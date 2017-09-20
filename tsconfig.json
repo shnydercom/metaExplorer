@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    //"module": "es2015", // use ES2015 modules
+    //"target": "es6", // compile to ES2015 (Babel will do the rest)
+    "allowSyntheticDefaultImports": true, // see below
+    "baseUrl": "src", // enables you to import relative to this folder
+    //"sourceMap": true, // make TypeScript generate sourcemaps
+    //"outDir": "ts-build", // output directory to build to (irrelevant because we use Webpack most of the time)
+    //"jsx": "react", // enable JSX mode, but "preserve" tells TypeScript to not transform it (we'll use Babel)
+    "strict": true,
+
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es2017",
+    "jsx": "preserve",
+    "sourceRoot": "src",
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": [ "node", "" ],
+    "typeRoots": [ "./node_modules/@types" ],
+    "suppressExcessPropertyErrors": true,
+		"declaration": true,
+		"strictNullChecks": false,
+		"skipLibCheck": true,
+		"lib": [
+			"dom",
+      "es2015",
+      "es6"
+		]
+  },
+  "exclude": [
+    "doc",
+    "node_modules",
+    "src/examples" // don't run on any code in the node_modules directory
+  ],
+  "awesomeTypescriptLoaderOptions": {
+		"compilerOptions": {
+			"declaration": false
+		}
+	}
+}

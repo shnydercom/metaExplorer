@@ -1,4 +1,16 @@
-# Logs
+#
+# additions
+#
+
+yarn.lock
+.settings
+.vscode
+
+#
+# github node standard ignores
+#
+
+Logs
 logs
 *.log
 npm-debug.log*
