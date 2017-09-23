@@ -1,0 +1,64 @@
+import { Action, Store } from 'redux'
+import { ActionsObservable, Epic, Options } from "redux-observable";
+import { AjaxError, Observable } from "rxjs/Rx";
+import "rxjs/Rx"; //TODO: re-check this line and only import what's needed
+//source: https://mikebridge.github.io/articles/typescript-redux-observable-epic-test/
+
+export const SCHEMA_LOAD_REQUEST = "schema/SCHEMA_LOAD_REQUEST";
+
+export const SCHEMA_LOAD_RESULT = "schema/SCHEMA_LOAD_RESULT";
+
+export const SCHEMA_LOAD_ERROR = "schema/SCHEMA_LOAD_ERROR";
+
+export interface ISchemaResult {
+    id: string;
+    name: string;
+}
+
+export interface ISchemaAjaxError {
+    type: string;
+    message: string;
+}
+
+export const loadUser = (userid: string) => ({
+    type: SCHEMA_LOAD_REQUEST,
+    userid
+});
+
+export const loadUserResult = (results: ISchemaResult) => ({
+    type: SCHEMA_LOAD_RESULT,
+    results
+});
+
+export const loadFailure = (message: string): ISchemaAjaxError => ({
+    type: SCHEMA_LOAD_ERROR,
+    message
+});
+
+
+export const isLoadingSchemaReducer = function isLoading(state: boolean = false, action: Action): boolean {
+    switch (action.type) {
+        case SCHEMA_LOAD_REQUEST:
+            return true
+        case SCHEMA_LOAD_RESULT:
+        case SCHEMA_LOAD_ERROR:
+            return false
+        default:
+            return state
+    }
+}
+export const loadSchemaEpic = (action$: ActionsObservable<any>, store : any , { getJSON }: any) => {
+    return action$.ofType(SCHEMA_LOAD_REQUEST)
+        .do(() => console.log("Locating User ...")) // debugging
+        .mergeMap(action =>
+            getJSON(`%PUBLIC_URL%/api/users`)
+                .map((response : any) => loadUserResult(response as any))
+                .catch((error: AjaxError): ActionsObservable<ISchemaAjaxError> =>
+                    ActionsObservable.of(loadFailure(
+                        `An error occurred: ${error.message}`
+                    )))
+        );
+
+};
+
+export default loadSchemaEpic;

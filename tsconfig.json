@@ -34,7 +34,7 @@
   "exclude": [
     "doc",
     "node_modules",
-    "src/examples" // don't run on any code in the node_modules directory
+    "src/examples"
   ],
   "awesomeTypescriptLoaderOptions": {
 		"compilerOptions": {

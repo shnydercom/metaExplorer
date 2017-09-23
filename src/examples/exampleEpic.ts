@@ -1,4 +1,4 @@
-/*import {ActionsObservable} from "redux-observable";
+import {ActionsObservable} from "redux-observable";
 import {AjaxError} from "rxjs/Rx";
 import "rxjs/Rx";
 
@@ -53,5 +53,3 @@ export const loadUserEpic = (action$: ActionsObservable<any>, store, {getJSON}) 
 };
 
 export default loadUserEpic;
-
-  */

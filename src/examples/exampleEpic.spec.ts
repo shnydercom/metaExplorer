@@ -1,4 +1,4 @@
-/*import { ActionsObservable } from "redux-observable";
+import { ActionsObservable } from "redux-observable";
 import "rxjs/Rx";
 import { Observable } from "rxjs/Observable";
 
@@ -49,4 +49,4 @@ describe("loadUserEpic", () => {
 
     });
 
-});*/
+});
