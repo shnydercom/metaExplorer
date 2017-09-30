@@ -21,10 +21,14 @@ module.exports = function(config) {
             //"hydra-testserver"
         ],
         files: [
+            "./node_modules/react/dist/react.js",
+            "./node_modules/react-dom/dist/react-dom.js",
             { pattern: "src/**/*.ts", included: true },
             { pattern: "src/**/*.tsx", included: true },
             { pattern: "testing/**/*.ts", included: true },
             { pattern: "tests/**/*.spec.ts", included: true },
+            
+
             { pattern: "src/examples/*.spec.ts", included:false },
             { pattern: "src/**/*.scss", included: false },
             //{ pattern: "integration-tests/**/*.spec.ts", included: true }
