@@ -12,7 +12,6 @@ import {
 import * as React from "react";
 
 //console.log('lodash version:', _.toUpper("abcDE"));
-
 export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
@@ -45,11 +44,12 @@ export default () => {
 	model.addLink(link1);
 
 	//5) load model into engine
-    engine.setDiagramModel(model);
-    
-    var test = _.map(model.getNodes());
+	engine.setDiagramModel(model);
+
+	var test = _.map(model.getNodes());
 
 	//6) render the diagram!
 	return <div className="entrypoint-editor" >
-	<DiagramWidget diagramEngine={engine} /> </div>;
+		<DiagramWidget diagramEngine={engine} />
+	</div>;
 };
