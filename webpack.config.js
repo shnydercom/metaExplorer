@@ -51,7 +51,7 @@ module.exports = {
         loader: "source-map-loader"
       },
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-      { test: /\.tsx?$/, loaders: ['babel-loader',"awesome-typescript-loader"] },
+      { test: /\.tsx?$/, loaders: ['babel-loader',"awesome-typescript-loader"]},
       {
         test: /\.scss$/,
         use: [{

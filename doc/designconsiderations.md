@@ -9,6 +9,10 @@ c) to load data from the server and hand it to a component
     c 1.) apollo-react (graphql + redux) do this with the functions mapStateToProps() and mapResultsToProps()
 d) in combination with react: which of its parameters should it "lift up", should it do that?
 
+state of react-components shouldn't be treated as application state, but "view state", if such a thing exists. That means,
+the state of the react-component must be completely irrelevant if the react-component is destroyed. All application state 
+mutations should be done through actions, that can be triggered in React
+
 ## style considerations/code convenctions/patterns:
 a dollar sign at the end is a common RxJS convention to identify variables that reference a stream
 # fat arrows:

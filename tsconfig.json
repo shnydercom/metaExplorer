@@ -7,11 +7,11 @@
     //"sourceMap": true, // make TypeScript generate sourcemaps
     //"outDir": "ts-build", // output directory to build to (irrelevant because we use Webpack most of the time)
     //"jsx": "react", // enable JSX mode, but "preserve" tells TypeScript to not transform it (we'll use Babel)
-    "strict": true,
+    "strict": false,
 
     "outDir": "./dist/",
     "sourceMap": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "module": "commonjs",
     "target": "es2017",
     "jsx": "preserve",
@@ -24,7 +24,7 @@
     "suppressExcessPropertyErrors": true,
 		"declaration": true,
 		"strictNullChecks": false,
-		"skipLibCheck": true,
+		"skipLibCheck": false,
 		"lib": [
 			"dom",
       "es2015",
@@ -39,6 +39,10 @@
   "awesomeTypescriptLoaderOptions": {
 		"compilerOptions": {
 			"declaration": false
-		}
+    },
+    "exclude": [
+      "node_modules",
+      "public/js"
+  ]
 	}
 }

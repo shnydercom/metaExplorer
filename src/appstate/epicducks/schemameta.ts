@@ -20,17 +20,17 @@ export interface ISchemaAjaxError {
     message: string;
 }
 
-export const loadUser = (userid: string) => ({
+export const loadSchema = (userid: string) => ({
     type: SCHEMA_LOAD_REQUEST,
     userid
 });
 
-export const loadUserResult = (results: ISchemaResult) => ({
+export const loadSchemaResult = (results: ISchemaResult) => ({
     type: SCHEMA_LOAD_RESULT,
     results
 });
 
-export const loadFailure = (message: string): ISchemaAjaxError => ({
+export const loadSchemaFailure = (message: string): ISchemaAjaxError => ({
     type: SCHEMA_LOAD_ERROR,
     message
 });
@@ -52,9 +52,9 @@ export const loadSchemaEpic = (action$: ActionsObservable<any>, store : any , { 
         .do(() => console.log("Locating User ...")) // debugging
         .mergeMap(action =>
             getJSON(`%PUBLIC_URL%/api/users`)
-                .map((response : any) => loadUserResult(response as any))
+                .map((response : any) => loadSchemaResult(response as any))
                 .catch((error: AjaxError): ActionsObservable<ISchemaAjaxError> =>
-                    ActionsObservable.of(loadFailure(
+                    ActionsObservable.of(loadSchemaFailure(
                         `An error occurred: ${error.message}`
                     )))
         );
