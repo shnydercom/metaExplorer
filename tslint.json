@@ -5,6 +5,7 @@
 	],
 	"jsRules": {},
 	"rules": {
+		"indent":true,
 		"member-access": false,
 		"comment-format": false,
 		"max-line-length": false,
@@ -21,7 +22,10 @@
 		"no-string-literal": false,
 		"ordered-imports": false,
 		"prefer-for-of": false,
-		"no-empty-interface": false
+		"no-empty-interface": false,
+		"curly":false,
+		"interface-over-type-literal":false,
+		"max-classes-per-file":false
 	},
 	"rulesDirectory": []
 }

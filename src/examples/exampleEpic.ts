@@ -37,13 +37,12 @@ export const loadFailure = (message: string): ICustomAjaxError => ({
     message
 });
 
-
 export const loadUserEpic = (action$: ActionsObservable<any>, store, {getJSON}) => {
     return action$.ofType(USER_LOAD_REQUEST)
         .do(() => console.log("Locating User ...")) // debugging
         .mergeMap(action =>
             getJSON(`%PUBLIC_URL%/api/users`)
-                .map(response => loadUserResult(response as any))
+                .map((response) => loadUserResult(response as any))
                 .catch((error: AjaxError): ActionsObservable<ICustomAjaxError> =>
                     ActionsObservable.of(loadFailure(
                         `An error occurred: ${error.message}`

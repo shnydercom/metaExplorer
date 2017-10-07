@@ -2,22 +2,22 @@ import JsonLdHypermediaProcessor from "hydraclient.js/src/DataModel/JsonLd/JsonL
 import HydraClient from "hydraclient.js/src/HydraClient";
 
 export class HydraClientAPI {
-  private static hcSingleton: HydraClient;
-  
-  public static getHCSingleton() : HydraClient {
+
+  public static getHCSingleton(): HydraClient {
     if (HydraClientAPI.hcSingleton == null) {
-        HydraClientAPI.initHydra();
+      HydraClientAPI.initHydra();
     }
-    return HydraClientAPI.hcSingleton; 
+    return HydraClientAPI.hcSingleton;
   }
-  
-  constructor() {
-    HydraClientAPI.getHCSingleton();
-  }
-  
+
+  private static hcSingleton: HydraClient;
   private static initHydra(): void {
-    (<any>HydraClient)._hypermediaProcessors.length = 0;
+    (HydraClient as any)._hypermediaProcessors.length = 0;
     HydraClient.registerHypermediaProcessor(new JsonLdHypermediaProcessor());
     HydraClientAPI.hcSingleton = new HydraClient();
+  }
+
+  constructor() {
+    HydraClientAPI.getHCSingleton();
   }
 }

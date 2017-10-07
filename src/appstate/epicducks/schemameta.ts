@@ -1,4 +1,4 @@
-import { Action, Store } from 'redux'
+import { Action, Store } from 'redux';
 import { ActionsObservable, Epic, Options } from "redux-observable";
 import { AjaxError, Observable } from "rxjs/Rx";
 import "rxjs/Rx"; //TODO: re-check this line and only import what's needed
@@ -35,7 +35,6 @@ export const loadSchemaFailure = (message: string): ISchemaAjaxError => ({
     message
 });
 
-
 export const isLoadingSchemaReducer = function isLoading(state: boolean = false, action: Action): boolean {
     switch (action.type) {
         case SCHEMA_LOAD_REQUEST:
@@ -52,7 +51,7 @@ export const loadSchemaEpic = (action$: ActionsObservable<any>, store : any , { 
         .do(() => console.log("Locating User ...")) // debugging
         .mergeMap(action =>
             getJSON(`%PUBLIC_URL%/api/users`)
-                .map((response : any) => loadSchemaResult(response as any))
+                .map((response: any) => loadSchemaResult(response as any))
                 .catch((error: AjaxError): ActionsObservable<ISchemaAjaxError> =>
                     ActionsObservable.of(loadSchemaFailure(
                         `An error occurred: ${error.message}`

@@ -1,5 +1,8 @@
+import { LDDict } from "ldaccess/LDDict";
+
 export interface IKvStore {
-    key : string;
+    key: LDDict;
     value: any;
-    intrprtrClass : any;
+    ldType: LDDict;
+    intrprtrClass?: any;
 }

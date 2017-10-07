@@ -1,27 +1,29 @@
-import {IWebResource} from 'hydraclient.js/src/DataModel/IWebResource';
+import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { HydraClientAPI } from './hydra-client';
-import {LDError } from './../appstate/LDError'
+import { LDError } from './../appstate/LDError';
+import { Observable } from 'rxjs/Observable';
 
-export class ImageUploadAPI{
-    private resrcEndpoint : string =  'http://localhost:1111/rest/ysj/media/upload';  // URL to web api IRI resource
-    postNewImage(fileList: FileList): Promise<IWebResource> {//Observable<IWebResource> { //FETCH
-        if (fileList.length > 0) {
-          let file: File = fileList[0];
-          let formData: FormData = new FormData();
-          formData.append('file', file, file.name);
-          
-        return fetch(this.resrcEndpoint, {
+export class ImageUploadAPI {  // URL to web api IRI resource
+  postNewImage(fileList: FileList, targetUrl: string): Observable<IWebResource> {//Observable<IWebResource> { //FETCH
+    if (fileList.length > 0) {
+      let file: File = fileList[0];
+      let formData: FormData = new FormData();
+      formData.append('file', file, file.name);
+      let returnVal: Observable<IWebResource>;
+      let fetchPromise = fetch(targetUrl, {
           method: 'POST',
-          body : formData
+          body: formData
         })
-          .then((response) => {
-            if (response.status >= 400) {
-              throw new LDError("Bad response from server");
-            }
-            var testVar = HydraClientAPI.getHCSingleton().getHypermediaProcessor(response);
-            var procResource = HydraClientAPI.getHCSingleton().getHypermediaProcessor(response).process(response);  
-            return procResource;
-          });
-         }
-      }
+        .then((response) => {
+          if (response.status >= 400) {
+            throw new LDError("Bad response from server");
+          }
+          var testVar = HydraClientAPI.getHCSingleton().getHypermediaProcessor(response);
+          var procResource = HydraClientAPI.getHCSingleton().getHypermediaProcessor(response).process(response).then((hydraResponse) => hydraResponse);
+          return procResource;
+        });
+      returnVal = Observable.from(fetchPromise);
+      return returnVal;
+    }
+  }
 }

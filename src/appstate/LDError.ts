@@ -1,5 +1,5 @@
 export class LDError extends Error{
-    
+
 }
 
 export interface LDErrorMsgState{

@@ -19,17 +19,17 @@
 
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": [ "node", "" ],
-    "typeRoots": [ "./node_modules/@types" ],
+    "types": ["node", ""],
+    "typeRoots": ["./node_modules/@types"],
     "suppressExcessPropertyErrors": true,
-		"declaration": true,
-		"strictNullChecks": false,
-		"skipLibCheck": false,
-		"lib": [
-			"dom",
+    "declaration": true,
+    "strictNullChecks": false,
+    "skipLibCheck": false,
+    "lib": [
+      "dom",
       "es2015",
       "es6"
-		]
+    ]
   },
   "exclude": [
     "doc",
@@ -37,12 +37,12 @@
     "src/examples"
   ],
   "awesomeTypescriptLoaderOptions": {
-		"compilerOptions": {
-			"declaration": false
+    "compilerOptions": {
+      "declaration": false
     },
     "exclude": [
       "node_modules",
       "public/js"
-  ]
-	}
+    ]
+  }
 }

@@ -1,4 +1,5 @@
 import * as _ from "lodash";
+import * as React from "react";
 import {
 	DiagramEngine,
 	DefaultNodeFactory,
@@ -9,7 +10,9 @@ import {
 	DefaultPortModel,
 	DiagramWidget
 } from "storm-react-diagrams";
-import * as React from "react";
+import { BaseDataTypeWidgetFactory } from "./appinterpreter-parts/BaseDataTypeWidgetFactory";
+import { BaseDataTypeNodeModel } from './appinterpreter-parts/BaseDataTypeNodeModel';
+import { LDPortModel } from './appinterpreter-parts/LDPortModel';
 
 //console.log('lodash version:', _.toUpper("abcDE"));
 export default () => {
@@ -17,9 +20,16 @@ export default () => {
 	var engine = new DiagramEngine();
 	engine.registerNodeFactory(new DefaultNodeFactory());
 	engine.registerLinkFactory(new DefaultLinkFactory());
+	engine.registerNodeFactory(new BaseDataTypeWidgetFactory());
 
 	//2) setup the diagram model
 	var model = new DiagramModel();
+
+	var newNode1 = new BaseDataTypeNodeModel("interpreter", "rgb(60,60,60)");
+	var newPort1 = newNode1.addPort(new LDPortModel(true, "out-3", "someLabel"));
+	newNode1.x = 100;
+	newNode1.y = 200;
+	model.addNode(newNode1);
 
 	//3-A) create a default node
 	var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
@@ -42,6 +52,11 @@ export default () => {
 	model.addNode(node1);
 	model.addNode(node2);
 	model.addLink(link1);
+
+	var linkNew = new LinkModel();
+	linkNew.setSourcePort(newPort1);
+	linkNew.setTargetPort(port1);
+	model.addLink(linkNew);
 
 	//5) load model into engine
 	engine.setDiagramModel(model);

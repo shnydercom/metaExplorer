@@ -13,6 +13,9 @@ state of react-components shouldn't be treated as application state, but "view s
 the state of the react-component must be completely irrelevant if the react-component is destroyed. All application state 
 mutations should be done through actions, that can be triggered in React
 
+react-components only export the result of the connect-function,
+anything else is internal
+
 ## style considerations/code convenctions/patterns:
 a dollar sign at the end is a common RxJS convention to identify variables that reference a stream
 # fat arrows:
