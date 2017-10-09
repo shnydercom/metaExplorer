@@ -26,10 +26,15 @@ export default () => {
 	var model = new DiagramModel();
 
 	var newNode1 = new BaseDataTypeNodeModel("interpreter", "rgb(60,60,60)");
-	var newPort1 = newNode1.addPort(new LDPortModel(true, "out-3", "someLabel"));
+	var newPort1 = newNode1.addPort(new LDPortModel(false, "out-3", "someLabel"));
 	newNode1.x = 100;
 	newNode1.y = 200;
 	model.addNode(newNode1);
+
+	console.log("newNode1:");
+	console.dir(newNode1);
+	console.log("newPort1:");
+	console.dir(newPort1);
 
 	//3-A) create a default node
 	var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
