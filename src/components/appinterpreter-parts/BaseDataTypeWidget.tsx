@@ -1,7 +1,16 @@
 import * as React from "react";
 import * as _ from "lodash";
 import { DefaultNodeModel, DefaultPortLabel, DiagramEngine } from "storm-react-diagrams";
+import Dropdown from 'react-toolbox/lib/dropdown';
 import { SinglePortWidget } from './SinglePortWidget';
+//import { SinglePortLabel } from "components/appinterpreter-parts/SinglePortLabelWidget";
+import { BaseDataTypeDropDown } from 'components/basedatatypeinterpreter/BaseDataTypeDropDown';
+import { BaseDataTypePortSelector } from "components/appinterpreter-parts/BaseDataTypePortSelectorWidget";
+
+import {
+	BooleanValInput, IntegerValInput, DoubleValInput, TextValInput, DateValInput, DateTimeValInput
+} from 'components/basedatatypeinterpreter/BaseDataTypeInput';
+
 //import { SinglePortLabel } from "components/appinterpreter-parts/SinglePortLabelWidget";
 
 export interface BaseDataTypeNodeProps {
@@ -12,7 +21,7 @@ export interface BaseDataTypeNodeProps {
 export interface BaseDataTypeNodeState { }
 
 /**
- * @author Dylan Vorster
+ * @author Jonathan Schneider
  */
 export class BaseDataTypeNodeWidget extends React.Component<BaseDataTypeNodeProps, BaseDataTypeNodeState> {
 	constructor(props: BaseDataTypeNodeProps) {
@@ -21,8 +30,10 @@ export class BaseDataTypeNodeWidget extends React.Component<BaseDataTypeNodeProp
 	}
 
 	generatePort(port) {
-		return <DefaultPortLabel model={port} key={port.id} />;
-		//return <SinglePortLabel model={port} key={port.id} />;
+		//return <DefaultPortLabel model={port} key={port.id} />;
+		return <div>
+			<BaseDataTypePortSelector model={port} key={port.id} />
+		</div>;
 	}
 
 	render() {

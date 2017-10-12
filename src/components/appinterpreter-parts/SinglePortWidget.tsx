@@ -1,9 +1,11 @@
 import * as React from "react";
-import { LDPortModel } from "./LDPortModel";
+import { InterpreterNodeModel } from "./InterpreterNodeModel";
+import { NodeModel } from "storm-react-diagrams";
 
 export interface PortProps {
 	name: string;
-	node: LDPortModel;
+	node: NodeModel;
+	isMulti: boolean;
 }
 
 export interface PortState {
@@ -11,7 +13,7 @@ export interface PortState {
 }
 
 /**
- * @author Dylan Vorster
+ * @author Jonathan Schneider
  */
 export class SinglePortWidget extends React.Component<PortProps, PortState> {
 	constructor(props: PortProps) {
@@ -30,7 +32,7 @@ export class SinglePortWidget extends React.Component<PortProps, PortState> {
 				onMouseLeave={() => {
 					this.setState({ selected: false });
 				}}
-				className={"port" + (this.state.selected ? " selected" : "")}
+				className={"port" + (this.state.selected ? " selected" : "") + (this.props.isMulti ? " isMulti" : "")}
 				data-name={this.props.name}
 				data-nodeid={this.props.node.getID()}
 			/>

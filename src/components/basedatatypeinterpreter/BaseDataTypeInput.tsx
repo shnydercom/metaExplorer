@@ -1,0 +1,169 @@
+import assertNever from "assert-never";
+import * as React from 'react';
+import * as redux from 'redux';
+import { connect } from 'react-redux';
+
+import { Input, Switch, DatePicker, TimePicker } from 'react-toolbox';
+
+import { ExplorerState } from 'appstate/store';
+import { BlueprintConfig } from 'ldaccess/ldBlueprint';
+import ldBlueprint, { IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
+import { ILDOptions } from 'ldaccess/ildoptions';
+
+import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
+import { IKvStore } from 'ldaccess/ikvstore';
+import { LDDict } from 'ldaccess/LDDict';
+
+import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
+
+/**
+ * @author Jonathan Schneider
+ * for each Base Data Type an interpreter is being configured, the React-Part
+ * of the interpreter is the same for all Base Data Types
+ */
+
+type OwnProps = {
+};
+type ConnectedState = {
+};
+
+type ConnectedDispatch = {
+	//fileChange: (fileList: FileList, url: string) => void;
+};
+
+const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
+});
+
+const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedDispatch => ({
+	/*fileChange: (fileList: FileList, url: string) => {
+			dispatch(uploadImgRequestAction(fileList, url));
+			return;
+	}*/
+});
+
+let bdts: LDBaseDataType[] = [LDDict.Boolean, LDDict.Integer, LDDict.Double, LDDict.Text, LDDict.Date, LDDict.DateTime];
+let bpcfgs: BlueprintConfig[] = new Array();
+
+for (var bdt in bdts) {
+	if (bdts.hasOwnProperty(bdt)) {
+		var elem = bdts[bdt];
+		//let cfgType: string = LDDict.CreateAction;
+		let cfgIntrprtTypes: string[] = [];
+		let initialKVStores: IKvStore[] = [
+			{
+				key: undefined,
+				value: undefined,
+				ldType: elem
+			}];
+		let bpCfg: BlueprintConfig = {
+			//consumeWebResource: (ldOptions: ILDOptions) => { return; },
+			forType: elem,
+			interpreterRetriever: appIntprtrRetr,
+			initialKvStores: initialKVStores,
+			getInterpretableKeys() { return cfgIntrprtTypes; },
+			crudSkills: "CRUd"
+		};
+		bpcfgs.push(bpCfg);
+	}
+}
+
+class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
+	implements IBlueprintInterpreter {
+
+	initialKvStores: IKvStore[];
+	private singleKV: IKvStore;
+
+	constructor(props: OwnProps) {
+		super(props);
+		this.singleKV = this.initialKvStores[0];
+		let baseDT: LDBaseDataType = this.singleKV.ldType as LDBaseDataType;
+		this.determineRenderFn(baseDT);
+	}
+	consumeWebResource = (ldOptions: ILDOptions) => {
+		return;
+	}
+
+	handleChange = (evt) => {
+		console.log("a change event: ");
+		console.dir(evt);
+		//this.setState({...this.state, [name]: value});
+	}
+
+	parseDate: any = (input) => "";
+	parseTime: any = (input) => "";
+
+	private determineRenderFn = (baseDT: LDBaseDataType) => {
+		switch (baseDT) {
+			case LDDict.Boolean:
+				this.render = () => <Switch checked={this.singleKV.value}
+					label="this.singleKV.key"
+					onChange={(evt) => this.handleChange(evt)} />;
+				break;
+			case LDDict.Integer:
+				this.render = () => <Input type='number'
+					label={this.singleKV.key}
+					name={this.singleKV.key}
+					value={this.singleKV.value}
+					onChange={(evt) => this.handleChange(evt)} maxLength={16} />;
+				break;
+			case LDDict.Double:
+				this.render = () => <Input type='number'
+					label={this.singleKV.key}
+					name={this.singleKV.key}
+					value={this.singleKV.value}
+					onChange={(evt) => this.handleChange(evt)} maxLength={16} />;
+				break;
+			case LDDict.Text:
+				this.render = () => <Input type='text'
+					label={this.singleKV.key}
+					name={this.singleKV.key}
+					value={this.singleKV.value}
+					onChange={(evt) => this.handleChange(evt)} maxLength={16} />;
+				break;
+			case LDDict.Date:
+				this.render = () => {
+					const { parsedDate } = this.parseDate(this.singleKV.value);
+					return <DatePicker
+						label={this.singleKV.key}
+						onChange={(evt) => this.handleChange(evt)}
+						value={parsedDate}
+						sundayFirstDayOfWeek />;
+				};
+				break;
+			case LDDict.DateTime:
+				this.render = () => {
+					const parsedDate = this.parseDate(this.singleKV.value);
+					const parsedTime = this.parseTime(this.singleKV.value);
+					return <div>
+						<DatePicker
+							label={this.singleKV.key}
+							onChange={(evt) => this.handleChange(evt)}
+							value={parsedDate}
+							sundayFirstDayOfWeek />;
+					<TimePicker
+							label='Finishing time'
+							onChange={this.handleChange}
+							value={parsedTime}
+						/></div>;
+				};
+				break;
+			default:
+				return assertNever(baseDT);
+		}
+	}
+}
+
+//this is the same as using a decorator function on individual classes
+var BoolInput = ldBlueprint(bpcfgs[0])(PureBaseDataTypeInput);
+var IntInput = ldBlueprint(bpcfgs[1])(PureBaseDataTypeInput);
+var DoubleInput = ldBlueprint(bpcfgs[2])(PureBaseDataTypeInput);
+var TextInput = ldBlueprint(bpcfgs[3])(PureBaseDataTypeInput);
+var DateInput = ldBlueprint(bpcfgs[4])(PureBaseDataTypeInput);
+var DateTimeInput = ldBlueprint(bpcfgs[5])(PureBaseDataTypeInput);
+
+export let BooleanValInput = connect(mapStateToProps, mapDispatchToProps)(BoolInput);
+export let IntegerValInput = connect(mapStateToProps, mapDispatchToProps)(IntInput);
+export let DoubleValInput = connect(mapStateToProps, mapDispatchToProps)(DoubleInput);
+export let TextValInput = connect(mapStateToProps, mapDispatchToProps)(TextInput);
+export let DateValInput = connect(mapStateToProps, mapDispatchToProps)(DateInput);
+export let DateTimeValInput = connect(mapStateToProps, mapDispatchToProps)(DateTimeInput);

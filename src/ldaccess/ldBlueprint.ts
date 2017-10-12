@@ -10,20 +10,23 @@ export interface IBlueprintInterpreter {
     initialKvStores: IKvStore[];
 }
 
+/**
+ * initialKvStores will be overriden if defined in config
+ */
 export interface BlueprintConfig {
     forType: string;
     interpreterRetriever: IInterpreterRetriever;
     initialKvStores?: IKvStore[];
     crudSkills: string;
-    consumeWebResource: ConsumeWebResourceFunc;
+    //consumeWebResource?: ConsumeWebResourceFunc;
     getInterpretableKeys(): any[];
 }
 
 function blueprintDecorator<T extends { new(...args: any[]): IBlueprintInterpreter }>(constructor: T, blueprintCfg: BlueprintConfig) {
     var newClass = class extends constructor {
         static forType = blueprintCfg.forType;
-        initialKvStores = blueprintCfg.initialKvStores;
-        consumeWebResource = blueprintCfg.consumeWebResource;
+        initialKvStores = blueprintCfg.initialKvStores ? blueprintCfg.initialKvStores : this.initialKvStores;
+        //consumeWebResource = blueprintCfg.consumeWebResource;
         interpreterRetriever = blueprintCfg.interpreterRetriever;
         getInterpretableKeys = blueprintCfg.getInterpretableKeys;
     };
@@ -38,7 +41,7 @@ export default function ldBlueprint(blueprintCfg: BlueprintConfig) {
     if (blueprintCfg.interpreterRetriever == null) throw new LDError("blueprintCfg.interpreterRetriever must not be null");
     if (blueprintCfg.crudSkills == null) throw new LDError("blueprintCfg.crudSkills must not be null");
     if (blueprintCfg.getInterpretableKeys == null) throw new LDError("blueprintCfg.getInterpretableKeys must not be null");
-    if (blueprintCfg.consumeWebResource == null) throw new LDError("blueprintCfg.consumeWebResource must not be null");
+    //if (blueprintCfg.consumeWebResource == null) throw new LDError("blueprintCfg.consumeWebResource must not be null");
     return <T extends { new(...args: any[]): IBlueprintInterpreter }>(target: T) => {
         return blueprintDecorator(target, blueprintCfg);
     };

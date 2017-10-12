@@ -11,13 +11,3 @@ export class BaseDataTypeNodeFactory extends SRD.AbstractInstanceFactory<BaseDat
 		return new BaseDataTypeNodeModel();
 	}
 }
-
-export class LDPortFactory extends SRD.AbstractInstanceFactory<LDPortModel> {
-	constructor() {
-		super("LDPortModel");
-	}
-
-	getInstance() {
-		return new LDPortModel(true, "unknown");
-	}
-}

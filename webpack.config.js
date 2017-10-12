@@ -58,19 +58,32 @@ module.exports = {
         test: /\.tsx?$/,
         loaders: ['babel-loader', "awesome-typescript-loader"]
       },
+      
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: [{
           loader: "style-loader"
         }, {
-          loader: "css-loader"
+          loader: "css-loader",
+          options: {
+            modules: true, // default is false
+            sourceMap: true,
+            importLoaders: 1,
+            localIdentName: "[name]--[local]--[hash:base64:8]"
+          }
         }, {
           loader: "sass-loader",
           options: {
             includePaths: ["src/styles"]
           }
         }]
-      }
+      }/*,
+      {
+        test: /\.css$/,
+        use: [{
+          loader: "css-loader"
+        }]
+      }*/
       /*{
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('css!sass')

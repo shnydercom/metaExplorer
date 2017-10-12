@@ -25,7 +25,7 @@ export default () => {
 	//2) setup the diagram model
 	var model = new DiagramModel();
 
-	var newNode1 = new BaseDataTypeNodeModel("interpreter", "rgb(60,60,60)");
+	var newNode1 = new BaseDataTypeNodeModel("a heading", "rgb(250,60,60)");
 	var newPort1 = newNode1.addPort(new LDPortModel(false, "out-3", "someLabel"));
 	newNode1.x = 100;
 	newNode1.y = 200;

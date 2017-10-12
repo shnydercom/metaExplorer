@@ -7,8 +7,8 @@ export class InterpreterNodeModel extends NodeModel {
 	color: string;
 	ports: { [s: string]: LDPortModel };
 
-	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)") {
-		super("interpreter");
+	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)", nodeType?: string) {
+		super(nodeType ? nodeType : "interpreter");
 		this.name = name;
 		this.color = color;
 	}
