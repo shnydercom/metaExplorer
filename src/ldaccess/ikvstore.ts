@@ -1,7 +1,7 @@
-import { LDDict } from "ldaccess/LDDict";
+import { LDDict, LDDictWildCard } from "ldaccess/LDDict";
 
 export interface IKvStore {
-    key: LDDict;
+    key: LDDictWildCard;
     value: any;
     ldType: LDDict;
     intrprtrClass?: any;

@@ -3,6 +3,7 @@ import { PortWidget, DefaultPortModel } from "storm-react-diagrams";
 import { SinglePortWidget } from "components/appinterpreter-parts/SinglePortWidget";
 import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
 import { BaseDataTypeDropDown } from "components/basedatatypeinterpreter/BaseDataTypeDropDown";
+import {GenericContainer} from "components/generic/genericContainer-component";
 
 export interface BaseDataTypePortSelectorProps {
 	model?: LDPortModel;
@@ -10,7 +11,7 @@ export interface BaseDataTypePortSelectorProps {
 	label?: string;
 }
 
-export interface BaseDataTypePortSelectorState {}
+export interface BaseDataTypePortSelectorState { }
 
 export class BaseDataTypePortSelector extends React.Component<BaseDataTypePortSelectorProps, BaseDataTypePortSelectorState> {
 	public static defaultProps: BaseDataTypePortSelectorProps = {
@@ -25,7 +26,8 @@ export class BaseDataTypePortSelector extends React.Component<BaseDataTypePortSe
 		return (
 			<div className={("out") + "-port"}>
 				{label}
-				<BaseDataTypeDropDown	/>
+				<BaseDataTypeDropDown />
+				<GenericContainer />
 				{port}
 			</div>
 		);

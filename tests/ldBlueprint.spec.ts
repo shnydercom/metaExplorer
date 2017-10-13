@@ -18,8 +18,8 @@ let bpCfg: BlueprintConfig = {
 
 @ldBlueprint(bpCfg)
 export class LDBlueprintContainerClass implements IBlueprintInterpreter {
+    consumeLDOptions: (ldOptions: ILDOptions) => any;
     initialKvStores: IKvStore[];
-    consumeWebResource: (ldOptions: ILDOptions) => any;
 }
 
 describe("ldBlueprint decorator func", () => {
@@ -29,7 +29,7 @@ describe("ldBlueprint decorator func", () => {
             expect(newLDContainer).toBeDefined();
         });
         it("should have a consumeWebResource function", () => {
-            expect(newLDContainer.consumeWebResource).toBeDefined();
+            expect(newLDContainer.consumeLDOptions).toBeDefined();
         });
     });
 });

@@ -3,10 +3,10 @@ import { IKvStore } from './ikvstore';
 import { LDError } from 'appstate/LDError';
 import { ILDOptions } from './ildoptions';
 
-export type ConsumeWebResourceFunc = (ldOptions: ILDOptions) => any;
+export type ConsumeLDOptionsFunc = (ldOptions: ILDOptions) => any;
 
 export interface IBlueprintInterpreter {
-    consumeWebResource: ConsumeWebResourceFunc;
+    consumeLDOptions: ConsumeLDOptionsFunc;
     initialKvStores: IKvStore[];
 }
 

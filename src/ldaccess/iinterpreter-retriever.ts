@@ -7,7 +7,7 @@ export interface IInterpreterRetriever {
      * e.g. crudSkills = 'cRuD' can read and delete, but not create and update
      *
      **/
-    searchForObjIntrprtr(term: string, crudSkills: string): any;
+    searchForObjIntrprtr(term: string | Array<string>, crudSkills: string): any;
     searchForKVIntrprtr(term: string, crudSkills: string): any;
     addInterpreter(typeName: string, intrprtr: any, crudSkills: string): void;
 }

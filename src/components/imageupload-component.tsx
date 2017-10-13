@@ -132,7 +132,7 @@ let bpCfg: BlueprintConfig = {
 class PureImgUploader extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
     implements IBlueprintInterpreter {
     initialKvStores: IKvStore[];
-    consumeWebResource: (ldOptions: ILDOptions) => any;
+    consumeLDOptions: (ldOptions: ILDOptions) => any;
     onClickFileChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault();
 		/*if (!this.props.isSaving) {
@@ -159,7 +159,7 @@ class PureImgUploader extends React.Component<ConnectedState & ConnectedDispatch
     private getStringValFromKey(key: string): string {
         let kvStoreVal = this.initialKvStores;
         if (kvStoreVal != null && kvStoreVal) {
-            kvStoreVal.filter(
+            return kvStoreVal.filter(
                 (curItm) => curItm.key === key).map((val) => val.value as string).reduce(
                 (a, b, idx) => idx === 0 ? b : a);
             //TODO: analyze which handling could be better, now selects first

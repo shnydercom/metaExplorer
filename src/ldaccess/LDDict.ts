@@ -14,6 +14,10 @@ export enum LDDict {
 	//properties:
 	target = "http://schema.org/target",
 	agent = "http://schema.org/agent",
-	result = "http://schema.org/result"
+	result = "http://schema.org/result",
 
+	//internal
+	WrapperObject = "http://shnyder.com/WrapperObject"
 }
+
+export type LDDictWildCard = LDDict | string;

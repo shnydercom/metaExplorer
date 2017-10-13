@@ -79,7 +79,7 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 		let baseDT: LDBaseDataType = this.singleKV.ldType as LDBaseDataType;
 		this.determineRenderFn(baseDT);
 	}
-	consumeWebResource = (ldOptions: ILDOptions) => {
+	consumeLDOptions = (ldOptions: ILDOptions) => {
 		return;
 	}
 
