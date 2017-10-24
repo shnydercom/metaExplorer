@@ -3,6 +3,11 @@ import { Dropdown, DropdownTheme } from 'react-toolbox/lib/dropdown';
 import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
 import { LDDict } from "ldaccess/LDDict";
 
+/**
+ * this component is not supposed to be used as a blueprint, only for
+ * selection in the designer
+ */
+
 export interface IDataTypeLabel {
 	value: LDBaseDataType;
 	label: string;
@@ -10,6 +15,7 @@ export interface IDataTypeLabel {
 }
 
 export interface IDataTypeDropDownProps {
+	selectionChange: (selectedDataType: string) => void;
 }
 
 export interface IDataTypeState {
@@ -34,6 +40,7 @@ export class BaseDataTypeDropDown extends React.Component<IDataTypeDropDownProps
 
 	handleChange = (value) => {
 		this.setState({ selectedDataType: value });
+		this.props.selectionChange(value);
 	}
 
 	render() {

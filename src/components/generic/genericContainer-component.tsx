@@ -15,8 +15,16 @@ import { IKvStore } from 'ldaccess/ikvstore';
 import { LDDict } from 'ldaccess/LDDict';
 import { IHypermediaContainer } from 'hydraclient.js/src/DataModel/IHypermediaContainer';
 import { singleHyperMediaToKvStores, multiHyperMediaToKvStores } from 'ldaccess/converterFns';
+import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
+import { IHypermedia } from 'hydraclient.js/src/DataModel/IHypermedia';
+import { LDConsts } from 'ldaccess/LDConsts';
+import { isInterpreter } from 'ldaccess/ldUtils';
 
 type OwnProps = {
+	//demoType is being used for empty display in the designer,
+	//and represents a convenience function to show interpreters for types without having the necessary data
+	demoType: string;
+	searchCrudSkills: string;
 };
 type ConnectedState = {
 };
@@ -36,7 +44,7 @@ let cfgIntrprtTypes: string[] =
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
 	forType: cfgType,
-	interpreterRetriever: appIntprtrRetr,
+	interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
 	getInterpretableKeys() { return cfgIntrprtTypes; },
 	crudSkills: "cRud"
@@ -52,6 +60,7 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 
 	consumeLDOptions = (ldOptions: ILDOptions) => {
 		let genKvStores: IKvStore[] = [];
+		let sCSkills: string = "cRud";
 		let hmArray: IHypermediaContainer = ldOptions.resource.hypermedia;
 		if (hmArray.length === 0) return;
 		if (hmArray.length === 1) {
@@ -60,7 +69,46 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 		if (hmArray.length > 1) {
 			genKvStores = multiHyperMediaToKvStores(hmArray);
 		}
-		appIntMatcher.matchKvArray(genKvStores, "cRud");
+		if (this.props.searchCrudSkills) {
+			sCSkills = this.props.searchCrudSkills;
+		}
+		genKvStores = appIntMatcher.matchKvArray(genKvStores, sCSkills);
+		return this.kvsToComponent(genKvStores);
+	}
+	render() {
+		var demoTypeParsed = null;
+		if (this.props.demoType) {
+			let dType: string = this.props.demoType;
+			var demoWebResource: IWebResource = {
+				hypermedia: [{ [LDConsts.type]: dType, members: null, client: null } as IHypermedia] as IHypermediaContainer,
+			};
+			var demoTypeLDOptions: ILDOptions = {
+				lang: null,
+				resource: demoWebResource,
+				ldToken: null
+			};
+			demoTypeParsed = this.consumeLDOptions(demoTypeLDOptions);
+		}
+		return <div>
+			parsed?
+			{demoTypeParsed}
+		</div>;
+	}
+
+	private kvsToComponent(input: IKvStore[]): any {
+		let reactCompClasses: React.ComponentClass[] = [];
+		input.forEach((itm) => {
+			let intrprtr = itm.intrprtrClass;
+			if (isInterpreter(intrprtr)) {
+				reactCompClasses.push(intrprtr as React.ComponentClass);
+			}
+		});
+		let reactComps = reactCompClasses.map((itm) => {
+			let GenericComp = itm;
+			return <GenericComp />;
+
+		});
+		return <div>here{reactComps}</div>;
 	}
 }
 

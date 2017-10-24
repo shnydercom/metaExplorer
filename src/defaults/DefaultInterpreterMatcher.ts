@@ -3,17 +3,41 @@ import { LDConsts } from "ldaccess/LDConsts";
 import { IInterpreterMatcher } from "ldaccess/iinterpreter-matcher";
 import { IKvStore } from "ldaccess/ikvstore";
 
-import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
+import appIntRetrFn from 'appconfig/appInterpreterRetriever';
+import { LDDict } from "ldaccess/LDDict";
+
+//import ImageUploadComponent from 'components/imageupload-component';
+import ImageDisplayComponent from 'components/imagedisplay-component';
+import { BooleanValInput, IntegerValInput, DoubleValInput, TextValInput, DateValInput, DateTimeValInput } from "components/basedatatypeinterpreter/BaseDataTypeInput";
 
 let matchIsType = (a: IKvStore) => a.key === LDConsts.type || a.key === LDConsts.isA;
 let matchIsLang = (a: IKvStore) => a.key === LDConsts.lang;
 let matchIsId = (a: IKvStore) => a.key === LDConsts.id || a.key === LDConsts.iri;
 
-export class DefaultInterpreterMatcher implements IInterpreterMatcher{
+/**
+ * the matcher is used for encapsuling the decision process that associates keys and values in a kv-store a matching interpreter.
+ * Currently, this is also the place where additional Interpreters are registered to the AppInterpreterRetriever, because it's not
+ * possible there
+ */
+export class DefaultInterpreterMatcher implements IInterpreterMatcher {
+	constructor() {
+		let appIntRetr = appIntRetrFn();
+		//appIntRetr.addInterpreter(LDDict.CreateAction, ImageUploadComponent, "Crud");
+		appIntRetr.addInterpreter(LDDict.ImageObject, ImageDisplayComponent, "cRud");
+
+		//register base data type inputs:
+		appIntRetr.addInterpreter(LDDict.Boolean, BooleanValInput, "CrUd");
+		appIntRetr.addInterpreter(LDDict.Integer, IntegerValInput, "CrUd");
+		appIntRetr.addInterpreter(LDDict.Double, DoubleValInput, "CrUd");
+		appIntRetr.addInterpreter(LDDict.Text, TextValInput, "CrUd");
+		appIntRetr.addInterpreter(LDDict.Date, DateValInput, "CrUd");
+		appIntRetr.addInterpreter(LDDict.DateTime, DateTimeValInput, "CrUd");
+	}
 	matchSingleKV(single: IKvStore, crudSkills: string): IKvStore {
 		throw new Error("Method not implemented.");
 	}
 	matchKvArray(multi: IKvStore[], crudSkills: string): IKvStore[] {
+		let rv: IKvStore[] = [];
 		let ldType = multi.find(matchIsType);
 		let ldLang = multi.find(matchIsLang);
 		let ldId = multi.find(matchIsId);
@@ -25,8 +49,12 @@ export class DefaultInterpreterMatcher implements IInterpreterMatcher{
 			//this is a typed base object then
 			let searchTerm: string | Array<string> = ldType.value;
 			if (searchTerm) {
-				appIntprtrRetr.searchForObjIntrprtr(searchTerm, crudSkills);
-				return;
+				if (typeof searchTerm === "string") {
+					let intrprtr = appIntRetrFn().searchForObjIntrprtr(searchTerm, crudSkills);
+					let rvAdd: IKvStore = { key: null, value: null, intrprtrClass: intrprtr, ldType: searchTerm };
+					rv.push(rvAdd);
+					return rv;
+				}
 			}
 		}
 	}

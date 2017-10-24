@@ -1,16 +1,16 @@
 import jasmine from 'jasmine';
 import {BlueprintConfig, IBlueprintInterpreter} from 'ldaccess/ldBlueprint';
 import ldBlueprint from 'ldaccess/ldBlueprint';
-import { MockInterpreterRetriever } from '../testing/mockInterpreterRetriever';
+import { mockInterpreterRetrieverFn } from '../testing/mockInterpreterRetriever';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { IKvStore } from 'ldaccess/ikvstore';
 
-var testInterpreter = new MockInterpreterRetriever();
+var testInterpreter = mockInterpreterRetrieverFn;
 
 let bpCfg: BlueprintConfig = {
     consumeWebResource: (ldOptions: ILDOptions) => {return; },
     forType: "http://shnyder.com/Testtype",
-    interpreterRetriever: testInterpreter,
+    interpreterRetrieverFn: testInterpreter,
     initialKvStores: null,
     getInterpretableKeys(){return null; },
     crudSkills: "cRud"

@@ -1,15 +1,22 @@
 import { DefaultInterpreterRetriever } from "defaults/DefaultInterpreterRetriever";
 import { IInterpreterRetriever } from "ldaccess/iinterpreter-retriever";
 
-//import ImageUploadComponent from 'components/imageupload-component';
-//import ImageDisplayComponent from 'components/imagedisplay-component';
 import { LDDict } from "ldaccess/LDDict";
 
 class AppInterpreterRetriever extends DefaultInterpreterRetriever{
 
 }
 
-const appIntRetr: IInterpreterRetriever = new AppInterpreterRetriever();
+var appIntRetr: IInterpreterRetriever = null;
 //appIntRetr.addInterpreter(LDDict.CreateAction, ImageUploadComponent, "Crud");
 //appIntRetr.addInterpreter(LDDict.ImageObject, ImageDisplayComponent, "cRud");
-export default appIntRetr;
+
+export let appIntRetrFn = (): IInterpreterRetriever => {
+	if (appIntRetr == null){
+		appIntRetr = new AppInterpreterRetriever();
+	}
+	console.dir(appIntRetr);
+	return appIntRetr;
+};
+
+export default appIntRetrFn;

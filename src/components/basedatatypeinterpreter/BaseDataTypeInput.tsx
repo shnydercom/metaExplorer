@@ -58,7 +58,7 @@ for (var bdt in bdts) {
 		let bpCfg: BlueprintConfig = {
 			//consumeWebResource: (ldOptions: ILDOptions) => { return; },
 			forType: elem,
-			interpreterRetriever: appIntprtrRetr,
+			interpreterRetrieverFn: appIntprtrRetr,
 			initialKvStores: initialKVStores,
 			getInterpretableKeys() { return cfgIntrprtTypes; },
 			crudSkills: "CRUd"
@@ -75,9 +75,8 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 
 	constructor(props: OwnProps) {
 		super(props);
-		this.singleKV = this.initialKvStores[0];
-		let baseDT: LDBaseDataType = this.singleKV.ldType as LDBaseDataType;
-		this.determineRenderFn(baseDT);
+		this.singleKV = null;
+		this.render = () => null;
 	}
 	consumeLDOptions = (ldOptions: ILDOptions) => {
 		return;
@@ -89,8 +88,13 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 		//this.setState({...this.state, [name]: value});
 	}
 
-	parseDate: any = (input) => "";
-	parseTime: any = (input) => "";
+	componentWillMount() {
+		this.singleKV = this.initialKvStores[0];
+		let baseDT: LDBaseDataType = this.singleKV.ldType as LDBaseDataType;
+		this.determineRenderFn(baseDT);
+	}
+	parseDate: any = (input): Date => null;
+	parseTime: any = (input) => null;
 
 	private determineRenderFn = (baseDT: LDBaseDataType) => {
 		switch (baseDT) {
@@ -122,7 +126,7 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 				break;
 			case LDDict.Date:
 				this.render = () => {
-					const { parsedDate } = this.parseDate(this.singleKV.value);
+					var parsedDate = this.parseDate(this.singleKV.value);
 					return <DatePicker
 						label={this.singleKV.key}
 						onChange={(evt) => this.handleChange(evt)}
@@ -132,8 +136,8 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 				break;
 			case LDDict.DateTime:
 				this.render = () => {
-					const parsedDate = this.parseDate(this.singleKV.value);
-					const parsedTime = this.parseTime(this.singleKV.value);
+					var parsedDate = this.parseDate(this.singleKV.value);
+					var parsedTime = this.parseTime(this.singleKV.value);
 					return <div>
 						<DatePicker
 							label={this.singleKV.key}

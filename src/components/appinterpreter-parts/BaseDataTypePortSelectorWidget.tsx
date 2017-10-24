@@ -11,13 +11,24 @@ export interface BaseDataTypePortSelectorProps {
 	label?: string;
 }
 
-export interface BaseDataTypePortSelectorState { }
+export interface BaseDataTypePortSelectorState {
+	portType: string;
+ }
 
 export class BaseDataTypePortSelector extends React.Component<BaseDataTypePortSelectorProps, BaseDataTypePortSelectorState> {
 	public static defaultProps: BaseDataTypePortSelectorProps = {
 		in: true,
 		label: "port"
 	};
+
+	constructor(){
+		super();
+		this.state = {portType: null};
+	}
+
+	onPortTypeChange = (newType: string) => {
+		this.state = {portType: newType};
+	}
 
 	render() {
 		var port = <SinglePortWidget node={this.props.model.getParent()} name={this.props.model.name} isMulti={true} />;
@@ -26,8 +37,8 @@ export class BaseDataTypePortSelector extends React.Component<BaseDataTypePortSe
 		return (
 			<div className={("out") + "-port"}>
 				{label}
-				<BaseDataTypeDropDown />
-				<GenericContainer />
+				<BaseDataTypeDropDown selectionChange={(newType) => {this.onPortTypeChange(newType); }}/>
+				<GenericContainer demoType={this.state.portType} searchCrudSkills="CrUd"/>
 				{port}
 			</div>
 		);

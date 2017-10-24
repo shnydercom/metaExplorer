@@ -122,7 +122,7 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
     //consumeWebResource: (ldOptions: ILDOptions) => { return; },
     forType: cfgType,
-    interpreterRetriever: appIntprtrRetr,
+    interpreterRetrieverFn: appIntprtrRetr,
     initialKvStores: initialKVStores,
     getInterpretableKeys() { return cfgIntrprtTypes; },
     crudSkills: "Crud"

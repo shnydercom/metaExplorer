@@ -11,3 +11,5 @@ export class MockInterpreterRetriever implements IInterpreterRetriever{
 			return null;
 	}
 }
+
+export let mockInterpreterRetrieverFn = () => new MockInterpreterRetriever();
