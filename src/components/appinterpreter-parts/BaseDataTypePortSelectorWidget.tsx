@@ -3,7 +3,7 @@ import { PortWidget, DefaultPortModel } from "storm-react-diagrams";
 import { SinglePortWidget } from "components/appinterpreter-parts/SinglePortWidget";
 import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
 import { BaseDataTypeDropDown } from "components/basedatatypeinterpreter/BaseDataTypeDropDown";
-import {GenericContainer} from "components/generic/genericContainer-component";
+import { GenericContainer } from "components/generic/genericContainer-component";
 
 export interface BaseDataTypePortSelectorProps {
 	model?: LDPortModel;
@@ -13,7 +13,7 @@ export interface BaseDataTypePortSelectorProps {
 
 export interface BaseDataTypePortSelectorState {
 	portType: string;
- }
+}
 
 export class BaseDataTypePortSelector extends React.Component<BaseDataTypePortSelectorProps, BaseDataTypePortSelectorState> {
 	public static defaultProps: BaseDataTypePortSelectorProps = {
@@ -21,13 +21,13 @@ export class BaseDataTypePortSelector extends React.Component<BaseDataTypePortSe
 		label: "port"
 	};
 
-	constructor(){
+	constructor() {
 		super();
-		this.state = {portType: null};
+		this.state = { portType: null };
 	}
 
 	onPortTypeChange = (newType: string) => {
-		this.state = {portType: newType};
+		this.setState({ portType: newType });
 	}
 
 	render() {
@@ -36,9 +36,11 @@ export class BaseDataTypePortSelector extends React.Component<BaseDataTypePortSe
 
 		return (
 			<div className={("out") + "-port"}>
-				{label}
-				<BaseDataTypeDropDown selectionChange={(newType) => {this.onPortTypeChange(newType); }}/>
-				<GenericContainer demoType={this.state.portType} searchCrudSkills="CrUd"/>
+				<div>
+					{label}
+					<BaseDataTypeDropDown selectionChange={(newType) => { this.onPortTypeChange(newType); }} />
+					<GenericContainer demoType={this.state.portType} searchCrudSkills="CrUd" />
+				</div>
 				{port}
 			</div>
 		);

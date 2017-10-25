@@ -89,8 +89,7 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 			};
 			demoTypeParsed = this.consumeLDOptions(demoTypeLDOptions);
 		}
-		return <div>
-			parsed?
+		return <div key={0}>
 			{demoTypeParsed}
 		</div>;
 	}
@@ -103,12 +102,12 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 				reactCompClasses.push(intrprtr as React.ComponentClass);
 			}
 		});
-		let reactComps = reactCompClasses.map((itm) => {
+		let reactComps = reactCompClasses.map((itm, idx) => {
 			let GenericComp = itm;
-			return <GenericComp />;
+			return <GenericComp key={idx}/>;
 
 		});
-		return <div>here{reactComps}</div>;
+		return <div>{reactComps}</div>;
 	}
 }
 

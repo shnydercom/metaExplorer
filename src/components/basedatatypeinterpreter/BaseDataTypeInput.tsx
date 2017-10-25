@@ -23,6 +23,7 @@ import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
  */
 
 type OwnProps = {
+	singleKV: IKvStore;
 };
 type ConnectedState = {
 };
@@ -71,64 +72,71 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 	implements IBlueprintInterpreter {
 
 	initialKvStores: IKvStore[];
-	private singleKV: IKvStore;
 
+	state = {
+		singleKV: null
+	};
 	constructor(props: OwnProps) {
 		super(props);
-		this.singleKV = null;
 		this.render = () => null;
 	}
 	consumeLDOptions = (ldOptions: ILDOptions) => {
 		return;
 	}
 
-	handleChange = (evt) => {
+	handleChange = (evtval) => {
 		console.log("a change event: ");
-		console.dir(evt);
+		console.dir(evtval);
+		let modSingleKV: IKvStore = this.state.singleKV;
+		modSingleKV.value = evtval;
+		this.setState({ ...this.state, singleKV: modSingleKV });
 		//this.setState({...this.state, [name]: value});
 	}
 
 	componentWillMount() {
-		this.singleKV = this.initialKvStores[0];
-		let baseDT: LDBaseDataType = this.singleKV.ldType as LDBaseDataType;
+		this.state.singleKV = this.initialKvStores[0];
+		let baseDT: LDBaseDataType = this.state.singleKV.ldType as LDBaseDataType;
 		this.determineRenderFn(baseDT);
 	}
-	parseDate: any = (input): Date => null;
-	parseTime: any = (input) => null;
-
+	parseDate: any = (input): Date => {
+		return input ? input : new Date();
+	}
+	parseTime: any = (input): Date => {
+		return input ? input : new Date();
+	}
 	private determineRenderFn = (baseDT: LDBaseDataType) => {
 		switch (baseDT) {
 			case LDDict.Boolean:
-				this.render = () => <Switch checked={this.singleKV.value}
-					label="this.singleKV.key"
+				this.render = () => <Switch checked={this.state.singleKV.value}
+					label={this.state.singleKV.key}
 					onChange={(evt) => this.handleChange(evt)} />;
 				break;
 			case LDDict.Integer:
 				this.render = () => <Input type='number'
-					label={this.singleKV.key}
-					name={this.singleKV.key}
-					value={this.singleKV.value}
+					label={this.state.singleKV.key}
+					name={this.state.singleKV.key}
+					value={this.state.singleKV.value}
 					onChange={(evt) => this.handleChange(evt)} maxLength={16} />;
 				break;
 			case LDDict.Double:
 				this.render = () => <Input type='number'
-					label={this.singleKV.key}
-					name={this.singleKV.key}
-					value={this.singleKV.value}
+					label={this.state.singleKV.key}
+					name={this.state.singleKV.key}
+					value={this.state.singleKV.value}
 					onChange={(evt) => this.handleChange(evt)} maxLength={16} />;
 				break;
 			case LDDict.Text:
 				this.render = () => <Input type='text'
-					label={this.singleKV.key}
-					name={this.singleKV.key}
-					value={this.singleKV.value}
+					label={this.state.singleKV.key}
+					name={this.state.singleKV.key}
+					value={this.state.singleKV.value}
 					onChange={(evt) => this.handleChange(evt)} maxLength={16} />;
 				break;
 			case LDDict.Date:
 				this.render = () => {
-					var parsedDate = this.parseDate(this.singleKV.value);
+					var parsedDate = this.parseDate(this.state.singleKV.value);
 					return <DatePicker
-						label={this.singleKV.key}
+						label={this.state.singleKV.key}
 						onChange={(evt) => this.handleChange(evt)}
 						value={parsedDate}
 						sundayFirstDayOfWeek />;
@@ -136,15 +144,15 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 				break;
 			case LDDict.DateTime:
 				this.render = () => {
-					var parsedDate = this.parseDate(this.singleKV.value);
-					var parsedTime = this.parseTime(this.singleKV.value);
+					var parsedDate = this.parseDate(this.state.singleKV.value);
+					var parsedTime = this.parseTime(this.state.singleKV.value);
 					return <div>
 						<DatePicker
-							label={this.singleKV.key}
+							label={this.state.singleKV.key}
 							onChange={(evt) => this.handleChange(evt)}
 							value={parsedDate}
 							sundayFirstDayOfWeek />;
-					<TimePicker
+						<TimePicker
 							label='Finishing time'
 							onChange={this.handleChange}
 							value={parsedTime}

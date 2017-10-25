@@ -31,9 +31,7 @@ export class BaseDataTypeNodeWidget extends React.Component<BaseDataTypeNodeProp
 
 	generatePort(port) {
 		//return <DefaultPortLabel model={port} key={port.id} />;
-		return <div>
-			<BaseDataTypePortSelector model={port} key={port.id} />
-		</div>;
+		return <BaseDataTypePortSelector model={port} key={port.id} />;
 	}
 
 	render() {
