@@ -26,12 +26,12 @@ export class DefaultInterpreterMatcher implements IInterpreterMatcher {
 		appIntRetr.addInterpreter(LDDict.ImageObject, ImageDisplayComponent, "cRud");
 
 		//register base data type inputs:
-		appIntRetr.addInterpreter(LDDict.Boolean, BooleanValInput, "CrUd");
-		appIntRetr.addInterpreter(LDDict.Integer, IntegerValInput, "CrUd");
-		appIntRetr.addInterpreter(LDDict.Double, DoubleValInput, "CrUd");
-		appIntRetr.addInterpreter(LDDict.Text, TextValInput, "CrUd");
-		appIntRetr.addInterpreter(LDDict.Date, DateValInput, "CrUd");
-		appIntRetr.addInterpreter(LDDict.DateTime, DateTimeValInput, "CrUd");
+		appIntRetr.addInterpreter(LDDict.Boolean, BooleanValInput, "crud");
+		appIntRetr.addInterpreter(LDDict.Integer, IntegerValInput, "CRUd");
+		appIntRetr.addInterpreter(LDDict.Double, DoubleValInput, "CRUd");
+		appIntRetr.addInterpreter(LDDict.Text, TextValInput, "CRUd");
+		appIntRetr.addInterpreter(LDDict.Date, DateValInput, "CRUd");
+		appIntRetr.addInterpreter(LDDict.DateTime, DateTimeValInput, "CRUd");
 	}
 	matchSingleKV(single: IKvStore, crudSkills: string): IKvStore {
 		throw new Error("Method not implemented.");

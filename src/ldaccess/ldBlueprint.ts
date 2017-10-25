@@ -15,6 +15,7 @@ export interface IBlueprintInterpreter {
  */
 export interface BlueprintConfig {
     forType: string;
+    nameSelf: string;
     interpreterRetrieverFn: () => IInterpreterRetriever;
     initialKvStores?: IKvStore[];
     crudSkills: string;
@@ -25,6 +26,7 @@ export interface BlueprintConfig {
 function blueprintDecorator<T extends { new(...args: any[]): IBlueprintInterpreter }>(constructor: T, blueprintCfg: BlueprintConfig) {
     var newClass = class extends constructor {
         static forType = blueprintCfg.forType;
+        static nameSelf = blueprintCfg.nameSelf;
         initialKvStores = blueprintCfg.initialKvStores ? blueprintCfg.initialKvStores : this.initialKvStores;
         //consumeWebResource = blueprintCfg.consumeWebResource;
         interpreterRetriever = blueprintCfg.interpreterRetrieverFn;
@@ -38,6 +40,7 @@ export default function ldBlueprint(blueprintCfg: BlueprintConfig) {
     //eval phase
     if (blueprintCfg == null) throw new LDError("blueprintCfg must not be null");
     if (blueprintCfg.forType == null) throw new LDError("blueprintCfg.forType must not be null");
+    if (blueprintCfg.nameSelf == null) throw new LDError("blueprintCfg.nameSelf must not be null");
     if (blueprintCfg.interpreterRetrieverFn == null) throw new LDError("blueprintCfg.interpreterRetriever must not be null");
     if (blueprintCfg.crudSkills == null) throw new LDError("blueprintCfg.crudSkills must not be null");
     if (blueprintCfg.getInterpretableKeys == null) throw new LDError("blueprintCfg.getInterpretableKeys must not be null");

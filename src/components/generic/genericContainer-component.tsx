@@ -44,6 +44,7 @@ let cfgIntrprtTypes: string[] =
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
 	forType: cfgType,
+	nameSelf: "shnyder/genericContainer",
 	interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
 	getInterpretableKeys() { return cfgIntrprtTypes; },

@@ -3,8 +3,9 @@ import { IBlueprintInterpreter } from "ldaccess/ldBlueprint";
 
 interface IInterpreterInfoItem {
 	type: string;
+	nameSelf: string;
 	interpreter: any;
-	crudSkills: any;
+	crudSkills: string;
 	baseType: string;
 	additionalTypes: Array<string>;
 }
@@ -29,8 +30,17 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 		throw new Error("Method not implemented.");
 	}
 	addInterpreter(typeName: string, intrprtr: any, crudSkills: string): void {
+		let preExisting: Array<IInterpreterInfoItem> = this.interpreterCollection.filter(
+			(curItm) => curItm.interpreter["nameSelf"] === intrprtr["nameSelf"] && curItm.type === typeName);
+		if (preExisting && preExisting.length > 0) {
+			let preExFirst = preExisting[0];
+			crudSkills = this.extendCrudSkills(crudSkills, preExFirst.crudSkills);
+			preExFirst.crudSkills = crudSkills;
+			return;
+		}
 		let newItm: IInterpreterInfoItem = {
 			type: typeName,
+			nameSelf: intrprtr["nameSelf"],
 			interpreter: intrprtr,
 			crudSkills: crudSkills,
 			baseType: this.getBaseTypeFromType(typeName),
@@ -38,6 +48,21 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 		};
 		this.interpreterCollection.push(newItm);
 		//throw new Error("Method not implemented.");
+	}
+	/**
+	 * will combine two crudSkills by choosing the most permissive skills
+	 * @param crudSkillsA
+	 * @param crudSkillsB
+	 */
+	private extendCrudSkills(crudSkillsA: string, crudSkillsB: string): string {
+		if (crudSkillsA === crudSkillsB) return crudSkillsA;
+		let rv: string = "";
+		for (var i = 0; i < crudSkillsA.length; i++) {
+			let a = crudSkillsA[i];
+			let b = crudSkillsB[i];
+			rv += a < b ? a : b;
+		}
+		return rv;
 	}
 
 	private searchSingleObjInterpreter(term: string, crudSkills: string) {

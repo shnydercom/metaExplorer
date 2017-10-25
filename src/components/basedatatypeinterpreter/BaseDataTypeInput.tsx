@@ -59,6 +59,7 @@ for (var bdt in bdts) {
 		let bpCfg: BlueprintConfig = {
 			//consumeWebResource: (ldOptions: ILDOptions) => { return; },
 			forType: elem,
+			nameSelf: "shnyder/react-toolbox/" + elem,
 			interpreterRetrieverFn: appIntprtrRetr,
 			initialKvStores: initialKVStores,
 			getInterpretableKeys() { return cfgIntrprtTypes; },
@@ -130,7 +131,7 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 					label={this.state.singleKV.key}
 					name={this.state.singleKV.key}
 					value={this.state.singleKV.value}
-					onChange={(evt) => this.handleChange(evt)} maxLength={16} />;
+					onChange={(evt) => this.handleChange(evt)} />;
 				break;
 			case LDDict.Date:
 				this.render = () => {

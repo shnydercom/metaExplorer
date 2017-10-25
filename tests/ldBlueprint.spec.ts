@@ -10,6 +10,7 @@ var testInterpreter = mockInterpreterRetrieverFn;
 let bpCfg: BlueprintConfig = {
     consumeWebResource: (ldOptions: ILDOptions) => {return; },
     forType: "http://shnyder.com/Testtype",
+    nameSelf: "shnyder/testTypeInterpreter",
     interpreterRetrieverFn: testInterpreter,
     initialKvStores: null,
     getInterpretableKeys(){return null; },

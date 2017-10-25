@@ -122,6 +122,7 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
     //consumeWebResource: (ldOptions: ILDOptions) => { return; },
     forType: cfgType,
+    nameSelf: "shnyder/imageUpload",
     interpreterRetrieverFn: appIntprtrRetr,
     initialKvStores: initialKVStores,
     getInterpretableKeys() { return cfgIntrprtTypes; },
