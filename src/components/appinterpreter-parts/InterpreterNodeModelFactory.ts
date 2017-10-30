@@ -3,7 +3,7 @@ import { AbstractInstanceFactory } from "storm-react-diagrams";
 export class InterpreterNodeModelFactory extends AbstractInstanceFactory<InterpreterNodeModel> {
 
 	constructor(subModel?: string) {
-		let sub: string = subModel === null ? "interpreter" : subModel; 
+		let sub: string = subModel === null ? "interpreter" : subModel;
 		super(sub);
 	}
 

@@ -1,7 +1,7 @@
 import { IInterpreterRetriever } from "ldaccess/iinterpreter-retriever";
 import { IBlueprintInterpreter } from "ldaccess/ldBlueprint";
 
-interface IInterpreterInfoItem {
+export interface IInterpreterInfoItem {
 	type: string;
 	nameSelf: string;
 	interpreter: any;
@@ -49,6 +49,12 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 		this.interpreterCollection.push(newItm);
 		//throw new Error("Method not implemented.");
 	}
+
+	getInterpreterList() {
+		return this.interpreterCollection;
+		//throw new Error("Method not implemented.");
+	}
+
 	/**
 	 * will combine two crudSkills by choosing the most permissive skills
 	 * @param crudSkillsA

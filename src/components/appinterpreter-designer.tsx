@@ -12,7 +12,11 @@ import {
 } from "storm-react-diagrams";
 import { BaseDataTypeWidgetFactory } from "./appinterpreter-parts/BaseDataTypeWidgetFactory";
 import { BaseDataTypeNodeModel } from './appinterpreter-parts/BaseDataTypeNodeModel';
+
 import { LDPortModel } from './appinterpreter-parts/LDPortModel';
+import { GeneralDataTypeWidgetFactory } from "components/appinterpreter-parts/GeneralDataTypeWidgetFactory";
+import { DesignerBody } from "components/appinterpreter-parts/DesignerBody";
+import { DesignerLogic } from "components/appinterpreter-parts/designer-logic";
 
 //console.log('lodash version:', _.toUpper("abcDE"));
 export default () => {
@@ -21,11 +25,12 @@ export default () => {
 	engine.registerNodeFactory(new DefaultNodeFactory());
 	engine.registerLinkFactory(new DefaultLinkFactory());
 	engine.registerNodeFactory(new BaseDataTypeWidgetFactory());
+	engine.registerNodeFactory(new GeneralDataTypeWidgetFactory());
 
 	//2) setup the diagram model
 	var model = new DiagramModel();
 
-	var newNode1 = new BaseDataTypeNodeModel("a heading", "rgb(250,60,60)");
+	var newNode1 = new BaseDataTypeNodeModel("Simple Data Type", "rgb(250,60,60)");
 	var newPort1 = newNode1.addPort(new LDPortModel(false, "out-3", "someLabel"));
 	newNode1.x = 100;
 	newNode1.y = 200;
@@ -66,10 +71,10 @@ export default () => {
 	//5) load model into engine
 	engine.setDiagramModel(model);
 
-	var test = _.map(model.getNodes());
-
+	//var test = _.map(model.getNodes());
+	var logic: DesignerLogic = new DesignerLogic();
 	//6) render the diagram!
 	return <div className="entrypoint-editor" >
-		<DiagramWidget diagramEngine={engine} />
+		<DesignerBody logic={logic}/>
 	</div>;
 };

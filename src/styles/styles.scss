@@ -1,8 +1,35 @@
 .entrypoint-editor{
-    width: 500px;
-	height: 500px;
+    width: 1000px;
+	height: 800px;
 	display: flex;
 	background-color: rgb(230,230,230);
+	.designer-content{
+		display: flex;
+		width: 100%;
+		float: left;
+		position: relative;
+	}
+	.designer-tray{
+		min-width: 200px;
+		background: rgb(20,20,20);
+		flex-grow: 0;
+		flex-shrink: 0;
+
+		.designer-tray-item{
+			color: white;
+			font-family: Helvetica, Arial;
+			padding: 5px;
+			margin: 0px 10px;
+			border: solid 1px;
+			border-radius: 5px;
+			margin-bottom: 2px;
+			cursor: pointer;
+		}
+	}
+	.diagram-layer{
+		position: relative;
+		flex-grow: 1;
+	}
 }
 
 .storm-diagrams-canvas{

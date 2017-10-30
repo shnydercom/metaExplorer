@@ -1,5 +1,8 @@
 import {IInterpreterRetriever} from 'ldaccess/iinterpreter-retriever';
 export class MockInterpreterRetriever implements IInterpreterRetriever{
+	getInterpreterList() {
+		throw new Error("Method not implemented.");
+	}
 	searchForObjIntrprtr(term: string, crudSkills: string) {
 			//throw new Error("Method not implemented.");
 	}

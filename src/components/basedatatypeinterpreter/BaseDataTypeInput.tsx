@@ -95,7 +95,8 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 	}
 
 	componentWillMount() {
-		this.state.singleKV = this.initialKvStores[0];
+		this.state.singleKV = this.initialKvStores[0]; //TODO: check, if this can be done with the setState fn. Only needed for determineRenderFn
+		//this.setState({ ...this.state, singleKV: this.initialKvStores[0]});
 		let baseDT: LDBaseDataType = this.state.singleKV.ldType as LDBaseDataType;
 		this.determineRenderFn(baseDT);
 	}
@@ -117,14 +118,14 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 					label={this.state.singleKV.key}
 					name={this.state.singleKV.key}
 					value={this.state.singleKV.value}
-					onChange={(evt) => this.handleChange(evt)} maxLength={16} />;
+					onChange={(evt) => this.handleChange(evt)} />;
 				break;
 			case LDDict.Double:
 				this.render = () => <Input type='number'
 					label={this.state.singleKV.key}
 					name={this.state.singleKV.key}
 					value={this.state.singleKV.value}
-					onChange={(evt) => this.handleChange(evt)} maxLength={16} />;
+					onChange={(evt) => this.handleChange(evt)} />;
 				break;
 			case LDDict.Text:
 				this.render = () => <Input type='text'

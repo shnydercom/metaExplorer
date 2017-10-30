@@ -15,7 +15,6 @@ export let appIntRetrFn = (): IInterpreterRetriever => {
 	if (appIntRetr == null){
 		appIntRetr = new AppInterpreterRetriever();
 	}
-	console.dir(appIntRetr);
 	return appIntRetr;
 };
 
