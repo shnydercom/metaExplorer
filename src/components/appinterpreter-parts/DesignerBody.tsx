@@ -11,6 +11,7 @@ import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
 import { IBlueprintInterpreter } from "ldaccess/ldBlueprint";
 import { IKvStore } from "ldaccess/ikvstore";
 import { GeneralDataTypeNodeModel } from "components/appinterpreter-parts/GeneralDataTypeNodeModel";
+import * as appStyles from 'styles/styles.scss';
 
 export interface DesignerBodyProps {
 	logic: DesignerLogic;
@@ -38,14 +39,14 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 			}
 			//console.dir(ports);
 			let ldBPCfg = (itm.interpreter as IBlueprintInterpreter).cfg;
-			return <DesignerTrayItem key={idx} model={{ type: "ldbp", bpname: ldBPCfg.nameSelf }} name={itm.type} color="rgb(192,255,0)" />;
+			return <DesignerTrayItem key={idx} model={{ type: "ldbp", bpname: ldBPCfg ? ldBPCfg.nameSelf : "unnamed" }} name={itm.type} color="rgb(192,255,0)" />;
 		});
 		return reactCompClasses;
 	}
 
 	render() {
 		return (
-			<div className="designer-content">
+			<div>
 				<DesignerTray>
 					{this.trayItemsFromInterpreterList()}
 					{/* <DesignerTrayItem model={{ type: "in" }} name="In Node" color="rgb(192,255,0)" />

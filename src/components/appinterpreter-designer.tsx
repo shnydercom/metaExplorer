@@ -1,7 +1,8 @@
 import * as _ from "lodash";
 import * as React from "react";
 import Splitter from 'm-react-splitters';
-//import 'm-react-splitters/lib/splitters.css';
+import * as s from 'm-react-splitters/lib/splitters.css';
+import * as appStyles from 'styles/styles.scss';
 import {
 	DiagramEngine,
 	DefaultNodeFactory,
@@ -80,7 +81,7 @@ export default () => {
 	var logic: DesignerLogic = new DesignerLogic();
 	//6) render the diagram!
 	return <div className="entrypoint-editor" >
-		<Splitter
+		<Splitter className={s.splitter}
 			position="vertical"
 			primaryPaneMaxWidth="80%"
 			primaryPaneMinWidth="40%"
@@ -90,7 +91,7 @@ export default () => {
 			primaryPaneHeight="100%"
 		>
 			<DesignerBody logic={logic} />
-			<GenericContainer demoType="shnyder/ProductDisplay" searchCrudSkills="CrUd" />
+			<GenericContainer class={appStyles} demoType="shnyder/ProductDisplay" searchCrudSkills="CrUd" />
 		</Splitter>
 	</div>;
 };

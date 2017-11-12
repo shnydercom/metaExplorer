@@ -9,7 +9,7 @@ const extractSass = new ExtractTextPlugin({
 });
 
 module.exports = {
-  devtool: "source-map",
+  devtool: "eval-source-map",
 
   // entry point of our application, within the `src` directory (which we add to resolve.modules below):
   entry: {
@@ -35,7 +35,7 @@ module.exports = {
   // tell Webpack to load TypeScript files
   resolve: {
     // Look for modules in .ts(x) files first, then .js
-    extensions: ['.ts', '.tsx', '.js', '.json'],
+    extensions: ['.ts', '.tsx', '.js', '.json', '.css', '.scss'],
 
     // add 'src' to the modules, so that when you import files you can do so with 'src' as the relative route
     modules: ['src', 'node_modules'],
@@ -48,40 +48,103 @@ module.exports = {
      //  {test :/\.jsx?$/, loaders: ['babel-loader']}
     ]*/
     rules: [ // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      /*{
+      {
         enforce: 'pre',
         test: /\.js$/,
         loader: "source-map-loader"
-      },*/
+      },
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
       {
         test: /\.tsx?$/,
-        loaders: [/*'babel-loader',"ts-loader", */"awesome-typescript-loader"]
-      },
-      
-      {
-        test: /\.s?css$/,
         use: [{
-          loader: "style-loader"
-        }, {
-          loader: "css-loader",
-          options: {
-            modules: true, // default is false
-            sourceMap: true,
-            importLoaders: 1,
-            localIdentName: "[name]--[local]--[hash:base64:8]"
-          }
-        }, {
-          loader: "sass-loader",
-          options: {
-            includePaths: ["src/styles"]
-          }
-        }]
+            loader: 'babel-loader'
+          },
+          {
+            loader: "ts-loader"
+          }, /*"awesome-typescript-loader"*/
+
+        ]
       },
-      { test: /\.html$/, use: 'html-loader' },
-      { test: /\.png$/, use: 'url-loader?limit=10000' },
-      { test: /\.jpg$/, use: 'file-loader' },
-      
+      /*{
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              sourceMap: true,
+              importLoaders: 1,
+              localIdentName: "[name]--[local]--[hash:base64:8]"
+            }
+          },
+          "postcss-loader" // has separate config, see postcss.config.js nearby
+        ]
+      },*/
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: 'typings-for-css-modules-loader',
+            options: {
+              camelcase:true,
+              namedExport: true,
+              modules: true,
+              sourceMap: true,
+              importLoaders: 2,
+              localIdentName: "[name]--[local]--[hash:base64:8]"
+            }
+          },
+          "postcss-loader", // has separate config, see postcss.config.js nearby
+        ]
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+
+          // Could also be write as follow:
+          // use: 'css-loader?modules&importLoader=2&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader'
+          use: [{
+              loader: 'css-loader',
+              query: {
+                modules: true,
+                sourceMap: true,
+                importLoaders: 2,
+                localIdentName: /*[name]--*/'[local]'//--[hash:base64:8]'
+              }
+            },
+            "postcss-loader",
+            'sass-loader'
+          ]
+        }),
+      },
+      /*{
+        test: /\.s?css$/,
+        exclude: /node_modules/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            "css-loader",
+            "postcss-loader",
+            "sass-loader"
+          ]
+        })
+      },*/
+      {
+        test: /\.html$/,
+        use: 'html-loader'
+      },
+      {
+        test: /\.png$/,
+        use: 'url-loader?limit=10000'
+      },
+      {
+        test: /\.jpg$/,
+        use: 'file-loader'
+      },
       /*,
       {
         test: /\.css$/,
@@ -117,7 +180,7 @@ module.exports = {
         }*/
   },
   plugins: [
-    new ExtractTextPlugin('public/style.css', {
+    new ExtractTextPlugin('style.css', {
       allChunks: true
     })
   ]

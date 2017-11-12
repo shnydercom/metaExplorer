@@ -3,10 +3,10 @@ import * as React from 'react';
 import * as redux from 'redux';
 import { connect } from 'react-redux';
 
-import Input from 'react-toolbox';
-import Switch from 'react-toolbox';
-import DatePicker from 'react-toolbox';
-import TimePicker from 'react-toolbox';
+import {Input, InputTheme} from 'react-toolbox';
+import {Switch, SwitchTheme} from 'react-toolbox';
+import {DatePicker, DatePickerTheme} from 'react-toolbox';
+import {TimePicker, TimePickerTheme} from 'react-toolbox';
 
 import { ExplorerState } from 'appstate/store';
 import { BlueprintConfig } from 'ldaccess/ldBlueprint';

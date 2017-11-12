@@ -21,8 +21,8 @@ export class BaseDataTypePortSelector extends React.Component<BaseDataTypePortSe
 		label: "port"
 	};
 
-	constructor() {
-		super();
+	constructor(props: BaseDataTypePortSelectorProps) {
+		super(props);
 		this.state = { portType: null };
 	}
 
