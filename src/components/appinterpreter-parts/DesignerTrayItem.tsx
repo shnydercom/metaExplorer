@@ -20,7 +20,7 @@ export class DesignerTrayItem extends React.Component<DesignerTrayProps, Designe
 				style={{ borderColor: this.props.color }}
 				draggable={true}
 				onDragStart={(event) => {
-					event.dataTransfer.setData("storm-diagram-node", JSON.stringify(this.props.model));
+					event.dataTransfer.setData("ld-node", JSON.stringify(this.props.model));
 				}}
 				className="designer-tray-item"
 			>

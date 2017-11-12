@@ -9,6 +9,7 @@ import { LDDict } from "ldaccess/LDDict";
 //import ImageUploadComponent from 'components/imageupload-component';
 import ImageDisplayComponent from 'components/imagedisplay-component';
 import { BooleanValInput, IntegerValInput, DoubleValInput, TextValInput, DateValInput, DateTimeValInput } from "components/basedatatypeinterpreter/BaseDataTypeInput";
+import ImgHeadSubDescIntrprtr, { ImgHeadSubDescIntrprtrName } from "components/visualcomposition/ImgHeadSubDescIntrprtr";
 
 let matchIsType = (a: IKvStore) => a.key === LDConsts.type || a.key === LDConsts.isA;
 let matchIsLang = (a: IKvStore) => a.key === LDConsts.lang;
@@ -23,7 +24,7 @@ export class DefaultInterpreterMatcher implements IInterpreterMatcher {
 	constructor() {
 		let appIntRetr = appIntRetrFn();
 		//appIntRetr.addInterpreter(LDDict.CreateAction, ImageUploadComponent, "Crud");
-		appIntRetr.addInterpreter(LDDict.ImageObject, ImageDisplayComponent, "cRud");
+		appIntRetr.addInterpreter(LDDict.ViewAction, ImageDisplayComponent, "cRud");
 
 		//register base data type inputs:
 		appIntRetr.addInterpreter(LDDict.Boolean, BooleanValInput, "crud");
@@ -32,6 +33,9 @@ export class DefaultInterpreterMatcher implements IInterpreterMatcher {
 		appIntRetr.addInterpreter(LDDict.Text, TextValInput, "CRUd");
 		appIntRetr.addInterpreter(LDDict.Date, DateValInput, "CRUd");
 		appIntRetr.addInterpreter(LDDict.DateTime, DateTimeValInput, "CRUd");
+
+		//register visual composition interpreters.
+		appIntRetr.addInterpreter(ImgHeadSubDescIntrprtrName, ImgHeadSubDescIntrprtr, "cRud");
 	}
 	matchSingleKV(single: IKvStore, crudSkills: string): IKvStore {
 		throw new Error("Method not implemented.");

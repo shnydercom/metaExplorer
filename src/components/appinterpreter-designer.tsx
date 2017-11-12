@@ -1,5 +1,7 @@
 import * as _ from "lodash";
 import * as React from "react";
+import Splitter from 'm-react-splitters';
+//import 'm-react-splitters/lib/splitters.css';
 import {
 	DiagramEngine,
 	DefaultNodeFactory,
@@ -10,6 +12,8 @@ import {
 	DefaultPortModel,
 	DiagramWidget
 } from "storm-react-diagrams";
+//import "storm-react-diagrams/dist/style.css";
+
 import { BaseDataTypeWidgetFactory } from "./appinterpreter-parts/BaseDataTypeWidgetFactory";
 import { BaseDataTypeNodeModel } from './appinterpreter-parts/BaseDataTypeNodeModel';
 
@@ -17,6 +21,7 @@ import { LDPortModel } from './appinterpreter-parts/LDPortModel';
 import { GeneralDataTypeWidgetFactory } from "components/appinterpreter-parts/GeneralDataTypeWidgetFactory";
 import { DesignerBody } from "components/appinterpreter-parts/DesignerBody";
 import { DesignerLogic } from "components/appinterpreter-parts/designer-logic";
+import { GenericContainer } from "components/generic/genericContainer-component";
 
 //console.log('lodash version:', _.toUpper("abcDE"));
 export default () => {
@@ -75,6 +80,17 @@ export default () => {
 	var logic: DesignerLogic = new DesignerLogic();
 	//6) render the diagram!
 	return <div className="entrypoint-editor" >
-		<DesignerBody logic={logic}/>
+		<Splitter
+			position="vertical"
+			primaryPaneMaxWidth="80%"
+			primaryPaneMinWidth="40%"
+			primaryPaneWidth="50%"
+			dispatchResize={true}
+			postPoned={false}
+			primaryPaneHeight="100%"
+		>
+			<DesignerBody logic={logic} />
+			<GenericContainer demoType="shnyder/ProductDisplay" searchCrudSkills="CrUd" />
+		</Splitter>
 	</div>;
 };

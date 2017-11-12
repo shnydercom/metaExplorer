@@ -1,5 +1,6 @@
 import { IInterpreterRetriever } from "ldaccess/iinterpreter-retriever";
-import { IBlueprintInterpreter } from "ldaccess/ldBlueprint";
+import ldBlueprint, { IBlueprintInterpreter, BlueprintConfig } from "ldaccess/ldBlueprint";
+import { UserDefDict } from "ldaccess/UserDefDict";
 
 export interface IInterpreterInfoItem {
 	type: string;
@@ -11,6 +12,7 @@ export interface IInterpreterInfoItem {
 }
 
 export class DefaultInterpreterRetriever implements IInterpreterRetriever {
+
 	private interpreterCollection: Array<IInterpreterInfoItem> = [];
 
 	searchForObjIntrprtr(term: string | string[], crudSkills: string) {
@@ -30,6 +32,19 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 		throw new Error("Method not implemented.");
 	}
 	addInterpreter(typeName: string, intrprtr: any, crudSkills: string): void {
+		//if the interpreter has a user defined name, add it using that name
+		if (intrprtr["cfg"]) {
+			let cfg: BlueprintConfig = intrprtr["cfg"];
+			if (cfg.initialKvStores && cfg.initialKvStores.length > 0) {
+				for (var i = 0; i < cfg.initialKvStores.length; i++) {
+					var itm = cfg.initialKvStores[i];
+					if (itm.key === UserDefDict.intrprtrName && itm.value) {
+						typeName = itm.value;
+						break;
+					}
+				}
+			}
+		}
 		let preExisting: Array<IInterpreterInfoItem> = this.interpreterCollection.filter(
 			(curItm) => curItm.interpreter["nameSelf"] === intrprtr["nameSelf"] && curItm.type === typeName);
 		if (preExisting && preExisting.length > 0) {
@@ -50,9 +65,17 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 		//throw new Error("Method not implemented.");
 	}
 
-	getInterpreterList() {
+	getInterpreterList(): IInterpreterInfoItem[] {
 		return this.interpreterCollection;
 		//throw new Error("Method not implemented.");
+	}
+
+	getInterpreterByNameSelf(nameSelf: string) {
+		let candidates: IInterpreterInfoItem[] = this.interpreterCollection.filter(
+			(curItm) => curItm.nameSelf === nameSelf);
+		if (candidates == null) return null;
+		if (candidates.length === 1) return candidates[0].interpreter;
+		return candidates[0].interpreter;
 	}
 
 	/**
@@ -82,7 +105,8 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 			(curItm) => curItm.crudSkills === crudSkills
 		);
 		if (candidatesMatch2 !== null || candidatesMatch2.length > 0) candidates = candidatesMatch2;
-		return candidates[0].interpreter;
+		if(candidates.length === 1) return candidates[0].interpreter;
+		return null;
 		//TODO: perform a mapping against the additionalTypes
 	}
 

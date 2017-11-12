@@ -1,9 +1,12 @@
+@import 'm-react-splitters/lib/splitters.css';
 .entrypoint-editor{
     width: 1000px;
 	height: 800px;
 	display: flex;
-	background-color: rgb(230,230,230);
+	flex-direction: row;
 	.designer-content{
+		
+	background-color: rgb(230,230,230);
 		display: flex;
 		width: 100%;
 		float: left;
@@ -38,6 +41,7 @@
 	display: flex;
 	cursor: move;
 	overflow: hidden;
+	height: 100%;
 
 	.point{
 		fill: rgba(white,0.5);

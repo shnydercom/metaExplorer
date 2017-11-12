@@ -32,6 +32,7 @@ export class GeneralDataTypeNodeWidget extends React.Component<GeneralDataTypeNo
 					<div className="name">{this.props.node.name}</div>
 				</div>
 				<div className="ports">
+					<div className="in">{_.map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>
 					<div className="out">{_.map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
 				</div>
 			</div>

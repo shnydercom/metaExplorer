@@ -1,3 +1,5 @@
+import { IBlueprintInterpreter } from "ldaccess/ldBlueprint";
+
 export interface IInterpreterRetriever {
     /*
      * searches for interpreters that:
@@ -11,4 +13,5 @@ export interface IInterpreterRetriever {
     searchForKVIntrprtr(term: string, crudSkills: string): any;
     addInterpreter(typeName: string, intrprtr: any, crudSkills: string): void;
     getInterpreterList(): any;
+    getInterpreterByNameSelf(nameSelf: string): any;
 }

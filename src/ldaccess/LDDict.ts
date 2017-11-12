@@ -15,6 +15,9 @@ export enum LDDict {
 	target = "http://schema.org/target",
 	agent = "http://schema.org/agent",
 	result = "http://schema.org/result",
+	contentUrl = "http://schema.org/contentUrl",
+	name = "http://schema.org/name",
+	fileFormat = "http://schema.org/fileFormat",
 
 	//internal
 	WrapperObject = "http://shnyder.com/WrapperObject"

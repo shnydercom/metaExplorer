@@ -3,7 +3,10 @@ import * as React from 'react';
 import * as redux from 'redux';
 import { connect } from 'react-redux';
 
-import { Input, Switch, DatePicker, TimePicker } from 'react-toolbox';
+import Input from 'react-toolbox';
+import Switch from 'react-toolbox';
+import DatePicker from 'react-toolbox';
+import TimePicker from 'react-toolbox';
 
 import { ExplorerState } from 'appstate/store';
 import { BlueprintConfig } from 'ldaccess/ldBlueprint';
@@ -71,6 +74,7 @@ for (var bdt in bdts) {
 
 class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
 	implements IBlueprintInterpreter {
+	cfg: BlueprintConfig;
 
 	initialKvStores: IKvStore[];
 

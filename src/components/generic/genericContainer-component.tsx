@@ -54,6 +54,7 @@ let bpCfg: BlueprintConfig = {
 @ldBlueprint(bpCfg)
 class PureGenericContainer extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
 	implements IBlueprintInterpreter {
+	cfg: BlueprintConfig;
 	initialKvStores: IKvStore[];
 	constructor(props: OwnProps) {
 		super(props);
@@ -108,7 +109,7 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 			return <GenericComp key={idx}/>;
 
 		});
-		return <div>{reactComps}</div>;
+		return <div>tessst{reactComps}</div>;
 	}
 }
 

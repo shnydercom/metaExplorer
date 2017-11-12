@@ -1,17 +1,21 @@
-import { IInterpreterRetriever } from './iinterpreter-retriever';
-import { IKvStore } from './ikvstore';
+import { IInterpreterRetriever } from 'ldaccess/iinterpreter-retriever';
+import { IKvStore } from 'ldaccess/ikvstore';
 import { LDError } from 'appstate/LDError';
-import { ILDOptions } from './ildoptions';
+import { ILDOptions } from 'ldaccess/ildoptions';
 
 export type ConsumeLDOptionsFunc = (ldOptions: ILDOptions) => any;
 
 export interface IBlueprintInterpreter {
+    cfg: BlueprintConfig;
     consumeLDOptions: ConsumeLDOptionsFunc;
     initialKvStores: IKvStore[];
+    //getInterpretableKeys: () => any[];
 }
 
 /**
- * initialKvStores will be overriden if defined in config
+ * initialKvStores will be overriden if defined in config.
+ * The order of initialKvStores and getInterpretableKeys is important, especially for
+ * visual components, e.g.: display image as header, then text as heading, text as subheading, then text as description
  */
 export interface BlueprintConfig {
     forType: string;
@@ -25,7 +29,7 @@ export interface BlueprintConfig {
 
 function blueprintDecorator<T extends { new(...args: any[]): IBlueprintInterpreter }>(constructor: T, blueprintCfg: BlueprintConfig) {
     var newClass = class extends constructor {
-        static forType = blueprintCfg.forType;
+        static cfg = blueprintCfg;
         static nameSelf = blueprintCfg.nameSelf;
         initialKvStores = blueprintCfg.initialKvStores ? blueprintCfg.initialKvStores : this.initialKvStores;
         //consumeWebResource = blueprintCfg.consumeWebResource;

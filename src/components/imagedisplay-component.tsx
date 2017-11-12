@@ -2,8 +2,13 @@ import * as React from 'react';
 import * as redux from 'redux';
 import { connect } from 'react-redux';
 
+import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
+import { LDDict } from 'ldaccess/LDDict';
+import { IKvStore } from 'ldaccess/ikvstore';
+import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
+import { ILDOptions } from 'ldaccess/ildoptions';
 
 type OwnProps = {
 	singleImage;
@@ -20,12 +25,35 @@ const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedSta
 const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedDispatch => ({
 });
 
-class PureImgDisplay extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>{
+let cfgType: string = LDDict.ViewAction;
+let cfgIntrprtTypes: string[] =
+    [LDDict.name, LDDict.fileFormat, LDDict.contentUrl];
+let initialKVStores: IKvStore[] = [];
+let bpCfg: BlueprintConfig = {
+    //consumeWebResource: (ldOptions: ILDOptions) => { return; },
+    forType: cfgType,
+    nameSelf: "shnyder/imageDisplay",
+    interpreterRetrieverFn: appIntprtrRetr,
+    initialKvStores: initialKVStores,
+    getInterpretableKeys() { return cfgIntrprtTypes; },
+    crudSkills: "cRud"
+};
+
+@ldBlueprint(bpCfg)
+class PureImgDisplay extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
+implements IBlueprintInterpreter {
+	cfg: BlueprintConfig;
+	consumeLDOptions: (ldOptions: ILDOptions) => any;
+	initialKvStores: IKvStore[];
+	constructor(props: ConnectedState & ConnectedDispatch & OwnProps) {
+		super(props);
+	}
 	render() {
 		const { singleImage } = this.props;
 		return <div>
 			<img alt="" src={singleImage}/>
 		</div>;
 	}
+
 }
 export default connect(mapStateToProps, mapDispatchToProps)(PureImgDisplay);

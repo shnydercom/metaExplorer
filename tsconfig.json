@@ -14,7 +14,7 @@
     "noImplicitAny": false,
     "module": "commonjs",
     "target": "es2017",
-    "jsx": "preserve",
+    "jsx": "react",
     "sourceRoot": "src",
 
     "experimentalDecorators": true,

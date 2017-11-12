@@ -102,7 +102,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedD
  */
 let cfgType: string = LDDict.CreateAction;
 let cfgIntrprtTypes: string[] =
-    [LDDict.agent, LDDict.result, LDDict.target];
+    [LDDict.agent, LDDict.target, LDDict.result];
 let initialKVStores: IKvStore[] = [
     {
         key: LDDict.agent,
@@ -119,19 +119,20 @@ let initialKVStores: IKvStore[] = [
         value: undefined,
         ldType: LDDict.ImageObject
     }];
-let bpCfg: BlueprintConfig = {
+var bpCfg: BlueprintConfig = {
     //consumeWebResource: (ldOptions: ILDOptions) => { return; },
     forType: cfgType,
     nameSelf: "shnyder/imageUpload",
     interpreterRetrieverFn: appIntprtrRetr,
     initialKvStores: initialKVStores,
-    getInterpretableKeys() { return cfgIntrprtTypes; },
+    getInterpretableKeys: () => cfgIntrprtTypes,
     crudSkills: "Crud"
 };
 
 @ldBlueprint(bpCfg)
 class PureImgUploader extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
     implements IBlueprintInterpreter {
+    cfg: BlueprintConfig;
     initialKvStores: IKvStore[];
     consumeLDOptions: (ldOptions: ILDOptions) => any;
     onClickFileChange = (e: React.FormEvent<HTMLInputElement>) => {

@@ -19,6 +19,7 @@ let bpCfg: BlueprintConfig = {
 
 @ldBlueprint(bpCfg)
 export class LDBlueprintContainerClass implements IBlueprintInterpreter {
+    cfg: BlueprintConfig;
     consumeLDOptions: (ldOptions: ILDOptions) => any;
     initialKvStores: IKvStore[];
 }

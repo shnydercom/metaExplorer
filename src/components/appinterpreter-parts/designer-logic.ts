@@ -3,12 +3,20 @@ import { GeneralDataTypeWidgetFactory } from "components/appinterpreter-parts/Ge
 import { DiagramModel, DefaultNodeModel, DefaultPortModel, LinkModel, DiagramEngine, DefaultNodeFactory, DefaultLinkFactory } from "storm-react-diagrams";
 import { BaseDataTypeNodeModel } from "components/appinterpreter-parts/BaseDataTypeNodeModel";
 import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
+import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
+import { IInterpreterInfoItem, DefaultInterpreterRetriever } from "defaults/DefaultInterpreterRetriever";
+import { LDBaseDataType, ldBaseDataTypeList } from "ldaccess/LDBaseDataType";
+import { IBlueprintInterpreter, BlueprintConfig } from "ldaccess/ldBlueprint";
+import { IKvStore } from "ldaccess/ikvstore";
+import { GeneralDataTypeNodeModel } from "components/appinterpreter-parts/GeneralDataTypeNodeModel";
+
 /**
  * @author Jonathan Schneider
  */
 export class DesignerLogic {
 	protected activeModel: DiagramModel;
 	protected diagramEngine: DiagramEngine;
+	protected interpreterList: IInterpreterInfoItem[];
 
 	constructor() {
 		this.diagramEngine = new DiagramEngine();
@@ -17,6 +25,7 @@ export class DesignerLogic {
 		this.diagramEngine.registerNodeFactory(new BaseDataTypeWidgetFactory());
 		this.diagramEngine.registerNodeFactory(new GeneralDataTypeWidgetFactory());
 		this.newModel();
+		this.interpreterList = (appIntprtrRetr() as DefaultInterpreterRetriever).getInterpreterList();
 	}
 
 	public newModel() {
@@ -68,5 +77,52 @@ export class DesignerLogic {
 
 	public getDiagramEngine(): DiagramEngine {
 		return this.diagramEngine;
+	}
+
+	public getInterpreterList(): IInterpreterInfoItem[] {
+		//return only one interpreter for the simple data types, so remove others from return value
+		let rv: IInterpreterInfoItem[] = [];
+		let baseTypeIntrprtr: IInterpreterInfoItem;
+		this.interpreterList.forEach((itm) => {
+			let firstBTIfound: boolean = false;
+			for (var index = 0; index < ldBaseDataTypeList.length; index++) {
+				var element = ldBaseDataTypeList[index];
+				if (itm.baseType === element) {
+					if (!baseTypeIntrprtr) baseTypeIntrprtr = itm;
+					firstBTIfound = true;
+					break;
+				}
+			}
+			if (firstBTIfound) return;
+			rv.push(itm);
+		});
+		rv.unshift(baseTypeIntrprtr);
+		return rv;
+	}
+
+	public addLDPortModelsToNode(node: GeneralDataTypeNodeModel, bpname: string): void {//: LDPortModel[] {
+		let interpreter: IBlueprintInterpreter = appIntprtrRetr().getInterpreterByNameSelf(bpname);
+		let cfg: BlueprintConfig = interpreter.cfg;
+		let rv: LDPortModel[] = [];
+		let intrprtrKeys: any[] = cfg.getInterpretableKeys();
+		let initialKvStores: IKvStore[] = cfg.initialKvStores;
+		node.name = bpname;
+		for (var i = 0; i < intrprtrKeys.length; i++) {
+			let elemi = intrprtrKeys[i];
+			//let newLDPM: LDPortModel =
+			let nName: string = "in_" + elemi;
+			node.addPort(new LDPortModel(true, nName, elemi));
+			console.dir(node.getPorts());
+			//rv.push(newLDPM);
+		}
+		for (var j = 0; j < initialKvStores.length; j++) {
+			console.dir(node.getPorts());
+			var elemj = initialKvStores[j];
+			let nName: string = "out_" + elemj.key;
+			node.addPort(new LDPortModel(false, nName, elemj.key));
+			//let newLDPM: LDPortModel = new LDPortModel(false, elemj.key, elemj.key + "-out");
+			//rv.push(newLDPM);
+		}
+		//return rv;
 	}
 }
