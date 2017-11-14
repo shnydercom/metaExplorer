@@ -46,7 +46,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 
 	render() {
 		return (
-			<div>
+			<div className="diagram-body">
 				<DesignerTray>
 					{this.trayItemsFromInterpreterList()}
 					{/* <DesignerTrayItem model={{ type: "in" }} name="In Node" color="rgb(192,255,0)" />

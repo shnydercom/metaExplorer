@@ -1,6 +1,6 @@
 @import 'm-react-splitters/lib/splitters.css';
 .entrypoint-editor{
-    width: 1000px;
+    width: 100%;
 	height: 800px;
 	display: flex;
 	flex-direction: row;
@@ -29,6 +29,10 @@
 			cursor: pointer;
 		}
 	}
+	.diagram-body{
+		height: 100%;
+		display: flex;
+	}
 	.diagram-layer{
 		position: relative;
 		flex-grow: 1;
@@ -42,6 +46,7 @@
 	cursor: move;
 	overflow: hidden;
 	height: 100%;
+	background: rgb(230,230,230);
 
 	.point{
 		fill: rgba(white,0.5);

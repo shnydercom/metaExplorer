@@ -75,7 +75,7 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 			(curItm) => curItm.nameSelf === nameSelf);
 		if (candidates == null) return null;
 		if (candidates.length === 1) return candidates[0].interpreter;
-		return candidates[0].interpreter;
+		return null;
 	}
 
 	/**
@@ -105,7 +105,7 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 			(curItm) => curItm.crudSkills === crudSkills
 		);
 		if (candidatesMatch2 !== null || candidatesMatch2.length > 0) candidates = candidatesMatch2;
-		if(candidates.length === 1) return candidates[0].interpreter;
+		if (candidates.length === 1) return candidates[0].interpreter;
 		return null;
 		//TODO: perform a mapping against the additionalTypes
 	}

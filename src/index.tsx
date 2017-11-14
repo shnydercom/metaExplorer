@@ -5,5 +5,5 @@ import { AppRoot } from 'approot';
 //var test : Observable<string> = Observable.of<string>();
 
 render(
-	<AppRoot />
+	<AppRoot/>
 	, document.getElementById('app'));

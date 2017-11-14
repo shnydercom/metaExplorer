@@ -45,7 +45,7 @@ implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
-	constructor(props: ConnectedState & ConnectedDispatch & OwnProps) {
+	constructor(props: any) {
 		super(props);
 	}
 	render() {

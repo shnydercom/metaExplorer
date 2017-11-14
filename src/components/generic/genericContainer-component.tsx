@@ -23,7 +23,7 @@ import { isInterpreter } from 'ldaccess/ldUtils';
 type OwnProps = {
 	//demoType is being used for empty display in the designer,
 	//and represents a convenience function to show interpreters for types without having the necessary data
-	demoType: string;
+	displayedType: string;
 	searchCrudSkills: string;
 };
 type ConnectedState = {
@@ -56,7 +56,7 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 	implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
 	initialKvStores: IKvStore[];
-	constructor(props: OwnProps) {
+	constructor(props?: any) {
 		super(props);
 	}
 
@@ -79,8 +79,8 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 	}
 	render() {
 		var demoTypeParsed = null;
-		if (this.props.demoType) {
-			let dType: string = this.props.demoType;
+		if (this.props.displayedType) {
+			let dType: string = this.props.displayedType;
 			var demoWebResource: IWebResource = {
 				hypermedia: [{ [LDConsts.type]: dType, members: null, client: null } as IHypermedia] as IHypermediaContainer,
 			};
@@ -113,4 +113,4 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 	}
 }
 
-export let GenericContainer = connect(mapStateToProps, mapDispatchToProps)(PureGenericContainer);
+export let GenericContainer =  connect<ConnectedState, ConnectedDispatch, OwnProps>(mapStateToProps, mapDispatchToProps)(PureGenericContainer);

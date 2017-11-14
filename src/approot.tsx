@@ -12,18 +12,21 @@ import ImageUploadComponent from 'components/imageupload-component';
 import './styles/styles.scss';
 
 const initialState: ExplorerState = {
-  demoObj : null
+	demoObj: null
 };
+
+export interface AppRootProps { }
 const store: redux.Store<ExplorerState> = configureStore(initialState);
 
-export const AppRoot = () => {
+export const AppRoot: React.SFC<AppRootProps> = () => {
 	return (
 		<Provider store={store}>
 			<div>
 				<p>React is working</p>
 				<AppInterpreterDesigner />
-				<ImageUploadComponent/>
+				<ImageUploadComponent />
 			</div>
 		</Provider>
 	);
 };
+AppRoot.defaultProps = {};

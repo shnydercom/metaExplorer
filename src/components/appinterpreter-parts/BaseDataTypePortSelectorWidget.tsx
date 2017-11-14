@@ -39,7 +39,7 @@ export class BaseDataTypePortSelector extends React.Component<BaseDataTypePortSe
 				<div>
 					{label}
 					<BaseDataTypeDropDown selectionChange={(newType) => { this.onPortTypeChange(newType); }} />
-					<GenericContainer demoType={this.state.portType} searchCrudSkills="CrUd" />
+					<GenericContainer displayedType={this.state.portType} searchCrudSkills="CrUd" />
 				</div>
 				{port}
 			</div>

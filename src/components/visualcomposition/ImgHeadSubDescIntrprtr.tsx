@@ -12,17 +12,22 @@ import { VisualDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 
 type OwnProps = {
+	test: string;
 };
 type ConnectedState = {
+	test: string;
 };
 
 type ConnectedDispatch = {
+	test: string;
 };
 
 const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
+	test: ""
 });
 
 const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedDispatch => ({
+	test: ""
 });
 
 export var ImgHeadSubDescIntrprtrName: string = "shnyder/ImgHeadSubDescIntrprtr";
@@ -66,12 +71,18 @@ let bpCfg: BlueprintConfig = {
 	crudSkills: "cRud"
 };
 
-//@ldBlueprint(bpCfg)
+interface TestState {
+	myState: string;
+}
+@ldBlueprint(bpCfg)
 class PureImgHeadSubDesc extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
 	implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
+	constructor(props: any) {
+		super(props);
+	}
 	render() {
 		return <div>
 			ImgHeadSubDescIntrprtr working
@@ -79,4 +90,4 @@ class PureImgHeadSubDesc extends React.Component<ConnectedState & ConnectedDispa
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PureImgHeadSubDesc);
+export default connect<ConnectedState, ConnectedDispatch, OwnProps>(mapStateToProps, mapDispatchToProps)(PureImgHeadSubDesc);

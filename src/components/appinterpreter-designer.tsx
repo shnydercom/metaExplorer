@@ -91,7 +91,7 @@ export default () => {
 			primaryPaneHeight="100%"
 		>
 			<DesignerBody logic={logic} />
-			<GenericContainer class={appStyles} demoType="shnyder/ProductDisplay" searchCrudSkills="CrUd" />
+			<GenericContainer displayedType="shnyder/ProductDisplay" searchCrudSkills="CrUd" />
 		</Splitter>
 	</div>;
 };

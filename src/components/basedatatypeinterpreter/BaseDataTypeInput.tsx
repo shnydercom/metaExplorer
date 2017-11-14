@@ -81,7 +81,7 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 	state = {
 		singleKV: null
 	};
-	constructor(props: OwnProps) {
+	constructor(props: any) {
 		super(props);
 		this.render = () => null;
 	}
