@@ -12,6 +12,7 @@ import { IBlueprintInterpreter } from "ldaccess/ldBlueprint";
 import { IKvStore } from "ldaccess/ikvstore";
 import { GeneralDataTypeNodeModel } from "components/appinterpreter-parts/GeneralDataTypeNodeModel";
 import * as appStyles from 'styles/styles.scss';
+import { UserDefDict } from "ldaccess/UserDefDict";
 
 export interface DesignerBodyProps {
 	logic: DesignerLogic;
@@ -87,8 +88,13 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 								console.dir(node);
 								break;
 							case "bdt":
+								var baseDataTypeKVStore: IKvStore = {
+									key: UserDefDict.exportSelfKey,
+									value: undefined,
+									ldType: undefined
+								};
 								node = new BaseDataTypeNodeModel("Simple Data Type", "rgb(192,100,0)");
-								node.addPort(new LDPortModel(false, "out-3", "output"));
+								node.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "output"));
 							default:
 								break;
 						}

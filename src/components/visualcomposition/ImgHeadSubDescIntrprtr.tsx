@@ -32,11 +32,11 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedD
 
 export var ImgHeadSubDescIntrprtrName: string = "shnyder/ImgHeadSubDescIntrprtr";
 let cfgType: string = ImgHeadSubDescIntrprtrName;
-let cfgIntrprtTypes: string[] =
-	[LDDict.Text, LDDict.ImageObject, LDDict.Text, LDDict.Text, LDDict.Text];
+let cfgIntrprtKeys: string[] =
+	[UserDefDict.intrprtrNameKey, VisualDict.headerImg, VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description, VisualDict.footerIntrprtr];
 let initialKVStores: IKvStore[] = [
 	{
-		key: UserDefDict.intrprtrName,
+		key: UserDefDict.intrprtrNameKey,
 		value: undefined,
 		ldType: LDDict.Text
 	},
@@ -59,6 +59,11 @@ let initialKVStores: IKvStore[] = [
 		key: VisualDict.description,
 		value: undefined,
 		ldType: LDDict.Text
+	},
+	{
+		key: VisualDict.footerIntrprtr,
+		value: undefined,
+		ldType: UserDefDict.intrptrtType
 	}
 ];
 let bpCfg: BlueprintConfig = {
@@ -67,7 +72,7 @@ let bpCfg: BlueprintConfig = {
 	nameSelf: ImgHeadSubDescIntrprtrName,
 	interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
-	getInterpretableKeys() { return cfgIntrprtTypes; },
+	getInterpretableKeys() { return cfgIntrprtKeys; },
 	crudSkills: "cRud"
 };
 

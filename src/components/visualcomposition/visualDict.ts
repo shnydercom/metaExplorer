@@ -3,5 +3,8 @@ export enum VisualDict {
 	headerImg = "HeaderImage",
 	headerTxt = "HeaderText",
 	subHeaderTxt = "SubHeaderText",
-	description = "Description"
+	description = "Description",
+
+	//other
+	footerIntrprtr = "FooterInterpreter"
 }

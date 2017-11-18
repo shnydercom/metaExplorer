@@ -9,6 +9,7 @@ import { LDBaseDataType, ldBaseDataTypeList } from "ldaccess/LDBaseDataType";
 import { IBlueprintInterpreter, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { IKvStore } from "ldaccess/ikvstore";
 import { GeneralDataTypeNodeModel } from "components/appinterpreter-parts/GeneralDataTypeNodeModel";
+import { UserDefDict } from "ldaccess/UserDefDict";
 
 /**
  * @author Jonathan Schneider
@@ -32,8 +33,13 @@ export class DesignerLogic {
 		//2) setup the diagram model
 		var model = new DiagramModel();
 
+		var baseDataTypeKVStore: IKvStore = {
+			key: UserDefDict.exportSelfKey,
+			value: undefined,
+			ldType: undefined
+		};
 		var newNode1 = new BaseDataTypeNodeModel("Simple Data Type", "rgb(250,60,60)");
-		var newPort1 = newNode1.addPort(new LDPortModel(false, "out-3", "someLabel"));
+		var newPort1 = newNode1.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "someLabel"));
 		newNode1.x = 100;
 		newNode1.y = 200;
 		model.addNode(newNode1);
@@ -100,6 +106,7 @@ export class DesignerLogic {
 		return rv;
 	}
 
+	//TODO: make getInterpretableKeys display left, rest right
 	public addLDPortModelsToNode(node: GeneralDataTypeNodeModel, bpname: string): void {//: LDPortModel[] {
 		let interpreter: IBlueprintInterpreter = appIntprtrRetr().getInterpreterByNameSelf(bpname);
 		let cfg: BlueprintConfig = interpreter.cfg;
@@ -107,19 +114,40 @@ export class DesignerLogic {
 		let intrprtrKeys: any[] = cfg.getInterpretableKeys();
 		let initialKvStores: IKvStore[] = cfg.initialKvStores;
 		node.name = bpname;
+		let isInitKVsmallerThanKeys: boolean = initialKvStores.length < intrprtrKeys.length;
 		for (var i = 0; i < intrprtrKeys.length; i++) {
-			let elemi = intrprtrKeys[i];
+			let elemi: IKvStore;
+			if (isInitKVsmallerThanKeys) {
+				if (i < initialKvStores.length - 1) {
+					elemi = initialKvStores[i];
+				} else {
+					elemi = {
+						key: intrprtrKeys[i],
+						value: undefined,
+						ldType: undefined
+					};
+				}
+			} else {
+				elemi = initialKvStores[i];
+			}
 			//let newLDPM: LDPortModel =
-			let nName: string = "in_" + elemi;
+			let nName: string = elemi.key;
 			node.addPort(new LDPortModel(true, nName, elemi));
 			console.dir(node.getPorts());
 			//rv.push(newLDPM);
 		}
-		for (var j = 0; j < initialKvStores.length; j++) {
+		//interpreter always exports itself
+		let exportSelfKV: IKvStore = {
+			key: UserDefDict.exportSelfKey,
+			value: undefined,
+			ldType: cfg.forType
+		};
+		node.addPort(new LDPortModel(false, exportSelfKV.key, exportSelfKV));
+		for (var j = intrprtrKeys.length; j < initialKvStores.length; j++) {
 			console.dir(node.getPorts());
 			var elemj = initialKvStores[j];
 			let nName: string = "out_" + elemj.key;
-			node.addPort(new LDPortModel(false, nName, elemj.key));
+			node.addPort(new LDPortModel(false, nName, elemj, elemj.key));
 			//let newLDPM: LDPortModel = new LDPortModel(false, elemj.key, elemj.key + "-out");
 			//rv.push(newLDPM);
 		}

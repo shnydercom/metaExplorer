@@ -52,7 +52,7 @@ for (var bdt in bdts) {
 	if (bdts.hasOwnProperty(bdt)) {
 		var elem = bdts[bdt];
 		//let cfgType: string = LDDict.CreateAction;
-		let cfgIntrprtTypes: string[] = [];
+		let cfgIntrprtKeys: string[] = [];
 		let initialKVStores: IKvStore[] = [
 			{
 				key: undefined,
@@ -65,7 +65,7 @@ for (var bdt in bdts) {
 			nameSelf: "shnyder/react-toolbox/" + elem,
 			interpreterRetrieverFn: appIntprtrRetr,
 			initialKvStores: initialKVStores,
-			getInterpretableKeys() { return cfgIntrprtTypes; },
+			getInterpretableKeys() { return cfgIntrprtKeys; },
 			crudSkills: "CRUd"
 		};
 		bpcfgs.push(bpCfg);

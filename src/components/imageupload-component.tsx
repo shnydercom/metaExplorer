@@ -101,8 +101,8 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedD
  * }
  */
 let cfgType: string = LDDict.CreateAction;
-let cfgIntrprtTypes: string[] =
-    [LDDict.agent, LDDict.target, LDDict.result];
+let cfgIntrprtKeys: string[] =
+    [LDDict.agent, LDDict.target];
 let initialKVStores: IKvStore[] = [
     {
         key: LDDict.agent,
@@ -125,7 +125,7 @@ var bpCfg: BlueprintConfig = {
     nameSelf: "shnyder/imageUpload",
     interpreterRetrieverFn: appIntprtrRetr,
     initialKvStores: initialKVStores,
-    getInterpretableKeys: () => cfgIntrprtTypes,
+    getInterpretableKeys: () => cfgIntrprtKeys,
     crudSkills: "Crud"
 };
 

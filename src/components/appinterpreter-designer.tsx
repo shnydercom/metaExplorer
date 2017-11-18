@@ -23,6 +23,8 @@ import { GeneralDataTypeWidgetFactory } from "components/appinterpreter-parts/Ge
 import { DesignerBody } from "components/appinterpreter-parts/DesignerBody";
 import { DesignerLogic } from "components/appinterpreter-parts/designer-logic";
 import { GenericContainer } from "components/generic/genericContainer-component";
+import { UserDefDict } from "ldaccess/UserDefDict";
+import { IKvStore } from "ldaccess/ikvstore";
 
 //console.log('lodash version:', _.toUpper("abcDE"));
 export default () => {
@@ -37,7 +39,12 @@ export default () => {
 	var model = new DiagramModel();
 
 	var newNode1 = new BaseDataTypeNodeModel("Simple Data Type", "rgb(250,60,60)");
-	var newPort1 = newNode1.addPort(new LDPortModel(false, "out-3", "someLabel"));
+	var dummyKVStore: IKvStore = {
+		key: UserDefDict.exportSelfKey,
+		value: undefined,
+		ldType: undefined
+	};
+	var newPort1 = newNode1.addPort(new LDPortModel(false, "out-3", dummyKVStore, "someLabel"));
 	newNode1.x = 100;
 	newNode1.y = 200;
 	model.addNode(newNode1);
@@ -91,7 +98,7 @@ export default () => {
 			primaryPaneHeight="100%"
 		>
 			<DesignerBody logic={logic} />
-			<GenericContainer displayedType="shnyder/ProductDisplay" searchCrudSkills="CrUd" />
+			<GenericContainer displayedType="shnyder/ProductDisplay" searchCrudSkills="cRud" />
 		</Splitter>
 	</div>;
 };

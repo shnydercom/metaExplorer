@@ -1,4 +1,4 @@
 export let isInterpreter = (input: any): boolean => {
 	if (!input) return false;
-	return input.hasOwnProperty("forType");
+	return input.hasOwnProperty("cfg");
 };

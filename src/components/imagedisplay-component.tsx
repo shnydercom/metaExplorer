@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedD
 });
 
 let cfgType: string = LDDict.ViewAction;
-let cfgIntrprtTypes: string[] =
+let cfgIntrprtKeys: string[] =
     [LDDict.name, LDDict.fileFormat, LDDict.contentUrl];
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
@@ -35,7 +35,7 @@ let bpCfg: BlueprintConfig = {
     nameSelf: "shnyder/imageDisplay",
     interpreterRetrieverFn: appIntprtrRetr,
     initialKvStores: initialKVStores,
-    getInterpretableKeys() { return cfgIntrprtTypes; },
+    getInterpretableKeys() { return cfgIntrprtKeys; },
     crudSkills: "cRud"
 };
 

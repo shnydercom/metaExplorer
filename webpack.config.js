@@ -9,7 +9,7 @@ const extractSass = new ExtractTextPlugin({
 });
 
 module.exports = {
-  devtool: "eval-source-map",
+  devtool: "source-map",
 
   // entry point of our application, within the `src` directory (which we add to resolve.modules below):
   entry: {
@@ -60,7 +60,7 @@ module.exports = {
             loader: 'babel-loader'
           },
           {
-            loader: "ts-loader"
+            loader: "awesome-typescript-loader"
           }, /*"awesome-typescript-loader"*/
 
         ]

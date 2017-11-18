@@ -38,7 +38,7 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 			if (cfg.initialKvStores && cfg.initialKvStores.length > 0) {
 				for (var i = 0; i < cfg.initialKvStores.length; i++) {
 					var itm = cfg.initialKvStores[i];
-					if (itm.key === UserDefDict.intrprtrName && itm.value) {
+					if (itm.key === UserDefDict.intrprtrNameKey && itm.value) {
 						typeName = itm.value;
 						break;
 					}

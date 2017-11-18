@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedD
 });
 
 let cfgType: string = LDDict.WrapperObject;
-let cfgIntrprtTypes: string[] =
+let cfgIntrprtKeys: string[] =
 	[];
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
@@ -47,7 +47,7 @@ let bpCfg: BlueprintConfig = {
 	nameSelf: "shnyder/genericContainer",
 	interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
-	getInterpretableKeys() { return cfgIntrprtTypes; },
+	getInterpretableKeys() { return cfgIntrprtKeys; },
 	crudSkills: "cRud"
 };
 
@@ -107,7 +107,6 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 		let reactComps = reactCompClasses.map((itm, idx) => {
 			let GenericComp = itm;
 			return <GenericComp key={idx}/>;
-
 		});
 		return <div>tessst{reactComps}</div>;
 	}
