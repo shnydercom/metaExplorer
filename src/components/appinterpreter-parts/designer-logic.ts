@@ -77,7 +77,7 @@ export class DesignerLogic {
 
 	}
 
-	public getActiveDiagram(): DiagramModel {
+	public getActiveModel(): DiagramModel {
 		return this.activeModel;
 	}
 

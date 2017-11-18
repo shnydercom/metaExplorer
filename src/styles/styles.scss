@@ -1,4 +1,5 @@
 @import 'm-react-splitters/lib/splitters.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 .entrypoint-editor{
     width: 100%;
 	height: 800px;
@@ -36,6 +37,12 @@
 	.diagram-layer{
 		position: relative;
 		flex-grow: 1;
+	}
+	.vertical-scroll{
+		float:left;
+		width:100%;
+		overflow-y: auto;
+		height: 100%;
 	}
 }
 
