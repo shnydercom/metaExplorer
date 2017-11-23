@@ -11,6 +11,7 @@ export enum LDDict {
 	ViewAction = "http://schema.org/ViewAction",
 	ImageObject = "http://schema.org/ImageObject",
 	EntryPoint = "http://http://schema.org/EntryPoint",
+	Organization = "http://schema.org/Organization",
 	//properties:
 	target = "http://schema.org/target",
 	agent = "http://schema.org/agent",
@@ -18,6 +19,9 @@ export enum LDDict {
 	contentUrl = "http://schema.org/contentUrl",
 	name = "http://schema.org/name",
 	fileFormat = "http://schema.org/fileFormat",
+	manufacturer = "http://schema.org/manufacturer",
+	description = "http://schema.org/description",
+	image = "http://schema.org/image",
 
 	//internal
 	WrapperObject = "http://shnyder.com/WrapperObject"

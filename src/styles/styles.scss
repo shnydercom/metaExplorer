@@ -1,5 +1,12 @@
 @import 'm-react-splitters/lib/splitters.css';
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+$designer-primary-color: #dadada;
+$designer-secondary-color: rgba(180,180,180,0.3);
+$designer-background-color: #010f27;
+$designer-background-elevated-color: #0c1e3a;
+$designer-selected-color: rgba(87, 161, 245, 0.9);
+
 .entrypoint-editor{
     width: 100%;
 	height: 800px;
@@ -7,7 +14,7 @@
 	flex-direction: row;
 	.designer-content{
 		
-	background-color: rgb(230,230,230);
+	background-color: $designer-background-elevated-color;
 		display: flex;
 		width: 100%;
 		float: left;
@@ -15,13 +22,13 @@
 	}
 	.designer-tray{
 		min-width: 200px;
-		background: rgb(20,20,20);
+		background: $designer-background-elevated-color;
 		flex-grow: 0;
 		flex-shrink: 0;
 
 		.designer-tray-item{
 			color: white;
-			font-family: Helvetica, Arial;
+			font-family: Roboto, Arial;
 			padding: 5px;
 			margin: 0px 10px;
 			border: solid 1px;
@@ -53,19 +60,19 @@
 	cursor: move;
 	overflow: hidden;
 	height: 100%;
-	background: rgb(230,230,230);
+	background: $designer-background-color;
 
 	.point{
-		fill: rgba(white,0.5);
+		fill: $designer-secondary-color;
 		&.selected{
-			fill: rgb(0,192,255);
+			fill: $designer-selected-color;
 		}
 	}
 
 	.selector{
 		position: absolute;
 		background-color: rgba(0, 195, 255, 0.2);
-		border: solid 2px rgb(0,192,255);
+		border: solid 2px $designer-selected-color;
 	}
 
 	svg{
@@ -96,7 +103,7 @@
 
 		&.selected{
 			>* {
-				border-color:rgb(0,192,255) !important;
+				border-color:$designer-selected-color !important;
 				//-webkit-filter: drop-shadow( 0 0 20px rgba(0,192,255,0.5));
 			}
 		}
@@ -114,9 +121,9 @@
 	path{
 		fill:none;
 		pointer-events:all;
-
+		stroke: $designer-secondary-color;
 		&.selected{
-			stroke: rgb(0,192,255) !important;
+			stroke: $designer-selected-color !important;
 			stroke-dasharray: 10,2;
 			animation: dash 1s linear infinite;
 		}
@@ -125,18 +132,18 @@
 	.port{
 		width: 15px;
 		height: 15px;
-		background: rgba(white,0.1);
+		background: $designer-secondary-color;
 		&:hover,&.selected{
-			background: rgb(192,255,0);
+			background: $designer-selected-color;
 		}
 	}
 
 	.basic-node{
 		background-color: rgb(30,30,30);
 		border-radius: 5px;
-		font-family:Arial;
-		color: white;
-		border: solid 2px black;
+		font-family: Roboto, Arial;
+		color: $designer-primary-color;
+		border: solid 2px $designer-secondary-color;
 		overflow: visible;
 		font-size: 11px;
 		//box-shadow: 0 0 10px rgba(black,0.5);
@@ -180,6 +187,11 @@
 				}
 				.name{
 					padding: 0 5px;
+				}
+			}
+			.top-port{
+				>*{
+					align-self: flex-start !important;
 				}
 			}
 			.out-port{

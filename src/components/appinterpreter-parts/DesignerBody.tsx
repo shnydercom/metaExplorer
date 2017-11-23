@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as _ from "lodash";
 
-import { DesignerLogic } from "components/appinterpreter-parts/designer-logic";
+import { DesignerLogic, designerSpecificNodesColor } from "components/appinterpreter-parts/designer-logic";
 import { DefaultNodeModel, DefaultPortModel, DiagramWidget } from "storm-react-diagrams";
 import { DesignerTray } from "components/appinterpreter-parts/DesignerTray";
 import { DesignerTrayItem } from "components/appinterpreter-parts/DesignerTrayItem";
@@ -13,6 +13,7 @@ import { IKvStore } from "ldaccess/ikvstore";
 import { GeneralDataTypeNodeModel } from "components/appinterpreter-parts/GeneralDataTypeNodeModel";
 import * as appStyles from 'styles/styles.scss';
 import { UserDefDict } from "ldaccess/UserDefDict";
+import { DeclarationPartNodeModel } from "components/appinterpreter-parts/DeclarationNodeModel";
 
 export interface DesignerBodyProps {
 	logic: DesignerLogic;
@@ -32,15 +33,19 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 	public trayItemsFromInterpreterList() {
 		//let reactCompClasses: React.ComponentClass[] = [];
 		let interpreters: IInterpreterInfoItem[] = this.props.logic.getInterpreterList();
+		interpreters.splice(1, 0, null);
 		//console.dir(interpreters);
 		let reactCompClasses: JSX.Element[] = interpreters.map((itm, idx) => {
 			//let GenericComp = itm;
 			if (idx === 0) {
-				return <DesignerTrayItem key={idx} model={{ type: "bdt" }} name="Simple Data Type" color="rgb(192,100,0)" />;
+				return <DesignerTrayItem key={idx} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />;
+			}
+			if (idx === 1){
+				return <DesignerTrayItem key={idx} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />;
 			}
 			//console.dir(ports);
 			let ldBPCfg = (itm.interpreter as IBlueprintInterpreter).cfg;
-			return <DesignerTrayItem key={idx} model={{ type: "ldbp", bpname: ldBPCfg ? ldBPCfg.nameSelf : "unnamed" }} name={itm.type} color="rgb(192,255,0)" />;
+			return <DesignerTrayItem key={idx} model={{ type: "ldbp", bpname: ldBPCfg ? ldBPCfg.nameSelf : "unnamed" }} name={itm.type} color={appStyles["$designer-secondary-color"]} />;
 		});
 		return reactCompClasses;
 	}
@@ -69,7 +74,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 						switch (data.type) {
 							case "ldbp":
 								let nodeName: string = "Node " + (nodesCount + 1) + ":";
-								node = new GeneralDataTypeNodeModel(nodeName, "rgb(192,255,0)");
+								node = new GeneralDataTypeNodeModel(nodeName, "rgba(250,250,250,0.2)");
 								console.dir(data);
 								console.dir(node);
 								if (data.bpname) {
@@ -93,8 +98,18 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 									value: undefined,
 									ldType: undefined
 								};
-								node = new BaseDataTypeNodeModel("Simple Data Type", "rgb(192,100,0)");
+								node = new BaseDataTypeNodeModel("Simple Data Type", "rgba(250,250,250,0.2)");
 								node.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "output"));
+								break;
+							case "inputtype":
+								var inputDataTypeKVStore: IKvStore = {
+									key: UserDefDict.externalInput,
+									value: undefined,
+									ldType: undefined
+								};
+								node = new DeclarationPartNodeModel("External Input Marker", designerSpecificNodesColor);
+								node.addPort(new LDPortModel(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
+								break;
 							default:
 								break;
 						}

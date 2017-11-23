@@ -1,6 +1,6 @@
 export enum VisualDict {
 	//Base data types:
-	headerImg = "HeaderImage",
+	headerImgDisplay = "HeaderImageDisplay",
 	headerTxt = "HeaderText",
 	subHeaderTxt = "SubHeaderText",
 	description = "Description",

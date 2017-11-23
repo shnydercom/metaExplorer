@@ -33,15 +33,10 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedD
 export var ImgHeadSubDescIntrprtrName: string = "shnyder/ImgHeadSubDescIntrprtr";
 let cfgType: string = ImgHeadSubDescIntrprtrName;
 let cfgIntrprtKeys: string[] =
-	[UserDefDict.intrprtrNameKey, VisualDict.headerImg, VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description, VisualDict.footerIntrprtr];
+	[VisualDict.headerImgDisplay, VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description, VisualDict.footerIntrprtr];
 let initialKVStores: IKvStore[] = [
 	{
-		key: UserDefDict.intrprtrNameKey,
-		value: undefined,
-		ldType: LDDict.Text
-	},
-	{
-		key: VisualDict.headerImg,
+		key: VisualDict.headerImgDisplay,
 		value: undefined,
 		ldType: LDDict.ImageObject
 	},

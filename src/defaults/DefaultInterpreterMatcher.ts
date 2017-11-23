@@ -10,6 +10,8 @@ import { LDDict } from "ldaccess/LDDict";
 import ImageDisplayComponent from 'components/imagedisplay-component';
 import { BooleanValInput, IntegerValInput, DoubleValInput, TextValInput, DateValInput, DateTimeValInput } from "components/basedatatypeinterpreter/BaseDataTypeInput";
 import ImgHeadSubDescIntrprtr, { ImgHeadSubDescIntrprtrName } from "components/visualcomposition/ImgHeadSubDescIntrprtr";
+import { ImageRetriever, imageRetrieverName } from "sidefx/ImageRetriever";
+import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
 
 let matchIsType = (a: IKvStore) => a.key === LDConsts.type || a.key === LDConsts.isA;
 let matchIsLang = (a: IKvStore) => a.key === LDConsts.lang;
@@ -36,6 +38,10 @@ export class DefaultInterpreterMatcher implements IInterpreterMatcher {
 
 		//register visual composition interpreters.
 		appIntRetr.addInterpreter(ImgHeadSubDescIntrprtrName, ImgHeadSubDescIntrprtr, "cRud");
+
+		//register side effect-interpreter (these interpreters change the state asynchronously and are typically non-visual)
+		appIntRetr.addInterpreter(imageRetrieverName, ImageRetriever, "cRud");
+		appIntRetr.addInterpreter(productRetrieverName, ProductRetriever, "cRud");
 	}
 	matchSingleKV(single: IKvStore, crudSkills: string): IKvStore {
 		throw new Error("Method not implemented.");

@@ -35,7 +35,7 @@ export class BaseDataTypePortSelector extends React.Component<BaseDataTypePortSe
 		var label = <div className="name">{this.props.model.label}</div>;
 
 		return (
-			<div className={("out") + "-port"}>
+			<div className={"out-port top-port"}>
 				<div>
 					{label}
 					<BaseDataTypeDropDown selectionChange={(newType) => { this.onPortTypeChange(newType); }} />

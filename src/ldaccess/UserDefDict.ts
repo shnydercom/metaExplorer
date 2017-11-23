@@ -3,8 +3,13 @@ export enum UserDefDict {
 	/**
 	 * the name of a component defined by a user
 	 */
-	intrprtrNameKey = "InterpreterNameKey",
+	intrprtrNameKey = "InterpreterName",
 	exportSelfKey = "exportSelf",
+	finalInputKey = "finalInput",
+	externalInput = "externalInput",
+
+	//values
+	outputInterpreter = "Output interpreter",
 
 	//types
 	/**

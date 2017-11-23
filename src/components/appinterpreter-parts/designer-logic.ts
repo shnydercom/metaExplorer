@@ -10,6 +10,11 @@ import { IBlueprintInterpreter, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { IKvStore } from "ldaccess/ikvstore";
 import { GeneralDataTypeNodeModel } from "components/appinterpreter-parts/GeneralDataTypeNodeModel";
 import { UserDefDict } from "ldaccess/UserDefDict";
+import { LDDict } from "ldaccess/LDDict";
+import { DeclarationWidgetFactory } from "components/appinterpreter-parts/DeclarationNodeWidgetFactory";
+import { DeclarationPartNodeModel } from "components/appinterpreter-parts/DeclarationNodeModel";
+
+export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 
 /**
  * @author Jonathan Schneider
@@ -25,6 +30,7 @@ export class DesignerLogic {
 		this.diagramEngine.registerLinkFactory(new DefaultLinkFactory());
 		this.diagramEngine.registerNodeFactory(new BaseDataTypeWidgetFactory());
 		this.diagramEngine.registerNodeFactory(new GeneralDataTypeWidgetFactory());
+		this.diagramEngine.registerNodeFactory(new DeclarationWidgetFactory());
 		this.newModel();
 		this.interpreterList = (appIntprtrRetr() as DefaultInterpreterRetriever).getInterpreterList();
 	}
@@ -33,25 +39,25 @@ export class DesignerLogic {
 		//2) setup the diagram model
 		var model = new DiagramModel();
 
-		var baseDataTypeKVStore: IKvStore = {
+		/*var baseDataTypeKVStore: IKvStore = {
 			key: UserDefDict.exportSelfKey,
 			value: undefined,
 			ldType: undefined
 		};
-		var newNode1 = new BaseDataTypeNodeModel("Simple Data Type", "rgb(250,60,60)");
+		var newNode1 = new BaseDataTypeNodeModel("Simple Data Type",  "rgba(250,250,250,0.2)");
 		var newPort1 = newNode1.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "someLabel"));
 		newNode1.x = 100;
 		newNode1.y = 200;
 		model.addNode(newNode1);
 
 		//3-A) create a default node
-		var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
+		var node1 = new DefaultNodeModel("Node 1",  "rgba(250,250,250,0.2)");
 		var port1 = node1.addPort(new DefaultPortModel(false, "out-1", "Out"));
 		node1.x = 100;
 		node1.y = 100;
 
 		//3-B) create another default node
-		var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
+		var node2 = new DefaultNodeModel("Node 2",  "rgba(250,250,250,0.2)");
 		var port2 = node2.addPort(new DefaultPortModel(true, "in-1", "IN"));
 		node2.x = 400;
 		node2.y = 100;
@@ -69,7 +75,28 @@ export class DesignerLogic {
 		var linkNew = new LinkModel();
 		linkNew.setSourcePort(newPort1);
 		linkNew.setTargetPort(port1);
-		model.addLink(linkNew);
+		model.addLink(linkNew);*/
+
+		//create fixed output node
+		let outputNode: DeclarationPartNodeModel = new DeclarationPartNodeModel(UserDefDict.outputInterpreter, designerSpecificNodesColor);
+		//outputNode.setLocked(true); locking would lock the ports as well
+		outputNode.x = 600;
+		outputNode.y = 200;
+		let outputFinalInputKV: IKvStore = {
+			key: UserDefDict.finalInputKey,
+			value: undefined,
+			ldType: UserDefDict.intrptrtType
+		};
+		let finalInputName: string = outputFinalInputKV.key;
+		outputNode.addPort(new LDPortModel(true, finalInputName, outputFinalInputKV));
+		let interpreterNameKV: IKvStore = {
+			key: UserDefDict.intrprtrNameKey,
+			value: undefined,
+			ldType: LDDict.Text
+		};
+		let interpreterNameString: string = UserDefDict.intrprtrNameKey;
+		outputNode.addPort(new LDPortModel(true, interpreterNameString, interpreterNameKV));
+		model.addNode(outputNode);
 
 		//5) load model into engine
 		this.activeModel = model;
@@ -106,7 +133,6 @@ export class DesignerLogic {
 		return rv;
 	}
 
-	//TODO: make getInterpretableKeys display left, rest right
 	public addLDPortModelsToNode(node: GeneralDataTypeNodeModel, bpname: string): void {//: LDPortModel[] {
 		let interpreter: IBlueprintInterpreter = appIntprtrRetr().getInterpreterByNameSelf(bpname);
 		let cfg: BlueprintConfig = interpreter.cfg;
