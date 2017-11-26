@@ -62,7 +62,6 @@ let initialKVStores: IKvStore[] = [
 	}
 ];
 let bpCfg: BlueprintConfig = {
-	//consumeWebResource: (ldOptions: ILDOptions) => { return; },
 	forType: cfgType,
 	nameSelf: ImgHeadSubDescIntrprtrName,
 	interpreterRetrieverFn: appIntprtrRetr,

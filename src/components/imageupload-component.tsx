@@ -120,7 +120,6 @@ let initialKVStores: IKvStore[] = [
         ldType: LDDict.ImageObject
     }];
 var bpCfg: BlueprintConfig = {
-    //consumeWebResource: (ldOptions: ILDOptions) => { return; },
     forType: cfgType,
     nameSelf: "shnyder/imageUpload",
     interpreterRetrieverFn: appIntprtrRetr,

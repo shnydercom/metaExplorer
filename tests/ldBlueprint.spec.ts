@@ -8,7 +8,6 @@ import { IKvStore } from 'ldaccess/ikvstore';
 var testInterpreter = mockInterpreterRetrieverFn;
 
 let bpCfg: BlueprintConfig = {
-    consumeWebResource: (ldOptions: ILDOptions) => {return; },
     forType: "http://shnyder.com/Testtype",
     nameSelf: "shnyder/testTypeInterpreter",
     interpreterRetrieverFn: testInterpreter,

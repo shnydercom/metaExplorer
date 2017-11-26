@@ -55,17 +55,35 @@ export class DefaultInterpreterMatcher implements IInterpreterMatcher {
 			//this is a base object and has an id, if an interpreter-retriever for special IDs is defined, then it could be used here
 			//return;
 		}
-		if (ldType !== null) {
+		let searchTerm: string | Array<string>;
+		if (ldType) {
 			//this is a typed base object then
-			let searchTerm: string | Array<string> = ldType.value;
-			if (searchTerm) {
-				if (typeof searchTerm === "string") {
-					let intrprtr = appIntRetrFn().searchForObjIntrprtr(searchTerm, crudSkills);
-					let rvAdd: IKvStore = { key: null, value: null, intrprtrClass: intrprtr, ldType: searchTerm };
-					rv.push(rvAdd);
-					return rv;
+			searchTerm = ldType.value;
+		} else {
+			searchTerm = [];
+			for (let idx = 0; idx < multi.length; idx++) {
+				const itm = multi[idx];
+				if (itm && itm.ldType) {
+					searchTerm.push(itm.ldType);
 				}
 			}
+
+		}
+		if (searchTerm) {
+			if (typeof searchTerm === "string") {
+				let intrprtr = appIntRetrFn().searchForObjIntrprtr(searchTerm, crudSkills);
+				let rvAdd: IKvStore = { key: null, value: null, intrprtrClass: intrprtr, ldType: searchTerm };
+				rv.push(rvAdd);
+				return rv;
+			} else {
+				searchTerm.forEach((elem) => {
+					let intrprtr = appIntRetrFn().searchForObjIntrprtr(elem, crudSkills);
+					let rvAddMulti: IKvStore = { key: null, value: null, intrprtrClass: intrprtr, ldType: elem };
+					rv.push(rvAddMulti);
+				});
+				return rv;
+			}
+
 		}
 	}
 

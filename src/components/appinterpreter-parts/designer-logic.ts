@@ -1,6 +1,6 @@
 import { BaseDataTypeWidgetFactory } from "components/appinterpreter-parts/BaseDataTypeWidgetFactory";
 import { GeneralDataTypeWidgetFactory } from "components/appinterpreter-parts/GeneralDataTypeWidgetFactory";
-import { DiagramModel, DefaultNodeModel, DefaultPortModel, LinkModel, DiagramEngine, DefaultNodeFactory, DefaultLinkFactory } from "storm-react-diagrams";
+import { DiagramModel, DefaultNodeModel, DefaultPortModel, LinkModel, DiagramEngine, DefaultNodeFactory, DefaultLinkFactory, NodeModel } from "storm-react-diagrams";
 import { BaseDataTypeNodeModel } from "components/appinterpreter-parts/BaseDataTypeNodeModel";
 import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
 import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
@@ -13,6 +13,9 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { LDDict } from "ldaccess/LDDict";
 import { DeclarationWidgetFactory } from "components/appinterpreter-parts/DeclarationNodeWidgetFactory";
 import { DeclarationPartNodeModel } from "components/appinterpreter-parts/DeclarationNodeModel";
+import { DECLARATION_MODEL, BASEDATATYPE_MODEL, GENERALDATATYPE_MODEL } from "components/appinterpreter-parts/designer-consts";
+import { InterpreterNodeModel } from "../../../dist/src/components/appinterpreter-parts/InterpreterNodeModel";
+import { elementAt } from "rxjs/operators/elementAt";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 
@@ -23,6 +26,7 @@ export class DesignerLogic {
 	protected activeModel: DiagramModel;
 	protected diagramEngine: DiagramEngine;
 	protected interpreterList: IInterpreterInfoItem[];
+	protected outputNode: DeclarationPartNodeModel;
 
 	constructor() {
 		this.diagramEngine = new DiagramEngine();
@@ -78,7 +82,8 @@ export class DesignerLogic {
 		model.addLink(linkNew);*/
 
 		//create fixed output node
-		let outputNode: DeclarationPartNodeModel = new DeclarationPartNodeModel(UserDefDict.outputInterpreter, designerSpecificNodesColor);
+		//TODO: make fixed but ports should still be settable, make outputNode singleton per Interpreter
+		let outputNode = new DeclarationPartNodeModel(UserDefDict.outputInterpreter, designerSpecificNodesColor);
 		//outputNode.setLocked(true); locking would lock the ports as well
 		outputNode.x = 600;
 		outputNode.y = 200;
@@ -98,6 +103,7 @@ export class DesignerLogic {
 		outputNode.addPort(new LDPortModel(true, interpreterNameString, interpreterNameKV));
 		model.addNode(outputNode);
 
+		this.outputNode = outputNode;
 		//5) load model into engine
 		this.activeModel = model;
 		this.diagramEngine.setDiagramModel(model);
@@ -133,6 +139,80 @@ export class DesignerLogic {
 		return rv;
 	}
 
+	public intrprtrBlueprintFromDiagram(): BlueprintConfig {
+		let rv: BlueprintConfig;
+		if (!this.outputNode) return null;
+		let crudSkills = "cRud";
+		let nameSelf = null;
+		let initialKvStores = [];
+		let interpretableKeysArr = [];
+
+		//TODO: fill the above recursively
+
+		let outputBPCfg: BlueprintConfig = {
+			forType: LDDict.ViewAction,
+			nameSelf: nameSelf,
+			interpreterRetrieverFn: appIntprtrRetr,
+			initialKvStores: initialKvStores,
+			crudSkills: crudSkills,
+			getInterpretableKeys: () => interpretableKeysArr,
+		};
+		this.fillBPCfgFromGraph(outputBPCfg, this.outputNode);
+		return outputBPCfg;
+	}
+
+	/**
+	 * helper function to enrich the graph with blueprint-data, so that it can be
+	 * interpreted by the generic container
+	 * @param branchBPCfg the BlueprintConfig to fill
+	 * @param branchNode the NodeModel used to fill branchBPCfg, on the same level!
+	 */
+	private fillBPCfgFromGraph(branchBPCfg: BlueprintConfig, branchNode: InterpreterNodeModel) {
+		let inPorts: LDPortModel[] = branchNode.getInPorts();
+		inPorts.forEach((port) => {
+			let links = port.getLinks();
+			for (const key in links) {
+				if (links.hasOwnProperty(key)) {
+					const oneLink = links[key];
+					let leafNode: NodeModel = oneLink.getSourcePort().getParent();
+					if (leafNode.getID() === branchNode.getID()) {
+						leafNode = oneLink.getTargetPort().getParent();
+					}
+					switch (leafNode.nodeType) {
+						case DECLARATION_MODEL:
+							break;
+						case BASEDATATYPE_MODEL:
+							let bdtLeafNode: BaseDataTypeNodeModel = leafNode as BaseDataTypeNodeModel;
+							let bdtKV = bdtLeafNode.getOutPorts()[0].kv;
+							branchBPCfg.initialKvStores.push(bdtKV);
+							console.log(bdtKV);
+							//TODO: check here, that BDT-Nodes hand up their input correctly
+							break;
+						case GENERALDATATYPE_MODEL:
+							let forType = null;
+							let crudSkills = "cRud";
+							let nameSelf = null;
+							let initialKvStores = [];
+							let interpretableKeysArr = [];
+							let outputBPCfg: BlueprintConfig = {
+								forType: forType,
+								nameSelf: nameSelf,
+								interpreterRetrieverFn: appIntprtrRetr,
+								initialKvStores: initialKvStores,
+								crudSkills: crudSkills,
+								getInterpretableKeys: () => interpretableKeysArr,
+							};
+							this.fillBPCfgFromGraph(outputBPCfg, leafNode as InterpreterNodeModel);
+							break;
+						default:
+							break;
+					}
+				}
+			}
+		});
+
+	}
+
 	public addLDPortModelsToNode(node: GeneralDataTypeNodeModel, bpname: string): void {//: LDPortModel[] {
 		let interpreter: IBlueprintInterpreter = appIntprtrRetr().getInterpreterByNameSelf(bpname);
 		let cfg: BlueprintConfig = interpreter.cfg;
@@ -158,7 +238,10 @@ export class DesignerLogic {
 			}
 			//let newLDPM: LDPortModel =
 			let nName: string = elemi.key;
-			node.addPort(new LDPortModel(true, nName, elemi));
+			//don't add KvStores that already have a value
+			if (!elemi.value) {
+				node.addPort(new LDPortModel(true, nName, elemi));
+			}
 			console.dir(node.getPorts());
 			//rv.push(newLDPM);
 		}

@@ -1,6 +1,7 @@
 import { NodeModel, AbstractInstanceFactory } from "storm-react-diagrams";
 import { LDPortModel } from './LDPortModel';
 import * as _ from "lodash";
+import { INTERPRETERDATATYPE_MODEL } from "components/appinterpreter-parts/designer-consts";
 
 export class InterpreterNodeModel extends NodeModel {
 	name: string;
@@ -8,7 +9,7 @@ export class InterpreterNodeModel extends NodeModel {
 	ports: { [s: string]: LDPortModel };
 
 	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)", nodeType?: string) {
-		super(nodeType ? nodeType : "interpreter");
+		super(nodeType ? nodeType : INTERPRETERDATATYPE_MODEL);
 		this.name = name;
 		this.color = color;
 	}

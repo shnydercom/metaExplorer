@@ -30,7 +30,6 @@ let cfgIntrprtKeys: string[] =
     [LDDict.name, LDDict.fileFormat, LDDict.contentUrl];
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
-    //consumeWebResource: (ldOptions: ILDOptions) => { return; },
     forType: cfgType,
     nameSelf: "shnyder/imageDisplay",
     interpreterRetrieverFn: appIntprtrRetr,

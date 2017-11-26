@@ -90,7 +90,6 @@ export let hypermediaToKvStores = (inputHM: IHypermedia): IKvStore[] => {
 	//var newKVStore : KvStore = new KvStore();
 	return kvStoreArray;
 };
-/*
 export let kvStoreToWebResource = (inputKvStore: IKvStore): IWebResource => {
 	var objToWrap = inputKvStore.value;
 	var wrpObj: IWebResource = objToWrap as IWebResource;

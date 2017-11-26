@@ -60,7 +60,6 @@ for (var bdt in bdts) {
 				ldType: elem
 			}];
 		let bpCfg: BlueprintConfig = {
-			//consumeWebResource: (ldOptions: ILDOptions) => { return; },
 			forType: elem,
 			nameSelf: "shnyder/react-toolbox/" + elem,
 			interpreterRetrieverFn: appIntprtrRetr,

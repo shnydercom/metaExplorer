@@ -62,20 +62,26 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 
 	consumeLDOptions = (ldOptions: ILDOptions) => {
 		let genKvStores: IKvStore[] = [];
-		let sCSkills: string = "cRud";
-		let hmArray: IHypermediaContainer = ldOptions.resource.hypermedia;
-		if (hmArray.length === 0) return;
-		if (hmArray.length === 1) {
-			genKvStores = singleHyperMediaToKvStores(hmArray[0]);
+		if (ldOptions.resource) {
+			let sCSkills: string = "cRud";
+			if (ldOptions.resource.kvStores) {
+				genKvStores = ldOptions.resource.kvStores;
+			} else if (ldOptions.resource.webInResource) {
+				let hmArray: IHypermediaContainer = ldOptions.resource.webInResource.hypermedia;
+				if (hmArray.length === 0) return;
+				if (hmArray.length === 1) {
+					genKvStores = singleHyperMediaToKvStores(hmArray[0]);
+				}
+				if (hmArray.length > 1) {
+					genKvStores = multiHyperMediaToKvStores(hmArray);
+				}
+				if (this.props.searchCrudSkills) {
+					sCSkills = this.props.searchCrudSkills;
+				}
+			}
+			genKvStores = appIntMatcher.matchKvArray(genKvStores, sCSkills);
 		}
-		if (hmArray.length > 1) {
-			genKvStores = multiHyperMediaToKvStores(hmArray);
-		}
-		if (this.props.searchCrudSkills) {
-			sCSkills = this.props.searchCrudSkills;
-		}
-		genKvStores = appIntMatcher.matchKvArray(genKvStores, sCSkills);
-		return this.kvsToComponent(genKvStores);
+		return genKvStores ? this.kvsToComponent(genKvStores) : null;
 	}
 	render() {
 		var demoTypeParsed = null;
@@ -86,7 +92,11 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 			};
 			var demoTypeLDOptions: ILDOptions = {
 				lang: null,
-				resource: demoWebResource,
+				resource: {
+					kvStores: [{ key: undefined, value: undefined, ldType: dType }],
+					webInResource: null,
+					webOutResource: null
+				},
 				ldToken: null
 			};
 			demoTypeParsed = this.consumeLDOptions(demoTypeLDOptions);
@@ -106,10 +116,10 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 		});
 		let reactComps = reactCompClasses.map((itm, idx) => {
 			let GenericComp = itm;
-			return <GenericComp key={idx}/>;
+			return <GenericComp key={idx} />;
 		});
 		return <div>tessst{reactComps}</div>;
 	}
 }
 
-export let GenericContainer =  connect<ConnectedState, ConnectedDispatch, OwnProps>(mapStateToProps, mapDispatchToProps)(PureGenericContainer);
+export let GenericContainer = connect<ConnectedState, ConnectedDispatch, OwnProps>(mapStateToProps, mapDispatchToProps)(PureGenericContainer);

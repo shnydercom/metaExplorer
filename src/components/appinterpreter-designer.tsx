@@ -55,7 +55,9 @@ export default class AppInterpreterDesigner extends React.Component<AIDProps, AI
 
 	onTestBtnClick = (e) => {
 		e.preventDefault();
-		let nodesSerialized: string = JSON.stringify(this.logic.getActiveModel().serializeDiagram(), undefined, 2);
+		let nodesBPCFG = this.logic.intrprtrBlueprintFromDiagram();
+		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
+		//nodesSerialized = JSON.stringify(this.logic.getDiagramEngine().getDiagramModel().serializeDiagram(), undefined, 2);
 		this.setState({serialized : nodesSerialized});
 	}
 	render() {

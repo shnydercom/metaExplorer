@@ -1,0 +1,5 @@
+c) serialisierung des node-diagrams erfolgt so, dass in die cfg des Interpreters ein KV-Paar kommt, dessen Type UserDefDict.intrptrtType ist, value ist dann ein String mit dem Interpreternamen oder eine andere Interpreter-cfg als json, deren Funktionen werden entweder interpretiert oder rausgeworfen (erst mal rausgeworfen, der Name sollte hoffentlich zu einem auffindbaren Interpreter führen, solange es nur einen Matcher gibt). Dort können dann auch sub-Interpreter drin sein. Nennen wir das Prinzip Link or include?? Jedenfalls hab ich dann das Problem mit dem Baum vs. Graph von json nicht mehr, und ggf. einfache JSON-LD-Umformung
+d) wenn values von einem Interpreter generiert werden, dann werden die im ExplorerStore gespeichert, indem sie einen Hashwert zugewiesen bekommen, damit beim Neubau eines Interpreters der richtige Wert zugewiesen wird
+
+
+Serialisierung bzw. Diagram-Interpretierung: Inputs in den simpleDataType-Nodes müssen ihre Variable korrekt an die Node weiter geben, die dann bei der Diagram-Interpretierung gesetzt wird.
