@@ -36,7 +36,7 @@ export type LDConnectedDispatch = {
         notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
 };
 - the ldTokenString is important to make clear, which part of the ld the interpreter is supposed to display. The ldOptions are needed for the consume-function of the ldBlueprint and will trigger updates on the ldOptions
-der TokenString ist wichtig, damit klar ist, welchen LD-Part der Interpreter jetzt überhaupt anzeigen soll. Die LDOptions werden für die consume-Funktion benötigt und gehen bei Änderungen in die notify-Funktion ein
+- when mutating from initialKvStores, create a new object like so: this.state.singleKV = {...this.initialKvStores[0]};
 
 ## style considerations/code convenctions/patterns:
 a dollar sign at the end is a common RxJS convention to identify variables that reference a stream

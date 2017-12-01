@@ -105,13 +105,10 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 	}
 
 	handleChange = (evtval) => {
-		console.log("a change event: ");
-		console.dir(evtval);
 		let modSingleKV: IKvStore = this.state.singleKV;
 		modSingleKV.value = evtval;
 		this.setState({ ...this.state, singleKV: modSingleKV });
 		//TODO: it might be a good idea to debounce before updating the application state
-		console.log(this.props.ldOptions);
 		this.props.ldOptions.resource.kvStores = [this.state.singleKV];
 		this.props.notifyLDOptionsChange(this.props.ldOptions);
 		//this.setState({...this.state, [name]: value});

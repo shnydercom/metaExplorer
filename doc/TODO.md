@@ -3,5 +3,3 @@ d) wenn values von einem Interpreter generiert werden, dann werden die im Explor
 
 
 Serialisierung bzw. Diagram-Interpretierung: Inputs in den simpleDataType-Nodes müssen ihre Variable korrekt an die Node weiter geben, die dann bei der Diagram-Interpretierung gesetzt wird.
-
-TODO: BaseDataTypeInput muss bei Änderung den State updaten, oder das hochreichen

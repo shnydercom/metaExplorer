@@ -99,12 +99,11 @@ export const ldOptionsMapReducer = (
 				};
 				actionAlias = ldToken.get();
 				let newState = Object.assign({}, state, { [actionAlias]: newLDCfg });
-				console.log(newState);
 				return newState;
 			}
 			break;
 		case LDOPTIONS_CLIENTSIDE_UPDATE:
-			return state;
+			return {...state};
 		case LDOPTIONS_REQUEST_ASYNC:
 			return state;
 		case LDOPTIONS_REQUEST_RESULT:
