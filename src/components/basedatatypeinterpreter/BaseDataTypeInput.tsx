@@ -118,7 +118,7 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 	}
 
 	componentWillMount() {
-		this.state.singleKV = this.initialKvStores[0]; //TODO: check, if this can be done with the setState fn. Only needed for determineRenderFn
+		this.state.singleKV = {...this.initialKvStores[0]}; //TODO: check, if this can be done with the setState fn. Only needed for determineRenderFn
 		//this.setState({ ...this.state, singleKV: this.initialKvStores[0]});
 		let baseDT: LDBaseDataType = this.state.singleKV.ldType as LDBaseDataType;
 		this.determineRenderFn(baseDT);
