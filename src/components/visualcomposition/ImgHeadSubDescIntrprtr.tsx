@@ -64,7 +64,7 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	forType: cfgType,
 	nameSelf: ImgHeadSubDescIntrprtrName,
-	interpreterRetrieverFn: appIntprtrRetr,
+	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
 	getInterpretableKeys() { return cfgIntrprtKeys; },
 	crudSkills: "cRud"

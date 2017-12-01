@@ -10,10 +10,13 @@ import AppInterpreterDesigner from 'components/appinterpreter-designer';
 import ImageUploadComponent from 'components/imageupload-component';
 //import { DiagramEngine } from 'storm-react-diagrams'
 import './styles/styles.scss';
+import DevTools from './appstate/devTools';
 
 const initialState: ExplorerState = {
-	demoObj: null
+	ldoptionsMap: {}
 };
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 export interface AppRootProps { }
 const store: redux.Store<ExplorerState> = configureStore(initialState);
@@ -25,6 +28,7 @@ export const AppRoot: React.SFC<AppRootProps> = () => {
 				<p>React is working</p>
 				<AppInterpreterDesigner />
 				<ImageUploadComponent />
+				{!isProduction && <DevTools />}
 			</div>
 		</Provider>
 	);

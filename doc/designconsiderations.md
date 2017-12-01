@@ -16,6 +16,28 @@ mutations should be done through actions, that can be triggered in React
 react-components only export the result of the connect-function,
 anything else is internal
 
+declarative linked data: ldBlueprints is used for class-level declarations, ldOptions for instance-level declaration handling and changing values 
+
+##redesign-decisions:
+- @ldBlueprint.interpreterRetriever has been disabled. The reason for that is
+    -- a) DRY: It was already added in DefaultInterpreterMatcher
+    -- b) although self-adding would be nice, it would _only_ add the Pure**-class, not the redux-wrapped function
+
+# connecting react, redux and ld-interpreters
+- all ld-interpreters should implement the following, if they want to interact with redux
+type OwnProps = {
+        ldTokenString: string;
+};
+export type LDConnectedState = {
+        ldOptions: ILDOptions
+};
+- input/change-interpreters should also implement this:
+export type LDConnectedDispatch = {
+        notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
+};
+- the ldTokenString is important to make clear, which part of the ld the interpreter is supposed to display. The ldOptions are needed for the consume-function of the ldBlueprint and will trigger updates on the ldOptions
+der TokenString ist wichtig, damit klar ist, welchen LD-Part der Interpreter jetzt überhaupt anzeigen soll. Die LDOptions werden für die consume-Funktion benötigt und gehen bei Änderungen in die notify-Funktion ein
+
 ## style considerations/code convenctions/patterns:
 a dollar sign at the end is a common RxJS convention to identify variables that reference a stream
 # fat arrows:

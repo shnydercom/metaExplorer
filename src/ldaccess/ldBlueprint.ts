@@ -20,7 +20,7 @@ export interface IBlueprintInterpreter {
 export interface BlueprintConfig {
     forType: string;
     nameSelf: string;
-    interpreterRetrieverFn: () => IInterpreterRetriever;
+    //interpreterRetrieverFn: () => IInterpreterRetriever;
     initialKvStores?: IKvStore[];
     crudSkills: string;
     //consumeWebResource?: ConsumeWebResourceFunc;
@@ -33,10 +33,10 @@ function blueprintDecorator<T extends { new(...args: any[]): IBlueprintInterpret
         static nameSelf = blueprintCfg.nameSelf;
         initialKvStores = blueprintCfg.initialKvStores ? blueprintCfg.initialKvStores : this.initialKvStores;
         //consumeWebResource = blueprintCfg.consumeWebResource;
-        interpreterRetriever = blueprintCfg.interpreterRetrieverFn;
+        //interpreterRetriever = blueprintCfg.interpreterRetrieverFn;
         getInterpretableKeys = blueprintCfg.getInterpretableKeys;
     };
-    blueprintCfg.interpreterRetrieverFn().addInterpreter(blueprintCfg.forType, newClass, blueprintCfg.crudSkills);
+    //blueprintCfg.interpreterRetrieverFn().addInterpreter(blueprintCfg.forType, newClass, blueprintCfg.crudSkills);
     return newClass;
 }
 
@@ -45,7 +45,7 @@ export default function ldBlueprint(blueprintCfg: BlueprintConfig) {
     if (blueprintCfg == null) throw new LDError("blueprintCfg must not be null");
     if (blueprintCfg.forType == null) throw new LDError("blueprintCfg.forType must not be null");
     if (blueprintCfg.nameSelf == null) throw new LDError("blueprintCfg.nameSelf must not be null");
-    if (blueprintCfg.interpreterRetrieverFn == null) throw new LDError("blueprintCfg.interpreterRetriever must not be null");
+    //if (blueprintCfg.interpreterRetrieverFn == null) throw new LDError("blueprintCfg.interpreterRetriever must not be null");
     if (blueprintCfg.crudSkills == null) throw new LDError("blueprintCfg.crudSkills must not be null");
     if (blueprintCfg.getInterpretableKeys == null) throw new LDError("blueprintCfg.getInterpretableKeys must not be null");
     //if (blueprintCfg.consumeWebResource == null) throw new LDError("blueprintCfg.consumeWebResource must not be null");

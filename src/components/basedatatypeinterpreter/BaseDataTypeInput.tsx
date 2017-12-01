@@ -3,21 +3,23 @@ import * as React from 'react';
 import * as redux from 'redux';
 import { connect } from 'react-redux';
 
-import {Input, InputTheme} from 'react-toolbox';
-import {Switch, SwitchTheme} from 'react-toolbox';
-import {DatePicker, DatePickerTheme} from 'react-toolbox';
-import {TimePicker, TimePickerTheme} from 'react-toolbox';
+import { Input, InputTheme } from 'react-toolbox';
+import { Switch, SwitchTheme } from 'react-toolbox';
+import { DatePicker, DatePickerTheme } from 'react-toolbox';
+import { TimePicker, TimePickerTheme } from 'react-toolbox';
 
 import { ExplorerState } from 'appstate/store';
 import { BlueprintConfig } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
-import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
+//import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { IKvStore } from 'ldaccess/ikvstore';
 import { LDDict } from 'ldaccess/LDDict';
 
 import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
+import { LDConnectedState, LDOwnProps } from "components/generic/genericContainer-component";
+import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
 
 /**
  * @author Jonathan Schneider
@@ -27,22 +29,37 @@ import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
 
 type OwnProps = {
 	singleKV: IKvStore;
-};
-type ConnectedState = {
+} & LDOwnProps;
+/*type ConnectedState = {
 };
 
 type ConnectedDispatch = {
 	//fileChange: (fileList: FileList, url: string) => void;
+};*/
+
+export type LDConnectedDispatch = {
+	notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
 };
 
-const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
-});
+const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): LDConnectedState => {
+	let tokenString: string = ownProps ? ownProps.ldTokenString : null;
+	let ldOptionsLoc: ILDOptions = tokenString ? state.ldoptionsMap[tokenString] : null;
+	return {
+		ldOptions: ldOptionsLoc
+	};
+};
 
-const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedDispatch => ({
-	/*fileChange: (fileList: FileList, url: string) => {
-			dispatch(uploadImgRequestAction(fileList, url));
-			return;
-	}*/
+const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: OwnProps): LDConnectedDispatch => ({
+	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
+		if (!ldOptions) {
+			let kvStores: IKvStore[] = [ownProps.singleKV];
+			let lang: string;
+			let alias: string = ownProps.ldTokenString;
+			dispatch(ldOptionsClientSideCreateAction(kvStores, lang, alias));
+		} else {
+			dispatch(ldOptionsClientSideUpdateAction(ldOptions));
+		}
+	}
 });
 
 let bdts: LDBaseDataType[] = [LDDict.Boolean, LDDict.Integer, LDDict.Double, LDDict.Text, LDDict.Date, LDDict.DateTime];
@@ -62,7 +79,7 @@ for (var bdt in bdts) {
 		let bpCfg: BlueprintConfig = {
 			forType: elem,
 			nameSelf: "shnyder/react-toolbox/" + elem,
-			interpreterRetrieverFn: appIntprtrRetr,
+			//interpreterRetrieverFn: appIntprtrRetr,
 			initialKvStores: initialKVStores,
 			getInterpretableKeys() { return cfgIntrprtKeys; },
 			crudSkills: "CRUd"
@@ -70,8 +87,7 @@ for (var bdt in bdts) {
 		bpcfgs.push(bpCfg);
 	}
 }
-
-class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
+class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
 	implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
 
@@ -80,7 +96,7 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 	state = {
 		singleKV: null
 	};
-	constructor(props: any) {
+	constructor(props?: any) {
 		super(props);
 		this.render = () => null;
 	}
@@ -94,6 +110,10 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 		let modSingleKV: IKvStore = this.state.singleKV;
 		modSingleKV.value = evtval;
 		this.setState({ ...this.state, singleKV: modSingleKV });
+		//TODO: it might be a good idea to debounce before updating the application state
+		console.log(this.props.ldOptions);
+		this.props.ldOptions.resource.kvStores = [this.state.singleKV];
+		this.props.notifyLDOptionsChange(this.props.ldOptions);
 		//this.setState({...this.state, [name]: value});
 	}
 
@@ -102,6 +122,9 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 		//this.setState({ ...this.state, singleKV: this.initialKvStores[0]});
 		let baseDT: LDBaseDataType = this.state.singleKV.ldType as LDBaseDataType;
 		this.determineRenderFn(baseDT);
+		if (!this.props.ldOptions) {
+			this.props.notifyLDOptionsChange(null);
+		}
 	}
 	parseDate: any = (input): Date => {
 		return input ? input : new Date();
@@ -171,16 +194,16 @@ class PureBaseDataTypeInput extends React.Component<ConnectedState & ConnectedDi
 }
 
 //this is the same as using a decorator function on individual classes
-var BoolInput = ldBlueprint(bpcfgs[0])(PureBaseDataTypeInput);
-var IntInput = ldBlueprint(bpcfgs[1])(PureBaseDataTypeInput);
-var DoubleInput = ldBlueprint(bpcfgs[2])(PureBaseDataTypeInput);
-var TextInput = ldBlueprint(bpcfgs[3])(PureBaseDataTypeInput);
-var DateInput = ldBlueprint(bpcfgs[4])(PureBaseDataTypeInput);
-var DateTimeInput = ldBlueprint(bpcfgs[5])(PureBaseDataTypeInput);
+const BoolInput = ldBlueprint(bpcfgs[0])(PureBaseDataTypeInput);
+const IntInput = ldBlueprint(bpcfgs[1])(PureBaseDataTypeInput);
+const DoubleInput = ldBlueprint(bpcfgs[2])(PureBaseDataTypeInput);
+const TextInput = ldBlueprint(bpcfgs[3])(PureBaseDataTypeInput);
+const DateInput = ldBlueprint(bpcfgs[4])(PureBaseDataTypeInput);
+const DateTimeInput = ldBlueprint(bpcfgs[5])(PureBaseDataTypeInput);
 
-export let BooleanValInput = connect(mapStateToProps, mapDispatchToProps)(BoolInput);
-export let IntegerValInput = connect(mapStateToProps, mapDispatchToProps)(IntInput);
-export let DoubleValInput = connect(mapStateToProps, mapDispatchToProps)(DoubleInput);
-export let TextValInput = connect(mapStateToProps, mapDispatchToProps)(TextInput);
-export let DateValInput = connect(mapStateToProps, mapDispatchToProps)(DateInput);
-export let DateTimeValInput = connect(mapStateToProps, mapDispatchToProps)(DateTimeInput);
+export const BooleanValInput = connect(mapStateToProps, mapDispatchToProps)(BoolInput);
+export const IntegerValInput = connect(mapStateToProps, mapDispatchToProps)(IntInput);
+export const DoubleValInput = connect(mapStateToProps, mapDispatchToProps)(DoubleInput);
+export const TextValInput = connect(mapStateToProps, mapDispatchToProps)(TextInput);
+export const DateValInput = connect(mapStateToProps, mapDispatchToProps)(DateInput);
+export const DateTimeValInput = connect(mapStateToProps, mapDispatchToProps)(DateTimeInput);

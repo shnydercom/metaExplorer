@@ -6,10 +6,10 @@ import { SinglePortWidget } from './SinglePortWidget';
 //import { SinglePortLabel } from "components/appinterpreter-parts/SinglePortLabelWidget";
 import { BaseDataTypeDropDown } from 'components/basedatatypeinterpreter/BaseDataTypeDropDown';
 import { BaseDataTypePortSelector } from "components/appinterpreter-parts/BaseDataTypePortSelectorWidget";
-
+/*
 import {
 	BooleanValInput, IntegerValInput, DoubleValInput, TextValInput, DateValInput, DateTimeValInput
-} from 'components/basedatatypeinterpreter/BaseDataTypeInput';
+} from 'components/basedatatypeinterpreter/BaseDataTypeInput';*/
 
 //import { SinglePortLabel } from "components/appinterpreter-parts/SinglePortLabelWidget";
 

@@ -8,7 +8,7 @@ import { BlueprintConfig } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
-import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
+//import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import appIntMatcher from 'appconfig/appInterpreterMatcher';
 
 import { IKvStore } from 'ldaccess/ikvstore';
@@ -19,23 +19,44 @@ import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { IHypermedia } from 'hydraclient.js/src/DataModel/IHypermedia';
 import { LDConsts } from 'ldaccess/LDConsts';
 import { isInterpreter } from 'ldaccess/ldUtils';
+import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from 'appstate/epicducks/ldOptions-duck';
+
+export type LDOwnProps = {
+	ldTokenString: string;
+};
 
 type OwnProps = {
-	//demoType is being used for empty display in the designer,
-	//and represents a convenience function to show interpreters for types without having the necessary data
 	displayedType: string;
 	searchCrudSkills: string;
-};
-type ConnectedState = {
+} & LDOwnProps;
+
+export type LDConnectedState = {
+	ldOptions: ILDOptions
 };
 
-type ConnectedDispatch = {
+export type LDConnectedDispatch = {
+	notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
 };
 
-const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
-});
+const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): LDConnectedState => {
+	let tokenString: string = ownProps ? ownProps.ldTokenString : null;
+	let ldOptionsLoc: ILDOptions = tokenString ? state.ldoptionsMap[tokenString] : null;
+	return {
+		ldOptions: ldOptionsLoc
+	};
+};
 
-const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedDispatch => ({
+const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: OwnProps): LDConnectedDispatch => ({
+	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
+		if (!ldOptions) {
+			let kvStores: IKvStore[] = [{ key: undefined, value: undefined, ldType: ownProps.displayedType }];
+			let lang: string;
+			let alias: string = ownProps.ldTokenString;
+			dispatch(ldOptionsClientSideCreateAction(kvStores, lang, alias));
+		} else {
+			dispatch(ldOptionsClientSideUpdateAction(ldOptions));
+		}
+	}
 });
 
 let cfgType: string = LDDict.WrapperObject;
@@ -45,14 +66,14 @@ let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
 	forType: cfgType,
 	nameSelf: "shnyder/genericContainer",
-	interpreterRetrieverFn: appIntprtrRetr,
+	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
 	getInterpretableKeys() { return cfgIntrprtKeys; },
 	crudSkills: "cRud"
 };
 
 @ldBlueprint(bpCfg)
-class PureGenericContainer extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
+class PureGenericContainer extends React.Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
 	implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
 	initialKvStores: IKvStore[];
@@ -83,23 +104,38 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 		}
 		return genKvStores ? this.kvsToComponent(genKvStores) : null;
 	}
+
+	componentWillReceiveProps(nextProps: OwnProps & LDConnectedDispatch, nextContext): void {
+		console.log(nextProps);
+		if (nextProps.displayedType !== this.props.displayedType) {
+			nextProps.notifyLDOptionsChange(null);
+		}
+	}
+
+	componentWillMount() {
+		if (!this.props.ldOptions) {
+			this.props.notifyLDOptionsChange(null);
+		}
+	}
+
 	render() {
 		var demoTypeParsed = null;
 		if (this.props.displayedType) {
 			let dType: string = this.props.displayedType;
-			var demoWebResource: IWebResource = {
+			/*var demoWebResource: IWebResource = {
 				hypermedia: [{ [LDConsts.type]: dType, members: null, client: null } as IHypermedia] as IHypermediaContainer,
-			};
-			var demoTypeLDOptions: ILDOptions = {
+			};*/
+			var displayedTypeLDOptions: ILDOptions = this.props.ldOptions ? this.props.ldOptions : {
 				lang: null,
 				resource: {
 					kvStores: [{ key: undefined, value: undefined, ldType: dType }],
 					webInResource: null,
 					webOutResource: null
 				},
-				ldToken: null
+				ldToken: null,
+				isLoading: false
 			};
-			demoTypeParsed = this.consumeLDOptions(demoTypeLDOptions);
+			demoTypeParsed = this.consumeLDOptions(displayedTypeLDOptions);
 		}
 		return <div key={0}>
 			{demoTypeParsed}
@@ -107,19 +143,24 @@ class PureGenericContainer extends React.Component<ConnectedState & ConnectedDis
 	}
 
 	private kvsToComponent(input: IKvStore[]): any {
-		let reactCompClasses: React.ComponentClass[] = [];
+		let reactCompClasses: (React.ComponentClass<LDOwnProps>)[] = [];
 		input.forEach((itm) => {
 			let intrprtr = itm.intrprtrClass;
 			if (isInterpreter(intrprtr)) {
-				reactCompClasses.push(intrprtr as React.ComponentClass);
+				reactCompClasses.push(intrprtr as React.ComponentClass<LDOwnProps>);
 			}
 		});
 		let reactComps = reactCompClasses.map((itm, idx) => {
 			let GenericComp = itm;
-			return <GenericComp key={idx} />;
+			let ldTokenString: string = null;
+			if (input.length === 1) {
+				//genericComp is only a wrapper then, hand token down directly
+				ldTokenString = this.props.ldTokenString;
+			}
+			return <GenericComp key={idx} ldTokenString={ldTokenString}/>;
 		});
 		return <div>tessst{reactComps}</div>;
 	}
 }
 
-export let GenericContainer = connect<ConnectedState, ConnectedDispatch, OwnProps>(mapStateToProps, mapDispatchToProps)(PureGenericContainer);
+export const GenericContainer = connect<LDConnectedState, LDConnectedDispatch, OwnProps>(mapStateToProps, mapDispatchToProps)(PureGenericContainer);

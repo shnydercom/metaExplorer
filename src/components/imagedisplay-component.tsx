@@ -1,8 +1,6 @@
 import * as React from 'react';
 import * as redux from 'redux';
 import { connect } from 'react-redux';
-
-import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
 import { LDDict } from 'ldaccess/LDDict';
@@ -32,7 +30,7 @@ let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
     forType: cfgType,
     nameSelf: "shnyder/imageDisplay",
-    interpreterRetrieverFn: appIntprtrRetr,
+    //interpreterRetrieverFn: appIntprtrRetr,
     initialKvStores: initialKVStores,
     getInterpretableKeys() { return cfgIntrprtKeys; },
     crudSkills: "cRud"

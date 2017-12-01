@@ -26,6 +26,7 @@ import { DesignerLogic } from "components/appinterpreter-parts/designer-logic";
 import { GenericContainer } from "components/generic/genericContainer-component";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
+import { BooleanValInput } from "components/basedatatypeinterpreter/BaseDataTypeInput";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -74,7 +75,8 @@ export default class AppInterpreterDesigner extends React.Component<AIDProps, AI
 				<DesignerBody logic={this.logic} />
 				<div className="vertical-scroll">
 					<Button onClick={this.onTestBtnClick}>serialize!</Button>
-					<GenericContainer displayedType="shnyder/ProductDisplay" searchCrudSkills="cRud" />
+					<GenericContainer ldTokenString="" displayedType="shnyder/ProductDisplay" searchCrudSkills="cRud" />
+					<BooleanValInput singleKV={null} ldTokenString="thisCouldBeaGenericToken"/>
 					<small><pre>{this.state.serialized}</pre></small>
 				</div>
 			</Splitter>

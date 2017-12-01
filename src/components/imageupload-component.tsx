@@ -64,7 +64,7 @@ import { BlueprintConfig } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
-import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
+//import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { IKvStore } from 'ldaccess/ikvstore';
 import { LDDict } from 'ldaccess/LDDict';
 
@@ -122,7 +122,7 @@ let initialKVStores: IKvStore[] = [
 var bpCfg: BlueprintConfig = {
     forType: cfgType,
     nameSelf: "shnyder/imageUpload",
-    interpreterRetrieverFn: appIntprtrRetr,
+    //interpreterRetrieverFn: appIntprtrRetr,
     initialKvStores: initialKVStores,
     getInterpretableKeys: () => cfgIntrprtKeys,
     crudSkills: "Crud"

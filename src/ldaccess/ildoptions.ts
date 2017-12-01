@@ -6,4 +6,5 @@ export interface ILDOptions {
 	lang: string;
 	resource: ILDResource;
 	ldToken: ILDToken;
+	isLoading: boolean;
 }

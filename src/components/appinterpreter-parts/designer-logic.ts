@@ -14,7 +14,7 @@ import { LDDict } from "ldaccess/LDDict";
 import { DeclarationWidgetFactory } from "components/appinterpreter-parts/DeclarationNodeWidgetFactory";
 import { DeclarationPartNodeModel } from "components/appinterpreter-parts/DeclarationNodeModel";
 import { DECLARATION_MODEL, BASEDATATYPE_MODEL, GENERALDATATYPE_MODEL } from "components/appinterpreter-parts/designer-consts";
-import { InterpreterNodeModel } from "../../../dist/src/components/appinterpreter-parts/InterpreterNodeModel";
+import { InterpreterNodeModel } from "components/appinterpreter-parts/InterpreterNodeModel";
 import { elementAt } from "rxjs/operators/elementAt";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
