@@ -159,7 +159,7 @@ class PureGenericContainer extends React.Component<LDConnectedState & LDConnecte
 			}
 			return <GenericComp key={idx} ldTokenString={ldTokenString}/>;
 		});
-		return <div>tessst{reactComps}</div>;
+		return <div>GenericContainerContents:{reactComps}</div>;
 	}
 }
 

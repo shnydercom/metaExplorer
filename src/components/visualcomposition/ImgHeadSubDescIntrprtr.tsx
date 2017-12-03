@@ -38,7 +38,7 @@ let initialKVStores: IKvStore[] = [
 	{
 		key: VisualDict.headerImgDisplay,
 		value: undefined,
-		ldType: LDDict.ImageObject
+		ldType: UserDefDict.intrptrtType
 	},
 	{
 		key: VisualDict.headerTxt,

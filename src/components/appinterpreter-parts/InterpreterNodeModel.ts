@@ -4,26 +4,30 @@ import * as _ from "lodash";
 import { INTERPRETERDATATYPE_MODEL } from "components/appinterpreter-parts/designer-consts";
 
 export class InterpreterNodeModel extends NodeModel {
-	name: string;
+	nameSelf: string;
+	forType: string;
 	color: string;
 	ports: { [s: string]: LDPortModel };
 
-	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)", nodeType?: string) {
+	constructor(nameSelf: string = "Untitled", forType: string = "", color: string = "rgb(0,192,255)", nodeType?: string) {
 		super(nodeType ? nodeType : INTERPRETERDATATYPE_MODEL);
-		this.name = name;
+		this.nameSelf = nameSelf;
 		this.color = color;
+		this.forType = forType;
 	}
 
 	deSerialize(object) {
 		super.deSerialize(object);
-		this.name = object.name;
+		this.nameSelf = object.nameSelf;
 		this.color = object.color;
+		this.forType = object.forType;
 	}
 
 	serialize() {
 		return _.merge(super.serialize(), {
-			name: this.name,
-			color: this.color
+			nameSelf: this.nameSelf,
+			color: this.color,
+			forType: this.forType
 		});
 	}
 

@@ -3,9 +3,10 @@ import * as _ from "lodash";
 import { DefaultNodeModel, DefaultPortLabel, DiagramEngine } from "storm-react-diagrams";
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { SinglePortWidget } from './SinglePortWidget';
+import { GeneralDataTypeNodeModel } from "components/appinterpreter-parts/GeneralDataTypeNodeModel";
 
 export interface GeneralDataTypeNodeProps {
-	node: DefaultNodeModel;
+	node: GeneralDataTypeNodeModel;
 	diagramEngine: DiagramEngine;
 }
 
@@ -29,7 +30,7 @@ export class GeneralDataTypeNodeWidget extends React.Component<GeneralDataTypeNo
 		return (
 			<div className="basic-node" style={{ background: this.props.node.color }}>
 				<div className="title">
-					<div className="name">{this.props.node.name}</div>
+					<div className="name">{this.props.node.nameSelf}</div>
 				</div>
 				<div className="ports">
 					<div className="in">{_.map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>

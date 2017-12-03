@@ -16,6 +16,7 @@ import { DeclarationPartNodeModel } from "components/appinterpreter-parts/Declar
 import { DECLARATION_MODEL, BASEDATATYPE_MODEL, GENERALDATATYPE_MODEL } from "components/appinterpreter-parts/designer-consts";
 import { InterpreterNodeModel } from "components/appinterpreter-parts/InterpreterNodeModel";
 import { elementAt } from "rxjs/operators/elementAt";
+import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 
@@ -83,7 +84,7 @@ export class DesignerLogic {
 
 		//create fixed output node
 		//TODO: make fixed but ports should still be settable, make outputNode singleton per Interpreter
-		let outputNode = new DeclarationPartNodeModel(UserDefDict.outputInterpreter, designerSpecificNodesColor);
+		let outputNode = new DeclarationPartNodeModel(UserDefDict.outputInterpreter, null, designerSpecificNodesColor);
 		//outputNode.setLocked(true); locking would lock the ports as well
 		outputNode.x = 600;
 		outputNode.y = 200;
@@ -145,7 +146,7 @@ export class DesignerLogic {
 		let rv: LDPortModel[] = [];
 		let intrprtrKeys: any[] = cfg.getInterpretableKeys();
 		let initialKvStores: IKvStore[] = cfg.initialKvStores;
-		node.name = bpname;
+		node.nameSelf = bpname;
 		let isInitKVsmallerThanKeys: boolean = initialKvStores.length < intrprtrKeys.length;
 		for (var i = 0; i < intrprtrKeys.length; i++) {
 			let elemi: IKvStore;
@@ -175,7 +176,7 @@ export class DesignerLogic {
 		let exportSelfKV: IKvStore = {
 			key: UserDefDict.exportSelfKey,
 			value: undefined,
-			ldType: cfg.forType
+			ldType: UserDefDict.intrptrtType
 		};
 		node.addPort(new LDPortModel(false, exportSelfKV.key, exportSelfKV));
 		for (var j = intrprtrKeys.length; j < initialKvStores.length; j++) {
@@ -202,12 +203,19 @@ export class DesignerLogic {
 		let outputBPCfg: BlueprintConfig = {
 			forType: LDDict.ViewAction,
 			nameSelf: nameSelf,
-			interpreterRetrieverFn: appIntprtrRetr,
 			initialKvStores: initialKvStores,
 			crudSkills: crudSkills,
 			getInterpretableKeys: () => interpretableKeysArr,
 		};
-		this.fillBPCfgFromGraph(outputBPCfg, this.outputNode);
+		let subIntrprtrCfgMap: { [s: string]: BlueprintConfig } = {};
+		this.fillBPCfgFromGraph(outputBPCfg, this.outputNode, subIntrprtrCfgMap);
+		let intrprtMapKV: IKvStore =
+			{
+				key: UserDefDict.intrprtrBPCfgRefMapKey,
+				value: subIntrprtrCfgMap,
+				ldType: UserDefDict.intrprtrBPCfgRefMapType
+			};
+		outputBPCfg.initialKvStores.push(intrprtMapKV);
 		return outputBPCfg;
 	}
 
@@ -217,7 +225,7 @@ export class DesignerLogic {
 	 * @param branchBPCfg the BlueprintConfig to fill
 	 * @param branchNode the NodeModel used to fill branchBPCfg, on the same level!
 	 */
-	private fillBPCfgFromGraph(branchBPCfg: BlueprintConfig, branchNode: InterpreterNodeModel) {
+	private fillBPCfgFromGraph(branchBPCfg: BlueprintConfig, branchNode: InterpreterNodeModel, otherIntrprtrCfgs: { [s: string]: BlueprintConfig }) {
 		let inPorts: LDPortModel[] = branchNode.getInPorts();
 		inPorts.forEach((port) => {
 			let links = port.getLinks();
@@ -225,34 +233,55 @@ export class DesignerLogic {
 				if (links.hasOwnProperty(key)) {
 					const oneLink = links[key];
 					let leafNode: NodeModel = oneLink.getSourcePort().getParent();
+					let leafPort: LDPortModel = oneLink.getSourcePort() as LDPortModel;
 					if (leafNode.getID() === branchNode.getID()) {
 						leafNode = oneLink.getTargetPort().getParent();
+						leafPort = oneLink.getTargetPort() as LDPortModel;
 					}
 					switch (leafNode.nodeType) {
 						case DECLARATION_MODEL:
 							break;
 						case BASEDATATYPE_MODEL:
 							let bdtLeafNode: BaseDataTypeNodeModel = leafNode as BaseDataTypeNodeModel;
-							let bdtKV = bdtLeafNode.getOutPorts()[0].kv;
+							let bdtKV = this.composeKVs(bdtLeafNode.getOutPorts()[0].kv, port.kv);
 							branchBPCfg.initialKvStores.push(bdtKV);
 							console.log(bdtKV);
 							//TODO: check here, that BDT-Nodes hand up their input correctly
 							break;
 						case GENERALDATATYPE_MODEL:
-							let forType = null;
-							let crudSkills = "cRud";
-							let nameSelf = null;
-							let initialKvStores = [];
-							let interpretableKeysArr = [];
-							let outputBPCfg: BlueprintConfig = {
-								forType: forType,
-								nameSelf: nameSelf,
-								interpreterRetrieverFn: appIntprtrRetr,
-								initialKvStores: initialKvStores,
-								crudSkills: crudSkills,
-								getInterpretableKeys: () => interpretableKeysArr,
+							let leafNodeID = leafNode.getID();
+							let outputBPCfg: BlueprintConfig = otherIntrprtrCfgs[leafNodeID];
+							let initialKvStores = null;
+							if (!outputBPCfg) {
+								let forType = (leafNode as InterpreterNodeModel).forType;
+								let crudSkills = "cRud";
+								let nameSelf = leafNodeID;
+								initialKvStores = [];
+								let interpretableKeysArr = [];
+								outputBPCfg = outputBPCfg ? outputBPCfg : {
+									forType: forType,
+									nameSelf: nameSelf,
+									initialKvStores: initialKvStores,
+									crudSkills: crudSkills,
+									getInterpretableKeys: () => interpretableKeysArr,
+								};
+								otherIntrprtrCfgs[leafNodeID] = outputBPCfg;
+								this.fillBPCfgFromGraph(outputBPCfg, leafNode as InterpreterNodeModel, otherIntrprtrCfgs);
+							} else {
+								initialKvStores = outputBPCfg.initialKvStores;
+							}
+							let outputType: string = leafPort.kv.ldType;
+							let outputRef: ObjectPropertyRef = {
+								objRef: leafNodeID,
+								propRef: leafPort.kv.key
 							};
-							this.fillBPCfgFromGraph(outputBPCfg, leafNode as InterpreterNodeModel);
+							let outputKV: IKvStore = {
+								key: leafPort.kv.key,
+								value: outputRef,
+								ldType: outputType
+							};
+							let gdtKV = this.composeKVs(outputKV, port.kv);
+							branchBPCfg.initialKvStores.push(gdtKV);
 							break;
 						default:
 							break;
@@ -260,7 +289,23 @@ export class DesignerLogic {
 				}
 			}
 		});
+	}
 
+	/**
+	 * composes the KvStore from a target and a source node. Used to make a property on a BPCfg from a link
+	 * @param sourceKV
+	 * @param targetKV
+	 */
+	private composeKVs(sourceKV: IKvStore, targetKV: IKvStore): IKvStore {
+		let rv: IKvStore = null;
+		if ( (sourceKV.ldType && targetKV.ldType) &&
+			(sourceKV.ldType !== targetKV.ldType)) return targetKV;
+		rv = {
+			key: targetKV.key,
+			value: sourceKV.value,
+			ldType: targetKV.ldType
+		};
+		return rv;
 	}
 
 }

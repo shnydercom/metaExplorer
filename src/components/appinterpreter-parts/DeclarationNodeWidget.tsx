@@ -3,9 +3,10 @@ import * as _ from "lodash";
 import { DefaultNodeModel, DefaultPortLabel, DiagramEngine } from "storm-react-diagrams";
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { SinglePortWidget } from './SinglePortWidget';
+import { DeclarationPartNodeModel } from "components/appinterpreter-parts/DeclarationNodeModel";
 
 export interface DeclarationNodeProps {
-	node: DefaultNodeModel;
+	node: DeclarationPartNodeModel;
 	diagramEngine: DiagramEngine;
 }
 
@@ -29,7 +30,7 @@ export class DeclarationNodeWidget extends React.Component<DeclarationNodeProps,
 		return (
 			<div className="basic-node" style={{ background: this.props.node.color }}>
 				<div className="title">
-					<div className="name">{this.props.node.name}</div>
+					<div className="name">{this.props.node.nameSelf}</div>
 				</div>
 				<div className="ports">
 					<div className="in">{_.map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>

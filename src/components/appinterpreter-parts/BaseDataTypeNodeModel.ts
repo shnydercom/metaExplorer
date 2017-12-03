@@ -6,9 +6,9 @@ import { BASEDATATYPE_MODEL } from "components/appinterpreter-parts/designer-con
 
 export class BaseDataTypeNodeModel extends InterpreterNodeModel {
 
-	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)") {
-		super(name, color, BASEDATATYPE_MODEL);
-		this.name = name;
+	constructor(nameSelf: string = "Untitled", forType: string = "", color: string = "rgb(0,192,255)") {
+		super(nameSelf, forType, color, BASEDATATYPE_MODEL);
+		this.nameSelf = nameSelf;
 		this.color = color;
 	}
 }

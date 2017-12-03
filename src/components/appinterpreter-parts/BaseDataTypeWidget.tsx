@@ -6,6 +6,7 @@ import { SinglePortWidget } from './SinglePortWidget';
 //import { SinglePortLabel } from "components/appinterpreter-parts/SinglePortLabelWidget";
 import { BaseDataTypeDropDown } from 'components/basedatatypeinterpreter/BaseDataTypeDropDown';
 import { BaseDataTypePortSelector } from "components/appinterpreter-parts/BaseDataTypePortSelectorWidget";
+import { BaseDataTypeNodeModel } from "components/appinterpreter-parts/BaseDataTypeNodeModel";
 /*
 import {
 	BooleanValInput, IntegerValInput, DoubleValInput, TextValInput, DateValInput, DateTimeValInput
@@ -14,7 +15,7 @@ import {
 //import { SinglePortLabel } from "components/appinterpreter-parts/SinglePortLabelWidget";
 
 export interface BaseDataTypeNodeProps {
-	node: DefaultNodeModel;
+	node: BaseDataTypeNodeModel;
 	diagramEngine: DiagramEngine;
 }
 
@@ -38,7 +39,7 @@ export class BaseDataTypeNodeWidget extends React.Component<BaseDataTypeNodeProp
 		return (
 			<div className="basic-node" style={{ background: this.props.node.color }}>
 				<div className="title">
-					<div className="name">{this.props.node.name}</div>
+					<div className="name">{this.props.node.nameSelf}</div>
 				</div>
 				<div className="ports">
 					<div className="out">{_.map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>

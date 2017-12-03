@@ -34,7 +34,8 @@
   "exclude": [
     "doc",
     "node_modules",
-    "src/examples"
+    "src/examples",
+    "dist"
   ],
   "awesomeTypescriptLoaderOptions": {
     "compilerOptions": {

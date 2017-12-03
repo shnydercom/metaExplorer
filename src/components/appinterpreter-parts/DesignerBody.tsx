@@ -40,12 +40,14 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 			if (idx === 0) {
 				return <DesignerTrayItem key={idx} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />;
 			}
-			if (idx === 1){
+			if (idx === 1) {
 				return <DesignerTrayItem key={idx} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />;
 			}
 			//console.dir(ports);
 			let ldBPCfg = (itm.interpreter as IBlueprintInterpreter).cfg;
-			return <DesignerTrayItem key={idx} model={{ type: "ldbp", bpname: ldBPCfg ? ldBPCfg.nameSelf : "unnamed" }} name={itm.type} color={appStyles["$designer-secondary-color"]} />;
+			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
+			let trayType = ldBPCfg ? ldBPCfg.forType : itm.type;
+			return <DesignerTrayItem key={idx} model={{ type: "ldbp", bpname: trayName, bptype: trayType }} name={trayName} color={appStyles["$designer-secondary-color"]} />;
 		});
 		return reactCompClasses;
 	}
@@ -74,7 +76,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 						switch (data.type) {
 							case "ldbp":
 								let nodeName: string = "Node " + (nodesCount + 1) + ":";
-								node = new GeneralDataTypeNodeModel(nodeName, "rgba(250,250,250,0.2)");
+								node = new GeneralDataTypeNodeModel(nodeName, null, "rgba(250,250,250,0.2)");
 								console.dir(data);
 								console.dir(node);
 								if (data.bpname) {
@@ -90,6 +92,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 										//node.addPort(new LDPortModel(true, "test", "test" + "-out"));
 									}*/
 								}
+								if (data.bptype) node.forType = data.bptype;
 								console.dir(node);
 								break;
 							case "bdt":
@@ -98,7 +101,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 									value: undefined,
 									ldType: undefined
 								};
-								node = new BaseDataTypeNodeModel("Simple Data Type", "rgba(250,250,250,0.2)");
+								node = new BaseDataTypeNodeModel("Simple Data Type", null, "rgba(250,250,250,0.2)");
 								node.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "output"));
 								break;
 							case "inputtype":
@@ -107,7 +110,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 									value: undefined,
 									ldType: undefined
 								};
-								node = new DeclarationPartNodeModel("External Input Marker", designerSpecificNodesColor);
+								node = new DeclarationPartNodeModel("External Input Marker", null, designerSpecificNodesColor);
 								node.addPort(new LDPortModel(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
 								break;
 							default:
