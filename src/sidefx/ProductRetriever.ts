@@ -46,7 +46,7 @@ let bpCfg: BlueprintConfig = {
 	nameSelf: productRetrieverName,
 	interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
-	getInterpretableKeys() { return cfgIntrprtKeys; },
+	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 

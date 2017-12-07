@@ -68,7 +68,7 @@ let bpCfg: BlueprintConfig = {
 	nameSelf: "shnyder/genericContainer",
 	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
-	getInterpretableKeys() { return cfgIntrprtKeys; },
+	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 

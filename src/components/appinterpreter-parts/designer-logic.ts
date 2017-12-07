@@ -17,6 +17,7 @@ import { DECLARATION_MODEL, BASEDATATYPE_MODEL, GENERALDATATYPE_MODEL } from "co
 import { InterpreterNodeModel } from "components/appinterpreter-parts/InterpreterNodeModel";
 import { elementAt } from "rxjs/operators/elementAt";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
+import { DeclarationNodeProps } from "components/appinterpreter-parts/DeclarationNodeWidget";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 
@@ -144,7 +145,7 @@ export class DesignerLogic {
 		let interpreter: IBlueprintInterpreter = appIntprtrRetr().getInterpreterByNameSelf(bpname);
 		let cfg: BlueprintConfig = interpreter.cfg;
 		let rv: LDPortModel[] = [];
-		let intrprtrKeys: any[] = cfg.getInterpretableKeys();
+		let intrprtrKeys: any[] = cfg.interpretableKeys;
 		let initialKvStores: IKvStore[] = cfg.initialKvStores;
 		node.nameSelf = bpname;
 		let isInitKVsmallerThanKeys: boolean = initialKvStores.length < intrprtrKeys.length;
@@ -205,7 +206,7 @@ export class DesignerLogic {
 			nameSelf: nameSelf,
 			initialKvStores: initialKvStores,
 			crudSkills: crudSkills,
-			getInterpretableKeys: () => interpretableKeysArr,
+			interpretableKeys: interpretableKeysArr,
 		};
 		let subIntrprtrCfgMap: { [s: string]: BlueprintConfig } = {};
 		this.fillBPCfgFromGraph(outputBPCfg, this.outputNode, subIntrprtrCfgMap);
@@ -216,6 +217,7 @@ export class DesignerLogic {
 				ldType: UserDefDict.intrprtrBPCfgRefMapType
 			};
 		outputBPCfg.initialKvStores.push(intrprtMapKV);
+		this.bakeKvStoresIntoBP(outputBPCfg);
 		return outputBPCfg;
 	}
 
@@ -240,6 +242,15 @@ export class DesignerLogic {
 					}
 					switch (leafNode.nodeType) {
 						case DECLARATION_MODEL:
+							let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
+							let declarID = declarModel.getID();
+							if (leafPort.kv && leafPort.kv.key === UserDefDict.externalInput) {
+								//is an external input marker
+								let keyInputMarked = port.kv.key;
+								let cfgIntrprtKeys: string[] = branchBPCfg.interpretableKeys;
+								cfgIntrprtKeys.push(keyInputMarked);
+								branchBPCfg.initialKvStores.push(this.copyKV(port.kv));
+							}
 							break;
 						case BASEDATATYPE_MODEL:
 							let bdtLeafNode: BaseDataTypeNodeModel = leafNode as BaseDataTypeNodeModel;
@@ -263,7 +274,7 @@ export class DesignerLogic {
 									nameSelf: nameSelf,
 									initialKvStores: initialKvStores,
 									crudSkills: crudSkills,
-									getInterpretableKeys: () => interpretableKeysArr,
+									interpretableKeys: interpretableKeysArr,
 								};
 								otherIntrprtrCfgs[leafNodeID] = outputBPCfg;
 								this.fillBPCfgFromGraph(outputBPCfg, leafNode as InterpreterNodeModel, otherIntrprtrCfgs);
@@ -298,7 +309,7 @@ export class DesignerLogic {
 	 */
 	private composeKVs(sourceKV: IKvStore, targetKV: IKvStore): IKvStore {
 		let rv: IKvStore = null;
-		if ( (sourceKV.ldType && targetKV.ldType) &&
+		if ((sourceKV.ldType && targetKV.ldType) &&
 			(sourceKV.ldType !== targetKV.ldType)) return targetKV;
 		rv = {
 			key: targetKV.key,
@@ -308,4 +319,67 @@ export class DesignerLogic {
 		return rv;
 	}
 
+	private copyKV(sourceKV: IKvStore){
+		let rv: IKvStore = {
+			key: sourceKV.key,
+			value: sourceKV.value,
+			ldType: sourceKV.ldType,
+			intrprtrClass: sourceKV.intrprtrClass
+		};
+		return rv;
+	}
+
+	private bakeKvStoresIntoBP(targetBP: BlueprintConfig) {
+		if (!targetBP) return;
+		let kvStores: IKvStore[] = targetBP.initialKvStores;
+		if (!kvStores || kvStores.length === 0) return;
+		let idxMap: Map<string, number> = new Map();
+		kvStores.forEach((itm, idx) => {
+			if (itm) {
+				//TODO: is there a more elegant way for comparing against multiple strings?
+				switch (itm.key) {
+					case UserDefDict.finalInputKey:
+						idxMap.set(itm.key, idx);
+						break;
+					case UserDefDict.intrprtrNameKey:
+						idxMap.set(itm.key, idx);
+						break;
+					default:
+						break;
+				}
+			}
+		});
+		idxMap.forEach((val, key) => {
+			switch (key) {
+				case UserDefDict.finalInputKey:
+					targetBP.forType = (kvStores[val].value as ObjectPropertyRef).objRef;
+					/**
+					 * sieht so aus: {
+      "key": "finalInput",
+      "value": {
+        "objRef": "9e47cf47-f756-4b53-bacf-c8dc269ba5e2",
+        "propRef": "exportSelf"
+      },
+      "ldType": "InterpreterType"
+    },
+					 */
+					break;
+				case UserDefDict.intrprtrNameKey:
+					targetBP.nameSelf = kvStores[val].value;
+					break;
+				default:
+					break;
+			}
+		});
+		console.dir(idxMap);
+		//delete at the end
+		let lastVal = 0;
+		idxMap.forEach((val, key) => {
+			kvStores.splice(val, 1);
+			idxMap.forEach((val2, key2) => {
+				if (val2 > val) idxMap.set(key2, val2 - 1);
+			});
+		});
+		console.dir(idxMap);
+	}
 }

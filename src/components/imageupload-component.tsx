@@ -124,7 +124,7 @@ var bpCfg: BlueprintConfig = {
     nameSelf: "shnyder/imageUpload",
     //interpreterRetrieverFn: appIntprtrRetr,
     initialKvStores: initialKVStores,
-    getInterpretableKeys: () => cfgIntrprtKeys,
+    interpretableKeys: cfgIntrprtKeys,
     crudSkills: "Crud"
 };
 

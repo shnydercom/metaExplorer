@@ -12,7 +12,7 @@ let bpCfg: BlueprintConfig = {
     nameSelf: "shnyder/testTypeInterpreter",
     interpreterRetrieverFn: testInterpreter,
     initialKvStores: null,
-    getInterpretableKeys(){return null; },
+    interpretableKeys: null,
     crudSkills: "cRud"
 };
 

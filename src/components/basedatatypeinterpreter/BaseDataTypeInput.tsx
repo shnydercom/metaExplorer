@@ -81,7 +81,7 @@ for (var bdt in bdts) {
 			nameSelf: "shnyder/react-toolbox/" + elem,
 			//interpreterRetrieverFn: appIntprtrRetr,
 			initialKvStores: initialKVStores,
-			getInterpretableKeys() { return cfgIntrprtKeys; },
+			interpretableKeys: cfgIntrprtKeys,
 			crudSkills: "CRUd"
 		};
 		bpcfgs.push(bpCfg);

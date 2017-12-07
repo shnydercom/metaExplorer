@@ -66,7 +66,7 @@ let bpCfg: BlueprintConfig = {
 	nameSelf: ImgHeadSubDescIntrprtrName,
 	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
-	getInterpretableKeys() { return cfgIntrprtKeys; },
+	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
