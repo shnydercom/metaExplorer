@@ -8,6 +8,10 @@ import { IKvStore } from 'ldaccess/ikvstore';
 var testInterpreter = mockInterpreterRetrieverFn;
 
 let bpCfg: BlueprintConfig = {
+    //TODO: property forType needs to be renamed, maybe split up into multiple properties. I need a clear
+    //conflicting use case to tackle the whole problem space though (e.g. schema:ViewAction vs. schema:image).
+    //Needs to be re-designed with crud-skills in mind though. Clear separation of concerns and DRY should
+    //be applicable to the end result
     forType: "http://shnyder.com/Testtype",
     nameSelf: "shnyder/testTypeInterpreter",
     interpreterRetrieverFn: testInterpreter,

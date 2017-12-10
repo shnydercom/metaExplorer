@@ -1,17 +1,19 @@
 c) serialisierung des node-diagrams erfolgt so, dass in die cfg des Interpreters ein KV-Paar kommt, dessen Type UserDefDict.intrptrtType ist, value ist dann ein String mit dem Interpreternamen oder eine andere Interpreter-cfg als json, deren Funktionen werden entweder interpretiert oder rausgeworfen (erst mal rausgeworfen, der Name sollte hoffentlich zu einem auffindbaren Interpreter führen, solange es nur einen Matcher gibt). Dort können dann auch sub-Interpreter drin sein. Nennen wir das Prinzip Link or include?? Jedenfalls hab ich dann das Problem mit dem Baum vs. Graph von json nicht mehr, und ggf. einfache JSON-LD-Umformung
 d) wenn values von einem Interpreter generiert werden, dann werden die im ExplorerStore gespeichert, indem sie einen Hashwert zugewiesen bekommen, damit beim Neubau eines Interpreters der richtige Wert zugewiesen wird
 
+#Cleanup
+- PureAppInterpreterDesigner State handling
+
 #UX
 - it shouldn't be possible to connect ports with non-matching kvStore.ldType
 - highlight matching kvStore.ldType or undefined input type
 
 #Node-serialization:
-- flatten KvStores into BPCfg						!!!
+done - flatten KvStores into BPCfg						!!!
 - External Input Markers to main BPCfg   !!
 - handle circular references
 
-06.12.2017  1h
-07.12.2017	1h 1925-1945 2220-
+Nächstes Todo ist in designer-logic.addBlueprintToRetriever() anzusetzen, eine Interpreter-Container-Klasse zu bauen, die dann von dem GenericContainer gelesen werden kann
 
 last serialized bits & pieces: seems to work!
 {

@@ -33,7 +33,7 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 	}
 	addInterpreter(typeName: string, intrprtr: any, crudSkills: string): void {
 		//if the interpreter has a user defined name, add it using that name
-		if (intrprtr["cfg"]) {
+		/*if (intrprtr["cfg"]) {
 			let cfg: BlueprintConfig = intrprtr["cfg"];
 			if (cfg.initialKvStores && cfg.initialKvStores.length > 0) {
 				for (var i = 0; i < cfg.initialKvStores.length; i++) {
@@ -44,7 +44,7 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 					}
 				}
 			}
-		}
+		}*/
 		let preExisting: Array<IInterpreterInfoItem> = this.interpreterCollection.filter(
 			(curItm) => curItm.interpreter["nameSelf"] === intrprtr["nameSelf"] && curItm.type === typeName);
 		if (preExisting && preExisting.length > 0) {
@@ -53,15 +53,18 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 			preExFirst.crudSkills = crudSkills;
 			return;
 		}
-		let newItm: IInterpreterInfoItem = {
-			type: typeName,
-			nameSelf: intrprtr["nameSelf"],
-			interpreter: intrprtr,
-			crudSkills: crudSkills,
-			baseType: this.getBaseTypeFromType(typeName),
-			additionalTypes: this.getAdditionalTypesFromType(typeName)
-		};
-		this.interpreterCollection.push(newItm);
+		if (intrprtr["cfg"]) {
+			let cfg: BlueprintConfig = intrprtr["cfg"];
+			let newItm: IInterpreterInfoItem = {
+				type: typeName,
+				nameSelf: cfg.nameSelf,
+				interpreter: intrprtr,
+				crudSkills: crudSkills,
+				baseType: this.getBaseTypeFromType(typeName),
+				additionalTypes: this.getAdditionalTypesFromType(typeName)
+			};
+			this.interpreterCollection.push(newItm);
+		}
 		//throw new Error("Method not implemented.");
 	}
 

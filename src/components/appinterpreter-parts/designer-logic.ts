@@ -16,7 +16,7 @@ import { DeclarationPartNodeModel } from "components/appinterpreter-parts/Declar
 import { DECLARATION_MODEL, BASEDATATYPE_MODEL, GENERALDATATYPE_MODEL } from "components/appinterpreter-parts/designer-consts";
 import { InterpreterNodeModel } from "components/appinterpreter-parts/InterpreterNodeModel";
 import { elementAt } from "rxjs/operators/elementAt";
-import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
+import { ObjectPropertyRef, OBJECT_PROP_REF } from "ldaccess/ObjectPropertyRef";
 import { DeclarationNodeProps } from "components/appinterpreter-parts/DeclarationNodeWidget";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
@@ -183,12 +183,19 @@ export class DesignerLogic {
 		for (var j = intrprtrKeys.length; j < initialKvStores.length; j++) {
 			console.dir(node.getPorts());
 			var elemj = initialKvStores[j];
+			if (elemj.ldType === UserDefDict.intrprtrBPCfgRefMapType) continue;
 			let nName: string = "out_" + elemj.key;
 			node.addPort(new LDPortModel(false, nName, elemj, elemj.key));
 			//let newLDPM: LDPortModel = new LDPortModel(false, elemj.key, elemj.key + "-out");
 			//rv.push(newLDPM);
 		}
 		//return rv;
+	}
+
+	public addBlueprintToRetriever(input: BlueprintConfig) {
+		let interpreterContainer: any = {} as IBlueprintInterpreter; //TODO: make actual container class
+		interpreterContainer.cfg = input;
+		appIntprtrRetr().addInterpreter(input.nameSelf, interpreterContainer, "cRud");
 	}
 
 	public intrprtrBlueprintFromDiagram(): BlueprintConfig {
@@ -282,9 +289,10 @@ export class DesignerLogic {
 								initialKvStores = outputBPCfg.initialKvStores;
 							}
 							let outputType: string = leafPort.kv.ldType;
+							let propRef = leafPort.kv.key === UserDefDict.exportSelfKey ? null : leafPort.kv.key;
 							let outputRef: ObjectPropertyRef = {
 								objRef: leafNodeID,
-								propRef: leafPort.kv.key
+								propRef: propRef
 							};
 							let outputKV: IKvStore = {
 								key: leafPort.kv.key,
@@ -319,7 +327,15 @@ export class DesignerLogic {
 		return rv;
 	}
 
-	private copyKV(sourceKV: IKvStore){
+	private copyKVforExport(sourceKV: IKvStore): IKvStore {
+		let newKVStore: IKvStore = this.copyKV(sourceKV);
+		if (newKVStore.value && newKVStore.value.hasOwnProperty(OBJECT_PROP_REF)) {
+			(sourceKV.value as ObjectPropertyRef).propRef = null;
+		}
+		return newKVStore;
+	}
+
+	private copyKV(sourceKV: IKvStore): IKvStore {
 		let rv: IKvStore = {
 			key: sourceKV.key,
 			value: sourceKV.value,
