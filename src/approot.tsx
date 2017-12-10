@@ -3,6 +3,7 @@ import React from 'react';
 import * as redux from 'redux';
 import { Provider } from 'react-redux';
 
+import { Toolkit } from "storm-react-diagrams";
 import { ExplorerState, configureStore } from 'appstate/store';
 
 //import {Observable} from 'rxjs';
@@ -21,12 +22,14 @@ const isProduction = process.env.NODE_ENV === 'production';
 export interface AppRootProps { }
 const store: redux.Store<ExplorerState> = configureStore(initialState);
 
+const appinterpreterToken: string = Toolkit.UID();
+
 export const AppRoot: React.SFC<AppRootProps> = () => {
 	return (
 		<Provider store={store}>
 			<div>
 				<p>React is working</p>
-				<AppInterpreterDesigner ldTokenString="appInterpreterTokenString" />
+				<AppInterpreterDesigner ldTokenString={appinterpreterToken} />
 				<ImageUploadComponent />
 				{!isProduction && <DevTools />}
 			</div>

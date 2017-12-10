@@ -9,8 +9,8 @@ export class InterpreterNodeModel extends NodeModel {
 	color: string;
 	ports: { [s: string]: LDPortModel };
 
-	constructor(nameSelf: string = "Untitled", forType: string = "", color: string = "rgb(0,192,255)", nodeType?: string) {
-		super(nodeType ? nodeType : INTERPRETERDATATYPE_MODEL);
+	constructor(nameSelf: string = "Untitled", forType: string = "", color: string = "rgb(0,192,255)", nodeType?: string, id?: string) {
+		super(nodeType ? nodeType : INTERPRETERDATATYPE_MODEL, id);
 		this.nameSelf = nameSelf;
 		this.color = color;
 		this.forType = forType;

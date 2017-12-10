@@ -39,6 +39,7 @@ export type AIDProps = {
 
 export type AIDState = {
 	serialized: string;
+	previewerToken: string;
 };
 
 export type LDConnectedDispatch = {
@@ -55,6 +56,7 @@ const mapStateToProps = (state: ExplorerState, ownProps: AIDProps) => {
 
 const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: AIDProps & LDOwnProps & AIDState): LDConnectedDispatch => ({
 	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
+		if (!ownProps.ldTokenString) return;
 		if (!ldOptions) {
 			let kvStores: IKvStore[] = [{
 				key: undefined,
@@ -74,18 +76,19 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: A
 class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedState & LDConnectedDispatch, AIDState> {
 
 	logic: DesignerLogic;
+	errorNotAvailableMsg: string = "Interpreter Designer environment not available. Please check your settings";
 	constructor(props?: any) {
 		super(props);
-		this.state = { serialized: "" };
-		if (!props) {
-			props = { ldTokenString: "myTokenString" };
-		}
+		let previewerToken = null;
+		previewerToken = props.ldTokenString;
+
 		if (!props.logic) {
-			var logic: DesignerLogic = new DesignerLogic();
+			var logic: DesignerLogic = new DesignerLogic(props.ldTokenString);
 			this.logic = logic;
 		} else {
 			this.logic = props.logic;
 		}
+		this.state = { serialized: "", previewerToken: previewerToken };
 	}
 
 	componentWillMount() {
@@ -101,10 +104,13 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
 		this.props.ldOptions.resource.kvStores = [{ key: nodesBPCFG.forType, ldType: undefined, value: nodesSerialized }];
 		//let nodesSerialized = JSON.stringify(this.logic.getDiagramEngine().getDiagramModel().serializeDiagram(), undefined, 2);
-		this.setState({ serialized: nodesSerialized });
+		this.setState({ ...this.state, serialized: nodesSerialized });
 		this.props.notifyLDOptionsChange(this.props.ldOptions);
 	}
 	render() {
+		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
+			return <div>{this.errorNotAvailableMsg}</div>;
+		}
 		return <div className="entrypoint-editor">
 			<Splitter className={s.splitter}
 				position="vertical"
@@ -118,8 +124,7 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 				<DesignerBody logic={this.logic} />
 				<div className="vertical-scroll">
 					<Button onClick={this.onTestBtnClick}>serialize!</Button>
-					<GenericContainer ldTokenString={this.state.serialized} displayedType="test" searchCrudSkills="cRud" />
-					<BooleanValInput singleKV={null} ldTokenString="thisCouldBeaGenericToken" />
+					<GenericContainer ldTokenString={this.state.previewerToken} searchCrudSkills="cRud" />
 					<small><pre>{this.state.serialized}</pre></small>
 				</div>
 			</Splitter>

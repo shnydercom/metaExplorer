@@ -30,18 +30,18 @@ export class DesignerLogic {
 	protected interpreterList: IInterpreterInfoItem[];
 	protected outputNode: DeclarationPartNodeModel;
 
-	constructor() {
+	constructor(outputLDOptionsToken: string) {
 		this.diagramEngine = new DiagramEngine();
 		this.diagramEngine.registerNodeFactory(new DefaultNodeFactory());
 		this.diagramEngine.registerLinkFactory(new DefaultLinkFactory());
 		this.diagramEngine.registerNodeFactory(new BaseDataTypeWidgetFactory());
 		this.diagramEngine.registerNodeFactory(new GeneralDataTypeWidgetFactory());
 		this.diagramEngine.registerNodeFactory(new DeclarationWidgetFactory());
-		this.newModel();
+		this.newModel(outputLDOptionsToken);
 		this.interpreterList = (appIntprtrRetr() as DefaultInterpreterRetriever).getInterpreterList();
 	}
 
-	public newModel() {
+	public newModel(outputLDOptionsToken: string) {
 		//2) setup the diagram model
 		var model = new DiagramModel();
 
@@ -85,7 +85,8 @@ export class DesignerLogic {
 
 		//create fixed output node
 		//TODO: make fixed but ports should still be settable, make outputNode singleton per Interpreter
-		let outputNode = new DeclarationPartNodeModel(UserDefDict.outputInterpreter, null, designerSpecificNodesColor);
+		let outputNode = new DeclarationPartNodeModel(UserDefDict.outputInterpreter, null, designerSpecificNodesColor,
+			outputLDOptionsToken);
 		//outputNode.setLocked(true); locking would lock the ports as well
 		outputNode.x = 600;
 		outputNode.y = 200;

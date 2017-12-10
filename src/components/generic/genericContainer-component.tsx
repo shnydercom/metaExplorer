@@ -26,7 +26,6 @@ export type LDOwnProps = {
 };
 
 type OwnProps = {
-	displayedType: string;
 	searchCrudSkills: string;
 } & LDOwnProps;
 
@@ -48,8 +47,9 @@ const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): LDConnectedS
 
 const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: OwnProps): LDConnectedDispatch => ({
 	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
+		if (!ownProps.ldTokenString) return;
 		if (!ldOptions) {
-			let kvStores: IKvStore[] = [{ key: undefined, value: undefined, ldType: ownProps.displayedType }];
+			let kvStores: IKvStore[] = [{ key: undefined, value: undefined, ldType: null /*ownProps.displayedType*/ }];
 			let lang: string;
 			let alias: string = ownProps.ldTokenString;
 			dispatch(ldOptionsClientSideCreateAction(kvStores, lang, alias));
@@ -82,6 +82,7 @@ class PureGenericContainer extends React.Component<LDConnectedState & LDConnecte
 	}
 
 	consumeLDOptions = (ldOptions: ILDOptions) => {
+		if (!ldOptions) return;
 		let genKvStores: IKvStore[] = [];
 		if (ldOptions.resource) {
 			let sCSkills: string = "cRud";
@@ -106,10 +107,11 @@ class PureGenericContainer extends React.Component<LDConnectedState & LDConnecte
 	}
 
 	componentWillReceiveProps(nextProps: OwnProps & LDConnectedDispatch, nextContext): void {
+		console.log("willRecProps");
 		console.log(nextProps);
-		if (nextProps.displayedType !== this.props.displayedType) {
-			nextProps.notifyLDOptionsChange(null);
-		}
+		//	if (nextProps.displayedType !== this.props.displayedType) {
+		//nextProps.notifyLDOptionsChange(null);
+		//	}
 	}
 
 	componentWillMount() {
@@ -120,24 +122,25 @@ class PureGenericContainer extends React.Component<LDConnectedState & LDConnecte
 
 	render() {
 		var demoTypeParsed = null;
-		if (this.props.displayedType) {
-			let dType: string = this.props.displayedType;
-			/*var demoWebResource: IWebResource = {
-				hypermedia: [{ [LDConsts.type]: dType, members: null, client: null } as IHypermedia] as IHypermediaContainer,
-			};*/
-			var displayedTypeLDOptions: ILDOptions = this.props.ldOptions ? this.props.ldOptions : {
-				lang: null,
-				resource: {
-					kvStores: [{ key: undefined, value: undefined, ldType: dType }],
-					webInResource: null,
-					webOutResource: null
-				},
-				ldToken: null,
-				isLoading: false
-			};
-			demoTypeParsed = this.consumeLDOptions(displayedTypeLDOptions);
-		}
+		//if (this.props.displayedType) {
+		let dType: string = null;// this.props.displayedType;
+		/*var demoWebResource: IWebResource = {
+			hypermedia: [{ [LDConsts.type]: dType, members: null, client: null } as IHypermedia] as IHypermediaContainer,
+		};*/
+		/*var displayedTypeLDOptions: ILDOptions = this.props.ldOptions ? this.props.ldOptions : {
+			lang: null,
+			resource: {
+				kvStores: [{ key: undefined, value: undefined, ldType:  dType }],
+				webInResource: null,
+				webOutResource: null
+			},
+			ldToken: null,
+			isLoading: false
+		};*/
+		demoTypeParsed = this.consumeLDOptions(this.props.ldOptions);//displayedTypeLDOptions);
+		//}
 		return <div key={0}>
+			genContainer Render
 			{demoTypeParsed}
 		</div>;
 	}
@@ -157,9 +160,9 @@ class PureGenericContainer extends React.Component<LDConnectedState & LDConnecte
 				//genericComp is only a wrapper then, hand token down directly
 				ldTokenString = this.props.ldTokenString;
 			}
-			return <GenericComp key={idx} ldTokenString={ldTokenString}/>;
+			return <GenericComp key={idx} ldTokenString={ldTokenString} />;
 		});
-		return <div>GenericContainerContents:{reactComps}</div>;
+		return <div>GenericContainerContents (kvsToComponent):{reactComps}</div>;
 	}
 }
 

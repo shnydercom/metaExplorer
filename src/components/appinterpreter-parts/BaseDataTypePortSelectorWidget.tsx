@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as redux from 'redux';
 import { PortWidget, DefaultPortModel } from "storm-react-diagrams";
 import { SinglePortWidget } from "components/appinterpreter-parts/SinglePortWidget";
 import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
@@ -8,12 +9,18 @@ import { IKvStore } from "ldaccess/ikvstore";
 import { ExplorerState } from "appstate/store";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { connect } from "react-redux";
+import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
+import { LDConnectedDispatch } from "components/basedatatypeinterpreter/BaseDataTypeInput";
 
-export interface BaseDataTypePortSelectorProps {
+export type LDOwnProps = {
+	ldTokenString: string;
+};
+
+export type BaseDataTypePortSelectorProps = {
 	model?: LDPortModel;
 	in?: boolean;
 	label?: string;
-}
+} & LDOwnProps;
 
 export interface BaseDataTypePortSelectorState {
 	portType: string;
@@ -22,17 +29,31 @@ export interface BaseDataTypePortSelectorState {
 const mapStateToProps = (state: ExplorerState, ownProps: BaseDataTypePortSelectorProps): LDConnectedState & BaseDataTypePortSelectorProps => {
 	let tokenString: string = ownProps && ownProps.model ? ownProps.model.getID() : null;
 	let ldOptionsLoc: ILDOptions = tokenString ? state.ldoptionsMap[tokenString] : null;
-	if (ldOptionsLoc) ownProps.model.kv = ldOptionsLoc.resource.kvStores[0];
 	return {
 		...ownProps,
 		ldOptions: ldOptionsLoc
 	};
 };
 
-class PureBaseDataTypePortSelector extends React.Component<BaseDataTypePortSelectorProps & LDConnectedState, BaseDataTypePortSelectorState> {
+const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: BaseDataTypePortSelectorProps): LDConnectedDispatch => ({
+	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
+		if (!ownProps.ldTokenString) return;
+		if (!ldOptions) {
+			let kvStores: IKvStore[] = [ownProps.model.kv];
+			let lang: string;
+			let alias: string = ownProps.ldTokenString;
+			dispatch(ldOptionsClientSideCreateAction(kvStores, lang, alias));
+		} else {
+			dispatch(ldOptionsClientSideUpdateAction(ldOptions));
+		}
+	}
+});
+
+class PureBaseDataTypePortSelector extends React.Component<BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch, BaseDataTypePortSelectorState> {
 	public static defaultProps: BaseDataTypePortSelectorProps = {
 		in: true,
-		label: "port"
+		label: "port",
+		ldTokenString: null
 	};
 
 	constructor(props) {
@@ -44,13 +65,17 @@ class PureBaseDataTypePortSelector extends React.Component<BaseDataTypePortSelec
 	}
 
 	componentWillReceiveProps(nextProps, nextContext): void {
-		console.log(nextProps);
+		if (nextProps.ldOptions) nextProps.model.kv = nextProps.ldOptions.resource.kvStores[0];
 	}
 
 	onPortTypeChange = (newType: string) => {
 		this.setState({ portType: newType });
 		let changedKvStore: IKvStore = this.props.model.kv;
 		changedKvStore.ldType = newType;
+		changedKvStore.key = null;
+		changedKvStore.value = null;
+		changedKvStore.intrprtrClass = null;
+		this.props.notifyLDOptionsChange(this.props.ldOptions);
 	}
 
 	render() {
@@ -62,7 +87,7 @@ class PureBaseDataTypePortSelector extends React.Component<BaseDataTypePortSelec
 				<div>
 					{label}
 					<BaseDataTypeDropDown selectionChange={(newType) => { this.onPortTypeChange(newType); }} />
-					<GenericContainer ldTokenString={this.props.model.id} displayedType={this.state.portType} searchCrudSkills="CrUd" />
+					<GenericContainer ldTokenString={this.props.model.id} searchCrudSkills="CrUd" />
 				</div>
 				{port}
 			</div>
@@ -70,4 +95,4 @@ class PureBaseDataTypePortSelector extends React.Component<BaseDataTypePortSelec
 	}
 }
 
-export const BaseDataTypePortSelector = connect<LDConnectedState, {}, BaseDataTypePortSelectorProps>(mapStateToProps)(PureBaseDataTypePortSelector);
+export const BaseDataTypePortSelector = connect<LDConnectedState, LDConnectedDispatch, BaseDataTypePortSelectorProps>(mapStateToProps, mapDispatchToProps)(PureBaseDataTypePortSelector);

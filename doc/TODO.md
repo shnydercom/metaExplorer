@@ -15,6 +15,9 @@ done - flatten KvStores into BPCfg						!!!
 
 Nächstes Todo ist in designer-logic.addBlueprintToRetriever() anzusetzen, eine Interpreter-Container-Klasse zu bauen, die dann von dem GenericContainer gelesen werden kann
 
+instead of ldOptionsMap-Entries being created in genericContainer by displayedType, they should only create entries when there's no matching ldTokenString. PortselectorWidget should create and modify entry. GenericContainer can only hold LDOptions, i.e. "instances" vs "classes"
+
+
 last serialized bits & pieces: seems to work!
 {
   "forType": "78e74a11-229b-4bdd-99ff-3f324b7920ca",
