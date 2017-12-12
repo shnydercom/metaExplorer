@@ -58,13 +58,13 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: A
 	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
 		if (!ownProps.ldTokenString) return;
 		if (!ldOptions) {
+			let alias: string = ownProps.ldTokenString; //i.e. interpreter.nameSelf
 			let kvStores: IKvStore[] = [{
 				key: undefined,
-				ldType: undefined,
+				ldType: alias,
 				value: ownProps.serialized
 			}];
 			let lang: string;
-			let alias: string = ownProps.ldTokenString;
 			dispatch(ldOptionsClientSideCreateAction(kvStores, lang, alias));
 		} else {
 			dispatch(ldOptionsClientSideUpdateAction(ldOptions));
@@ -80,7 +80,7 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 	constructor(props?: any) {
 		super(props);
 		let previewerToken = null;
-		previewerToken = props.ldTokenString;
+		previewerToken = props.ldTokenString + "-previewLDOptions";
 
 		if (!props.logic) {
 			var logic: DesignerLogic = new DesignerLogic(props.ldTokenString);
@@ -102,7 +102,7 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 		let nodesBPCFG = this.logic.intrprtrBlueprintFromDiagram();
 		this.logic.addBlueprintToRetriever(nodesBPCFG);
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
-		this.props.ldOptions.resource.kvStores = [{ key: nodesBPCFG.forType, ldType: undefined, value: nodesSerialized }];
+		this.props.ldOptions.resource.kvStores = [{ key: undefined , ldType: nodesBPCFG.nameSelf, value: nodesSerialized }];
 		//let nodesSerialized = JSON.stringify(this.logic.getDiagramEngine().getDiagramModel().serializeDiagram(), undefined, 2);
 		this.setState({ ...this.state, serialized: nodesSerialized });
 		this.props.notifyLDOptionsChange(this.props.ldOptions);

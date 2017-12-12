@@ -101,6 +101,7 @@ class PureGenericContainer extends React.Component<LDConnectedState & LDConnecte
 					sCSkills = this.props.searchCrudSkills;
 				}
 			}
+			//TODO: filter for UserDefDict.intrprtrNameKey and UserDefDict.intrptrtType first, ignore other keys if interpreter is found
 			genKvStores = appIntMatcher.matchKvArray(genKvStores, sCSkills);
 		}
 		return genKvStores ? this.kvsToComponent(genKvStores) : null;
