@@ -85,7 +85,7 @@ export class DesignerLogic {
 
 		//create fixed output node
 		//TODO: make fixed but ports should still be settable, make outputNode singleton per Interpreter
-		let outputNode = new DeclarationPartNodeModel(UserDefDict.outputInterpreter, null, designerSpecificNodesColor,
+		let outputNode = new DeclarationPartNodeModel(UserDefDict.outputInterpreter, null, null, designerSpecificNodesColor,
 			outputLDOptionsToken);
 		//outputNode.setLocked(true); locking would lock the ports as well
 		outputNode.x = 600;
@@ -148,7 +148,8 @@ export class DesignerLogic {
 		let rv: LDPortModel[] = [];
 		let intrprtrKeys: any[] = cfg.interpretableKeys;
 		let initialKvStores: IKvStore[] = cfg.initialKvStores;
-		node.nameSelf = bpname;
+		node.nameSelf = node.id;
+		node.subInterpreterOf = bpname;
 		let isInitKVsmallerThanKeys: boolean = initialKvStores.length < intrprtrKeys.length;
 		for (var i = 0; i < intrprtrKeys.length; i++) {
 			let elemi: IKvStore;
@@ -199,18 +200,19 @@ export class DesignerLogic {
 		appIntprtrRetr().addInterpreter(input.nameSelf, interpreterContainer, "cRud");
 	}
 
-	public intrprtrBlueprintFromDiagram(): BlueprintConfig {
+	public intrprtrBlueprintFromDiagram(finalCanInterpretType?: string): BlueprintConfig {
 		let rv: BlueprintConfig;
 		if (!this.outputNode) return null;
 		let crudSkills = "cRud";
 		let nameSelf = null;
 		let initialKvStores = [];
 		let interpretableKeysArr = [];
-
+		let canInterpretType = finalCanInterpretType ? finalCanInterpretType : null;
 		//TODO: fill the above recursively
 
 		let outputBPCfg: BlueprintConfig = {
-			forType: LDDict.ViewAction,
+			subInterpreterOf: null,
+			canInterpretType: canInterpretType,
 			nameSelf: nameSelf,
 			initialKvStores: initialKvStores,
 			crudSkills: crudSkills,
@@ -272,13 +274,15 @@ export class DesignerLogic {
 							let outputBPCfg: BlueprintConfig = otherIntrprtrCfgs[leafNodeID];
 							let initialKvStores = null;
 							if (!outputBPCfg) {
-								let forType = (leafNode as InterpreterNodeModel).forType;
+								let canInterpretType = (leafNode as InterpreterNodeModel).canInterpretType;
+								let subInterpreterOf = (leafNode as InterpreterNodeModel).subInterpreterOf;
 								let crudSkills = "cRud";
 								let nameSelf = leafNodeID;
 								initialKvStores = [];
 								let interpretableKeysArr = [];
 								outputBPCfg = outputBPCfg ? outputBPCfg : {
-									forType: forType,
+									subInterpreterOf: subInterpreterOf,
+									canInterpretType: canInterpretType,
 									nameSelf: nameSelf,
 									initialKvStores: initialKvStores,
 									crudSkills: crudSkills,
@@ -369,7 +373,7 @@ export class DesignerLogic {
 		idxMap.forEach((val, key) => {
 			switch (key) {
 				case UserDefDict.finalInputKey:
-					targetBP.forType = (kvStores[val].value as ObjectPropertyRef).objRef;
+					//targetBP.canInterpretType = (kvStores[val].value as ObjectPropertyRef).objRef;
 					/**
 					 * sieht so aus: {
       "key": "finalInput",

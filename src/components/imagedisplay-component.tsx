@@ -28,7 +28,8 @@ let cfgIntrprtKeys: string[] =
     [LDDict.name, LDDict.fileFormat, LDDict.contentUrl];
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
-    forType: cfgType,
+		subInterpreterOf: null,
+		canInterpretType: cfgType,
     nameSelf: "shnyder/imageDisplay",
     //interpreterRetrieverFn: appIntprtrRetr,
     initialKvStores: initialKVStores,

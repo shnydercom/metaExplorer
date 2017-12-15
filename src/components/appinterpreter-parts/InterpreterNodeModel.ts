@@ -5,29 +5,33 @@ import { INTERPRETERDATATYPE_MODEL } from "components/appinterpreter-parts/desig
 
 export class InterpreterNodeModel extends NodeModel {
 	nameSelf: string;
-	forType: string;
+	canInterpretType: string;
+	subInterpreterOf: string;
 	color: string;
 	ports: { [s: string]: LDPortModel };
 
-	constructor(nameSelf: string = "Untitled", forType: string = "", color: string = "rgb(0,192,255)", nodeType?: string, id?: string) {
+	constructor(nameSelf: string = "Untitled", subInterpreterOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", nodeType?: string, id?: string) {
 		super(nodeType ? nodeType : INTERPRETERDATATYPE_MODEL, id);
 		this.nameSelf = nameSelf;
 		this.color = color;
-		this.forType = forType;
+		this.canInterpretType = canInterpretType;
+		this.subInterpreterOf = subInterpreterOf;
 	}
 
 	deSerialize(object) {
 		super.deSerialize(object);
 		this.nameSelf = object.nameSelf;
 		this.color = object.color;
-		this.forType = object.forType;
+		this.canInterpretType = object.canInterpretType;
+		this.subInterpreterOf = object.subInterpreterOf;
 	}
 
 	serialize() {
 		return _.merge(super.serialize(), {
 			nameSelf: this.nameSelf,
 			color: this.color,
-			forType: this.forType
+			canInterpretType: this.canInterpretType,
+			subInterpreterOf: this.subInterpreterOf
 		});
 	}
 

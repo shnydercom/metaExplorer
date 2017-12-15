@@ -12,7 +12,8 @@ let bpCfg: BlueprintConfig = {
     //conflicting use case to tackle the whole problem space though (e.g. schema:ViewAction vs. schema:image).
     //Needs to be re-designed with crud-skills in mind though. Clear separation of concerns and DRY should
     //be applicable to the end result
-    forType: "http://shnyder.com/Testtype",
+    subInterpreterOf: null,
+    canInterpretType: "http://shnyder.com/Testtype",
     nameSelf: "shnyder/testTypeInterpreter",
     interpreterRetrieverFn: testInterpreter,
     initialKvStores: null,

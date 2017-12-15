@@ -6,7 +6,6 @@ import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { ILDOptions } from "ldaccess/ildoptions";
 
 export var imageRetrieverName = "shnyder/imageRetriever";
-let cfgType: string = imageRetrieverName;
 let cfgIntrprtKeys: string[] =
 	[SideFXDict.srvURL, SideFXDict.identifier];
 let initialKVStores: IKvStore[] = [
@@ -37,7 +36,7 @@ let initialKVStores: IKvStore[] = [
 	}
 ];
 let bpCfg: BlueprintConfig = {
-	forType: cfgType,
+	subInterpreterOf: null,
 	nameSelf: imageRetrieverName,
 	interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,

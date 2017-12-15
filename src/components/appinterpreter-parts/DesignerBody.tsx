@@ -22,7 +22,7 @@ export interface DesignerBodyProps {
 export interface DesignerBodyState { }
 
 /**
- * @author Dylan Vorster
+ * @author Jonathan Schneider
  */
 export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBodyState> {
 	constructor(props: DesignerBodyProps) {
@@ -46,8 +46,9 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 			//console.dir(ports);
 			let ldBPCfg = (itm.interpreter as IBlueprintInterpreter).cfg;
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
-			let trayType = ldBPCfg ? ldBPCfg.forType : itm.type;
-			return <DesignerTrayItem key={idx} model={{ type: "ldbp", bpname: trayName, bptype: trayType }} name={trayName} color={appStyles["$designer-secondary-color"]} />;
+			let trayInterpreterType = ldBPCfg ? ldBPCfg.canInterpretType : itm.canInterpretType;
+			//let traySubInterpreterOf = ldBPCfg ? ldBPCfg.subInterpreterOf : null;
+			return <DesignerTrayItem key={idx} model={{ type: "ldbp", bpname: trayName, canInterpretType: trayInterpreterType, subInterpreterOf: null /*traySubInterpreterOf*/ }} name={trayName} color={appStyles["$designer-secondary-color"]} />;
 		});
 		return reactCompClasses;
 	}
@@ -76,7 +77,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 						switch (data.type) {
 							case "ldbp":
 								let nodeName: string = "Node " + (nodesCount + 1) + ":";
-								node = new GeneralDataTypeNodeModel(nodeName, null, "rgba(250,250,250,0.2)");
+								node = new GeneralDataTypeNodeModel(nodeName, null, null, "rgba(250,250,250,0.2)");
 								console.dir(data);
 								console.dir(node);
 								if (data.bpname) {
@@ -92,7 +93,8 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 										//node.addPort(new LDPortModel(true, "test", "test" + "-out"));
 									}*/
 								}
-								if (data.bptype) node.forType = data.bptype;
+								if (data.canInterpretType) node.canInterpretType = data.canInterpretType;
+								//if (data.subInterpreterOf) node.subInterpreterOf = data.subInterpreterOf;
 								console.dir(node);
 								break;
 							case "bdt":
@@ -101,7 +103,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 									value: undefined,
 									ldType: undefined
 								};
-								node = new BaseDataTypeNodeModel("Simple Data Type", null, "rgba(250,250,250,0.2)");
+								node = new BaseDataTypeNodeModel("Simple Data Type", null, null, "rgba(250,250,250,0.2)");
 								node.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "output"));
 								break;
 							case "inputtype":
@@ -110,7 +112,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 									value: undefined,
 									ldType: undefined
 								};
-								node = new DeclarationPartNodeModel("External Input Marker", null, designerSpecificNodesColor);
+								node = new DeclarationPartNodeModel("External Input Marker", null, null, designerSpecificNodesColor);
 								node.addPort(new LDPortModel(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
 								break;
 							default:

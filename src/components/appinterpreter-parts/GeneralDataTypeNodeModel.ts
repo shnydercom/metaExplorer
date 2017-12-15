@@ -6,8 +6,8 @@ import { GENERALDATATYPE_MODEL } from "components/appinterpreter-parts/designer-
 
 export class GeneralDataTypeNodeModel extends InterpreterNodeModel {
 
-	constructor(nameSelf: string = "Untitled", forType: string = "", color: string = "rgb(222,222,222)") {
-		super(nameSelf, forType, color, GENERALDATATYPE_MODEL);
+	constructor(nameSelf: string = "Untitled", subInterpreterOf: string = null, canInterpretType: string = "", color: string = "rgb(222,222,222)") {
+		super(nameSelf, subInterpreterOf, canInterpretType, color, GENERALDATATYPE_MODEL);
 		this.nameSelf = nameSelf;
 		this.color = color;
 	}

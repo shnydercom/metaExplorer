@@ -62,7 +62,7 @@ let initialKVStores: IKvStore[] = [
 	}
 ];
 let bpCfg: BlueprintConfig = {
-	forType: cfgType,
+	subInterpreterOf: null,
 	nameSelf: ImgHeadSubDescIntrprtrName,
 	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,

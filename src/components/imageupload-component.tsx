@@ -120,7 +120,8 @@ let initialKVStores: IKvStore[] = [
         ldType: LDDict.ImageObject
     }];
 var bpCfg: BlueprintConfig = {
-    forType: cfgType,
+    subInterpreterOf: null,
+    canInterpretType: cfgType,
     nameSelf: "shnyder/imageUpload",
     //interpreterRetrieverFn: appIntprtrRetr,
     initialKvStores: initialKVStores,

@@ -6,7 +6,6 @@ import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { ILDOptions } from "ldaccess/ildoptions";
 
 export var productRetrieverName = "shnyder/productRetriever";
-let cfgType: string = productRetrieverName;
 let cfgIntrprtKeys: string[] =
 	[SideFXDict.srvURL, SideFXDict.identifier];
 let initialKVStores: IKvStore[] = [
@@ -42,7 +41,7 @@ let initialKVStores: IKvStore[] = [
 	}
 ];
 let bpCfg: BlueprintConfig = {
-	forType: cfgType,
+	subInterpreterOf: null,
 	nameSelf: productRetrieverName,
 	interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,

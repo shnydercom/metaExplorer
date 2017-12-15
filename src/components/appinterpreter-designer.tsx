@@ -32,6 +32,7 @@ import { connect } from "react-redux";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { ExplorerState } from "appstate/store";
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
+import { LDDict } from "ldaccess/LDDict";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -81,7 +82,6 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 		super(props);
 		let previewerToken = null;
 		previewerToken = props.ldTokenString + "-previewLDOptions";
-
 		if (!props.logic) {
 			var logic: DesignerLogic = new DesignerLogic(props.ldTokenString);
 			this.logic = logic;
@@ -99,10 +99,11 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 
 	onTestBtnClick = (e) => {
 		e.preventDefault();
-		let nodesBPCFG = this.logic.intrprtrBlueprintFromDiagram();
+		let tokenTypeStoreHash = LDDict.ViewAction;
+		let nodesBPCFG = this.logic.intrprtrBlueprintFromDiagram(tokenTypeStoreHash);
 		this.logic.addBlueprintToRetriever(nodesBPCFG);
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
-		this.props.ldOptions.resource.kvStores = [{ key: undefined , ldType: nodesBPCFG.nameSelf, value: nodesSerialized }];
+		this.props.ldOptions.resource.kvStores = [{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized }];
 		//let nodesSerialized = JSON.stringify(this.logic.getDiagramEngine().getDiagramModel().serializeDiagram(), undefined, 2);
 		this.setState({ ...this.state, serialized: nodesSerialized });
 		this.props.notifyLDOptionsChange(this.props.ldOptions);

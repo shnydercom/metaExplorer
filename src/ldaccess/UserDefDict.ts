@@ -25,5 +25,7 @@ export enum UserDefDict {
 	 * only references (c). In the node-editor, no ports with this type should appear, as it is only necessary for
 	 * serialization
 	 */
-	intrprtrBPCfgRefMapType = "InterpreterReferenceMapType"
+	intrprtrBPCfgRefMapType = "InterpreterReferenceMapType",
+
+	standardInterpreterObjectTypeSuffix = "-ObjectType"
 }

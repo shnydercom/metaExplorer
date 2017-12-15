@@ -3,7 +3,8 @@ import ldBlueprint, { IBlueprintInterpreter, BlueprintConfig } from "ldaccess/ld
 import { UserDefDict } from "ldaccess/UserDefDict";
 
 export interface IInterpreterInfoItem {
-	type: string;
+	canInterpretType: string;
+	subInterpreterOf: string;
 	nameSelf: string;
 	interpreter: any;
 	crudSkills: string;
@@ -46,7 +47,7 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 			}
 		}*/
 		let preExisting: Array<IInterpreterInfoItem> = this.interpreterCollection.filter(
-			(curItm) => curItm.interpreter["nameSelf"] === intrprtr["nameSelf"] && curItm.type === typeName);
+			(curItm) => curItm.interpreter["nameSelf"] === intrprtr["nameSelf"] && curItm.canInterpretType === typeName);
 		if (preExisting && preExisting.length > 0) {
 			let preExFirst = preExisting[0];
 			crudSkills = this.extendCrudSkills(crudSkills, preExFirst.crudSkills);
@@ -56,7 +57,8 @@ export class DefaultInterpreterRetriever implements IInterpreterRetriever {
 		if (intrprtr["cfg"]) {
 			let cfg: BlueprintConfig = intrprtr["cfg"];
 			let newItm: IInterpreterInfoItem = {
-				type: typeName,
+				canInterpretType: typeName,
+				subInterpreterOf: null,
 				nameSelf: cfg.nameSelf,
 				interpreter: intrprtr,
 				crudSkills: crudSkills,

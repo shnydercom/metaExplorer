@@ -77,7 +77,8 @@ for (var bdt in bdts) {
 				ldType: elem
 			}];
 		let bpCfg: BlueprintConfig = {
-			forType: elem,
+			subInterpreterOf: undefined,
+			canInterpretType: elem,
 			nameSelf: "shnyder/react-toolbox/" + elem,
 			//interpreterRetrieverFn: appIntprtrRetr,
 			initialKvStores: initialKVStores,
