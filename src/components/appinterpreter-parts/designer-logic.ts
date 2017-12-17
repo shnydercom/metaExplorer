@@ -6,7 +6,7 @@ import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
 import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { IInterpreterInfoItem, DefaultInterpreterRetriever } from "defaults/DefaultInterpreterRetriever";
 import { LDBaseDataType, ldBaseDataTypeList } from "ldaccess/LDBaseDataType";
-import { IBlueprintInterpreter, BlueprintConfig } from "ldaccess/ldBlueprint";
+import ldBlueprint, { IBlueprintInterpreter, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { IKvStore } from "ldaccess/ikvstore";
 import { GeneralDataTypeNodeModel } from "components/appinterpreter-parts/GeneralDataTypeNodeModel";
 import { UserDefDict } from "ldaccess/UserDefDict";
@@ -18,6 +18,7 @@ import { InterpreterNodeModel } from "components/appinterpreter-parts/Interprete
 import { elementAt } from "rxjs/operators/elementAt";
 import { ObjectPropertyRef, OBJECT_PROP_REF } from "ldaccess/ObjectPropertyRef";
 import { DeclarationNodeProps } from "components/appinterpreter-parts/DeclarationNodeWidget";
+import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 
@@ -88,7 +89,7 @@ export class DesignerLogic {
 		let outputNode = new DeclarationPartNodeModel(UserDefDict.outputInterpreter, null, null, designerSpecificNodesColor,
 			outputLDOptionsToken);
 		//outputNode.setLocked(true); locking would lock the ports as well
-		outputNode.x = 600;
+		outputNode.x = 200;
 		outputNode.y = 200;
 		let outputFinalInputKV: IKvStore = {
 			key: UserDefDict.finalInputKey,
@@ -194,10 +195,24 @@ export class DesignerLogic {
 		//return rv;
 	}
 
+	/**
+	 * adds a blueprint defined in the designer to the AppInterpreterRetriever, automatically looks
+	 * for the correct React-Class to extend
+	 * @param input the BlueprintConfig used as a setup for the new Interpreter
+	 */
 	public addBlueprintToRetriever(input: BlueprintConfig) {
-		let interpreterContainer: any = {} as IBlueprintInterpreter; //TODO: make actual container class
+		let retriever = appIntprtrRetr();
+		let candidate = retriever.getInterpreterByNameSelf(input.subInterpreterOf);
+		if (!candidate) {
+			let refMap = getKVStoreByKey(input.initialKvStores, UserDefDict.intrprtrBPCfgRefMapKey);
+			if (!refMap || !refMap.value || refMap.value === {}) return;
+			let searchTerm: string = (refMap.value[input.subInterpreterOf] as BlueprintConfig).subInterpreterOf;
+			candidate = retriever.getInterpreterByNameSelf(searchTerm);
+		}
+		if (!candidate) return;
+		let interpreterContainer: any = ldBlueprint(input)(candidate); //actually wraps, doesn't extend
 		interpreterContainer.cfg = input;
-		appIntprtrRetr().addInterpreter(input.nameSelf, interpreterContainer, "cRud");
+		retriever.addInterpreter(input.nameSelf, interpreterContainer, "cRud");
 	}
 
 	public intrprtrBlueprintFromDiagram(finalCanInterpretType?: string): BlueprintConfig {
@@ -209,7 +224,6 @@ export class DesignerLogic {
 		let interpretableKeysArr = [];
 		let canInterpretType = finalCanInterpretType ? finalCanInterpretType : null;
 		//TODO: fill the above recursively
-
 		let outputBPCfg: BlueprintConfig = {
 			subInterpreterOf: null,
 			canInterpretType: canInterpretType,
@@ -226,6 +240,7 @@ export class DesignerLogic {
 				value: subIntrprtrCfgMap,
 				ldType: UserDefDict.intrprtrBPCfgRefMapType
 			};
+		outputBPCfg.subInterpreterOf = this.outputNode.subInterpreterOf;
 		outputBPCfg.initialKvStores.push(intrprtMapKV);
 		this.bakeKvStoresIntoBP(outputBPCfg);
 		return outputBPCfg;
@@ -306,6 +321,10 @@ export class DesignerLogic {
 							};
 							let gdtKV = this.composeKVs(outputKV, port.kv);
 							branchBPCfg.initialKvStores.push(gdtKV);
+							//extra handling so that the final output-class.subInterpretOf property
+							if (branchNode.nodeType === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
+								branchNode.subInterpreterOf = leafNode.getID();
+							}
 							break;
 						default:
 							break;

@@ -125,7 +125,7 @@ class PureGenericContainer extends React.Component<LDConnectedState & LDConnecte
 	render() {
 		var demoTypeParsed = null;
 		//if (this.props.displayedType) {
-		let dType: string = null;// this.props.displayedType;
+		let dType: string = null; // this.props.displayedType;
 		/*var demoWebResource: IWebResource = {
 			hypermedia: [{ [LDConsts.type]: dType, members: null, client: null } as IHypermedia] as IHypermediaContainer,
 		};*/
@@ -139,7 +139,7 @@ class PureGenericContainer extends React.Component<LDConnectedState & LDConnecte
 			ldToken: null,
 			isLoading: false
 		};*/
-		demoTypeParsed = this.consumeLDOptions(this.props.ldOptions);//displayedTypeLDOptions);
+		demoTypeParsed = this.consumeLDOptions(this.props.ldOptions); //displayedTypeLDOptions);
 		//}
 		return <div key={0}>
 			genContainer Render

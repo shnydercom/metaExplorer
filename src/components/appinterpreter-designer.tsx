@@ -33,6 +33,9 @@ import { ILDOptions } from "ldaccess/ildoptions";
 import { ExplorerState } from "appstate/store";
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
 import { LDDict } from "ldaccess/LDDict";
+import { BlueprintConfig } from "ldaccess/ldBlueprint";
+
+const previewLDOptionsPostfix = "-previewLDOptions";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -73,9 +76,8 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: A
 	}
 });
 
-//console.log('lodash version:', _.toUpper("abcDE"));
 class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedState & LDConnectedDispatch, AIDState> {
-
+	finalCanInterpretType: string = LDDict.ViewAction; // what type the interpreter you're designing is capable of interpreting -> usually a new generic type
 	logic: DesignerLogic;
 	errorNotAvailableMsg: string = "Interpreter Designer environment not available. Please check your settings";
 	constructor(props?: any) {
@@ -99,11 +101,13 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 
 	onTestBtnClick = (e) => {
 		e.preventDefault();
-		let tokenTypeStoreHash = LDDict.ViewAction;
-		let nodesBPCFG = this.logic.intrprtrBlueprintFromDiagram(tokenTypeStoreHash);
+		let nodesBPCFG: BlueprintConfig = this.logic.intrprtrBlueprintFromDiagram(this.finalCanInterpretType);
 		this.logic.addBlueprintToRetriever(nodesBPCFG);
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
-		this.props.ldOptions.resource.kvStores = [{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized }];
+		this.props.ldOptions.resource.kvStores = [
+			{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+			{ key: undefined, ldType: undefined, value: undefined}
+		];
 		//let nodesSerialized = JSON.stringify(this.logic.getDiagramEngine().getDiagramModel().serializeDiagram(), undefined, 2);
 		this.setState({ ...this.state, serialized: nodesSerialized });
 		this.props.notifyLDOptionsChange(this.props.ldOptions);
@@ -125,12 +129,13 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 				<DesignerBody logic={this.logic} />
 				<div className="vertical-scroll">
 					<Button onClick={this.onTestBtnClick}>serialize!</Button>
-					<GenericContainer ldTokenString={this.state.previewerToken} searchCrudSkills="cRud" />
+					<GenericContainer ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
 					<small><pre>{this.state.serialized}</pre></small>
 				</div>
 			</Splitter>
 		</div >;
 	}
 }
+//
 
 export default connect(mapStateToProps, mapDispatchToProps)(PureAppInterpreterDesigner);
