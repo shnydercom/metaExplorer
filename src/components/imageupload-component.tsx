@@ -154,7 +154,8 @@ class PureImgUploader extends React.Component<ConnectedState & ConnectedDispatch
         return <div>
             <input type="file" onChange={(evt) => this.onClickFileChange(evt)}
                 placeholder="Upload file" accept=".jpg,.png,.txt" />
-            <ImgDisplay singleImage="" />
+            //  ImgDisplay/>
+            // singleImage="" />
         </div>;
     }
 

@@ -20,22 +20,23 @@ import { IHypermedia } from 'hydraclient.js/src/DataModel/IHypermedia';
 import { LDConsts } from 'ldaccess/LDConsts';
 import { isInterpreter } from 'ldaccess/ldUtils';
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from 'appstate/epicducks/ldOptions-duck';
+import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from 'appstate/LDProps';
 
-export type LDOwnProps = {
+/*export type LDOwnProps = {
 	ldTokenString: string;
-};
+};*/
 
 type OwnProps = {
 	searchCrudSkills: string;
 } & LDOwnProps;
 
-export type LDConnectedState = {
+/*export type LDConnectedState = {
 	ldOptions: ILDOptions
 };
 
 export type LDConnectedDispatch = {
 	notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
-};
+};*/
 
 const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): LDConnectedState => {
 	let tokenString: string = ownProps ? ownProps.ldTokenString : null;
@@ -158,12 +159,16 @@ class PureGenericContainer extends React.Component<LDConnectedState & LDConnecte
 		let reactComps = reactCompClasses.map((itm, idx) => {
 			let GenericComp = itm;
 			let ldTokenString: string = null;
-			if (input.length === 1) {
-				//genericComp is only a wrapper then, hand token down directly
-				ldTokenString = this.props.ldTokenString;
-			}
+			let tokenStringExtension = input[idx].key ? input[idx].key : idx;
+			ldTokenString = this.props.ldTokenString + "-" + tokenStringExtension;
 			return <GenericComp key={idx} ldTokenString={ldTokenString} />;
 		});
+		if (reactComps.length === 1) {
+			//genericComp is only a wrapper then, hand token down directly
+			let searchIdx = reactComps[0].key;
+			let GenericSingle = reactCompClasses[searchIdx];
+			reactComps[0] = <GenericSingle key={0} ldTokenString={this.props.ldTokenString} />;
+		}
 		return <div>GenericContainerContents (kvsToComponent):{reactComps}</div>;
 	}
 }

@@ -3,6 +3,8 @@ import { IKvStore } from 'ldaccess/ikvstore';
 import { LDError } from 'appstate/LDError';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { UserDefDict } from 'ldaccess/UserDefDict';
+import { ObjectPropertyRef } from 'ldaccess/ObjectPropertyRef';
+import { InferableComponentEnhancerWithProps } from 'react-redux';
 
 export type ConsumeLDOptionsFunc = (ldOptions: ILDOptions) => any;
 
@@ -26,27 +28,39 @@ export interface BlueprintConfig {
     initialKvStores?: IKvStore[];
     crudSkills: string;
     //consumeWebResource?: ConsumeWebResourceFunc;
-    interpretableKeys: string[];
+    interpretableKeys: (string | ObjectPropertyRef)[];
 }
 
-function blueprintDecorator<T extends { new(...args: any[]): IBlueprintInterpreter }>(constructor: T, blueprintCfg: BlueprintConfig) {
-    var newClass = class extends constructor {
-        static cfg = blueprintCfg;
+function blueprintDecorator<T extends { new(...args: any[]): IBlueprintInterpreter }>(constructorFn: T, blueprintCfg: BlueprintConfig) {
+    var classToExtend = null;
+    var reduxClass = null;
+    if (constructorFn["WrappedComponent"]) {
+        classToExtend = constructorFn["WrappedComponent"];
+        reduxClass = constructorFn;
+    }
+    console.log("isWrapped");
+    classToExtend = class extends constructorFn {
         static nameSelf = blueprintCfg.nameSelf;
+        static cfg = blueprintCfg;
         initialKvStores = blueprintCfg.initialKvStores ? blueprintCfg.initialKvStores : this.initialKvStores;
         //consumeWebResource = blueprintCfg.consumeWebResource;
         //interpreterRetriever = blueprintCfg.interpreterRetrieverFn;
         interpretableKeys = blueprintCfg.interpretableKeys;
     };
+    if (reduxClass) {
+        reduxClass["WrappedComponent"] = classToExtend;
+        return reduxClass;
+    } else {
+        return classToExtend;
+    }
     //blueprintCfg.interpreterRetrieverFn().addInterpreter(blueprintCfg.forType, newClass, blueprintCfg.crudSkills);
-    return newClass;
 }
 
 export default function ldBlueprint(blueprintCfg: BlueprintConfig) {
     //eval phase
     if (blueprintCfg == null) throw new LDError("blueprintCfg must not be null");
     if (blueprintCfg.nameSelf == null) throw new LDError("blueprintCfg.nameSelf must not be null");
-    if (blueprintCfg.canInterpretType == null){
+    if (blueprintCfg.canInterpretType == null) {
         //autmatically generate an interpreter-specific Instance type
         blueprintCfg.canInterpretType = blueprintCfg.nameSelf + UserDefDict.standardInterpreterObjectTypeSuffix;
     }

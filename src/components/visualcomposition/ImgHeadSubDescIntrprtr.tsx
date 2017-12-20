@@ -10,6 +10,8 @@ import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter } from 'ldaccess/ld
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { VisualDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
+import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
+import { LDOwnProps, LDConnectedDispatch, LDConnectedState } from 'appstate/LDProps';
 
 type OwnProps = {
 	test: string;
@@ -22,13 +24,13 @@ type ConnectedDispatch = {
 	test: string;
 };
 
-const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
+/*const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
 	test: ""
 });
 
 const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedDispatch => ({
 	test: ""
-});
+});*/
 
 export var ImgHeadSubDescIntrprtrName: string = "shnyder/ImgHeadSubDescIntrprtr";
 let cfgType: string = ImgHeadSubDescIntrprtrName;
@@ -74,7 +76,7 @@ interface TestState {
 	myState: string;
 }
 @ldBlueprint(bpCfg)
-class PureImgHeadSubDesc extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
+class PureImgHeadSubDesc extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, {}>
 	implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
@@ -89,4 +91,4 @@ class PureImgHeadSubDesc extends React.Component<ConnectedState & ConnectedDispa
 	}
 }
 
-export default connect<ConnectedState, ConnectedDispatch, OwnProps>(mapStateToProps, mapDispatchToProps)(PureImgHeadSubDesc);
+export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureImgHeadSubDesc);

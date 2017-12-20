@@ -1,32 +1,34 @@
 @import 'm-react-splitters/lib/splitters.css';
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-
 $designer-primary-color: #dadada;
-$designer-secondary-color: rgba(180,180,180,0.3);
+$designer-secondary-color: rgba(180,
+180,
+180,
+0.3);
 $designer-background-color: #010f27;
 $designer-background-elevated-color: #0c1e3a;
-$designer-selected-color: rgba(87, 161, 245, 0.9);
-
-.entrypoint-editor{
-    width: 100%;
+$designer-selected-color: rgba(87,
+161,
+245,
+0.9);
+.entrypoint-editor {
+	width: 100%;
 	height: 800px;
 	display: flex;
 	flex-direction: row;
-	.designer-content{
-		
-	background-color: $designer-background-elevated-color;
+	.designer-content {
+		background-color: $designer-background-elevated-color;
 		display: flex;
 		width: 100%;
 		float: left;
 		position: relative;
 	}
-	.designer-tray{
+	.designer-tray {
 		min-width: 200px;
 		background: $designer-background-elevated-color;
 		flex-grow: 0;
 		flex-shrink: 0;
-
-		.designer-tray-item{
+		.designer-tray-item {
 			color: white;
 			font-family: Roboto, Arial;
 			padding: 5px;
@@ -37,23 +39,23 @@ $designer-selected-color: rgba(87, 161, 245, 0.9);
 			cursor: pointer;
 		}
 	}
-	.diagram-body{
+	.diagram-body {
 		height: 100%;
 		display: flex;
 	}
-	.diagram-layer{
+	.diagram-layer {
 		position: relative;
 		flex-grow: 1;
 	}
-	.vertical-scroll{
-		float:left;
-		width:100%;
+	.vertical-scroll {
+		float: left;
+		width: 100%;
 		overflow-y: auto;
 		height: 100%;
 	}
 }
 
-.storm-diagrams-canvas{
+.storm-diagrams-canvas {
 	position: relative;
 	flex-grow: 1;
 	display: flex;
@@ -61,142 +63,132 @@ $designer-selected-color: rgba(87, 161, 245, 0.9);
 	overflow: hidden;
 	height: 100%;
 	background: $designer-background-color;
-
-	.point{
+	.point {
 		fill: $designer-secondary-color;
-		&.selected{
+		&.selected {
 			fill: $designer-selected-color;
 		}
 	}
-
-	.selector{
+	.selector {
 		position: absolute;
 		background-color: rgba(0, 195, 255, 0.2);
 		border: solid 2px $designer-selected-color;
 	}
-
-	svg{
+	svg {
 		position: absolute;
 		height: 100%;
 		width: 100%;
 		transform-origin: 0 0;
 		overflow: visible;
 	}
-
-	.node-view{
-		top:0;
-		left:0;
-		right:0;
-		bottom:0;
+	.node-view {
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 		position: absolute;
 		pointer-events: none;
 		transform-origin: 0 0;
 	}
-
-	.node{
+	.node {
 		position: absolute;
-		-webkit-touch-callout: none; /* iOS Safari */
-		-webkit-user-select: none;   /* Chrome/Safari/Opera */
+		-webkit-touch-callout: none;
+		/* iOS Safari */
+		-webkit-user-select: none;
+		/* Chrome/Safari/Opera */
 		user-select: none;
 		cursor: move;
 		pointer-events: all;
-
-		&.selected{
+		&.selected {
 			>* {
-				border-color:$designer-selected-color !important;
-				//-webkit-filter: drop-shadow( 0 0 20px rgba(0,192,255,0.5));
+				border-color: $designer-selected-color !important; //-webkit-filter: drop-shadow( 0 0 20px rgba(0,192,255,0.5));
 			}
 		}
 	}
-
 	@keyframes dash {
 		from {
-            stroke-dashoffset: 24;
+			stroke-dashoffset: 24;
 		}
 		to {
-            stroke-dashoffset: 0;
+			stroke-dashoffset: 0;
 		}
-	  }
-
-	path{
-		fill:none;
-		pointer-events:all;
+	}
+	path {
+		fill: none;
+		pointer-events: all;
 		stroke: $designer-secondary-color;
-		&.selected{
+		&.selected {
 			stroke: $designer-selected-color !important;
-			stroke-dasharray: 10,2;
+			stroke-dasharray: 10, 2;
 			animation: dash 1s linear infinite;
 		}
 	}
-
-	.port{
+	.port {
 		width: 15px;
 		height: 15px;
 		background: $designer-secondary-color;
-		&:hover,&.selected{
+		&:hover,
+		&.selected {
 			background: $designer-selected-color;
 		}
 	}
-
-	.basic-node{
-		background-color: rgb(30,30,30);
+	.basic-node {
+		background-color: rgb(30, 30, 30);
 		border-radius: 5px;
 		font-family: Roboto, Arial;
 		color: $designer-primary-color;
 		border: solid 2px $designer-secondary-color;
 		overflow: visible;
-		font-size: 11px;
-		//box-shadow: 0 0 10px rgba(black,0.5);
-
-		.title{
-/*			background-image: linear-gradient(rgba(black,0.1),rgba(black,0.2));*/
-			background: rgba(black,0.3);
+		font-size: 11px; //box-shadow: 0 0 10px rgba(black,0.5);
+		.title {
+			/*			background-image: linear-gradient(rgba(black,0.1),rgba(black,0.2));*/
+			background: rgba(black, 0.3);
 			display: flex;
 			white-space: nowrap;
-			>*{
+			>* {
 				align-self: center;
 			}
-			.fa{
+			.fa {
 				padding: 5px;
 				opacity: 0.2;
 				cursor: pointer;
-
-				&:hover{
+				&:hover {
 					opacity: 1.0;
 				}
 			}
-			.name{
+			.name {
 				flex-grow: 1;
 				padding: 5px 5px;
 			}
 		}
-
-		.ports{
+		.ports {
 			display: flex;
-			background-image: linear-gradient(rgba(black,0.1),rgba(black,0.2));
-			.in, .out{
+			background-image: linear-gradient(rgba(black, 0.1), rgba(black, 0.2));
+			.in,
+			.out {
 				flex-grow: 1;
 				display: flex;
 				flex-direction: column;
 			}
-			.in-port,.out-port{
+			.in-port,
+			.out-port {
 				display: flex;
 				margin-top: 1px;
-				>*{
+				>* {
 					align-self: center;
 				}
-				.name{
+				.name {
 					padding: 0 5px;
 				}
 			}
-			.top-port{
-				>*{
+			.top-port {
+				>* {
 					align-self: flex-start !important;
 				}
 			}
-			.out-port{
+			.out-port {
 				justify-content: flex-end;
-				.name{
+				.name {
 					justify-content: flex-end;
 					text-align: right;
 				}

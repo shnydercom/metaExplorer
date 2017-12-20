@@ -4,6 +4,10 @@ import * as redux from 'redux';
 import Splitter from 'm-react-splitters';
 import * as s from 'm-react-splitters/lib/splitters.css';
 import * as appStyles from 'styles/styles.scss';
+import * as mdDarkStyles from 'styles/mddark.scss';
+
+import * as prefilledInterpreterA from '../../testing/prefilledInterpreter.json';
+
 import {
 	DiagramEngine,
 	DefaultNodeFactory,
@@ -15,6 +19,7 @@ import {
 	DiagramWidget
 } from "storm-react-diagrams";
 import Button from 'react-toolbox/lib/button';
+import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 //import "storm-react-diagrams/dist/style.css";
 
 import { BaseDataTypeWidgetFactory } from "./appinterpreter-parts/BaseDataTypeWidgetFactory";
@@ -24,7 +29,7 @@ import { LDPortModel } from './appinterpreter-parts/LDPortModel';
 import { GeneralDataTypeWidgetFactory } from "components/appinterpreter-parts/GeneralDataTypeWidgetFactory";
 import { DesignerBody } from "components/appinterpreter-parts/DesignerBody";
 import { DesignerLogic } from "components/appinterpreter-parts/designer-logic";
-import { GenericContainer, LDConnectedState, LDOwnProps } from "components/generic/genericContainer-component";
+import { GenericContainer } from "components/generic/genericContainer-component";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
 import { BooleanValInput } from "components/basedatatypeinterpreter/BaseDataTypeInput";
@@ -34,8 +39,8 @@ import { ExplorerState } from "appstate/store";
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
 import { LDDict } from "ldaccess/LDDict";
 import { BlueprintConfig } from "ldaccess/ldBlueprint";
-
-const previewLDOptionsPostfix = "-previewLDOptions";
+import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
+import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -46,7 +51,7 @@ export type AIDState = {
 	previewerToken: string;
 };
 
-export type LDConnectedDispatch = {
+/*export type LDConnectedDispatch = {
 	notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
 };
 
@@ -74,7 +79,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: A
 			dispatch(ldOptionsClientSideUpdateAction(ldOptions));
 		}
 	}
-});
+});*/
 
 class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedState & LDConnectedDispatch, AIDState> {
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the interpreter you're designing is capable of interpreting -> usually a new generic type
@@ -101,18 +106,41 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 
 	onTestBtnClick = (e) => {
 		e.preventDefault();
-		let nodesBPCFG: BlueprintConfig = this.logic.intrprtrBlueprintFromDiagram(this.finalCanInterpretType);
+		let nodesBPCFG: BlueprintConfig = this.logic.intrprtrBlueprintFromDiagram(null);
+		let newType = nodesBPCFG.canInterpretType;
+		if (!newType) {
+			if (!nodesBPCFG.nameSelf) return;
+			newType = nodesBPCFG.nameSelf + UserDefDict.standardInterpreterObjectTypeSuffix;
+			nodesBPCFG.canInterpretType = newType;
+		}
+		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
 		this.logic.addBlueprintToRetriever(nodesBPCFG);
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
 		this.props.ldOptions.resource.kvStores = [
 			{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
-			{ key: undefined, ldType: undefined, value: undefined}
+			{ key: undefined, ldType: newType, value: dummyInstance }
 		];
 		//let nodesSerialized = JSON.stringify(this.logic.getDiagramEngine().getDiagramModel().serializeDiagram(), undefined, 2);
 		this.setState({ ...this.state, serialized: nodesSerialized });
 		this.props.notifyLDOptionsChange(this.props.ldOptions);
 	}
-	render() {
+
+	onPrefilledButtonClick = (e) => {
+		let prefilledData: any = prefilledInterpreterA;
+		let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
+		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
+		this.logic.addBlueprintToRetriever(nodesBPCFG);
+		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
+		let newType = nodesBPCFG.canInterpretType;
+		this.props.ldOptions.resource.kvStores = [
+			{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+			{ key: undefined, ldType: newType, value: dummyInstance }
+		];
+		this.setState({ ...this.state, serialized: nodesSerialized });
+		this.props.notifyLDOptionsChange(this.props.ldOptions);
+	}
+
+ 	render() {
 		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
 			return <div>{this.errorNotAvailableMsg}</div>;
 		}
@@ -126,9 +154,12 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 				postPoned={false}
 				primaryPaneHeight="100%"
 			>
-				<DesignerBody logic={this.logic} />
+				<ThemeProvider theme={mdDarkStyles}>
+					<DesignerBody logic={this.logic} />
+				</ThemeProvider>
 				<div className="vertical-scroll">
 					<Button onClick={this.onTestBtnClick}>serialize!</Button>
+					<Button onClick={this.onPrefilledButtonClick}>preFilled!</Button>
 					<GenericContainer ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
 					<small><pre>{this.state.serialized}</pre></small>
 				</div>

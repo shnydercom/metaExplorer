@@ -204,15 +204,31 @@ export class DesignerLogic {
 		let retriever = appIntprtrRetr();
 		let candidate = retriever.getInterpreterByNameSelf(input.subInterpreterOf);
 		if (!candidate) {
+			//check if it's well-defined
 			let refMap = getKVStoreByKey(input.initialKvStores, UserDefDict.intrprtrBPCfgRefMapKey);
 			if (!refMap || !refMap.value || refMap.value === {}) return;
-			let searchTerm: string = (refMap.value[input.subInterpreterOf] as BlueprintConfig).subInterpreterOf;
+			if (! refMap.value[input.subInterpreterOf]) return;
+			let searchTerm: string = UserDefDict.intrprtrBPCfgRefMapName;
 			candidate = retriever.getInterpreterByNameSelf(searchTerm);
 		}
 		if (!candidate) return;
 		let interpreterContainer: any = ldBlueprint(input)(candidate); //actually wraps, doesn't extend
-		interpreterContainer.cfg = input;
-		retriever.addInterpreter(input.nameSelf, interpreterContainer, "cRud");
+		//interpreterContainer.cfg = input;
+		retriever.addInterpreter(input.canInterpretType, interpreterContainer, "cRud");
+	}
+
+	public intrprtrTypeInstanceFromBlueprint(input: BlueprintConfig): any {
+		if (!input) return null;
+		let rv = {};
+		input.interpretableKeys.forEach((val) => {
+			try {
+				let propID: string = (val as ObjectPropertyRef).propRef;
+				rv[propID] = null;
+			} catch (error) {
+				rv[val as string] = null;
+			}
+		});
+		return rv;
 	}
 
 	public intrprtrBlueprintFromDiagram(finalCanInterpretType?: string): BlueprintConfig {
@@ -233,7 +249,7 @@ export class DesignerLogic {
 			interpretableKeys: interpretableKeysArr,
 		};
 		let subIntrprtrCfgMap: { [s: string]: BlueprintConfig } = {};
-		this.fillBPCfgFromGraph(outputBPCfg, this.outputNode, subIntrprtrCfgMap);
+		this.fillBPCfgFromGraph(outputBPCfg, this.outputNode, subIntrprtrCfgMap, outputBPCfg);
 		let intrprtMapKV: IKvStore =
 			{
 				key: UserDefDict.intrprtrBPCfgRefMapKey,
@@ -247,12 +263,14 @@ export class DesignerLogic {
 	}
 
 	/**
-	 * helper function to enrich the graph with blueprint-data, so that it can be
+	 * recursive helper function to enrich the graph with blueprint-data, so that it can be
 	 * interpreted by the generic container
 	 * @param branchBPCfg the BlueprintConfig to fill
 	 * @param branchNode the NodeModel used to fill branchBPCfg, on the same level!
+	 * @param topBPCfg the root or top node, i.e. the node where the recursive process started
 	 */
-	private fillBPCfgFromGraph(branchBPCfg: BlueprintConfig, branchNode: InterpreterNodeModel, otherIntrprtrCfgs: { [s: string]: BlueprintConfig }) {
+	private fillBPCfgFromGraph(branchBPCfg: BlueprintConfig, branchNode: InterpreterNodeModel, otherIntrprtrCfgs: { [s: string]: BlueprintConfig },
+		topBPCfg: BlueprintConfig) {
 		let inPorts: LDPortModel[] = branchNode.getInPorts();
 		inPorts.forEach((port) => {
 			let links = port.getLinks();
@@ -272,8 +290,9 @@ export class DesignerLogic {
 							if (leafPort.kv && leafPort.kv.key === UserDefDict.externalInput) {
 								//is an external input marker
 								let keyInputMarked = port.kv.key;
-								let cfgIntrprtKeys: string[] = branchBPCfg.interpretableKeys;
-								cfgIntrprtKeys.push(keyInputMarked);
+								let inputObjPropRef: ObjectPropertyRef = { objRef: branchNode.getID(), propRef: keyInputMarked };
+								let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.interpretableKeys;
+								cfgIntrprtKeys.push(inputObjPropRef);
 								branchBPCfg.initialKvStores.push(this.copyKV(port.kv));
 							}
 							break;
@@ -304,7 +323,7 @@ export class DesignerLogic {
 									interpretableKeys: interpretableKeysArr,
 								};
 								otherIntrprtrCfgs[leafNodeID] = outputBPCfg;
-								this.fillBPCfgFromGraph(outputBPCfg, leafNode as InterpreterNodeModel, otherIntrprtrCfgs);
+								this.fillBPCfgFromGraph(outputBPCfg, leafNode as InterpreterNodeModel, otherIntrprtrCfgs, topBPCfg);
 							} else {
 								initialKvStores = outputBPCfg.initialKvStores;
 							}

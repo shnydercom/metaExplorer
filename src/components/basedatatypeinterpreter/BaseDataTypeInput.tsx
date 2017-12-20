@@ -18,8 +18,9 @@ import { IKvStore } from 'ldaccess/ikvstore';
 import { LDDict } from 'ldaccess/LDDict';
 
 import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
-import { LDConnectedState, LDOwnProps } from "components/generic/genericContainer-component";
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
+import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
+import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 
 /**
  * @author Jonathan Schneider
@@ -37,11 +38,11 @@ type ConnectedDispatch = {
 	//fileChange: (fileList: FileList, url: string) => void;
 };*/
 
-export type LDConnectedDispatch = {
+/*export type LDConnectedDispatch = {
 	notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
-};
+};*/
 
-const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): LDConnectedState => {
+/*const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): LDConnectedState => {
 	let tokenString: string = ownProps ? ownProps.ldTokenString : null;
 	let ldOptionsLoc: ILDOptions = tokenString ? state.ldoptionsMap[tokenString] : null;
 	return {
@@ -60,7 +61,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: O
 			dispatch(ldOptionsClientSideUpdateAction(ldOptions));
 		}
 	}
-});
+});*/
 
 let bdts: LDBaseDataType[] = [LDDict.Boolean, LDDict.Integer, LDDict.Double, LDDict.Text, LDDict.Date, LDDict.DateTime];
 let bpcfgs: BlueprintConfig[] = new Array();
@@ -105,6 +106,13 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 		return;
 	}
 
+	componentWillReceiveProps(nextProps, nextContext): void {
+		if (nextProps.ldOptions) {
+			let nextSingleKV = nextProps.ldOptions.resource.kvStores[0];
+			this.setState({ ...this.state, singleKV: nextSingleKV });
+		}
+	}
+
 	handleChange = (evtval) => {
 		let modSingleKV: IKvStore = this.state.singleKV;
 		modSingleKV.value = evtval;
@@ -116,7 +124,7 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 	}
 
 	componentWillMount() {
-		this.state.singleKV = {...this.initialKvStores[0]}; //TODO: check, if this can be done with the setState fn. Only needed for determineRenderFn
+		this.state.singleKV = { ...this.initialKvStores[0] }; //TODO: check, if this can be done with the setState fn. Only needed for determineRenderFn
 		//this.setState({ ...this.state, singleKV: this.initialKvStores[0]});
 		let baseDT: LDBaseDataType = this.state.singleKV.ldType as LDBaseDataType;
 		this.determineRenderFn(baseDT);

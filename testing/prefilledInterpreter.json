@@ -1,0 +1,127 @@
+{
+  "subInterpreterOf": "09a69696-1d2a-4102-ab33-071bdf6f122a",
+  "canInterpretType": "testinterpreter-ObjectType",
+  "nameSelf": "testinterpreter",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "09a69696-1d2a-4102-ab33-071bdf6f122a": {
+          "subInterpreterOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "nameSelf": "09a69696-1d2a-4102-ab33-071bdf6f122a",
+          "initialKvStores": [
+            {
+              "key": "HeaderImageDisplay",
+              "value": {
+                "objRef": "22f39c9d-3a7f-4801-9e05-4967ac0d9e32",
+                "propRef": null
+              },
+              "ldType": "InterpreterType"
+            },
+            {
+              "key": "HeaderText",
+              "value": {
+                "objRef": "bd39b821-b0c3-4782-b0d1-d177beda0122",
+                "propRef": "http://schema.org/name"
+              },
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderText",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "Description",
+              "value": {
+                "objRef": "bd39b821-b0c3-4782-b0d1-d177beda0122",
+                "propRef": "http://schema.org/description"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "22f39c9d-3a7f-4801-9e05-4967ac0d9e32": {
+          "subInterpreterOf": "shnyder/imageDisplay",
+          "canInterpretType": "http://schema.org/ViewAction",
+          "nameSelf": "22f39c9d-3a7f-4801-9e05-4967ac0d9e32",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/name",
+              "value": {
+                "objRef": "0d2bc878-9579-42b6-8544-0e4b63ad3e0a",
+                "propRef": "http://schema.org/name"
+              }
+            },
+            {
+              "key": "http://schema.org/fileFormat",
+              "value": {
+                "objRef": "0d2bc878-9579-42b6-8544-0e4b63ad3e0a",
+                "propRef": "http://schema.org/fileFormat"
+              }
+            },
+            {
+              "key": "http://schema.org/contentUrl",
+              "value": {
+                "objRef": "0d2bc878-9579-42b6-8544-0e4b63ad3e0a",
+                "propRef": "http://schema.org/contentUrl"
+              }
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "0d2bc878-9579-42b6-8544-0e4b63ad3e0a": {
+          "subInterpreterOf": "shnyder/imageRetriever",
+          "canInterpretType": "shnyder/imageRetriever-ObjectType",
+          "nameSelf": "0d2bc878-9579-42b6-8544-0e4b63ad3e0a",
+          "initialKvStores": [
+            {
+              "key": "srvURL",
+              "value": "http:/imageurl",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "identifier",
+              "value": {
+                "objRef": "bd39b821-b0c3-4782-b0d1-d177beda0122",
+                "propRef": "http://schema.org/image"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "bd39b821-b0c3-4782-b0d1-d177beda0122": {
+          "subInterpreterOf": "shnyder/productRetriever",
+          "canInterpretType": "shnyder/productRetriever-ObjectType",
+          "nameSelf": "bd39b821-b0c3-4782-b0d1-d177beda0122",
+          "initialKvStores": [
+            {
+              "key": "srvURL",
+              "value": "http://producturl",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "identifier",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": [
+    {
+      "objRef": "bd39b821-b0c3-4782-b0d1-d177beda0122",
+      "propRef": "identifier"
+    }
+  ]
+}

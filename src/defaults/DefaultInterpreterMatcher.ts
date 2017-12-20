@@ -12,6 +12,8 @@ import { BooleanValInput, IntegerValInput, DoubleValInput, TextValInput, DateVal
 import ImgHeadSubDescIntrprtr, { ImgHeadSubDescIntrprtrName } from "components/visualcomposition/ImgHeadSubDescIntrprtr";
 import { ImageRetriever, imageRetrieverName } from "sidefx/ImageRetriever";
 import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
+import { RefMapIntrprtr } from "components/generic/InterpreterReferenceMapType-component";
+import { UserDefDict } from "ldaccess/UserDefDict";
 
 let matchIsType = (a: IKvStore) => a.key === LDConsts.type || a.key === LDConsts.isA;
 let matchIsLang = (a: IKvStore) => a.key === LDConsts.lang;
@@ -42,6 +44,9 @@ export class DefaultInterpreterMatcher implements IInterpreterMatcher {
 		//register side effect-interpreter (these interpreters change the state asynchronously and are typically non-visual)
 		appIntRetr.addInterpreter(imageRetrieverName, ImageRetriever, "cRud");
 		appIntRetr.addInterpreter(productRetrieverName, ProductRetriever, "cRud");
+
+		//register generic interpreter for Designer-defined interpreters
+		appIntRetr.addInterpreter(UserDefDict.intrprtrBPCfgRefMapType, RefMapIntrprtr, "cRud");
 	}
 	matchSingleKV(single: IKvStore, crudSkills: string): IKvStore {
 		throw new Error("Method not implemented.");
@@ -55,31 +60,34 @@ export class DefaultInterpreterMatcher implements IInterpreterMatcher {
 			//this is a base object and has an id, if an interpreter-retriever for special IDs is defined, then it could be used here
 			//return;
 		}
-		let searchTerm: string | Array<string>;
+		let searchTerm: Array<IKvStore>;
 		if (ldType) {
 			//this is a typed base object then
-			searchTerm = ldType.value;
+			let singleSearch: IKvStore = {key: undefined, value: undefined, ldType: ldType.value};
+			searchTerm = [singleSearch];
 		} else {
 			searchTerm = [];
 			for (let idx = 0; idx < multi.length; idx++) {
 				const itm = multi[idx];
 				if (itm && itm.ldType) {
-					searchTerm.push(itm.ldType);
+					searchTerm.push(itm);
 				}
 			}
 
 		}
 		if (searchTerm) {
-			if (typeof searchTerm === "string") {
-				let intrprtr = appIntRetrFn().searchForObjIntrprtr(searchTerm, crudSkills);
-				let rvAdd: IKvStore = { key: null, value: null, intrprtrClass: intrprtr, ldType: searchTerm };
+			if (searchTerm.length === 1) {
+				let intrprtr = appIntRetrFn().searchForObjIntrprtr(searchTerm[0].ldType, crudSkills);
+				searchTerm[0].intrprtrClass = intrprtr;
+				let rvAdd: IKvStore = searchTerm[0];
 				rv.push(rvAdd);
 				return rv;
 			} else {
 				searchTerm.forEach((elem) => {
-					let intrprtr = appIntRetrFn().searchForObjIntrprtr(elem, crudSkills);
-					let rvAddMulti: IKvStore = { key: null, value: null, intrprtrClass: intrprtr, ldType: elem };
-					rv.push(rvAddMulti);
+					let intrprtr = appIntRetrFn().searchForObjIntrprtr(elem.ldType, crudSkills);
+					elem.intrprtrClass = intrprtr;
+					//let rvAddMulti: IKvStore = { key: null, value: null, intrprtrClass: intrprtr, ldType: elem };
+					rv.push(elem);
 				});
 				return rv;
 			}

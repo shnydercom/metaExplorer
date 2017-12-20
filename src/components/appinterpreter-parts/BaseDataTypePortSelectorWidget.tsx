@@ -4,17 +4,19 @@ import { PortWidget, DefaultPortModel } from "storm-react-diagrams";
 import { SinglePortWidget } from "components/appinterpreter-parts/SinglePortWidget";
 import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
 import { BaseDataTypeDropDown } from "components/basedatatypeinterpreter/BaseDataTypeDropDown";
-import { GenericContainer, LDConnectedState } from "components/generic/genericContainer-component";
+import { GenericContainer } from "components/generic/genericContainer-component";
 import { IKvStore } from "ldaccess/ikvstore";
 import { ExplorerState } from "appstate/store";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { connect } from "react-redux";
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
-import { LDConnectedDispatch } from "components/basedatatypeinterpreter/BaseDataTypeInput";
+import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
+import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 
-export type LDOwnProps = {
+
+/*export type LDOwnProps = {
 	ldTokenString: string;
-};
+};*/
 
 export type BaseDataTypePortSelectorProps = {
 	model?: LDPortModel;
@@ -26,7 +28,7 @@ export interface BaseDataTypePortSelectorState {
 	portType: string;
 }
 
-const mapStateToProps = (state: ExplorerState, ownProps: BaseDataTypePortSelectorProps): LDConnectedState & BaseDataTypePortSelectorProps => {
+/*const mapStateToProps = (state: ExplorerState, ownProps: BaseDataTypePortSelectorProps): LDConnectedState & BaseDataTypePortSelectorProps => {
 	let tokenString: string = ownProps && ownProps.model ? ownProps.model.getID() : null;
 	let ldOptionsLoc: ILDOptions = tokenString ? state.ldoptionsMap[tokenString] : null;
 	return {
@@ -47,7 +49,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: B
 			dispatch(ldOptionsClientSideUpdateAction(ldOptions));
 		}
 	}
-});
+});*/
 
 class PureBaseDataTypePortSelector extends React.Component<BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch, BaseDataTypePortSelectorState> {
 	public static defaultProps: BaseDataTypePortSelectorProps = {

@@ -26,6 +26,7 @@ export enum UserDefDict {
 	 * serialization
 	 */
 	intrprtrBPCfgRefMapType = "InterpreterReferenceMapType",
+	intrprtrBPCfgRefMapName = "shnyder/RefMapInterpreter",
 
 	standardInterpreterObjectTypeSuffix = "-ObjectType"
 }
