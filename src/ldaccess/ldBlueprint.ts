@@ -33,12 +33,12 @@ export interface BlueprintConfig {
 
 function blueprintDecorator<T extends { new(...args: any[]): IBlueprintInterpreter }>(constructorFn: T, blueprintCfg: BlueprintConfig) {
     var classToExtend = null;
-    var reduxClass = null;
-    if (constructorFn["WrappedComponent"]) {
+    //var reduxClass = null;
+    /*if (constructorFn["WrappedComponent"]) {
         classToExtend = constructorFn["WrappedComponent"];
         reduxClass = constructorFn;
-    }
-    console.log("isWrapped");
+    }*/
+    //console.log("isWrapped");
     classToExtend = class extends constructorFn {
         static nameSelf = blueprintCfg.nameSelf;
         static cfg = blueprintCfg;
@@ -47,12 +47,12 @@ function blueprintDecorator<T extends { new(...args: any[]): IBlueprintInterpret
         //interpreterRetriever = blueprintCfg.interpreterRetrieverFn;
         interpretableKeys = blueprintCfg.interpretableKeys;
     };
-    if (reduxClass) {
+    /*if (reduxClass) {
         reduxClass["WrappedComponent"] = classToExtend;
         return reduxClass;
-    } else {
-        return classToExtend;
-    }
+    } else {*/
+    return classToExtend;
+    //}
     //blueprintCfg.interpreterRetrieverFn().addInterpreter(blueprintCfg.forType, newClass, blueprintCfg.crudSkills);
 }
 
