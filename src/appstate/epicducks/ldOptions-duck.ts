@@ -104,8 +104,9 @@ export const ldOptionsMapReducer = (
 			break;
 		case LDOPTIONS_CLIENTSIDE_UPDATE:
 			console.dir(action);
-			let tokenVal = action.updatedLDOptions.ldToken.get();
+			let tokenVal = (action.updatedLDOptions.ldToken as NetworkPreferredToken).get();
 			let updatedLDOptionsObj = {... action.updatedLDOptions};
+			console.log(updatedLDOptionsObj === action.updatedLDOptions);
 			let updatedState = Object.assign({}, state, { [tokenVal]: updatedLDOptionsObj });
 			return updatedState;
 		case LDOPTIONS_REQUEST_ASYNC:

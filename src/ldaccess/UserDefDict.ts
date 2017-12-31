@@ -8,15 +8,35 @@ export enum UserDefDict {
 	finalInputKey = "finalInput",
 	externalInput = "externalInput",
 	intrprtrBPCfgRefMapKey = "InterpreterReferenceMapKey",
+	/**
+	 * an outputKVMap inside of the value of a kv
+	 */
+	outputKVMapKey = "outputKVMapKey",
 
 	//values
 	outputInterpreter = "Output interpreter",
 
 	//types
 	/**
-	 * if a kv-Store is typed with this type, then its value is another interpreter
+	 * if a kv-Store is typed with this type, then its value is another interpreter class
 	 */
-	intrptrtType = "InterpreterType",
+	intrprtrClassType = "InterpreterClassType",
+
+	/**
+	 * if a kv-Store is typed with this type, then its value is an ldTokenString, the intrprtrClass is filled
+	 */
+	intrprtrObjectType = "InterpreterObjectType",
+
+	/**
+	 * if a kv-store is type with this type, then its value is a reference key to the store (i.e. application state)
+	 */
+	ldTokenStringReference = "ldTkStrRef",
+
+	/**
+	 * an outputKVMap inside of the value of a kv
+	 */
+	outputKVMapType = "outputKVMapType",
+
 	/**
 	 * if a kv-Store is typed with this type, then its value is a map containing Ld-Blueprint-Configs. This is useful,
 	 * because an interpreter is rarely defined as a perfect tree. Referencing between branches needs to be possible

@@ -1,9 +1,9 @@
-import { DefaultInterpreterRetriever } from "defaults/DefaultInterpreterRetriever";
 import { IInterpreterRetriever } from "ldaccess/iinterpreter-retriever";
 
 import { LDDict } from "ldaccess/LDDict";
+import { ReduxInterpreterRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
 
-class AppInterpreterRetriever extends DefaultInterpreterRetriever{
+class AppInterpreterRetriever extends ReduxInterpreterRetriever{
 
 }
 

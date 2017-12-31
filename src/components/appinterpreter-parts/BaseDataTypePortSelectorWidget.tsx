@@ -13,7 +13,6 @@ import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 
-
 /*export type LDOwnProps = {
 	ldTokenString: string;
 };*/
@@ -55,7 +54,8 @@ class PureBaseDataTypePortSelector extends React.Component<BaseDataTypePortSelec
 	public static defaultProps: BaseDataTypePortSelectorProps = {
 		in: true,
 		label: "port",
-		ldTokenString: null
+		ldTokenString: null,
+		outputKVMap: null
 	};
 
 	constructor(props) {
@@ -89,7 +89,7 @@ class PureBaseDataTypePortSelector extends React.Component<BaseDataTypePortSelec
 				<div>
 					{label}
 					<BaseDataTypeDropDown selectionChange={(newType) => { this.onPortTypeChange(newType); }} />
-					<GenericContainer ldTokenString={this.props.model.id} searchCrudSkills="CrUd" />
+					<GenericContainer ldTokenString={this.props.model.id} searchCrudSkills="CrUd" outputKVMap={null}/>
 				</div>
 				{port}
 			</div>

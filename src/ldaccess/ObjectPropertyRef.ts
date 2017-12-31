@@ -6,5 +6,6 @@ export interface ObjectPropertyRef {
 	propRef: string;
 }
 
+export var OBJECT_REF: string = "objRef";
 export var OBJECT_PROP_REF: string = "propRef";
 //TODO: check, if this can be handled more elegantly. Interfaces are not available after compile-time

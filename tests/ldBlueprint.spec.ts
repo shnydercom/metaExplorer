@@ -1,5 +1,5 @@
 import jasmine from 'jasmine';
-import {BlueprintConfig, IBlueprintInterpreter} from 'ldaccess/ldBlueprint';
+import {BlueprintConfig, IBlueprintInterpreter, OutputKVMap} from 'ldaccess/ldBlueprint';
 import ldBlueprint from 'ldaccess/ldBlueprint';
 import { mockInterpreterRetrieverFn } from '../testing/mockInterpreterRetriever';
 import { ILDOptions } from 'ldaccess/ildoptions';
@@ -24,6 +24,7 @@ let bpCfg: BlueprintConfig = {
 @ldBlueprint(bpCfg)
 export class LDBlueprintContainerClass implements IBlueprintInterpreter {
     cfg: BlueprintConfig;
+    outputKVMap: OutputKVMap;
     consumeLDOptions: (ldOptions: ILDOptions) => any;
     initialKvStores: IKvStore[];
 }

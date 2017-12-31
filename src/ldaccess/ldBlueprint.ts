@@ -5,14 +5,23 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { ObjectPropertyRef } from 'ldaccess/ObjectPropertyRef';
 import { InferableComponentEnhancerWithProps } from 'react-redux';
+import { LDDictWildCard } from 'ldaccess/LDDict';
+import { ILDToken } from 'ldaccess/ildtoken';
 
 export type ConsumeLDOptionsFunc = (ldOptions: ILDOptions) => any;
+
+export type OutputKVMapElement = {targetLDToken: ILDToken, targetProperty: string};
+/**
+ * maps the kvStores that produce/change values in this interpreter to a token string and a target property
+ * on the object that is referenced by the token string
+ * e.g. { "http://schema.com/name": {targetLDToken: "someUID", targetProperty: "someTextField"}}
+ */
+export type OutputKVMap = { [key: string]: OutputKVMapElement};
 
 export interface IBlueprintInterpreter {
     cfg: BlueprintConfig;
     consumeLDOptions: ConsumeLDOptionsFunc;
     initialKvStores: IKvStore[];
-    //getInterpretableKeys: () => any[];
 }
 
 /**
@@ -24,10 +33,8 @@ export interface BlueprintConfig {
     subInterpreterOf: string;
     canInterpretType?: string;
     nameSelf: string;
-    //interpreterRetrieverFn: () => IInterpreterRetriever;
     initialKvStores?: IKvStore[];
     crudSkills: string;
-    //consumeWebResource?: ConsumeWebResourceFunc;
     interpretableKeys: (string | ObjectPropertyRef)[];
 }
 

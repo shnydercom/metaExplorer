@@ -4,11 +4,13 @@ import { ILDOptions } from "ldaccess/ildoptions";
 import * as redux from 'redux';
 import { IKvStore } from "ldaccess/ikvstore";
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
+import { ILDResource } from "ldaccess/ildresource";
 
 //final:
 export const mapStateToProps = (state: ExplorerState, ownProps: LDOwnProps): LDOwnProps & LDConnectedState => {
 	let tokenString: string = ownProps ? ownProps.ldTokenString : null;
 	let ldOptionsLoc: ILDOptions = tokenString ? state.ldoptionsMap[tokenString] : null;
+	//ldOptionsLoc = ldOptionsLoc ? {...ldOptionsLoc} : null; //only spread if exists
 	return {
 		...ownProps,
 		ldOptions: ldOptionsLoc

@@ -12,6 +12,6 @@ export interface IInterpreterRetriever {
     searchForObjIntrprtr(term: string | Array<string>, crudSkills: string): any;
     searchForKVIntrprtr(term: string, crudSkills: string): any;
     addInterpreter(typeName: string, intrprtr: any, crudSkills: string): void;
-    getInterpreterList(): any;
+    getInterpreterList(): Array<any>;
     getInterpreterByNameSelf(nameSelf: string): any;
 }

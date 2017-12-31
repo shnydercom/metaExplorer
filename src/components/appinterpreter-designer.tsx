@@ -41,6 +41,7 @@ import { LDDict } from "ldaccess/LDDict";
 import { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
+import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -132,12 +133,13 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 		this.logic.addBlueprintToRetriever(nodesBPCFG);
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
 		let newType = nodesBPCFG.canInterpretType;
-		this.props.ldOptions.resource.kvStores = [
+		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+		newLDOptions.resource.kvStores = [
 			{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
 			{ key: undefined, ldType: newType, value: dummyInstance }
 		];
 		this.setState({ ...this.state, serialized: nodesSerialized });
-		this.props.notifyLDOptionsChange(this.props.ldOptions);
+		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
  	render() {
@@ -160,7 +162,7 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 				<div className="vertical-scroll">
 					<Button onClick={this.onTestBtnClick}>serialize!</Button>
 					<Button onClick={this.onPrefilledButtonClick}>preFilled!</Button>
-					<GenericContainer ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
+					<GenericContainer ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null}/>
 					<small><pre>{this.state.serialized}</pre></small>
 				</div>
 			</Splitter>

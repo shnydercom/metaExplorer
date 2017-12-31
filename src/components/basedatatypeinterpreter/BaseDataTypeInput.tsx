@@ -9,7 +9,7 @@ import { DatePicker, DatePickerTheme } from 'react-toolbox';
 import { TimePicker, TimePickerTheme } from 'react-toolbox';
 
 import { ExplorerState } from 'appstate/store';
-import { BlueprintConfig } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
@@ -92,7 +92,7 @@ for (var bdt in bdts) {
 class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
 	implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
-
+	outputKVMap: OutputKVMap;
 	initialKvStores: IKvStore[];
 
 	state = {
@@ -200,16 +200,16 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 }
 
 //this is the same as using a decorator function on individual classes
-const BoolInput = ldBlueprint(bpcfgs[0])(PureBaseDataTypeInput);
-const IntInput = ldBlueprint(bpcfgs[1])(PureBaseDataTypeInput);
-const DoubleInput = ldBlueprint(bpcfgs[2])(PureBaseDataTypeInput);
-const TextInput = ldBlueprint(bpcfgs[3])(PureBaseDataTypeInput);
-const DateInput = ldBlueprint(bpcfgs[4])(PureBaseDataTypeInput);
-const DateTimeInput = ldBlueprint(bpcfgs[5])(PureBaseDataTypeInput);
+export const PureBoolInput = ldBlueprint(bpcfgs[0])(PureBaseDataTypeInput);
+export const PureIntInput = ldBlueprint(bpcfgs[1])(PureBaseDataTypeInput);
+export const PureDoubleInput = ldBlueprint(bpcfgs[2])(PureBaseDataTypeInput);
+export const PureTextInput = ldBlueprint(bpcfgs[3])(PureBaseDataTypeInput);
+export const PureDateInput = ldBlueprint(bpcfgs[4])(PureBaseDataTypeInput);
+export const PureDateTimeInput = ldBlueprint(bpcfgs[5])(PureBaseDataTypeInput);
 
-export const BooleanValInput = connect(mapStateToProps, mapDispatchToProps)(BoolInput);
-export const IntegerValInput = connect(mapStateToProps, mapDispatchToProps)(IntInput);
-export const DoubleValInput = connect(mapStateToProps, mapDispatchToProps)(DoubleInput);
-export const TextValInput = connect(mapStateToProps, mapDispatchToProps)(TextInput);
-export const DateValInput = connect(mapStateToProps, mapDispatchToProps)(DateInput);
-export const DateTimeValInput = connect(mapStateToProps, mapDispatchToProps)(DateTimeInput);
+export const BooleanValInput = connect(mapStateToProps, mapDispatchToProps)(PureBoolInput);
+export const IntegerValInput = connect(mapStateToProps, mapDispatchToProps)(PureIntInput);
+export const DoubleValInput = connect(mapStateToProps, mapDispatchToProps)(PureDoubleInput);
+export const TextValInput = connect(mapStateToProps, mapDispatchToProps)(PureTextInput);
+export const DateValInput = connect(mapStateToProps, mapDispatchToProps)(PureDateInput);
+export const DateTimeValInput = connect(mapStateToProps, mapDispatchToProps)(PureDateTimeInput);

@@ -1,7 +1,7 @@
 import { SideFXDict } from "sidefx/SideFXDict";
 import { LDDict } from "ldaccess/LDDict";
 import { IKvStore } from "ldaccess/ikvstore";
-import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter } from "ldaccess/ldBlueprint";
+import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from "ldaccess/ldBlueprint";
 import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { ILDOptions } from "ldaccess/ildoptions";
 
@@ -53,5 +53,6 @@ let bpCfg: BlueprintConfig = {
 export class ProductRetriever implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
+	outputKVMap: OutputKVMap;
 	initialKvStores: IKvStore[];
 }

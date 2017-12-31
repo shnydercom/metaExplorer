@@ -19,6 +19,7 @@ import { elementAt } from "rxjs/operators/elementAt";
 import { ObjectPropertyRef, OBJECT_PROP_REF } from "ldaccess/ObjectPropertyRef";
 import { DeclarationNodeProps } from "components/appinterpreter-parts/DeclarationNodeWidget";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
+import { ReduxInterpreterRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 
@@ -39,7 +40,7 @@ export class DesignerLogic {
 		this.diagramEngine.registerNodeFactory(new GeneralDataTypeWidgetFactory());
 		this.diagramEngine.registerNodeFactory(new DeclarationWidgetFactory());
 		this.newModel(outputLDOptionsToken);
-		this.interpreterList = (appIntprtrRetr() as DefaultInterpreterRetriever).getInterpreterList();
+		this.interpreterList = (appIntprtrRetr() as ReduxInterpreterRetriever).getInterpreterList();
 	}
 
 	public newModel(outputLDOptionsToken: string) {
@@ -94,7 +95,7 @@ export class DesignerLogic {
 		let outputFinalInputKV: IKvStore = {
 			key: UserDefDict.finalInputKey,
 			value: undefined,
-			ldType: UserDefDict.intrptrtType
+			ldType: UserDefDict.intrprtrClassType
 		};
 		let finalInputName: string = outputFinalInputKV.key;
 		outputNode.addPort(new LDPortModel(true, finalInputName, outputFinalInputKV));
@@ -180,7 +181,7 @@ export class DesignerLogic {
 		let exportSelfKV: IKvStore = {
 			key: UserDefDict.exportSelfKey,
 			value: undefined,
-			ldType: UserDefDict.intrptrtType
+			ldType: UserDefDict.intrprtrClassType
 		};
 		node.addPort(new LDPortModel(false, exportSelfKV.key, exportSelfKV));
 		for (var j = intrprtrKeys.length; j < initialKvStores.length; j++) {
@@ -201,15 +202,15 @@ export class DesignerLogic {
 	 * @param input the BlueprintConfig used as a setup for the new Interpreter
 	 */
 	public addBlueprintToRetriever(input: BlueprintConfig) {
-		let retriever = appIntprtrRetr();
-		let candidate = retriever.getInterpreterByNameSelf(input.subInterpreterOf);
+		let retriever = appIntprtrRetr() as ReduxInterpreterRetriever;
+		let candidate = retriever.getUnconnectedByNameSelf(input.subInterpreterOf);
 		if (!candidate) {
 			//check if it's well-defined
 			let refMap = getKVStoreByKey(input.initialKvStores, UserDefDict.intrprtrBPCfgRefMapKey);
 			if (!refMap || !refMap.value || refMap.value === {}) return;
-			if (! refMap.value[input.subInterpreterOf]) return;
+			if (!refMap.value[input.subInterpreterOf]) return;
 			let searchTerm: string = UserDefDict.intrprtrBPCfgRefMapName;
-			candidate = retriever.getInterpreterByNameSelf(searchTerm);
+			candidate = retriever.getUnconnectedByNameSelf(searchTerm);
 		}
 		if (!candidate) return;
 		let interpreterContainer: any = ldBlueprint(input)(candidate); //actually wraps, doesn't extend

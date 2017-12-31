@@ -7,12 +7,12 @@ import appIntRetrFn from 'appconfig/appInterpreterRetriever';
 import { LDDict } from "ldaccess/LDDict";
 
 //import ImageUploadComponent from 'components/imageupload-component';
-import ImageDisplayComponent from 'components/imagedisplay-component';
-import { BooleanValInput, IntegerValInput, DoubleValInput, TextValInput, DateValInput, DateTimeValInput } from "components/basedatatypeinterpreter/BaseDataTypeInput";
-import ImgHeadSubDescIntrprtr, { ImgHeadSubDescIntrprtrName } from "components/visualcomposition/ImgHeadSubDescIntrprtr";
+import ImageDisplayComponent, { PureImgDisplay } from 'components/imagedisplay-component';
+import { PureBoolInput, PureIntInput, PureDoubleInput, PureTextInput, PureDateInput, PureDateTimeInput } from "components/basedatatypeinterpreter/BaseDataTypeInput";
+import ImgHeadSubDescIntrprtr, { ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc } from "components/visualcomposition/ImgHeadSubDescIntrprtr";
 import { ImageRetriever, imageRetrieverName } from "sidefx/ImageRetriever";
 import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
-import { RefMapIntrprtr } from "components/generic/InterpreterReferenceMapType-component";
+import { PureRefMapIntrprtr } from "components/generic/InterpreterReferenceMapType-component";
 import { UserDefDict } from "ldaccess/UserDefDict";
 
 let matchIsType = (a: IKvStore) => a.key === LDConsts.type || a.key === LDConsts.isA;
@@ -28,25 +28,25 @@ export class DefaultInterpreterMatcher implements IInterpreterMatcher {
 	constructor() {
 		let appIntRetr = appIntRetrFn();
 		//appIntRetr.addInterpreter(LDDict.CreateAction, ImageUploadComponent, "Crud");
-		appIntRetr.addInterpreter(LDDict.ViewAction, ImageDisplayComponent, "cRud");
+		appIntRetr.addInterpreter(LDDict.ViewAction, PureImgDisplay, "cRud");
 
 		//register base data type inputs:
-		appIntRetr.addInterpreter(LDDict.Boolean, BooleanValInput, "crud");
-		appIntRetr.addInterpreter(LDDict.Integer, IntegerValInput, "CRUd");
-		appIntRetr.addInterpreter(LDDict.Double, DoubleValInput, "CRUd");
-		appIntRetr.addInterpreter(LDDict.Text, TextValInput, "CRUd");
-		appIntRetr.addInterpreter(LDDict.Date, DateValInput, "CRUd");
-		appIntRetr.addInterpreter(LDDict.DateTime, DateTimeValInput, "CRUd");
+		appIntRetr.addInterpreter(LDDict.Boolean, PureBoolInput, "crud");
+		appIntRetr.addInterpreter(LDDict.Integer, PureIntInput, "CRUd");
+		appIntRetr.addInterpreter(LDDict.Double, PureDoubleInput, "CRUd");
+		appIntRetr.addInterpreter(LDDict.Text, PureTextInput, "CRUd");
+		appIntRetr.addInterpreter(LDDict.Date, PureDateInput, "CRUd");
+		appIntRetr.addInterpreter(LDDict.DateTime, PureDateTimeInput, "CRUd");
 
 		//register visual composition interpreters.
-		appIntRetr.addInterpreter(ImgHeadSubDescIntrprtrName, ImgHeadSubDescIntrprtr, "cRud");
+		appIntRetr.addInterpreter(ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc, "cRud");
 
 		//register side effect-interpreter (these interpreters change the state asynchronously and are typically non-visual)
 		appIntRetr.addInterpreter(imageRetrieverName, ImageRetriever, "cRud");
 		appIntRetr.addInterpreter(productRetrieverName, ProductRetriever, "cRud");
 
 		//register generic interpreter for Designer-defined interpreters
-		appIntRetr.addInterpreter(UserDefDict.intrprtrBPCfgRefMapType, RefMapIntrprtr, "cRud");
+		appIntRetr.addInterpreter(UserDefDict.intrprtrBPCfgRefMapType, PureRefMapIntrprtr, "cRud");
 	}
 	matchSingleKV(single: IKvStore, crudSkills: string): IKvStore {
 		throw new Error("Method not implemented.");

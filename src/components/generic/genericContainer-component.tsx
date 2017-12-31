@@ -4,7 +4,7 @@ import * as redux from 'redux';
 import { connect } from 'react-redux';
 
 import { ExplorerState } from 'appstate/store';
-import { BlueprintConfig } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
@@ -18,15 +18,17 @@ import { singleHyperMediaToKvStores, multiHyperMediaToKvStores } from 'ldaccess/
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { IHypermedia } from 'hydraclient.js/src/DataModel/IHypermedia';
 import { LDConsts } from 'ldaccess/LDConsts';
-import { isInterpreter } from 'ldaccess/ldUtils';
+import { isInterpreter, isLDOptionsSame } from 'ldaccess/ldUtils';
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from 'appstate/epicducks/ldOptions-duck';
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from 'appstate/LDProps';
+import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
+import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
 
 /*export type LDOwnProps = {
 	ldTokenString: string;
 };*/
 
-type OwnProps = {
+export type OwnProps = {
 	searchCrudSkills: string;
 } & LDOwnProps;
 
@@ -37,28 +39,22 @@ type OwnProps = {
 export type LDConnectedDispatch = {
 	notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
 };*/
-
-const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): LDConnectedState => {
-	let tokenString: string = ownProps ? ownProps.ldTokenString : null;
-	let ldOptionsLoc: ILDOptions = tokenString ? state.ldoptionsMap[tokenString] : null;
-	return {
-		ldOptions: ldOptionsLoc
-	};
-};
-
+/*
 const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: OwnProps): LDConnectedDispatch => ({
 	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
 		if (!ownProps.ldTokenString) return;
 		if (!ldOptions) {
-			let kvStores: IKvStore[] = [{ key: undefined, value: undefined, ldType: null /*ownProps.displayedType*/ }];
+			let kvStores: IKvStore[] = [{ key: undefined, value: undefined, ldType: null /*ownProps.displayedType*/
+			
+			/*}];
 			let lang: string;
 			let alias: string = ownProps.ldTokenString;
 			dispatch(ldOptionsClientSideCreateAction(kvStores, lang, alias));
 		} else {
-			dispatch(ldOptionsClientSideUpdateAction(ldOptions));
+			dispatch(ldOptionsClientSideUpdateAction({... ldOptions}));
 		}
 	}
-});
+});*/
 
 let cfgType: string = LDDict.WrapperObject;
 let cfgIntrprtKeys: string[] =
@@ -75,12 +71,16 @@ let bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-class PureGenericContainer extends React.Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
+export class PureGenericContainer extends React.Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
 	implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
+	outputKVMap: OutputKVMap;
 	initialKvStores: IKvStore[];
+	isGenericChanged: boolean = false;
+	genCompCache: any;
 	constructor(props?: any) {
 		super(props);
+		this.isGenericChanged = true;
 	}
 
 	consumeLDOptions = (ldOptions: ILDOptions) => {
@@ -109,12 +109,10 @@ class PureGenericContainer extends React.Component<LDConnectedState & LDConnecte
 		return genKvStores ? this.kvsToComponent(genKvStores) : null;
 	}
 
-	componentWillReceiveProps(nextProps: OwnProps & LDConnectedDispatch, nextContext): void {
-		console.log("willRecProps");
-		console.log(nextProps);
-		//	if (nextProps.displayedType !== this.props.displayedType) {
-		//nextProps.notifyLDOptionsChange(null);
-		//	}
+	componentWillReceiveProps(nextProps: OwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
+		if (compNeedsUpdate(nextProps, this.props)) {
+			this.isGenericChanged = true;
+		}
 	}
 
 	componentWillMount() {
@@ -140,12 +138,15 @@ class PureGenericContainer extends React.Component<LDConnectedState & LDConnecte
 			ldToken: null,
 			isLoading: false
 		};*/
-		demoTypeParsed = this.consumeLDOptions(this.props.ldOptions); //displayedTypeLDOptions);
+		if (this.isGenericChanged) {
+			this.genCompCache = this.consumeLDOptions(this.props.ldOptions); //displayedTypeLDOptions);
+			this.isGenericChanged = false;
+		}
 		//}
 		return <div key={0}>
 			genContainer Render
-			{demoTypeParsed}
-		</div>;
+			{this.genCompCache}
+		</div >;
 	}
 
 	private kvsToComponent(input: IKvStore[]): any {
@@ -161,13 +162,13 @@ class PureGenericContainer extends React.Component<LDConnectedState & LDConnecte
 			let ldTokenString: string = null;
 			let tokenStringExtension = input[idx].key ? input[idx].key : idx;
 			ldTokenString = this.props.ldTokenString + "-" + tokenStringExtension;
-			return <GenericComp key={idx} ldTokenString={ldTokenString} />;
+			return <GenericComp key={idx} ldTokenString={ldTokenString} outputKVMap={null} />;
 		});
 		if (reactComps.length === 1) {
 			//genericComp is only a wrapper then, hand token down directly
 			let searchIdx = reactComps[0].key;
 			let GenericSingle = reactCompClasses[searchIdx];
-			reactComps[0] = <GenericSingle key={0} ldTokenString={this.props.ldTokenString} />;
+			reactComps[0] = <GenericSingle key={0} ldTokenString={this.props.ldTokenString} outputKVMap={null}/>;
 		}
 		return <div>GenericContainerContents (kvsToComponent):{reactComps}</div>;
 	}

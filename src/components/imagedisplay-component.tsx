@@ -5,7 +5,7 @@ import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
+import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
@@ -27,22 +27,23 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedD
 
 let cfgType: string = LDDict.ViewAction;
 let cfgIntrprtKeys: string[] =
-    [LDDict.name, LDDict.fileFormat, LDDict.contentUrl];
+	[LDDict.name, LDDict.fileFormat, LDDict.contentUrl];
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
-		subInterpreterOf: null,
-		canInterpretType: cfgType,
-    nameSelf: "shnyder/imageDisplay",
-    //interpreterRetrieverFn: appIntprtrRetr,
-    initialKvStores: initialKVStores,
-    interpretableKeys: cfgIntrprtKeys,
-    crudSkills: "cRud"
+	subInterpreterOf: null,
+	canInterpretType: cfgType,
+	nameSelf: "shnyder/imageDisplay",
+	//interpreterRetrieverFn: appIntprtrRetr,
+	initialKvStores: initialKVStores,
+	interpretableKeys: cfgIntrprtKeys,
+	crudSkills: "cRud"
 };
 
 @ldBlueprint(bpCfg)
-class PureImgDisplay extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, {}>
-implements IBlueprintInterpreter {
+export class PureImgDisplay extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, {}>
+	implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
+	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 	constructor(props: any) {
@@ -50,8 +51,11 @@ implements IBlueprintInterpreter {
 	}
 	render() {
 		const { ldOptions } = this.props;
+		if (!ldOptions) return <div>no Image data</div>;
 		return <div>
-			<img alt="" src={ldOptions.resource.kvStores[0].value}/>
+			ImgDisplay working
+			<img alt="" src={ldOptions.resource.kvStores[0].value} />
+			{this.props.children}
 		</div>;
 	}
 

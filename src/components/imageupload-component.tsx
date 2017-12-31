@@ -60,7 +60,7 @@ import { connect } from 'react-redux';
 import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
 import ImgDisplay from './imagedisplay-component';
-import { BlueprintConfig } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
@@ -133,6 +133,7 @@ var bpCfg: BlueprintConfig = {
 class PureImgUploader extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
     implements IBlueprintInterpreter {
     cfg: BlueprintConfig;
+    outputKVMap: OutputKVMap;
     initialKvStores: IKvStore[];
     consumeLDOptions: (ldOptions: ILDOptions) => any;
     onClickFileChange = (e: React.FormEvent<HTMLInputElement>) => {
