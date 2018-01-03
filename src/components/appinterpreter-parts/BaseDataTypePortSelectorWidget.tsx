@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
+import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 
 /*export type LDOwnProps = {
 	ldTokenString: string;
@@ -67,7 +68,7 @@ class PureBaseDataTypePortSelector extends React.Component<BaseDataTypePortSelec
 	}
 
 	componentWillReceiveProps(nextProps, nextContext): void {
-		if (nextProps.ldOptions) nextProps.model.kv = nextProps.ldOptions.resource.kvStores[0];
+		if (nextProps.ldOptions) nextProps.model.kv = nextProps.ldOptions.resource.kvStores[0] ? nextProps.ldOptions.resource.kvStores[0] : {key: null, value: null, ldType: null} ;
 	}
 
 	onPortTypeChange = (newType: string) => {
@@ -77,7 +78,9 @@ class PureBaseDataTypePortSelector extends React.Component<BaseDataTypePortSelec
 		changedKvStore.key = null;
 		changedKvStore.value = null;
 		changedKvStore.intrprtrClass = null;
-		this.props.notifyLDOptionsChange(this.props.ldOptions);
+		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+		newLDOptions.resource.kvStores = [changedKvStore];
+		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
 	render() {

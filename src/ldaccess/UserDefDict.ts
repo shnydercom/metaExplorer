@@ -7,6 +7,11 @@ export enum UserDefDict {
 	exportSelfKey = "exportSelf",
 	finalInputKey = "finalInput",
 	externalInput = "externalInput",
+	/**
+	 * if a designer-defined interpreter references another interpreter that shall _not_ be sub-instantiated in the designer-defined
+	 * interpreter, a reference key to an external Interpreter is necessary
+	 */
+	externalReferenceKey = "externalReferenceKey",
 	intrprtrBPCfgRefMapKey = "InterpreterReferenceMapKey",
 	/**
 	 * an outputKVMap inside of the value of a kv

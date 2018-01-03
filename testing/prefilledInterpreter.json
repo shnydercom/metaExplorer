@@ -1,7 +1,7 @@
 {
   "subInterpreterOf": "headUID",
-  "canInterpretType": "testinterpreter-ObjectType",
-  "nameSelf": "testinterpreter",
+  "canInterpretType": "testInterpreter-ObjectType",
+  "nameSelf": "testInterpreter",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -14,27 +14,23 @@
             {
               "key": "HeaderImageDisplay",
               "value": {
-                "objRef": "imageDUID",
+                "objRef": "imgDispUID",
                 "propRef": null
               },
-              "ldType": "InterpreterType"
+              "ldType": "InterpreterClassType"
             },
             {
               "key": "HeaderText",
               "value": {
-                "objRef": "prodRUID",
+                "objRef": "prodRetrUID",
                 "propRef": "http://schema.org/name"
               },
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "SubHeaderText",
-              "ldType": "http://schema.org/Text"
-            },
-            {
               "key": "Description",
               "value": {
-                "objRef": "prodRUID",
+                "objRef": "prodRetrUID",
                 "propRef": "http://schema.org/description"
               },
               "ldType": "http://schema.org/Text"
@@ -43,29 +39,29 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "imageDUID": {
+        "imgDispUID": {
           "subInterpreterOf": "shnyder/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
-          "nameSelf": "imageDUID",
+          "nameSelf": "imgDispUID",
           "initialKvStores": [
             {
               "key": "http://schema.org/name",
               "value": {
-                "objRef": "imageRUID",
+                "objRef": "imgRetrUID",
                 "propRef": "http://schema.org/name"
               }
             },
             {
               "key": "http://schema.org/fileFormat",
               "value": {
-                "objRef": "imageRUID",
+                "objRef": "imgRetrUID",
                 "propRef": "http://schema.org/fileFormat"
               }
             },
             {
               "key": "http://schema.org/contentUrl",
               "value": {
-                "objRef": "imageRUID",
+                "objRef": "imgRetrUID",
                 "propRef": "http://schema.org/contentUrl"
               }
             }
@@ -73,20 +69,25 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "imageRUID": {
+        "imgRetrUID": {
           "subInterpreterOf": "shnyder/imageRetriever",
           "canInterpretType": "shnyder/imageRetriever-ObjectType",
-          "nameSelf": "imageRUID",
+          "nameSelf": "imgRetrUID",
           "initialKvStores": [
             {
+              "key": "externalReferenceKey",
+              "value": "extImgRRef",
+              "ldType": "http://schema.org/Text"
+            },
+            {
               "key": "srvURL",
-              "value": "http:/imageurl",
+              "value": "http://image",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "identifier",
               "value": {
-                "objRef": "prodRUID",
+                "objRef": "prodRetrUID",
                 "propRef": "http://schema.org/image"
               },
               "ldType": "http://schema.org/Text"
@@ -95,14 +96,19 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "prodRUID": {
+        "prodRetrUID": {
           "subInterpreterOf": "shnyder/productRetriever",
           "canInterpretType": "shnyder/productRetriever-ObjectType",
-          "nameSelf": "prodRUID",
+          "nameSelf": "prodRetrUID",
           "initialKvStores": [
             {
+              "key": "externalReferenceKey",
+              "value": "extProdRRef",
+              "ldType": "http://schema.org/Text"
+            },
+            {
               "key": "srvURL",
-              "value": "http://producturl",
+              "value": "http://product",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -120,7 +126,7 @@
   "crudSkills": "cRud",
   "interpretableKeys": [
     {
-      "objRef": "prodRUID",
+      "objRef": "prodRetrUID",
       "propRef": "identifier"
     }
   ]

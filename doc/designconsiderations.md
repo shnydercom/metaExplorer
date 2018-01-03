@@ -24,6 +24,7 @@ declarative linked data: ldBlueprints is used for class-level declarations, ldOp
     -- b) although self-adding would be nice, it would _only_ add the Pure**-class, not the redux-wrapped function
 
 # connecting react, redux and ld-interpreters
+- functions and classes should be moved out of the store, rather keep a reference to a runtime-store for such things
 - all ld-interpreters should implement the following, if they want to interact with redux
 type OwnProps = {
         ldTokenString: string;

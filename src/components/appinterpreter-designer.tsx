@@ -142,7 +142,15 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
- 	render() {
+	onIncreaseIDButtonClick = (e) => {
+		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+		let kvChangeVar = newLDOptions.resource.kvStores.find((val) => val.ldType && val.ldType.endsWith(UserDefDict.standardInterpreterObjectTypeSuffix));
+		if (!kvChangeVar || !kvChangeVar.value) return;
+		kvChangeVar.value.identifier = kvChangeVar.value.identifier !== null ? kvChangeVar.value.identifier + 1 : 0;
+		this.props.notifyLDOptionsChange(newLDOptions);
+	}
+
+	render() {
 		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
 			return <div>{this.errorNotAvailableMsg}</div>;
 		}
@@ -162,7 +170,8 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 				<div className="vertical-scroll">
 					<Button onClick={this.onTestBtnClick}>serialize!</Button>
 					<Button onClick={this.onPrefilledButtonClick}>preFilled!</Button>
-					<GenericContainer ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null}/>
+					<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
+					<GenericContainer ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null} />
 					<small><pre>{this.state.serialized}</pre></small>
 				</div>
 			</Splitter>

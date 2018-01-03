@@ -4,11 +4,18 @@ import { IKvStore } from "ldaccess/ikvstore";
 import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from "ldaccess/ldBlueprint";
 import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { ILDOptions } from "ldaccess/ildoptions";
+import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
+import { UserDefDict } from "ldaccess/UserDefDict";
 
 export var imageRetrieverName = "shnyder/imageRetriever";
 let cfgIntrprtKeys: string[] =
-	[SideFXDict.srvURL, SideFXDict.identifier];
+	[UserDefDict.externalReferenceKey, SideFXDict.srvURL, SideFXDict.identifier];
 let initialKVStores: IKvStore[] = [
+	{
+		key: UserDefDict.externalReferenceKey,
+		value: undefined,
+		ldType: LDDict.Text
+	},
 	{
 		key: SideFXDict.srvURL,
 		value: undefined,
@@ -48,6 +55,12 @@ let bpCfg: BlueprintConfig = {
 export class ImageRetriever implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
+	constructor() {
+		this.cfg = this.constructor["cfg"];
+	}
+	consumeLDOptions = (ldOptions: ILDOptions) => {
+		console.log("non-empty");
+		return;
+	};
 }

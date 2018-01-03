@@ -15,6 +15,10 @@ import * as React from "react";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { ILDResource } from "ldaccess/ildresource";
+import { applicationStore } from "approot";
+import { ldNonVisSETAction } from "appstate/epicducks/ldNonVisual-duck";
+import { connectNonVisLDComp } from "sidefx/nonVisualConnect";
+import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 
 type InterpretableKeysInfo = {
 	ref: ObjectPropertyRef,
@@ -37,6 +41,7 @@ export class RefMapTypeDesintegrator {
 	ldOptionsPrepMap: OutputLDOptionsPrepMap;
 	headInterpreterLnk: string;
 	interpreterMap: InterpreterMap;
+	extIntReferenceMap: Map<string, string> = new Map();
 	retriever: ReduxInterpreterRetriever = appIntRetrFn() as ReduxInterpreterRetriever;
 	public setRefMapBP = (input: BlueprintConfig) => {
 		let refMapCandidate: any = null;
@@ -67,7 +72,19 @@ export class RefMapTypeDesintegrator {
 			if (refMapCandidate.hasOwnProperty(cfgKey)) {
 				let cfgVal: BlueprintConfig = refMapCandidate[cfgKey];
 				//construct actual interpreter-classes
-				this.interpreterMap[cfgKey] = this.assignSubBPCfgToInterpreter(cfgVal, cfgKey);
+				let extRef = getKVStoreByKey(cfgVal.initialKvStores, UserDefDict.externalReferenceKey);
+				let mapKey = extRef && extRef.value ? extRef.value : cfgKey;
+				this.extIntReferenceMap.set(cfgKey, mapKey);
+				this.interpreterMap[mapKey] = this.assignSubBPCfgToInterpreter(cfgVal, cfgKey);
+			}
+		}
+		for (const intrprtrKey in this.interpreterMap) {
+			if (this.interpreterMap.hasOwnProperty(intrprtrKey)) {
+				const lIntrprtr = this.interpreterMap[intrprtrKey];
+				if (!isReactComponent(lIntrprtr)) {
+					connectNonVisLDComp(intrprtrKey, new lIntrprtr());
+				}
+				//applicationStore.dispatch(ldNonVisSETAction(intrprtrKey, new lIntrprtr()));
 			}
 		}
 		//diese keys werden dafür verwendet, den input type bei Änderungen weiter zu geben.
@@ -85,14 +102,27 @@ export class RefMapTypeDesintegrator {
 		for (let pmKey in this.ldOptionsPrepMap) {
 			if (this.ldOptionsPrepMap.hasOwnProperty(pmKey)) {
 				let targetIntrprtrLnk: string = pmKey;
+				let targetLDToken: ILDToken;
+				if (targetIntrprtrLnk !== this.extIntReferenceMap.get(targetIntrprtrLnk)) {
+					targetIntrprtrLnk = this.extIntReferenceMap.get(targetIntrprtrLnk);
+					targetLDToken = new NetworkPreferredToken(targetIntrprtrLnk);
+				} else {
+					targetLDToken = this.createConcatNetworkPreferredToken(inputLDTokenString, targetIntrprtrLnk);
+				}
 				let pmVal = this.ldOptionsPrepMap[pmKey];
 				pmVal.refs.forEach((tupel: OutputLDOptionsTupel) => {
 					//setting the link on the source Map (outputKvMaps):
+					let targetIntrprtrCfg: BlueprintConfig = this.interpreterMap[targetIntrprtrLnk].cfg;
 					let targetPropLnk: string = tupel.key;
 					let sourceIntrprtLnk = tupel.objPropRef.objRef;
 					let sourceProperty = tupel.objPropRef.propRef;
-					let targetLDToken: ILDToken = this.createConcatNetworkPreferredToken(inputLDTokenString, targetIntrprtrLnk);
-					let sourcLDToken: ILDToken = this.createConcatNetworkPreferredToken(inputLDTokenString, sourceIntrprtLnk);
+					let sourcLDToken: ILDToken;
+					if (sourceIntrprtLnk !== this.extIntReferenceMap.get(sourceIntrprtLnk)) {
+						sourceIntrprtLnk = this.extIntReferenceMap.get(sourceIntrprtLnk);
+						sourcLDToken = new NetworkPreferredToken(sourceIntrprtLnk);
+					} else {
+						sourcLDToken = this.createConcatNetworkPreferredToken(inputLDTokenString, sourceIntrprtLnk);
+					}
 					let newOKVMObj: OutputKVMapElement = {
 						targetLDToken: targetLDToken,
 						targetProperty: targetPropLnk
@@ -103,7 +133,6 @@ export class RefMapTypeDesintegrator {
 					subSlice = { ...subSlice, [sourceProperty]: newOKVMObj };
 					subOutputKVmaps[sourceIntrprtLnk] = subSlice;
 					//setting the link and interpreter on the target (initialKvStores):
-					let targetIntrprtrCfg: BlueprintConfig = this.interpreterMap[targetIntrprtrLnk].cfg;
 					let targetKey = targetPropLnk;
 					let targetValue = sourcLDToken.get();
 					let targetLDType = this.determineType(sourceProperty);
@@ -128,12 +157,18 @@ export class RefMapTypeDesintegrator {
 		for (let okvmKey in input) {
 			if (input.hasOwnProperty(okvmKey)) {
 				let okvm = input[okvmKey];
+				let compLDToken: ILDToken;
+				if (okvmKey !== this.extIntReferenceMap.get(okvmKey)) {
+					compLDToken = new NetworkPreferredToken(okvmKey);
+				} else {
+					compLDToken = this.createConcatNetworkPreferredToken(ldTokenString, okvmKey);
+				}
 				//create link on target
 				for (let propKey in okvm) {
 					if (okvm.hasOwnProperty(propKey)) {
 						let prop = okvm[propKey];
 						let ldSubTokenString = prop.targetLDToken.get();
-						let reverseToken = this.createConcatNetworkPreferredToken(ldTokenString, okvmKey);
+						let reverseToken = compLDToken; //this.createConcatNetworkPreferredToken(ldTokenString, okvmKey);
 						if (!rv[ldSubTokenString]) {
 							let lang: string;
 							let resource: ILDResource = {
@@ -154,7 +189,6 @@ export class RefMapTypeDesintegrator {
 					}
 				}
 				//create link on source
-				let compLDToken = this.createConcatNetworkPreferredToken(ldTokenString, okvmKey);
 				let sourceresource: ILDResource = {
 					kvStores: [{ key: UserDefDict.outputKVMapKey, ldType: UserDefDict.outputKVMapType, value: okvm }],
 					webInResource: null,
@@ -169,7 +203,7 @@ export class RefMapTypeDesintegrator {
 		return rv;
 	}
 
-	public fillOutputKVMaps(ldTokenString: string, soKVM: { [s: string]: OutputKVMap }): LDOptionsMap {
+	/*public fillOutputKVMaps(ldTokenString: string, soKVM: { [s: string]: OutputKVMap }): LDOptionsMap {
 		let rv: LDOptionsMap = {};
 		for (let intrprtrKey in this.interpreterMap) {
 			if (this.interpreterMap.hasOwnProperty(intrprtrKey)) {
@@ -187,7 +221,7 @@ export class RefMapTypeDesintegrator {
 			}
 		}
 		return rv;
-	}
+	}*/
 
 	private assignSubBPCfgToInterpreter(bpCfg: BlueprintConfig, bpKey: string): any {
 		let rv: any;

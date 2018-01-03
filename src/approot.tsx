@@ -12,21 +12,23 @@ import ImageUploadComponent from 'components/imageupload-component';
 //import { DiagramEngine } from 'storm-react-diagrams'
 import './styles/styles.scss';
 import DevTools from './appstate/devTools';
+import { initLDConnect } from 'sidefx/nonVisualConnect';
 
 const initialState: ExplorerState = {
-	ldoptionsMap: {}
+	ldoptionsMap: {},
+	ldNonVisualMap: {}
 };
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 export interface AppRootProps { }
-const store: redux.Store<ExplorerState> = configureStore(initialState);
-
+export const applicationStore: redux.Store<ExplorerState> = configureStore(initialState);
+initLDConnect();
 const appinterpreterToken: string = Toolkit.UID();
 
 export const AppRoot: React.SFC<AppRootProps> = () => {
 	return (
-		<Provider store={store}>
+		<Provider store={applicationStore}>
 			<div>
 				<p>React is working</p>
 				<AppInterpreterDesigner ldTokenString={appinterpreterToken} outputKVMap={null}/>

@@ -4,7 +4,6 @@ import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from
 import * as React from "react";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
-import { ldOptionsClientSideUpdateAction, ldOptionsClientSideCreateAction } from "appstate/epicducks/ldOptions-duck";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { ExplorerState } from "appstate/store";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
@@ -15,6 +14,9 @@ import { PureImgDisplay } from "components/imagedisplay-component";
 import { GenericContainer } from "components/generic/genericContainer-component";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
 import { compNeedsUpdate } from "components/reactUtils/compUtilFns";
+import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
+import { ILDResource } from "ldaccess/ildresource";
+import { ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";
 
 export type OwnProps = {
 	searchCrudSkills: string;
@@ -32,7 +34,7 @@ let bpCfg: BlueprintConfig = {
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
-
+//TODO: move state-relevant ldOptionsMap-Entry genration outside of the component, or make this a non-visual interpreter
 @ldBlueprint(bpCfg)
 export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
 	implements IBlueprintInterpreter {
@@ -40,26 +42,59 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 	subOutputKVMap: { [s: string]: OutputKVMap };
 	rmtd: RefMapTypeDesintegrator;
 	initialKvStores: IKvStore[];
+	subCfg: BlueprintConfig;
 	constructor(props?: any) {
 		super(props);
 		let compBPCfg: BlueprintConfig = this.constructor["cfg"];
+		this.subCfg = compBPCfg;
 		this.rmtd = new RefMapTypeDesintegrator();
 		this.rmtd.setRefMapBP(compBPCfg);
 		let ldTS: string = this.props.ldTokenString;
 		if (ldTS && ldTS !== "" && ldTS.length > 0) {
 			this.subOutputKVMap = this.rmtd.fillSubOutputKVmaps(ldTS);
 			this.fillLDOptions();
+			//this.consumeLDOptions(this.props.ldOptions);
 		}
 	}
 
 	consumeLDOptions = (ldOptions: ILDOptions) => {
 		if (!ldOptions) return;
+		if (!ldOptions.resource || !ldOptions.resource.kvStores || ldOptions.resource.kvStores.length === 0) return;
+		let kvs = ldOptions.resource.kvStores;
+		this.subCfg.interpretableKeys.forEach((singleIntrpblKey) => {
+			kvs.forEach((val, idx) => {
+				if (val.ldType === this.subCfg.nameSelf) return;
+				if (val.value == null) return;
+				let ldTokenRef: ILDToken;
+				let lObjRef = (singleIntrpblKey as ObjectPropertyRef).objRef;
+				if (lObjRef !== this.rmtd.extIntReferenceMap.get(lObjRef)) {
+					ldTokenRef = new NetworkPreferredToken(this.rmtd.extIntReferenceMap.get(lObjRef));
+				} else {
+					ldTokenRef = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, lObjRef);
+				}
+				let ldPropRef = (singleIntrpblKey as ObjectPropertyRef).propRef;
+				let ldValue = val.value[ldPropRef];
+				let newLDResource: ILDResource = {
+					webInResource: null,
+					webOutResource: null,
+					kvStores: [{ key: ldPropRef, value: ldValue, ldType: null }]
+				};
+				let newLDOptions: ILDOptions = {
+					isLoading: false,
+					lang: null,
+					ldToken: ldTokenRef,
+					resource: newLDResource
+				};
+				this.props.notifyLDOptionsChange(newLDOptions);
+			});
+		});
 	}
 
 	componentWillReceiveProps(nextProps: OwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
 		if (compNeedsUpdate(nextProps, this.props)) {
 			this.subOutputKVMap = this.rmtd.fillSubOutputKVmaps(nextProps.ldTokenString);
 			this.fillLDOptions();
+			this.consumeLDOptions(nextProps.ldOptions);
 		}
 	}
 
@@ -97,7 +132,7 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 		</div>;
 	}
 
-	private fillLDOptions(){
+	private fillLDOptions() {
 		let ldOptionsMap = this.rmtd.fillLDOptions(this.subOutputKVMap, this.props.ldTokenString);
 		for (const ldOptKey in ldOptionsMap) {
 			if (ldOptionsMap.hasOwnProperty(ldOptKey)) {

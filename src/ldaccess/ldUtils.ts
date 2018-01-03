@@ -26,6 +26,7 @@ export let isObjPropertyRef = (input: any): boolean => {
  * @param b the other ldOptions-Obj
  */
 export let isLDOptionsSame = (a: ILDOptions, b: ILDOptions): boolean => {
+	if ((!a || !b) && !(!a && !b) ) return false;
 	if (a.isLoading !== b.isLoading) return false;
 	if (a.lang !== b.lang) return false;
 	if (a.ldToken !== b.ldToken) return false;
@@ -34,14 +35,15 @@ export let isLDOptionsSame = (a: ILDOptions, b: ILDOptions): boolean => {
 	let kvsA = a.resource.kvStores;
 	let kvsB = b.resource.kvStores;
 	if (kvsA.length !== kvsB.length) return false;
+	let isKVsSame: boolean = true;
 	kvsA.forEach((aVal, idx: number) => {
 		let bVal = kvsB[idx];
-		if (aVal.key !== bVal.key) return false;
-		if (aVal.ldType !== bVal.ldType) return false;
-		if (aVal.value !== bVal.value) return false;
-		if (aVal.intrprtrClass !== bVal.intrprtrClass) return false;
+		if (aVal.key !== bVal.key) { isKVsSame = false; return; }
+		if (aVal.ldType !== bVal.ldType) { isKVsSame = false; return; }
+		if (aVal.value !== bVal.value) { isKVsSame = false; return; }
+		if (aVal.intrprtrClass !== bVal.intrprtrClass) { isKVsSame = false; return; }
 	});
-	return true;
+	return isKVsSame;
 };
 
 export let ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {
@@ -49,7 +51,7 @@ export let ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {
 	let newKVStores: IKvStore[] = [];
 	input.resource.kvStores.forEach((elem) => {
 		let newKey = elem.key ? "" + elem.key : null;
-		let newValue = elem.value ? {...elem.value} : null;
+		let newValue = elem.value ? { ...elem.value } : null;
 		let newLDType = elem.ldType ? "" + elem.ldType : null;
 		let newKvSingle: IKvStore = {
 			intrprtrClass: elem.intrprtrClass,
@@ -57,6 +59,7 @@ export let ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {
 			value: newValue,
 			ldType: newLDType
 		};
+		newKVStores.push(newKvSingle);
 	});
 	let newWebInResource: IWebResource;
 	let newWebOutResource: string;
