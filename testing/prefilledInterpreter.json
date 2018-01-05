@@ -81,7 +81,7 @@
             },
             {
               "key": "srvURL",
-              "value": "http://image",
+              "value": "localhost:1111/static/imgTestObjs/{identifier}",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -108,7 +108,7 @@
             },
             {
               "key": "srvURL",
-              "value": "http://product",
+              "value": "localhost:1111/static/productTestObjs/{identifier}",
               "ldType": "http://schema.org/Text"
             },
             {

@@ -10,18 +10,15 @@ d) wenn values von einem Interpreter generiert werden, dann werden die im Explor
 
 #Node-serialization:
 done - flatten KvStores into BPCfg						!!!
-- External Input Markers to main BPCfg   !!
+done - External Input Markers to main BPCfg   !!
+done - redux-connection soll erst in einem speziellen Interpreter connected werden, um sie davor beliebig extenden zu können
+done - Nächstes Todo ist in designer-logic.addBlueprintToRetriever() anzusetzen, eine Interpreter-Container-Klasse zu bauen, die dann von dem GenericContainer gelesen werden kann, das ist InterpreterReferenceMapType-component
+done - Interpreter-ReferenceMapType.cfg lesen, daraus in componentWillMount() das Setup bauen, in componentWillReceiveProps() die entsprechenden Werte zuweisen 
+done - Im ImgHeadSubDescr-Component die cfg lesen und daraus eine Sub-Komponente erstellen und befüllen.
+done - Im InterpreterRefMap-Component die ILDOptions-Objekte erstellen und ggf füllen
 - handle circular references
 - instead of ldOptionsMap-Entries being created in genericContainer by displayedType, they should only create entries when there's no matching ldTokenString. PortselectorWidget should create and modify entry. GenericContainer can only hold LDOptions, i.e. "instances" vs "classes"
-- redux-connection soll erst in einem speziellen Interpreter connected werden, um sie davor beliebig extenden zu können
 
-
-Nächstes Todo ist in designer-logic.addBlueprintToRetriever() anzusetzen, eine Interpreter-Container-Klasse zu bauen, die dann von dem GenericContainer gelesen werden kann, das ist InterpreterReferenceMapType-component
-
-Interpreter-ReferenceMapType.cfg lesen, daraus in componentWillMount() das Setup bauen, in componentWillReceiveProps() die entsprechenden Werte zuweisen 
-
-Im ImgHeadSubDescr-Component die cfg lesen und daraus eine Sub-Komponente erstellen und befüllen.
-Im InterpreterRefMap-Component die ILDOptions-Objekte erstellen und ggf füllen
 
 last serialized bits & pieces: seems to work!
 {

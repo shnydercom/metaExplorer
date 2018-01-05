@@ -1,0 +1,15 @@
+{
+    "@context": {
+        "@vocab": "http://schema.org/",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+    },
+    "@id": "http://shnyder.com/Sanostol",
+    "@language": "en",
+    "@type": "http://schema.org/Product",
+    "http://schema.org/gtin13": [
+        "123Sanostol321"
+    ],
+    "http://schema.org/name": [
+        "Sanostol general class"
+    ]
+}

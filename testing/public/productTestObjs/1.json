@@ -1,0 +1,18 @@
+{
+    "@context": {
+        "@vocab": "http://schema.org/",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+    },
+    "@id": "http://shnyder.com/Aptamil",
+    "@language": "en",
+    "@type": "http://schema.org/Product",
+    "http://schema.org/name": [
+        "Aptamil general class"
+    ],
+    "http://schema.org/gtin13": [
+        "123Aptamil321"
+    ],
+    "http://schema.org/image": [
+        "http://shnyder.com/84f446e0-3e4f-4e11-a65c-fb5498b66d98"
+    ]
+}

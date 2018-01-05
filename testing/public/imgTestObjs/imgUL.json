@@ -1,0 +1,18 @@
+{
+    "@context": {
+        "@vocab": "http://schema.org/",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+    },
+    "@id": "http://shnyder.com/b1e74762-39d3-4de6-8704-5b1b8b430e48",
+    "@language": "en",
+    "@type": "http://schema.org/ImageObject",
+    "http://schema.org/fileFormat": [
+        "image/png"
+    ],
+    "http://schema.org/contentUrl": [
+        "b1e74762-39d3-4de6-8704-5b1b8b430e48"
+    ],
+    "http://schema.org/name": [
+        "logo.png"
+    ]
+}

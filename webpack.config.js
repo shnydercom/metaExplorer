@@ -2,6 +2,8 @@ const webpack = require('webpack')
 const path = require('path')
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const extractSass = new ExtractTextPlugin({
   filename: "[name].[contenthash].css",
@@ -170,6 +172,12 @@ module.exports = {
       commonjs2: 'react-dom',
       commonjs: 'react-dom',
       amd: 'react-dom'
+    },
+    'urijs': {
+      root: 'urijs',
+      commonjs2: 'urijs',
+      commonjs: 'urijs',
+      amd: 'urijs'
     }
     /*,
         "lodash": {
@@ -180,6 +188,8 @@ module.exports = {
         }*/
   },
   plugins: [
+    new WriteFilePlugin(),
+    new CopyWebpackPlugin([ { from: 'testing/public', to: 'static' } ]),
     new ExtractTextPlugin('style.css', {
       allChunks: true
     })

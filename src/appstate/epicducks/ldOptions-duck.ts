@@ -78,7 +78,7 @@ export const ldOptionsMapReducer = (
 					)
 				) {
 					isUpdateNeeded = true;
-				}else{
+				} else {
 					//check kvStores in detail, quick and dirty deep compare
 					let kvStoresA: IKvStore[] = action.kvStores;
 					let kvStoresB: IKvStore[] = singleLDOptions.resource.kvStores;
@@ -105,11 +105,13 @@ export const ldOptionsMapReducer = (
 		case LDOPTIONS_CLIENTSIDE_UPDATE:
 			console.dir(action);
 			let tokenVal = (action.updatedLDOptions.ldToken as NetworkPreferredToken).get();
-			let updatedLDOptionsObj = {... action.updatedLDOptions};
+			let updatedLDOptionsObj = { ...action.updatedLDOptions };
 			console.log(updatedLDOptionsObj === action.updatedLDOptions);
 			let updatedState = Object.assign({}, state, { [tokenVal]: updatedLDOptionsObj });
 			return updatedState;
 		case LDOPTIONS_REQUEST_ASYNC:
+			console.log("async ldoptions request");
+			console.dir(action);
 			return state;
 		case LDOPTIONS_REQUEST_RESULT:
 			return state;
@@ -124,12 +126,21 @@ export const ldOptionsMapReducer = (
 export const requestLDOptionsEpic = (action$: ActionsObservable<any>, store: any, { ldOptionsAPI }: any) => {
 	return action$.ofType(LDOPTIONS_REQUEST_ASYNC)
 		.do(() => console.log("Requesting LD Options from network"))
-		.mergeMap((action) =>
-			ldOptionsAPI.postNewImage(action.uploadData, action.targetUrl)
-				.map((response: IWebResource) => ldOptionsResultAction(response))
-				.catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
-					ActionsObservable.of(ldOptionsFailureAction(
-						'An error occured during image uploading: ${error.message}'
-					)))
-		);
+		.mergeMap((action) => {
+			if (action.uploadData === null) {
+				return ldOptionsAPI.postLDOptions(action.uploadData, action.targetUrl)
+					.map((response: IWebResource) => ldOptionsResultAction(response))
+					.catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
+						ActionsObservable.of(ldOptionsFailureAction(
+							'An error occured during ld getting: ${error.message}'
+						)));
+			} else {
+				return ldOptionsAPI.postLDOptions(action.uploadData, action.targetUrl)
+					.map((response: IWebResource) => ldOptionsResultAction(response))
+					.catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
+						ActionsObservable.of(ldOptionsFailureAction(
+							'An error occured during ld posting: ${error.message}'
+						)));
+			}
+		});
 };
