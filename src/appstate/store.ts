@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, Store, compose } from 'redux';
+import { createStore, applyMiddleware, Store, compose, GenericStoreEnhancer } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { rootEpic, rootReducer } from './rootduck';
 import { ajax } from 'rxjs/observable/dom/ajax';
@@ -27,7 +27,7 @@ export interface ILDNonvisualIntrprtrMapStatePart {
 }
 
 const isProduction = process.env.NODE_ENV === 'production';
-let middleWare = isProduction ? applyMiddleware(epicMiddleware) : (applyMiddleware(epicMiddleware), DevTools.instrument());
+let middleWare = isProduction ? applyMiddleware(epicMiddleware) : compose(applyMiddleware(epicMiddleware), DevTools.instrument()) as GenericStoreEnhancer;
 export interface ExplorerState {
   isSaving?: boolean;
   isLoading?: boolean;
@@ -39,8 +39,7 @@ export function configureStore(initialState: ExplorerState): Store<ExplorerState
   const store: Store<ExplorerState> = createStore<ExplorerState>(
     rootReducer,
     initialState,
-    (applyMiddleware(epicMiddleware),
-      DevTools.instrument())
+    middleWare
   );
   return store;
 }
