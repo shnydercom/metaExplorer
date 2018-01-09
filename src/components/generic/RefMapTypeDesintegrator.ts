@@ -144,7 +144,6 @@ export class RefMapTypeDesintegrator {
 						intrprtrClass: targetIntrprtrClass
 					};
 					targetIntrprtrCfg.initialKvStores.push(newTargetKV);
-					console.log(targetIntrprtrCfg);
 				});
 			}
 		}

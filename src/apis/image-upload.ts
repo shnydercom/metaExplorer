@@ -22,7 +22,7 @@ export class ImageUploadAPI {  // URL to web api IRI resource
             throw new LDError("Bad response from server");
           }
           var testVar = HydraClientAPI.getHCSingleton().getHypermediaProcessor(response);
-          var procResource = HydraClientAPI.getHCSingleton().getHypermediaProcessor(response).process(response).then((hydraResponse) => {
+          var procResource = HydraClientAPI.getHCSingleton().getHypermediaProcessor(response).process(response, HydraClientAPI.getHCSingleton()).then((hydraResponse) => {
             console.dir(hydraResponse);
             return hydraResponse;
           });

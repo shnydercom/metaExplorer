@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { IKvStore } from "ldaccess/ikvstore";
 import { LDOwnProps } from "appstate/LDProps";
 

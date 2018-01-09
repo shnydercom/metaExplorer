@@ -16,8 +16,15 @@ export class LDRetrieverSuper implements IBlueprintInterpreter {
 	srvUrl: string;
 	identifier: string | number;
 	isDirty: boolean = false;
+	retrieverStoreKey: string; //needed when requesting asynchronously, so that the output can find this
 	constructor() {
 		this.cfg = this.constructor["cfg"];
+		this.retrieverStoreKey = this.cfg.nameSelf;
+		if (this.cfg.initialKvStores) {
+			let extRefKey = this.cfg.initialKvStores.find(
+				(val) => val.key === UserDefDict.externalReferenceKey);
+			this.retrieverStoreKey = extRefKey.value ? extRefKey.value : this.retrieverStoreKey;
+		}
 	}
 	consumeLDOptions = (ldOptions: ILDOptions) => {
 		if (!ldOptions || !ldOptions.resource || !ldOptions.resource.kvStores) return;
@@ -46,7 +53,8 @@ export class LDRetrieverSuper implements IBlueprintInterpreter {
 				let requestURL = URI.expand(this.srvUrl, {
 					identifier: this.identifier
 				});
-				applicationStore.dispatch(ldOptionsRequestAction(null, requestURL.valueOf()));
+				let reqAsString = requestURL.valueOf();
+				applicationStore.dispatch(ldOptionsRequestAction(null, reqAsString, this.retrieverStoreKey));
 			}
 		}
 	}

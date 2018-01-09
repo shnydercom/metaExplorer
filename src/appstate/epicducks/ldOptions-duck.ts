@@ -18,9 +18,9 @@ export const LDOPTIONS_REQUEST_RESULT = 'shnyder/LDOPTIONS_REQUEST_RESULT';
 export type LDAction =
 	{ type: 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE', kvStores: IKvStore[], lang: string, alias: string }
 	| { type: 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE', updatedLDOptions: ILDOptions }
-	| { type: 'shnyder/LDOPTIONS_REQUEST_ASYNC', uploadData: ILDOptions, targetUrl: string }
-	| { type: 'shnyder/LDOPTIONS_REQUEST_RESULT', ldOptionsPayload: IWebResource }
-	| { type: 'shnyder/LDOPTIONS_REQUEST_ERROR', message: string };
+	| { type: 'shnyder/LDOPTIONS_REQUEST_ASYNC', uploadData: ILDOptions, targetUrl: string, targetReceiverLnk: string }
+	| { type: 'shnyder/LDOPTIONS_REQUEST_RESULT', ldOptionsPayload: IWebResource, targetReceiverLnk: string }
+	| { type: 'shnyder/LDOPTIONS_REQUEST_ERROR', message: string, targetReceiverLnk: string };
 
 //Action factories, return action objects
 export const ldOptionsClientSideCreateAction = (kvStores: IKvStore[], lang: string, alias: string) => ({
@@ -35,20 +35,23 @@ export const ldOptionsClientSideUpdateAction = (updatedLDOptions: ILDOptions) =>
 	updatedLDOptions: updatedLDOptions
 });
 
-export const ldOptionsRequestAction = (uploadData: ILDOptions, targetUrl: string) => ({
+export const ldOptionsRequestAction = (uploadData: ILDOptions, targetUrl: string, targetReceiverLnk) => ({
 	type: LDOPTIONS_REQUEST_ASYNC,
 	uploadData: uploadData,
-	targetUrl: targetUrl
+	targetUrl: targetUrl,
+	targetReceiverLnk
 });
 
-export const ldOptionsResultAction = (ldOptionsPayload: IWebResource) => ({
+export const ldOptionsResultAction = (ldOptionsPayload: IWebResource, targetReceiverLnk) => ({
 	type: LDOPTIONS_REQUEST_RESULT,
-	ldOptionsPayload
+	ldOptionsPayload,
+	targetReceiverLnk
 });
 
-export const ldOptionsFailureAction = (message: string): LDErrorMsgState => ({
+export const ldOptionsFailureAction = (message: string, targetReceiverLnk): LDErrorMsgState => ({
 	type: LDOPTIONS_REQUEST_ERROR,
-	message
+	message,
+	targetReceiverLnk
 });
 
 //this will modify the hashmap containing all the ILDOptions
@@ -103,10 +106,8 @@ export const ldOptionsMapReducer = (
 			}
 			break;
 		case LDOPTIONS_CLIENTSIDE_UPDATE:
-			console.dir(action);
 			let tokenVal = (action.updatedLDOptions.ldToken as NetworkPreferredToken).get();
 			let updatedLDOptionsObj = { ...action.updatedLDOptions };
-			console.log(updatedLDOptionsObj === action.updatedLDOptions);
 			let updatedState = Object.assign({}, state, { [tokenVal]: updatedLDOptionsObj });
 			return updatedState;
 		case LDOPTIONS_REQUEST_ASYNC:
@@ -114,8 +115,11 @@ export const ldOptionsMapReducer = (
 			console.dir(action);
 			return state;
 		case LDOPTIONS_REQUEST_RESULT:
+			let lnk = action.targetReceiverLnk;
+			let payload = action.ldOptionsPayload;
 			return state;
 		case LDOPTIONS_REQUEST_ERROR:
+			console.log('ldOptions Error message received, subMsg: ' + action.message);
 			return state;
 		default:
 			return state;
@@ -127,19 +131,20 @@ export const requestLDOptionsEpic = (action$: ActionsObservable<any>, store: any
 	return action$.ofType(LDOPTIONS_REQUEST_ASYNC)
 		.do(() => console.log("Requesting LD Options from network"))
 		.mergeMap((action) => {
+			console.log(action.targetReceiverLnk);
 			if (action.uploadData === null) {
-				return ldOptionsAPI.postLDOptions(action.uploadData, action.targetUrl)
-					.map((response: IWebResource) => ldOptionsResultAction(response))
+				return ldOptionsAPI.getLDOptions(action.targetUrl)
+					.map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
 					.catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
 						ActionsObservable.of(ldOptionsFailureAction(
-							'An error occured during ld getting: ${error.message}'
+							`An error occured during ld getting: ${error.message + " " + error.stack}`, action.targetReceiverLnk
 						)));
 			} else {
 				return ldOptionsAPI.postLDOptions(action.uploadData, action.targetUrl)
-					.map((response: IWebResource) => ldOptionsResultAction(response))
+					.map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
 					.catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
 						ActionsObservable.of(ldOptionsFailureAction(
-							'An error occured during ld posting: ${error.message}'
+							`An error occured during ld posting: ${error.message + " " + error.stack}`, action.targetReceiverLnk
 						)));
 			}
 		});

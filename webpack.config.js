@@ -1,6 +1,8 @@
 const webpack = require('webpack')
 const path = require('path')
 
+const polyfill = require('@babel/polyfill')
+
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const WriteFilePlugin = require('write-file-webpack-plugin');
@@ -14,10 +16,11 @@ module.exports = {
   devtool: "source-map",
 
   // entry point of our application, within the `src` directory (which we add to resolve.modules below):
-  entry: {
-    "index": "./src/index",
+  entry: [
+    //"index": 
+    '@babel/polyfill', "./src/index"
     //"css": "./styles/styles.scss"
-  },
+  ],
 
   // configure the output directory and publicPath for the devServer
   output: {
@@ -58,12 +61,35 @@ module.exports = {
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
       {
         test: /\.tsx?$/,
-        use: [{
-            loader: 'babel-loader'
+        //exclude: /(node_modules)/,
+        use: [
+          {
+            loader: 'babel-loader',
+            /* .babelrc
+                        "presets": [
+                          "es2015",
+                          "react"
+                        ],*/
+
+            options: {
+              presets: [
+                '@babel/env',
+                /*{
+                  "targets": {
+                    "chrome": 52
+                  }
+                }]
+              ,*/
+                "@babel/preset-es2015", '@babel/preset-react'
+              ]
+
+              //"@babel/preset-es2015",'@babel/preset-react'],
+            }
           },
           {
             loader: "awesome-typescript-loader"
-          }, /*"awesome-typescript-loader"*/
+          },
+          /*"awesome-typescript-loader"*/
 
         ]
       },
@@ -90,7 +116,7 @@ module.exports = {
           {
             loader: 'typings-for-css-modules-loader',
             options: {
-              camelcase:true,
+              camelcase: true,
               namedExport: true,
               modules: true,
               sourceMap: true,
@@ -115,7 +141,7 @@ module.exports = {
                 modules: true,
                 sourceMap: true,
                 importLoaders: 2,
-                localIdentName: /*[name]--*/'[local]'//--[hash:base64:8]'
+                localIdentName: /*[name]--*/ '[local]' //--[hash:base64:8]'
               }
             },
             "postcss-loader",
@@ -189,7 +215,10 @@ module.exports = {
   },
   plugins: [
     new WriteFilePlugin(),
-    new CopyWebpackPlugin([ { from: 'testing/public', to: 'static' } ]),
+    new CopyWebpackPlugin([{
+      from: 'testing/public',
+      to: 'static'
+    }]),
     new ExtractTextPlugin('style.css', {
       allChunks: true
     })

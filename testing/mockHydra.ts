@@ -3,8 +3,8 @@ import { HydraClientAPI } from 'apis/hydra-client';
 
 export function processAsWebResource(input) {
 	var testvar = HydraClientAPI.getHCSingleton();
-	var procResource = HydraClientAPI.getHCSingleton().getHypermediaProcessor(input).process(input);
-	return procResource;
+	//var procResource = HydraClientAPI.getHCSingleton().getHypermediaProcessor(input).process(input);
+	return null; //procResource;
 }
 export function getHydraForURL(url: string): Promise<IWebResource> {
 return fetch(url, {
@@ -21,9 +21,9 @@ return fetch(url, {
 			}
 			// var testVar2 = response.json();
 			var testVar = HydraClientAPI.getHCSingleton().getHypermediaProcessor( response );
-			var procResource = HydraClientAPI.getHCSingleton().getHypermediaProcessor( response ).process( response );
+			//var procResource = HydraClientAPI.getHCSingleton().getHypermediaProcessor( response ).process( response );
 			//console.log(procResource);
 			//var testVar3 = response.headers.get("Content-Type");
-			return procResource;
+			return null; //procResource;
 	} );
 }

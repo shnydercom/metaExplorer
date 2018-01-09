@@ -1,6 +1,7 @@
 {
-    "presets": [
-        "es2015",
-        "react"
+    "plugins": [
+        ["babel-plugin-transform-builtin-extend", {
+            "globals": ["Error", "Array"]
+        }]
     ]
 }

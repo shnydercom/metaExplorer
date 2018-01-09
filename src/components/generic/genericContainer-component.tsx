@@ -16,7 +16,7 @@ import { LDDict } from 'ldaccess/LDDict';
 import { IHypermediaContainer } from 'hydraclient.js/src/DataModel/IHypermediaContainer';
 import { singleHyperMediaToKvStores, multiHyperMediaToKvStores } from 'ldaccess/converterFns';
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
-import { IHypermedia } from 'hydraclient.js/src/DataModel/IHypermedia';
+//import { IHypermedia } from 'hydraclient.js/src/DataModel/IHypermedia';
 import { LDConsts } from 'ldaccess/LDConsts';
 import { isInterpreter, isLDOptionsSame } from 'ldaccess/ldUtils';
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from 'appstate/epicducks/ldOptions-duck';

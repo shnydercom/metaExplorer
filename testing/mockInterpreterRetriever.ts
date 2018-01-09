@@ -17,3 +17,4 @@ export class MockInterpreterRetriever implements IInterpreterRetriever {
 }
 
 export let mockInterpreterRetrieverFn = () => new MockInterpreterRetriever();
+//"http://localhost:3000/dist/static/productTestObjs/{identifier}.json",

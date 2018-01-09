@@ -27,8 +27,7 @@
     "skipLibCheck": false,
     "lib": [
       "dom",
-      "es2015",
-      "es6"
+      "es2017"
     ]
   },
   "exclude": [

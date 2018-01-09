@@ -1,4 +1,4 @@
-import JsonLdHypermediaProcessor from "hydraclient.js/src/DataModel/JsonLd/JsonLdHypermediaProcessor";
+import JsonLdHypermediaProcessor from "hydraclient.js/src/JsonLd/JsonLdHypermediaProcessor";
 import HydraClient from "hydraclient.js/src/HydraClient";
 
 export class HydraClientAPI {
@@ -12,7 +12,7 @@ export class HydraClientAPI {
 
   private static hcSingleton: HydraClient;
   private static initHydra(): void {
-    (HydraClient as any)._hypermediaProcessors.length = 0;
+    //(HydraClient as any)._hypermediaProcessors.length = 0;
     HydraClient.registerHypermediaProcessor(new JsonLdHypermediaProcessor());
     HydraClientAPI.hcSingleton = new HydraClient();
   }
