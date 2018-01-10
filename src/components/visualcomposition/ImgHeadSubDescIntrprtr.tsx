@@ -15,6 +15,8 @@ import { LDOwnProps, LDConnectedDispatch, LDConnectedState } from 'appstate/LDPr
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
 import { elementAt } from 'rxjs/operators/elementAt';
 import { generateIntrprtrForProp } from 'components/generic/generatorFns';
+import { getKVValue } from 'ldaccess/ldUtils';
+import { getKVStoreByKey } from 'ldaccess/kvConvenienceFns';
 
 type OwnProps = {
 	test: string;
@@ -84,6 +86,9 @@ export class PureImgHeadSubDesc extends React.Component<LDConnectedState & LDCon
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	headerImgDisplay: any;
+	headerText: string;
+	subHeaderText: string;
+	description: string;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 	constructor(props: any) {
@@ -101,6 +106,12 @@ export class PureImgHeadSubDesc extends React.Component<LDConnectedState & LDCon
 			ImgHeadSubDescIntrprtr working
 			headerImg:
 			{this.headerImgDisplay}
+			headerText:
+			{this.headerText}
+			subHeaderText:
+			{this.subHeaderText}
+			description:
+			{this.description}
 			children:
 			{this.props.children}
 		</div>;
@@ -110,6 +121,9 @@ export class PureImgHeadSubDesc extends React.Component<LDConnectedState & LDCon
 		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
 			kvs = props.ldOptions.resource.kvStores;
 			this.headerImgDisplay = generateIntrprtrForProp(kvs, VisualDict.headerImgDisplay);
+			this.headerText = getKVValue(getKVStoreByKey(kvs, VisualDict.headerTxt));
+			this.subHeaderText = getKVValue(getKVStoreByKey(kvs, VisualDict.subHeaderTxt));
+			this.description = getKVValue(getKVStoreByKey(kvs, VisualDict.description));
 		}
 		if (!this.headerImgDisplay) {
 			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;

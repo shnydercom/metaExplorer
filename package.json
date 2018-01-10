@@ -16,7 +16,6 @@
   "dependencies": {
     "@types/classnames": "^2.2.3",
     "assert-never": "^1.0.0",
-    "babel-plugin-transform-builtin-extend": "^1.1.2",
     "classnames": "^2.2.0",
     "hydraclient.js": "https://github.com/HydraCG/Heracles.ts.git",
     "i": "^0.3.6",
@@ -41,6 +40,7 @@
     "@babel/polyfill": "^7.0.0-beta.37",
     "@babel/preset-es2015": "^7.0.0-beta.37",
     "@babel/preset-react": "^7.0.0-beta.37",
+    "babel-plugin-transform-builtin-extend": "^1.1.2",
     "@types/jasmine": "^2.6.0",
     "@types/lodash": "^4.14.85",
     "@types/node": "^8.0.51",

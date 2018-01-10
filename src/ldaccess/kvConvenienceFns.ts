@@ -5,7 +5,7 @@ export function getKVStoreByKey(input: IKvStore[], searchKey: string): IKvStore 
 	if (input && input.length > 0) {
 		for (let i = 0; i < input.length; i++) {
 			const elem = input[i];
-			if (elem.key === searchKey) rv = elem; break;
+			if (elem.key === searchKey) { rv = elem; break; }
 		}
 	}
 	return rv;

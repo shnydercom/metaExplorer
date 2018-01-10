@@ -108,7 +108,7 @@
             },
             {
               "key": "srvURL",
-              "value": "http://localhost:1111/rest/ysj/ns/shnyder/Aptamil",
+              "value": "http://localhost:1111/rest/ysj/ns/shnyder/FlyingCar1",
               "ldType": "http://schema.org/Text"
             },
             {

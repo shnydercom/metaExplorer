@@ -61,36 +61,19 @@ module.exports = {
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
       {
         test: /\.tsx?$/,
-        //exclude: /(node_modules)/,
         use: [
           {
             loader: 'babel-loader',
-            /* .babelrc
-                        "presets": [
-                          "es2015",
-                          "react"
-                        ],*/
-
             options: {
               presets: [
                 '@babel/env',
-                /*{
-                  "targets": {
-                    "chrome": 52
-                  }
-                }]
-              ,*/
                 "@babel/preset-es2015", '@babel/preset-react'
               ]
-
-              //"@babel/preset-es2015",'@babel/preset-react'],
             }
           },
           {
             loader: "awesome-typescript-loader"
           },
-          /*"awesome-typescript-loader"*/
-
         ]
       },
       /*{

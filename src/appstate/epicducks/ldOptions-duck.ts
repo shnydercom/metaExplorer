@@ -8,6 +8,7 @@ import { ILDOptionsMapStatePart } from 'appstate/store';
 import { IKvStore } from 'ldaccess/ikvstore';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
+import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 
 export const LDOPTIONS_CLIENTSIDE_CREATE = 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE';
 export const LDOPTIONS_CLIENTSIDE_UPDATE = 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE';
@@ -113,11 +114,19 @@ export const ldOptionsMapReducer = (
 		case LDOPTIONS_REQUEST_ASYNC:
 			console.log("async ldoptions request");
 			console.dir(action);
-			return state;
+			let asyncLnk = action.targetReceiverLnk;
+			let asyncReqLDOptions = ldOptionsDeepCopy(state[asyncLnk]);
+			asyncReqLDOptions.isLoading = true;
+			let asyncedState = Object.assign({}, state, { [asyncLnk]: asyncReqLDOptions });
+			return asyncedState;
 		case LDOPTIONS_REQUEST_RESULT:
 			let lnk = action.targetReceiverLnk;
 			let payload = action.ldOptionsPayload;
-			return state;
+			let newLDOptions = ldOptionsDeepCopy(state[lnk]);
+			newLDOptions.isLoading = false;
+			newLDOptions.resource.webInResource = payload;
+			let reqResultState = Object.assign({}, state, { [lnk]: newLDOptions });
+			return reqResultState;
 		case LDOPTIONS_REQUEST_ERROR:
 			console.log('ldOptions Error message received, subMsg: ' + action.message);
 			return state;
