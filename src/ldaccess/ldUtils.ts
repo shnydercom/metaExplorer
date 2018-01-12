@@ -58,7 +58,12 @@ export const ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {
 		let valType = typeof elem.value;
 		if (elem.value) {
 			if (valType === 'object') {
-				newValue = { ...elem.value };
+				if (elem.value.constructor === Array) {
+					let elemValAsArray: Array<any> = elem.value as Array<any>;
+					newValue = elemValAsArray.slice(0, elemValAsArray.length);
+				} else {
+					newValue = { ...elem.value };
+				}
 			} else {
 				newValue = elem.value;
 			}
@@ -99,7 +104,7 @@ export const isOutputKVSame = (a: OutputKVMap, b: OutputKVMap): boolean => {
 	return isSame;
 };
 
-export const getKVValue = (input: IKvStore): any => {
+export const getKVValue = (input: IKvStore | string | number): any => {
 	if (typeof input !== 'object') return input;
 	if (!input || input.value === null || input.value === undefined) return null;
 	if (input.value.constructor === Array) {

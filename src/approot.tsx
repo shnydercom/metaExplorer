@@ -30,7 +30,6 @@ export const AppRoot: React.SFC<AppRootProps> = () => {
 	return (
 		<Provider store={applicationStore}>
 			<div>
-				<p>React is working</p>
 				<AppInterpreterDesigner ldTokenString={appinterpreterToken} outputKVMap={null}/>
 				<ImageUploadComponent />
 				{!isProduction && <DevTools />}

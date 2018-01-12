@@ -144,7 +144,6 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 		}
 		//}
 		return <div key={0}>
-			genContainer Render
 			{this.genCompCache}
 		</div >;
 	}
@@ -170,7 +169,7 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 			let GenericSingle = reactCompClasses[searchIdx];
 			reactComps[0] = <GenericSingle key={0} ldTokenString={this.props.ldTokenString} outputKVMap={null}/>;
 		}
-		return <div>GenericContainerContents (kvsToComponent):{reactComps}</div>;
+		return <div>{reactComps}</div>;
 	}
 }
 

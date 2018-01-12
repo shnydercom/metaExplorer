@@ -127,7 +127,6 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 	render() {
 		let subInterpreters = this.buildIntrprtrJSX();
 		return <div key={0}>
-			RefMapIntrprtr working
 			{subInterpreters}
 		</div>;
 	}

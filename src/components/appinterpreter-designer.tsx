@@ -5,6 +5,7 @@ import Splitter from 'm-react-splitters';
 import * as s from 'm-react-splitters/lib/splitters.css';
 import * as appStyles from 'styles/styles.scss';
 import * as mdDarkStyles from 'styles/mddark.scss';
+import AppBar from 'react-toolbox/lib/app_bar';
 
 import * as prefilledInterpreterA from '../../testing/prefilledInterpreter.json';
 
@@ -159,7 +160,7 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 				position="vertical"
 				primaryPaneMaxWidth="80%"
 				primaryPaneMinWidth="40%"
-				primaryPaneWidth="50%"
+				primaryPaneWidth="43%"
 				dispatchResize={true}
 				postPoned={false}
 				primaryPaneHeight="100%"
@@ -171,7 +172,10 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 					<Button onClick={this.onTestBtnClick}>serialize!</Button>
 					<Button onClick={this.onPrefilledButtonClick}>preFilled!</Button>
 					<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
-					<GenericContainer ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null} />
+					<div className="app-preview">
+						<AppBar leftIcon='menu' />
+						<GenericContainer ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null} />
+					</div>
 					<small><pre>{this.state.serialized}</pre></small>
 				</div>
 			</Splitter>

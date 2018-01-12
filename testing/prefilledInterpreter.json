@@ -1,7 +1,7 @@
 {
   "subInterpreterOf": "headUID",
   "canInterpretType": "testInterpreter-ObjectType",
-  "nameSelf": "testInterpreter",
+  "nameSelf": "ProductDisplayInterpreter",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -81,7 +81,7 @@
             },
             {
               "key": "srvURL",
-              "value": "http://localhost:3000/dist/static/imgTestObjs/{identifier}",
+              "value": "http://localhost:1111/rest/ysj/ns/{identifier}",
               "ldType": "http://schema.org/Text"
             },
             {

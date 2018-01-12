@@ -11,6 +11,7 @@ import { isOutputKVSame, ldOptionsDeepCopy, getKVValue } from "ldaccess/ldUtils"
 import { IWebResource } from "hydraclient.js/src/DataModel/IWebResource";
 import { ILDOptionsMapStatePart } from "appstate/store";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
+import { nameSpaceMap } from "ldaccess/ns/nameSpaceMap";
 
 export let ldRetrCfgIntrprtKeys: string[] =
 	[UserDefDict.externalReferenceKey, SideFXDict.srvURL, SideFXDict.identifier];
@@ -42,7 +43,7 @@ export class LDRetrieverSuper implements IBlueprintInterpreter {
 		let outputKVMap: IKvStore = kvs.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		this.setSrvUrl(srvUrlKv && srvUrlKv.value ? srvUrlKv.value : this.srvUrl);
-		this.setIdentifier(identifier && identifier.value !== null ? identifier.value : this.identifier);
+		this.setIdentifier(identifier && identifier.value !== null ? identifier : this.identifier);
 		this.setWebContent(ldOptions);
 		this.evalDirtyInput();
 		this.evalDirtyOutput();
@@ -51,7 +52,7 @@ export class LDRetrieverSuper implements IBlueprintInterpreter {
 		if (!isOutputKVSame(value, this.outputKVMap)) this.isOutputDirty = true;
 		this.outputKVMap = value;
 	}
-	setIdentifier = (value: IKvStore) => {
+	setIdentifier = (value: IKvStore | string | number) => {
 		if (getKVValue(value) !== this.identifier) this.isInputDirty = true;
 		this.identifier = getKVValue(value);
 	}
@@ -77,9 +78,38 @@ export class LDRetrieverSuper implements IBlueprintInterpreter {
 		if (this.isInputDirty) {
 			if (this.srvUrl && this.srvUrl.length > 0 && this.identifier !== null && this.identifier !== undefined) {
 				this.isInputDirty = false;
-				let requestURL = URI.expand(this.srvUrl, {
-					identifier: this.identifier
-				});
+				let idStr = this.identifier.toString();
+				let idSplitIdx = idStr.indexOf('/');
+				let requestURL;
+				if (idSplitIdx !== -1) {
+					console.log(idStr.slice(0, idSplitIdx));
+					let nsMHasValue = false;
+					let nsMSearchVal = idStr.slice(0, idSplitIdx);
+					for (const nsMEntry of
+						nameSpaceMap.values()) {
+						if (nsMEntry === nsMSearchVal) {
+							nsMHasValue = true;
+							break;
+						}
+					}
+					if (nsMHasValue) {
+						let idNS = idStr.slice(0, idSplitIdx);
+						let idId = idStr.slice(idSplitIdx + 1, idStr.length);
+						let reqSplitString = this.srvUrl.replace('{' + SideFXDict.identifier + '}',
+							'{namespace}/' + '{' + SideFXDict.identifier + '}');
+						requestURL = URI.expand(reqSplitString, {
+							namespace: idNS,
+							identifier: idId
+						});
+					} else {
+						//TODO: enter error state
+						return;
+					}
+				} else {
+					requestURL = URI.expand(this.srvUrl, {
+						identifier: this.identifier
+					});
+				}
 				let reqAsString = requestURL.valueOf();
 				applicationStore.dispatch(ldOptionsRequestAction(null, reqAsString, this.retrieverStoreKey));
 			}

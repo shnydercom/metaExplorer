@@ -9,6 +9,9 @@ import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
+import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
+import { getKVStoreByKey } from 'ldaccess/kvConvenienceFns';
+import { getKVValue } from 'ldaccess/ldUtils';
 
 type OwnProps = {
 	singleImage;
@@ -44,17 +47,30 @@ export class PureImgDisplay extends React.Component<LDConnectedState & LDConnect
 	implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	consumeLDOptions: (ldOptions: ILDOptions) => any;
+	imgLink: string;
+
 	initialKvStores: IKvStore[];
 	constructor(props: any) {
 		super(props);
 	}
+	componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
+		if (compNeedsUpdate(nextProps, this.props)) {
+			this.consumeLDOptions(nextProps.ldOptions);
+		}
+	}
+	consumeLDOptions = (ldOptions: ILDOptions) => {
+		if (ldOptions && ldOptions.resource && ldOptions.resource.kvStores) {
+			let kvs = ldOptions.resource.kvStores;
+			this.imgLink = getKVValue(getKVStoreByKey(kvs, LDDict.contentUrl));
+		}
+	}
 	render() {
 		const { ldOptions } = this.props;
+		const imgLnk = "http://localhost:1111/rest/ysj/media/pngs/" + this.imgLink;
 		if (!ldOptions) return <div>no Image data</div>;
-		return <div>
-			ImgDisplay working
-			<img alt="" src={ldOptions.resource.kvStores[0].value} />
+		return <div className="imgdisplay">
+			<img alt="" src={imgLnk} className="imgdisplay"/>
+			{this.imgLink}
 			{this.props.children}
 		</div>;
 	}

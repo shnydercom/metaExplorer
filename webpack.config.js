@@ -170,7 +170,7 @@ module.exports = {
     ]
   },
   externals: {
-    'react': {
+   'react': {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
@@ -199,7 +199,7 @@ module.exports = {
   plugins: [
     new WriteFilePlugin(),
     new CopyWebpackPlugin([{
-      from: 'testing/public',
+      from: 'assets',
       to: 'static'
     }]),
     new ExtractTextPlugin('style.css', {

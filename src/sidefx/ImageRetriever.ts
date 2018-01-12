@@ -7,6 +7,8 @@ import { ILDOptions } from "ldaccess/ildoptions";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { LDRetrieverSuper, ldRetrCfgIntrprtKeys } from "sidefx/LDRetrieverSuper";
+import { getKVValue } from "ldaccess/ldUtils";
+import { resolveNS } from "ldaccess/ns/nameSpaceResolution";
 
 export var imageRetrieverName = "shnyder/imageRetriever";
 let initialKVStores: IKvStore[] = [
@@ -51,4 +53,11 @@ let bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-export class ImageRetriever extends LDRetrieverSuper { }
+export class ImageRetriever extends LDRetrieverSuper {
+	setIdentifier = (value: IKvStore) => {
+		let kvResolved: string = getKVValue(value);
+		let changedSrvIdPart = resolveNS(kvResolved);
+		if (changedSrvIdPart !== this.identifier) this.isInputDirty = true;
+		this.identifier = changedSrvIdPart;
+	}
+}
