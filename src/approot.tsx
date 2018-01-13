@@ -32,9 +32,10 @@ export const AppRoot: React.SFC<AppRootProps> = () => {
 			<div>
 				<AppInterpreterDesigner ldTokenString={appinterpreterToken} outputKVMap={null}/>
 				<ImageUploadComponent />
-				{!isProduction && <DevTools />}
 			</div>
 		</Provider>
 	);
 };
 AppRoot.defaultProps = {};
+
+// for Redux-DevTools, add: {!isProduction && <DevTools />}

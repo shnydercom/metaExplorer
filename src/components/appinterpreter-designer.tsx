@@ -4,10 +4,13 @@ import * as redux from 'redux';
 import Splitter from 'm-react-splitters';
 import * as s from 'm-react-splitters/lib/splitters.css';
 import * as appStyles from 'styles/styles.scss';
-import * as mdDarkStyles from 'styles/mddark.scss';
+//import * as mdDarkStyles from 'styles/mddark.scss';
+
 import AppBar from 'react-toolbox/lib/app_bar';
 
-import * as prefilledInterpreterA from '../../testing/prefilledInterpreter.json';
+import * as prefilledProductInterpreterA from '../../testing/prefilledProductInterpreter.json';
+
+import * as prefilledOrganizationInterpreterA from '../../testing/prefilledOrganizationInterpreter.json';
 
 import {
 	DiagramEngine,
@@ -43,6 +46,7 @@ import { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
+import { designerTheme } from "styles/designer/designerTheme";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -127,8 +131,24 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 		this.props.notifyLDOptionsChange(this.props.ldOptions);
 	}
 
-	onPrefilledButtonClick = (e) => {
-		let prefilledData: any = prefilledInterpreterA;
+	onPrefilledProductButtonClick = (e) => {
+		let prefilledData: any = prefilledProductInterpreterA;
+		let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
+		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
+		this.logic.addBlueprintToRetriever(nodesBPCFG);
+		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
+		let newType = nodesBPCFG.canInterpretType;
+		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+		newLDOptions.resource.kvStores = [
+			{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+			{ key: undefined, ldType: newType, value: dummyInstance }
+		];
+		this.setState({ ...this.state, serialized: nodesSerialized });
+		this.props.notifyLDOptionsChange(newLDOptions);
+	}
+
+	onPrefilledOrganizationButtonClick = (e) => {
+		let prefilledData: any = prefilledOrganizationInterpreterA;
 		let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
 		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
 		this.logic.addBlueprintToRetriever(nodesBPCFG);
@@ -159,18 +179,19 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 			<Splitter className={s.splitter}
 				position="vertical"
 				primaryPaneMaxWidth="80%"
-				primaryPaneMinWidth="40%"
+				primaryPaneMinWidth="70%"
 				primaryPaneWidth="43%"
 				dispatchResize={true}
 				postPoned={false}
 				primaryPaneHeight="100%"
 			>
-				<ThemeProvider theme={mdDarkStyles}>
+				<ThemeProvider theme={designerTheme}>
 					<DesignerBody logic={this.logic} />
 				</ThemeProvider>
 				<div className="vertical-scroll">
 					<Button onClick={this.onTestBtnClick}>serialize!</Button>
-					<Button onClick={this.onPrefilledButtonClick}>preFilled!</Button>
+					<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>
+					<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>
 					<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
 					<div className="app-preview">
 						<AppBar leftIcon='menu' />

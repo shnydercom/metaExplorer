@@ -1,0 +1,141 @@
+{
+  "subInterpreterOf": "2b8270e6-d166-4a89-971d-e61ce2f35581",
+  "canInterpretType": "organizationDisplay-ObjectType",
+  "nameSelf": "organizationDisplayInterpreter",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "2b8270e6-d166-4a89-971d-e61ce2f35581": {
+          "subInterpreterOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "nameSelf": "2b8270e6-d166-4a89-971d-e61ce2f35581",
+          "initialKvStores": [
+            {
+              "key": "HeaderImageDisplay",
+              "value": {
+                "objRef": "6ffd015f-c436-4dd6-82d5-457604bdf45c",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": {
+                "objRef": "5a485416-d92c-43fe-ad6d-eeeaed03ed37",
+                "propRef": "http://schema.org/name"
+              },
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderText",
+              "value": {
+                "objRef": "5a485416-d92c-43fe-ad6d-eeeaed03ed37",
+                "propRef": "http://schema.org/address"
+              },
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "Description",
+              "value": {
+                "objRef": "5a485416-d92c-43fe-ad6d-eeeaed03ed37",
+                "propRef": "http://schema.org/description"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "6ffd015f-c436-4dd6-82d5-457604bdf45c": {
+          "subInterpreterOf": "shnyder/imageDisplay",
+          "canInterpretType": "http://schema.org/ViewAction",
+          "nameSelf": "6ffd015f-c436-4dd6-82d5-457604bdf45c",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/name",
+              "value": {
+                "objRef": "a39dee61-5207-48b5-9e94-2c44ab2d48b1",
+                "propRef": "http://schema.org/name"
+              }
+            },
+            {
+              "key": "http://schema.org/fileFormat",
+              "value": {
+                "objRef": "a39dee61-5207-48b5-9e94-2c44ab2d48b1",
+                "propRef": "http://schema.org/fileFormat"
+              }
+            },
+            {
+              "key": "http://schema.org/contentUrl",
+              "value": {
+                "objRef": "a39dee61-5207-48b5-9e94-2c44ab2d48b1",
+                "propRef": "http://schema.org/contentUrl"
+              }
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "a39dee61-5207-48b5-9e94-2c44ab2d48b1": {
+          "subInterpreterOf": "shnyder/imageRetriever",
+          "canInterpretType": "shnyder/imageRetriever-ObjectType",
+          "nameSelf": "a39dee61-5207-48b5-9e94-2c44ab2d48b1",
+          "initialKvStores": [
+            {
+              "key": "externalReferenceKey",
+              "value": "orgImageRetriever",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "srvURL",
+              "value": "http://localhost:1111/rest/ysj/ns/{identifier}",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "identifier",
+              "value": {
+                "objRef": "5a485416-d92c-43fe-ad6d-eeeaed03ed37",
+                "propRef": "http://schema.org/image"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "5a485416-d92c-43fe-ad6d-eeeaed03ed37": {
+          "subInterpreterOf": "shnyder/organizationRetriever",
+          "canInterpretType": "shnyder/organizationRetriever-ObjectType",
+          "nameSelf": "5a485416-d92c-43fe-ad6d-eeeaed03ed37",
+          "initialKvStores": [
+            {
+              "key": "externalReferenceKey",
+              "value": "extOrgRetriever",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "srvURL",
+              "value": "http://localhost:1111/rest/ysj/ns/shnyder/Bens3DPrints",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "identifier",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": [
+    {
+      "objRef": "5a485416-d92c-43fe-ad6d-eeeaed03ed37",
+      "propRef": "identifier"
+    }
+  ]
+}

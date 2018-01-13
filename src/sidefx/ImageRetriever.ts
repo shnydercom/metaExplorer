@@ -10,7 +10,7 @@ import { LDRetrieverSuper, ldRetrCfgIntrprtKeys } from "sidefx/LDRetrieverSuper"
 import { getKVValue } from "ldaccess/ldUtils";
 import { resolveNS } from "ldaccess/ns/nameSpaceResolution";
 
-export var imageRetrieverName = "shnyder/imageRetriever";
+export const imageRetrieverName = "shnyder/imageRetriever";
 let initialKVStores: IKvStore[] = [
 	{
 		key: UserDefDict.externalReferenceKey,

@@ -14,6 +14,7 @@ import { ImageRetriever, imageRetrieverName } from "sidefx/ImageRetriever";
 import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
 import { PureRefMapIntrprtr } from "components/generic/InterpreterReferenceMapType-component";
 import { UserDefDict } from "ldaccess/UserDefDict";
+import { organizationRetrieverName, OrganizationRetriever } from "sidefx/OrganizationRetriever";
 
 let matchIsType = (a: IKvStore) => a.key === LDConsts.type || a.key === LDConsts.isA;
 let matchIsLang = (a: IKvStore) => a.key === LDConsts.lang;
@@ -44,6 +45,7 @@ export class DefaultInterpreterMatcher implements IInterpreterMatcher {
 		//register side effect-interpreter (these interpreters change the state asynchronously and are typically non-visual)
 		appIntRetr.addInterpreter(imageRetrieverName, ImageRetriever, "cRud");
 		appIntRetr.addInterpreter(productRetrieverName, ProductRetriever, "cRud");
+		appIntRetr.addInterpreter(organizationRetrieverName, OrganizationRetriever, "cRud");
 
 		//register generic interpreter for Designer-defined interpreters
 		appIntRetr.addInterpreter(UserDefDict.intrprtrBPCfgRefMapType, PureRefMapIntrprtr, "cRud");

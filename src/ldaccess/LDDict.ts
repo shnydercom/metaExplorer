@@ -13,6 +13,7 @@ export enum LDDict {
 	EntryPoint = "http://http://schema.org/EntryPoint",
 	Organization = "http://schema.org/Organization",
 	//properties:
+	address = "http://schema.org/address",
 	target = "http://schema.org/target",
 	agent = "http://schema.org/agent",
 	result = "http://schema.org/result",

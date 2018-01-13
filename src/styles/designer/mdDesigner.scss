@@ -1,5 +1,6 @@
 @import "react-toolbox/lib/colors.css";
-@import "~react-toolbox/lib/input/theme";
+@import "react-toolbox/lib/input/theme.css";
+@import './colors.scss';
 
 $color-primary: #FF00FF;//$palette-green-600;
 $color-primary-dark: #AA00AA;//$palette-purple-a700;
@@ -10,10 +11,17 @@ $color-primary-dark: #AA00AA;//$palette-purple-a700;
   border-left: 0;
   border-right: 0;
   border-top: 0;
-  color: $color-primary !important;
+  color: $designer-primary-color !important;
   display: block;
-  font-size: 32px !important;
   outline: none;
   padding: 8px 0;
   width: 100%
+}
+
+.values {
+  background-color: $color-primary-dark;
+}
+
+.on .thumb {
+  background: $color-primary-dark !important;
 }

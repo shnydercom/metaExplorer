@@ -4,7 +4,7 @@ import * as redux from 'redux';
 import { connect } from 'react-redux';
 
 import { Input, InputTheme } from 'react-toolbox';
-import { Switch, SwitchTheme } from 'react-toolbox';
+import { Switch } from 'react-toolbox';
 import { DatePicker, DatePickerTheme } from 'react-toolbox';
 import { TimePicker, TimePickerTheme } from 'react-toolbox';
 

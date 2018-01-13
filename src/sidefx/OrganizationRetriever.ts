@@ -6,7 +6,7 @@ import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { LDRetrieverSuper, ldRetrCfgIntrprtKeys } from "sidefx/LDRetrieverSuper";
 
-export const productRetrieverName = "shnyder/productRetriever";
+export const organizationRetrieverName = "shnyder/organizationRetriever";
 
 let initialKVStores: IKvStore[] = [
 	{
@@ -30,9 +30,9 @@ let initialKVStores: IKvStore[] = [
 		ldType: LDDict.Text
 	},
 	{
-		key: LDDict.manufacturer,
+		key: LDDict.address,
 		value: undefined,
-		ldType: LDDict.Organization
+		ldType: LDDict.Text
 	},
 	{
 		key: LDDict.description,
@@ -47,7 +47,7 @@ let initialKVStores: IKvStore[] = [
 ];
 let bpCfg: BlueprintConfig = {
 	subInterpreterOf: null,
-	nameSelf: productRetrieverName,
+	nameSelf: organizationRetrieverName,
 	interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
 	interpretableKeys: ldRetrCfgIntrprtKeys,
@@ -55,4 +55,4 @@ let bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-export class ProductRetriever extends LDRetrieverSuper { }
+export class OrganizationRetriever extends LDRetrieverSuper { }

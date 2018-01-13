@@ -1,16 +1,7 @@
 @import 'm-react-splitters/lib/splitters.css';
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-$designer-primary-color: #dadada;
-$designer-secondary-color: rgba(180,
-180,
-180,
-0.3);
-$designer-background-color: #010f27;
-$designer-background-elevated-color: #0c1e3a;
-$designer-selected-color: rgba(87,
-161,
-245,
-0.9);
+@import '/designer/colors.scss';
+
 .app-preview {
 	width: 420px;
 	height: 746px;
@@ -40,8 +31,7 @@ $designer-selected-color: rgba(87,
 	color: white;
 	font-size: x-large;
 	align-self: flex-end;
-	padding: 0px 0px 25px 20px;
-	//margin-top: -100%;
+	padding: 0px 0px 25px 20px; //margin-top: -100%;
 }
 
 .imgdisplay {
