@@ -174,6 +174,8 @@ export class DesignerLogic {
 			if (!elemi.value) {
 				node.addPort(new LDPortModel(true, nName, elemi));
 			}
+
+			//node.addPort(new LDPortModel(true, "identifier", { key: null, value: null, ldType: null }));
 			console.dir(node.getPorts());
 			//rv.push(newLDPM);
 		}

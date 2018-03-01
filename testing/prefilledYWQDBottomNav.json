@@ -1,0 +1,93 @@
+{
+  "subInterpreterOf": "5e92814f-4b9b-4d81-9f02-43bc4de2b28c",
+  "canInterpretType": "ywqd/BottomNav-ObjectType",
+  "nameSelf": "ywqd/BottomNav",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "5e92814f-4b9b-4d81-9f02-43bc4de2b28c": {
+          "subInterpreterOf": "shnyder/BottomNavigation",
+          "canInterpretType": "shnyder/BottomNavigation-ObjectType",
+          "nameSelf": "5e92814f-4b9b-4d81-9f02-43bc4de2b28c",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "IconURL_1",
+              "value": "/dist/static/spark_red.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "IconURL_1_Disabled",
+              "value": "/dist/static/spark_grey.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_1",
+              "value": "actions",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "IconURL_2",
+              "value": "/dist/static/camera_black.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "IconURL_2_Disabled",
+              "value": "/dist/static/camera_grey.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_2",
+              "value": "camera_scan",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "IconURL_3",
+              "value": "/dist/static/butterfly_black.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "IconURL_3_Disabled",
+              "value": "/dist/static/butterfly_grey.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_3",
+              "value": "explore",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "IconURL_4",
+              "value": "/dist/static/persons_black.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "IconURL_4_Disabled",
+              "value": "/dist/static/persons_grey.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_4",
+              "value": "persons",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": [
+    {
+      "objRef": "5e92814f-4b9b-4d81-9f02-43bc4de2b28c",
+      "propRef": "freeContainer"
+    }
+  ]
+}

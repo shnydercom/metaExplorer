@@ -33,7 +33,7 @@ var successResult = {
 
 var resultPromise: Promise<IWebResource> = null;
 /*
-var imgUploadData = POST /rest/ysj/media/upload HTTP/1.1
+var imgUploadData = POST /api/ysj/media/upload HTTP/1.1
 Host: localhost:1111
 Cache-Control: no-cache
 Postman-Token: 05362090-7232-e0f7-dafb-12e89c4cb5f8

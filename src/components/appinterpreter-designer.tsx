@@ -3,14 +3,15 @@ import * as React from "react";
 import * as redux from 'redux';
 import Splitter from 'm-react-splitters';
 import * as s from 'm-react-splitters/lib/splitters.css';
-import * as appStyles from 'styles/styles.scss';
-//import * as mdDarkStyles from 'styles/mddark.scss';
 
-import AppBar from 'react-toolbox/lib/app_bar';
+import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 
+import configuratorTestData from '../../testing/configuratorTestData';
 import * as prefilledProductInterpreterA from '../../testing/prefilledProductInterpreter.json';
-
 import * as prefilledOrganizationInterpreterA from '../../testing/prefilledOrganizationInterpreter.json';
+
+//YWQD
+import * as prefilledYWQDBottomNav from '../../testing/prefilledYWQDBottomNav.json';
 
 import {
 	DiagramEngine,
@@ -47,6 +48,10 @@ import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { designerTheme } from "styles/designer/designerTheme";
+import { appTheme } from "styles/appTheme/appTheme";
+import { LDConsts } from "ldaccess/LDConsts";
+import NavBarWActions from "./ywqd/navigation/NavBarWActions";
+import BottomNavigation from "./ywqd/navigation/BottomNavigation";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -110,7 +115,7 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 		}
 	}
 
-	onTestBtnClick = (e) => {
+	onSerializeBtnClick = (e) => {
 		e.preventDefault();
 		let nodesBPCFG: BlueprintConfig = this.logic.intrprtrBlueprintFromDiagram(null);
 		let newType = nodesBPCFG.canInterpretType;
@@ -122,13 +127,43 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
 		this.logic.addBlueprintToRetriever(nodesBPCFG);
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
-		this.props.ldOptions.resource.kvStores = [
+		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+		newLDOptions.resource.kvStores = [
 			{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
 			{ key: undefined, ldType: newType, value: dummyInstance }
 		];
 		//let nodesSerialized = JSON.stringify(this.logic.getDiagramEngine().getDiagramModel().serializeDiagram(), undefined, 2);
 		this.setState({ ...this.state, serialized: nodesSerialized });
-		this.props.notifyLDOptionsChange(this.props.ldOptions);
+		this.props.notifyLDOptionsChange(newLDOptions);
+	}
+
+	onGenAppClick = (e) => {
+		let prefilledData: any = prefilledYWQDBottomNav;
+		let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
+		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
+		this.logic.addBlueprintToRetriever(nodesBPCFG);
+		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
+		let newType = nodesBPCFG.canInterpretType;
+		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+		newLDOptions.resource.kvStores = [
+			{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+			{ key: undefined, ldType: newType, value: dummyInstance }
+		];
+		this.setState({ ...this.state, serialized: nodesSerialized });
+		this.props.notifyLDOptionsChange(newLDOptions);
+	}
+
+	onMultiConfiguratorButtonClick = (e) => {
+		let prefilledData: IKvStore[] = configuratorTestData;
+		//let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
+		//let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
+		//this.logic.addBlueprintToRetriever(nodesBPCFG);
+		//let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
+		let newType = "configuratorType";
+		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+		newLDOptions.resource.kvStores = prefilledData;
+		this.setState({ ...this.state, serialized: "" });
+		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
 	onPrefilledProductButtonClick = (e) => {
@@ -179,7 +214,7 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 			<Splitter className={s.splitter}
 				position="vertical"
 				primaryPaneMaxWidth="80%"
-				primaryPaneMinWidth="70%"
+				primaryPaneMinWidth="40%"
 				primaryPaneWidth="43%"
 				dispatchResize={true}
 				postPoned={false}
@@ -189,14 +224,20 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 					<DesignerBody logic={this.logic} />
 				</ThemeProvider>
 				<div className="vertical-scroll">
-					<Button onClick={this.onTestBtnClick}>serialize!</Button>
+					<Button onClick={this.onSerializeBtnClick}>serialize!</Button>
+					<Button onClick={this.onGenAppClick}>Generate App!</Button>
+					<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
 					<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>
 					<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>
-					<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
-					<div className="app-preview">
-						<AppBar leftIcon='menu' />
-						<GenericContainer ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null} />
-					</div>
+					<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
+					<ThemeProvider theme={appTheme}>
+						<div className="app-preview">
+							<div className="app-content">
+								<NavBarWActions ldTokenString="empty" outputKVMap={null} />
+									<GenericContainer ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null} />
+							</div>
+						</div>
+					</ThemeProvider>
 					<small><pre>{this.state.serialized}</pre></small>
 				</div>
 			</Splitter>

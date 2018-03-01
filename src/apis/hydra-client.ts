@@ -13,6 +13,9 @@ export class HydraClientAPI {
   private static hcSingleton: HydraClient;
   private static initHydra(): void {
     //(HydraClient as any)._hypermediaProcessors.length = 0;
+    var utf8jsonld = "application/ld+json;charset=UTF-8";
+    var processor = new JsonLdHypermediaProcessor();
+    var suppMediaTypes = processor.supportedMediaTypes;
     HydraClient.registerHypermediaProcessor(new JsonLdHypermediaProcessor());
     HydraClientAPI.hcSingleton = new HydraClient();
   }

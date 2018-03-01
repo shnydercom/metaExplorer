@@ -57,8 +57,17 @@ export class RefMapTypeDesintegrator {
 				}
 			}
 		});
-		if (!refMapCandidate) return;
-		let headInterpreter: BlueprintConfig = refMapCandidate[this.headInterpreterLnk];
+		let headInterpreter: BlueprintConfig = null;
+		if (!refMapCandidate) {
+			//i.e. not a refMap-Interpreter in subproperties, look in retriever
+			let hIntrprtrKey = this.headInterpreterLnk;
+			//this.interpreterMap[hIntrprtrKey] = this.retriever.getInterpreterByNameSelf(hIntrprtrKey);
+			//return;
+			headInterpreter = this.retriever.getInterpreterByNameSelf(hIntrprtrKey);
+			this.interpreterMap[hIntrprtrKey] = headInterpreter;
+		} else {
+			headInterpreter = refMapCandidate[this.headInterpreterLnk];
+		}
 		let interpretableKeysInfos: InterpretableKeysInfo[] = [];
 		input.interpretableKeys.forEach((elem: ObjectPropertyRef) => {
 			let newElem: InterpretableKeysInfo = {

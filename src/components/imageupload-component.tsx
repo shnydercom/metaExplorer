@@ -97,7 +97,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedD
  * 	"result" //:"schema:ImageObject",
  * 	"target" //:"schema:Entrypoint"
  * initialKVStores:
- * 	"target": "'http://localhost:1111/rest/ysj/media/upload';"
+ * 	"target": "'http://localhost:1111/api/ysj/media/upload';"
  * }
  */
 let cfgType: string = LDDict.CreateAction;
@@ -111,7 +111,7 @@ let initialKVStores: IKvStore[] = [
     },
     {
         key: LDDict.target,
-        value: 'http://localhost:1111/rest/ysj/media/upload',
+        value: 'http://localhost:1111/api/ysj/media/upload',
         ldType: LDDict.EntryPoint
     },
     {

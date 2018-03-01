@@ -89,7 +89,7 @@
             },
             {
               "key": "srvURL",
-              "value": "http://localhost:1111/rest/ysj/ns/{identifier}",
+              "value": "http://localhost:1111/api/ysj/ns/{identifier}",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -116,7 +116,7 @@
             },
             {
               "key": "srvURL",
-              "value": "http://localhost:1111/rest/ysj/ns/shnyder/Bens3DPrints",
+              "value": "http://localhost:1111/api/ysj/ns/shnyder/Bens3DPrints",
               "ldType": "http://schema.org/Text"
             },
             {

@@ -30,12 +30,14 @@ export const AppRoot: React.SFC<AppRootProps> = () => {
 	return (
 		<Provider store={applicationStore}>
 			<div>
-				<AppInterpreterDesigner ldTokenString={appinterpreterToken} outputKVMap={null}/>
-				<ImageUploadComponent />
+
+				<AppInterpreterDesigner ldTokenString={appinterpreterToken} outputKVMap={null} />
+				{!isProduction && <DevTools />}
 			</div>
 		</Provider>
 	);
 };
 AppRoot.defaultProps = {};
 
-// for Redux-DevTools, add: {!isProduction && <DevTools />}
+// for Redux-DevTools, add:
+// <ImageUploadComponent />

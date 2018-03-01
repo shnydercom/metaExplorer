@@ -28,6 +28,7 @@ export const isObjPropertyRef = (input: any): boolean => {
  */
 export const isLDOptionsSame = (a: ILDOptions, b: ILDOptions): boolean => {
 	if ((!a || !b) && !(!a && !b)) return false;
+	if (!a && !b) return true;
 	if (a.isLoading !== b.isLoading) return false;
 	if (a.lang !== b.lang) return false;
 	if (a.ldToken !== b.ldToken) return false;

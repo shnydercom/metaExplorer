@@ -9,6 +9,16 @@
 	padding: 69px 58px 80px 58px;
 	box-sizing: border-box;
 	font-family: Roboto, Arial;
+	text-overflow:ellipsis;
+}
+
+.app-content {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	display: flex;
+	flex-direction: column;
 }
 
 .header-img-container {

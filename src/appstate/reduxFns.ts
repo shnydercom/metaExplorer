@@ -7,16 +7,20 @@ import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from
 import { ILDResource } from "ldaccess/ildresource";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { OutputKVMapElement } from "ldaccess/ldBlueprint";
+import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 
 //final:
 export const mapStateToProps = (state: ExplorerState, ownProps: LDOwnProps): LDOwnProps & LDConnectedState => {
 	let tokenString: string = ownProps ? ownProps.ldTokenString : null;
 	let ldOptionsLoc: ILDOptions = tokenString ? state.ldoptionsMap[tokenString] : null;
 	//ldOptionsLoc = ldOptionsLoc ? {...ldOptionsLoc} : null; //only spread if exists
-	if (ldOptionsLoc) ldOptionsLoc = ldTkStrRefToFilledProp(state, ownProps, ldOptionsLoc);
+	if (ldOptionsLoc){
+	 	ldOptionsLoc = ldTkStrRefToFilledProp(state, ownProps, ldOptionsLoc);
+		//ldOptionsLoc = ldOptionsDeepCopy(ldOptionsLoc); //causes circular calls
+	}
 	return {
 		...ownProps,
-		ldOptions: ldOptionsLoc
+		ldOptions: (ldOptionsLoc)
 	};
 };
 

@@ -23,6 +23,8 @@ import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
+import { ILDResource } from 'ldaccess/ildresource';
+import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
 
 /*export type LDOwnProps = {
 	ldTokenString: string;
@@ -45,15 +47,15 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: O
 		if (!ownProps.ldTokenString) return;
 		if (!ldOptions) {
 			let kvStores: IKvStore[] = [{ key: undefined, value: undefined, ldType: null /*ownProps.displayedType*/
-			
-			/*}];
-			let lang: string;
-			let alias: string = ownProps.ldTokenString;
-			dispatch(ldOptionsClientSideCreateAction(kvStores, lang, alias));
-		} else {
-			dispatch(ldOptionsClientSideUpdateAction({... ldOptions}));
-		}
-	}
+
+/*}];
+let lang: string;
+let alias: string = ownProps.ldTokenString;
+dispatch(ldOptionsClientSideCreateAction(kvStores, lang, alias));
+} else {
+dispatch(ldOptionsClientSideUpdateAction({... ldOptions}));
+}
+}
 });*/
 
 let cfgType: string = LDDict.WrapperObject;
@@ -161,13 +163,19 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 			let ldTokenString: string = null;
 			let tokenStringExtension = input[idx].key ? input[idx].key : idx;
 			ldTokenString = this.props.ldTokenString + "-" + tokenStringExtension;
+			//
+			let ldRes: ILDResource = { webInResource: null, webOutResource: null, kvStores: [input[idx]] };
+			let ldToken: ILDToken = new NetworkPreferredToken(ldTokenString);
+			let newldOptions: ILDOptions = { ldToken: ldToken, resource: ldRes, isLoading: false, lang: "en" };
+			this.props.notifyLDOptionsChange(newldOptions);
+			//
 			return <GenericComp key={idx} ldTokenString={ldTokenString} outputKVMap={null} />;
 		});
 		if (reactComps.length === 1) {
 			//genericComp is only a wrapper then, hand token down directly
 			let searchIdx = reactComps[0].key;
 			let GenericSingle = reactCompClasses[searchIdx];
-			reactComps[0] = <GenericSingle key={0} ldTokenString={this.props.ldTokenString} outputKVMap={null}/>;
+			reactComps[0] = <GenericSingle key={0} ldTokenString={this.props.ldTokenString} outputKVMap={null} />;
 		}
 		return <div>{reactComps}</div>;
 	}

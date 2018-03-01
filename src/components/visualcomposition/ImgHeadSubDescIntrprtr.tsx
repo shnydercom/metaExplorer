@@ -93,7 +93,6 @@ export class PureImgHeadSubDesc extends React.Component<LDConnectedState & LDCon
 	initialKvStores: IKvStore[];
 	constructor(props: any) {
 		super(props);
-		console.log(this.constructor["cfg"]);
 		if (props) this.handleKVs(props);
 	}
 	componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
@@ -105,9 +104,6 @@ export class PureImgHeadSubDesc extends React.Component<LDConnectedState & LDCon
 		return <div>
 			<div className="header-img-container">
 				{this.headerImgDisplay}
-				<div style={{ color: 'red' }}><b>test<br />test<br />test<br />test<br />test<br />test
-				<br />test<br />test<br />test<br />test<br />test<br />test<br />test<br />test<br />test
-				<br />test<br />test<br />test<br />test<br /></b></div>
 			</div>
 			<div className="header-img-container overlay-gradient">
 				<div className="header-text">
@@ -116,7 +112,7 @@ export class PureImgHeadSubDesc extends React.Component<LDConnectedState & LDCon
 			</div>
 			<div className="imgheadsubdesc-text">
 				<div>
-					<h4>{this.subHeaderText ? this.subHeaderText : 'subHeaderTextPlaceholder'}</h4>
+					<h4>{this.subHeaderText ? this.subHeaderText : "subHeaderTextPlaceholder"}</h4>
 				</div>
 				<div>
 					<i>{this.description ? this.description : 'descriptionPlaceholder'}</i>

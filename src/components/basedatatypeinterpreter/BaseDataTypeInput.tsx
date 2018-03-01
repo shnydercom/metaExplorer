@@ -21,6 +21,7 @@ import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
+import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 
 /**
  * @author Jonathan Schneider
@@ -76,7 +77,13 @@ for (var bdt in bdts) {
 				key: undefined,
 				value: undefined,
 				ldType: elem
-			}];
+			},
+			{
+				key: LDDict.description,
+				value: undefined,
+				ldType: LDDict.Text
+			}
+		];
 		let bpCfg: BlueprintConfig = {
 			subInterpreterOf: undefined,
 			canInterpretType: elem,
@@ -107,23 +114,34 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 	}
 
 	componentWillReceiveProps(nextProps, nextContext): void {
+		console.log("cWillRecProps")
 		if (nextProps.ldOptions) {
 			let nextSingleKV = nextProps.ldOptions.resource.kvStores[0];
+			if (this.props.ldOptions && nextSingleKV) {
+				let prevKVStore = this.props.ldOptions.resource.kvStores[0];
+				if (prevKVStore.ldType !== nextSingleKV.ldType) {
+					this.determineRenderFn(nextSingleKV.ldType);
+				}
+			}
 			this.setState({ ...this.state, singleKV: nextSingleKV });
 		}
 	}
 
 	handleChange = (evtval) => {
-		let modSingleKV: IKvStore = this.state.singleKV;
+		console.log("handleChange")
+		let newLDOptionsObj = ldOptionsDeepCopy(this.props.ldOptions);
+		let modSingleKV: IKvStore = newLDOptionsObj.resource.kvStores[0];
 		modSingleKV.value = evtval;
 		this.setState({ ...this.state, singleKV: modSingleKV });
 		//TODO: it might be a good idea to debounce before updating the application state
-		this.props.ldOptions.resource.kvStores = [this.state.singleKV];
-		this.props.notifyLDOptionsChange(this.props.ldOptions);
+		//this.props.ldOptions.resource.kvStores = [modSingleKV];
+
+		this.props.notifyLDOptionsChange(newLDOptionsObj);
 		//this.setState({...this.state, [name]: value});
 	}
 
 	componentWillMount() {
+		console.log("cWillMount");
 		this.state.singleKV = { ...this.initialKvStores[0] }; //TODO: check, if this can be done with the setState fn. Only needed for determineRenderFn
 		//this.setState({ ...this.state, singleKV: this.initialKvStores[0]});
 		let baseDT: LDBaseDataType = this.state.singleKV.ldType as LDBaseDataType;
@@ -132,45 +150,82 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 			this.props.notifyLDOptionsChange(null);
 		}
 	}
-	parseDate: any = (input): Date => {
+	parseBoolean: any = (inputKv): boolean => {
+		if (!inputKv) return false;
+		let input = inputKv.value;
+		return input === undefined || input === null ? false : input;
+	}
+	parseText: any = (inputKv): string => {
+		if (!inputKv) return "";
+		let input = inputKv.value;
+		return input ? input : '';
+	}
+	parseDate: any = (inputKv): Date => {
+		if (!inputKv) return new Date();
+		let input = inputKv.value;
 		return input ? input : new Date();
 	}
-	parseTime: any = (input): Date => {
+	parseTime: any = (inputKv): Date => {
+		if (!inputKv) return new Date();
+		let input = inputKv.value;
 		return input ? input : new Date();
+	}
+	parseNumber: any = (inputKv): number => {
+		if (!inputKv) return 0;
+		let input = inputKv.value;
+		return input ? input : 0;
+	}
+	parseLabel: any = (inputKv): string => {
+		if (!inputKv) return "";
+		let input = inputKv.key;
+		return input ? input : '';
 	}
 	private determineRenderFn = (baseDT: LDBaseDataType) => {
+		console.log(this.state.singleKV.value);
 		switch (baseDT) {
 			case LDDict.Boolean:
-				this.render = () => <Switch checked={this.state.singleKV.value}
-					label={this.state.singleKV.key}
-					onChange={(evt) => this.handleChange(evt)} />;
+				this.render = () => {
+					let parsedBoolean = this.parseBoolean(this.state.singleKV);
+					return <Switch checked={parsedBoolean}
+						label={this.parseLabel(this.state.singleKV)}
+						onChange={(evt) => this.handleChange(evt)} />;
+				};
 				break;
 			case LDDict.Integer:
-				this.render = () => <Input type='number'
-					label={this.state.singleKV.key}
-					name={this.state.singleKV.key}
-					value={this.state.singleKV.value}
-					onChange={(evt) => this.handleChange(evt)} />;
+				this.render = () => {
+					let parsedNumber = this.parseNumber(this.state.singleKV);
+					return <Input type='number'
+						label={this.parseLabel(this.state.singleKV)}
+						name={this.parseLabel(this.state.singleKV)}
+						value={parsedNumber}
+						onChange={(evt) => this.handleChange(evt)} />;
+				};
 				break;
 			case LDDict.Double:
-				this.render = () => <Input type='number'
-					label={this.state.singleKV.key}
-					name={this.state.singleKV.key}
-					value={this.state.singleKV.value}
-					onChange={(evt) => this.handleChange(evt)} />;
+				this.render = () => {
+					let parsedNumber = this.parseNumber(this.state.singleKV);
+					return <Input type='number'
+						label={this.parseLabel(this.state.singleKV)}
+						name={this.parseLabel(this.state.singleKV)}
+						value={parsedNumber}
+						onChange={(evt) => this.handleChange(evt)} />;
+				};
 				break;
 			case LDDict.Text:
-				this.render = () => <Input type='text'
-					label={this.state.singleKV.key}
-					name={this.state.singleKV.key}
-					value={this.state.singleKV.value}
-					onChange={(evt) => this.handleChange(evt)} />;
+				this.render = () => {
+					let parsedText = this.parseText(this.state.singleKV);
+					return <Input type='text'
+						label={this.parseLabel(this.state.singleKV)}
+						name={this.parseLabel(this.state.singleKV)}
+						value={parsedText}
+						onChange={(evt) => this.handleChange(evt)} />;
+				};
 				break;
 			case LDDict.Date:
 				this.render = () => {
-					var parsedDate = this.parseDate(this.state.singleKV.value);
+					var parsedDate = this.parseDate(this.state.singleKV);
 					return <DatePicker
-						label={this.state.singleKV.key}
+						label={this.parseLabel(this.state.singleKV)}
 						onChange={(evt) => this.handleChange(evt)}
 						value={parsedDate}
 						sundayFirstDayOfWeek />;
@@ -178,17 +233,17 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 				break;
 			case LDDict.DateTime:
 				this.render = () => {
-					var parsedDate = this.parseDate(this.state.singleKV.value);
-					var parsedTime = this.parseTime(this.state.singleKV.value);
+					var parsedDate = this.parseDate(this.state.singleKV);
+					var parsedTime = this.parseTime(this.state.singleKV);
 					return <div>
 						<DatePicker
-							label={this.state.singleKV.key}
+							label={this.parseLabel(this.state.singleKV)}
 							onChange={(evt) => this.handleChange(evt)}
 							value={parsedDate}
 							sundayFirstDayOfWeek />;
 						<TimePicker
-							label='Finishing time'
-							onChange={this.handleChange}
+							label='Time'
+							onChange={(evt) => this.handleChange(evt)}
 							value={parsedTime}
 						/></div>;
 				};

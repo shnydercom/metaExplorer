@@ -66,7 +66,7 @@ export class PureImgDisplay extends React.Component<LDConnectedState & LDConnect
 	}
 	render() {
 		const { ldOptions } = this.props;
-		const imgLnk = "http://localhost:1111/rest/ysj/media/pngs/" + this.imgLink;
+		const imgLnk = "http://localhost:1111/api/ysj/media/jpgs/" + this.imgLink;
 		if (!ldOptions) return <div>no Image data</div>;
 		return <div className="imgdisplay">
 			<img alt="" src={imgLnk} className="imgdisplay"/>

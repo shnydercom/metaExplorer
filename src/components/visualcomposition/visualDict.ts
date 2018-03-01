@@ -4,7 +4,19 @@ export enum VisualDict {
 	headerTxt = "HeaderText",
 	subHeaderTxt = "SubHeaderText",
 	description = "Description",
+	freeContainer = "freeContainer", //e.g. for the bottomNavigation anything that is "top"
 
 	//other
-	footerIntrprtr = "FooterInterpreter"
+	footerIntrprtr = "FooterInterpreter",
+	popOverContent = "PopOverContent",
+	iconImg = "IconImage",
+
+	//Router-related Types
+	route_added = "Route_Added",
+	route_new = "Route_New",
+
+	//NavigationElement-keys
+	routeSend_search = "RouteSend_Search",
+	routeSend_back = "RouteSend_Back",
+
 }

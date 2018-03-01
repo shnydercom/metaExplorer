@@ -81,7 +81,7 @@
             },
             {
               "key": "srvURL",
-              "value": "http://localhost:1111/rest/ysj/ns/{identifier}",
+              "value": "http://localhost:1111/api/ysj/ns/{identifier}",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -108,7 +108,7 @@
             },
             {
               "key": "srvURL",
-              "value": "http://localhost:1111/rest/ysj/ns/shnyder/FlyingCar1",
+              "value": "http://localhost:1111/api/ysj/ns/shnyder/FlyingCar1",
               "ldType": "http://schema.org/Text"
             },
             {

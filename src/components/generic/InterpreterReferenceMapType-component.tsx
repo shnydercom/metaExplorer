@@ -109,6 +109,9 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 		let baseIntrprtr = this.rmtd.interpreterMap[this.rmtd.headInterpreterLnk];
 		let soKVM = this.subOutputKVMap;
 		let BaseComp = baseIntrprtr;
+		if(BaseComp === null || BaseComp === undefined){
+			console.error("InterpreterReferenceMapType-component: interpreter null or undefined");
+		}
 		let headToken = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.headInterpreterLnk);
 		reactComps.push(<BaseComp key={0} ldTokenString={headToken.get()} outputKVMap={null} />);
 		/*for (let intrprtrKey in this.rmtd.interpreterMap) {
