@@ -18,7 +18,7 @@ import { InterpreterNodeModel } from "components/appinterpreter-parts/Interprete
 import { elementAt } from "rxjs/operators/elementAt";
 import { ObjectPropertyRef, OBJECT_PROP_REF } from "ldaccess/ObjectPropertyRef";
 import { DeclarationNodeProps } from "components/appinterpreter-parts/DeclarationNodeWidget";
-import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
+import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from "ldaccess/kvConvenienceFns";
 import { ReduxInterpreterRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
@@ -170,9 +170,19 @@ export class DesignerLogic {
 			}
 			//let newLDPM: LDPortModel =
 			let nName: string = elemi.key;
-			//don't add KvStores that already have a value
+			//don't add KvStores that already have a value, unless they are InterpreterReferenceMap-typed
 			if (!elemi.value) {
 				node.addPort(new LDPortModel(true, nName, elemi));
+			} else if (elemi.ldType === UserDefDict.intrprtrBPCfgRefMapType) {
+				let objPropRef: ObjectPropertyRef = intrprtrKeys[i];
+				let nestedKey = objPropRef.propRef;
+				let nestedType = getKVStoreByKeyFromLDOptionsOrCfg(null, elemi.value[objPropRef.objRef], nestedKey).ldType;
+				let elemiNested: IKvStore = {
+					key: nestedKey,
+					value: undefined,
+					ldType: nestedType
+				};
+				node.addPort(new LDPortModel(true, nestedKey, elemiNested));
 			}
 
 			//node.addPort(new LDPortModel(true, "identifier", { key: null, value: null, ldType: null }));

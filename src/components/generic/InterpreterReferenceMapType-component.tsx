@@ -6,7 +6,7 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { ExplorerState } from "appstate/store";
-import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
+import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { RefMapTypeDesintegrator } from "components/generic/RefMapTypeDesintegrator";
 import ImgHeadSubDescIntrprtr from "components/visualcomposition/ImgHeadSubDescIntrprtr";
@@ -18,9 +18,9 @@ import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
 import { ILDResource } from "ldaccess/ildresource";
 import { ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";
 
-export type OwnProps = {
+export type OwnProps = LDOwnProps & {
 	searchCrudSkills: string;
-} & LDOwnProps;
+};
 
 let canInterpretType: string = UserDefDict.intrprtrBPCfgRefMapType;
 let cfgIntrprtKeys: string[] =
@@ -113,7 +113,8 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 			console.error("InterpreterReferenceMapType-component: interpreter null or undefined");
 		}
 		let headToken = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.headInterpreterLnk);
-		reactComps.push(<BaseComp key={0} ldTokenString={headToken.get()} outputKVMap={null} />);
+		const { routes } = this.props;
+		reactComps.push(<BaseComp key={0} routes={routes} ldTokenString={headToken.get()} outputKVMap={null} />);
 		/*for (let intrprtrKey in this.rmtd.interpreterMap) {
 			if (this.rmtd.interpreterMap.hasOwnProperty(intrprtrKey)) {
 				if (intrprtrKey === this.rmtd.headInterpreterLnk) continue;
@@ -124,14 +125,14 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 				reactComps.push(<GenericComp key={intrprtrKey} ldTokenString={compLDToken.get()} outputKVMap={kvMap} />);
 			}
 		}*/
-		return <div>{reactComps}</div>;
+		return <>{reactComps}</>;
 	}
 
 	render() {
 		let subInterpreters = this.buildIntrprtrJSX();
-		return <div key={0}>
+		return <>
 			{subInterpreters}
-		</div>;
+		</>;
 	}
 
 	private fillLDOptions() {

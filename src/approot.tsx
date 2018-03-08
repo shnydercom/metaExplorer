@@ -13,6 +13,9 @@ import ImageUploadComponent from 'components/imageupload-component';
 import './styles/styles.scss';
 import DevTools from './appstate/devTools';
 import { initLDConnect } from 'sidefx/nonVisualConnect';
+import {
+	BrowserRouter as Router
+} from 'react-router-dom';
 
 const initialState: ExplorerState = {
 	ldoptionsMap: {},
@@ -29,11 +32,12 @@ const appinterpreterToken: string = Toolkit.UID();
 export const AppRoot: React.SFC<AppRootProps> = () => {
 	return (
 		<Provider store={applicationStore}>
-			<div>
-
-				<AppInterpreterDesigner ldTokenString={appinterpreterToken} outputKVMap={null} />
-				{!isProduction && <DevTools />}
-			</div>
+			<Router>
+				<div>
+					<AppInterpreterDesigner ldTokenString={appinterpreterToken} outputKVMap={null} />
+					{!isProduction && <DevTools />}
+				</div>
+			</Router>
 		</Provider>
 	);
 };

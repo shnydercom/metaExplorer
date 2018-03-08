@@ -45,13 +45,20 @@ import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from
 import { LDDict } from "ldaccess/LDDict";
 import { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
-import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
+import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from "appstate/LDProps";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { designerTheme } from "styles/designer/designerTheme";
 import { appTheme } from "styles/appTheme/appTheme";
 import { LDConsts } from "ldaccess/LDConsts";
 import NavBarWActions from "./ywqd/navigation/NavBarWActions";
 import BottomNavigation from "./ywqd/navigation/BottomNavigation";
+
+import {
+	Route,
+	Link
+} from 'react-router-dom';
+import ImgHeadSubDescIntrprtr from "./visualcomposition/ImgHeadSubDescIntrprtr";
+import { Switch } from "react-router";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -233,8 +240,19 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 					<ThemeProvider theme={appTheme}>
 						<div className="app-preview">
 							<div className="app-content">
-								<NavBarWActions ldTokenString="empty" outputKVMap={null} />
-									<GenericContainer ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null} />
+								<Link to="/designerinitial">initial</Link>
+								<Link to="/app">app</Link>
+								<Switch>
+									<Route path="/designerinitial" render={() => (
+										<div><b>drag and drop items into the designer</b></div>
+									)} />
+									<Route path="/app" render={(routeProps: LDRouteProps) => {
+										routeProps.match.params.nextPath = "";
+										return <>
+											<GenericContainer routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null} />
+										</>;
+									}} />
+								</Switch>
 							</div>
 						</div>
 					</ThemeProvider>

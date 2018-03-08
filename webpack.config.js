@@ -97,6 +97,15 @@ module.exports = {
         use: [
           "style-loader",
           {
+            loader: 'css-loader',
+            query: {
+              modules: true,
+              sourceMap: true,
+              importLoaders: 2,
+              localIdentName: "[name]--[local]--[hash:base64:8]"
+            }
+          },
+          /*{
             loader: 'typings-for-css-modules-loader',
             options: {
               camelcase: true,
@@ -106,7 +115,7 @@ module.exports = {
               importLoaders: 2,
               localIdentName: "[name]--[local]--[hash:base64:8]"
             }
-          },
+          },*/
           "postcss-loader", // has separate config, see postcss.config.js nearby
         ]
       },

@@ -1,0 +1,84 @@
+{
+  "subInterpreterOf": "e50eca39-5c21-42ec-a0bf-207f266e5b46",
+  "canInterpretType": "2RandomInputsComplex-ObjectType",
+  "nameSelf": "2RandomInputsComplex",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "e50eca39-5c21-42ec-a0bf-207f266e5b46": {
+          "subInterpreterOf": "ywqd/NavBarWActions",
+          "canInterpretType": "ywqd/NavBarWActions-ObjectType",
+          "nameSelf": "e50eca39-5c21-42ec-a0bf-207f266e5b46",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "a39b2dbf-e61e-4650-a0fb-95980e368759",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "A header",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_Search",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "PopOverContent",
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "a39b2dbf-e61e-4650-a0fb-95980e368759": {
+          "subInterpreterOf": "ywqd/BottomNav",
+          "canInterpretType": "ywqd/BottomNav-ObjectType",
+          "nameSelf": "a39b2dbf-e61e-4650-a0fb-95980e368759",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "bda01b43-6805-4490-be80-b9ce7cc95916",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "bda01b43-6805-4490-be80-b9ce7cc95916": {
+          "subInterpreterOf": "ProductDisplayInterpreter",
+          "canInterpretType": "testInterpreter-ObjectType",
+          "nameSelf": "bda01b43-6805-4490-be80-b9ce7cc95916",
+          "initialKvStores": [
+            {
+              "key": "identifier",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": [
+    {
+      "objRef": "bda01b43-6805-4490-be80-b9ce7cc95916",
+      "propRef": "identifier"
+    },
+    {
+      "objRef": "e50eca39-5c21-42ec-a0bf-207f266e5b46",
+      "propRef": "PopOverContent"
+    }
+  ]
+}

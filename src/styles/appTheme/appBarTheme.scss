@@ -86,7 +86,7 @@
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
   text-size-adjust: 100%;
-  z-index: 1000;
+  z-index: calc(var(--z-index-higher)-1);
 }
 
 .appBar *,
@@ -174,7 +174,7 @@
   flex-direction: column;
 }
 
-.bottom-nav-tab {
+.bottom-nav-tabs {
   /*position:absolute;
   bottom: 0px;*/
   width: 100%;
@@ -182,7 +182,14 @@
   background-color: var(--color-primary);
   box-shadow: 0 2px 5px rgba(0,0,0,.26),
               0 -2px 5px rgba(0,0,0,.26);
-  z-index: 999;
+  z-index: calc(var(--z-index-higher)-1);
+}
+.bottom-nav-tab {
+  padding: 0px;
+}
+
+.bottom-nav-tab section {
+  padding: 0px;
 }
 
 .bottom-nav-topfree {

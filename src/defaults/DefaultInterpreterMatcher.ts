@@ -10,7 +10,8 @@ import { LDDict } from "ldaccess/LDDict";
 import ImageDisplayComponent, { PureImgDisplay } from 'components/imagedisplay-component';
 import { PureBoolInput, PureIntInput, PureDoubleInput, PureTextInput, PureDateInput, PureDateTimeInput } from "components/basedatatypeinterpreter/BaseDataTypeInput";
 import ImgHeadSubDescIntrprtr, { ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc } from "components/visualcomposition/ImgHeadSubDescIntrprtr";
-import { BottomNavigationName, PureNavBarWActions} from "components/ywqd/navigation/BottomNavigation";
+import { BottomNavigationName, PureBottomNavigation} from "components/ywqd/navigation/BottomNavigation";
+import { PureNavBarWActions, NavBarWActionsName } from "components/ywqd/navigation/NavBarWActions";
 import { ImageRetriever, imageRetrieverName } from "sidefx/ImageRetriever";
 import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
 import { PureRefMapIntrprtr } from "components/generic/InterpreterReferenceMapType-component";
@@ -42,7 +43,8 @@ export class DefaultInterpreterMatcher implements IInterpreterMatcher {
 
 		//register visual composition interpreters.
 		appIntRetr.addInterpreter(ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc, "cRud");
-		appIntRetr.addInterpreter(BottomNavigationName, PureNavBarWActions, "cRud");
+		appIntRetr.addInterpreter(NavBarWActionsName, PureNavBarWActions, "cRud");
+		appIntRetr.addInterpreter(BottomNavigationName, PureBottomNavigation, "cRud");
 
 		//register side effect-interpreter (these interpreters change the state asynchronously and are typically non-visual)
 		appIntRetr.addInterpreter(imageRetrieverName, ImageRetriever, "cRud");

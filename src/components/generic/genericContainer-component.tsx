@@ -20,19 +20,20 @@ import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { LDConsts } from 'ldaccess/LDConsts';
 import { isInterpreter, isLDOptionsSame } from 'ldaccess/ldUtils';
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from 'appstate/epicducks/ldOptions-duck';
-import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from 'appstate/LDProps';
+import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
 import { ILDResource } from 'ldaccess/ildresource';
 import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
+import { UserDefDict } from 'ldaccess/UserDefDict';
 
 /*export type LDOwnProps = {
 	ldTokenString: string;
 };*/
 
-export type OwnProps = {
+export interface GenOwnProps extends LDOwnProps {
 	searchCrudSkills: string;
-} & LDOwnProps;
+}
 
 /*export type LDConnectedState = {
 	ldOptions: ILDOptions
@@ -73,7 +74,7 @@ let bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-export class PureGenericContainer extends React.Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
+export class PureGenericContainer extends React.Component<LDConnectedState & LDConnectedDispatch & GenOwnProps, {}>
 	implements IBlueprintInterpreter {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
@@ -111,7 +112,7 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 		return genKvStores ? this.kvsToComponent(genKvStores) : null;
 	}
 
-	componentWillReceiveProps(nextProps: OwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
+	componentWillReceiveProps(nextProps: GenOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
 		if (compNeedsUpdate(nextProps, this.props)) {
 			this.isGenericChanged = true;
 		}
@@ -145,9 +146,9 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 			this.isGenericChanged = false;
 		}
 		//}
-		return <div key={0}>
-			{this.genCompCache}
-		</div >;
+		return <>
+			{this.genCompCache ? this.genCompCache : null}
+		</>;
 	}
 
 	private kvsToComponent(input: IKvStore[]): any {
@@ -168,17 +169,18 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 			let ldToken: ILDToken = new NetworkPreferredToken(ldTokenString);
 			let newldOptions: ILDOptions = { ldToken: ldToken, resource: ldRes, isLoading: false, lang: "en" };
 			this.props.notifyLDOptionsChange(newldOptions);
-			//
-			return <GenericComp key={idx} ldTokenString={ldTokenString} outputKVMap={null} />;
+			const { routes } = this.props;
+			return <GenericComp key={idx} routes={routes} ldTokenString={ldTokenString} outputKVMap={null} />;
 		});
 		if (reactComps.length === 1) {
 			//genericComp is only a wrapper then, hand token down directly
 			let searchIdx = reactComps[0].key;
 			let GenericSingle = reactCompClasses[searchIdx];
-			reactComps[0] = <GenericSingle key={0} ldTokenString={this.props.ldTokenString} outputKVMap={null} />;
+			const { routes } = this.props;
+			reactComps[0] = <GenericSingle key={0} routes={routes} ldTokenString={this.props.ldTokenString} outputKVMap={null} />;
 		}
-		return <div>{reactComps}</div>;
+		return <>{reactComps}</>;
 	}
 }
 
-export const GenericContainer = connect<LDConnectedState, LDConnectedDispatch, OwnProps>(mapStateToProps, mapDispatchToProps)(PureGenericContainer);
+export const GenericContainer = connect<LDConnectedState, LDConnectedDispatch, GenOwnProps>(mapStateToProps, mapDispatchToProps)(PureGenericContainer);

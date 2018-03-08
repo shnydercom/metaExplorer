@@ -7,7 +7,7 @@ import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDRouteProps } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
 import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
@@ -21,6 +21,7 @@ import { Tabs } from 'react-toolbox/lib/tabs/';
 import { generateIntrprtrForProp } from '../../generic/generatorFns';
 import { active } from 'react-toolbox/lib/dropdown/theme.css';
 import { checkAllFilled } from 'GeneralUtils';
+import { Redirect } from 'react-router';
 
 type ConnectedState = {
 };
@@ -147,9 +148,16 @@ let bpCfg: BlueprintConfig = {
 	crudSkills: "cRud"
 };
 
+export type BottomNavState = {
+	tabIdx: number;
+};
+
 @ldBlueprint(bpCfg)
-export class PureNavBarWActions extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, {}>
+export class PureBottomNavigation extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, BottomNavState>
 	implements IBlueprintInterpreter {
+	state = {
+		tabIdx: 0
+	};
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
@@ -171,43 +179,77 @@ export class PureNavBarWActions extends React.Component<LDConnectedState & LDCon
 	route3: string = null;
 	route4: string = null;
 	route5: string = null;
+	isGen1: boolean = false;
+	isGen2: boolean = false;
+	isGen3: boolean = false;
+	isGen4: boolean = false;
+	isGen5: boolean = false;
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		if (props) this.handleKVs(props);
+		if (props) {
+			this.handleKVs(props);
+			this.handleRoutes(props.routes);
+		}
 	}
 	componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
 		if (compNeedsUpdate(nextProps, this.props)) {
 			this.handleKVs(nextProps);
 		}
+		this.handleRoutes(nextProps.routes);
 	}
-	onTabChanged = (idx) => {
-		this.tabIdx = idx; //TODO: change to state-handling
+	onTabChanged = (tabIdx) => {
+		this.setState({ tabIdx });
+		//this.tabIdx = idx; //TODO: change to state-handling
 	}
-	generateTab(imgSrcActive, imgSrcInActive: string, isActive: boolean): JSX.Element {
-		return <Tab label='' icon={isActive
+	generateTab(imgSrcActive, imgSrcInActive: string, route: string, isActive: boolean): JSX.Element {
+		//const mustRedirect = match && isActive && (match.params.lastPath !== undefined || match.params.lastPath !== null) && match.params.lastPath !== route;
+		return <Tab label='' className="bottom-nav-tab" icon={isActive
 			? <img src={imgSrcActive} height="30px" />
-			: <img src={imgSrcInActive} height="30px" />}></Tab>;
+			: <img src={imgSrcInActive} height="30px" />}>
+		</Tab>;
+	}
+	generateRedirect(tabIdx: number): JSX.Element {
+		if (!this.props.routes) return null;
+		const { match } = this.props.routes;
+		let route: string = "";
+		if (match.params.nextPath === undefined) match.params.nextPath = route;
+		switch (tabIdx) {
+			case 0:
+				route = this.route1;
+				break;
+			case 1:
+				route = this.route2;
+				break;
+			case 2:
+				route = this.route3;
+				break;
+			case 3:
+				route = this.route4;
+				break;
+			case 4:
+				route = this.route5;
+				break;
+			default:
+				break;
+		}
+		return <Redirect to={match.url + "/" + route} />;
 	}
 	render() {
 		const { ldOptions } = this.props;
-		const tabIdx = this.tabIdx;
-		const isGen1 = checkAllFilled(this.icon1url, this.icon1urlDisabled, this.route1);
-		const isGen2 = checkAllFilled(this.icon2url, this.icon2urlDisabled, this.route2);
-		const isGen3 = checkAllFilled(this.icon3url, this.icon3urlDisabled, this.route3);
-		const isGen4 = checkAllFilled(this.icon4url, this.icon4urlDisabled, this.route4);
-		const isGen5 = checkAllFilled(this.icon5url, this.icon5urlDisabled, this.route5);
+		let tabIdx = this.state.tabIdx;
 		return <div className="bottom-nav">
 			<div className="bottom-nav-topfree mdscrollbar">
 				{this.topFreeContainer}
 				{this.props.children}
+				{this.generateRedirect(tabIdx)}
 			</div>
-			<Tabs index={tabIdx} onChange={this.onTabChanged} fixed className="bottom-nav-tab">
-				{isGen1 ? this.generateTab(this.icon1url, this.icon1urlDisabled, tabIdx === 0) : null}
-				{isGen2 ? this.generateTab(this.icon2url, this.icon2urlDisabled, tabIdx === 1) : null}
-				{isGen3 ? this.generateTab(this.icon3url, this.icon3urlDisabled, tabIdx === 2) : null}
-				{isGen4 ? this.generateTab(this.icon4url, this.icon4urlDisabled, tabIdx === 3) : null}
-				{isGen5 ? this.generateTab(this.icon5url, this.icon5urlDisabled, tabIdx === 4) : null}
+			<Tabs index={tabIdx} onChange={this.onTabChanged} fixed className="bottom-nav-tabs">
+				{this.isGen1 ? this.generateTab(this.icon1url, this.icon1urlDisabled, this.route1, tabIdx === 0) : null}
+				{this.isGen2 ? this.generateTab(this.icon2url, this.icon2urlDisabled, this.route2, tabIdx === 1) : null}
+				{this.isGen3 ? this.generateTab(this.icon3url, this.icon3urlDisabled, this.route3, tabIdx === 2) : null}
+				{this.isGen4 ? this.generateTab(this.icon4url, this.icon4urlDisabled, this.route4, tabIdx === 3) : null}
+				{this.isGen5 ? this.generateTab(this.icon5url, this.icon5urlDisabled, this.route5, tabIdx === 4) : null}
 			</Tabs>
 		</div>;
 	}
@@ -216,6 +258,32 @@ export class PureNavBarWActions extends React.Component<LDConnectedState & LDCon
 					{this.generateTab("/dist/static/camera_black.svg", "/dist/static/camera_grey.svg", tabIdx === 1)}
 					{this.generateTab("/dist/static/butterfly_black.svg", "/dist/static/butterfly_grey.svg", tabIdx === 2)}
 					{this.generateTab("/dist/static/persons_black.svg", "/dist/static/persons_grey.svg", tabIdx === 3)}*/
+
+	private handleRoutes(routes: LDRouteProps) {
+		if (!routes) return;
+		const { match } = routes;
+		let tabIdx = 0;
+		if (!match) {
+			console.error("BottomNavigation: No route information passed to BottomNavigation, can't switch tabs");
+			return;
+		}
+		if (!match.params) match.params = { nextPath: null };
+		if (match.params.nextPath) {
+			let tabIdxCounter = 0;
+			const lastPath = match.params.nextPath;
+			if (lastPath === this.route1) tabIdx = tabIdxCounter;
+			if (this.isGen2) tabIdxCounter++;
+			if (lastPath === this.route2) tabIdx = tabIdxCounter;
+			if (this.isGen3) tabIdxCounter++;
+			if (lastPath === this.route3) tabIdx = tabIdxCounter;
+			if (this.isGen4) tabIdxCounter++;
+			if (lastPath === this.route4) tabIdx = tabIdxCounter;
+			if (this.isGen5) tabIdxCounter++;
+			if (lastPath === this.route5) tabIdx = tabIdxCounter;
+		}
+		this.setState({ tabIdx });
+	}
+
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
 		let kvs: IKvStore[];
 		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
@@ -238,6 +306,11 @@ export class PureNavBarWActions extends React.Component<LDConnectedState & LDCon
 		this.route3 = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_3_ROUTESEND));
 		this.route4 = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_4_ROUTESEND));
 		this.route5 = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_5_ROUTESEND));
+		this.isGen1 = checkAllFilled(this.icon1url, this.icon1urlDisabled, this.route1);
+		this.isGen2 = checkAllFilled(this.icon2url, this.icon2urlDisabled, this.route2);
+		this.isGen3 = checkAllFilled(this.icon3url, this.icon3urlDisabled, this.route3);
+		this.isGen4 = checkAllFilled(this.icon4url, this.icon4urlDisabled, this.route4);
+		this.isGen5 = checkAllFilled(this.icon5url, this.icon5urlDisabled, this.route5);
 	}
 }
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureNavBarWActions);
+export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureBottomNavigation);
