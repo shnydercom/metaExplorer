@@ -12,6 +12,7 @@ import * as prefilledOrganizationInterpreterA from '../../testing/prefilledOrgan
 
 //YWQD
 import * as prefilledYWQDBottomNav from '../../testing/prefilledYWQDBottomNav.json';
+import * as prefilledRandomTest from '../../testing/prefilledRandomTest.json';
 
 import {
 	DiagramEngine,
@@ -146,7 +147,13 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 
 	onGenAppClick = (e) => {
 		let prefilledData: any = prefilledYWQDBottomNav;
-		let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
+		this.generatePrefilled(prefilledData);
+		let prefilledDataRandom: any = prefilledRandomTest;
+		this.generatePrefilled(prefilledDataRandom);
+	}
+
+	generatePrefilled = (input: any) => {
+		let nodesBPCFG: BlueprintConfig = input as BlueprintConfig;
 		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
 		this.logic.addBlueprintToRetriever(nodesBPCFG);
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
@@ -159,7 +166,6 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 		this.setState({ ...this.state, serialized: nodesSerialized });
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
-
 	onMultiConfiguratorButtonClick = (e) => {
 		let prefilledData: IKvStore[] = configuratorTestData;
 		//let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
