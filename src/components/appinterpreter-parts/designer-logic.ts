@@ -307,6 +307,7 @@ export class DesignerLogic {
 								let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.interpretableKeys;
 								cfgIntrprtKeys.push(inputObjPropRef);
 								branchBPCfg.initialKvStores.push(this.copyKV(port.kv));
+								branchBPCfg.interpretableKeys.push(port.kv.key);
 							}
 							break;
 						case BASEDATATYPE_MODEL:
@@ -353,9 +354,11 @@ export class DesignerLogic {
 							};
 							let gdtKV = this.composeKVs(outputKV, port.kv);
 							branchBPCfg.initialKvStores.push(gdtKV);
-							//extra handling so that the final output-class.subInterpretOf property
+							//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subInterpreters
 							if (branchNode.nodeType === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
 								branchNode.subInterpreterOf = leafNode.getID();
+							}else{
+								branchBPCfg.interpretableKeys.push(gdtKV.key);
 							}
 							break;
 						default:
