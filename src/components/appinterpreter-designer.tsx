@@ -12,7 +12,7 @@ import * as prefilledOrganizationInterpreterA from '../../testing/prefilledOrgan
 
 //YWQD
 import * as prefilledYWQDBottomNav from '../../testing/prefilledYWQDBottomNav.json';
-import * as prefilledRandomTest from '../../testing/prefilledRandomTest.json';
+import * as prefilledScndStep from '../../testing/prefilledScndStep.json';
 
 import {
 	DiagramEngine,
@@ -144,12 +144,15 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 		this.setState({ ...this.state, serialized: nodesSerialized });
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
-
+	// tslint:disable-next-line:member-ordering
+	hascreatedFirst: boolean = false;
 	onGenAppClick = (e) => {
-		let prefilledData: any = prefilledYWQDBottomNav;
-		this.generatePrefilled(prefilledData);
-		let prefilledDataRandom: any = prefilledRandomTest;
-		this.generatePrefilled(prefilledDataRandom);
+		if (!this.hascreatedFirst) {
+			let prefilledData: any = prefilledYWQDBottomNav;
+			this.generatePrefilled(prefilledData);
+		}
+		let prefilledScnd: any = prefilledScndStep;
+		this.generatePrefilled(prefilledScnd);
 	}
 
 	generatePrefilled = (input: any) => {

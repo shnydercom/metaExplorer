@@ -27,7 +27,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 export interface AppRootProps { }
 export const applicationStore: redux.Store<ExplorerState> = configureStore(initialState);
 initLDConnect();
-const appinterpreterToken: string = Toolkit.UID();
+const appinterpreterToken: string = "tID"; //TODO: uncomment Toolkit.UID();
 
 export const AppRoot: React.SFC<AppRootProps> = () => {
 	return (

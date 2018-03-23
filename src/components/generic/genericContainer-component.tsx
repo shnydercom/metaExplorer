@@ -162,8 +162,8 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 		let reactComps = reactCompClasses.map((itm, idx) => {
 			let GenericComp = itm;
 			let ldTokenString: string = null;
-			let tokenStringExtension = input[idx].key ? input[idx].key : idx;
-			ldTokenString = this.props.ldTokenString + "-" + tokenStringExtension;
+			let tokenStringExtension = input[idx].key ? input[idx].key : "-gen-" + idx;
+			ldTokenString = this.props.ldTokenString + tokenStringExtension;
 			//
 			let ldRes: ILDResource = { webInResource: null, webOutResource: null, kvStores: [input[idx]] };
 			let ldToken: ILDToken = new NetworkPreferredToken(ldTokenString);

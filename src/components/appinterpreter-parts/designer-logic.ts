@@ -20,6 +20,7 @@ import { ObjectPropertyRef, OBJECT_PROP_REF } from "ldaccess/ObjectPropertyRef";
 import { DeclarationNodeProps } from "components/appinterpreter-parts/DeclarationNodeWidget";
 import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from "ldaccess/kvConvenienceFns";
 import { ReduxInterpreterRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
+import { isObjPropertyRef } from "ldaccess/ldUtils";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 
@@ -159,11 +160,19 @@ export class DesignerLogic {
 				if (i < initialKvStores.length - 1) {
 					elemi = initialKvStores[i];
 				} else {
-					elemi = {
-						key: intrprtrKeys[i],
-						value: undefined,
-						ldType: undefined
-					};
+					if (isObjPropertyRef(intrprtrKeys[i])) {
+						elemi = {
+							key: intrprtrKeys[i].propRef,
+							value: undefined,
+							ldType: undefined //TODO: determine or type here
+						};
+					} else {
+						elemi = {
+							key: intrprtrKeys[i],
+							value: undefined,
+							ldType: undefined
+						};
+					}
 				}
 			} else {
 				elemi = initialKvStores[i];
@@ -357,7 +366,7 @@ export class DesignerLogic {
 							//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subInterpreters
 							if (branchNode.nodeType === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
 								branchNode.subInterpreterOf = leafNode.getID();
-							}else{
+							} else {
 								branchBPCfg.interpretableKeys.push(gdtKV.key);
 							}
 							break;

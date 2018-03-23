@@ -27,7 +27,9 @@ export interface ILDNonvisualIntrprtrMapStatePart {
 }
 
 const isProduction = process.env.NODE_ENV === 'production';
+
 let middleWare = isProduction ? applyMiddleware(epicMiddleware) : compose(applyMiddleware(epicMiddleware), DevTools.instrument()) as GenericStoreEnhancer;
+
 export interface ExplorerState {
   isSaving?: boolean;
   isLoading?: boolean;

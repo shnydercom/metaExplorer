@@ -40,14 +40,18 @@ export var REFMAP_HEAD = "head";
 export class RefMapTypeDesintegrator {
 	ldOptionsPrepMap: OutputLDOptionsPrepMap;
 	headInterpreterLnk: string;
+	refMapName: string;
 	interpreterMap: InterpreterMap;
 	extIntReferenceMap: Map<string, string> = new Map();
 	retriever: ReduxInterpreterRetriever = appIntRetrFn() as ReduxInterpreterRetriever;
-	public setRefMapBP = (input: BlueprintConfig) => {
+
+	public setRefMapBP(input: BlueprintConfig): void {
 		let refMapCandidate: any = null;
 		let refMapContentCandidate: string = null;
+		let parentInitialKvStoreInterprtrMap: Map<string, IKvStore> = new Map();
 		this.interpreterMap = {};
 		this.headInterpreterLnk = input.subInterpreterOf;
+		this.refMapName = input.nameSelf;
 		input.initialKvStores.forEach((val, idx) => {
 			if (val.ldType === UserDefDict.intrprtrBPCfgRefMapType) {
 				if (typeof val.value === "string") {
@@ -55,6 +59,10 @@ export class RefMapTypeDesintegrator {
 				} else {
 					refMapCandidate = val.value;
 				}
+			} else if (val.ldType === UserDefDict.intrprtrObjectType) {
+				parentInitialKvStoreInterprtrMap.set(val.key, val);
+			} else {
+				console.log("unsupported parent KvStore type");
 			}
 		});
 		let headInterpreter: BlueprintConfig = null;
@@ -70,11 +78,16 @@ export class RefMapTypeDesintegrator {
 		}
 		let interpretableKeysInfos: InterpretableKeysInfo[] = [];
 		input.interpretableKeys.forEach((elem: ObjectPropertyRef) => {
-			let newElem: InterpretableKeysInfo = {
-				ref: elem,
-				kvStore: refMapCandidate[elem.objRef]
-			};
-			interpretableKeysInfos.push(newElem);
+			if (isObjPropertyRef(elem)) {
+				let newElem: InterpretableKeysInfo = {
+					ref: elem,
+					kvStore: refMapCandidate[elem.objRef]
+				};
+				interpretableKeysInfos.push(newElem);
+			} else if (typeof elem === "string") {
+				let newKvStore = parentInitialKvStoreInterprtrMap.get(elem);
+				this.interpreterMap[elem] = newKvStore.intrprtrClass;
+			}
 		});
 		this.ldOptionsPrepMap = {};
 		for (let cfgKey in refMapCandidate) {
@@ -116,7 +129,7 @@ export class RefMapTypeDesintegrator {
 					targetIntrprtrLnk = this.extIntReferenceMap.get(targetIntrprtrLnk);
 					targetLDToken = new NetworkPreferredToken(targetIntrprtrLnk);
 				} else {
-					targetLDToken = this.createConcatNetworkPreferredToken(inputLDTokenString, targetIntrprtrLnk);
+					targetLDToken = this.createConcatNetworkPreferredToken(inputLDTokenString, this.refMapName + targetIntrprtrLnk);
 				}
 				let pmVal = this.ldOptionsPrepMap[pmKey];
 				pmVal.refs.forEach((tupel: OutputLDOptionsTupel) => {
@@ -130,7 +143,7 @@ export class RefMapTypeDesintegrator {
 						sourceIntrprtLnk = this.extIntReferenceMap.get(sourceIntrprtLnk);
 						sourcLDToken = new NetworkPreferredToken(sourceIntrprtLnk);
 					} else {
-						sourcLDToken = this.createConcatNetworkPreferredToken(inputLDTokenString, sourceIntrprtLnk);
+						sourcLDToken = this.createConcatNetworkPreferredToken(inputLDTokenString, this.refMapName + sourceIntrprtLnk);
 					}
 					let newOKVMObj: OutputKVMapElement = {
 						targetLDToken: targetLDToken,
@@ -169,7 +182,7 @@ export class RefMapTypeDesintegrator {
 				if (okvmKey !== this.extIntReferenceMap.get(okvmKey)) {
 					compLDToken = new NetworkPreferredToken(okvmKey);
 				} else {
-					compLDToken = this.createConcatNetworkPreferredToken(ldTokenString, okvmKey);
+					compLDToken = this.createConcatNetworkPreferredToken(ldTokenString, this.refMapName + okvmKey);
 				}
 				//create link on target
 				for (let propKey in okvm) {
@@ -236,23 +249,32 @@ export class RefMapTypeDesintegrator {
 		let rvCfg: BlueprintConfig;
 		let baseInterpreter = this.retriever.getUnconnectedByNameSelf(bpCfg.subInterpreterOf);
 		let fixedInitialKVStores: IKvStore[] = [];
+		let interpretableKeys: (string | ObjectPropertyRef)[] = [];
 		bpCfg.initialKvStores.forEach((elemKV) => {
 			if (isObjPropertyRef(elemKV.value)) {
 				//build ldOptionsPrepMap for RefMap (doesn't affect rv)
 				if (!this.ldOptionsPrepMap[bpKey]) this.ldOptionsPrepMap[bpKey] = { refs: new Array<OutputLDOptionsTupel>() };
 				this.ldOptionsPrepMap[bpKey].refs.push({ key: elemKV.key, objPropRef: elemKV.value });
+				interpretableKeys.push(elemKV.key);
 			} else {
 				//assign fixed value to Interpreter
 				fixedInitialKVStores.push(elemKV);
 			}
 		});
+		let interpretableKeysADD: (string | ObjectPropertyRef)[] = [];
+		bpCfg.interpretableKeys.forEach((val, idx) => {
+			if (!interpretableKeys.includes(val)) {
+				interpretableKeysADD.push(val);
+			}
+		});
+		interpretableKeys = [...interpretableKeysADD, ...interpretableKeys];
 		rvCfg = {
 			subInterpreterOf: bpCfg.subInterpreterOf,
 			nameSelf: bpCfg.nameSelf,
 			canInterpretType: bpCfg.canInterpretType,
 			crudSkills: bpCfg.crudSkills,
 			initialKvStores: fixedInitialKVStores,
-			interpretableKeys: []
+			interpretableKeys: interpretableKeys,
 		};
 		baseInterpreter = ldBlueprint(rvCfg)(baseInterpreter);
 		if (isReactComponent(baseInterpreter)) {

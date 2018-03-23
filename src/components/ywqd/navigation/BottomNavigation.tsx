@@ -291,6 +291,10 @@ export class PureBottomNavigation extends React.Component<LDConnectedState & LDC
 			kvs = props.ldOptions.resource.kvStores;
 			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer);
 		}
+		if (!this.topFreeContainer) {
+			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
+			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer);
+		}
 		this.icon1url = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_1_ICONURL));
 		this.icon2url = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_2_ICONURL));
 		this.icon3url = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_3_ICONURL));

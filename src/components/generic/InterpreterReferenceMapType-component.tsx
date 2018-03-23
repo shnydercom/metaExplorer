@@ -17,6 +17,8 @@ import { compNeedsUpdate } from "components/reactUtils/compUtilFns";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
 import { ILDResource } from "ldaccess/ildresource";
 import { ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";
+import { isObjPropertyRef } from "ldaccess/ldUtils";
+import { LDConsts } from "ldaccess/LDConsts";
 
 export type OwnProps = LDOwnProps & {
 	searchCrudSkills: string;
@@ -66,19 +68,32 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 				if (val.ldType === this.subCfg.nameSelf) return;
 				if (val.value == null) return;
 				let ldTokenRef: ILDToken;
-				let lObjRef = (singleIntrpblKey as ObjectPropertyRef).objRef;
-				if (lObjRef !== this.rmtd.extIntReferenceMap.get(lObjRef)) {
-					ldTokenRef = new NetworkPreferredToken(this.rmtd.extIntReferenceMap.get(lObjRef));
+				let newLDResource: ILDResource;
+				if (isObjPropertyRef(singleIntrpblKey)) {
+					let lObjRef = (singleIntrpblKey as ObjectPropertyRef).objRef;
+					if (lObjRef !== this.rmtd.extIntReferenceMap.get(lObjRef)) {
+						ldTokenRef = new NetworkPreferredToken(this.rmtd.extIntReferenceMap.get(lObjRef));
+					} else {
+						ldTokenRef = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, lObjRef);
+					}
+					let ldPropRef = (singleIntrpblKey as ObjectPropertyRef).propRef;
+					let ldValue = val.value[ldPropRef];
+					newLDResource = {
+						webInResource: null,
+						webOutResource: null,
+						kvStores: [{ key: ldPropRef, value: ldValue, ldType: null }]
+					};
+				} else if (val.ldType === UserDefDict.ldTokenStringReference) {
+					//i.e. handing the reference down to the component
+					newLDResource = {
+						webInResource: null,
+						webOutResource: null,
+						kvStores: [val]
+					};
+					ldTokenRef = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.headInterpreterLnk);
 				} else {
-					ldTokenRef = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, lObjRef);
+					console.error("unsupported ldType for reference");
 				}
-				let ldPropRef = (singleIntrpblKey as ObjectPropertyRef).propRef;
-				let ldValue = val.value[ldPropRef];
-				let newLDResource: ILDResource = {
-					webInResource: null,
-					webOutResource: null,
-					kvStores: [{ key: ldPropRef, value: ldValue, ldType: null }]
-				};
 				let newLDOptions: ILDOptions = {
 					isLoading: false,
 					lang: null,
@@ -91,6 +106,7 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 	}
 
 	componentWillReceiveProps(nextProps: OwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
+		console.log("refMapProps: " + nextProps.ldTokenString);
 		if (compNeedsUpdate(nextProps, this.props)) {
 			this.subOutputKVMap = this.rmtd.fillSubOutputKVmaps(nextProps.ldTokenString);
 			this.fillLDOptions();
@@ -109,11 +125,12 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 		let baseIntrprtr = this.rmtd.interpreterMap[this.rmtd.headInterpreterLnk];
 		let soKVM = this.subOutputKVMap;
 		let BaseComp = baseIntrprtr;
-		if(BaseComp === null || BaseComp === undefined){
+		if (BaseComp === null || BaseComp === undefined) {
 			console.error("InterpreterReferenceMapType-component: interpreter null or undefined");
 		}
-		let headToken = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.headInterpreterLnk);
+		let headToken = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.refMapName + this.rmtd.headInterpreterLnk);
 		const { routes } = this.props;
+		console.log("headToken: " + headToken.get());
 		reactComps.push(<BaseComp key={0} routes={routes} ldTokenString={headToken.get()} outputKVMap={null} />);
 		/*for (let intrprtrKey in this.rmtd.interpreterMap) {
 			if (this.rmtd.interpreterMap.hasOwnProperty(intrprtrKey)) {

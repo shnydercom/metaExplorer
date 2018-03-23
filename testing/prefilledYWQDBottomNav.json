@@ -1,15 +1,15 @@
 {
-  "subInterpreterOf": "5e92814f-4b9b-4d81-9f02-43bc4de2b28c",
-  "canInterpretType": "ywqd/BottomNav-ObjectType",
-  "nameSelf": "ywqd/BottomNav",
+  "subInterpreterOf": "bSub",
+  "canInterpretType": "BHead-ObjectType",
+  "nameSelf": "BHead",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
-        "5e92814f-4b9b-4d81-9f02-43bc4de2b28c": {
+        "bSub": {
           "subInterpreterOf": "shnyder/BottomNavigation",
           "canInterpretType": "shnyder/BottomNavigation-ObjectType",
-          "nameSelf": "5e92814f-4b9b-4d81-9f02-43bc4de2b28c",
+          "nameSelf": "bSub",
           "initialKvStores": [
             {
               "key": "freeContainer",
@@ -77,7 +77,9 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "interpretableKeys": [
+            "freeContainer"
+          ]
         }
       },
       "ldType": "InterpreterReferenceMapType"
@@ -86,7 +88,7 @@
   "crudSkills": "cRud",
   "interpretableKeys": [
     {
-      "objRef": "5e92814f-4b9b-4d81-9f02-43bc4de2b28c",
+      "objRef": "bSub",
       "propRef": "freeContainer"
     }
   ]
