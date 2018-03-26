@@ -3,14 +3,15 @@ const path = require('path')
 
 const polyfill = require('@babel/polyfill')
 
+//const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const WriteFilePlugin = require('write-file-webpack-plugin');
 
-const extractSass = new ExtractTextPlugin({
+/*const extractSass = new ExtractTextPlugin({
   filename: "[name].[contenthash].css",
   disable: process.env.NODE_ENV === "development"
-});
+});*/
 
 module.exports = {
   devtool: "source-map",
@@ -40,7 +41,7 @@ module.exports = {
   // tell Webpack to load TypeScript files
   resolve: {
     // Look for modules in .ts(x) files first, then .js
-    extensions: ['.ts', '.tsx', '.js', '.json', '.css', '.scss'],
+    extensions: ['.json', '.css', '.scss','.ts', '.tsx', '.js'],
 
     // add 'src' to the modules, so that when you import files you can do so with 'src' as the relative route
     modules: ['src', 'node_modules'],
@@ -76,36 +77,20 @@ module.exports = {
           },
         ]
       },
-      /*{
-        test: /\.css$/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              modules: true,
-              sourceMap: true,
-              importLoaders: 1,
-              localIdentName: "[name]--[local]--[hash:base64:8]"
-            }
-          },
-          "postcss-loader" // has separate config, see postcss.config.js nearby
-        ]
-      },*/
       {
         test: /\.css$/,
         use: [
           "style-loader",
-          {
-            loader: 'css-loader',
-            query: {
+         /* {
+            loader: "css-loader",
+            options: {
               modules: true,
               sourceMap: true,
               importLoaders: 2,
               localIdentName: "[name]--[local]--[hash:base64:8]"
             }
-          },
-          /*{
+          },*/
+          {
             loader: 'typings-for-css-modules-loader',
             options: {
               camelcase: true,
@@ -115,19 +100,21 @@ module.exports = {
               importLoaders: 2,
               localIdentName: "[name]--[local]--[hash:base64:8]"
             }
-          },*/
-          "postcss-loader", // has separate config, see postcss.config.js nearby
+          },
+          "postcss-loader" // has separate config, see postcss.config.js nearby
         ]
       },
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
+        use: 
+        ExtractTextPlugin.extract({
           fallback: 'style-loader',
 
           // Could also be write as follow:
           // use: 'css-loader?modules&importLoader=2&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader'
-          use: [{
+          use: [//'style-loader',
+          //MiniCssExtractPlugin.loader,
+          {
               loader: 'css-loader',
               query: {
                 modules: true,
@@ -211,6 +198,12 @@ module.exports = {
       from: 'assets',
       to: 'static'
     }]),
+   /* new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })*/
     new ExtractTextPlugin('style.css', {
       allChunks: true
     })
