@@ -1,5 +1,7 @@
 {
-  "compilerOptions": {
+  "compilerOptions": {    
+    "inlineSourceMap": true,
+
     //"module": "es2015", // use ES2015 modules
     //"target": "es6", // compile to ES2015 (Babel will do the rest)
     "allowSyntheticDefaultImports": true, // see below

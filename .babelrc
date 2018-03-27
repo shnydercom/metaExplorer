@@ -1,7 +1,8 @@
 {
+    "presets": ["env", "react"],
     "plugins": [
         ["babel-plugin-transform-builtin-extend", {
             "globals": ["Error", "Array"]
-        }]
+        }, "transform-decorators-legacy", "transform-class-properties"]
     ]
 }

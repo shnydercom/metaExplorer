@@ -1,9 +1,10 @@
 import jasmine from 'jasmine';
-import {BlueprintConfig, IBlueprintInterpreter, OutputKVMap} from 'ldaccess/ldBlueprint';
-import ldBlueprint from 'ldaccess/ldBlueprint';
-import { mockInterpreterRetrieverFn } from '../testing/mockInterpreterRetriever';
+import { BlueprintConfig, IBlueprintInterpreter, OutputKVMap, ldBlueprint } from 'ldaccess/ldBlueprint';
+import { mockInterpreterRetrieverFn, bpAsFn } from '../testing/mockInterpreterRetriever';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { IKvStore } from 'ldaccess/ikvstore';
+import { DefaultInterpreterRetriever } from 'defaults/DefaultInterpreterRetriever';
+import { ImgHeadSubDescIntrprtrName } from 'components/visualcomposition/ImgHeadSubDescIntrprtr';
 
 var testInterpreter = mockInterpreterRetrieverFn;
 
@@ -16,8 +17,8 @@ let bpCfg: BlueprintConfig = {
     canInterpretType: "http://shnyder.com/Testtype",
     nameSelf: "shnyder/testTypeInterpreter",
     interpreterRetrieverFn: testInterpreter,
-    initialKvStores: null,
-    interpretableKeys: null,
+    initialKvStores: [],
+    interpretableKeys: [],
     crudSkills: "cRud"
 };
 
@@ -30,13 +31,20 @@ export class LDBlueprintContainerClass implements IBlueprintInterpreter {
 }
 
 describe("ldBlueprint decorator func", () => {
+
+    //const wrappedContainerClass = ldBlueprint(bpCfg);
+    //const wrapped2 = wrappedContainerClass(LDBlueprintContainerClass);
     describe("for a correct LDBlueprintContainerClass object to be constructed...", () => {
         var newLDContainer: LDBlueprintContainerClass = new LDBlueprintContainerClass();
+        //var newLDContainer = bpCfg;
+        //var dir: PureImgDisplay = new PureImgDisplay({});
+        //var ihsdi = dir.getInterpreterByNameSelf(ImgHeadSubDescIntrprtrName);
         it("POJO should be created", () => {
             expect(newLDContainer).toBeDefined();
+          //  expect(dir).toBeDefined();
         });
-        it("should have a consumeWebResource function", () => {
-            expect(newLDContainer.consumeLDOptions).toBeDefined();
-        });
+        /* it("should have a consumeWebResource function", () => {
+             expect(newLDContainer.consumeLDOptions).toBeDefined();
+         });*/
     });
 });
