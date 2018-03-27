@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import { ReduxInterpreterRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
 import * as React from "react";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
-import { ILDOptions } from "ldaccess/ildoptions";
+import { ILDOptions, DEFAULT_INTERPRETER_RETRIEVER } from "ldaccess/ildoptions";
 import { ILDResource } from "ldaccess/ildresource";
 import { applicationStore } from "approot";
 import { ldNonVisSETAction } from "appstate/epicducks/ldNonVisual-duck";
@@ -200,7 +200,10 @@ export class RefMapTypeDesintegrator {
 							let ldToken: ILDToken = new NetworkPreferredToken(ldSubTokenString);
 							let isLoading: boolean = false;
 							let newLDOptions: ILDOptions = {
-								lang, resource, ldToken, isLoading
+								lang, resource, ldToken, isLoading,
+								visualInfo: {
+									retriever: DEFAULT_INTERPRETER_RETRIEVER
+								}
 							};
 							rv[ldSubTokenString] = newLDOptions;
 						} else {
@@ -216,7 +219,10 @@ export class RefMapTypeDesintegrator {
 					webOutResource: null
 				};
 				let newSourceLDOptions: ILDOptions = {
-					lang: undefined, resource: sourceresource, ldToken: compLDToken, isLoading: false
+					lang: undefined, resource: sourceresource, ldToken: compLDToken, isLoading: false,
+					visualInfo: {
+						retriever: DEFAULT_INTERPRETER_RETRIEVER
+					}
 				};
 				rv[compLDToken.get()] = newSourceLDOptions;
 			}

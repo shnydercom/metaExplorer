@@ -19,7 +19,8 @@ module.exports = {
   // entry point of our application, within the `src` directory (which we add to resolve.modules below):
   entry: [
     //"index": 
-    '@babel/polyfill', "./src/index"
+      '@babel/polyfill',
+      "./src/index"
     //"css": "./styles/styles.scss"
   ],
 
@@ -41,7 +42,7 @@ module.exports = {
   // tell Webpack to load TypeScript files
   resolve: {
     // Look for modules in .ts(x) files first, then .js
-    extensions: ['.json', '.css', '.scss','.ts', '.tsx', '.js'],
+    extensions: ['.json', '.css', '.scss', '.ts', '.tsx', '.js'],
 
     // add 'src' to the modules, so that when you import files you can do so with 'src' as the relative route
     modules: ['src', 'node_modules'],
@@ -62,8 +63,7 @@ module.exports = {
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
       {
         test: /\.tsx?$/,
-        use: [
-          {
+        use: [{
             loader: 'babel-loader',
             options: {
               presets: [
@@ -79,17 +79,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        //exclude: path.resolve(__dirname, "../node_modules/react-toolbox"),
         use: [
           "style-loader",
-         /* {
-            loader: "css-loader",
-            options: {
-              modules: true,
-              sourceMap: true,
-              importLoaders: 2,
-              localIdentName: "[name]--[local]--[hash:base64:8]"
-            }
-          },*/
+          /* {
+             loader: "css-loader",
+             options: {
+               modules: true,
+               sourceMap: true,
+               importLoaders: 2,
+               localIdentName: "[name]--[local]--[hash:base64:8]"
+             }
+           },*/
           {
             loader: 'typings-for-css-modules-loader',
             options: {
@@ -98,23 +99,27 @@ module.exports = {
               modules: true,
               sourceMap: true,
               importLoaders: 2,
-              localIdentName: "[name]--[local]--[hash:base64:8]"
+              localIdentName: '[local]' // "[name]--[local]--[hash:base64:8]"
             }
           },
-          "postcss-loader" // has separate config, see postcss.config.js nearby
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          }, // has separate config, see postcss.config.js nearby
         ]
       },
       {
         test: /\.scss$/,
-        use: 
-        ExtractTextPlugin.extract({
+        use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
 
           // Could also be write as follow:
           // use: 'css-loader?modules&importLoader=2&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader'
-          use: [//'style-loader',
-          //MiniCssExtractPlugin.loader,
-          {
+          use: [ //'style-loader',
+            //MiniCssExtractPlugin.loader,
+            {
               loader: 'css-loader',
               query: {
                 modules: true,
@@ -128,6 +133,29 @@ module.exports = {
           ]
         }),
       },
+      /*{
+        test: /\.s?css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+
+          // Could also be write as follow:
+          // use: 'css-loader?modules&importLoader=2&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader'
+          use: [ //'style-loader',
+            //MiniCssExtractPlugin.loader,
+            {
+              loader: 'typings-for-css-modules-loader',
+              query: {
+                modules: true,
+                sourceMap: true,
+                importLoaders: 2,
+                localIdentName: /*[name]--*/ // '[local]' //--[hash:base64:8]'
+      /* }
+            },
+            { loader: 'postcss-loader', options: { sourceMap: true } },
+            { loader: 'sass-loader', options: { sourceMap: true } }
+          ]
+        }),
+      },*/
       /*{
         test: /\.s?css$/,
         exclude: /node_modules/,
@@ -166,7 +194,7 @@ module.exports = {
     ]
   },
   externals: {
-   'react': {
+    'react': {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
@@ -198,12 +226,12 @@ module.exports = {
       from: 'assets',
       to: 'static'
     }]),
-   /* new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    })*/
+    /* new MiniCssExtractPlugin({
+       // Options similar to the same options in webpackOptions.output
+       // both options are optional
+       filename: "[name].css",
+       chunkFilename: "[id].css"
+     })*/
     new ExtractTextPlugin('style.css', {
       allChunks: true
     })

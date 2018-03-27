@@ -4,7 +4,7 @@ import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from
 import * as React from "react";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
-import { ILDOptions } from "ldaccess/ildoptions";
+import { ILDOptions, DEFAULT_INTERPRETER_RETRIEVER } from "ldaccess/ildoptions";
 import { ExplorerState } from "appstate/store";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
@@ -98,7 +98,10 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 					isLoading: false,
 					lang: null,
 					ldToken: ldTokenRef,
-					resource: newLDResource
+					resource: newLDResource,
+					visualInfo: {
+						retriever: DEFAULT_INTERPRETER_RETRIEVER
+					}
 				};
 				this.props.notifyLDOptionsChange(newLDOptions);
 			});

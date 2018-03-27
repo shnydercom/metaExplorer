@@ -1,12 +1,9 @@
 import jasmine from 'jasmine';
-import { BlueprintConfig, IBlueprintInterpreter, OutputKVMap, ldBlueprint } from 'ldaccess/ldBlueprint';
-import { mockInterpreterRetrieverFn, bpAsFn } from '../testing/mockInterpreterRetriever';
+import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { IKvStore } from 'ldaccess/ikvstore';
 import { DefaultInterpreterRetriever } from 'defaults/DefaultInterpreterRetriever';
 import { ImgHeadSubDescIntrprtrName } from 'components/visualcomposition/ImgHeadSubDescIntrprtr';
-
-var testInterpreter = mockInterpreterRetrieverFn;
 
 let bpCfg: BlueprintConfig = {
     //TODO: property forType needs to be renamed, maybe split up into multiple properties. I need a clear
@@ -16,7 +13,6 @@ let bpCfg: BlueprintConfig = {
     subInterpreterOf: null,
     canInterpretType: "http://shnyder.com/Testtype",
     nameSelf: "shnyder/testTypeInterpreter",
-    interpreterRetrieverFn: testInterpreter,
     initialKvStores: [],
     interpretableKeys: [],
     crudSkills: "cRud"

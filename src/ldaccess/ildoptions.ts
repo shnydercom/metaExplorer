@@ -7,4 +7,12 @@ export interface ILDOptions {
 	resource: ILDResource;
 	ldToken: ILDToken;
 	isLoading: boolean;
+	visualInfo: IVisInfo;
 }
+
+export interface IVisInfo {
+	interpretedBy?: string;
+	retriever: string;
+}
+
+export const DEFAULT_INTERPRETER_RETRIEVER = "default";

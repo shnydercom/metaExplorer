@@ -6,7 +6,7 @@ import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { LDError, LDErrorMsgState } from './../LDError';
 import { ILDOptionsMapStatePart } from 'appstate/store';
 import { IKvStore } from 'ldaccess/ikvstore';
-import { ILDOptions } from 'ldaccess/ildoptions';
+import { ILDOptions, DEFAULT_INTERPRETER_RETRIEVER } from 'ldaccess/ildoptions';
 import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
 import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 
@@ -95,6 +95,9 @@ export const ldOptionsMapReducer = (
 					lang: action.lang,
 					isLoading: false,
 					ldToken: ldToken,
+					visualInfo: {
+						retriever: DEFAULT_INTERPRETER_RETRIEVER
+					},
 					resource: {
 						kvStores: action.kvStores,
 						webInResource: null,

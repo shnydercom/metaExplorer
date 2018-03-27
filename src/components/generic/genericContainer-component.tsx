@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { ExplorerState } from 'appstate/store';
 import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
+import { ILDOptions, DEFAULT_INTERPRETER_RETRIEVER } from 'ldaccess/ildoptions';
 
 //import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import appIntMatcher from 'appconfig/appInterpreterMatcher';
@@ -153,6 +153,7 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 
 	private kvsToComponent(input: IKvStore[]): any {
 		let reactCompClasses: (React.ComponentClass<LDOwnProps>)[] = [];
+		let intrprtrNames: string[] = [];
 		input.forEach((itm) => {
 			let intrprtr = itm.intrprtrClass;
 			if (isInterpreter(intrprtr)) {
@@ -167,7 +168,10 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 			//
 			let ldRes: ILDResource = { webInResource: null, webOutResource: null, kvStores: [input[idx]] };
 			let ldToken: ILDToken = new NetworkPreferredToken(ldTokenString);
-			let newldOptions: ILDOptions = { ldToken: ldToken, resource: ldRes, isLoading: false, lang: "en" };
+			let newldOptions: ILDOptions = { ldToken: ldToken, resource: ldRes, isLoading: false, lang: "en",
+			visualInfo: {
+				retriever: DEFAULT_INTERPRETER_RETRIEVER
+			} };
 			this.props.notifyLDOptionsChange(newldOptions);
 			const { routes } = this.props;
 			return <GenericComp key={idx} routes={routes} ldTokenString={ldTokenString} outputKVMap={null} />;

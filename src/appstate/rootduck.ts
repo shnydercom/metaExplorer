@@ -5,12 +5,16 @@ import { isUploadingImgReducer, uploadImageEpic } from 'appstate/epicducks/image
 import { ExplorerState } from 'appstate/store';
 import { ldOptionsMapReducer, requestLDOptionsEpic } from 'appstate/epicducks/ldOptions-duck';
 import { ldNonVisMapReducer } from 'appstate/epicducks/ldNonVisual-duck';
+import reduceReducers from 'reduce-reducers';
+import { refMapReducer } from './epicducks/refMap-duck';
+
+const combLdOptionsMapReducer = reduceReducers(ldOptionsMapReducer, refMapReducer);
 
 //at the level of the root reducer, next-action-predicates should be handled
 export const rootReducer = combineReducers<ExplorerState>({
-    isLoading:  isUploadingImgReducer,
+    isLoading: isUploadingImgReducer,
     isSaving: isLoadingSchemaReducer,
-    ldoptionsMap: ldOptionsMapReducer,
+    ldoptionsMap: combLdOptionsMapReducer,
     ldNonVisualMap: ldNonVisMapReducer
 });
 
