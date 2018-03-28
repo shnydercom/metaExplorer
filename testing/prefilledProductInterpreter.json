@@ -1,5 +1,5 @@
 {
-  "subInterpreterOf": "headUID",
+  "subItptOf": "headUID",
   "canInterpretType": "testInterpreter-ObjectType",
   "nameSelf": "ProductDisplayInterpreter",
   "initialKvStores": [
@@ -7,7 +7,7 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "headUID": {
-          "subInterpreterOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
           "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "headUID",
           "initialKvStores": [
@@ -40,7 +40,7 @@
           "interpretableKeys": []
         },
         "imgDispUID": {
-          "subInterpreterOf": "shnyder/imageDisplay",
+          "subItptOf": "shnyder/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "imgDispUID",
           "initialKvStores": [
@@ -70,7 +70,7 @@
           "interpretableKeys": []
         },
         "imgRetrUID": {
-          "subInterpreterOf": "shnyder/imageRetriever",
+          "subItptOf": "shnyder/imageRetriever",
           "canInterpretType": "shnyder/imageRetriever-ObjectType",
           "nameSelf": "imgRetrUID",
           "initialKvStores": [
@@ -97,7 +97,7 @@
           "interpretableKeys": []
         },
         "prodRetrUID": {
-          "subInterpreterOf": "shnyder/productRetriever",
+          "subItptOf": "shnyder/productRetriever",
           "canInterpretType": "shnyder/productRetriever-ObjectType",
           "nameSelf": "prodRetrUID",
           "initialKvStores": [

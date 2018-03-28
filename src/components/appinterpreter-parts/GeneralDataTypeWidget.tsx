@@ -30,7 +30,7 @@ export class GeneralDataTypeNodeWidget extends React.Component<GeneralDataTypeNo
 		return (
 			<div className="basic-node" style={{ background: this.props.node.color }}>
 				<div className="title">
-					<div className="name">{this.props.node.subInterpreterOf}</div>
+					<div className="name">{this.props.node.subItptOf}</div>
 				</div>
 				<div className="ports">
 					<div className="in">{_.map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>

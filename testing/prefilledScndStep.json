@@ -1,5 +1,5 @@
 {
-  "subInterpreterOf": "aSub",
+  "subItptOf": "aSub",
   "canInterpretType": "AName-ObjectType",
   "nameSelf": "AName",
   "initialKvStores": [
@@ -7,7 +7,7 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "aSub": {
-          "subInterpreterOf": "BHead",
+          "subItptOf": "BHead",
           "canInterpretType": "BHead-ObjectType",
           "nameSelf": "aSub",
           "initialKvStores": [
@@ -26,7 +26,7 @@
           ]
         },
         "aImgHS": {
-          "subInterpreterOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
           "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "aImgHS",
           "initialKvStores": [],

@@ -6,8 +6,8 @@ import { DECLARATION_MODEL } from "components/appinterpreter-parts/designer-cons
 
 export class DeclarationPartNodeModel extends InterpreterNodeModel {
 
-	constructor(nameSelf: string = "Untitled", subInterpreterOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", id?: string) {
-		super(nameSelf, subInterpreterOf, canInterpretType, color, DECLARATION_MODEL, id);
+	constructor(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", id?: string) {
+		super(nameSelf, subItptOf, canInterpretType, color, DECLARATION_MODEL, id);
 		this.nameSelf = nameSelf;
 		this.color = color;
 	}

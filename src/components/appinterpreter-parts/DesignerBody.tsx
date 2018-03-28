@@ -47,8 +47,8 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 			let ldBPCfg = (itm.itpt as IBlueprintItpt).cfg;
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
 			let trayInterpreterType = ldBPCfg ? ldBPCfg.canInterpretType : itm.canInterpretType;
-			//let traySubInterpreterOf = ldBPCfg ? ldBPCfg.subInterpreterOf : null;
-			return <DesignerTrayItem key={idx} model={{ type: "ldbp", bpname: trayName, canInterpretType: trayInterpreterType, subInterpreterOf: null /*traySubInterpreterOf*/ }} name={trayName} color={appStyles["$designer-secondary-color"]} />;
+			//let traysubItptOf = ldBPCfg ? ldBPCfg.subItptOf : null;
+			return <DesignerTrayItem key={idx} model={{ type: "ldbp", bpname: trayName, canInterpretType: trayInterpreterType, subItptOf: null /*traysubItptOf*/ }} name={trayName} color={appStyles["$designer-secondary-color"]} />;
 		});
 		return reactCompClasses;
 	}
@@ -94,7 +94,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 									}*/
 								}
 								if (data.canInterpretType) node.canInterpretType = data.canInterpretType;
-								//if (data.subInterpreterOf) node.subInterpreterOf = data.subInterpreterOf;
+								//if (data.subItptOf) node.subItptOf = data.subItptOf;
 								console.dir(node);
 								break;
 							case "bdt":

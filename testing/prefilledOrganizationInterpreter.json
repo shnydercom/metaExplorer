@@ -1,5 +1,5 @@
 {
-  "subInterpreterOf": "2b8270e6-d166-4a89-971d-e61ce2f35581",
+  "subItptOf": "2b8270e6-d166-4a89-971d-e61ce2f35581",
   "canInterpretType": "organizationDisplay-ObjectType",
   "nameSelf": "organizationDisplayInterpreter",
   "initialKvStores": [
@@ -7,7 +7,7 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "2b8270e6-d166-4a89-971d-e61ce2f35581": {
-          "subInterpreterOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
           "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "2b8270e6-d166-4a89-971d-e61ce2f35581",
           "initialKvStores": [
@@ -48,7 +48,7 @@
           "interpretableKeys": []
         },
         "6ffd015f-c436-4dd6-82d5-457604bdf45c": {
-          "subInterpreterOf": "shnyder/imageDisplay",
+          "subItptOf": "shnyder/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "6ffd015f-c436-4dd6-82d5-457604bdf45c",
           "initialKvStores": [
@@ -78,7 +78,7 @@
           "interpretableKeys": []
         },
         "a39dee61-5207-48b5-9e94-2c44ab2d48b1": {
-          "subInterpreterOf": "shnyder/imageRetriever",
+          "subItptOf": "shnyder/imageRetriever",
           "canInterpretType": "shnyder/imageRetriever-ObjectType",
           "nameSelf": "a39dee61-5207-48b5-9e94-2c44ab2d48b1",
           "initialKvStores": [
@@ -105,7 +105,7 @@
           "interpretableKeys": []
         },
         "5a485416-d92c-43fe-ad6d-eeeaed03ed37": {
-          "subInterpreterOf": "shnyder/organizationRetriever",
+          "subItptOf": "shnyder/organizationRetriever",
           "canInterpretType": "shnyder/organizationRetriever-ObjectType",
           "nameSelf": "5a485416-d92c-43fe-ad6d-eeeaed03ed37",
           "initialKvStores": [

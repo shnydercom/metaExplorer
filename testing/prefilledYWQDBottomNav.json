@@ -1,5 +1,5 @@
 {
-  "subInterpreterOf": "bSub",
+  "subItptOf": "bSub",
   "canInterpretType": "BHead-ObjectType",
   "nameSelf": "BHead",
   "initialKvStores": [
@@ -7,7 +7,7 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "bSub": {
-          "subInterpreterOf": "shnyder/BottomNavigation",
+          "subItptOf": "shnyder/BottomNavigation",
           "canInterpretType": "shnyder/BottomNavigation-ObjectType",
           "nameSelf": "bSub",
           "initialKvStores": [

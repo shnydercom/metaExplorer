@@ -152,7 +152,7 @@ export class DesignerLogic {
 		let intrprtrKeys: any[] = cfg.interpretableKeys;
 		let initialKvStores: IKvStore[] = cfg.initialKvStores;
 		node.nameSelf = node.id;
-		node.subInterpreterOf = bpname;
+		node.subItptOf = bpname;
 		let isInitKVsmallerThanKeys: boolean = initialKvStores.length < intrprtrKeys.length;
 		for (var i = 0; i < intrprtrKeys.length; i++) {
 			let elemi: IKvStore;
@@ -278,7 +278,7 @@ export class DesignerLogic {
 				value: subIntrprtrCfgMap,
 				ldType: UserDefDict.intrprtrBPCfgRefMapType
 			};
-		outputBPCfg.subItptOf = this.outputNode.subInterpreterOf;
+		outputBPCfg.subItptOf = this.outputNode.subItptOf;
 		outputBPCfg.initialKvStores.push(intrprtMapKV);
 		this.bakeKvStoresIntoBP(outputBPCfg);
 		return outputBPCfg;
@@ -332,13 +332,13 @@ export class DesignerLogic {
 							let initialKvStores = null;
 							if (!outputBPCfg) {
 								let canInterpretType = (leafNode as InterpreterNodeModel).canInterpretType;
-								let subInterpreterOf = (leafNode as InterpreterNodeModel).subInterpreterOf;
+								let subItptOf = (leafNode as InterpreterNodeModel).subItptOf;
 								let crudSkills = "cRud";
 								let nameSelf = leafNodeID;
 								initialKvStores = [];
 								let interpretableKeysArr = [];
 								outputBPCfg = outputBPCfg ? outputBPCfg : {
-									subItptOf: subInterpreterOf,
+									subItptOf: subItptOf,
 									canInterpretType: canInterpretType,
 									nameSelf: nameSelf,
 									initialKvStores: initialKvStores,
@@ -365,7 +365,7 @@ export class DesignerLogic {
 							branchBPCfg.initialKvStores.push(gdtKV);
 							//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subInterpreters
 							if (branchNode.nodeType === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
-								branchNode.subInterpreterOf = leafNode.getID();
+								branchNode.subItptOf = leafNode.getID();
 							} else {
 								branchBPCfg.interpretableKeys.push(gdtKV.key);
 							}

@@ -6,16 +6,16 @@ import { INTERPRETERDATATYPE_MODEL } from "components/appinterpreter-parts/desig
 export class InterpreterNodeModel extends NodeModel {
 	nameSelf: string;
 	canInterpretType: string;
-	subInterpreterOf: string;
+	subItptOf: string;
 	color: string;
 	ports: { [s: string]: LDPortModel };
 
-	constructor(nameSelf: string = "Untitled", subInterpreterOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", nodeType?: string, id?: string) {
+	constructor(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", nodeType?: string, id?: string) {
 		super(nodeType ? nodeType : INTERPRETERDATATYPE_MODEL, id);
 		this.nameSelf = nameSelf;
 		this.color = color;
 		this.canInterpretType = canInterpretType;
-		this.subInterpreterOf = subInterpreterOf;
+		this.subItptOf = subItptOf;
 	}
 
 	deSerialize(object) {
@@ -23,7 +23,7 @@ export class InterpreterNodeModel extends NodeModel {
 		this.nameSelf = object.nameSelf;
 		this.color = object.color;
 		this.canInterpretType = object.canInterpretType;
-		this.subInterpreterOf = object.subInterpreterOf;
+		this.subItptOf = object.subItptOf;
 	}
 
 	serialize() {
@@ -31,7 +31,7 @@ export class InterpreterNodeModel extends NodeModel {
 			nameSelf: this.nameSelf,
 			color: this.color,
 			canInterpretType: this.canInterpretType,
-			subInterpreterOf: this.subInterpreterOf
+			subItptOf: this.subItptOf
 		});
 	}
 
