@@ -6,7 +6,7 @@ import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { ExplorerState } from 'appstate/store';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from 'ldaccess/ldBlueprint';
+import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { VisualDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
@@ -69,7 +69,7 @@ let initialKVStores: IKvStore[] = [
 	}
 ];
 let bpCfg: BlueprintConfig = {
-	subInterpreterOf: null,
+	subItptOf: null,
 	nameSelf: ImgHeadSubDescIntrprtrName,
 	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
@@ -82,7 +82,7 @@ interface TestState {
 }
 @ldBlueprint(bpCfg)
 export class PureImgHeadSubDesc extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, {}>
-	implements IBlueprintInterpreter {
+	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	headerImgDisplay: any;

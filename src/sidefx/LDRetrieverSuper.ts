@@ -1,4 +1,4 @@
-import { IBlueprintInterpreter, BlueprintConfig, OutputKVMap } from "ldaccess/ldBlueprint";
+import { IBlueprintItpt, BlueprintConfig, OutputKVMap } from "ldaccess/ldBlueprint";
 import { IKvStore } from "ldaccess/ikvstore";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { UserDefDict } from "ldaccess/UserDefDict";
@@ -15,7 +15,7 @@ import { nameSpaceMap } from "ldaccess/ns/nameSpaceMap";
 
 export let ldRetrCfgIntrprtKeys: string[] =
 	[UserDefDict.externalReferenceKey, SideFXDict.srvURL, SideFXDict.identifier];
-export class LDRetrieverSuper implements IBlueprintInterpreter {
+export class LDRetrieverSuper implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	initialKvStores: IKvStore[];

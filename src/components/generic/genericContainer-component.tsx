@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 
 import { ExplorerState } from 'appstate/store';
 import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
-import ldBlueprint, { IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
-import { ILDOptions, DEFAULT_INTERPRETER_RETRIEVER } from 'ldaccess/ildoptions';
+import ldBlueprint, { IBlueprintItpt } from 'ldaccess/ldBlueprint';
+import { ILDOptions } from 'ldaccess/ildoptions';
 
 //import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import appIntMatcher from 'appconfig/appInterpreterMatcher';
@@ -26,6 +26,7 @@ import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
 import { ILDResource } from 'ldaccess/ildresource';
 import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
 import { UserDefDict } from 'ldaccess/UserDefDict';
+import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
 
 /*export type LDOwnProps = {
 	ldTokenString: string;
@@ -64,7 +65,7 @@ let cfgIntrprtKeys: string[] =
 	[];
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
-	subInterpreterOf: null,
+	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: "shnyder/genericContainer",
 	//interpreterRetrieverFn: appIntprtrRetr,
@@ -75,7 +76,7 @@ let bpCfg: BlueprintConfig = {
 
 @ldBlueprint(bpCfg)
 export class PureGenericContainer extends React.Component<LDConnectedState & LDConnectedDispatch & GenOwnProps, {}>
-	implements IBlueprintInterpreter {
+	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	initialKvStores: IKvStore[];
@@ -170,7 +171,7 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 			let ldToken: ILDToken = new NetworkPreferredToken(ldTokenString);
 			let newldOptions: ILDOptions = { ldToken: ldToken, resource: ldRes, isLoading: false, lang: "en",
 			visualInfo: {
-				retriever: DEFAULT_INTERPRETER_RETRIEVER
+				retriever: DEFAULT_ITPT_RETRIEVER_NAME
 			} };
 			this.props.notifyLDOptionsChange(newldOptions);
 			const { routes } = this.props;

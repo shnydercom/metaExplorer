@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import * as redux from 'redux';
-import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from "ldaccess/ldBlueprint";
+import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from "ldaccess/ldBlueprint";
 import * as React from "react";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
-import { ILDOptions, DEFAULT_INTERPRETER_RETRIEVER } from "ldaccess/ildoptions";
+import { ILDOptions } from "ldaccess/ildoptions";
 import { ExplorerState } from "appstate/store";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
@@ -19,6 +19,7 @@ import { ILDResource } from "ldaccess/ildresource";
 import { ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";
 import { isObjPropertyRef } from "ldaccess/ldUtils";
 import { LDConsts } from "ldaccess/LDConsts";
+import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultInterpreterRetriever";
 
 export type OwnProps = LDOwnProps & {
 	searchCrudSkills: string;
@@ -29,7 +30,7 @@ let cfgIntrprtKeys: string[] =
 	[];
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
-	subInterpreterOf: null,
+	subItptOf: null,
 	canInterpretType: canInterpretType,
 	nameSelf: UserDefDict.intrprtrBPCfgRefMapName,
 	initialKvStores: initialKVStores,
@@ -39,7 +40,7 @@ let bpCfg: BlueprintConfig = {
 //TODO: move state-relevant ldOptionsMap-Entry genration outside of the component, or make this a non-visual interpreter
 @ldBlueprint(bpCfg)
 export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
-	implements IBlueprintInterpreter {
+	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	subOutputKVMap: { [s: string]: OutputKVMap };
 	rmtd: RefMapTypeDesintegrator;
@@ -90,7 +91,7 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 						webOutResource: null,
 						kvStores: [val]
 					};
-					ldTokenRef = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.headInterpreterLnk);
+					ldTokenRef = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.headItptLnk);
 				} else {
 					console.error("unsupported ldType for reference");
 				}
@@ -100,7 +101,7 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 					ldToken: ldTokenRef,
 					resource: newLDResource,
 					visualInfo: {
-						retriever: DEFAULT_INTERPRETER_RETRIEVER
+						retriever: DEFAULT_ITPT_RETRIEVER_NAME
 					}
 				};
 				this.props.notifyLDOptionsChange(newLDOptions);
@@ -125,19 +126,19 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 
 	buildIntrprtrJSX(): any {
 		let reactComps = [];
-		let baseIntrprtr = this.rmtd.interpreterMap[this.rmtd.headInterpreterLnk];
+		let baseIntrprtr = this.rmtd.interpreterMap[this.rmtd.headItptLnk];
 		let soKVM = this.subOutputKVMap;
 		let BaseComp = baseIntrprtr;
 		if (BaseComp === null || BaseComp === undefined) {
 			console.error("InterpreterReferenceMapType-component: interpreter null or undefined");
 		}
-		let headToken = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.refMapName + this.rmtd.headInterpreterLnk);
+		let headToken = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.refMapName + this.rmtd.headItptLnk);
 		const { routes } = this.props;
 		console.log("headToken: " + headToken.get());
 		reactComps.push(<BaseComp key={0} routes={routes} ldTokenString={headToken.get()} outputKVMap={null} />);
 		/*for (let intrprtrKey in this.rmtd.interpreterMap) {
 			if (this.rmtd.interpreterMap.hasOwnProperty(intrprtrKey)) {
-				if (intrprtrKey === this.rmtd.headInterpreterLnk) continue;
+				if (intrprtrKey === this.rmtd.headItptLnk) continue;
 				let GenericComp = this.rmtd.interpreterMap[intrprtrKey];
 				if (!isReactComponent(GenericComp)) continue;
 				let kvMap = soKVM[intrprtrKey];

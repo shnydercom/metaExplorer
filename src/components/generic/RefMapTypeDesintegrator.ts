@@ -6,19 +6,19 @@ import { isObjPropertyRef } from "ldaccess/ldUtils";
 import { ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";
 import { LDDict } from "ldaccess/LDDict";
 import appIntRetrFn from 'appconfig/appInterpreterRetriever';
-import { IInterpreterRetriever } from "ldaccess/iinterpreter-retriever";
 import { mapDispatchToProps, mapStateToProps } from "appstate/reduxFns";
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from "appstate/LDProps";
 import { connect } from "react-redux";
-import { ReduxInterpreterRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
+import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
 import * as React from "react";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
-import { ILDOptions, DEFAULT_INTERPRETER_RETRIEVER } from "ldaccess/ildoptions";
+import { ILDOptions } from "ldaccess/ildoptions";
 import { ILDResource } from "ldaccess/ildresource";
 import { applicationStore } from "approot";
 import { ldNonVisSETAction } from "appstate/epicducks/ldNonVisual-duck";
 import { connectNonVisLDComp } from "sidefx/nonVisualConnect";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
+import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultInterpreterRetriever";
 
 type InterpretableKeysInfo = {
 	ref: ObjectPropertyRef,
@@ -39,18 +39,18 @@ export var REFMAP_HEAD = "head";
 
 export class RefMapTypeDesintegrator {
 	ldOptionsPrepMap: OutputLDOptionsPrepMap;
-	headInterpreterLnk: string;
+	headItptLnk: string;
 	refMapName: string;
 	interpreterMap: InterpreterMap;
 	extIntReferenceMap: Map<string, string> = new Map();
-	retriever: ReduxInterpreterRetriever = appIntRetrFn() as ReduxInterpreterRetriever;
+	retriever: ReduxItptRetriever = appIntRetrFn() as ReduxItptRetriever;
 
 	public setRefMapBP(input: BlueprintConfig): void {
 		let refMapCandidate: any = null;
 		let refMapContentCandidate: string = null;
 		let parentInitialKvStoreInterprtrMap: Map<string, IKvStore> = new Map();
 		this.interpreterMap = {};
-		this.headInterpreterLnk = input.subInterpreterOf;
+		this.headItptLnk = input.subItptOf;
 		this.refMapName = input.nameSelf;
 		input.initialKvStores.forEach((val, idx) => {
 			if (val.ldType === UserDefDict.intrprtrBPCfgRefMapType) {
@@ -65,16 +65,16 @@ export class RefMapTypeDesintegrator {
 				console.log("unsupported parent KvStore type");
 			}
 		});
-		let headInterpreter: BlueprintConfig = null;
+		let headItpt: BlueprintConfig = null;
 		if (!refMapCandidate) {
 			//i.e. not a refMap-Interpreter in subproperties, look in retriever
-			let hIntrprtrKey = this.headInterpreterLnk;
+			let hIntrprtrKey = this.headItptLnk;
 			//this.interpreterMap[hIntrprtrKey] = this.retriever.getInterpreterByNameSelf(hIntrprtrKey);
 			//return;
-			headInterpreter = this.retriever.getInterpreterByNameSelf(hIntrprtrKey);
-			this.interpreterMap[hIntrprtrKey] = headInterpreter;
+			headItpt = this.retriever.getItptByNameSelf(hIntrprtrKey);
+			this.interpreterMap[hIntrprtrKey] = headItpt;
 		} else {
-			headInterpreter = refMapCandidate[this.headInterpreterLnk];
+			headItpt = refMapCandidate[this.headItptLnk];
 		}
 		let interpretableKeysInfos: InterpretableKeysInfo[] = [];
 		input.interpretableKeys.forEach((elem: ObjectPropertyRef) => {
@@ -97,7 +97,7 @@ export class RefMapTypeDesintegrator {
 				let extRef = getKVStoreByKey(cfgVal.initialKvStores, UserDefDict.externalReferenceKey);
 				let mapKey = extRef && extRef.value ? extRef.value : cfgKey;
 				this.extIntReferenceMap.set(cfgKey, mapKey);
-				this.interpreterMap[mapKey] = this.assignSubBPCfgToInterpreter(cfgVal, cfgKey);
+				this.interpreterMap[mapKey] = this.assignSubBPCfgToItpt(cfgVal, cfgKey);
 			}
 		}
 		for (const intrprtrKey in this.interpreterMap) {
@@ -202,7 +202,7 @@ export class RefMapTypeDesintegrator {
 							let newLDOptions: ILDOptions = {
 								lang, resource, ldToken, isLoading,
 								visualInfo: {
-									retriever: DEFAULT_INTERPRETER_RETRIEVER
+									retriever: DEFAULT_ITPT_RETRIEVER_NAME
 								}
 							};
 							rv[ldSubTokenString] = newLDOptions;
@@ -221,7 +221,7 @@ export class RefMapTypeDesintegrator {
 				let newSourceLDOptions: ILDOptions = {
 					lang: undefined, resource: sourceresource, ldToken: compLDToken, isLoading: false,
 					visualInfo: {
-						retriever: DEFAULT_INTERPRETER_RETRIEVER
+						retriever: DEFAULT_ITPT_RETRIEVER_NAME
 					}
 				};
 				rv[compLDToken.get()] = newSourceLDOptions;
@@ -250,10 +250,10 @@ export class RefMapTypeDesintegrator {
 		return rv;
 	}*/
 
-	private assignSubBPCfgToInterpreter(bpCfg: BlueprintConfig, bpKey: string): any {
+	private assignSubBPCfgToItpt(bpCfg: BlueprintConfig, bpKey: string): any {
 		let rv: any;
 		let rvCfg: BlueprintConfig;
-		let baseInterpreter = this.retriever.getUnconnectedByNameSelf(bpCfg.subInterpreterOf);
+		let baseInterpreter = this.retriever.getUnconnectedByNameSelf(bpCfg.subItptOf);
 		let fixedInitialKVStores: IKvStore[] = [];
 		let interpretableKeys: (string | ObjectPropertyRef)[] = [];
 		bpCfg.initialKvStores.forEach((elemKV) => {
@@ -275,7 +275,7 @@ export class RefMapTypeDesintegrator {
 		});
 		interpretableKeys = [...interpretableKeysADD, ...interpretableKeys];
 		rvCfg = {
-			subInterpreterOf: bpCfg.subInterpreterOf,
+			subItptOf: bpCfg.subItptOf,
 			nameSelf: bpCfg.nameSelf,
 			canInterpretType: bpCfg.canInterpretType,
 			crudSkills: bpCfg.crudSkills,

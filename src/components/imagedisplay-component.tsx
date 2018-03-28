@@ -5,7 +5,7 @@ import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from 'ldaccess/ldBlueprint';
+import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
@@ -33,7 +33,7 @@ let cfgIntrprtKeys: string[] =
 	[LDDict.name, LDDict.fileFormat, LDDict.contentUrl];
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
-	subInterpreterOf: null,
+	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: "shnyder/imageDisplay",
 	//interpreterRetrieverFn: appIntprtrRetr,
@@ -44,7 +44,7 @@ let bpCfg: BlueprintConfig = {
 
 @ldBlueprint(bpCfg)
 export class PureImgDisplay extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, {}>
-	implements IBlueprintInterpreter {
+	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	imgLink: string;

@@ -14,5 +14,3 @@ export interface IVisInfo {
 	interpretedBy?: string;
 	retriever: string;
 }
-
-export const DEFAULT_INTERPRETER_RETRIEVER = "default";

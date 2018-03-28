@@ -6,9 +6,10 @@ import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { LDError, LDErrorMsgState } from './../LDError';
 import { ILDOptionsMapStatePart } from 'appstate/store';
 import { IKvStore } from 'ldaccess/ikvstore';
-import { ILDOptions, DEFAULT_INTERPRETER_RETRIEVER } from 'ldaccess/ildoptions';
+import { ILDOptions } from 'ldaccess/ildoptions';
 import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
 import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
+import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
 
 export const LDOPTIONS_CLIENTSIDE_CREATE = 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE';
 export const LDOPTIONS_CLIENTSIDE_UPDATE = 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE';
@@ -96,7 +97,7 @@ export const ldOptionsMapReducer = (
 					isLoading: false,
 					ldToken: ldToken,
 					visualInfo: {
-						retriever: DEFAULT_INTERPRETER_RETRIEVER
+						retriever: DEFAULT_ITPT_RETRIEVER_NAME
 					},
 					resource: {
 						kvStores: action.kvStores,

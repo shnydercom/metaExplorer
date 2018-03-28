@@ -5,7 +5,7 @@ import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from 'ldaccess/ldBlueprint';
+import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDRouteProps } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
@@ -140,7 +140,7 @@ let initialKVStores: IKvStore[] = [
 	},
 ];
 let bpCfg: BlueprintConfig = {
-	subInterpreterOf: null,
+	subItptOf: null,
 	nameSelf: BottomNavigationName,
 	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
@@ -154,7 +154,7 @@ export type BottomNavState = {
 
 @ldBlueprint(bpCfg)
 export class PureBottomNavigation extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, BottomNavState>
-	implements IBlueprintInterpreter {
+	implements IBlueprintItpt {
 	state = {
 		tabIdx: 0
 	};

@@ -1,19 +1,29 @@
-import { IInterpreterRetriever } from 'ldaccess/iinterpreter-retriever';
-export class MockInterpreterRetriever implements IInterpreterRetriever {
-	getInterpreterList(): Array<any> {
+import { IItptRetriever } from 'ldaccess/iinterpreter-retriever';
+export class MockInterpreterRetriever implements IItptRetriever {
+	name: string;
+	setDerivedItpt(ldTokenVal: string, itpt: any): void {
 		throw new Error("Method not implemented.");
 	}
-	searchForObjIntrprtr(term: string, crudSkills: string) {
+	hasDerivedItpt(ldTokenVal: string): boolean {
+		throw new Error("Method not implemented.");
+	}
+	getDerivedItpt(ldTokenVal: string) {
+		throw new Error("Method not implemented.");
+	}
+	getItptList(): Array<any> {
+		throw new Error("Method not implemented.");
+	}
+	searchForObjItpt(term: string, crudSkills: string) {
 		//throw new Error("Method not implemented.");
 	}
-	searchForKVIntrprtr(term: string, crudSkills: string) {
+	searchForKVItpt(term: string, crudSkills: string) {
 		//throw new Error("Method not implemented.");
 	}
-	addInterpreter(typeName: string, intrprtr: any, crudSkills: string) {
+	addItpt(typeName: string, intrprtr: any, crudSkills: string) {
 		//throw new Error("Method not implemented.");
 		return null;
 	}
-	getInterpreterByNameSelf(nameSelf: string): any { return null; }
+	getItptByNameSelf(nameSelf: string): any { return null; }
 }
 
 export let mockInterpreterRetrieverFn = () => new MockInterpreterRetriever();

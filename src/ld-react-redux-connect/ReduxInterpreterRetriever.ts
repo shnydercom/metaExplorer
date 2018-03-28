@@ -1,43 +1,42 @@
-import { IInterpreterRetriever } from "ldaccess/iinterpreter-retriever";
 import { InferableComponentEnhancerWithProps, connect } from "react-redux";
-import { DefaultInterpreterRetriever } from "defaults/DefaultInterpreterRetriever";
-import { IBlueprintInterpreter, BlueprintConfig } from "ldaccess/ldBlueprint";
+import { DefaultItptRetriever } from "defaults/DefaultInterpreterRetriever";
+import { IBlueprintItpt, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 
-export class ReduxInterpreterRetriever extends DefaultInterpreterRetriever {
-	//maps by nameSelf of the interpreter
-	private connectedInterpreters: Map<string, any> = new Map();
+export class ReduxItptRetriever extends DefaultItptRetriever {
+	//maps by nameSelf of the Itpt
+	private connectedItpts: Map<string, any> = new Map();
 
-	searchForObjIntrprtr(term: string | string[], crudSkills: string) {
-		let searchResult = super.searchForObjIntrprtr(term, crudSkills) as IBlueprintInterpreter;
+	searchForObjItpt(term: string | string[], crudSkills: string) {
+		let searchResult = super.searchForObjItpt(term, crudSkills) as IBlueprintItpt;
 		if (searchResult) {
-			return this.connectedInterpreters.get(searchResult.cfg.nameSelf);
+			return this.connectedItpts.get(searchResult.cfg.nameSelf);
 		}
 		return null;
 	}
-	searchForKVIntrprtr(term: string, crudSkills: string) {
+	searchForKVItpt(term: string, crudSkills: string) {
 		throw new Error("Method not implemented.");
 	}
-	addInterpreter(typeName: string, intrprtr: any, crudSkills: string): void {
-		super.addInterpreter(typeName, intrprtr, crudSkills);
-		let intrprtrAsLDBP: IBlueprintInterpreter = intrprtr;
+	addItpt(typeName: string, intrprtr: any, crudSkills: string): void {
+		super.addItpt(typeName, intrprtr, crudSkills);
+		let intrprtrAsLDBP: IBlueprintItpt = intrprtr;
 		let nameSelf = intrprtrAsLDBP.cfg.nameSelf;
-		let connIntrprtr = connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(intrprtr);
-		this.connectedInterpreters.set(nameSelf, connIntrprtr);
+		let connItpt = connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(intrprtr);
+		this.connectedItpts.set(nameSelf, connItpt);
 	}
-	getInterpreterList(): Array<any> {
-		return super.getInterpreterList();
+	getItptList(): Array<any> {
+		return super.getItptList();
 	}
-	getInterpreterByNameSelf(nameSelf: string) {
-		let searchResult = super.getInterpreterByNameSelf(nameSelf) as IBlueprintInterpreter;
+	getItptByNameSelf(nameSelf: string) {
+		let searchResult = super.getItptByNameSelf(nameSelf) as IBlueprintItpt;
 		if (searchResult) {
-			return this.connectedInterpreters.get(searchResult.cfg.nameSelf);
+			return this.connectedItpts.get(searchResult.cfg.nameSelf);
 		}
 		return null;
 	}
 	getUnconnectedByNameSelf(nameSelf: string) {
-		let searchResult = super.getInterpreterByNameSelf(nameSelf);
+		let searchResult = super.getItptByNameSelf(nameSelf);
 		if (searchResult) {
 			return searchResult;
 		} else {

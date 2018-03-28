@@ -61,7 +61,7 @@ import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
 import ImgDisplay from './imagedisplay-component';
 import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
-import ldBlueprint, { IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
+import ldBlueprint, { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
 //import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
@@ -120,7 +120,7 @@ let initialKVStores: IKvStore[] = [
         ldType: LDDict.ImageObject
     }];
 var bpCfg: BlueprintConfig = {
-    subInterpreterOf: null,
+    subItptOf: null,
     canInterpretType: cfgType,
     nameSelf: "shnyder/imageUpload",
     //interpreterRetrieverFn: appIntprtrRetr,
@@ -131,7 +131,7 @@ var bpCfg: BlueprintConfig = {
 
 @ldBlueprint(bpCfg)
 class PureImgUploader extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
-    implements IBlueprintInterpreter {
+    implements IBlueprintItpt {
     cfg: BlueprintConfig;
     outputKVMap: OutputKVMap;
     initialKvStores: IKvStore[];

@@ -91,3 +91,6 @@ const fetchUserEpic = action$ =>
       api.fetchUser(action.payload) // This returns our Observable wrapping the Promise
         .map(payload => ({ type: FETCH_USER_FULFILLED, payload }))
     );
+
+# Naming conventions
+- Interpreter-Classes and Objects have been renamed to Itpt or itpt respectively

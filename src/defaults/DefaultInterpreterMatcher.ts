@@ -31,32 +31,32 @@ let matchIsId = (a: IKvStore) => a.key === LDConsts.id || a.key === LDConsts.iri
 export class DefaultInterpreterMatcher implements IInterpreterMatcher {
 	constructor() {
 		let appIntRetr = appIntRetrFn();
-		//appIntRetr.addInterpreter(LDDict.CreateAction, ImageUploadComponent, "Crud");
-		appIntRetr.addInterpreter(LDDict.ViewAction, PureImgDisplay, "cRud");
+		//appIntRetr.addItpt(LDDict.CreateAction, ImageUploadComponent, "Crud");
+		appIntRetr.addItpt(LDDict.ViewAction, PureImgDisplay, "cRud");
 
 		//register base data type inputs:
-		appIntRetr.addInterpreter(LDDict.Boolean, PureBoolInput, "crud");
-		appIntRetr.addInterpreter(LDDict.Integer, PureIntInput, "CRUd");
-		appIntRetr.addInterpreter(LDDict.Double, PureDoubleInput, "CRUd");
-		appIntRetr.addInterpreter(LDDict.Text, PureTextInput, "CRUd");
-		appIntRetr.addInterpreter(LDDict.Date, PureDateInput, "CRUd");
-		appIntRetr.addInterpreter(LDDict.DateTime, PureDateTimeInput, "CRUd");
+		appIntRetr.addItpt(LDDict.Boolean, PureBoolInput, "crud");
+		appIntRetr.addItpt(LDDict.Integer, PureIntInput, "CRUd");
+		appIntRetr.addItpt(LDDict.Double, PureDoubleInput, "CRUd");
+		appIntRetr.addItpt(LDDict.Text, PureTextInput, "CRUd");
+		appIntRetr.addItpt(LDDict.Date, PureDateInput, "CRUd");
+		appIntRetr.addItpt(LDDict.DateTime, PureDateTimeInput, "CRUd");
 
 		//register visual composition interpreters.
-		appIntRetr.addInterpreter(ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc, "cRud");
-		appIntRetr.addInterpreter(NavBarWActionsName, PureNavBarWActions, "cRud");
-		appIntRetr.addInterpreter(BottomNavigationName, PureBottomNavigation, "cRud");
+		appIntRetr.addItpt(ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc, "cRud");
+		appIntRetr.addItpt(NavBarWActionsName, PureNavBarWActions, "cRud");
+		appIntRetr.addItpt(BottomNavigationName, PureBottomNavigation, "cRud");
 
 		//register routing interpreters
-		appIntRetr.addInterpreter(RouteComponentName, PureRouteComponent, "cRud");
+		appIntRetr.addItpt(RouteComponentName, PureRouteComponent, "cRud");
 
 		//register side effect-interpreter (these interpreters change the state asynchronously and are typically non-visual)
-		appIntRetr.addInterpreter(imageRetrieverName, ImageRetriever, "cRud");
-		appIntRetr.addInterpreter(productRetrieverName, ProductRetriever, "cRud");
-		appIntRetr.addInterpreter(organizationRetrieverName, OrganizationRetriever, "cRud");
+		appIntRetr.addItpt(imageRetrieverName, ImageRetriever, "cRud");
+		appIntRetr.addItpt(productRetrieverName, ProductRetriever, "cRud");
+		appIntRetr.addItpt(organizationRetrieverName, OrganizationRetriever, "cRud");
 
 		//register generic interpreter for Designer-defined interpreters
-		appIntRetr.addInterpreter(UserDefDict.intrprtrBPCfgRefMapType, PureRefMapIntrprtr, "cRud");
+		appIntRetr.addItpt(UserDefDict.intrprtrBPCfgRefMapType, PureRefMapIntrprtr, "cRud");
 	}
 	matchSingleKV(single: IKvStore, crudSkills: string): IKvStore {
 		throw new Error("Method not implemented.");
@@ -87,14 +87,14 @@ export class DefaultInterpreterMatcher implements IInterpreterMatcher {
 		}
 		if (searchTerm) {
 			if (searchTerm.length === 1) {
-				let intrprtr = appIntRetrFn().searchForObjIntrprtr(searchTerm[0].ldType, crudSkills);
+				let intrprtr = appIntRetrFn().searchForObjItpt(searchTerm[0].ldType, crudSkills);
 				searchTerm[0].intrprtrClass = intrprtr;
 				let rvAdd: IKvStore = searchTerm[0];
 				rv.push(rvAdd);
 				return rv;
 			} else {
 				searchTerm.forEach((elem) => {
-					let intrprtr = appIntRetrFn().searchForObjIntrprtr(elem.ldType, crudSkills);
+					let intrprtr = appIntRetrFn().searchForObjItpt(elem.ldType, crudSkills);
 					elem.intrprtrClass = intrprtr;
 					//let rvAddMulti: IKvStore = { key: null, value: null, intrprtrClass: intrprtr, ldType: elem };
 					rv.push(elem);

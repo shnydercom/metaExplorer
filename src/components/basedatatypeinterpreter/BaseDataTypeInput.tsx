@@ -10,7 +10,7 @@ import { TimePicker, TimePickerTheme } from 'react-toolbox';
 
 import { ExplorerState } from 'appstate/store';
 import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
-import ldBlueprint, { IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
+import ldBlueprint, { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
 //import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
@@ -85,7 +85,7 @@ for (var bdt in bdts) {
 			}
 		];
 		let bpCfg: BlueprintConfig = {
-			subInterpreterOf: undefined,
+			subItptOf: undefined,
 			canInterpretType: elem,
 			nameSelf: "shnyder/react-toolbox/" + elem,
 			//interpreterRetrieverFn: appIntprtrRetr,
@@ -97,7 +97,7 @@ for (var bdt in bdts) {
 	}
 }
 class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
-	implements IBlueprintInterpreter {
+	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	initialKvStores: IKvStore[];

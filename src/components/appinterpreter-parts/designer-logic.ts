@@ -4,9 +4,9 @@ import { DiagramModel, DefaultNodeModel, DefaultPortModel, LinkModel, DiagramEng
 import { BaseDataTypeNodeModel } from "components/appinterpreter-parts/BaseDataTypeNodeModel";
 import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
 import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
-import { IInterpreterInfoItem, DefaultInterpreterRetriever } from "defaults/DefaultInterpreterRetriever";
+import { IItptInfoItem } from "defaults/DefaultInterpreterRetriever";
 import { LDBaseDataType, ldBaseDataTypeList } from "ldaccess/LDBaseDataType";
-import ldBlueprint, { IBlueprintInterpreter, BlueprintConfig } from "ldaccess/ldBlueprint";
+import ldBlueprint, { IBlueprintItpt, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { IKvStore } from "ldaccess/ikvstore";
 import { GeneralDataTypeNodeModel } from "components/appinterpreter-parts/GeneralDataTypeNodeModel";
 import { UserDefDict } from "ldaccess/UserDefDict";
@@ -19,7 +19,7 @@ import { elementAt } from "rxjs/operators/elementAt";
 import { ObjectPropertyRef, OBJECT_PROP_REF } from "ldaccess/ObjectPropertyRef";
 import { DeclarationNodeProps } from "components/appinterpreter-parts/DeclarationNodeWidget";
 import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from "ldaccess/kvConvenienceFns";
-import { ReduxInterpreterRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
+import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
 import { isObjPropertyRef } from "ldaccess/ldUtils";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
@@ -30,7 +30,7 @@ export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 export class DesignerLogic {
 	protected activeModel: DiagramModel;
 	protected diagramEngine: DiagramEngine;
-	protected interpreterList: IInterpreterInfoItem[];
+	protected interpreterList: IItptInfoItem[];
 	protected outputNode: DeclarationPartNodeModel;
 
 	constructor(outputLDOptionsToken: string) {
@@ -41,7 +41,7 @@ export class DesignerLogic {
 		this.diagramEngine.registerNodeFactory(new GeneralDataTypeWidgetFactory());
 		this.diagramEngine.registerNodeFactory(new DeclarationWidgetFactory());
 		this.newModel(outputLDOptionsToken);
-		this.interpreterList = (appIntprtrRetr() as ReduxInterpreterRetriever).getInterpreterList();
+		this.interpreterList = (appIntprtrRetr() as ReduxItptRetriever).getItptList();
 	}
 
 	public newModel(outputLDOptionsToken: string) {
@@ -124,10 +124,10 @@ export class DesignerLogic {
 		return this.diagramEngine;
 	}
 
-	public getInterpreterList(): IInterpreterInfoItem[] {
+	public getInterpreterList(): IItptInfoItem[] {
 		//return only one interpreter for the simple data types, so remove others from return value
-		let rv: IInterpreterInfoItem[] = [];
-		let baseTypeIntrprtr: IInterpreterInfoItem;
+		let rv: IItptInfoItem[] = [];
+		let baseTypeIntrprtr: IItptInfoItem;
 		this.interpreterList.forEach((itm) => {
 			let firstBTIfound: boolean = false;
 			for (var index = 0; index < ldBaseDataTypeList.length; index++) {
@@ -146,7 +146,7 @@ export class DesignerLogic {
 	}
 
 	public addLDPortModelsToNode(node: GeneralDataTypeNodeModel, bpname: string): void {//: LDPortModel[] {
-		let interpreter: IBlueprintInterpreter = appIntprtrRetr().getInterpreterByNameSelf(bpname);
+		let interpreter: IBlueprintItpt = appIntprtrRetr().getItptByNameSelf(bpname);
 		let cfg: BlueprintConfig = interpreter.cfg;
 		let rv: LDPortModel[] = [];
 		let intrprtrKeys: any[] = cfg.interpretableKeys;
@@ -223,20 +223,20 @@ export class DesignerLogic {
 	 * @param input the BlueprintConfig used as a setup for the new Interpreter
 	 */
 	public addBlueprintToRetriever(input: BlueprintConfig) {
-		let retriever = appIntprtrRetr() as ReduxInterpreterRetriever;
-		let candidate = retriever.getUnconnectedByNameSelf(input.subInterpreterOf);
+		let retriever = appIntprtrRetr() as ReduxItptRetriever;
+		let candidate = retriever.getUnconnectedByNameSelf(input.subItptOf);
 		if (!candidate) {
 			//check if it's well-defined
 			let refMap = getKVStoreByKey(input.initialKvStores, UserDefDict.intrprtrBPCfgRefMapKey);
 			if (!refMap || !refMap.value || refMap.value === {}) return;
-			if (!refMap.value[input.subInterpreterOf]) return;
+			if (!refMap.value[input.subItptOf]) return;
 			let searchTerm: string = UserDefDict.intrprtrBPCfgRefMapName;
 			candidate = retriever.getUnconnectedByNameSelf(searchTerm);
 		}
 		if (!candidate) return;
 		let interpreterContainer: any = ldBlueprint(input)(candidate); //actually wraps, doesn't extend
 		//interpreterContainer.cfg = input;
-		retriever.addInterpreter(input.canInterpretType, interpreterContainer, "cRud");
+		retriever.addItpt(input.canInterpretType, interpreterContainer, "cRud");
 	}
 
 	public intrprtrTypeInstanceFromBlueprint(input: BlueprintConfig): any {
@@ -263,7 +263,7 @@ export class DesignerLogic {
 		let canInterpretType = finalCanInterpretType ? finalCanInterpretType : null;
 		//TODO: fill the above recursively
 		let outputBPCfg: BlueprintConfig = {
-			subInterpreterOf: null,
+			subItptOf: null,
 			canInterpretType: canInterpretType,
 			nameSelf: nameSelf,
 			initialKvStores: initialKvStores,
@@ -278,7 +278,7 @@ export class DesignerLogic {
 				value: subIntrprtrCfgMap,
 				ldType: UserDefDict.intrprtrBPCfgRefMapType
 			};
-		outputBPCfg.subInterpreterOf = this.outputNode.subInterpreterOf;
+		outputBPCfg.subItptOf = this.outputNode.subInterpreterOf;
 		outputBPCfg.initialKvStores.push(intrprtMapKV);
 		this.bakeKvStoresIntoBP(outputBPCfg);
 		return outputBPCfg;
@@ -292,7 +292,7 @@ export class DesignerLogic {
 	 * @param topBPCfg the root or top node, i.e. the node where the recursive process started
 	 */
 	private fillBPCfgFromGraph(branchBPCfg: BlueprintConfig, branchNode: InterpreterNodeModel, otherIntrprtrCfgs: { [s: string]: BlueprintConfig },
-		topBPCfg: BlueprintConfig) {
+		                          topBPCfg: BlueprintConfig) {
 		let inPorts: LDPortModel[] = branchNode.getInPorts();
 		inPorts.forEach((port) => {
 			let links = port.getLinks();
@@ -338,7 +338,7 @@ export class DesignerLogic {
 								initialKvStores = [];
 								let interpretableKeysArr = [];
 								outputBPCfg = outputBPCfg ? outputBPCfg : {
-									subInterpreterOf: subInterpreterOf,
+									subItptOf: subInterpreterOf,
 									canInterpretType: canInterpretType,
 									nameSelf: nameSelf,
 									initialKvStores: initialKvStores,

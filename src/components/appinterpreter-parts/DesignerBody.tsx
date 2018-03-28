@@ -5,10 +5,10 @@ import { DesignerLogic, designerSpecificNodesColor } from "components/appinterpr
 import { DefaultNodeModel, DefaultPortModel, DiagramWidget } from "storm-react-diagrams";
 import { DesignerTray } from "components/appinterpreter-parts/DesignerTray";
 import { DesignerTrayItem } from "components/appinterpreter-parts/DesignerTrayItem";
-import { IInterpreterInfoItem } from "defaults/DefaultInterpreterRetriever";
+import { IItptInfoItem } from "defaults/DefaultInterpreterRetriever";
 import { BaseDataTypeNodeModel } from "components/appinterpreter-parts/BaseDataTypeNodeModel";
 import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
-import { IBlueprintInterpreter } from "ldaccess/ldBlueprint";
+import { IBlueprintItpt } from "ldaccess/ldBlueprint";
 import { IKvStore } from "ldaccess/ikvstore";
 import { GeneralDataTypeNodeModel } from "components/appinterpreter-parts/GeneralDataTypeNodeModel";
 import * as appStyles from 'styles/styles.scss';
@@ -32,7 +32,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 
 	public trayItemsFromInterpreterList() {
 		//let reactCompClasses: React.ComponentClass[] = [];
-		let interpreters: IInterpreterInfoItem[] = this.props.logic.getInterpreterList();
+		let interpreters: IItptInfoItem[] = this.props.logic.getInterpreterList();
 		interpreters.splice(1, 0, null);
 		//console.dir(interpreters);
 		let reactCompClasses: JSX.Element[] = interpreters.map((itm, idx) => {
@@ -44,7 +44,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 				return <DesignerTrayItem key={idx} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />;
 			}
 			//console.dir(ports);
-			let ldBPCfg = (itm.interpreter as IBlueprintInterpreter).cfg;
+			let ldBPCfg = (itm.itpt as IBlueprintItpt).cfg;
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
 			let trayInterpreterType = ldBPCfg ? ldBPCfg.canInterpretType : itm.canInterpretType;
 			//let traySubInterpreterOf = ldBPCfg ? ldBPCfg.subInterpreterOf : null;

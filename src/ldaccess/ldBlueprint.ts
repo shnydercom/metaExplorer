@@ -1,4 +1,3 @@
-import { IInterpreterRetriever } from 'ldaccess/iinterpreter-retriever';
 import { IKvStore } from 'ldaccess/ikvstore';
 import { LDError } from 'appstate/LDError';
 import { ILDOptions } from 'ldaccess/ildoptions';
@@ -18,7 +17,7 @@ export type OutputKVMapElement = {targetLDToken: ILDToken, targetProperty: strin
  */
 export type OutputKVMap = { [key: string]: OutputKVMapElement};
 
-export interface IBlueprintInterpreter {
+export interface IBlueprintItpt {
     cfg: BlueprintConfig;
     consumeLDOptions: ConsumeLDOptionsFunc;
     initialKvStores: IKvStore[];
@@ -30,7 +29,7 @@ export interface IBlueprintInterpreter {
  * visual components, e.g.: display image as header, then text as heading, text as subheading, then text as description
  */
 export interface BlueprintConfig {
-    subInterpreterOf: string;
+    subItptOf: string;
     canInterpretType?: string;
     nameSelf: string;
     initialKvStores?: IKvStore[];
@@ -38,7 +37,7 @@ export interface BlueprintConfig {
     interpretableKeys: (string | ObjectPropertyRef)[];
 }
 
-function blueprintDecorator<T extends { new(...args: any[]): IBlueprintInterpreter }>(constructorFn: T, blueprintCfg: BlueprintConfig) {
+function blueprintDecorator<T extends { new(...args: any[]): IBlueprintItpt }>(constructorFn: T, blueprintCfg: BlueprintConfig) {
     var classToExtend = null;
     //var reduxClass = null;
     /*if (constructorFn["WrappedComponent"]) {
@@ -75,7 +74,7 @@ export default function ldBlueprint(blueprintCfg: BlueprintConfig) {
     if (blueprintCfg.crudSkills == null) throw new LDError("blueprintCfg.crudSkills must not be null");
     if (blueprintCfg.interpretableKeys == null) throw new LDError("blueprintCfg.interpretableKeys must not be null");
     //if (blueprintCfg.consumeWebResource == null) throw new LDError("blueprintCfg.consumeWebResource must not be null");
-    return <T extends { new(...args: any[]): IBlueprintInterpreter }>(target: T) => {
+    return <T extends { new(...args: any[]): IBlueprintItpt }>(target: T) => {
         return blueprintDecorator(target, blueprintCfg);
     };
 }

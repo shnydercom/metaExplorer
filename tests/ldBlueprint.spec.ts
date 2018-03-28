@@ -1,8 +1,8 @@
 import jasmine from 'jasmine';
-import ldBlueprint, { BlueprintConfig, IBlueprintInterpreter, OutputKVMap } from 'ldaccess/ldBlueprint';
+import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { IKvStore } from 'ldaccess/ikvstore';
-import { DefaultInterpreterRetriever } from 'defaults/DefaultInterpreterRetriever';
+import { DefaultItptRetriever } from 'defaults/DefaultInterpreterRetriever';
 import { ImgHeadSubDescIntrprtrName } from 'components/visualcomposition/ImgHeadSubDescIntrprtr';
 
 let bpCfg: BlueprintConfig = {
@@ -10,7 +10,7 @@ let bpCfg: BlueprintConfig = {
     //conflicting use case to tackle the whole problem space though (e.g. schema:ViewAction vs. schema:image).
     //Needs to be re-designed with crud-skills in mind though. Clear separation of concerns and DRY should
     //be applicable to the end result
-    subInterpreterOf: null,
+    subItptOf: null,
     canInterpretType: "http://shnyder.com/Testtype",
     nameSelf: "shnyder/testTypeInterpreter",
     initialKvStores: [],
@@ -19,7 +19,7 @@ let bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-export class LDBlueprintContainerClass implements IBlueprintInterpreter {
+export class LDBlueprintContainerClass implements IBlueprintItpt {
     cfg: BlueprintConfig;
     outputKVMap: OutputKVMap;
     consumeLDOptions: (ldOptions: ILDOptions) => any;

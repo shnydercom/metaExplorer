@@ -1,9 +1,9 @@
 import { applicationStore } from "approot";
-import { ConsumeLDOptionsFunc, IBlueprintInterpreter } from "ldaccess/ldBlueprint";
+import { ConsumeLDOptionsFunc, IBlueprintItpt } from "ldaccess/ldBlueprint";
 import { ILDOptionsMapStatePart } from "appstate/store";
 import { isLDOptionsSame } from "ldaccess/ldUtils";
 
-const connectedMap: Map<string, IBlueprintInterpreter> = new Map();
+const connectedMap: Map<string, IBlueprintItpt> = new Map();
 let lastLDOptionsMap: ILDOptionsMapStatePart = null;
 const nonVisListener = () => {
 	let state = applicationStore.getState();
@@ -18,7 +18,7 @@ const nonVisListener = () => {
 
 export const initLDConnect = () => { applicationStore.subscribe(nonVisListener); };
 
-export const connectNonVisLDComp = (alias: string, interpreter: IBlueprintInterpreter) => {
+export const connectNonVisLDComp = (alias: string, interpreter: IBlueprintItpt) => {
 	if (connectedMap.get(alias) && connectedMap.get(alias).cfg === interpreter.cfg) return;
 	connectedMap.set(alias, interpreter);
 };

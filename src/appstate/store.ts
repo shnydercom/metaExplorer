@@ -6,7 +6,7 @@ import { ImageUploadAPI } from 'apis/image-upload';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDOptionsAPI } from 'apis/ldoptions-api';
 import DevTools from './devTools';
-import { IBlueprintInterpreter } from 'ldaccess/ldBlueprint';
+import { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 
 const imgUploader: ImageUploadAPI = new ImageUploadAPI();
 const ldOptionsAPI: LDOptionsAPI = new LDOptionsAPI();
@@ -23,7 +23,7 @@ export interface ILDOptionsMapStatePart {
 }
 
 export interface ILDNonvisualIntrprtrMapStatePart {
-  [s: string]: IBlueprintInterpreter;
+  [s: string]: IBlueprintItpt;
 }
 
 const isProduction = process.env.NODE_ENV === 'production';

@@ -1,11 +1,11 @@
-import { IBlueprintInterpreter } from "ldaccess/ldBlueprint";
+import { IBlueprintItpt } from "ldaccess/ldBlueprint";
 import { ILDNonvisualIntrprtrMapStatePart } from "appstate/store";
 
 export const LDNONVIS_SET = 'shnyder/LDNONVIS_SET';
 export const LDNONVIS_DELETE = 'shnyder/LDNONVIS_DELETE';
 
 export type LDNonVisAction =
-	{ type: 'shnyder/LDNONVIS_SET', alias: string, intrprtr: IBlueprintInterpreter }
+	{ type: 'shnyder/LDNONVIS_SET', alias: string, intrprtr: IBlueprintItpt }
 	| { type: 'shnyder/LDNONVIS_DELETE', alias: string };
 
 /**
@@ -13,7 +13,7 @@ export type LDNonVisAction =
  * @param alias the key/alias under which the interpreter is saved
  * @param intrprtr the interpreter-object
  */
-export const ldNonVisSETAction = (alias: string, intrprtr: IBlueprintInterpreter) =>
+export const ldNonVisSETAction = (alias: string, intrprtr: IBlueprintItpt) =>
 	({ type: LDNONVIS_SET, alias, intrprtr });
 export const ldNonVisDeleteAction = (alias: string) =>
 	({ type: LDNONVIS_DELETE, alias });
