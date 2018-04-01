@@ -120,7 +120,6 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 	}
 
 	componentWillReceiveProps(nextProps, nextContext): void {
-		console.log("cWillRecProps")
 		if (nextProps.ldOptions) {
 			let nextSingleKV = nextProps.ldOptions.resource.kvStores[0];
 			if (this.props.ldOptions && nextSingleKV) {
@@ -134,7 +133,6 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 	}
 
 	handleChange = (evtval) => {
-		console.log("handleChange")
 		let newLDOptionsObj = ldOptionsDeepCopy(this.props.ldOptions);
 		let modSingleKV: IKvStore = newLDOptionsObj.resource.kvStores[0];
 		modSingleKV.value = evtval;
@@ -147,7 +145,6 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 	}
 
 	componentWillMount() {
-		console.log("cWillMount");
 		this.state.singleKV = { ...this.initialKvStores[0] }; //TODO: check, if this can be done with the setState fn. Only needed for determineRenderFn
 		//this.setState({ ...this.state, singleKV: this.initialKvStores[0]});
 		let baseDT: LDBaseDataType = this.state.singleKV.ldType as LDBaseDataType;
@@ -192,7 +189,6 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 		return input ? input : '';
 	}
 	private determineRenderFn = (baseDT: LDBaseDataType) => {
-		console.log(this.state.singleKV.value);
 		switch (baseDT) {
 			case LDDict.Boolean:
 				this.render = () => {

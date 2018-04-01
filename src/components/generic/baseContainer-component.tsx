@@ -105,6 +105,7 @@ export class PureBaseContainer extends React.Component<LDConnectedState & LDConn
 		let interpretedBy = ldOptions.visualInfo.interpretedBy;
 		let sCSkills: string = "cRud";
 		this.reactCompInfo = [];
+		if (ldOptions.isLoading) return;
 		if (!interpretedBy || !isLDOptionsSame(this.props.ldOptions, ldOptions)) {
 			//i.e. first time this ldOptions-Object gets interpreted, or interpreter-change
 			let newldOptions = ldOptionsDeepCopy(ldOptions);
@@ -150,7 +151,7 @@ export class PureBaseContainer extends React.Component<LDConnectedState & LDConn
 
 	componentWillReceiveProps(nextProps: BaseContOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
 		//if (compNeedsUpdate(nextProps, this.props)) {
-			this.consumeLDOptions(nextProps.ldOptions);
+		this.consumeLDOptions(nextProps.ldOptions);
 		//}
 	}
 

@@ -6,7 +6,7 @@ import { LDDict } from 'ldaccess/LDDict';
 import { ILDOptionsMapStatePart } from 'appstate/store';
 import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 import { IKvStore } from 'ldaccess/ikvstore';
-import { linearReducer, linearSplitAction, LinearSplitAction } from 'appstate/epicducks/linearSplit-duck';
+import { linearReducer, linearSplitRequestAction, LinearSplitAction } from 'appstate/epicducks/linearSplit-duck';
 
 let testTokenStr: string = "testTokenString";
 let testToken: ILDToken = new NetworkPreferredToken(testTokenStr);
@@ -47,8 +47,8 @@ describe("linear split reducer function", () => {
 		testExecOptions.resource.kvStores = testDiffKVStores;
 		//makes sure kvstores are immuted
 		testExecOptions = ldOptionsDeepCopy(testExecOptions);
-		execAction = linearSplitAction(testExecOptions);
-		secondExecAction = linearSplitAction(ldOptionsDeepCopy(testExecOptions));
+		execAction = linearSplitRequestAction(testExecOptions);
+		secondExecAction = linearSplitRequestAction(ldOptionsDeepCopy(testExecOptions));
 	});
 
 	describe("for an ldOptions-Obj to be split...", () => {

@@ -16,7 +16,9 @@ const nonVisListener = () => {
 	lastLDOptionsMap = state.ldoptionsMap;
 };
 
-export const initLDConnect = () => { applicationStore.subscribe(nonVisListener); };
+export const initLDConnect = () => {
+	applicationStore.subscribe(nonVisListener);
+};
 
 export const connectNonVisLDComp = (alias: string, interpreter: IBlueprintItpt) => {
 	if (connectedMap.get(alias) && connectedMap.get(alias).cfg === interpreter.cfg) return;

@@ -7,7 +7,7 @@ import { ldOptionsMapReducer, requestLDOptionsEpic } from 'appstate/epicducks/ld
 import { ldNonVisMapReducer } from 'appstate/epicducks/ldNonVisual-duck';
 import { refMapReducer } from './epicducks/refMap-duck';
 import reduceReducers from './reduceReducers';
-import { linearReducer } from './epicducks/linearSplit-duck';
+import { linearReducer, linearSplitEpic } from './epicducks/linearSplit-duck';
 
 const combLdOptionsMapReducer = reduceReducers(ldOptionsMapReducer, refMapReducer, linearReducer);
 
@@ -20,6 +20,7 @@ export const rootReducer = combineReducers<ExplorerState>({
 });
 
 export const rootEpic = combineEpics(
+    linearSplitEpic,
     uploadImageEpic,
     loadSchemaEpic,
     requestLDOptionsEpic

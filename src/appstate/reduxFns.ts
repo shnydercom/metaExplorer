@@ -8,7 +8,7 @@ import { ILDResource } from "ldaccess/ildresource";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { OutputKVMapElement } from "ldaccess/ldBlueprint";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
-import { linearSplitAction } from "./epicducks/linearSplit-duck";
+import { linearSplitRequestAction } from "./epicducks/linearSplit-duck";
 import { refMapPREFILLAction, refMapFILLAction } from "./epicducks/refMap-duck";
 
 //final:
@@ -71,7 +71,7 @@ export const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownP
 	},
 	notifyLDOptionsLinearSplitChange: (ldOptions: ILDOptions) => {
 		if (!ldOptions) return;
-		dispatch(linearSplitAction(ldOptions));
+		dispatch(linearSplitRequestAction(ldOptions));
 	},
 	notifyLDOptionsRefMapSplitChange: (ldOptions: ILDOptions) => {
 		if (!ldOptions) return;
