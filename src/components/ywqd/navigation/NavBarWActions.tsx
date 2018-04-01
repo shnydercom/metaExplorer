@@ -21,7 +21,6 @@ import { IconMenu } from 'react-toolbox/lib/menu/';
 import Navigation from 'react-toolbox/lib/navigation/Navigation.js';
 import { generateIntrprtrForProp } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
-import { GenericContainer } from '../../generic/genericContainer-component';
 
 type ConnectedState = {
 };

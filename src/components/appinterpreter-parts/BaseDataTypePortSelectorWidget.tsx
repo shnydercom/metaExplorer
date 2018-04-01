@@ -4,15 +4,14 @@ import { PortWidget, DefaultPortModel } from "storm-react-diagrams";
 import { SinglePortWidget } from "components/appinterpreter-parts/SinglePortWidget";
 import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
 import { BaseDataTypeDropDown } from "components/basedatatypeinterpreter/BaseDataTypeDropDown";
-import { GenericContainer } from "components/generic/genericContainer-component";
 import { IKvStore } from "ldaccess/ikvstore";
 import { ExplorerState } from "appstate/store";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { connect } from "react-redux";
-import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
+import { BaseContainer } from "../generic/baseContainer-component";
 
 /*export type LDOwnProps = {
 	ldTokenString: string;
@@ -92,7 +91,7 @@ class PureBaseDataTypePortSelector extends React.Component<BaseDataTypePortSelec
 				<div>
 					{label}
 					<BaseDataTypeDropDown selectionChange={(newType) => { this.onPortTypeChange(newType); }} />
-					<GenericContainer ldTokenString={this.props.model.id} searchCrudSkills="CrUd" outputKVMap={null}/>
+					<BaseContainer ldTokenString={this.props.model.id} searchCrudSkills="CrUd" outputKVMap={null}/>
 				</div>
 				{port}
 			</div>

@@ -3,7 +3,7 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
 import { IKvStore } from "ldaccess/ikvstore";
 import { isObjPropertyRef } from "ldaccess/ldUtils";
-import { ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";
+import { ILDToken, NetworkPreferredToken, createConcatNetworkPreferredToken } from "ldaccess/ildtoken";
 import { LDDict } from "ldaccess/LDDict";
 import appIntRetrFn from 'appconfig/appInterpreterRetriever';
 import { mapDispatchToProps, mapStateToProps } from "appstate/reduxFns";
@@ -115,10 +115,6 @@ export class RefMapTypeDesintegrator {
 		console.log(refMapCandidate);
 	}
 
-	public createConcatNetworkPreferredToken(inputLDTokenString: string, targetIntrprtrLnk: string): NetworkPreferredToken {
-		return new NetworkPreferredToken(inputLDTokenString + "_" + targetIntrprtrLnk);
-	}
-
 	public fillSubOutputKVmaps(inputLDTokenString: string): { [s: string]: OutputKVMap } {
 		let subOutputKVmaps: { [s: string]: OutputKVMap } = {};
 		for (let pmKey in this.ldOptionsPrepMap) {
@@ -129,7 +125,7 @@ export class RefMapTypeDesintegrator {
 					targetIntrprtrLnk = this.extIntReferenceMap.get(targetIntrprtrLnk);
 					targetLDToken = new NetworkPreferredToken(targetIntrprtrLnk);
 				} else {
-					targetLDToken = this.createConcatNetworkPreferredToken(inputLDTokenString, this.refMapName + targetIntrprtrLnk);
+					targetLDToken = createConcatNetworkPreferredToken(inputLDTokenString, this.refMapName + targetIntrprtrLnk);
 				}
 				let pmVal = this.ldOptionsPrepMap[pmKey];
 				pmVal.refs.forEach((tupel: OutputLDOptionsTupel) => {
@@ -143,7 +139,7 @@ export class RefMapTypeDesintegrator {
 						sourceIntrprtLnk = this.extIntReferenceMap.get(sourceIntrprtLnk);
 						sourcLDToken = new NetworkPreferredToken(sourceIntrprtLnk);
 					} else {
-						sourcLDToken = this.createConcatNetworkPreferredToken(inputLDTokenString, this.refMapName + sourceIntrprtLnk);
+						sourcLDToken = createConcatNetworkPreferredToken(inputLDTokenString, this.refMapName + sourceIntrprtLnk);
 					}
 					let newOKVMObj: OutputKVMapElement = {
 						targetLDToken: targetLDToken,
@@ -182,7 +178,7 @@ export class RefMapTypeDesintegrator {
 				if (okvmKey !== this.extIntReferenceMap.get(okvmKey)) {
 					compLDToken = new NetworkPreferredToken(okvmKey);
 				} else {
-					compLDToken = this.createConcatNetworkPreferredToken(ldTokenString, this.refMapName + okvmKey);
+					compLDToken = createConcatNetworkPreferredToken(ldTokenString, this.refMapName + okvmKey);
 				}
 				//create link on target
 				for (let propKey in okvm) {

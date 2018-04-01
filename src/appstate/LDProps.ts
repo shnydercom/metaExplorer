@@ -18,6 +18,8 @@ export type LDConnectedDispatch = {
 	 * IMPORTANT: use ldOptionsDeepCopy() before to create a new ldOptions-Object as a parameter here
 	 */
 	notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
+	notifyLDOptionsLinearSplitChange: (ldOptions: ILDOptions) => void;
+	notifyLDOptionsRefMapSplitChange: (ldOptions: ILDOptions) => void;
 };
 
 export type LDConnectedState = {

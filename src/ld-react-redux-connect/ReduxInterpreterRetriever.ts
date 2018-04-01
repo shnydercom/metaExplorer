@@ -35,6 +35,10 @@ export class ReduxItptRetriever extends DefaultItptRetriever {
 		}
 		return null;
 	}
+	/**
+	 * gets Interpreter that is not connected to Redux
+	 * @param nameSelf the nameSelf-property in the BlueprintConfig of the interpreter
+	 */
 	getUnconnectedByNameSelf(nameSelf: string) {
 		let searchResult = super.getItptByNameSelf(nameSelf);
 		if (searchResult) {

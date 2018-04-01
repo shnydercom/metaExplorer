@@ -7,8 +7,9 @@ import { ldOptionsMapReducer, requestLDOptionsEpic } from 'appstate/epicducks/ld
 import { ldNonVisMapReducer } from 'appstate/epicducks/ldNonVisual-duck';
 import { refMapReducer } from './epicducks/refMap-duck';
 import reduceReducers from './reduceReducers';
+import { linearReducer } from './epicducks/linearSplit-duck';
 
-const combLdOptionsMapReducer = reduceReducers(ldOptionsMapReducer, refMapReducer);
+const combLdOptionsMapReducer = reduceReducers(ldOptionsMapReducer, refMapReducer, linearReducer);
 
 //at the level of the root reducer, next-action-predicates should be handled
 export const rootReducer = combineReducers<ExplorerState>({

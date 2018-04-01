@@ -37,14 +37,20 @@ export const isLDOptionsSame = (a: ILDOptions, b: ILDOptions): boolean => {
 	let kvsA = a.resource.kvStores;
 	let kvsB = b.resource.kvStores;
 	if (kvsA.length !== kvsB.length) return false;
-	if (a.resource.webInResource !== b.resource.webInResource) return false;
-	if (a.resource.webOutResource !== b.resource.webOutResource) return false; //TODO: resources could have shallow object checks
+	if (a.resource.webInResource || b.resource.webInResource) {
+		if (a.resource.webInResource !== b.resource.webInResource) return false;
+	}
+	if (a.resource.webOutResource || b.resource.webOutResource) {
+		if (a.resource.webOutResource !== b.resource.webOutResource) return false; //TODO: resources could have shallow object checks
+	}
 	let isKVsSame: boolean = kvsA.every((aVal, idx: number) => {
 		let bVal = kvsB[idx];
 		if (aVal.key !== bVal.key) return false;
 		if (aVal.ldType !== bVal.ldType) return false;
-		if (aVal.value !== bVal.value) return false;
-		if (aVal.intrprtrClass !== bVal.intrprtrClass) return false;
+		if (aVal.value || bVal.value) {
+			if (JSON.stringify(aVal.value) !== JSON.stringify(bVal.value)) return false;
+		}
+		//if (aVal.intrprtrClass !== bVal.intrprtrClass) return false;
 		return true;
 	});
 	return isKVsSame;
@@ -62,9 +68,12 @@ export const ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {
 				if (elem.value.constructor === Array) {
 					let elemValAsArray: Array<any> = elem.value as Array<any>;
 					newValue = elemValAsArray.slice(0, elemValAsArray.length);
-				} else {
-					newValue = { ...elem.value };
-				}
+				} else
+					if (elem.value.constructor === Date) {
+						newValue = new Date(elem.value);
+					} else {
+						newValue = { ...elem.value };
+					}
 			} else {
 				newValue = elem.value;
 			}
@@ -80,8 +89,8 @@ export const ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {
 		};
 		newKVStores.push(newKvSingle);
 	});
-	let newWebInResource: IWebResource;
-	let newWebOutResource: string;
+	let newWebInResource: IWebResource = null;
+	let newWebOutResource: string = null;
 	let newResource: ILDResource = { kvStores: newKVStores, webOutResource: newWebOutResource, webInResource: newWebInResource };
 	rv = {
 		...input,

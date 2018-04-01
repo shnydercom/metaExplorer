@@ -18,7 +18,6 @@ import { IKvStore } from 'ldaccess/ikvstore';
 import { LDDict } from 'ldaccess/LDDict';
 
 import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
-import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
@@ -105,9 +104,16 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 	state = {
 		singleKV: null
 	};
-	constructor(props?: any) {
+	constructor(props?: LDConnectedState & LDConnectedDispatch & OwnProps) {
 		super(props);
+		//if (!props) {
 		this.render = () => null;
+		//}
+		/* else {
+				if (props.ldOptions && props.ldOptions.resource.kvStores.length > 0) {
+					this.determineRenderFn(nextSingleKV.ldType);
+				}
+			}*/
 	}
 	consumeLDOptions = (ldOptions: ILDOptions) => {
 		return;
@@ -148,6 +154,11 @@ class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnect
 		this.determineRenderFn(baseDT);
 		if (!this.props.ldOptions) {
 			this.props.notifyLDOptionsChange(null);
+		} else {
+			if (this.props.ldOptions.resource.kvStores.length > 0) {
+				let mountSingleKv: IKvStore = this.props.ldOptions.resource.kvStores[0];
+				this.setState({ ...this.state, singleKV: mountSingleKv });
+			}
 		}
 	}
 	parseBoolean: any = (inputKv): boolean => {

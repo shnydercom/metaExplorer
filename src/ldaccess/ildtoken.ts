@@ -1,4 +1,5 @@
 import { Toolkit } from "storm-react-diagrams";
+import { ITPT_LINEAR_SPLIT } from "./iinterpreter-retriever";
 /**
  * adds the requirement for a getter and setter function for the token value.
  * This is necessary because tokens are very simple objects, but shouldn't
@@ -14,6 +15,14 @@ export interface ILDToken {
 	getClientTokenVal(): string;
 	setClientTokenVal(val: string);
 	get(): string;
+}
+
+export function createConcatNetworkPreferredToken(inputLDTokenString: string, targetIntrprtrLnk: string): NetworkPreferredToken {
+	return new NetworkPreferredToken(inputLDTokenString + "_" + targetIntrprtrLnk);
+}
+
+export function linearLDTokenStr(ldTokenStr: string, id: number): string {
+	return ldTokenStr + '-' + ITPT_LINEAR_SPLIT + id;
 }
 
 export class NetworkPreferredToken implements ILDToken {

@@ -35,14 +35,12 @@ import { LDPortModel } from './appinterpreter-parts/LDPortModel';
 import { GeneralDataTypeWidgetFactory } from "components/appinterpreter-parts/GeneralDataTypeWidgetFactory";
 import { DesignerBody } from "components/appinterpreter-parts/DesignerBody";
 import { DesignerLogic } from "components/appinterpreter-parts/designer-logic";
-import { GenericContainer } from "components/generic/genericContainer-component";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
 import { BooleanValInput } from "components/basedatatypeinterpreter/BaseDataTypeInput";
 import { connect } from "react-redux";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { ExplorerState } from "appstate/store";
-import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
 import { LDDict } from "ldaccess/LDDict";
 import { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
@@ -60,6 +58,7 @@ import {
 } from 'react-router-dom';
 import ImgHeadSubDescIntrprtr from "./visualcomposition/ImgHeadSubDescIntrprtr";
 import { Switch } from "react-router";
+import { BaseContainer } from "./generic/baseContainer-component";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -170,6 +169,7 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 	onMultiConfiguratorButtonClick = (e) => {
+		this.props.notifyLDOptionsChange(null);
 		let prefilledData: IKvStore[] = configuratorTestData;
 		//let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
 		//let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
@@ -255,10 +255,10 @@ class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedS
 									<Route path="/designerinitial" render={() => (
 										<div><b>drag and drop items into the designer</b></div>
 									)} />
-									<Route path="/app" render={(routeProps: LDRouteProps) => {
+									<Route path="" render={(routeProps: LDRouteProps) => {
 										routeProps.match.params.nextPath = "";
 										return <>
-											<GenericContainer routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null} />
+											<BaseContainer routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null} />
 										</>;
 									}} />
 								</Switch>

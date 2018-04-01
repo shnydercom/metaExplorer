@@ -1,7 +1,19 @@
-import { DefaultInterpreterMatcher } from "defaults/DefaultInterpreterMatcher";
-import { IInterpreterMatcher } from "ldaccess/iinterpreter-matcher";
+import { DefaultItptMatcher } from "defaults/DefaultInterpreterMatcher";
+import { IItptMatcher } from "ldaccess/iinterpreter-matcher";
+import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultInterpreterRetriever";
+import { appIntRetrFn } from "./appInterpreterRetriever";
 
-class AppInterpreterMatcher extends DefaultInterpreterMatcher{
+class AppInterpreterMatcher extends DefaultItptMatcher {
 }
-const appIntMatcher: IInterpreterMatcher = new AppInterpreterMatcher();
-export default appIntMatcher;
+var appItptMatcher: IItptMatcher = null;
+
+export let appItptMatcherFn = (): IItptMatcher => {
+	if (appItptMatcher == null) {
+		appItptMatcher = new AppInterpreterMatcher();
+		let defaultRetriever = appIntRetrFn();
+		appItptMatcher.setItptRetriever(DEFAULT_ITPT_RETRIEVER_NAME, defaultRetriever);
+	}
+	return appItptMatcher;
+};
+
+//export default appItptMatcherFn;

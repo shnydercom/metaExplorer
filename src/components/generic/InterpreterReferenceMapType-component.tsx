@@ -11,12 +11,12 @@ import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { RefMapTypeDesintegrator } from "components/generic/RefMapTypeDesintegrator";
 import ImgHeadSubDescIntrprtr from "components/visualcomposition/ImgHeadSubDescIntrprtr";
 import { PureImgDisplay } from "components/imagedisplay-component";
-import { GenericContainer } from "components/generic/genericContainer-component";
+import { BaseContainer } from "components/generic/baseContainer-component";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
 import { compNeedsUpdate } from "components/reactUtils/compUtilFns";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
 import { ILDResource } from "ldaccess/ildresource";
-import { ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";
+import { ILDToken, NetworkPreferredToken, createConcatNetworkPreferredToken } from "ldaccess/ildtoken";
 import { isObjPropertyRef } from "ldaccess/ldUtils";
 import { LDConsts } from "ldaccess/LDConsts";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultInterpreterRetriever";
@@ -75,7 +75,7 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 					if (lObjRef !== this.rmtd.extIntReferenceMap.get(lObjRef)) {
 						ldTokenRef = new NetworkPreferredToken(this.rmtd.extIntReferenceMap.get(lObjRef));
 					} else {
-						ldTokenRef = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, lObjRef);
+						ldTokenRef = createConcatNetworkPreferredToken(this.props.ldTokenString, lObjRef);
 					}
 					let ldPropRef = (singleIntrpblKey as ObjectPropertyRef).propRef;
 					let ldValue = val.value[ldPropRef];
@@ -91,7 +91,7 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 						webOutResource: null,
 						kvStores: [val]
 					};
-					ldTokenRef = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.headItptLnk);
+					ldTokenRef = createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.headItptLnk);
 				} else {
 					console.error("unsupported ldType for reference");
 				}
@@ -132,7 +132,7 @@ export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDCon
 		if (BaseComp === null || BaseComp === undefined) {
 			console.error("InterpreterReferenceMapType-component: interpreter null or undefined");
 		}
-		let headToken = this.rmtd.createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.refMapName + this.rmtd.headItptLnk);
+		let headToken = createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.refMapName + this.rmtd.headItptLnk);
 		const { routes } = this.props;
 		console.log("headToken: " + headToken.get());
 		reactComps.push(<BaseComp key={0} routes={routes} ldTokenString={headToken.get()} outputKVMap={null} />);

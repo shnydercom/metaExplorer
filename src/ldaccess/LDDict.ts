@@ -22,10 +22,7 @@ export enum LDDict {
 	fileFormat = "http://schema.org/fileFormat",
 	manufacturer = "http://schema.org/manufacturer",
 	description = "http://schema.org/description",
-	image = "http://schema.org/image",
-
-	//internal
-	WrapperObject = "http://shnyder.com/WrapperObject"
+	image = "http://schema.org/image"
 }
 
 export type LDDictWildCard = LDDict | string;

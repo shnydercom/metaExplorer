@@ -1,3 +1,5 @@
+export const ITPT_LINEAR_SPLIT = 'l';
+
 export interface IItptRetriever {
     /**
      * the interpreter has a name-attribute so

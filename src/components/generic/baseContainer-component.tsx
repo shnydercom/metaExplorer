@@ -9,7 +9,7 @@ import ldBlueprint, { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
 //import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
-import appIntMatcher from 'appconfig/appInterpreterMatcher';
+import { appItptMatcherFn } from 'appconfig/appInterpreterMatcher';
 
 import { IKvStore } from 'ldaccess/ikvstore';
 import { LDDict } from 'ldaccess/LDDict';
@@ -18,21 +18,22 @@ import { singleHyperMediaToKvStores, multiHyperMediaToKvStores } from 'ldaccess/
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 //import { IHypermedia } from 'hydraclient.js/src/DataModel/IHypermedia';
 import { LDConsts } from 'ldaccess/LDConsts';
-import { isInterpreter, isLDOptionsSame } from 'ldaccess/ldUtils';
-import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from 'appstate/epicducks/ldOptions-duck';
+import { isInterpreter, isLDOptionsSame, ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
 import { ILDResource } from 'ldaccess/ildresource';
-import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
+import { ILDToken, NetworkPreferredToken, linearLDTokenStr } from 'ldaccess/ildtoken';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
+import { isReactComponent } from '../reactUtils/reactUtilFns';
+import { LDError } from 'appstate/LDError';
 
 /*export type LDOwnProps = {
 	ldTokenString: string;
 };*/
 
-export interface GenOwnProps extends LDOwnProps {
+export interface BaseContOwnProps extends LDOwnProps {
 	searchCrudSkills: string;
 }
 
@@ -60,14 +61,16 @@ dispatch(ldOptionsClientSideUpdateAction({... ldOptions}));
 }
 });*/
 
-let cfgType: string = LDDict.WrapperObject;
+export const COMP_BASE_CONTAINER = "shnyder/baseContainer";
+
+let cfgType: string = UserDefDict.itptContainerObjType;
 let cfgIntrprtKeys: string[] =
 	[];
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
-	nameSelf: "shnyder/genericContainer",
+	nameSelf: COMP_BASE_CONTAINER,
 	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
@@ -75,22 +78,54 @@ let bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-export class PureGenericContainer extends React.Component<LDConnectedState & LDConnectedDispatch & GenOwnProps, {}>
+export class PureBaseContainer extends React.Component<LDConnectedState & LDConnectedDispatch & BaseContOwnProps, {}>
 	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
-	outputKVMap: OutputKVMap;
 	initialKvStores: IKvStore[];
-	isGenericChanged: boolean = false;
-	genCompCache: any;
+	outputKVMap: OutputKVMap;
+	reactCompInfo: {
+		compClass: React.ComponentClass<LDOwnProps>,
+		compOutputKvMap: OutputKVMap
+	}[] = [];
+	//genCompCache: any;
+	//isWrapper: boolean = false;
 	constructor(props?: any) {
 		super(props);
-		this.isGenericChanged = true;
+		this.cfg = this.constructor["cfg"];
+		if (props) {
+			this.consumeLDOptions(props.ldOptions);
+		}
 	}
 
 	consumeLDOptions = (ldOptions: ILDOptions) => {
 		if (!ldOptions) return;
 		let genKvStores: IKvStore[] = [];
-		if (ldOptions.resource) {
+		let ldTokenString = ldOptions.ldToken.get();
+		let retriever: string = ldOptions.visualInfo.retriever;
+		let interpretedBy = ldOptions.visualInfo.interpretedBy;
+		let sCSkills: string = "cRud";
+		this.reactCompInfo = [];
+		if (!interpretedBy || !isLDOptionsSame(this.props.ldOptions, ldOptions)) {
+			//i.e. first time this ldOptions-Object gets interpreted, or interpreter-change
+			let newldOptions = ldOptionsDeepCopy(ldOptions);
+			newldOptions.visualInfo.interpretedBy = this.cfg.nameSelf;
+			this.props.notifyLDOptionsLinearSplitChange(newldOptions);
+			return;
+		} else {
+			ldOptions.resource.kvStores.forEach((elem, idx) => {
+				let elemKey: string = elem.key;
+				let itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(linearLDTokenStr(ldTokenString, idx));
+				if (isReactComponent(itpt)) {
+					let targetLDToken: ILDToken = new NetworkPreferredToken(this.props.ldTokenString);
+					let newOutputKvMap: OutputKVMap = { [elemKey]: { targetLDToken: targetLDToken, targetProperty: elemKey } };
+					this.reactCompInfo.push({ compClass: itpt, compOutputKvMap: newOutputKvMap });
+				} else {
+					throw new LDError("baseContainer got a non-visual component");
+				}
+			});
+		}
+		//appIntMatcher.matchLDOptions(ldOptions, sCSkills, "default");
+		/*if (ldOptions.resource) {
 			let sCSkills: string = "cRud";
 			if (ldOptions.resource.kvStores) {
 				genKvStores = ldOptions.resource.kvStores;
@@ -108,15 +143,15 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 				}
 			}
 			//TODO: filter for UserDefDict.intrprtrNameKey and UserDefDict.intrptrtType first, ignore other keys if interpreter is found
-			genKvStores = appIntMatcher.matchKvArray(genKvStores, sCSkills);
+			genKvStores = appIntMatcher.matchLDOptions(ldOptions, genKvStores, sCSkills, "default");
 		}
-		return genKvStores ? this.kvsToComponent(genKvStores) : null;
+		this.genCompCache = genKvStores ? this.kvsToComponent(genKvStores) : null;*/
 	}
 
-	componentWillReceiveProps(nextProps: GenOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
-		if (compNeedsUpdate(nextProps, this.props)) {
-			this.isGenericChanged = true;
-		}
+	componentWillReceiveProps(nextProps: BaseContOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
+		//if (compNeedsUpdate(nextProps, this.props)) {
+			this.consumeLDOptions(nextProps.ldOptions);
+		//}
 	}
 
 	componentWillMount() {
@@ -126,9 +161,19 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 	}
 
 	render() {
-		var demoTypeParsed = null;
+		let { ldTokenString, routes } = this.props;
+		let reactComps = this.reactCompInfo.map((itm, idx) => {
+			let GenericComp = itm.compClass;
+			return <GenericComp key={idx} routes={routes} ldTokenString={
+				linearLDTokenStr(ldTokenString, idx)
+			} outputKVMap={itm.compOutputKvMap} />;
+		});
+		return <>
+			{reactComps ? reactComps : null}
+		</>;
+		//var demoTypeParsed = null;
 		//if (this.props.displayedType) {
-		let dType: string = null; // this.props.displayedType;
+		//let dType: string = null; // this.props.displayedType;
 		/*var demoWebResource: IWebResource = {
 			hypermedia: [{ [LDConsts.type]: dType, members: null, client: null } as IHypermedia] as IHypermediaContainer,
 		};*/
@@ -142,17 +187,14 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 			ldToken: null,
 			isLoading: false
 		};*/
-		if (this.isGenericChanged) {
+		/*if (this.isContainerChanged) {
 			this.genCompCache = this.consumeLDOptions(this.props.ldOptions); //displayedTypeLDOptions);
-			this.isGenericChanged = false;
-		}
+			this.isContainerChanged = false;
+		}*/
 		//}
-		return <>
-			{this.genCompCache ? this.genCompCache : null}
-		</>;
 	}
 
-	private kvsToComponent(input: IKvStore[]): any {
+	/*private kvsToComponent(input: IKvStore[]): any {
 		let reactCompClasses: (React.ComponentClass<LDOwnProps>)[] = [];
 		let intrprtrNames: string[] = [];
 		input.forEach((itm) => {
@@ -169,10 +211,12 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 			//
 			let ldRes: ILDResource = { webInResource: null, webOutResource: null, kvStores: [input[idx]] };
 			let ldToken: ILDToken = new NetworkPreferredToken(ldTokenString);
-			let newldOptions: ILDOptions = { ldToken: ldToken, resource: ldRes, isLoading: false, lang: "en",
-			visualInfo: {
-				retriever: DEFAULT_ITPT_RETRIEVER_NAME
-			} };
+			let newldOptions: ILDOptions = {
+				ldToken: ldToken, resource: ldRes, isLoading: false, lang: "en",
+				visualInfo: {
+					retriever: DEFAULT_ITPT_RETRIEVER_NAME
+				}
+			};
 			this.props.notifyLDOptionsChange(newldOptions);
 			const { routes } = this.props;
 			return <GenericComp key={idx} routes={routes} ldTokenString={ldTokenString} outputKVMap={null} />;
@@ -185,7 +229,7 @@ export class PureGenericContainer extends React.Component<LDConnectedState & LDC
 			reactComps[0] = <GenericSingle key={0} routes={routes} ldTokenString={this.props.ldTokenString} outputKVMap={null} />;
 		}
 		return <>{reactComps}</>;
-	}
+	}*/
 }
 
-export const GenericContainer = connect<LDConnectedState, LDConnectedDispatch, GenOwnProps>(mapStateToProps, mapDispatchToProps)(PureGenericContainer);
+export const BaseContainer = connect<LDConnectedState, LDConnectedDispatch, BaseContOwnProps>(mapStateToProps, mapDispatchToProps)(PureBaseContainer);
