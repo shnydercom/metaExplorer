@@ -1,5 +1,3 @@
-import * as React from 'react';
-import * as redux from 'redux';
 import { connect } from 'react-redux';
 import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
@@ -21,6 +19,7 @@ import { IconMenu } from 'react-toolbox/lib/menu/';
 import Navigation from 'react-toolbox/lib/navigation/Navigation.js';
 import { generateIntrprtrForProp } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
+import { Component, ComponentClass, StatelessComponent } from 'react';
 
 type ConnectedState = {
 };
@@ -72,7 +71,7 @@ export type NavBarWActionState = {
 	isRightMenuOpen: boolean;
 };
 @ldBlueprint(bpCfg)
-export class PureNavBarWActions extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavBarWActionState>
+export class PureNavBarWActions extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavBarWActionState>
 	implements IBlueprintItpt {
 	state = {
 		isDoRedirect: false,

@@ -1,5 +1,3 @@
-import * as React from 'react';
-import * as redux from 'redux';
 import { connect } from 'react-redux';
 import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
@@ -22,6 +20,7 @@ import { generateIntrprtrForProp } from '../generic/generatorFns';
 import { active } from 'react-toolbox/lib/dropdown/theme.css';
 import { checkAllFilled } from 'GeneralUtils';
 import { Route } from 'react-router';
+import { Component, ComponentClass, StatelessComponent } from 'react';
 
 type ConnectedState = {
 };
@@ -68,7 +67,7 @@ export type RouteComponentState = {
 };
 
 @ldBlueprint(bpCfg)
-export class PureRouteComponent extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, RouteComponentState>
+export class PureRouteComponent extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, RouteComponentState>
 	implements IBlueprintItpt {
 	state = {
 		isExact: false,

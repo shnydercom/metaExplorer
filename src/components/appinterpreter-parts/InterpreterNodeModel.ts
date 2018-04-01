@@ -1,6 +1,6 @@
 import { NodeModel, AbstractInstanceFactory } from "storm-react-diagrams";
 import { LDPortModel } from './LDPortModel';
-import * as _ from "lodash";
+import { merge, filter } from "lodash";
 import { INTERPRETERDATATYPE_MODEL } from "components/appinterpreter-parts/designer-consts";
 
 export class InterpreterNodeModel extends NodeModel {
@@ -27,7 +27,7 @@ export class InterpreterNodeModel extends NodeModel {
 	}
 
 	serialize() {
-		return _.merge(super.serialize(), {
+		return merge(super.serialize(), {
 			nameSelf: this.nameSelf,
 			color: this.color,
 			canInterpretType: this.canInterpretType,
@@ -36,13 +36,13 @@ export class InterpreterNodeModel extends NodeModel {
 	}
 
 	getInPorts(): LDPortModel[] {
-		return _.filter(this.ports, (portModel) => {
+		return filter(this.ports, (portModel) => {
 			return portModel.in;
 		});
 	}
 
 	getOutPorts(): LDPortModel[] {
-		return _.filter(this.ports, (portModel) => {
+		return filter(this.ports, (portModel) => {
 			return !portModel.in;
 		});
 	}

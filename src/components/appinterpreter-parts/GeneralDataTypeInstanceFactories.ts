@@ -1,9 +1,9 @@
-import * as SRD from "storm-react-diagrams";
 import { GeneralDataTypeNodeModel } from "./GeneralDataTypeNodeModel";
 import { LDPortModel } from "./LDPortModel";
 import { GENERALDATATYPE_MODEL } from "components/appinterpreter-parts/designer-consts";
+import { AbstractInstanceFactory } from "storm-react-diagrams/dist/src/main";
 
-export class GeneralDataTypeNodeFactory extends SRD.AbstractInstanceFactory<GeneralDataTypeNodeModel> {
+export class GeneralDataTypeNodeFactory extends AbstractInstanceFactory<GeneralDataTypeNodeModel> {
 	constructor() {
 		super(GENERALDATATYPE_MODEL);
 	}

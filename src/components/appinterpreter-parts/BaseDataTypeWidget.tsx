@@ -1,5 +1,3 @@
-import * as React from "react";
-import * as _ from "lodash";
 import { DefaultNodeModel, DefaultPortLabel, DiagramEngine } from "storm-react-diagrams";
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { SinglePortWidget } from './SinglePortWidget';
@@ -7,6 +5,8 @@ import { SinglePortWidget } from './SinglePortWidget';
 import { BaseDataTypeDropDown } from 'components/basedatatypeinterpreter/BaseDataTypeDropDown';
 import { BaseDataTypePortSelector } from "components/appinterpreter-parts/BaseDataTypePortSelectorWidget";
 import { BaseDataTypeNodeModel } from "components/appinterpreter-parts/BaseDataTypeNodeModel";
+import { Component, createFactory, ClassAttributes, ComponentElement, ReactElement, ReactPortal } from "react";
+import { map } from "lodash";
 /*
 import {
 	BooleanValInput, IntegerValInput, DoubleValInput, TextValInput, DateValInput, DateTimeValInput
@@ -24,7 +24,7 @@ export interface BaseDataTypeNodeState { }
 /**
  * @author Jonathan Schneider
  */
-export class BaseDataTypeNodeWidget extends React.Component<BaseDataTypeNodeProps, BaseDataTypeNodeState> {
+export class BaseDataTypeNodeWidget extends Component<BaseDataTypeNodeProps, BaseDataTypeNodeState> {
 	constructor(props: BaseDataTypeNodeProps) {
 		super(props);
 		this.state = {};
@@ -42,11 +42,11 @@ export class BaseDataTypeNodeWidget extends React.Component<BaseDataTypeNodeProp
 					<div className="name">{this.props.node.nameSelf}</div>
 				</div>
 				<div className="ports">
-					<div className="out">{_.map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
+					<div className="out">{map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
 				</div>
 			</div>
 		);
 	}
 }
 
-export var BaseDataTypeNodeWidgetFactory = React.createFactory(BaseDataTypeNodeWidget);
+export var BaseDataTypeNodeWidgetFactory = createFactory(BaseDataTypeNodeWidget);

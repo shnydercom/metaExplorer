@@ -1,7 +1,7 @@
 import { Action, Store } from 'redux';
 import { ActionsObservable, Epic, Options } from "redux-observable";
 import { AjaxError, Observable } from "rxjs/Rx";
-import "rxjs/Rx"; //TODO: re-check this line and only import what's needed
+//import "rxjs/Rx"; //TODO: re-check this line and only import what's needed
 //source: https://mikebridge.github.io/articles/typescript-redux-observable-epic-test/
 
 export const SCHEMA_LOAD_REQUEST = "schema/SCHEMA_LOAD_REQUEST";
@@ -38,18 +38,18 @@ export const loadSchemaFailure = (message: string): ISchemaAjaxError => ({
 export const isLoadingSchemaReducer = function isLoading(state: boolean = false, action: Action): boolean {
     switch (action.type) {
         case SCHEMA_LOAD_REQUEST:
-            return true
+            return true;
         case SCHEMA_LOAD_RESULT:
         case SCHEMA_LOAD_ERROR:
-            return false
+            return false;
         default:
-            return state
+            return state;
     }
 }
 export const loadSchemaEpic = (action$: ActionsObservable<any>, store : any , { getJSON }: any) => {
     return action$.ofType(SCHEMA_LOAD_REQUEST)
         .do(() => console.log("Locating User ...")) // debugging
-        .mergeMap(action =>
+        .mergeMap((action) =>
             getJSON(`%PUBLIC_URL%/api/users`)
                 .map((response: any) => loadSchemaResult(response as any))
                 .catch((error: AjaxError): ActionsObservable<ISchemaAjaxError> =>

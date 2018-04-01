@@ -1,6 +1,4 @@
-import * as _ from "lodash";
-import * as React from "react";
-import * as redux from 'redux';
+import { Component } from "react";
 import Splitter from 'm-react-splitters';
 import * as s from 'm-react-splitters/lib/splitters.css';
 
@@ -99,7 +97,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: A
 	}
 });*/
 
-class PureAppInterpreterDesigner extends React.Component<AIDProps & LDConnectedState & LDConnectedDispatch, AIDState> {
+class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState & LDConnectedDispatch, AIDState> {
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the interpreter you're designing is capable of interpreting -> usually a new generic type
 	logic: DesignerLogic;
 	errorNotAvailableMsg: string = "Interpreter Designer environment not available. Please check your settings";

@@ -1,5 +1,3 @@
-import * as React from 'react';
-import * as redux from 'redux';
 import { connect } from 'react-redux';
 
 import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
@@ -17,6 +15,7 @@ import { elementAt } from 'rxjs/operators/elementAt';
 import { generateIntrprtrForProp } from 'components/generic/generatorFns';
 import { getKVValue } from 'ldaccess/ldUtils';
 import { getKVStoreByKey } from 'ldaccess/kvConvenienceFns';
+import { Component, ComponentClass, StatelessComponent } from 'react';
 
 type OwnProps = {
 	test: string;
@@ -81,7 +80,7 @@ interface TestState {
 	myState: string;
 }
 @ldBlueprint(bpCfg)
-export class PureImgHeadSubDesc extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, {}>
+export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, {}>
 	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;

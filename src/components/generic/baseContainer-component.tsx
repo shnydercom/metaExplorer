@@ -1,6 +1,4 @@
 //TODO: continue implementing here, then put it into BaseDataTypePortSelector, then we can also build generic nodes that can set basic data types!
-import * as React from 'react';
-import * as redux from 'redux';
 import { connect } from 'react-redux';
 
 import { ExplorerState } from 'appstate/store';
@@ -28,6 +26,7 @@ import { UserDefDict } from 'ldaccess/UserDefDict';
 import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
 import { isReactComponent } from '../reactUtils/reactUtilFns';
 import { LDError } from 'appstate/LDError';
+import { Component, ComponentClass, StatelessComponent } from 'react';
 
 /*export type LDOwnProps = {
 	ldTokenString: string;
@@ -78,7 +77,7 @@ let bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-export class PureBaseContainer extends React.Component<LDConnectedState & LDConnectedDispatch & BaseContOwnProps, {}>
+export class PureBaseContainer extends Component<LDConnectedState & LDConnectedDispatch & BaseContOwnProps, {}>
 	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	initialKvStores: IKvStore[];

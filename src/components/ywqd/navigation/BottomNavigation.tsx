@@ -1,5 +1,3 @@
-import * as React from 'react';
-import * as redux from 'redux';
 import { connect } from 'react-redux';
 import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
@@ -22,6 +20,7 @@ import { generateIntrprtrForProp } from '../../generic/generatorFns';
 import { active } from 'react-toolbox/lib/dropdown/theme.css';
 import { checkAllFilled } from 'GeneralUtils';
 import { Redirect } from 'react-router';
+import { Component, ComponentClass, StatelessComponent } from 'react';
 
 type ConnectedState = {
 };
@@ -153,7 +152,7 @@ export type BottomNavState = {
 };
 
 @ldBlueprint(bpCfg)
-export class PureBottomNavigation extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, BottomNavState>
+export class PureBottomNavigation extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, BottomNavState>
 	implements IBlueprintItpt {
 	state = {
 		tabIdx: 0

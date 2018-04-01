@@ -1,5 +1,4 @@
-import * as React from "react";
-import * as _ from "lodash";
+import { keys } from "lodash";
 
 import { DesignerLogic, designerSpecificNodesColor } from "components/appinterpreter-parts/designer-logic";
 import { DefaultNodeModel, DefaultPortModel, DiagramWidget } from "storm-react-diagrams";
@@ -14,6 +13,7 @@ import { GeneralDataTypeNodeModel } from "components/appinterpreter-parts/Genera
 import * as appStyles from 'styles/styles.scss';
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { DeclarationPartNodeModel } from "components/appinterpreter-parts/DeclarationNodeModel";
+import { Component } from "react";
 
 export interface DesignerBodyProps {
 	logic: DesignerLogic;
@@ -24,7 +24,7 @@ export interface DesignerBodyState { }
 /**
  * @author Jonathan Schneider
  */
-export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBodyState> {
+export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState> {
 	constructor(props: DesignerBodyProps) {
 		super(props);
 		this.state = {};
@@ -66,7 +66,7 @@ export class DesignerBody extends React.Component<DesignerBodyProps, DesignerBod
 					onDrop={(event) => {
 						console.dir(event);
 						var data = JSON.parse(event.dataTransfer.getData("ld-node"));
-						var nodesCount = _.keys(
+						var nodesCount = keys(
 							this.props.logic
 								.getDiagramEngine()
 								.getDiagramModel()

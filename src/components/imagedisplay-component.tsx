@@ -1,5 +1,3 @@
-import * as React from 'react';
-import * as redux from 'redux';
 import { connect } from 'react-redux';
 import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
@@ -12,6 +10,7 @@ import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
 import { getKVStoreByKey } from 'ldaccess/kvConvenienceFns';
 import { getKVValue } from 'ldaccess/ldUtils';
+import { Component, ComponentClass, StatelessComponent } from 'react';
 
 type OwnProps = {
 	singleImage;
@@ -43,7 +42,7 @@ let bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-export class PureImgDisplay extends React.Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, {}>
+export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, {}>
 	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;

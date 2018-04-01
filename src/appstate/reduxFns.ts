@@ -1,7 +1,6 @@
 import { ExplorerState } from "appstate/store";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 import { ILDOptions } from "ldaccess/ildoptions";
-import * as redux from 'redux';
 import { IKvStore } from "ldaccess/ikvstore";
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
 import { ILDResource } from "ldaccess/ildresource";
@@ -10,6 +9,7 @@ import { OutputKVMapElement } from "ldaccess/ldBlueprint";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { linearSplitRequestAction } from "./epicducks/linearSplit-duck";
 import { refMapPREFILLAction, refMapFILLAction } from "./epicducks/refMap-duck";
+import { Dispatch } from "redux";
 
 //final:
 export const mapStateToProps = (state: ExplorerState, ownProps: LDOwnProps): LDOwnProps & LDConnectedState => {
@@ -58,7 +58,7 @@ const ldTkStrRefToFilledProp = (state: ExplorerState, ownProps: LDOwnProps, ldOp
 	return rv;
 };
 
-export const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: LDOwnProps): LDConnectedDispatch => ({
+export const mapDispatchToProps = (dispatch: Dispatch<ExplorerState>, ownProps: LDOwnProps): LDConnectedDispatch => ({
 	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
 		if (!ldOptions) {
 			let kvStores: IKvStore[] = [/*ownProps.singleKV*/];

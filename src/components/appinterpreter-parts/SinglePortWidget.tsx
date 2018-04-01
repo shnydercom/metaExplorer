@@ -1,6 +1,6 @@
-import * as React from "react";
 import { InterpreterNodeModel } from "./InterpreterNodeModel";
 import { NodeModel } from "storm-react-diagrams";
+import { Component } from "react";
 
 export interface PortProps {
 	name: string;
@@ -15,7 +15,7 @@ export interface PortState {
 /**
  * @author Jonathan Schneider
  */
-export class SinglePortWidget extends React.Component<PortProps, PortState> {
+export class SinglePortWidget extends Component<PortProps, PortState> {
 	constructor(props: PortProps) {
 		super(props);
 		this.state = {

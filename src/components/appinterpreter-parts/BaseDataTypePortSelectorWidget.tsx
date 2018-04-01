@@ -1,5 +1,3 @@
-import * as React from "react";
-import * as redux from 'redux';
 import { PortWidget, DefaultPortModel } from "storm-react-diagrams";
 import { SinglePortWidget } from "components/appinterpreter-parts/SinglePortWidget";
 import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
@@ -12,6 +10,7 @@ import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDPr
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { BaseContainer } from "../generic/baseContainer-component";
+import { Component, ComponentClass, StatelessComponent } from "react";
 
 /*export type LDOwnProps = {
 	ldTokenString: string;
@@ -50,7 +49,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: B
 	}
 });*/
 
-class PureBaseDataTypePortSelector extends React.Component<BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch, BaseDataTypePortSelectorState> {
+class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch, BaseDataTypePortSelectorState> {
 	public static defaultProps: BaseDataTypePortSelectorProps = {
 		in: true,
 		label: "port",

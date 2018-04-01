@@ -1,6 +1,6 @@
-import React from 'react';
+import { SFC } from 'react';
 
-import * as redux from 'redux';
+import { Store } from 'redux';
 import { Provider } from 'react-redux';
 
 import { Toolkit } from "storm-react-diagrams";
@@ -26,7 +26,7 @@ const initialState: ExplorerState = {
 const isProduction = process.env.NODE_ENV === 'production';
 
 export interface AppRootProps { }
-export const applicationStore: redux.Store<ExplorerState> = configureStore(initialState);
+export const applicationStore: Store<ExplorerState> = configureStore(initialState);
 const appinterpreterToken: string = "tID"; //TODO: uncomment Toolkit.UID();
 function rootSetup(): void {
 	appItptMatcherFn();
@@ -34,7 +34,7 @@ function rootSetup(): void {
 }
 
 rootSetup();
-export const AppRoot: React.SFC<AppRootProps> = () => {
+export const AppRoot: SFC<AppRootProps> = () => {
 	return (
 		<Provider store={applicationStore}>
 			<Router>

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Component } from "react";
 
 export interface DesignerTrayProps {}
 
@@ -7,7 +7,7 @@ export interface DesignerTrayState {}
 /**
  * @author Dylan Vorster
  */
-export class DesignerTray extends React.Component<DesignerTrayProps, DesignerTrayState> {
+export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState> {
 	public static defaultProps: DesignerTrayProps = {};
 
 	constructor(props: DesignerTrayProps) {

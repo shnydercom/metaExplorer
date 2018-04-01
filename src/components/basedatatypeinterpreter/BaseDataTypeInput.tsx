@@ -1,6 +1,4 @@
 import assertNever from "assert-never";
-import * as React from 'react';
-import * as redux from 'redux';
 import { connect } from 'react-redux';
 
 import { Input, InputTheme } from 'react-toolbox';
@@ -21,6 +19,7 @@ import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
+import { Component, ComponentClass, StatelessComponent } from "react";
 
 /**
  * @author Jonathan Schneider
@@ -95,7 +94,7 @@ for (var bdt in bdts) {
 		bpcfgs.push(bpCfg);
 	}
 }
-class PureBaseDataTypeInput extends React.Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
+class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
 	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;

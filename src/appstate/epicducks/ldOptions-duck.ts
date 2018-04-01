@@ -1,7 +1,7 @@
 import { Action, Store } from 'redux';
 import { ActionsObservable, Epic, Options } from 'redux-observable';
 import { AjaxError, Observable } from 'rxjs/Rx';
-import "rxjs/Rx";
+//import "rxjs/Rx";
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { LDError, LDErrorMsgState } from './../LDError';
 import { ILDOptionsMapStatePart } from 'appstate/store';

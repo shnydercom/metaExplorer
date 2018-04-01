@@ -1,5 +1,5 @@
-import * as React from "react";
 import { NodeModel } from "storm-react-diagrams";
+import { Component } from "react";
 
 export interface PortProps {
 	name: string;
@@ -13,7 +13,7 @@ export interface PortState {
 /**
  * @author Dylan Vorster
  */
-export class MultiPortWidget extends React.Component<PortProps, PortState> {
+export class MultiPortWidget extends Component<PortProps, PortState> {
 	constructor(props: PortProps) {
 		super(props);
 		this.state = {

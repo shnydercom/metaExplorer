@@ -1,7 +1,5 @@
 import { connect } from "react-redux";
-import * as redux from 'redux';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from "ldaccess/ldBlueprint";
-import * as React from "react";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
 import { ILDOptions } from "ldaccess/ildoptions";
@@ -20,6 +18,7 @@ import { ILDToken, NetworkPreferredToken, createConcatNetworkPreferredToken } fr
 import { isObjPropertyRef } from "ldaccess/ldUtils";
 import { LDConsts } from "ldaccess/LDConsts";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultInterpreterRetriever";
+import { Component } from "react";
 
 export type OwnProps = LDOwnProps & {
 	searchCrudSkills: string;
@@ -39,7 +38,7 @@ let bpCfg: BlueprintConfig = {
 };
 //TODO: move state-relevant ldOptionsMap-Entry genration outside of the component, or make this a non-visual interpreter
 @ldBlueprint(bpCfg)
-export class PureRefMapIntrprtr extends React.Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
+export class PureRefMapIntrprtr extends Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
 	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	subOutputKVMap: { [s: string]: OutputKVMap };

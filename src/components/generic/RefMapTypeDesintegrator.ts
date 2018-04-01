@@ -10,7 +10,6 @@ import { mapDispatchToProps, mapStateToProps } from "appstate/reduxFns";
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from "appstate/LDProps";
 import { connect } from "react-redux";
 import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
-import * as React from "react";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { ILDResource } from "ldaccess/ildresource";

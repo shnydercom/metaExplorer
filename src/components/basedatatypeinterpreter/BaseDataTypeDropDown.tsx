@@ -1,7 +1,7 @@
-import * as React from "react";
 import { Dropdown, DropdownTheme } from 'react-toolbox/lib/dropdown';
 import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
 import { LDDict } from "ldaccess/LDDict";
+import { Component } from 'react';
 
 /**
  * this component is not supposed to be used as a blueprint, only for
@@ -31,7 +31,7 @@ const baseDataTypes: IDataTypeLabel[] = [
 	{ value: LDDict.DateTime, label: 'DateTime', img: null },
 ];
 
-export class BaseDataTypeDropDown extends React.Component<IDataTypeDropDownProps, IDataTypeState> {
+export class BaseDataTypeDropDown extends Component<IDataTypeDropDownProps, IDataTypeState> {
 
 	constructor(props: IDataTypeDropDownProps) {
 		super(props);

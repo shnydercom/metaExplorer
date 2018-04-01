@@ -1,5 +1,5 @@
 import { PortModel, AbstractInstanceFactory } from "storm-react-diagrams";
-import * as _ from "lodash";
+import { merge } from "lodash";
 import { IKvStore } from "ldaccess/ikvstore";
 
 /**
@@ -25,7 +25,7 @@ export class LDPortModel extends PortModel {
 	}
 
 	serialize() {
-		return _.merge(super.serialize(), {
+		return merge(super.serialize(), {
 			in: this.in,
 			label: this.label,
 			kv: this.kv

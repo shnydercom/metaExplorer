@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Component } from "react";
 
 export interface DesignerTrayProps {
 	model: any;
@@ -8,7 +8,7 @@ export interface DesignerTrayProps {
 
 export interface DesignerTrayState {}
 
-export class DesignerTrayItem extends React.Component<DesignerTrayProps, DesignerTrayState> {
+export class DesignerTrayItem extends Component<DesignerTrayProps, DesignerTrayState> {
 	constructor(props: DesignerTrayProps) {
 		super(props);
 		this.state = {};

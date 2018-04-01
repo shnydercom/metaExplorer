@@ -1,7 +1,7 @@
-import * as React from "react";
 import { PortWidget, DefaultPortModel } from "storm-react-diagrams";
 import { SinglePortWidget } from "components/appinterpreter-parts/SinglePortWidget";
 import { LDPortModel } from "components/appinterpreter-parts/LDPortModel";
+import { Component } from "react";
 
 export interface SinglePortLabelProps {
 	model?: LDPortModel;
@@ -11,7 +11,7 @@ export interface SinglePortLabelProps {
 
 export interface SinglePortLabelState {}
 
-export class SinglePortLabel extends React.Component<SinglePortLabelProps, SinglePortLabelState> {
+export class SinglePortLabel extends Component<SinglePortLabelProps, SinglePortLabelState> {
 	public static defaultProps: SinglePortLabelProps = {
 		in: true,
 		label: "port"

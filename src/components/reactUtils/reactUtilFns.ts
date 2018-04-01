@@ -1,4 +1,4 @@
-import * as React from "react";
+import { isValidElement } from "react";
 
 export function isClassComponent(component) {
 	return (
@@ -22,7 +22,7 @@ export function isReactComponent(component) {
 }
 
 export function isElement(element) {
-	return React.isValidElement(element);
+	return isValidElement(element);
 }
 
 export function isDOMTypeElement(element) {
