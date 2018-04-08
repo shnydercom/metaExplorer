@@ -2,7 +2,7 @@ import { connect, Dispatch } from 'react-redux';
 
 import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
-import ImgDisplay from './imagedisplay-component';
+//import ImgDisplay from './imagedisplay-component';
 import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';

@@ -28,7 +28,7 @@ export enum UserDefDict {
 	intrprtrClassType = "InterpreterClassType",
 
 	/**
-	 * if a kv-Store is typed with this type, then its value is an ldTokenString, the intrprtrClass is filled
+	 * if a kv-Store is typed with this type, then its value is an ldTokenString on the state, i.e. a runtime-itpt
 	 */
 	intrprtrObjectType = "InterpreterObjectType",
 

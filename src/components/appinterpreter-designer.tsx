@@ -160,7 +160,7 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 		let newType = nodesBPCFG.canInterpretType;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = [
-			{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+	//		{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
 			{ key: undefined, ldType: newType, value: dummyInstance }
 		];
 		this.setState({ ...this.state, serialized: nodesSerialized });
@@ -189,7 +189,7 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 		let newType = nodesBPCFG.canInterpretType;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = [
-			{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+			//{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
 			{ key: undefined, ldType: newType, value: dummyInstance }
 		];
 		this.setState({ ...this.state, serialized: nodesSerialized });
@@ -205,7 +205,7 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 		let newType = nodesBPCFG.canInterpretType;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = [
-			{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+		//	{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
 			{ key: undefined, ldType: newType, value: dummyInstance }
 		];
 		this.setState({ ...this.state, serialized: nodesSerialized });

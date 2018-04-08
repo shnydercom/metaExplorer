@@ -78,6 +78,7 @@ function assignDerivedItpt(retriever: string, newLDTokenStr: string, ldType: str
 }
 
 function clearDerivedItpt(retriever: string, oldLDTokenStr: string) {
+	//TODO: implement peakAhead-Algorithm to remove all ...-l[0..n] ldTokenStrings
 	if (appItptMatcherFn().getItptRetriever(retriever).hasDerivedItpt(oldLDTokenStr)) {
 		appItptMatcherFn().getItptRetriever(retriever).setDerivedItpt(oldLDTokenStr, null);
 	}

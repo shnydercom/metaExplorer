@@ -1,4 +1,5 @@
 export const ITPT_LINEAR_SPLIT = 'l';
+export const ITPT_REFMAP_BASE = "rmb";
 
 export interface IItptRetriever {
     /**

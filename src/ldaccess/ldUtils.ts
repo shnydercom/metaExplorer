@@ -4,7 +4,7 @@ import { ILDResource } from "ldaccess/ildresource";
 import { IKvStore } from "ldaccess/ikvstore";
 import { IWebResource } from "hydraclient.js/src/DataModel/IWebResource";
 import { elementAt } from "rxjs/operator/elementAt";
-import { OutputKVMap } from "ldaccess/ldBlueprint";
+import { OutputKVMap, BlueprintConfig } from "ldaccess/ldBlueprint";
 
 export const isInterpreter = (input: any): boolean => {
 	if (!input) return false;
@@ -54,6 +54,12 @@ export const isLDOptionsSame = (a: ILDOptions, b: ILDOptions): boolean => {
 		return true;
 	});
 	return isKVsSame;
+};
+
+export const ldBlueprintCfgDeepCopy = (input: BlueprintConfig): BlueprintConfig => {
+	let rv: BlueprintConfig;
+	rv = JSON.parse(JSON.stringify(input));
+	return rv;
 };
 
 export const ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {

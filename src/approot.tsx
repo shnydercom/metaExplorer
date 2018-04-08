@@ -17,6 +17,7 @@ import {
 	BrowserRouter as Router
 } from 'react-router-dom';
 import { appItptMatcherFn } from 'appconfig/appInterpreterMatcher';
+import { initReactToolBoxRetrieverFnAsDefault } from 'components/react-toolbox/initReactToolBoxRetrieverSetup';
 
 const initialState: ExplorerState = {
 	ldoptionsMap: {},
@@ -30,6 +31,7 @@ export const applicationStore: Store<ExplorerState> = configureStore(initialStat
 const appinterpreterToken: string = "tID"; //TODO: uncomment Toolkit.UID();
 function rootSetup(): void {
 	appItptMatcherFn();
+	initReactToolBoxRetrieverFnAsDefault();
 	initLDConnect();
 }
 

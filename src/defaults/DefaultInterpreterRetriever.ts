@@ -88,7 +88,10 @@ export class DefaultItptRetriever implements IItptRetriever {
 	}
 
 	setDerivedItpt(ldTokenVal: string, itpt: any): void {
-		if (!itpt) this.derivedItptMap.delete(ldTokenVal);
+		if (!itpt) {
+			this.derivedItptMap.delete(ldTokenVal);
+			return;
+		}
 		this.derivedItptMap.set(ldTokenVal, itpt);
 	}
 	hasDerivedItpt(ldTokenVal: string): boolean {

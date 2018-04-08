@@ -22,7 +22,12 @@
       "jsx",
       "json",
       "node"
-    ]
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig-jest.json"
+      }
+    }
   },
   "scripts": {
     "test": "jest --watch",
