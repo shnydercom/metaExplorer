@@ -81,7 +81,6 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 	buildIntrprtrJSX(ldOptions: ILDOptions): any { //TODO: search for right type ?! React.Component<LDOwnProps>
 		let { ldTokenString } = this.props;
 		let { interpretedBy, retriever } = ldOptions.visualInfo;
-		let exportSelfKey: string = ldOptions.resource.kvStores.find((a) => a.key === UserDefDict.exportSelfKey).value;
 		let baseRMTkStr = refMapBaseTokenStr(ldTokenString);
 		let BaseComp = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(baseRMTkStr);
 		if (BaseComp === null || BaseComp === undefined) {

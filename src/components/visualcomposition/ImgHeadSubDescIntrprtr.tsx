@@ -124,16 +124,17 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 	}
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
 		let kvs: IKvStore[];
+		const retriever = this.props.ldOptions.visualInfo.retriever;
 		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
 			kvs = props.ldOptions.resource.kvStores;
-			this.headerImgDisplay = generateIntrprtrForProp(kvs, VisualDict.headerImgDisplay);
+			this.headerImgDisplay = generateIntrprtrForProp(kvs, VisualDict.headerImgDisplay, retriever);
 			this.headerText = getKVValue(getKVStoreByKey(kvs, VisualDict.headerTxt));
 			this.subHeaderText = getKVValue(getKVStoreByKey(kvs, VisualDict.subHeaderTxt));
 			this.description = getKVValue(getKVStoreByKey(kvs, VisualDict.description));
 		}
 		if (!this.headerImgDisplay) {
 			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			this.headerImgDisplay = generateIntrprtrForProp(kvs, VisualDict.headerImgDisplay);
+			this.headerImgDisplay = generateIntrprtrForProp(kvs, VisualDict.headerImgDisplay, retriever);
 		}
 	}
 }

@@ -286,13 +286,14 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
 		let kvs: IKvStore[];
 		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
+		const retriever = this.props.ldOptions.visualInfo.retriever;
 		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
 			kvs = props.ldOptions.resource.kvStores;
-			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer);
+			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever);
 		}
 		if (!this.topFreeContainer) {
 			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer);
+			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever);
 		}
 		this.icon1url = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_1_ICONURL));
 		this.icon2url = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_2_ICONURL));

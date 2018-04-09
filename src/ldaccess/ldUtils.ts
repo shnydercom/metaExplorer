@@ -126,5 +126,6 @@ export const getKVValue = (input: IKvStore | string | number): any => {
 	if (input.value.constructor === Array) {
 		if ((input.value as Array<any>).length === 1) return input.value[0];
 	}
+	if (isObjPropertyRef(input.value)) return null;
 	return input.value;
 };

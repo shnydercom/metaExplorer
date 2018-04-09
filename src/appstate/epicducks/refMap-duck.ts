@@ -10,7 +10,7 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { isObjPropertyRef, ldBlueprintCfgDeepCopy } from "ldaccess/ldUtils";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { ITPT_REFMAP_BASE } from "ldaccess/iinterpreter-retriever";
-import { refMapBaseTokenStr, ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";
+import { refMapBaseTokenStr, ILDToken, NetworkPreferredToken, createConcatNetworkPreferredToken } from "ldaccess/ildtoken";
 import { appItptMatcherFn } from "appconfig/appInterpreterMatcher";
 //import { appItptMatcherFn } from "appconfig/appInterpreterMatcher";
 
@@ -41,9 +41,9 @@ export const refMapReducer = (
 		case REFMAP_REQUEST:
 			let baseRefMap: BlueprintConfig = action.refMap;
 			let ldOptionsBase = action.ldOptionsBase;
-			let isRefMapNeedsUpdate: boolean = false;
+			let isRefMapNeedsUpdate: boolean = true;
 			//make sure the creation algorithm only runs once
-			if (ldOptionsBase.visualInfo.interpretedBy) {
+			/*if (ldOptionsBase.visualInfo.interpretedBy) {
 				if (action.refMap.nameSelf !== ldOptionsBase.visualInfo.interpretedBy) {
 					isRefMapNeedsUpdate = true;
 				} else {
@@ -51,7 +51,7 @@ export const refMapReducer = (
 				}
 			} else {
 				isRefMapNeedsUpdate = true;
-			}
+			}*/
 			if (isRefMapNeedsUpdate) {
 				/*let ldOptionsRefMapIdx = ldOptionsBase.resource.kvStores.findIndex((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
 				if (ldOptionsRefMapIdx) {
@@ -95,6 +95,8 @@ const createRuntimeRefMapLinks: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 			let aAsOPR: ObjectPropertyRef = a as ObjectPropertyRef;
 			if (aAsOPR.objRef === subItptOf) {
 				aAsOPR.objRef = ldBaseTokenStr;
+			} else {
+				aAsOPR.objRef = createConcatNetworkPreferredToken(ldTkStr, aAsOPR.objRef).get();
 			}
 		}
 	});
@@ -109,13 +111,14 @@ const createRuntimeRefMapLinks: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 					if (aAsOPR.objRef === subItptOf) {
 						aAsOPR.objRef = ldBaseTokenStr;
 					} else {
-						aAsOPR.objRef = refMapBaseTokenStr(aAsOPR.objRef);
+						aAsOPR.objRef = createConcatNetworkPreferredToken(ldTkStr, aAsOPR.objRef).get();
 					}
 				}
 			});
 		}
 	}
 	rmKv.value[ITPT_REFMAP_BASE] = rmKv.value[subItptOf];
+	delete rmKv.value[subItptOf];
 	return modifiedObj;
 };
 
@@ -125,12 +128,13 @@ const assignValuesToRuntimeRefMap: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 	ldOptions: ILDOptions
 ) => {
 	let rmKv: IKvStore = rmBPCfg.initialKvStores.find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
+	let ldTkStr = ldOptions.ldToken.get();
 	for (const rmSubCfgKey in rmKv.value) {
 		if (rmKv.value.hasOwnProperty(rmSubCfgKey)) {
 			const rmSubCfg: BlueprintConfig = rmKv.value[rmSubCfgKey];
 			//create runtime-objects
-			let rtNewTkStr: string = refMapBaseTokenStr(rmSubCfgKey);
-			let rtNewToken: ILDToken = new NetworkPreferredToken(rtNewTkStr);
+			let rtNewToken: ILDToken = createConcatNetworkPreferredToken(ldTkStr, rmSubCfgKey);
+			let rtNewTkStr: string = rtNewToken.get();
 			let rtLDOptions: ILDOptions = {
 				lang: ldOptions.lang,
 				isLoading: false,
@@ -211,7 +215,7 @@ export const refMapEpic = (action$: ActionsObservable<any>, store: any) => {
 			let ldOptionsObj: ILDOptions = action.ldOptionsBase;
 			let baseRefMap: BlueprintConfig = action.refMap;
 			let refMapREQUESTPromise = new Promise((resolve, reject) => {
-				createInterpreters(null, baseRefMap, ldOptionsObj);
+				createInterpreters(ldOptionsObj);
 				ldOptionsObj.isLoading = false;
 				resolve(ldOptionsObj);
 			});
@@ -222,22 +226,22 @@ export const refMapEpic = (action$: ActionsObservable<any>, store: any) => {
 		});
 };
 
-const createInterpreters: RefMapIteratorFn<any> = (
-	modifiedObj: any,
-	rmBPCfg: BlueprintConfig,
+const createInterpreters = (
 	ldOptions: ILDOptions
 ) => {
 	//TODO: recursive config-desintegration and traversal here, assigning of FULL derived interpreters
 	let { retriever, interpretedBy } = ldOptions.visualInfo;
 	let itptRetriever = appItptMatcherFn().getItptRetriever(retriever);
-	let rmKv = rmBPCfg.initialKvStores.find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
+	let ldTkStr = ldOptions.ldToken.get();
+	let rmKv = ldOptions.resource.kvStores.find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
 	let rmKvVal = rmKv.value;
 	for (const rmSubCfgKey in rmKvVal) {
 		if (rmKvVal.hasOwnProperty(rmSubCfgKey)) {
+			const concatNWTkStr = createConcatNetworkPreferredToken(ldTkStr, rmSubCfgKey).get();
 			const subCfg = rmKvVal[rmSubCfgKey];
 			let itpt = itptRetriever.getItptByNameSelf(subCfg.subItptOf);
 			itpt = ldBlueprint(subCfg)(itpt);
-			itptRetriever.setDerivedItpt(rmSubCfgKey, itpt);
+			itptRetriever.setDerivedItpt(concatNWTkStr, itpt);
 		}
 	}
 	return;

@@ -121,20 +121,21 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 	}
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
 		let kvs: IKvStore[];
+		let retriever = props.ldOptions.visualInfo.retriever;
 		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
 			kvs = props.ldOptions.resource.kvStores;
-			this.lowerFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer);
+			this.lowerFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever);
 			this.headerText = getKVValue(getKVStoreByKey(kvs, VisualDict.headerTxt));
 			this.routeSendSearch = getKVValue(getKVStoreByKey(kvs, VisualDict.routeSend_search));
-			this.usrIconPopOverContent = this.usrIconPopOverContent ? generateIntrprtrForProp(kvs, VisualDict.popOverContent) : null;
+			this.usrIconPopOverContent = this.usrIconPopOverContent ? generateIntrprtrForProp(kvs, VisualDict.popOverContent, retriever) : null;
 		}
 		if (!this.lowerFreeContainer) {
 			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			this.lowerFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer);
+			this.lowerFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever);
 		}
 		if (!this.usrIconPopOverContent) {
 			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			this.usrIconPopOverContent = generateIntrprtrForProp(kvs, VisualDict.popOverContent);
+			this.usrIconPopOverContent = generateIntrprtrForProp(kvs, VisualDict.popOverContent, retriever);
 		}
 	}
 }

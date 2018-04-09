@@ -103,7 +103,7 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 		let toPath: string;
 		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
 			kvs = props.ldOptions.resource.kvStores;
-			displayedComponent = generateIntrprtrForProp(kvs, VisualDict.freeContainer);
+			displayedComponent = generateIntrprtrForProp(kvs, VisualDict.freeContainer, props.ldOptions.visualInfo.retriever);
 		}
 		isExact = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, ROUTE_ISEXACT));
 		toPath = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, ROUTE_PATH));
