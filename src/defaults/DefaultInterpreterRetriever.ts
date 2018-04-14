@@ -97,7 +97,7 @@ export class DefaultItptRetriever implements IItptRetriever {
 	hasDerivedItpt(ldTokenVal: string): boolean {
 		return this.derivedItptMap.has(ldTokenVal);
 	}
-	getDerivedItpt(ldTokenVal: string) {
+	getDerivedItpt(ldTokenVal: string): any {
 		if (this.hasDerivedItpt(ldTokenVal)) {
 			return this.derivedItptMap.get(ldTokenVal);
 		} else {

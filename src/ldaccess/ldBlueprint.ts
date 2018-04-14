@@ -9,13 +9,13 @@ import { ILDToken } from 'ldaccess/ildtoken';
 
 export type ConsumeLDOptionsFunc = (ldOptions: ILDOptions) => any;
 
-export type OutputKVMapElement = {targetLDToken: ILDToken, targetProperty: string};
+export type OutputKVMapElement = { targetLDToken: ILDToken, targetProperty: string };
 /**
  * maps the kvStores that produce/change values in this interpreter to a token string and a target property
  * on the object that is referenced by the token string
  * e.g. { "http://schema.com/name": {targetLDToken: "someUID", targetProperty: "someTextField"}}
  */
-export type OutputKVMap = { [key: string]: OutputKVMapElement};
+export type OutputKVMap = { [key: string]: OutputKVMapElement };
 
 export interface IBlueprintItpt {
     cfg: BlueprintConfig;
@@ -37,7 +37,29 @@ export interface BlueprintConfig {
     interpretableKeys: (string | ObjectPropertyRef)[];
 }
 
-function blueprintDecorator<T extends { new(...args: any[]): IBlueprintItpt }>(constructorFn: T, blueprintCfg: BlueprintConfig) {
+function handleKVInheritance(baseClassKV: IKvStore[], subClassKV: IKvStore[], isReplace: boolean): IKvStore[] {
+    let rv: IKvStore[] = [];
+    if (isReplace) {
+        rv = subClassKV ? subClassKV : baseClassKV;
+    } else {
+        if (!baseClassKV) {
+            rv = subClassKV;
+        } else {
+            let baseCopy = baseClassKV.slice();
+            subClassKV.forEach((kv, idx, arr) => {
+                let findIdx = baseCopy.findIndex((findKv) => findKv.key === kv.key);
+                rv.push(kv);
+                if (findIdx >= 0) {
+                    baseCopy.splice(findIdx, 1);
+                }
+            });
+            rv.push(...baseCopy);
+        }
+    }
+    return rv;
+}
+
+function blueprintDecorator<T extends { new(...args: any[]): IBlueprintItpt }>(constructorFn: T, blueprintCfg: BlueprintConfig, replaceKVs: boolean = false) {
     var classToExtend = null;
     //var reduxClass = null;
     /*if (constructorFn["WrappedComponent"]) {
@@ -48,7 +70,8 @@ function blueprintDecorator<T extends { new(...args: any[]): IBlueprintItpt }>(c
     classToExtend = class extends constructorFn {
         static nameSelf = blueprintCfg.nameSelf;
         static cfg = blueprintCfg;
-        initialKvStores = blueprintCfg.initialKvStores ? blueprintCfg.initialKvStores : this.initialKvStores;
+        initialKvStores = handleKVInheritance(this.initialKvStores, blueprintCfg.initialKvStores, replaceKVs);
+
         //consumeWebResource = blueprintCfg.consumeWebResource;
         //interpreterRetriever = blueprintCfg.interpreterRetrieverFn;
         interpretableKeys = blueprintCfg.interpretableKeys;
@@ -62,7 +85,7 @@ function blueprintDecorator<T extends { new(...args: any[]): IBlueprintItpt }>(c
     //blueprintCfg.interpreterRetrieverFn().addInterpreter(blueprintCfg.forType, newClass, blueprintCfg.crudSkills);
 }
 
-export default function ldBlueprint(blueprintCfg: BlueprintConfig) {
+export default function ldBlueprint(blueprintCfg: BlueprintConfig, replaceKVs: boolean = false) {
     //eval phase
     if (blueprintCfg == null) throw new LDError("blueprintCfg must not be null");
     if (blueprintCfg.nameSelf == null) throw new LDError("blueprintCfg.nameSelf must not be null");
@@ -75,6 +98,6 @@ export default function ldBlueprint(blueprintCfg: BlueprintConfig) {
     if (blueprintCfg.interpretableKeys == null) throw new LDError("blueprintCfg.interpretableKeys must not be null");
     //if (blueprintCfg.consumeWebResource == null) throw new LDError("blueprintCfg.consumeWebResource must not be null");
     return <T extends { new(...args: any[]): IBlueprintItpt }>(target: T) => {
-        return blueprintDecorator(target, blueprintCfg);
+        return blueprintDecorator(target, blueprintCfg, replaceKVs);
     };
 }

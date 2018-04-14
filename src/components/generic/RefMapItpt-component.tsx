@@ -20,6 +20,7 @@ import { LDConsts } from "ldaccess/LDConsts";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultInterpreterRetriever";
 import { Component } from "react";
 import { appItptMatcherFn } from "appconfig/appInterpreterMatcher";
+import { ITPT_REFMAP_BASE } from "ldaccess/iinterpreter-retriever";
 
 export type OwnProps = LDOwnProps & {
 	searchCrudSkills: string;

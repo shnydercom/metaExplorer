@@ -7,6 +7,7 @@ import { appItptMatcherFn } from "appconfig/appInterpreterMatcher";
 import { ActionsObservable } from "redux-observable";
 import { Observable } from 'rxjs/Rx';
 import { LDError, LDErrorMsgState } from "../LDError";
+import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
 
 /**
  * a duck for linear state splitting, used for containers
@@ -73,8 +74,9 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 }
 
 function assignDerivedItpt(retriever: string, newLDTokenStr: string, ldType: string, crudSkills: string): void {
-	let baseItpt = appItptMatcherFn().getItptRetriever(retriever).searchForObjItpt(ldType, crudSkills);
-	appItptMatcherFn().getItptRetriever(retriever).setDerivedItpt(newLDTokenStr, baseItpt);
+	(appItptMatcherFn().getItptRetriever(retriever) as ReduxItptRetriever).searchForObjItptAndDerive(ldType, crudSkills, newLDTokenStr);
+	//let baseItpt = appItptMatcherFn().getItptRetriever(retriever).searchForObjItpt(ldType, crudSkills);
+	//appItptMatcherFn().getItptRetriever(retriever).setDerivedItpt(newLDTokenStr, baseItpt);
 }
 
 function clearDerivedItpt(retriever: string, oldLDTokenStr: string) {

@@ -1,4 +1,4 @@
-import { ILDOptionsMapStatePart } from "../store";
+import { ILDOptionsMapStatePart, ExplorerState } from "../store";
 import { ILDOptions } from "ldaccess/ildoptions";
 import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { ActionsObservable } from "redux-observable";
@@ -12,6 +12,8 @@ import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { ITPT_REFMAP_BASE } from "ldaccess/iinterpreter-retriever";
 import { refMapBaseTokenStr, ILDToken, NetworkPreferredToken, createConcatNetworkPreferredToken } from "ldaccess/ildtoken";
 import { appItptMatcherFn } from "appconfig/appInterpreterMatcher";
+import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
+import { Store } from "redux";
 //import { appItptMatcherFn } from "appconfig/appInterpreterMatcher";
 
 /**
@@ -135,11 +137,12 @@ const assignValuesToRuntimeRefMap: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 			//create runtime-objects
 			let rtNewToken: ILDToken = createConcatNetworkPreferredToken(ldTkStr, rmSubCfgKey);
 			let rtNewTkStr: string = rtNewToken.get();
+			let newInterpretedby: string = rmSubCfgKey === ITPT_REFMAP_BASE ? rmSubCfg.nameSelf : rmSubCfgKey;
 			let rtLDOptions: ILDOptions = {
 				lang: ldOptions.lang,
 				isLoading: false,
 				ldToken: rtNewToken,
-				visualInfo: { retriever: ldOptions.visualInfo.retriever, interpretedBy: rmSubCfgKey },
+				visualInfo: { retriever: ldOptions.visualInfo.retriever, interpretedBy: newInterpretedby },
 				resource: { webInResource: null, webOutResource: null, kvStores: rmSubCfg.initialKvStores }
 			};
 			modifiedObj[rtNewTkStr] = rtLDOptions;
@@ -152,14 +155,14 @@ const assignValuesToRuntimeRefMap: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 			//property on another BPConfig
 			let sKeyAsObjPropRef: ObjectPropertyRef = singleIntrpblKey as ObjectPropertyRef;
 			let propName: string = sKeyAsObjPropRef.propRef;
-			let ldTkStr: string = sKeyAsObjPropRef.objRef;
+			let stateLdTkStr: string = sKeyAsObjPropRef.objRef;
 			let actualInputKv: IKvStore = ldOptions.resource.kvStores.find((a) => a.key === propName);
 			if (!actualInputKv) return;
-			let propIdx = modifiedObj[ldTkStr].resource.kvStores.findIndex((b) => b.key === propName);
+			let propIdx = modifiedObj[stateLdTkStr].resource.kvStores.findIndex((b) => b.key === propName);
 			if (propIdx === -1) {
-				modifiedObj[ldTkStr].resource.kvStores.unshift(actualInputKv);
+				modifiedObj[stateLdTkStr].resource.kvStores.unshift(actualInputKv);
 			} else {
-				modifiedObj[ldTkStr].resource.kvStores.splice(propIdx, 1, actualInputKv);
+				modifiedObj[stateLdTkStr].resource.kvStores.splice(propIdx, 1, actualInputKv);
 			}
 		} else {
 			//is string, property on this BPConfig
@@ -208,14 +211,14 @@ function assignDerivedItpt(retriever: string, newLDTokenStr: string, bpCfg: Blue
 	appItptMatcherFn().getItptRetriever(retriever).setDerivedItpt(newLDTokenStr, wrappedItpt);
 }*/
 
-export const refMapEpic = (action$: ActionsObservable<any>, store: any) => {
+export const refMapEpic = (action$: ActionsObservable<any>, store: Store<ExplorerState>) => {
 	return action$.ofType(REFMAP_REQUEST)
 		.do(() => console.log("REQUESTing Refmap Async part (itpt-retrieval)"))
 		.mergeMap((action) => {
 			let ldOptionsObj: ILDOptions = action.ldOptionsBase;
 			let baseRefMap: BlueprintConfig = action.refMap;
 			let refMapREQUESTPromise = new Promise((resolve, reject) => {
-				createInterpreters(ldOptionsObj);
+				createInterpreters(ldOptionsObj, store);
 				ldOptionsObj.isLoading = false;
 				resolve(ldOptionsObj);
 			});
@@ -227,21 +230,40 @@ export const refMapEpic = (action$: ActionsObservable<any>, store: any) => {
 };
 
 const createInterpreters = (
-	ldOptions: ILDOptions
+	ldOptions: ILDOptions,
+	store: Store<ExplorerState>
 ) => {
 	//TODO: recursive config-desintegration and traversal here, assigning of FULL derived interpreters
 	let { retriever, interpretedBy } = ldOptions.visualInfo;
-	let itptRetriever = appItptMatcherFn().getItptRetriever(retriever);
+	let itptRetriever: ReduxItptRetriever = appItptMatcherFn().getItptRetriever(retriever) as ReduxItptRetriever;
 	let ldTkStr = ldOptions.ldToken.get();
 	let rmKv = ldOptions.resource.kvStores.find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
 	let rmKvVal = rmKv.value;
 	for (const rmSubCfgKey in rmKvVal) {
 		if (rmKvVal.hasOwnProperty(rmSubCfgKey)) {
-			const concatNWTkStr = createConcatNetworkPreferredToken(ldTkStr, rmSubCfgKey).get();
+			const concatNWTk = createConcatNetworkPreferredToken(ldTkStr, rmSubCfgKey);
+			const concatNWTkStr = concatNWTk.get();
 			const subCfg = rmKvVal[rmSubCfgKey];
-			let itpt = itptRetriever.getItptByNameSelf(subCfg.subItptOf);
+			const subCfgsubItptOf: string = subCfg.subItptOf;
+			let itpt: any = null;
+			itpt = itptRetriever.getUnconnectedByNameSelf(subCfgsubItptOf);
+			let originalBPCfgCopy: BlueprintConfig = ldBlueprintCfgDeepCopy(itpt.cfg);
+			//this line will do the inheritance
 			itpt = ldBlueprint(subCfg)(itpt);
 			itptRetriever.setDerivedItpt(concatNWTkStr, itpt);
+			let itptAsCfg: BlueprintConfig = itpt.cfg as BlueprintConfig;
+			if (!originalBPCfgCopy.initialKvStores) continue;
+			let itptRM = originalBPCfgCopy.initialKvStores.find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
+			if (itptRM) {
+				let newRMLDOptions: ILDOptions = {
+					lang: ldOptions.lang,
+					isLoading: false,
+					ldToken: concatNWTk,
+					visualInfo: { retriever: ldOptions.visualInfo.retriever, interpretedBy: itpt.nameSelf },
+					resource: { webInResource: null, webOutResource: null, kvStores: [{ key: null, value: null, ldType: itptAsCfg.canInterpretType }] }
+				};
+				store.dispatch(refMapREQUESTAction(ldOptions, originalBPCfgCopy));
+			}
 		}
 	}
 	return;

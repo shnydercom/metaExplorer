@@ -1,5 +1,5 @@
 import { InferableComponentEnhancerWithProps, connect } from "react-redux";
-import { DefaultItptRetriever } from "defaults/DefaultInterpreterRetriever";
+import { DefaultItptRetriever, IItptInfoItem } from "defaults/DefaultInterpreterRetriever";
 import { IBlueprintItpt, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
@@ -15,6 +15,15 @@ export class ReduxItptRetriever extends DefaultItptRetriever {
 		}
 		return null;
 	}
+
+	searchForObjItptAndDerive(term: string | string[], crudSkills: string, newLDTokenStr: string) {
+		let searchResult = super.searchForObjItpt(term, crudSkills) as IBlueprintItpt;
+		if (searchResult) {
+			this.setDerivedItpt(newLDTokenStr, searchResult);
+		}
+		return null;
+	}
+
 	searchForKVItpt(term: string, crudSkills: string) {
 		throw new Error("Method not implemented.");
 	}
@@ -25,15 +34,32 @@ export class ReduxItptRetriever extends DefaultItptRetriever {
 		let connItpt = connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(intrprtr);
 		this.connectedItpts.set(nameSelf, connItpt);
 	}
-	getItptList(): Array<any> {
-		return super.getItptList();
+	setDerivedItpt(ldTokenVal: string, itpt: any): void {
+		super.setDerivedItpt(ldTokenVal, itpt);
+		let intrprtrAsLDBP: IBlueprintItpt = itpt;
+		let nameSelf = intrprtrAsLDBP.cfg.nameSelf;
+		let connItpt = connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(itpt);
+		this.connectedItpts.set(nameSelf, connItpt);
 	}
+
+	getDerivedItpt(ldTokenVal: string): any {
+		let searchResult = super.getDerivedItpt(ldTokenVal) as IBlueprintItpt;
+		if (searchResult) {
+			return this.connectedItpts.get(searchResult.cfg.nameSelf);
+		}
+		return null;
+	}
+
 	getItptByNameSelf(nameSelf: string) {
 		let searchResult = super.getItptByNameSelf(nameSelf) as IBlueprintItpt;
 		if (searchResult) {
 			return this.connectedItpts.get(searchResult.cfg.nameSelf);
 		}
 		return null;
+	}
+
+	getItptList(): Array<any> {
+		return super.getItptList();
 	}
 	/**
 	 * gets Interpreter that is not connected to Redux
@@ -46,5 +72,9 @@ export class ReduxItptRetriever extends DefaultItptRetriever {
 		} else {
 			return null;
 		}
+	}
+
+	hasConnectedByNameSelf(nameSelf: string) {
+		return this.connectedItpts.has(nameSelf);
 	}
 }
