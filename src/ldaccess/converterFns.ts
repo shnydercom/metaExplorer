@@ -15,7 +15,7 @@ export let singleHyperMediaToKvStores = (inputHM: any): IKvStore[] => {
 				key: key,
 				value: value,
 				ldType: ldType,
-				intrprtrClass: null
+				//intrprtrClass: null
 			};
 			kvStoreArray.push(newKvStore);
 		}

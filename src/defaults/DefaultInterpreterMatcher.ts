@@ -3,7 +3,7 @@ import { LDConsts } from "ldaccess/LDConsts";
 import { IItptMatcher } from "ldaccess/iinterpreter-matcher";
 import { IKvStore } from "ldaccess/ikvstore";
 
-import appIntRetrFn from 'appconfig/appInterpreterRetriever';
+import appItptRetrFn from 'appconfig/appInterpreterRetriever';
 import { LDDict } from "ldaccess/LDDict";
 
 //import ImageUploadComponent from 'components/imageupload-component';

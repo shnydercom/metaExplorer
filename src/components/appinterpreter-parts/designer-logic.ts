@@ -408,7 +408,7 @@ export class DesignerLogic {
 			key: sourceKV.key,
 			value: sourceKV.value,
 			ldType: sourceKV.ldType,
-			intrprtrClass: sourceKV.intrprtrClass
+			//intrprtrClass: sourceKV.intrprtrClass
 		};
 		return rv;
 	}

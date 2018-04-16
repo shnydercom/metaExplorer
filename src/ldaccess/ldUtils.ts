@@ -88,7 +88,7 @@ export const ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {
 			newValue = elem.value;
 		let newLDType = elem.ldType ? "" + elem.ldType : null;
 		let newKvSingle: IKvStore = {
-			intrprtrClass: elem.intrprtrClass,
+			//intrprtrClass: elem.intrprtrClass,
 			key: newKey,
 			value: newValue,
 			ldType: newLDType

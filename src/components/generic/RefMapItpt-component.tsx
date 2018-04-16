@@ -66,7 +66,6 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 	}
 
 	componentWillReceiveProps(nextProps: OwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
-		console.log("refMapProps: " + nextProps.ldTokenString);
 		if (compNeedsUpdate(nextProps, this.props)) {
 			//if (nextProps.ldOptions.isLoading) return;
 			this.consumeLDOptions(nextProps.ldOptions);

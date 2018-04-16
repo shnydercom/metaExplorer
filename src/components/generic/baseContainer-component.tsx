@@ -1,4 +1,3 @@
-//TODO: continue implementing here, then put it into BaseDataTypePortSelector, then we can also build generic nodes that can set basic data types!
 import { connect } from 'react-redux';
 
 import { ExplorerState } from 'appstate/store';

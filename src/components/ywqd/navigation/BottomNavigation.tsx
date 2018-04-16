@@ -210,7 +210,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 	}
 	generateRedirect(tabIdx: number): JSX.Element {
 		if (!this.props.routes) return null;
-		const { match } = this.props.routes;
+		const { match, location } = this.props.routes;
 		let route: string = "";
 		if (match.params.nextPath === undefined) match.params.nextPath = route;
 		switch (tabIdx) {
@@ -232,7 +232,9 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			default:
 				break;
 		}
-		return <Redirect to={match.url + "/" + route} />;
+		let newPath: string = match.url + "/" + route;
+		//if (location.pathname === newPath) return null;
+		return <Redirect to={newPath} />;
 	}
 	render() {
 		const { ldOptions } = this.props;

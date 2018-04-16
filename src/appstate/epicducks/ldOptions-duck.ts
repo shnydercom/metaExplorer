@@ -10,19 +10,22 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
 import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
+import { OutputKVMap } from 'ldaccess/ldBlueprint';
 
 export const LDOPTIONS_CLIENTSIDE_CREATE = 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE';
 export const LDOPTIONS_CLIENTSIDE_UPDATE = 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE';
 export const LDOPTIONS_REQUEST_ASYNC = 'shnyder/LDOPTIONS_REQUEST_ASYNC';
 export const LDOPTIONS_REQUEST_ERROR = 'shnyder/LDOPTIONS_REQUEST_ERROR';
 export const LDOPTIONS_REQUEST_RESULT = 'shnyder/LDOPTIONS_REQUEST_RESULT';
+export const LDOPTIONS_KV_UPDATE = 'shnyder/LDOPTIONS_KV_UPDATE';
 
 export type LDAction =
 	{ type: 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE', kvStores: IKvStore[], lang: string, alias: string }
 	| { type: 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE', updatedLDOptions: ILDOptions }
 	| { type: 'shnyder/LDOPTIONS_REQUEST_ASYNC', uploadData: ILDOptions, targetUrl: string, targetReceiverLnk: string }
 	| { type: 'shnyder/LDOPTIONS_REQUEST_RESULT', ldOptionsPayload: IWebResource, targetReceiverLnk: string }
-	| { type: 'shnyder/LDOPTIONS_REQUEST_ERROR', message: string, targetReceiverLnk: string };
+	| { type: 'shnyder/LDOPTIONS_REQUEST_ERROR', message: string, targetReceiverLnk: string }
+	| { type: 'shnyder/LDOPTIONS_KV_UPDATE', changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap };
 
 //Action factories, return action objects
 export const ldOptionsClientSideCreateAction = (kvStores: IKvStore[], lang: string, alias: string) => ({
@@ -54,6 +57,13 @@ export const ldOptionsFailureAction = (message: string, targetReceiverLnk): LDEr
 	type: LDOPTIONS_REQUEST_ERROR,
 	message,
 	targetReceiverLnk
+});
+
+export const dispatchKvUpdateAction = (changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => ({
+	type: LDOPTIONS_KV_UPDATE,
+	changedKvStores,
+	thisLdTkStr,
+	updatedKvMap
 });
 
 //this will modify the hashmap containing all the ILDOptions
@@ -134,6 +144,28 @@ export const ldOptionsMapReducer = (
 		case LDOPTIONS_REQUEST_ERROR:
 			console.log('ldOptions Error message received, subMsg: ' + action.message);
 			return state;
+		case LDOPTIONS_KV_UPDATE:
+			let stateCopy = { ...state };
+			let { changedKvStores, updatedKvMap, thisLdTkStr } = action;
+			changedKvStores.forEach((kvElem) => {
+				let elemKey = kvElem.key;
+				let modKVMapPart = updatedKvMap[elemKey];
+				if (!modKVMapPart || elemKey === null) return;
+				//modify on "this" first:
+				let thisTokenStrKVIdx = stateCopy[thisLdTkStr].resource.kvStores.findIndex((a) => a.key === elemKey);
+				stateCopy[thisLdTkStr].resource.kvStores[thisTokenStrKVIdx] = kvElem;
+				//then modify on target, copying to target property key:
+				let targetTokenStr = modKVMapPart.targetLDToken.get();
+				let targetProp = modKVMapPart.targetProperty;
+				let targetTokenStrKvIdx = stateCopy[targetTokenStr].resource.kvStores.findIndex((a) => a.key === targetProp);
+				let kvElemCopy: IKvStore = {
+					key: targetProp,
+					value: kvElem.value,
+					ldType: kvElem.ldType
+				};
+				stateCopy[targetTokenStr].resource.kvStores[targetTokenStrKvIdx] = kvElemCopy;
+			});
+			return stateCopy;
 		default:
 			return state;
 	}

@@ -18,6 +18,12 @@ export enum UserDefDict {
 	 */
 	outputKVMapKey = "outputKVMapKey",
 
+	/**
+	 * in some cases, a value might exist without itself having a key. This happens for example when a wrapping LDOptions-Object only
+	 * has a a single value. For this case, singleKvStore is used so that the key is referencable (by OutputKvMap for example)
+	 */
+	singleKvStore = "singleKvStore",
+
 	//values
 	outputInterpreter = "Output interpreter",
 

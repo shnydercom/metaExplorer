@@ -11,11 +11,11 @@ var appIntRetr: IItptRetriever = null;
 //appIntRetr.addInterpreter(LDDict.CreateAction, ImageUploadComponent, "Crud");
 //appIntRetr.addInterpreter(LDDict.ImageObject, ImageDisplayComponent, "cRud");
 
-export let appIntRetrFn = (): IItptRetriever => {
+export let appItptRetrFn = (): IItptRetriever => {
 	if (appIntRetr == null){
 		appIntRetr = new AppInterpreterRetriever();
 	}
 	return appIntRetr;
 };
 
-export default appIntRetrFn;
+export default appItptRetrFn;

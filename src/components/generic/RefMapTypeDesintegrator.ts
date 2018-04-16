@@ -5,7 +5,7 @@ import { IKvStore } from "ldaccess/ikvstore";
 import { isObjPropertyRef } from "ldaccess/ldUtils";
 import { ILDToken, NetworkPreferredToken, createConcatNetworkPreferredToken } from "ldaccess/ildtoken";
 import { LDDict } from "ldaccess/LDDict";
-import appIntRetrFn from 'appconfig/appInterpreterRetriever';
+import appItptRetrFn from 'appconfig/appInterpreterRetriever';
 import { mapDispatchToProps, mapStateToProps } from "appstate/reduxFns";
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from "appstate/LDProps";
 import { connect } from "react-redux";
@@ -42,7 +42,7 @@ export class RefMapTypeDesintegrator {
 	refMapName: string;
 	interpreterMap: InterpreterMap;
 	extIntReferenceMap: Map<string, string> = new Map();
-	retriever: ReduxItptRetriever = appIntRetrFn() as ReduxItptRetriever;
+	retriever: ReduxItptRetriever = appItptRetrFn() as ReduxItptRetriever;
 
 	public setRefMapBP(input: BlueprintConfig): void {
 		let refMapCandidate: any = null;
@@ -85,7 +85,7 @@ export class RefMapTypeDesintegrator {
 				interpretableKeysInfos.push(newElem);
 			} else if (typeof elem === "string") {
 				let newKvStore = parentInitialKvStoreInterprtrMap.get(elem);
-				this.interpreterMap[elem] = newKvStore.intrprtrClass;
+				//this.interpreterMap[elem] = newKvStore.intrprtrClass;
 			}
 		});
 		this.ldOptionsPrepMap = {};
@@ -153,12 +153,12 @@ export class RefMapTypeDesintegrator {
 					let targetKey = targetPropLnk;
 					let targetValue = sourcLDToken.get();
 					let targetLDType = this.determineType(sourceProperty);
-					let targetIntrprtrClass = sourceProperty === UserDefDict.exportSelfKey ? this.interpreterMap[sourceIntrprtLnk] : null;
+					//let targetIntrprtrClass = sourceProperty === UserDefDict.exportSelfKey ? this.interpreterMap[sourceIntrprtLnk] : null;
 					let newTargetKV: IKvStore = {
 						key: targetKey,
 						value: targetValue,
 						ldType: targetLDType,
-						intrprtrClass: targetIntrprtrClass
+						//intrprtrClass: targetIntrprtrClass
 					};
 					targetIntrprtrCfg.initialKvStores.push(newTargetKV);
 				});

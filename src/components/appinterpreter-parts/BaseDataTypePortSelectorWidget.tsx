@@ -11,6 +11,9 @@ import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { BaseContainer } from "../generic/baseContainer-component";
 import { Component, ComponentClass, StatelessComponent } from "react";
+import { OutputKVMap } from "ldaccess/ldBlueprint";
+import { ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";
+import { UserDefDict } from "ldaccess/UserDefDict";
 
 /*export type LDOwnProps = {
 	ldTokenString: string;
@@ -66,16 +69,16 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 	}
 
 	componentWillReceiveProps(nextProps, nextContext): void {
-		if (nextProps.ldOptions) nextProps.model.kv = nextProps.ldOptions.resource.kvStores[0] ? nextProps.ldOptions.resource.kvStores[0] : {key: null, value: null, ldType: null} ;
+		if (nextProps.ldOptions) nextProps.model.kv = nextProps.ldOptions.resource.kvStores[0] ? nextProps.ldOptions.resource.kvStores[0] : { key: null, value: null, ldType: null };
 	}
 
 	onPortTypeChange = (newType: string) => {
 		this.setState({ portType: newType });
 		let changedKvStore: IKvStore = this.props.model.kv;
 		changedKvStore.ldType = newType;
-		changedKvStore.key = null;
+		changedKvStore.key = UserDefDict.singleKvStore;
 		changedKvStore.value = null;
-		changedKvStore.intrprtrClass = null;
+		//changedKvStore.intrprtrClass = null;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = [changedKvStore];
 		this.props.notifyLDOptionsChange(newLDOptions);
@@ -84,13 +87,15 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 	render() {
 		var port = <SinglePortWidget node={this.props.model.getParent()} name={this.props.model.name} isMulti={true} />;
 		var label = <div className="name">{this.props.model.label}</div>;
-
+		let targetID = this.props.model.id;
+		let newToken: ILDToken = new NetworkPreferredToken(targetID);
+		let newOutputKVMap: OutputKVMap = { [targetID]: { targetLDToken: newToken, targetProperty: null } };
 		return (
 			<div className={"out-port top-port"}>
 				<div>
 					{label}
 					<BaseDataTypeDropDown selectionChange={(newType) => { this.onPortTypeChange(newType); }} />
-					<BaseContainer ldTokenString={this.props.model.id} searchCrudSkills="CrUd" outputKVMap={null}/>
+					<BaseContainer ldTokenString={targetID} searchCrudSkills="CrUd" outputKVMap={newOutputKVMap} />
 				</div>
 				{port}
 			</div>

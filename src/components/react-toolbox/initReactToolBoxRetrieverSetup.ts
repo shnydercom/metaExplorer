@@ -1,4 +1,4 @@
-import { appIntRetrFn } from "appconfig/appInterpreterRetriever";
+import { appItptRetrFn } from "appconfig/appInterpreterRetriever";
 import { LDDict } from "ldaccess/LDDict";
 import { PureImgDisplay } from "../imagedisplay-component";
 import { PureBoolInput, PureIntInput, PureDoubleInput, PureTextInput, PureDateInput, PureDateTimeInput } from "../basedatatypeinterpreter/BaseDataTypeInput";
@@ -17,7 +17,7 @@ import { PureRefMapItpt } from "../generic/RefMapItpt-component";
  * sorry for the long function name //TODO: change
  */
 export function initReactToolBoxRetrieverFnAsDefault() {
-	let appIntRetr = appIntRetrFn();
+	let appIntRetr = appItptRetrFn();
 	//appIntRetr.addItpt(LDDict.CreateAction, ImageUploadComponent, "Crud");
 	appIntRetr.addItpt(LDDict.ViewAction, PureImgDisplay, "cRud");
 

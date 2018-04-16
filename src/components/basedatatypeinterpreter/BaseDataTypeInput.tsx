@@ -20,6 +20,7 @@ import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDPr
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { Component, ComponentClass, StatelessComponent } from "react";
+import { UserDefDict } from "ldaccess/UserDefDict";
 
 /**
  * @author Jonathan Schneider
@@ -72,7 +73,7 @@ for (var bdt in bdts) {
 		let cfgIntrprtKeys: string[] = [];
 		let initialKVStores: IKvStore[] = [
 			{
-				key: undefined,
+				key: UserDefDict.singleKvStore,
 				value: undefined,
 				ldType: elem
 			},
@@ -138,8 +139,8 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 		this.setState({ ...this.state, singleKV: modSingleKV });
 		//TODO: it might be a good idea to debounce before updating the application state
 		//this.props.ldOptions.resource.kvStores = [modSingleKV];
-
-		this.props.notifyLDOptionsChange(newLDOptionsObj);
+		this.props.dispatchKvOutput([modSingleKV], this.props.ldTokenString, this.props.outputKVMap);
+		//this.props.notifyLDOptionsChange(newLDOptionsObj);
 		//this.setState({...this.state, [name]: value});
 	}
 
