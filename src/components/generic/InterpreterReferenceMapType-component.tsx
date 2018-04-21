@@ -36,8 +36,11 @@ let bpCfg: BlueprintConfig = {
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
-//TODO: move state-relevant ldOptionsMap-Entry genration outside of the component, or make this a non-visual interpreter
+//TODO: move state-relevant ldOptionsMap-Entry generation outside of the component, or make this a non-visual interpreter
 @ldBlueprint(bpCfg)
+/**
+ * @deprecated replaced by RefMapItpt-component and state-side handling
+ */
 export class PureRefMapIntrprtr extends Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
 	implements IBlueprintItpt {
 	cfg: BlueprintConfig;

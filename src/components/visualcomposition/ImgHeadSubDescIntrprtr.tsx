@@ -123,6 +123,7 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 		</div >;
 	}
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
+		if (!props.ldOptions) return;
 		let kvs: IKvStore[];
 		const retriever = this.props.ldOptions.visualInfo.retriever;
 		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {

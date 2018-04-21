@@ -183,21 +183,25 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 	isGen3: boolean = false;
 	isGen4: boolean = false;
 	isGen5: boolean = false;
+
+	private hasTabChanged: boolean = true;
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		if (props) {
 			this.handleKVs(props);
 			this.handleRoutes(props.routes);
+			this.hasTabChanged = true;
 		}
 	}
 	componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
 		if (compNeedsUpdate(nextProps, this.props)) {
 			this.handleKVs(nextProps);
+			this.handleRoutes(nextProps.routes);
 		}
-		this.handleRoutes(nextProps.routes);
 	}
 	onTabChanged = (tabIdx) => {
+		if (this.state.tabIdx !== tabIdx) this.hasTabChanged = true;
 		this.setState({ tabIdx });
 		//this.tabIdx = idx; //TODO: change to state-handling
 	}
@@ -209,7 +213,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		</Tab>;
 	}
 	generateRedirect(tabIdx: number): JSX.Element {
-		if (!this.props.routes) return null;
+		if (!this.props.routes || !this.hasTabChanged) return null;
 		const { match, location } = this.props.routes;
 		let route: string = "";
 		if (match.params.nextPath === undefined) match.params.nextPath = route;
@@ -233,6 +237,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 				break;
 		}
 		let newPath: string = match.url + "/" + route;
+		this.hasTabChanged = false;
 		//if (location.pathname === newPath) return null;
 		return <Redirect to={newPath} />;
 	}

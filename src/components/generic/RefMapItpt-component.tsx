@@ -38,7 +38,7 @@ let bpCfg: BlueprintConfig = {
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
-//TODO: move state-relevant ldOptionsMap-Entry genration outside of the component, or make this a non-visual interpreter
+//TODO: move state-relevant ldOptionsMap-Entry generation outside of the component, or make this a non-visual interpreter
 @ldBlueprint(bpCfg)
 export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
 	implements IBlueprintItpt {
@@ -90,6 +90,9 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 		if (isReactComponent(BaseComp)) {
 			const { routes } = this.props;
 			console.log("baseToken: " + baseRMTkStr);
+			//TODO: implement output-handling/change of values in sub-interpreters
+			//let targetLDToken: ILDToken = new NetworkPreferredToken(this.props.ldTokenString);
+			//let newOutputKvMap: OutputKVMap = { [elemKey]: { targetLDToken: targetLDToken, targetProperty: elemKey } };
 			return <BaseComp routes={routes} ldTokenString={baseRMTkStr} outputKVMap={null} />;
 		} else {
 			return null;

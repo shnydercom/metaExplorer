@@ -255,14 +255,15 @@ const createInterpreters = (
 			if (!originalBPCfgCopy.initialKvStores) continue;
 			let itptRM = originalBPCfgCopy.initialKvStores.find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
 			if (itptRM) {
+				let newSubRMInputs: IKvStore[] = subCfg.initialKvStores;
 				let newRMLDOptions: ILDOptions = {
 					lang: ldOptions.lang,
 					isLoading: false,
 					ldToken: concatNWTk,
 					visualInfo: { retriever: ldOptions.visualInfo.retriever, interpretedBy: itpt.nameSelf },
-					resource: { webInResource: null, webOutResource: null, kvStores: [{ key: null, value: null, ldType: itptAsCfg.canInterpretType }] }
+					resource: { webInResource: null, webOutResource: null, kvStores: newSubRMInputs }
 				};
-				store.dispatch(refMapREQUESTAction(ldOptions, originalBPCfgCopy));
+				store.dispatch(refMapREQUESTAction(newRMLDOptions, originalBPCfgCopy));
 			}
 		}
 	}

@@ -19,6 +19,7 @@ done - Im InterpreterRefMap-Component die ILDOptions-Objekte erstellen und ggf f
 - handle circular references
 - instead of ldOptionsMap-Entries being created in genericContainer by displayedType, they should only create entries when there's no matching ldTokenString. PortselectorWidget should create and modify entry. GenericContainer can only hold LDOptions, i.e. "instances" vs "classes"
 
+- server-side: upsert instead of insert
 
 last serialized bits & pieces: seems to work!
 {
