@@ -8,7 +8,7 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
-import { getKVStoreByKey } from 'ldaccess/kvConvenienceFns';
+import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
 import { getKVValue } from 'ldaccess/ldUtils';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 
@@ -51,27 +51,41 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 	initialKvStores: IKvStore[];
 	constructor(props: any) {
 		super(props);
+		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
+		if (props) {
+			this.handleKVs(props);
+		}
 	}
 	componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
 		if (compNeedsUpdate(nextProps, this.props)) {
-			this.consumeLDOptions(nextProps.ldOptions);
+			this.handleKVs(nextProps);
+			//this.consumeLDOptions(nextProps.ldOptions);
 		}
 	}
 	consumeLDOptions = (ldOptions: ILDOptions) => {
-		if (ldOptions && ldOptions.resource && ldOptions.resource.kvStores) {
+		/*if (ldOptions && ldOptions.resource && ldOptions.resource.kvStores) {
 			let kvs = ldOptions.resource.kvStores;
 			this.imgLink = getKVValue(getKVStoreByKey(kvs, LDDict.contentUrl));
-		}
+		}*/
 	}
+
 	render() {
 		const { ldOptions } = this.props;
-		const imgLnk = "http://localhost:1111/api/ysj/media/jpgs/" + this.imgLink;
+		let imgLnk: string = this.imgLink;
+		if (this.imgLink && !this.imgLink.startsWith("http://")) {
+			imgLnk = "http://localhost:1111/api/ysj/media/jpgs/" + this.imgLink;
+		}
 		if (!ldOptions) return <div>no Image data</div>;
 		return <div className="imgdisplay">
-			<img alt="" src={imgLnk} className="imgdisplay"/>
+			<img alt="" src={imgLnk} className="imgdisplay" />
 			{this.imgLink}
 			{this.props.children}
 		</div>;
+	}
+
+	private handleKVs(props: LDOwnProps & LDConnectedState) {
+		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
+		this.imgLink = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, LDDict.contentUrl));
 	}
 
 }

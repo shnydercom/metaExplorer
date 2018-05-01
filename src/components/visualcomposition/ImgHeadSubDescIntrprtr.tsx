@@ -9,13 +9,17 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { VisualDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
-import { LDOwnProps, LDConnectedDispatch, LDConnectedState } from 'appstate/LDProps';
+import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDRouteProps } from 'appstate/LDProps';
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
 import { elementAt } from 'rxjs/operators/elementAt';
 import { generateIntrprtrForProp } from 'components/generic/generatorFns';
-import { getKVValue } from 'ldaccess/ldUtils';
-import { getKVStoreByKey } from 'ldaccess/kvConvenienceFns';
+import { getKVValue, isObjPropertyRef } from 'ldaccess/ldUtils';
+import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
+import { ObjectPropertyRef } from 'ldaccess/ObjectPropertyRef';
+import { appItptMatcherFn } from 'appconfig/appInterpreterMatcher';
+import { isReactComponent } from '../reactUtils/reactUtilFns';
 
 type OwnProps = {
 	test: string;
@@ -92,6 +96,7 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 	initialKvStores: IKvStore[];
 	constructor(props: any) {
 		super(props);
+		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		if (props) this.handleKVs(props);
 	}
 	componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
@@ -123,21 +128,25 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 		</div >;
 	}
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
-		if (!props.ldOptions) return;
 		let kvs: IKvStore[];
-		const retriever = this.props.ldOptions.visualInfo.retriever;
+		const retriever = !props.ldOptions ? DEFAULT_ITPT_RETRIEVER_NAME : this.props.ldOptions.visualInfo.retriever;
+		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
 		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
 			kvs = props.ldOptions.resource.kvStores;
-			this.headerImgDisplay = generateIntrprtrForProp(kvs, VisualDict.headerImgDisplay, retriever);
-			this.headerText = getKVValue(getKVStoreByKey(kvs, VisualDict.headerTxt));
+			this.headerImgDisplay = generateIntrprtrForProp(kvs, VisualDict.headerImgDisplay, retriever, this.props.routes);
+			/*this.headerText = getKVValue(getKVStoreByKey(kvs, VisualDict.headerTxt));
 			this.subHeaderText = getKVValue(getKVStoreByKey(kvs, VisualDict.subHeaderTxt));
-			this.description = getKVValue(getKVStoreByKey(kvs, VisualDict.description));
+			this.description = getKVValue(getKVStoreByKey(kvs, VisualDict.description));*/
 		}
+		this.headerText = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.headerTxt));
+		this.subHeaderText = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.subHeaderTxt));
+		this.description = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.description));
 		if (!this.headerImgDisplay) {
 			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			this.headerImgDisplay = generateIntrprtrForProp(kvs, VisualDict.headerImgDisplay, retriever);
+			this.headerImgDisplay = generateIntrprtrForProp(kvs, VisualDict.headerImgDisplay, retriever, this.props.routes);
 		}
 	}
+
 }
 
 export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureImgHeadSubDesc);

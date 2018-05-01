@@ -88,7 +88,7 @@ function clearDerivedItpt(retriever: string, oldLDTokenStr: string) {
 
 export const linearSplitEpic = (action$: ActionsObservable<any>, store: any) => {
 	return action$.ofType(LINEAR_SPLIT_REQUEST)
-		.do(() => console.log("after splitting LDOptions generate Retrievers/Matchers"))
+		/*.do(() => console.log("after splitting LDOptions generate Retrievers/Matchers"))*/
 		.mergeMap((action) => {
 			if (!action.ldOptionsBase) return;
 			let ldOptionsObj = action.ldOptionsBase;

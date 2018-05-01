@@ -29,7 +29,23 @@
           "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
           "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "aImgHS",
-          "initialKvStores": [],
+          "initialKvStores": [
+            {
+              "key": "HeaderText",
+              "value": "Header from RefMap-Def",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderText",
+              "value": "Sub-Header From RefMap-Def",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "Description",
+              "value": "This is a description from the RefMap-Definition",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }

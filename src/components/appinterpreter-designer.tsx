@@ -10,7 +10,8 @@ import * as prefilledOrganizationInterpreterA from '../../testing/prefilledOrgan
 
 //YWQD
 import * as prefilledYWQDBottomNav from '../../testing/prefilledYWQDBottomNav.json';
-import * as prefilledScndStep from '../../testing/prefilledScndStep.json';
+import * as prefilledScndStepA from '../../testing/prefilledScndStepA.json';
+import * as prefilledScndStepAA from '../../testing/prefilledScndStepAA.json';
 
 import {
 	DiagramEngine,
@@ -134,13 +135,14 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = [
-			{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+			//{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
 			{ key: undefined, ldType: newType, value: dummyInstance }
 		];
 		//let nodesSerialized = JSON.stringify(this.logic.getDiagramEngine().getDiagramModel().serializeDiagram(), undefined, 2);
 		this.setState({ ...this.state, serialized: nodesSerialized });
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
+
 	// tslint:disable-next-line:member-ordering
 	hascreatedFirst: boolean = false;
 	onGenAppClick = (e) => {
@@ -148,7 +150,7 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 			let prefilledData: any = prefilledYWQDBottomNav;
 			this.generatePrefilled(prefilledData);
 		}
-		let prefilledScnd: any = prefilledScndStep;
+		let prefilledScnd: any = prefilledScndStepA;
 		this.generatePrefilled(prefilledScnd);
 	}
 
@@ -160,7 +162,7 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 		let newType = nodesBPCFG.canInterpretType;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = [
-	//		{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+			//		{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
 			{ key: undefined, ldType: newType, value: dummyInstance }
 		];
 		this.setState({ ...this.state, serialized: nodesSerialized });
@@ -205,7 +207,7 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 		let newType = nodesBPCFG.canInterpretType;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = [
-		//	{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+			//	{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
 			{ key: undefined, ldType: newType, value: dummyInstance }
 		];
 		this.setState({ ...this.state, serialized: nodesSerialized });
@@ -244,17 +246,17 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 					<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>
 					<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>
 					<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
+					<Link to="/designerinitial">initial   </Link>
+					<Link to="/app">   app</Link>
 					<ThemeProvider theme={appTheme}>
 						<div className="app-preview">
 							<div className="app-content">
-								<Link to="/designerinitial">initial</Link>
-								<Link to="/app">app</Link>
 								<Switch>
 									<Route path="/designerinitial" render={() => (
 										<div><b>drag and drop items into the designer</b></div>
 									)} />
-									<Route path="/app" render={(routeProps: LDRouteProps) => {
-										routeProps.match.params.nextPath = "/app";
+									<Route path="/" render={(routeProps: LDRouteProps) => {
+										routeProps.match.params.nextPath = "";
 										return <>
 											<BaseContainer routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null} />
 										</>;
@@ -263,6 +265,7 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 							</div>
 						</div>
 					</ThemeProvider>
+					<p>demo image link: http://localhost:3000/dist/static/localhost.png</p>
 					<small><pre>{this.state.serialized}</pre></small>
 				</div>
 			</Splitter>

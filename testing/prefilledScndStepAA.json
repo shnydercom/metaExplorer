@@ -1,0 +1,61 @@
+{
+  "subItptOf": "aaSub",
+  "canInterpretType": "AAHead-ObjectType",
+  "nameSelf": "AAHead",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "aaSub": {
+          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "nameSelf": "aaSub",
+          "initialKvStores": [
+            {
+              "key": "HeaderImageDisplay",
+              "value": {
+                "objRef": "aaBHead",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "HeaderImageDisplay"
+          ]
+        },
+        "aaBHead": {
+          "subItptOf": "BHead",
+          "canInterpretType": "BHead-ObjectType",
+          "nameSelf": "aaBHead",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "aaImgDisp",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "aaImgDisp": {
+          "subItptOf": "shnyder/imageDisplay",
+          "canInterpretType": "http://schema.org/ViewAction",
+          "nameSelf": "aaImgDisp",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

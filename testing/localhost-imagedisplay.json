@@ -1,0 +1,28 @@
+{
+  "subItptOf": "7fb8a093-892a-4ef7-97da-3388e266526a",
+  "canInterpretType": "localhost/imageDisplay-ObjectType",
+  "nameSelf": "localhost/imageDisplay",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "7fb8a093-892a-4ef7-97da-3388e266526a": {
+          "subItptOf": "shnyder/imageDisplay",
+          "canInterpretType": "http://schema.org/ViewAction",
+          "nameSelf": "7fb8a093-892a-4ef7-97da-3388e266526a",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/contentUrl",
+              "value": "http://localhost:3000/dist/static/localhost.png"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

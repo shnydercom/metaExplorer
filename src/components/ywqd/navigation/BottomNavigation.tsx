@@ -236,7 +236,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			default:
 				break;
 		}
-		let newPath: string = match.url + "/" + route;
+		let newPath: string = match.url.endsWith("/") ? match.url + route : match.url + "/" + route;
 		this.hasTabChanged = false;
 		//if (location.pathname === newPath) return null;
 		return <Redirect to={newPath} />;
@@ -296,11 +296,11 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		const retriever = this.props.ldOptions.visualInfo.retriever;
 		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
 			kvs = props.ldOptions.resource.kvStores;
-			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever);
+			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
 		}
 		if (!this.topFreeContainer) {
 			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever);
+			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
 		}
 		this.icon1url = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_1_ICONURL));
 		this.icon2url = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_2_ICONURL));

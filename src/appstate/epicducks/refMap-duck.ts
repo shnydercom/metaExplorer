@@ -213,7 +213,7 @@ function assignDerivedItpt(retriever: string, newLDTokenStr: string, bpCfg: Blue
 
 export const refMapEpic = (action$: ActionsObservable<any>, store: Store<ExplorerState>) => {
 	return action$.ofType(REFMAP_REQUEST)
-		.do(() => console.log("REQUESTing Refmap Async part (itpt-retrieval)"))
+		/*.do(() => console.log("REQUESTing Refmap Async part (itpt-retrieval)"))*/
 		.mergeMap((action) => {
 			let ldOptionsObj: ILDOptions = action.ldOptionsBase;
 			let baseRefMap: BlueprintConfig = action.refMap;
