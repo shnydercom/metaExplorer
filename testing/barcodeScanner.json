@@ -1,0 +1,23 @@
+{
+  "subItptOf": "71a0c68b-4acb-4e8b-a3fd-77bcf2afed68",
+  "canInterpretType": "BarcodeScannerComp-ObjectType",
+  "nameSelf": "BarcodeScannerComp",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "71a0c68b-4acb-4e8b-a3fd-77bcf2afed68": {
+          "subItptOf": "shnyder/EANScanner",
+          "canInterpretType": "http://schema.org/ViewAction",
+          "nameSelf": "71a0c68b-4acb-4e8b-a3fd-77bcf2afed68",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

@@ -12,6 +12,7 @@ import { organizationRetrieverName, OrganizationRetriever } from "sidefx/Organiz
 import { PureRefMapIntrprtr } from "../generic/InterpreterReferenceMapType-component";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { PureRefMapItpt } from "../generic/RefMapItpt-component";
+import { EANScannerName, EANScanner } from "../peripherals/camera/EAN-scanner";
 
 /**
  * sorry for the long function name //TODO: change
@@ -45,4 +46,5 @@ export function initReactToolBoxRetrieverFnAsDefault() {
 	//register generic interpreter for Designer-defined interpreters
 	//appIntRetr.addItpt(UserDefDict.intrprtrBPCfgRefMapType, PureRefMapIntrprtr, "cRud"); //old version
 	appIntRetr.addItpt(UserDefDict.intrprtrBPCfgRefMapType, PureRefMapItpt, "cRud"); //new version
+	appIntRetr.addItpt(EANScannerName, EANScanner, "cRud"); //new version
 }

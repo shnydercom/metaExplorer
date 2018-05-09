@@ -12,6 +12,7 @@ import * as prefilledOrganizationInterpreterA from '../../testing/prefilledOrgan
 import * as prefilledYWQDBottomNav from '../../testing/prefilledYWQDBottomNav.json';
 import * as prefilledScndStepA from '../../testing/prefilledScndStepA.json';
 import * as prefilledScndStepAA from '../../testing/prefilledScndStepAA.json';
+import * as barcodePrefilled from '../../testing/barcodeScanner.json';
 
 import {
 	DiagramEngine,
@@ -154,6 +155,11 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 		this.generatePrefilled(prefilledScnd);
 	}
 
+	onGenBarcodeClick = (e) => {
+		let prefilledData: any = barcodePrefilled;
+		this.generatePrefilled(prefilledData);
+	}
+
 	generatePrefilled = (input: any) => {
 		let nodesBPCFG: BlueprintConfig = input as BlueprintConfig;
 		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
@@ -242,6 +248,7 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 				<div className="vertical-scroll">
 					<Button onClick={this.onSerializeBtnClick}>serialize!</Button>
 					<Button onClick={this.onGenAppClick}>Generate App!</Button>
+					<Button onClick={this.onGenBarcodeClick}>Barcode Scanner</Button>
 					<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
 					<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>
 					<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>

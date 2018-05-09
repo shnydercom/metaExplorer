@@ -180,10 +180,10 @@
   width: 100%;
   align-self: flex-end;
   background-color: var(--color-primary);
-  box-shadow: 0 2px 5px rgba(0,0,0,.26),
-              0 -2px 5px rgba(0,0,0,.26);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .26), 0 -2px 5px rgba(0, 0, 0, .26);
   z-index: calc(var(--z-index-higher)-1);
 }
+
 .bottom-nav-tab {
   padding: 0px;
 }
@@ -209,4 +209,43 @@
 
 .mdscrollbar::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.26);
+}
+
+/***
+  barcode elements
+**/
+
+#interactive {
+  align-self: center;
+  display: flex;
+}
+
+#interactive.viewport>canvas,
+#interactive.viewport>video {
+  max-width: 100%;
+  width: 100%;
+  vertical-align: middle;
+  align-self: center;
+}
+
+canvas.drawing,
+canvas.drawingBuffer {
+  position: absolute;
+}
+
+.ywqd-barcode-reader {
+  /* position: relative; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: darkgrey;
+}
+
+.ywqd-barcode-image {
+  position: relative;
+  height: 100pt;
+  width: 100pt;
+  vertical-align: middle;
+  position: absolute;
+  align-self: center;
 }

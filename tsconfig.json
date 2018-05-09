@@ -19,7 +19,7 @@
 
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": ["node", ""],
+    "types": ["node"],
     "typeRoots": ["./node_modules/@types"],
     "suppressExcessPropertyErrors": true,
     "declaration": true,
