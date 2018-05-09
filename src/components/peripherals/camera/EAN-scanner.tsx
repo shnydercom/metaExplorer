@@ -11,9 +11,10 @@ import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
 import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
 import { getKVValue } from 'ldaccess/ldUtils';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import { CameraSwitcherTabs } from './cameraSwitcherTabs';
 
 //TODO: find proper way to include quagga with types, compiling
-//import * as QuaggaAll from 'quagga';
+//import * as Quagga from 'quagga';
 // tslint:disable-next-line:no-var-requires
 //const Quagga = require('quagga').default;
 //const Quagga = QuaggaAll.default;
@@ -42,7 +43,8 @@ export enum EANScannerStateEnum {
 
 export type EANScannerState = {
 	curStep: EANScannerStateEnum,
-	vidDeviceList: MediaDeviceInfo[]
+	vidDeviceList: MediaDeviceInfo[],
+	curId: string
 };
 
 export const EANScannerName = "shnyder/EANScanner";
@@ -74,6 +76,7 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
 			vidDeviceList: null,
+			curId: null,
 			curStep: EANScannerStateEnum.isLoading
 		};
 		if (props) {
@@ -109,7 +112,9 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 					this.setStateToError();
 					return;
 				} else {
-					this.startQuagga();
+					const deviceId = vidInputList[0].deviceId;
+					this.setState({ curId: deviceId, curStep: EANScannerStateEnum.isLoading, vidDeviceList: vidInputList });
+					this.startQuagga(deviceId);
 					return;
 				}
 			})
@@ -120,29 +125,45 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 
 	}
 
-	startQuagga() {
+	startQuagga(deviceId: string) {
 		Quagga.init({
 			inputStream: {
 				type: "LiveStream",
 				constraints: {
 					width: 1024,
 					height: 1024,
+					deviceId: deviceId,
 					facingMode: "environment" // or user
 				}
 			},
+			debug: true,
 			locator: {
 				patchSize: "medium",
-				halfSample: true
+				halfSample: true,
+				/*debug: {
+					showCanvas: true,
+					showPatches: true,
+					showFoundPatches: true,
+					showSkeleton: true,
+					showLabels: true,
+					showPatchLabels: true,
+					showRemainingPatchLabels: true,
+					boxFromPatches: {
+						showTransformed: true,
+						showTransformedBox: true,
+						showBB: true,
+					}
+				}*/
 			},
 			numOfWorkers: 4,
 			decoder: {
-				readers: ["ean_reader"]
-			},
-			debug: {
-				drawBoundingBox: true,
-				showFrequency: false,
-				drawScanline: true,
-				showPattern: false
+				readers: ["ean_reader"], // 'code_128_reader'
+				/*debug: {
+					drawBoundingBox: true,
+					showFrequency: true,
+					drawScanline: true,
+					showPattern: true
+				},*/
 			},
 			locate: true
 		}, (err) => {
@@ -157,18 +178,20 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 	}
 
 	setStateToError() {
-		this.setState({ vidDeviceList: null, curStep: EANScannerStateEnum.isError });
+		this.setState({ vidDeviceList: null, curId: null, curStep: EANScannerStateEnum.isError });
 	}
 
 	componentWillUnmount() {
 		Quagga.offDetected(this.onBarCodeDetected);
-		this.setState({ curStep: EANScannerStateEnum.isLoading });
+		this.setState({ curStep: EANScannerStateEnum.isLoading, vidDeviceList: null, curId: null });
 	}
 
 	render() {
 		let stateVisLnk = this.loadingImgLink;
+		const { curStep, curId, vidDeviceList } = this.state;
 		let isDisplayImage: boolean = true;
-		switch (this.state.curStep) {
+		const isMultiVidSource: boolean = vidDeviceList && vidDeviceList.length > 1;
+		switch (curStep) {
 			case EANScannerStateEnum.isError:
 				stateVisLnk = this.errorImgLink;
 				break;
@@ -181,9 +204,26 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 		return (
 			<div className="ywqd-barcode-reader">
 				<div id="interactive" className="viewport" />
-				{isDisplayImage ? <img className="ywqd-barcode-image" src={stateVisLnk} height="100px" /> : null}
+				{isDisplayImage ?
+					<img className="ywqd-barcode-image" src={stateVisLnk} height="100px" /> :
+					isMultiVidSource ?
+						<CameraSwitcherTabs activeCameraId={curId} vidDeviceList={vidDeviceList} onTabChanged={(newActiveId) => {
+							Quagga.offDetected(this.onBarCodeDetected);
+							Quagga.stop();
+							this.setState({ ...this.state, curId: newActiveId, curStep: EANScannerStateEnum.isLoading });
+							this.startQuagga(newActiveId);
+						}} /> :
+						null
+				}
 			</div>
 		);
+	}
+
+	onCamTabChanged(newActiveId: string) {
+		Quagga.offDetected(this.onBarCodeDetected);
+		Quagga.stop();
+		this.setState({ ...this.state, curId: newActiveId, curStep: EANScannerStateEnum.isLoading });
+		this.startQuagga(newActiveId);
 	}
 
 	private handleKVs(props: LDOwnProps & LDConnectedState) {

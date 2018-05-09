@@ -109,7 +109,7 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		const { ldOptions, routes } = this.props;
 		const { isDoRedirect, isRightMenuOpen } = this.state;
 		return isDoRedirect && this.routeSendSearch ? <Redirect to={this.routeSendSearch} />
-			: <div><AppBar title={this.headerText ? this.headerText : "Menu"}>
+			: <><AppBar title={this.headerText ? this.headerText : "Menu"}>
 				<Navigation type='horizontal'>
 					<IconButton icon='search' onClick={this.onAppBarSearchBtnClick} />
 					<IconMenu icon='account_circle' position='topRight' menuRipple onClick={this.onAppBarRightIconMenuClick}>
@@ -118,7 +118,7 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 				</Navigation>
 			</AppBar>
 				{this.lowerFreeContainer}
-			</div>;
+			</>;
 	}
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
 		let kvs: IKvStore[];

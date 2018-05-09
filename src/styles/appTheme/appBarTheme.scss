@@ -249,3 +249,24 @@ canvas.drawingBuffer {
   position: absolute;
   align-self: center;
 }
+
+.ywqd-camera-switcher-tabs {
+  width: 100%;
+  height: calc(6.4 * var(--unit));
+  display: flex;
+  position: absolute;
+  background-image: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .3), rgba(255, 255, 255, .7));
+  .sub-tab {
+    flex-direction: row;
+    flex-grow: 1;
+    border-left: solid white 2px;
+    border-right: solid white 2px;
+    display: flex;
+  }
+  .switcher-icon {
+    height: calc(5 * var(--unit));
+    width: 100%;
+    vertical-align: middle;
+    align-self: center;
+  }
+}
