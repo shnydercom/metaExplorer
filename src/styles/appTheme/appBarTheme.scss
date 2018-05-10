@@ -195,6 +195,7 @@
 .bottom-nav-topfree {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .mdscrollbar::-webkit-scrollbar-track {

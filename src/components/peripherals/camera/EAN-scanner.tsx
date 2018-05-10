@@ -183,6 +183,7 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 
 	componentWillUnmount() {
 		Quagga.offDetected(this.onBarCodeDetected);
+		Quagga.stop();
 		this.setState({ curStep: EANScannerStateEnum.isLoading, vidDeviceList: null, curId: null });
 	}
 
@@ -234,6 +235,9 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 	private onBarCodeDetected(result) {
 		console.log("hey, detected!");
 		console.dir(result);
+		let barcode: string = result.codeResult.code;
+		console.log(barcode);
+		//this.props.dispatchKvOutput()
 		//this.props.onDetected(result);
 	}
 
