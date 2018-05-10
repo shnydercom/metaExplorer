@@ -6,7 +6,7 @@ import { ILDOptions } from "ldaccess/ildoptions";
 import { ExplorerState } from "appstate/store";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
-import { RefMapTypeDesintegrator } from "components/generic/RefMapTypeDesintegrator";
+import { RefMapTypeDesintegrator } from "components/generic/depr_RefMapTypeDesintegrator";
 import ImgHeadSubDescIntrprtr from "components/visualcomposition/ImgHeadSubDescIntrprtr";
 import { PureImgDisplay } from "components/imagedisplay-component";
 import { BaseContainer } from "components/generic/baseContainer-component";

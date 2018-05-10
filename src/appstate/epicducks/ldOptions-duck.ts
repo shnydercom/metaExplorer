@@ -129,7 +129,9 @@ export const ldOptionsMapReducer = (
 			console.log("async ldoptions request");
 			console.dir(action);
 			let asyncLnk = action.targetReceiverLnk;
-			let asyncReqLDOptions = ldOptionsDeepCopy(state[asyncLnk]);
+			const statePart = state[asyncLnk];
+			if (!statePart) return state;
+			let asyncReqLDOptions = ldOptionsDeepCopy(statePart);
 			asyncReqLDOptions.isLoading = true;
 			let asyncedState = Object.assign({}, state, { [asyncLnk]: asyncReqLDOptions });
 			return asyncedState;

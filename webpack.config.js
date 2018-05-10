@@ -211,7 +211,13 @@ module.exports = {
       commonjs2: 'urijs',
       commonjs: 'urijs',
       amd: 'urijs'
-    }
+    },/*
+    'quagga': {
+      root: 'quagga',
+      commonjs2: 'quagga',
+      commonjs: 'quagga',
+      amd: 'quagga'
+    }*/
     /*,
         "lodash": {
           commonjs: 'lodash',

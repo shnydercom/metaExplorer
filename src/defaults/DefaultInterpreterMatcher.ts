@@ -14,7 +14,6 @@ import { BottomNavigationName, PureBottomNavigation } from "components/ywqd/navi
 import { PureNavBarWActions, NavBarWActionsName } from "components/ywqd/navigation/NavBarWActions";
 import { ImageRetriever, imageRetrieverName } from "sidefx/ImageRetriever";
 import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
-import { PureRefMapIntrprtr } from "components/generic/InterpreterReferenceMapType-component";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { organizationRetrieverName, OrganizationRetriever } from "sidefx/OrganizationRetriever";
 import { RouteComponentName, PureRouteComponent } from "components/routing/route-component";

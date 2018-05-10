@@ -9,7 +9,6 @@ import { PureRouteComponent, RouteComponentName } from "../routing/route-compone
 import { imageRetrieverName, ImageRetriever } from "sidefx/ImageRetriever";
 import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
 import { organizationRetrieverName, OrganizationRetriever } from "sidefx/OrganizationRetriever";
-import { PureRefMapIntrprtr } from "../generic/InterpreterReferenceMapType-component";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { PureRefMapItpt } from "../generic/RefMapItpt-component";
 import { EANScannerName, EANScanner } from "../peripherals/camera/EAN-scanner";

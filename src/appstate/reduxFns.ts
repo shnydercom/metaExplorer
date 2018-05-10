@@ -75,7 +75,31 @@ export const mapDispatchToProps = (dispatch: Dispatch<ExplorerState>, ownProps: 
 	},
 	notifyLDOptionsRefMapSplitChange: (ldOptions: ILDOptions, refMap: BlueprintConfig) => {
 		if (!ldOptions) return;
-		dispatch(refMapREQUESTAction(ldOptions, refMap));
+		const { canInterpretType } = refMap;
+		if (!ldOptions.resource || !ldOptions.resource.kvStores || ldOptions.resource.kvStores.length < 1) {
+			console.warn("can't dispatch RefMap Split");
+			return;
+		}
+		let newLDOptions = ldOptionsDeepCopy(ldOptions);
+		const matchingTypeKV = newLDOptions.resource.kvStores.find((a) => a.ldType === canInterpretType);
+		if (!matchingTypeKV) {
+			console.warn("can't dispatch RefMap Split");
+			return;
+		}
+		const newKvArr: IKvStore[] = [];
+		const matchVal = matchingTypeKV.value;
+		if (!(!matchVal && matchVal !== false)) {
+			const matchValAsObj: { [s: string]: any } = matchVal;
+			for (const keyPart in matchValAsObj) {
+				if (matchValAsObj.hasOwnProperty(keyPart)) {
+					const valPart = matchValAsObj[keyPart];
+					const newKV: IKvStore = { key: keyPart, value: valPart, ldType: null };
+					newKvArr.push(newKV);
+				}
+			}
+		}
+		newLDOptions.resource.kvStores = newKvArr;
+		dispatch(refMapREQUESTAction(newLDOptions, refMap));
 	},
 	dispatchKvOutput: (changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => {
 		dispatch(dispatchKvUpdateAction(changedKvStores, thisLdTkStr, updatedKvMap));

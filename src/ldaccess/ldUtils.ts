@@ -107,6 +107,7 @@ export const ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {
 
 export const isOutputKVSame = (a: OutputKVMap, b: OutputKVMap): boolean => {
 	if ((!a || !b) && !(!a && !b)) return false;
+	if (!a && !b) return true;
 	let pnsA = Object.getOwnPropertyNames(a);
 	let pnsB = Object.getOwnPropertyNames(b);
 	if (pnsA.length !== pnsB.length) return false;

@@ -14,6 +14,8 @@ import { refMapBaseTokenStr, ILDToken, NetworkPreferredToken, createConcatNetwor
 import { appItptMatcherFn } from "appconfig/appInterpreterMatcher";
 import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
 import { Store } from "redux";
+import { isReactComponent } from "components/reactUtils/reactUtilFns";
+import { connectNonVisLDComp } from "sidefx/nonVisualConnect";
 //import { appItptMatcherFn } from "appconfig/appInterpreterMatcher";
 
 /**
@@ -250,7 +252,12 @@ const createInterpreters = (
 			let originalBPCfgCopy: BlueprintConfig = ldBlueprintCfgDeepCopy(itpt.cfg);
 			//this line will do the inheritance
 			itpt = ldBlueprint(subCfg)(itpt);
-			itptRetriever.setDerivedItpt(concatNWTkStr, itpt);
+			if (!isReactComponent(itpt)) {
+				connectNonVisLDComp(concatNWTkStr, new itpt());
+				// TODO: do I have to return here?
+			} else {
+				itptRetriever.setDerivedItpt(concatNWTkStr, itpt);
+			}
 			let itptAsCfg: BlueprintConfig = itpt.cfg as BlueprintConfig;
 			if (!originalBPCfgCopy.initialKvStores) continue;
 			let itptRM = originalBPCfgCopy.initialKvStores.find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);

@@ -220,13 +220,6 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 		);
 	}
 
-	onCamTabChanged(newActiveId: string) {
-		Quagga.offDetected(this.onBarCodeDetected);
-		Quagga.stop();
-		this.setState({ ...this.state, curId: newActiveId, curStep: EANScannerStateEnum.isLoading });
-		this.startQuagga(newActiveId);
-	}
-
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
 		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
 		//this.imgLink = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, LDDict.contentUrl));

@@ -36,6 +36,9 @@ export type LDOptionsMap = { [s: string]: ILDOptions };
 
 export var REFMAP_HEAD = "head";
 
+/**
+ * @deprecated
+ */
 export class RefMapTypeDesintegrator {
 	ldOptionsPrepMap: OutputLDOptionsPrepMap;
 	headItptLnk: string;
