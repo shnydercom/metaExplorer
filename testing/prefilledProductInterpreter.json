@@ -75,11 +75,6 @@
           "nameSelf": "imgRetrUID",
           "initialKvStores": [
             {
-              "key": "externalReferenceKey",
-              "value": "extImgRRef",
-              "ldType": "http://schema.org/Text"
-            },
-            {
               "key": "srvURL",
               "value": "http://localhost:1111/api/ysj/ns/{identifier}",
               "ldType": "http://schema.org/Text"
@@ -101,11 +96,6 @@
           "canInterpretType": "shnyder/productRetriever-ObjectType",
           "nameSelf": "prodRetrUID",
           "initialKvStores": [
-            {
-              "key": "externalReferenceKey",
-              "value": "extProdRRef",
-              "ldType": "http://schema.org/Text"
-            },
             {
               "key": "srvURL",
               "value": "http://localhost:1111/api/ysj/ns/shnyder/FlyingCar1",

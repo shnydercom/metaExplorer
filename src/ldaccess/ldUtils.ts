@@ -5,6 +5,7 @@ import { IKvStore } from "ldaccess/ikvstore";
 import { IWebResource } from "hydraclient.js/src/DataModel/IWebResource";
 import { elementAt } from "rxjs/operator/elementAt";
 import { OutputKVMap, BlueprintConfig } from "ldaccess/ldBlueprint";
+import { LDError } from "appstate/LDError";
 
 export const isInterpreter = (input: any): boolean => {
 	if (!input) return false;
@@ -63,6 +64,7 @@ export const ldBlueprintCfgDeepCopy = (input: BlueprintConfig): BlueprintConfig 
 };
 
 export const ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {
+	if (!input) throw new LDError("ldOptionsDeepCopy: input must not be null or undefined");
 	let rv: ILDOptions;
 	let newKVStores: IKvStore[] = [];
 	input.resource.kvStores.forEach((elem) => {

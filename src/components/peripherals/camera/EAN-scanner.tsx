@@ -12,6 +12,7 @@ import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvC
 import { getKVValue } from 'ldaccess/ldUtils';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { CameraSwitcherTabs } from './cameraSwitcherTabs';
+import { UserDefDict } from 'ldaccess/UserDefDict';
 
 //TODO: find proper way to include quagga with types, compiling
 //import * as Quagga from 'quagga';
@@ -50,8 +51,14 @@ export type EANScannerState = {
 export const EANScannerName = "shnyder/EANScanner";
 let cfgType: string = LDDict.ViewAction;
 let cfgIntrprtKeys: string[] =
-	[LDDict.name, LDDict.fileFormat, LDDict.contentUrl];
-let initialKVStores: IKvStore[] = [];
+	[];
+let initialKVStores: IKvStore[] = [
+	{
+		key: LDDict.gtin8,
+		value: undefined,
+		ldType: LDDict.Text
+	}
+];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
@@ -183,7 +190,8 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 
 	componentWillUnmount() {
 		Quagga.offDetected(this.onBarCodeDetected);
-		Quagga.stop();
+		if (this.state.curStep !== EANScannerStateEnum.isError)
+			Quagga.stop();
 		this.setState({ curStep: EANScannerStateEnum.isLoading, vidDeviceList: null, curId: null });
 	}
 
@@ -222,14 +230,21 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
 		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
+		this.outputKVMap = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, UserDefDict.outputKVMapKey));
 		//this.imgLink = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, LDDict.contentUrl));
 	}
 
-	private onBarCodeDetected(result) {
+	private onBarCodeDetected = (result) => {
 		console.log("hey, detected!");
 		console.dir(result);
 		let barcode: string = result.codeResult.code;
 		console.log(barcode);
+		const barcodeKV: IKvStore = 	{
+			key: LDDict.gtin8,
+			value: barcode,
+			ldType: LDDict.Text
+		};
+		this.props.dispatchKvOutput([barcodeKV], this.props.ldTokenString, this.outputKVMap);
 		//this.props.dispatchKvOutput()
 		//this.props.onDetected(result);
 	}

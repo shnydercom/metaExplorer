@@ -10,11 +10,6 @@ export const productRetrieverName = "shnyder/productRetriever";
 
 let initialKVStores: IKvStore[] = [
 	{
-		key: UserDefDict.externalReferenceKey,
-		value: undefined,
-		ldType: LDDict.Text
-	},
-	{
 		key: SideFXDict.srvURL,
 		value: undefined,
 		ldType: LDDict.Text

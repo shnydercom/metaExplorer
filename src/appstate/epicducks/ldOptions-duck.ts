@@ -129,9 +129,7 @@ export const ldOptionsMapReducer = (
 			console.log("async ldoptions request");
 			console.dir(action);
 			let asyncLnk = action.targetReceiverLnk;
-			const statePart = state[asyncLnk];
-			if (!statePart) return state;
-			let asyncReqLDOptions = ldOptionsDeepCopy(statePart);
+			let asyncReqLDOptions = ldOptionsDeepCopy(state[asyncLnk]);
 			asyncReqLDOptions.isLoading = true;
 			let asyncedState = Object.assign({}, state, { [asyncLnk]: asyncReqLDOptions });
 			return asyncedState;
@@ -155,17 +153,24 @@ export const ldOptionsMapReducer = (
 				if (!modKVMapPart || elemKey === null) return;
 				//modify on "this" first:
 				let thisTokenStrKVIdx = stateCopy[thisLdTkStr].resource.kvStores.findIndex((a) => a.key === elemKey);
-				stateCopy[thisLdTkStr].resource.kvStores[thisTokenStrKVIdx] = kvElem;
+				const srcKvCopy = stateCopy[thisLdTkStr].resource.kvStores.slice();
+				if (thisTokenStrKVIdx === -1) {
+					srcKvCopy.push(kvElem);
+				} else {
+					srcKvCopy[thisTokenStrKVIdx] = kvElem;
+				}
 				//then modify on target, copying to target property key:
 				let targetTokenStr = modKVMapPart.targetLDToken.get();
 				let targetProp = modKVMapPart.targetProperty;
-				let targetTokenStrKvIdx = stateCopy[targetTokenStr].resource.kvStores.findIndex((a) => a.key === targetProp);
+				const targetKvCopy = stateCopy[targetTokenStr].resource.kvStores.slice();
+				let targetTokenStrKvIdx = targetKvCopy.findIndex((a) => a.key === targetProp);
 				let kvElemCopy: IKvStore = {
 					key: targetProp,
 					value: kvElem.value,
 					ldType: kvElem.ldType
 				};
-				stateCopy[targetTokenStr].resource.kvStores[targetTokenStrKvIdx] = kvElemCopy;
+				targetKvCopy[targetTokenStrKvIdx] = kvElemCopy;
+				stateCopy[targetTokenStr].resource.kvStores = targetKvCopy;
 			});
 			return stateCopy;
 		default:

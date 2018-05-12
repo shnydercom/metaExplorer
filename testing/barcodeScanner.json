@@ -1,15 +1,43 @@
 {
-  "subItptOf": "71a0c68b-4acb-4e8b-a3fd-77bcf2afed68",
+  "subItptOf": "topImgHeadSubDesc",
   "canInterpretType": "BarcodeScannerComp-ObjectType",
   "nameSelf": "BarcodeScannerComp",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
-        "71a0c68b-4acb-4e8b-a3fd-77bcf2afed68": {
+        "topImgHeadSubDesc": {
+          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "nameSelf": "topImgHeadSubDesc",
+          "initialKvStores": [
+            {
+              "key": "HeaderImageDisplay",
+              "value": {
+                "objRef": "scannerHead",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": {
+                "objRef": "scannerHead",
+                "propRef": "http://schema.org/gtin8"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "HeaderImageDisplay",
+            "HeaderText"
+          ]
+        },
+        "scannerHead": {
           "subItptOf": "shnyder/EANScanner",
           "canInterpretType": "http://schema.org/ViewAction",
-          "nameSelf": "71a0c68b-4acb-4e8b-a3fd-77bcf2afed68",
+          "nameSelf": "scannerHead",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []

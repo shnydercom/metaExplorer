@@ -102,6 +102,10 @@ export const mapDispatchToProps = (dispatch: Dispatch<ExplorerState>, ownProps: 
 		dispatch(refMapREQUESTAction(newLDOptions, refMap));
 	},
 	dispatchKvOutput: (changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => {
+		if (!(changedKvStores && thisLdTkStr && updatedKvMap)) {
+			console.warn("dispatching KVs failed because not all values were set");
+			return;
+		}
 		dispatch(dispatchKvUpdateAction(changedKvStores, thisLdTkStr, updatedKvMap));
 		return;
 	}

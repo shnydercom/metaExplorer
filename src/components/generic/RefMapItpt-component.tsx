@@ -90,9 +90,15 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 			const { routes } = this.props;
 			console.log("baseToken: " + baseRMTkStr);
 			//TODO: implement output-handling/change of values in sub-interpreters
-			//let targetLDToken: ILDToken = new NetworkPreferredToken(this.props.ldTokenString);
-			//let newOutputKvMap: OutputKVMap = { [elemKey]: { targetLDToken: targetLDToken, targetProperty: elemKey } };
-			return <BaseComp routes={routes} ldTokenString={baseRMTkStr} outputKVMap={null} />;
+			let nonRMKvStores = ldOptions.resource.kvStores.filter(
+				(itm, idx) => itm.key !== UserDefDict.intrprtrBPCfgRefMapKey);
+			let targetLDToken: ILDToken = new NetworkPreferredToken(this.props.ldTokenString);
+			let newOutputKvMap: OutputKVMap = {};
+			nonRMKvStores.forEach((kv) => {
+				const elemKey = kv.key;
+				newOutputKvMap[elemKey] =  { targetLDToken: targetLDToken, targetProperty: elemKey };
+			});
+			return <BaseComp routes={routes} ldTokenString={baseRMTkStr} outputKVMap={newOutputKvMap} />;
 		} else {
 			return null;
 		}

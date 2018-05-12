@@ -14,7 +14,7 @@ import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { nameSpaceMap } from "ldaccess/ns/nameSpaceMap";
 
 export let ldRetrCfgIntrprtKeys: string[] =
-	[UserDefDict.externalReferenceKey, SideFXDict.srvURL, SideFXDict.identifier];
+	[SideFXDict.srvURL, SideFXDict.identifier];
 export class LDRetrieverSuper implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
@@ -27,20 +27,23 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 	webContent: IWebResource;
 	constructor() {
 		this.cfg = this.constructor["cfg"];
-		this.retrieverStoreKey = this.cfg.nameSelf;
-		if (this.cfg.initialKvStores) {
+		//this.retrieverStoreKey = this.cfg.nameSelf;
+		/*if (this.cfg.initialKvStores) {
 			let extRefKey = this.cfg.initialKvStores.find(
 				(val) => val.key === UserDefDict.externalReferenceKey);
 			this.retrieverStoreKey = extRefKey.value ? extRefKey.value : this.retrieverStoreKey;
-		}
+		}*/
 	}
 	consumeLDOptions = (ldOptions: ILDOptions) => {
 		if (!ldOptions || !ldOptions.resource || !ldOptions.resource.kvStores) return;
+		this.retrieverStoreKey = ldOptions.ldToken.get();
 		let kvs = ldOptions.resource.kvStores;
-		let srvUrlKv: IKvStore = kvs.find((val) => ldRetrCfgIntrprtKeys[1] === val.key);
-		srvUrlKv = srvUrlKv ? srvUrlKv : this.cfg.initialKvStores.find((val) => ldRetrCfgIntrprtKeys[1] === val.key);
-		let identifier: IKvStore = kvs.find((val) => ldRetrCfgIntrprtKeys[2] === val.key);
+		let srvUrlKv: IKvStore = kvs.find((val) => ldRetrCfgIntrprtKeys[0] === val.key);
+		srvUrlKv = srvUrlKv ? srvUrlKv : this.cfg.initialKvStores.find((val) => ldRetrCfgIntrprtKeys[0] === val.key);
+		let identifier: IKvStore = kvs.find((val) => ldRetrCfgIntrprtKeys[1] === val.key);
+		identifier = identifier ? identifier : this.cfg.initialKvStores.find((val) => ldRetrCfgIntrprtKeys[1] === val.key);
 		let outputKVMap: IKvStore = kvs.find((val) => UserDefDict.outputKVMapKey === val.key);
+		outputKVMap = outputKVMap ? outputKVMap : this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		this.setSrvUrl(srvUrlKv && srvUrlKv.value ? srvUrlKv.value : this.srvUrl);
 		this.setIdentifier(identifier && identifier.value !== null ? identifier : this.identifier);
