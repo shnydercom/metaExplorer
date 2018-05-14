@@ -28,6 +28,10 @@
               "ldType": "http://schema.org/Text"
             },
             {
+              "key": "SubHeaderText",
+              "ldType": "http://schema.org/Text"
+            },
+            {
               "key": "Description",
               "value": {
                 "objRef": "prodRetrUID",
@@ -37,7 +41,12 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "interpretableKeys": [
+            "HeaderImageDisplay",
+            "HeaderText",
+            "SubHeaderText",
+            "Description"
+          ]
         },
         "imgDispUID": {
           "subItptOf": "shnyder/imageDisplay",
@@ -67,7 +76,11 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "interpretableKeys": [
+            "http://schema.org/name",
+            "http://schema.org/fileFormat",
+            "http://schema.org/contentUrl"
+          ]
         },
         "imgRetrUID": {
           "subItptOf": "shnyder/imageRetriever",
@@ -89,7 +102,9 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "interpretableKeys": [
+            "identifier"
+          ]
         },
         "prodRetrUID": {
           "subItptOf": "shnyder/productRetriever",
@@ -107,7 +122,9 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "interpretableKeys": [
+            "identifier"
+          ]
         }
       },
       "ldType": "InterpreterReferenceMapType"

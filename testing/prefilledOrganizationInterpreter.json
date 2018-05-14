@@ -45,7 +45,12 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "interpretableKeys": [
+            "HeaderImageDisplay",
+            "HeaderText",
+            "SubHeaderText",
+            "Description"
+          ]
         },
         "imgDisp": {
           "subItptOf": "shnyder/imageDisplay",
@@ -75,18 +80,17 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "interpretableKeys": [
+            "http://schema.org/name",
+            "http://schema.org/fileFormat",
+            "http://schema.org/contentUrl"
+          ]
         },
         "imgRetr": {
           "subItptOf": "shnyder/imageRetriever",
           "canInterpretType": "shnyder/imageRetriever-ObjectType",
           "nameSelf": "imgRetr",
           "initialKvStores": [
-            {
-              "key": "externalReferenceKey",
-              "value": "orgImageRetriever",
-              "ldType": "http://schema.org/Text"
-            },
             {
               "key": "srvURL",
               "value": "http://localhost:1111/api/ysj/ns/{identifier}",
@@ -102,18 +106,15 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "interpretableKeys": [
+            "identifier"
+          ]
         },
         "orgRetr": {
           "subItptOf": "shnyder/organizationRetriever",
           "canInterpretType": "shnyder/organizationRetriever-ObjectType",
           "nameSelf": "orgRetr",
           "initialKvStores": [
-            {
-              "key": "externalReferenceKey",
-              "value": "extOrgRetriever",
-              "ldType": "http://schema.org/Text"
-            },
             {
               "key": "srvURL",
               "value": "http://localhost:1111/api/ysj/ns/shnyder/Bens3DPrints",
@@ -125,7 +126,9 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "interpretableKeys": [
+            "identifier"
+          ]
         }
       },
       "ldType": "InterpreterReferenceMapType"
