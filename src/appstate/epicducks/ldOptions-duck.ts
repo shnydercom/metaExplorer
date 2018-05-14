@@ -147,6 +147,7 @@ export const ldOptionsMapReducer = (
 		case LDOPTIONS_KV_UPDATE:
 			let stateCopy = { ...state };
 			let { changedKvStores, updatedKvMap, thisLdTkStr } = action;
+			stateCopy[thisLdTkStr] = ldOptionsDeepCopy(stateCopy[thisLdTkStr]);
 			changedKvStores.forEach((kvElem) => {
 				let elemKey = kvElem.key;
 				let modKVMapPart = updatedKvMap[elemKey];
@@ -162,6 +163,7 @@ export const ldOptionsMapReducer = (
 				//then modify on target, copying to target property key:
 				let targetTokenStr = modKVMapPart.targetLDToken.get();
 				let targetProp = modKVMapPart.targetProperty;
+				stateCopy[targetTokenStr] = ldOptionsDeepCopy(stateCopy[targetTokenStr]);
 				const targetKvCopy = stateCopy[targetTokenStr].resource.kvStores.slice();
 				let targetTokenStrKvIdx = targetKvCopy.findIndex((a) => a.key === targetProp);
 				let kvElemCopy: IKvStore = {
