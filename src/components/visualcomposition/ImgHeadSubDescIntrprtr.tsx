@@ -43,10 +43,10 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedD
 export var ImgHeadSubDescIntrprtrName: string = "shnyder/ImgHeadSubDescIntrprtr";
 let cfgType: string = ImgHeadSubDescIntrprtrName;
 let cfgIntrprtKeys: string[] =
-	[VisualDict.headerImgDisplay, VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description, VisualDict.footerIntrprtr];
+	[VisualDict.headerItpt, VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description, VisualDict.footerItpt];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.headerImgDisplay,
+		key: VisualDict.headerItpt,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
@@ -66,7 +66,7 @@ let initialKVStores: IKvStore[] = [
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualDict.footerIntrprtr,
+		key: VisualDict.footerItpt,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	}
@@ -88,10 +88,11 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	headerImgDisplay: any;
+	headerItpt: any;
 	headerText: string;
 	subHeaderText: string;
 	description: string;
+	footerItpt: any;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 	constructor(props: any) {
@@ -105,9 +106,9 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 		}
 	}
 	render() {
-		return <div>
+		return <div className="mdscrollbar">
 			<div className="header-img-container">
-				{this.headerImgDisplay}
+				{this.headerItpt}
 			</div>
 			<div className="header-img-container overlay-gradient">
 				<div className="header-text">
@@ -123,9 +124,9 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 				</div>
 			</div>
 			<div>
-				{this.props.children}
+				{this.footerItpt}
 			</div>
-		</div >;
+		</div>;
 	}
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
 		let kvs: IKvStore[];
@@ -133,7 +134,8 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
 		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
 			kvs = props.ldOptions.resource.kvStores;
-			this.headerImgDisplay = generateIntrprtrForProp(kvs, VisualDict.headerImgDisplay, retriever, this.props.routes);
+			this.headerItpt = generateIntrprtrForProp(kvs, VisualDict.headerItpt, retriever, this.props.routes);
+			this.footerItpt = generateIntrprtrForProp(kvs, VisualDict.footerItpt, retriever, this.props.routes);
 			/*this.headerText = getKVValue(getKVStoreByKey(kvs, VisualDict.headerTxt));
 			this.subHeaderText = getKVValue(getKVStoreByKey(kvs, VisualDict.subHeaderTxt));
 			this.description = getKVValue(getKVStoreByKey(kvs, VisualDict.description));*/
@@ -141,9 +143,13 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 		this.headerText = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.headerTxt));
 		this.subHeaderText = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.subHeaderTxt));
 		this.description = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.description));
-		if (!this.headerImgDisplay) {
+		if (!this.headerItpt) {
 			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			this.headerImgDisplay = generateIntrprtrForProp(kvs, VisualDict.headerImgDisplay, retriever, this.props.routes);
+			this.headerItpt = generateIntrprtrForProp(kvs, VisualDict.headerItpt, retriever, this.props.routes);
+		}
+		if (!this.footerItpt) {
+			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
+			this.footerItpt = generateIntrprtrForProp(kvs, VisualDict.footerItpt, retriever, this.props.routes);
 		}
 	}
 

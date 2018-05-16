@@ -13,6 +13,7 @@ import * as prefilledYWQDBottomNav from '../../testing/prefilledYWQDBottomNav.js
 import * as prefilledScndStepA from '../../testing/prefilledScndStepA.json';
 import * as prefilledScndStepAA from '../../testing/prefilledScndStepAA.json';
 import * as barcodePrefilled from '../../testing/barcodeScanner.json';
+import * as prefilledSingleImageSel from '../../testing/prefilledSingleImageSel.json';
 
 import {
 	DiagramEngine,
@@ -160,6 +161,11 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 		this.generatePrefilled(prefilledData);
 	}
 
+	onGenSingleImageSel = (e) => {
+		let prefilledData: any = prefilledSingleImageSel;
+		this.generatePrefilled(prefilledData);
+	}
+
 	generatePrefilled = (input: any) => {
 		let nodesBPCFG: BlueprintConfig = input as BlueprintConfig;
 		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
@@ -248,6 +254,7 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 				<div className="vertical-scroll">
 					<Button onClick={this.onSerializeBtnClick}>serialize!</Button>
 					<Button onClick={this.onGenAppClick}>Generate App!</Button>
+					<Button onClick={this.onGenSingleImageSel}>Single Image Selector!</Button>
 					<Button onClick={this.onGenBarcodeClick}>Barcode Scanner</Button>
 					<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
 					<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>

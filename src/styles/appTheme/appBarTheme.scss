@@ -194,6 +194,10 @@
 
 .bottom-nav-topfree {
   flex: 1;
+}
+
+.mdscrollbar {
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -242,7 +246,7 @@ canvas.drawingBuffer {
   background-color: darkgrey;
 }
 
-.ywqd-barcode-image {
+.ywqd-large-image {
   position: relative;
   height: 100pt;
   width: 100pt;
@@ -269,5 +273,63 @@ canvas.drawingBuffer {
     width: 100%;
     vertical-align: middle;
     align-self: center;
+  }
+}
+
+.single-img-sel {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  .btn-extension {
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+  }
+  .btn-extension .material-icons {
+    line-height: 1 !important;
+    font-size: 300% !important;
+  }
+}
+
+.cover-img {
+  object-fit: cover;
+  width: inherit;
+  height: inherit;
+}
+
+.dom-camera {
+  display: flex;
+  width: inherit;
+  height: inherit;
+  background-color: darkgrey;
+  justify-content: center;
+  align-items: flex-end;
+  .vid-big-icons {
+    line-height: 1 !important;
+    font-size: 600% !important;
+    color: white;
+    width: 100%;
+    text-align: center;
+    align-self: center;
+  }
+  >video {
+    height: inherit;
+    width: inherit;
+    object-fit: cover;
+  }
+  .controls-container {
+    height: inherit;
+    width: inherit;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding-bottom: var(--appbar-h-padding);
+    >button >span {
+      font-size: 170% !important;
+    }
   }
 }

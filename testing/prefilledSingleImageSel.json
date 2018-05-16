@@ -1,0 +1,23 @@
+{
+  "subItptOf": "a9075807-e37f-4804-acee-7a2807276838",
+  "canInterpretType": "f-ObjectType",
+  "nameSelf": "f",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "a9075807-e37f-4804-acee-7a2807276838": {
+          "subItptOf": "shnyder/SingleImageSelector",
+          "canInterpretType": "http://schema.org/CreateAction",
+          "nameSelf": "a9075807-e37f-4804-acee-7a2807276838",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

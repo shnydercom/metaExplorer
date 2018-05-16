@@ -17,7 +17,7 @@ import { Tab } from 'react-toolbox/lib/tabs/';
 import { Tabs } from 'react-toolbox/lib/tabs/';
 
 import { generateIntrprtrForProp } from '../generic/generatorFns';
-import { active } from 'react-toolbox/lib/dropdown/theme.css';
+// import { active } from 'react-toolbox/lib/dropdown/theme.css';
 import { checkAllFilled } from 'GeneralUtils';
 import { Route } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';

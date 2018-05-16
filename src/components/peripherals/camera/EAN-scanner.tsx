@@ -214,7 +214,7 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 			<div className="ywqd-barcode-reader">
 				<div id="interactive" className="viewport" />
 				{isDisplayImage ?
-					<img className="ywqd-barcode-image" src={stateVisLnk} height="100px" /> :
+					<img className="ywqd-large-image" src={stateVisLnk} height="100px" /> :
 					isMultiVidSource ?
 						<CameraSwitcherTabs activeCameraId={curId} vidDeviceList={vidDeviceList} onTabChanged={(newActiveId) => {
 							Quagga.offDetected(this.onBarCodeDetected);

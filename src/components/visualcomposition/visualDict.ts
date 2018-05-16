@@ -1,13 +1,13 @@
 export enum VisualDict {
 	//Base data types:
-	headerImgDisplay = "HeaderImageDisplay",
+	headerItpt = "HeaderInterpreter",
 	headerTxt = "HeaderText",
 	subHeaderTxt = "SubHeaderText",
 	description = "Description",
 	freeContainer = "freeContainer", //e.g. for the bottomNavigation anything that is "top"
 
 	//other
-	footerIntrprtr = "FooterInterpreter",
+	footerItpt = "FooterInterpreter",
 	popOverContent = "PopOverContent",
 	iconImg = "IconImage",
 

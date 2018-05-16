@@ -12,7 +12,7 @@
           "nameSelf": "headUID",
           "initialKvStores": [
             {
-              "key": "HeaderImageDisplay",
+              "key": "HeaderInterpreter",
               "value": {
                 "objRef": "imgDispUID",
                 "propRef": null
@@ -42,7 +42,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "HeaderImageDisplay",
+            "HeaderInterpreter",
             "HeaderText",
             "SubHeaderText",
             "Description"
