@@ -137,7 +137,7 @@ export class PureRefMapIntrprtr extends Component<LDConnectedState & LDConnected
 		let headToken = createConcatNetworkPreferredToken(this.props.ldTokenString, this.rmtd.refMapName + this.rmtd.headItptLnk);
 		const { routes } = this.props;
 		console.log("headToken: " + headToken.get());
-		reactComps.push(<BaseComp key={0} routes={routes} ldTokenString={headToken.get()} outputKVMap={null} />);
+		reactComps.push(<BaseComp key={0} routes={routes} ldTokenString={headToken.get()} />);
 		/*for (let intrprtrKey in this.rmtd.interpreterMap) {
 			if (this.rmtd.interpreterMap.hasOwnProperty(intrprtrKey)) {
 				if (intrprtrKey === this.rmtd.headItptLnk) continue;

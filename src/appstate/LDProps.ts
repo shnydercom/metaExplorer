@@ -10,7 +10,6 @@ export interface LDRouteProps extends RouteComponentProps<LDRouteParams> {}
 
 export type LDOwnProps = {
 	ldTokenString: string,
-	outputKVMap: OutputKVMap,
 	routes?: LDRouteProps
 };
 

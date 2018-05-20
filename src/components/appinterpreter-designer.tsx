@@ -272,7 +272,7 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 									<Route path="/" render={(routeProps: LDRouteProps) => {
 										routeProps.match.params.nextPath = "";
 										return <>
-											<BaseContainer routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" outputKVMap={null} />
+											<BaseContainer routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud"/>
 										</>;
 									}} />
 								</Switch>

@@ -98,7 +98,7 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 				const elemKey = kv.key;
 				newOutputKvMap[elemKey] =  { targetLDToken: targetLDToken, targetProperty: elemKey };
 			});
-			return <BaseComp routes={routes} ldTokenString={baseRMTkStr} outputKVMap={newOutputKvMap} />;
+			return <BaseComp routes={routes} ldTokenString={baseRMTkStr} />;
 		} else {
 			return null;
 		}

@@ -41,7 +41,7 @@ export const AppRoot: SFC<AppRootProps> = () => {
 		<Provider store={applicationStore}>
 			<Router>
 				<div>
-					<AppInterpreterDesigner ldTokenString={appinterpreterToken} outputKVMap={null} />
+					<AppInterpreterDesigner ldTokenString={appinterpreterToken}/>
 					{!isProduction && <DevTools />}
 				</div>
 			</Router>

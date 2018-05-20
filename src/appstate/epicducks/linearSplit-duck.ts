@@ -1,13 +1,17 @@
 import { ILDOptionsMapStatePart } from "../store";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { LDAction } from "./ldOptions-duck";
-import { linearLDTokenStr, NetworkPreferredToken } from "ldaccess/ildtoken";
+import { linearLDTokenStr, NetworkPreferredToken, ILDToken } from "ldaccess/ildtoken";
 import { isLDOptionsSame } from "ldaccess/ldUtils";
 import { appItptMatcherFn } from "appconfig/appInterpreterMatcher";
 import { ActionsObservable } from "redux-observable";
 import { Observable } from 'rxjs/Rx';
 import { LDError, LDErrorMsgState } from "../LDError";
 import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
+import { OutputKVMap } from "ldaccess/ldBlueprint";
+import { IKvStore } from "ldaccess/ikvstore";
+import { LDDict } from "ldaccess/LDDict";
+import { UserDefDict } from "ldaccess/UserDefDict";
 
 /**
  * a duck for linear state splitting, used for containers
@@ -55,9 +59,13 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 	let lang = ldOptionsObj.lang;
 	let retriever = ldOptionsObj.visualInfo.retriever;
 	ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
+		const elemKey = itm.key;
 		let newLDTokenStr: string = linearLDTokenStr(ldTkStr, idx);
 		let newLDToken = new NetworkPreferredToken(newLDTokenStr);
 		//assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
+		let targetLDToken: ILDToken = new NetworkPreferredToken(ldTkStr);
+		let newOutputKvMap: OutputKVMap = { [elemKey]: { targetLDToken: targetLDToken, targetProperty: elemKey } };
+		let newOKVStore: IKvStore = {key: UserDefDict.outputKVMapKey, value: newOutputKvMap, ldType: UserDefDict.outputKVMapType};
 		let newLDOptions: ILDOptions = {
 			isLoading: false,
 			lang: lang,
@@ -66,7 +74,7 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 			resource: {
 				webInResource: null,
 				webOutResource: null,
-				kvStores: [itm]
+				kvStores: [itm, newOKVStore]
 			}
 		};
 		stateCopy[newLDToken.get()] = newLDOptions;

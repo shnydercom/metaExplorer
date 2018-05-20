@@ -165,7 +165,7 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 			let GenericComp = itm.compClass;
 			return <GenericComp key={idx} routes={routes} ldTokenString={
 				linearLDTokenStr(ldTokenString, idx)
-			} outputKVMap={itm.compOutputKvMap} />;
+			} />;
 		});
 		return <>
 			{reactComps ? reactComps : null}

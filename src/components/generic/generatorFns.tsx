@@ -35,7 +35,6 @@ export function generateIntrprtrForProp(kvStores: IKvStore[], prop: string, retr
 	}
 	if (isReactComponent(BaseComp)) {
 		console.log("baseToken: " + baseRMTkStr);
-		return <BaseComp routes={routes} ldTokenString={baseRMTkStr} outputKVMap={null} />;
+		return <BaseComp routes={routes} ldTokenString={baseRMTkStr}/>;
 	} else { return null; }
-
 }
