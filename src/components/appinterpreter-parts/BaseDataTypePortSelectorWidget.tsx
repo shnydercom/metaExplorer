@@ -14,10 +14,9 @@ import { Component, ComponentClass, StatelessComponent } from "react";
 import { OutputKVMap } from "ldaccess/ldBlueprint";
 import { ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";
 import { UserDefDict } from "ldaccess/UserDefDict";
-
-/*export type LDOwnProps = {
-	ldTokenString: string;
-};*/
+import { compNeedsUpdate } from "../reactUtils/compUtilFns";
+import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
+import { LDDict } from "ldaccess/LDDict";
 
 export type BaseDataTypePortSelectorProps = {
 	model?: LDPortModel;
@@ -29,35 +28,11 @@ export interface BaseDataTypePortSelectorState {
 	portType: string;
 }
 
-/*const mapStateToProps = (state: ExplorerState, ownProps: BaseDataTypePortSelectorProps): LDConnectedState & BaseDataTypePortSelectorProps => {
-	let tokenString: string = ownProps && ownProps.model ? ownProps.model.getID() : null;
-	let ldOptionsLoc: ILDOptions = tokenString ? state.ldoptionsMap[tokenString] : null;
-	return {
-		...ownProps,
-		ldOptions: ldOptionsLoc
-	};
-};
-
-const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: BaseDataTypePortSelectorProps): LDConnectedDispatch => ({
-	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
-		if (!ownProps.ldTokenString) return;
-		if (!ldOptions) {
-			let kvStores: IKvStore[] = [ownProps.model.kv];
-			let lang: string;
-			let alias: string = ownProps.ldTokenString;
-			dispatch(ldOptionsClientSideCreateAction(kvStores, lang, alias));
-		} else {
-			dispatch(ldOptionsClientSideUpdateAction(ldOptions));
-		}
-	}
-});*/
-
 class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch, BaseDataTypePortSelectorState> {
 	public static defaultProps: BaseDataTypePortSelectorProps = {
 		in: true,
 		label: "port",
-		ldTokenString: null,
-		outputKVMap: null
+		ldTokenString: null
 	};
 
 	constructor(props) {
@@ -66,20 +41,28 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 			portType: null,
 			ldOptions: null
 		};
+		this.props.notifyLDOptionsChange(null);
 	}
 
 	componentWillReceiveProps(nextProps, nextContext): void {
-		if (nextProps.ldOptions) nextProps.model.kv = nextProps.ldOptions.resource.kvStores[0] ? nextProps.ldOptions.resource.kvStores[0] : { key: null, value: null, ldType: null };
+		if (compNeedsUpdate(nextProps, this.props)) {
+			let newKV: IKvStore = getKVStoreByKey(nextProps.ldOptions.resource.kvStores, UserDefDict.singleKvStore);
+			newKV = newKV ? newKV : { key: null, value: null, ldType: null };
+			nextProps.model.kv = newKV;
+			let newType = newKV ? newKV.ldType : null;
+			this.onPortTypeChange(newType, nextProps);
+		}
 	}
 
-	onPortTypeChange = (newType: string) => {
+	onPortTypeChange = (newType: string, nProps: BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch) => {
 		this.setState({ portType: newType });
 		let changedKvStore: IKvStore = this.props.model.kv;
-		changedKvStore.ldType = newType;
-		changedKvStore.key = UserDefDict.singleKvStore;
-		changedKvStore.value = null;
-		//changedKvStore.intrprtrClass = null;
-		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+		if (newType !== changedKvStore.ldType) {
+			changedKvStore.ldType = newType;
+			changedKvStore.key = UserDefDict.singleKvStore;
+			changedKvStore.value = null;
+		}
+		let newLDOptions = ldOptionsDeepCopy(nProps.ldOptions);
 		newLDOptions.resource.kvStores = [changedKvStore];
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
@@ -94,8 +77,8 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 			<div className={"out-port top-port"}>
 				<div>
 					{label}
-					<BaseDataTypeDropDown selectionChange={(newType) => { this.onPortTypeChange(newType); }} />
-					<BaseContainer ldTokenString={targetID} searchCrudSkills="CrUd" outputKVMap={newOutputKVMap} />
+					<BaseDataTypeDropDown selectionChange={(newType) => { this.onPortTypeChange(newType, this.props); }} />
+					{this.state.portType ? <BaseContainer ldTokenString={targetID} searchCrudSkills="CrUd" /> : null}
 				</div>
 				{port}
 			</div>
@@ -103,4 +86,5 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 	}
 }
 
-export const BaseDataTypePortSelector = connect<LDConnectedState, LDConnectedDispatch, BaseDataTypePortSelectorProps>(mapStateToProps, mapDispatchToProps)(PureBaseDataTypePortSelector);
+export const BaseDataTypePortSelector = connect<LDConnectedState, LDConnectedDispatch, BaseDataTypePortSelectorProps>
+	(mapStateToProps, mapDispatchToProps)(PureBaseDataTypePortSelector);

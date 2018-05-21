@@ -88,7 +88,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: A
 		if (!ldOptions) {
 			let alias: string = ownProps.ldTokenString; //i.e. interpreter.nameSelf
 			let kvStores: IKvStore[] = [{
-				key: undefined,
+				key: DESIGNER_KV_KEY,
 				ldType: alias,
 				value: ownProps.serialized
 			}];
@@ -99,6 +99,8 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: A
 		}
 	}
 });*/
+
+const DESIGNER_KV_KEY = "DesignerKvKey";
 
 class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState & LDConnectedDispatch, AIDState> {
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the interpreter you're designing is capable of interpreting -> usually a new generic type
@@ -137,8 +139,8 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = [
-			//{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
-			{ key: undefined, ldType: newType, value: dummyInstance }
+			//{ key: DESIGNER_KV_KEY, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+			{ key: DESIGNER_KV_KEY, ldType: newType, value: dummyInstance }
 		];
 		//let nodesSerialized = JSON.stringify(this.logic.getDiagramEngine().getDiagramModel().serializeDiagram(), undefined, 2);
 		this.setState({ ...this.state, serialized: nodesSerialized });
@@ -174,8 +176,8 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 		let newType = nodesBPCFG.canInterpretType;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = [
-			//		{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
-			{ key: undefined, ldType: newType, value: dummyInstance }
+			//		{ key: DESIGNER_KV_KEY, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+			{ key: DESIGNER_KV_KEY, ldType: newType, value: dummyInstance }
 		];
 		this.setState({ ...this.state, serialized: nodesSerialized });
 		this.props.notifyLDOptionsChange(newLDOptions);
@@ -203,8 +205,8 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 		let newType = nodesBPCFG.canInterpretType;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = [
-			//{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
-			{ key: undefined, ldType: newType, value: dummyInstance }
+			//{ key: DESIGNER_KV_KEY, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+			{ key: DESIGNER_KV_KEY, ldType: newType, value: dummyInstance }
 		];
 		this.setState({ ...this.state, serialized: nodesSerialized });
 		this.props.notifyLDOptionsChange(newLDOptions);
@@ -219,8 +221,8 @@ class PureAppInterpreterDesigner extends Component<AIDProps & LDConnectedState &
 		let newType = nodesBPCFG.canInterpretType;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = [
-			//	{ key: undefined, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
-			{ key: undefined, ldType: newType, value: dummyInstance }
+			//	{ key: DESIGNER_KV_KEY, ldType: nodesBPCFG.nameSelf, value: nodesSerialized },
+			{ key: DESIGNER_KV_KEY, ldType: newType, value: dummyInstance }
 		];
 		this.setState({ ...this.state, serialized: nodesSerialized });
 		this.props.notifyLDOptionsChange(newLDOptions);

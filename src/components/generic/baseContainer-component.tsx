@@ -27,37 +27,9 @@ import { isReactComponent } from '../reactUtils/reactUtilFns';
 import { LDError } from 'appstate/LDError';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 
-/*export type LDOwnProps = {
-	ldTokenString: string;
-};*/
-
 export interface BaseContOwnProps extends LDOwnProps {
 	searchCrudSkills: string;
 }
-
-/*export type LDConnectedState = {
-	ldOptions: ILDOptions
-};
-
-export type LDConnectedDispatch = {
-	notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
-};*/
-/*
-const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: OwnProps): LDConnectedDispatch => ({
-	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
-		if (!ownProps.ldTokenString) return;
-		if (!ldOptions) {
-			let kvStores: IKvStore[] = [{ key: undefined, value: undefined, ldType: null /*ownProps.displayedType*/
-
-/*}];
-let lang: string;
-let alias: string = ownProps.ldTokenString;
-dispatch(ldOptionsClientSideCreateAction(kvStores, lang, alias));
-} else {
-dispatch(ldOptionsClientSideUpdateAction({... ldOptions}));
-}
-}
-});*/
 
 export const COMP_BASE_CONTAINER = "shnyder/baseContainer";
 
@@ -69,7 +41,6 @@ let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: COMP_BASE_CONTAINER,
-	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
@@ -82,11 +53,8 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 	initialKvStores: IKvStore[];
 	outputKVMap: OutputKVMap;
 	reactCompInfo: {
-		compClass: React.ComponentClass<LDOwnProps>,
-		compOutputKvMap: OutputKVMap
+		compClass: React.ComponentClass<LDOwnProps> & IBlueprintItpt
 	}[] = [];
-	//genCompCache: any;
-	//isWrapper: boolean = false;
 	constructor(props?: any) {
 		super(props);
 		this.cfg = this.constructor["cfg"];
@@ -102,7 +70,8 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 		let retriever: string = ldOptions.visualInfo.retriever;
 		let interpretedBy = ldOptions.visualInfo.interpretedBy;
 		let sCSkills: string = "cRud";
-		this.reactCompInfo = [];
+		let reactCompInfoCopy = this.reactCompInfo.slice();
+		let newreactCompInfo = [];
 		if (ldOptions.isLoading) return;
 		if (!interpretedBy || !isLDOptionsSame(this.props.ldOptions, ldOptions)) {
 			//i.e. first time this ldOptions-Object gets interpreted, or interpreter-change
@@ -113,38 +82,16 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 		} else {
 			ldOptions.resource.kvStores.forEach((elem, idx) => {
 				let elemKey: string = elem.key;
-				let itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(linearLDTokenStr(ldTokenString, idx));
+				let itpt: React.ComponentClass<LDOwnProps> & IBlueprintItpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(linearLDTokenStr(ldTokenString, idx));
 				if (isReactComponent(itpt)) {
 					let targetLDToken: ILDToken = new NetworkPreferredToken(this.props.ldTokenString);
-					let newOutputKvMap: OutputKVMap = { [elemKey]: { targetLDToken: targetLDToken, targetProperty: elemKey } };
-					this.reactCompInfo.push({ compClass: itpt, compOutputKvMap: newOutputKvMap });
+					newreactCompInfo.push({ compClass: itpt });
 				} else {
 					throw new LDError("baseContainer got a non-visual component");
 				}
 			});
+			this.reactCompInfo = newreactCompInfo;
 		}
-		//appIntMatcher.matchLDOptions(ldOptions, sCSkills, "default");
-		/*if (ldOptions.resource) {
-			let sCSkills: string = "cRud";
-			if (ldOptions.resource.kvStores) {
-				genKvStores = ldOptions.resource.kvStores;
-			} else if (ldOptions.resource.webInResource) {
-				let hmArray: IHypermediaContainer = ldOptions.resource.webInResource.hypermedia;
-				if (hmArray.length === 0) return;
-				if (hmArray.length === 1) {
-					genKvStores = singleHyperMediaToKvStores(hmArray[0]);
-				}
-				if (hmArray.length > 1) {
-					genKvStores = multiHyperMediaToKvStores(hmArray);
-				}
-				if (this.props.searchCrudSkills) {
-					sCSkills = this.props.searchCrudSkills;
-				}
-			}
-			//TODO: filter for UserDefDict.intrprtrNameKey and UserDefDict.intrptrtType first, ignore other keys if interpreter is found
-			genKvStores = appIntMatcher.matchLDOptions(ldOptions, genKvStores, sCSkills, "default");
-		}
-		this.genCompCache = genKvStores ? this.kvsToComponent(genKvStores) : null;*/
 	}
 
 	componentWillReceiveProps(nextProps: BaseContOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
@@ -170,65 +117,7 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 		return <>
 			{reactComps ? reactComps : null}
 		</>;
-		//var demoTypeParsed = null;
-		//if (this.props.displayedType) {
-		//let dType: string = null; // this.props.displayedType;
-		/*var demoWebResource: IWebResource = {
-			hypermedia: [{ [LDConsts.type]: dType, members: null, client: null } as IHypermedia] as IHypermediaContainer,
-		};*/
-		/*var displayedTypeLDOptions: ILDOptions = this.props.ldOptions ? this.props.ldOptions : {
-			lang: null,
-			resource: {
-				kvStores: [{ key: undefined, value: undefined, ldType:  dType }],
-				webInResource: null,
-				webOutResource: null
-			},
-			ldToken: null,
-			isLoading: false
-		};*/
-		/*if (this.isContainerChanged) {
-			this.genCompCache = this.consumeLDOptions(this.props.ldOptions); //displayedTypeLDOptions);
-			this.isContainerChanged = false;
-		}*/
-		//}
 	}
-
-	/*private kvsToComponent(input: IKvStore[]): any {
-		let reactCompClasses: (React.ComponentClass<LDOwnProps>)[] = [];
-		let intrprtrNames: string[] = [];
-		input.forEach((itm) => {
-			let intrprtr = itm.intrprtrClass;
-			if (isInterpreter(intrprtr)) {
-				reactCompClasses.push(intrprtr as React.ComponentClass<LDOwnProps>);
-			}
-		});
-		let reactComps = reactCompClasses.map((itm, idx) => {
-			let GenericComp = itm;
-			let ldTokenString: string = null;
-			let tokenStringExtension = input[idx].key ? input[idx].key : "-gen-" + idx;
-			ldTokenString = this.props.ldTokenString + tokenStringExtension;
-			//
-			let ldRes: ILDResource = { webInResource: null, webOutResource: null, kvStores: [input[idx]] };
-			let ldToken: ILDToken = new NetworkPreferredToken(ldTokenString);
-			let newldOptions: ILDOptions = {
-				ldToken: ldToken, resource: ldRes, isLoading: false, lang: "en",
-				visualInfo: {
-					retriever: DEFAULT_ITPT_RETRIEVER_NAME
-				}
-			};
-			this.props.notifyLDOptionsChange(newldOptions);
-			const { routes } = this.props;
-			return <GenericComp key={idx} routes={routes} ldTokenString={ldTokenString} outputKVMap={null} />;
-		});
-		if (reactComps.length === 1) {
-			//genericComp is only a wrapper then, hand token down directly
-			let searchIdx = reactComps[0].key;
-			let GenericSingle = reactCompClasses[searchIdx];
-			const { routes } = this.props;
-			reactComps[0] = <GenericSingle key={0} routes={routes} ldTokenString={this.props.ldTokenString} outputKVMap={null} />;
-		}
-		return <>{reactComps}</>;
-	}*/
 }
 
 export const BaseContainer = connect<LDConnectedState, LDConnectedDispatch, BaseContOwnProps>(mapStateToProps, mapDispatchToProps)(PureBaseContainer);

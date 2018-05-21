@@ -7,6 +7,8 @@ import { BaseDataTypePortSelector } from "components/appinterpreter-parts/BaseDa
 import { BaseDataTypeNodeModel } from "components/appinterpreter-parts/BaseDataTypeNodeModel";
 import { Component, createFactory, ClassAttributes, ComponentElement, ReactElement, ReactPortal } from "react";
 import { map } from "lodash";
+import { IKvStore } from "ldaccess/ikvstore";
+import { LDPortModel } from "./LDPortModel";
 /*
 import {
 	BooleanValInput, IntegerValInput, DoubleValInput, TextValInput, DateValInput, DateTimeValInput
@@ -32,7 +34,7 @@ export class BaseDataTypeNodeWidget extends Component<BaseDataTypeNodeProps, Bas
 
 	generatePort(port) {
 		//return <DefaultPortLabel model={port} key={port.id} />;
-		return <BaseDataTypePortSelector model={port} key={port.id} ldTokenString={port.id} outputKVMap={null}/>;
+		return <BaseDataTypePortSelector model={port} key={port.id} ldTokenString={port.id}/>;
 	}
 
 	render() {

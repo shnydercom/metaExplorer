@@ -18,9 +18,11 @@ import { LDDict } from 'ldaccess/LDDict';
 import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
-import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
+import { ldOptionsDeepCopy, getKVValue } from "ldaccess/ldUtils";
 import { Component, ComponentClass, StatelessComponent } from "react";
 import { UserDefDict } from "ldaccess/UserDefDict";
+import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from "ldaccess/kvConvenienceFns";
+import { compNeedsUpdate } from "../reactUtils/compUtilFns";
 
 /**
  * @author Jonathan Schneider
@@ -31,37 +33,12 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 type OwnProps = {
 	singleKV: IKvStore;
 } & LDOwnProps;
-/*type ConnectedState = {
+
+type BaseDataTypeState = {
+	heading: string,
+	singleKV: IKvStore,
+	singleKVKey: string
 };
-
-type ConnectedDispatch = {
-	//fileChange: (fileList: FileList, url: string) => void;
-};*/
-
-/*export type LDConnectedDispatch = {
-	notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
-};*/
-
-/*const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): LDConnectedState => {
-	let tokenString: string = ownProps ? ownProps.ldTokenString : null;
-	let ldOptionsLoc: ILDOptions = tokenString ? state.ldoptionsMap[tokenString] : null;
-	return {
-		ldOptions: ldOptionsLoc
-	};
-};
-
-const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>, ownProps: OwnProps): LDConnectedDispatch => ({
-	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
-		if (!ldOptions) {
-			let kvStores: IKvStore[] = [ownProps.singleKV];
-			let lang: string;
-			let alias: string = ownProps.ldTokenString;
-			dispatch(ldOptionsClientSideCreateAction(kvStores, lang, alias));
-		} else {
-			dispatch(ldOptionsClientSideUpdateAction(ldOptions));
-		}
-	}
-});*/
 
 let bdts: LDBaseDataType[] = [LDDict.Boolean, LDDict.Integer, LDDict.Double, LDDict.Text, LDDict.Date, LDDict.DateTime];
 let bpcfgs: BlueprintConfig[] = new Array();
@@ -70,18 +47,23 @@ for (var bdt in bdts) {
 	if (bdts.hasOwnProperty(bdt)) {
 		var elem = bdts[bdt];
 		//let cfgType: string = LDDict.CreateAction;
-		let cfgIntrprtKeys: string[] = [];
+		let cfgIntrprtKeys: string[] = [LDDict.description, UserDefDict.singleKvStore];
 		let initialKVStores: IKvStore[] = [
-			{
-				key: UserDefDict.singleKvStore,
-				value: undefined,
-				ldType: elem
-			},
 			{
 				key: LDDict.description,
 				value: undefined,
 				ldType: LDDict.Text
-			}
+			},
+			{//if singleKvStore is not used explicitly, BaseDataTypeInput tries to determine the key dynamically
+				key: UserDefDict.singleKvStore,
+				value: undefined,
+				ldType: elem
+			},
+			{//one for output, gets ignored
+				key: UserDefDict.singleKvStore,
+				value: undefined,
+				ldType: elem
+			},
 		];
 		let bpCfg: BlueprintConfig = {
 			subItptOf: undefined,
@@ -95,144 +77,179 @@ for (var bdt in bdts) {
 		bpcfgs.push(bpCfg);
 	}
 }
-class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
+class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDispatch & OwnProps, BaseDataTypeState>
 	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	initialKvStores: IKvStore[];
 
-	state = {
-		singleKV: null
-	};
 	constructor(props?: LDConnectedState & LDConnectedDispatch & OwnProps) {
 		super(props);
-		//if (!props) {
+		this.cfg = this.constructor["cfg"];
 		this.render = () => null;
-		//}
-		/* else {
-				if (props.ldOptions && props.ldOptions.resource.kvStores.length > 0) {
-					this.determineRenderFn(nextSingleKV.ldType);
-				}
-			}*/
+		this.state = {
+			heading: "",
+			singleKV: null,
+			singleKVKey: UserDefDict.singleKvStore
+		};
 	}
 	consumeLDOptions = (ldOptions: ILDOptions) => {
 		return;
 	}
 
 	componentWillReceiveProps(nextProps, nextContext): void {
-		if (nextProps.ldOptions) {
-			let nextSingleKV = nextProps.ldOptions.resource.kvStores[0];
-			if (this.props.ldOptions && nextSingleKV) {
-				let prevKVStore = this.props.ldOptions.resource.kvStores[0];
-				if (prevKVStore.ldType !== nextSingleKV.ldType) {
-					this.determineRenderFn(nextSingleKV.ldType);
-				}
-			}
-			this.setState({ ...this.state, singleKV: nextSingleKV });
+		if (compNeedsUpdate(nextProps, this.props)) {
+			this.handleKVs(nextProps);
 		}
 	}
 
 	handleChange = (evtval) => {
 		let newLDOptionsObj = ldOptionsDeepCopy(this.props.ldOptions);
-		let modSingleKV: IKvStore = newLDOptionsObj.resource.kvStores[0];
+		let modSingleKV: IKvStore = getKVStoreByKey(newLDOptionsObj.resource.kvStores, this.state.singleKVKey);
 		modSingleKV.value = evtval;
 		this.setState({ ...this.state, singleKV: modSingleKV });
 		//TODO: it might be a good idea to debounce before updating the application state
-		//this.props.ldOptions.resource.kvStores = [modSingleKV];
-		this.props.dispatchKvOutput([modSingleKV], this.props.ldTokenString, this.props.outputKVMap);
-		//this.props.notifyLDOptionsChange(newLDOptionsObj);
-		//this.setState({...this.state, [name]: value});
+		this.props.dispatchKvOutput([modSingleKV], this.props.ldTokenString, this.outputKVMap);
 	}
 
 	componentWillMount() {
-		this.state.singleKV = { ...this.initialKvStores[0] }; //TODO: check, if this can be done with the setState fn. Only needed for determineRenderFn
-		//this.setState({ ...this.state, singleKV: this.initialKvStores[0]});
-		let baseDT: LDBaseDataType = this.state.singleKV.ldType as LDBaseDataType;
+		let initialSingleKV = { ...getKVStoreByKey(this.initialKvStores, this.state.singleKVKey) };
+		let baseDT: LDBaseDataType = initialSingleKV.ldType as LDBaseDataType;
 		this.determineRenderFn(baseDT);
 		if (!this.props.ldOptions) {
 			this.props.notifyLDOptionsChange(null);
 		} else {
 			if (this.props.ldOptions.resource.kvStores.length > 0) {
-				let mountSingleKv: IKvStore = this.props.ldOptions.resource.kvStores[0];
-				this.setState({ ...this.state, singleKV: mountSingleKv });
+				this.handleKVs(this.props);
 			}
 		}
 	}
-	parseBoolean: any = (inputKv): boolean => {
+	parseBoolean = (inputKv): boolean => {
 		if (!inputKv) return false;
 		let input = inputKv.value;
 		return input === undefined || input === null ? false : input;
 	}
-	parseText: any = (inputKv): string => {
+	parseText = (inputKv): string => {
 		if (!inputKv) return "";
 		let input = inputKv.value;
 		return input ? input : '';
 	}
-	parseDate: any = (inputKv): Date => {
+	parseDate = (inputKv): Date => {
 		if (!inputKv) return new Date();
 		let input = inputKv.value;
 		return input ? input : new Date();
 	}
-	parseTime: any = (inputKv): Date => {
+	parseTime = (inputKv): Date => {
 		if (!inputKv) return new Date();
 		let input = inputKv.value;
 		return input ? input : new Date();
 	}
-	parseNumber: any = (inputKv): number => {
+	parseNumber = (inputKv): number => {
 		if (!inputKv) return 0;
 		let input = inputKv.value;
 		return input ? input : 0;
 	}
-	parseLabel: any = (inputKv): string => {
+	parseLabel = (inputKv, descrKv: IKvStore): string => {
+		if (descrKv) {
+			if (descrKv.ldType === LDDict.Text && descrKv.value !== null && descrKv.value !== undefined) {
+				return descrKv.value;
+			}
+		}
 		if (!inputKv) return "";
 		let input = inputKv.key;
 		return input ? input : '';
 	}
+
+	private handleKVs(props: LDOwnProps & LDConnectedState) {
+		if (props.ldOptions) {
+			let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
+			let newSingleKVKey: string = this.determineSingleKVKey(pLdOpts.resource.kvStores);
+			let nextDescription = getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, LDDict.description);
+			let nextSingleKV = getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, newSingleKVKey);
+			if (this.props.ldOptions && nextSingleKV) {
+				let prevKVStore = getKVStoreByKey(this.props.ldOptions.resource.kvStores, newSingleKVKey);
+				if ((!prevKVStore && nextSingleKV) || prevKVStore.ldType !== nextSingleKV.ldType) {
+					this.determineRenderFn(nextSingleKV.ldType as LDBaseDataType);
+				}
+			}
+			this.outputKVMap = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, UserDefDict.outputKVMapKey));
+			let desc = this.parseLabel(nextSingleKV, nextDescription);
+			this.setState({ ...this.state, singleKV: nextSingleKV, heading: desc, singleKVKey: newSingleKVKey });
+		}
+	}
+
+	private determineSingleKVKey(kvStores: IKvStore[]): string {
+		let rv: string = UserDefDict.singleKvStore;
+		let candidates: IKvStore[] = [];
+		if (kvStores) {
+			for (let idx = 0; idx < kvStores.length; idx++) {
+				const a = kvStores[idx];
+				if (a.key === UserDefDict.singleKvStore) break;
+				if (a.key === UserDefDict.outputKVMapKey) continue;
+				if (kvStores[idx].ldType === this.cfg.canInterpretType) {
+					candidates.push(kvStores[idx]);
+				}
+			}
+		}
+		if (candidates.length === 1) {
+			rv = candidates[0].key as string;
+		} else {
+			candidates.filter((a) => !this.cfg.interpretableKeys.includes(a.key));
+			rv = candidates.length > 0 ? candidates[0].key : rv;
+		}
+		return rv;
+	}
+
 	private determineRenderFn = (baseDT: LDBaseDataType) => {
 		switch (baseDT) {
 			case LDDict.Boolean:
 				this.render = () => {
+					const { heading } = this.state;
 					let parsedBoolean = this.parseBoolean(this.state.singleKV);
 					return <Switch checked={parsedBoolean}
-						label={this.parseLabel(this.state.singleKV)}
+						label={heading}
 						onChange={(evt) => this.handleChange(evt)} />;
 				};
 				break;
 			case LDDict.Integer:
 				this.render = () => {
+					const { heading } = this.state;
 					let parsedNumber = this.parseNumber(this.state.singleKV);
 					return <Input type='number'
-						label={this.parseLabel(this.state.singleKV)}
-						name={this.parseLabel(this.state.singleKV)}
+						label={heading}
+						name={heading}
 						value={parsedNumber}
 						onChange={(evt) => this.handleChange(evt)} />;
 				};
 				break;
 			case LDDict.Double:
 				this.render = () => {
+					const { heading } = this.state;
 					let parsedNumber = this.parseNumber(this.state.singleKV);
 					return <Input type='number'
-						label={this.parseLabel(this.state.singleKV)}
-						name={this.parseLabel(this.state.singleKV)}
+						label={heading}
+						name={heading}
 						value={parsedNumber}
 						onChange={(evt) => this.handleChange(evt)} />;
 				};
 				break;
 			case LDDict.Text:
 				this.render = () => {
+					const { heading } = this.state;
 					let parsedText = this.parseText(this.state.singleKV);
 					return <Input type='text'
-						label={this.parseLabel(this.state.singleKV)}
-						name={this.parseLabel(this.state.singleKV)}
+						label={heading}
+						name={heading}
 						value={parsedText}
 						onChange={(evt) => this.handleChange(evt)} />;
 				};
 				break;
 			case LDDict.Date:
 				this.render = () => {
+					const { heading } = this.state;
 					var parsedDate = this.parseDate(this.state.singleKV);
 					return <DatePicker
-						label={this.parseLabel(this.state.singleKV)}
+						label={heading}
 						onChange={(evt) => this.handleChange(evt)}
 						value={parsedDate}
 						sundayFirstDayOfWeek />;
@@ -240,11 +257,12 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 				break;
 			case LDDict.DateTime:
 				this.render = () => {
+					const { heading } = this.state;
 					var parsedDate = this.parseDate(this.state.singleKV);
 					var parsedTime = this.parseTime(this.state.singleKV);
 					return <div>
 						<DatePicker
-							label={this.parseLabel(this.state.singleKV)}
+							label={heading}
 							onChange={(evt) => this.handleChange(evt)}
 							value={parsedDate}
 							sundayFirstDayOfWeek />;

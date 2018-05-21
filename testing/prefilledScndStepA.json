@@ -2,57 +2,88 @@
   "subItptOf": "aSub",
   "canInterpretType": "AName-ObjectType",
   "nameSelf": "AName",
-  "initialKvStores": [
-    {
-      "key": "InterpreterReferenceMapKey",
-      "value": {
-        "aSub": {
-          "subItptOf": "BHead",
-          "canInterpretType": "BHead-ObjectType",
-          "nameSelf": "aSub",
-          "initialKvStores": [
-            {
-              "key": "freeContainer",
-              "value": {
-                "objRef": "aImgHS",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": [
-            "freeContainer"
-          ]
-        },
-        "aImgHS": {
-          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
-          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
-          "nameSelf": "aImgHS",
-          "initialKvStores": [
-            {
-              "key": "HeaderText",
-              "value": "Header from RefMap-Def",
-              "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "SubHeaderText",
-              "value": "Sub-Header From RefMap-Def",
-              "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "Description",
-              "value": "This is a description from the RefMap-Definition",
-              "ldType": "http://schema.org/Text"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
-        }
+  "initialKvStores": [{
+    "key": "InterpreterReferenceMapKey",
+    "value": {
+      "aSub": {
+        "subItptOf": "BHead",
+        "canInterpretType": "BHead-ObjectType",
+        "nameSelf": "aSub",
+        "initialKvStores": [{
+          "key": "freeContainer",
+          "value": {
+            "objRef": "aImgHS",
+            "propRef": null
+          },
+          "ldType": "InterpreterClassType"
+        }],
+        "crudSkills": "cRud",
+        "interpretableKeys": [
+          "freeContainer"
+        ]
       },
-      "ldType": "InterpreterReferenceMapType"
-    }
-  ],
+      "aImgHS": {
+        "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
+        "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+        "nameSelf": "aImgHS",
+        "initialKvStores": [{
+            "key": "HeaderText",
+            "value": "Header from RefMap-Def",
+            "ldType": "http://schema.org/Text"
+          },
+          {
+            "key": "SubHeaderText",
+            "value": "Sub-Header From RefMap-Def",
+            "ldType": "http://schema.org/Text"
+          },
+          {
+            "key": "Description",
+            "value": "This is a description from the RefMap-Definition",
+            "ldType": "http://schema.org/Text"
+          },
+          {
+            "key": "HeaderInterpreter",
+            "value": {
+              "objRef": "textInputComp",
+              "propRef": null
+            },
+            "ldType": "InterpreterClassType"
+          },
+          {
+            "key": "SubHeaderText",
+            "value": {
+              "objRef": "textInputComp",
+              "propRef": "singleKvStore"
+            },
+            "ldType": "http://schema.org/Text"
+          }
+        ],
+        "crudSkills": "cRud",
+        "interpretableKeys": [
+          "HeaderInterpreter", "SubHeaderText"
+        ]
+      },
+      "textInputComp": {
+        "subItptOf": "shnyder/react-toolbox/http://schema.org/Text",
+        "canInterpretType": "http://schema.org/Boolean",
+        "nameSelf": "textInputComp",
+        "initialKvStores": [{
+            "key": "http://schema.org/description",
+            "value": "a description Text",
+            "ldType": "http://schema.org/Text"
+          },
+          {
+            "key": "singleKvStore",
+            "value": "some Text",
+            "ldType": "http://schema.org/Text"
+          }
+        ],
+        "crudSkills": "cRud",
+        "interpretableKeys": []
+      }
+    },
+    "ldType": "InterpreterReferenceMapType"
+  }],
   "crudSkills": "cRud",
   "interpretableKeys": []
 }
