@@ -13,6 +13,7 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { PureRefMapItpt } from "../generic/RefMapItpt-component";
 import { EANScannerName, EANScanner } from "../peripherals/camera/EAN-scanner";
 import { SingleImageSelectorName, PureSingleImageSelector } from "../ywqd/content/SingleImageSelector";
+import { NavSearchBarName, PureNavSearchBar } from "../ywqd/navigation/NavSearchBar";
 
 /**
  * sorry for the long function name //TODO: change
@@ -34,6 +35,7 @@ export function initReactToolBoxRetrieverFnAsDefault() {
 	appIntRetr.addItpt(ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc, "cRud");
 	appIntRetr.addItpt(NavBarWActionsName, PureNavBarWActions, "cRud");
 	appIntRetr.addItpt(BottomNavigationName, PureBottomNavigation, "cRud");
+	appIntRetr.addItpt(NavSearchBarName, PureNavSearchBar, "cRud");
 
 	//register routing interpreters
 	appIntRetr.addItpt(RouteComponentName, PureRouteComponent, "cRud");

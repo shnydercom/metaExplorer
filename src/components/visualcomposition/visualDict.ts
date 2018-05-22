@@ -14,9 +14,11 @@ export enum VisualDict {
 	//Router-related Types
 	route_added = "Route_Added",
 	route_new = "Route_New",
+	route_popLast = "Route_PopLast", //for back-navigation
 
 	//NavigationElement-keys
 	routeSend_search = "RouteSend_Search",
 	routeSend_back = "RouteSend_Back",
+	searchText = "searchText"
 
 }

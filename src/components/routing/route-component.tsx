@@ -21,6 +21,7 @@ import { generateIntrprtrForProp } from '../generic/generatorFns';
 import { checkAllFilled } from 'GeneralUtils';
 import { Route } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
 
 type ConnectedState = {
 };
@@ -42,7 +43,7 @@ let initialKVStores: IKvStore[] = [
 	},
 	{
 		key: ROUTE_ISEXACT,
-		value: undefined,
+		value: false,
 		ldType: LDDict.Boolean
 	},
 	{
@@ -63,17 +64,12 @@ let bpCfg: BlueprintConfig = {
 export type RouteComponentState = {
 	isExact: boolean;
 	toPath: string;
-	displayedComponent: any;
+	displayedComponent: React.ReactElement<LDConnectedState & LDConnectedDispatch & LDOwnProps>;
 };
 
 @ldBlueprint(bpCfg)
 export class PureRouteComponent extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, RouteComponentState>
 	implements IBlueprintItpt {
-	state = {
-		isExact: false,
-		toPath: "",
-		displayedComponent: null
-	};
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
@@ -81,18 +77,29 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		if (props) {
-			this.handleKVs(props);
-		}
+		this.state = {
+			isExact: false,
+			toPath: "",
+			displayedComponent: null
+		};
 	}
 	componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
 		if (compNeedsUpdate(nextProps, this.props)) {
 			this.handleKVs(nextProps);
 		}
 	}
+	componentWillMount() {
+		if (this.props.ldOptions) {
+			if (this.props.ldOptions.resource.kvStores.length > 0) {
+				this.handleKVs(this.props);
+			}
+		}
+	}
 	render() {
 		const { isExact, toPath, displayedComponent } = this.state;
-		return <Route exact={ isExact} path={toPath} component={displayedComponent} />;
+		console.log(this.state);
+		const compExecFn = () => <>{displayedComponent}</>;
+		return <Route exact={isExact} path={toPath} component={compExecFn} />;
 	}
 
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
@@ -101,12 +108,19 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 		let displayedComponent: any = null;
 		let isExact: boolean;
 		let toPath: string;
+		const retriever = !props.ldOptions ? DEFAULT_ITPT_RETRIEVER_NAME : this.props.ldOptions.visualInfo.retriever;
 		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
 			kvs = props.ldOptions.resource.kvStores;
-			displayedComponent = generateIntrprtrForProp(kvs, VisualDict.freeContainer, props.ldOptions.visualInfo.retriever, this.props.routes);
+			displayedComponent = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
+		}
+		if (!displayedComponent) {
+			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
+			displayedComponent = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
 		}
 		isExact = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, ROUTE_ISEXACT));
+		isExact = isExact === undefined ? false : isExact;
 		toPath = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, ROUTE_PATH));
+		this.setState({ displayedComponent, toPath, isExact });
 	}
 }
 export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureRouteComponent);

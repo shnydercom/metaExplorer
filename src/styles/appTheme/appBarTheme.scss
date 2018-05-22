@@ -328,8 +328,18 @@ canvas.drawingBuffer {
     justify-content: flex-end;
     flex-direction: column;
     padding-bottom: var(--appbar-h-padding);
-    >button >span {
+    >button>span {
       font-size: 170% !important;
     }
+  }
+}
+
+.searchbar-input {
+  height: 100%;
+  width: 100%;
+  padding: 10pt 0pt 0pt 0pt !important;
+  >input {
+    font-size: 200%;
+    padding-left: 8pt;
   }
 }
