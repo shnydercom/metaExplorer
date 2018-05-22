@@ -75,7 +75,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 		let newOutputKVMap: OutputKVMap = { [targetID]: { targetLDToken: newToken, targetProperty: null } };
 		return (
 			<div className={"out-port top-port"}>
-				<div>
+				<div onFocus={() => this.props.model.getParent().setSelected(false)}>
 					{label}
 					<BaseDataTypeDropDown selectionChange={(newType) => { this.onPortTypeChange(newType, this.props); }} />
 					{this.state.portType ? <BaseContainer ldTokenString={targetID} searchCrudSkills="CrUd" /> : null}

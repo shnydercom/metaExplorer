@@ -184,7 +184,7 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 		if (kvStores) {
 			for (let idx = 0; idx < kvStores.length; idx++) {
 				const a = kvStores[idx];
-				if (a.key === UserDefDict.singleKvStore) break;
+				if (a.key === UserDefDict.singleKvStore) return rv;
 				if (a.key === UserDefDict.outputKVMapKey) continue;
 				if (kvStores[idx].ldType === this.cfg.canInterpretType) {
 					candidates.push(kvStores[idx]);
