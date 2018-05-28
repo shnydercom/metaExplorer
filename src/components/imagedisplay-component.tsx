@@ -35,7 +35,6 @@ let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: "shnyder/imageDisplay",
-	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"

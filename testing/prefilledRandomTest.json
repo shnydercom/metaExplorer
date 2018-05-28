@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "e50eca39-5c21-42ec-a0bf-207f266e5b46": {
-          "subItptOf": "ywqd/NavBarWActions",
-          "canInterpretType": "ywqd/NavBarWActions-ObjectType",
+          "subItptOf": "shnyder/md/NavBarWActions",
+          "canInterpretType": "shnyder/md/NavBarWActions-ObjectType",
           "nameSelf": "e50eca39-5c21-42ec-a0bf-207f266e5b46",
           "initialKvStores": [
             {
@@ -37,8 +37,8 @@
           "interpretableKeys": []
         },
         "a39b2dbf-e61e-4650-a0fb-95980e368759": {
-          "subItptOf": "ywqd/BottomNav",
-          "canInterpretType": "ywqd/BottomNav-ObjectType",
+          "subItptOf": "shnyder/md/BottomNav",
+          "canInterpretType": "shnyder/md/BottomNav-ObjectType",
           "nameSelf": "a39b2dbf-e61e-4650-a0fb-95980e368759",
           "initialKvStores": [
             {

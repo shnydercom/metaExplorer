@@ -2,7 +2,7 @@ import jasmine from 'jasmine';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { IKvStore } from 'ldaccess/ikvstore';
-import { DefaultItptRetriever } from 'defaults/DefaultInterpreterRetriever';
+import { DefaultItptRetriever } from 'defaults/DefaultItptRetriever';
 import { ImgHeadSubDescIntrprtrName } from 'components/visualcomposition/ImgHeadSubDescIntrprtr';
 
 let bpCfg: BlueprintConfig = {
@@ -34,7 +34,6 @@ describe("ldBlueprint decorator func", () => {
         var newLDContainer: LDBlueprintContainerClass = new LDBlueprintContainerClass();
         //var newLDContainer = bpCfg;
         //var dir: PureImgDisplay = new PureImgDisplay({});
-        //var ihsdi = dir.getInterpreterByNameSelf(ImgHeadSubDescIntrprtrName);
         it("POJO should be created", () => {
             expect(newLDContainer).toBeDefined();
           //  expect(dir).toBeDefined();

@@ -31,8 +31,8 @@ export type LDConnectedDispatch = {
 	 */
 	notifyLDOptionsRefMapSplitChange: (ldOptions: ILDOptions, refMap: BlueprintConfig) => void;
 	/**
-	 * dispatches changes inside an interpreter to the store, use this to handle updating values.
-	 * @param thisLdTkStr is the LD-Token of the interpreter from which the update gets dispatched
+	 * dispatches changes inside an itpt to the store, use this to handle updating values.
+	 * @param thisLdTkStr is the LD-Token of the itpt from which the update gets dispatched
 	 * @param updatedKvMap the values that shall be updated. Unchanged values of the kvMap aren't affected
 	 */
 	dispatchKvOutput: (changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => void;

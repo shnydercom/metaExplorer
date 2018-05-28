@@ -5,24 +5,22 @@ import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
-//import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
-import { appItptMatcherFn } from 'appconfig/appInterpreterMatcher';
+import { appItptMatcherFn } from 'appconfig/appItptMatcher';
 
 import { IKvStore } from 'ldaccess/ikvstore';
 import { LDDict } from 'ldaccess/LDDict';
 import { IHypermediaContainer } from 'hydraclient.js/src/DataModel/IHypermediaContainer';
 import { singleHyperMediaToKvStores, multiHyperMediaToKvStores } from 'ldaccess/converterFns';
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
-//import { IHypermedia } from 'hydraclient.js/src/DataModel/IHypermedia';
 import { LDConsts } from 'ldaccess/LDConsts';
-import { isInterpreter, isLDOptionsSame, ldOptionsDeepCopy } from 'ldaccess/ldUtils';
+import { isItpt, isLDOptionsSame, ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
 import { ILDResource } from 'ldaccess/ildresource';
 import { ILDToken, NetworkPreferredToken, linearLDTokenStr } from 'ldaccess/ildtoken';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
+import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 import { isReactComponent } from '../reactUtils/reactUtilFns';
 import { LDError } from 'appstate/LDError';
 import { Component, ComponentClass, StatelessComponent } from 'react';
@@ -74,7 +72,7 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 		let newreactCompInfo = [];
 		if (ldOptions.isLoading) return;
 		if (!interpretedBy || !isLDOptionsSame(this.props.ldOptions, ldOptions)) {
-			//i.e. first time this ldOptions-Object gets interpreted, or interpreter-change
+			//i.e. first time this ldOptions-Object gets interpreted, or itpt-change
 			let newldOptions = ldOptionsDeepCopy(ldOptions);
 			newldOptions.visualInfo.interpretedBy = this.cfg.nameSelf;
 			this.props.notifyLDOptionsLinearSplitChange(newldOptions);

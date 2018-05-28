@@ -9,14 +9,13 @@ import { LDDict } from "ldaccess/LDDict";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { isObjPropertyRef, ldBlueprintCfgDeepCopy } from "ldaccess/ldUtils";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
-import { ITPT_REFMAP_BASE } from "ldaccess/iinterpreter-retriever";
+import { ITPT_REFMAP_BASE } from "ldaccess/iitpt-retriever";
 import { refMapBaseTokenStr, ILDToken, NetworkPreferredToken, createConcatNetworkPreferredToken } from "ldaccess/ildtoken";
-import { appItptMatcherFn } from "appconfig/appInterpreterMatcher";
-import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxInterpreterRetriever";
+import { appItptMatcherFn } from "appconfig/appItptMatcher";
+import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
 import { Store } from "redux";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
 import { connectNonVisLDComp } from "sidefx/nonVisualConnect";
-//import { appItptMatcherFn } from "appconfig/appInterpreterMatcher";
 
 /**
  * a duck for ReferenceMap-handling.
@@ -57,10 +56,6 @@ export const refMapReducer = (
 				isRefMapNeedsUpdate = true;
 			}*/
 			if (isRefMapNeedsUpdate) {
-				/*let ldOptionsRefMapIdx = ldOptionsBase.resource.kvStores.findIndex((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
-				if (ldOptionsRefMapIdx) {
-					ldOptionsBase.resource.kvStores.splice(ldOptionsRefMapIdx, 1);
-				}*/
 				//makes sure a copy of the RefMap-KV exists in the ILDOptions-Object (basically pushes itpt-declaration
 				// to runtime-model, while making sure the declaration isn't changed by being used)
 				let stateCopy = { ...state };
@@ -75,9 +70,6 @@ export const refMapReducer = (
 			} else {
 				return state;
 			}
-		//throw new Error("not implemented, interpret RefMaps recursively. Build functions" +
-		//	" for each part of a BlueprintConfig, so that creation and deletion can use the same traversal");
-		//return state;
 		case REFMAP_SUCCESS:
 			return state;
 		default:
@@ -257,7 +249,7 @@ export const refMapEpic = (action$: ActionsObservable<any>, store: Store<Explore
 			let ldOptionsObj: ILDOptions = action.ldOptionsBase;
 			let baseRefMap: BlueprintConfig = action.refMap;
 			let refMapREQUESTPromise = new Promise((resolve, reject) => {
-				createInterpreters(ldOptionsObj, store);
+				createItpts(ldOptionsObj, store);
 				ldOptionsObj.isLoading = false;
 				resolve(ldOptionsObj);
 			});
@@ -277,7 +269,7 @@ interface InstancePrepItm {
 	itpt: any;
 }
 
-const createInterpreters = (
+const createItpts = (
 	ldOptions: ILDOptions,
 	store: Store<ExplorerState>
 ) => {

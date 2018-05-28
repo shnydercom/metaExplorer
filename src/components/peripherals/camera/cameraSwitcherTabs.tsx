@@ -22,7 +22,7 @@ export class CameraSwitcherTabs extends Component<CameraSwitcherTabsProps, {}>{
 			</div>;
 		});
 		return (
-			<div className="ywqd-camera-switcher-tabs">
+			<div className="md-camera-switcher-tabs">
 				{reactComps}
 			</div>
 		);

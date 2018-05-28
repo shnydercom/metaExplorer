@@ -3,7 +3,7 @@ import { ILDToken } from 'ldaccess/ildtoken';
 import { ILDResource } from 'ldaccess/ildresource';
 
 /**
- * this interface is used for assigning values to interpreters at runtime
+ * this interface is used for assigning values to itpts at runtime
  */
 export interface ILDOptions {
 	lang: string;
@@ -14,7 +14,7 @@ export interface ILDOptions {
 }
 
 /**
- * visual details for ILDOptions, which interpreter to use and which retriever to get it from
+ * visual details for ILDOptions, which itpt to use and which retriever to get it from
  */
 export interface IVisInfo {
 	interpretedBy?: string;

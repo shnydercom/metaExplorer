@@ -9,7 +9,7 @@ import { IKvStore } from 'ldaccess/ikvstore';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
 import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
-import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
+import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 import { OutputKVMap } from 'ldaccess/ldBlueprint';
 
 export const LDOPTIONS_CLIENTSIDE_CREATE = 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE';

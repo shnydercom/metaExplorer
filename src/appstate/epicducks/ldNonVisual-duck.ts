@@ -9,12 +9,12 @@ export type LDNonVisAction =
 	| { type: 'shnyder/LDNONVIS_DELETE', alias: string };
 
 /**
- * sets a non-visual interpreter. If one exists with that alias and the cfg is same it will keep the old one
- * @param alias the key/alias under which the interpreter is saved
- * @param intrprtr the interpreter-object
+ * sets a non-visual itpt. If one exists with that alias and the cfg is same it will keep the old one
+ * @param alias the key/alias under which the itpt is saved
+ * @param itpt the itpt-object
  */
-export const ldNonVisSETAction = (alias: string, intrprtr: IBlueprintItpt) =>
-	({ type: LDNONVIS_SET, alias, intrprtr });
+export const ldNonVisSETAction = (alias: string, itpt: IBlueprintItpt) =>
+	({ type: LDNONVIS_SET, alias, itpt });
 export const ldNonVisDeleteAction = (alias: string) =>
 	({ type: LDNONVIS_DELETE, alias });
 

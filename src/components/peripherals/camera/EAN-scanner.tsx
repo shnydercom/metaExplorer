@@ -63,7 +63,6 @@ let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: EANScannerName,
-	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
@@ -190,8 +189,9 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 
 	componentWillUnmount() {
 		Quagga.offDetected(this.onBarCodeDetected);
-		if (this.state.curStep !== EANScannerStateEnum.isError)
+		if (this.state.curStep !== EANScannerStateEnum.isError && this.state.curId !== null) {
 			Quagga.stop();
+		}
 		this.setState({ curStep: EANScannerStateEnum.isLoading, vidDeviceList: null, curId: null });
 	}
 
@@ -211,10 +211,10 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 				break;
 		}
 		return (
-			<div className="ywqd-barcode-reader">
+			<div className="md-barcode-reader">
 				<div id="interactive" className="viewport" />
 				{isDisplayImage ?
-					<img className="ywqd-large-image" src={stateVisLnk} height="100px" /> :
+					<img className="md-large-image" src={stateVisLnk} height="100px" /> :
 					isMultiVidSource ?
 						<CameraSwitcherTabs activeCameraId={curId} vidDeviceList={vidDeviceList} onTabChanged={(newActiveId) => {
 							Quagga.offDetected(this.onBarCodeDetected);
@@ -239,7 +239,7 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 		console.dir(result);
 		let barcode: string = result.codeResult.code;
 		console.log(barcode);
-		const barcodeKV: IKvStore = 	{
+		const barcodeKV: IKvStore = {
 			key: LDDict.gtin8,
 			value: barcode,
 			ldType: LDDict.Text

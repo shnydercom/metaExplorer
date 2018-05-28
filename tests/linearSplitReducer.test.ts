@@ -1,6 +1,6 @@
 import jasmine from 'jasmine';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
+import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 import { ILDToken, NetworkPreferredToken, linearLDTokenStr } from 'ldaccess/ildtoken';
 import { LDDict } from 'ldaccess/LDDict';
 import { ILDOptionsMapStatePart } from 'appstate/store';

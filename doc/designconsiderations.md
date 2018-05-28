@@ -19,24 +19,24 @@ anything else is internal
 declarative linked data: ldBlueprints is used for class-level declarations, ldOptions for instance-level declaration handling and changing values 
 
 ##redesign-decisions:
-- @ldBlueprint.interpreterRetriever has been disabled. The reason for that is
-    -- a) DRY: It was already added in DefaultInterpreterMatcher
+- @ldBlueprint.itptRetriever has been disabled. The reason for that is
+    -- a) DRY: It was already added in DefaultItptMatcher
     -- b) although self-adding would be nice, it would _only_ add the Pure**-class, not the redux-wrapped function
 
-# connecting react, redux and ld-interpreters
+# connecting react, redux and ld-itpts
 - functions and classes should be moved out of the store, rather keep a reference to a runtime-store for such things
-- all ld-interpreters should implement the following, if they want to interact with redux
+- all ld-itpts should implement the following, if they want to interact with redux
 type OwnProps = {
         ldTokenString: string;
 };
 export type LDConnectedState = {
         ldOptions: ILDOptions
 };
-- input/change-interpreters should also implement this:
+- input/change-itpts should also implement this:
 export type LDConnectedDispatch = {
         notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
 };
-- the ldTokenString is important to make clear, which part of the ld the interpreter is supposed to display. The ldOptions are needed for the consume-function of the ldBlueprint and will trigger updates on the ldOptions
+- the ldTokenString is important to make clear, which part of the ld the itpts is supposed to display. The ldOptions are needed for the consume-function of the ldBlueprint and will trigger updates on the ldOptions
 - when mutating from initialKvStores, create a new object like so: this.state.singleKV = {...this.initialKvStores[0]};
 
 ## style considerations/code convenctions/patterns:

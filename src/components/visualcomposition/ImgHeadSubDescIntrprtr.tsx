@@ -1,6 +1,4 @@
 import { connect } from 'react-redux';
-
-import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { ExplorerState } from 'appstate/store';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
@@ -16,9 +14,9 @@ import { generateIntrprtrForProp } from 'components/generic/generatorFns';
 import { getKVValue, isObjPropertyRef } from 'ldaccess/ldUtils';
 import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
-import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
+import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 import { ObjectPropertyRef } from 'ldaccess/ObjectPropertyRef';
-import { appItptMatcherFn } from 'appconfig/appInterpreterMatcher';
+import { appItptMatcherFn } from 'appconfig/appItptMatcher';
 import { isReactComponent } from '../reactUtils/reactUtilFns';
 
 type OwnProps = {
@@ -74,7 +72,6 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ImgHeadSubDescIntrprtrName,
-	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"

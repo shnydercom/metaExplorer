@@ -16,10 +16,10 @@ import { ILDResource } from "ldaccess/ildresource";
 import { ILDToken, NetworkPreferredToken, createConcatNetworkPreferredToken, refMapBaseTokenStr } from "ldaccess/ildtoken";
 import { isObjPropertyRef, ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { LDConsts } from "ldaccess/LDConsts";
-import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultInterpreterRetriever";
+import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { Component } from "react";
-import { appItptMatcherFn } from "appconfig/appInterpreterMatcher";
-import { ITPT_REFMAP_BASE } from "ldaccess/iinterpreter-retriever";
+import { appItptMatcherFn } from "appconfig/appItptMatcher";
+import { ITPT_REFMAP_BASE } from "ldaccess/iitpt-retriever";
 
 export type OwnProps = LDOwnProps & {
 	searchCrudSkills: string;
@@ -37,7 +37,6 @@ let bpCfg: BlueprintConfig = {
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
-//TODO: move state-relevant ldOptionsMap-Entry generation outside of the component, or make this a non-visual interpreter
 @ldBlueprint(bpCfg)
 export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
 	implements IBlueprintItpt {
@@ -83,13 +82,12 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 		let baseRMTkStr = refMapBaseTokenStr(ldTokenString);
 		let BaseComp = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(baseRMTkStr);
 		if (BaseComp === null || BaseComp === undefined) {
-			console.error("InterpreterReferenceMapType-component: interpreter null or undefined");
+			console.error("ItptReferenceMapType-component: itpt null or undefined");
 			return null;
 		}
 		if (isReactComponent(BaseComp)) {
 			const { routes } = this.props;
 			console.log("baseToken: " + baseRMTkStr);
-			//TODO: implement output-handling/change of values in sub-interpreters
 			let nonRMKvStores = ldOptions.resource.kvStores.filter(
 				(itm, idx) => itm.key !== UserDefDict.intrprtrBPCfgRefMapKey);
 			let targetLDToken: ILDToken = new NetworkPreferredToken(this.props.ldTokenString);

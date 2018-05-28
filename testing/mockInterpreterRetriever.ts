@@ -1,5 +1,5 @@
-import { IItptRetriever } from 'ldaccess/iinterpreter-retriever';
-export class MockInterpreterRetriever implements IItptRetriever {
+import { IItptRetriever } from 'ldaccess/iitpt-retriever';
+export class MockItptRetriever implements IItptRetriever {
 	name: string;
 	setDerivedItpt(ldTokenVal: string, itpt: any): void {
 		throw new Error("Method not implemented.");
@@ -26,5 +26,5 @@ export class MockInterpreterRetriever implements IItptRetriever {
 	getItptByNameSelf(nameSelf: string): any { return null; }
 }
 
-export let mockInterpreterRetrieverFn = () => new MockInterpreterRetriever();
+export let mockItptRetrieverFn = () => new MockItptRetriever();
 //"http://localhost:3000/dist/static/productTestObjs/{identifier}.json",

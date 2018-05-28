@@ -2,12 +2,10 @@ import { connect, Dispatch } from 'react-redux';
 
 import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
-//import ImgDisplay from './imagedisplay-component';
 import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
-//import appIntprtrRetr from 'appconfig/appInterpreterRetriever';
 import { IKvStore } from 'ldaccess/ikvstore';
 import { LDDict } from 'ldaccess/LDDict';
 import { Component, ComponentClass, StatelessComponent } from 'react';
@@ -31,19 +29,6 @@ const mapDispatchToProps = (dispatch: Dispatch<ExplorerState>): ConnectedDispatc
     }
 });
 
-/**
- * annotation-candidates:
- * {
- * 	forType:
- * 	"@type":"schema:CreateAction",
- * 	getInterpretableKeys:
- * 	"agent"  //:"schema:Person",
- * 	"result" //:"schema:ImageObject",
- * 	"target" //:"schema:Entrypoint"
- * initialKVStores:
- * 	"target": "'http://localhost:1111/api/ysj/media/upload';"
- * }
- */
 let cfgType: string = LDDict.CreateAction;
 let cfgIntrprtKeys: string[] =
     [LDDict.agent, LDDict.target];
@@ -67,7 +52,6 @@ var bpCfg: BlueprintConfig = {
     subItptOf: null,
     canInterpretType: cfgType,
     nameSelf: "shnyder/imageUpload",
-    //interpreterRetrieverFn: appIntprtrRetr,
     initialKvStores: initialKVStores,
     interpretableKeys: cfgIntrprtKeys,
     crudSkills: "Crud"
@@ -82,16 +66,10 @@ class PureImgUploader extends Component<ConnectedState & ConnectedDispatch & Own
     consumeLDOptions: (ldOptions: ILDOptions) => any;
     onClickFileChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault();
-		/*if (!this.props.isSaving) {
-			this.props.save(this.props.counter.value)
-		}*/
         let fileList: FileList = (e.target as HTMLInputElement).files;
         if (fileList.length > 0) {
             var url: string = this.getStringValFromKey(LDDict.target);
             this.props.fileChange(fileList, url);
-			/*this.imgULsrvc.postNewImage(fileList).then(remoteImgObj => {
-				this.imgReturnWR = Observable.of<IWebResource>(remoteImgObj);
-			});*/
         }
     }
     render() {

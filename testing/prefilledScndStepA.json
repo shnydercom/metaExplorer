@@ -6,8 +6,8 @@
     "key": "InterpreterReferenceMapKey",
     "value": {
       "aSub": {
-        "subItptOf": "BHead",
-        "canInterpretType": "BHead-ObjectType",
+        "subItptOf": "愿望清单/BottomBar",
+        "canInterpretType": "愿望清单/BottomBar-ObjectType",
         "nameSelf": "aSub",
         "initialKvStores": [{
           "key": "freeContainer",
@@ -64,7 +64,7 @@
         ]
       },
       "textInputComp": {
-        "subItptOf": "shnyder/react-toolbox/http://schema.org/Text",
+        "subItptOf": "shnyder/md/http://schema.org/Text",
         "canInterpretType": "http://schema.org/Boolean",
         "nameSelf": "textInputComp",
         "initialKvStores": [{

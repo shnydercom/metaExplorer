@@ -6,7 +6,7 @@ import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { IKvStore } from 'ldaccess/ikvstore';
 import { BlueprintConfig } from 'ldaccess/ldBlueprint';
-import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
+import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 import { ILDOptionsMapStatePart } from 'appstate/store';
 import { RefMapAction, refMapREQUESTAction, refMapReducer } from 'appstate/epicducks/refMap-duck';
 import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
@@ -46,7 +46,7 @@ describe("refMap reducer function", () => {
 	});
 	describe("for a RefMaps' options to be spread across the store,...",
 		() => {
-			it("should fill visualInfo.interpretedBy with the sub-RefMap-Interpreter", () => {
+			it("should fill visualInfo.interpretedBy with the sub-RefMap-Itpt", () => {
 				let reducerResult = refMapReducer(startStore, execAAction);
 				expect(reducerResult[testTokenStr].visualInfo.interpretedBy === "AName");
 			});

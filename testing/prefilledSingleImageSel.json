@@ -1,23 +1,158 @@
 {
-  "subItptOf": "a9075807-e37f-4804-acee-7a2807276838",
-  "canInterpretType": "f-ObjectType",
-  "nameSelf": "f",
-  "initialKvStores": [
-    {
-      "key": "InterpreterReferenceMapKey",
-      "value": {
-        "a9075807-e37f-4804-acee-7a2807276838": {
-          "subItptOf": "shnyder/SingleImageSelector",
-          "canInterpretType": "http://schema.org/CreateAction",
-          "nameSelf": "a9075807-e37f-4804-acee-7a2807276838",
-          "initialKvStores": [],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
-        }
+  "subItptOf": "27b22aa0-6c09-4ec6-b306-296c907f6693",
+  "canInterpretType": "MyNewBarcodeApp-ObjectType",
+  "nameSelf": "MyNewBarcodeApp",
+  "initialKvStores": [{
+    "key": "InterpreterReferenceMapKey",
+    "value": {
+      "27b22aa0-6c09-4ec6-b306-296c907f6693": {
+        "subItptOf": "shnyder/md/NavBarWActions",
+        "canInterpretType": "shnyder/md/NavBarWActions-ObjectType",
+        "nameSelf": "27b22aa0-6c09-4ec6-b306-296c907f6693",
+        "initialKvStores": [{
+            "key": "freeContainer",
+            "value": {
+              "objRef": "226a9915-c8c3-4885-8dc4-6dccb0c98614",
+              "propRef": null
+            },
+            "ldType": "InterpreterClassType"
+          },
+          {
+            "key": "HeaderText",
+            "value": "My Barcodes",
+            "ldType": "http://schema.org/Text"
+          },
+          {
+            "key": "PopOverContent",
+            "value": {
+              "objRef": "46933941-3233-4f2d-9d6e-57dbaf137a4f",
+              "propRef": null
+            },
+            "ldType": "InterpreterClassType"
+          }
+        ],
+        "crudSkills": "cRud",
+        "interpretableKeys": [
+          "freeContainer",
+          "PopOverContent"
+        ]
       },
-      "ldType": "InterpreterReferenceMapType"
-    }
-  ],
+      "226a9915-c8c3-4885-8dc4-6dccb0c98614": {
+        "subItptOf": "愿望清单/BottomBar",
+        "canInterpretType": "愿望清单/BottomBar-ObjectType",
+        "nameSelf": "226a9915-c8c3-4885-8dc4-6dccb0c98614",
+        "initialKvStores": [{
+          "key": "freeContainer",
+          "value": {
+            "objRef": "67384b7b-a5a2-413c-898b-2201412aa01b",
+            "propRef": null
+          },
+          "ldType": "InterpreterClassType"
+        }],
+        "crudSkills": "cRud",
+        "interpretableKeys": [
+          "freeContainer"
+        ]
+      },
+      "67384b7b-a5a2-413c-898b-2201412aa01b": {
+        "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
+        "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+        "nameSelf": "67384b7b-a5a2-413c-898b-2201412aa01b",
+        "initialKvStores": [{
+            "key": "HeaderInterpreter",
+            "value": {
+              "objRef": "cd09fcc9-46be-4af9-a4bd-1f036739908f",
+              "propRef": null
+            },
+            "ldType": "InterpreterClassType"
+          },
+          {
+            "key": "HeaderText",
+            "value": "Barcode Scanner",
+            "ldType": "http://schema.org/Text"
+          },
+          {
+            "key": "SubHeaderText",
+            "value": {
+              "objRef": "cd09fcc9-46be-4af9-a4bd-1f036739908f",
+              "propRef": "http://schema.org/gtin8"
+            },
+            "ldType": "http://schema.org/Text"
+          },
+          {
+            "key": "Description",
+            "value": "Connect a camera and scan a barcode. The EAN-Number will be displayed above instead of \"subHeaderTextPlaceHolder\"",
+            "ldType": "http://schema.org/Text"
+          },
+          {
+            "key": "Description",
+            "value": {
+              "objRef": "46933941-3233-4f2d-9d6e-57dbaf137a4f",
+              "propRef": "searchText"
+            },
+            "ldType": "http://schema.org/Text"
+          },
+          {
+            "key": "FooterInterpreter",
+            "ldType": "InterpreterClassType"
+          }
+        ],
+        "crudSkills": "cRud",
+        "interpretableKeys": [
+          "HeaderInterpreter",
+          "SubHeaderText",
+          "Description",
+          "FooterInterpreter"
+        ]
+      },
+      "cd09fcc9-46be-4af9-a4bd-1f036739908f": {
+        "subItptOf": "shnyder/EANScanner",
+        "canInterpretType": "http://schema.org/ViewAction",
+        "nameSelf": "cd09fcc9-46be-4af9-a4bd-1f036739908f",
+        "initialKvStores": [],
+        "crudSkills": "cRud",
+        "interpretableKeys": []
+      },
+      "46933941-3233-4f2d-9d6e-57dbaf137a4f": {
+        "subItptOf": "shnyder/md/NavSearchBar",
+        "canInterpretType": "shnyder/md/NavSearchBar-ObjectType",
+        "nameSelf": "46933941-3233-4f2d-9d6e-57dbaf137a4f",
+        "initialKvStores": [{
+            "key": "freeContainer",
+            "value": {
+              "objRef": "db530b76-baca-4370-ae6b-41a994ab1e4b",
+              "propRef": null
+            },
+            "ldType": "InterpreterClassType"
+          },
+          {
+            "key": "searchText",
+            "value": "nesting components",
+            "ldType": "http://schema.org/Text"
+          }
+        ],
+        "crudSkills": "cRud",
+        "interpretableKeys": [
+          "freeContainer"
+        ]
+      },
+      "db530b76-baca-4370-ae6b-41a994ab1e4b": {
+        "subItptOf": "shnyder/imageDisplay",
+        "canInterpretType": "http://schema.org/ViewAction",
+        "nameSelf": "db530b76-baca-4370-ae6b-41a994ab1e4b",
+        "initialKvStores": [{
+          "key": "http://schema.org/contentUrl",
+          "value": "http://localhost:3000/dist/static/localhost.png"
+        }],
+        "crudSkills": "cRud",
+        "interpretableKeys": []
+      }
+    },
+    "ldType": "InterpreterReferenceMapType"
+  }],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "interpretableKeys": [{
+    "objRef": "67384b7b-a5a2-413c-898b-2201412aa01b",
+    "propRef": "FooterInterpreter"
+  }]
 }

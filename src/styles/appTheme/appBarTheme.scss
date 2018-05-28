@@ -238,7 +238,7 @@ canvas.drawingBuffer {
   position: absolute;
 }
 
-.ywqd-barcode-reader {
+.md-barcode-reader {
   /* position: relative; */
   height: 100%;
   display: flex;
@@ -246,7 +246,7 @@ canvas.drawingBuffer {
   background-color: darkgrey;
 }
 
-.ywqd-large-image {
+.md-large-image {
   position: relative;
   height: 100pt;
   width: 100pt;
@@ -255,7 +255,7 @@ canvas.drawingBuffer {
   align-self: center;
 }
 
-.ywqd-camera-switcher-tabs {
+.md-camera-switcher-tabs {
   width: 100%;
   height: calc(6.4 * var(--unit));
   display: flex;
@@ -342,4 +342,15 @@ canvas.drawingBuffer {
     font-size: 200%;
     padding-left: 8pt;
   }
+}
+
+body {
+  margin: 0pt;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.designer-json {
+  overflow-x: auto;
 }

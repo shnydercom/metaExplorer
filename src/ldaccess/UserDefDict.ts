@@ -25,7 +25,7 @@ export enum UserDefDict {
 	singleKvStore = "singleKvStore",
 
 	//values
-	outputInterpreter = "Output interpreter",
+	outputItpt = "Output interpreter",
 
 	//types
 	/**
@@ -61,5 +61,5 @@ export enum UserDefDict {
 
 	itptContainerObjType = "shnyder/ContainerObjType",
 
-	standardInterpreterObjectTypeSuffix = "-ObjectType"
+	standardItptObjectTypeSuffix = "-ObjectType"
 }

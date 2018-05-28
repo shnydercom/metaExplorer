@@ -7,7 +7,7 @@ import { Toolkit } from "storm-react-diagrams";
 import { ExplorerState, configureStore } from 'appstate/store';
 
 //import {Observable} from 'rxjs';
-import AppInterpreterDesigner from 'components/appinterpreter-designer';
+import AppItptDesigner from 'components/itpt-designer/appitpt-designer';
 import ImageUploadComponent from 'components/imageupload-component';
 //import { DiagramEngine } from 'storm-react-diagrams'
 import './styles/styles.scss';
@@ -16,7 +16,7 @@ import { initLDConnect } from 'sidefx/nonVisualConnect';
 import {
 	BrowserRouter as Router
 } from 'react-router-dom';
-import { appItptMatcherFn } from 'appconfig/appInterpreterMatcher';
+import { appItptMatcherFn } from 'appconfig/appItptMatcher';
 import { initReactToolBoxRetrieverFnAsDefault } from 'components/react-toolbox/initReactToolBoxRetrieverSetup';
 
 const initialState: ExplorerState = {
@@ -24,11 +24,11 @@ const initialState: ExplorerState = {
 	ldNonVisualMap: {}
 };
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = true; //process.env.NODE_ENV === 'production';
 
 export interface AppRootProps { }
 export const applicationStore: Store<ExplorerState> = configureStore(initialState);
-const appinterpreterToken: string = "tID"; //TODO: uncomment Toolkit.UID();
+const appItptToken: string = "tID"; //TODO: uncomment Toolkit.UID();
 function rootSetup(): void {
 	appItptMatcherFn();
 	initReactToolBoxRetrieverFnAsDefault();
@@ -41,7 +41,7 @@ export const AppRoot: SFC<AppRootProps> = () => {
 		<Provider store={applicationStore}>
 			<Router>
 				<div>
-					<AppInterpreterDesigner ldTokenString={appinterpreterToken}/>
+					<AppItptDesigner ldTokenString={appItptToken}/>
 					{!isProduction && <DevTools />}
 				</div>
 			</Router>

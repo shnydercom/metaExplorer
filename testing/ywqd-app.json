@@ -1,0 +1,234 @@
+{
+  "subItptOf": "d57234da-46f2-443a-87d1-4a9b02e6b237",
+  "canInterpretType": "愿望清单/AppEntry-ObjectType",
+  "nameSelf": "愿望清单/AppEntry",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "d57234da-46f2-443a-87d1-4a9b02e6b237": {
+          "subItptOf": "shnyder/md/NavBarWActions",
+          "canInterpretType": "shnyder/md/NavBarWActions-ObjectType",
+          "nameSelf": "d57234da-46f2-443a-87d1-4a9b02e6b237",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "6d06988c-606b-4862-9698-bbf1c21ec283",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "愿望清单",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "6d06988c-606b-4862-9698-bbf1c21ec283": {
+          "subItptOf": "愿望清单/BottomBar",
+          "canInterpretType": "MyNewBottomBar-ObjectType",
+          "nameSelf": "6d06988c-606b-4862-9698-bbf1c21ec283",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "078c5817-632f-44cc-a088-03d29edf795d",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "70e96539-0b43-43d2-aaa3-be5e8fb7cd1a",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "9f3a4457-e185-47b0-bc02-27e28256eb57",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer",
+            "freeContainer",
+            "freeContainer"
+          ]
+        },
+        "078c5817-632f-44cc-a088-03d29edf795d": {
+          "subItptOf": "shnyder/Route",
+          "canInterpretType": "shnyder/Route-ObjectType",
+          "nameSelf": "078c5817-632f-44cc-a088-03d29edf795d",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "e6726813-b826-455f-b993-fe7ad70af5f0",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "actions",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "e6726813-b826-455f-b993-fe7ad70af5f0": {
+          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "nameSelf": "e6726813-b826-455f-b993-fe7ad70af5f0",
+          "initialKvStores": [
+            {
+              "key": "HeaderInterpreter",
+              "value": {
+                "objRef": "9f84fba9-6b41-4701-b5ca-f15df95bfa46",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "Dummy for actions selection",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "HeaderInterpreter"
+          ]
+        },
+        "9f84fba9-6b41-4701-b5ca-f15df95bfa46": {
+          "subItptOf": "shnyder/md/SingleImageSelector",
+          "canInterpretType": "http://schema.org/CreateAction",
+          "nameSelf": "9f84fba9-6b41-4701-b5ca-f15df95bfa46",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "70e96539-0b43-43d2-aaa3-be5e8fb7cd1a": {
+          "subItptOf": "shnyder/Route",
+          "canInterpretType": "shnyder/Route-ObjectType",
+          "nameSelf": "70e96539-0b43-43d2-aaa3-be5e8fb7cd1a",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "75807a16-9f05-40f6-be32-ed445c846dfe",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "camera_scan",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "75807a16-9f05-40f6-be32-ed445c846dfe": {
+          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "nameSelf": "75807a16-9f05-40f6-be32-ed445c846dfe",
+          "initialKvStores": [
+            {
+              "key": "HeaderInterpreter",
+              "value": {
+                "objRef": "de7c0c96-3a17-4953-b18c-6367465c2c9d",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "Dummy for Scanner",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderText",
+              "value": {
+                "objRef": "de7c0c96-3a17-4953-b18c-6367465c2c9d",
+                "propRef": "http://schema.org/gtin8"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "HeaderInterpreter",
+            "SubHeaderText"
+          ]
+        },
+        "de7c0c96-3a17-4953-b18c-6367465c2c9d": {
+          "subItptOf": "shnyder/EANScanner",
+          "canInterpretType": "http://schema.org/ViewAction",
+          "nameSelf": "de7c0c96-3a17-4953-b18c-6367465c2c9d",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "9f3a4457-e185-47b0-bc02-27e28256eb57": {
+          "subItptOf": "shnyder/Route",
+          "canInterpretType": "shnyder/Route-ObjectType",
+          "nameSelf": "9f3a4457-e185-47b0-bc02-27e28256eb57",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "eb48f2e7-52db-4e23-9dba-79159a2cfd4e",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "explore",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "eb48f2e7-52db-4e23-9dba-79159a2cfd4e": {
+          "subItptOf": "shnyder/imageDisplay",
+          "canInterpretType": "http://schema.org/ViewAction",
+          "nameSelf": "eb48f2e7-52db-4e23-9dba-79159a2cfd4e",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/contentUrl",
+              "value": "http://localhost:3000/dist/static/localhost.png"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

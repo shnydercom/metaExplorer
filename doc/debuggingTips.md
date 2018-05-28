@@ -1,9 +1,9 @@
 # problem messages:
-	Argument of type 'typeof YourClass' is not assignable to parameter of type 'new (...args: any[]) => IBlueprintInterpreter'.
-	Type 'YourClass' is not assignable to type 'IBlueprintInterpreter'.
+	Argument of type 'typeof YourClass' is not assignable to parameter of type 'new (...args: any[]) => IBlueprintItpt'.
+	Type 'YourClass' is not assignable to type 'IBlueprintItpt'.
 	Property 'consumeWebResource' is missing in type 'YourClass'.
 # fix:
-	have the class implement the interface 'IBlueprintInterpreter'
+	have the class implement the interface 'IBlueprintItpt'
 	
 # problem message:
 	many errors, mostly in some TSX that was previously working fine. A way up the log you'll find that errors come from multiple definitions of react-types inside submodules. E.g. "node-modules/react-redux/node-modules/@types/react".

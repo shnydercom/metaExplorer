@@ -20,7 +20,7 @@ export const initLDConnect = () => {
 	applicationStore.subscribe(nonVisListener);
 };
 
-export const connectNonVisLDComp = (alias: string, interpreter: IBlueprintItpt) => {
-	if (connectedMap.get(alias) && connectedMap.get(alias).cfg === interpreter.cfg) return;
-	connectedMap.set(alias, interpreter);
+export const connectNonVisLDComp = (alias: string, itpt: IBlueprintItpt) => {
+	if (connectedMap.get(alias) && connectedMap.get(alias).cfg === itpt.cfg) return;
+	connectedMap.set(alias, itpt);
 };

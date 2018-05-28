@@ -21,7 +21,7 @@ import { generateIntrprtrForProp } from '../generic/generatorFns';
 import { checkAllFilled } from 'GeneralUtils';
 import { Route } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
-import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultInterpreterRetriever';
+import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 
 type ConnectedState = {
 };
@@ -55,7 +55,6 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: RouteComponentName,
-	//interpreterRetrieverFn: appIntprtrRetr,
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
@@ -99,7 +98,7 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 		const { isExact, toPath, displayedComponent } = this.state;
 		console.log(this.state);
 		const compExecFn = () => <>{displayedComponent}</>;
-		return <Route exact={isExact} path={toPath} component={compExecFn} />;
+		return <Route exact={isExact} path={"/" + toPath} component={compExecFn} />;
 	}
 
 	private handleKVs(props: LDOwnProps & LDConnectedState) {

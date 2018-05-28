@@ -7,7 +7,7 @@ import { elementAt } from "rxjs/operator/elementAt";
 import { OutputKVMap, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { LDError } from "appstate/LDError";
 
-export const isInterpreter = (input: any): boolean => {
+export const isItpt = (input: any): boolean => {
 	if (!input) return false;
 	return input.hasOwnProperty("cfg");
 };

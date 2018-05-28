@@ -1,14 +1,14 @@
 {
   "subItptOf": "bSub",
-  "canInterpretType": "BHead-ObjectType",
-  "nameSelf": "BHead",
+  "canInterpretType": "MyNewBottomBar-ObjectType",
+  "nameSelf": "愿望清单/BottomBar",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
         "bSub": {
-          "subItptOf": "shnyder/BottomNavigation",
-          "canInterpretType": "shnyder/BottomNavigation-ObjectType",
+          "subItptOf": "shnyder/md/BottomNavigation",
+          "canInterpretType": "shnyder/md/BottomNavigation-ObjectType",
           "nameSelf": "bSub",
           "initialKvStores": [
             {
