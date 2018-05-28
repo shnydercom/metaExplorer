@@ -61,7 +61,7 @@ import {
 	Link
 } from 'react-router-dom';
 import ImgHeadSubDescIntrprtr from "components/visualcomposition/ImgHeadSubDescIntrprtr";
-import { Switch } from "react-router";
+import { Switch, withRouter, RouteComponentProps } from "react-router";
 import { BaseContainer } from "components/generic/baseContainer-component";
 
 export type AIDProps = {
@@ -75,7 +75,7 @@ export type AIDState = {
 
 const DESIGNER_KV_KEY = "DesignerKvKey";
 
-class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConnectedDispatch, AIDState> {
+class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps, AIDState> {
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the itpt you're designing is capable of interpreting -> usually a new generic type
 	logic: DesignerLogic;
 	errorNotAvailableMsg: string = "Itpt Designer environment not available. Please check your settings";
@@ -251,6 +251,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 									)} />
 									<Route path="/" render={(routeProps: LDRouteProps) => {
 										routeProps.match.params.nextPath = "";
+										console.log(routeProps);
 										return <>
 											<BaseContainer routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
 										</>;

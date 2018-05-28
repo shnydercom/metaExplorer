@@ -18,6 +18,8 @@ import {
 } from 'react-router-dom';
 import { appItptMatcherFn } from 'appconfig/appItptMatcher';
 import { initReactToolBoxRetrieverFnAsDefault } from 'components/react-toolbox/initReactToolBoxRetrieverSetup';
+import { Route } from 'react-router';
+import { LDRouteProps } from 'appstate/LDProps';
 
 const initialState: ExplorerState = {
 	ldoptionsMap: {},
@@ -40,10 +42,13 @@ export const AppRoot: SFC<AppRootProps> = () => {
 	return (
 		<Provider store={applicationStore}>
 			<Router>
-				<div>
-					<AppItptDesigner ldTokenString={appItptToken}/>
-					{!isProduction && <DevTools />}
-				</div>
+				<Route path="/" render={(routeProps: LDRouteProps) => {
+					routeProps.match.params.nextPath = "";
+					return (<div>
+						<AppItptDesigner ldTokenString={appItptToken} routes={routeProps} />
+						{!isProduction && <DevTools />}
+					</div>);
+				}} />
 			</Router>
 		</Provider>
 	);

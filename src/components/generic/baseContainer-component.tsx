@@ -16,7 +16,7 @@ import { LDConsts } from 'ldaccess/LDConsts';
 import { isItpt, isLDOptionsSame, ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
-import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
+import { compNeedsUpdate, isRouteSame } from 'components/reactUtils/compUtilFns';
 import { ILDResource } from 'ldaccess/ildresource';
 import { ILDToken, NetworkPreferredToken, linearLDTokenStr } from 'ldaccess/ildtoken';
 import { UserDefDict } from 'ldaccess/UserDefDict';
@@ -93,8 +93,14 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 	}
 
 	componentWillReceiveProps(nextProps: BaseContOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
-		//if (compNeedsUpdate(nextProps, this.props)) {
-		this.consumeLDOptions(nextProps.ldOptions);
+		if (!isRouteSame(nextProps.routes, this.props.routes)) {
+			//always update when route has changed
+			let newldOptions = ldOptionsDeepCopy(nextProps.ldOptions);
+			newldOptions.visualInfo.interpretedBy = this.cfg.nameSelf;
+			this.props.notifyLDOptionsLinearSplitChange(newldOptions);
+		} else {
+			this.consumeLDOptions(nextProps.ldOptions);
+		}
 		//}
 	}
 

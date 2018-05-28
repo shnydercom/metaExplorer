@@ -19,8 +19,9 @@ import { Tabs } from 'react-toolbox/lib/tabs/';
 import { generateIntrprtrForProp } from '../../generic/generatorFns';
 //import { active } from 'react-toolbox/lib/dropdown/theme.css';
 import { checkAllFilled } from 'GeneralUtils';
-import { Redirect } from 'react-router';
+import { Redirect, Route } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import { NetworkPreferredToken } from 'ldaccess/ildtoken';
 
 type ConnectedState = {
 };
@@ -167,7 +168,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
-	topFreeContainer: any = null;
+	topFreeContainer: React.Component<LDOwnProps> = null;
 	tabIdx: number = 0;
 	icon1url: string = null;
 	icon2url: string = null;
@@ -219,6 +220,14 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			value: undefined,
 			ldType: VisualDict.route_added
 		};
+		let ldOptions: ILDOptions = {
+			isLoading: false,
+			lang: "en",
+			ldToken: new NetworkPreferredToken("someToken"),
+			resource: null,
+			visualInfo: {retriever: "default"}
+		};
+		this.props.notifyLDOptionsChange(ldOptions);
 		//this.props.dispatchKvOutput([outRouteKV], this.props.ldTokenString, this.outputKVMap);
 		//this.tabIdx = idx; //TODO: change to state-handling
 	}
@@ -255,15 +264,36 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		}
 		let newPath: string = match.url.endsWith("/") ? match.url + route : match.url + "/" + route;
 		this.hasTabChanged = false;
+		this.generateRoutableTopFree(this.props);
 		//if (location.pathname === newPath) return null;
 		return <Redirect to={newPath} />;
+	}
+
+	generateRoutableTopFree(props: LDOwnProps & LDConnectedState) {
+		let kvs: IKvStore[];
+		const retriever = this.props.ldOptions.visualInfo.retriever;
+		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
+			kvs = props.ldOptions.resource.kvStores;
+			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
+		}
+		if (!this.topFreeContainer) {
+			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
+			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
+		}
 	}
 	render() {
 		const { ldOptions } = this.props;
 		let tabIdx = this.state.tabIdx;
+		if (this.topFreeContainer && this.topFreeContainer.props.routes) {
+			/*console.log("topfree routes: ");
+			console.dir(this.topFreeContainer.props.routes);
+			console.log("this routes:");
+			console.dir(this.props.routes);*/
+		}
+		const bsCompExecFn = () => <>{this.topFreeContainer}</>;
 		return <div className="bottom-nav">
 			<div className="bottom-nav-topfree mdscrollbar">
-				{this.topFreeContainer}
+				<Route component={bsCompExecFn}/>
 				{this.props.children}
 				{this.generateRedirect(tabIdx)}
 			</div>
@@ -276,11 +306,6 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			</Tabs>
 		</div>;
 	}
-
-	/*	{this.generateTab("/dist/static/spark_red.svg", "/dist/static/spark_grey.svg", tabIdx === 0)}
-					{this.generateTab("/dist/static/camera_black.svg", "/dist/static/camera_grey.svg", tabIdx === 1)}
-					{this.generateTab("/dist/static/butterfly_black.svg", "/dist/static/butterfly_grey.svg", tabIdx === 2)}
-					{this.generateTab("/dist/static/persons_black.svg", "/dist/static/persons_grey.svg", tabIdx === 3)}*/
 
 	private handleRoutes(routes: LDRouteProps) {
 		if (!routes) return;
@@ -311,14 +336,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		let kvs: IKvStore[];
 		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
 		const retriever = this.props.ldOptions.visualInfo.retriever;
-		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
-			kvs = props.ldOptions.resource.kvStores;
-			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
-		}
-		if (!this.topFreeContainer) {
-			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
-		}
+		this.generateRoutableTopFree(props);
 		this.outputKVMap = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, UserDefDict.outputKVMapKey));
 		this.icon1url = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_1_ICONURL));
 		this.icon2url = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_2_ICONURL));
