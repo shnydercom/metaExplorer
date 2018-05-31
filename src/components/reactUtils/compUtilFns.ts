@@ -9,5 +9,6 @@ export const compNeedsUpdate = (nextProps, lastProps): boolean => {
 };
 
 export const isRouteSame = (nextRoute: LDRouteProps, lastRoute: LDRouteProps): boolean => {
-	return nextRoute.location.pathname === lastRoute.location.pathname;
+	if ((!nextRoute || !lastRoute) && (!nextRoute && !lastRoute)) return true;
+	return nextRoute.match.path === lastRoute.match.path;
 };

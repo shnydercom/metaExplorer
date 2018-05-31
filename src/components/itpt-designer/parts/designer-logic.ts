@@ -13,7 +13,7 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { LDDict } from "ldaccess/LDDict";
 import { DeclarationWidgetFactory } from "./declarationtypes/DeclarationNodeWidgetFactory";
 import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeModel";
-import { DECLARATION_MODEL, BASEDATATYPE_MODEL, GENERALDATATYPE_MODEL } from "./designer-consts";
+import { DECLARATION_MODEL, BASEDATATYPE_MODEL, GENERALDATATYPE_MODEL, EXTENDABLETYPES_MODEL } from "./designer-consts";
 import { ItptNodeModel } from "./ItptNodeModel";
 import { elementAt } from "rxjs/operators/elementAt";
 import { ObjectPropertyRef, OBJECT_PROP_REF } from "ldaccess/ObjectPropertyRef";
@@ -21,6 +21,8 @@ import { DeclarationNodeProps } from "./declarationtypes/DeclarationNodeWidget";
 import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from "ldaccess/kvConvenienceFns";
 import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
 import { isObjPropertyRef } from "ldaccess/ldUtils";
+import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesWidgetFactory";
+import { COMP_BASE_CONTAINER } from "../../generic/baseContainer-component";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 
@@ -40,6 +42,7 @@ export class DesignerLogic {
 		this.diagramEngine.registerNodeFactory(new BaseDataTypeWidgetFactory());
 		this.diagramEngine.registerNodeFactory(new GeneralDataTypeWidgetFactory());
 		this.diagramEngine.registerNodeFactory(new DeclarationWidgetFactory());
+		this.diagramEngine.registerNodeFactory(new ExtendableTypesWidgetFactory());
 		this.newModel(outputLDOptionsToken);
 		this.itptList = (appIntprtrRetr() as ReduxItptRetriever).getItptList();
 	}
@@ -108,12 +111,10 @@ export class DesignerLogic {
 		let itptNameString: string = UserDefDict.intrprtrNameKey;
 		outputNode.addPort(new LDPortModel(true, itptNameString, itptNameKV));
 		model.addNode(outputNode);
-
 		this.outputNode = outputNode;
 		//5) load model into engine
 		this.activeModel = model;
 		this.diagramEngine.setDiagramModel(model);
-
 	}
 
 	public getActiveModel(): DiagramModel {
@@ -291,7 +292,7 @@ export class DesignerLogic {
 	 * @param topBPCfg the root or top node, i.e. the node where the recursive process started
 	 */
 	private fillBPCfgFromGraph(branchBPCfg: BlueprintConfig, branchNode: ItptNodeModel, otherIntrprtrCfgs: { [s: string]: BlueprintConfig },
-		                          topBPCfg: BlueprintConfig) {
+		topBPCfg: BlueprintConfig) {
 		let inPorts: LDPortModel[] = branchNode.getInPorts();
 		inPorts.forEach((port) => {
 			let links = port.getLinks();
@@ -367,6 +368,48 @@ export class DesignerLogic {
 								branchNode.subItptOf = leafNode.getID();
 							} else {
 								branchBPCfg.interpretableKeys.push(gdtKV.key);
+							}
+							break;
+						case EXTENDABLETYPES_MODEL:
+							let extendableNodeID = leafNode.getID();
+							let extendableBPCfg: BlueprintConfig = otherIntrprtrCfgs[extendableNodeID];
+							let extInitialKvStores = null;
+							if (!extendableBPCfg) {
+								let crudSkills = "cRud";
+								let nameSelf = extendableNodeID;
+								extInitialKvStores = [];
+								let interpretableKeysArr = [];
+								extendableBPCfg = extendableBPCfg ? extendableBPCfg : {
+									subItptOf: COMP_BASE_CONTAINER,
+									canInterpretType: UserDefDict.itptContainerObjType,
+									nameSelf: nameSelf,
+									initialKvStores: extInitialKvStores,
+									crudSkills: crudSkills,
+									interpretableKeys: interpretableKeysArr,
+								};
+								otherIntrprtrCfgs[extendableNodeID] = extendableBPCfg;
+								this.fillBPCfgFromGraph(extendableBPCfg, leafNode as ItptNodeModel, otherIntrprtrCfgs, topBPCfg);
+							} else {
+								extInitialKvStores = extendableBPCfg.initialKvStores;
+							}
+							let extOutputType: string = leafPort.kv.ldType;
+							let extPropRef = leafPort.kv.key === UserDefDict.exportSelfKey ? null : leafPort.kv.key;
+							let extOutputRef: ObjectPropertyRef = {
+								objRef: extendableNodeID,
+								propRef: extPropRef
+							};
+							let extOutputKV: IKvStore = {
+								key: leafPort.kv.key,
+								value: extOutputRef,
+								ldType: extOutputType
+							};
+							let extDtKV = this.composeKVs(extOutputKV, port.kv);
+							branchBPCfg.initialKvStores.push(extDtKV);
+							//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
+							if (branchNode.nodeType === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
+								branchNode.subItptOf = leafNode.getID();
+							} else {
+								branchBPCfg.interpretableKeys.push(extDtKV.key);
 							}
 							break;
 						default:

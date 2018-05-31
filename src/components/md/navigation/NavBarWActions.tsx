@@ -17,9 +17,10 @@ import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 import IconButton from 'react-toolbox/lib/button/';
 import { IconMenu } from 'react-toolbox/lib/menu/';
 import Navigation from 'react-toolbox/lib/navigation/Navigation.js';
-import { generateIntrprtrForProp } from '../../generic/generatorFns';
+import { generateIntrprtrForProp, generateCompInfoItm, generateItptFromCompInfo } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import { ReactCompInfoMap, IReactCompInfoItm, ReactBlueprint } from '../../reactUtils/iReactCompInfo';
 
 type ConnectedState = {
 };
@@ -27,11 +28,6 @@ type ConnectedState = {
 type ConnectedDispatch = {
 };
 
-/*const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
-});
-
-const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedDispatch => ({
-});*/
 export const NavBarWActionsName = "shnyder/md/NavBarWActions";
 let cfgIntrprtKeys: string[] =
 	[VisualDict.freeContainer, VisualDict.headerTxt, VisualDict.routeSend_search, VisualDict.popOverContent];
@@ -71,19 +67,21 @@ export type NavBarWActionState = {
 };
 @ldBlueprint(bpCfg)
 export class PureNavBarWActions extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavBarWActionState>
-	implements IBlueprintItpt {
+	implements IBlueprintItpt, ReactBlueprint {
 	state = {
 		isDoRedirect: false,
 		isRightMenuOpen: false
 	};
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	lowerFreeContainer: any = null;
+	compInfos: ReactCompInfoMap = new Map();
 	headerText: string;
 	routeSendSearch: string;
-	usrIconPopOverContent: any;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
+
+	private renderSub = generateItptFromCompInfo.bind(this);
+
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
@@ -96,7 +94,6 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 	}
 	onAppBarRightIconMenuClick = (e) => {
 		//will be called on opening and clicking inside the menu
-		let target = this.usrIconPopOverContent;
 	}
 	onAppBarSearchBtnClick = (e) => {
 		this.setState({
@@ -112,30 +109,43 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 				<Navigation type='horizontal'>
 					<IconButton icon='search' onClick={this.onAppBarSearchBtnClick} />
 					<IconMenu icon='account_circle' position='topRight' menuRipple onClick={this.onAppBarRightIconMenuClick}>
-						{this.usrIconPopOverContent}
+						{this.renderSub(VisualDict.popOverContent)}
 					</IconMenu>
 				</Navigation>
 			</AppBar>
-				{this.lowerFreeContainer}
+			{this.renderSub(VisualDict.freeContainer)}
 			</>;
 	}
+
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
 		let kvs: IKvStore[];
 		let retriever = props.ldOptions.visualInfo.retriever;
+		let lowerFreeContainerInfo: IReactCompInfoItm;
+		let usrIconPopOverInfo: IReactCompInfoItm;
 		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
 			kvs = props.ldOptions.resource.kvStores;
-			this.lowerFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
+			lowerFreeContainerInfo = generateCompInfoItm(kvs, VisualDict.freeContainer, retriever, this.props.routes);
 			this.headerText = getKVValue(getKVStoreByKey(kvs, VisualDict.headerTxt));
 			this.routeSendSearch = getKVValue(getKVStoreByKey(kvs, VisualDict.routeSend_search));
-			this.usrIconPopOverContent = this.usrIconPopOverContent ? generateIntrprtrForProp(kvs, VisualDict.popOverContent, retriever, this.props.routes) : null;
+			usrIconPopOverInfo = usrIconPopOverInfo ? generateCompInfoItm(kvs, VisualDict.popOverContent, retriever, this.props.routes) : null;
 		}
-		if (!this.lowerFreeContainer) {
+		if (!lowerFreeContainerInfo) {
 			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			this.lowerFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
+			lowerFreeContainerInfo = generateCompInfoItm(kvs, VisualDict.freeContainer, retriever, this.props.routes);
 		}
-		if (!this.usrIconPopOverContent) {
+		if (!usrIconPopOverInfo) {
 			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			this.usrIconPopOverContent = generateIntrprtrForProp(kvs, VisualDict.popOverContent, retriever, this.props.routes);
+			usrIconPopOverInfo = generateCompInfoItm(kvs, VisualDict.popOverContent, retriever, this.props.routes);
+		}
+		if (lowerFreeContainerInfo) {
+			this.compInfos.set(VisualDict.freeContainer, lowerFreeContainerInfo);
+		} else {
+			this.compInfos.delete(VisualDict.freeContainer);
+		}
+		if (usrIconPopOverInfo) {
+			this.compInfos.set(VisualDict.popOverContent, usrIconPopOverInfo);
+		} else {
+			this.compInfos.delete(VisualDict.popOverContent);
 		}
 	}
 }

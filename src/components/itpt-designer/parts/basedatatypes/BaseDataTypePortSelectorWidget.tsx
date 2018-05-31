@@ -78,7 +78,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 				<div onFocus={() => this.props.model.getParent().setSelected(false)}>
 					{label}
 					<BaseDataTypeDropDown selectionChange={(newType) => { this.onPortTypeChange(newType, this.props); }} />
-					{this.state.portType ? <BaseContainer ldTokenString={targetID} searchCrudSkills="CrUd" /> : null}
+					{this.state.portType ? <BaseContainer ldTokenString={targetID} searchCrudSkills="CrUd" routes={null} /> : null}
 				</div>
 				{port}
 			</div>

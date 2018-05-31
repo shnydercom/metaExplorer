@@ -15,6 +15,7 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeModel";
 import { Component } from "react";
 import { URLToMenuTree, treeDemoData } from "./URLsToMenuTree";
+import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
 
 export interface DesignerBodyProps {
 	logic: DesignerLogic;
@@ -33,6 +34,8 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 
 	public trayItemsFromItptList() {
 		let itpts: IItptInfoItem[] = this.props.logic.getItptList();
+		itpts.shift(); //rm basecontainer
+		itpts.shift(); //rm refMap
 		itpts.sort((a, b) => {
 			var x = a.nameSelf.toLowerCase();
 			var y = b.nameSelf.toLowerCase();
@@ -40,14 +43,18 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 			if (x > y) { return 1; }
 			return 0;
 		});
-
-		itpts.splice(1, 0, null);
+		itpts.unshift(null);
+		itpts.unshift(null);
+		itpts.unshift(null);
 		let reactCompClasses: JSX.Element[] = itpts.map((itm, idx) => {
 			if (idx === 0) {
 				return <DesignerTrayItem key={idx} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />;
 			}
 			if (idx === 1) {
 				return <DesignerTrayItem key={idx} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />;
+			}
+			if (idx === 2) {
+				return <DesignerTrayItem key={idx} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />;
 			}
 			let ldBPCfg = (itm.itpt as IBlueprintItpt).cfg;
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
@@ -111,6 +118,15 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 								};
 								node = new DeclarationPartNodeModel("External Input Marker", null, null, designerSpecificNodesColor);
 								node.addPort(new LDPortModel(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
+								break;
+							case "lineardata":
+								node = new ExtendableTypesNodeModel("Linear Data Display", null, null, designerSpecificNodesColor);
+								let exportSelfKV: IKvStore = {
+									key: UserDefDict.exportSelfKey,
+									value: undefined,
+									ldType: UserDefDict.intrprtrClassType
+								};
+								node.addPort(new LDPortModel(false, exportSelfKV.key, exportSelfKV));
 								break;
 							default:
 								break;

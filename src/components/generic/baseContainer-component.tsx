@@ -13,7 +13,7 @@ import { IHypermediaContainer } from 'hydraclient.js/src/DataModel/IHypermediaCo
 import { singleHyperMediaToKvStores, multiHyperMediaToKvStores } from 'ldaccess/converterFns';
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { LDConsts } from 'ldaccess/LDConsts';
-import { isItpt, isLDOptionsSame, ldOptionsDeepCopy } from 'ldaccess/ldUtils';
+import { isItpt, isLDOptionsSame, ldOptionsDeepCopy, isObjPropertyRef } from 'ldaccess/ldUtils';
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { compNeedsUpdate, isRouteSame } from 'components/reactUtils/compUtilFns';
@@ -24,6 +24,8 @@ import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 import { isReactComponent } from '../reactUtils/reactUtilFns';
 import { LDError } from 'appstate/LDError';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import { IReactCompInfoItm } from '../reactUtils/iReactCompInfo';
+import { ObjectPropertyRef } from 'ldaccess/ObjectPropertyRef';
 
 export interface BaseContOwnProps extends LDOwnProps {
 	searchCrudSkills: string;
@@ -50,9 +52,7 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 	cfg: BlueprintConfig;
 	initialKvStores: IKvStore[];
 	outputKVMap: OutputKVMap;
-	reactCompInfo: {
-		compClass: React.ComponentClass<LDOwnProps> & IBlueprintItpt
-	}[] = [];
+	reactCompInfo: IReactCompInfoItm[] = [];
 	constructor(props?: any) {
 		super(props);
 		this.cfg = this.constructor["cfg"];
@@ -69,7 +69,7 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 		let interpretedBy = ldOptions.visualInfo.interpretedBy;
 		let sCSkills: string = "cRud";
 		let reactCompInfoCopy = this.reactCompInfo.slice();
-		let newreactCompInfo = [];
+		let newreactCompInfo: IReactCompInfoItm[] = [];
 		if (ldOptions.isLoading) return;
 		if (!interpretedBy || !isLDOptionsSame(this.props.ldOptions, ldOptions)) {
 			//i.e. first time this ldOptions-Object gets interpreted, or itpt-change
@@ -80,10 +80,14 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 		} else {
 			ldOptions.resource.kvStores.forEach((elem, idx) => {
 				let elemKey: string = elem.key;
-				let itpt: React.ComponentClass<LDOwnProps> & IBlueprintItpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(linearLDTokenStr(ldTokenString, idx));
+				let itpt: React.ComponentClass<LDOwnProps> & IBlueprintItpt = null;
+				if (elem.ldType === UserDefDict.intrprtrClassType && elem.value && isObjPropertyRef(elem.value)) {
+					itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt((elem.value as ObjectPropertyRef).objRef);
+				}else{
+					itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(linearLDTokenStr(ldTokenString, idx));
+				}
 				if (isReactComponent(itpt)) {
-					let targetLDToken: ILDToken = new NetworkPreferredToken(this.props.ldTokenString);
-					newreactCompInfo.push({ compClass: itpt });
+					newreactCompInfo.push({ compClass: itpt, key: "_" + idx, ldTokenString: linearLDTokenStr(ldTokenString, idx) });
 				} else {
 					throw new LDError("baseContainer got a non-visual component");
 				}
@@ -112,11 +116,10 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 
 	render() {
 		let { ldTokenString, routes } = this.props;
+		routes = routes ? { ...routes } : null;
 		let reactComps = this.reactCompInfo.map((itm, idx) => {
 			let GenericComp = itm.compClass;
-			return <GenericComp key={idx} routes={routes} ldTokenString={
-				linearLDTokenStr(ldTokenString, idx)
-			} />;
+			return <GenericComp key={itm.key} routes={routes} ldTokenString={itm.ldTokenString} />;
 		});
 		return <>
 			{reactComps ? reactComps : null}

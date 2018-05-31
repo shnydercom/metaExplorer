@@ -15,10 +15,17 @@ export function isFunctionComponent(component) {
 }
 
 export function isReactComponent(component) {
+	if (!component) return false;
 	return (
 		isClassComponent(component) ||
-		isFunctionComponent(component)
+		isFunctionComponent(component) ||
+		isCompositeTypeElement(component) ||
+		isRouteWrappedComponent(component)
 	) ? true : false;
+}
+
+export function isRouteWrappedComponent(component) {
+	return !!Object.getPrototypeOf(component).WrappedComponent;
 }
 
 export function isElement(element) {

@@ -19,7 +19,7 @@ export class ReduxItptRetriever extends DefaultItptRetriever {
 	searchForObjItptAndDerive(term: string | string[], crudSkills: string, newLDTokenStr: string) {
 		let prevItpt = this.getDerivedItpt(newLDTokenStr) as IBlueprintItpt;
 		let searchResult = super.searchForObjItpt(term, crudSkills) as IBlueprintItpt;
-		if (searchResult && (!prevItpt || prevItpt.cfg.nameSelf !== searchResult.cfg.nameSelf) ){
+		if (searchResult && (!prevItpt || prevItpt.cfg.nameSelf !== searchResult.cfg.nameSelf)) {
 			this.setDerivedItpt(newLDTokenStr, searchResult);
 		}
 		return null;

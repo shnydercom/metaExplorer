@@ -10,7 +10,6 @@ import { imageRetrieverName, ImageRetriever } from "sidefx/ImageRetriever";
 import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
 import { organizationRetrieverName, OrganizationRetriever } from "sidefx/OrganizationRetriever";
 import { UserDefDict } from "ldaccess/UserDefDict";
-import { PureRefMapItpt } from "../generic/RefMapItpt-component";
 import { EANScannerName, EANScanner } from "../peripherals/camera/EAN-scanner";
 import { SingleImageSelectorName, PureSingleImageSelector } from "../md/content/SingleImageSelector";
 import { NavSearchBarName, PureNavSearchBar } from "../md/navigation/NavSearchBar";
@@ -18,7 +17,7 @@ import { NavSearchBarName, PureNavSearchBar } from "../md/navigation/NavSearchBa
 /**
  * sorry for the long function name //TODO: change
  */
-export function initReactToolBoxRetrieverFnAsDefault() {
+export function initMDitptFnAsDefault() {
 	let appIntRetr = appItptRetrFn();
 	//appIntRetr.addItpt(LDDict.CreateAction, ImageUploadComponent, "Crud");
 	appIntRetr.addItpt(LDDict.ViewAction, PureImgDisplay, "cRud");
@@ -45,9 +44,7 @@ export function initReactToolBoxRetrieverFnAsDefault() {
 	appIntRetr.addItpt(productRetrieverName, ProductRetriever, "cRud");
 	appIntRetr.addItpt(organizationRetrieverName, OrganizationRetriever, "cRud");
 
-	//register generic itpt for Designer-defined itpts
-	//appIntRetr.addItpt(UserDefDict.intrprtrBPCfgRefMapType, PureRefMapIntrprtr, "cRud"); //old version
-	appIntRetr.addItpt(UserDefDict.intrprtrBPCfgRefMapType, PureRefMapItpt, "cRud"); //new version
+	//register shnyder-itpt
 	appIntRetr.addItpt(EANScannerName, EANScanner, "cRud"); //new version
 	appIntRetr.addItpt(SingleImageSelectorName, PureSingleImageSelector, "cRud");
 }

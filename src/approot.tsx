@@ -17,9 +17,10 @@ import {
 	BrowserRouter as Router
 } from 'react-router-dom';
 import { appItptMatcherFn } from 'appconfig/appItptMatcher';
-import { initReactToolBoxRetrieverFnAsDefault } from 'components/react-toolbox/initReactToolBoxRetrieverSetup';
+import { initMDitptFnAsDefault } from 'components/md/initReactToolBoxRetrieverSetup';
 import { Route } from 'react-router';
 import { LDRouteProps } from 'appstate/LDProps';
+import { initEssentialItpts } from 'defaults/initEssentialItpts';
 
 const initialState: ExplorerState = {
 	ldoptionsMap: {},
@@ -33,7 +34,8 @@ export const applicationStore: Store<ExplorerState> = configureStore(initialStat
 const appItptToken: string = "tID"; //TODO: uncomment Toolkit.UID();
 function rootSetup(): void {
 	appItptMatcherFn();
-	initReactToolBoxRetrieverFnAsDefault();
+	initEssentialItpts();
+	initMDitptFnAsDefault();
 	initLDConnect();
 }
 

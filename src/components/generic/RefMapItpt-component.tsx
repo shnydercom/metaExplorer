@@ -10,7 +10,7 @@ import ImgHeadSubDescIntrprtr from "components/visualcomposition/ImgHeadSubDescI
 import { PureImgDisplay } from "components/imagedisplay-component";
 import { BaseContainer } from "components/generic/baseContainer-component";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
-import { compNeedsUpdate } from "components/reactUtils/compUtilFns";
+import { compNeedsUpdate, isRouteSame } from "components/reactUtils/compUtilFns";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
 import { ILDResource } from "ldaccess/ildresource";
 import { ILDToken, NetworkPreferredToken, createConcatNetworkPreferredToken, refMapBaseTokenStr } from "ldaccess/ildtoken";
@@ -48,11 +48,11 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 		super(props);
 		this.cfg = this.constructor["cfg"];
 		if (props && props.ldOptions) {
-			this.consumeLDOptions(props.ldOptions);
+			this.consumeLDOptions(props.ldOptions, props.routes);
 		}
 	}
 
-	consumeLDOptions = (ldOptions: ILDOptions) => {
+	consumeLDOptions = (ldOptions: ILDOptions, routes?: LDRouteProps) => {
 		if (!this.props.ldOptions) return;
 		if (!this.props.ldOptions.visualInfo.interpretedBy) {
 			let newLDOptions: ILDOptions = ldOptionsDeepCopy(this.props.ldOptions);
@@ -60,13 +60,20 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 			this.props.notifyLDOptionsRefMapSplitChange(newLDOptions, this.cfg);
 			return null;
 		}
-		this.subItpt = this.buildIntrprtrJSX(ldOptions);
+		this.subItpt = this.buildIntrprtrJSX(ldOptions, routes);
 	}
 
 	componentWillReceiveProps(nextProps: OwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
-		if (compNeedsUpdate(nextProps, this.props)) {
+		console.log("receiving refmap-props: " + nextProps.routes.location.pathname);
+		if (!isRouteSame(nextProps.routes, this.props.routes)) {
+			let newLDOptions: ILDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+			newLDOptions.visualInfo.interpretedBy = this.cfg.nameSelf;
+			this.props.notifyLDOptionsRefMapSplitChange(newLDOptions, this.cfg);
+			return null;
+		} else {
+			//if (compNeedsUpdate(nextProps, this.props)) {
 			//if (nextProps.ldOptions.isLoading) return;
-			this.consumeLDOptions(nextProps.ldOptions);
+			this.consumeLDOptions(nextProps.ldOptions, nextProps.routes);
 		}
 	}
 
@@ -76,7 +83,7 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 		console.log(this.constructor["cfg"]);
 	}
 
-	buildIntrprtrJSX(ldOptions: ILDOptions): any { //TODO: search for right type ?! React.Component<LDOwnProps>
+	buildIntrprtrJSX(ldOptions: ILDOptions, routes: LDRouteProps): any { //TODO: search for right type ?! React.Component<LDOwnProps>
 		let { ldTokenString } = this.props;
 		let { interpretedBy, retriever } = ldOptions.visualInfo;
 		let baseRMTkStr = refMapBaseTokenStr(ldTokenString);
@@ -86,16 +93,6 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 			return null;
 		}
 		if (isReactComponent(BaseComp)) {
-			const { routes } = this.props;
-			console.log("baseToken: " + baseRMTkStr);
-			let nonRMKvStores = ldOptions.resource.kvStores.filter(
-				(itm, idx) => itm.key !== UserDefDict.intrprtrBPCfgRefMapKey);
-			let targetLDToken: ILDToken = new NetworkPreferredToken(this.props.ldTokenString);
-			let newOutputKvMap: OutputKVMap = {};
-			nonRMKvStores.forEach((kv) => {
-				const elemKey = kv.key;
-				newOutputKvMap[elemKey] =  { targetLDToken: targetLDToken, targetProperty: elemKey };
-			});
 			return <BaseComp routes={routes} ldTokenString={baseRMTkStr} />;
 		} else {
 			return null;

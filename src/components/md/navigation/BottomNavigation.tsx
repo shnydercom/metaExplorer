@@ -225,7 +225,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			lang: "en",
 			ldToken: new NetworkPreferredToken("someToken"),
 			resource: null,
-			visualInfo: {retriever: "default"}
+			visualInfo: { retriever: "default" }
 		};
 		this.props.notifyLDOptionsChange(ldOptions);
 		//this.props.dispatchKvOutput([outRouteKV], this.props.ldTokenString, this.outputKVMap);
@@ -262,16 +262,20 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			default:
 				break;
 		}
-		let newPath: string = match.url.endsWith("/") ? match.url + route : match.url + "/" + route;
+		let newPath: string = match.url.endsWith("/") ? match.url + route : `${match.url}/${route}`;
 		this.hasTabChanged = false;
-		this.generateRoutableTopFree(this.props);
+		this.generateRoutableTopFree(this.props, route);
 		//if (location.pathname === newPath) return null;
 		return <Redirect to={newPath} />;
 	}
 
-	generateRoutableTopFree(props: LDOwnProps & LDConnectedState) {
+	generateRoutableTopFree(props: LDOwnProps & LDConnectedState, nextPath: string) {
 		let kvs: IKvStore[];
 		const retriever = this.props.ldOptions.visualInfo.retriever;
+		const newRoutes = { ... this.props.routes };
+		if (nextPath) {
+			newRoutes.match.params.nextPath = nextPath;
+		}
 		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
 			kvs = props.ldOptions.resource.kvStores;
 			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
@@ -293,7 +297,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		const bsCompExecFn = () => <>{this.topFreeContainer}</>;
 		return <div className="bottom-nav">
 			<div className="bottom-nav-topfree mdscrollbar">
-				<Route component={bsCompExecFn}/>
+				<Route component={bsCompExecFn} />
 				{this.props.children}
 				{this.generateRedirect(tabIdx)}
 			</div>
@@ -336,7 +340,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		let kvs: IKvStore[];
 		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
 		const retriever = this.props.ldOptions.visualInfo.retriever;
-		this.generateRoutableTopFree(props);
+		this.generateRoutableTopFree(props, null);
 		this.outputKVMap = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, UserDefDict.outputKVMapKey));
 		this.icon1url = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_1_ICONURL));
 		this.icon2url = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, TAB_2_ICONURL));

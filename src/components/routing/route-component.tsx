@@ -5,7 +5,7 @@ import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDRouteProps } from 'appstate/LDProps';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDRouteProps, LDRouteParams } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
 import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
@@ -19,7 +19,7 @@ import { Tabs } from 'react-toolbox/lib/tabs/';
 import { generateIntrprtrForProp } from '../generic/generatorFns';
 // import { active } from 'react-toolbox/lib/dropdown/theme.css';
 import { checkAllFilled } from 'GeneralUtils';
-import { Route } from 'react-router';
+import { Route, withRouter, RouteComponentProps, RouteProps } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 
@@ -43,7 +43,7 @@ let initialKVStores: IKvStore[] = [
 	},
 	{
 		key: ROUTE_ISEXACT,
-		value: false,
+		value: true,
 		ldType: LDDict.Boolean
 	},
 	{
@@ -65,7 +65,6 @@ export type RouteComponentState = {
 	toPath: string;
 	displayedComponent: React.ReactElement<LDConnectedState & LDConnectedDispatch & LDOwnProps>;
 };
-
 @ldBlueprint(bpCfg)
 export class PureRouteComponent extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, RouteComponentState>
 	implements IBlueprintItpt {
@@ -77,7 +76,7 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
-			isExact: false,
+			isExact: true,
 			toPath: "",
 			displayedComponent: null
 		};
@@ -117,7 +116,7 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 			displayedComponent = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
 		}
 		isExact = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, ROUTE_ISEXACT));
-		isExact = isExact === undefined ? false : isExact;
+		isExact = isExact === undefined ? true : isExact;
 		toPath = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, ROUTE_PATH));
 		this.setState({ displayedComponent, toPath, isExact });
 	}
