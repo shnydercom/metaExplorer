@@ -29,12 +29,13 @@ type ConnectedState = {
 type ConnectedDispatch = {
 };
 
+export const ROUTE_ISABSOLUTE = "isRouteAbsolute";
 export const ROUTE_ISEXACT = "isRouteExact";
 export const ROUTE_PATH = "routePath";
 
 export const RouteComponentName = "shnyder/Route";
 let cfgIntrprtKeys: string[] =
-	[VisualDict.freeContainer, ROUTE_ISEXACT, ROUTE_PATH];
+	[VisualDict.freeContainer, ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH];
 let initialKVStores: IKvStore[] = [
 	{
 		key: VisualDict.freeContainer,
@@ -43,6 +44,11 @@ let initialKVStores: IKvStore[] = [
 	},
 	{
 		key: ROUTE_ISEXACT,
+		value: true,
+		ldType: LDDict.Boolean
+	},
+	{
+		key: ROUTE_ISABSOLUTE,
 		value: true,
 		ldType: LDDict.Boolean
 	},
@@ -95,9 +101,13 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 	}
 	render() {
 		const { isExact, toPath, displayedComponent } = this.state;
+		const { routes } = this.props;
+		const isAbsolute = false;
 		console.log(this.state);
 		const compExecFn = () => <>{displayedComponent}</>;
-		return <Route exact={isExact} path={"/" + toPath} component={compExecFn} />;
+		let newPath = !isAbsolute && routes && routes.match ? routes.match.path : "";
+		newPath +=  "/" + toPath;
+		return <Route exact={isExact} path={newPath} component={compExecFn} />;
 	}
 
 	private handleKVs(props: LDOwnProps & LDConnectedState) {

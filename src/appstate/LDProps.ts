@@ -2,6 +2,7 @@ import { ILDOptions } from "ldaccess/ildoptions";
 import { OutputKVMap, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { RouteComponentProps } from 'react-router';
 import { IKvStore } from "ldaccess/ikvstore";
+import { ReactCompInfoMap } from "components/reactUtils/iReactCompInfo";
 
 export interface LDRouteParams {
 	nextPath: string;
@@ -41,3 +42,13 @@ export type LDConnectedDispatch = {
 export type LDConnectedState = {
 	ldOptions: ILDOptions
 };
+
+export type ReactCompLDLocalState = {
+	compInfos: ReactCompInfoMap;
+};
+
+export type LDLocalValues = {
+	localValues: Map<string, any>;
+};
+
+export type LDLocalState = ReactCompLDLocalState & LDLocalValues;

@@ -23,6 +23,11 @@
               "key": "HeaderText",
               "value": "愿望清单",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_Search",
+              "value": "search",
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",

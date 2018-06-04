@@ -17,7 +17,7 @@ import {
 	BrowserRouter as Router
 } from 'react-router-dom';
 import { appItptMatcherFn } from 'appconfig/appItptMatcher';
-import { initMDitptFnAsDefault } from 'components/md/initReactToolBoxRetrieverSetup';
+import { initMDitptFnAsDefault } from 'components/md/initMDitptRetrieverSetup';
 import { Route } from 'react-router';
 import { LDRouteProps } from 'appstate/LDProps';
 import { initEssentialItpts } from 'defaults/initEssentialItpts';
