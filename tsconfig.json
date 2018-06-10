@@ -34,7 +34,9 @@
     "doc",
     "node_modules",
     "src/examples",
-    "dist"
+    "dist",
+    "scripts",
+    "tooling"
   ],
   "awesomeTypescriptLoaderOptions": {
     "compilerOptions": {
@@ -42,7 +44,9 @@
     },
     "exclude": [
       "node_modules",
-      "public/js"
+      "public/js",
+      "scripts",
+      "tooling"
     ]
   }
 }
