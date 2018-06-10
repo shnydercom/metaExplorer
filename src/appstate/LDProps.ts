@@ -47,8 +47,9 @@ export type ReactCompLDLocalState = {
 	compInfos: ReactCompInfoMap;
 };
 
-export type LDLocalValues = {
+export type LDLocalKv = {
 	localValues: Map<string, any>;
+	localLDTypes: Map<string, any>;
 };
 
-export type LDLocalState = ReactCompLDLocalState & LDLocalValues;
+export type LDLocalState = ReactCompLDLocalState & LDLocalKv;

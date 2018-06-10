@@ -20,6 +20,7 @@ import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { Component } from "react";
 import { appItptMatcherFn } from "appconfig/appItptMatcher";
 import { ITPT_REFMAP_BASE } from "ldaccess/iitpt-retriever";
+import { ErrorBoundaryState } from "../errors/ErrorBoundaryState";
 
 export type OwnProps = LDOwnProps & {
 	searchCrudSkills: string;
@@ -38,7 +39,7 @@ let bpCfg: BlueprintConfig = {
 	crudSkills: "cRud"
 };
 @ldBlueprint(bpCfg)
-export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDispatch & OwnProps, {}>
+export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDispatch & OwnProps, ErrorBoundaryState>
 	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	initialKvStores: IKvStore[];
@@ -50,6 +51,9 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 		if (props && props.ldOptions) {
 			this.consumeLDOptions(props.ldOptions, props.routes);
 		}
+		this.state = {
+			hasError: false
+		};
 	}
 
 	consumeLDOptions = (ldOptions: ILDOptions, routes?: LDRouteProps) => {
@@ -99,9 +103,21 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 		}
 	}
 
+	componentDidCatch(error, info) {
+		console.log("basecontainer: error, info:");
+		console.dir(error);
+		console.dir(info);
+		this.setState({ hasError: true });
+	}
+
 	render() {
-		return <>
-			{this.subItpt}
-		</>;
+		const { hasError } = this.state;
+		if (!hasError) {
+			return <>
+				{this.subItpt}
+			</>;
+		}else{
+			return <span>refmap has caught error</span>;
+		}
 	}
 }

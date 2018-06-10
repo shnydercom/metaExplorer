@@ -26,6 +26,7 @@ import { LDError } from 'appstate/LDError';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { IReactCompInfoItm } from '../reactUtils/iReactCompInfo';
 import { ObjectPropertyRef } from 'ldaccess/ObjectPropertyRef';
+import { ErrorBoundaryState } from '../errors/ErrorBoundaryState';
 
 export interface BaseContOwnProps extends LDOwnProps {
 	searchCrudSkills: string;
@@ -47,7 +48,7 @@ let bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-export class PureBaseContainer extends Component<LDConnectedState & LDConnectedDispatch & BaseContOwnProps, {}>
+export class PureBaseContainer extends Component<LDConnectedState & LDConnectedDispatch & BaseContOwnProps, ErrorBoundaryState>
 	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	initialKvStores: IKvStore[];
@@ -59,6 +60,9 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 		if (props) {
 			this.consumeLDOptions(props.ldOptions);
 		}
+		this.state = {
+			hasError: false
+		};
 	}
 
 	consumeLDOptions = (ldOptions: ILDOptions) => {
@@ -83,7 +87,7 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 				let itpt: React.ComponentClass<LDOwnProps> & IBlueprintItpt = null;
 				if (elem.ldType === UserDefDict.intrprtrClassType && elem.value && isObjPropertyRef(elem.value)) {
 					itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt((elem.value as ObjectPropertyRef).objRef);
-				}else{
+				} else {
 					itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(linearLDTokenStr(ldTokenString, idx));
 				}
 				if (isReactComponent(itpt)) {
@@ -114,16 +118,28 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 		}
 	}
 
+	componentDidCatch(error, info) {
+		console.log("basecontainer: error, info:");
+		console.dir(error);
+		console.dir(info);
+		this.setState({ hasError: true });
+	}
+
 	render() {
-		let { ldTokenString, routes } = this.props;
-		routes = routes ? { ...routes } : null;
-		let reactComps = this.reactCompInfo.map((itm, idx) => {
-			let GenericComp = itm.compClass;
-			return <GenericComp key={itm.key} routes={routes} ldTokenString={itm.ldTokenString} />;
-		});
-		return <>
-			{reactComps ? reactComps : null}
-		</>;
+		let { hasError } = this.state;
+		if (!hasError) {
+			let { ldTokenString, routes } = this.props;
+			routes = routes ? { ...routes } : null;
+			let reactComps = this.reactCompInfo.map((itm, idx) => {
+				let GenericComp = itm.compClass;
+				return <GenericComp key={itm.key} routes={routes} ldTokenString={itm.ldTokenString} />;
+			});
+			return <>
+				{reactComps ? reactComps : null}
+			</>;
+		}else{
+			return <span>error caught baseContainer</span>;
+		}
 	}
 }
 

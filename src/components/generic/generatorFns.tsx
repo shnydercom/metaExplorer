@@ -1,5 +1,5 @@
 import { IKvStore } from "ldaccess/ikvstore";
-import { LDOwnProps, LDRouteProps, LDConnectedState, LDLocalState, ReactCompLDLocalState, LDLocalValues } from "appstate/LDProps";
+import { LDOwnProps, LDRouteProps, LDConnectedState, LDLocalState, ReactCompLDLocalState, LDLocalKv } from "appstate/LDProps";
 import { isObjPropertyRef, getKVValue } from "ldaccess/ldUtils";
 import { appItptMatcherFn } from "appconfig/appItptMatcher";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
@@ -54,21 +54,28 @@ export function generateCompInfoItm(kvStores: IKvStore[], prop: string, retrieve
 	} else { return null; }
 }
 
-export function generateItptFromCompInfo(compName: string) {
-	if (!compName) return null;
+/**
+ * use this function in a react component for sub-render functions that return a component
+ * example usage:	private renderSub = generateItptFromCompInfo.bind(this);
+ * render(){<>{this.renderSub(VisualDict.freeContainer)}<>}
+ * @param compKey the key of the itpt-kv, e.g. VisualDict.freeContainer
+ */
+export function generateItptFromCompInfo(compKey: string) {
+	if (!compKey) return null;
 	if (!this || !this.props || !this.props.routes || !this.state.compInfos) throw new LDError('function must be bound to a IBlueprintItpt with LDOwnProps and LDLocalState before being called');
-	const compInfo = this.state.compInfos.get(compName);
+	const compInfo = this.state.compInfos.get(compKey);
 	if (!compInfo) return null;
 	let BaseComp = compInfo.compClass;
 	return <BaseComp routes={this.props.routes} ldTokenString={compInfo.ldTokenString} />;
 }
 
-export function initReactCompInfoMap(
+export function initLDLocalState(
 	cfg: BlueprintConfig,
 	props: LDConnectedState & LDOwnProps,
 	itptKeys: string[], kvKeys: string[]): LDLocalState {
 	let rvCompInfo = new Map<string, IReactCompInfoItm>();
-	let newKvMap = new Map<string, any>();
+	let newValueMap = new Map<string, any>();
+	let newLDTypeMap = new Map<string, any>();
 	let retriever = DEFAULT_ITPT_RETRIEVER_NAME;
 	if (cfg) {
 		let kvs = cfg.initialKvStores;
@@ -84,7 +91,8 @@ export function initReactCompInfoMap(
 			let kv = getKVStoreByKey(kvs, itptKey);
 			if (!kv) return;
 			let val = getKVValue(kv);
-			newKvMap.set(itptKey, val);
+			newValueMap.set(itptKey, val);
+			newLDTypeMap.set(itptKey, kv.ldType);
 		});
 	}
 	if (props) {
@@ -98,10 +106,10 @@ export function initReactCompInfoMap(
 			props, null, kvKeys
 		);
 		if (localState) {
-			newKvMap = localState.localValues;
+			newValueMap = localState.localValues;
 		}
 	}
-	return {compInfos: rvCompInfo, localValues: newKvMap};
+	return {compInfos: rvCompInfo, localValues: newValueMap, localLDTypes: newLDTypeMap};
 }
 
 export function LDgetDerivedStateFromProps(
@@ -130,36 +138,76 @@ export function LDgetDerivedStateFromProps(
 
 export function getDerivedKVStateFromProps(
 	props: LDOwnProps & LDConnectedState,
-	prevState: LDLocalValues,
-	kvKeys: string[]): LDLocalValues {
+	prevState: LDLocalKv,
+	kvKeys: string[]): LDLocalKv {
 	if (props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores && kvKeys.length > 0) {
 		let kvs: IKvStore[];
 		let retriever = props.ldOptions.visualInfo.retriever;
 		kvs = props.ldOptions.resource.kvStores;
-		let newMap = new Map<string, any>();
+		let newValueMap = new Map<string, any>();
+		let newLDTypeMap = new Map<string, any>();
 		kvKeys.forEach((itptKey) => {
 			let kv = getKVStoreByKey(kvs, itptKey);
 			if (!kv) return;
 			let val = getKVValue(kv);
-			newMap.set(itptKey, val);
+			newValueMap.set(itptKey, val);
+			newLDTypeMap.set(itptKey, kv.ldType);
 		});
 		if (!prevState) {
-			return { localValues: newMap };
+			return { localValues: newValueMap, localLDTypes: newLDTypeMap };
 		}
-		if (prevState.localValues.size === newMap.size) {
+		if (prevState.localValues.size === newValueMap.size) {
 			try {
 				prevState.localValues.forEach((val, key) => {
-					if (!newMap.has(key)) {
+					if (!newValueMap.has(key)) {
 						throw Error();
 					}
-					if (newMap.get(key) !== val) {
+					if (newValueMap.get(key) !== val) {
+						throw Error();
+					}
+					if (newLDTypeMap.get(key) !== prevState.localLDTypes.get(key)){
 						throw Error();
 					}
 				});
 			} catch (error) {
-				return { ...prevState, localValues: newMap };
+				return { ...prevState, localValues: newValueMap, localLDTypes: newLDTypeMap };
 			}
+		} else {
+			return { ...prevState, localValues: newValueMap, localLDTypes: newLDTypeMap };
 		}
 		return null;
 	}
+}
+
+/**
+ * used e.g. for BaseDataTypeInput. When generic containers deconstruct the object given to them, they
+ * construct interpreters based on the type of that object's properties. To display that property name
+ * as a description in the interpreter, we need to determine its key. For example:
+ * {myTimesheetContainerData: {workhours: 7.7, date: 2018-06-09, forProject: 'Customer Project 1'}}
+ * would result in a container splitting myTimeSheetContainerData up into three interpreters,
+ * workhours with a number double input field and "workhours" as the description,
+ * date with a date input and "date" description, and a text field containing "Customer Project 1"
+ * and "forProject" as the description
+ * @param kvStores the kvStores to determine singleKVKey from
+ */
+export function determineSingleKVKey(kvStores: IKvStore[], cfg: BlueprintConfig ): string {
+	let rv: string = UserDefDict.singleKvStore;
+	let candidates: IKvStore[] = [];
+	if (kvStores) {
+		for (let idx = 0; idx < kvStores.length; idx++) {
+			const a = kvStores[idx];
+			if (a.key === UserDefDict.singleKvStore) return rv;
+			if (a.key === UserDefDict.outputKVMapKey) continue;
+			if (kvStores[idx].ldType === cfg.canInterpretType) {
+				candidates.push(kvStores[idx]);
+			}
+		}
+	}
+	if (candidates.length === 1) {
+		rv = candidates[0].key as string;
+	} else {
+		candidates.filter((a) => cfg.interpretableKeys.includes(a.key));
+		rv = candidates.length > 0 ? candidates[0].key : rv;
+	}
+	return rv;
 }

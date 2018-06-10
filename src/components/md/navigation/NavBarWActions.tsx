@@ -17,7 +17,7 @@ import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 import IconButton from 'react-toolbox/lib/button/';
 import { IconMenu } from 'react-toolbox/lib/menu/';
 import Navigation from 'react-toolbox/lib/navigation/Navigation.js';
-import { generateIntrprtrForProp, generateCompInfoItm, generateItptFromCompInfo, initReactCompInfoMap, LDgetDerivedStateFromProps, getDerivedKVStateFromProps } from '../../generic/generatorFns';
+import { generateIntrprtrForProp, generateCompInfoItm, generateItptFromCompInfo, initLDLocalState, LDgetDerivedStateFromProps, getDerivedKVStateFromProps } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { ReactCompInfoMap, IReactCompInfoItm, ReactBlueprint } from '../../reactUtils/iReactCompInfo';
@@ -99,7 +99,7 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		};
 		this.state = {
 			...navBarStatePart,
-			...initReactCompInfoMap(this.cfg, props,
+			...initLDLocalState(this.cfg, props,
 				[VisualDict.freeContainer, VisualDict.popOverContent],
 				[VisualDict.routeSend_search, VisualDict.headerTxt])
 		};

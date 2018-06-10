@@ -41,7 +41,6 @@ import { DesignerBody } from "./parts/DesignerBody";
 import { DesignerLogic } from "./parts/designer-logic";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
-import { BooleanValInput } from "components/md/content/BaseDataTypeInput";
 import { connect } from "react-redux";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { ExplorerState } from "appstate/store";
@@ -251,7 +250,6 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 									)} />
 									<Route path="/app" render={(routeProps: LDRouteProps) => {
 										routeProps.match.params.nextPath = "app";
-										console.log(routeProps);
 										return <>
 											<BaseContainer routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
 										</>;
