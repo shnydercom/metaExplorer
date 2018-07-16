@@ -84,6 +84,7 @@ export class PureNavSearchBar extends Component<LDConnectedState & LDConnectedDi
 	initialKvStores: IKvStore[];
 	constructor(props: any) {
 		super(props);
+		console.log("navSearchBar Contstructor called");
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 	}
 

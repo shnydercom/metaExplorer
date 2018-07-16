@@ -25,7 +25,8 @@
 		"no-empty-interface": false,
 		"curly":false,
 		"interface-over-type-literal":false,
-		"max-classes-per-file":false
+		"max-classes-per-file":false,
+		"no-console" : false
 	},
 	"rulesDirectory": []
 }

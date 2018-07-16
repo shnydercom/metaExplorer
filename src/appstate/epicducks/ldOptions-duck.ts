@@ -160,6 +160,7 @@ export const ldOptionsMapReducer = (
 				} else {
 					srcKvCopy[thisTokenStrKVIdx] = kvElem;
 				}
+				stateCopy[thisLdTkStr].resource.kvStores = srcKvCopy;
 				//then modify on target, copying to target property key:
 				let targetTokenStr = modKVMapPart.targetLDToken.get();
 				let targetProp = modKVMapPart.targetProperty;

@@ -36,7 +36,6 @@ type OwnProps = {
 } & LDOwnProps;
 
 type BaseDataTypeState = {
-	heading: string,
 	singleKV: IKvStore,
 	singleKVKey: string
 };
@@ -86,10 +85,10 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 
 	constructor(props?: LDConnectedState & LDConnectedDispatch & OwnProps) {
 		super(props);
+		console.log("BDTInput constructor called");
 		this.cfg = this.constructor["cfg"];
 		//this.render = () => null;
 		let bdtState: BaseDataTypeState = {
-			heading: "",
 			singleKV: null,
 			singleKVKey: UserDefDict.singleKvStore
 		};
@@ -99,6 +98,14 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 				this.cfg, props,
 				[],
 				[LDDict.description, UserDefDict.singleKvStore, UserDefDict.outputKVMapKey])
+		};
+		this.state = {
+			...this.state, singleKV:
+			{
+				key: this.state.singleKVKey,
+				value: this.state.localValues.get(this.state.singleKVKey),
+				ldType: this.state.localLDTypes.get(this.state.singleKVKey)
+			}
 		};
 	}
 
@@ -158,7 +165,7 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 	}*/
 
 	private renderSingleKv(baseDT: LDBaseDataType) {
-		const { heading } = this.state;
+		const heading = this.state.localValues.get(LDDict.description);
 		switch (baseDT) {
 			case LDDict.Boolean:
 				let parsedBoolean = parseBoolean(this.state.singleKV);
@@ -231,7 +238,9 @@ function wrapGDSF(cfg: BlueprintConfig) {
 			let desc = nextDescription ? nextDescription : newSingleKVKey;
 			rvLD.localLDTypes.set(newSingleKVKey, nextSingleKV.ldType);
 			rvLD.localValues.set(newSingleKVKey, nextSingleKV.value);
-			rvLocal = { singleKV: nextSingleKV, heading: desc, singleKVKey: newSingleKVKey };
+			rvLD.localLDTypes.set(LDDict.description, LDDict.Text);
+			rvLD.localValues.set(LDDict.description, desc);
+			rvLocal = { singleKV: nextSingleKV, singleKVKey: newSingleKVKey };
 		}
 		if (!rvLocal) return null;
 		return { ...prevState, ...rvLD, ...rvLocal };

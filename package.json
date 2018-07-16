@@ -37,15 +37,17 @@
     "lint": "tslint ./src/**/*.ts -t verbose",
     "compcss": "node-sass --output-style compressed ./src/styles/styles.scss > cat ./dist/style.css",
     "dl-tooling": "node ./scripts/dlTooling.js",
-    "generateGoogleSheetsClient": "java -jar ./tooling/swagger-codegen-cli.jar generate -i https://raw.githubusercontent.com/APIs-guru/openapi-directory/master/APIs/googleapis.com/sheets/v4/swagger.yaml -l typescript-fetch -o ./src/apis/google/sheets"
+    "generateGoogleSheetsClient": "java -jar ./tooling/swagger-codegen-cli.jar generate -i https://raw.githubusercontent.com/APIs-guru/openapi-directory/master/APIs/googleapis.com/sheets/v4/swagger.yaml -l typescript-fetch -o ./src/google/apis/sheets-generated"
   },
   "dependencies": {
+    "@types/gapi": "^0.0.35",
+    "@types/gapi.auth2": "^0.0.47",
     "assert-never": "^1.0.0",
+    "googleapis": "^32.0.0",
     "history": "^4.7.2",
     "hydraclient.js": "https://github.com/HydraCG/Heracles.ts.git",
     "lodash": "^4.17.4",
     "m-react-splitters": "^1.0.4",
-    "nswag": "^11.17.13",
     "quagga": "^0.12.1",
     "react": "^16.4.0",
     "react-collapsible": "^2.2.0",

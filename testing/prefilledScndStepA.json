@@ -65,7 +65,7 @@
       },
       "textInputComp": {
         "subItptOf": "shnyder/md/http://schema.org/Text",
-        "canInterpretType": "http://schema.org/Boolean",
+        "canInterpretType": "http://schema.org/Text",
         "nameSelf": "textInputComp",
         "initialKvStores": [{
             "key": "http://schema.org/description",

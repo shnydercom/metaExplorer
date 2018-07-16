@@ -21,13 +21,14 @@ import { initMDitptFnAsDefault } from 'components/md/initMDitptRetrieverSetup';
 import { Route } from 'react-router';
 import { LDRouteProps } from 'appstate/LDProps';
 import { initEssentialItpts } from 'defaults/initEssentialItpts';
+import 'mods/google/components/GWebAuthenticator';
 
 const initialState: ExplorerState = {
 	ldoptionsMap: {},
 	ldNonVisualMap: {}
 };
 
-const isProduction = true; //process.env.NODE_ENV === 'production';
+const isProduction = false; //true; //process.env.NODE_ENV === 'production';
 
 export interface AppRootProps { }
 export const applicationStore: Store<ExplorerState> = configureStore(initialState);

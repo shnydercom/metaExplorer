@@ -3,18 +3,6 @@ import { LDConsts } from "ldaccess/LDConsts";
 import { IItptMatcher } from "ldaccess/iitpt-matcher";
 import { IKvStore } from "ldaccess/ikvstore";
 
-import { LDDict } from "ldaccess/LDDict";
-
-import { PureImgDisplay } from 'components/imagedisplay-component';
-import { PureBoolInput, PureIntInput, PureDoubleInput, PureTextInput, PureDateInput, PureDateTimeInput } from "components/md/content/BaseDataTypeInput";
-import ImgHeadSubDescIntrprtr, { ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc } from "components/visualcomposition/ImgHeadSubDescIntrprtr";
-import { BottomNavigationName, PureBottomNavigation } from "components/md/navigation/BottomNavigation";
-import { PureNavBarWActions, NavBarWActionsName } from "components/md/navigation/NavBarWActions";
-import { ImageRetriever, imageRetrieverName } from "sidefx/ImageRetriever";
-import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { organizationRetrieverName, OrganizationRetriever } from "sidefx/OrganizationRetriever";
-import { RouteComponentName, PureRouteComponent } from "components/routing/route-component";
 import { IItptRetriever } from "ldaccess/iitpt-retriever";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";

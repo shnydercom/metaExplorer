@@ -19,7 +19,7 @@
 
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": ["node"],
+    "types": ["node", "gapi", "gapi.auth2"],
     "typeRoots": ["./node_modules/@types"],
     "suppressExcessPropertyErrors": true,
     "declaration": true,
@@ -40,7 +40,8 @@
   ],
   "awesomeTypescriptLoaderOptions": {
     "compilerOptions": {
-      "declaration": false
+      "declaration": false,
+      "types": ["node", "gapi", "gapi.auth2"],
     },
     "exclude": [
       "node_modules",

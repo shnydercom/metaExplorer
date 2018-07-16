@@ -1,6 +1,5 @@
 import { IItptRetriever } from "ldaccess/iitpt-retriever";
-import ldBlueprint, { IBlueprintItpt, BlueprintConfig } from "ldaccess/ldBlueprint";
-import { UserDefDict } from "ldaccess/UserDefDict";
+import { IBlueprintItpt, BlueprintConfig } from "ldaccess/ldBlueprint";
 
 export const DEFAULT_ITPT_RETRIEVER_NAME = "default";
 

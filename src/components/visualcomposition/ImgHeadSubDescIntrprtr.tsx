@@ -94,6 +94,7 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 	initialKvStores: IKvStore[];
 	constructor(props: any) {
 		super(props);
+		console.log("ImgHeadSubDesc Constructor called");
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		if (props) this.handleKVs(props);
 	}
