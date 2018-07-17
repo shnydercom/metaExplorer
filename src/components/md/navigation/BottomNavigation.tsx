@@ -271,6 +271,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 
 	generateRoutableTopFree(props: LDOwnProps & LDConnectedState, nextPath: string) {
 		let kvs: IKvStore[];
+		console.log("generateRoutableTopFree called");
 		const retriever = this.props.ldOptions.visualInfo.retriever;
 		const newRoutes = { ... this.props.routes };
 		if (nextPath) {
@@ -285,21 +286,22 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
 		}
 	}
+	
+	bsCompExecFn = () => <>{this.topFreeContainer}</>;
 	render() {
 		const { ldOptions } = this.props;
 		let tabIdx = this.state.tabIdx;
 		if (this.topFreeContainer && this.topFreeContainer.props.routes) {
-			/*console.log("topfree routes: ");
+			console.log("topfree routes: ");
 			console.dir(this.topFreeContainer.props.routes);
 			console.log("this routes:");
-			console.dir(this.props.routes);*/
+			console.dir(this.props.routes);
 		}
-		const bsCompExecFn = () => <>{this.topFreeContainer}</>;
 		return <div className="bottom-nav">
 			<div className="bottom-nav-topfree mdscrollbar">
-				<Route component={bsCompExecFn} />
-				{this.props.children}
 				{this.generateRedirect(tabIdx)}
+				<Route component={this.bsCompExecFn} />
+				{this.props.children}
 			</div>
 			<Tabs index={tabIdx} onChange={this.onTabChanged} fixed className="bottom-nav-tabs">
 				{this.isGen1 ? this.generateTab(this.icon1url, this.icon1urlDisabled, this.route1, tabIdx === 0) : null}
