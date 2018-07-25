@@ -82,8 +82,12 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 			this.props.notifyLDOptionsLinearSplitChange(newldOptions);
 			return;
 		} else {
+			const interpretableKeys = this.cfg.interpretableKeys;
 			ldOptions.resource.kvStores.forEach((elem, idx) => {
 				let elemKey: string = elem.key;
+				//pre-check if it exists as an interpretableKey in a pre-defined linear data display
+				console.log(interpretableKeys);
+				if (interpretableKeys.length > 0 && interpretableKeys.findIndex((itptKey) => itptKey === elemKey) < 0) return;
 				let itpt: React.ComponentClass<LDOwnProps> & IBlueprintItpt = null;
 				if (elem.ldType === UserDefDict.intrprtrClassType && elem.value && isObjPropertyRef(elem.value)) {
 					itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt((elem.value as ObjectPropertyRef).objRef);
@@ -137,7 +141,7 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 			return <>
 				{reactComps ? reactComps : null}
 			</>;
-		}else{
+		} else {
 			return <span>error caught baseContainer</span>;
 		}
 	}

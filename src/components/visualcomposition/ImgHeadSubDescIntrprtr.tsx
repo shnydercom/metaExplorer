@@ -7,10 +7,10 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { VisualDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
-import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDRouteProps } from 'appstate/LDProps';
+import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDRouteProps, LDLocalState } from 'appstate/LDProps';
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
 import { elementAt } from 'rxjs/operators/elementAt';
-import { generateIntrprtrForProp } from 'components/generic/generatorFns';
+import { generateIntrprtrForProp, getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
 import { getKVValue, isObjPropertyRef } from 'ldaccess/ldUtils';
 import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
@@ -81,52 +81,80 @@ interface TestState {
 	myState: string;
 }
 @ldBlueprint(bpCfg)
-export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, {}>
+export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, LDLocalState>
 	implements IBlueprintItpt {
+
+	static getDerivedStateFromProps(
+		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
+		prevState: null | LDLocalState)
+		: null | LDLocalState {
+		let rvLD = getDerivedItptStateFromProps(
+			nextProps, prevState, [VisualDict.headerItpt, VisualDict.footerItpt]);
+		let rvLocal = getDerivedKVStateFromProps(
+			nextProps, prevState, [VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description]);
+		if (!rvLD && !rvLocal) {
+			return null;
+		}
+		return { ...prevState, ...rvLD, ...rvLocal  };
+	}
+
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	headerItpt: any;
-	headerText: string;
-	subHeaderText: string;
-	description: string;
-	footerItpt: any;
+	// headerItpt: any;
+	// headerText: string;
+	// subHeaderText: string;
+	// description: string;
+	// footerItpt: any;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
+
+	private renderSub = generateItptFromCompInfo.bind(this);
+
 	constructor(props: any) {
 		super(props);
 		console.log("ImgHeadSubDesc Constructor called");
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		if (props) this.handleKVs(props);
+		//if (props) this.handleKVs(props);
+		this.state = {
+			...initLDLocalState(this.cfg, props,
+				[VisualDict.headerItpt, VisualDict.footerItpt],
+				[VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description])
+		};
 	}
-	componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
+	/*componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
 		if (compNeedsUpdate(nextProps, this.props)) {
 			this.handleKVs(nextProps);
 		}
-	}
+	}*/
 	render() {
+		const { localValues } = this.state;
+		const headerText = localValues.get(VisualDict.headerTxt);
+		const subHeaderText = localValues.get(VisualDict.subHeaderTxt);
+		const description = localValues.get(VisualDict.description);
 		return <div className="mdscrollbar">
 			<div className="header-img-container">
-				{this.headerItpt}
+				{this.renderSub(VisualDict.headerItpt)}
 			</div>
 			<div className="header-img-container overlay-gradient">
 				<div className="header-text">
-					<span>{this.headerText ? this.headerText : 'headerTextPlaceholder'}</span>
+					<span>{headerText ? headerText : 'headerTextPlaceholder'}</span>
 				</div>
 			</div>
 			<div className="imgheadsubdesc-text">
 				<div>
-					<h4>{this.subHeaderText ? this.subHeaderText : "subHeaderTextPlaceholder"}</h4>
+					<h4>{subHeaderText ? subHeaderText : "subHeaderTextPlaceholder"}</h4>
 				</div>
 				<div>
-					<i>{this.description ? this.description : 'descriptionPlaceholder'}</i>
+					<i>{description ? description : 'descriptionPlaceholder'}</i>
 				</div>
 			</div>
 			<div>
-				{this.footerItpt}
+				{this.renderSub(VisualDict.footerItpt)}
 			</div>
 		</div>;
 	}
-	private handleKVs(props: LDOwnProps & LDConnectedState) {
+
+	/*private handleKVs(props: LDOwnProps & LDConnectedState) {
 		let kvs: IKvStore[];
 		const retriever = !props.ldOptions ? DEFAULT_ITPT_RETRIEVER_NAME : this.props.ldOptions.visualInfo.retriever;
 		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
@@ -137,7 +165,7 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 			/*this.headerText = getKVValue(getKVStoreByKey(kvs, VisualDict.headerTxt));
 			this.subHeaderText = getKVValue(getKVStoreByKey(kvs, VisualDict.subHeaderTxt));
 			this.description = getKVValue(getKVStoreByKey(kvs, VisualDict.description));*/
-		}
+	/*	}
 		this.headerText = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.headerTxt));
 		this.subHeaderText = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.subHeaderTxt));
 		this.description = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.description));
@@ -149,7 +177,7 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
 			this.footerItpt = generateIntrprtrForProp(kvs, VisualDict.footerItpt, retriever, this.props.routes);
 		}
-	}
+	}*/
 
 }
 

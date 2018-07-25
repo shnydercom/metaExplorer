@@ -79,7 +79,7 @@ export function initLDLocalState(
 	let retriever = DEFAULT_ITPT_RETRIEVER_NAME;
 	if (cfg) {
 		let kvs = cfg.initialKvStores;
-		if (props && props.ldOptions.visualInfo.retriever) {
+		if (props && props.ldOptions && props.ldOptions.visualInfo && props.ldOptions.visualInfo.retriever) {
 			retriever = props.ldOptions.visualInfo.retriever;
 		}
 		itptKeys.forEach((itptKey) => {
@@ -96,7 +96,7 @@ export function initLDLocalState(
 		});
 	}
 	if (props) {
-		let compState = LDgetDerivedStateFromProps(
+		let compState = getDerivedItptStateFromProps(
 			props, null, itptKeys
 		);
 		if (compState) {
@@ -112,7 +112,7 @@ export function initLDLocalState(
 	return {compInfos: rvCompInfo, localValues: newValueMap, localLDTypes: newLDTypeMap};
 }
 
-export function LDgetDerivedStateFromProps(
+export function getDerivedItptStateFromProps(
 	props: LDConnectedState & LDOwnProps,
 	prevState: null | ReactCompLDLocalState,
 	itptKeys: string[]): null | ReactCompLDLocalState {
