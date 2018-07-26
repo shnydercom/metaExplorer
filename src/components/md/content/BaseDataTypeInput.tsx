@@ -1,12 +1,8 @@
 import assertNever from "assert-never";
 import { connect } from 'react-redux';
 
-import { Input, InputTheme } from 'react-toolbox';
-import { Switch } from 'react-toolbox';
-import { DatePicker, DatePickerTheme } from 'react-toolbox';
-import { TimePicker, TimePickerTheme } from 'react-toolbox';
+import { Input, InputTheme, DatePicker, DatePickerTheme, Switch, TimePicker, TimePickerTheme } from 'react-toolbox';
 
-import { ExplorerState } from 'appstate/store';
 import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
@@ -17,11 +13,10 @@ import { LDDict } from 'ldaccess/LDDict';
 import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDLocalState } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
-import { ldOptionsDeepCopy, getKVValue } from "ldaccess/ldUtils";
+import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { Component, ComponentClass, StatelessComponent } from "react";
 import { UserDefDict } from "ldaccess/UserDefDict";
-import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from "ldaccess/kvConvenienceFns";
-import { compNeedsUpdate } from "../../reactUtils/compUtilFns";
+import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { getDerivedKVStateFromProps, initLDLocalState, determineSingleKVKey } from "../../generic/generatorFns";
 import { parseDate, parseTime, parseText, parseNumber, parseBoolean } from "ldaccess/ldtypesystem/parseSimple";
 

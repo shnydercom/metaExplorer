@@ -1,15 +1,10 @@
 import { connect } from 'react-redux';
-import { ExplorerState } from 'appstate/store';
-import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
-import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
-import { getKVStoreByKey } from 'ldaccess/kvConvenienceFns';
-import { getKVValue } from 'ldaccess/ldUtils';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualDict } from '../../visualcomposition/visualDict';
 
@@ -20,13 +15,6 @@ import Navigation from 'react-toolbox/lib/navigation/Navigation.js';
 import { generateItptFromCompInfo, initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
-import { ReactCompInfoMap, IReactCompInfoItm, ReactBlueprint } from '../../reactUtils/iReactCompInfo';
-
-type ConnectedState = {
-};
-
-type ConnectedDispatch = {
-};
 
 export const NavBarWActionsName = "shnyder/md/NavBarWActions";
 let cfgIntrprtKeys: string[] =
