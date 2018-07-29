@@ -68,8 +68,7 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               presets: [
-                '@babel/env',
-                "@babel/preset-es2015", '@babel/preset-react'
+                '@babel/env', '@babel/preset-react'
               ]
             }
           },

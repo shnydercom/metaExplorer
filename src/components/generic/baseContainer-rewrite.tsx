@@ -1,0 +1,130 @@
+import { LDOwnProps, LDLocalState, LDConnectedState, LDConnectedDispatch, LDRouteProps } from "appstate/LDProps";
+import { UserDefDict } from "ldaccess/UserDefDict";
+import { IKvStore } from "ldaccess/ikvstore";
+import ldBlueprint, { BlueprintConfig, OutputKVMap, IBlueprintItpt } from "ldaccess/ldBlueprint";
+import { Component, ComponentClass, StatelessComponent } from "react";
+import { ILDOptions } from "ldaccess/ildoptions";
+import { connect } from "react-redux";
+import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
+import { IReactCompInfoItm } from "../reactUtils/iReactCompInfo";
+import { ldOptionsDeepCopy, isObjPropertyRef } from "ldaccess/ldUtils";
+import { isRouteSame } from "../reactUtils/compUtilFns";
+import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
+import { appItptMatcherFn } from "appconfig/appItptMatcher";
+import { linearLDTokenStr } from "ldaccess/ildtoken";
+import { isReactComponent } from "../reactUtils/reactUtilFns";
+import { LDError } from "appstate/LDError";
+
+export interface BaseContOwnProps extends LDOwnProps {
+	searchCrudSkills: string;
+}
+
+export interface BaseContOwnState extends LDLocalState {
+	hasError: boolean;
+	errorMsg: string;
+	nameSelf: string;
+	routes: LDRouteProps | null;
+}
+
+export const COMP_BASE_CONTAINER = "shnyder/baseContainer";
+
+let cfgType: string = UserDefDict.itptContainerObjType;
+let cfgIntrprtKeys: string[] =
+	[];
+let initialKVStores: IKvStore[] = [];
+let bpCfg: BlueprintConfig = {
+	subItptOf: null,
+	canInterpretType: cfgType,
+	nameSelf: COMP_BASE_CONTAINER,
+	initialKvStores: initialKVStores,
+	interpretableKeys: cfgIntrprtKeys,
+	crudSkills: "cRud"
+};
+
+@ldBlueprint(bpCfg)
+export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDConnectedState & LDConnectedDispatch, BaseContOwnState>
+{
+
+	static getDerivedStateFromProps(
+		nextProps: LDConnectedState & LDConnectedDispatch & BaseContOwnProps,
+		prevState: null | BaseContOwnState): null | BaseContOwnState {
+		if (!nextProps.ldOptions || !nextProps.ldOptions.resource ||
+			nextProps.ldOptions.resource.kvStores.length === 0) return null;
+		const ldOptions = nextProps.ldOptions;
+		if (ldOptions.isLoading) return null;
+		let ldTokenString = ldOptions.ldToken.get();
+		let retriever: string = ldOptions.visualInfo.retriever;
+		let interpretedBy = ldOptions.visualInfo.interpretedBy;
+		let newreactCompInfos: Map<string, IReactCompInfoItm> = new Map();
+		if (!interpretedBy || !isRouteSame(nextProps.routes, prevState.routes)) {
+			//i.e. first time this ldOptions-Object gets interpreted, or itpt-change
+			let newldOptions = ldOptionsDeepCopy(ldOptions);
+			newldOptions.visualInfo.interpretedBy = prevState.nameSelf;
+			nextProps.notifyLDOptionsLinearSplitChange(newldOptions);
+			return null;
+		}
+		ldOptions.resource.kvStores.forEach((elem, idx) => {
+			let elemKey: string = elem.key;
+			let itpt: React.ComponentClass<LDOwnProps> & IBlueprintItpt = null;
+			if (elem.ldType === UserDefDict.intrprtrClassType && elem.value && isObjPropertyRef(elem.value)) {
+				itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt((elem.value as ObjectPropertyRef).objRef);
+			} else {
+				itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(linearLDTokenStr(ldTokenString, idx));
+			}
+			let newKey: string = "_" + idx;
+			if (isReactComponent(itpt)) {
+				newreactCompInfos.set(newKey, { compClass: itpt, key: newKey, ldTokenString: linearLDTokenStr(ldTokenString, idx) });
+			} else {
+				throw new LDError("baseContainer got a non-visual component");
+			}
+		});
+		return { ...prevState, compInfos: newreactCompInfos };
+	}
+
+	cfg: BlueprintConfig;
+	outputKVMap: OutputKVMap;
+	consumeLDOptions: (ldOptions: ILDOptions) => any;
+	initialKvStores: IKvStore[];
+
+	constructor(props?: BaseContOwnProps & LDConnectedState & LDConnectedDispatch) {
+		super(props);
+		this.cfg = this.constructor["cfg"];
+		this.state = {
+			hasError: false,
+			errorMsg: '',
+			nameSelf: this.cfg.nameSelf,
+			routes: null,
+			compInfos: new Map(),
+			localLDTypes: new Map(),
+			localValues: new Map()
+		};
+	}
+
+	componentDidCatch(error, info) {
+		this.setState({ ...this.state, hasError: true, errorMsg: info });
+	}
+
+	render() {
+		let { hasError, errorMsg } = this.state;
+		if (!hasError) {
+			let { routes } = this.props;
+			routes = routes ? { ...routes } : null;
+			let iterator = 0;
+			let reactComps = [];
+			this.state.compInfos.forEach((cInfoItm, key) => {
+				let GenericComp = cInfoItm.compClass;
+				reactComps[iterator] = <GenericComp key={cInfoItm.key} routes={routes}
+					ldTokenString={cInfoItm.ldTokenString} />;
+				iterator++;
+			});
+			return <>
+				{reactComps ? reactComps : null}
+			</>;
+		} else {
+			return <span>error caught baseContainer: {errorMsg}</span>;
+		}
+	}
+
+}
+
+export const BaseContainerRewrite = connect<LDConnectedState, LDConnectedDispatch, BaseContOwnProps>(mapStateToProps, mapDispatchToProps)(PureBaseContainerRewrite);

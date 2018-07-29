@@ -17,6 +17,7 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { compNeedsUpdate } from "components/reactUtils/compUtilFns";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { LDDict } from "ldaccess/LDDict";
+import { BaseContainerRewrite } from "../../../generic/baseContainer-rewrite";
 
 export type BaseDataTypePortSelectorProps = {
 	model?: LDPortModel;
@@ -78,7 +79,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 				<div onFocus={() => this.props.model.getParent().setSelected(false)}>
 					{label}
 					<BaseDataTypeDropDown selectionChange={(newType) => { this.onPortTypeChange(newType, this.props); }} />
-					{this.state.portType ? <BaseContainer ldTokenString={targetID} searchCrudSkills="CrUd" routes={null} /> : null}
+					{this.state.portType ? <BaseContainerRewrite ldTokenString={targetID} searchCrudSkills="CrUd" routes={null} /> : null}
 				</div>
 				{port}
 			</div>
