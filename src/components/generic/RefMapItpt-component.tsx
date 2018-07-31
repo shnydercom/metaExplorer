@@ -8,7 +8,6 @@ import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from 
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import ImgHeadSubDescIntrprtr from "components/visualcomposition/ImgHeadSubDescIntrprtr";
 import { PureImgDisplay } from "components/imagedisplay-component";
-import { BaseContainer } from "components/generic/baseContainer-component";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
 import { compNeedsUpdate, isRouteSame } from "components/reactUtils/compUtilFns";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
@@ -104,7 +103,7 @@ export class PureRefMapItpt extends Component<LDConnectedState & LDConnectedDisp
 	}
 
 	componentDidCatch(error, info) {
-		console.log("basecontainer: error, info:");
+		console.log("refmap: error, info:");
 		console.dir(error);
 		console.dir(info);
 		this.setState({ hasError: true });

@@ -8,6 +8,8 @@ import configuratorTestData from '../../../testing/configuratorTestData';
 import * as prefilledProductItptA from '../../../testing/prefilledProductInterpreter.json';
 import * as prefilledOrganizationItptA from '../../../testing/prefilledOrganizationInterpreter.json';
 
+import * as linearDataDisplayTest from '../../../testing/linearDataDisplayTest.json';
+
 import { ComponentClass, StatelessComponent } from 'react';
 
 //YWQD
@@ -61,7 +63,7 @@ import {
 } from 'react-router-dom';
 import ImgHeadSubDescIntrprtr from "components/visualcomposition/ImgHeadSubDescIntrprtr";
 import { Switch, withRouter, RouteComponentProps } from "react-router";
-import { BaseContainer } from "components/generic/baseContainer-component";
+import { BaseContainerRewrite } from "../generic/baseContainer-rewrite";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -149,6 +151,11 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 		}
 		let prefilledDataB: any = prefilledYWQDApp;
 		this.generatePrefilled(prefilledDataB);
+	}
+
+	onGenLinearClick = (e) => {
+		let prefilledData: any = linearDataDisplayTest;
+		this.generatePrefilled(prefilledData);
 	}
 
 	generatePrefilled = (input: any) => {
@@ -239,6 +246,8 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 					<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>
 					<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>
 					<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
+
+					<Button onClick={this.onGenLinearClick}>Linear!</Button>
 					<Link to="/designerinitial">initial   </Link>
 					<Link to="/app">   app</Link>
 					<ThemeProvider theme={appTheme}>
@@ -251,7 +260,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 									<Route path="/app" render={(routeProps: LDRouteProps) => {
 										routeProps.match.params.nextPath = "app";
 										return <>
-											<BaseContainer routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
+											<BaseContainerRewrite routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
 										</>;
 									}} />
 								</Switch>

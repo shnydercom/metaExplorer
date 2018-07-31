@@ -115,8 +115,14 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 	}*/
 
 	handleChange = (evtval) => {
-		let newLDOptionsObj = ldOptionsDeepCopy(this.props.ldOptions);
-		let modSingleKV: IKvStore = getKVStoreByKey(newLDOptionsObj.resource.kvStores, this.state.singleKVKey);
+		//let newLDOptionsObj = ldOptionsDeepCopy(this.props.ldOptions);
+		let singleKey: string = this.state.singleKVKey;
+		let modSingleKV: IKvStore = {
+			key: this.state.singleKVKey,
+			ldType: this.state.localLDTypes.get(singleKey),
+			value: this.state.localValues.get(singleKey)
+		};
+		//getKVStoreByKey(newLDOptionsObj.resource.kvStores, this.state.singleKVKey);
 		modSingleKV.value = evtval;
 		this.setState({ ...this.state, singleKV: modSingleKV });
 		//TODO: it might be a good idea to debounce before updating the application state
@@ -129,7 +135,8 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 		/*let initialSingleKV = { ...getKVStoreByKey(this.initialKvStores, this.state.singleKVKey) };
 		let baseDT: LDBaseDataType = initialSingleKV.ldType as LDBaseDataType;
 		this.determineRenderFn(baseDT);*/
-		if (!this.props.ldOptions) {
+		if (!this.state.singleKV || !this.state.singleKV.ldType) {
+			console.log('PureBaseDataTypeInput notifyLDOptionsChange');
 			//this self-creates an object. Used e.g. in the itpt-designer, bdt-part
 			this.props.notifyLDOptionsChange(null);
 		}/* else {

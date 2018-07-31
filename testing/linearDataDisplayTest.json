@@ -1,0 +1,76 @@
+{
+  "subItptOf": "RootItpt",
+  "canInterpretType": "test-ObjectType",
+  "nameSelf": "test",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "RootItpt": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "RootItpt",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "ImgHeadSubDesc",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0"
+          ]
+        },
+        "ImgHeadSubDesc": {
+          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "nameSelf": "ImgHeadSubDesc",
+          "initialKvStores": [
+            {
+              "key": "HeaderInterpreter",
+              "value": {
+                "objRef": "TextInputItpt",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "SubHeaderText",
+              "value": {
+                "objRef": "TextInputItpt",
+                "propRef": "singleKvStore"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "HeaderInterpreter",
+            "SubHeaderText"
+          ]
+        },
+        "TextInputItpt": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "TextInputItpt",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": "predefinedInputfromTest",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+/*import { connect } from 'react-redux';
 
 import { ExplorerState } from 'appstate/store';
 import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
@@ -148,3 +148,4 @@ export class PureBaseContainer extends Component<LDConnectedState & LDConnectedD
 }
 
 export const BaseContainer = connect<LDConnectedState, LDConnectedDispatch, BaseContOwnProps>(mapStateToProps, mapDispatchToProps)(PureBaseContainer);
+*/

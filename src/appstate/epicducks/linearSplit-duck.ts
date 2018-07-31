@@ -65,7 +65,7 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 		//assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
 		let targetLDToken: ILDToken = new NetworkPreferredToken(ldTkStr);
 		let newOutputKvMap: OutputKVMap = { [elemKey]: { targetLDToken: targetLDToken, targetProperty: elemKey } };
-		let newOKVStore: IKvStore = {key: UserDefDict.outputKVMapKey, value: newOutputKvMap, ldType: UserDefDict.outputKVMapType};
+		let newOKVStore: IKvStore = { key: UserDefDict.outputKVMapKey, value: newOutputKvMap, ldType: UserDefDict.outputKVMapType };
 		let newLDOptions: ILDOptions = {
 			isLoading: false,
 			lang: lang,
@@ -103,13 +103,15 @@ export const linearSplitEpic = (action$: ActionsObservable<any>, store: any) => 
 			let retriever = action.ldOptionsBase.visualInfo.retriever;
 			let ldTkStr = action.ldOptionsBase.ldToken.get();
 			let splitReqPromise = new Promise((resolve, reject) => {
-				clearDerivedItpt(retriever, ldTkStr);
+				//TOdo: check if it's needed:
+				// clearDerivedItpt(retriever, ldTkStr);
 				ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
 					let newLDTokenStr: string = linearLDTokenStr(ldTkStr, idx);
 					let newLDToken = new NetworkPreferredToken(newLDTokenStr);
 					assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
 				});
 				ldOptionsObj.isLoading = false;
+				// assignDerivedItpt(retriever, ldTkStr, UserDefDict.itptContainerObjType, "cRud");
 				resolve(ldOptionsObj);
 			});
 			let rv = Observable.from(splitReqPromise);

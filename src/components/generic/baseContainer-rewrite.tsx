@@ -14,6 +14,7 @@ import { appItptMatcherFn } from "appconfig/appItptMatcher";
 import { linearLDTokenStr } from "ldaccess/ildtoken";
 import { isReactComponent } from "../reactUtils/reactUtilFns";
 import { LDError } from "appstate/LDError";
+import { value } from "../../../node_modules/react-toolbox/lib/dropdown/theme.css";
 
 export interface BaseContOwnProps extends LDOwnProps {
 	searchCrudSkills: string;
@@ -24,6 +25,7 @@ export interface BaseContOwnState extends LDLocalState {
 	errorMsg: string;
 	nameSelf: string;
 	routes: LDRouteProps | null;
+	interpretableKeys: (string | ObjectPropertyRef)[];
 }
 
 export const COMP_BASE_CONTAINER = "shnyder/baseContainer";
@@ -52,16 +54,36 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 			nextProps.ldOptions.resource.kvStores.length === 0) return null;
 		const ldOptions = nextProps.ldOptions;
 		if (ldOptions.isLoading) return null;
+		let interpretableKeys = prevState.interpretableKeys;
 		let ldTokenString = ldOptions.ldToken.get();
 		let retriever: string = ldOptions.visualInfo.retriever;
 		let interpretedBy = ldOptions.visualInfo.interpretedBy;
 		let newreactCompInfos: Map<string, IReactCompInfoItm> = new Map();
-		if (!interpretedBy || !isRouteSame(nextProps.routes, prevState.routes)) {
+		let newLDTypes: Map<string, string> = new Map();
+		let isLDTypeSame = true;
+		let isItptKey = false;
+		ldOptions.resource.kvStores.forEach((itm, idx, kvstores) => {
+			let prevStateLDType = prevState.localLDTypes.get(itm.key);
+			newLDTypes.set(itm.key, itm.ldType);
+			if (interpretableKeys.length > 0 && interpretableKeys.findIndex((itptKey) => itptKey === itm.key) >= 0) {
+				isItptKey = true;
+				return;
+			}
+			if (!isLDTypeSame) return;
+			if (prevStateLDType !== itm.ldType) {
+				isLDTypeSame = false;
+			}
+		});
+		if ((!interpretedBy
+			|| !isRouteSame(nextProps.routes, prevState.routes)
+			|| !isLDTypeSame)
+			&& !isItptKey) {
 			//i.e. first time this ldOptions-Object gets interpreted, or itpt-change
 			let newldOptions = ldOptionsDeepCopy(ldOptions);
 			newldOptions.visualInfo.interpretedBy = prevState.nameSelf;
 			nextProps.notifyLDOptionsLinearSplitChange(newldOptions);
-			return null;
+			let routes: LDRouteProps = nextProps.routes;
+			return { ...prevState, routes, localLDTypes: newLDTypes };
 		}
 		ldOptions.resource.kvStores.forEach((elem, idx) => {
 			let elemKey: string = elem.key;
@@ -71,14 +93,19 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 			} else {
 				itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(linearLDTokenStr(ldTokenString, idx));
 			}
-			let newKey: string = "_" + idx;
+			let newKey: string = elem.key; // "_" + idx;
 			if (isReactComponent(itpt)) {
-				newreactCompInfos.set(newKey, { compClass: itpt, key: newKey, ldTokenString: linearLDTokenStr(ldTokenString, idx) });
+				let ldTokenStringNew: string = linearLDTokenStr(ldTokenString, idx);
+				if (isItptKey && isObjPropertyRef(elem.value)) {
+					ldTokenStringNew = (elem.value as ObjectPropertyRef).objRef;
+				}
+				newreactCompInfos.set(newKey, { compClass: itpt, key: newKey, ldTokenString: ldTokenStringNew });
+				newLDTypes.set(newKey, itpt.cfg.canInterpretType);
 			} else {
 				throw new LDError("baseContainer got a non-visual component");
 			}
 		});
-		return { ...prevState, compInfos: newreactCompInfos };
+		return { ...prevState, compInfos: newreactCompInfos, localLDTypes: newLDTypes };
 	}
 
 	cfg: BlueprintConfig;
@@ -96,7 +123,8 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 			routes: null,
 			compInfos: new Map(),
 			localLDTypes: new Map(),
-			localValues: new Map()
+			localValues: new Map(),
+			interpretableKeys: this.cfg.interpretableKeys
 		};
 	}
 

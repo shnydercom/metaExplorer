@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
-import { BaseContainer } from "components/generic/baseContainer-component";
 import { Component, ComponentClass, StatelessComponent } from "react";
 import { OutputKVMap } from "ldaccess/ldBlueprint";
 import { ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";

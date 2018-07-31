@@ -22,7 +22,7 @@ import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from "ldaccess/kvC
 import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
 import { isObjPropertyRef } from "ldaccess/ldUtils";
 import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesWidgetFactory";
-import { COMP_BASE_CONTAINER } from "../../generic/baseContainer-component";
+import { COMP_BASE_CONTAINER } from "../../generic/baseContainer-rewrite";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 

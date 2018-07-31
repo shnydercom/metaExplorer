@@ -37,6 +37,7 @@ export class ReduxItptRetriever extends DefaultItptRetriever {
 	}
 	setDerivedItpt(ldTokenVal: string, itpt: any): void {
 		super.setDerivedItpt(ldTokenVal, itpt);
+		if (itpt === null) return;
 		let intrprtrAsLDBP: IBlueprintItpt = itpt;
 		let nameSelf = intrprtrAsLDBP.cfg.nameSelf;
 		let connItpt = connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(itpt);
