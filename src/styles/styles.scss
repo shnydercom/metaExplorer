@@ -1,7 +1,6 @@
 @import 'm-react-splitters/lib/splitters.css';
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import '/designer/colors.scss';
-
 .app-preview {
 	width: 420px;
 	height: 746px;
@@ -9,7 +8,7 @@
 	padding: 69px 58px 80px 58px;
 	box-sizing: border-box;
 	font-family: Roboto, Arial;
-	text-overflow:ellipsis;
+	text-overflow: ellipsis;
 }
 
 .app-content {
@@ -35,7 +34,7 @@
 	display: flex;
 	background-image: -webkit-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.6));
 	background-image: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.6));
-	pointer-events:none;
+	pointer-events: none;
 }
 
 .header-text {
@@ -72,10 +71,16 @@
 	}
 	.designer-tray {
 		min-width: 200px;
+		max-width: 400px;
 		background: $designer-background-elevated-color;
 		flex-grow: 0;
+		flex: 1;
 		flex-shrink: 0;
+		display: flex;
+		flex-direction: column;
 		.designer-tray-item {
+			overflow: hidden;
+			text-overflow: ellipsis; 
 			color: white;
 			font-family: Roboto, Arial;
 			padding: 5px;
@@ -84,6 +89,27 @@
 			border-radius: 5px;
 			margin-bottom: 2px;
 			cursor: pointer;
+		}
+		.refmap-drop-outer {
+			min-height: 100px;
+			flex: 1;
+			display: flex;
+			flex-direction: column-reverse;
+		}
+		.refmap-drop-inner {
+			color: adjust-color($color: #ffffff, $lightness: 80%, $alpha: 0.8);
+			background-color: adjust-color($color: #0c1e3a, $saturation: -20%, $lightness: 10%);
+			font-family: Roboto, Arial;
+			padding: 5px;
+			margin: 0px 10px;
+			border: solid 1px;
+			border-radius: 5px;
+			border-style: none;
+			margin-bottom: 2px;
+			cursor: pointer;
+			min-height: 100px;
+			text-align: center;
+			user-select: none;
 		}
 	}
 	.diagram-body {

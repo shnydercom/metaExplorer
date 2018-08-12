@@ -4,9 +4,6 @@ export interface DesignerTrayProps {}
 
 export interface DesignerTrayState {}
 
-/**
- * @author Dylan Vorster
- */
 export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState> {
 	public static defaultProps: DesignerTrayProps = {};
 

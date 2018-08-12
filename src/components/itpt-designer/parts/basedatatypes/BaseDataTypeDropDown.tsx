@@ -15,6 +15,12 @@ export interface IDataTypeLabel {
 }
 
 export interface IDataTypeDropDownProps {
+	selection?: LDDict.Boolean |
+	LDDict.Integer |
+	LDDict.Double |
+	LDDict.Text |
+	LDDict.Date |
+	LDDict.DateTime;
 	selectionChange: (selectedDataType: string) => void;
 }
 
@@ -32,6 +38,14 @@ const baseDataTypes: IDataTypeLabel[] = [
 ];
 
 export class BaseDataTypeDropDown extends Component<IDataTypeDropDownProps, IDataTypeState> {
+
+	static getDerivedStateFromProps(nextProps: IDataTypeDropDownProps, prevState: IDataTypeState): IDataTypeState {
+		if (nextProps.selection) {
+			if (nextProps.selection === prevState.selectedDataType) return null;
+			return {selectedDataType: nextProps.selection};
+		}
+		return null;
+	}
 
 	constructor(props: IDataTypeDropDownProps) {
 		super(props);

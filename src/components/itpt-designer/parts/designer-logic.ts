@@ -24,6 +24,15 @@ import { isObjPropertyRef } from "ldaccess/ldUtils";
 import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesWidgetFactory";
 import { COMP_BASE_CONTAINER } from "../../generic/baseContainer-rewrite";
 
+export interface NewNodeSig {
+	x: number;
+	y: number;
+	id: string;
+}
+
+export const DIAG_TRANSF_X = -250;
+export const DIAG_TRANSF_Y = 200;
+
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 
 /**
@@ -253,6 +262,27 @@ export class DesignerLogic {
 		return rv;
 	}
 
+	public diagramFromItptBlueprint(itpt: BlueprintConfig): void {
+		let newSigBase: NewNodeSig = {id: this.outputNode.id + UserDefDict.intrprtrNameKey, x: this.outputNode.x + DIAG_TRANSF_X, y: this.outputNode.y + DIAG_TRANSF_Y };
+		this.addNewBDTNode(newSigBase, LDDict.Text, itpt.nameSelf);
+	}
+
+	public addNewBDTNode(signature: NewNodeSig, ldType: string, value: any): BaseDataTypeNodeModel {
+		var baseDataTypeKVStore: IKvStore = {
+			key: UserDefDict.singleKvStore,
+			value: value,
+			ldType: ldType
+		};
+		let node = new BaseDataTypeNodeModel("Simple Data Type", null, null, "rgba(250,250,250,0.2)");
+		node.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "output", signature.id));
+		node.x = signature.x;
+		node.y = signature.y;
+		this.getDiagramEngine()
+			.getDiagramModel()
+			.addNode(node);
+		return node;
+	}
+
 	public intrprtrBlueprintFromDiagram(finalCanInterpretType?: string): BlueprintConfig {
 		let rv: BlueprintConfig;
 		if (!this.outputNode) return null;
@@ -273,11 +303,11 @@ export class DesignerLogic {
 		let subIntrprtrCfgMap: { [s: string]: BlueprintConfig } = {};
 		this.fillBPCfgFromGraph(outputBPCfg, this.outputNode, subIntrprtrCfgMap, outputBPCfg);
 		let intrprtMapKV: IKvStore =
-			{
-				key: UserDefDict.intrprtrBPCfgRefMapKey,
-				value: subIntrprtrCfgMap,
-				ldType: UserDefDict.intrprtrBPCfgRefMapType
-			};
+		{
+			key: UserDefDict.intrprtrBPCfgRefMapKey,
+			value: subIntrprtrCfgMap,
+			ldType: UserDefDict.intrprtrBPCfgRefMapType
+		};
 		outputBPCfg.subItptOf = this.outputNode.subItptOf;
 		outputBPCfg.initialKvStores.push(intrprtMapKV);
 		this.bakeKvStoresIntoBP(outputBPCfg);

@@ -7,7 +7,7 @@ import { DesignerTrayItem } from "./DesignerTrayItem";
 import { IItptInfoItem } from "defaults/DefaultitptRetriever";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
 import { LDPortModel } from "./LDPortModel";
-import { IBlueprintItpt } from "ldaccess/ldBlueprint";
+import { IBlueprintItpt, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { IKvStore } from "ldaccess/ikvstore";
 import { GeneralDataTypeNodeModel } from "./generaldatatypes/GeneralDataTypeNodeModel";
 import * as appStyles from 'styles/styles.scss';
@@ -16,6 +16,10 @@ import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeMode
 import { Component } from "react";
 import { URLToMenuTree, treeDemoData } from "./URLsToMenuTree";
 import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
+import { RefMapDropSpace } from "./RefMapDropSpace";
+import { LDError } from "appstate/LDError";
+import { value } from "../../../../node_modules/react-toolbox/lib/dropdown/theme.css";
+import { generateItptFromCompInfo } from "../../generic/generatorFns";
 
 export interface DesignerBodyProps {
 	logic: DesignerLogic;
@@ -69,6 +73,43 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 			<div className="diagram-body">
 				<DesignerTray>
 					{this.trayItemsFromItptList()}
+					<RefMapDropSpace
+						dropText="drop here to load interpreter"
+						refMapDrop={(event) => {
+							var data = JSON.parse(event.dataTransfer.getData("ld-node"));
+							var nodesCount = keys(
+								this.props.logic
+									.getDiagramEngine()
+									.getDiagramModel()
+									.getNodes()
+							).length;
+							var node = null;
+							switch (data.type) {
+								case "ldbp":
+									let itptInfo = this.props.logic.getItptList().find((itm) => itm.nameSelf === data.bpname);
+									let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
+									if (!itptCfg.initialKvStores
+										|| itptCfg.initialKvStores.length !== 1
+										|| itptCfg.initialKvStores[0].key !== UserDefDict.intrprtrBPCfgRefMapKey) {
+										return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
+									}
+									this.props.logic.diagramFromItptBlueprint(itptCfg);
+									this.forceUpdate();
+									return { isSuccess: true, message: "check the diagram on the right to see your interpreter" };
+								case "bdt":
+									return { isSuccess: false, message: "simple data types can't be used here" };
+								case "inputtype":
+									return { isSuccess: false, message: "input type can't be used here" };
+								case "lineardata":
+									return { isSuccess: false, message: "linear data display can't be used here" };
+								default:
+									break;
+							}
+							return { isSuccess: false, message: JSON.stringify(data) };
+							//throw new LDError("unsupported ");
+							//return;
+						}}
+					/>
 				</DesignerTray>
 				<div
 					className="diagram-layer"
