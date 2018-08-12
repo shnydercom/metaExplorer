@@ -1,5 +1,3 @@
-import { NodeModel, AbstractInstanceFactory } from "storm-react-diagrams";
-import { LDPortModel } from './../LDPortModel';
 import { ItptNodeModel } from "components/itpt-designer/parts/ItptNodeModel";
 import { BASEDATATYPE_MODEL } from "components/itpt-designer/parts/designer-consts";
 

@@ -2,8 +2,6 @@ import { Component } from "react";
 import Splitter from 'm-react-splitters';
 import * as s from 'm-react-splitters/lib/splitters.css';
 
-import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
-
 import configuratorTestData from '../../../testing/configuratorTestData';
 import * as prefilledProductItptA from '../../../testing/prefilledProductInterpreter.json';
 import * as prefilledOrganizationItptA from '../../../testing/prefilledOrganizationInterpreter.json';
@@ -15,7 +13,6 @@ import { ComponentClass, StatelessComponent } from 'react';
 //YWQD
 import * as prefilledMDBottomNav from '../../../testing/prefilledYWQDBottomNav.json';
 import * as prefilledScndStepA from '../../../testing/prefilledScndStepA.json';
-import * as prefilledScndStepAA from '../../../testing/prefilledScndStepAA.json';
 import * as barcodePrefilled from '../../../testing/barcodeScanner.json';
 import * as prefilledSingleImageSel from '../../../testing/prefilledSingleImageSel.json';
 import * as prefilledYWQDApp from '../../../testing/ywqd-app.json';
@@ -32,20 +29,12 @@ import {
 } from "storm-react-diagrams";
 import Button from 'react-toolbox/lib/button';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
-//import "storm-react-diagrams/dist/style.css";
-
-import { BaseDataTypeWidgetFactory } from "./parts/basedatatypes/BaseDataTypeWidgetFactory";
-import { BaseDataTypeNodeModel } from './parts/basedatatypes/BaseDataTypeNodeModel';
-
-import { LDPortModel } from './parts/LDPortModel';
-import { GeneralDataTypeWidgetFactory } from "./parts/generaldatatypes/GeneralDataTypeWidgetFactory";
+import "storm-react-diagrams/dist/style.min.css";
 import { DesignerBody } from "./parts/DesignerBody";
 import { DesignerLogic } from "./parts/designer-logic";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
 import { connect } from "react-redux";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { ExplorerState } from "appstate/store";
 import { LDDict } from "ldaccess/LDDict";
 import { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
@@ -53,16 +42,12 @@ import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from 
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { designerTheme } from "styles/designer/designerTheme";
 import { appTheme } from "styles/appTheme/appTheme";
-import { LDConsts } from "ldaccess/LDConsts";
-import NavBarWActions from "components/md/navigation/NavBarWActions";
-import BottomNavigation from "components/md/navigation/BottomNavigation";
 
 import {
 	Route,
 	Link
 } from 'react-router-dom';
-import ImgHeadSubDescIntrprtr from "components/visualcomposition/ImgHeadSubDescIntrprtr";
-import { Switch, withRouter, RouteComponentProps } from "react-router";
+import { Switch } from "react-router";
 import { BaseContainerRewrite } from "../generic/baseContainer-rewrite";
 
 export type AIDProps = {

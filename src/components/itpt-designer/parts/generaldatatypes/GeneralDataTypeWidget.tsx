@@ -39,4 +39,4 @@ export class GeneralDataTypeNodeWidget extends Component<GeneralDataTypeNodeProp
 	}
 }
 
-export var GeneralDataTypeNodeWidgetFactory = createFactory(GeneralDataTypeNodeWidget);
+// export var GeneralDataTypeNodeWidgetFactory = createFactory(GeneralDataTypeNodeWidget);

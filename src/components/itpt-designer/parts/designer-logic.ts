@@ -1,6 +1,4 @@
-import { BaseDataTypeWidgetFactory } from "./basedatatypes/BaseDataTypeWidgetFactory";
-import { GeneralDataTypeWidgetFactory } from "./generaldatatypes/GeneralDataTypeWidgetFactory";
-import { DiagramModel, DefaultNodeModel, DefaultPortModel, LinkModel, DiagramEngine, DefaultNodeFactory, DefaultLinkFactory, NodeModel } from "storm-react-diagrams";
+import { DiagramModel, LinkModel, DiagramEngine, DefaultNodeFactory, DefaultLinkFactory, NodeModel } from "storm-react-diagrams";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
 import { LDPortModel } from "./LDPortModel";
 import appIntprtrRetr from 'appconfig/appItptRetriever';
@@ -23,6 +21,8 @@ import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
 import { isObjPropertyRef } from "ldaccess/ldUtils";
 import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesWidgetFactory";
 import { COMP_BASE_CONTAINER } from "../../generic/baseContainer-rewrite";
+import { GeneralDataTypeNodeFactory } from "./generaldatatypes/GeneralDataTypeInstanceFactories";
+import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
 
 export interface NewNodeSig {
 	x: number;
@@ -32,6 +32,7 @@ export interface NewNodeSig {
 
 export const DIAG_TRANSF_X = -250;
 export const DIAG_TRANSF_Y = 200;
+export const PORTNAME_OUT_EXPORTSELF = "out-expSelf";
 
 export var designerSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 
@@ -48,8 +49,8 @@ export class DesignerLogic {
 		this.diagramEngine = new DiagramEngine();
 		this.diagramEngine.registerNodeFactory(new DefaultNodeFactory());
 		this.diagramEngine.registerLinkFactory(new DefaultLinkFactory());
-		this.diagramEngine.registerNodeFactory(new BaseDataTypeWidgetFactory());
-		this.diagramEngine.registerNodeFactory(new GeneralDataTypeWidgetFactory());
+		this.diagramEngine.registerNodeFactory(new BaseDataTypeNodeFactory());
+		this.diagramEngine.registerNodeFactory(new GeneralDataTypeNodeFactory());
 		this.diagramEngine.registerNodeFactory(new DeclarationWidgetFactory());
 		this.diagramEngine.registerNodeFactory(new ExtendableTypesWidgetFactory());
 		this.newModel(outputLDOptionsToken);
@@ -263,8 +264,19 @@ export class DesignerLogic {
 	}
 
 	public diagramFromItptBlueprint(itpt: BlueprintConfig): void {
-		let newSigBase: NewNodeSig = {id: this.outputNode.id + UserDefDict.intrprtrNameKey, x: this.outputNode.x + DIAG_TRANSF_X, y: this.outputNode.y + DIAG_TRANSF_Y };
-		this.addNewBDTNode(newSigBase, LDDict.Text, itpt.nameSelf);
+		let newSigBase: NewNodeSig = { id: this.outputNode.id + UserDefDict.intrprtrNameKey, x: this.outputNode.x + DIAG_TRANSF_X, y: this.outputNode.y + DIAG_TRANSF_Y };
+		let nameTextNode = this.addNewBDTNode(newSigBase, LDDict.Text, itpt.nameSelf);
+		let nameTextNodeOutPort = nameTextNode.getPort(PORTNAME_OUT_EXPORTSELF);
+
+		let outputNodeNameInPort = this.outputNode.getPort(UserDefDict.intrprtrNameKey);
+
+		var link1 = new LinkModel();
+		link1.setSourcePort(outputNodeNameInPort);
+		link1.setTargetPort(nameTextNodeOutPort);
+
+		this.getDiagramEngine()
+			.getDiagramModel().addLink(link1);
+
 	}
 
 	public addNewBDTNode(signature: NewNodeSig, ldType: string, value: any): BaseDataTypeNodeModel {
@@ -274,7 +286,7 @@ export class DesignerLogic {
 			ldType: ldType
 		};
 		let node = new BaseDataTypeNodeModel("Simple Data Type", null, null, "rgba(250,250,250,0.2)");
-		node.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "output", signature.id));
+		node.addPort(new LDPortModel(false, PORTNAME_OUT_EXPORTSELF, baseDataTypeKVStore, "output", signature.id));
 		node.x = signature.x;
 		node.y = signature.y;
 		this.getDiagramEngine()
@@ -321,7 +333,10 @@ export class DesignerLogic {
 	 * @param branchNode the NodeModel used to fill branchBPCfg, on the same level!
 	 * @param topBPCfg the root or top node, i.e. the node where the recursive process started
 	 */
-	private fillBPCfgFromGraph(branchBPCfg: BlueprintConfig, branchNode: ItptNodeModel, otherIntrprtrCfgs: { [s: string]: BlueprintConfig },
+	private fillBPCfgFromGraph(
+		branchBPCfg: BlueprintConfig,
+		branchNode: ItptNodeModel,
+		otherIntrprtrCfgs: { [s: string]: BlueprintConfig },
 		topBPCfg: BlueprintConfig) {
 		let inPorts: LDPortModel[] = branchNode.getInPorts();
 		inPorts.forEach((port) => {
@@ -335,7 +350,7 @@ export class DesignerLogic {
 						leafNode = oneLink.getTargetPort().getParent();
 						leafPort = oneLink.getTargetPort() as LDPortModel;
 					}
-					switch (leafNode.nodeType) {
+					switch (leafNode.type) {
 						case DECLARATION_MODEL:
 							let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
 							let declarID = declarModel.getID();
@@ -394,7 +409,7 @@ export class DesignerLogic {
 							let gdtKV = this.composeKVs(outputKV, port.kv);
 							branchBPCfg.initialKvStores.push(gdtKV);
 							//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
-							if (branchNode.nodeType === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
+							if (branchNode.type === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
 								branchNode.subItptOf = leafNode.getID();
 							} else {
 								branchBPCfg.interpretableKeys.push(gdtKV.key);
@@ -436,7 +451,7 @@ export class DesignerLogic {
 							let extDtKV = this.composeKVs(extOutputKV, port.kv);
 							branchBPCfg.initialKvStores.push(extDtKV);
 							//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
-							if (branchNode.nodeType === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
+							if (branchNode.type === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
 								branchNode.subItptOf = leafNode.getID();
 							} else {
 								branchBPCfg.interpretableKeys.push(extDtKV.key);

@@ -1,4 +1,4 @@
-import { DiagramEngine, NodeWidgetFactory } from "storm-react-diagrams";
+/*import { DiagramEngine, Factory } from "storm-react-diagrams";
 import { BaseDataTypeNodeWidgetFactory } from "./BaseDataTypeWidget";
 import { BASEDATATYPE_MODEL } from "components/itpt-designer/parts/designer-consts";
 import { BaseDataTypeNodeModel } from "./BaseDataTypeNodeModel";
@@ -15,3 +15,4 @@ export class BaseDataTypeWidgetFactory extends NodeWidgetFactory {
 		});
 	}
 }
+*/

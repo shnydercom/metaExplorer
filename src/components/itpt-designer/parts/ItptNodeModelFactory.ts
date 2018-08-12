@@ -1,14 +1,15 @@
-import { ItptNodeModel } from "./ItptNodeModel";
-import { AbstractInstanceFactory } from "storm-react-diagrams";
+/*import { ItptNodeModel } from "./ItptNodeModel";
+import { AbstractNodeFactory } from "storm-react-diagrams";
 import { INTERPRETERDATATYPE_MODEL } from "./designer-consts";
-export class ItptNodeModelFactory extends AbstractInstanceFactory<ItptNodeModel> {
+export class ItptNodeModelFactory extends AbstractNodeFactory<ItptNodeModel> {
 
 	constructor(subModel?: string) {
 		let sub: string = subModel === null ? INTERPRETERDATATYPE_MODEL : subModel;
 		super(sub);
 	}
 
-	getInstance() {
+	getNewInstance() {
 		return new ItptNodeModel();
 	}
 }
+*/

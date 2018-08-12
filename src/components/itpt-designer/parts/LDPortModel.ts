@@ -1,4 +1,4 @@
-import { PortModel, AbstractInstanceFactory } from "storm-react-diagrams";
+import { PortModel, DiagramEngine, LinkModel, DefaultPortModel, DefaultLinkModel } from "storm-react-diagrams";
 import { merge } from "lodash";
 import { IKvStore } from "ldaccess/ikvstore";
 
@@ -17,8 +17,8 @@ export class LDPortModel extends PortModel {
 		this.kv = kv;
 	}
 
-	deSerialize(object) {
-		super.deSerialize(object);
+	deSerialize(object, engine: DiagramEngine) {
+		super.deSerialize(object, engine);
 		this.in = object.in;
 		this.label = object.label;
 		this.kv = object.kv;
@@ -30,5 +30,24 @@ export class LDPortModel extends PortModel {
 			label: this.label,
 			kv: this.kv
 		});
+	}
+
+	link(port: PortModel): LinkModel {
+		let link = this.createLinkModel();
+		link.setSourcePort(this);
+		link.setTargetPort(port);
+		return link;
+	}
+
+	canLinkToPort(port: PortModel): boolean {
+		if (port instanceof DefaultPortModel) {
+			return this.in !== port.in;
+		}
+		return true;
+	}
+
+	createLinkModel(): LinkModel {
+		let link = super.createLinkModel();
+		return link || new DefaultLinkModel();
 	}
 }

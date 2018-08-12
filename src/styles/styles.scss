@@ -1,6 +1,7 @@
 @import 'm-react-splitters/lib/splitters.css';
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-@import '/designer/colors.scss';
+@import './designer/colors.scss';
+@import "storm-react-diagrams/dist/style.min.css";
 .app-preview {
 	width: 420px;
 	height: 746px;
@@ -80,7 +81,7 @@
 		flex-direction: column;
 		.designer-tray-item {
 			overflow: hidden;
-			text-overflow: ellipsis; 
+			text-overflow: ellipsis;
 			color: white;
 			font-family: Roboto, Arial;
 			padding: 5px;
@@ -128,7 +129,7 @@
 	}
 }
 
-.storm-diagrams-canvas {
+.srd-diagram {
 	position: relative;
 	flex-grow: 1;
 	display: flex;
@@ -242,17 +243,10 @@
 				flex-grow: 1;
 				display: flex;
 				flex-direction: column;
-			}
-			.in-port,
-			.out-port {
-				display: flex;
-				margin-top: 1px;
-				>* {
-					align-self: center;
-				}
 				.name {
 					padding: 0 5px;
 				}
+				margin-top: 1px;
 			}
 			.top-port {
 				>* {
@@ -260,6 +254,7 @@
 				}
 			}
 			.out-port {
+				display: flex;
 				justify-content: flex-end;
 				.name {
 					justify-content: flex-end;

@@ -1,9 +1,9 @@
-import { NodeWidgetFactory, DiagramEngine } from "storm-react-diagrams";
+import { DiagramEngine, AbstractNodeFactory } from "storm-react-diagrams";
 import { DeclarationNodeWidgetFactory } from "./DeclarationNodeWidget";
 import { DECLARATION_MODEL } from "./../designer-consts";
 import { DeclarationPartNodeModel } from "./DeclarationNodeModel";
 
-export class DeclarationWidgetFactory extends NodeWidgetFactory {
+export class DeclarationWidgetFactory extends AbstractNodeFactory<DeclarationPartNodeModel> {
 	constructor() {
 		super(DECLARATION_MODEL);
 	}
@@ -13,5 +13,9 @@ export class DeclarationWidgetFactory extends NodeWidgetFactory {
 			node: node,
 			diagramEngine: diagramEngine
 		});
+	}
+
+	getNewInstance() {
+		return new DeclarationPartNodeModel();
 	}
 }

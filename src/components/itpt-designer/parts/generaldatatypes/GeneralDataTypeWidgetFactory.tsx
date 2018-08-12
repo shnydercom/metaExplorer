@@ -1,4 +1,4 @@
-import { GeneralDataTypeNodeWidgetFactory } from "./GeneralDataTypeWidget";
+/*import { GeneralDataTypeNodeWidgetFactory } from "./GeneralDataTypeWidget";
 import { GENERALDATATYPE_MODEL } from "./../designer-consts";
 import { GeneralDataTypeNodeModel } from "./GeneralDataTypeNodeModel";
 import { NodeWidgetFactory, DiagramEngine } from "storm-react-diagrams";
@@ -13,3 +13,4 @@ export class GeneralDataTypeWidgetFactory extends NodeWidgetFactory {
 			diagramEngine: diagramEngine });
 	}
 }
+*/

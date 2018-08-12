@@ -1,4 +1,4 @@
-import { NodeModel, AbstractInstanceFactory } from "storm-react-diagrams";
+import { NodeModel, DiagramEngine } from "storm-react-diagrams";
 import { LDPortModel } from './LDPortModel';
 import { merge, filter } from "lodash";
 import { INTERPRETERDATATYPE_MODEL } from "./designer-consts";
@@ -10,16 +10,16 @@ export class ItptNodeModel extends NodeModel {
 	color: string;
 	ports: { [s: string]: LDPortModel };
 
-	constructor(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", nodeType?: string, id?: string) {
-		super(nodeType ? nodeType : INTERPRETERDATATYPE_MODEL, id);
+	constructor(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", type?: string, id?: string) {
+		super(type ? type : INTERPRETERDATATYPE_MODEL, id);
 		this.nameSelf = nameSelf;
 		this.color = color;
 		this.canInterpretType = canInterpretType;
 		this.subItptOf = subItptOf;
 	}
 
-	deSerialize(object) {
-		super.deSerialize(object);
+	deSerialize(object, engine: DiagramEngine) {
+		super.deSerialize(object, engine);
 		this.nameSelf = object.nameSelf;
 		this.color = object.color;
 		this.canInterpretType = object.canInterpretType;

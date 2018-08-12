@@ -57,4 +57,4 @@ export class ExtendableTypesNodeWidget extends Component<ExtendableTypesNodeProp
 	}
 }
 
-export var ExtendableTypesNodeWidgetFactory = createFactory(ExtendableTypesNodeWidget);
+// export var ExtendableTypesNodeWidgetFactory = createFactory(ExtendableTypesNodeWidget);

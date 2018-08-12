@@ -14,7 +14,7 @@ import { appItptMatcherFn } from "appconfig/appItptMatcher";
 import { linearLDTokenStr } from "ldaccess/ildtoken";
 import { isReactComponent } from "../reactUtils/reactUtilFns";
 import { LDError } from "appstate/LDError";
-import { value } from "../../../node_modules/react-toolbox/lib/dropdown/theme.css";
+// import { value } from "../../../node_modules/react-toolbox/lib/dropdown/theme.css";
 
 export interface BaseContOwnProps extends LDOwnProps {
 	searchCrudSkills: string;

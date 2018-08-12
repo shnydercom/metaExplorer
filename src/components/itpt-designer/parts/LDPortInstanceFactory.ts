@@ -1,14 +1,14 @@
 import { LDPortModel } from "./LDPortModel";
-import { AbstractInstanceFactory } from "storm-react-diagrams";
+import { AbstractPortFactory } from "storm-react-diagrams";
 import { IKvStore } from "ldaccess/ikvstore";
 import { UserDefDict } from "ldaccess/UserDefDict";
 
-export class LDPortInstanceFactory extends AbstractInstanceFactory<LDPortModel> {
+export class LDPortInstanceFactory extends AbstractPortFactory<LDPortModel> {
 	constructor() {
 		super("LDPortModel");
 	}
 
-	getInstance() {
+	getNewInstance() {
 		var baseDataTypeKVStore: IKvStore = {
 			key: UserDefDict.exportSelfKey,
 			value: undefined,

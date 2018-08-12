@@ -1,8 +1,8 @@
 import { ItptNodeModel } from "./ItptNodeModel";
-import { NodeModel } from "storm-react-diagrams";
+import { NodeModel, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
 import { Component } from "react";
 
-export interface PortProps {
+export interface PortProps extends BaseWidgetProps {
 	name: string;
 	node: NodeModel;
 	isMulti: boolean;
@@ -15,12 +15,16 @@ export interface PortState {
 /**
  * @author Jonathan Schneider
  */
-export class SinglePortWidget extends Component<PortProps, PortState> {
+export class SinglePortWidget extends BaseWidget<PortProps, PortState> {
 	constructor(props: PortProps) {
-		super(props);
+		super("srd-port", props);
 		this.state = {
 			selected: false
 		};
+	}
+
+	getClassName() {
+		return "port " + super.getClassName() + (this.state.selected ? this.bem("--selected") : "");
 	}
 
 	render() {
