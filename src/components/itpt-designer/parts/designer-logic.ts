@@ -1,3 +1,4 @@
+import { keys } from "lodash";
 import { DiagramModel, LinkModel, DiagramEngine, DefaultNodeFactory, DefaultLinkFactory, NodeModel } from "storm-react-diagrams";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
 import { LDPortModel } from "./LDPortModel";
@@ -23,6 +24,7 @@ import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesW
 import { COMP_BASE_CONTAINER } from "../../generic/baseContainer-rewrite";
 import { GeneralDataTypeNodeFactory } from "./generaldatatypes/GeneralDataTypeInstanceFactories";
 import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
+import { value } from "../../../../node_modules/react-toolbox/lib/dropdown/theme.css";
 
 export interface NewNodeSig {
 	x: number;
@@ -220,7 +222,7 @@ export class DesignerLogic {
 			console.dir(node.getPorts());
 			var elemj = initialKvStores[j];
 			if (elemj.ldType === UserDefDict.intrprtrBPCfgRefMapType) continue;
-			let nName: string = "out_" + elemj.key;
+			let nName: string = elemj.key;
 			node.addPort(new LDPortModel(false, nName, elemj, elemj.key));
 			//let newLDPM: LDPortModel = new LDPortModel(false, elemj.key, elemj.key + "-out");
 			//rv.push(newLDPM);
@@ -264,19 +266,102 @@ export class DesignerLogic {
 	}
 
 	public diagramFromItptBlueprint(itpt: BlueprintConfig): void {
-		let newSigBase: NewNodeSig = { id: this.outputNode.id + UserDefDict.intrprtrNameKey, x: this.outputNode.x + DIAG_TRANSF_X, y: this.outputNode.y + DIAG_TRANSF_Y };
-		let nameTextNode = this.addNewBDTNode(newSigBase, LDDict.Text, itpt.nameSelf);
+		let newSigBaseTxt: NewNodeSig = {
+			id: this.outputNode.id + UserDefDict.intrprtrNameKey,
+			x: this.outputNode.x + DIAG_TRANSF_X,
+			y: this.outputNode.y + DIAG_TRANSF_Y
+		};
+		let nameTextNode = this.addNewBDTNode(newSigBaseTxt, LDDict.Text, itpt.nameSelf);
 		let nameTextNodeOutPort = nameTextNode.getPort(PORTNAME_OUT_EXPORTSELF);
+		let refMap = getKVStoreByKey(itpt.initialKvStores, UserDefDict.intrprtrBPCfgRefMapKey);
 
+		let mainItpt = refMap.value[itpt.subItptOf];
+		let newSigBaseItpt: NewNodeSig = { id: itpt.subItptOf, x: newSigBaseTxt.x, y: newSigBaseTxt.y - DIAG_TRANSF_Y };
+		let baseNode = this.addNewGeneralNode(newSigBaseItpt, mainItpt);
+
+		//create nodes first
+		let nodeMap = new Map<string, GeneralDataTypeNodeModel>();
+		nodeMap.set(itpt.subItptOf, baseNode);
+		let yIterator = 0;
+		for (const itm in refMap.value) {
+			if (refMap.value.hasOwnProperty(itm)) {
+				const subItpt: BlueprintConfig = refMap.value[itm];
+				if (subItpt === mainItpt) continue;
+				yIterator++;
+				let newSigSubItpt: NewNodeSig = { id: itm, x: newSigBaseItpt.x, y: newSigBaseItpt.y - DIAG_TRANSF_Y * yIterator };
+				let subNode = this.addNewGeneralNode(newSigSubItpt, subItpt);
+				nodeMap.set(itm, subNode);
+			}
+		}
+
+		//create links between nodes
+		let linkArray = [];
+		for (const itm in refMap.value) {
+			if (refMap.value.hasOwnProperty(itm)) {
+				const subItpt: BlueprintConfig = refMap.value[itm];
+				const targetNode = nodeMap.get(itm);
+				subItpt.initialKvStores.forEach((kvItm, idx) => {
+					let sourcePort: LDPortModel;
+					let targetPort: LDPortModel;
+					targetPort = targetNode.getPort(kvItm.key) as LDPortModel;
+					if (isObjPropertyRef(kvItm.value)) {
+						const kvValAsObjPropRef: ObjectPropertyRef = kvItm.value as ObjectPropertyRef;
+						let sourceNode = nodeMap.get(kvValAsObjPropRef.objRef);
+						if (kvValAsObjPropRef.propRef === null) {
+							sourcePort = sourceNode.getPort(UserDefDict.exportSelfKey) as LDPortModel;
+						} else {
+							sourcePort = sourceNode.getPort(kvValAsObjPropRef.propRef) as LDPortModel;
+						}
+					} else {
+						let bdtStaticNode;
+						let newBDTSig: NewNodeSig = { id: itm, x: newSigBaseItpt.x + DIAG_TRANSF_X, y: newSigBaseItpt.y - DIAG_TRANSF_Y * idx };
+						if (!kvItm.ldType || kvItm.ldType === LDDict.Text) {
+							bdtStaticNode = this.addNewBDTNode(newBDTSig, LDDict.Text, kvItm.value);
+						} else {
+							bdtStaticNode = this.addNewBDTNode(newBDTSig, kvItm.ldType, kvItm.value);
+						}
+						sourcePort = bdtStaticNode.getPort(PORTNAME_OUT_EXPORTSELF) as LDPortModel;
+					}
+					let subItptLink = new LinkModel();
+					subItptLink.setSourcePort(sourcePort);
+					subItptLink.setTargetPort(targetPort);
+					linkArray.push(subItptLink);
+				});
+			}
+		}
+
+		let outputNodeItptInPort = this.outputNode.getPort(UserDefDict.finalInputKey);
 		let outputNodeNameInPort = this.outputNode.getPort(UserDefDict.intrprtrNameKey);
 
-		var link1 = new LinkModel();
-		link1.setSourcePort(outputNodeNameInPort);
-		link1.setTargetPort(nameTextNodeOutPort);
+		let outputItptLink = new LinkModel();
+		outputItptLink.setTargetPort(outputNodeItptInPort);
+		outputItptLink.setSourcePort(baseNode.getPort(UserDefDict.exportSelfKey));
 
+		let outputNameLink = new LinkModel();
+		outputNameLink.setTargetPort(outputNodeNameInPort);
+		outputNameLink.setSourcePort(nameTextNodeOutPort);
+
+		this.getDiagramEngine().recalculatePortsVisually();
+		this.getDiagramEngine().getDiagramModel().addLink(outputNameLink);
+		this.getDiagramEngine().getDiagramModel().addLink(outputItptLink);
+		console.log(linkArray.length);
+		linkArray.forEach((link) => {
+			this.getDiagramEngine().getDiagramModel().addLink(link);
+		});
+	}
+
+	public addNewGeneralNode(signature: NewNodeSig, itpt: BlueprintConfig): GeneralDataTypeNodeModel {
+		let nodeName: string = itpt.subItptOf;
+		let generalNode = new GeneralDataTypeNodeModel(nodeName, null, null, "rgba(250,250,250,0.2)");
+		generalNode.id = signature.id;
+		generalNode.x = signature.x;
+		generalNode.y = signature.y;
+		this.addLDPortModelsToNode(generalNode, nodeName);
+		if (itpt.canInterpretType) generalNode.canInterpretType = itpt.canInterpretType;
 		this.getDiagramEngine()
-			.getDiagramModel().addLink(link1);
-
+			.getDiagramModel()
+			.addNode(generalNode);
+		return generalNode;
 	}
 
 	public addNewBDTNode(signature: NewNodeSig, ldType: string, value: any): BaseDataTypeNodeModel {
@@ -286,9 +371,9 @@ export class DesignerLogic {
 			ldType: ldType
 		};
 		let node = new BaseDataTypeNodeModel("Simple Data Type", null, null, "rgba(250,250,250,0.2)");
-		node.addPort(new LDPortModel(false, PORTNAME_OUT_EXPORTSELF, baseDataTypeKVStore, "output", signature.id));
 		node.x = signature.x;
 		node.y = signature.y;
+		node.addPort(new LDPortModel(false, PORTNAME_OUT_EXPORTSELF, baseDataTypeKVStore, "output", signature.id));
 		this.getDiagramEngine()
 			.getDiagramModel()
 			.addNode(node);

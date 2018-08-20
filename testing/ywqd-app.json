@@ -1,7 +1,7 @@
 {
   "subItptOf": "d57234da-46f2-443a-87d1-4a9b02e6b237",
-  "canInterpretType": "愿望清单/AppEntry-ObjectType",
-  "nameSelf": "愿望清单/AppEntry",
+  "canInterpretType": "愿望清单/AppEntry2-ObjectType",
+  "nameSelf": "愿望清单/AppEntry2",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -26,8 +26,7 @@
             },
             {
               "key": "RouteSend_Search",
-              "value": "search",
-              "ldType": "http://schema.org/Text"
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",
