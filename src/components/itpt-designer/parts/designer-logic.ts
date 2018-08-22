@@ -313,6 +313,7 @@ export class DesignerLogic {
 							sourcePort = sourceNode.getPort(kvValAsObjPropRef.propRef) as LDPortModel;
 						}
 					} else {
+						if (kvItm.value === undefined) return;
 						let bdtStaticNode;
 						let newBDTSig: NewNodeSig = { id: itm, x: newSigBaseItpt.x + DIAG_TRANSF_X, y: newSigBaseItpt.y - DIAG_TRANSF_Y * idx };
 						if (!kvItm.ldType || kvItm.ldType === LDDict.Text) {
