@@ -41,7 +41,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 		nextProps: BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch,
 		prevState: null | LDLocalState & BaseDataTypePortSelectorState)
 		: null | LDLocalState & BaseDataTypePortSelectorState {
-		if (!prevState) {
+		if (!prevState.compInfos && !prevState.localLDTypes && !prevState.localValues && !prevState.portKvStore && !prevState.portType) {
 			let newLDTypes = new Map<string, any>();
 			let newLDValues = new Map<string, any>();
 			if (nextProps.model.kv) {
@@ -105,15 +105,18 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 		}
 	}*/
 
-	/*constructor(props) {
+	constructor(props) {
 		super(props);
 		this.state = {
 			portType: null,
 			ldOptions: null,
-			portKvStore: null
+			portKvStore: null,
+			compInfos: null,
+			localValues: null,
+			localLDTypes: null
 		};
-		this.props.notifyLDOptionsChange(null);
-	}*/
+		// this.props.notifyLDOptionsChange(null);
+	}
 
 	onPortTypeChange = (newType: string, nProps: BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch) => {
 		let changedKvStore: IKvStore = this.props.model.kv;

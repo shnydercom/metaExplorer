@@ -331,6 +331,30 @@ export class DesignerLogic {
 			}
 		}
 
+		//create nodes and Links for external input markers
+		for (let itptKeysIdx = 0; itptKeysIdx < itpt.interpretableKeys.length; itptKeysIdx++) {
+			const a = itpt.interpretableKeys[itptKeysIdx];
+			if (isObjPropertyRef(a)) {
+				let itptKeyField: ObjectPropertyRef = a as ObjectPropertyRef;
+				var inputDataTypeKVStore: IKvStore = {
+					key: UserDefDict.externalInput,
+					value: undefined,
+					ldType: undefined
+				};
+				let inputMarkerNode = new DeclarationPartNodeModel("External Input Marker", null, null, designerSpecificNodesColor);
+				let inputMarkerPort = inputMarkerNode.addPort(new LDPortModel(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
+				this.getDiagramEngine()
+					.getDiagramModel()
+					.addNode(inputMarkerNode);
+				let targetNode = nodeMap.get(itptKeyField.objRef);
+				let targetPort = targetNode.getPort(itptKeyField.propRef);
+				let inputMarkerLink = new LinkModel();
+				inputMarkerLink.setSourcePort(inputMarkerPort);
+				inputMarkerLink.setTargetPort(targetPort);
+				linkArray.push(inputMarkerLink);
+			}
+		}
+
 		let outputNodeItptInPort = this.outputNode.getPort(UserDefDict.finalInputKey);
 		let outputNodeNameInPort = this.outputNode.getPort(UserDefDict.intrprtrNameKey);
 
@@ -366,6 +390,14 @@ export class DesignerLogic {
 	}
 
 	public addNewBDTNode(signature: NewNodeSig, ldType: string, value: any): BaseDataTypeNodeModel {
+		if (ldType !== LDDict.Boolean &&
+			ldType !== LDDict.Integer &&
+			ldType !== LDDict.Double &&
+			ldType !== LDDict.Text &&
+			ldType !== LDDict.Date &&
+			ldType !== LDDict.DateTime) {
+			ldType = LDDict.Text;
+		}
 		var baseDataTypeKVStore: IKvStore = {
 			key: UserDefDict.singleKvStore,
 			value: value,
