@@ -2,10 +2,11 @@ import { LDPortModel } from "./LDPortModel";
 import { AbstractPortFactory } from "storm-react-diagrams";
 import { IKvStore } from "ldaccess/ikvstore";
 import { UserDefDict } from "ldaccess/UserDefDict";
+import { LD_PORTMODEL } from "./designer-consts";
 
 export class LDPortInstanceFactory extends AbstractPortFactory<LDPortModel> {
 	constructor() {
-		super("LDPortModel");
+		super(LD_PORTMODEL);
 	}
 
 	getNewInstance() {

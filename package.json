@@ -31,7 +31,7 @@
   },
   "scripts": {
     "test": "jest --watch",
-    "build": "webpack -p --config=webpack.prod.config.js",
+    "build": "webpack --config=webpack.prod.config.js",
     "start": "webpack-dev-server",
     "startfornetwork": "webpack-dev-server --host 0.0.0.0",
     "lint": "tslint ./src/**/*.ts -t verbose",
@@ -43,6 +43,7 @@
     "@types/gapi": "^0.0.35",
     "@types/gapi.auth2": "^0.0.47",
     "assert-never": "^1.0.0",
+    "dagre": "^0.8.2",
     "googleapis": "^32.0.0",
     "history": "^4.7.2",
     "hydraclient.js": "https://github.com/HydraCG/Heracles.ts.git",

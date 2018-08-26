@@ -24,7 +24,10 @@ import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesW
 import { COMP_BASE_CONTAINER } from "../../generic/baseContainer-rewrite";
 import { GeneralDataTypeNodeFactory } from "./generaldatatypes/GeneralDataTypeInstanceFactories";
 import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
-import { value } from "../../../../node_modules/react-toolbox/lib/dropdown/theme.css";
+// import { value } from "../../../../node_modules/react-toolbox/lib/dropdown/theme.css";
+
+import { distributeElements } from "./dagre-utils";
+import { LDPortInstanceFactory } from "./LDPortInstanceFactory";
 
 export interface NewNodeSig {
 	x: number;
@@ -55,8 +58,25 @@ export class DesignerLogic {
 		this.diagramEngine.registerNodeFactory(new GeneralDataTypeNodeFactory());
 		this.diagramEngine.registerNodeFactory(new DeclarationWidgetFactory());
 		this.diagramEngine.registerNodeFactory(new ExtendableTypesWidgetFactory());
+		this.diagramEngine.registerPortFactory(new LDPortInstanceFactory());
 		this.newModel(outputLDOptionsToken);
 		this.itptList = (appIntprtrRetr() as ReduxItptRetriever).getItptList();
+	}
+
+	public autoDistribute() {
+		const engine = this.diagramEngine;
+		const model = engine.getDiagramModel();
+		let distributedModel = this.getDistributedModel(engine, model);
+		engine.setDiagramModel(distributedModel);
+	}
+
+	public getDistributedModel(engine, model) {
+		const serialized = model.serializeDiagram();
+		const distributedSerializedDiagram = distributeElements(serialized);
+		//deserialize the model
+		let deSerializedModel = new DiagramModel();
+		deSerializedModel.deSerializeDiagram(distributedSerializedDiagram, engine);
+		return deSerializedModel;
 	}
 
 	public newModel(outputLDOptionsToken: string) {

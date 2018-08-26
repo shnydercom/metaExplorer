@@ -18,8 +18,9 @@ import { URLToMenuTree, treeDemoData } from "./URLsToMenuTree";
 import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
 import { RefMapDropSpace } from "./RefMapDropSpace";
 import { LDError } from "appstate/LDError";
-import { value } from "../../../../node_modules/react-toolbox/lib/dropdown/theme.css";
+// import { value } from "../../../../node_modules/react-toolbox/lib/dropdown/theme.css";
 import { generateItptFromCompInfo } from "../../generic/generatorFns";
+import { Button } from "react-toolbox/lib/button";
 
 export interface DesignerBodyProps {
 	logic: DesignerLogic;
@@ -71,8 +72,14 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 	render() {
 		return (
 			<div className="diagram-body">
+				<Button label="autolayout" onClick={(ev) => {
+					this.props.logic.autoDistribute();
+					this.forceUpdate();
+				}
+				} />
 				<DesignerTray>
 					{this.trayItemsFromItptList()}
+
 					<RefMapDropSpace
 						dropText="drop here to load interpreter"
 						refMapDrop={(event) => {

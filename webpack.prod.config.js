@@ -194,7 +194,7 @@ module.exports = {
     ]
   },
   externals: {
-    'react': {
+    /*'react': {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
@@ -211,7 +211,7 @@ module.exports = {
       commonjs2: 'urijs',
       commonjs: 'urijs',
       amd: 'urijs'
-    }
+    }*/
     /*,
         "lodash": {
           commonjs: 'lodash',
@@ -224,9 +224,17 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),
+    new webpack.ProvidePlugin({
+      "React": "react",
+      "Quagga": "quagga"
+    }),
     new BundleAnalyzerPlugin(),
+    new ExtractTextPlugin('style.css', {
+      allChunks: true
+    }),
     new webpack.optimize.UglifyJsPlugin({
       mangle: true,
+      sourceMap: false,
       compress: {
         warnings: false, // Suppress uglification warnings
         pure_getters: true,
@@ -258,8 +266,5 @@ module.exports = {
        filename: "[name].css",
        chunkFilename: "[id].css"
      })*/
-    new ExtractTextPlugin('style.css', {
-      allChunks: true
-    })
   ]
 }

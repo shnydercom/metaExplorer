@@ -28,7 +28,7 @@ const initialState: ExplorerState = {
 	ldNonVisualMap: {}
 };
 
-const isProduction = false; //true; //process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 
 export interface AppRootProps { }
 export const applicationStore: Store<ExplorerState> = configureStore(initialState);

@@ -21,7 +21,7 @@ import { generateIntrprtrForProp } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 
-import { Input, InputTheme } from 'react-toolbox';
+import { Input, InputTheme } from 'react-toolbox/lib/input';
 
 type ConnectedState = {
 };

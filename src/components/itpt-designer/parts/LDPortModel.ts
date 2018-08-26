@@ -1,6 +1,7 @@
 import { PortModel, DiagramEngine, LinkModel, DefaultPortModel, DefaultLinkModel } from "storm-react-diagrams";
 import { merge } from "lodash";
 import { IKvStore } from "ldaccess/ikvstore";
+import { LD_PORTMODEL } from "./designer-consts";
 
 /**
  * @author Dylan Vorster
@@ -12,6 +13,7 @@ export class LDPortModel extends PortModel {
 
 	constructor(isInput: boolean, name: string, kv: IKvStore, label: string = null, id?: string) {
 		super(name, id);
+		this.type = LD_PORTMODEL;
 		this.in = isInput;
 		this.label = label || name;
 		this.kv = kv;
