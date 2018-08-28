@@ -113,12 +113,17 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 							//return;
 						}}
 					/>
-					<Button style={{color: "white"}} label="zoom + autolayout" onClick={(ev) => {
-						this.props.logic.autoDistribute();
-						this.props.logic.getDiagramEngine().recalculatePortsVisually();
-						this.forceUpdate();
-					}
-					} />
+					<div className="button-row">
+						<Button style={{ color: "white" }} label="zoom + autolayout" onClick={(ev) => {
+							this.props.logic.autoDistribute();
+							this.props.logic.getDiagramEngine().recalculatePortsVisually();
+							this.forceUpdate();
+						}
+						} />
+						<Button style={{ color: "white" }} label="clear" onClick={(ev) => {
+							this.props.logic.clear();
+						}} />
+					</div>
 				</DesignerTray>
 				<div
 					className="diagram-layer"

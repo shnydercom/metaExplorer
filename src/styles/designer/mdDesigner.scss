@@ -25,3 +25,8 @@ $color-primary-dark: #AA00AA;//$palette-purple-a700;
 .on .thumb {
   background: $color-primary-dark !important;
 }
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+}

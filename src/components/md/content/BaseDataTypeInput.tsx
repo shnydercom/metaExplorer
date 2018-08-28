@@ -80,7 +80,6 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 
 	constructor(props?: LDConnectedState & LDConnectedDispatch & OwnProps) {
 		super(props);
-		console.log("BDTInput constructor called");
 		this.cfg = this.constructor["cfg"];
 		//this.render = () => null;
 		let bdtState: BaseDataTypeState = {

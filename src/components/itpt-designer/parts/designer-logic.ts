@@ -66,6 +66,10 @@ export class DesignerLogic {
 		this.itptList = (appIntprtrRetr() as ReduxItptRetriever).getItptList();
 	}
 
+	public clear() {
+		this.newModel(this.outputLDOptionsToken);
+	}
+
 	public autoDistribute() {
 		const engine = this.diagramEngine;
 		const model = engine.getDiagramModel();
@@ -514,7 +518,6 @@ export class DesignerLogic {
 							let bdtLeafNode: BaseDataTypeNodeModel = leafNode as BaseDataTypeNodeModel;
 							let bdtKV = this.composeKVs(bdtLeafNode.getOutPorts()[0].kv, port.kv);
 							branchBPCfg.initialKvStores.push(bdtKV);
-							console.log(bdtKV);
 							//TODO: check here, that BDT-Nodes hand up their input correctly
 							break;
 						case GENERALDATATYPE_MODEL:
@@ -677,7 +680,6 @@ export class DesignerLogic {
 					break;
 			}
 		});
-		console.dir(idxMap);
 		//delete at the end
 		let lastVal = 0;
 		idxMap.forEach((val, key) => {
