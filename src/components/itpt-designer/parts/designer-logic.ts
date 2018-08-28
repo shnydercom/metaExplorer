@@ -216,10 +216,10 @@ export class DesignerLogic {
 				elemi = initialKvStores[i];
 			}
 			//let newLDPM: LDPortModel =
-			let nName: string = elemi.key;
+			let nName: string = elemi.key + "_in";
 			//don't add KvStores that already have a value, unless they are ItptReferenceMap-typed
 			if (!elemi.value) {
-				node.addPort(new LDPortModel(true, nName, elemi));
+				node.addPort(new LDPortModel(true, nName, elemi, elemi.key));
 			} else if (elemi.ldType === UserDefDict.intrprtrBPCfgRefMapType) {
 				let objPropRef: ObjectPropertyRef = intrprtrKeys[i];
 				let nestedKey = objPropRef.propRef;
@@ -247,7 +247,7 @@ export class DesignerLogic {
 			console.dir(node.getPorts());
 			var elemj = initialKvStores[j];
 			if (elemj.ldType === UserDefDict.intrprtrBPCfgRefMapType) continue;
-			let nName: string = elemj.key;
+			let nName: string = elemj.key + "_out";
 			node.addPort(new LDPortModel(false, nName, elemj, elemj.key));
 			//let newLDPM: LDPortModel = new LDPortModel(false, elemj.key, elemj.key + "-out");
 			//rv.push(newLDPM);
