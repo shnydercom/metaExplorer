@@ -2,8 +2,8 @@ import * as dagre from "dagre";
 import * as _ from "lodash";
 
 const size = {
-	width: 60,
-	height: 60
+	width: 200,
+	height: 200
 };
 
 /**

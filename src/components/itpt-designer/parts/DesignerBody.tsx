@@ -72,14 +72,8 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 	render() {
 		return (
 			<div className="diagram-body">
-				<Button label="autolayout" onClick={(ev) => {
-					this.props.logic.autoDistribute();
-					this.forceUpdate();
-				}
-				} />
 				<DesignerTray>
 					{this.trayItemsFromItptList()}
-
 					<RefMapDropSpace
 						dropText="drop here to load interpreter"
 						refMapDrop={(event) => {
@@ -101,6 +95,9 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 										return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
 									}
 									this.props.logic.diagramFromItptBlueprint(itptCfg);
+
+									this.props.logic.autoDistribute();
+									this.props.logic.getDiagramEngine().recalculatePortsVisually();
 									this.forceUpdate();
 									return { isSuccess: true, message: "check the diagram on the right to see your interpreter" };
 								case "bdt":
@@ -117,6 +114,12 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 							//return;
 						}}
 					/>
+					<Button label="autolayout" onClick={(ev) => {
+						this.props.logic.autoDistribute();
+						this.props.logic.getDiagramEngine().recalculatePortsVisually();
+						this.forceUpdate();
+					}
+					} />
 				</DesignerTray>
 				<div
 					className="diagram-layer"

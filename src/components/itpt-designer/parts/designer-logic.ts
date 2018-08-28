@@ -28,6 +28,7 @@ import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFac
 
 import { distributeElements } from "./dagre-utils";
 import { LDPortInstanceFactory } from "./LDPortInstanceFactory";
+import { isInputValueValidFor } from "ldaccess/ldtypesystem/typeChecking";
 
 export interface NewNodeSig {
 	x: number;
@@ -610,8 +611,8 @@ export class DesignerLogic {
 	 */
 	private composeKVs(sourceKV: IKvStore, targetKV: IKvStore): IKvStore {
 		let rv: IKvStore = null;
-		if ((sourceKV.ldType && targetKV.ldType) &&
-			(sourceKV.ldType !== targetKV.ldType)) return targetKV;
+		if (!isInputValueValidFor(sourceKV, targetKV))/*((sourceKV.ldType && targetKV.ldType) &&
+			(sourceKV.ldType !== targetKV.ldType))*/ return targetKV;
 		rv = {
 			key: targetKV.key,
 			value: sourceKV.value,
