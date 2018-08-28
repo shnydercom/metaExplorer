@@ -97,7 +97,6 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 									this.props.logic.diagramFromItptBlueprint(itptCfg);
 
 									this.props.logic.autoDistribute();
-									this.props.logic.getDiagramEngine().recalculatePortsVisually();
 									this.forceUpdate();
 									return { isSuccess: true, message: "check the diagram on the right to see your interpreter" };
 								case "bdt":
@@ -114,7 +113,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 							//return;
 						}}
 					/>
-					<Button style={{color: "white"}} label="autolayout" onClick={(ev) => {
+					<Button style={{color: "white"}} label="zoom + autolayout" onClick={(ev) => {
 						this.props.logic.autoDistribute();
 						this.props.logic.getDiagramEngine().recalculatePortsVisually();
 						this.forceUpdate();

@@ -38,7 +38,7 @@ function distributeGraph(model) {
 		}
 	});
 	//TODO: move to separate parameter of layout-function once issue is resolved: https://github.com/dagrejs/dagre/issues/161
-	graph.setGraph({rankdir: 'LR'});
+	graph.setGraph({ rankdir: 'LR' });
 	//auto-distribute
 	dagre.layout(graph);
 	return graph.nodes().map((node) => graph.node(node));
@@ -46,7 +46,12 @@ function distributeGraph(model) {
 
 function mapElements(model) {
 	// dagre compatible format
-	return model.nodes.map((node) => ({ id: node.id, metadata: { ...size, id: node.id } }));
+	return model.nodes.map((node) => ({
+		id: node.id, metadata: {
+			...size,
+			id: node.id
+		}
+	}));
 }
 
 function mapEdges(model) {

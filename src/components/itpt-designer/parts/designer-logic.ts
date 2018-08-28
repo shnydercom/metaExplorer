@@ -73,6 +73,8 @@ export class DesignerLogic {
 		this.activeModel = distributedModel;
 		this.outputNode = this.activeModel.getNode(this.outputLDOptionsToken) as DeclarationPartNodeModel;
 		engine.setDiagramModel(distributedModel);
+		engine.recalculatePortsVisually();
+		engine.zoomToFit();
 	}
 
 	public getDistributedModel(engine, model) {
@@ -373,7 +375,7 @@ export class DesignerLogic {
 					.getDiagramModel()
 					.addNode(inputMarkerNode);
 				let targetNode = nodeMap.get(itptKeyField.objRef);
-				let targetPort = targetNode.getPort(itptKeyField.propRef);
+				let targetPort = targetNode.getPort(itptKeyField.propRef + "_in");
 				let inputMarkerLink = new LinkModel();
 				inputMarkerLink.setSourcePort(inputMarkerPort);
 				inputMarkerLink.setTargetPort(targetPort);
