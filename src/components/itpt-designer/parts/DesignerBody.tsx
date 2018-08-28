@@ -114,7 +114,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 							//return;
 						}}
 					/>
-					<Button label="autolayout" onClick={(ev) => {
+					<Button style={{color: "white"}} label="autolayout" onClick={(ev) => {
 						this.props.logic.autoDistribute();
 						this.props.logic.getDiagramEngine().recalculatePortsVisually();
 						this.forceUpdate();

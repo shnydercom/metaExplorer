@@ -50,8 +50,10 @@ export class DesignerLogic {
 	protected diagramEngine: DiagramEngine;
 	protected itptList: IItptInfoItem[];
 	protected outputNode: DeclarationPartNodeModel;
+	protected outputLDOptionsToken: string;
 
 	constructor(outputLDOptionsToken: string) {
+		this.outputLDOptionsToken = outputLDOptionsToken;
 		this.diagramEngine = new DiagramEngine();
 		this.diagramEngine.registerNodeFactory(new DefaultNodeFactory());
 		this.diagramEngine.registerLinkFactory(new DefaultLinkFactory());
@@ -68,6 +70,8 @@ export class DesignerLogic {
 		const engine = this.diagramEngine;
 		const model = engine.getDiagramModel();
 		let distributedModel = this.getDistributedModel(engine, model);
+		this.activeModel = distributedModel;
+		this.outputNode = this.activeModel.getNode(this.outputLDOptionsToken) as DeclarationPartNodeModel;
 		engine.setDiagramModel(distributedModel);
 	}
 

@@ -37,6 +37,8 @@ function distributeGraph(model) {
 			graph.setEdge(edge.from, edge.to);
 		}
 	});
+	//TODO: move to separate parameter of layout-function once issue is resolved: https://github.com/dagrejs/dagre/issues/161
+	graph.setGraph({rankdir: 'LR'});
 	//auto-distribute
 	dagre.layout(graph);
 	return graph.nodes().map((node) => graph.node(node));

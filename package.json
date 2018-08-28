@@ -40,6 +40,7 @@
     "generateGoogleSheetsClient": "java -jar ./tooling/swagger-codegen-cli.jar generate -i https://raw.githubusercontent.com/APIs-guru/openapi-directory/master/APIs/googleapis.com/sheets/v4/swagger.yaml -l typescript-fetch -o ./src/google/apis/sheets-generated"
   },
   "dependencies": {
+    "@types/dagre": "^0.7.40",
     "@types/gapi": "^0.0.35",
     "@types/gapi.auth2": "^0.0.47",
     "assert-never": "^1.0.0",
