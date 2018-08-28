@@ -2,6 +2,11 @@ import { IKvStore } from "../ikvstore";
 import { LDDict } from "../LDDict";
 import { VisualDict } from "components/visualcomposition/visualDict";
 
+/**
+ * type checking, which largely ignores unset types but enforces type mapping setup for existing types
+ * @param inputKv the input KvStore
+ * @param targetKv the target KvStore
+ */
 export const isInputValueValidFor: (inputKv: IKvStore, targetKv: IKvStore) => boolean
 	= (inputKv, targetKv) => {
 		if (inputKv.ldType && targetKv.ldType) {
@@ -13,7 +18,7 @@ export const isInputValueValidFor: (inputKv: IKvStore, targetKv: IKvStore) => bo
 			}
 			return true;
 		}
-		return false;
+		return true;
 	};
 
 export const typeMatrixKeyMap: Map<string, number> = new Map();

@@ -26,6 +26,7 @@
             },
             {
               "key": "RouteSend_Search",
+              "value": "search",
               "ldType": "Route_Added"
             }
           ],

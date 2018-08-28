@@ -229,7 +229,8 @@ export class DesignerLogic {
 					value: undefined,
 					ldType: nestedType
 				};
-				node.addPort(new LDPortModel(true, nestedKey, elemiNested));
+				let nestedName = nestedKey + "_in";
+				node.addPort(new LDPortModel(true, nestedName, elemiNested, nestedKey));
 			}
 
 			//node.addPort(new LDPortModel(true, "identifier", { key: null, value: null, ldType: null }));
@@ -328,14 +329,14 @@ export class DesignerLogic {
 				subItpt.initialKvStores.forEach((kvItm, idx) => {
 					let sourcePort: LDPortModel;
 					let targetPort: LDPortModel;
-					targetPort = targetNode.getPort(kvItm.key) as LDPortModel;
+					targetPort = targetNode.getPort(kvItm.key + "_in") as LDPortModel;
 					if (isObjPropertyRef(kvItm.value)) {
 						const kvValAsObjPropRef: ObjectPropertyRef = kvItm.value as ObjectPropertyRef;
 						let sourceNode = nodeMap.get(kvValAsObjPropRef.objRef);
 						if (kvValAsObjPropRef.propRef === null) {
 							sourcePort = sourceNode.getPort(UserDefDict.exportSelfKey) as LDPortModel;
 						} else {
-							sourcePort = sourceNode.getPort(kvValAsObjPropRef.propRef) as LDPortModel;
+							sourcePort = sourceNode.getPort(kvValAsObjPropRef.propRef + "_out") as LDPortModel;
 						}
 					} else {
 						if (kvItm.value === undefined) return;
