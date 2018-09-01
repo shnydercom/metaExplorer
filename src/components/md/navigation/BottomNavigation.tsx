@@ -286,7 +286,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			this.topFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
 		}
 	}
-	
+
 	bsCompExecFn = () => <>{this.topFreeContainer}</>;
 	render() {
 		const { ldOptions } = this.props;

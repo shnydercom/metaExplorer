@@ -13,6 +13,7 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { EANScannerName, EANScanner } from "../peripherals/camera/EAN-scanner";
 import { SingleImageSelectorName, PureSingleImageSelector } from "../md/content/SingleImageSelector";
 import { NavSearchBarName, PureNavSearchBar } from "../md/navigation/NavSearchBar";
+import { NavProcessAtomName, PureNavProcessAtom } from "./navigation/NavProcessAtom";
 
 /**
  * sorry for the long function name //TODO: change
@@ -35,6 +36,7 @@ export function initMDitptFnAsDefault() {
 	appIntRetr.addItpt(NavBarWActionsName, PureNavBarWActions, "cRud");
 	appIntRetr.addItpt(BottomNavigationName, PureBottomNavigation, "cRud");
 	appIntRetr.addItpt(NavSearchBarName, PureNavSearchBar, "cRud");
+	appIntRetr.addItpt(NavProcessAtomName, PureNavProcessAtom, "cRud");
 
 	//register routing itpts
 	appIntRetr.addItpt(RouteComponentName, PureRouteComponent, "cRud");

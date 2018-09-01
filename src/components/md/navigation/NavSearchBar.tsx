@@ -69,13 +69,15 @@ let bpCfg: BlueprintConfig = {
 export type NavSearchBartate = {
 	searchValue: string;
 	routeSendBack: IKvStore;
+	isDoRedirect: boolean;
 };
 @ldBlueprint(bpCfg)
 export class PureNavSearchBar extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavSearchBartate>
 	implements IBlueprintItpt {
 	state = {
 		searchValue: "",
-		routeSendBack: null
+		routeSendBack: null,
+		isDoRedirect: false
 	};
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
@@ -117,17 +119,20 @@ export class PureNavSearchBar extends Component<LDConnectedState & LDConnectedDi
 	//</Navigation>
 	render() {
 		const { ldOptions, routes } = this.props;
-		const { searchValue } = this.state;
-		return (<><AppBar leftIcon='arrow_back' onLeftIconClick={() => this.onBackBtnClick()} rightIcon='search'>
-			<Input type='text'
-				className='searchbar-input'
-				label=""
-				name="searchInput"
-				value={searchValue}
-				onChange={(evt) => this.onSearchChange(evt)} />
-		</AppBar>
-			{this.lowerFreeContainer}
-		</>);
+		const { searchValue, isDoRedirect } = this.state;
+		//const { routeSend_back } = localValues.get(VisualDict.routeSend_back);
+		return (
+			<>
+				<AppBar leftIcon='arrow_back' onLeftIconClick={() => this.onBackBtnClick()} rightIcon='search'>
+					<Input type='text'
+						className='searchbar-input'
+						label=""
+						name="searchInput"
+						value={searchValue}
+						onChange={(evt) => this.onSearchChange(evt)} />
+				</AppBar>
+				{this.lowerFreeContainer}
+			</>);
 	}
 	private handleKVs(props: LDOwnProps & LDConnectedState) {
 		let kvs: IKvStore[];
@@ -141,7 +146,7 @@ export class PureNavSearchBar extends Component<LDConnectedState & LDConnectedDi
 			let searchText = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.searchText));
 			let routeSendBack = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.routeSend_back));
 			this.outputKVMap = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, UserDefDict.outputKVMapKey));
-			this.setState({searchValue: searchText, routeSendBack});
+			this.setState({ searchValue: searchText, routeSendBack });
 		}
 		if (!this.lowerFreeContainer) {
 			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;

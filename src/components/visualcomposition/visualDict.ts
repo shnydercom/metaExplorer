@@ -5,6 +5,8 @@ export enum VisualDict {
 	subHeaderTxt = "SubHeaderText",
 	description = "Description",
 	freeContainer = "freeContainer", //e.g. for the bottomNavigation anything that is "top"
+	cancelTxt = "cancelTxt",
+	confirmTxt = "confirmTxt",
 
 	//other
 	footerItpt = "FooterInterpreter",
@@ -19,6 +21,7 @@ export enum VisualDict {
 	//NavigationElement-keys
 	routeSend_search = "RouteSend_Search",
 	routeSend_back = "RouteSend_Back",
-	searchText = "searchText"
-
+	searchText = "searchText",
+	routeSend_confirm = "RouteSend_confirm",
+	routeSend_cancel = "RouteSend_cancel"
 }
