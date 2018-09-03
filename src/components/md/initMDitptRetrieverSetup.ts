@@ -14,6 +14,7 @@ import { EANScannerName, EANScanner } from "../peripherals/camera/EAN-scanner";
 import { SingleImageSelectorName, PureSingleImageSelector } from "../md/content/SingleImageSelector";
 import { NavSearchBarName, PureNavSearchBar } from "../md/navigation/NavSearchBar";
 import { NavProcessAtomName, PureNavProcessAtom } from "./navigation/NavProcessAtom";
+import { PureMDButton } from "./interaction/MDButton";
 
 /**
  * sorry for the long function name //TODO: change
@@ -40,6 +41,9 @@ export function initMDitptFnAsDefault() {
 
 	//register routing itpts
 	appIntRetr.addItpt(RouteComponentName, PureRouteComponent, "cRud");
+
+	//register Action itpts
+	appIntRetr.addItpt(LDDict.Action, PureMDButton, "cRud");
 
 	//register side effect-itpt (these itpts change the state asynchronously and are typically non-visual)
 	appIntRetr.addItpt(imageRetrieverName, ImageRetriever, "cRud");

@@ -22,7 +22,8 @@ let cfgIntrprtKeys: string[] =
 		VisualDict.cancelTxt,
 		VisualDict.confirmTxt,
 		VisualDict.routeSend_cancel,
-		VisualDict.routeSend_confirm
+		VisualDict.routeSend_confirm,
+		VisualDict.action_confirm
 	];
 let initialKVStores: IKvStore[] = [
 	{
@@ -54,6 +55,11 @@ let initialKVStores: IKvStore[] = [
 		key: VisualDict.routeSend_confirm,
 		value: undefined,
 		ldType: VisualDict.route_added,
+	},
+	{
+		key: VisualDict.action_confirm,
+		value: undefined,
+		ldType: LDDict.Action
 	}
 ];
 let bpCfg: BlueprintConfig = {
@@ -162,9 +168,9 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 			</div>
 			<div className="bottom-nav-tabs flex-container">
 				<Button className="flex-filler"
-					label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />
-				<Button className="flex-filler"
 					label={cancelTxt ? cancelTxt : "cancel"} onClick={() => this.onCancelClick()} />
+				<Button className="flex-filler"
+					label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />
 			</div>
 		</div>;
 	}

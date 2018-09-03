@@ -7,6 +7,7 @@ export enum LDDict {
 	Date = "http://schema.org/Date",
 	DateTime = "http://schema.org/DateTime",
 	//classes:
+	Action = "https://schema.org/Action",
 	CreateAction = "http://schema.org/CreateAction",
 	ViewAction = "http://schema.org/ViewAction",
 	ImageObject = "http://schema.org/ImageObject",

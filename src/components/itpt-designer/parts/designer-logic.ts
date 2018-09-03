@@ -431,7 +431,6 @@ export class DesignerLogic {
 	public addNewExtendableNode(signature: NewNodeSig, itpt: BlueprintConfig): ExtendableTypesNodeModel {
 		let extendableNode = new ExtendableTypesNodeModel("Linear Data Display", null, null, designerSpecificNodesColor);
 		let nodeName: string = itpt.subItptOf;
-		extendableNode.id = signature.id;
 		extendableNode.x = signature.x;
 		extendableNode.y = signature.y;
 		extendableNode.canInterpretType = itpt.canInterpretType;
@@ -441,6 +440,8 @@ export class DesignerLogic {
 			ldType: UserDefDict.intrprtrClassType
 		};
 		this.addLDPortModelsToNodeFromCfg(extendableNode, itpt);
+		extendableNode.id = signature.id;
+		extendableNode.nameSelf = "Linear Data Display";
 		this.getDiagramEngine()
 			.getDiagramModel()
 			.addNode(extendableNode);

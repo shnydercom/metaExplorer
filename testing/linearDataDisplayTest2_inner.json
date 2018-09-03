@@ -1,0 +1,78 @@
+{
+  "subItptOf": "RMObj_ImgHeadSubDesc",
+  "canInterpretType": "LinearContainer-Inner-ObjectType",
+  "nameSelf": "LinearContainer-Inner",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "RMObj_ImgHeadSubDesc": {
+          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "nameSelf": "RMObj_ImgHeadSubDesc",
+          "initialKvStores": [
+            {
+              "key": "HeaderInterpreter",
+              "value": {
+                "objRef": "RMObj_LinearContainer",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "HeaderInterpreter"
+          ]
+        },
+        "RMObj_LinearContainer": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "RMObj_LinearContainer",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "RMObj_Date",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "RMObj_Boolean",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
+        "RMObj_Date": {
+          "subItptOf": "shnyder/md/http://schema.org/Date",
+          "canInterpretType": "http://schema.org/Date",
+          "nameSelf": "RMObj_Date",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "RMObj_Boolean": {
+          "subItptOf": "shnyder/md/http://schema.org/Boolean",
+          "canInterpretType": "http://schema.org/Boolean",
+          "nameSelf": "RMObj_Boolean",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

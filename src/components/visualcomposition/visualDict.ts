@@ -23,5 +23,8 @@ export enum VisualDict {
 	routeSend_back = "RouteSend_Back",
 	searchText = "searchText",
 	routeSend_confirm = "RouteSend_confirm",
-	routeSend_cancel = "RouteSend_cancel"
+	routeSend_cancel = "RouteSend_cancel",
+
+	//Actions
+	action_confirm = "Action_Confirm"
 }

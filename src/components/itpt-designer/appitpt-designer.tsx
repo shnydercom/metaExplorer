@@ -7,6 +7,7 @@ import * as prefilledProductItptA from '../../../testing/prefilledProductInterpr
 import * as prefilledOrganizationItptA from '../../../testing/prefilledOrganizationInterpreter.json';
 
 import * as linearDataDisplayTest from '../../../testing/linearDataDisplayTest.json';
+import * as linearDataDisplayTest2_Inner from '../../../testing/linearDataDisplayTest2_inner.json';
 
 import { ComponentClass, StatelessComponent } from 'react';
 
@@ -139,7 +140,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 	}
 
 	onGenLinearClick = (e) => {
-		let prefilledData: any = linearDataDisplayTest;
+		let prefilledData: any = linearDataDisplayTest2_Inner;
 		this.generatePrefilled(prefilledData);
 	}
 

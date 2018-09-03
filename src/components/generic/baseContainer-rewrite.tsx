@@ -87,6 +87,9 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 		}
 		ldOptions.resource.kvStores.forEach((elem, idx) => {
 			let elemKey: string = elem.key;
+			if (elemKey === UserDefDict.outputKVMapKey) {
+				return;
+			}
 			let itpt: React.ComponentClass<LDOwnProps> & IBlueprintItpt = null;
 			if (elem.ldType === UserDefDict.intrprtrClassType && elem.value && isObjPropertyRef(elem.value)) {
 				itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt((elem.value as ObjectPropertyRef).objRef);
