@@ -142,7 +142,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 								let nodeName: string = "Node " + (nodesCount + 1) + ":";
 								node = new GeneralDataTypeNodeModel(nodeName, null, null, "rgba(250,250,250,0.2)");
 								if (data.bpname) {
-									this.props.logic.addLDPortModelsToNode(node, data.bpname);
+									this.props.logic.addLDPortModelsToNodeFromItptRetr(node, data.bpname);
 									/*let newPorts: LDPortModel[] = data.ports as LDPortModel[];
 									console.log("test1");
 									console.dir(newPorts);

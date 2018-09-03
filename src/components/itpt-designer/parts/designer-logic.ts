@@ -29,6 +29,7 @@ import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFac
 import { distributeElements } from "./dagre-utils";
 import { LDPortInstanceFactory } from "./LDPortInstanceFactory";
 import { isInputValueValidFor } from "ldaccess/ldtypesystem/typeChecking";
+import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
 
 export interface NewNodeSig {
 	x: number;
@@ -189,14 +190,17 @@ export class DesignerLogic {
 		return rv;
 	}
 
-	public addLDPortModelsToNode(node: GeneralDataTypeNodeModel, bpname: string): void {//: LDPortModel[] {
+	public addLDPortModelsToNodeFromItptRetr(node: ItptNodeModel, bpname: string): void {//: LDPortModel[] {
 		let itpt: IBlueprintItpt = appIntprtrRetr().getItptByNameSelf(bpname);
 		let cfg: BlueprintConfig = itpt.cfg;
+		this.addLDPortModelsToNodeFromCfg(node, cfg);
+	}
+	public addLDPortModelsToNodeFromCfg(node: ItptNodeModel, cfg: BlueprintConfig) {
 		let rv: LDPortModel[] = [];
 		let intrprtrKeys: any[] = cfg.interpretableKeys;
 		let initialKvStores: IKvStore[] = cfg.initialKvStores;
 		node.nameSelf = node.id;
-		node.subItptOf = bpname;
+		node.subItptOf = cfg.nameSelf;
 		let isInitKVsmallerThanKeys: boolean = initialKvStores.length < intrprtrKeys.length;
 		for (var i = 0; i < intrprtrKeys.length; i++) {
 			let elemi: IKvStore;
@@ -226,18 +230,28 @@ export class DesignerLogic {
 			//don't add KvStores that already have a value, unless they are ItptReferenceMap-typed
 			if (!elemi.value) {
 				node.addPort(new LDPortModel(true, nName, elemi, elemi.key));
-			} else if (elemi.ldType === UserDefDict.intrprtrBPCfgRefMapType) {
-				let objPropRef: ObjectPropertyRef = intrprtrKeys[i];
-				let nestedKey = objPropRef.propRef;
-				let nestedType = getKVStoreByKeyFromLDOptionsOrCfg(null, elemi.value[objPropRef.objRef], nestedKey).ldType;
-				let elemiNested: IKvStore = {
-					key: nestedKey,
-					value: undefined,
-					ldType: nestedType
-				};
-				let nestedName = nestedKey + "_in";
-				node.addPort(new LDPortModel(true, nestedName, elemiNested, nestedKey));
-			}
+			} else
+
+				if (elemi.ldType === UserDefDict.intrprtrBPCfgRefMapType) {
+					let objPropRef: ObjectPropertyRef = intrprtrKeys[i];
+					let nestedKey = objPropRef.propRef;
+					let nestedType = getKVStoreByKeyFromLDOptionsOrCfg(null, elemi.value[objPropRef.objRef], nestedKey).ldType;
+					let elemiNested: IKvStore = {
+						key: nestedKey,
+						value: undefined,
+						ldType: nestedType
+					};
+					let nestedName = nestedKey + "_in";
+					node.addPort(new LDPortModel(true, nestedName, elemiNested, nestedKey));
+				}
+				else if (elemi.ldType === UserDefDict.intrprtrClassType) {
+					let newInKV: IKvStore = {
+						key: elemi.key,
+						value: undefined,
+						ldType: UserDefDict.intrprtrClassType
+					};
+					node.addPort(new LDPortModel(true, elemi.key + "_in", newInKV, elemi.key));
+				}
 
 			//node.addPort(new LDPortModel(true, "identifier", { key: null, value: null, ldType: null }));
 			console.dir(node.getPorts());
@@ -307,20 +321,25 @@ export class DesignerLogic {
 		let nameTextNodeOutPort = nameTextNode.getPort(PORTNAME_OUT_EXPORTSELF);
 		let refMap = getKVStoreByKey(itpt.initialKvStores, UserDefDict.intrprtrBPCfgRefMapKey);
 
-		let mainItpt = refMap.value[itpt.subItptOf];
+		// let mainItpt = refMap.value[itpt.subItptOf];
 		let newSigBaseItpt: NewNodeSig = { id: itpt.subItptOf, x: newSigBaseTxt.x, y: newSigBaseTxt.y - DIAG_TRANSF_Y };
-		let baseNode = this.addNewGeneralNode(newSigBaseItpt, mainItpt);
+		//let baseNode = this.addNewGeneralNode(newSigBaseItpt, mainItpt);
 
 		//create nodes first
 		let nodeMap = new Map<string, GeneralDataTypeNodeModel>();
-		nodeMap.set(itpt.subItptOf, baseNode);
+		//nodeMap.set(itpt.subItptOf, baseNode);
 		let yIterator = 0;
 		for (const itm in refMap.value) {
 			if (refMap.value.hasOwnProperty(itm)) {
 				const subItpt: BlueprintConfig = refMap.value[itm];
-				if (subItpt === mainItpt) continue;
+				//if (subItpt === mainItpt) continue;
 				yIterator++;
 				let newSigSubItpt: NewNodeSig = { id: itm, x: newSigBaseItpt.x, y: newSigBaseItpt.y - DIAG_TRANSF_Y * yIterator };
+				if (subItpt.canInterpretType === UserDefDict.itptContainerObjType) {
+					let extendableNode = this.addNewExtendableNode(newSigSubItpt, subItpt);
+					nodeMap.set(itm, extendableNode);
+					continue;
+				}
 				let subNode = this.addNewGeneralNode(newSigSubItpt, subItpt);
 				nodeMap.set(itm, subNode);
 			}
@@ -387,6 +406,8 @@ export class DesignerLogic {
 			}
 		}
 
+		let baseNode = nodeMap.get(itpt.subItptOf);
+
 		let outputNodeItptInPort = this.outputNode.getPort(UserDefDict.finalInputKey);
 		let outputNodeNameInPort = this.outputNode.getPort(UserDefDict.intrprtrNameKey);
 
@@ -407,13 +428,33 @@ export class DesignerLogic {
 		});
 	}
 
+	public addNewExtendableNode(signature: NewNodeSig, itpt: BlueprintConfig): ExtendableTypesNodeModel {
+		let extendableNode = new ExtendableTypesNodeModel("Linear Data Display", null, null, designerSpecificNodesColor);
+		let nodeName: string = itpt.subItptOf;
+		extendableNode.id = signature.id;
+		extendableNode.x = signature.x;
+		extendableNode.y = signature.y;
+		extendableNode.canInterpretType = itpt.canInterpretType;
+		let exportSelfKV: IKvStore = {
+			key: UserDefDict.exportSelfKey,
+			value: undefined,
+			ldType: UserDefDict.intrprtrClassType
+		};
+		this.addLDPortModelsToNodeFromCfg(extendableNode, itpt);
+		this.getDiagramEngine()
+			.getDiagramModel()
+			.addNode(extendableNode);
+		//extendableNode.addPort(new LDPortModel(false, exportSelfKV.key, exportSelfKV));
+		return extendableNode;
+	}
+
 	public addNewGeneralNode(signature: NewNodeSig, itpt: BlueprintConfig): GeneralDataTypeNodeModel {
 		let nodeName: string = itpt.subItptOf;
 		let generalNode = new GeneralDataTypeNodeModel(nodeName, null, null, "rgba(250,250,250,0.2)");
 		generalNode.id = signature.id;
 		generalNode.x = signature.x;
 		generalNode.y = signature.y;
-		this.addLDPortModelsToNode(generalNode, nodeName);
+		this.addLDPortModelsToNodeFromItptRetr(generalNode, nodeName);
 		if (itpt.canInterpretType) generalNode.canInterpretType = itpt.canInterpretType;
 		this.getDiagramEngine()
 			.getDiagramModel()
