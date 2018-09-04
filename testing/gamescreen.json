@@ -1,0 +1,137 @@
+{
+  "subItptOf": "2413c0f1-4c38-4658-bc34-957621841afd",
+  "canInterpretType": "flightdemo-ObjectType",
+  "nameSelf": "flightdemo",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "2413c0f1-4c38-4658-bc34-957621841afd": {
+          "subItptOf": "game/FourFieldsView",
+          "canInterpretType": "game/FourFieldsView-ObjectType",
+          "nameSelf": "2413c0f1-4c38-4658-bc34-957621841afd",
+          "initialKvStores": [
+            {
+              "key": "GameTaskHeading",
+              "value": "Choose the correct answer",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "GameTaskText",
+              "value": "How much liquid is each passenger allowed to carry?",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "GameFieldItpt_UpperLeft",
+              "value": {
+                "objRef": "fcc48ef2-56df-467b-977d-6316391a12f3",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "GameFieldItpt_UpperRight",
+              "value": {
+                "objRef": "a700107b-85e4-4c0e-b429-e5f26acfa6ba",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "GameFieldItpt_LowerLeft",
+              "value": {
+                "objRef": "68b98593-8161-4a99-907b-a81291e44820",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "GameFieldItpt_LowerRight",
+              "value": {
+                "objRef": "bbdc562f-0b8d-499d-8989-c165299cd6c1",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "GameStatsText",
+              "value": "Question 3/10",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "GameField_Correct_idx",
+              "value": "2",
+              "ldType": "http://schema.org/Integer"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "GameFieldItpt_UpperLeft",
+            "GameFieldItpt_UpperRight",
+            "GameFieldItpt_LowerLeft",
+            "GameFieldItpt_LowerRight"
+          ]
+        },
+        "fcc48ef2-56df-467b-977d-6316391a12f3": {
+          "subItptOf": "game/SingleFieldView",
+          "canInterpretType": "game/SingleFieldView-ObjectType",
+          "nameSelf": "fcc48ef2-56df-467b-977d-6316391a12f3",
+          "initialKvStores": [
+            {
+              "key": "HeaderText",
+              "value": "max 100ml, but gels and cremes are o.k.",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "a700107b-85e4-4c0e-b429-e5f26acfa6ba": {
+          "subItptOf": "game/SingleFieldView",
+          "canInterpretType": "game/SingleFieldView-ObjectType",
+          "nameSelf": "a700107b-85e4-4c0e-b429-e5f26acfa6ba",
+          "initialKvStores": [
+            {
+              "key": "HeaderText",
+              "value": "max 150ml, no more than 4 bottles",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "68b98593-8161-4a99-907b-a81291e44820": {
+          "subItptOf": "game/SingleFieldView",
+          "canInterpretType": "game/SingleFieldView-ObjectType",
+          "nameSelf": "68b98593-8161-4a99-907b-a81291e44820",
+          "initialKvStores": [
+            {
+              "key": "HeaderText",
+              "value": "max 100ml, in a 1L plastic bag",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "bbdc562f-0b8d-499d-8989-c165299cd6c1": {
+          "subItptOf": "game/SingleFieldView",
+          "canInterpretType": "game/SingleFieldView-ObjectType",
+          "nameSelf": "bbdc562f-0b8d-499d-8989-c165299cd6c1",
+          "initialKvStores": [
+            {
+              "key": "HeaderText",
+              "value": "a single 1L bottle",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

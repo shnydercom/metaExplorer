@@ -1,6 +1,6 @@
 import { appItptRetrFn } from "appconfig/appItptRetriever";
 import { LDDict } from "ldaccess/LDDict";
-import { PureImgDisplay } from "../imagedisplay-component";
+import { PureImgDisplay } from "../visualcomposition/imagedisplay-component";
 import { PureBoolInput, PureIntInput, PureDoubleInput, PureTextInput, PureDateInput, PureDateTimeInput } from "../md/content/BaseDataTypeInput";
 import { ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc } from "../visualcomposition/ImgHeadSubDescIntrprtr";
 import { PureNavBarWActions, NavBarWActionsName } from "../md/navigation/NavBarWActions";

@@ -11,6 +11,9 @@ import * as linearDataDisplayTest2_Inner from '../../../testing/linearDataDispla
 
 import { ComponentClass, StatelessComponent } from 'react';
 
+//Game
+import * as prefilledGame from '../../../testing/gamescreen.json';
+
 //YWQD
 import * as prefilledMDBottomNav from '../../../testing/prefilledYWQDBottomNav.json';
 import * as prefilledScndStepA from '../../../testing/prefilledScndStepA.json';
@@ -144,6 +147,11 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 		this.generatePrefilled(prefilledData);
 	}
 
+	onGameClick = (e) => {
+		let prefilledData: any = prefilledGame;
+		this.generatePrefilled(prefilledData);
+	}
+
 	generatePrefilled = (input: any) => {
 		let nodesBPCFG: BlueprintConfig = input as BlueprintConfig;
 		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
@@ -234,6 +242,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 					<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
 
 					<Button onClick={this.onGenLinearClick}>Linear!</Button>
+					<Button onClick={this.onGameClick}>Game!</Button>
 					<Link to="/designerinitial">initial   </Link>
 					<Link to="/app">   app</Link>
 					<ThemeProvider theme={appTheme}>
@@ -243,8 +252,8 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 									<Route path="/designerinitial" render={() => (
 										<div><b>drag and drop items into the designer</b></div>
 									)} />
-									<Route path="/app" render={(routeProps: LDRouteProps) => {
-										routeProps.match.params.nextPath = "app";
+									<Route path="/" render={(routeProps: LDRouteProps) => {
+										//routeProps.match.params.nextPath = "/";
 										return <>
 											<BaseContainerRewrite routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
 										</>;

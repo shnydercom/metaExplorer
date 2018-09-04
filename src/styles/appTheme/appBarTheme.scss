@@ -6,6 +6,7 @@
 @import 'react-toolbox/lib/ripple/config.css';
 @import 'react-toolbox/lib/ripple/theme.css';
 @import './colors.scss';
+
 :root {
   --standard-increment-mobile: calc(5.6 * var(--unit));
   --standard-increment-desktop: calc(6.4 * var(--unit));
@@ -148,21 +149,25 @@
     text-overflow: ellipsis;
     white-space: nowrap
   }
+
   .title>small {
     font-size: calc(2 * var(--unit));
     font-weight: normal;
   }
+
   .leftIcon {
     margin-left: calc(-1.2 * var(--unit));
     color: var(--appbar-contrast) !important;
     font-size: calc(3 * var(--unit));
   }
+
   .rightIcon {
     margin-left: auto;
     margin-right: calc(-1.2 * var(--unit));
     color: var(--appbar-contrast) !important;
     font-size: calc(3 * var(--unit));
   }
+
   .font-icon {
     font-size: calc(3 * var(--unit));
   }
@@ -194,6 +199,7 @@
 
 .bottom-nav-topfree {
   flex: 1;
+  display: flex;
 }
 
 .mdscrollbar {
@@ -219,7 +225,6 @@
 /***
   barcode elements
 **/
-
 #interactive {
   align-self: center;
   display: flex;
@@ -261,6 +266,7 @@ canvas.drawingBuffer {
   display: flex;
   position: absolute;
   background-image: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .3), rgba(255, 255, 255, .7));
+
   .sub-tab {
     flex-direction: row;
     flex-grow: 1;
@@ -268,6 +274,7 @@ canvas.drawingBuffer {
     border-right: solid white 2px;
     display: flex;
   }
+
   .switcher-icon {
     height: calc(5 * var(--unit));
     width: 100%;
@@ -281,12 +288,14 @@ canvas.drawingBuffer {
   width: 100%;
   height: 100%;
   justify-content: center;
+
   .btn-extension {
     height: 100%;
     flex: 1;
     flex-direction: column;
     display: flex;
   }
+
   .btn-extension .material-icons {
     line-height: 1 !important;
     font-size: 300% !important;
@@ -306,6 +315,7 @@ canvas.drawingBuffer {
   background-color: darkgrey;
   justify-content: center;
   align-items: flex-end;
+
   .vid-big-icons {
     line-height: 1 !important;
     font-size: 600% !important;
@@ -314,11 +324,13 @@ canvas.drawingBuffer {
     text-align: center;
     align-self: center;
   }
+
   >video {
     height: inherit;
     width: inherit;
     object-fit: cover;
   }
+
   .controls-container {
     height: inherit;
     width: inherit;
@@ -328,6 +340,7 @@ canvas.drawingBuffer {
     justify-content: flex-end;
     flex-direction: column;
     padding-bottom: var(--appbar-h-padding);
+
     >button>span {
       font-size: 170% !important;
     }
@@ -338,6 +351,7 @@ canvas.drawingBuffer {
   height: 100%;
   width: 100%;
   padding: 10pt 0pt 0pt 0pt !important;
+
   >input {
     font-size: 200%;
     padding-left: 8pt;

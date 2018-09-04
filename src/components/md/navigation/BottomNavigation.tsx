@@ -17,7 +17,6 @@ import { Tab } from 'react-toolbox/lib/tabs/';
 import { Tabs } from 'react-toolbox/lib/tabs/';
 
 import { generateIntrprtrForProp } from '../../generic/generatorFns';
-//import { active } from 'react-toolbox/lib/dropdown/theme.css';
 import { checkAllFilled } from 'GeneralUtils';
 import { Redirect, Route } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
@@ -28,12 +27,6 @@ type ConnectedState = {
 
 type ConnectedDispatch = {
 };
-
-/*const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
-});
-
-const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedDispatch => ({
-});*/
 
 export const TAB_1_ICONURL = "IconURL_1";
 export const TAB_1_ICONURL_DISABLED = "IconURL_1_Disabled";

@@ -22,6 +22,7 @@ import { Route } from 'react-router';
 import { LDRouteProps } from 'appstate/LDProps';
 import { initEssentialItpts } from 'defaults/initEssentialItpts';
 import 'mods/google/components/GWebAuthenticator';
+import { initGameItpt } from 'components/game/initGameItpts';
 
 const initialState: ExplorerState = {
 	ldoptionsMap: {},
@@ -37,6 +38,7 @@ function rootSetup(): void {
 	appItptMatcherFn();
 	initEssentialItpts();
 	initMDitptFnAsDefault();
+	initGameItpt();
 	initLDConnect();
 }
 

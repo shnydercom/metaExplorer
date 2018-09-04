@@ -125,11 +125,6 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 		};
 	}
 
-	/*componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
-		if (compNeedsUpdate(nextProps, this.props)) {
-			this.handleKVs(nextProps);
-		}
-	}*/
 	onCancelClick = () => {
 		this.setState({
 			...this.state,

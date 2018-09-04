@@ -1,0 +1,61 @@
+//game-itpt with 4 fields
+.game-4f-base {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	justify-content: space-between;
+}
+
+.game-4f-idle {
+	background-color: white;
+}
+
+.game-4f-correct {
+	.game-field {
+		background-color: rgba(0, 177, 68, 0.651);
+	}
+}
+
+.game-4f-wrong {
+	.game-field {
+		background-color: rgba(209, 0, 0, 0.829);
+	}
+}
+
+.game-4f-top {
+	text-align: center;
+}
+
+.game-4f-fields {
+	flex: 0.9;
+	display: flex;
+	flex-direction: column;
+}
+
+.game-4f-field-row {
+	flex: 1;
+	display: flex;
+}
+
+.game-4f-field-col {
+	display: flex;
+	width: 50%;
+	justify-content: center;
+}
+
+.game-4f-bottom {
+	text-align: center;
+}
+
+//single raised field
+.game-field {
+	flex: 0.8;
+	padding: 10px;
+	text-align: center;
+	align-self: center;
+	border-radius: 5px;
+	height: 40%;
+	transition: background-color 2s;
+	background-color: rgba(0, 0, 0, .14);
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}

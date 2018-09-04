@@ -29,11 +29,6 @@ type ConnectedState = {
 type ConnectedDispatch = {
 };
 
-/*const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
-});
-
-const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedDispatch => ({
-});*/
 export const NavSearchBarName = "shnyder/md/NavSearchBar";
 let cfgIntrprtKeys: string[] =
 	[VisualDict.freeContainer, VisualDict.searchText, VisualDict.routeSend_back];
@@ -115,12 +110,9 @@ export class PureNavSearchBar extends Component<LDConnectedState & LDConnectedDi
 	onBackBtnClick = () => {
 		//TODO: execute back routing, use VisualDict.routeSend_back
 	}
-	//<Navigation type='horizontal'>
-	//</Navigation>
 	render() {
 		const { ldOptions, routes } = this.props;
 		const { searchValue, isDoRedirect } = this.state;
-		//const { routeSend_back } = localValues.get(VisualDict.routeSend_back);
 		return (
 			<>
 				<AppBar leftIcon='arrow_back' onLeftIconClick={() => this.onBackBtnClick()} rightIcon='search'>

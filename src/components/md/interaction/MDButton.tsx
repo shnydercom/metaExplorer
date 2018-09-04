@@ -109,7 +109,7 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 		if (isDoRedirectConfirm && routeSendConfirm) {
 			return <Redirect to={routeSendConfirm} />;
 		}
-		return <Button label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />;
+		return <Button raised label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />;
 	}
 }
 export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureMDButton);

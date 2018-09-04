@@ -106,7 +106,11 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 		console.log(this.state);
 		const compExecFn = () => <>{displayedComponent}</>;
 		let newPath = !isAbsolute && routes && routes.match ? routes.match.path : "";
-		newPath +=  "/" + toPath;
+		if (!newPath.startsWith("/")) {
+			newPath += "/" + toPath;
+		}else{
+			newPath += toPath;
+		}
 		return <Route exact={isExact} path={newPath} component={compExecFn} />;
 	}
 

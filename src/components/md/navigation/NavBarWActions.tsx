@@ -93,11 +93,6 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		};
 	}
 
-	/*componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
-		if (compNeedsUpdate(nextProps, this.props)) {
-			this.handleKVs(nextProps);
-		}
-	}*/
 	onAppBarRightIconMenuClick = (e) => {
 		//will be called on opening and clicking inside the menu
 	}
@@ -125,37 +120,5 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 				{this.renderSub(VisualDict.freeContainer)}
 			</>;
 	}
-
-	/*private handleKVs(props: LDOwnProps & LDConnectedState) {
-		let kvs: IKvStore[];
-		let retriever = props.ldOptions.visualInfo.retriever;
-		//let lowerFreeContainerInfo: IReactCompInfoItm;
-		//let usrIconPopOverInfo: IReactCompInfoItm;
-		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
-			kvs = props.ldOptions.resource.kvStores;
-			//lowerFreeContainerInfo = generateCompInfoItm(kvs, VisualDict.freeContainer, retriever);
-			this.headerText = getKVValue(getKVStoreByKey(kvs, VisualDict.headerTxt));
-			this.routeSendSearch = getKVValue(getKVStoreByKey(kvs, VisualDict.routeSend_search));
-			//usrIconPopOverInfo = usrIconPopOverInfo ? generateCompInfoItm(kvs, VisualDict.popOverContent, retriever) : null;
-		}
-		if (!lowerFreeContainerInfo) {
-			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			lowerFreeContainerInfo = generateCompInfoItm(kvs, VisualDict.freeContainer, retriever);
-		}
-		if (!usrIconPopOverInfo) {
-			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			usrIconPopOverInfo = generateCompInfoItm(kvs, VisualDict.popOverContent, retriever);
-		}
-		if (lowerFreeContainerInfo) {
-			this.state.compInfos.set(VisualDict.freeContainer, lowerFreeContainerInfo);
-		} else {
-			this.state.compInfos.delete(VisualDict.freeContainer);
-		}
-		if (usrIconPopOverInfo) {
-			this.state.compInfos.set(VisualDict.popOverContent, usrIconPopOverInfo);
-		} else {
-			this.state.compInfos.delete(VisualDict.popOverContent);
-		}
-	}*/
 }
 export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureNavBarWActions);

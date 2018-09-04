@@ -19,6 +19,8 @@ import { ObjectPropertyRef } from 'ldaccess/ObjectPropertyRef';
 import { appItptMatcherFn } from 'appconfig/appItptMatcher';
 import { isReactComponent } from '../reactUtils/reactUtilFns';
 
+import Ripple from 'react-toolbox/lib/ripple';
+
 type OwnProps = {
 	test: string;
 };
@@ -30,64 +32,48 @@ type ConnectedDispatch = {
 	test: string;
 };
 
-export var ImgHeadSubDescIntrprtrName: string = "shnyder/ImgHeadSubDescIntrprtr";
-let cfgType: string = ImgHeadSubDescIntrprtrName;
+export var SingleFieldViewIntrprtrName: string = "game/SingleFieldView";
+let cfgType: string = SingleFieldViewIntrprtrName;
 let cfgIntrprtKeys: string[] =
-	[VisualDict.headerItpt, VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description, VisualDict.footerItpt];
+	[
+		VisualDict.headerTxt
+	];
 let initialKVStores: IKvStore[] = [
-	{
-		key: VisualDict.headerItpt,
-		value: undefined,
-		ldType: UserDefDict.intrprtrClassType
-	},
 	{
 		key: VisualDict.headerTxt,
 		value: undefined,
 		ldType: LDDict.Text
-	},
-	{
-		key: VisualDict.subHeaderTxt,
-		value: undefined,
-		ldType: LDDict.Text
-	},
-	{
-		key: VisualDict.description,
-		value: undefined,
-		ldType: LDDict.Text
-	},
-	{
-		key: VisualDict.footerItpt,
-		value: undefined,
-		ldType: UserDefDict.intrprtrClassType
 	}
 ];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
-	nameSelf: ImgHeadSubDescIntrprtrName,
+	nameSelf: SingleFieldViewIntrprtrName,
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
-interface TestState {
-	myState: string;
+interface SingleFieldViewState {
 }
 @ldBlueprint(bpCfg)
-export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, LDLocalState>
+export class PureSingleFieldView extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, SingleFieldViewState & LDLocalState>
 	implements IBlueprintItpt {
 
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
-		prevState: null | LDLocalState)
-		: null | LDLocalState {
+		prevState: null | LDLocalState & SingleFieldViewState)
+		: null | LDLocalState & SingleFieldViewState {
 		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualDict.headerItpt, VisualDict.footerItpt]);
+			nextProps, prevState, [
+			]);
 		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description]);
+			nextProps, prevState, [
+				VisualDict.headerTxt
+			]);
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
-		return { ...prevState, ...rvLD, ...rvLocal  };
+		return { ...prevState, ...rvLD, ...rvLocal };
 	}
 
 	cfg: BlueprintConfig;
@@ -99,42 +85,33 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 
 	constructor(props: any) {
 		super(props);
-		console.log("ImgHeadSubDesc Constructor called");
+		console.log("SingleFieldView Constructor called");
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
 			...initLDLocalState(this.cfg, props,
-				[VisualDict.headerItpt, VisualDict.footerItpt],
-				[VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description])
+				[
+				],
+				[
+					VisualDict.headerTxt
+				])
 		};
 	}
+
+	ripplefn = (props) => (
+		<a {...props} style={{ position: 'relative' }}>
+			{props.children}
+		</a>
+	)
+
 	render() {
 		const { localValues } = this.state;
-		const headerText = localValues.get(VisualDict.headerTxt);
-		const subHeaderText = localValues.get(VisualDict.subHeaderTxt);
-		const description = localValues.get(VisualDict.description);
-		return <div className="mdscrollbar">
-			<div className="header-img-container">
-				{this.renderSub(VisualDict.headerItpt)}
-			</div>
-			<div className="header-img-container overlay-gradient">
-				<div className="header-text">
-					<span>{headerText ? headerText : 'headerTextPlaceholder'}</span>
-				</div>
-			</div>
-			<div className="imgheadsubdesc-text">
-				<div>
-					<h4>{subHeaderText ? subHeaderText : "subHeaderTextPlaceholder"}</h4>
-				</div>
-				<div>
-					<i>{description ? description : 'descriptionPlaceholder'}</i>
-				</div>
-			</div>
-			<div>
-				{this.renderSub(VisualDict.footerItpt)}
-			</div>
+		const headerTxt = localValues.get(VisualDict.headerTxt);
+		const RippleLink = Ripple({ spread: 3 })(this.ripplefn);
+		return <div className="game-field">
+			<RippleLink >{headerTxt}</RippleLink>
 		</div>;
 	}
 
 }
 
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureImgHeadSubDesc);
+export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureSingleFieldView);

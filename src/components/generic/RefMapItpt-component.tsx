@@ -7,7 +7,7 @@ import { ExplorerState } from "appstate/store";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import ImgHeadSubDescIntrprtr from "components/visualcomposition/ImgHeadSubDescIntrprtr";
-import { PureImgDisplay } from "components/imagedisplay-component";
+import { PureImgDisplay } from "../visualcomposition/imagedisplay-component";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
 import { compNeedsUpdate, isRouteSame } from "components/reactUtils/compUtilFns";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";

@@ -24,7 +24,7 @@
     "suppressExcessPropertyErrors": true,
     "declaration": true,
     "strictNullChecks": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "lib": [
       "dom",
       "es2017"
