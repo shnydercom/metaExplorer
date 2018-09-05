@@ -1,6 +1,6 @@
 import Dropzone, { ImageFile } from 'react-dropzone';
 import { Component, ComponentClass, StatelessComponent } from 'react';
-import { LDConnectedDispatch, LDConnectedState, LDOwnProps } from 'appstate/LDProps';
+import { LDConnectedDispatch, LDConnectedState, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
@@ -13,7 +13,8 @@ import { mapDispatchToProps, mapStateToProps } from 'appstate/reduxFns';
 import { connect } from 'react-redux';
 import { Button } from 'react-toolbox/lib/button';
 import { DOMCamera } from '../../peripherals/camera/dom-camera';
-// drop file anim: https://css-tricks.com/examples/DragAndDropFileUploading/
+import { initLDLocalState, getDerivedKVStateFromProps } from '../../generic/generatorFns';
+// TODO: drop file anim: https://css-tricks.com/examples/DragAndDropFileUploading/
 
 export enum SingleImageSelectorStateEnum {
 	isSelectInputType = 2,
@@ -23,32 +24,24 @@ export enum SingleImageSelectorStateEnum {
 	isError = 6
 }
 
-export type SingleImageSelectorState = {
-	curStep: SingleImageSelectorStateEnum,
-	isCamAvailable: boolean,
-	previewURL: string,
-};
+export interface SingleImageSelectorState extends LDLocalState {
+	curStep: SingleImageSelectorStateEnum;
+	isCamAvailable: boolean;
+	previewURL: string;
+}
 
 export const SingleImageSelectorName = "shnyder/md/SingleImageSelector";
 let cfgType: string = LDDict.CreateAction;
 let cfgIntrprtKeys: string[] =
-	[LDDict.agent, LDDict.target];
+	[];
+const RESULT_KV: IKvStore = {
+	key: LDDict.result,
+	value: undefined,
+	ldType: LDDict.URL
+};
 let initialKVStores: IKvStore[] = [
-	{
-		key: LDDict.agent,
-		value: undefined,
-		ldType: undefined
-	},
-	{
-		key: LDDict.target,
-		value: 'http://localhost:1111/api/ysj/media/upload',
-		ldType: LDDict.EntryPoint
-	},
-	{
-		key: LDDict.result,
-		value: undefined,
-		ldType: LDDict.ImageObject
-	}];
+	RESULT_KV
+];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
@@ -59,10 +52,21 @@ let bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-export class PureSingleImageSelector extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, SingleImageSelectorState>
+export class PureSingleImageSelector extends Component<
+LDConnectedState & LDConnectedDispatch & LDOwnProps,
+SingleImageSelectorState>
 	implements IBlueprintItpt {
+
+	static getDerivedStateFromProps(
+		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
+		prevState: SingleImageSelectorState): null | SingleImageSelectorState {
+		let rvLD = getDerivedKVStateFromProps(nextProps, prevState, [UserDefDict.outputKVMapKey]);
+		if (rvLD === null || rvLD === prevState) return null;
+		return { ...prevState, ...rvLD };
+	}
+
 	cfg: BlueprintConfig;
-	outputKVMap: OutputKVMap;
+	//outputKVMap: OutputKVMap;
 	loadingImgLink: string = "/dist/static/camera_negative_black.svg";
 	errorImgLink: string = "/dist/static/nocamera_negative_black.svg";
 	draggingImgLink: string = "/dist/static/dragndrop.svg";
@@ -71,21 +75,41 @@ export class PureSingleImageSelector extends Component<LDConnectedState & LDConn
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		this.state = {
+		const baseState = {
 			curStep: SingleImageSelectorStateEnum.isSelectInputType,
 			isCamAvailable: false,
 			previewURL: null
 		};
-		if (props) {
+		this.state = {
+			...baseState,
+			...initLDLocalState(
+				this.cfg,
+				props,
+				[],
+				[UserDefDict.outputKVMapKey]
+			)
+		};
+		/*if (props) {
 			this.handleKVs(props);
-		}
+		}*/
 	}
-	componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
+
+	/**
+	 * called when the URL/blob of the image URL changes, dispatches KV-Output
+	 */
+	onResultChanged(url: string) {
+		const outputKV = { ...RESULT_KV, value: url };
+		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
+		if (!outputKVMap) return;
+		this.props.dispatchKvOutput([outputKV], this.props.ldTokenString, outputKVMap);
+	}
+
+	/*componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
 		if (compNeedsUpdate(nextProps, this.props)) {
 			this.handleKVs(nextProps);
 			//this.consumeLDOptions(nextProps.ldOptions);
 		}
-	}
+	}*/
 	consumeLDOptions = (ldOptions: ILDOptions) => {
 		/*if (ldOptions && ldOptions.resource && ldOptions.resource.kvStores) {
 			let kvs = ldOptions.resource.kvStores;
@@ -126,6 +150,7 @@ export class PureSingleImageSelector extends Component<LDConnectedState & LDConn
 
 	onDropSuccess(imgFile: File, previewURL: string) {
 		this.setState({ ...this.state, curStep: SingleImageSelectorStateEnum.isPreviewing, previewURL: previewURL });
+		this.onResultChanged(previewURL);
 	}
 	onDropFailure() {
 		if (this.state.curStep !== SingleImageSelectorStateEnum.isPreviewing) {
@@ -156,7 +181,8 @@ export class PureSingleImageSelector extends Component<LDConnectedState & LDConn
 			onDragEnter={() => this.startDrag()}
 			onDragOver={() => this.startDrag()}
 			onDragLeave={() => this.onDropFailure()}
-			onFileDialogCancel={() => this.onDropFailure()}>
+			onFileDialogCancel={() => this.onDropFailure()}
+			>
 			{(() => {
 				switch (curStep) {
 					case SingleImageSelectorStateEnum.isSelectInputType:
@@ -179,11 +205,11 @@ export class PureSingleImageSelector extends Component<LDConnectedState & LDConn
 		</Dropzone >);
 	}
 
-	private handleKVs(props: LDOwnProps & LDConnectedState) {
+	/*private handleKVs(props: LDOwnProps & LDConnectedState) {
 		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
 		this.outputKVMap = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, UserDefDict.outputKVMapKey));
 		//this.imgLink = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, LDDict.contentUrl));
-	}
+	}*/
 
 }
 

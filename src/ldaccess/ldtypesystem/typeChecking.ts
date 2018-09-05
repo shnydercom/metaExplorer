@@ -24,8 +24,11 @@ export const isInputValueValidFor: (inputKv: IKvStore, targetKv: IKvStore) => bo
 export const typeMatrixKeyMap: Map<string, number> = new Map();
 typeMatrixKeyMap.set(LDDict.Text, 0);
 typeMatrixKeyMap.set(VisualDict.route_added, 1);
+typeMatrixKeyMap.set(LDDict.URL, 2);
 
+//format: [inputIdx][targetIdx]
 export const typeMatrix: boolean[][] = [
-	[true, true],
-	[true, true]
+	[true, true, true],
+	[true, true, false],
+	[true, false, true]
 ];

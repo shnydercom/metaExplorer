@@ -152,7 +152,7 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 				{reactComps ? reactComps : null}
 			</>;
 		} else {
-			return <span>error caught baseContainer: {errorMsg}</span>;
+			return <span>error caught in baseContainer: {errorMsg}</span>;
 		}
 	}
 
