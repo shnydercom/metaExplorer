@@ -1,7 +1,7 @@
 {
   "subItptOf": "d57234da-46f2-443a-87d1-4a9b02e6b237",
-  "canInterpretType": "愿望清单/AppEntry2-ObjectType",
-  "nameSelf": "愿望清单/AppEntry2",
+  "canInterpretType": "愿望清单2/AppEntry2-ObjectType",
+  "nameSelf": "愿望清单2/AppEntry2",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -43,13 +43,32 @@
             {
               "key": "freeContainer",
               "value": {
+                "objRef": "aacd1cf2-b8d4-4546-b38d-71adaa580c00",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "aacd1cf2-b8d4-4546-b38d-71adaa580c00": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "aacd1cf2-b8d4-4546-b38d-71adaa580c00",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
                 "objRef": "078c5817-632f-44cc-a088-03d29edf795d",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
             },
             {
-              "key": "freeContainer",
+              "key": "in_1",
               "value": {
                 "objRef": "70e96539-0b43-43d2-aaa3-be5e8fb7cd1a",
                 "propRef": null
@@ -57,7 +76,7 @@
               "ldType": "InterpreterClassType"
             },
             {
-              "key": "freeContainer",
+              "key": "in_2",
               "value": {
                 "objRef": "9f3a4457-e185-47b0-bc02-27e28256eb57",
                 "propRef": null
@@ -67,9 +86,9 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer",
-            "freeContainer",
-            "freeContainer"
+            "in_0",
+            "in_1",
+            "in_2"
           ]
         },
         "078c5817-632f-44cc-a088-03d29edf795d": {
