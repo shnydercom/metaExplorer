@@ -1,18 +1,15 @@
 import { connect } from 'react-redux';
-import { ExplorerState } from 'appstate/store';
-import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
-import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
-import { getKVValue } from 'ldaccess/ldUtils';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { CameraSwitcherTabs } from './cameraSwitcherTabs';
 import { UserDefDict } from 'ldaccess/UserDefDict';
+import { initLDLocalState } from '../../generic/generatorFns';
 
 //TODO: find proper way to include quagga with types, compiling
 //import * as Quagga from 'quagga';
@@ -21,32 +18,17 @@ import { UserDefDict } from 'ldaccess/UserDefDict';
 //const Quagga = QuaggaAll.default;
 declare var Quagga: any;
 
-type OwnProps = {
-	singleImage;
-};
-type ConnectedState = {
-};
-
-type ConnectedDispatch = {
-};
-
-/*const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
-});
-
-const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedDispatch => ({
-});*/
-
 export enum EANScannerStateEnum {
 	isLoading = 2,
 	isError = 3,
 	isScanning = 4,
 }
 
-export type EANScannerState = {
-	curStep: EANScannerStateEnum,
-	vidDeviceList: MediaDeviceInfo[],
-	curId: string
-};
+export interface EANScannerState extends LDLocalState {
+	curStep: EANScannerStateEnum;
+	vidDeviceList: MediaDeviceInfo[];
+	curId: string;
+}
 
 export const EANScannerName = "shnyder/EANScanner";
 let cfgType: string = LDDict.ViewAction;
@@ -73,6 +55,7 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 	implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
+	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	loadingImgLink: string = "/dist/static/camera_negative_black.svg";
 	errorImgLink: string = "/dist/static/nocamera_negative_black.svg";
 
@@ -80,26 +63,13 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
+		const ldState = initLDLocalState(this.cfg, props, [], [UserDefDict.outputKVMapKey]);
 		this.state = {
+			...ldState,
 			vidDeviceList: null,
 			curId: null,
 			curStep: EANScannerStateEnum.isLoading
 		};
-		if (props) {
-			this.handleKVs(props);
-		}
-	}
-	componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
-		if (compNeedsUpdate(nextProps, this.props)) {
-			this.handleKVs(nextProps);
-			//this.consumeLDOptions(nextProps.ldOptions);
-		}
-	}
-	consumeLDOptions = (ldOptions: ILDOptions) => {
-		/*if (ldOptions && ldOptions.resource && ldOptions.resource.kvStores) {
-			let kvs = ldOptions.resource.kvStores;
-			this.imgLink = getKVValue(getKVStoreByKey(kvs, LDDict.contentUrl));
-		}*/
 	}
 
 	componentDidMount() {
@@ -119,7 +89,7 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 					return;
 				} else {
 					const deviceId = vidInputList[0].deviceId;
-					this.setState({ curId: deviceId, curStep: EANScannerStateEnum.isLoading, vidDeviceList: vidInputList });
+					this.setState({...this.state, curId: deviceId, curStep: EANScannerStateEnum.isLoading, vidDeviceList: vidInputList });
 					this.startQuagga(deviceId);
 					return;
 				}
@@ -177,14 +147,14 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 				this.setStateToError();
 				return;
 			}
-			this.setState({ curStep: EANScannerStateEnum.isScanning });
+			this.setState({...this.state, curStep: EANScannerStateEnum.isScanning });
 			Quagga.start();
 		});
 		Quagga.onDetected(this.onBarCodeDetected);
 	}
 
 	setStateToError() {
-		this.setState({ vidDeviceList: null, curId: null, curStep: EANScannerStateEnum.isError });
+		this.setState({...this.state, vidDeviceList: null, curId: null, curStep: EANScannerStateEnum.isError });
 	}
 
 	componentWillUnmount() {
@@ -192,7 +162,7 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 		if (this.state.curStep !== EANScannerStateEnum.isError && this.state.curId !== null) {
 			Quagga.stop();
 		}
-		this.setState({ curStep: EANScannerStateEnum.isLoading, vidDeviceList: null, curId: null });
+		this.setState({...this.state, curStep: EANScannerStateEnum.isLoading, vidDeviceList: null, curId: null });
 	}
 
 	render() {
@@ -228,25 +198,16 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 		);
 	}
 
-	private handleKVs(props: LDOwnProps & LDConnectedState) {
-		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
-		this.outputKVMap = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, UserDefDict.outputKVMapKey));
-		//this.imgLink = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, LDDict.contentUrl));
-	}
-
 	private onBarCodeDetected = (result) => {
-		console.log("hey, detected!");
-		console.dir(result);
+		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
+		if (!outputKVMap) return;
 		let barcode: string = result.codeResult.code;
-		console.log(barcode);
 		const barcodeKV: IKvStore = {
 			key: LDDict.gtin8,
 			value: barcode,
 			ldType: LDDict.Text
 		};
-		this.props.dispatchKvOutput([barcodeKV], this.props.ldTokenString, this.outputKVMap);
-		//this.props.dispatchKvOutput()
-		//this.props.onDetected(result);
+		this.props.dispatchKvOutput([barcodeKV], this.props.ldTokenString, outputKVMap);
 	}
 
 }
