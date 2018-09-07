@@ -38,14 +38,8 @@ export class DefaultItptRetriever implements IItptRetriever {
 		throw new Error("Method not implemented.");
 	}
 	addItpt(typeName: string, itpt: any, crudSkills: string): void {
-		let preExisting: Array<IItptInfoItem> = this.itptCollection.filter(
+		let preExistingIdx = this.itptCollection.findIndex(
 			(curItm) => curItm.itpt["nameSelf"] === itpt["nameSelf"] && curItm.canInterpretType === typeName);
-		if (preExisting && preExisting.length > 0) {
-			let preExFirst = preExisting[0];
-			crudSkills = this.extendCrudSkills(crudSkills, preExFirst.crudSkills);
-			preExFirst.crudSkills = crudSkills;
-			return;
-		}
 		if (itpt["cfg"]) {
 			let cfg: BlueprintConfig = itpt["cfg"];
 			let newItm: IItptInfoItem = {
@@ -57,7 +51,11 @@ export class DefaultItptRetriever implements IItptRetriever {
 				baseType: this.getBaseTypeFromType(typeName),
 				additionalTypes: this.getAdditionalTypesFromType(typeName)
 			};
-			this.itptCollection.push(newItm);
+			if (preExistingIdx >= 0) {
+				this.itptCollection[preExistingIdx] = newItm;
+			} else {
+				this.itptCollection.push(newItm);
+			}
 		}
 	}
 
