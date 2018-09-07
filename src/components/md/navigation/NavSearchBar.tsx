@@ -1,33 +1,19 @@
 import { connect } from 'react-redux';
-import { ExplorerState } from 'appstate/store';
-import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
-import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
-import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
-import { getKVValue, ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualDict } from '../../visualcomposition/visualDict';
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
-import IconButton from 'react-toolbox/lib/button/';
-import { IconMenu } from 'react-toolbox/lib/menu/';
-import Navigation from 'react-toolbox/lib/navigation/Navigation.js';
-import { generateIntrprtrForProp } from '../../generic/generatorFns';
-import { Redirect } from 'react-router';
+import { initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo } from '../../generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 
 import { Input, InputTheme } from 'react-toolbox/lib/input';
-
-type ConnectedState = {
-};
-
-type ConnectedDispatch = {
-};
+import { Redirect } from 'react-router';
 
 export const NavSearchBarName = "shnyder/md/NavSearchBar";
 let cfgIntrprtKeys: string[] =
@@ -61,58 +47,76 @@ let bpCfg: BlueprintConfig = {
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
-export type NavSearchBartate = {
+export interface NavSearchBarState extends LDLocalState {
 	searchValue: string;
-	routeSendBack: IKvStore;
+	routeSendBack: string;
 	isDoRedirect: boolean;
-};
+}
 @ldBlueprint(bpCfg)
-export class PureNavSearchBar extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavSearchBartate>
+export class PureNavSearchBar extends Component<
+LDConnectedState & LDConnectedDispatch & LDOwnProps,
+NavSearchBarState>
 	implements IBlueprintItpt {
-	state = {
-		searchValue: "",
-		routeSendBack: null,
-		isDoRedirect: false
-	};
+
+	static getDerivedStateFromProps(
+		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
+		prevState: NavSearchBarState): null | NavSearchBarState {
+		let rvLD = getDerivedItptStateFromProps(
+			nextProps, prevState, [VisualDict.freeContainer]);
+		let rvLocal = getDerivedKVStateFromProps(
+			nextProps, prevState, [VisualDict.searchText, VisualDict.routeSend_back, UserDefDict.outputKVMapKey]);
+		if (!rvLD && !rvLocal) {
+			return null;
+		}
+		let rvNew = { ...rvLD, ...rvLocal };
+		let searchValue = rvNew.localValues.get(VisualDict.searchText);
+		let routeSendBack = rvNew.localValues.get(VisualDict.routeSend_back);
+		return { ...rvNew, searchValue, routeSendBack, isDoRedirect: prevState.isDoRedirect };
+	}
+
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	lowerFreeContainer: any = null;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
+
+	private renderFreeContainer = generateItptFromCompInfo.bind(this, VisualDict.freeContainer);
+
 	constructor(props: any) {
 		super(props);
-		console.log("navSearchBar Contstructor called");
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
+		const ldState = initLDLocalState(this.cfg, props,
+			[VisualDict.freeContainer],
+			[VisualDict.searchText, VisualDict.routeSend_back, UserDefDict.outputKVMapKey]);
+		this.state = {
+			searchValue: ldState.localValues.get(VisualDict.searchText),
+			routeSendBack: ldState.localValues.get(VisualDict.routeSend_back),
+			isDoRedirect: false,
+			...ldState
+		};
 	}
 
-	componentWillMount() {
-		if (this.props.ldOptions) {
-			if (this.props.ldOptions.resource.kvStores.length > 0) {
-				this.handleKVs(this.props);
-			}
-		}
-	}
-
-	componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
-		if (compNeedsUpdate(nextProps, this.props)) {
-			this.handleKVs(nextProps);
-		}
-	}
 	onSearchChange = (evtVal) => {
-
-		let newLDOptionsObj = ldOptionsDeepCopy(this.props.ldOptions);
-		let modSingleKV: IKvStore = getKVStoreByKey(newLDOptionsObj.resource.kvStores, VisualDict.searchText);
-		modSingleKV.value = evtVal;
-		this.setState({ searchValue: evtVal });
+		this.setState({ ...this.state, searchValue: evtVal });
+		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
+		if (!outputKVMap) return;
+		let outSearchKv: IKvStore = {
+			key: VisualDict.searchText,
+			value: evtVal,
+			ldType: LDDict.Text
+		};
 		//TODO: it might be a good idea to debounce before updating the application state
-		this.props.dispatchKvOutput([modSingleKV], this.props.ldTokenString, this.outputKVMap);
+		this.props.dispatchKvOutput([outSearchKv], this.props.ldTokenString, outputKVMap);
 	}
 	onBackBtnClick = () => {
-		//TODO: execute back routing, use VisualDict.routeSend_back
+		if (this.state.routeSendBack === undefined || this.state.routeSendBack === null) return;
+		this.setState({ ...this.state, isDoRedirect: true });
 	}
 	render() {
-		const { ldOptions, routes } = this.props;
-		const { searchValue, isDoRedirect } = this.state;
+		const { searchValue, isDoRedirect, routeSendBack } = this.state;
+		if (isDoRedirect) {
+			this.setState({ ...this.state, isDoRedirect: false });
+			return <Redirect to={routeSendBack} />;
+		}
 		return (
 			<>
 				<AppBar leftIcon='arrow_back' onLeftIconClick={() => this.onBackBtnClick()} rightIcon='search'>
@@ -123,27 +127,8 @@ export class PureNavSearchBar extends Component<LDConnectedState & LDConnectedDi
 						value={searchValue}
 						onChange={(evt) => this.onSearchChange(evt)} />
 				</AppBar>
-				{this.lowerFreeContainer}
+				{this.renderFreeContainer()}
 			</>);
-	}
-	private handleKVs(props: LDOwnProps & LDConnectedState) {
-		let kvs: IKvStore[];
-		let retriever = props.ldOptions.visualInfo.retriever;
-		if (props && props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
-			kvs = props.ldOptions.resource.kvStores;
-			this.lowerFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
-		}
-		if (props && props.ldOptions) {
-			const pLdOpts: ILDOptions = props.ldOptions;
-			let searchText = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.searchText));
-			let routeSendBack = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, VisualDict.routeSend_back));
-			this.outputKVMap = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, UserDefDict.outputKVMapKey));
-			this.setState({ searchValue: searchText, routeSendBack });
-		}
-		if (!this.lowerFreeContainer) {
-			kvs = (this.constructor["cfg"] as BlueprintConfig).initialKvStores;
-			this.lowerFreeContainer = generateIntrprtrForProp(kvs, VisualDict.freeContainer, retriever, this.props.routes);
-		}
 	}
 }
 export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureNavSearchBar);
