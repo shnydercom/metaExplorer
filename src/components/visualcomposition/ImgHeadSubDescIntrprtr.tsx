@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { ExplorerState } from 'appstate/store';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
@@ -7,31 +6,11 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { VisualDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
-import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDRouteProps, LDLocalState } from 'appstate/LDProps';
-import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
-import { elementAt } from 'rxjs/operators/elementAt';
-import { generateIntrprtrForProp, getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
-import { getKVValue, isObjPropertyRef } from 'ldaccess/ldUtils';
-import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
+import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
+import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
-import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
-import { ObjectPropertyRef } from 'ldaccess/ObjectPropertyRef';
-import { appItptMatcherFn } from 'appconfig/appItptMatcher';
-import { isReactComponent } from '../reactUtils/reactUtilFns';
-
-type OwnProps = {
-	test: string;
-};
-type ConnectedState = {
-	test: string;
-};
-
-type ConnectedDispatch = {
-	test: string;
-};
 
 export var ImgHeadSubDescIntrprtrName: string = "shnyder/ImgHeadSubDescIntrprtr";
-let cfgType: string = ImgHeadSubDescIntrprtrName;
 let cfgIntrprtKeys: string[] =
 	[VisualDict.headerItpt, VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description, VisualDict.footerItpt];
 let initialKVStores: IKvStore[] = [
@@ -69,9 +48,6 @@ let bpCfg: BlueprintConfig = {
 	crudSkills: "cRud"
 };
 
-interface TestState {
-	myState: string;
-}
 @ldBlueprint(bpCfg)
 export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, LDLocalState>
 	implements IBlueprintItpt {

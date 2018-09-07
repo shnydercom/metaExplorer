@@ -1,31 +1,15 @@
 import { connect } from 'react-redux';
-import { ExplorerState } from 'appstate/store';
-import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
-import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
+import { getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
 import { getKVValue } from 'ldaccess/ldUtils';
 import { Component, ComponentClass, StatelessComponent } from 'react';
-
-type OwnProps = {
-	singleImage;
-};
-type ConnectedState = {
-};
-
-type ConnectedDispatch = {
-};
-
-/*const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
-});
-
-const mapDispatchToProps = (dispatch: redux.Dispatch<ExplorerState>): ConnectedDispatch => ({
-});*/
+import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from '../generic/generatorFns';
 
 let cfgType: string = LDDict.ViewAction;
 let cfgIntrprtKeys: string[] =
@@ -41,53 +25,48 @@ let bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, {}>
+export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, LDLocalState>
 	implements IBlueprintItpt {
+
+	static getDerivedStateFromProps(
+		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
+		prevState: LDLocalState): null | LDLocalState {
+		let rvLD = getDerivedItptStateFromProps(
+			nextProps, prevState, []);
+		let rvLocal = getDerivedKVStateFromProps(
+			nextProps, prevState, [LDDict.name, LDDict.fileFormat, LDDict.contentUrl]);
+		if (!rvLD && !rvLocal) {
+			return null;
+		}
+		let rvNew = { ...rvLD, ...rvLocal };
+		return {...rvNew};
+	}
+
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	imgLink: string;
-
 	initialKvStores: IKvStore[];
+	consumeLDOptions: (ldOptions: ILDOptions) => any;
+
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		if (props) {
-			this.handleKVs(props);
-		}
-	}
-	componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
-		if (compNeedsUpdate(nextProps, this.props)) {
-			this.handleKVs(nextProps);
-			//this.consumeLDOptions(nextProps.ldOptions);
-		}
-	}
-	consumeLDOptions = (ldOptions: ILDOptions) => {
-		/*if (ldOptions && ldOptions.resource && ldOptions.resource.kvStores) {
-			let kvs = ldOptions.resource.kvStores;
-			this.imgLink = getKVValue(getKVStoreByKey(kvs, LDDict.contentUrl));
-		}*/
+		this.state = initLDLocalState(this.cfg, props, [], [LDDict.name, LDDict.fileFormat, LDDict.contentUrl]);
 	}
 
 	render() {
 		const { ldOptions } = this.props;
-		let imgLnk: string = this.imgLink;
-		if (this.imgLink
-			&& !this.imgLink.startsWith("http://")
-			&& !this.imgLink.startsWith("blob:http://")) {
-			imgLnk = "http://localhost:1111/api/ysj/media/jpgs/" + this.imgLink;
+		let imgLnk: string = this.state.localValues.get(LDDict.contentUrl);
+		if (imgLnk
+			&& !imgLnk.startsWith("http://")
+			&& !imgLnk.startsWith("blob:http://")) {
+			imgLnk = "http://localhost:1111/api/ysj/media/jpgs/" + imgLnk;
 		}
 		if (!ldOptions) return <div>no Image data</div>;
 		return <div className="imgdisplay">
 			<img alt="" src={imgLnk} className="imgdisplay" />
-			{this.imgLink}
+			{imgLnk}
 			{this.props.children}
 		</div>;
 	}
-
-	private handleKVs(props: LDOwnProps & LDConnectedState) {
-		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
-		this.imgLink = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, LDDict.contentUrl));
-	}
-
 }
 export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureImgDisplay);
