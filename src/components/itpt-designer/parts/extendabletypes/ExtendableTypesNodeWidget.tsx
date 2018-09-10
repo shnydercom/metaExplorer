@@ -51,7 +51,7 @@ export class ExtendableTypesNodeWidget extends Component<ExtendableTypesNodeProp
 					<div className="in">{map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>
 					<div className="out">{map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
 				</div>
-				<Button label="+ in" onClick={this.addInPort.bind(this)} />
+				<Button className="input-highlight" label="+ in" onClick={this.addInPort.bind(this)} />
 			</div>
 		);
 	}

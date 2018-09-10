@@ -28,8 +28,8 @@ export class ReduxItptRetriever extends DefaultItptRetriever {
 	searchForKVItpt(term: string, crudSkills: string) {
 		throw new Error("Method not implemented.");
 	}
-	addItpt(typeName: string, intrprtr: any, crudSkills: string): void {
-		super.addItpt(typeName, intrprtr, crudSkills);
+	addItpt(typeName: string, intrprtr: any, crudSkills: string, tags: string[]): void {
+		super.addItpt(typeName, intrprtr, crudSkills, tags);
 		let intrprtrAsLDBP: IBlueprintItpt = intrprtr;
 		let nameSelf = intrprtrAsLDBP.cfg.nameSelf;
 		let connItpt = connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(intrprtr);

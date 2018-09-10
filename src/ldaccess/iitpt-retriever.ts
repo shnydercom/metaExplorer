@@ -1,6 +1,10 @@
 export const ITPT_LINEAR_SPLIT = 'l';
 export const ITPT_REFMAP_BASE = "rmb";
 
+export const ITPT_TAG_SPECIAL = "special";
+export const ITPT_TAG_ATOMIC = "atomic";
+export const ITPT_TAG_COMPOUND = "compound";
+
 export interface IItptRetriever {
     /**
      * the interpreter has a name-attribute so
@@ -18,7 +22,7 @@ export interface IItptRetriever {
      **/
     searchForObjItpt(term: string | Array<string>, crudSkills: string): any;
     searchForKVItpt(term: string, crudSkills: string): any;
-    addItpt(typeName: string, itpt: any, crudSkills: string): void;
+    addItpt(typeName: string, itpt: any, crudSkills: string, tags: string[]): void;
     getItptList(): Array<any>;
     getItptByNameSelf(nameSelf: string): any;
 

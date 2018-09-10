@@ -11,6 +11,7 @@ export interface IItptInfoItem {
 	crudSkills: string;
 	baseType: string;
 	additionalTypes: Array<string>;
+	tags: string[];
 }
 
 export class DefaultItptRetriever implements IItptRetriever {
@@ -37,7 +38,7 @@ export class DefaultItptRetriever implements IItptRetriever {
 	searchForKVItpt(term: string, crudSkills: string) {
 		throw new Error("Method not implemented.");
 	}
-	addItpt(typeName: string, itpt: any, crudSkills: string): void {
+	addItpt(typeName: string, itpt: any, crudSkills: string, tags: string[]): void {
 		let preExistingIdx = this.itptCollection.findIndex(
 			(curItm) => curItm.itpt["nameSelf"] === itpt["nameSelf"] && curItm.canInterpretType === typeName);
 		if (itpt["cfg"]) {
@@ -49,7 +50,8 @@ export class DefaultItptRetriever implements IItptRetriever {
 				itpt: itpt,
 				crudSkills: crudSkills,
 				baseType: this.getBaseTypeFromType(typeName),
-				additionalTypes: this.getAdditionalTypesFromType(typeName)
+				additionalTypes: this.getAdditionalTypesFromType(typeName),
+				tags
 			};
 			if (preExistingIdx >= 0) {
 				this.itptCollection[preExistingIdx] = newItm;

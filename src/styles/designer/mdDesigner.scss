@@ -1,6 +1,7 @@
 @import "react-toolbox/lib/colors.css";
 //@import "react-toolbox/lib/input/theme.css";
 @import './colors.scss';
+@import "../../../node_modules/metaexplorer-react-components/src/components/treeview/treeview.scss";
 
 $color-primary: #FF00FF;//$palette-green-600;
 $color-primary-dark: #AA00AA;//$palette-purple-a700;
@@ -29,4 +30,8 @@ $color-primary-dark: #AA00AA;//$palette-purple-a700;
 .button-row {
   display: flex;
   flex-direction: row;
+}
+
+.input-highlight {
+  color: #fff !important;
 }

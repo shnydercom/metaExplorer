@@ -21,6 +21,8 @@ import { LDError } from "appstate/LDError";
 // import { value } from "../../../../node_modules/react-toolbox/lib/dropdown/theme.css";
 import { generateItptFromCompInfo } from "../../generic/generatorFns";
 import { Button } from "react-toolbox/lib/button";
+import TreeView, { TreeViewProps, TreeViewState, TreeEntry } from 'metaexplorer-react-components/lib/treeview';
+import { ITPT_TAG_ATOMIC, ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
 
 export interface DesignerBodyProps {
 	logic: DesignerLogic;
@@ -48,10 +50,58 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 			if (x > y) { return 1; }
 			return 0;
 		});
+		/*itpts.unshift(null);
 		itpts.unshift(null);
-		itpts.unshift(null);
-		itpts.unshift(null);
-		let reactCompClasses: JSX.Element[] = itpts.map((itm, idx) => {
+		itpts.unshift(null);*/
+		const specialNodesText: string = "Set standard values, mark a value for later input or build forms with as many interpreters as you want";
+		const specialNodesTreeItem: TreeEntry = {
+			flatContent: [
+				<DesignerTrayItem model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />,
+				<DesignerTrayItem model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />,
+				<DesignerTrayItem model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />
+			],
+			label: 'Special Nodes',
+			subEntries: []
+		};
+		const atomicNodesText: string = "Use these elements to create compound nodes. As basic building blocks, they can't be split up into smaller parts";
+		const atomicNodesTreeItem: TreeEntry = {
+			flatContent: [],
+			label: 'Atomic Nodes',
+			subEntries: []
+		};
+		const compoundNodesText: string = "Combine any node type to make up new nodes, or drop one in the box below to see how it's been made";
+		const compoundNodesTreeItem: TreeEntry = {
+			flatContent: [],
+			label: 'Compound Nodes',
+			subEntries: []
+		};
+		itpts.forEach((iItptInfoItm, idx) => {
+			let ldBPCfg = (iItptInfoItm.itpt as IBlueprintItpt).cfg;
+			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
+			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : iItptInfoItm.canInterpretType;
+			if (iItptInfoItm.tags.includes(ITPT_TAG_ATOMIC)) {
+				atomicNodesTreeItem.flatContent.push(
+					<DesignerTrayItem
+						model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
+						name={trayName}
+						color={appStyles["$designer-secondary-color"]} />
+				);
+			} else
+				if (iItptInfoItm.tags.includes(ITPT_TAG_COMPOUND)) {
+					compoundNodesTreeItem.flatContent.push(
+						<DesignerTrayItem
+							model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
+							name={trayName}
+							color={appStyles["$designer-secondary-color"]} />
+					);
+				}
+		});
+		return <div style={{ paddingBottom: "40px", flex: 1 }} className="mdscrollbar">
+			<TreeView entry={specialNodesTreeItem}>{specialNodesText}</TreeView>
+			<TreeView entry={atomicNodesTreeItem}>{atomicNodesText}</TreeView>
+			<TreeView entry={compoundNodesTreeItem}>{compoundNodesText}</TreeView>
+		</div>;
+		/*let reactCompClasses: JSX.Element[] = itpts.map((itm, idx) => {
 			if (idx === 0) {
 				return <DesignerTrayItem key={idx} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />;
 			}
@@ -66,7 +116,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : itm.canInterpretType;
 			return <DesignerTrayItem key={idx} model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }} name={trayName} color={appStyles["$designer-secondary-color"]} />;
 		});
-		return reactCompClasses;
+		return reactCompClasses;*/
 	}
 
 	render() {

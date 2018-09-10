@@ -30,6 +30,7 @@ import { distributeElements } from "./dagre-utils";
 import { LDPortInstanceFactory } from "./LDPortInstanceFactory";
 import { isInputValueValidFor } from "ldaccess/ldtypesystem/typeChecking";
 import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
+import { ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
 
 export interface NewNodeSig {
 	x: number;
@@ -294,7 +295,7 @@ export class DesignerLogic {
 		}
 		if (!candidate) return;
 		let itptContainer: any = ldBlueprint(input)(candidate); //actually wraps, doesn't extend
-		retriever.addItpt(input.canInterpretType, itptContainer, "cRud");
+		retriever.addItpt(input.canInterpretType, itptContainer, "cRud", [ITPT_TAG_COMPOUND]);
 	}
 
 	public intrprtrTypeInstanceFromBlueprint(input: BlueprintConfig): any {

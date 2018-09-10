@@ -15,6 +15,7 @@ export interface IDataTypeLabel {
 }
 
 export interface IDataTypeDropDownProps {
+	className?: string;
 	selection?: LDDict.Boolean |
 	LDDict.Integer |
 	LDDict.Double |
@@ -59,7 +60,7 @@ export class BaseDataTypeDropDown extends Component<IDataTypeDropDownProps, IDat
 
 	render() {
 		return (
-			<Dropdown
+			<Dropdown className={this.props.className}
 				onChange={this.handleChange}
 				source={baseDataTypes}
 				value={this.state.selectedDataType}
