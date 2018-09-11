@@ -1,7 +1,7 @@
 import { keys } from "lodash";
 
 import { DesignerLogic, designerSpecificNodesColor } from "./designer-logic";
-import { DefaultNodeModel, DefaultPortModel, DiagramWidget } from "storm-react-diagrams";
+import { DiagramWidget } from "storm-react-diagrams";
 import { DesignerTray } from "./DesignerTray";
 import { DesignerTrayItem } from "./DesignerTrayItem";
 import { IItptInfoItem } from "defaults/DefaultitptRetriever";
@@ -14,14 +14,10 @@ import * as appStyles from 'styles/styles.scss';
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeModel";
 import { Component } from "react";
-import { URLToMenuTree, treeDemoData } from "./URLsToMenuTree";
 import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
 import { RefMapDropSpace } from "./RefMapDropSpace";
-import { LDError } from "appstate/LDError";
-// import { value } from "../../../../node_modules/react-toolbox/lib/dropdown/theme.css";
-import { generateItptFromCompInfo } from "../../generic/generatorFns";
 import { Button } from "react-toolbox/lib/button";
-import TreeView, { TreeViewProps, TreeViewState, TreeEntry } from 'metaexplorer-react-components/lib/treeview';
+import TreeView, { TreeEntry, TreeViewProps, TreeViewState } from 'metaexplorer-react-components/lib/components/treeview/treeview';
 import { ITPT_TAG_ATOMIC, ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
 
 export interface DesignerBodyProps {
@@ -39,6 +35,8 @@ export interface DesignerBodyState { }
  * @author Jonathan Schneider
  */
 export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState> {
+
+	private privOnRMDrop = this.onRefMapDrop.bind(this);
 	constructor(props: DesignerBodyProps) {
 		super(props);
 		this.state = {};
@@ -100,6 +98,42 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 		</div>;
 	}
 
+	onRefMapDrop(event) {
+		var data = JSON.parse(event.dataTransfer.getData("ld-node"));
+		var nodesCount = keys(
+			this.props.logic
+				.getDiagramEngine()
+				.getDiagramModel()
+				.getNodes()
+		).length;
+		var node = null;
+		switch (data.type) {
+			case "ldbp":
+				let itptInfo = this.props.logic.getItptList().find((itm) => itm.nameSelf === data.bpname);
+				let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
+				if (!itptCfg.initialKvStores
+					|| itptCfg.initialKvStores.length !== 1
+					|| itptCfg.initialKvStores[0].key !== UserDefDict.intrprtrBPCfgRefMapKey) {
+					return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
+				}
+				this.props.logic.diagramFromItptBlueprint(itptCfg);
+				this.props.logic.autoDistribute();
+				this.forceUpdate();
+				return { isSuccess: true, message: "check the diagram on the right to see your interpreter" };
+			case "bdt":
+				return { isSuccess: false, message: "simple data types can't be used here" };
+			case "inputtype":
+				return { isSuccess: false, message: "input type can't be used here" };
+			case "lineardata":
+				return { isSuccess: false, message: "linear data display can't be used here" };
+			default:
+				break;
+		}
+		return { isSuccess: false, message: JSON.stringify(data) };
+		//throw new LDError("unsupported ");
+		//return;
+	}
+
 	render() {
 		return (
 			<div className="diagram-body">
@@ -107,42 +141,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 					{this.trayItemsFromItptList()}
 					<RefMapDropSpace
 						dropText="drop here to load interpreter"
-						refMapDrop={(event) => {
-							var data = JSON.parse(event.dataTransfer.getData("ld-node"));
-							var nodesCount = keys(
-								this.props.logic
-									.getDiagramEngine()
-									.getDiagramModel()
-									.getNodes()
-							).length;
-							var node = null;
-							switch (data.type) {
-								case "ldbp":
-									let itptInfo = this.props.logic.getItptList().find((itm) => itm.nameSelf === data.bpname);
-									let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
-									if (!itptCfg.initialKvStores
-										|| itptCfg.initialKvStores.length !== 1
-										|| itptCfg.initialKvStores[0].key !== UserDefDict.intrprtrBPCfgRefMapKey) {
-										return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
-									}
-									this.props.logic.diagramFromItptBlueprint(itptCfg);
-
-									this.props.logic.autoDistribute();
-									this.forceUpdate();
-									return { isSuccess: true, message: "check the diagram on the right to see your interpreter" };
-								case "bdt":
-									return { isSuccess: false, message: "simple data types can't be used here" };
-								case "inputtype":
-									return { isSuccess: false, message: "input type can't be used here" };
-								case "lineardata":
-									return { isSuccess: false, message: "linear data display can't be used here" };
-								default:
-									break;
-							}
-							return { isSuccess: false, message: JSON.stringify(data) };
-							//throw new LDError("unsupported ");
-							//return;
-						}}
+						refMapDrop={this.privOnRMDrop}
 					/>
 					<div className="button-row">
 						<Button style={{ color: "white" }} label="zoom + autolayout" onClick={(ev) => {
@@ -153,6 +152,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 						} />
 						<Button style={{ color: "white" }} label="clear" onClick={(ev) => {
 							this.props.logic.clear();
+							this.forceUpdate();
 						}} />
 					</div>
 				</DesignerTray>

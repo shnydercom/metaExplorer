@@ -82,7 +82,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 		this.state = { serialized: "", previewerToken: previewerToken };
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		if (!this.props.ldOptions) {
 			this.props.notifyLDOptionsChange(null);
 		}
