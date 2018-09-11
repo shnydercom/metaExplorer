@@ -28,6 +28,11 @@ export interface DesignerBodyProps {
 	logic: DesignerLogic;
 }
 
+export interface FlatContentInfo {
+	flatContentURLs: string[];
+	itpts: IBlueprintItpt[];
+}
+
 export interface DesignerBodyState { }
 
 /**
@@ -56,46 +61,54 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 		const specialNodesText: string = "Set standard values, mark a value for later input or build forms with as many interpreters as you want";
 		const specialNodesTreeItem: TreeEntry = {
 			flatContent: [
-				<DesignerTrayItem model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />,
-				<DesignerTrayItem model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />,
-				<DesignerTrayItem model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />
+				<DesignerTrayItem key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />,
+				<DesignerTrayItem key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />,
+				<DesignerTrayItem key={3} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />
 			],
 			label: 'Special Nodes',
 			subEntries: []
 		};
 		const atomicNodesText: string = "Use these elements to create compound nodes. As basic building blocks, they can't be split up into smaller parts";
-		const atomicNodesTreeItem: TreeEntry = {
+		const atomicNodesTreeItem: TreeEntry & FlatContentInfo = {
+			flatContentURLs: [],
 			flatContent: [],
 			label: 'Atomic Nodes',
-			subEntries: []
+			subEntries: [],
+			itpts: []
 		};
 		const compoundNodesText: string = "Combine any node type to make up new nodes, or drop one in the box below to see how it's been made";
-		const compoundNodesTreeItem: TreeEntry = {
+		const compoundNodesTreeItem: TreeEntry & FlatContentInfo = {
+			flatContentURLs: [],
 			flatContent: [],
 			label: 'Compound Nodes',
-			subEntries: []
+			subEntries: [],
+			itpts: []
 		};
 		itpts.forEach((iItptInfoItm, idx) => {
 			let ldBPCfg = (iItptInfoItm.itpt as IBlueprintItpt).cfg;
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
 			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : iItptInfoItm.canInterpretType;
 			if (iItptInfoItm.tags.includes(ITPT_TAG_ATOMIC)) {
-				atomicNodesTreeItem.flatContent.push(
-					<DesignerTrayItem
+				this.addItptToTree(atomicNodesTreeItem, iItptInfoItm, trayName);
+				/*atomicNodesTreeItem.flatContent.push(
+					<DesignerTrayItem key={idx}
 						model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
 						name={trayName}
 						color={appStyles["$designer-secondary-color"]} />
-				);
+				);*/
 			} else
 				if (iItptInfoItm.tags.includes(ITPT_TAG_COMPOUND)) {
-					compoundNodesTreeItem.flatContent.push(
-						<DesignerTrayItem
+					this.addItptToTree(compoundNodesTreeItem, iItptInfoItm, trayName);
+					/*compoundNodesTreeItem.flatContent.push(
+						<DesignerTrayItem key={idx}
 							model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
 							name={trayName}
 							color={appStyles["$designer-secondary-color"]} />
-					);
+					);*/
 				}
 		});
+		this.createFlatContentFromItpts(atomicNodesTreeItem);
+		this.createFlatContentFromItpts(compoundNodesTreeItem);
 		return <div style={{ paddingBottom: "40px", flex: 1 }} className="mdscrollbar">
 			<TreeView entry={specialNodesTreeItem}>{specialNodesText}</TreeView>
 			<TreeView entry={atomicNodesTreeItem}>{atomicNodesText}</TreeView>
@@ -253,5 +266,115 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 				</div>
 			</div>
 		);
+	}
+
+	private addItptToTree(tree: TreeEntry & FlatContentInfo, infoItm: IItptInfoItem, remainingName: string) {
+		let remainerSplit = remainingName.split('/');
+		let isCreateHere: boolean = false;
+		if (remainerSplit.length === 1) {
+			isCreateHere = true;
+		}
+		if (!isCreateHere) {
+			let treeToAddToIdx: number = tree.subEntries.findIndex((val) => val.label === remainerSplit[0]);
+			let treeToAddTo: TreeEntry = tree.subEntries[treeToAddToIdx];
+			let remainerIdx: number = 1;
+			if (!treeToAddTo) {
+				treeToAddToIdx = tree.subEntries.findIndex((val, idx) => val.label.startsWith(remainerSplit[0]));
+				treeToAddTo = tree.subEntries[treeToAddToIdx];
+				if (treeToAddTo) {
+					let searchTerm = remainerSplit[0];
+					for (let idx = 1; idx < remainerSplit.length; idx++) {
+						let newSearchTerm = searchTerm + '/' + remainerSplit[idx];
+						remainerIdx = idx;
+						if (!treeToAddTo.label.startsWith(newSearchTerm)) {
+							break;
+						}
+						searchTerm = newSearchTerm;
+					}
+					if (treeToAddTo.label !== searchTerm) {
+						let splitTreeLabelA = treeToAddTo.label.slice(searchTerm.length - 1);
+						treeToAddTo.label = splitTreeLabelA;
+						let newRoot: TreeEntry & FlatContentInfo = {
+							flatContent: [],
+							flatContentURLs: [],
+							label: searchTerm,
+							subEntries: [
+								treeToAddTo
+							],
+							itpts: []
+						};
+						treeToAddTo = newRoot;
+					}
+				}
+			}
+			if (treeToAddTo) {
+				remainerSplit = remainerSplit.slice(remainerIdx);
+				tree.subEntries.splice(treeToAddToIdx, 1, treeToAddTo);
+				this.addItptToTree(treeToAddTo as TreeEntry & FlatContentInfo, infoItm, remainerSplit.join('/'));
+				return;
+			}
+		}
+		if (!isCreateHere) {
+			let similarItm = tree.flatContentURLs.findIndex((val, idx) => val.startsWith(remainerSplit[0]));
+			if (similarItm === -1) {
+				isCreateHere = true;
+			} else {
+				let similarString: string = tree.flatContentURLs[similarItm];
+				let stringRemainerIdx: number = 1;
+				let searchTerm = remainerSplit[0];
+				for (let idx = 1; idx < remainerSplit.length; idx++) {
+					let newSearchTerm = searchTerm + '/' + remainerSplit[idx];
+					stringRemainerIdx = idx;
+					if (!similarString.startsWith(newSearchTerm)) {
+						break;
+					}
+					searchTerm = newSearchTerm;
+				}
+				let remainerA = similarString.slice(searchTerm.length + 1);
+				let newTree: TreeEntry & FlatContentInfo = {
+					label: searchTerm,
+					flatContentURLs: [remainerA],
+					flatContent: [],
+					subEntries: [],
+					itpts: [tree.itpts[similarItm]]
+				};
+				remainerSplit = remainerSplit.slice(stringRemainerIdx);
+				tree.subEntries.push(newTree);
+				tree.itpts.splice(similarItm, 1);
+				tree.flatContentURLs.splice(similarItm, 1);
+				this.addItptToTree(newTree, infoItm, remainerSplit.join('/'));
+				return;
+			}
+		}
+		if (isCreateHere) {
+			/*let ldBPCfg = (infoItm.itpt as IBlueprintItpt).cfg;
+			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
+			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : infoItm.canInterpretType;*/
+			tree.flatContentURLs.push(remainingName);
+			/*tree.flatContent.push(
+				<DesignerTrayItem key={trayName}
+					model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
+					name={remainingName}
+					color={appStyles["$designer-secondary-color"]} />
+			);*/
+			tree.itpts.push(infoItm.itpt);
+		}
+	}
+
+	private createFlatContentFromItpts(tree: TreeEntry & FlatContentInfo) {
+		tree.itpts.forEach((itpt, idx) => {
+			let ldBPCfg = itpt.cfg;
+			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
+			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : ldBPCfg.canInterpretType;
+			let remainingName = tree.flatContentURLs[idx];
+			tree.flatContent.push(<DesignerTrayItem key={trayName}
+				model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
+				name={remainingName}
+				color={appStyles["$designer-secondary-color"]} />
+			);
+		});
+		tree.subEntries.forEach((treeEntry: TreeEntry & FlatContentInfo, idx) => {
+			this.createFlatContentFromItpts(treeEntry);
+		});
 	}
 }
