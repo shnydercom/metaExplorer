@@ -55,9 +55,6 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 			if (x > y) { return 1; }
 			return 0;
 		});
-		/*itpts.unshift(null);
-		itpts.unshift(null);
-		itpts.unshift(null);*/
 		const specialNodesText: string = "Set standard values, mark a value for later input or build forms with as many interpreters as you want";
 		const specialNodesTreeItem: TreeEntry = {
 			flatContent: [
@@ -87,24 +84,11 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 		itpts.forEach((iItptInfoItm, idx) => {
 			let ldBPCfg = (iItptInfoItm.itpt as IBlueprintItpt).cfg;
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
-			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : iItptInfoItm.canInterpretType;
 			if (iItptInfoItm.tags.includes(ITPT_TAG_ATOMIC)) {
 				this.addItptToTree(atomicNodesTreeItem, iItptInfoItm, trayName);
-				/*atomicNodesTreeItem.flatContent.push(
-					<DesignerTrayItem key={idx}
-						model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
-						name={trayName}
-						color={appStyles["$designer-secondary-color"]} />
-				);*/
 			} else
 				if (iItptInfoItm.tags.includes(ITPT_TAG_COMPOUND)) {
 					this.addItptToTree(compoundNodesTreeItem, iItptInfoItm, trayName);
-					/*compoundNodesTreeItem.flatContent.push(
-						<DesignerTrayItem key={idx}
-							model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
-							name={trayName}
-							color={appStyles["$designer-secondary-color"]} />
-					);*/
 				}
 		});
 		this.createFlatContentFromItpts(atomicNodesTreeItem);
@@ -114,22 +98,6 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 			<TreeView entry={atomicNodesTreeItem}>{atomicNodesText}</TreeView>
 			<TreeView entry={compoundNodesTreeItem}>{compoundNodesText}</TreeView>
 		</div>;
-		/*let reactCompClasses: JSX.Element[] = itpts.map((itm, idx) => {
-			if (idx === 0) {
-				return <DesignerTrayItem key={idx} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />;
-			}
-			if (idx === 1) {
-				return <DesignerTrayItem key={idx} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />;
-			}
-			if (idx === 2) {
-				return <DesignerTrayItem key={idx} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />;
-			}
-			let ldBPCfg = (itm.itpt as IBlueprintItpt).cfg;
-			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
-			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : itm.canInterpretType;
-			return <DesignerTrayItem key={idx} model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }} name={trayName} color={appStyles["$designer-secondary-color"]} />;
-		});
-		return reactCompClasses;*/
 	}
 
 	render() {
@@ -206,16 +174,6 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 								node = new GeneralDataTypeNodeModel(nodeName, null, null, "rgba(250,250,250,0.2)");
 								if (data.bpname) {
 									this.props.logic.addLDPortModelsToNodeFromItptRetr(node, data.bpname);
-									/*let newPorts: LDPortModel[] = data.ports as LDPortModel[];
-									console.log("test1");
-									console.dir(newPorts);
-									for (var index = 0; index < newPorts.length; index++) {
-										console.log(index +"index");
-										var element: LDPortModel = newPorts[index];
-										element.parentNode = node;
-										node.addPort(element);
-										//node.addPort(new LDPortModel(true, "test", "test" + "-out"));
-									}*/
 								}
 								if (data.canInterpretType) node.canInterpretType = data.canInterpretType;
 								break;
@@ -347,16 +305,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 			}
 		}
 		if (isCreateHere) {
-			/*let ldBPCfg = (infoItm.itpt as IBlueprintItpt).cfg;
-			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
-			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : infoItm.canInterpretType;*/
 			tree.flatContentURLs.push(remainingName);
-			/*tree.flatContent.push(
-				<DesignerTrayItem key={trayName}
-					model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
-					name={remainingName}
-					color={appStyles["$designer-secondary-color"]} />
-			);*/
 			tree.itpts.push(infoItm.itpt);
 		}
 	}
