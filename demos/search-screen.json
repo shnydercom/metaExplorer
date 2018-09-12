@@ -1,0 +1,53 @@
+{
+  "subItptOf": "16fa4268-e330-4b6f-b732-b0d1b9c6cc9f",
+  "canInterpretType": "demo/screens/search-ObjectType",
+  "nameSelf": "demo/screens/search",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "16fa4268-e330-4b6f-b732-b0d1b9c6cc9f": {
+          "subItptOf": "shnyder/Route",
+          "canInterpretType": "shnyder/Route-ObjectType",
+          "nameSelf": "16fa4268-e330-4b6f-b732-b0d1b9c6cc9f",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "04b29471-bd7a-4227-8017-2a9b2dc3db7b",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "search",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "04b29471-bd7a-4227-8017-2a9b2dc3db7b": {
+          "subItptOf": "shnyder/md/NavSearchBar",
+          "canInterpretType": "shnyder/md/NavSearchBar-ObjectType",
+          "nameSelf": "04b29471-bd7a-4227-8017-2a9b2dc3db7b",
+          "initialKvStores": [
+            {
+              "key": "RouteSend_Back",
+              "value": "",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

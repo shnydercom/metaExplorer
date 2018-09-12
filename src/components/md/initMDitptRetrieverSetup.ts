@@ -16,6 +16,7 @@ import { NavSearchBarName, PureNavSearchBar } from "../md/navigation/NavSearchBa
 import { NavProcessAtomName, PureNavProcessAtom } from "./navigation/NavProcessAtom";
 import { PureMDButton } from "./interaction/MDButton";
 import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
+import { LayoutVHCenteredColumnName, PureVHcenteredColumnLayout } from "../layout/layoutBaseComp";
 
 /**
  * sorry for the long function name //TODO: change
@@ -54,4 +55,5 @@ export function initMDitptFnAsDefault() {
 	//register shnyder-itpt
 	appIntRetr.addItpt(EANScannerName, EANScanner, "cRud", [ITPT_TAG_ATOMIC]); //new version
 	appIntRetr.addItpt(SingleImageSelectorName, PureSingleImageSelector, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, "cRud", [ITPT_TAG_ATOMIC]);
 }

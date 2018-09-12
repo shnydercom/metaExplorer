@@ -28,6 +28,17 @@
 	overflow: hidden;
 }
 
+.vh-centered-column {
+		display: flex;
+		flex: 1;
+    flex-direction: column;
+    justify-content: center;
+		align-content: center;
+		>* {
+			margin: 5px;
+		}
+}
+
 .header-img-container.overlay-gradient {
 	width: 100%;
 	position: relative;

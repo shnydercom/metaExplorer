@@ -14,7 +14,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "a0682ba6-efde-4556-8128-5dfa95e120ae",
+                "objRef": "2db6cf6f-cc02-4347-81a8-0a3f0322bcad",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -23,6 +23,25 @@
               "key": "routePath",
               "value": "actions",
               "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "2db6cf6f-cc02-4347-81a8-0a3f0322bcad": {
+          "subItptOf": "shnyder/layout/vh-centered-column",
+          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
+          "nameSelf": "2db6cf6f-cc02-4347-81a8-0a3f0322bcad",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "a0682ba6-efde-4556-8128-5dfa95e120ae",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
