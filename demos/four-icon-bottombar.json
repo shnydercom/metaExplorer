@@ -1,7 +1,7 @@
 {
   "subItptOf": "bSub",
-  "canInterpretType": "MyNewBottomBar-ObjectType",
-  "nameSelf": "愿望清单/BottomBar",
+  "canInterpretType": "4-Icon-BottomBar-ObjectType",
+  "nameSelf": "compoundComponents/4-Icon-BottomBar",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

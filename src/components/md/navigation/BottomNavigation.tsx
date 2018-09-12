@@ -13,8 +13,8 @@ import { getKVValue } from 'ldaccess/ldUtils';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualDict } from '../../visualcomposition/visualDict';
 
-import { Tab } from 'react-toolbox/lib/tabs/';
-import { Tabs } from 'react-toolbox/lib/tabs/';
+import { Tab, TabTheme } from 'react-toolbox/lib/tabs/';
+import { Tabs, TabsTheme} from 'react-toolbox/lib/tabs/';
 
 import { generateIntrprtrForProp, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from '../../generic/generatorFns';
 import { checkAllFilled } from 'GeneralUtils';

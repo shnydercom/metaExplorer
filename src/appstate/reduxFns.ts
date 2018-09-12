@@ -99,6 +99,7 @@ export const mapDispatchToProps = (dispatch: Dispatch<ExplorerState>, ownProps: 
 			}
 		}
 		newLDOptions.resource.kvStores = newKvArr;
+
 		dispatch(refMapREQUESTAction(newLDOptions, refMap));
 	},
 	dispatchKvOutput: (changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => {

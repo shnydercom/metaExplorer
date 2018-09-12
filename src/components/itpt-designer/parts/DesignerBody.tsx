@@ -140,7 +140,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 				<DesignerTray>
 					{this.trayItemsFromItptList()}
 					<RefMapDropSpace
-						dropText="drop here to load interpreter"
+						dropText="...drop a Compound Node here to edit it..."
 						refMapDrop={this.privOnRMDrop}
 					/>
 					<div className="button-row">

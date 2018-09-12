@@ -15,7 +15,7 @@ import { ComponentClass, StatelessComponent } from 'react';
 import * as prefilledGame from '../../../testing/gamescreen.json';
 
 //YWQD
-import * as prefilledMDBottomNav from '../../../testing/prefilledYWQDBottomNav.json';
+import * as fourIconBottomBar from '../../../demos/four-icon-bottombar.json';
 import * as prefilledScndStepA from '../../../testing/prefilledScndStepA.json';
 import * as barcodePrefilled from '../../../testing/barcodeScanner.json';
 import * as prefilledSingleImageSel from '../../../testing/prefilledSingleImageSel.json';
@@ -53,6 +53,8 @@ import {
 } from 'react-router-dom';
 import { Switch } from "react-router";
 import { BaseContainerRewrite } from "../generic/baseContainer-rewrite";
+import { Tabs, Tab } from "react-toolbox/lib/tabs";
+import { FontIcon } from "react-toolbox/lib/font_icon";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -61,6 +63,8 @@ export type AIDProps = {
 export type AIDState = {
 	serialized: string;
 	previewerToken: string;
+	previewDisplay: "phone" | "code";
+	hasCompletedFirstRender: boolean;
 };
 
 const DESIGNER_KV_KEY = "DesignerKvKey";
@@ -79,7 +83,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 		} else {
 			this.logic = props.logic;
 		}
-		this.state = { serialized: "", previewerToken: previewerToken };
+		this.state = { serialized: "", previewerToken: previewerToken, previewDisplay: "phone", hasCompletedFirstRender: false };
 	}
 
 	componentDidMount() {
@@ -112,7 +116,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 	hascreatedFirst: boolean = false;
 	onGenAppClick = (e) => {
 		if (!this.hascreatedFirst) {
-			let prefilledData: any = prefilledMDBottomNav;
+			let prefilledData: any = fourIconBottomBar;
 			this.generatePrefilled(prefilledData);
 		}
 		let prefilledScnd: any = prefilledScndStepA;
@@ -126,7 +130,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 
 	onGenSingleImageSel = (e) => {
 		if (!this.hascreatedFirst) {
-			let prefilledDataA: any = prefilledMDBottomNav;
+			let prefilledDataA: any = fourIconBottomBar;
 			this.generatePrefilled(prefilledDataA);
 		}
 		let prefilledDataB: any = prefilledSingleImageSel;
@@ -135,7 +139,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 
 	onYWQDClick = (e) => {
 		if (!this.hascreatedFirst) {
-			let prefilledDataA: any = prefilledMDBottomNav;
+			let prefilledDataA: any = fourIconBottomBar;
 			this.generatePrefilled(prefilledDataA);
 		}
 		let prefilledDataB: any = prefilledYWQDApp;
@@ -213,16 +217,25 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
+	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps) {
+		if (!this.state.hasCompletedFirstRender) {
+			//generate demos for compound itpts
+			let prefilledData: any = fourIconBottomBar;
+			this.generatePrefilled(prefilledData);
+			this.setState({ ...this.state, hasCompletedFirstRender: true });
+		}
+	}
 	render() {
 		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
 			return <div>{this.errorNotAvailableMsg}</div>;
 		}
+		let isDisplayDevContent = false;
 		return <div className="entrypoint-editor">
 			<Splitter className={s.splitter}
 				position="vertical"
 				primaryPaneMaxWidth="80%"
 				primaryPaneMinWidth="40%"
-				primaryPaneWidth="43%"
+				primaryPaneWidth="66%"
 				dispatchResize={true}
 				postPoned={false}
 				primaryPaneHeight="100%"
@@ -230,40 +243,84 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 				<ThemeProvider theme={designerTheme}>
 					<DesignerBody logic={this.logic} />
 				</ThemeProvider>
-				<div className="vertical-scroll">
-					<Button onClick={this.onSerializeBtnClick}>serialize!</Button>
-					<Button onClick={this.onGenAppClick}>Generate App!</Button>
-					<Button onClick={this.onGenSingleImageSel}>My Barcodes App</Button>
-					<Button onClick={this.onYWQDClick}>愿望清单</Button>
-					<Button onClick={this.onGenBarcodeClick}>Barcode Scanner</Button>
-					<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
-					<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>
-					<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>
-					<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
+				<div className="phone-preview-container">
+					{isDisplayDevContent ? <>
+						<Button onClick={this.onSerializeBtnClick}>serialize!</Button>
+						<Button onClick={this.onGenAppClick}>Generate App!</Button>
+						<Button onClick={this.onGenSingleImageSel}>My Barcodes App</Button>
+						<Button onClick={this.onYWQDClick}>愿望清单</Button>
+						<Button onClick={this.onGenBarcodeClick}>Barcode Scanner</Button>
+						<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
+						<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>
+						<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>
+						<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
 
-					<Button onClick={this.onGenLinearClick}>Linear!</Button>
-					<Button onClick={this.onGameClick}>Game!</Button>
-					<Link to="/designerinitial">initial   </Link>
-					<Link to="/app">   app</Link>
-					<ThemeProvider theme={appTheme}>
-						<div className="app-preview">
-							<div className="app-content">
-								<Switch>
-									<Route path="/designerinitial" render={() => (
-										<div><b>drag and drop items into the designer</b></div>
-									)} />
-									<Route path="/" render={(routeProps: LDRouteProps) => {
-										//routeProps.match.params.nextPath = "/";
-										return <>
-											<BaseContainerRewrite routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
-										</>;
-									}} />
-								</Switch>
+						<Button onClick={this.onGenLinearClick}>Linear!</Button>
+						<Button onClick={this.onGameClick}>Game!</Button>
+						<Link to="/designerinitial">initial   </Link>
+						<Link to="/app">   app</Link>
+					</> : null}
+					<div className="rotated-serialize">
+						<Button onClick={this.onSerializeBtnClick} raised primary style={{ background: '#010f27' }}>
+							<FontIcon value='arrow_upward' />
+							-
+							Interpret
+							-
+							<FontIcon value='arrow_upward' />
+						</Button>
+					</div>
+					<div className="phone-preview-centered vertical-scroll">
+						{this.state.previewDisplay === "phone" ?
+							<ThemeProvider theme={appTheme}>
+								<div className="app-preview">
+									<div className="app-content">
+										<Switch>
+											<Route path="/designerinitial" render={() => (
+												<div><b>drag and drop items into the designer</b></div>
+											)} />
+											<Route path="/" render={(routeProps: LDRouteProps) => {
+												//routeProps.match.params.nextPath = "/";
+												return <>
+													<BaseContainerRewrite routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
+												</>;
+											}} />
+										</Switch>
+									</div>
+								</div>
+							</ThemeProvider>
+							:
+							<div className="code-preview">
+								<h4 className="designer-json-header">Current Component as Declarative Output</h4>
+								<pre className="designer-json">
+									<p>
+										<small>
+											{this.state.serialized ? this.state.serialized :
+												<span>Nothing to display yet! <br />Drag and drop elements in the design-tool on the right,
+												<br />and click "Interpret!"</span>
+											}
+										</small>
+									</p>
+								</pre>
 							</div>
-						</div>
-					</ThemeProvider>
-					<p>demo image link: http://localhost:3000/dist/static/localhost.png</p>
-					<small><pre className="designer-json">{this.state.serialized}</pre></small>
+						}
+					</div>
+					<div className="rotated-preview-switch">
+						<Button onClick={
+							() => {
+								if (this.state.previewDisplay === "phone") {
+									this.setState({ ...this.state, previewDisplay: "code" });
+								} else {
+									this.setState({ ...this.state, previewDisplay: "phone" });
+								}
+							}
+						} raised primary style={{ background: '#010f27' }}>
+							<FontIcon value={this.state.previewDisplay === "phone" ? "unfold_more" : "stay_current_landscape"} />
+							-
+							{this.state.previewDisplay === "phone" ? " show code " : " show phone "}
+							-
+							<FontIcon value={this.state.previewDisplay === "phone" ? "unfold_more" : "stay_current_landscape"} />
+						</Button>
+					</div>
 				</div>
 			</Splitter>
 		</div >;

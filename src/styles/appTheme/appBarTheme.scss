@@ -367,4 +367,22 @@ body {
 
 .designer-json {
   overflow-x: auto;
+  border: 1px solid #aaa;
+  border-radius: 0px 0px 10px 10px;
+  background: #eee;
+  margin-top: 0px;
+  flex: 0.85;
+}
+
+.designer-json-header {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  border: 1px solid #353535;
+  border-radius: 10px;
+  background: #0c1e3a;
+  margin: 0px;
+  margin-top: 69px;
+  color: white;
+  padding: 10px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }

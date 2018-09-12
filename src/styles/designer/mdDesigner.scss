@@ -3,8 +3,8 @@
 @import './colors.scss';
 @import "../../../node_modules/metaexplorer-react-components/src/components/treeview/treeview.scss";
 
-$color-primary: #FF00FF;//$palette-green-600;
-$color-primary-dark: #AA00AA;//$palette-purple-a700;
+$color-primary: #FF00FF; //$palette-green-600;
+$color-primary-dark: #AA00AA; //$palette-purple-a700;
 
 .inputElement {
   background-color: transparent;
@@ -34,4 +34,36 @@ $color-primary-dark: #AA00AA;//$palette-purple-a700;
 
 .input-highlight {
   color: #fff !important;
+}
+
+.phone-preview-centered {
+  display: flex;
+  justify-content: center;
+}
+
+.phone-preview-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.code-preview {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  height: 746px;
+  //padding: 69px 58px 80px 58px;
+}
+
+.rotated-serialize {
+  align-self: center;
+  width: 36px;
+  height: 36px;
+  transform: translate(0%, -60px) rotate(90deg);
+}
+
+.rotated-preview-switch {
+  align-self: center;
+  width: 36px;
+  height: 36px;
+  transform: translate(0%, 60px) rotate(270deg);
 }
