@@ -99,14 +99,15 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 	}
 
 	onRefMapDrop(event) {
+		this.props.logic.clear();
 		var data = JSON.parse(event.dataTransfer.getData("ld-node"));
-		var nodesCount = keys(
+		/*var nodesCount = keys(
 			this.props.logic
 				.getDiagramEngine()
 				.getDiagramModel()
 				.getNodes()
 		).length;
-		var node = null;
+		var node = null;*/
 		switch (data.type) {
 			case "ldbp":
 				let itptInfo = this.props.logic.getItptList().find((itm) => itm.nameSelf === data.bpname);
@@ -119,7 +120,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 				this.props.logic.diagramFromItptBlueprint(itptCfg);
 				this.props.logic.autoDistribute();
 				this.forceUpdate();
-				return { isSuccess: true, message: "check the diagram on the right to see your interpreter" };
+				return { isSuccess: true, message: "check the diagram on the right to see your interpreter, or drop another compound node here to edit that one" };
 			case "bdt":
 				return { isSuccess: false, message: "simple data types can't be used here" };
 			case "inputtype":

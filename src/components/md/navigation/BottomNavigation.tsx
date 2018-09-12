@@ -14,7 +14,7 @@ import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualDict } from '../../visualcomposition/visualDict';
 
 import { Tab, TabTheme } from 'react-toolbox/lib/tabs/';
-import { Tabs, TabsTheme} from 'react-toolbox/lib/tabs/';
+import { Tabs, TabsTheme } from 'react-toolbox/lib/tabs/';
 
 import { generateIntrprtrForProp, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from '../../generic/generatorFns';
 import { checkAllFilled } from 'GeneralUtils';
@@ -99,6 +99,7 @@ let bpCfg: BlueprintConfig = {
 };
 
 export interface BottomNavState extends LDLocalState {
+	isInitial: boolean;
 	tabIdx: number;
 	iconEnabledURLs: string[];
 	iconDisabledURLs: string[];
@@ -119,10 +120,16 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			nextProps, prevState, [VisualDict.freeContainer]);
 		let rvLocal = getDerivedKVStateFromProps(
 			nextProps, prevState, BOTTOMNAV_VALUE_FIELDS);
+		let rvNew;
 		if (!rvLD && !rvLocal) {
-			return null;
+			if (prevState.isInitial) {
+				rvNew = prevState;
+			} else {
+				return null;
+			}
+		} else {
+			rvNew = { ...rvLD, ...rvLocal };
 		}
-		let rvNew = { ...rvLD, ...rvLocal };
 		const iconEnabledURLs: string[] = [];
 		const iconDisabledURLs: string[] = [];
 		const routes: string[] = [];
@@ -158,6 +165,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		}
 		return {
 			...prevState, ...rvNew,
+			isInitial: false,
 			tabIdx,
 			iconEnabledURLs,
 			iconDisabledURLs,
@@ -176,6 +184,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
+			isInitial: true,
 			tabIdx: 0,
 			numTabs: 5,
 			iconEnabledURLs: [],
@@ -242,5 +251,5 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			</Tabs>
 		</div>;
 	}
-	}
+}
 export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureBottomNavigation);

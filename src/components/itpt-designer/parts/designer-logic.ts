@@ -255,7 +255,7 @@ export class DesignerLogic {
 				}
 
 			//node.addPort(new LDPortModel(true, "identifier", { key: null, value: null, ldType: null }));
-			console.dir(node.getPorts());
+			//console.dir(node.getPorts());
 			//rv.push(newLDPM);
 		}
 		//Itpt always exports itself
@@ -423,7 +423,7 @@ export class DesignerLogic {
 		this.getDiagramEngine().recalculatePortsVisually();
 		this.getDiagramEngine().getDiagramModel().addLink(outputNameLink);
 		this.getDiagramEngine().getDiagramModel().addLink(outputItptLink);
-		console.log(linkArray.length);
+		//console.log(linkArray.length);
 		linkArray.forEach((link) => {
 			this.getDiagramEngine().getDiagramModel().addLink(link);
 		});
@@ -731,6 +731,6 @@ export class DesignerLogic {
 				if (val2 > val) idxMap.set(key2, val2 - 1);
 			});
 		});
-		console.dir(idxMap);
+		//console.dir(idxMap);
 	}
 }

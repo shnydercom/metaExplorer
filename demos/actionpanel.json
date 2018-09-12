@@ -1,0 +1,118 @@
+{
+  "subItptOf": "5bd321d6-1bbd-4ba8-bf5e-fd19e6daa4cc",
+  "canInterpretType": "demo/components/actionpanel-ObjectType",
+  "nameSelf": "demo/components/actionpanel",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "5bd321d6-1bbd-4ba8-bf5e-fd19e6daa4cc": {
+          "subItptOf": "shnyder/Route",
+          "canInterpretType": "shnyder/Route-ObjectType",
+          "nameSelf": "5bd321d6-1bbd-4ba8-bf5e-fd19e6daa4cc",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "a0682ba6-efde-4556-8128-5dfa95e120ae",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "actions",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "a0682ba6-efde-4556-8128-5dfa95e120ae": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "a0682ba6-efde-4556-8128-5dfa95e120ae",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "abf24ba8-baf3-4356-b37d-6e9918d5ee7c",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "7883e76f-4d76-4bb2-9373-a4d02225a8dd",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "2b83c21b-f8d0-42c2-99ac-9fe94acc7353",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2"
+          ]
+        },
+        "abf24ba8-baf3-4356-b37d-6e9918d5ee7c": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "abf24ba8-baf3-4356-b37d-6e9918d5ee7c",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "Start a Game!",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "7883e76f-4d76-4bb2-9373-a4d02225a8dd": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "7883e76f-4d76-4bb2-9373-a4d02225a8dd",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "Start a booking process!",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "2b83c21b-f8d0-42c2-99ac-9fe94acc7353": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "2b83c21b-f8d0-42c2-99ac-9fe94acc7353",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "Measure working hours!",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

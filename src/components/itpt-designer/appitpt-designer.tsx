@@ -15,11 +15,17 @@ import { ComponentClass, StatelessComponent } from 'react';
 import * as prefilledGame from '../../../testing/gamescreen.json';
 
 //YWQD
-import * as fourIconBottomBar from '../../../demos/four-icon-bottombar.json';
 import * as prefilledScndStepA from '../../../testing/prefilledScndStepA.json';
 import * as barcodePrefilled from '../../../testing/barcodeScanner.json';
 import * as prefilledSingleImageSel from '../../../testing/prefilledSingleImageSel.json';
 import * as prefilledYWQDApp from '../../../testing/ywqd-app.json';
+
+//demo
+
+import * as fourIconBottomBar from '../../../demos/four-icon-bottombar.json';
+import * as singleChoiceGame from '../../../demos/single-choice-game.json';
+import * as actionPanel from '../../../demos/actionpanel.json';
+import * as barcodeScanPanel from '../../../demos/camerascanpanel.json';
 
 import {
 	DiagramEngine,
@@ -92,7 +98,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 		}
 	}
 
-	onSerializeBtnClick = (e) => {
+	onInterpretBtnClick = (e) => {
 		e.preventDefault();
 		let nodesBPCFG: BlueprintConfig = this.logic.intrprtrBlueprintFromDiagram(null);
 		let newType = nodesBPCFG.canInterpretType;
@@ -109,6 +115,9 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 			{ key: DESIGNER_KV_KEY, ldType: newType, value: dummyInstance }
 		];
 		this.setState({ ...this.state, serialized: nodesSerialized });
+		let blankLDOptions = ldOptionsDeepCopy(newLDOptions);
+		blankLDOptions.resource.kvStores = [];
+		this.props.notifyLDOptionsChange(blankLDOptions);
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
@@ -220,8 +229,10 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps) {
 		if (!this.state.hasCompletedFirstRender) {
 			//generate demos for compound itpts
-			let prefilledData: any = fourIconBottomBar;
-			this.generatePrefilled(prefilledData);
+			let prefilledData: any[] = [fourIconBottomBar, singleChoiceGame, actionPanel, barcodeScanPanel];
+			for (let i = 0; i < prefilledData.length; i++) {
+				this.generatePrefilled(prefilledData[i]);
+			}
 			this.setState({ ...this.state, hasCompletedFirstRender: true });
 		}
 	}
@@ -245,7 +256,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 				</ThemeProvider>
 				<div className="phone-preview-container">
 					{isDisplayDevContent ? <>
-						<Button onClick={this.onSerializeBtnClick}>serialize!</Button>
+						<Button onClick={this.onInterpretBtnClick}>interpret!</Button>
 						<Button onClick={this.onGenAppClick}>Generate App!</Button>
 						<Button onClick={this.onGenSingleImageSel}>My Barcodes App</Button>
 						<Button onClick={this.onYWQDClick}>愿望清单</Button>
@@ -261,7 +272,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 						<Link to="/app">   app</Link>
 					</> : null}
 					<div className="rotated-serialize">
-						<Button onClick={this.onSerializeBtnClick} raised primary style={{ background: '#010f27' }}>
+						<Button onClick={this.onInterpretBtnClick} raised primary style={{ background: '#010f27' }}>
 							<FontIcon value='arrow_upward' />
 							-
 							Interpret

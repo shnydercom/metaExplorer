@@ -28,15 +28,15 @@ export class RefMapDropSpace extends Component<RefMapDropSpaceProps, RefMapDropS
 				<div
 					onDrop={(event) => {
 						let dropResult = this.props.refMapDrop(event);
-						this.setState({message: `isSuccess: ${dropResult.isSuccess} message: ${dropResult.message}`});
+						this.setState({ message: `${dropResult.message}` });
 					}}
 					onDragOver={(event) => {
 						event.preventDefault();
 					}}
 					className="refmap-drop-inner"
 				>
-					{this.props.dropText}
-					{this.state.message}
+					{!this.state.message ? this.props.dropText : '...dropped!...'}
+					{this.state.message ? <><br/><br/>{this.state.message}</> : null}
 				</div>
 			</div>
 		);

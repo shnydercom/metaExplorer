@@ -1,7 +1,7 @@
 {
   "subItptOf": "bSub",
-  "canInterpretType": "4-Icon-BottomBar-ObjectType",
-  "nameSelf": "compoundComponents/4-Icon-BottomBar",
+  "canInterpretType": "demo/components/4-Icon-BottomBar-ObjectType",
+  "nameSelf": "demo/components/4-Icon-BottomBar",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -72,7 +72,7 @@
             },
             {
               "key": "RouteSend_4",
-              "value": "persons",
+              "value": "users",
               "ldType": "Route_Added"
             }
           ],

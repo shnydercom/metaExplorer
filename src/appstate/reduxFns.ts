@@ -10,6 +10,8 @@ import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { linearSplitRequestAction } from "./epicducks/linearSplit-duck";
 import { refMapREQUESTAction, refMapSUCCESSAction } from "./epicducks/refMap-duck";
 import { Dispatch } from "redux";
+import { LDDict } from "ldaccess/LDDict";
+import { ITPT_REFMAP_BASE } from "ldaccess/iitpt-retriever";
 
 //final:
 export const mapStateToProps = (state: ExplorerState, ownProps: LDOwnProps): LDOwnProps & LDConnectedState => {
@@ -84,22 +86,27 @@ export const mapDispatchToProps = (dispatch: Dispatch<ExplorerState>, ownProps: 
 		const matchingTypeKV = newLDOptions.resource.kvStores.find((a) => a.ldType === canInterpretType);
 		if (!matchingTypeKV) {
 			console.warn("can't dispatch RefMap Split");
-			return;
-		}
-		const newKvArr: IKvStore[] = [];
-		const matchVal = matchingTypeKV.value;
-		if (!(!matchVal && matchVal !== false)) {
-			const matchValAsObj: { [s: string]: any } = matchVal;
-			for (const keyPart in matchValAsObj) {
-				if (matchValAsObj.hasOwnProperty(keyPart)) {
-					const valPart = matchValAsObj[keyPart];
-					const newKV: IKvStore = { key: keyPart, value: valPart, ldType: null };
-					newKvArr.push(newKV);
+			//return;
+		} else {
+			const newKvArr: IKvStore[] = [];
+			const matchVal = matchingTypeKV.value;
+			if (!(!matchVal && matchVal !== false)) {
+				const matchValAsObj: { [s: string]: any } = matchVal;
+				for (const keyPart in matchValAsObj) {
+					if (matchValAsObj.hasOwnProperty(keyPart)) {
+						const valPart = matchValAsObj[keyPart];
+						const newKV: IKvStore = { key: keyPart, value: valPart, ldType: null };
+						newKvArr.push(newKV);
+					}
 				}
 			}
+			newLDOptions.resource.kvStores = newKvArr;
 		}
-		newLDOptions.resource.kvStores = newKvArr;
-
+		let refMapKv = refMap.initialKvStores.find((val) => val.key === UserDefDict.intrprtrBPCfgRefMapKey);
+		if (refMapKv && refMapKv.value && refMapKv.value[ITPT_REFMAP_BASE]) {
+			dispatch(refMapSUCCESSAction(newLDOptions));
+			return;
+		}
 		dispatch(refMapREQUESTAction(newLDOptions, refMap));
 	},
 	dispatchKvOutput: (changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => {

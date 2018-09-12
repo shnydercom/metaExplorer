@@ -44,6 +44,8 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
 .phone-preview-container {
   display: flex;
   flex-direction: row;
+  height: 100%;
+  align-items: center;
 }
 
 .code-preview {
