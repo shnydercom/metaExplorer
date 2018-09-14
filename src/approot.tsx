@@ -48,7 +48,7 @@ export const AppRoot: SFC<AppRootProps> = () => {
 		<Provider store={applicationStore}>
 			<Router>
 				<Route path="/" render={(routeProps: LDRouteProps) => {
-					routeProps.match.params.nextPath = "";
+					//routeProps.match.params.nextPath = "";
 					return (<div>
 						<AppItptDesigner ldTokenString={appItptToken} routes={routeProps} />
 						{!isProduction && <DevTools />}

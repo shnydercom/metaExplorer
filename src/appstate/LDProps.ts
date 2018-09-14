@@ -5,9 +5,9 @@ import { IKvStore } from "ldaccess/ikvstore";
 import { ReactCompInfoMap } from "components/reactUtils/iReactCompInfo";
 
 export interface LDRouteParams {
-	nextPath: string;
+	//nextPath: string;
 }
-export interface LDRouteProps extends RouteComponentProps<LDRouteParams> {}
+export interface LDRouteProps extends RouteComponentProps<{}> {}
 
 export type LDOwnProps = {
 	ldTokenString: string,

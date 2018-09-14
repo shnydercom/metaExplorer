@@ -107,7 +107,17 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 		const routeSendConfirm = localValues.get(VisualDict.routeSend_confirm);
 		const confirmTxt = localValues.get(VisualDict.confirmTxt);
 		if (isDoRedirectConfirm && routeSendConfirm) {
-			return <Redirect to={routeSendConfirm} />;
+			const { match, location } = this.props.routes;
+			let route: string = routeSendConfirm;
+			if (route.startsWith("/")) {//i.e attach to path/create sub-path
+				route = route.substring(1);
+				route = match.url.endsWith("/") ? match.url + route : `${match.url}/${route}`;
+			} else {
+				route = match.url.substr(0, match.url.lastIndexOf("/") + 1) + route;
+			}
+			//if (match.params.nextPath === undefined) match.params.nextPath = route;
+			this.setState({ ...this.state, isDoRedirectConfirm: false });
+			return <Redirect to={route} />;
 		}
 		return <Button raised label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />;
 	}

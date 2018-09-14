@@ -11,6 +11,7 @@ import { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
+import { RouteComponentProps } from "react-router";
 
 type LDComponent = new () => Component<LDOwnProps>;
 const ReactWrapLDComp = Component as LDComponent;
@@ -60,13 +61,16 @@ export function generateCompInfoItm(kvStores: IKvStore[], prop: string, retrieve
  * render(){<>{this.renderSub(VisualDict.freeContainer)}<>}
  * @param compKey the key of the itpt-kv, e.g. VisualDict.freeContainer
  */
-export function generateItptFromCompInfo(compKey: string) {
+export function generateItptFromCompInfo(compKey: string, routes?: LDRouteProps) {
 	if (!compKey) return null;
 	if (!this || !this.props || !this.props.routes || !this.state.compInfos) throw new LDError('function must be bound to a IBlueprintItpt with LDOwnProps and LDLocalState before being called');
 	const compInfo = this.state.compInfos.get(compKey);
 	if (!compInfo) return null;
 	let BaseComp = compInfo.compClass;
-	return <BaseComp routes={this.props.routes} ldTokenString={compInfo.ldTokenString} />;
+	const compRoutes = routes ? routes : this.props.routes;
+	console.log(compInfo.ldTokenString);
+	console.dir(compRoutes);
+	return <BaseComp routes={compRoutes} ldTokenString={compInfo.ldTokenString} />;
 }
 
 export function initLDLocalState(

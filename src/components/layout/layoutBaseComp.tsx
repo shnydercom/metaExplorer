@@ -9,6 +9,7 @@ import { VisualDict } from '../visualcomposition/visualDict';
 
 import { initLDLocalState, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import CircleView from 'metaexplorer-react-components/lib/components/circle/circleview';
 
 let cfgIntrprtKeys: string[] =
 	[VisualDict.freeContainer];
@@ -57,7 +58,7 @@ export abstract class PureLayoutComponent extends Component<LDConnectedState & L
 	initialKvStores: IKvStore[];
 	styleClassName: string;
 
-	private renderFreeContainer = generateItptFromCompInfo.bind(this, VisualDict.freeContainer);
+	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualDict.freeContainer);
 
 	constructor(props: any) {
 		super(props);
@@ -79,4 +80,13 @@ export class PureVHcenteredColumnLayout extends PureLayoutComponent {
 	styleClassName = "vh-centered-column";
 }
 
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureVHcenteredColumnLayout);
+export const LayoutCircleDisplayName = 'shnyder/layout/circle-display';
+@ldBlueprint(createLayoutBpCfg(LayoutCircleDisplayName))
+export class PureCircleLayout extends PureLayoutComponent {
+	styleClassName = ""; //can be set, default behaviour is centering vertically and horizontally
+	render() {
+		return <CircleView>{this.renderFreeContainer()}</CircleView>;
+	}
+}
+
+//export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureVHcenteredColumnLayout);

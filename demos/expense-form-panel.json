@@ -1,0 +1,111 @@
+{
+  "subItptOf": "08ef36d3-2cbd-4ea1-bca9-77172bcc0141",
+  "canInterpretType": "demo/components/expense-form-panel-ObjectType",
+  "nameSelf": "demo/components/expense-form-panel",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "08ef36d3-2cbd-4ea1-bca9-77172bcc0141": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "08ef36d3-2cbd-4ea1-bca9-77172bcc0141",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "e8016df1-1a7f-4fad-aa1e-1138cda392d5",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "64d00460-f088-46c7-87c4-8fd7dd6b63d5",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "6255886a-5226-42aa-a9db-4bf21e76be04",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "b644c4ad-dcd2-48a1-ac9b-09ec55ea381f",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2",
+            "in_3"
+          ]
+        },
+        "e8016df1-1a7f-4fad-aa1e-1138cda392d5": {
+          "subItptOf": "shnyder/md/SingleImageSelector",
+          "canInterpretType": "http://schema.org/CreateAction",
+          "nameSelf": "e8016df1-1a7f-4fad-aa1e-1138cda392d5",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "64d00460-f088-46c7-87c4-8fd7dd6b63d5": {
+          "subItptOf": "shnyder/md/http://schema.org/Date",
+          "canInterpretType": "http://schema.org/Date",
+          "nameSelf": "64d00460-f088-46c7-87c4-8fd7dd6b63d5",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Date on bill",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "6255886a-5226-42aa-a9db-4bf21e76be04": {
+          "subItptOf": "shnyder/md/http://schema.org/Number",
+          "canInterpretType": "http://schema.org/Number",
+          "nameSelf": "6255886a-5226-42aa-a9db-4bf21e76be04",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Total amount (in €)",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "b644c4ad-dcd2-48a1-ac9b-09ec55ea381f": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "b644c4ad-dcd2-48a1-ac9b-09ec55ea381f",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Summary",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

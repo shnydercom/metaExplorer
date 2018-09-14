@@ -58,7 +58,8 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 		let imgLnk: string = this.state.localValues.get(LDDict.contentUrl);
 		if (imgLnk
 			&& !imgLnk.startsWith("http://")
-			&& !imgLnk.startsWith("blob:http://")) {
+			&& !imgLnk.startsWith("blob:http://")
+			&& !imgLnk.startsWith("/")) {
 			imgLnk = "http://localhost:1111/api/ysj/media/jpgs/" + imgLnk;
 		}
 		if (!ldOptions) return <div>no Image data</div>;

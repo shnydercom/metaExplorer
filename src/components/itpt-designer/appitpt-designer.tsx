@@ -23,12 +23,15 @@ import * as prefilledYWQDApp from '../../../testing/ywqd-app.json';
 //demo
 
 import * as fourIconBottomBar from '../../../demos/four-icon-bottombar.json';
+import * as testImage from '../../../demos/test-image.json';
 import * as singleChoiceGame from '../../../demos/single-choice-game.json';
 import * as actionPanel from '../../../demos/actionpanel.json';
 import * as barcodeScanPanel from '../../../demos/camerascanpanel.json';
+import * as expenseFormPanel from '../../../demos/expense-form-panel.json';
 import * as mainScreen from '../../../demos/main-screen.json';
 import * as searchScreen from '../../../demos/search-screen.json';
 import * as appMain from '../../../demos/app-main.json';
+import * as routehowto from '../../../demos/route-howto.json';
 
 import {
 	DiagramEngine,
@@ -232,7 +235,10 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps) {
 		if (!this.state.hasCompletedFirstRender) {
 			//generate demos for compound itpts
-			let prefilledData: any[] = [fourIconBottomBar, singleChoiceGame, actionPanel, barcodeScanPanel, mainScreen, searchScreen, appMain];
+			let prefilledData: any[] = [fourIconBottomBar, testImage, singleChoiceGame,
+				actionPanel, barcodeScanPanel, expenseFormPanel,
+				mainScreen, searchScreen, appMain,
+				routehowto];
 			for (let i = 0; i < prefilledData.length; i++) {
 				this.generatePrefilled(prefilledData[i]);
 			}

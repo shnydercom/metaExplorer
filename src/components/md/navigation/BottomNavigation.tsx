@@ -153,10 +153,13 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 				console.error("BottomNavigation: No route information passed to BottomNavigation, can't switch tabs");
 				return null;
 			}
-			if (!match.params) match.params = { nextPath: null };
-			if (match.params.nextPath) {
-				let tabIdxCounter = 0;
-				const lastPath = match.params.nextPath;
+			//if (!match.params) match.params = { nextPath: null };
+
+			let tabIdxCounter = 0;
+			if (!prevState.hasTabChanged) {
+				let lastPath = location.pathname.replace(match.path, "");
+				lastPath = lastPath.startsWith("/") ? lastPath.substr(1) : lastPath;
+				lastPath = lastPath.split("/")[0];
 				for (let idx = 0; idx < prevState.numTabs; idx++) {
 					if (lastPath === routes[idx]) tabIdx = tabIdxCounter;
 					if (isGenerateAtPositions[idx]) tabIdxCounter++;
@@ -220,7 +223,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		if (!this.props.routes || !this.state.hasTabChanged) return null;
 		const { match, location } = this.props.routes;
 		let route: string = this.state.routes[tabIdx];
-		if (match.params.nextPath === undefined) match.params.nextPath = route;
+		//if (match.params.nextPath === undefined) match.params.nextPath = route;
 		let newPath: string = match.url.endsWith("/") ? match.url + route : `${match.url}/${route}`;
 		this.setState({ ...this.state, hasTabChanged: false });
 		return <Redirect to={newPath} />;

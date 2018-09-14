@@ -77,13 +77,22 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "c02c0ea4-fa07-4070-90e3-1513c23a25aa",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "in_0",
             "in_1",
-            "in_2"
+            "in_2",
+            "in_3"
           ]
         },
         "abf24ba8-baf3-4356-b37d-6e9918d5ee7c": {
@@ -122,6 +131,20 @@
             {
               "key": "confirmTxt",
               "value": "Measure working hours!",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "c02c0ea4-fa07-4070-90e3-1513c23a25aa": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "c02c0ea4-fa07-4070-90e3-1513c23a25aa",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "manage expenses!",
               "ldType": "http://schema.org/Text"
             }
           ],
