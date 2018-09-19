@@ -159,10 +159,14 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			let tabIdxCounter = 0;
 			if (!prevState.hasTabChanged) {
 				let lastPath = location.pathname.replace(match.path, "");
-				lastPath = lastPath.startsWith("/") ? lastPath.substr(1) : lastPath;
-				lastPath = lastPath.split("/")[0];
+				let isOnTopLayer = false;
+				if (match.path === '/') {
+					isOnTopLayer = true;
+				}
+				//lastPath = lastPath.startsWith("/") ? lastPath.substr(1) : lastPath;
+				//lastPath = lastPath.split("/")[0];
 				for (let idx = 0; idx < prevState.numTabs; idx++) {
-					if (lastPath === routes[idx]) tabIdx = tabIdxCounter;
+					if (lastPath === routes[idx] || (isOnTopLayer && ('/' + lastPath === routes[idx]))) tabIdx = tabIdxCounter;
 					if (isGenerateAtPositions[idx]) tabIdxCounter++;
 				}
 			}
