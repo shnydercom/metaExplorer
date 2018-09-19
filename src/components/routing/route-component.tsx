@@ -16,7 +16,7 @@ export const ROUTE_ISABSOLUTE = "isRouteAbsolute";
 export const ROUTE_ISEXACT = "isRouteExact";
 export const ROUTE_PATH = "routePath";
 
-export const RouteComponentName = "shnyder/Route";
+export const RouteComponentName = "shnyder/routing/Route";
 let cfgIntrprtKeys: string[] =
 	[VisualDict.freeContainer, ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH];
 let initialKVStores: IKvStore[] = [

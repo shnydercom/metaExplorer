@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "16fa4268-e330-4b6f-b732-b0d1b9c6cc9f": {
-          "subItptOf": "shnyder/Route",
-          "canInterpretType": "shnyder/Route-ObjectType",
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
           "nameSelf": "16fa4268-e330-4b6f-b732-b0d1b9c6cc9f",
           "initialKvStores": [
             {

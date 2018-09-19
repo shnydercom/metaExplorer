@@ -68,8 +68,8 @@ export function generateItptFromCompInfo(compKey: string, routes?: LDRouteProps)
 	if (!compInfo) return null;
 	let BaseComp = compInfo.compClass;
 	const compRoutes = routes ? routes : this.props.routes;
-	console.log(compInfo.ldTokenString);
-	console.dir(compRoutes);
+	//console.log(compInfo.ldTokenString);
+	//console.dir(compRoutes);
 	return <BaseComp routes={compRoutes} ldTokenString={compInfo.ldTokenString} />;
 }
 

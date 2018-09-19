@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "5bd321d6-1bbd-4ba8-bf5e-fd19e6daa4cc": {
-          "subItptOf": "shnyder/Route",
-          "canInterpretType": "shnyder/Route-ObjectType",
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
           "nameSelf": "5bd321d6-1bbd-4ba8-bf5e-fd19e6daa4cc",
           "initialKvStores": [
             {
@@ -21,7 +21,7 @@
             },
             {
               "key": "routePath",
-              "value": "camera_scan",
+              "value": "/camera_scan",
               "ldType": "http://schema.org/Text"
             }
           ],

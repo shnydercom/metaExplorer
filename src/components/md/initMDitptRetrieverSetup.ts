@@ -17,6 +17,7 @@ import { NavProcessAtomName, PureNavProcessAtom } from "./navigation/NavProcessA
 import { PureMDButton } from "./interaction/MDButton";
 import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
 import { LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, PureCircleLayout, LayoutCircleDisplayName } from "../layout/layoutBaseComp";
+import { PureRedirectComponent, RouteRedirectName } from "../routing/redirect";
 
 /**
  * sorry for the long function name //TODO: change
@@ -43,6 +44,7 @@ export function initMDitptFnAsDefault() {
 
 	//register routing itpts
 	appIntRetr.addItpt(RouteComponentName, PureRouteComponent, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(RouteRedirectName, PureRedirectComponent, "cRud", [ITPT_TAG_ATOMIC]);
 
 	//register Action itpts
 	appIntRetr.addItpt(LDDict.Action, PureMDButton, "cRud", [ITPT_TAG_ATOMIC]);

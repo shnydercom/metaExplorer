@@ -27,7 +27,7 @@
             },
             {
               "key": "RouteSend_1",
-              "value": "actions",
+              "value": "/actions",
               "ldType": "Route_Added"
             },
             {
@@ -42,7 +42,7 @@
             },
             {
               "key": "RouteSend_2",
-              "value": "camera_scan",
+              "value": "/camera_scan",
               "ldType": "Route_Added"
             },
             {
@@ -57,7 +57,7 @@
             },
             {
               "key": "RouteSend_3",
-              "value": "explore",
+              "value": "/explore",
               "ldType": "Route_Added"
             },
             {
@@ -72,7 +72,7 @@
             },
             {
               "key": "RouteSend_4",
-              "value": "users",
+              "value": "/users",
               "ldType": "Route_Added"
             }
           ],

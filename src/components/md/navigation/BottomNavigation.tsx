@@ -21,6 +21,7 @@ import { checkAllFilled } from 'GeneralUtils';
 import { Redirect, Route } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { NetworkPreferredToken } from 'ldaccess/ildtoken';
+import { cleanRouteString } from '../../routing/route-helper-fns';
 
 export const ICON_URLS: string[] = [
 	"IconURL_1",
@@ -224,7 +225,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		const { match, location } = this.props.routes;
 		let route: string = this.state.routes[tabIdx];
 		//if (match.params.nextPath === undefined) match.params.nextPath = route;
-		let newPath: string = match.url.endsWith("/") ? match.url + route : `${match.url}/${route}`;
+		let newPath: string = cleanRouteString(route, this.props.routes);
 		this.setState({ ...this.state, hasTabChanged: false });
 		return <Redirect to={newPath} />;
 	}

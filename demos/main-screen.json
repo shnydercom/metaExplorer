@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "b5ab8003-c730-4960-a831-67cf6515e52a": {
-          "subItptOf": "shnyder/Route",
-          "canInterpretType": "shnyder/Route-ObjectType",
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
           "nameSelf": "b5ab8003-c730-4960-a831-67cf6515e52a",
           "initialKvStores": [
             {
@@ -20,13 +20,8 @@
               "ldType": "InterpreterClassType"
             },
             {
-              "key": "isRouteExact",
-              "value": false,
-              "ldType": "http://schema.org/Boolean"
-            },
-            {
               "key": "routePath",
-              "value": "",
+              "value": "demo",
               "ldType": "http://schema.org/Text"
             }
           ],

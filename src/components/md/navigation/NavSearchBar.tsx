@@ -14,6 +14,7 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 
 import { Input, InputTheme } from 'react-toolbox/lib/input';
 import { Redirect } from 'react-router';
+import { cleanRouteString } from '../../routing/route-helper-fns';
 
 export const NavSearchBarName = "shnyder/md/NavSearchBar";
 let cfgIntrprtKeys: string[] =
@@ -114,8 +115,9 @@ NavSearchBarState>
 	render() {
 		const { searchValue, isDoRedirect, routeSendBack } = this.state;
 		if (isDoRedirect) {
+			let route: string = cleanRouteString(routeSendBack, this.props.routes);
 			this.setState({ ...this.state, isDoRedirect: false });
-			return <Redirect to={routeSendBack} />;
+			return <Redirect to={route} />;
 		}
 		return (
 			<>

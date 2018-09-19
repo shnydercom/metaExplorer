@@ -54,8 +54,8 @@
           ]
         },
         "82437e26-ba39-4b21-8fc9-1b2762e35b08": {
-          "subItptOf": "shnyder/Route",
-          "canInterpretType": "shnyder/Route-ObjectType",
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
           "nameSelf": "82437e26-ba39-4b21-8fc9-1b2762e35b08",
           "initialKvStores": [
             {
@@ -125,8 +125,8 @@
           ]
         },
         "99cb9959-5c1d-41c6-acce-6900fcf4835a": {
-          "subItptOf": "shnyder/Route",
-          "canInterpretType": "shnyder/Route-ObjectType",
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
           "nameSelf": "99cb9959-5c1d-41c6-acce-6900fcf4835a",
           "initialKvStores": [
             {
@@ -285,8 +285,8 @@
           "interpretableKeys": []
         },
         "c4e1a5a1-7fdb-4d33-9a73-954ea063b73a": {
-          "subItptOf": "shnyder/Route",
-          "canInterpretType": "shnyder/Route-ObjectType",
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
           "nameSelf": "c4e1a5a1-7fdb-4d33-9a73-954ea063b73a",
           "initialKvStores": [
             {
@@ -323,8 +323,8 @@
           "interpretableKeys": []
         },
         "7e6c681e-35d9-4792-a7dd-07c1c5fd7692": {
-          "subItptOf": "shnyder/Route",
-          "canInterpretType": "shnyder/Route-ObjectType",
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
           "nameSelf": "7e6c681e-35d9-4792-a7dd-07c1c5fd7692",
           "initialKvStores": [
             {

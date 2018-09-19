@@ -15,6 +15,7 @@ import Navigation from 'react-toolbox/lib/navigation/Navigation.js';
 import { generateItptFromCompInfo, initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import { cleanRouteString } from '../../routing/route-helper-fns';
 
 export const NavBarWActionsName = "shnyder/md/NavBarWActions";
 let cfgIntrprtKeys: string[] =
@@ -108,17 +109,23 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		const { isDoRedirect, isRightMenuOpen, localValues } = this.state;
 		const routeSendSearch = localValues.get(VisualDict.routeSend_search);
 		const headerText = localValues.get(VisualDict.headerTxt);
-		return isDoRedirect && routeSendSearch ? <Redirect to={routeSendSearch} />
-			: <><AppBar title={headerText ? headerText : "Menu"}>
-				<Navigation type='horizontal'>
-					<IconButton icon='search' onClick={this.onAppBarSearchBtnClick} />
-					<IconMenu icon='account_circle' position='topRight' menuRipple onClick={this.onAppBarRightIconMenuClick}>
-						{this.renderSub(VisualDict.popOverContent)}
-					</IconMenu>
-				</Navigation>
-			</AppBar>
-				{this.renderSub(VisualDict.freeContainer)}
-			</>;
+		if (isDoRedirect && routeSendSearch) {
+			let route: string = cleanRouteString(routeSendSearch, this.props.routes);
+			//if (match.params.nextPath === undefined) match.params.nextPath = route;
+			this.setState({ ...this.state, isDoRedirect: false });
+			console.log("navBar redirect to: " + route);
+			return <Redirect to={route} />;
+		}
+		return <><AppBar title={headerText ? headerText : "Menu"}>
+			<Navigation type='horizontal'>
+				<IconButton icon='search' onClick={this.onAppBarSearchBtnClick} />
+				<IconMenu icon='account_circle' position='topRight' menuRipple onClick={this.onAppBarRightIconMenuClick}>
+					{this.renderSub(VisualDict.popOverContent)}
+				</IconMenu>
+			</Navigation>
+		</AppBar>
+			{this.renderSub(VisualDict.freeContainer)}
+		</>;
 	}
 }
 export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureNavBarWActions);

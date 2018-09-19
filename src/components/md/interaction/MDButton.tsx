@@ -11,6 +11,7 @@ import { Button } from 'react-toolbox/lib/button/';
 import { generateItptFromCompInfo, initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import { cleanRouteString } from '../../routing/route-helper-fns';
 
 export const MDButtonName = "shnyder/md/Button";
 let cfgIntrprtKeys: string[] =
@@ -107,16 +108,10 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 		const routeSendConfirm = localValues.get(VisualDict.routeSend_confirm);
 		const confirmTxt = localValues.get(VisualDict.confirmTxt);
 		if (isDoRedirectConfirm && routeSendConfirm) {
-			const { match, location } = this.props.routes;
-			let route: string = routeSendConfirm;
-			if (route.startsWith("/")) {//i.e attach to path/create sub-path
-				route = route.substring(1);
-				route = match.url.endsWith("/") ? match.url + route : `${match.url}/${route}`;
-			} else {
-				route = match.url.substr(0, match.url.lastIndexOf("/") + 1) + route;
-			}
+			let route: string = cleanRouteString(routeSendConfirm, this.props.routes);
 			//if (match.params.nextPath === undefined) match.params.nextPath = route;
 			this.setState({ ...this.state, isDoRedirectConfirm: false });
+			console.log("MD button redirect to : " + route);
 			return <Redirect to={route} />;
 		}
 		return <Button raised label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />;

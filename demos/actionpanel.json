@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "5bd321d6-1bbd-4ba8-bf5e-fd19e6daa4cc": {
-          "subItptOf": "shnyder/Route",
-          "canInterpretType": "shnyder/Route-ObjectType",
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
           "nameSelf": "5bd321d6-1bbd-4ba8-bf5e-fd19e6daa4cc",
           "initialKvStores": [
             {
@@ -21,7 +21,7 @@
             },
             {
               "key": "routePath",
-              "value": "actions",
+              "value": "/actions",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -104,6 +104,11 @@
               "key": "confirmTxt",
               "value": "Start a Game!",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "../game",
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",
@@ -132,6 +137,11 @@
               "key": "confirmTxt",
               "value": "Measure working hours!",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "../timetracking-form",
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",
@@ -146,6 +156,11 @@
               "key": "confirmTxt",
               "value": "manage expenses!",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "../expense-form",
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",

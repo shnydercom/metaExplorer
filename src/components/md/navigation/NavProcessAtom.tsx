@@ -13,6 +13,7 @@ import { Button } from 'react-toolbox/lib/button/';
 import { generateItptFromCompInfo, initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import { cleanRouteString } from '../../routing/route-helper-fns';
 
 export const NavProcessAtomName = "shnyder/md/NavProcessAtom";
 let cfgIntrprtKeys: string[] =
@@ -141,15 +142,17 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 	render() {
 		const { ldOptions, routes } = this.props;
 		const { isDoRedirectCancel, isDoRedirectConfirm, localValues } = this.state;
-		const routeSendCancel = localValues.get(VisualDict.routeSend_cancel);
-		const routeSendConfirm = localValues.get(VisualDict.routeSend_confirm);
+		let routeSendCancel: string = localValues.get(VisualDict.routeSend_cancel);
+		let routeSendConfirm = localValues.get(VisualDict.routeSend_confirm);
 		const headerText = localValues.get(VisualDict.headerTxt);
 		const cancelTxt = localValues.get(VisualDict.cancelTxt);
 		const confirmTxt = localValues.get(VisualDict.confirmTxt);
 		if (isDoRedirectCancel && routeSendCancel) {
+			routeSendCancel = cleanRouteString(routeSendCancel, this.props.routes);
 			return <Redirect to={routeSendCancel} />;
 		}
 		if (isDoRedirectConfirm && routeSendConfirm) {
+			routeSendConfirm = cleanRouteString(routeSendConfirm, this.props.routes);
 			return <Redirect to={routeSendConfirm} />;
 		}
 		return <div className="bottom-nav">

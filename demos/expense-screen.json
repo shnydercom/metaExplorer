@@ -1,0 +1,86 @@
+{
+  "subItptOf": "554c3038-cd49-4b68-b8f7-6f26905e7cb3",
+  "canInterpretType": "demo/screens/expense-process-ObjectType",
+  "nameSelf": "demo/screens/expense-process",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "554c3038-cd49-4b68-b8f7-6f26905e7cb3": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "554c3038-cd49-4b68-b8f7-6f26905e7cb3",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "a1d416fa-f99d-4ae7-a3b5-463c93a1d887",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "expense-form",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "a1d416fa-f99d-4ae7-a3b5-463c93a1d887": {
+          "subItptOf": "shnyder/md/NavProcessAtom",
+          "canInterpretType": "shnyder/md/NavProcessAtom-ObjectType",
+          "nameSelf": "a1d416fa-f99d-4ae7-a3b5-463c93a1d887",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "343fe09a-602d-4ae2-9239-3b61b5819147",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "Fill in an expense",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "confirmTxt",
+              "value": "save",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_cancel",
+              "value": "../",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "../",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "343fe09a-602d-4ae2-9239-3b61b5819147": {
+          "subItptOf": "demo/components/expense-form-panel",
+          "canInterpretType": "demo/components/expense-form-panel-ObjectType",
+          "nameSelf": "343fe09a-602d-4ae2-9239-3b61b5819147",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

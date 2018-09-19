@@ -70,9 +70,9 @@ RefMapItptState>
 		) {
 			let newLDOptions: ILDOptions = ldOptionsDeepCopy(nextProps.ldOptions);
 			newLDOptions.visualInfo.interpretedBy = prevState.cfg.nameSelf;
-			console.log(prevState.cfg.canInterpretType);
-			console.dir(newLDOptions);
-			console.dir(prevState.cfg);
+			//console.log(prevState.cfg.canInterpretType);
+			//console.dir(newLDOptions);
+			//console.dir(prevState.cfg);
 			nextProps.notifyLDOptionsRefMapSplitChange(newLDOptions, prevState.cfg);
 			let routes: LDRouteProps = nextProps.routes;
 			return {...prevState, routes};
