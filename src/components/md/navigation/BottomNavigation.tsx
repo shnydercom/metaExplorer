@@ -1,26 +1,20 @@
 import { connect } from 'react-redux';
-import { ExplorerState } from 'appstate/store';
-import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDRouteProps, LDLocalState } from 'appstate/LDProps';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
-import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
-import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
-import { getKVValue } from 'ldaccess/ldUtils';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualDict } from '../../visualcomposition/visualDict';
 
 import { Tab, TabTheme } from 'react-toolbox/lib/tabs/';
 import { Tabs, TabsTheme } from 'react-toolbox/lib/tabs/';
 
-import { generateIntrprtrForProp, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from '../../generic/generatorFns';
+import { generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from '../../generic/generatorFns';
 import { checkAllFilled } from 'GeneralUtils';
 import { Redirect, Route } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
-import { NetworkPreferredToken } from 'ldaccess/ildtoken';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 
 export const ICON_URLS: string[] = [
