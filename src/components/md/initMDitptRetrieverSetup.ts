@@ -9,7 +9,6 @@ import { PureRouteComponent, RouteComponentName } from "../routing/route-compone
 import { imageRetrieverName, ImageRetriever } from "sidefx/ImageRetriever";
 import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
 import { organizationRetrieverName, OrganizationRetriever } from "sidefx/OrganizationRetriever";
-import { UserDefDict } from "ldaccess/UserDefDict";
 import { EANScannerName, EANScanner } from "../peripherals/camera/EAN-scanner";
 import { SingleImageSelectorName, PureSingleImageSelector } from "../md/content/SingleImageSelector";
 import { NavSearchBarName, PureNavSearchBar } from "../md/navigation/NavSearchBar";
@@ -18,6 +17,7 @@ import { PureMDButton } from "./interaction/MDButton";
 import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
 import { LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, PureCircleLayout, LayoutCircleDisplayName } from "../layout/layoutBaseComp";
 import { PureRedirectComponent, RouteRedirectName } from "../routing/redirect";
+import { PureCard3itptLTR, Card3itptLTRName } from "./content/Card_3itptLTR";
 
 /**
  * sorry for the long function name //TODO: change
@@ -41,6 +41,7 @@ export function initMDitptFnAsDefault() {
 	appIntRetr.addItpt(BottomNavigationName, PureBottomNavigation, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(NavSearchBarName, PureNavSearchBar, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(NavProcessAtomName, PureNavProcessAtom, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(Card3itptLTRName, PureCard3itptLTR, "cRud", [ITPT_TAG_ATOMIC] );
 
 	//register routing itpts
 	appIntRetr.addItpt(RouteComponentName, PureRouteComponent, "cRud", [ITPT_TAG_ATOMIC]);
