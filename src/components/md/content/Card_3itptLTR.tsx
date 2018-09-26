@@ -10,7 +10,7 @@ import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptF
 export const CONTAINER_FRONT = "frontContainer";
 export const CONTAINER_MIDDLE = "middleContainer";
 export const CONTAINER_LAST = "lastContainer";
-export const Card3itptLTRName = "Card3itptLTRName";
+export const Card3itptLTRName = "shnyder/md/CardW3Containers";
 
 let cfgIntrprtKeys: string[] =
 	[CONTAINER_FRONT, CONTAINER_MIDDLE, CONTAINER_LAST];

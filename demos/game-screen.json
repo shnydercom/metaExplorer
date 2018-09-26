@@ -1,0 +1,91 @@
+{
+  "subItptOf": "97371287-fc38-47ff-ad2b-0279236b2198",
+  "canInterpretType": "demo/screens/game-ObjectType",
+  "nameSelf": "demo/screens/game",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "97371287-fc38-47ff-ad2b-0279236b2198": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "97371287-fc38-47ff-ad2b-0279236b2198",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "9752904d-2106-4a35-b4df-3a7715c0c71b",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "game",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "9752904d-2106-4a35-b4df-3a7715c0c71b": {
+          "subItptOf": "shnyder/md/NavProcessAtom",
+          "canInterpretType": "shnyder/md/NavProcessAtom-ObjectType",
+          "nameSelf": "9752904d-2106-4a35-b4df-3a7715c0c71b",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "214f63e3-dd73-481e-8f0f-187880b5560c",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "An example for a game",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "cancelTxt",
+              "value": "back",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "confirmTxt",
+              "value": "next",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_cancel",
+              "value": "demo",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "demo",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "214f63e3-dd73-481e-8f0f-187880b5560c": {
+          "subItptOf": "demo/Single-Choice-Game/Romeo-and-Julia",
+          "canInterpretType": "demo/Single-Choice-Game/Romeo-and-Julia-ObjectType",
+          "nameSelf": "214f63e3-dd73-481e-8f0f-187880b5560c",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}
