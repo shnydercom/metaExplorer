@@ -123,6 +123,11 @@
               "key": "confirmTxt",
               "value": "Start a booking process!",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "../booking-form",
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",

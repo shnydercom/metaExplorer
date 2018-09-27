@@ -23,6 +23,7 @@ import { LDRouteProps } from 'appstate/LDProps';
 import { initEssentialItpts } from 'defaults/initEssentialItpts';
 import 'mods/google/components/GWebAuthenticator';
 import { initGameItpt } from 'components/game/initGameItpts';
+import { initBaseHtmlItpt } from 'components/basic-html/initBaseHtmlItpt';
 
 const initialState: ExplorerState = {
 	ldoptionsMap: {},
@@ -37,6 +38,7 @@ const appItptToken: string = "tID"; //TODO: uncomment Toolkit.UID();
 function rootSetup(): void {
 	appItptMatcherFn();
 	initEssentialItpts();
+	initBaseHtmlItpt();
 	initMDitptFnAsDefault();
 	initGameItpt();
 	initLDConnect();

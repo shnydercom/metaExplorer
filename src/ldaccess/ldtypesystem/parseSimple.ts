@@ -14,7 +14,12 @@ export const parseText = (inputKv: IKvStore): string => {
 export const parseDate = (inputKv: IKvStore): Date => {
 	if (!inputKv) return new Date();
 	let input = inputKv.value;
-	return input ? input : new Date();
+	if (!input) return new Date();
+	try {
+		return new Date(Date.parse(input));
+	} catch (error) {
+		return input;
+	}
 };
 export const parseTime = (inputKv: IKvStore): Date => {
 	if (!inputKv) return new Date();

@@ -58,6 +58,14 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_6",
+              "value": {
+                "objRef": "bfda5e82-c896-49c0-a25e-497d258e66ab",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
@@ -67,7 +75,8 @@
             "in_2",
             "in_3",
             "in_4",
-            "in_5"
+            "in_5",
+            "in_6"
           ]
         },
         "f860920d-9742-4334-be18-d07d273b72d1": {
@@ -154,6 +163,14 @@
           "subItptOf": "demo/screens/timetracking",
           "canInterpretType": "demo/screens/timetracking-ObjectType",
           "nameSelf": "b2f8bebb-a976-4978-8661-88e22d0559c8",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "bfda5e82-c896-49c0-a25e-497d258e66ab": {
+          "subItptOf": "demo/screens/booking",
+          "canInterpretType": "demo/screens/booking-ObjectType",
+          "nameSelf": "bfda5e82-c896-49c0-a25e-497d258e66ab",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []

@@ -1,0 +1,209 @@
+{
+  "subItptOf": "bf8b1635-c41c-474f-94d5-86c73ff1b4c0",
+  "canInterpretType": "demo/components/booking-form-panel-ObjectType",
+  "nameSelf": "demo/components/booking-form-panel",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "bf8b1635-c41c-474f-94d5-86c73ff1b4c0": {
+          "subItptOf": "shnyder/md/NavProcessAtom",
+          "canInterpretType": "shnyder/md/NavProcessAtom-ObjectType",
+          "nameSelf": "bf8b1635-c41c-474f-94d5-86c73ff1b4c0",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "9d9d1cdf-3c41-42d2-8df2-1ad4c327f7d7",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "A-to-B travels",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "confirmTxt",
+              "value": "search",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_cancel",
+              "value": "../",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer",
+            "RouteSend_confirm"
+          ]
+        },
+        "9d9d1cdf-3c41-42d2-8df2-1ad4c327f7d7": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "9d9d1cdf-3c41-42d2-8df2-1ad4c327f7d7",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "53c2b550-14fc-4965-8398-68e234117b74",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "74a5d0df-fada-4d75-9044-21d6fb2f0f1d",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "00c11ed9-25a1-499f-9ec1-eab4be1abdd0",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "c41bf539-039c-46c1-98ad-def4d48e6b31",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_4",
+              "value": {
+                "objRef": "96250689-aa39-446b-aeba-57fffd9f8759",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2",
+            "in_3",
+            "in_4"
+          ]
+        },
+        "53c2b550-14fc-4965-8398-68e234117b74": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "53c2b550-14fc-4965-8398-68e234117b74",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "From",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "London",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "74a5d0df-fada-4d75-9044-21d6fb2f0f1d": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "74a5d0df-fada-4d75-9044-21d6fb2f0f1d",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "To",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "Paris",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "00c11ed9-25a1-499f-9ec1-eab4be1abdd0": {
+          "subItptOf": "shnyder/md/http://schema.org/Date",
+          "canInterpretType": "http://schema.org/Date",
+          "nameSelf": "00c11ed9-25a1-499f-9ec1-eab4be1abdd0",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Departure Date:",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "2019-03-09T15:10:46.168Z",
+              "ldType": "http://schema.org/Date"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "c41bf539-039c-46c1-98ad-def4d48e6b31": {
+          "subItptOf": "shnyder/md/http://schema.org/Date",
+          "canInterpretType": "http://schema.org/Date",
+          "nameSelf": "c41bf539-039c-46c1-98ad-def4d48e6b31",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Return Date:",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "2019-03-16T15:11:18.055Z",
+              "ldType": "http://schema.org/Date"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "96250689-aa39-446b-aeba-57fffd9f8759": {
+          "subItptOf": "shnyder/md/http://schema.org/Integer",
+          "canInterpretType": "http://schema.org/Integer",
+          "nameSelf": "96250689-aa39-446b-aeba-57fffd9f8759",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Passengers",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "1",
+              "ldType": "http://schema.org/Integer"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": [
+    {
+      "objRef": "bf8b1635-c41c-474f-94d5-86c73ff1b4c0",
+      "propRef": "RouteSend_confirm"
+    }
+  ]
+}
