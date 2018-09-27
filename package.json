@@ -59,7 +59,7 @@
     "react-dropzone": "^4.2.9",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
-    "react-toolbox": "2.0.0-beta.12",
+    "react-toolbox": "https://github.com/react-toolbox/react-toolbox.git#dev",
     "react-transition-group": "2.2.1",
     "redux": "^3.7.2",
     "redux-observable": "^0.17.0",

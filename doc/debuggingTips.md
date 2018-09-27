@@ -15,3 +15,8 @@
 	[at-loader] cannot resolve module  (... and then a css file)
 # fix:
 	call "yarn build" in the console first, then "yarn start"
+
+# problem message:
+	react-toolbox/lib... cannot be found
+# fix:
+	run 'yarn install' and 'yarn build' inside the folder 'node_modules/react-toolbox', if the dependency for react-toolbox is not npm but github. Reason for this was a bug which lead to a crash of the TimePicker component, that wasn't fixed in the npm package up until version 2.0.0-beta.13

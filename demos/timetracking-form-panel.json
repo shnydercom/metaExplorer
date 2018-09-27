@@ -1,0 +1,253 @@
+{
+  "subItptOf": "66c1833f-9057-4cfc-b382-ab453c77fd5a",
+  "canInterpretType": "demo/components/timetracking-form-panel-ObjectType",
+  "nameSelf": "demo/components/timetracking-form-panel",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "66c1833f-9057-4cfc-b382-ab453c77fd5a": {
+          "subItptOf": "shnyder/md/NavProcessAtom",
+          "canInterpretType": "shnyder/md/NavProcessAtom-ObjectType",
+          "nameSelf": "66c1833f-9057-4cfc-b382-ab453c77fd5a",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "76350c83-e0ed-49ea-85d9-c84adaf83e55",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "Track your work",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "confirmTxt",
+              "value": "save",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_cancel",
+              "value": "../",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer",
+            "RouteSend_confirm"
+          ]
+        },
+        "76350c83-e0ed-49ea-85d9-c84adaf83e55": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "76350c83-e0ed-49ea-85d9-c84adaf83e55",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "49376ec9-7113-4f3a-bb93-7e6a2190c63a",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "0d391bc6-45a7-4050-8c09-63183f9bab20",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "87ca034c-bd8d-4896-9229-1e9528255e1e",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "c7556fa8-ef67-4d45-bae3-c41d8848508b",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_4",
+              "value": {
+                "objRef": "f30ca349-c379-4ef5-b9f9-93f8b3e0fa1f",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_5",
+              "value": {
+                "objRef": "b178bdbe-cabf-436d-9a70-30472d3bfdbb",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_6",
+              "value": {
+                "objRef": "cf7af0b1-a0c2-4717-82ed-12dd56a91e02",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_7",
+              "value": {
+                "objRef": "ce4ae0ee-c711-4078-83fe-e7b510b06aaa",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2",
+            "in_3",
+            "in_4",
+            "in_5",
+            "in_6",
+            "in_7"
+          ]
+        },
+        "49376ec9-7113-4f3a-bb93-7e6a2190c63a": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "49376ec9-7113-4f3a-bb93-7e6a2190c63a",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Customer",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "0d391bc6-45a7-4050-8c09-63183f9bab20": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "0d391bc6-45a7-4050-8c09-63183f9bab20",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Project",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "87ca034c-bd8d-4896-9229-1e9528255e1e": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "87ca034c-bd8d-4896-9229-1e9528255e1e",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Subproject",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "c7556fa8-ef67-4d45-bae3-c41d8848508b": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "c7556fa8-ef67-4d45-bae3-c41d8848508b",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Task(s)",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "f30ca349-c379-4ef5-b9f9-93f8b3e0fa1f": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "f30ca349-c379-4ef5-b9f9-93f8b3e0fa1f",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Description",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "b178bdbe-cabf-436d-9a70-30472d3bfdbb": {
+          "subItptOf": "shnyder/md/http://schema.org/DateTime",
+          "canInterpretType": "http://schema.org/DateTime",
+          "nameSelf": "b178bdbe-cabf-436d-9a70-30472d3bfdbb",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "work started at:",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "cf7af0b1-a0c2-4717-82ed-12dd56a91e02": {
+          "subItptOf": "shnyder/md/http://schema.org/DateTime",
+          "canInterpretType": "http://schema.org/DateTime",
+          "nameSelf": "cf7af0b1-a0c2-4717-82ed-12dd56a91e02",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "finished at:",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "ce4ae0ee-c711-4078-83fe-e7b510b06aaa": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "ce4ae0ee-c711-4078-83fe-e7b510b06aaa",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Achievements",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": [
+    {
+      "objRef": "66c1833f-9057-4cfc-b382-ab453c77fd5a",
+      "propRef": "RouteSend_confirm"
+    }
+  ]
+}

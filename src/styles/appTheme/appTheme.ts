@@ -1,5 +1,5 @@
 import * as appBarTheme from './appBarTheme.scss';
-import * as rdIDs from 'react-toolbox/src/components/identifiers';
+import * as rdIDs from 'react-toolbox/components/identifiers';
 //configuration names for React-Toolbox from react-css-themr, found in react-toolbox/src/components/identifiers.js
 
 import * as DefaultInputTheme from 'react-toolbox/lib/input/theme.css';

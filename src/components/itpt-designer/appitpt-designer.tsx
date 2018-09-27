@@ -28,10 +28,12 @@ import * as singleChoiceGame from '../../../demos/single-choice-game.json';
 import * as actionPanel from '../../../demos/actionpanel.json';
 import * as barcodeScanPanel from '../../../demos/camerascanpanel.json';
 import * as expenseFormPanel from '../../../demos/expense-form-panel.json';
+import * as timetrackingPanel from '../../../demos/timetracking-form-panel.json';
 import * as mainScreen from '../../../demos/main-screen.json';
 import * as gameScreen from '../../../demos/game-screen.json';
 import * as searchScreen from '../../../demos/search-screen.json';
 import * as expenseScreen from '../../../demos/expense-screen.json';
+import * as timeTrackingScreen from '../../../demos/timetracking-screen.json';
 import * as appMain from '../../../demos/app-main.json';
 import * as routehowto from '../../../demos/route-howto.json';
 
@@ -238,8 +240,8 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 		if (!this.state.hasCompletedFirstRender) {
 			//generate demos for compound itpts
 			let prefilledData: any[] = [fourIconBottomBar, testImage, singleChoiceGame,
-				actionPanel, barcodeScanPanel, expenseFormPanel,
-				mainScreen, searchScreen, expenseScreen, gameScreen,
+				actionPanel, barcodeScanPanel, expenseFormPanel, timetrackingPanel,
+				mainScreen, searchScreen, expenseScreen, gameScreen, timeTrackingScreen,
 				routehowto, appMain
 				];
 			for (let i = 0; i < prefilledData.length; i++) {

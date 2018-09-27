@@ -1,7 +1,10 @@
 import assertNever from "assert-never";
 import { connect } from 'react-redux';
 
-import { Input, InputTheme, DatePicker, DatePickerTheme, Switch, TimePicker, TimePickerTheme } from 'react-toolbox';
+import { Input, InputTheme } from 'react-toolbox/lib/input';
+import { DatePicker, DatePickerTheme } from 'react-toolbox/lib/date_picker';
+import { Switch } from 'react-toolbox/lib/switch';
+import { TimePicker, TimePickerTheme } from 'react-toolbox/lib/time_picker';
 
 import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintItpt } from 'ldaccess/ldBlueprint';
@@ -209,8 +212,8 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 						label={heading}
 						onChange={(evt) => this.handleChange(evt)}
 						value={parsedDate}
-						sundayFirstDayOfWeek />;
-						<TimePicker
+						sundayFirstDayOfWeek />
+					<TimePicker
 						label='Time'
 						onChange={(evt) => this.handleChange(evt)}
 						value={parsedTime}

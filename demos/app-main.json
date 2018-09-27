@@ -50,6 +50,14 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_5",
+              "value": {
+                "objRef": "b2f8bebb-a976-4978-8661-88e22d0559c8",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
@@ -58,7 +66,8 @@
             "in_1",
             "in_2",
             "in_3",
-            "in_4"
+            "in_4",
+            "in_5"
           ]
         },
         "f860920d-9742-4334-be18-d07d273b72d1": {
@@ -137,6 +146,14 @@
           "subItptOf": "demo/screens/game",
           "canInterpretType": "demo/screens/game-ObjectType",
           "nameSelf": "af3cbaf7-ed5e-47b1-a4cb-467b1a0481cb",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "b2f8bebb-a976-4978-8661-88e22d0559c8": {
+          "subItptOf": "demo/screens/timetracking",
+          "canInterpretType": "demo/screens/timetracking-ObjectType",
+          "nameSelf": "b2f8bebb-a976-4978-8661-88e22d0559c8",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
