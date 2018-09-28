@@ -110,6 +110,21 @@
               "ldType": "InterpreterClassType"
             },
             {
+              "key": "HeaderText",
+              "value": "back",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "cancelTxt",
+              "value": "back",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "confirmTxt",
+              "value": "next",
+              "ldType": "http://schema.org/Text"
+            },
+            {
               "key": "RouteSend_cancel",
               "value": "booking-form",
               "ldType": "Route_Added"

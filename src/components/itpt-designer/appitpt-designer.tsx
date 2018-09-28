@@ -29,6 +29,7 @@ import * as actionPanel from '../../../demos/actionpanel.json';
 import * as barcodeScanPanel from '../../../demos/camerascanpanel.json';
 import * as expenseFormPanel from '../../../demos/expense-form-panel.json';
 import * as bookingFormPanel from '../../../demos/booking-form-panel.json';
+import * as bookingSelectionFlight from '../../../demos/booking-sel-flight.json';
 import * as bookingSelectionPanel from '../../../demos/booking-selection-panel.json';
 import * as timetrackingPanel from '../../../demos/timetracking-form-panel.json';
 import * as mainScreen from '../../../demos/main-screen.json';
@@ -245,6 +246,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 			//generate demos for compound itpts
 			let prefilledData: any[] = [fourIconBottomBar, testImage, singleChoiceGame,
 				actionPanel, barcodeScanPanel, expenseFormPanel, timetrackingPanel, bookingFormPanel, bookingSelectionPanel,
+				bookingSelectionFlight,
 				mainScreen, searchScreen, expenseScreen, gameScreen, timeTrackingScreen, bookingScreen,
 				routehowto, htmlhowto, appMain
 				];
