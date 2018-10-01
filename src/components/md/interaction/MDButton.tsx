@@ -8,7 +8,7 @@ import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { VisualDict } from '../../visualcomposition/visualDict';
 
 import { Button } from 'react-toolbox/lib/button/';
-import { generateItptFromCompInfo, initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../../generic/generatorFns';
+import { initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';

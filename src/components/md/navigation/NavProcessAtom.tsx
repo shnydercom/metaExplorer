@@ -140,13 +140,15 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 		});
 	}
 	render() {
-		const { ldOptions, routes } = this.props;
 		const { isDoRedirectCancel, isDoRedirectConfirm, localValues } = this.state;
 		let routeSendCancel: string = localValues.get(VisualDict.routeSend_cancel);
 		let routeSendConfirm = localValues.get(VisualDict.routeSend_confirm);
 		const headerText = localValues.get(VisualDict.headerTxt);
 		const cancelTxt = localValues.get(VisualDict.cancelTxt);
 		const confirmTxt = localValues.get(VisualDict.confirmTxt);
+		//don't display bottom content if no routes or button text values are defined
+		const isHideBottom: boolean = !routeSendConfirm
+			&& !cancelTxt && !confirmTxt;
 		if (isDoRedirectCancel && routeSendCancel) {
 			routeSendCancel = cleanRouteString(routeSendCancel, this.props.routes);
 			return <Redirect to={routeSendCancel} />;
@@ -164,12 +166,14 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 			<div className="bottom-nav-topfree mdscrollbar">
 				{this.renderSub(VisualDict.freeContainer)}
 			</div>
-			<div className="bottom-nav-tabs flex-container">
-				<Button className="flex-filler"
-					label={cancelTxt ? cancelTxt : "cancel"} onClick={() => this.onCancelClick()} />
-				<Button className="flex-filler"
-					label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />
-			</div>
+			{isHideBottom ? null :
+				<div className="bottom-nav-tabs flex-container">
+					<Button className="flex-filler"
+						label={cancelTxt ? cancelTxt : "cancel"} onClick={() => this.onCancelClick()} />
+					<Button className="flex-filler"
+						label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />
+				</div>
+			}
 		</div>;
 	}
 }

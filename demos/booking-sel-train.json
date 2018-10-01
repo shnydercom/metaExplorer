@@ -1,7 +1,7 @@
 {
   "subItptOf": "bcb9a710-c155-4c2b-bfa7-1b7cff7052d2",
-  "canInterpretType": "demo/components/booking-sel-flight-ObjectType",
-  "nameSelf": "demo/components/booking-sel-flight",
+  "canInterpretType": "demo/components/booking-sel-train-ObjectType",
+  "nameSelf": "demo/components/booking-sel-train",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -21,17 +21,17 @@
             },
             {
               "key": "HeaderText",
-              "value": "Flight: LHR - CDG",
+              "value": "Train: St Pancras International - Gare du Nord",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "SubHeaderText",
-              "value": "09:00 - 11:20",
+              "value": "09:22 - 12:47",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "Description",
-              "value": "Please arrive at the airport 2h before departure. Dangerous goods are not allowed",
+              "value": "The ticket will only be valid for the selected train and reservation",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -65,7 +65,7 @@
             {
               "key": "in_0",
               "value": {
-                "objRef": "79028027-6c98-4fb8-9149-849f3620b951",
+                "objRef": "5fb6d490-20e2-4f2d-86aa-222c0d50baad",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -73,7 +73,7 @@
             {
               "key": "in_1",
               "value": {
-                "objRef": "576a3c1d-d142-4f92-a679-affaaa4531f8",
+                "objRef": "4628ff54-02b6-4bf0-bb2a-0c0b7ef57b35",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -85,34 +85,39 @@
             "in_1"
           ]
         },
-        "79028027-6c98-4fb8-9149-849f3620b951": {
-          "subItptOf": "shnyder/md/http://schema.org/Integer",
-          "canInterpretType": "http://schema.org/Integer",
-          "nameSelf": "79028027-6c98-4fb8-9149-849f3620b951",
+        "5fb6d490-20e2-4f2d-86aa-222c0d50baad": {
+          "subItptOf": "shnyder/md/http://schema.org/Boolean",
+          "canInterpretType": "http://schema.org/Boolean",
+          "nameSelf": "5fb6d490-20e2-4f2d-86aa-222c0d50baad",
           "initialKvStores": [
             {
               "key": "http://schema.org/description",
-              "value": "Number of bags (up to 23kg)",
+              "value": "Reserve saloon seat",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "singleKvStore",
-              "value": "2",
-              "ldType": "http://schema.org/Integer"
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "576a3c1d-d142-4f92-a679-affaaa4531f8": {
+        "4628ff54-02b6-4bf0-bb2a-0c0b7ef57b35": {
           "subItptOf": "shnyder/md/http://schema.org/Boolean",
           "canInterpretType": "http://schema.org/Boolean",
-          "nameSelf": "576a3c1d-d142-4f92-a679-affaaa4531f8",
+          "nameSelf": "4628ff54-02b6-4bf0-bb2a-0c0b7ef57b35",
           "initialKvStores": [
             {
               "key": "http://schema.org/description",
-              "value": "VIP Queue",
+              "value": "Reserve window seat",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
             }
           ],
           "crudSkills": "cRud",

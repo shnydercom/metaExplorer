@@ -29,7 +29,14 @@ import * as actionPanel from '../../../demos/actionpanel.json';
 import * as barcodeScanPanel from '../../../demos/camerascanpanel.json';
 import * as expenseFormPanel from '../../../demos/expense-form-panel.json';
 import * as bookingFormPanel from '../../../demos/booking-form-panel.json';
+
+import * as bookingBuyFlight from '../../../demos/booking-flight-summary.json';
+import * as bookingBuyTrain from '../../../demos/booking-train-summary.json';
+import * as bookingBuyBus from '../../../demos/booking-bus-summary.json';
+
+import * as bookingSelectionTrain from '../../../demos/booking-sel-train.json';
 import * as bookingSelectionFlight from '../../../demos/booking-sel-flight.json';
+import * as bookingSelectionBus from '../../../demos/booking-sel-bus.json';
 import * as bookingSelectionPanel from '../../../demos/booking-selection-panel.json';
 import * as timetrackingPanel from '../../../demos/timetracking-form-panel.json';
 import * as mainScreen from '../../../demos/main-screen.json';
@@ -246,10 +253,11 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 			//generate demos for compound itpts
 			let prefilledData: any[] = [fourIconBottomBar, testImage, singleChoiceGame,
 				actionPanel, barcodeScanPanel, expenseFormPanel, timetrackingPanel, bookingFormPanel, bookingSelectionPanel,
-				bookingSelectionFlight,
+				bookingSelectionFlight, bookingSelectionTrain, bookingSelectionBus,
+				bookingBuyFlight,	bookingBuyTrain, bookingBuyBus,
 				mainScreen, searchScreen, expenseScreen, gameScreen, timeTrackingScreen, bookingScreen,
 				routehowto, htmlhowto, appMain
-				];
+			];
 			for (let i = 0; i < prefilledData.length; i++) {
 				this.generatePrefilled(prefilledData[i]);
 			}

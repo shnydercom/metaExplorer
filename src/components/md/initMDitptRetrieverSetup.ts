@@ -17,7 +17,7 @@ import { PureMDButton } from "./interaction/MDButton";
 import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
 import { LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, PureCircleLayout, LayoutCircleDisplayName } from "../layout/layoutBaseComp";
 import { PureRedirectComponent, RouteRedirectName } from "../routing/redirect";
-import { PureCard3itptLTR, Card3itptLTRName } from "./content/Card_3itptLTR";
+import { PureCard3itptLTR, Card3itptLTRName } from "./interaction/Card_3itptLTR";
 
 /**
  * sorry for the long function name //TODO: change

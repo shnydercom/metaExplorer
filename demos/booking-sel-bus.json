@@ -1,7 +1,7 @@
 {
   "subItptOf": "bcb9a710-c155-4c2b-bfa7-1b7cff7052d2",
-  "canInterpretType": "demo/components/booking-sel-flight-ObjectType",
-  "nameSelf": "demo/components/booking-sel-flight",
+  "canInterpretType": "demo/components/booking-sel-bus-ObjectType",
+  "nameSelf": "demo/components/booking-sel-bus",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -21,23 +21,23 @@
             },
             {
               "key": "HeaderText",
-              "value": "Flight: LHR - CDG",
+              "value": "Bus: London - Paris (Bercy Seine)",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "SubHeaderText",
-              "value": "09:00 - 11:20",
+              "value": "13:00 - 21:45",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "Description",
-              "value": "Please arrive at the airport 2h before departure. Dangerous goods are not allowed",
+              "value": "Bike transport only possible in the summer. Bike tickets are limited",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "FooterInterpreter",
               "value": {
-                "objRef": "bc4fc131-0bee-4dd4-9531-7f7ad786e3c8",
+                "objRef": "4628ff54-02b6-4bf0-bb2a-0c0b7ef57b35",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -57,61 +57,14 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "bc4fc131-0bee-4dd4-9531-7f7ad786e3c8": {
-          "subItptOf": "shnyder/baseContainer",
-          "canInterpretType": "shnyder/ContainerObjType",
-          "nameSelf": "bc4fc131-0bee-4dd4-9531-7f7ad786e3c8",
-          "initialKvStores": [
-            {
-              "key": "in_0",
-              "value": {
-                "objRef": "79028027-6c98-4fb8-9149-849f3620b951",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
-            },
-            {
-              "key": "in_1",
-              "value": {
-                "objRef": "576a3c1d-d142-4f92-a679-affaaa4531f8",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": [
-            "in_0",
-            "in_1"
-          ]
-        },
-        "79028027-6c98-4fb8-9149-849f3620b951": {
-          "subItptOf": "shnyder/md/http://schema.org/Integer",
-          "canInterpretType": "http://schema.org/Integer",
-          "nameSelf": "79028027-6c98-4fb8-9149-849f3620b951",
-          "initialKvStores": [
-            {
-              "key": "http://schema.org/description",
-              "value": "Number of bags (up to 23kg)",
-              "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "singleKvStore",
-              "value": "2",
-              "ldType": "http://schema.org/Integer"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
-        },
-        "576a3c1d-d142-4f92-a679-affaaa4531f8": {
+        "4628ff54-02b6-4bf0-bb2a-0c0b7ef57b35": {
           "subItptOf": "shnyder/md/http://schema.org/Boolean",
           "canInterpretType": "http://schema.org/Boolean",
-          "nameSelf": "576a3c1d-d142-4f92-a679-affaaa4531f8",
+          "nameSelf": "4628ff54-02b6-4bf0-bb2a-0c0b7ef57b35",
           "initialKvStores": [
             {
               "key": "http://schema.org/description",
-              "value": "VIP Queue",
+              "value": "add bike ticket (extra charge)",
               "ldType": "http://schema.org/Text"
             }
           ],

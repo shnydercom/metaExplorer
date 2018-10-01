@@ -82,6 +82,11 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "RouteSend_middleContainer",
+              "value": "booking-flight",
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",
@@ -166,7 +171,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "09:15 - 10:15",
+              "value": "09:00 - 11:20",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -193,6 +198,11 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "RouteSend_middleContainer",
+              "value": "booking-train",
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",
@@ -263,7 +273,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "Train: King's Cross - Champ du Mars",
+              "value": "Train: St Pancras International - Gare du Nord",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -277,7 +287,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "12:30 - 16:00",
+              "value": "09:22 - 12:47",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -304,6 +314,11 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "RouteSend_middleContainer",
+              "value": "booking-bus",
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",
@@ -374,7 +389,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "Bus: London - Paris",
+              "value": "Bus: London - Paris (Bercy Seine)",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -388,7 +403,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "08:00 - 17:15",
+              "value": "13:00 - 21:45",
               "ldType": "http://schema.org/Text"
             }
           ],

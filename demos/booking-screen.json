@@ -26,12 +26,39 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "11a65fc2-7b6c-4aa9-9d24-cfd67dfa7d1d",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "a10cf335-844e-4285-87b2-281533a06314",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_4",
+              "value": {
+                "objRef": "92711ce7-df70-449e-ad5b-03210c81c249",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "in_0",
-            "in_1"
+            "in_1",
+            "in_2",
+            "in_3",
+            "in_4"
           ]
         },
         "60313b47-d16a-47dd-bacd-321cc62904ba": {
@@ -115,23 +142,8 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "cancelTxt",
-              "value": "back",
-              "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "confirmTxt",
-              "value": "next",
-              "ldType": "http://schema.org/Text"
-            },
-            {
               "key": "RouteSend_cancel",
               "value": "booking-form",
-              "ldType": "Route_Added"
-            },
-            {
-              "key": "RouteSend_confirm",
-              "value": "../",
               "ldType": "Route_Added"
             }
           ],
@@ -147,6 +159,30 @@
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
+        },
+        "11a65fc2-7b6c-4aa9-9d24-cfd67dfa7d1d": {
+          "subItptOf": "demo/screens/flight-summary",
+          "canInterpretType": "demo/screens/flight-summary-ObjectType",
+          "nameSelf": "11a65fc2-7b6c-4aa9-9d24-cfd67dfa7d1d",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "a10cf335-844e-4285-87b2-281533a06314": {
+          "subItptOf": "demo/screens/train-summary",
+          "canInterpretType": "demo/screens/train-summary-ObjectType",
+          "nameSelf": "a10cf335-844e-4285-87b2-281533a06314",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "92711ce7-df70-449e-ad5b-03210c81c249": {
+          "subItptOf": "demo/screens/bus-summary",
+          "canInterpretType": "demo/screens/train-summary-ObjectType",
+          "nameSelf": "92711ce7-df70-449e-ad5b-03210c81c249",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
@@ -155,3 +191,4 @@
   "crudSkills": "cRud",
   "interpretableKeys": []
 }
+
