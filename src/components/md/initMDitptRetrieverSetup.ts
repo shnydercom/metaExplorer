@@ -4,7 +4,7 @@ import { PureImgDisplay } from "../visualcomposition/imagedisplay-component";
 import { PureBoolInput, PureIntInput, PureDoubleInput, PureTextInput, PureDateInput, PureDateTimeInput } from "../md/content/BaseDataTypeInput";
 import { ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc } from "../visualcomposition/ImgHeadSubDescIntrprtr";
 import { PureNavBarWActions, NavBarWActionsName } from "../md/navigation/NavBarWActions";
-import { BottomNavigationName, PureBottomNavigation } from "../md/navigation/BottomNavigation";
+import { BottomNavigationName, PureBottomNavigation, TopNavigationName, PureTopNavigation } from "../md/navigation/BottomNavigation";
 import { PureRouteComponent, RouteComponentName } from "../routing/route-component";
 import { imageRetrieverName, ImageRetriever } from "sidefx/ImageRetriever";
 import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
@@ -39,9 +39,10 @@ export function initMDitptFnAsDefault() {
 	appIntRetr.addItpt(ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(NavBarWActionsName, PureNavBarWActions, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(BottomNavigationName, PureBottomNavigation, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(TopNavigationName, PureTopNavigation, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(NavSearchBarName, PureNavSearchBar, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(NavProcessAtomName, PureNavProcessAtom, "cRud", [ITPT_TAG_ATOMIC]);
-	appIntRetr.addItpt(Card3itptLTRName, PureCard3itptLTR, "cRud", [ITPT_TAG_ATOMIC] );
+	appIntRetr.addItpt(Card3itptLTRName, PureCard3itptLTR, "cRud", [ITPT_TAG_ATOMIC]);
 
 	//register routing itpts
 	appIntRetr.addItpt(RouteComponentName, PureRouteComponent, "cRud", [ITPT_TAG_ATOMIC]);

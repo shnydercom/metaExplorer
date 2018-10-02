@@ -49,6 +49,8 @@ export const BOTTOMNAV_VALUE_FIELDS: string[] = [
 export const CHANGED_ROUTE_OUTPUT = "ChangedRoute";
 
 export const BottomNavigationName = "shnyder/md/BottomNavigation";
+export const TopNavigationName = "shnyder/md/TopNavigation";
+
 let cfgIntrprtKeys: string[] =
 	[VisualDict.freeContainer];
 let initialKVStores: IKvStore[] = [
@@ -85,7 +87,7 @@ initialKVStores.push({
 	ldType: VisualDict.route_added
 });
 
-let bpCfg: BlueprintConfig = {
+let bottomBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: BottomNavigationName,
 	initialKvStores: initialKVStores,
@@ -103,7 +105,7 @@ export interface BottomNavState extends LDLocalState {
 	hasTabChanged: boolean;
 	numTabs: number;
 }
-@ldBlueprint(bpCfg)
+@ldBlueprint(bottomBpCfg)
 export class PureBottomNavigation extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, BottomNavState>
 	implements IBlueprintItpt {
 
@@ -151,7 +153,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			//if (!match.params) match.params = { nextPath: null };
 
 			let tabIdxCounter = 0;
-			if (!prevState.hasTabChanged) {
+			if (!prevState.hasTabChanged || prevState.isInitial) {
 				let lastPath = location.pathname.replace(match.path, "");
 				let isOnTopLayer = false;
 				if (match.path === '/') {
@@ -181,7 +183,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	private renderFreeContainer = generateItptFromCompInfo.bind(this, VisualDict.freeContainer);
+	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualDict.freeContainer);
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
@@ -221,7 +223,13 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 	generateRedirect(tabIdx: number): JSX.Element {
 		if (!this.props.routes || !this.state.hasTabChanged) return null;
 		const { match, location } = this.props.routes;
-		let route: string = this.state.routes[tabIdx];
+		let cleanedTabIdx: number = tabIdx;
+		for (let idx = tabIdx; idx >= 0; idx--) {
+			if (!this.state.isGenerateAtPositions[idx]) {
+				cleanedTabIdx++;
+			}
+		}
+		let route: string = this.state.routes[cleanedTabIdx];
 		//if (match.params.nextPath === undefined) match.params.nextPath = route;
 		let newPath: string = cleanRouteString(route, this.props.routes);
 		this.setState({ ...this.state, hasTabChanged: false });
@@ -232,14 +240,18 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		const { numTabs, isGenerateAtPositions, iconEnabledURLs, iconDisabledURLs, routes, tabIdx } = this.state;
 
 		let tabs = [];
+		let cleanedTabIdx = tabIdx;
 		for (let idx = 0; idx < numTabs; idx++) {
 			const isGen = isGenerateAtPositions[idx];
-			if (!isGen) continue;
+			if (!isGen) {
+				cleanedTabIdx++;
+				continue;
+			}
 			let newTab = this.generateTab(
 				iconEnabledURLs[idx],
 				iconDisabledURLs[idx],
 				routes[idx],
-				tabIdx === idx);
+				cleanedTabIdx === idx);
 			tabs.push(newTab);
 		}
 		return <div className="bottom-nav">
@@ -254,4 +266,44 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		</div>;
 	}
 }
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureBottomNavigation);
+
+let topBpCfg: BlueprintConfig = {
+	subItptOf: null,
+	nameSelf: TopNavigationName,
+	initialKvStores: initialKVStores,
+	interpretableKeys: cfgIntrprtKeys,
+	crudSkills: "cRud"
+};
+@ldBlueprint(topBpCfg)
+export class PureTopNavigation extends PureBottomNavigation {
+	render() {
+		const { numTabs, isGenerateAtPositions, iconEnabledURLs, iconDisabledURLs, routes, tabIdx } = this.state;
+
+		let tabs = [];
+		let cleanedTabIdx = tabIdx;
+		for (let idx = 0; idx < numTabs; idx++) {
+			const isGen = isGenerateAtPositions[idx];
+			if (!isGen) {
+				cleanedTabIdx++;
+				continue;
+			}
+			let newTab = this.generateTab(
+				iconEnabledURLs[idx],
+				iconDisabledURLs[idx],
+				routes[idx],
+				cleanedTabIdx === idx);
+			tabs.push(newTab);
+		}
+		return <div className="top-nav">
+			<Tabs index={tabIdx} onChange={this.onTabChanged} fixed className="top-nav-tabs">
+				{tabs}
+			</Tabs>
+			<div className="mdscrollbar top-nav-bottomfree">
+				{this.generateRedirect(tabIdx)}
+				<Route component={this.renderFreeContainer} />
+				{this.props.children}
+			</div>
+		</div>;
+	}
+}
+// export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureBottomNavigation);

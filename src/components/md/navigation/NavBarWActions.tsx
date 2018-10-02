@@ -120,7 +120,7 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 			<Navigation type='horizontal'>
 				<IconButton icon='search' onClick={this.onAppBarSearchBtnClick} />
 				<IconMenu icon='account_circle' position='topRight' menuRipple onClick={this.onAppBarRightIconMenuClick}>
-					{this.renderSub(VisualDict.popOverContent)}
+					<div className="menu-pop-over">{this.renderSub(VisualDict.popOverContent)}</div>
 				</IconMenu>
 			</Navigation>
 		</AppBar>

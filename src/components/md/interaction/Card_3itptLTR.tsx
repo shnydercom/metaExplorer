@@ -94,7 +94,7 @@ export class PureCard3itptLTR extends Component<LDConnectedState & LDConnectedDi
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
-	styleClassName: string;
+	styleClassName: string = "card-style";
 
 	protected renderFreeContainer = generateItptFromCompInfo.bind(this);
 

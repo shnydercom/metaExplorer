@@ -203,6 +203,17 @@
   flex-direction: column;
 }
 
+.top-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.top-nav-bottomfree {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .mdscrollbar {
   height: 100%;
   overflow-y: auto;
@@ -354,7 +365,7 @@ canvas.drawingBuffer {
   padding: 10pt 0pt 0pt 0pt !important;
 
   >input {
-    font-size: 200%;
+    font-size: 150%;
     padding-left: 8pt;
   }
 }

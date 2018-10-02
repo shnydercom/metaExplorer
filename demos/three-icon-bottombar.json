@@ -1,0 +1,80 @@
+{
+  "subItptOf": "bSub",
+  "canInterpretType": "demo/components/3-Icon-BottomBar-ObjectType",
+  "nameSelf": "demo/components/3-Icon-BottomBar",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "bSub": {
+          "subItptOf": "shnyder/md/BottomNavigation",
+          "canInterpretType": "shnyder/md/BottomNavigation-ObjectType",
+          "nameSelf": "bSub",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "IconURL_1",
+              "value": "/dist/static/camera_black.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "IconURL_1_Disabled",
+              "value": "/dist/static/camera_grey.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_1",
+              "value": "/camera_scan",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "IconURL_2",
+              "value": "/dist/static/spark_red.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "IconURL_2_Disabled",
+              "value": "/dist/static/spark_grey.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_2",
+              "value": "/actions",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "IconURL_3",
+              "value": "/dist/static/persons_black.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "IconURL_3_Disabled",
+              "value": "/dist/static/persons_grey.svg",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_3",
+              "value": "/users",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": [
+    {
+      "objRef": "bSub",
+      "propRef": "freeContainer"
+    }
+  ]
+}

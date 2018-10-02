@@ -60,12 +60,12 @@
             },
             {
               "key": "RouteSend_cancel",
-              "value": "demo",
+              "value": "../",
               "ldType": "Route_Added"
             },
             {
               "key": "RouteSend_confirm",
-              "value": "demo",
+              "value": "../",
               "ldType": "Route_Added"
             }
           ],

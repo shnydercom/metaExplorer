@@ -65,7 +65,7 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 		if (!ldOptions) return <div>no Image data</div>;
 		return <div className="imgdisplay">
 			<img alt="" src={imgLnk} className="imgdisplay" />
-			{imgLnk}
+			{/*imgLnk*/}
 			{this.props.children}
 		</div>;
 	}

@@ -47,16 +47,25 @@
               "key": "RouteSend_Search",
               "value": "search",
               "ldType": "Route_Added"
+            },
+            {
+              "key": "PopOverContent",
+              "value": {
+                "objRef": "48618dcc-515f-4a36-bc60-34e85102bcc6",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "freeContainer",
+            "PopOverContent"
           ]
         },
         "62764da2-6b35-4d54-8cc7-e779201c33de": {
-          "subItptOf": "demo/components/4-Icon-BottomBar",
-          "canInterpretType": "demo/components/4-Icon-BottomBar-ObjectType",
+          "subItptOf": "demo/components/3-Icon-BottomBar",
+          "canInterpretType": "demo/components/3-Icon-BottomBar-ObjectType",
           "nameSelf": "62764da2-6b35-4d54-8cc7-e779201c33de",
           "initialKvStores": [
             {
@@ -93,12 +102,21 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "9534fd60-a8c8-4a21-a80d-9b8b3861c206",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "in_0",
-            "in_1"
+            "in_1",
+            "in_2"
           ]
         },
         "194f0426-8df1-4b84-86c2-88935b188d1c": {
@@ -113,6 +131,22 @@
           "subItptOf": "demo/components/barcode-scan-panel",
           "canInterpretType": "demo/components/barcode-scan-panel-ObjectType",
           "nameSelf": "35a92061-9850-481e-b362-0477edafd88a",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "9534fd60-a8c8-4a21-a80d-9b8b3861c206": {
+          "subItptOf": "demo/components/users-panel",
+          "canInterpretType": "demo/components/users-panel-ObjectType",
+          "nameSelf": "9534fd60-a8c8-4a21-a80d-9b8b3861c206",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "48618dcc-515f-4a36-bc60-34e85102bcc6": {
+          "subItptOf": "demo/components/popover-me",
+          "canInterpretType": "demo/components/popover-me-ObjectType",
+          "nameSelf": "48618dcc-515f-4a36-bc60-34e85102bcc6",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []

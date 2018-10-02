@@ -4,8 +4,12 @@
 @import "storm-react-diagrams/dist/style.min.css";
 @import "./game/game.scss";
 
+$app-outer-width: 420px;
+$app-inner-width: 304px;
+$app-inner-width-90: $app-inner-width * 0.9;
+
 .app-preview {
-	width: 420px;
+	width: $app-outer-width;
 	height: 746px;
 	background-image: url('/dist/static/designer-phone-bg.png');
 	padding: 69px 58px 80px 58px;
@@ -34,6 +38,8 @@
     flex-direction: column;
     justify-content: center;
 		align-content: center;
+		min-height: 40px;
+		min-width: 40px;
 		>* {
 			margin: 5px;
 		}
@@ -150,6 +156,16 @@
 		width: 100%;
 		overflow-y: auto;
 		//height: 100%;
+	}
+}
+
+.menu-pop-over {
+	width: $app-inner-width-90;
+	white-space: normal;
+	display: flex;
+	>* {
+		flex: 1;
+		max-width: $app-inner-width;
 	}
 }
 

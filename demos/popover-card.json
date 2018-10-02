@@ -1,0 +1,145 @@
+{
+  "subItptOf": "b88bf822-4cb3-4e29-accf-dc20819765e0",
+  "canInterpretType": "demo/components/popover-me-ObjectType",
+  "nameSelf": "demo/components/popover-me",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "b88bf822-4cb3-4e29-accf-dc20819765e0": {
+          "subItptOf": "shnyder/md/CardW3Containers",
+          "canInterpretType": "shnyder/md/CardW3Containers-ObjectType",
+          "nameSelf": "b88bf822-4cb3-4e29-accf-dc20819765e0",
+          "initialKvStores": [
+            {
+              "key": "frontContainer",
+              "value": {
+                "objRef": "be0bc506-f13a-428b-a94f-639e3b20f43f",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "lastContainer",
+              "value": {
+                "objRef": "311aa3f5-2091-4b20-857f-e6c14fdb2e9a",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "frontContainer",
+            "lastContainer"
+          ]
+        },
+        "be0bc506-f13a-428b-a94f-639e3b20f43f": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "be0bc506-f13a-428b-a94f-639e3b20f43f",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "671b1959-9ae3-4a4d-b3c1-dbb178e55687",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "d18423dc-6253-4f1a-af3d-646cd16ac0f2",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
+        "671b1959-9ae3-4a4d-b3c1-dbb178e55687": {
+          "subItptOf": "shnyder/basichtml/h3",
+          "canInterpretType": "shnyder/basichtml/h3-ObjectType",
+          "nameSelf": "671b1959-9ae3-4a4d-b3c1-dbb178e55687",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": "You!",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "d18423dc-6253-4f1a-af3d-646cd16ac0f2": {
+          "subItptOf": "shnyder/layout/vh-centered-column",
+          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
+          "nameSelf": "d18423dc-6253-4f1a-af3d-646cd16ac0f2",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "a0885890-f8c8-49b8-99dd-bea1c1c82a7c",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "a0885890-f8c8-49b8-99dd-bea1c1c82a7c": {
+          "subItptOf": "shnyder/basichtml/italics",
+          "canInterpretType": "shnyder/basichtml/italics-ObjectType",
+          "nameSelf": "a0885890-f8c8-49b8-99dd-bea1c1c82a7c",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": "@your_handle, you@email.com",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "311aa3f5-2091-4b20-857f-e6c14fdb2e9a": {
+          "subItptOf": "shnyder/layout/circle-display",
+          "canInterpretType": "shnyder/layout/circle-display-ObjectType",
+          "nameSelf": "311aa3f5-2091-4b20-857f-e6c14fdb2e9a",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "6ede6d86-30ed-47b9-a343-21fdfab2d8ca",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "6ede6d86-30ed-47b9-a343-21fdfab2d8ca": {
+          "subItptOf": "demo/components/test-image",
+          "canInterpretType": "demo/components/test-image-ObjectType",
+          "nameSelf": "6ede6d86-30ed-47b9-a343-21fdfab2d8ca",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

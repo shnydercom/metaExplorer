@@ -120,7 +120,7 @@
           "initialKvStores": [
             {
               "key": "RouteSend_confirm",
-              "value": "demo",
+              "value": "demo/actions",
               "ldType": "Route_Added"
             }
           ],
