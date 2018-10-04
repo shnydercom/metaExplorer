@@ -194,7 +194,7 @@ module.exports = {
     ]
   },
   externals: {
-    /*'react': {
+    'react': {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
@@ -206,7 +206,7 @@ module.exports = {
       commonjs: 'react-dom',
       amd: 'react-dom'
     },
-    'urijs': {
+    /*'urijs': {
       root: 'urijs',
       commonjs2: 'urijs',
       commonjs: 'urijs',

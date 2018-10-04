@@ -1,4 +1,4 @@
-import { SFC } from 'react';
+import { SFC, Component } from 'react';
 
 import { Store } from 'redux';
 import { Provider } from 'react-redux';
@@ -14,7 +14,7 @@ import './styles/styles.scss';
 import DevTools from './appstate/devTools';
 import { initLDConnect } from 'sidefx/nonVisualConnect';
 import {
-	BrowserRouter as Router
+	BrowserRouter as Router, Link
 } from 'react-router-dom';
 import { appItptMatcherFn } from 'appconfig/appItptMatcher';
 import { initMDitptFnAsDefault } from 'components/md/initMDitptRetrieverSetup';
@@ -24,6 +24,7 @@ import { initEssentialItpts } from 'defaults/initEssentialItpts';
 import 'mods/google/components/GWebAuthenticator';
 import { initGameItpt } from 'components/game/initGameItpts';
 import { initBaseHtmlItpt } from 'components/basic-html/initBaseHtmlItpt';
+import LDApproot, { PureLDApproot } from 'ldapproot';
 
 const initialState: ExplorerState = {
 	ldoptionsMap: {},
@@ -33,6 +34,7 @@ const initialState: ExplorerState = {
 const isProduction = process.env.NODE_ENV === 'production';
 
 export interface AppRootProps { }
+export interface AppRootState { mode: "designer" | "app"; }
 export const applicationStore: Store<ExplorerState> = configureStore(initialState);
 const appItptToken: string = "tID"; //TODO: uncomment Toolkit.UID();
 function rootSetup(): void {
@@ -45,21 +47,52 @@ function rootSetup(): void {
 }
 
 rootSetup();
-export const AppRoot: SFC<AppRootProps> = () => {
-	return (
-		<Provider store={applicationStore}>
-			<Router>
-				<Route path="/" render={(routeProps: LDRouteProps) => {
-					//routeProps.match.params.nextPath = "";
-					return (<div>
-						<AppItptDesigner ldTokenString={appItptToken} routes={routeProps} />
-						{!isProduction && <DevTools />}
-					</div>);
-				}} />
-			</Router>
-		</Provider>
-	);
-};
-AppRoot.defaultProps = {};
+export class AppRoot extends Component<AppRootProps, AppRootState>{
+	constructor(props) {
+		super(props);
+		this.state = { mode: "app" };
+	}
+	render() {
+		return (
+			<Provider store={applicationStore}>
+				<Router>
+					<Route path="/" render={(routeProps: LDRouteProps) => {
+						if (routeProps.location.search === "?mode=designer") {
+							this.setState({ ...this.state, mode: "designer" });
+							this.forceUpdate();
+						}
+						if (routeProps.location.search === "?mode=app") {
+							this.setState({ ...this.state, mode: "app" });
+						}
+						if (this.state.mode === "designer") {
+							return (
+								<div style={{ flex: "1", background: "white" }}>
+									<AppItptDesigner ldTokenString={appItptToken} routes={routeProps} />
+									{!isProduction && <DevTools />}
+									<div className="mode-switcher">
+										<Link to={{ pathname: routeProps.location.pathname, search: "?mode=app" }}>
+											Switch to App
+										</Link>
+									</div>
+								</div>
+							);
+						} else {
+							return (
+								<div className="app-actual">
+									<LDApproot ldTokenString={appItptToken} routes={routeProps} />
+									<div className="mode-switcher">
+										<Link to={{ pathname: routeProps.location.pathname, search: "?mode=designer" }}>
+											Switch to Designer
+										</Link>
+									</div>
+								</div>
+							);
+						}
+					}} />
+				</Router>
+			</Provider>
+		);
+	}
+}
 // for Redux-DevTools, add:
 // <ImageUploadComponent />

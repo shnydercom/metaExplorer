@@ -277,41 +277,6 @@ export class DesignerLogic {
 		//return rv;
 	}
 
-	/**
-	 * adds a blueprint defined in the designer to the AppItptRetriever, automatically looks
-	 * for the correct React-Class to extend
-	 * @param input the BlueprintConfig used as a setup for the new Itpt
-	 */
-	public addBlueprintToRetriever(input: BlueprintConfig) {
-		let retriever = appIntprtrRetr() as ReduxItptRetriever;
-		let candidate = retriever.getUnconnectedByNameSelf(input.subItptOf);
-		if (!candidate) {
-			//check if it's well-defined
-			let refMap = getKVStoreByKey(input.initialKvStores, UserDefDict.intrprtrBPCfgRefMapKey);
-			if (!refMap || !refMap.value || refMap.value === {}) return;
-			if (!refMap.value[input.subItptOf]) return;
-			let searchTerm: string = UserDefDict.intrprtrBPCfgRefMapName;
-			candidate = retriever.getUnconnectedByNameSelf(searchTerm);
-		}
-		if (!candidate) return;
-		let itptContainer: any = ldBlueprint(input)(candidate); //actually wraps, doesn't extend
-		retriever.addItpt(input.canInterpretType, itptContainer, "cRud", [ITPT_TAG_COMPOUND]);
-	}
-
-	public intrprtrTypeInstanceFromBlueprint(input: BlueprintConfig): any {
-		if (!input) return null;
-		let rv = {};
-		input.interpretableKeys.forEach((val) => {
-			try {
-				let propID: string = (val as ObjectPropertyRef).propRef;
-				rv[propID] = null;
-			} catch (error) {
-				rv[val as string] = null;
-			}
-		});
-		return rv;
-	}
-
 	public diagramFromItptBlueprint(itpt: BlueprintConfig): void {
 		let newSigBaseTxt: NewNodeSig = {
 			id: this.outputNode.id + UserDefDict.intrprtrNameKey,

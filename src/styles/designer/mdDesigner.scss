@@ -42,6 +42,7 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
 .phone-preview-centered {
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 
 .phone-preview-container {

@@ -56,9 +56,9 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 		const specialNodesText: string = "Set standard values, mark a value for later input or build forms with as many interpreters as you want";
 		const specialNodesTreeItem: TreeEntry = {
 			flatContent: [
-				<DesignerTrayItem key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />,
-				<DesignerTrayItem key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />,
-				<DesignerTrayItem key={3} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />
+				<DesignerTrayItem onDoubleClick={(data) => this.onEditTrayItem(data)} key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />,
+				<DesignerTrayItem onDoubleClick={(data) => this.onEditTrayItem(data)} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />,
+				<DesignerTrayItem onDoubleClick={(data) => this.onEditTrayItem(data)} key={3} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />
 			],
 			label: 'Special Nodes',
 			subEntries: []
@@ -99,40 +99,8 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 	}
 
 	onRefMapDrop(event) {
-		this.props.logic.clear();
 		var data = JSON.parse(event.dataTransfer.getData("ld-node"));
-		/*var nodesCount = keys(
-			this.props.logic
-				.getDiagramEngine()
-				.getDiagramModel()
-				.getNodes()
-		).length;
-		var node = null;*/
-		switch (data.type) {
-			case "ldbp":
-				let itptInfo = this.props.logic.getItptList().find((itm) => itm.nameSelf === data.bpname);
-				let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
-				if (!itptCfg.initialKvStores
-					|| itptCfg.initialKvStores.length !== 1
-					|| itptCfg.initialKvStores[0].key !== UserDefDict.intrprtrBPCfgRefMapKey) {
-					return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
-				}
-				this.props.logic.diagramFromItptBlueprint(itptCfg);
-				this.props.logic.autoDistribute();
-				this.forceUpdate();
-				return { isSuccess: true, message: "check the diagram on the right to see your interpreter, or drop another compound node here to edit that one" };
-			case "bdt":
-				return { isSuccess: false, message: "simple data types can't be used here" };
-			case "inputtype":
-				return { isSuccess: false, message: "input type can't be used here" };
-			case "lineardata":
-				return { isSuccess: false, message: "linear data display can't be used here" };
-			default:
-				break;
-		}
-		return { isSuccess: false, message: JSON.stringify(data) };
-		//throw new LDError("unsupported ");
-		//return;
+		this.onEditTrayItem(data);
 	}
 
 	render() {
@@ -227,7 +195,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 		);
 	}
 
-	private addItptToTree(tree: TreeEntry & FlatContentInfo, infoItm: IItptInfoItem, remainingName: string) {
+	protected addItptToTree(tree: TreeEntry & FlatContentInfo, infoItm: IItptInfoItem, remainingName: string) {
 		let remainerSplit = remainingName.split('/');
 		let isCreateHere: boolean = false;
 		if (remainerSplit.length === 1) {
@@ -311,13 +279,50 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 		}
 	}
 
-	private createFlatContentFromItpts(tree: TreeEntry & FlatContentInfo) {
+	protected onEditTrayItem(data) {
+		/*var nodesCount = keys(
+			this.props.logic
+				.getDiagramEngine()
+				.getDiagramModel()
+				.getNodes()
+		).length;
+		var node = null;*/
+		switch (data.type) {
+			case "ldbp":
+				this.props.logic.clear();
+				let itptInfo = this.props.logic.getItptList().find((itm) => itm.nameSelf === data.bpname);
+				let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
+				if (!itptCfg.initialKvStores
+					|| itptCfg.initialKvStores.length !== 1
+					|| itptCfg.initialKvStores[0].key !== UserDefDict.intrprtrBPCfgRefMapKey) {
+					return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
+				}
+				this.props.logic.diagramFromItptBlueprint(itptCfg);
+				this.props.logic.autoDistribute();
+				this.forceUpdate();
+				return { isSuccess: true, message: "check the diagram on the right to see your interpreter, or drop another compound node here to edit that one" };
+			case "bdt":
+				return { isSuccess: false, message: "simple data types can't be used here" };
+			case "inputtype":
+				return { isSuccess: false, message: "input type can't be used here" };
+			case "lineardata":
+				return { isSuccess: false, message: "linear data display can't be used here" };
+			default:
+				break;
+		}
+		return { isSuccess: false, message: JSON.stringify(data) };
+		//throw new LDError("unsupported ");
+		//return;
+	}
+
+	protected createFlatContentFromItpts(tree: TreeEntry & FlatContentInfo) {
 		tree.itpts.forEach((itpt, idx) => {
 			let ldBPCfg = itpt.cfg;
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
 			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : ldBPCfg.canInterpretType;
 			let remainingName = tree.flatContentURLs[idx];
-			tree.flatContent.push(<DesignerTrayItem key={trayName}
+			tree.flatContent.push(<DesignerTrayItem onDoubleClick={(data) => this.onEditTrayItem(data)}
+				key={trayName}
 				model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
 				name={remainingName}
 				color={appStyles["$designer-secondary-color"]} />

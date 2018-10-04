@@ -88,6 +88,7 @@ import { Switch } from "react-router";
 import { BaseContainerRewrite } from "../generic/baseContainer-rewrite";
 import { Tabs, Tab } from "react-toolbox/lib/tabs";
 import { FontIcon } from "react-toolbox/lib/font_icon";
+import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -134,8 +135,8 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 			newType = nodesBPCFG.nameSelf + UserDefDict.standardItptObjectTypeSuffix;
 			nodesBPCFG.canInterpretType = newType;
 		}
-		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
-		this.logic.addBlueprintToRetriever(nodesBPCFG);
+		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
+		addBlueprintToRetriever(nodesBPCFG);
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = [
@@ -194,8 +195,8 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 
 	generatePrefilled = (input: any) => {
 		let nodesBPCFG: BlueprintConfig = input as BlueprintConfig;
-		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
-		this.logic.addBlueprintToRetriever(nodesBPCFG);
+		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
+		addBlueprintToRetriever(nodesBPCFG);
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
 		let newType = nodesBPCFG.canInterpretType;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
@@ -218,8 +219,8 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 	onPrefilledProductButtonClick = (e) => {
 		let prefilledData: any = prefilledProductItptA;
 		let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
-		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
-		this.logic.addBlueprintToRetriever(nodesBPCFG);
+		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
+		addBlueprintToRetriever(nodesBPCFG);
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
 		let newType = nodesBPCFG.canInterpretType;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
@@ -233,8 +234,8 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 	onPrefilledOrganizationButtonClick = (e) => {
 		let prefilledData: any = prefilledOrganizationItptA;
 		let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
-		let dummyInstance = this.logic.intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
-		this.logic.addBlueprintToRetriever(nodesBPCFG);
+		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
+		addBlueprintToRetriever(nodesBPCFG);
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
 		let newType = nodesBPCFG.canInterpretType;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);

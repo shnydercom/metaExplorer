@@ -8,7 +8,18 @@ $app-outer-width: 420px;
 $app-inner-width: 304px;
 $app-inner-width-90: $app-inner-width * 0.9;
 
+#app {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	background-image: linear-gradient(#64b7ff, rgba(255, 255, 255, 0.3), rgba(153, 227, 255, 0.3));
+}
+
 .app-preview {
+	//min-width: $app-outer-width;
 	width: $app-outer-width;
 	height: 746px;
 	background-image: url('/dist/static/designer-phone-bg.png');
@@ -16,6 +27,27 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	box-sizing: border-box;
 	font-family: Roboto, Arial;
 	text-overflow: ellipsis;
+	overflow-x: hidden;
+}
+
+.mode-switcher {
+	z-index: 999;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.app-actual {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	box-sizing: border-box;
+	font-family: Roboto, Arial;
+	text-overflow: ellipsis;
+	background: #fff;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .app-content {
@@ -33,16 +65,17 @@ $app-inner-width-90: $app-inner-width * 0.9;
 }
 
 .vh-centered-column {
-		display: flex;
-		flex: 1;
-    flex-direction: column;
-    justify-content: center;
-		align-content: center;
-		min-height: 40px;
-		min-width: 40px;
-		>* {
-			margin: 5px;
-		}
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	min-height: 40px;
+	min-width: 40px;
+
+	>* {
+		margin: 5px;
+	}
 }
 
 .header-img-container.overlay-gradient {
@@ -163,6 +196,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	width: $app-inner-width-90;
 	white-space: normal;
 	display: flex;
+
 	>* {
 		flex: 1;
 		max-width: $app-inner-width;
