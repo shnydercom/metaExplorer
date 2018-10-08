@@ -170,7 +170,7 @@ SingleImageSelectorState>
 	render() {
 		const { curStep, isCamAvailable, previewURL } = this.state;
 		let dropzoneRef;
-		return (<Dropzone className="single-img-sel"
+		return (<Dropzone className={curStep === SingleImageSelectorStateEnum.isPreviewing ? "single-img-sel accept" : "single-img-sel"}
 			accept="image/*"
 			multiple={false}
 			disableClick={true}
@@ -182,18 +182,18 @@ SingleImageSelectorState>
 			onDragOver={() => this.startDrag()}
 			onDragLeave={() => this.onDropFailure()}
 			onFileDialogCancel={() => this.onDropFailure()}
-			>
+		>
 			{(() => {
 				switch (curStep) {
 					case SingleImageSelectorStateEnum.isSelectInputType:
-						return <> {isCamAvailable ? <Button className="btn-extension" icon="add_a_photo" onClick={() => { this.startCamera(); }}>Open Camera</Button> : null}
-							<Button className="btn-extension" icon="add_photo_alternate" onClick={() => { dropzoneRef.open(); }}>Select Image</Button></>;
+						return <div className="accept"> {isCamAvailable ? <Button className="btn-extension" icon="add_a_photo" onClick={() => { this.startCamera(); }}>Open Camera</Button> : null}
+							<Button className="btn-extension" icon="add_photo_alternate" onClick={() => { dropzoneRef.open(); }}>Select Image</Button></div>;
 					case SingleImageSelectorStateEnum.isCamShooting:
 						return <DOMCamera onImageCaptured={(a) => {
 							this.onDropSuccess(null, a);
 						}} />;
 					case SingleImageSelectorStateEnum.isDragging:
-						return <img className="md-large-image" src={this.draggingImgLink} height="100px" />;
+						return <div className="accept"><img className="md-large-image" style={{flex: 1}} src={this.draggingImgLink} height="100px" /></div>;
 					case SingleImageSelectorStateEnum.isPreviewing:
 						return <img className="cover-img" src={previewURL} alt="image preview" ></img>;
 					case SingleImageSelectorStateEnum.isError:

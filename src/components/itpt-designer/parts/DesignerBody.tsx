@@ -56,9 +56,9 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 		const specialNodesText: string = "Set standard values, mark a value for later input or build forms with as many interpreters as you want";
 		const specialNodesTreeItem: TreeEntry = {
 			flatContent: [
-				<DesignerTrayItem onDoubleClick={(data) => this.onEditTrayItem(data)} key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />,
-				<DesignerTrayItem onDoubleClick={(data) => this.onEditTrayItem(data)} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />,
-				<DesignerTrayItem onDoubleClick={(data) => this.onEditTrayItem(data)} key={3} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />
+				<DesignerTrayItem onLongPress={(data) => this.onEditTrayItem(data)} key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />,
+				<DesignerTrayItem onLongPress={(data) => this.onEditTrayItem(data)} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />,
+				<DesignerTrayItem onLongPress={(data) => this.onEditTrayItem(data)} key={3} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />
 			],
 			label: 'Special Nodes',
 			subEntries: []
@@ -109,7 +109,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 				<DesignerTray>
 					{this.trayItemsFromItptList()}
 					<RefMapDropSpace
-						dropText="...drop a Compound Node here to edit it..."
+						dropText="...drop a Compound Node here to edit it, or long-press on it..."
 						refMapDrop={this.privOnRMDrop}
 					/>
 					<div className="button-row">
@@ -321,7 +321,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
 			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : ldBPCfg.canInterpretType;
 			let remainingName = tree.flatContentURLs[idx];
-			tree.flatContent.push(<DesignerTrayItem onDoubleClick={(data) => this.onEditTrayItem(data)}
+			tree.flatContent.push(<DesignerTrayItem onLongPress={(data) => this.onEditTrayItem(data)}
 				key={trayName}
 				model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
 				name={remainingName}

@@ -1,5 +1,5 @@
 @import 'm-react-splitters/lib/splitters.css';
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+//@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import './designer/colors.scss';
 @import "storm-react-diagrams/dist/style.min.css";
 @import "./game/game.scss";
@@ -112,8 +112,8 @@ $app-inner-width-90: $app-inner-width * 0.9;
 }
 
 .entrypoint-editor {
-	width: 100%;
-	height: 100vh;
+	width: 100vw;
+	height: 100%;
 	display: flex;
 	flex-direction: row;
 

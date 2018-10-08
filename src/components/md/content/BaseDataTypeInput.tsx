@@ -129,7 +129,7 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 		this.setState({ ...this.state, singleKV: modSingleKV });
 		//TODO: it might be a good idea to debounce before updating the application state
 		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
-		if (!outputKVMap) return;
+		if (!outputKVMap || !outputKVMap[this.state.singleKVKey]) return;
 		this.props.dispatchKvOutput([modSingleKV], this.props.ldTokenString, outputKVMap);
 	}
 
@@ -140,7 +140,24 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 		if (!this.state.singleKV || !this.state.singleKV.ldType) {
 			console.log('PureBaseDataTypeInput notifyLDOptionsChange');
 			//this self-creates an object. Used e.g. in the itpt-designer, bdt-part
-			this.props.notifyLDOptionsChange(null);
+			console.dir(this.props.ldOptions);
+			if (this.props.ldOptions) {
+				let newLDOptionsObj = ldOptionsDeepCopy(this.props.ldOptions);
+				let kvStoreIdx = newLDOptionsObj.resource.kvStores.findIndex((a) => {
+					return UserDefDict.singleKvStore.toString() === a.key;
+				});
+				let singleKv: IKvStore;
+				if (kvStoreIdx === -1) {
+					singleKv = { key: UserDefDict.singleKvStore, value: null, ldType: this.cfg.canInterpretType };
+					newLDOptionsObj.resource.kvStores.push(singleKv);
+					this.props.notifyLDOptionsChange(newLDOptionsObj);
+				}
+				/*else {
+					singleKv = newLDOptionsObj.resource.kvStores[kvStoreIdx];
+				}*/
+			} else {
+				this.props.notifyLDOptionsChange(null);
+			}
 		}/* else {
 			if (this.props.ldOptions.resource.kvStores.length > 0) {
 				this.handleKVs(this.props);

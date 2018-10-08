@@ -57,11 +57,13 @@ export class AppRoot extends Component<AppRootProps, AppRootState>{
 			<Provider store={applicationStore}>
 				<Router>
 					<Route path="/" render={(routeProps: LDRouteProps) => {
-						if (routeProps.location.search === "?mode=designer") {
+						if (routeProps.location.search === "?mode=designer" && this.state.mode !== "designer") {
+							console.log("switching to designer");
 							this.setState({ ...this.state, mode: "designer" });
 							this.forceUpdate();
 						}
-						if (routeProps.location.search === "?mode=app") {
+						if (routeProps.location.search === "?mode=app" && this.state.mode !== "app") {
+							console.log("switching to app");
 							this.setState({ ...this.state, mode: "app" });
 						}
 						if (this.state.mode === "designer") {

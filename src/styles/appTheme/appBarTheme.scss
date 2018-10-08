@@ -315,7 +315,16 @@ canvas.drawingBuffer {
     line-height: 1 !important;
     font-size: 300% !important;
   }
+  .accept {
+    border: 2px dashed;
+    border-radius: 8px;
+    margin: 20px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
 }
+
 
 .cover-img {
   object-fit: cover;
@@ -330,6 +339,7 @@ canvas.drawingBuffer {
   background-color: darkgrey;
   justify-content: center;
   align-items: flex-end;
+  overflow: hidden;
 
   .vid-big-icons {
     line-height: 1 !important;
@@ -373,9 +383,12 @@ canvas.drawingBuffer {
   }
 }
 
+html {
+  height: 100%;
+}
 body {
   margin: 0pt;
-  height: 100vh;
+  height: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
 }
