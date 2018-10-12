@@ -128,7 +128,7 @@ module.exports = {
     ]
   },
   externals: {
-    /*'react': {
+    'react': {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
@@ -139,7 +139,13 @@ module.exports = {
       commonjs2: 'react-dom',
       commonjs: 'react-dom',
       amd: 'react-dom'
-    },*/
+    },
+    'quagga': {
+      root: 'Quagga',
+      commonjs2: 'quagga',
+      commonjs: 'quagga',
+      amd: 'quagga'
+    }
     /*'urijs': {
       root: 'urijs',
       commonjs2: 'urijs',
@@ -206,6 +212,18 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: 'assets',
       to: 'static'
+    },
+    {
+      from: 'node_modules/react/umd/react.production.min.js',
+      to: 'lib/react.js'
+    },
+    {
+      from: 'node_modules/react-dom/umd/react-dom.production.min.js',
+      to: 'lib/react-dom.js'
+    },
+    {
+      from: 'node_modules/quagga/dist/quagga.min.js',
+      to: 'lib/quagga.js'
     }]),
     /* new MiniCssExtractPlugin({
        // Options similar to the same options in webpackOptions.output
