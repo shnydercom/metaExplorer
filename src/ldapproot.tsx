@@ -44,6 +44,7 @@ import * as routehowto from '../demos/route-howto.json';
 import * as htmlhowto from '../demos/html-howto.json';
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
+import { DemoCompleteReceiver } from "approot";
 
 export interface LDApprootProps {
 
@@ -52,7 +53,7 @@ export interface LDApprootState {
 	hasCompletedFirstRender;
 }
 
-export class PureLDApproot extends Component<LDApprootProps & LDConnectedState & LDConnectedDispatch & LDOwnProps, LDApprootState>  {
+export class PureLDApproot extends Component<LDApprootProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver, LDApprootState>  {
 	public static APP_KEY = "app";
 	constructor(props?: any) {
 		super(props);
@@ -63,8 +64,8 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 			this.props.notifyLDOptionsChange(null);
 		}
 	}
-	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps) {
-		if (!this.state.hasCompletedFirstRender) {
+	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver) {
+		if (!this.state.hasCompletedFirstRender && prevProps.isInitDemo) {
 			//generate demos for compound itpts
 			let prefilledData: any[] = [fourIconBottomBar, threeIconBottomBar, testImage, chartsImage, singleChoiceGame, popoverCard,
 				actionPanel, barcodeScanPanel, usersPanel, expenseFormPanel, timetrackingPanel, bookingFormPanel, bookingSelectionPanel,
@@ -77,6 +78,7 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 				this.generatePrefilled(prefilledData[i]);
 			}
 			this.setState({ ...this.state, hasCompletedFirstRender: true });
+			this.props.notifyDemoComplete();
 		}
 	}
 	generatePrefilled = (input: any) => {
@@ -103,4 +105,4 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PureLDApproot);
+export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps & DemoCompleteReceiver>(mapStateToProps, mapDispatchToProps)(PureLDApproot);

@@ -33,8 +33,16 @@ const initialState: ExplorerState = {
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-export interface AppRootProps { }
-export interface AppRootState { mode: "designer" | "app"; }
+export type DemoCompleteReceiver = {
+	isInitDemo: boolean,
+	notifyDemoComplete: () => void
+};
+export interface AppRootProps {
+}
+export interface AppRootState {
+	mode: "designer" | "app";
+	isDemoInitialized: boolean;
+}
 export const applicationStore: Store<ExplorerState> = configureStore(initialState);
 const appItptToken: string = "tID"; //TODO: uncomment Toolkit.UID();
 function rootSetup(): void {
@@ -50,9 +58,11 @@ rootSetup();
 export class AppRoot extends Component<AppRootProps, AppRootState>{
 	constructor(props) {
 		super(props);
-		this.state = { mode: "app" };
+		this.state = { mode: "app", isDemoInitialized: false };
 	}
+
 	render() {
+		console.log("isDemoInitialized: " + this.state.isDemoInitialized);
 		return (
 			<Provider store={applicationStore}>
 				<Router>
@@ -69,7 +79,8 @@ export class AppRoot extends Component<AppRootProps, AppRootState>{
 						if (this.state.mode === "designer") {
 							return (
 								<div style={{ flex: "1", background: "white" }}>
-									<AppItptDesigner ldTokenString={appItptToken} routes={routeProps} />
+									<AppItptDesigner ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
+										notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })}/>
 									{!isProduction && <DevTools />}
 									<div className="mode-switcher">
 										<Link to={{ pathname: routeProps.location.pathname, search: "?mode=app" }}>
@@ -81,7 +92,8 @@ export class AppRoot extends Component<AppRootProps, AppRootState>{
 						} else {
 							return (
 								<div className="app-actual">
-									<LDApproot ldTokenString={appItptToken} routes={routeProps} />
+									<LDApproot ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
+										notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })}/>
 									<div className="mode-switcher">
 										<Link to={{ pathname: routeProps.location.pathname, search: "?mode=designer" }}>
 											Switch to Designer

@@ -89,6 +89,7 @@ import { BaseContainerRewrite } from "../generic/baseContainer-rewrite";
 import { Tabs, Tab } from "react-toolbox/lib/tabs";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
+import { DemoCompleteReceiver } from "approot";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -103,7 +104,7 @@ export type AIDState = {
 
 const DESIGNER_KV_KEY = "DesignerKvKey";
 
-class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps, AIDState> {
+class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver, AIDState> {
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the itpt you're designing is capable of interpreting -> usually a new generic type
 	logic: DesignerLogic;
 	errorNotAvailableMsg: string = "Itpt Designer environment not available. Please check your settings";
@@ -254,8 +255,8 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
-	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps) {
-		if (!this.state.hasCompletedFirstRender) {
+	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver) {
+		if (!this.state.hasCompletedFirstRender && prevProps.isInitDemo) {
 			//generate demos for compound itpts
 			let prefilledData: any[] = [fourIconBottomBar, threeIconBottomBar, testImage, chartsImage, singleChoiceGame, popoverCard,
 				actionPanel, barcodeScanPanel, usersPanel, expenseFormPanel, timetrackingPanel, bookingFormPanel, bookingSelectionPanel,
@@ -268,6 +269,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 				this.generatePrefilled(prefilledData[i]);
 			}
 			this.setState({ ...this.state, hasCompletedFirstRender: true });
+			this.props.notifyDemoComplete();
 		}
 	}
 	render() {
@@ -372,4 +374,4 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PureAppItptDesigner);
+export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps & DemoCompleteReceiver>(mapStateToProps, mapDispatchToProps)(PureAppItptDesigner);
