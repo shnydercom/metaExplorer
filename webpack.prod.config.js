@@ -1,34 +1,29 @@
 const webpack = require('webpack')
 const path = require('path')
 
-const polyfill = require('@babel/polyfill')
-
-//const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+//const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const WriteFilePlugin = require('write-file-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 var CompressionPlugin = require("compression-webpack-plugin");
-/*const extractSass = new ExtractTextPlugin({
-  filename: "[name].[contenthash].css",
-  disable: process.env.NODE_ENV === "development"
-});*/
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  devtool: 'cheap-module-source-map',
-
+  mode: 'production',
   // entry point of our application, within the `src` directory (which we add to resolve.modules below):
-  entry: [
+  entry: {
     //"index": 
-      '@babel/polyfill',
-      "./src/index"
+    //'@babel/polyfill',
+    main: "./src/index"
     //"css": "./styles/styles.scss"
-  ],
+  },
 
   // configure the output directory and publicPath for the devServer
   output: {
-    filename: '[name].js',
-    publicPath: 'dist',
+    filename: '[name].[chunkhash].js',
+    path: 'dist',
     libraryTarget: 'umd',
     path: path.resolve('dist')
   },
@@ -50,11 +45,6 @@ module.exports = {
   },
 
   module: {
-    /*loaders: [
-       // .ts(x) files should first pass through the Typescript loader, and then through babel
-       { test: /\.tsx?$/, loaders: ['babel-loader','awesome-typescript-loader'], include: path.resolve('src') },
-     //  {test :/\.jsx?$/, loaders: ['babel-loader']}
-    ]*/
     rules: [ // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       {
         enforce: 'pre',
@@ -65,32 +55,25 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: [{
-            loader: 'babel-loader',
-            options: {
+          loader: "awesome-typescript-loader",
+          query: {
+            useBabel: true,
+            useCache: true,
+            /*babelOptions: {
+              babelrc: false,
               presets: [
-                '@babel/env', '@babel/preset-react'
+                ["@babel/env", { "targets": "last 2 versions, ie 11", "modules": false }], '@babel/preset-react', 
+                ['minify', {'mangle':false}]
               ]
-            }
-          },
-          {
-            loader: "awesome-typescript-loader"
-          },
-        ]
+            },*/
+            babelCore: "@babel/core"
+          }
+        }]
       },
       {
         test: /\.css$/,
-        //exclude: path.resolve(__dirname, "../node_modules/react-toolbox"),
         use: [
           "style-loader",
-          /* {
-             loader: "css-loader",
-             options: {
-               modules: true,
-               sourceMap: true,
-               importLoaders: 2,
-               localIdentName: "[name]--[local]--[hash:base64:8]"
-             }
-           },*/
           {
             loader: 'typings-for-css-modules-loader',
             options: {
@@ -99,7 +82,7 @@ module.exports = {
               modules: true,
               sourceMap: true,
               importLoaders: 2,
-              localIdentName: "[name]--[local]--[hash:base64:8]"// '[local]' // "[name]--[local]--[hash:base64:8]"
+              localIdentName: "[name]--[local]--[hash:base64:8]" // '[local]' // "[name]--[local]--[hash:base64:8]"
             }
           },
           {
@@ -110,68 +93,30 @@ module.exports = {
           }, // has separate config, see postcss.config.js nearby
         ]
       },
+      /*{
+        test: /\.scss$/,
+        use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+      },*/
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-
-          // Could also be write as follow:
-          // use: 'css-loader?modules&importLoader=2&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader'
-          use: [ //'style-loader',
-            //MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader',
-              query: {
-                modules: true,
-                sourceMap: true,
-                importLoaders: 2,
-                localIdentName: /*[name]--*/ '[local]' //--[hash:base64:8]'
-              }
-            },
-            "postcss-loader",
-            'sass-loader'
-          ]
-        }),
+        use: [MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            query: {
+              modules: true,
+              sourceMap: true,
+              importLoaders: 2,
+              localIdentName: /*[name]--*/ '[local]' //--[hash:base64:8]'
+            }
+          },
+          "postcss-loader",
+          'sass-loader'
+        ]
       },
-      /*{
-        test: /\.s?css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-
-          // Could also be write as follow:
-          // use: 'css-loader?modules&importLoader=2&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader'
-          use: [ //'style-loader',
-            //MiniCssExtractPlugin.loader,
-            {
-              loader: 'typings-for-css-modules-loader',
-              query: {
-                modules: true,
-                sourceMap: true,
-                importLoaders: 2,
-                localIdentName: /*[name]--*/ // '[local]' //--[hash:base64:8]'
-      /* }
-            },
-            { loader: 'postcss-loader', options: { sourceMap: true } },
-            { loader: 'sass-loader', options: { sourceMap: true } }
-          ]
-        }),
-      },*/
-      /*{
-        test: /\.s?css$/,
-        exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            "css-loader",
-            "postcss-loader",
-            "sass-loader"
-          ]
-        })
-      },*/
-      {
+     /* {
         test: /\.html$/,
         use: 'html-loader'
-      },
+      },*/
       {
         test: /\.png$/,
         use: 'url-loader?limit=10000'
@@ -179,22 +124,11 @@ module.exports = {
       {
         test: /\.jpg$/,
         use: 'file-loader'
-      },
-      /*,
-      {
-        test: /\.css$/,
-        use: [{
-          loader: "css-loader"
-        }]
-      }*/
-      /*{
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!sass')
-      }*/
+      }
     ]
   },
   externals: {
-    'react': {
+    /*'react': {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
@@ -205,7 +139,7 @@ module.exports = {
       commonjs2: 'react-dom',
       commonjs: 'react-dom',
       amd: 'react-dom'
-    },
+    },*/
     /*'urijs': {
       root: 'urijs',
       commonjs2: 'urijs',
@@ -221,6 +155,7 @@ module.exports = {
         }*/
   },
   plugins: [
+    new CleanWebpackPlugin('dist', {} ),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),
@@ -228,11 +163,23 @@ module.exports = {
       "React": "react",
       "Quagga": "quagga"
     }),
+    /*new MinifyPlugin({
+      mangle: false
+    }),*/
     new BundleAnalyzerPlugin(),
-    new ExtractTextPlugin('style.css', {
-      allChunks: true
+    new MiniCssExtractPlugin({
+      filename: 'style.[contenthash].css',
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    new HtmlWebpackPlugin({
+      inject: false,
+      hash: true,
+      template: './src/index.html',
+      filename: 'index.html'
+    }),
+    /*new ExtractTextPlugin('style.css', {
+      allChunks: true
+    }),*/
+    /*new webpack.optimize.UglifyJsPlugin({
       mangle: true,
       sourceMap: false,
       compress: {
@@ -246,8 +193,8 @@ module.exports = {
         comments: false,
       },
       exclude: [/\.min\.js$/gi] // skip pre-minified libs
-    }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
+    }),*/
+    //new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
     new CompressionPlugin({
       asset: "[path].gz[query]",
       algorithm: "gzip",

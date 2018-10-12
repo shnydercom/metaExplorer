@@ -13,7 +13,7 @@
           "initialKvStores": [
             {
               "key": "http://schema.org/contentUrl",
-              "value": "/dist/static/charts_big.png"
+              "value": "/static/charts_big.png"
             }
           ],
           "crudSkills": "cRud",

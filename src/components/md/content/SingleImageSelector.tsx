@@ -67,9 +67,9 @@ SingleImageSelectorState>
 
 	cfg: BlueprintConfig;
 	//outputKVMap: OutputKVMap;
-	loadingImgLink: string = "/dist/static/camera_negative_black.svg";
-	errorImgLink: string = "/dist/static/nocamera_negative_black.svg";
-	draggingImgLink: string = "/dist/static/dragndrop.svg";
+	loadingImgLink: string = "/static/camera_negative_black.svg";
+	errorImgLink: string = "/static/nocamera_negative_black.svg";
+	draggingImgLink: string = "/static/dragndrop.svg";
 
 	initialKvStores: IKvStore[];
 	constructor(props: any) {

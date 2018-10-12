@@ -17,12 +17,12 @@
             },
             {
               "key": "IconURL_1",
-              "value": "/dist/static/spark_red.svg",
+              "value": "/static/spark_red.svg",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "IconURL_1_Disabled",
-              "value": "/dist/static/spark_grey.svg",
+              "value": "/static/spark_grey.svg",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -32,12 +32,12 @@
             },
             {
               "key": "IconURL_2",
-              "value": "/dist/static/camera_black.svg",
+              "value": "/static/camera_black.svg",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "IconURL_2_Disabled",
-              "value": "/dist/static/camera_grey.svg",
+              "value": "/static/camera_grey.svg",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -47,12 +47,12 @@
             },
             {
               "key": "IconURL_3",
-              "value": "/dist/static/butterfly_black.svg",
+              "value": "/static/butterfly_black.svg",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "IconURL_3_Disabled",
-              "value": "/dist/static/butterfly_grey.svg",
+              "value": "/static/butterfly_grey.svg",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -62,12 +62,12 @@
             },
             {
               "key": "IconURL_4",
-              "value": "/dist/static/persons_black.svg",
+              "value": "/static/persons_black.svg",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "IconURL_4_Disabled",
-              "value": "/dist/static/persons_grey.svg",
+              "value": "/static/persons_grey.svg",
               "ldType": "http://schema.org/Text"
             },
             {

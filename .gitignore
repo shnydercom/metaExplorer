@@ -72,3 +72,4 @@ typings/
 
 # any additional tooling
 tooling/*
+.awcache/*

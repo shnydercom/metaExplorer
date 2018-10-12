@@ -13,3 +13,6 @@ https://www.ebpml.org/blog15/2016/01/sam-a-functional-approach-to-ui-constructio
 
 #structured programming vs. state-action-model
 https://www.ebpml.org/blog15/2015/06/sam-the-state-action-model-pattern/
+
+#configuring webpack 4
+https://hackernoon.com/a-tale-of-webpack-4-and-how-to-finally-configure-it-in-the-right-way-4e94c8e7e5c1
