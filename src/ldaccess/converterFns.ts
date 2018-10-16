@@ -1,5 +1,4 @@
 import { IKvStore } from "ldaccess/ikvstore";
-import { LDConsts } from 'ldaccess/LDConsts';
 import { IHypermediaContainer } from "hydraclient.js/src/DataModel/IHypermediaContainer";
 import { LDDict } from "ldaccess/LDDict";
 

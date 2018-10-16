@@ -1,4 +1,4 @@
-import { LDConsts } from "ldaccess/LDConsts";
+import { LDConsts } from "ldaccess/LDconsts";
 
 import { IItptMatcher } from "ldaccess/iitpt-matcher";
 import { IKvStore } from "ldaccess/ikvstore";

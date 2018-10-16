@@ -14,7 +14,6 @@ import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
 import { ILDResource } from "ldaccess/ildresource";
 import { ILDToken, NetworkPreferredToken, createConcatNetworkPreferredToken, refMapBaseTokenStr } from "ldaccess/ildtoken";
 import { isObjPropertyRef, ldOptionsDeepCopy } from "ldaccess/ldUtils";
-import { LDConsts } from "ldaccess/LDConsts";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { Component } from "react";
 import { appItptMatcherFn } from "appconfig/appItptMatcher";
