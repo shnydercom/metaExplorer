@@ -3,7 +3,7 @@ import { GoogleAuth, GoogleAuthOptions } from 'google-auth-library';
 import { getAPI } from 'googleapis/build/src/shared/src';*/
 
 //test data, to be ld-input parameters later:
-let testCfg: GoogleWebAuthAPICfg = {
+export let gwaTestCfg: GoogleWebAuthAPICfg = {
 	scope: 'https://www.googleapis.com/auth/spreadsheets.readonly',
 	apiKey: 'AIzaSyBGoOzD583AP7izQdrdDjvCIKnXln1v38c',
 	clientID: '988991312764-rj2bejoo1n2li9gala129dobmfpeminf.apps.googleusercontent.com',
@@ -24,7 +24,7 @@ export interface GoogleWebAuthState {
 
 export class GoogleWebAuthAPI {
 	public static getSingleton(): GoogleWebAuthAPI {
-		if (GoogleWebAuthAPI.singleton == null) {
+		if (GoogleWebAuthAPI.singleton === null || GoogleWebAuthAPI.singleton === undefined ) {
 			let newSingleton: GoogleWebAuthAPI = new GoogleWebAuthAPI();
 			newSingleton.initScriptLoad();
 			GoogleWebAuthAPI.singleton = newSingleton;
@@ -40,7 +40,7 @@ export class GoogleWebAuthAPI {
 	private _state: GoogleWebAuthState;
 
 	constructor() {
-		GoogleWebAuthAPI.getSingleton();
+		//GoogleWebAuthAPI.getSingleton();
 		this._state = {
 			generalState: "preAPIDownload"
 		};
@@ -75,6 +75,7 @@ export class GoogleWebAuthAPI {
 	 *  listeners.
 	 */
 	initClient(cfg?: GoogleWebAuthAPICfg) {
+		console.log("initialising client on state: " + this._state);
 		if (!cfg && !this._cfg) {
 			console.warn("not initializing Auth Client, no configuration set");
 			return;

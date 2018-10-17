@@ -25,6 +25,7 @@ import 'mods/google/components/GWebAuthenticator';
 import { initGameItpt } from 'components/game/initGameItpts';
 import { initBaseHtmlItpt } from 'components/basic-html/initBaseHtmlItpt';
 import LDApproot, { PureLDApproot } from 'ldapproot';
+import { initGoogleServiceItpts } from 'mods/google/initGoogleServiceItpts';
 
 const initialState: ExplorerState = {
 	ldoptionsMap: {},
@@ -52,6 +53,7 @@ function rootSetup(): void {
 	initMDitptFnAsDefault();
 	initGameItpt();
 	initLDConnect();
+	initGoogleServiceItpts();
 }
 
 rootSetup();

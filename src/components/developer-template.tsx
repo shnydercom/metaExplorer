@@ -9,7 +9,7 @@ import { initLDLocalState, generateItptFromCompInfo, getDerivedItptStateFromProp
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { LDDict } from 'ldaccess/LDDict';
 
-let allMyInputKeys: string[] = [VisualDict.freeContainer];
+let allMyInputKeys: string[] = [VisualDict.freeContainer, "http://my-domain.com/my-class/my-member-a"];
 let initialKVStores: IKvStore[] = [ //the content of the key-value stores at initialization
 	//is an input, because it is defined in var allMyInputKeys, and is a visual container
 	{ key: VisualDict.freeContainer, value: undefined, ldType: UserDefDict.intrprtrClassType },
