@@ -66,11 +66,11 @@ module.exports = {...sharedWebpackCfg,
         to: 'static'
       },
       {
-        from: 'node_modules/react/umd/react.production.min.js',
+        from: 'node_modules/react/umd/react.development.js',
         to: 'lib/react.js'
       },
       {
-        from: 'node_modules/react-dom/umd/react-dom.production.min.js',
+        from: 'node_modules/react-dom/umd/react-dom.development.js',
         to: 'lib/react-dom.js'
       },
       {

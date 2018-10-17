@@ -45,6 +45,7 @@ import * as htmlhowto from '../demos/html-howto.json';
 import * as parisTrain from '../demos/img-paris-train.json';
 import * as londonBus from '../demos/img-london-bus.json';
 import * as planeLanding from '../demos/img-plane-landing.json';
+import * as shnyderlogo from '../demos/img-shnyderlogo.json';
 
 import * as aToBtravels from '../demos/img-a-to-b-travels.json';
 import { connect } from "react-redux";
@@ -73,7 +74,7 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 		if (!this.state.hasCompletedFirstRender && prevProps.isInitDemo) {
 			//generate demos for compound itpts
 			let prefilledData: any[] = [
-				planeLanding, parisTrain, londonBus, aToBtravels,
+				planeLanding, parisTrain, londonBus, aToBtravels, shnyderlogo,
 				fourIconBottomBar, threeIconBottomBar, testImage, chartsImage, singleChoiceGame, popoverCard,
 				actionPanel, barcodeScanPanel, usersPanel, expenseFormPanel, timetrackingPanel, bookingFormPanel, bookingSelectionPanel,
 				bookingSelectionFlight, bookingSelectionTrain, bookingSelectionBus,

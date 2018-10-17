@@ -14,7 +14,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "2db6cf6f-cc02-4347-81a8-0a3f0322bcad",
+                "objRef": "5dc3e3d1-a669-4e8f-88cb-a3f660f332a3",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -29,6 +29,42 @@
           "interpretableKeys": [
             "freeContainer"
           ]
+        },
+        "5dc3e3d1-a669-4e8f-88cb-a3f660f332a3": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "5dc3e3d1-a669-4e8f-88cb-a3f660f332a3",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "a3836604-3193-4256-a329-51dd55cfbce6",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "2db6cf6f-cc02-4347-81a8-0a3f0322bcad",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
+        "a3836604-3193-4256-a329-51dd55cfbce6": {
+          "subItptOf": "demo/images/shnyderLogo",
+          "canInterpretType": "demo/images/shnyderLogo-ObjectType",
+          "nameSelf": "a3836604-3193-4256-a329-51dd55cfbce6",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
         },
         "2db6cf6f-cc02-4347-81a8-0a3f0322bcad": {
           "subItptOf": "shnyder/layout/vh-centered-column",
