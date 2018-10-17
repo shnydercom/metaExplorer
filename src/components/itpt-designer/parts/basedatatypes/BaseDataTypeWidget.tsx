@@ -5,8 +5,6 @@ import { BaseDataTypePortSelector } from "./BaseDataTypePortSelectorWidget";
 import { BaseDataTypeNodeModel } from "./BaseDataTypeNodeModel";
 import { Component, createFactory, ClassAttributes, ComponentElement, ReactElement, ReactPortal } from "react";
 import { map } from "lodash";
-import { IKvStore } from "ldaccess/ikvstore";
-import { LDPortModel } from "./../LDPortModel";
 
 export interface BaseDataTypeNodeProps {
 	node: BaseDataTypeNodeModel;

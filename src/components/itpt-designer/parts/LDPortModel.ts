@@ -2,6 +2,7 @@ import { PortModel, DiagramEngine, LinkModel, DefaultPortModel, DefaultLinkModel
 import { merge } from "lodash";
 import { IKvStore } from "ldaccess/ikvstore";
 import { LD_PORTMODEL } from "./designer-consts";
+import { isInputValueValidFor } from "ldaccess/ldtypesystem/typeChecking";
 
 /**
  * @author Dylan Vorster
@@ -42,10 +43,19 @@ export class LDPortModel extends PortModel {
 	}
 
 	canLinkToPort(port: PortModel): boolean {
-		if (port instanceof DefaultPortModel) {
-			return this.in !== port.in;
+		let rv: boolean = true;
+		if (port instanceof LDPortModel) {
+			if (this.in === port.in) return false;
+		} else {
+			return false;
 		}
-		return true;
+		let ldPort = port as LDPortModel;
+		if (ldPort.in) {
+			rv = isInputValueValidFor(this.kv, ldPort.kv);
+		} else {
+			rv = isInputValueValidFor(ldPort.kv, this.kv);
+		}
+		return rv;
 	}
 
 	createLinkModel(): LinkModel {
