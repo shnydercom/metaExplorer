@@ -14,7 +14,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "76350c83-e0ed-49ea-85d9-c84adaf83e55",
+                "objRef": "f5f5f934-77d6-4c87-9f3d-4b2972e11d25",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -43,6 +43,25 @@
           "interpretableKeys": [
             "freeContainer",
             "RouteSend_confirm"
+          ]
+        },
+        "f5f5f934-77d6-4c87-9f3d-4b2972e11d25": {
+          "subItptOf": "shnyder/layout/vh-centered-column",
+          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
+          "nameSelf": "f5f5f934-77d6-4c87-9f3d-4b2972e11d25",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "76350c83-e0ed-49ea-85d9-c84adaf83e55",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
           ]
         },
         "76350c83-e0ed-49ea-85d9-c84adaf83e55": {

@@ -1,11 +1,30 @@
 {
-  "subItptOf": "08ef36d3-2cbd-4ea1-bca9-77172bcc0141",
+  "subItptOf": "32b677cb-ce47-4bb6-a58d-6498c6c08149",
   "canInterpretType": "demo/components/expense-form-panel-ObjectType",
   "nameSelf": "demo/components/expense-form-panel",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
+        "32b677cb-ce47-4bb6-a58d-6498c6c08149": {
+          "subItptOf": "shnyder/layout/vh-centered-column",
+          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
+          "nameSelf": "32b677cb-ce47-4bb6-a58d-6498c6c08149",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "08ef36d3-2cbd-4ea1-bca9-77172bcc0141",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
         "08ef36d3-2cbd-4ea1-bca9-77172bcc0141": {
           "subItptOf": "shnyder/baseContainer",
           "canInterpretType": "shnyder/ContainerObjType",
