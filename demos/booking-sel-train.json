@@ -14,7 +14,7 @@
             {
               "key": "HeaderInterpreter",
               "value": {
-                "objRef": "b6c5d11d-b317-4d2d-83f8-0780ac3e698e",
+                "objRef": "47af9b40-a9f6-482d-9410-c8e42fa6458f",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -49,10 +49,10 @@
             "FooterInterpreter"
           ]
         },
-        "b6c5d11d-b317-4d2d-83f8-0780ac3e698e": {
-          "subItptOf": "demo/components/test-image",
-          "canInterpretType": "demo/components/test-image-ObjectType",
-          "nameSelf": "b6c5d11d-b317-4d2d-83f8-0780ac3e698e",
+        "47af9b40-a9f6-482d-9410-c8e42fa6458f": {
+          "subItptOf": "demo/images/parisTrain",
+          "canInterpretType": "demo/images/parisTrain-ObjectType",
+          "nameSelf": "47af9b40-a9f6-482d-9410-c8e42fa6458f",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []

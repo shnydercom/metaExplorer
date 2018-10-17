@@ -42,6 +42,11 @@ import * as bookingScreen from '../demos/booking-screen.json';
 import * as appMain from '../demos/app-main.json';
 import * as routehowto from '../demos/route-howto.json';
 import * as htmlhowto from '../demos/html-howto.json';
+import * as parisTrain from '../demos/img-paris-train.json';
+import * as londonBus from '../demos/img-london-bus.json';
+import * as planeLanding from '../demos/img-plane-landing.json';
+
+import * as aToBtravels from '../demos/img-a-to-b-travels.json';
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { DemoCompleteReceiver } from "approot";
@@ -67,7 +72,9 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver) {
 		if (!this.state.hasCompletedFirstRender && prevProps.isInitDemo) {
 			//generate demos for compound itpts
-			let prefilledData: any[] = [fourIconBottomBar, threeIconBottomBar, testImage, chartsImage, singleChoiceGame, popoverCard,
+			let prefilledData: any[] = [
+				planeLanding, parisTrain, londonBus, aToBtravels,
+				fourIconBottomBar, threeIconBottomBar, testImage, chartsImage, singleChoiceGame, popoverCard,
 				actionPanel, barcodeScanPanel, usersPanel, expenseFormPanel, timetrackingPanel, bookingFormPanel, bookingSelectionPanel,
 				bookingSelectionFlight, bookingSelectionTrain, bookingSelectionBus,
 				bookingBuyFlight, bookingBuyTrain, bookingBuyBus,

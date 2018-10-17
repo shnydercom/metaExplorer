@@ -53,6 +53,11 @@ import * as bookingScreen from '../../../demos/booking-screen.json';
 import * as appMain from '../../../demos/app-main.json';
 import * as routehowto from '../../../demos/route-howto.json';
 import * as htmlhowto from '../../../demos/html-howto.json';
+import * as parisTrain from '../../../demos/img-paris-train.json';
+import * as londonBus from '../../../demos/img-london-bus.json';
+import * as planeLanding from '../../../demos/img-plane-landing.json';
+
+import * as aToBtravels from '../../../demos/img-a-to-b-travels.json';
 
 import {
 	DiagramEngine,
@@ -185,7 +190,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 	}
 
 	onGenLinearClick = (e) => {
-		let prefilledData: any = linearDataDisplayTest2_Inner;
+		let prefilledData: any = linearDataDisplayTest2_Inner; // linearDataDisplayTest; //
 		this.generatePrefilled(prefilledData);
 	}
 
@@ -258,10 +263,12 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver) {
 		if (!this.state.hasCompletedFirstRender && prevProps.isInitDemo) {
 			//generate demos for compound itpts
-			let prefilledData: any[] = [fourIconBottomBar, threeIconBottomBar, testImage, chartsImage, singleChoiceGame, popoverCard,
+			let prefilledData: any[] = [
+				planeLanding, parisTrain, londonBus, aToBtravels,
+				fourIconBottomBar, threeIconBottomBar, testImage, chartsImage, singleChoiceGame, popoverCard,
 				actionPanel, barcodeScanPanel, usersPanel, expenseFormPanel, timetrackingPanel, bookingFormPanel, bookingSelectionPanel,
 				bookingSelectionFlight, bookingSelectionTrain, bookingSelectionBus,
-				bookingBuyFlight,	bookingBuyTrain, bookingBuyBus,
+				bookingBuyFlight, bookingBuyTrain, bookingBuyBus,
 				mainScreen, searchScreen, expenseScreen, gameScreen, timeTrackingScreen, bookingScreen,
 				routehowto, htmlhowto, appMain
 			];
@@ -291,7 +298,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 					<DesignerBody logic={this.logic} />
 				</ThemeProvider>
 				<div className="phone-preview-container">
-					{isDisplayDevContent ? <>
+					{isDisplayDevContent ? <div style={{alignSelf: "flex-start", position: "absolute"}}>
 						<Button onClick={this.onInterpretBtnClick}>interpret!</Button>
 						<Button onClick={this.onGenAppClick}>Generate App!</Button>
 						<Button onClick={this.onGenSingleImageSel}>My Barcodes App</Button>
@@ -300,13 +307,13 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 						<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
 						<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>
 						<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>
-						<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
+					<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
 
 						<Button onClick={this.onGenLinearClick}>Linear!</Button>
 						<Button onClick={this.onGameClick}>Game!</Button>
 						<Link to="/designerinitial">initial   </Link>
 						<Link to="/app">   app</Link>
-					</> : null}
+					</div> : null}
 					<div className="rotated-serialize">
 						<Button onClick={this.onInterpretBtnClick} raised primary style={{ background: '#010f27' }}>
 							<FontIcon value='arrow_upward' />

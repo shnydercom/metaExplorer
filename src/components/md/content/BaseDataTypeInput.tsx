@@ -224,7 +224,7 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 			case LDDict.DateTime:
 				var parsedDate = parseDate(this.state.singleKV);
 				var parsedTime = parseTime(this.state.singleKV);
-				return <div>
+				return <div className="dateTimePicker">
 					<DatePicker
 						label={heading}
 						onChange={(evt) => this.handleChange(evt)}

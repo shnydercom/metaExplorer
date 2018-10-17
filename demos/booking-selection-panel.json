@@ -103,7 +103,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "fefe154d-9bb6-4a36-bc98-0606df5e6697",
+                "objRef": "ba619113-b303-4f8c-b3da-d00a3129e424",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -114,10 +114,10 @@
             "freeContainer"
           ]
         },
-        "fefe154d-9bb6-4a36-bc98-0606df5e6697": {
-          "subItptOf": "demo/components/test-image",
-          "canInterpretType": "demo/components/test-image-ObjectType",
-          "nameSelf": "fefe154d-9bb6-4a36-bc98-0606df5e6697",
+        "ba619113-b303-4f8c-b3da-d00a3129e424": {
+          "subItptOf": "demo/images/planeLanding",
+          "canInterpretType": "demo/images/planeLanding-ObjectType",
+          "nameSelf": "ba619113-b303-4f8c-b3da-d00a3129e424",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
@@ -219,7 +219,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "7af5d6a0-64c3-4ff4-b6a3-b29ac6826e1b",
+                "objRef": "6a0eb6f1-6d44-4fea-8d22-c045bd655321",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -230,10 +230,10 @@
             "freeContainer"
           ]
         },
-        "7af5d6a0-64c3-4ff4-b6a3-b29ac6826e1b": {
-          "subItptOf": "demo/components/test-image",
-          "canInterpretType": "demo/components/test-image-ObjectType",
-          "nameSelf": "7af5d6a0-64c3-4ff4-b6a3-b29ac6826e1b",
+        "6a0eb6f1-6d44-4fea-8d22-c045bd655321": {
+          "subItptOf": "demo/images/parisTrain",
+          "canInterpretType": "demo/images/parisTrain-ObjectType",
+          "nameSelf": "6a0eb6f1-6d44-4fea-8d22-c045bd655321",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
@@ -335,7 +335,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "3d9b64f3-f61d-4ead-8e24-cdea11c95477",
+                "objRef": "e7741996-e491-46f3-841a-9cd4d7573688",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -346,10 +346,10 @@
             "freeContainer"
           ]
         },
-        "3d9b64f3-f61d-4ead-8e24-cdea11c95477": {
-          "subItptOf": "demo/components/test-image",
-          "canInterpretType": "demo/components/test-image-ObjectType",
-          "nameSelf": "3d9b64f3-f61d-4ead-8e24-cdea11c95477",
+        "e7741996-e491-46f3-841a-9cd4d7573688": {
+          "subItptOf": "demo/images/londonBus",
+          "canInterpretType": "demo/images/londonBus-ObjectType",
+          "nameSelf": "e7741996-e491-46f3-841a-9cd4d7573688",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []

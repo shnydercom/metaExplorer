@@ -35,7 +35,7 @@ module.exports = {...sharedWebpackCfg,
     inline: true,
   },
   plugins: [
-    //new CleanWebpackPlugin('dist', {} ),
+    new CleanWebpackPlugin('dist', {} ),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"'
     }),

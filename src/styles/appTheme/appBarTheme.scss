@@ -211,6 +211,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .top-nav-bottomfree {
   flex: 1;
   display: flex;
@@ -315,6 +316,7 @@ canvas.drawingBuffer {
     line-height: 1 !important;
     font-size: 300% !important;
   }
+
   .accept {
     border: 2px dashed;
     border-radius: 8px;
@@ -386,6 +388,7 @@ canvas.drawingBuffer {
 html {
   height: 100%;
 }
+
 body {
   margin: 0pt;
   height: 100%;
@@ -413,4 +416,12 @@ body {
   padding: 10px;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
+}
+
+.dateTimePicker {
+  display: flex;
+  >* {
+    flex: 1;
+    padding: 10px;
+  }
 }

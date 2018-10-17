@@ -12,8 +12,9 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from '../generic/generatorFns';
 
 let cfgType: string = LDDict.ViewAction;
+export const CSS_OBJECT_FIT = "CSSObjectFit";
 let cfgIntrprtKeys: string[] =
-	[LDDict.name, LDDict.fileFormat, LDDict.contentUrl];
+	[LDDict.name, LDDict.fileFormat, LDDict.contentUrl, CSS_OBJECT_FIT];
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
@@ -34,12 +35,12 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 		let rvLD = getDerivedItptStateFromProps(
 			nextProps, prevState, []);
 		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [LDDict.name, LDDict.fileFormat, LDDict.contentUrl]);
+			nextProps, prevState, [LDDict.name, LDDict.fileFormat, LDDict.contentUrl, CSS_OBJECT_FIT]);
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
 		let rvNew = { ...rvLD, ...rvLocal };
-		return {...rvNew};
+		return { ...rvNew };
 	}
 
 	cfg: BlueprintConfig;
@@ -50,12 +51,15 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		this.state = initLDLocalState(this.cfg, props, [], [LDDict.name, LDDict.fileFormat, LDDict.contentUrl]);
+		this.state = initLDLocalState(this.cfg, props, [], [LDDict.name, LDDict.fileFormat, LDDict.contentUrl, CSS_OBJECT_FIT]);
 	}
 
 	render() {
 		const { ldOptions } = this.props;
-		let imgLnk: string = this.state.localValues.get(LDDict.contentUrl);
+		const { localValues } = this.state;
+		let objFit = localValues.get(CSS_OBJECT_FIT);
+		objFit = objFit ? objFit : "unset";
+		let imgLnk: string = localValues.get(LDDict.contentUrl);
 		if (imgLnk
 			&& !imgLnk.startsWith("http://")
 			&& !imgLnk.startsWith("blob:http://")
@@ -64,7 +68,7 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 		}
 		if (!ldOptions) return <div>no Image data</div>;
 		return <div className="imgdisplay">
-			<img alt="" src={imgLnk} className="imgdisplay" />
+			<img alt="" src={imgLnk} className="imgdisplay" style={{ objectFit: objFit }}/>
 			{/*imgLnk*/}
 			{this.props.children}
 		</div>;
