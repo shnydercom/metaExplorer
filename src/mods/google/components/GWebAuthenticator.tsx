@@ -8,7 +8,7 @@ import { initLDLocalState, generateItptFromCompInfo, getDerivedItptStateFromProp
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { LDDict } from 'ldaccess/LDDict';
 import { VisualDict } from 'components/visualcomposition/visualDict';
-import { GoogleWebAuthAPI, gwaTestCfg } from '../apis/GoogleWebAuthAPI';
+import { GoogleWebAuthAPI, gwaTestCfg, EVENT_GOOGLE_WEB_AUTH, GoogleWebAuthState } from '../apis/GoogleWebAuthAPI';
 import { Button } from 'react-toolbox/lib/button';
 
 export const GoogleWebAuthenticatorName: string = "GoogleWebAuthenticator";
@@ -22,7 +22,9 @@ export const GWebAuthenticatorCfg: BlueprintConfig = {
 	interpretableKeys: allMyInputKeys,
 	crudSkills: "cRUd"
 };
-export interface GWebAuthenticatorState extends LDLocalState { }
+export interface GWebAuthenticatorState extends LDLocalState {
+	googleState: GoogleWebAuthState;
+}
 
 @ldBlueprint(GWebAuthenticatorCfg)
 export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, GWebAuthenticatorState>
@@ -37,7 +39,7 @@ export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnec
 			return null;
 		}
 		let rvNew = { ...rvLD, ...rvLocal };
-		return { ...rvNew };
+		return { ...prevState, ...rvNew };
 	}
 
 	googleAPI: GoogleWebAuthAPI;
@@ -53,17 +55,29 @@ export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnec
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, props, [], []);
-		this.state = { ...ldState, };
+
 		this.googleAPI = GoogleWebAuthAPI.getSingleton();
+		this.googleAPI.addEventListener(EVENT_GOOGLE_WEB_AUTH,
+			(event) => {
+				this.setState({ ...this.state, googleState: this.googleAPI.getState() });
+			});
+		this.state = { ...ldState, googleState: this.googleAPI.getState() };
 	}
 	render() {
-		const { localValues } = this.state;
-		const googleState = this.googleAPI.getState();
+		const { googleState } = this.state;
 		console.log(googleState);
 		const isLoggedIn: boolean = googleState.generalState === "signedIn";
 		const isInitial: boolean = googleState.generalState === "initial";
+		const canReSignIn: boolean = googleState.generalState === "notSignedIn";
 		return <div>
 			<h3>authenticate to google</h3>
+			{
+				canReSignIn ?
+				<Button onClick={() => {
+					this.googleAPI.reSignIn();
+				}}>sign in</Button>
+				: null
+			}
 			{isInitial ?
 				<Button onClick={() => {
 					this.googleAPI.initClient(gwaTestCfg);
