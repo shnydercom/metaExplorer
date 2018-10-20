@@ -1,5 +1,5 @@
 import { keys } from "lodash";
-import { DiagramModel, LinkModel, DiagramEngine, DefaultNodeFactory, DefaultLinkFactory, NodeModel } from "storm-react-diagrams";
+import { DiagramModel, DiagramEngine, NodeModel, DefaultLinkModel } from "storm-react-diagrams";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
 import { LDPortModel } from "./LDPortModel";
 import appIntprtrRetr from 'appconfig/appItptRetriever';
@@ -31,6 +31,8 @@ import { LDPortInstanceFactory } from "./LDPortInstanceFactory";
 import { isInputValueValidFor } from "ldaccess/ldtypesystem/typeChecking";
 import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
 import { ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
+import { SettingsLabelFactory } from "./SettingsLabelFactory";
+import { SettingsLinkFactory } from "./SettingsLinkFactory";
 
 export interface NewNodeSig {
 	x: number;
@@ -57,8 +59,11 @@ export class DesignerLogic {
 	constructor(outputLDOptionsToken: string) {
 		this.outputLDOptionsToken = outputLDOptionsToken;
 		this.diagramEngine = new DiagramEngine();
-		this.diagramEngine.registerNodeFactory(new DefaultNodeFactory());
-		this.diagramEngine.registerLinkFactory(new DefaultLinkFactory());
+		//this.diagramEngine.installDefaultFactories();
+		//this.diagramEngine.registerNodeFactory(new DefaultNodeFactory());
+		//this.diagramEngine.registerLinkFactory(new DefaultLinkFactory());
+		this.diagramEngine.registerLabelFactory(new SettingsLabelFactory());
+		this.diagramEngine.registerLinkFactory(new SettingsLinkFactory());
 		this.diagramEngine.registerNodeFactory(new BaseDataTypeNodeFactory());
 		this.diagramEngine.registerNodeFactory(new GeneralDataTypeNodeFactory());
 		this.diagramEngine.registerNodeFactory(new DeclarationWidgetFactory());
@@ -340,7 +345,7 @@ export class DesignerLogic {
 						}
 						sourcePort = bdtStaticNode.getPort(PORTNAME_OUT_EXPORTSELF) as LDPortModel;
 					}
-					let subItptLink = new LinkModel();
+					let subItptLink = new DefaultLinkModel();
 					subItptLink.setSourcePort(sourcePort);
 					subItptLink.setTargetPort(targetPort);
 					linkArray.push(subItptLink);
@@ -365,7 +370,7 @@ export class DesignerLogic {
 					.addNode(inputMarkerNode);
 				let targetNode = nodeMap.get(itptKeyField.objRef);
 				let targetPort = targetNode.getPort(itptKeyField.propRef + "_in");
-				let inputMarkerLink = new LinkModel();
+				let inputMarkerLink = new DefaultLinkModel();
 				inputMarkerLink.setSourcePort(inputMarkerPort);
 				inputMarkerLink.setTargetPort(targetPort);
 				linkArray.push(inputMarkerLink);
@@ -377,17 +382,17 @@ export class DesignerLogic {
 		let outputNodeItptInPort = this.outputNode.getPort(UserDefDict.finalInputKey);
 		let outputNodeNameInPort = this.outputNode.getPort(UserDefDict.intrprtrNameKey);
 
-		let outputItptLink = new LinkModel();
+		let outputItptLink = new DefaultLinkModel();
 		outputItptLink.setTargetPort(outputNodeItptInPort);
 		outputItptLink.setSourcePort(baseNode.getPort(UserDefDict.exportSelfKey));
 
-		let outputNameLink = new LinkModel();
+		let outputNameLink = new DefaultLinkModel();
 		outputNameLink.setTargetPort(outputNodeNameInPort);
 		outputNameLink.setSourcePort(nameTextNodeOutPort);
 
-		this.getDiagramEngine().recalculatePortsVisually();
-		this.getDiagramEngine().getDiagramModel().addLink(outputNameLink);
 		this.getDiagramEngine().getDiagramModel().addLink(outputItptLink);
+		this.getDiagramEngine().getDiagramModel().addLink(outputNameLink);
+		this.getDiagramEngine().recalculatePortsVisually();
 		//console.log(linkArray.length);
 		linkArray.forEach((link) => {
 			this.getDiagramEngine().getDiagramModel().addLink(link);

@@ -19,7 +19,9 @@
 
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": ["node", "gapi", "gapi.auth2", "react-toolbox"],
+    "types": ["node", 
+      "gapi", "gapi.auth2", "gapi", "gapi.auth2", "gapi.client", "gapi.client.sheets", 
+      "react-toolbox"],
     "typeRoots": ["./node_modules/@types"],
     "suppressExcessPropertyErrors": true,
     "declaration": true,

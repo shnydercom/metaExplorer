@@ -170,10 +170,10 @@ export class GoogleWebAuthAPI implements EventTarget {
 	}
 
 	reSignIn(): boolean {
-		if(this._state.generalState === "notSignedIn"){
+		if (this._state.generalState === "notSignedIn") {
 			gapi.auth2.getAuthInstance().signIn();
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}

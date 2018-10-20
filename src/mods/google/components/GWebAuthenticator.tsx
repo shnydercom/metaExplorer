@@ -10,6 +10,7 @@ import { LDDict } from 'ldaccess/LDDict';
 import { VisualDict } from 'components/visualcomposition/visualDict';
 import { GoogleWebAuthAPI, gwaTestCfg, EVENT_GOOGLE_WEB_AUTH, GoogleWebAuthState } from '../apis/GoogleWebAuthAPI';
 import { Button } from 'react-toolbox/lib/button';
+import { GSheetsRetriever } from '../sidefx/GSheetsRetriever';
 
 export const GoogleWebAuthenticatorName: string = "GoogleWebAuthenticator";
 let allMyInputKeys: string[] = [];
@@ -60,6 +61,9 @@ export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnec
 		this.googleAPI.addEventListener(EVENT_GOOGLE_WEB_AUTH,
 			(event) => {
 				this.setState({ ...this.state, googleState: this.googleAPI.getState() });
+				if (event.newState === "signedIn") {
+					let test = new GSheetsRetriever();
+				}
 			});
 		this.state = { ...ldState, googleState: this.googleAPI.getState() };
 	}
@@ -73,10 +77,10 @@ export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnec
 			<h3>authenticate to google</h3>
 			{
 				canReSignIn ?
-				<Button onClick={() => {
-					this.googleAPI.reSignIn();
-				}}>sign in</Button>
-				: null
+					<Button onClick={() => {
+						this.googleAPI.reSignIn();
+					}}>sign in</Button>
+					: null
 			}
 			{isInitial ?
 				<Button onClick={() => {

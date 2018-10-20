@@ -22,8 +22,14 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
   width: 100%
 }
 
-.values {
-  background-color: $color-primary-dark;
+.dropdown {
+  .values {
+    background-color: $designer-background-elevated-color;
+    color: $designer-primary-color;
+    *:hover {
+      background-color: $designer-secondary-color !important;
+    }
+  }
 }
 
 .on .thumb {
