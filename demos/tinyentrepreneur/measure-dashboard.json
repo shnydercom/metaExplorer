@@ -1,0 +1,39 @@
+{
+  "subItptOf": "185ebea6-e4c1-4307-bb04-3ab5ee556053",
+  "canInterpretType": "tinyentrepreneur/measure-dashboard-ObjectType",
+  "nameSelf": "tinyentrepreneur/measure-dashboard",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "185ebea6-e4c1-4307-bb04-3ab5ee556053": {
+          "subItptOf": "shnyder/md/NavProcessAtom",
+          "canInterpretType": "shnyder/md/NavProcessAtom-ObjectType",
+          "nameSelf": "185ebea6-e4c1-4307-bb04-3ab5ee556053",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "save",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_cancel",
+              "value": "../",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "../",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

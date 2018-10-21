@@ -1,0 +1,212 @@
+{
+  "subItptOf": "57616b5e-d385-4550-88eb-c1932ad127c8",
+  "canInterpretType": "tinyentrepreneur/APP-ObjectType",
+  "nameSelf": "tinyentrepreneur/APP",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "57616b5e-d385-4550-88eb-c1932ad127c8": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "57616b5e-d385-4550-88eb-c1932ad127c8",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "be5e5be8-9cce-4267-b0f0-1326cc24a147",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "b4414ef1-d2af-4e63-b335-0c2e33d895cc",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "0640aa89-fb3e-49b3-b4d6-d23e70ca7b0c",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "d03f20f7-9415-4973-9b22-340178775b0b",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_4",
+              "value": {
+                "objRef": "0799005c-8877-493d-8d36-fa7827f3cb3c",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2",
+            "in_3",
+            "in_4"
+          ]
+        },
+        "be5e5be8-9cce-4267-b0f0-1326cc24a147": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "be5e5be8-9cce-4267-b0f0-1326cc24a147",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "68e1a757-5b7e-43c0-925e-23eebaf85dec",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "/",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "68e1a757-5b7e-43c0-925e-23eebaf85dec": {
+          "subItptOf": "tinyentrepreneur/main-menu",
+          "canInterpretType": "tinyentrepreneur/main-menu-ObjectType",
+          "nameSelf": "68e1a757-5b7e-43c0-925e-23eebaf85dec",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "b4414ef1-d2af-4e63-b335-0c2e33d895cc": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "b4414ef1-d2af-4e63-b335-0c2e33d895cc",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "e6ebd602-494a-4d4b-80bc-f655b5186e28",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "addworkingtime",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "e6ebd602-494a-4d4b-80bc-f655b5186e28": {
+          "subItptOf": "tinyentrepreneur/timetracker-form",
+          "canInterpretType": "tinyentrepreneur/timetracker-form-ObjectType",
+          "nameSelf": "e6ebd602-494a-4d4b-80bc-f655b5186e28",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "0640aa89-fb3e-49b3-b4d6-d23e70ca7b0c": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "0640aa89-fb3e-49b3-b4d6-d23e70ca7b0c",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "e2efaf6c-a7a7-42c4-bafa-b6dc23be74a7",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "addincome",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "e2efaf6c-a7a7-42c4-bafa-b6dc23be74a7": {
+          "subItptOf": "tinyentrepreneur/income-record-form",
+          "canInterpretType": "tinyentrepreneur/income-record-form-ObjectType",
+          "nameSelf": "e2efaf6c-a7a7-42c4-bafa-b6dc23be74a7",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "d03f20f7-9415-4973-9b22-340178775b0b": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "d03f20f7-9415-4973-9b22-340178775b0b",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "ff804964-c0ca-4bce-a149-067f07bf6a42",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "addexpense",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "ff804964-c0ca-4bce-a149-067f07bf6a42": {
+          "subItptOf": "tinyentrepreneur/expense-record-form",
+          "canInterpretType": "tinyentrepreneur/expense-record-form-ObjectType",
+          "nameSelf": "ff804964-c0ca-4bce-a149-067f07bf6a42",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "0799005c-8877-493d-8d36-fa7827f3cb3c": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "0799005c-8877-493d-8d36-fa7827f3cb3c",
+          "initialKvStores": [
+            {
+              "key": "routePath",
+              "value": null,
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

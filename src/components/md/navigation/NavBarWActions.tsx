@@ -106,9 +106,10 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 	}
 	render() {
 		const { ldOptions, routes } = this.props;
-		const { isDoRedirect, isRightMenuOpen, localValues } = this.state;
+		const { isDoRedirect, isRightMenuOpen, localValues, compInfos } = this.state;
 		const routeSendSearch = localValues.get(VisualDict.routeSend_search);
 		const headerText = localValues.get(VisualDict.headerTxt);
+		const hasPopOverContent = compInfos.has(VisualDict.popOverContent);
 		if (isDoRedirect && routeSendSearch) {
 			let route: string = cleanRouteString(routeSendSearch, this.props.routes);
 			//if (match.params.nextPath === undefined) match.params.nextPath = route;
@@ -118,10 +119,14 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		}
 		return <><AppBar title={headerText ? headerText : "Menu"}>
 			<Navigation type='horizontal'>
-				<IconButton icon='search' onClick={this.onAppBarSearchBtnClick} />
-				<IconMenu icon='account_circle' position='topRight' menuRipple onClick={this.onAppBarRightIconMenuClick}>
-					<div className="menu-pop-over">{this.renderSub(VisualDict.popOverContent)}</div>
-				</IconMenu>
+				{routeSendSearch
+					? <IconButton icon='search' onClick={this.onAppBarSearchBtnClick} />
+					: null}
+				{hasPopOverContent
+					? <IconMenu icon='account_circle' position='topRight' menuRipple onClick={this.onAppBarRightIconMenuClick}>
+						<div className="menu-pop-over">{this.renderSub(VisualDict.popOverContent)}</div>
+					</IconMenu>
+					: null}
 			</Navigation>
 		</AppBar>
 			{this.renderSub(VisualDict.freeContainer)}
