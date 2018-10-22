@@ -503,126 +503,130 @@ export class DesignerLogic {
 		topBPCfg: BlueprintConfig) {
 		let inPorts: LDPortModel[] = branchNode.getInPorts();
 		inPorts.forEach((port) => {
-			let links = port.getLinks();
-			for (const key in links) {
-				if (links.hasOwnProperty(key)) {
-					const oneLink = links[key];
-					let leafNode: NodeModel = oneLink.getSourcePort().getParent();
-					let leafPort: LDPortModel = oneLink.getSourcePort() as LDPortModel;
-					if (leafNode.getID() === branchNode.getID()) {
-						leafNode = oneLink.getTargetPort().getParent();
-						leafPort = oneLink.getTargetPort() as LDPortModel;
-					}
-					switch (leafNode.type) {
-						case DECLARATION_MODEL:
-							let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
-							let declarID = declarModel.getID();
-							if (leafPort.kv && leafPort.kv.key === UserDefDict.externalInput) {
-								//is an external input marker
-								let keyInputMarked = port.kv.key;
-								let inputObjPropRef: ObjectPropertyRef = { objRef: branchNode.getID(), propRef: keyInputMarked };
-								let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.interpretableKeys;
-								cfgIntrprtKeys.push(inputObjPropRef);
-								branchBPCfg.initialKvStores.push(this.copyKV(port.kv));
-								branchBPCfg.interpretableKeys.push(port.kv.key);
-							}
-							break;
-						case BASEDATATYPE_MODEL:
-							let bdtLeafNode: BaseDataTypeNodeModel = leafNode as BaseDataTypeNodeModel;
-							let bdtKV = this.composeKVs(bdtLeafNode.getOutPorts()[0].kv, port.kv);
-							branchBPCfg.initialKvStores.push(bdtKV);
-							//TODO: check here, that BDT-Nodes hand up their input correctly
-							break;
-						case GENERALDATATYPE_MODEL:
-							let leafNodeID = leafNode.getID();
-							let outputBPCfg: BlueprintConfig = otherIntrprtrCfgs[leafNodeID];
-							let initialKvStores = null;
-							if (!outputBPCfg) {
-								let canInterpretType = (leafNode as ItptNodeModel).canInterpretType;
-								let subItptOf = (leafNode as ItptNodeModel).subItptOf;
-								let crudSkills = "cRud";
-								let nameSelf = leafNodeID;
-								initialKvStores = [];
-								let interpretableKeysArr = [];
-								outputBPCfg = outputBPCfg ? outputBPCfg : {
-									subItptOf: subItptOf,
-									canInterpretType: canInterpretType,
-									nameSelf: nameSelf,
-									initialKvStores: initialKvStores,
-									crudSkills: crudSkills,
-									interpretableKeys: interpretableKeysArr,
-								};
-								otherIntrprtrCfgs[leafNodeID] = outputBPCfg;
-								this.fillBPCfgFromGraph(outputBPCfg, leafNode as ItptNodeModel, otherIntrprtrCfgs, topBPCfg);
-							} else {
-								initialKvStores = outputBPCfg.initialKvStores;
-							}
-							let outputType: string = leafPort.kv.ldType;
-							let propRef = leafPort.kv.key === UserDefDict.exportSelfKey ? null : leafPort.kv.key;
-							let outputRef: ObjectPropertyRef = {
-								objRef: leafNodeID,
-								propRef: propRef
-							};
-							let outputKV: IKvStore = {
-								key: leafPort.kv.key,
-								value: outputRef,
-								ldType: outputType
-							};
-							let gdtKV = this.composeKVs(outputKV, port.kv);
-							branchBPCfg.initialKvStores.push(gdtKV);
-							//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
-							if (branchNode.type === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
-								branchNode.subItptOf = leafNode.getID();
-							} else {
-								branchBPCfg.interpretableKeys.push(gdtKV.key);
-							}
-							break;
-						case EXTENDABLETYPES_MODEL:
-							let extendableNodeID = leafNode.getID();
-							let extendableBPCfg: BlueprintConfig = otherIntrprtrCfgs[extendableNodeID];
-							let extInitialKvStores = null;
-							if (!extendableBPCfg) {
-								let crudSkills = "cRud";
-								let nameSelf = extendableNodeID;
-								extInitialKvStores = [];
-								let interpretableKeysArr = [];
-								extendableBPCfg = extendableBPCfg ? extendableBPCfg : {
-									subItptOf: COMP_BASE_CONTAINER,
-									canInterpretType: UserDefDict.itptContainerObjType,
-									nameSelf: nameSelf,
-									initialKvStores: extInitialKvStores,
-									crudSkills: crudSkills,
-									interpretableKeys: interpretableKeysArr,
-								};
-								otherIntrprtrCfgs[extendableNodeID] = extendableBPCfg;
-								this.fillBPCfgFromGraph(extendableBPCfg, leafNode as ItptNodeModel, otherIntrprtrCfgs, topBPCfg);
-							} else {
-								extInitialKvStores = extendableBPCfg.initialKvStores;
-							}
-							let extOutputType: string = leafPort.kv.ldType;
-							let extPropRef = leafPort.kv.key === UserDefDict.exportSelfKey ? null : leafPort.kv.key;
-							let extOutputRef: ObjectPropertyRef = {
-								objRef: extendableNodeID,
-								propRef: extPropRef
-							};
-							let extOutputKV: IKvStore = {
-								key: leafPort.kv.key,
-								value: extOutputRef,
-								ldType: extOutputType
-							};
-							let extDtKV = this.composeKVs(extOutputKV, port.kv);
-							branchBPCfg.initialKvStores.push(extDtKV);
-							//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
-							if (branchNode.type === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
-								branchNode.subItptOf = leafNode.getID();
-							} else {
-								branchBPCfg.interpretableKeys.push(extDtKV.key);
-							}
-							break;
-						default:
-							break;
-					}
+			let lso = port.getLinksSortOrder();
+			for (let index = 0; index < lso.length; index++) {
+				const element = lso[index];
+				/*let links = port.getLinks();
+				for (const key in links) {
+					if (links.hasOwnProperty(key)) {*/
+				//const oneLink = links[key];
+				const oneLink = port.getLinks()[element];
+				let leafNode: NodeModel = oneLink.getSourcePort().getParent();
+				let leafPort: LDPortModel = oneLink.getSourcePort() as LDPortModel;
+				if (leafNode.getID() === branchNode.getID()) {
+					leafNode = oneLink.getTargetPort().getParent();
+					leafPort = oneLink.getTargetPort() as LDPortModel;
 				}
+				switch (leafNode.type) {
+					case DECLARATION_MODEL:
+						let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
+						let declarID = declarModel.getID();
+						if (leafPort.kv && leafPort.kv.key === UserDefDict.externalInput) {
+							//is an external input marker
+							let keyInputMarked = port.kv.key;
+							let inputObjPropRef: ObjectPropertyRef = { objRef: branchNode.getID(), propRef: keyInputMarked };
+							let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.interpretableKeys;
+							cfgIntrprtKeys.push(inputObjPropRef);
+							branchBPCfg.initialKvStores.push(this.copyKV(port.kv));
+							branchBPCfg.interpretableKeys.push(port.kv.key);
+						}
+						break;
+					case BASEDATATYPE_MODEL:
+						let bdtLeafNode: BaseDataTypeNodeModel = leafNode as BaseDataTypeNodeModel;
+						let bdtKV = this.composeKVs(bdtLeafNode.getOutPorts()[0].kv, port.kv);
+						branchBPCfg.initialKvStores.push(bdtKV);
+						//TODO: check here, that BDT-Nodes hand up their input correctly
+						break;
+					case GENERALDATATYPE_MODEL:
+						let leafNodeID = leafNode.getID();
+						let outputBPCfg: BlueprintConfig = otherIntrprtrCfgs[leafNodeID];
+						let initialKvStores = null;
+						if (!outputBPCfg) {
+							let canInterpretType = (leafNode as ItptNodeModel).canInterpretType;
+							let subItptOf = (leafNode as ItptNodeModel).subItptOf;
+							let crudSkills = "cRud";
+							let nameSelf = leafNodeID;
+							initialKvStores = [];
+							let interpretableKeysArr = [];
+							outputBPCfg = outputBPCfg ? outputBPCfg : {
+								subItptOf: subItptOf,
+								canInterpretType: canInterpretType,
+								nameSelf: nameSelf,
+								initialKvStores: initialKvStores,
+								crudSkills: crudSkills,
+								interpretableKeys: interpretableKeysArr,
+							};
+							otherIntrprtrCfgs[leafNodeID] = outputBPCfg;
+							this.fillBPCfgFromGraph(outputBPCfg, leafNode as ItptNodeModel, otherIntrprtrCfgs, topBPCfg);
+						} else {
+							initialKvStores = outputBPCfg.initialKvStores;
+						}
+						let outputType: string = leafPort.kv.ldType;
+						let propRef = leafPort.kv.key === UserDefDict.exportSelfKey ? null : leafPort.kv.key;
+						let outputRef: ObjectPropertyRef = {
+							objRef: leafNodeID,
+							propRef: propRef
+						};
+						let outputKV: IKvStore = {
+							key: leafPort.kv.key,
+							value: outputRef,
+							ldType: outputType
+						};
+						let gdtKV = this.composeKVs(outputKV, port.kv);
+						branchBPCfg.initialKvStores.push(gdtKV);
+						//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
+						if (branchNode.type === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
+							branchNode.subItptOf = leafNode.getID();
+						} else {
+							branchBPCfg.interpretableKeys.push(gdtKV.key);
+						}
+						break;
+					case EXTENDABLETYPES_MODEL:
+						let extendableNodeID = leafNode.getID();
+						let extendableBPCfg: BlueprintConfig = otherIntrprtrCfgs[extendableNodeID];
+						let extInitialKvStores = null;
+						if (!extendableBPCfg) {
+							let crudSkills = "cRud";
+							let nameSelf = extendableNodeID;
+							extInitialKvStores = [];
+							let interpretableKeysArr = [];
+							extendableBPCfg = extendableBPCfg ? extendableBPCfg : {
+								subItptOf: COMP_BASE_CONTAINER,
+								canInterpretType: UserDefDict.itptContainerObjType,
+								nameSelf: nameSelf,
+								initialKvStores: extInitialKvStores,
+								crudSkills: crudSkills,
+								interpretableKeys: interpretableKeysArr,
+							};
+							otherIntrprtrCfgs[extendableNodeID] = extendableBPCfg;
+							this.fillBPCfgFromGraph(extendableBPCfg, leafNode as ItptNodeModel, otherIntrprtrCfgs, topBPCfg);
+						} else {
+							extInitialKvStores = extendableBPCfg.initialKvStores;
+						}
+						let extOutputType: string = leafPort.kv.ldType;
+						let extPropRef = leafPort.kv.key === UserDefDict.exportSelfKey ? null : leafPort.kv.key;
+						let extOutputRef: ObjectPropertyRef = {
+							objRef: extendableNodeID,
+							propRef: extPropRef
+						};
+						let extOutputKV: IKvStore = {
+							key: leafPort.kv.key,
+							value: extOutputRef,
+							ldType: extOutputType
+						};
+						let extDtKV = this.composeKVs(extOutputKV, port.kv);
+						branchBPCfg.initialKvStores.push(extDtKV);
+						//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
+						if (branchNode.type === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
+							branchNode.subItptOf = leafNode.getID();
+						} else {
+							branchBPCfg.interpretableKeys.push(extDtKV.key);
+						}
+						break;
+					default:
+						break;
+				}
+				//}
 			}
 		});
 	}

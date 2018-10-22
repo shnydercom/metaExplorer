@@ -195,11 +195,29 @@
           "nameSelf": "0799005c-8877-493d-8d36-fa7827f3cb3c",
           "initialKvStores": [
             {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "d98c7fed-ec5e-46a2-a173-d6357b8d8633",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
               "key": "routePath",
-              "value": null,
+              "value": "measure",
               "ldType": "http://schema.org/Text"
             }
           ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "d98c7fed-ec5e-46a2-a173-d6357b8d8633": {
+          "subItptOf": "tinyentrepreneur/measure-dashboard",
+          "canInterpretType": "tinyentrepreneur/measure-dashboard-ObjectType",
+          "nameSelf": "d98c7fed-ec5e-46a2-a173-d6357b8d8633",
+          "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }

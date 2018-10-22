@@ -26,6 +26,7 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
   .values {
     background-color: $designer-background-elevated-color;
     color: $designer-primary-color;
+
     *:hover {
       background-color: $designer-secondary-color !important;
     }
@@ -78,4 +79,106 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
   width: 36px;
   height: 36px;
   transform: translate(0%, 60px) rotate(270deg);
+}
+
+@keyframes expand {
+  from {
+    max-height: 30px;
+    width: 30px;
+    border: solid 0px;
+    border-radius: 15px;
+    color: #FFFFFF00;
+  }
+
+  to {
+    max-height: 300px;
+    width: 120px;
+    border: solid 0px;
+    border-radius: 5px;
+    color: #fff;
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.srd-link-menu.anim {
+  animation: expand;
+  animation-duration: 200ms;
+  height: fit-content;
+  width: 120px;
+  border: solid 0px;
+  border-radius: 5px;
+}
+
+.srd-link-menu {
+  position: absolute;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  user-select: none;
+  cursor: move;
+  pointer-events: all;
+  z-index: 999999;
+  color: white;
+  font-family: Roboto, Arial;
+  font-size: 11px;
+
+  h3 {
+    padding: 5px;
+    margin: 5px 0px 15px 0px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  background-color: $designer-background-elevated-color;
+
+  .menu-col {
+    //animation: fadein;
+    //animation-duration: 400ms;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: 50px;
+
+    .menu-row {
+      display: flex;
+      flex-direction: row;
+
+      align-items: center;
+
+      .btn {
+        background-color: $designer-secondary-color;
+        width: 30px;
+        height: 30px;
+        border-width: 0px;
+        padding: 0px;
+        -webkit-appearance: unset;
+      }
+
+      .btn:enabled {
+        color: white;
+      }
+
+      .btn:hover:enabled {
+        color: $designer-selected-color;
+      }
+    }
+  }
 }

@@ -3,6 +3,7 @@ import { merge } from "lodash";
 import { IKvStore } from "ldaccess/ikvstore";
 import { LD_PORTMODEL } from "./designer-consts";
 import { isInputValueValidFor } from "ldaccess/ldtypesystem/typeChecking";
+import { arrayMove } from "GeneralUtils";
 
 /**
  * @author Dylan Vorster
@@ -11,6 +12,7 @@ export class LDPortModel extends PortModel {
 	in: boolean;
 	label: string;
 	kv: IKvStore;
+	linkSortOrder: string[];
 
 	constructor(isInput: boolean, name: string, kv: IKvStore, label: string = null, id?: string) {
 		super(name, id);
@@ -18,6 +20,7 @@ export class LDPortModel extends PortModel {
 		this.in = isInput;
 		this.label = label || name;
 		this.kv = kv;
+		this.linkSortOrder = [];
 	}
 
 	deSerialize(object, engine: DiagramEngine) {
@@ -60,6 +63,40 @@ export class LDPortModel extends PortModel {
 
 	createLinkModel(): LinkModel {
 		let link = super.createLinkModel();
-		return link || new DefaultLinkModel();
+		if (link) return link;
+		let defaultLink = new DefaultLinkModel();
+		defaultLink.addLabel("");
+		return defaultLink;
+	}
+
+	removeLink(link: LinkModel) {
+		super.removeLink(link);
+		var idx = this.linkSortOrder.indexOf(link.id);
+		if (idx > -1) {
+			this.linkSortOrder.splice(idx, 1);
+		}
+	}
+
+	addLink(link: LinkModel) {
+		super.addLink(link);
+		this.linkSortOrder.push(link.id);
+	}
+
+	decreaseLinksSortOrder(link: LinkModel) {
+		const idx = this.linkSortOrder.indexOf(link.id);
+		if (idx > 0) {
+			arrayMove(this.linkSortOrder, idx, idx - 1);
+		}
+	}
+
+	increaseLinksSortOrder(link: LinkModel) {
+		const idx = this.linkSortOrder.indexOf(link.id);
+		if (idx > -1 && idx <= this.linkSortOrder.length - 1) {
+			arrayMove(this.linkSortOrder, idx, idx + 1);
+		}
+	}
+
+	getLinksSortOrder(): string[] {
+		return this.linkSortOrder;
 	}
 }

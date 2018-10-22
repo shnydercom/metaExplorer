@@ -1,8 +1,8 @@
 import * as React from "react";
 import { BaseWidgetProps, DefaultLabelModel, BaseWidget, LinkModel } from "storm-react-diagrams";
 import { FontIcon } from "react-toolbox/lib/font_icon";
-import { keysIn } from "lodash";
-
+import { indexOf } from "lodash";
+import { LDPortModel } from "./LDPortModel";
 export interface SettingsLabelWidgetProps extends BaseWidgetProps {
 	model: DefaultLabelModel;
 }
@@ -10,59 +10,125 @@ export interface SettingsLabelWidgetProps extends BaseWidgetProps {
 export interface SettingsLabelWidgetState {
 	isVisible: boolean;
 	isOpened: boolean;
-	sourceLinks: {
-		[id: string]: LinkModel;
-	};
-	targetLinks: {
-		[id: string]: LinkModel;
-	};
+	inputLinks: string[];
+	outputLinks: string[];
 }
 
 export class SettingsLabelWidget extends BaseWidget<SettingsLabelWidgetProps, SettingsLabelWidgetState> {
 	static getDerivedStateFromProps(nextProps: SettingsLabelWidgetProps, prevState: SettingsLabelWidgetState): SettingsLabelWidgetState | null {
-		let sourceLinks = {};
+		let inputLinks = [];
+		let outputLinks = [];
 		try {
-			sourceLinks = nextProps.model.getParent().getSourcePort().getLinks();
+			//sourceLinks = nextProps.model.getParent().getSourcePort().getLinks();
+			const sourcePort = (nextProps.model.getParent().getSourcePort() as LDPortModel);
+			if (sourcePort.in) {
+				inputLinks = sourcePort.getLinksSortOrder();
+			} else {
+				outputLinks = sourcePort.getLinksSortOrder();
+			}
 		} catch (ignore) {
 			/** noop */
 		}
-		let targetLinks = {};
 		try {
-			targetLinks = nextProps.model.getParent().getTargetPort().getLinks();
+			//targetLinks = nextProps.model.getParent().getTargetPort().getLinks();
+			const targetPort = (nextProps.model.getParent().getTargetPort() as LDPortModel);
+			if (targetPort.in) {
+				inputLinks = targetPort.getLinksSortOrder();
+			} else {
+				outputLinks = targetPort.getLinksSortOrder();
+			}
 		} catch (ignore) {
 			/** noop */
 		}
 		let isVisible = false;
-		if (keysIn(sourceLinks).length > 1 || keysIn(targetLinks).length > 1) {
+		if (inputLinks.length > 1 || outputLinks.length > 1) {
 			isVisible = true;
 		}
-		return { ...prevState, isVisible, sourceLinks, targetLinks };
+		return { ...prevState, isVisible, inputLinks, outputLinks };
 	}
 
 	constructor(props) {
 		//	super("srd-default-label", props);
-		super("srd-default-label", props);
-		this.state = { isVisible: false, isOpened: false, sourceLinks: {}, targetLinks: {} };
+		super("srd-link-menu", props);
+		this.state = { isVisible: false, isOpened: false, inputLinks: [], outputLinks: [] };
 		console.dir(props);
 	}
-	//
+
+	getInPort(): LDPortModel {
+		const parentLink = this.props.model.getParent();
+		if ((parentLink.getSourcePort() as LDPortModel).in) {
+			return parentLink.getSourcePort() as LDPortModel;
+		} else {
+			return parentLink.getTargetPort() as LDPortModel;
+		}
+	}
+	getOutPort(): LDPortModel {
+		const parentLink = this.props.model.getParent();
+		if (!(parentLink.getSourcePort() as LDPortModel).in) {
+			return parentLink.getSourcePort() as LDPortModel;
+		} else {
+			return parentLink.getTargetPort() as LDPortModel;
+		}
+	}
+
 	render() {
-		const { isVisible, isOpened, sourceLinks, targetLinks } = this.state;
+		const { isVisible, isOpened, inputLinks, outputLinks } = this.state;
+		const parentLink = this.props.model.getParent();
 		if (!isVisible) return null;
-		return <div style={{ backgroundColor: "black", pointerEvents: "all" }}
-			onMouseEnter={() => this.setState({ ...this.state, isOpened: true })}
+		const inputLinksLen = inputLinks.length;
+		const outputLinksLen = outputLinks.length;
+		const inputPos = indexOf(inputLinks, parentLink.id) + 1;
+		const outputPos = indexOf(outputLinks, parentLink.id) + 1;
+		const thisProps = this.getProps();
+		return <div {...thisProps} className={isOpened ? thisProps.className + "anim" : thisProps.className}
+			onMouseEnter={(event) => this.setState({ ...this.state, isOpened: true })}
 			onMouseLeave={() => this.setState({ ...this.state, isOpened: false })}
-			{...this.getProps()}
-		>
-			{this.props.model.label}
+		><FontIcon>settings</FontIcon>
 			{
 				isOpened ?
-					<div style={{ height: "100px", width: "100px" }}>
-						<small>{keysIn(sourceLinks).length}</small><br/>
-						<small>{keysIn(targetLinks).length}</small></div>
-					:
-					<FontIcon>settings</FontIcon>
+					<div className="menu-col">
+						{inputLinksLen > 1
+							? <>
+								<h3>input position:</h3>
+								<div className="menu-row">
+									<button type="button" className="btn" disabled={inputPos === 1}
+										onClick={() => {
+											this.getInPort().decreaseLinksSortOrder(parentLink);
+											this.forceUpdate();
+										}
+										} >&lt;</button>
+									<b>{" " + inputPos + "/" + inputLinksLen + " "}</b>
+									<button type="button" className="btn" disabled={inputPos === inputLinksLen}
+										onClick={() => {
+											this.getInPort().increaseLinksSortOrder(parentLink);
+											this.forceUpdate();
+										}}>&gt;</button><br />
+								</div>
+							</>
+							: null}
+						{outputLinksLen > 1
+							? <>
+								<h3>output position</h3>
+								<div className="menu-row">
+									<button type="button" className="btn" disabled={outputPos === 1}
+										onClick={() => {
+											this.getOutPort().decreaseLinksSortOrder(parentLink);
+											this.forceUpdate();
+										}
+										}>&lt;</button>
+									<b>{" " + outputPos + "/" + outputLinksLen + " "}</b>
+									<button type="button" className="btn" disabled={outputPos === outputLinksLen}
+										onClick={() => {
+											this.getOutPort().increaseLinksSortOrder(parentLink);
+											this.forceUpdate();
+										}
+										}>&gt;</button>
+								</div>
+							</>
+							: null}
+					</div>
+					: null
 			}
-		</div >;
+		</div>;
 	}
 }
