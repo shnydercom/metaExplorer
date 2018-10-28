@@ -64,7 +64,7 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 		let newLDToken = new NetworkPreferredToken(newLDTokenStr);
 		//assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
 		let targetLDToken: ILDToken = new NetworkPreferredToken(ldTkStr);
-		let newOutputKvMap: OutputKVMap = { [elemKey]: { targetLDToken: targetLDToken, targetProperty: elemKey } };
+		let newOutputKvMap: OutputKVMap = { [elemKey]: [{ targetLDToken: targetLDToken, targetProperty: elemKey }] };
 		let newOKVStore: IKvStore = { key: UserDefDict.outputKVMapKey, value: newOutputKvMap, ldType: UserDefDict.outputKVMapType };
 		let newLDOptions: ILDOptions = {
 			isLoading: false,

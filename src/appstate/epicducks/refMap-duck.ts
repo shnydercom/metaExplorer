@@ -193,7 +193,13 @@ const assignOutputKvMaps: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 				if (!okvmMap.has(srcObjRef)) {
 					okvmMap.set(srcObjRef, {});
 				}
-				okvmMap.get(srcObjRef)[srcObjPropRef.propRef] = { targetLDToken: targetLDToken, targetProperty: iKeyStr };
+				let outputElem = okvmMap.get(srcObjRef)[srcObjPropRef.propRef];
+				const newOutputElem = { targetLDToken: targetLDToken, targetProperty: iKeyStr };
+				if (outputElem) {
+					outputElem.push(newOutputElem);
+				} else {
+					okvmMap.get(srcObjRef)[srcObjPropRef.propRef] = [newOutputElem];
+				}
 			});
 		}
 	}

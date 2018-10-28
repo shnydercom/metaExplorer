@@ -137,7 +137,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 		var label = <div className="name">{this.props.model.label}</div>;
 		let targetID = this.props.model.id;
 		let newToken: ILDToken = new NetworkPreferredToken(targetID);
-		let newOutputKVMap: OutputKVMap = { [targetID]: { targetLDToken: newToken, targetProperty: null } };
+		//let newOutputKVMap: OutputKVMap = { [targetID]: { targetLDToken: newToken, targetProperty: null } };
 		return (
 			<div className={"out-port top-port"}>
 				<div className="input-highlight" onFocus={() => this.props.model.getParent().setSelected(false)}>

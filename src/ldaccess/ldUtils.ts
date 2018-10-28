@@ -116,8 +116,14 @@ export const isOutputKVSame = (a: OutputKVMap, b: OutputKVMap): boolean => {
 	let isSame = pnsA.every((aPN, idx: number) => {
 		let aVal = a[aPN];
 		let bVal = b[aPN];
-		if (aVal.targetProperty !== bVal.targetProperty) return false;
-		if (aVal.targetLDToken.get() !== bVal.targetLDToken.get()) return false;
+		if (aVal.length !== bVal.length) return false;
+		for (let i = 0; i < aVal.length; i++) {
+			const elemA = aVal[i];
+			const elemB = bVal[i];
+			if (!elemA || !elemB) return false;
+			if (elemA.targetProperty !== elemB.targetProperty) return false;
+			if (elemA.targetLDToken.get() !== elemB.targetLDToken.get()) return false;
+		}
 		return true;
 	});
 	return isSame;

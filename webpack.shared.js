@@ -1,14 +1,7 @@
-const webpack = require('webpack')
 const path = require('path')
 
 //const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const WriteFilePlugin = require('write-file-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-var CompressionPlugin = require("compression-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   // entry point of our application, within the `src` directory (which we add to resolve.modules below):
@@ -57,7 +50,7 @@ module.exports = {
           loader: "awesome-typescript-loader",
           query: {
             useBabel: true,
-            useCache: true,
+            useCache: false,
             /*babelOptions: {
               babelrc: false,
               presets: [

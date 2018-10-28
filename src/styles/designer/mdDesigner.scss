@@ -132,6 +132,8 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
   -webkit-user-select: none;
   /* Chrome/Safari/Opera */
   user-select: none;
+  border: solid 0px;
+  border-radius: 50px;
   cursor: move;
   pointer-events: all;
   z-index: 999999;

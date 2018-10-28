@@ -127,23 +127,27 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 		let statePart: ILDOptionsMapStatePart = {};
 		okvmPNs.forEach((pn) => {
 			let fillValue = webObj[pn];
-			let targetTokenLnk = this.outputKVMap[pn].targetLDToken.get();
-			let targetProp = this.outputKVMap[pn].targetProperty;
-			let newLDOptions: ILDOptions;
-			if (statePart[targetTokenLnk]) {
-				newLDOptions = statePart[targetTokenLnk];
-			} else {
-				newLDOptions = applicationStore.getState().ldoptionsMap[targetTokenLnk];
-				newLDOptions = ldOptionsDeepCopy(newLDOptions);
-				statePart[targetTokenLnk] = newLDOptions;
-			}
-			let targetKVStore = getKVStoreByKey(newLDOptions.resource.kvStores, targetProp);
-			if (targetKVStore) {
-				targetKVStore.value = fillValue;
-				targetKVStore.ldType = null;
-			} else {
-				targetKVStore = { key: targetProp, value: fillValue, ldType: null };
-				newLDOptions.resource.kvStores.push(targetKVStore);
+			let outputElems = this.outputKVMap[pn];
+			for (let i = 0; i < outputElems.length; i++) {
+				const outputElem = outputElems[i];
+				let targetTokenLnk = outputElem.targetLDToken.get();
+				let targetProp = outputElem.targetProperty;
+				let newLDOptions: ILDOptions;
+				if (statePart[targetTokenLnk]) {
+					newLDOptions = statePart[targetTokenLnk];
+				} else {
+					newLDOptions = applicationStore.getState().ldoptionsMap[targetTokenLnk];
+					newLDOptions = ldOptionsDeepCopy(newLDOptions);
+					statePart[targetTokenLnk] = newLDOptions;
+				}
+				let targetKVStore = getKVStoreByKey(newLDOptions.resource.kvStores, targetProp);
+				if (targetKVStore) {
+					targetKVStore.value = fillValue;
+					targetKVStore.ldType = null;
+				} else {
+					targetKVStore = { key: targetProp, value: fillValue, ldType: null };
+					newLDOptions.resource.kvStores.push(targetKVStore);
+				}
 			}
 		});
 		for (const key in statePart) {

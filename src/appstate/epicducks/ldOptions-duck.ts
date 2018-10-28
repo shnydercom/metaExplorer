@@ -162,18 +162,21 @@ export const ldOptionsMapReducer = (
 				}
 				stateCopy[thisLdTkStr].resource.kvStores = srcKvCopy;
 				//then modify on target, copying to target property key:
-				let targetTokenStr = modKVMapPart.targetLDToken.get();
-				let targetProp = modKVMapPart.targetProperty;
-				stateCopy[targetTokenStr] = ldOptionsDeepCopy(stateCopy[targetTokenStr]);
-				const targetKvCopy = stateCopy[targetTokenStr].resource.kvStores.slice();
-				let targetTokenStrKvIdx = targetKvCopy.findIndex((a) => a.key === targetProp);
-				let kvElemCopy: IKvStore = {
-					key: targetProp,
-					value: kvElem.value,
-					ldType: kvElem.ldType
-				};
-				targetKvCopy[targetTokenStrKvIdx] = kvElemCopy;
-				stateCopy[targetTokenStr].resource.kvStores = targetKvCopy;
+				for (let idx = 0; idx < modKVMapPart.length; idx++) {
+					const outputElem = modKVMapPart[idx];
+					let targetTokenStr = outputElem.targetLDToken.get();
+					let targetProp = outputElem.targetProperty;
+					stateCopy[targetTokenStr] = ldOptionsDeepCopy(stateCopy[targetTokenStr]);
+					const targetKvCopy = stateCopy[targetTokenStr].resource.kvStores.slice();
+					let targetTokenStrKvIdx = targetKvCopy.findIndex((a) => a.key === targetProp);
+					let kvElemCopy: IKvStore = {
+						key: targetProp,
+						value: kvElem.value,
+						ldType: kvElem.ldType
+					};
+					targetKvCopy[targetTokenStrKvIdx] = kvElemCopy;
+					stateCopy[targetTokenStr].resource.kvStores = targetKvCopy;
+				}
 			});
 			return stateCopy;
 		default:

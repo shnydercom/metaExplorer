@@ -15,7 +15,7 @@ export type OutputKVMapElement = { targetLDToken: ILDToken, targetProperty: stri
  * on the object that is referenced by the token string
  * e.g. { "http://schema.com/name": {targetLDToken: "someUID", targetProperty: "someTextField"}}
  */
-export type OutputKVMap = { [key: string]: OutputKVMapElement };
+export type OutputKVMap = { [key: string]: OutputKVMapElement[] };
 
 export interface IBlueprintItpt {
     cfg: BlueprintConfig;
