@@ -47,10 +47,38 @@ let bpCfg: BlueprintConfig = {
 
 @ldBlueprint(bpCfg)
 export class ImageRetriever extends LDRetrieverSuper {
-	setIdentifier = (value: IKvStore) => {
+	/*setIdentifier = (value: IKvStore) => {
 		let kvResolved: string = getKVValue(value);
 		let changedSrvIdPart = resolveNS(kvResolved);
 		if (changedSrvIdPart !== this.identifier) this.isInputDirty = true;
 		this.identifier = changedSrvIdPart;
+	}*/
+	consumeLDOptions = (ldOptions: ILDOptions) => {
+		if (!ldOptions || !ldOptions.resource || !ldOptions.resource.kvStores) return;
+		super.consumeLDOptions(ldOptions);
+		this.retrieverStoreKey = ldOptions.ldToken.get();
+		let kvs = ldOptions.resource.kvStores;
+		let identifier: IKvStore = kvs.find((val) => SideFXDict.identifier === val.key);
+		let kvResolved: string = getKVValue(identifier);
+		let changedSrvIdPart = resolveNS(kvResolved);
+		let identifierKv = this.inputParams.get(SideFXDict.identifier);
+		if (identifierKv && identifierKv.value && changedSrvIdPart !== identifierKv.value) this.isInputDirty = true;
+		identifierKv.value = changedSrvIdPart;
+
+		/*outputKVMap = outputKVMap ? outputKVMap : this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
+		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
+		for (let idx = 0; idx < ldRetrCfgIntrprtKeys.length; idx++) {
+			const inputKey = ldRetrCfgIntrprtKeys[idx];
+			let param = kvs.find((val) => val.key === inputKey);
+			if (param.value !== null) {
+				this.inputParams.set(inputKey, param);
+				this.isInputDirty = true;
+			}
+		}
+		//this.setSrvUrl(srvUrlKv && srvUrlKv.value ? srvUrlKv.value : this.srvUrl);
+		//this.setIdentifier(identifier && identifier.value !== null ? identifier : this.identifier);
+		this.setWebContent(ldOptions);
+		this.evalDirtyInput();
+		this.evalDirtyOutput();*/
 	}
 }

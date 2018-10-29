@@ -12,7 +12,7 @@ import { GoogleWebAuthAPI, gwaTestCfg, EVENT_GOOGLE_WEB_AUTH, GoogleWebAuthState
 import { Button } from 'react-toolbox/lib/button';
 import { GSheetsRetriever } from '../sidefx/GSheetsRetriever';
 
-export const GoogleWebAuthenticatorName: string = "GoogleWebAuthenticator";
+export const GoogleWebAuthenticatorName: string = "google-api/WebAuthenticator";
 let allMyInputKeys: string[] = [];
 let initialKVStores: IKvStore[] = [];
 export const GWebAuthenticatorCfg: BlueprintConfig = {

@@ -19,14 +19,19 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	initialKvStores: IKvStore[];
-	srvUrl: string;
-	identifier: string | number;
+	inputParams: Map<string, IKvStore>;
+	//srvUrl: string;
+	//identifier: string | number;
 	isInputDirty: boolean = false;
 	isOutputDirty: boolean = false;
 	retrieverStoreKey: string; //needed when requesting asynchronously, so that the output can find this
 	webContent: IWebResource;
+
+	protected apiCallOverride: Promise<any> | null = null;
+
 	constructor() {
 		this.cfg = this.constructor["cfg"];
+		this.inputParams = new Map();
 		//this.retrieverStoreKey = this.cfg.nameSelf;
 		/*if (this.cfg.initialKvStores) {
 			let extRefKey = this.cfg.initialKvStores.find(
@@ -38,15 +43,19 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 		if (!ldOptions || !ldOptions.resource || !ldOptions.resource.kvStores) return;
 		this.retrieverStoreKey = ldOptions.ldToken.get();
 		let kvs = ldOptions.resource.kvStores;
-		let srvUrlKv: IKvStore = kvs.find((val) => ldRetrCfgIntrprtKeys[0] === val.key);
-		srvUrlKv = srvUrlKv ? srvUrlKv : this.cfg.initialKvStores.find((val) => ldRetrCfgIntrprtKeys[0] === val.key);
-		let identifier: IKvStore = kvs.find((val) => ldRetrCfgIntrprtKeys[1] === val.key);
-		identifier = identifier ? identifier : this.cfg.initialKvStores.find((val) => ldRetrCfgIntrprtKeys[1] === val.key);
 		let outputKVMap: IKvStore = kvs.find((val) => UserDefDict.outputKVMapKey === val.key);
 		outputKVMap = outputKVMap ? outputKVMap : this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
-		this.setSrvUrl(srvUrlKv && srvUrlKv.value ? srvUrlKv.value : this.srvUrl);
-		this.setIdentifier(identifier && identifier.value !== null ? identifier : this.identifier);
+		for (let idx = 0; idx < ldRetrCfgIntrprtKeys.length; idx++) {
+			const inputKey = ldRetrCfgIntrprtKeys[idx];
+			let param = kvs.find((val) => val.key === inputKey);
+			if (param && param.value !== null) {
+				this.inputParams.set(inputKey, param);
+				this.isInputDirty = true;
+			}
+		}
+		//this.setSrvUrl(srvUrlKv && srvUrlKv.value ? srvUrlKv.value : this.srvUrl);
+		//this.setIdentifier(identifier && identifier.value !== null ? identifier : this.identifier);
 		this.setWebContent(ldOptions);
 		this.evalDirtyInput();
 		this.evalDirtyOutput();
@@ -55,14 +64,14 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 		if (!isOutputKVSame(value, this.outputKVMap)) this.isOutputDirty = true;
 		this.outputKVMap = value;
 	}
-	setIdentifier = (value: IKvStore | string | number) => {
+	/*setIdentifier = (value: IKvStore | string | number) => {
 		if (getKVValue(value) !== this.identifier) this.isInputDirty = true;
 		this.identifier = getKVValue(value);
 	}
 	setSrvUrl = (value: string) => {
 		if (value !== this.srvUrl) this.isInputDirty = true;
 		this.srvUrl = value;
-	}
+	}*/
 	setWebContent = (value: ILDOptions) => {
 		if (value.isLoading) return;
 		if (value.resource.webInResource && value.resource.webInResource !== this.webContent) {
@@ -79,48 +88,63 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 	}
 	evalDirtyInput = () => {
 		if (this.isInputDirty) {
-			if (this.srvUrl && this.srvUrl.length > 0 && this.identifier !== null && this.identifier !== undefined) {
-				this.isInputDirty = false;
-				let idStr = this.identifier.toString();
-				let idSplitIdx = idStr.indexOf('/');
-				let requestURL;
-				if (idSplitIdx !== -1) {
-					console.log(idStr.slice(0, idSplitIdx));
-					let nsMHasValue = false;
-					let nsMSearchVal = idStr.slice(0, idSplitIdx);
-					for (const nsMEntry of
-						nameSpaceMap.values()) {
-						if (nsMEntry === nsMSearchVal) {
-							nsMHasValue = true;
-							break;
+			if (!this.apiCallOverride) {
+				//if it's an jsonld-request
+				let srvUrl = this.inputParams.get(ldRetrCfgIntrprtKeys[0]);
+				let identifier = this.inputParams.get(ldRetrCfgIntrprtKeys[1]);
+				if (srvUrl && srvUrl.value && srvUrl.value.length > 0
+					&& identifier
+					&& identifier.value !== null && identifier.value !== undefined) {
+					this.isInputDirty = false;
+					let idStr = identifier.toString();
+					let idSplitIdx = idStr.indexOf('/');
+					let requestURL;
+					if (idSplitIdx !== -1) {
+						console.log(idStr.slice(0, idSplitIdx));
+						let nsMHasValue = false;
+						let nsMSearchVal = idStr.slice(0, idSplitIdx);
+						for (const nsMEntry of
+							nameSpaceMap.values()) {
+							if (nsMEntry === nsMSearchVal) {
+								nsMHasValue = true;
+								break;
+							}
 						}
-					}
-					if (nsMHasValue) {
-						let idNS = idStr.slice(0, idSplitIdx);
-						let idId = idStr.slice(idSplitIdx + 1, idStr.length);
-						let reqSplitString = this.srvUrl.replace('{' + SideFXDict.identifier + '}',
-							'{namespace}/' + '{' + SideFXDict.identifier + '}');
-						requestURL = URI.expand(reqSplitString, {
-							namespace: idNS,
-							identifier: idId
-						});
+						if (nsMHasValue) {
+							let idNS = idStr.slice(0, idSplitIdx);
+							let idId = idStr.slice(idSplitIdx + 1, idStr.length);
+							let reqSplitString = srvUrl.value.replace('{' + SideFXDict.identifier + '}',
+								'{namespace}/' + '{' + SideFXDict.identifier + '}');
+							requestURL = URI.expand(reqSplitString, {
+								namespace: idNS,
+								identifier: idId
+							});
+						} else {
+							//TODO: enter error state
+							return;
+						}
 					} else {
-						//TODO: enter error state
-						return;
+						requestURL = URI.expand(srvUrl.value, {
+							identifier: identifier.value
+						});
 					}
-				} else {
-					requestURL = URI.expand(this.srvUrl, {
-						identifier: this.identifier
-					});
+					let reqAsString = requestURL.valueOf();
+					this.callToAPI(null, reqAsString, this.retrieverStoreKey);
 				}
-				let reqAsString = requestURL.valueOf();
-				applicationStore.dispatch(ldOptionsRequestAction(null, reqAsString, this.retrieverStoreKey));
+			} else {
+				this.callToAPI(null, null, this.retrieverStoreKey);
 			}
 		}
 	}
+
+	protected callToAPI(uploadData?: ILDOptions, targetUrl?: string, targetReceiverLnk?): void {
+		applicationStore.dispatch(ldOptionsRequestAction(this.apiCallOverride, uploadData, targetUrl, targetReceiverLnk));
+	}
+
 	private refreshOutput(): void {
 		let okvmPNs = Object.getOwnPropertyNames(this.outputKVMap);
 		let webObj = this.webContent;
+		console.log("ldRetrieverSuper got new output");
 		console.log(webObj);
 		console.log(okvmPNs);
 		console.log(this.outputKVMap);

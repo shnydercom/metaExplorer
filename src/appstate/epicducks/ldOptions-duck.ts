@@ -22,7 +22,7 @@ export const LDOPTIONS_KV_UPDATE = 'shnyder/LDOPTIONS_KV_UPDATE';
 export type LDAction =
 	{ type: 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE', kvStores: IKvStore[], lang: string, alias: string }
 	| { type: 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE', updatedLDOptions: ILDOptions }
-	| { type: 'shnyder/LDOPTIONS_REQUEST_ASYNC', uploadData: ILDOptions, targetUrl: string, targetReceiverLnk: string }
+	| { type: 'shnyder/LDOPTIONS_REQUEST_ASYNC', apiCallOverride: Promise<any>, uploadData: ILDOptions, targetUrl: string, targetReceiverLnk: string }
 	| { type: 'shnyder/LDOPTIONS_REQUEST_RESULT', ldOptionsPayload: IWebResource, targetReceiverLnk: string }
 	| { type: 'shnyder/LDOPTIONS_REQUEST_ERROR', message: string, targetReceiverLnk: string }
 	| { type: 'shnyder/LDOPTIONS_KV_UPDATE', changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap };
@@ -40,7 +40,15 @@ export const ldOptionsClientSideUpdateAction = (updatedLDOptions: ILDOptions) =>
 	updatedLDOptions: updatedLDOptions
 });
 
-export const ldOptionsRequestAction = (uploadData: ILDOptions, targetUrl: string, targetReceiverLnk) => ({
+/**
+ * used to wrap any calls to APIs so that they can be easily consumed by the state
+ * @param apiCallOverride !!! if set, uploadData and targetUrl will be ignored.
+ * @param uploadData default call: upload data for jsonld-POST request
+ * @param targetUrl default call: REST endpoint (jsonld)
+ * @param targetReceiverLnk the receiving interpreter's link
+ */
+export const ldOptionsRequestAction = (apiCallOverride: Promise<any>, uploadData?: ILDOptions, targetUrl?: string, targetReceiverLnk?) => ({
+	apiCallOverride,
 	type: LDOPTIONS_REQUEST_ASYNC,
 	uploadData: uploadData,
 	targetUrl: targetUrl,
@@ -190,20 +198,37 @@ export const requestLDOptionsEpic = (action$: ActionsObservable<any>, store: any
 		.do(() => console.log("Requesting LD Options from network"))
 		.mergeMap((action) => {
 			console.log(action.targetReceiverLnk);
-			if (action.uploadData === null) {
-				return ldOptionsAPI.getLDOptions(action.targetUrl)
-					.map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
-					.catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
-						ActionsObservable.of(ldOptionsFailureAction(
-							`An error occured during ld getting: ${error.message + " " + error.stack}`, action.targetReceiverLnk
-						)));
+			if (action.apiCallOverride) {
+				let apiCallOverride: Promise<any>;
+				let apiObservable = Observable.from(apiCallOverride);
+				return apiObservable.
+				map((val: any) => {
+					let response: IWebResource = {
+						hypermedia: val,
+						iri: null,
+						type: null
+					};
+					ldOptionsResultAction(response, action.targetReceiverLnk);
+				}).catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
+				ActionsObservable.of(ldOptionsFailureAction(
+					`An error occured during ld getting: ${error.message + " " + error.stack}`, action.targetReceiverLnk
+				)));
 			} else {
-				return ldOptionsAPI.postLDOptions(action.uploadData, action.targetUrl)
-					.map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
-					.catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
-						ActionsObservable.of(ldOptionsFailureAction(
-							`An error occured during ld posting: ${error.message + " " + error.stack}`, action.targetReceiverLnk
-						)));
+				if (action.uploadData === null) {
+					return ldOptionsAPI.getLDOptions(action.targetUrl)
+						.map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
+						.catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
+							ActionsObservable.of(ldOptionsFailureAction(
+								`An error occured during ld getting: ${error.message + " " + error.stack}`, action.targetReceiverLnk
+							)));
+				} else {
+					return ldOptionsAPI.postLDOptions(action.uploadData, action.targetUrl)
+						.map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
+						.catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
+							ActionsObservable.of(ldOptionsFailureAction(
+								`An error occured during ld posting: ${error.message + " " + error.stack}`, action.targetReceiverLnk
+							)));
+				}
 			}
 		});
 };
