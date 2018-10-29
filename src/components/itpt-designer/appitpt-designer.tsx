@@ -60,6 +60,8 @@ import * as planeLanding from '../../../demos/img-plane-landing.json';
 import * as aToBtravels from '../../../demos/img-a-to-b-travels.json';
 import * as shnyderlogo from '../../../demos/img-shnyderlogo.json';
 
+import * as gsheetsTester from '../../../demos/gsheets-tester.json';
+
 import {
 	DiagramEngine,
 	DefaultNodeFactory,
@@ -271,7 +273,8 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 				bookingSelectionFlight, bookingSelectionTrain, bookingSelectionBus,
 				bookingBuyFlight, bookingBuyTrain, bookingBuyBus,
 				mainScreen, searchScreen, expenseScreen, gameScreen, timeTrackingScreen, bookingScreen,
-				routehowto, htmlhowto, appMain
+				routehowto, htmlhowto, appMain,
+				gsheetsTester
 			];
 			for (let i = 0; i < prefilledData.length; i++) {
 				this.generatePrefilled(prefilledData[i]);

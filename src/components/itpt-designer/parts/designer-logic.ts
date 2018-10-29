@@ -94,6 +94,15 @@ export class DesignerLogic {
 		//deserialize the model
 		let deSerializedModel = new DiagramModel();
 		deSerializedModel.deSerializeDiagram(distributedSerializedDiagram, engine);
+		//bugfix for multiple labels:
+		for (const key in deSerializedModel.links) {
+			if (deSerializedModel.links.hasOwnProperty(key)) {
+				const oneLink = deSerializedModel.links[key];
+				if (oneLink.labels.length > 1) {
+					oneLink.labels.pop();
+				}
+			}
+		}
 		return deSerializedModel;
 	}
 
