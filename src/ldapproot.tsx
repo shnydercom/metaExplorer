@@ -52,6 +52,8 @@ import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { DemoCompleteReceiver } from "approot";
 
+import * as gsheetsTester from '../demos/gsheets-tester.json';
+
 export interface LDApprootProps {
 
 }
@@ -80,7 +82,8 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 				bookingSelectionFlight, bookingSelectionTrain, bookingSelectionBus,
 				bookingBuyFlight, bookingBuyTrain, bookingBuyBus,
 				mainScreen, searchScreen, expenseScreen, gameScreen, timeTrackingScreen, bookingScreen,
-				routehowto, htmlhowto, appMain
+				routehowto, htmlhowto, appMain,
+				gsheetsTester
 			];
 			for (let i = 0; i < prefilledData.length; i++) {
 				this.generatePrefilled(prefilledData[i]);

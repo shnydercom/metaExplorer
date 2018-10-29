@@ -1,0 +1,211 @@
+{
+  "subItptOf": "59bf7b60-b89a-4a0f-ad14-dbfd15ad5bb2",
+  "canInterpretType": "google/sheets/retriever-test-ObjectType",
+  "nameSelf": "google/sheets/retriever-test",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "59bf7b60-b89a-4a0f-ad14-dbfd15ad5bb2": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "59bf7b60-b89a-4a0f-ad14-dbfd15ad5bb2",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "0de650b7-8890-4e48-afdc-40b2241a66b6",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "03172f8c-20fa-42ee-a208-721ff6631881",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "0bceb3a1-20b5-4ffd-b9b3-07a78fdc1ebd",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "63d651d3-b428-42a2-ad32-ce441d0308ce",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_4",
+              "value": {
+                "objRef": "8cb3749e-4837-43cf-982d-a034e0101497",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2",
+            "in_3",
+            "in_4"
+          ]
+        },
+        "0de650b7-8890-4e48-afdc-40b2241a66b6": {
+          "subItptOf": "google-api/WebAuthenticator",
+          "canInterpretType": "http://my-domain.com/my-class",
+          "nameSelf": "0de650b7-8890-4e48-afdc-40b2241a66b6",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "03172f8c-20fa-42ee-a208-721ff6631881": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "03172f8c-20fa-42ee-a208-721ff6631881",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "The sheet's document ID as in the URL",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "1HL-Zf9NKxuo03SVlcMGQk22I5ZhGq3CD4nX9k12TBLA",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "0bceb3a1-20b5-4ffd-b9b3-07a78fdc1ebd": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "0bceb3a1-20b5-4ffd-b9b3-07a78fdc1ebd",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "sheet name inside the document",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "History",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "63d651d3-b428-42a2-ad32-ce441d0308ce": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "63d651d3-b428-42a2-ad32-ce441d0308ce",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "The range to get from that sheet",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "A1:I",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "8cb3749e-4837-43cf-982d-a034e0101497": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "8cb3749e-4837-43cf-982d-a034e0101497",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "here you can see the output",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": {
+                "objRef": "fea0a2de-b1ff-424c-9d95-bdd5bc45f348",
+                "propRef": "data"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "singleKvStore"
+          ]
+        },
+        "fea0a2de-b1ff-424c-9d95-bdd5bc45f348": {
+          "subItptOf": "google-api/sheets/rangeRetriever",
+          "canInterpretType": "google-api/sheets/rangeRetriever-ObjectType",
+          "nameSelf": "fea0a2de-b1ff-424c-9d95-bdd5bc45f348",
+          "initialKvStores": [
+            {
+              "key": "googleDocID",
+              "value": "1HL-Zf9NKxuo03SVlcMGQk22I5ZhGq3CD4nX9k12TBLA",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "googleDocID",
+              "value": {
+                "objRef": "03172f8c-20fa-42ee-a208-721ff6631881",
+                "propRef": "singleKvStore"
+              },
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "sheetName",
+              "value": "History",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "sheetName",
+              "value": {
+                "objRef": "0bceb3a1-20b5-4ffd-b9b3-07a78fdc1ebd",
+                "propRef": "singleKvStore"
+              },
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "range",
+              "value": {
+                "objRef": "63d651d3-b428-42a2-ad32-ce441d0308ce",
+                "propRef": "singleKvStore"
+              },
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "range",
+              "value": "A1:I",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "googleDocID",
+            "sheetName",
+            "range"
+          ]
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

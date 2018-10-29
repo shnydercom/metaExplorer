@@ -51,7 +51,6 @@ export class SettingsLabelWidget extends BaseWidget<SettingsLabelWidgetProps, Se
 		//	super("srd-default-label", props);
 		super("srd-link-menu", props);
 		this.state = { isVisible: false, isOpened: false, inputLinks: [], outputLinks: [] };
-		console.dir(props);
 	}
 
 	getInPort(): LDPortModel {

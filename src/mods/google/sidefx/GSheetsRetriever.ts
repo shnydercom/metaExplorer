@@ -5,6 +5,7 @@ import { LDDict } from "ldaccess/LDDict";
 import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { GoogleWebAuthAPI, EVENT_GOOGLE_WEB_AUTH } from "../apis/GoogleWebAuthAPI";
+import { isObjPropertyRef } from "ldaccess/ldUtils";
 
 //import { sheets_v4 } from "googleapis";
 //import { GlobalOptions } from "googleapis/build/src/shared/src";
@@ -51,7 +52,9 @@ export class GSheetsRetriever extends LDRetrieverSuper {
 
 	constructor() {
 		super();
-		this.apiCallOverride = new Promise((resolve, reject) => resolve());
+		this.apiCallOverride = () => new Promise((resolve, reject) => {
+			resolve("apiCallOverride still initial");
+		});
 		this.initGSApi();
 		// https://developers.google.com/sheets/api/quickstart/js
 	}
@@ -68,9 +71,11 @@ export class GSheetsRetriever extends LDRetrieverSuper {
 				try {
 					this.gsApi = gapi.client["sheets"].spreadsheets;
 				} catch (error) {
-					gapi.client.load('sheets', 'v4', () => {
-						this.gsApi = gapi.client["sheets"].spreadsheets;
-					});
+					if (gapi.client) {
+						gapi.client.load('sheets', 'v4', () => {
+							this.gsApi = gapi.client["sheets"].spreadsheets;
+						});
+					}
 				}
 			} else {
 				let gwApi = GoogleWebAuthAPI.getSingleton();
@@ -106,7 +111,8 @@ export class GSheetsRetriever extends LDRetrieverSuper {
 		for (let idx = 0; idx < rangeRetrItptKeys.length; idx++) {
 			const inputKey = rangeRetrItptKeys[idx];
 			let param = kvs.find((val) => val.key === inputKey);
-			if (param && param.value !== null) {
+			if (param && param.value !== null && !isObjPropertyRef(param.value)
+				&& JSON.stringify(param) !== JSON.stringify(this.inputParams.get(inputKey))) {
 				this.inputParams.set(inputKey, param);
 				this.isInputDirty = true;
 			}
@@ -120,22 +126,35 @@ export class GSheetsRetriever extends LDRetrieverSuper {
 
 	callToAPI(uploadData?: ILDOptions, targetUrl?: string, targetReceiverLnk?): void {
 		this.updateAPIcallOverride();
-		super.callToAPI(uploadData, targetUrl, targetReceiverLnk);
+		if (this.apiCallOverride !== null) {
+			super.callToAPI(uploadData, targetUrl, targetReceiverLnk);
+		}
 	}
+
+	setWebContent = (value: ILDOptions) => {
+		if (value.isLoading) return;
+		if (value.resource.webInResource
+			&& value.resource.webInResource[spreadSheetData]
+			&& JSON.stringify(value.resource.webInResource) !== JSON.stringify(this.webContent)) {
+			this.webContent = value.resource.webInResource;
+			this.isOutputDirty = true;
+		}
+	}
+
 	updateAPIcallOverride = () => {
 		if (this.gsApi) {
 			let spreadsheetIdKv = this.inputParams.get(googleDocID);
 			let subSheetKv: IKvStore = this.inputParams.get(sheetName);
 			let rangeKv: IKvStore = this.inputParams.get(spreadSheetRange);
-			let spreadsheetId = '1HL-Zf9NKxuo03SVlcMGQk22I5ZhGq3CD4nX9k12TBLA';
-			let subSheet: string = 'History';
-			let range: string = 'A1:I';
-			this.apiCallOverride = new Promise((resolve, reject) => {
+			let spreadsheetId = spreadsheetIdKv.value; //'1HL-Zf9NKxuo03SVlcMGQk22I5ZhGq3CD4nX9k12TBLA';
+			let subSheet: string = subSheetKv.value; //'History';
+			let range: string = rangeKv.value; // 'A1:I';
+			this.apiCallOverride = () => new Promise((resolve, reject) => {
 				this.gsApi.values.get({
 					spreadsheetId: spreadsheetId, // example: 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms
 					range: subSheet + '!' + range,
 				}).then((response) => {
-					resolve(response);
+					resolve({ [spreadSheetData]: response.result.values });
 				}, (response) => {
 					reject('Error: ' + response.result.error.message);
 				});

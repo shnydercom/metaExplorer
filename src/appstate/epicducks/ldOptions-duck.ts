@@ -11,6 +11,7 @@ import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
 import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 import { OutputKVMap } from 'ldaccess/ldBlueprint';
+import { string } from 'prop-types';
 
 export const LDOPTIONS_CLIENTSIDE_CREATE = 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE';
 export const LDOPTIONS_CLIENTSIDE_UPDATE = 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE';
@@ -22,10 +23,12 @@ export const LDOPTIONS_KV_UPDATE = 'shnyder/LDOPTIONS_KV_UPDATE';
 export type LDAction =
 	{ type: 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE', kvStores: IKvStore[], lang: string, alias: string }
 	| { type: 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE', updatedLDOptions: ILDOptions }
-	| { type: 'shnyder/LDOPTIONS_REQUEST_ASYNC', apiCallOverride: Promise<any>, uploadData: ILDOptions, targetUrl: string, targetReceiverLnk: string }
+	| { type: 'shnyder/LDOPTIONS_REQUEST_ASYNC', isExternalAPICall: boolean, uploadData: ILDOptions, targetUrl: string, targetReceiverLnk: string }
 	| { type: 'shnyder/LDOPTIONS_REQUEST_RESULT', ldOptionsPayload: IWebResource, targetReceiverLnk: string }
 	| { type: 'shnyder/LDOPTIONS_REQUEST_ERROR', message: string, targetReceiverLnk: string }
 	| { type: 'shnyder/LDOPTIONS_KV_UPDATE', changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap };
+
+const externalAPICallDict = new Map<string, () => Promise<any>>();
 
 //Action factories, return action objects
 export const ldOptionsClientSideCreateAction = (kvStores: IKvStore[], lang: string, alias: string) => ({
@@ -47,25 +50,44 @@ export const ldOptionsClientSideUpdateAction = (updatedLDOptions: ILDOptions) =>
  * @param targetUrl default call: REST endpoint (jsonld)
  * @param targetReceiverLnk the receiving interpreter's link
  */
-export const ldOptionsRequestAction = (apiCallOverride: Promise<any>, uploadData?: ILDOptions, targetUrl?: string, targetReceiverLnk?) => ({
-	apiCallOverride,
-	type: LDOPTIONS_REQUEST_ASYNC,
-	uploadData: uploadData,
-	targetUrl: targetUrl,
-	targetReceiverLnk
-});
+export const ldOptionsRequestAction = (apiCallOverride: () => Promise<any>, uploadData?: ILDOptions, targetUrl?: string, targetReceiverLnk?) => {
+	if (apiCallOverride) {
+		externalAPICallDict.set(targetReceiverLnk, apiCallOverride);
+		return {
+			isExternalAPICall: true,
+			type: LDOPTIONS_REQUEST_ASYNC,
+			uploadData: uploadData,
+			targetUrl: targetUrl,
+			targetReceiverLnk
+		};
+	} else {
+		return {
+			isExternalAPICall: false,
+			type: LDOPTIONS_REQUEST_ASYNC,
+			uploadData: uploadData,
+			targetUrl: targetUrl,
+			targetReceiverLnk
+		};
+	}
+};
 
-export const ldOptionsResultAction = (ldOptionsPayload: IWebResource, targetReceiverLnk) => ({
-	type: LDOPTIONS_REQUEST_RESULT,
-	ldOptionsPayload,
-	targetReceiverLnk
-});
+export const ldOptionsResultAction = (ldOptionsPayload: IWebResource, targetReceiverLnk) => {
+	externalAPICallDict.delete(targetReceiverLnk);
+	return {
+		type: LDOPTIONS_REQUEST_RESULT,
+		ldOptionsPayload,
+		targetReceiverLnk
+	};
+};
 
-export const ldOptionsFailureAction = (message: string, targetReceiverLnk): LDErrorMsgState => ({
-	type: LDOPTIONS_REQUEST_ERROR,
-	message,
-	targetReceiverLnk
-});
+export const ldOptionsFailureAction = (message: string, targetReceiverLnk): LDErrorMsgState => {
+	externalAPICallDict.delete(targetReceiverLnk);
+	return {
+		type: LDOPTIONS_REQUEST_ERROR,
+		message,
+		targetReceiverLnk
+	};
+};
 
 export const dispatchKvUpdateAction = (changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => ({
 	type: LDOPTIONS_KV_UPDATE,
@@ -198,21 +220,21 @@ export const requestLDOptionsEpic = (action$: ActionsObservable<any>, store: any
 		.do(() => console.log("Requesting LD Options from network"))
 		.mergeMap((action) => {
 			console.log(action.targetReceiverLnk);
-			if (action.apiCallOverride) {
-				let apiCallOverride: Promise<any>;
-				let apiObservable = Observable.from(apiCallOverride);
+			if (action.isExternalAPICall) {
+				let apiCallOverride: () => Promise<any> = externalAPICallDict.get(action.targetReceiverLnk);
+				let apiObservable = Observable.from(apiCallOverride());
 				return apiObservable.
-				map((val: any) => {
-					let response: IWebResource = {
-						hypermedia: val,
-						iri: null,
-						type: null
-					};
-					ldOptionsResultAction(response, action.targetReceiverLnk);
-				}).catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
-				ActionsObservable.of(ldOptionsFailureAction(
-					`An error occured during ld getting: ${error.message + " " + error.stack}`, action.targetReceiverLnk
-				)));
+					map((val: any) => {
+						/*let response: IWebResource = {
+							hypermedia: val,
+							iri: null,
+							type: null
+						};*/
+						return ldOptionsResultAction(val, action.targetReceiverLnk);
+					}).catch((error): ActionsObservable<LDErrorMsgState> =>
+						ActionsObservable.of(ldOptionsFailureAction(
+							`An error occured during ld getting: ${error}`, action.targetReceiverLnk
+						)));
 			} else {
 				if (action.uploadData === null) {
 					return ldOptionsAPI.getLDOptions(action.targetUrl)

@@ -62,7 +62,7 @@ export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnec
 			(event) => {
 				this.setState({ ...this.state, googleState: this.googleAPI.getState() });
 				if (event.newState === "signedIn") {
-					let test = new GSheetsRetriever();
+					//let test = new GSheetsRetriever();
 				}
 			});
 		this.state = { ...ldState, googleState: this.googleAPI.getState() };

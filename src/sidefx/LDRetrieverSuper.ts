@@ -27,7 +27,7 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 	retrieverStoreKey: string; //needed when requesting asynchronously, so that the output can find this
 	webContent: IWebResource;
 
-	protected apiCallOverride: Promise<any> | null = null;
+	protected apiCallOverride: (() => Promise<any>) | null = null;
 
 	constructor() {
 		this.cfg = this.constructor["cfg"];
@@ -132,6 +132,7 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 					this.callToAPI(null, reqAsString, this.retrieverStoreKey);
 				}
 			} else {
+				this.isInputDirty = false;
 				this.callToAPI(null, null, this.retrieverStoreKey);
 			}
 		}

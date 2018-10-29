@@ -1,5 +1,4 @@
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
-import TypesCollection from 'hydraclient.js/src/DataModel/Collections/TypesCollection';
 import { HydraClientAPI } from './hydra-client';
 import { LDError } from './../appstate/LDError';
 import { Observable } from 'rxjs/Observable';
