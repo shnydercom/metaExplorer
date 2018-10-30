@@ -50,6 +50,14 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_5",
+              "value": {
+                "objRef": "923f3cf5-82cd-4a0f-b711-521149cc99d2",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
@@ -58,7 +66,8 @@
             "in_1",
             "in_2",
             "in_3",
-            "in_4"
+            "in_4",
+            "in_5"
           ]
         },
         "0de650b7-8890-4e48-afdc-40b2241a66b6": {
@@ -139,8 +148,8 @@
             {
               "key": "singleKvStore",
               "value": {
-                "objRef": "fea0a2de-b1ff-424c-9d95-bdd5bc45f348",
-                "propRef": "data"
+                "objRef": "c1068925-8bf3-46f4-a540-36af6990e057",
+                "propRef": "headings"
               },
               "ldType": "http://schema.org/Text"
             }
@@ -148,6 +157,29 @@
           "crudSkills": "cRud",
           "interpretableKeys": [
             "singleKvStore"
+          ]
+        },
+        "c1068925-8bf3-46f4-a540-36af6990e057": {
+          "subItptOf": "data/2DtoJSONArray",
+          "canInterpretType": "data/2DtoJSONArray-ObjectType",
+          "nameSelf": "c1068925-8bf3-46f4-a540-36af6990e057",
+          "initialKvStores": [
+            {
+              "key": "rowsAndCols",
+              "value": {
+                "objRef": "fea0a2de-b1ff-424c-9d95-bdd5bc45f348",
+                "propRef": "data"
+              }
+            },
+            {
+              "key": "isFirstRowHeading",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "rowsAndCols"
           ]
         },
         "fea0a2de-b1ff-424c-9d95-bdd5bc45f348": {
@@ -200,6 +232,25 @@
             "googleDocID",
             "sheetName",
             "range"
+          ]
+        },
+        "923f3cf5-82cd-4a0f-b711-521149cc99d2": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "923f3cf5-82cd-4a0f-b711-521149cc99d2",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": {
+                "objRef": "c1068925-8bf3-46f4-a540-36af6990e057",
+                "propRef": "contentRow"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "singleKvStore"
           ]
         }
       },

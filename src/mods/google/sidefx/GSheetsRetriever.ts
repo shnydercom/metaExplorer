@@ -124,9 +124,9 @@ export class GSheetsRetriever extends LDRetrieverSuper {
 		let idx = 0;
 		for (idx = 0; idx < rangeRetrItptKeys.length; idx++) {
 			const inputKey = rangeRetrItptKeys[idx];
-			if (this.inputParams.has(inputKey)) break;
+			if (!this.inputParams.has(inputKey)) break;
 		}
-		if (idx === rangeRetrItptKeys.length - 1) {
+		if (idx === rangeRetrItptKeys.length) {
 			this.evalDirtyInput();
 		}
 		this.evalDirtyOutput();
