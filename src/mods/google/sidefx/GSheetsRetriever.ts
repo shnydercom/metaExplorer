@@ -108,8 +108,8 @@ export class GSheetsRetriever extends LDRetrieverSuper {
 		let outputKVMap: IKvStore = kvs.find((val) => UserDefDict.outputKVMapKey === val.key);
 		outputKVMap = outputKVMap ? outputKVMap : this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
-		for (let idx = 0; idx < rangeRetrItptKeys.length; idx++) {
-			const inputKey = rangeRetrItptKeys[idx];
+		for (let inputidx = 0; inputidx < rangeRetrItptKeys.length; inputidx++) {
+			const inputKey = rangeRetrItptKeys[inputidx];
 			let param = kvs.find((val) => val.key === inputKey);
 			if (param && param.value !== null && !isObjPropertyRef(param.value)
 				&& JSON.stringify(param) !== JSON.stringify(this.inputParams.get(inputKey))) {
@@ -120,7 +120,15 @@ export class GSheetsRetriever extends LDRetrieverSuper {
 		//this.setSrvUrl(srvUrlKv && srvUrlKv.value ? srvUrlKv.value : this.srvUrl);
 		//this.setIdentifier(identifier && identifier.value !== null ? identifier : this.identifier);
 		this.setWebContent(ldOptions);
-		this.evalDirtyInput();
+		//all input parameters have to have been set in order for the dirty input to be re-evaluated:
+		let idx = 0;
+		for (idx = 0; idx < rangeRetrItptKeys.length; idx++) {
+			const inputKey = rangeRetrItptKeys[idx];
+			if (this.inputParams.has(inputKey)) break;
+		}
+		if (idx === rangeRetrItptKeys.length - 1) {
+			this.evalDirtyInput();
+		}
 		this.evalDirtyOutput();
 	}
 
