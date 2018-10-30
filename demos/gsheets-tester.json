@@ -54,7 +54,7 @@
             {
               "key": "in_5",
               "value": {
-                "objRef": "923f3cf5-82cd-4a0f-b711-521149cc99d2",
+                "objRef": "3b154a92-d981-4ec6-a81f-824575095192",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -234,23 +234,30 @@
             "range"
           ]
         },
-        "923f3cf5-82cd-4a0f-b711-521149cc99d2": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
-          "canInterpretType": "http://schema.org/Text",
-          "nameSelf": "923f3cf5-82cd-4a0f-b711-521149cc99d2",
+        "3b154a92-d981-4ec6-a81f-824575095192": {
+          "subItptOf": "shnyder/md/SimpleTextTable",
+          "canInterpretType": "shnyder/md/SimpleTextTable-ObjectType",
+          "nameSelf": "3b154a92-d981-4ec6-a81f-824575095192",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "headings",
+              "value": {
+                "objRef": "c1068925-8bf3-46f4-a540-36af6990e057",
+                "propRef": "headings"
+              }
+            },
+            {
+              "key": "rows",
               "value": {
                 "objRef": "c1068925-8bf3-46f4-a540-36af6990e057",
                 "propRef": "contentRow"
-              },
-              "ldType": "http://schema.org/Text"
+              }
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "singleKvStore"
+            "headings",
+            "rows"
           ]
         }
       },

@@ -2,15 +2,12 @@ import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { UserDefDict } from 'ldaccess/UserDefDict';
 
 import { initLDLocalState, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
-import { LDDict } from 'ldaccess/LDDict';
 import { VisualDict } from 'components/visualcomposition/visualDict';
 import { GoogleWebAuthAPI, gwaTestCfg, EVENT_GOOGLE_WEB_AUTH, GoogleWebAuthState } from '../apis/GoogleWebAuthAPI';
 import { Button } from 'react-toolbox/lib/button';
-import { GSheetsRetriever } from '../sidefx/GSheetsRetriever';
 
 export const GoogleWebAuthenticatorName: string = "google-api/WebAuthenticator";
 let allMyInputKeys: string[] = [];

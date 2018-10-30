@@ -19,6 +19,7 @@ import { LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, PureCircleLayou
 import { PureRedirectComponent, RouteRedirectName } from "../routing/redirect";
 import { PureCard3itptLTR, Card3itptLTRName } from "./interaction/Card_3itptLTR";
 import { TwoDtoJSONArray, TwoDtoJSONArrayName } from "datatransformation/TwoDtoJSONArray";
+import { PureSimpleTextTable, SimpleTextTableName } from "./content/SimpleTextTable";
 
 /**
  * sorry for the long function name //TODO: change
@@ -44,6 +45,7 @@ export function initMDitptFnAsDefault() {
 	appIntRetr.addItpt(NavSearchBarName, PureNavSearchBar, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(NavProcessAtomName, PureNavProcessAtom, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(Card3itptLTRName, PureCard3itptLTR, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(SimpleTextTableName, PureSimpleTextTable, "cRud", [ITPT_TAG_ATOMIC]);
 
 	//register routing itpts
 	appIntRetr.addItpt(RouteComponentName, PureRouteComponent, "cRud", [ITPT_TAG_ATOMIC]);
@@ -64,5 +66,5 @@ export function initMDitptFnAsDefault() {
 	appIntRetr.addItpt(LayoutCircleDisplayName, PureCircleLayout, "cRud", [ITPT_TAG_ATOMIC]);
 
 	//data transformation itpts
-	appIntRetr.addItpt(TwoDtoJSONArrayName, TwoDtoJSONArray, "cRUd", [ITPT_TAG_ATOMIC]); //new version
+	appIntRetr.addItpt(TwoDtoJSONArrayName, TwoDtoJSONArray, "cRUd", [ITPT_TAG_ATOMIC]);
 }
