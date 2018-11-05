@@ -29,7 +29,6 @@ export class LDOptionsAPI {  // URL to web api IRI resource
 			throw new Error(("no targetUrl defined for LDOptionsAPI"));
 		}
 		let returnVal: Observable<IWebResource>;
-		let uploadDataSerialized: string;
 		let fetchPromise = fetch(targetUrl, {
 			method: 'GET',
 			headers: {

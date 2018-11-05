@@ -1,0 +1,23 @@
+{
+  "subItptOf": "b4759e72-bdd3-4da9-ad54-b189cb8752c8",
+  "canInterpretType": "MainAppEntryPoint-ObjectType",
+  "nameSelf": "MainAppEntryPoint",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "b4759e72-bdd3-4da9-ad54-b189cb8752c8": {
+          "subItptOf": "demo/App",
+          "canInterpretType": "demo/App-ObjectType",
+          "nameSelf": "b4759e72-bdd3-4da9-ad54-b189cb8752c8",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

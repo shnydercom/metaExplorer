@@ -11,6 +11,7 @@ import * as linearDataDisplayTest2_Inner from '../../../testing/linearDataDispla
 
 import { ComponentClass, StatelessComponent } from 'react';
 
+/*
 //Game
 import * as prefilledGame from '../../../testing/gamescreen.json';
 
@@ -60,18 +61,8 @@ import * as planeLanding from '../../../demos/img-plane-landing.json';
 import * as aToBtravels from '../../../demos/img-a-to-b-travels.json';
 import * as shnyderlogo from '../../../demos/img-shnyderlogo.json';
 
-import * as gsheetsTester from '../../../demos/gsheets-tester.json';
+import * as gsheetsTester from '../../../demos/gsheets-tester.json';*/
 
-import {
-	DiagramEngine,
-	DefaultNodeFactory,
-	DefaultLinkFactory,
-	DiagramModel,
-	DefaultNodeModel,
-	LinkModel,
-	DefaultPortModel,
-	DiagramWidget
-} from "storm-react-diagrams";
 import Button from 'react-toolbox/lib/button';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import "storm-react-diagrams/dist/style.min.css";
@@ -98,6 +89,7 @@ import { Tabs, Tab } from "react-toolbox/lib/tabs";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
 import { DemoCompleteReceiver } from "approot";
+import { itptLoadApi } from "appstate/store";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -160,7 +152,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 
 	// tslint:disable-next-line:member-ordering
 	hascreatedFirst: boolean = false;
-	onGenAppClick = (e) => {
+	/*onGenAppClick = (e) => {
 		if (!this.hascreatedFirst) {
 			let prefilledData: any = fourIconBottomBar;
 			this.generatePrefilled(prefilledData);
@@ -200,7 +192,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 	onGameClick = (e) => {
 		let prefilledData: any = prefilledGame;
 		this.generatePrefilled(prefilledData);
-	}
+	}*/
 
 	generatePrefilled = (input: any) => {
 		let nodesBPCFG: BlueprintConfig = input as BlueprintConfig;
@@ -266,7 +258,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver) {
 		if (!this.state.hasCompletedFirstRender && prevProps.isInitDemo) {
 			//generate demos for compound itpts
-			let prefilledData: any[] = [
+			/*let prefilledData: any[] = [
 				planeLanding, parisTrain, londonBus, aToBtravels, shnyderlogo,
 				fourIconBottomBar, threeIconBottomBar, testImage, chartsImage, singleChoiceGame, popoverCard,
 				actionPanel, barcodeScanPanel, usersPanel, expenseFormPanel, timetrackingPanel, bookingFormPanel, bookingSelectionPanel,
@@ -278,7 +270,13 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 			];
 			for (let i = 0; i < prefilledData.length; i++) {
 				this.generatePrefilled(prefilledData[i]);
-			}
+			}*/
+			itptLoadApi.getItptsForCurrentUser()().then((val) => {
+				let numItpts = val.itptList.length;
+				if (numItpts > 0) {
+					this.generatePrefilled(val.itptList[numItpts - 1]);
+				}
+			});
 			this.setState({ ...this.state, hasCompletedFirstRender: true });
 			this.props.notifyDemoComplete();
 		}
@@ -302,19 +300,22 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 					<DesignerBody logic={this.logic} />
 				</ThemeProvider>
 				<div className="phone-preview-container">
-					{isDisplayDevContent ? <div style={{alignSelf: "flex-start", position: "absolute"}}>
+					{isDisplayDevContent ? <div style={{ alignSelf: "flex-start", position: "absolute" }}>
 						<Button onClick={this.onInterpretBtnClick}>interpret!</Button>
+						{/*
 						<Button onClick={this.onGenAppClick}>Generate App!</Button>
 						<Button onClick={this.onGenSingleImageSel}>My Barcodes App</Button>
 						<Button onClick={this.onYWQDClick}>愿望清单</Button>
 						<Button onClick={this.onGenBarcodeClick}>Barcode Scanner</Button>
+						*/}
 						<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
 						<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>
 						<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>
-					<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
-
+						<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
+						{/*
 						<Button onClick={this.onGenLinearClick}>Linear!</Button>
 						<Button onClick={this.onGameClick}>Game!</Button>
+						*/}
 						<Link to="/designerinitial">initial   </Link>
 						<Link to="/app">   app</Link>
 					</div> : null}

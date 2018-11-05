@@ -7,9 +7,11 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDOptionsAPI } from 'apis/ldoptions-api';
 import DevTools from './devTools';
 import { IBlueprintItpt } from 'ldaccess/ldBlueprint';
+import { ItptLoadApi } from 'apis/itpt-load-api';
 
 const imgUploader: ImageUploadAPI = new ImageUploadAPI();
 const ldOptionsAPI: LDOptionsAPI = new LDOptionsAPI();
+export const itptLoadApi = new ItptLoadApi();
 
 const epicMiddleware = createEpicMiddleware(rootEpic, {
   dependencies: {
