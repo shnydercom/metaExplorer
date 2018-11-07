@@ -7,7 +7,7 @@ export interface IReactCompInfoItm {
 	ldTokenString: string;
 }
 
-export interface ReactCompInfoMap extends Map<string, IReactCompInfoItm>{}
+export interface ReactCompInfoMap extends Map<string, IReactCompInfoItm | IReactCompInfoItm[]>{}
 
 export interface ReactBlueprint {
 	compInfos: ReactCompInfoMap;

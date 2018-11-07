@@ -73,7 +73,9 @@ export class PureSingleFieldView extends Component<LDConnectedState & LDConnecte
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
-		return { ...prevState, ...rvLD, ...rvLocal };
+		return {
+			...prevState, ...rvLD, ...rvLocal
+		};
 	}
 
 	cfg: BlueprintConfig;

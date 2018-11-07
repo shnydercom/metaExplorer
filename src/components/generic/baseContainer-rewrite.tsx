@@ -142,11 +142,19 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 			routes = routes ? { ...routes } : null;
 			let iterator = 0;
 			let reactComps = [];
-			this.state.compInfos.forEach((cInfoItm, key) => {
-				let GenericComp = cInfoItm.compClass;
-				reactComps[iterator] = <GenericComp key={cInfoItm.key} routes={routes}
-					ldTokenString={cInfoItm.ldTokenString} />;
-				iterator++;
+			this.state.compInfos.forEach((cInfoItmOrItms, key) => {
+				let cInfoAsArray = [];
+				if (Array.isArray(cInfoItmOrItms)) {
+					cInfoAsArray = cInfoItmOrItms;
+				} else {
+					cInfoAsArray = [cInfoItmOrItms];
+				}
+				for (let i = 0; i < cInfoAsArray.length; i++) {
+					const cInfoItm = cInfoAsArray[i];
+					let GenericComp = cInfoItm.compClass;
+					reactComps[iterator] = <GenericComp key={cInfoItm.key} routes={routes} ldTokenString={cInfoItm.ldTokenString} />;
+					iterator++;
+				}
 			});
 			return <>
 				{reactComps ? reactComps : null}

@@ -26,6 +26,7 @@ import { initGameItpt } from 'components/game/initGameItpts';
 import { initBaseHtmlItpt } from 'components/basic-html/initBaseHtmlItpt';
 import LDApproot, { PureLDApproot } from 'ldapproot';
 import { initGoogleServiceItpts } from 'mods/google/initGoogleServiceItpts';
+import { initShnyderItpts } from 'components/shnyder/initShnyderItpts';
 
 const initialState: ExplorerState = {
 	ldoptionsMap: {},
@@ -54,6 +55,7 @@ function rootSetup(): void {
 	initGameItpt();
 	initLDConnect();
 	initGoogleServiceItpts();
+	initShnyderItpts();
 }
 
 rootSetup();

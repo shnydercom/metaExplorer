@@ -10,7 +10,7 @@ import { LDError } from "appstate/LDError";
 import { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
-import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
+import { getKVStoreByKey, getAllKVStoresByKey } from "ldaccess/kvConvenienceFns";
 import { RouteComponentProps } from "react-router";
 
 type LDComponent = new () => Component<LDOwnProps>;
@@ -55,16 +55,49 @@ export function generateCompInfoItm(kvStores: IKvStore[], prop: string, retrieve
 	} else { return null; }
 }
 
+export function generateAllCompInfoItms(kvStores: IKvStore[], prop: string, retriever: string): IReactCompInfoItm[] {
+	let rv: IReactCompInfoItm[] = [];
+	let genKvs = getAllKVStoresByKey(kvStores, prop); // kvStores.find((elem) => elem.key === prop);
+	if (!genKvs || genKvs.length === 0) rv.push(null);
+	for (let i = 0; i < genKvs.length; i++) {
+		const genKv = genKvs[i];
+		if (!isObjPropertyRef(genKv.value)) rv.push(null);
+		const valAsObjPropRef: ObjectPropertyRef = genKv.value as ObjectPropertyRef;
+		let baseRMTkStr = valAsObjPropRef.objRef;
+		let itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(baseRMTkStr);
+		if (itpt === null || itpt === undefined) {
+			console.error("ItptReferenceMapType-component: itpt null or undefined");
+			rv.push(null);
+		}
+		if (isReactComponent(itpt)) {
+			let newComp = {
+				compClass: itpt,
+				key: prop,
+				ldTokenString: baseRMTkStr
+			};
+			rv.push(newComp);
+		} else { rv.push(null); }
+	}
+	return rv;
+}
+
 /**
  * use this function in a react component for sub-render functions that return a component
  * example usage:	private renderSub = generateItptFromCompInfo.bind(this);
  * render(){<>{this.renderSub(VisualDict.freeContainer)}<>}
  * @param compKey the key of the itpt-kv, e.g. VisualDict.freeContainer
  */
-export function generateItptFromCompInfo(compKey: string, routes?: LDRouteProps) {
+export function generateItptFromCompInfo(compKey: string, routes?: LDRouteProps, index?: number) {
 	if (!compKey) return null;
 	if (!this || !this.props || !this.props.routes || !this.state.compInfos) throw new LDError('function must be bound to a IBlueprintItpt with LDOwnProps and LDLocalState before being called');
-	const compInfo = this.state.compInfos.get(compKey);
+	const compInfos = this.state.compInfos.get(compKey);
+	let compInfo = null;
+	if (Array.isArray(compInfos)) {
+		let locIndex = !index ? 0 : index;
+		compInfo = compInfos[locIndex];
+	} else {
+		compInfo = compInfos;
+	}
 	if (!compInfo) return null;
 	let BaseComp = compInfo.compClass;
 	const compRoutes = routes ? routes : this.props.routes;
@@ -76,8 +109,11 @@ export function generateItptFromCompInfo(compKey: string, routes?: LDRouteProps)
 export function initLDLocalState(
 	cfg: BlueprintConfig,
 	props: LDConnectedState & LDOwnProps,
-	itptKeys: string[], kvKeys: string[]): LDLocalState {
-	let rvCompInfo = new Map<string, IReactCompInfoItm>();
+	itptKeys: string[], kvKeys: string[],
+	itptIsMulti?: boolean[],
+	kvIsMulti?: boolean[]
+): LDLocalState {
+	let rvCompInfo = new Map<string, IReactCompInfoItm | IReactCompInfoItm[]>();
 	let newValueMap = new Map<string, any>();
 	let newLDTypeMap = new Map<string, any>();
 	let retriever = DEFAULT_ITPT_RETRIEVER_NAME;
@@ -101,36 +137,54 @@ export function initLDLocalState(
 	}
 	if (props) {
 		let compState = getDerivedItptStateFromProps(
-			props, null, itptKeys
+			props, null, itptKeys, itptIsMulti
 		);
 		if (compState) {
 			rvCompInfo = compState.compInfos;
 		}
 		let localState = getDerivedKVStateFromProps(
-			props, null, kvKeys
+			props, null, kvKeys, kvIsMulti
 		);
 		if (localState) {
 			newValueMap = localState.localValues;
 		}
 	}
-	return {compInfos: rvCompInfo, localValues: newValueMap, localLDTypes: newLDTypeMap};
+	return { compInfos: rvCompInfo, localValues: newValueMap, localLDTypes: newLDTypeMap };
 }
 
 export function getDerivedItptStateFromProps(
 	props: LDConnectedState & LDOwnProps,
 	prevState: null | ReactCompLDLocalState,
-	itptKeys: string[]): null | ReactCompLDLocalState {
+	itptKeys: string[],
+	isMulti?: boolean[]): null | ReactCompLDLocalState {
 	let rv: null | ReactCompLDLocalState = null;
 	if (props && prevState && itptKeys && itptKeys.length > 0) {
 		if (props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores) {
+			if (isMulti && isMulti.length !== itptKeys.length) {
+				console.warn("parameter isMulti in getDerivedItptStateFromProps has been set, " +
+					"but is not set for all itptKeys. Aborting function");
+				return;
+			}
 			let kvs: IKvStore[];
 			let retriever = props.ldOptions.visualInfo.retriever;
 			kvs = props.ldOptions.resource.kvStores;
-			let newMap: ReactCompInfoMap = new Map<string, IReactCompInfoItm>();
-			itptKeys.forEach((itptKey) => {
-				let compInfo = generateCompInfoItm(kvs, itptKey, retriever);
-				if (!compInfo) return;
-				newMap.set(itptKey, compInfo);
+			let newMap: ReactCompInfoMap = new Map<string, IReactCompInfoItm | IReactCompInfoItm[]>();
+			itptKeys.forEach((itptKey, idx) => {
+				if (isMulti && isMulti[idx]) {
+					let compInfos = generateAllCompInfoItms(kvs, itptKey, retriever);
+					for (let i = 0; i < compInfos.length; i++) {
+						const compInfo = compInfos[i];
+						if (!newMap.has(itptKey)) {
+							newMap.set(itptKey, [compInfo]);
+						} else {
+							(newMap.get(itptKey) as IReactCompInfoItm[]).push(compInfo);
+						}
+					}
+				} else {
+					let compInfo = generateCompInfoItm(kvs, itptKey, retriever);
+					if (!compInfo) return;
+					newMap.set(itptKey, compInfo);
+				}
 			});
 			//TODO: check for compInfo-equality and return null if nothing has changed
 			if (newMap.size === 0) return null;
@@ -143,19 +197,34 @@ export function getDerivedItptStateFromProps(
 export function getDerivedKVStateFromProps(
 	props: LDOwnProps & LDConnectedState,
 	prevState: LDLocalKv,
-	kvKeys: string[]): LDLocalKv {
+	kvKeys: string[],
+	isMulti?: boolean[]
+): LDLocalKv {
 	if (props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores && kvKeys.length > 0) {
+		if (isMulti && isMulti.length !== kvKeys.length) {
+			console.warn("parameter isMulti in getDerivedKVStateFromProps has been set, " +
+				"but is not set for all kvKeys. Aborting function");
+			return;
+		}
 		let kvs: IKvStore[];
 		let retriever = props.ldOptions.visualInfo.retriever;
 		kvs = props.ldOptions.resource.kvStores;
 		let newValueMap = new Map<string, any>();
 		let newLDTypeMap = new Map<string, any>();
-		kvKeys.forEach((itptKey) => {
+		kvKeys.forEach((itptKey, idx) => {
 			let kv = getKVStoreByKey(kvs, itptKey);
 			if (!kv) return;
 			let val = getKVValue(kv);
-			newValueMap.set(itptKey, val);
 			newLDTypeMap.set(itptKey, kv.ldType);
+			if (isMulti && isMulti[idx]) {
+				if (!newValueMap.has(itptKey)) {
+					newValueMap.set(itptKey, [val]);
+				} else {
+					newValueMap.get(itptKey).push(val);
+				}
+			} else {
+				newValueMap.set(itptKey, val);
+			}
 		});
 		if (!prevState) {
 			return { localValues: newValueMap, localLDTypes: newLDTypeMap };
@@ -169,15 +238,15 @@ export function getDerivedKVStateFromProps(
 					if (newValueMap.get(key) !== val) {
 						throw Error();
 					}
-					if (newLDTypeMap.get(key) !== prevState.localLDTypes.get(key)){
+					if (newLDTypeMap.get(key) !== prevState.localLDTypes.get(key)) {
 						throw Error();
 					}
 				});
 			} catch (error) {
-				return { ...prevState, localValues: newValueMap, localLDTypes: newLDTypeMap };
+				return { localValues: newValueMap, localLDTypes: newLDTypeMap };
 			}
 		} else {
-			return { ...prevState, localValues: newValueMap, localLDTypes: newLDTypeMap };
+			return { localValues: newValueMap, localLDTypes: newLDTypeMap };
 		}
 		return null;
 	}
@@ -194,7 +263,7 @@ export function getDerivedKVStateFromProps(
  * and "forProject" as the description
  * @param kvStores the kvStores to determine singleKVKey from
  */
-export function determineSingleKVKey(kvStores: IKvStore[], cfg: BlueprintConfig ): string {
+export function determineSingleKVKey(kvStores: IKvStore[], cfg: BlueprintConfig): string {
 	let rv: string = UserDefDict.singleKvStore;
 	let candidates: IKvStore[] = [];
 	if (kvStores) {

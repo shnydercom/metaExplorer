@@ -54,6 +54,8 @@ import { DemoCompleteReceiver } from "approot";
 
 import * as gsheetsTester from '../demos/gsheets-tester.json';
 
+import * as shnyderWebsiteGallery from '../demos/shnyder-website-hero.json';
+
 export interface LDApprootProps {
 
 }
@@ -83,7 +85,8 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 				bookingBuyFlight, bookingBuyTrain, bookingBuyBus,
 				mainScreen, searchScreen, expenseScreen, gameScreen, timeTrackingScreen, bookingScreen,
 				routehowto, htmlhowto, appMain,
-				gsheetsTester
+				gsheetsTester,
+				shnyderWebsiteGallery
 			];
 			for (let i = 0; i < prefilledData.length; i++) {
 				this.generatePrefilled(prefilledData[i]);

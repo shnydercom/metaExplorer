@@ -2,7 +2,7 @@ import { appItptRetrFn } from "appconfig/appItptRetriever";
 import { LDDict } from "ldaccess/LDDict";
 import { PureImgDisplay } from "../visualcomposition/imagedisplay-component";
 import { PureBoolInput, PureIntInput, PureDoubleInput, PureTextInput, PureDateInput, PureDateTimeInput } from "../md/content/BaseDataTypeInput";
-import { ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc } from "../visualcomposition/ImgHeadSubDescIntrprtr";
+import { ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc } from "../shnyder/ImgHeadSubDescIntrprtr";
 import { PureNavBarWActions, NavBarWActionsName } from "../md/navigation/NavBarWActions";
 import { BottomNavigationName, PureBottomNavigation, TopNavigationName, PureTopNavigation } from "../md/navigation/BottomNavigation";
 import { PureRouteComponent, RouteComponentName } from "../routing/route-component";
@@ -38,7 +38,6 @@ export function initMDitptFnAsDefault() {
 	appIntRetr.addItpt(LDDict.DateTime, PureDateTimeInput, "CRUd", [ITPT_TAG_ATOMIC]);
 
 	//register visual composition itpts.
-	appIntRetr.addItpt(ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(NavBarWActionsName, PureNavBarWActions, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(BottomNavigationName, PureBottomNavigation, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(TopNavigationName, PureTopNavigation, "cRud", [ITPT_TAG_ATOMIC]);

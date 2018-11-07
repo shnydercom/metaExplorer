@@ -2,8 +2,6 @@ import jasmine from 'jasmine';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { IKvStore } from 'ldaccess/ikvstore';
-import { DefaultItptRetriever } from 'defaults/DefaultItptRetriever';
-import { ImgHeadSubDescIntrprtrName } from 'components/visualcomposition/ImgHeadSubDescIntrprtr';
 
 let bpCfg: BlueprintConfig = {
     //TODO: property forType needs to be renamed, maybe split up into multiple properties. I need a clear

@@ -1,0 +1,84 @@
+{
+  "subItptOf": "4240d82a-6bed-4542-9e59-c305c768435e",
+  "canInterpretType": "shnyder-website/hero-gallery-ObjectType",
+  "nameSelf": "shnyder-website/hero-gallery",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "4240d82a-6bed-4542-9e59-c305c768435e": {
+          "subItptOf": "shnyder/HeroGallery",
+          "canInterpretType": "shnyder/HeroGallery-ObjectType",
+          "nameSelf": "4240d82a-6bed-4542-9e59-c305c768435e",
+          "initialKvStores": [
+            {
+              "key": "foregroundPart",
+              "value": {
+                "objRef": "f5722fe1-5f29-48e4-93dc-2fca82c2d2bd",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "foregroundPart",
+              "value": {
+                "objRef": "7430e050-aea0-49ca-9e75-61b51028ca2d",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "previousBtnLabel",
+              "value": "Introduction",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "previousBtnLabel",
+              "value": "get started",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "nextBtnLabel",
+              "value": "get started",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "nextBtnLabel",
+              "value": "Introduction",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderText",
+              "value": "sharing our passion for creation",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "foregroundPart",
+            "foregroundPart"
+          ]
+        },
+        "f5722fe1-5f29-48e4-93dc-2fca82c2d2bd": {
+          "subItptOf": "demo/images/shnyderLogo",
+          "canInterpretType": "demo/images/shnyderLogo-ObjectType",
+          "nameSelf": "f5722fe1-5f29-48e4-93dc-2fca82c2d2bd",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "7430e050-aea0-49ca-9e75-61b51028ca2d": {
+          "subItptOf": "demo/images/parisTrain",
+          "canInterpretType": "demo/images/parisTrain-ObjectType",
+          "nameSelf": "7430e050-aea0-49ca-9e75-61b51028ca2d",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

@@ -66,7 +66,9 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
-		return { ...prevState, ...rvLD, ...rvLocal };
+		return {
+			...prevState, ...rvLD, ...rvLocal
+		};
 	}
 
 	cfg: BlueprintConfig;

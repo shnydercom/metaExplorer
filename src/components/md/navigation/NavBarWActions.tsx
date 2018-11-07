@@ -69,7 +69,9 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
-		return { ...prevState, ...rvLD, ...rvLocal };
+		return {
+			...prevState, ...rvLD, ...rvLocal
+		};
 	}
 
 	cfg: BlueprintConfig;

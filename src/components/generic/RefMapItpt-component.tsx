@@ -1,23 +1,14 @@
-import { connect } from "react-redux";
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from "ldaccess/ldBlueprint";
+import ldBlueprint, { BlueprintConfig, IBlueprintItpt } from "ldaccess/ldBlueprint";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
 import { ILDOptions } from "ldaccess/ildoptions";
-import { ExplorerState } from "appstate/store";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps, LDLocalState } from "appstate/LDProps";
-import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
-import ImgHeadSubDescIntrprtr from "components/visualcomposition/ImgHeadSubDescIntrprtr";
-import { PureImgDisplay } from "../visualcomposition/imagedisplay-component";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
-import { compNeedsUpdate, isRouteSame } from "components/reactUtils/compUtilFns";
-import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
-import { ILDResource } from "ldaccess/ildresource";
-import { ILDToken, NetworkPreferredToken, createConcatNetworkPreferredToken, refMapBaseTokenStr } from "ldaccess/ildtoken";
-import { isObjPropertyRef, ldOptionsDeepCopy } from "ldaccess/ldUtils";
-import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
+import { isRouteSame } from "components/reactUtils/compUtilFns";
+import { refMapBaseTokenStr } from "ldaccess/ildtoken";
+import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { Component } from "react";
 import { appItptMatcherFn } from "appconfig/appItptMatcher";
-import { ITPT_REFMAP_BASE } from "ldaccess/iitpt-retriever";
 import { ErrorBoundaryState } from "../errors/ErrorBoundaryState";
 import { IReactCompInfoItm } from "../reactUtils/iReactCompInfo";
 
@@ -74,7 +65,7 @@ RefMapItptState>
 			//console.dir(prevState.cfg);
 			nextProps.notifyLDOptionsRefMapSplitChange(newLDOptions, prevState.cfg);
 			let routes: LDRouteProps = nextProps.routes;
-			return {...prevState, routes};
+			return { ...prevState, routes };
 		}
 		let baseRMTkStr = refMapBaseTokenStr(ldTokenString);
 		let BaseComp = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(baseRMTkStr);
@@ -83,12 +74,12 @@ RefMapItptState>
 			return null;
 		}
 		if (isReactComponent(BaseComp)) {
-			newreactCompInfos.set(baseRMTkStr, { compClass: BaseComp, key: baseRMTkStr, ldTokenString: baseRMTkStr});
+			newreactCompInfos.set(baseRMTkStr, { compClass: BaseComp, key: baseRMTkStr, ldTokenString: baseRMTkStr });
 			//return <BaseComp routes={routes} ldTokenString={baseRMTkStr} />;
 		} else {
 			return null;
 		}
-		return { ...prevState, compInfos: newreactCompInfos};
+		return { ...prevState, compInfos: newreactCompInfos };
 	}
 	cfg: BlueprintConfig;
 	initialKvStores: IKvStore[];
@@ -111,38 +102,38 @@ RefMapItptState>
 			cfg: this.cfg
 		};
 	}
-/*
-	consumeLDOptions = (ldOptions: ILDOptions, routes?: LDRouteProps) => {
-		if (!this.props.ldOptions) return;
-		if (!this.props.ldOptions.visualInfo.interpretedBy) {
-			let newLDOptions: ILDOptions = ldOptionsDeepCopy(this.props.ldOptions);
-			newLDOptions.visualInfo.interpretedBy = this.cfg.nameSelf;
-			this.props.notifyLDOptionsRefMapSplitChange(newLDOptions, this.cfg);
-			return null;
+	/*
+		consumeLDOptions = (ldOptions: ILDOptions, routes?: LDRouteProps) => {
+			if (!this.props.ldOptions) return;
+			if (!this.props.ldOptions.visualInfo.interpretedBy) {
+				let newLDOptions: ILDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+				newLDOptions.visualInfo.interpretedBy = this.cfg.nameSelf;
+				this.props.notifyLDOptionsRefMapSplitChange(newLDOptions, this.cfg);
+				return null;
+			}
+			//this.subItpt = this.buildIntrprtrJSX(ldOptions, routes);
 		}
-		//this.subItpt = this.buildIntrprtrJSX(ldOptions, routes);
-	}
 
-	componentWillReceiveProps(nextProps: OwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
-		console.log("receiving refmap-props: " + nextProps.routes.location.pathname);
-		if (!isRouteSame(nextProps.routes, this.props.routes)) {
-			let newLDOptions: ILDOptions = ldOptionsDeepCopy(this.props.ldOptions);
-			newLDOptions.visualInfo.interpretedBy = this.cfg.nameSelf;
-			this.props.notifyLDOptionsRefMapSplitChange(newLDOptions, this.cfg);
-			return null;
-		} else {
-			//if (compNeedsUpdate(nextProps, this.props)) {
-			//if (nextProps.ldOptions.isLoading) return;
-			this.consumeLDOptions(nextProps.ldOptions, nextProps.routes);
+		componentWillReceiveProps(nextProps: OwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
+			console.log("receiving refmap-props: " + nextProps.routes.location.pathname);
+			if (!isRouteSame(nextProps.routes, this.props.routes)) {
+				let newLDOptions: ILDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+				newLDOptions.visualInfo.interpretedBy = this.cfg.nameSelf;
+				this.props.notifyLDOptionsRefMapSplitChange(newLDOptions, this.cfg);
+				return null;
+			} else {
+				//if (compNeedsUpdate(nextProps, this.props)) {
+				//if (nextProps.ldOptions.isLoading) return;
+				this.consumeLDOptions(nextProps.ldOptions, nextProps.routes);
+			}
 		}
-	}
 
-	componentWillMount() {
-		console.log("componentWillmount");
-		console.log(this.constructor.name);
-		console.log(this.constructor["cfg"]);
-	}
-*/
+		componentWillMount() {
+			console.log("componentWillmount");
+			console.log(this.constructor.name);
+			console.log(this.constructor["cfg"]);
+		}
+	*/
 	buildIntrprtrJSX(ldOptions: ILDOptions, routes: LDRouteProps): any { //TODO: search for right type ?! React.Component<LDOwnProps>
 		let { ldTokenString } = this.props;
 		let { interpretedBy, retriever } = ldOptions.visualInfo;
@@ -170,11 +161,20 @@ RefMapItptState>
 			routes = routes ? { ...routes } : null;
 			let iterator = 0;
 			let reactComps = [];
-			this.state.compInfos.forEach((cInfoItm, key) => {
-				let GenericComp = cInfoItm.compClass;
-				reactComps[iterator] = <GenericComp key={cInfoItm.key} routes={routes}
-					ldTokenString={cInfoItm.ldTokenString} />;
-				iterator++;
+			this.state.compInfos.forEach((cInfoItmOrItms, key) => {
+				let cInfoAsArray = [];
+				if (Array.isArray(cInfoItmOrItms)) {
+					cInfoAsArray = cInfoItmOrItms;
+				} else {
+					cInfoAsArray = [cInfoItmOrItms];
+				}
+				for (let i = 0; i < cInfoAsArray.length; i++) {
+					const cInfoItm = cInfoAsArray[i];
+					let GenericComp = cInfoItm.compClass;
+					reactComps[iterator] = <GenericComp key={cInfoItm.key} routes={routes}
+						ldTokenString={cInfoItm.ldTokenString} />;
+					iterator++;
+				}
 			});
 			return <>
 				{reactComps ? reactComps : null}
