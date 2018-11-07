@@ -103,20 +103,22 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 			<div className="bg-container">
 				{this.renderSub(backgroundItpt)}
 			</div>
-			<div className="hero-front overlay-gradient">
-				<div className="fg-container">
-					{this.renderSub(foregroundItpt)}
-				</div>
-				<div className="btns">
-					<div className="prev">
-						<div className="start"></div>
-						<div className="mid">{prevBtnLabelStrings}</div>
-						<div className="end"></div>
+			<div className="hero-front-outer overlay-gradient">
+				<div className="hero-front-inner">
+					<div className="fg-container">
+						{this.renderSub(foregroundItpt)}
 					</div>
-					<div className="nxt">
-						<div className="start"></div>
-						<div className="mid">{nxtBtnLabelStrings}</div>
-						<div className="end"></div>
+					<div className="btns">
+						<div className="prev">
+							<div className="start"></div>
+							<div className="mid">{prevBtnLabelStrings}</div>
+							<div className="end"></div>
+						</div>
+						<div className="nxt">
+							<div className="start"></div>
+							<div className="mid">{nxtBtnLabelStrings}</div>
+							<div className="end"></div>
+						</div>
 					</div>
 				</div>
 			</div>

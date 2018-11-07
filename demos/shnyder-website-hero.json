@@ -1,16 +1,60 @@
 {
-  "subItptOf": "4240d82a-6bed-4542-9e59-c305c768435e",
+  "subItptOf": "be3815ea-fd23-4da5-b904-3b13dc07ab79",
   "canInterpretType": "shnyder-website/hero-gallery-ObjectType",
   "nameSelf": "shnyder-website/hero-gallery",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
+        "be3815ea-fd23-4da5-b904-3b13dc07ab79": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "be3815ea-fd23-4da5-b904-3b13dc07ab79",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "4dbfaecb-05ca-4ad9-aac2-155494717fb4",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "4240d82a-6bed-4542-9e59-c305c768435e",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
+        "4dbfaecb-05ca-4ad9-aac2-155494717fb4": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "4dbfaecb-05ca-4ad9-aac2-155494717fb4",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
         "4240d82a-6bed-4542-9e59-c305c768435e": {
           "subItptOf": "shnyder/HeroGallery",
           "canInterpretType": "shnyder/HeroGallery-ObjectType",
           "nameSelf": "4240d82a-6bed-4542-9e59-c305c768435e",
           "initialKvStores": [
+            {
+              "key": "backgroundPart",
+              "value": {
+                "objRef": "7e551c5c-b455-4700-a832-223d05bb91ab",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
             {
               "key": "foregroundPart",
               "value": {
@@ -55,9 +99,18 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
+            "backgroundPart",
             "foregroundPart",
             "foregroundPart"
           ]
+        },
+        "7e551c5c-b455-4700-a832-223d05bb91ab": {
+          "subItptOf": "demo/images/londonBus",
+          "canInterpretType": "demo/images/londonBus-ObjectType",
+          "nameSelf": "7e551c5c-b455-4700-a832-223d05bb91ab",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
         },
         "f5722fe1-5f29-48e4-93dc-2fca82c2d2bd": {
           "subItptOf": "demo/images/shnyderLogo",
