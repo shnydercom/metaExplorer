@@ -14,7 +14,7 @@
             {
               "key": "in_0",
               "value": {
-                "objRef": "4dbfaecb-05ca-4ad9-aac2-155494717fb4",
+                "objRef": "4240d82a-6bed-4542-9e59-c305c768435e",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -22,7 +22,7 @@
             {
               "key": "in_1",
               "value": {
-                "objRef": "4240d82a-6bed-4542-9e59-c305c768435e",
+                "objRef": "d1ea87a0-fd29-456d-a34c-7530852988fd",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -34,19 +34,19 @@
             "in_1"
           ]
         },
-        "4dbfaecb-05ca-4ad9-aac2-155494717fb4": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
-          "nameSelf": "4dbfaecb-05ca-4ad9-aac2-155494717fb4",
-          "initialKvStores": [],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
-        },
         "4240d82a-6bed-4542-9e59-c305c768435e": {
           "subItptOf": "shnyder/HeroGallery",
           "canInterpretType": "shnyder/HeroGallery-ObjectType",
           "nameSelf": "4240d82a-6bed-4542-9e59-c305c768435e",
           "initialKvStores": [
+            {
+              "key": "backgroundPart",
+              "value": {
+                "objRef": "25093ea5-c1bf-42e8-be45-ed3a4d0655a5",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
             {
               "key": "backgroundPart",
               "value": {
@@ -78,12 +78,12 @@
             },
             {
               "key": "previousBtnLabel",
-              "value": "get started",
+              "value": "Get Started",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "nextBtnLabel",
-              "value": "get started",
+              "value": "Get Started",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -100,9 +100,18 @@
           "crudSkills": "cRud",
           "interpretableKeys": [
             "backgroundPart",
+            "backgroundPart",
             "foregroundPart",
             "foregroundPart"
           ]
+        },
+        "25093ea5-c1bf-42e8-be45-ed3a4d0655a5": {
+          "subItptOf": "shnyder-website/images/node-editor-mainpage",
+          "canInterpretType": "shnyder-website/images/node-editor-mainpage-ObjectType",
+          "nameSelf": "25093ea5-c1bf-42e8-be45-ed3a4d0655a5",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
         },
         "7e551c5c-b455-4700-a832-223d05bb91ab": {
           "subItptOf": "demo/images/londonBus",
@@ -113,8 +122,8 @@
           "interpretableKeys": []
         },
         "d7b68cdd-0f95-4992-9fca-10498093b1af": {
-          "subItptOf": "demo/images/shnyderLogoOnWhite",
-          "canInterpretType": "demo/images/shnyderLogoOnWhite-ObjectType",
+          "subItptOf": "shnyder-website/images/shnyderLogoOnWhite",
+          "canInterpretType": "shnyder-website/images/shnyderLogoOnWhite-ObjectType",
           "nameSelf": "d7b68cdd-0f95-4992-9fca-10498093b1af",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -125,6 +134,127 @@
           "canInterpretType": "demo/images/parisTrain-ObjectType",
           "nameSelf": "7430e050-aea0-49ca-9e75-61b51028ca2d",
           "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "d1ea87a0-fd29-456d-a34c-7530852988fd": {
+          "subItptOf": "shnyder/layout/vh-centered-column",
+          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
+          "nameSelf": "d1ea87a0-fd29-456d-a34c-7530852988fd",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "3c7cd4fe-02db-4185-b1e0-ae28a4d08680",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "3c7cd4fe-02db-4185-b1e0-ae28a4d08680": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "3c7cd4fe-02db-4185-b1e0-ae28a4d08680",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "a90c3159-5724-4b1a-9a8d-0c01889e7f09",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "c0def857-6e41-4e07-a710-45f569754081",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "2cee035d-ec0b-406d-ab61-3ff0a2e12451",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "29efe34f-6c6a-4f2c-ad2c-7d9a459d439b",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2",
+            "in_3"
+          ]
+        },
+        "a90c3159-5724-4b1a-9a8d-0c01889e7f09": {
+          "subItptOf": "shnyder/basichtml/h3",
+          "canInterpretType": "shnyder/basichtml/h3-ObjectType",
+          "nameSelf": "a90c3159-5724-4b1a-9a8d-0c01889e7f09",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": "Our latest features",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "c0def857-6e41-4e07-a710-45f569754081": {
+          "subItptOf": "shnyder/basichtml/paragraph",
+          "canInterpretType": "shnyder/basichtml/paragraph-ObjectType",
+          "nameSelf": "c0def857-6e41-4e07-a710-45f569754081",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": "We would be glad to present our latest innovations to you live. Please leave your email so we can get back to you!",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "2cee035d-ec0b-406d-ab61-3ff0a2e12451": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "2cee035d-ec0b-406d-ab61-3ff0a2e12451",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "email address",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "29efe34f-6c6a-4f2c-ad2c-7d9a459d439b": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "29efe34f-6c6a-4f2c-ad2c-7d9a459d439b",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "submit",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }

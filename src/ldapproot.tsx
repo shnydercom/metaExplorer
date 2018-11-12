@@ -56,6 +56,7 @@ import { DemoCompleteReceiver } from "approot";
 import * as gsheetsTester from '../demos/gsheets-tester.json';
 
 import * as shnyderWebsiteGallery from '../demos/shnyder-website-hero.json';
+import * as imgWebsiteNode from '../demos/img-website-node.json';
 
 export interface LDApprootProps {
 
@@ -87,6 +88,7 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 				mainScreen, searchScreen, expenseScreen, gameScreen, timeTrackingScreen, bookingScreen,
 				routehowto, htmlhowto, appMain,
 				gsheetsTester,
+				imgWebsiteNode,
 				shnyderWebsiteGallery
 			];
 			for (let i = 0; i < prefilledData.length; i++) {
