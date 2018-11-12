@@ -9,6 +9,7 @@ import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
 import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import HeroGallery from 'metaexplorer-react-components/lib/components/hero/hero';
 
 export var HeroGalleryName: string = "shnyder/HeroGallery";
 const backgroundItpt = "backgroundPart";
@@ -17,7 +18,7 @@ const prevBtnLabel = "previousBtnLabel";
 const nextBtnLabel = "nextBtnLabel";
 
 let cfgIntrprtKeys: string[] =
-	[backgroundItpt, foregroundItpt, prevBtnLabel, nextBtnLabel, VisualDict.subHeaderTxt];
+	[backgroundItpt, foregroundItpt, prevBtnLabel, nextBtnLabel, VisualDict.headerTxt, VisualDict.subHeaderTxt];
 let initialKVStores: IKvStore[] = [
 	{
 		key: cfgIntrprtKeys[0],
@@ -43,6 +44,11 @@ let initialKVStores: IKvStore[] = [
 		key: cfgIntrprtKeys[4],
 		value: undefined,
 		ldType: LDDict.Text
+	},
+	{
+		key: cfgIntrprtKeys[5],
+		value: undefined,
+		ldType: LDDict.Text
 	}
 ];
 let bpCfg: BlueprintConfig = {
@@ -53,23 +59,31 @@ let bpCfg: BlueprintConfig = {
 	crudSkills: "cRud"
 };
 
+export interface HeroGalleryState extends LDLocalState {
+	displayIdx: number;
+	numGalleryItems: number;
+}
+
 @ldBlueprint(bpCfg)
-export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, LDLocalState>
+export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, HeroGalleryState>
 	implements IBlueprintItpt {
 
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
-		prevState: null | LDLocalState)
-		: null | LDLocalState {
+		prevState: null | HeroGalleryState)
+		: null | HeroGalleryState {
 		let rvLD = getDerivedItptStateFromProps(
 			nextProps, prevState, [cfgIntrprtKeys[0], cfgIntrprtKeys[1]], [true, true]);
 		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [cfgIntrprtKeys[2], cfgIntrprtKeys[3], cfgIntrprtKeys[4]], [true, true, false]);
+			nextProps, prevState, [cfgIntrprtKeys[2], cfgIntrprtKeys[3], cfgIntrprtKeys[4], cfgIntrprtKeys[5]], [true, true, false, false]);
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
+		let galFrontItems = rvLD.compInfos.get(cfgIntrprtKeys[1]);
+		let numGalleryItems = galFrontItems ? (galFrontItems as []).length : 0;
 		return {
-			...prevState, ...rvLD, ...rvLocal
+			...prevState, ...rvLD, ...rvLocal,
+			numGalleryItems
 		};
 	}
 
@@ -84,30 +98,48 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
+			numGalleryItems: 0,
+			displayIdx: 0,
 			...initLDLocalState(this.cfg, props,
 				[cfgIntrprtKeys[0], cfgIntrprtKeys[1]],
-				[cfgIntrprtKeys[2], cfgIntrprtKeys[3], cfgIntrprtKeys[4]],
+				[cfgIntrprtKeys[2], cfgIntrprtKeys[3], cfgIntrprtKeys[4], cfgIntrprtKeys[5]],
 				[true, true],
-				[true, true, false])
+				[true, true, false, false])
 		};
 	}
 
-	componentDidMount() {
-		(this.refs.innerDiv as HTMLDivElement).setAttribute('style', "--aspect-ratio:4/3;");
+	onGalleryLeftClick() {
+		let newDisplayIdx = this.state.displayIdx - 1;
+		newDisplayIdx = newDisplayIdx < 0 ? this.state.numGalleryItems : newDisplayIdx;
+		this.setState({ ...this.state, displayIdx: newDisplayIdx });
 	}
-	componentDidUpdate() {
-		(this.refs.innerDiv as HTMLDivElement).setAttribute('style', "--aspect-ratio:4/3;");
+
+	onGalleryRightClick() {
+		let newDisplayIdx = this.state.displayIdx + 1;
+		newDisplayIdx = newDisplayIdx >= this.state.numGalleryItems ? 0 : newDisplayIdx;
+		this.setState({ ...this.state, displayIdx: newDisplayIdx });
 	}
 
 	render() {
-		const { localValues } = this.state;
+		const { localValues, displayIdx } = this.state;
+		const { routes } = this.props;
 		const prevBtnLabelStrings: string[] = localValues.get(prevBtnLabel);
 		const nxtBtnLabelStrings: string[] = localValues.get(nextBtnLabel);
 		const subHeaderTextStr: string = localValues.get(VisualDict.subHeaderTxt);
-		console.dir(prevBtnLabelStrings);
-		console.dir(nxtBtnLabelStrings);
-		console.dir(subHeaderTextStr);
-		return <div className="hero-gallery">
+		const topHeaderTextStr: string = localValues.get(VisualDict.headerTxt);
+		return <HeroGallery
+			backgroundComp={this.renderSub(backgroundItpt, routes, displayIdx)}
+			foregroundComp={this.renderSub(foregroundItpt, routes, displayIdx)}
+			leftBtnLabel={prevBtnLabelStrings[displayIdx]}
+			rightBtnLabel={nxtBtnLabelStrings[displayIdx]}
+			onLeftBtnClick={() => this.onGalleryLeftClick()}
+			onRightBtnClick={() => this.onGalleryRightClick()}
+			topHeader={topHeaderTextStr}
+			subHeader={subHeaderTextStr}
+		>
+
+		</HeroGallery>;
+		/*return <div className="hero-gallery">
 			<div className="bg-container">
 				{this.renderSub(backgroundItpt)}
 			</div>
@@ -135,7 +167,7 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 			<div className="hero-text">
 				<h4>{subHeaderTextStr}</h4>
 			</div>
-		</div>;
+		</div>;*/
 	}
 
 }

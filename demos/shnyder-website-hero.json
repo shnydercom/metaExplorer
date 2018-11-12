@@ -58,7 +58,7 @@
             {
               "key": "foregroundPart",
               "value": {
-                "objRef": "f5722fe1-5f29-48e4-93dc-2fca82c2d2bd",
+                "objRef": "d7b68cdd-0f95-4992-9fca-10498093b1af",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -112,10 +112,10 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "f5722fe1-5f29-48e4-93dc-2fca82c2d2bd": {
-          "subItptOf": "demo/images/shnyderLogo",
-          "canInterpretType": "demo/images/shnyderLogo-ObjectType",
-          "nameSelf": "f5722fe1-5f29-48e4-93dc-2fca82c2d2bd",
+        "d7b68cdd-0f95-4992-9fca-10498093b1af": {
+          "subItptOf": "demo/images/shnyderLogoOnWhite",
+          "canInterpretType": "demo/images/shnyderLogoOnWhite-ObjectType",
+          "nameSelf": "d7b68cdd-0f95-4992-9fca-10498093b1af",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
