@@ -100,7 +100,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 
 	onRefMapDrop(event) {
 		var data = JSON.parse(event.dataTransfer.getData("ld-node"));
-		this.onEditTrayItem(data);
+		return this.onEditTrayItem(data);
 	}
 
 	render() {

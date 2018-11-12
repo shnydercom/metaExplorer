@@ -19,7 +19,7 @@
 
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": ["node", 
+    "types": ["node", "react", "react-router", "rxjs",
       "gapi", "gapi.auth2", "gapi", "gapi.auth2", "gapi.client", "gapi.client.sheets", 
       "react-toolbox"],
     "typeRoots": ["./node_modules/@types"],
@@ -34,7 +34,6 @@
   },
   "exclude": [
     "doc",
-    "node_modules",
     "src/examples",
     "dist",
     "scripts",
@@ -43,10 +42,11 @@
   "awesomeTypescriptLoaderOptions": {
     "compilerOptions": {
       "declaration": false,
-      "types": ["node", "gapi", "gapi.auth2"],
+      "types": ["node", "react", "react-router", "rxjs",
+        "gapi", "gapi.auth2", "gapi", "gapi.auth2", "gapi.client", "gapi.client.sheets", 
+        "react-toolbox"],
     },
     "exclude": [
-      "node_modules",
       "public/js",
       "scripts",
       "tooling"

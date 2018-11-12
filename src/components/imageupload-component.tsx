@@ -1,4 +1,4 @@
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { ExplorerState } from 'appstate/store';
 import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
@@ -9,6 +9,7 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { IKvStore } from 'ldaccess/ikvstore';
 import { LDDict } from 'ldaccess/LDDict';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Dispatch, Action } from 'redux';
 
 type OwnProps = {
 };
@@ -22,7 +23,7 @@ type ConnectedDispatch = {
 const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<ExplorerState>): ConnectedDispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch<Action<any>>): ConnectedDispatch => ({
     fileChange: (fileList: FileList, url: string) => {
         dispatch(uploadImgRequestAction(fileList, url));
         return;

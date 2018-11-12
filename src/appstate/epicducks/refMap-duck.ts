@@ -1,8 +1,8 @@
 import { ILDOptionsMapStatePart, ExplorerState } from "../store";
 import { ILDOptions } from "ldaccess/ildoptions";
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap, OutputKVMapElement } from "ldaccess/ldBlueprint";
-import { ActionsObservable } from "redux-observable";
-import { Observable } from 'rxjs/Rx';
+import { ActionsObservable, ofType } from "redux-observable";
+import { Observable, of } from 'rxjs';
 import { IKvStore } from "ldaccess/ikvstore";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
 import { LDDict } from "ldaccess/LDDict";
@@ -17,7 +17,8 @@ import { Store, Action } from "redux";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
 import { connectNonVisLDComp } from "sidefx/nonVisualConnect";
 
-import { concat as concat$ } from 'rxjs/observable/concat';
+import { concat as concat$ } from 'rxjs';
+import { mergeMap } from "rxjs/operators";
 
 /**
  * a duck for ReferenceMap-handling.
@@ -251,9 +252,10 @@ function assignDerivedItpt(retriever: string, newLDTokenStr: string, bpCfg: Blue
 }*/
 
 export const refMapEpic = (action$: ActionsObservable<any>, store: Store<ExplorerState>) => {
-	return action$.ofType(REFMAP_REQUEST)
+	return action$.pipe(
+		ofType(REFMAP_REQUEST),
 		/*.do(() => console.log("REQUESTing Refmap Async part (itpt-retrieval)"))*/
-		.mergeMap((action: RefMapRequestAction) => {
+		mergeMap((action: RefMapRequestAction) => {
 			let ldOptionsObj: ILDOptions = action.ldOptionsBase;
 			let baseRefMap: BlueprintConfig = action.refMap;
 			//let refMapREQUESTPromise = new Promise((resolve, reject) => {
@@ -264,11 +266,10 @@ export const refMapEpic = (action$: ActionsObservable<any>, store: Store<Explore
 			//let rv = Observable.from(refMapREQUESTPromise);
 			return concat$(
 				rv,
-				() => {
-					ldOptionsObj.isLoading = false;
-					return Observable.of(refMapSUCCESSAction(ldOptionsObj));
-				});
-		});
+				of(refMapSUCCESSAction({ ...ldOptionsObj, isLoading: false }))
+			);
+		})
+	);
 };
 
 interface InstancePrepItm {

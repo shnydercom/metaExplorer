@@ -1,7 +1,7 @@
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { HydraClientAPI } from './hydra-client';
 import { LDError } from './../appstate/LDError';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 export class ImageUploadAPI {  // URL to web api IRI resource
   postNewImage(fileList: FileList, targetUrl: string): Observable<IWebResource> {//Observable<IWebResource> { //FETCH

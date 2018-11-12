@@ -1,6 +1,5 @@
-import { Action, Store } from 'redux';
-import { ActionsObservable, Epic, Options } from 'redux-observable';
-import { AjaxError, Observable } from 'rxjs/Rx';
+import { ActionsObservable, ofType } from 'redux-observable';
+import { Observable } from 'rxjs';
 //import "rxjs/Rx";
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { LDError, LDErrorMsgState } from './../LDError';
@@ -11,7 +10,7 @@ import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
 import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 import { OutputKVMap } from 'ldaccess/ldBlueprint';
-import { string } from 'prop-types';
+import { tap, mergeMap } from 'rxjs/operators';
 
 export const LDOPTIONS_CLIENTSIDE_CREATE = 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE';
 export const LDOPTIONS_CLIENTSIDE_UPDATE = 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE';
@@ -216,9 +215,10 @@ export const ldOptionsMapReducer = (
 };
 
 export const requestLDOptionsEpic = (action$: ActionsObservable<any>, store: any, { ldOptionsAPI }: any) => {
-	return action$.ofType(LDOPTIONS_REQUEST_ASYNC)
-		.do(() => console.log("Requesting LD Options from network"))
-		.mergeMap((action) => {
+	return action$.pipe(
+		ofType(LDOPTIONS_REQUEST_ASYNC),
+		tap(() => console.log("Requesting LD Options from network")),
+		mergeMap((action) => {
 			console.log(action.targetReceiverLnk);
 			if (action.isExternalAPICall) {
 				let apiCallOverride: () => Promise<any> = externalAPICallDict.get(action.targetReceiverLnk);
@@ -252,5 +252,6 @@ export const requestLDOptionsEpic = (action$: ActionsObservable<any>, store: any
 							)));
 				}
 			}
-		});
+		})
+	);
 };

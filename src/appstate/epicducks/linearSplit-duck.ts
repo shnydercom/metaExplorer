@@ -4,14 +4,15 @@ import { LDAction } from "./ldOptions-duck";
 import { linearLDTokenStr, NetworkPreferredToken, ILDToken } from "ldaccess/ildtoken";
 import { isLDOptionsSame } from "ldaccess/ldUtils";
 import { appItptMatcherFn } from "appconfig/appItptMatcher";
-import { ActionsObservable } from "redux-observable";
-import { Observable } from 'rxjs/Rx';
+import { ActionsObservable, ofType } from "redux-observable";
+import { Observable, from } from 'rxjs';
 import { LDError, LDErrorMsgState } from "../LDError";
 import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
 import { OutputKVMap } from "ldaccess/ldBlueprint";
 import { IKvStore } from "ldaccess/ikvstore";
 import { LDDict } from "ldaccess/LDDict";
 import { UserDefDict } from "ldaccess/UserDefDict";
+import { mergeMap, map } from "rxjs/operators";
 
 /**
  * a duck for linear state splitting, used for containers
@@ -95,29 +96,56 @@ function clearDerivedItpt(retriever: string, oldLDTokenStr: string) {
 }
 
 export const linearSplitEpic = (action$: ActionsObservable<any>, store: any) => {
-	return action$.ofType(LINEAR_SPLIT_REQUEST)
-		/*.do(() => console.log("after splitting LDOptions generate Retrievers/Matchers"))*/
-		.mergeMap((action) => {
-			if (!action.ldOptionsBase) return;
-			let ldOptionsObj = action.ldOptionsBase;
-			let retriever = action.ldOptionsBase.visualInfo.retriever;
-			let ldTkStr = action.ldOptionsBase.ldToken.get();
-			let splitReqPromise = new Promise((resolve, reject) => {
-				//TOdo: check if it's needed:
-				// clearDerivedItpt(retriever, ldTkStr);
-				ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
-					let newLDTokenStr: string = linearLDTokenStr(ldTkStr, idx);
-					let newLDToken = new NetworkPreferredToken(newLDTokenStr);
-					assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
+	return action$.pipe(
+		ofType(LINEAR_SPLIT_REQUEST),
+		mergeMap(
+			(action) => {
+				if (!action.ldOptionsBase) return;
+				let ldOptionsObj = action.ldOptionsBase;
+				let retriever = action.ldOptionsBase.visualInfo.retriever;
+				let ldTkStr = action.ldOptionsBase.ldToken.get();
+				let splitReqPromise = new Promise((resolve, reject) => {
+					//TOdo: check if it's needed:
+					// clearDerivedItpt(retriever, ldTkStr);
+					ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
+						let newLDTokenStr: string = linearLDTokenStr(ldTkStr, idx);
+						let newLDToken = new NetworkPreferredToken(newLDTokenStr);
+						assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
+					});
+					ldOptionsObj.isLoading = false;
+					// assignDerivedItpt(retriever, ldTkStr, UserDefDict.itptContainerObjType, "cRud");
+					resolve(ldOptionsObj);
 				});
-				ldOptionsObj.isLoading = false;
-				// assignDerivedItpt(retriever, ldTkStr, UserDefDict.itptContainerObjType, "cRud");
-				resolve(ldOptionsObj);
+				let rv = from(splitReqPromise);
+				return rv.pipe(
+					map((ldOptions: ILDOptions) => (
+						linearSplitSuccessAction(ldOptions)
+					)));
+			}
+		)
+	);
+	/*.do(() => console.log("after splitting LDOptions generate Retrievers/Matchers"))*/
+	/*.mergeMap((action) => {
+		if (!action.ldOptionsBase) return;
+		let ldOptionsObj = action.ldOptionsBase;
+		let retriever = action.ldOptionsBase.visualInfo.retriever;
+		let ldTkStr = action.ldOptionsBase.ldToken.get();
+		let splitReqPromise = new Promise((resolve, reject) => {
+			//TOdo: check if it's needed:
+			// clearDerivedItpt(retriever, ldTkStr);
+			ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
+				let newLDTokenStr: string = linearLDTokenStr(ldTkStr, idx);
+				let newLDToken = new NetworkPreferredToken(newLDTokenStr);
+				assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
 			});
-			let rv = Observable.from(splitReqPromise);
-			return rv.map((ldOptions: ILDOptions) => (
-				linearSplitSuccessAction(ldOptions)
-			));
-		}
-		);
+			ldOptionsObj.isLoading = false;
+			// assignDerivedItpt(retriever, ldTkStr, UserDefDict.itptContainerObjType, "cRud");
+			resolve(ldOptionsObj);
+		});
+		let rv = Observable.from(splitReqPromise);
+		return rv.map((ldOptions: ILDOptions) => (
+			linearSplitSuccessAction(ldOptions)
+		));
+	}
+	);*/
 };

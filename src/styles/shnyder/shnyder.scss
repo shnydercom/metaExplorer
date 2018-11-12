@@ -1,4 +1,4 @@
-$bright-text-color: #ffffffaa;
+$bright-text-color: unquote('#ffffffaa');
 $gallery-itm-bg-color: #121212;
 $gallery-bg-color: #010f27;
 $gallery-height: 66%;
@@ -14,31 +14,39 @@ $gallery-height: 66%;
 		background-color: $gallery-bg-color;
 	}
 
+	.hero-front-outer:after {
+		content: "";
+		display: block;
+		padding-bottom: 100%;
+	}
+
 	.hero-front-outer {
 		position: absolute;
-		max-width: 760px;
-		display: flex;
-
+		//max-width: 760px;
+		//display: flex;
+		top: 0;
+		bottom: 0;
 		left: 0;
 		right: 0;
-		margin-left: auto;
-		margin-right: auto;
+		//margin-left: auto;
+		//margin-right: auto;
 
 		.hero-front-inner {
-			margin: $gallery-height*0.16;
-			border: solid 1px;
-			border-radius: 20px;
-			background-color: $gallery-itm-bg-color;
-			flex-direction: column;
-			display: flex;
-			flex: 1;
+			//margin: $gallery-height*0.16;
+
+			//flex-direction: column;
+			//display: flex;
+			//flex: 1;
 
 			.fg-container {
-				flex: 4;
+				//flex: 4;
+				border: solid 1px;
+				border-radius: 20px;
+				background-color: $gallery-itm-bg-color;
 			}
 
 			.btns {
-				flex: 1;
+				//flex: 1;
 				display: flex;
 				flex-direction: row;
 
@@ -73,4 +81,31 @@ $gallery-height: 66%;
 		text-align: center;
 	}
 
+}
+
+[style*="--aspect-ratio"]> :first-child {
+	width: 100%;
+}
+
+[style*="--aspect-ratio"]>img {
+	height: auto;
+}
+
+@supports (--custom:property) {
+	[style*="--aspect-ratio"] {
+		position: relative;
+	}
+
+	[style*="--aspect-ratio"]::before {
+		content: "";
+		display: block;
+		padding-bottom: calc(100% / (var(--aspect-ratio)));
+	}
+
+	[style*="--aspect-ratio"]> :first-child {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+	}
 }

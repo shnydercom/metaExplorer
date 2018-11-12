@@ -9,7 +9,7 @@ import { OutputKVMapElement, OutputKVMap, BlueprintConfig } from "ldaccess/ldBlu
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { linearSplitRequestAction } from "./epicducks/linearSplit-duck";
 import { refMapREQUESTAction, refMapSUCCESSAction } from "./epicducks/refMap-duck";
-import { Dispatch } from "redux";
+import { Dispatch, Action } from "redux";
 import { LDDict } from "ldaccess/LDDict";
 import { ITPT_REFMAP_BASE } from "ldaccess/iitpt-retriever";
 
@@ -60,7 +60,7 @@ const ldTkStrRefToFilledProp = (state: ExplorerState, ownProps: LDOwnProps, ldOp
 	return rv;
 };
 
-export const mapDispatchToProps = (dispatch: Dispatch<ExplorerState>, ownProps: LDOwnProps): LDConnectedDispatch => ({
+export const mapDispatchToProps = (dispatch: Dispatch<Action<any>>, ownProps: LDOwnProps): LDConnectedDispatch => ({
 	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
 		if (!ldOptions) {
 			let kvStores: IKvStore[] = [/*ownProps.singleKV*/];

@@ -91,6 +91,14 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 				[true, true, false])
 		};
 	}
+
+	componentDidMount() {
+		(this.refs.innerDiv as HTMLDivElement).setAttribute('style', "--aspect-ratio:4/3;");
+	}
+	componentDidUpdate() {
+		(this.refs.innerDiv as HTMLDivElement).setAttribute('style', "--aspect-ratio:4/3;");
+	}
+
 	render() {
 		const { localValues } = this.state;
 		const prevBtnLabelStrings: string[] = localValues.get(prevBtnLabel);
@@ -104,20 +112,22 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 				{this.renderSub(backgroundItpt)}
 			</div>
 			<div className="hero-front-outer overlay-gradient">
-				<div className="hero-front-inner">
-					<div className="fg-container">
-						{this.renderSub(foregroundItpt)}
-					</div>
-					<div className="btns">
-						<div className="prev">
-							<div className="start"></div>
-							<div className="mid">{prevBtnLabelStrings}</div>
-							<div className="end"></div>
+				<div className="hero-front-inner" ref="innerDiv">
+					<div>
+						<div className="fg-container">
+							{this.renderSub(foregroundItpt)}
 						</div>
-						<div className="nxt">
-							<div className="start"></div>
-							<div className="mid">{nxtBtnLabelStrings}</div>
-							<div className="end"></div>
+						<div className="btns">
+							<div className="prev">
+								<div className="start"></div>
+								<div className="mid">{prevBtnLabelStrings}</div>
+								<div className="end"></div>
+							</div>
+							<div className="nxt">
+								<div className="start"></div>
+								<div className="mid">{nxtBtnLabelStrings}</div>
+								<div className="end"></div>
+							</div>
 						</div>
 					</div>
 				</div>

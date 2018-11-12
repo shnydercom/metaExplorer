@@ -1,4 +1,4 @@
-import Dropzone, { ImageFile } from 'react-dropzone';
+import Dropzone from 'react-dropzone';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { LDConnectedDispatch, LDConnectedState, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
@@ -175,7 +175,13 @@ SingleImageSelectorState>
 			multiple={false}
 			disableClick={true}
 			ref={(node) => { dropzoneRef = node; }}
-			onDropAccepted={(acceptedOrRejected) => this.onDropSuccess(acceptedOrRejected[0], acceptedOrRejected[0].preview)}
+			onDropAccepted={(acceptedOrRejected) => {
+				let files = acceptedOrRejected.map((file) => ({
+					...file,
+					preview: URL.createObjectURL(file)
+				}));
+				this.onDropSuccess(files[0], files[0].preview);
+			}}
 			onDropRejected={() => this.onDropFailure()}
 			onDragStart={() => this.startDrag()}
 			onDragEnter={() => this.startDrag()}
@@ -193,7 +199,7 @@ SingleImageSelectorState>
 							this.onDropSuccess(null, a);
 						}} />;
 					case SingleImageSelectorStateEnum.isDragging:
-						return <div className="accept"><img className="md-large-image" style={{flex: 1}} src={this.draggingImgLink} height="100px" /></div>;
+						return <div className="accept"><img className="md-large-image" style={{ flex: 1 }} src={this.draggingImgLink} height="100px" /></div>;
 					case SingleImageSelectorStateEnum.isPreviewing:
 						return <img className="cover-img" src={previewURL} alt="image preview" ></img>;
 					case SingleImageSelectorStateEnum.isError:

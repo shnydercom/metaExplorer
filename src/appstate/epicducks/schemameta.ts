@@ -1,6 +1,7 @@
 import { Action, Store } from 'redux';
-import { ActionsObservable, Epic, Options } from "redux-observable";
+import { ActionsObservable, Epic, Options, ofType } from "redux-observable";
 import { AjaxError, Observable } from "rxjs/Rx";
+import { tap, mergeMap } from 'rxjs/operators';
 //import "rxjs/Rx"; //TODO: re-check this line and only import what's needed
 //source: https://mikebridge.github.io/articles/typescript-redux-observable-epic-test/
 
@@ -45,19 +46,21 @@ export const isLoadingSchemaReducer = function isLoading(state: boolean = false,
         default:
             return state;
     }
-}
-export const loadSchemaEpic = (action$: ActionsObservable<any>, store : any , { getJSON }: any) => {
-    return action$.ofType(SCHEMA_LOAD_REQUEST)
-        .do(() => console.log("Locating User ...")) // debugging
-        .mergeMap((action) =>
+};
+
+export const loadSchemaEpic = (action$: ActionsObservable<any>, store: any, { getJSON }: any) => {
+    return action$.pipe(
+        ofType(SCHEMA_LOAD_REQUEST),
+        tap(() => console.log("Locating User ...")), // debugging
+        mergeMap((action) =>
             getJSON(`%PUBLIC_URL%/api/users`)
                 .map((response: any) => loadSchemaResult(response as any))
                 .catch((error: AjaxError): ActionsObservable<ISchemaAjaxError> =>
                     ActionsObservable.of(loadSchemaFailure(
                         `An error occurred: ${error.message}`
                     )))
-        );
-
+        )
+    );
 };
 
 export default loadSchemaEpic;

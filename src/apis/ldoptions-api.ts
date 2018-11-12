@@ -1,7 +1,7 @@
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { HydraClientAPI } from './hydra-client';
 import { LDError } from './../appstate/LDError';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
 //let testTC = new TypesCollection(["someTypeInAnArray"] || new Array<string>());
