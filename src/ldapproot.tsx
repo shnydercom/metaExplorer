@@ -58,6 +58,11 @@ import * as gsheetsTester from '../demos/gsheets-tester.json';
 import * as shnyderWebsiteGallery from '../demos/shnyder-website-hero.json';
 import * as imgWebsiteNode from '../demos/img-website-node.json';
 
+import * as englishActivities from '../demos/video/englishactivities.json';
+import * as chineseActivities from '../demos/video/chineseactivities.json';
+import * as imgBerlin from '../demos/video/img-berlin.json';
+import * as overview from '../demos/video/overview.json';
+
 export interface LDApprootProps {
 
 }
@@ -87,6 +92,9 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 				bookingBuyFlight, bookingBuyTrain, bookingBuyBus,
 				mainScreen, searchScreen, expenseScreen, gameScreen, timeTrackingScreen, bookingScreen,
 				routehowto, htmlhowto, appMain,
+
+				englishActivities, chineseActivities, imgBerlin, overview,
+
 				gsheetsTester,
 				imgWebsiteNode,
 				shnyderWebsiteGallery

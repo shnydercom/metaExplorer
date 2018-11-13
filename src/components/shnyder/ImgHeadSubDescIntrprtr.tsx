@@ -94,7 +94,7 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 			<div className="header-img-container">
 				{this.renderSub(VisualDict.headerItpt)}
 			</div>
-			<div className="header-img-container overlay-gradient">
+			<div className="header-img-container gradient">
 				<div className="header-text">
 					<span>{headerText ? headerText : 'headerTextPlaceholder'}</span>
 				</div>
