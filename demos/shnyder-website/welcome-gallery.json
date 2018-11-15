@@ -1,0 +1,118 @@
+{
+  "subItptOf": "4240d82a-6bed-4542-9e59-c305c768435e",
+  "canInterpretType": "shnyder-website/welcome-gallery-ObjectType",
+  "nameSelf": "shnyder-website/welcome-gallery",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "4240d82a-6bed-4542-9e59-c305c768435e": {
+          "subItptOf": "shnyder/HeroGallery",
+          "canInterpretType": "shnyder/HeroGallery-ObjectType",
+          "nameSelf": "4240d82a-6bed-4542-9e59-c305c768435e",
+          "initialKvStores": [
+            {
+              "key": "backgroundPart",
+              "value": {
+                "objRef": "25093ea5-c1bf-42e8-be45-ed3a4d0655a5",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "backgroundPart",
+              "value": {
+                "objRef": "7e551c5c-b455-4700-a832-223d05bb91ab",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "foregroundPart",
+              "value": {
+                "objRef": "d7b68cdd-0f95-4992-9fca-10498093b1af",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "foregroundPart",
+              "value": {
+                "objRef": "7430e050-aea0-49ca-9e75-61b51028ca2d",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "previousBtnLabel",
+              "value": "Introduction",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "previousBtnLabel",
+              "value": "Get Started",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "nextBtnLabel",
+              "value": "Get Started",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "nextBtnLabel",
+              "value": "Introduction",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderText",
+              "value": "sharing our passion for creation",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "backgroundPart",
+            "backgroundPart",
+            "foregroundPart",
+            "foregroundPart"
+          ]
+        },
+        "25093ea5-c1bf-42e8-be45-ed3a4d0655a5": {
+          "subItptOf": "shnyder-website/images/node-editor-mainpage",
+          "canInterpretType": "shnyder-website/images/node-editor-mainpage-ObjectType",
+          "nameSelf": "25093ea5-c1bf-42e8-be45-ed3a4d0655a5",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "7e551c5c-b455-4700-a832-223d05bb91ab": {
+          "subItptOf": "demo/images/londonBus",
+          "canInterpretType": "demo/images/londonBus-ObjectType",
+          "nameSelf": "7e551c5c-b455-4700-a832-223d05bb91ab",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "d7b68cdd-0f95-4992-9fca-10498093b1af": {
+          "subItptOf": "shnyder-website/images/shnyderLogoOnWhite",
+          "canInterpretType": "shnyder-website/images/shnyderLogoOnWhite-ObjectType",
+          "nameSelf": "d7b68cdd-0f95-4992-9fca-10498093b1af",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "7430e050-aea0-49ca-9e75-61b51028ca2d": {
+          "subItptOf": "demo/images/parisTrain",
+          "canInterpretType": "demo/images/parisTrain-ObjectType",
+          "nameSelf": "7430e050-aea0-49ca-9e75-61b51028ca2d",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}
