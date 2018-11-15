@@ -55,7 +55,10 @@ import { DemoCompleteReceiver } from "approot";
 
 import * as gsheetsTester from '../demos/gsheets-tester.json';
 
-import * as shnyderWebsiteGallery from '../demos/shnyder-website-hero.json';
+import * as shnyderWebsiteGallery from '../demos/shnyder-website/welcome-gallery.json';
+import * as languageSelection from '../demos/shnyder-website/language-selection.json';
+import * as shnyderWebsiteContent from '../demos/shnyder-website/main-content.json';
+import * as shnyderWebsiteMain from '../demos/shnyder-website/main-page.json';
 import * as imgWebsiteNode from '../demos/img-website-node.json';
 
 import * as englishActivities from '../demos/video/englishactivities.json';
@@ -97,7 +100,10 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 
 				gsheetsTester,
 				imgWebsiteNode,
-				shnyderWebsiteGallery
+				shnyderWebsiteGallery,
+				languageSelection,
+				shnyderWebsiteContent,
+				shnyderWebsiteMain
 			];
 			for (let i = 0; i < prefilledData.length; i++) {
 				this.generatePrefilled(prefilledData[i]);

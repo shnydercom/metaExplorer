@@ -110,7 +110,7 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 
 	onGalleryLeftClick() {
 		let newDisplayIdx = this.state.displayIdx - 1;
-		newDisplayIdx = newDisplayIdx < 0 ? this.state.numGalleryItems : newDisplayIdx;
+		newDisplayIdx = newDisplayIdx < 0 ? this.state.numGalleryItems - 1 : newDisplayIdx;
 		this.setState({ ...this.state, displayIdx: newDisplayIdx });
 	}
 

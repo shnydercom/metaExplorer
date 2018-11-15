@@ -1,1 +1,9 @@
 @import "../../../node_modules/metaexplorer-react-components/src/components/hero/hero.scss";
+@import "../mods/mailchimp.scss";
+
+.vertical-scroll {
+	float: left;
+	width: 100%;
+	overflow-y: auto;
+	//height: 100%;
+}

@@ -71,6 +71,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
+	text-align: center;
 	min-height: fit-content;
 	min-width: 40px;
 
@@ -187,12 +188,6 @@ $app-inner-width-90: $app-inner-width * 0.9;
 		flex-grow: 1;
 	}
 
-	.vertical-scroll {
-		float: left;
-		width: 100%;
-		overflow-y: auto;
-		//height: 100%;
-	}
 }
 
 .menu-pop-over {

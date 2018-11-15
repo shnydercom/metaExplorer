@@ -2,7 +2,7 @@ import * as dagre from "dagre";
 import * as _ from "lodash";
 
 const size = {
-	width: 200,
+	width: 230,
 	height: 200
 };
 

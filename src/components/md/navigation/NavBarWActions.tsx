@@ -18,8 +18,9 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 
 export const NavBarWActionsName = "shnyder/md/NavBarWActions";
+
 let cfgIntrprtKeys: string[] =
-	[VisualDict.freeContainer, VisualDict.headerTxt, VisualDict.routeSend_search, VisualDict.popOverContent];
+	[VisualDict.freeContainer, VisualDict.headerTxt, VisualDict.routeSend_search, VisualDict.popOverContent, VisualDict.iconName];
 let initialKVStores: IKvStore[] = [
 	{
 		key: VisualDict.freeContainer,
@@ -40,7 +41,12 @@ let initialKVStores: IKvStore[] = [
 		key: VisualDict.popOverContent,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
-	}
+	},
+	{
+		key: VisualDict.iconName,
+		value: undefined,
+		ldType: LDDict.Text
+	},
 
 ];
 let bpCfg: BlueprintConfig = {
@@ -65,7 +71,7 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		let rvLD = getDerivedItptStateFromProps(
 			nextProps, prevState, [VisualDict.freeContainer, VisualDict.popOverContent]);
 		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualDict.headerTxt, VisualDict.routeSend_search]);
+			nextProps, prevState, [VisualDict.headerTxt, VisualDict.routeSend_search, VisualDict.iconName]);
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
@@ -92,7 +98,7 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 			...navBarStatePart,
 			...initLDLocalState(this.cfg, props,
 				[VisualDict.freeContainer, VisualDict.popOverContent],
-				[VisualDict.routeSend_search, VisualDict.headerTxt])
+				[VisualDict.routeSend_search, VisualDict.headerTxt, VisualDict.iconName])
 		};
 	}
 
@@ -111,6 +117,7 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		const { isDoRedirect, isRightMenuOpen, localValues, compInfos } = this.state;
 		const routeSendSearch = localValues.get(VisualDict.routeSend_search);
 		const headerText = localValues.get(VisualDict.headerTxt);
+		const iconName = localValues.get(VisualDict.iconName);
 		const hasPopOverContent = compInfos.has(VisualDict.popOverContent);
 		if (isDoRedirect && routeSendSearch) {
 			let route: string = cleanRouteString(routeSendSearch, this.props.routes);
@@ -119,19 +126,22 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 			console.log("navBar redirect to: " + route);
 			return <Redirect to={route} />;
 		}
-		return <><AppBar title={headerText ? headerText : "Menu"}>
-			<Navigation type='horizontal'>
-				{routeSendSearch
-					? <IconButton icon='search' onClick={this.onAppBarSearchBtnClick} />
-					: null}
-				{hasPopOverContent
-					? <IconMenu icon='account_circle' position='topRight' menuRipple onClick={this.onAppBarRightIconMenuClick}>
-						<div className="menu-pop-over">{this.renderSub(VisualDict.popOverContent)}</div>
-					</IconMenu>
-					: null}
-			</Navigation>
-		</AppBar>
-			{this.renderSub(VisualDict.freeContainer)}
+		return <>
+			<AppBar title={headerText ? headerText : "Menu"}>
+				<Navigation type='horizontal'>
+					{routeSendSearch
+						? <IconButton icon='search' onClick={this.onAppBarSearchBtnClick} />
+						: null}
+					{hasPopOverContent
+						? <IconMenu icon={iconName ? iconName : 'account_circle'} position='topRight' menuRipple onClick={this.onAppBarRightIconMenuClick}>
+							<div className="menu-pop-over">{this.renderSub(VisualDict.popOverContent)}</div>
+						</IconMenu>
+						: null}
+				</Navigation>
+			</AppBar>
+			<div className="bottom-nav-topfree mdscrollbar">
+				{this.renderSub(VisualDict.freeContainer)}
+			</div>
 		</>;
 	}
 }

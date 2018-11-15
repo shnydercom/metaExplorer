@@ -332,7 +332,7 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 						{this.state.previewDisplay === "phone" ?
 							<ThemeProvider theme={appTheme}>
 								<div className="app-preview">
-									<div className="app-content">
+									<div className="app-content mdscrollbar">
 										<Switch>
 											<Route path="/designerinitial" render={() => (
 												<div><b>drag and drop items into the designer</b></div>

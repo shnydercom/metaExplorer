@@ -12,6 +12,8 @@ export enum VisualDict {
 	footerItpt = "FooterInterpreter",
 	popOverContent = "PopOverContent",
 	iconImg = "IconImage",
+	videoId = "VideoID",
+	iconName = "iconName",
 
 	//Router-related Types
 	route_added = "Route_Added",

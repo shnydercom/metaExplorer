@@ -60,22 +60,22 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 				<DesignerTrayItem onLongPress={(data) => this.onEditTrayItem(data)} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />,
 				<DesignerTrayItem onLongPress={(data) => this.onEditTrayItem(data)} key={3} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />
 			],
-			label: 'Special Nodes',
+			label: 'Special Blocks',
 			subEntries: []
 		};
-		const atomicNodesText: string = "Use these elements to create compound nodes. As basic building blocks, they can't be split up into smaller parts";
+		const atomicNodesText: string = "Use these elements to create compound blocks. As basic functional blocks, they can't be split up into smaller parts";
 		const atomicNodesTreeItem: TreeEntry & FlatContentInfo = {
 			flatContentURLs: [],
 			flatContent: [],
-			label: 'Atomic Nodes',
+			label: 'Atomic Blocks',
 			subEntries: [],
 			itpts: []
 		};
-		const compoundNodesText: string = "Combine any node type to make up new nodes, or drop one in the box below to see how it's been made";
+		const compoundNodesText: string = "Combine any block type to make up new blocks, or drop one in the box below to see how it's been made";
 		const compoundNodesTreeItem: TreeEntry & FlatContentInfo = {
 			flatContentURLs: [],
 			flatContent: [],
-			label: 'Compound Nodes',
+			label: 'Compound Block',
 			subEntries: [],
 			itpts: []
 		};
@@ -109,7 +109,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 				<DesignerTray>
 					{this.trayItemsFromItptList()}
 					<RefMapDropSpace
-						dropText="...drop a Compound Node here to edit it, or long-press on it..."
+						dropText="...drop a Compound Block here to edit it, or long-press on it..."
 						refMapDrop={this.privOnRMDrop}
 					/>
 					<div className="button-row">
@@ -300,7 +300,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 				this.props.logic.diagramFromItptBlueprint(itptCfg);
 				this.props.logic.autoDistribute();
 				this.forceUpdate();
-				return { isSuccess: true, message: "check the diagram on the right to see your interpreter, or drop another compound node here to edit that one" };
+				return { isSuccess: true, message: "check the diagram on the right to see your interpreter, or drop another Compound Block here to edit that one" };
 			case "bdt":
 				return { isSuccess: false, message: "simple data types can't be used here" };
 			case "inputtype":
