@@ -3,10 +3,12 @@ import { ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc } from "./ImgHeadSubDesc
 import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
 import { PureHeroGallery, HeroGalleryName } from "./hero-gallery";
 import TitleTextAndImage, { TitleTextAndImageName } from "./TitleTextAndImage";
+import { GooeyNavName, PureGooeyNav } from "./gooey-nav";
 
 export function initShnyderItpts() {
 	let appIntRetr = appItptRetrFn();
 	appIntRetr.addItpt(HeroGalleryName, PureHeroGallery, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(TitleTextAndImageName, TitleTextAndImage, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(GooeyNavName, PureGooeyNav, "cRud", [ITPT_TAG_ATOMIC]);
 }

@@ -109,7 +109,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 				<DesignerTray>
 					{this.trayItemsFromItptList()}
 					<RefMapDropSpace
-						dropText="...drop a Compound Block here to edit it, or long-press on it..."
+						dropText="...drop a Compound Block here to edit it, or long-press on it, then hit the 'INTERPRET' button in the middle..."
 						refMapDrop={this.privOnRMDrop}
 					/>
 					<div className="button-row">

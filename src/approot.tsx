@@ -100,7 +100,7 @@ export class AppRoot extends Component<AppRootProps, AppRootState>{
 										notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })}/>
 									<div className="mode-switcher">
 										<Link to={{ pathname: routeProps.location.pathname, search: "?mode=designer" }}>
-											Switch to Designer
+											Switch to Editor
 										</Link>
 									</div>
 								</div>

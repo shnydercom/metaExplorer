@@ -212,17 +212,22 @@ export function getDerivedKVStateFromProps(
 		let newValueMap = new Map<string, any>();
 		let newLDTypeMap = new Map<string, any>();
 		kvKeys.forEach((itptKey, idx) => {
-			let kv = getKVStoreByKey(kvs, itptKey);
-			if (!kv) return;
-			let val = getKVValue(kv);
-			newLDTypeMap.set(itptKey, kv.ldType);
 			if (isMulti && isMulti[idx]) {
-				if (!newValueMap.has(itptKey)) {
-					newValueMap.set(itptKey, [val]);
-				} else {
-					newValueMap.get(itptKey).push(val);
+				let multiKvs = getAllKVStoresByKey(kvs, itptKey);
+				for (let i = 0; i < multiKvs.length; i++) {
+					const elemFromMulti = multiKvs[i];
+					if (!newValueMap.has(itptKey)) {
+						newLDTypeMap.set(itptKey, elemFromMulti.ldType);
+						newValueMap.set(itptKey, [getKVValue(elemFromMulti)]);
+					} else {
+						newValueMap.get(itptKey).push(getKVValue(elemFromMulti));
+					}
 				}
 			} else {
+				let kv = getKVStoreByKey(kvs, itptKey);
+				if (!kv) return;
+				newLDTypeMap.set(itptKey, kv.ldType);
+				let val = getKVValue(kv);
 				newValueMap.set(itptKey, val);
 			}
 		});

@@ -53,13 +53,22 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "6b09bf4d-417b-4960-9318-0b8e2833655c",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "in_0",
             "in_1",
-            "in_2"
+            "in_2",
+            "in_3"
           ]
         },
         "2919a775-d9a4-4cd1-93b2-3c853a1d0b2e": {
@@ -85,11 +94,6 @@
               "key": "confirmTxt",
               "value": "english",
               "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "RouteSend_confirm",
-              "value": "english",
-              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",
@@ -104,11 +108,20 @@
               "key": "confirmTxt",
               "value": "中文",
               "ldType": "http://schema.org/Text"
-            },
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "6b09bf4d-417b-4960-9318-0b8e2833655c": {
+          "subItptOf": "shnyder/basichtml/italics",
+          "canInterpretType": "shnyder/basichtml/italics-ObjectType",
+          "nameSelf": "6b09bf4d-417b-4960-9318-0b8e2833655c",
+          "initialKvStores": [
             {
-              "key": "RouteSend_confirm",
-              "value": "chinese",
-              "ldType": "Route_Added"
+              "key": "singleKvStore",
+              "value": "nothing much happening in other languages... the language selection was only created for the demo video",
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",
