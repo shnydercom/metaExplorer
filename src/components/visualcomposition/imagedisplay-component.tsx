@@ -68,7 +68,13 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 		}
 		if (!ldOptions) return <div>no Image data</div>;
 		return <div className="imgdisplay">
-			<img alt="" src={imgLnk} className="imgdisplay" style={{ objectFit: objFit }}/>
+			<img alt="" src={imgLnk} className="imgdisplay is-loading"
+				onLoad={
+					(ev) => {
+						ev.currentTarget.classList.remove("is-loading");
+					}
+				}
+				style={{ objectFit: objFit }} />
 			{/*imgLnk*/}
 			{this.props.children}
 		</div>;

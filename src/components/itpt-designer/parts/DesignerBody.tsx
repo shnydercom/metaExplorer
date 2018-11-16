@@ -75,7 +75,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 		const compoundNodesTreeItem: TreeEntry & FlatContentInfo = {
 			flatContentURLs: [],
 			flatContent: [],
-			label: 'Compound Block',
+			label: 'Compound Blocks',
 			subEntries: [],
 			itpts: []
 		};
