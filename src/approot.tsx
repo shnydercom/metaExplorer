@@ -83,7 +83,8 @@ export class AppRoot extends Component<AppRootProps, AppRootState>{
 						if (this.state.mode === "editor") {
 							return (
 								<div style={{ flex: "1", background: "white" }}>
-									<AppItptDesigner ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
+									<AppItptDesigner initiallyDisplayedItptName="shnyder-website/main-page"
+									 ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
 										notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })} />
 									{!isProduction && <DevTools />}
 									<div className="mode-switcher">

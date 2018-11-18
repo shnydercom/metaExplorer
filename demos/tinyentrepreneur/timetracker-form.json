@@ -1,6 +1,6 @@
 {
   "subItptOf": "66c1833f-9057-4cfc-b382-ab453c77fd5a",
-  "canInterpretType": "tinyentrepreneur/timetracker-form-ObjectType",
+  "canInterpretType": "tinyentrepreneur/time-tracker-form-ObjectType",
   "nameSelf": "tinyentrepreneur/time-tracker-form",
   "initialKvStores": [
     {

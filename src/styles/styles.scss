@@ -20,7 +20,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 }
 
 .app-preview {
-	//min-width: $app-outer-width;
+	min-width: $app-outer-width;
 	width: $app-outer-width;
 	height: 746px;
 	background-image: url('/static/designer-phone-bg.png');
@@ -29,6 +29,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	font-family: Roboto, Arial;
 	text-overflow: ellipsis;
 	overflow-x: hidden;
+	min-width: 420px;
 }
 
 .mode-switcher {
@@ -114,7 +115,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	animation: fadein 250ms;
 	#img {
 		object-fit: cover;
-		-webkit-transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1);
+		transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1);
 	}
 }
 
@@ -143,7 +144,8 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	}
 
 	.designer-tray {
-		min-width: 200px;
+		position: relative;
+		min-width: 250px;
 		max-width: 400px;
 		background: $designer-background-elevated-color;
 		flex-grow: 0;
@@ -164,31 +166,6 @@ $app-inner-width-90: $app-inner-width * 0.9;
 			margin-bottom: 3px;
 			cursor: pointer;
 		}
-
-		.refmap-drop-outer {
-			min-height: 100px;
-			display: flex;
-			flex-direction: column-reverse;
-		}
-
-		.refmap-drop-inner {
-			color: adjust-color($color: #ffffff, $lightness: 80%, $alpha: 0.8);
-			background-color: adjust-color($color: #0c1e3a, $saturation: -20%, $lightness: 10%);
-			font-family: Roboto, Arial;
-			padding: 5px;
-			margin: 0px 10px;
-			border: solid 1px;
-			border-radius: 5px;
-			border-style: none;
-			margin-bottom: 2px;
-			cursor: pointer;
-			min-height: 100px;
-			text-align: center;
-			user-select: none;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
 	}
 
 	.diagram-body {
@@ -198,7 +175,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 
 	.diagram-layer {
 		position: relative;
-		flex-grow: 1;
+		flex-grow: 3;
 	}
 
 }

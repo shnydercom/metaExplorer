@@ -118,8 +118,8 @@
           ]
         },
         "e6ebd602-494a-4d4b-80bc-f655b5186e28": {
-          "subItptOf": "tinyentrepreneur/timetracker-form",
-          "canInterpretType": "tinyentrepreneur/timetracker-form-ObjectType",
+          "subItptOf": "tinyentrepreneur/time-tracker-form",
+          "canInterpretType": "tinyentrepreneur/time-tracker-form-ObjectType",
           "nameSelf": "e6ebd602-494a-4d4b-80bc-f655b5186e28",
           "initialKvStores": [],
           "crudSkills": "cRud",

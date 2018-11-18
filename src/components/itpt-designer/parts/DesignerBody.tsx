@@ -22,6 +22,8 @@ import { ITPT_TAG_ATOMIC, ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
 
 export interface DesignerBodyProps {
 	logic: DesignerLogic;
+	currentlyEditingItpt: string | null;
+	changeCurrentlyEditingItpt: (newItpt: string | null) => void;
 }
 
 export interface FlatContentInfo {
@@ -29,17 +31,45 @@ export interface FlatContentInfo {
 	itpts: IBlueprintItpt[];
 }
 
-export interface DesignerBodyState { }
+export interface DesignerBodyState {
+	currentlyEditingItpt: string | null;
+}
+
+export const loadToDesignerByName: (props: DesignerBodyProps, name: string) => boolean = (props: DesignerBodyProps, name: string) => {
+	let itptInfo = props.logic.getItptList().find((itm) => itm.nameSelf === name);
+	let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
+	if (!itptCfg.initialKvStores
+		|| itptCfg.initialKvStores.length !== 1
+		|| itptCfg.initialKvStores[0].key !== UserDefDict.intrprtrBPCfgRefMapKey) {
+		return false;
+	}
+	props.logic.diagramFromItptBlueprint(itptCfg);
+	props.logic.autoDistribute();
+	props.changeCurrentlyEditingItpt(itptCfg.nameSelf);
+	return true;
+};
 
 /**
  * @author Jonathan Schneider
  */
 export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState> {
 
+	static getDerivedStateFromProps(nextProps: DesignerBodyProps, prevState: DesignerBodyState) {
+		if (nextProps.currentlyEditingItpt !== prevState.currentlyEditingItpt) {
+			let nextCurEditItpt = nextProps.currentlyEditingItpt;
+			if (nextCurEditItpt) {
+				nextProps.logic.clear();
+				loadToDesignerByName(nextProps, nextCurEditItpt);
+			}
+			return { currentlyEditingItpt: nextCurEditItpt };
+		}
+		return null;
+	}
+
 	private privOnRMDrop = this.onRefMapDrop.bind(this);
 	constructor(props: DesignerBodyProps) {
 		super(props);
-		this.state = {};
+		this.state = { currentlyEditingItpt: null };
 	}
 
 	public trayItemsFromItptList() {
@@ -108,10 +138,6 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 			<div className="diagram-body">
 				<DesignerTray>
 					{this.trayItemsFromItptList()}
-					<RefMapDropSpace
-						dropText="...drop a Compound Block here to edit it, or long-press on it, then hit the 'INTERPRET' button in the middle..."
-						refMapDrop={this.privOnRMDrop}
-					/>
 					<div className="button-row">
 						<Button style={{ color: "white" }} label="zoom + autolayout" onClick={(ev) => {
 							this.props.logic.autoDistribute();
@@ -121,6 +147,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 						} />
 						<Button style={{ color: "white" }} label="clear" onClick={(ev) => {
 							this.props.logic.clear();
+							this.props.changeCurrentlyEditingItpt(null);
 							this.forceUpdate();
 						}} />
 					</div>
@@ -190,6 +217,13 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 					}}
 				>
 					<DiagramWidget diagramEngine={this.props.logic.getDiagramEngine()} />
+					<div className="button-row">
+						<RefMapDropSpace
+							currentDisplayedItpt={this.state.currentlyEditingItpt}
+							dropText="...drop a Compound Block here to edit it, or long-press on it, then hit the 'INTERPRET' button in the middle..."
+							refMapDrop={this.privOnRMDrop}
+						/>
+					</div>
 				</div>
 			</div>
 		);
@@ -290,15 +324,8 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 		switch (data.type) {
 			case "ldbp":
 				this.props.logic.clear();
-				let itptInfo = this.props.logic.getItptList().find((itm) => itm.nameSelf === data.bpname);
-				let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
-				if (!itptCfg.initialKvStores
-					|| itptCfg.initialKvStores.length !== 1
-					|| itptCfg.initialKvStores[0].key !== UserDefDict.intrprtrBPCfgRefMapKey) {
-					return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
-				}
-				this.props.logic.diagramFromItptBlueprint(itptCfg);
-				this.props.logic.autoDistribute();
+				let isLoadSuccess = loadToDesignerByName(this.props, data.bpname);
+				if (!isLoadSuccess) return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
 				this.forceUpdate();
 				return { isSuccess: true, message: "check the diagram on the right to see your interpreter, or drop another Compound Block here to edit that one" };
 			case "bdt":

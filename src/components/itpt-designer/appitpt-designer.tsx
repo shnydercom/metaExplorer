@@ -37,6 +37,7 @@ import appItptRetrFn from "appconfig/appItptRetriever";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
+	initiallyDisplayedItptName: string | null;
 } & LDOwnProps;
 
 export type AIDState = {
@@ -44,7 +45,7 @@ export type AIDState = {
 	previewerToken: string;
 	previewDisplay: "phone" | "code";
 	hasCompletedFirstRender: boolean;
-	initiallyDisplayedItptName: string;
+	currentlyEditingItptName: string | null;
 };
 
 const DESIGNER_KV_KEY = "DesignerKvKey";
@@ -55,7 +56,6 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 	errorNotAvailableMsg: string = "Itpt Designer environment not available. Please check your settings";
 	constructor(props?: any) {
 		super(props);
-		console.log("constructor");
 		let previewerToken = null;
 		previewerToken = props.ldTokenString + "-previewLDOptions";
 		if (!props.logic) {
@@ -64,11 +64,10 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 		} else {
 			this.logic = props.logic;
 		}
-		this.state = { initiallyDisplayedItptName: 'shnyder-website/main-page', serialized: "", previewerToken: previewerToken, previewDisplay: "phone", hasCompletedFirstRender: false };
+		this.state = { currentlyEditingItptName: null, serialized: "", previewerToken: previewerToken, previewDisplay: "phone", hasCompletedFirstRender: false };
 	}
 
 	componentDidMount() {
-		console.log("cdM");
 		if (!this.props.ldOptions) {
 			this.props.notifyLDOptionsChange(null);
 		}
@@ -203,27 +202,36 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 	}
 
 	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver) {
-		if (!this.state.hasCompletedFirstRender && prevProps.isInitDemo) {
-			itptLoadApi.getItptsForCurrentUser()().then((val) => {
-				let numItpts = val.itptList.length;
-				val.itptList.forEach((itpt) => {
-					addBlueprintToRetriever(itpt);
-				});
-				if (numItpts > 0) {
-					//this.generatePrefilled(val.itptList[numItpts - 1]);
-					let newItpt = appItptRetrFn().getItptByNameSelf(this.state.initiallyDisplayedItptName).cfg as BlueprintConfig;
-					let newType = newItpt.canInterpretType;
-					let dummyInstance = intrprtrTypeInstanceFromBlueprint(newItpt);
-					let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
-					newLDOptions.resource.kvStores = [
-						{ key: DESIGNER_KV_KEY, ldType: newType, value: dummyInstance }
-					];
-					this.props.notifyLDOptionsChange(newLDOptions);
-				}
-				this.setState({ ...this.state, hasCompletedFirstRender: true });
-				this.props.notifyDemoComplete();
-			}).catch((reason) => console.log(reason));
+		if (!this.state.hasCompletedFirstRender) {
+			if (prevProps.isInitDemo) {
+				itptLoadApi.getItptsForCurrentUser()().then((val) => {
+					let numItpts = val.itptList.length;
+					val.itptList.forEach((itpt) => {
+						addBlueprintToRetriever(itpt);
+					});
+					let itptName = null;
+					if (numItpts > 0) {
+						//this.generatePrefilled(val.itptList[numItpts - 1]);
+						itptName = this.state.currentlyEditingItptName ? this.state.currentlyEditingItptName : this.props.initiallyDisplayedItptName;
+						if (!itptName) return;
+						let newItpt = appItptRetrFn().getItptByNameSelf(itptName).cfg as BlueprintConfig;
+						let newType = newItpt.canInterpretType;
+						let dummyInstance = intrprtrTypeInstanceFromBlueprint(newItpt);
+						let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+						newLDOptions.resource.kvStores = [
+							{ key: DESIGNER_KV_KEY, ldType: newType, value: dummyInstance }
+						];
+						this.props.notifyLDOptionsChange(newLDOptions);
+					}
+					this.setState({ ...this.state, hasCompletedFirstRender: true, currentlyEditingItptName: itptName });
+					this.props.notifyDemoComplete();
+				}).catch((reason) => console.log(reason));
+			} else {
+				console.log("cdu called");
+				this.setState({ ...this.state, hasCompletedFirstRender: true, currentlyEditingItptName: this.props.initiallyDisplayedItptName });
+			}
 		}
+
 	}
 	render() {
 		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
@@ -241,7 +249,9 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 				primaryPaneHeight="100%"
 			>
 				<ThemeProvider theme={designerTheme}>
-					<DesignerBody logic={this.logic} />
+					<DesignerBody
+						changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
+						currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
 				</ThemeProvider>
 				<div className="phone-preview-container">
 					{isDisplayDevContent ? <div style={{ alignSelf: "flex-start", position: "absolute" }}>
