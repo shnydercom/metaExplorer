@@ -33,7 +33,7 @@ const initialState: ExplorerState = {
 	ldNonVisualMap: {}
 };
 
-const isProduction = process.env.NODE_ENV === 'production';
+export const isProduction = process.env.NODE_ENV === 'production';
 
 export type DemoCompleteReceiver = {
 	isInitDemo: boolean,
@@ -42,7 +42,7 @@ export type DemoCompleteReceiver = {
 export interface AppRootProps {
 }
 export interface AppRootState {
-	mode: "designer" | "app";
+	mode: "editor" | "app" | "initial";
 	isDemoInitialized: boolean;
 }
 export const applicationStore: Store<ExplorerState> = configureStore(initialState);
@@ -62,7 +62,7 @@ rootSetup();
 export class AppRoot extends Component<AppRootProps, AppRootState>{
 	constructor(props) {
 		super(props);
-		this.state = { mode: "app", isDemoInitialized: false };
+		this.state = { mode: "initial", isDemoInitialized: false };
 	}
 
 	render() {
@@ -71,41 +71,46 @@ export class AppRoot extends Component<AppRootProps, AppRootState>{
 			<Provider store={applicationStore}>
 				<Router>
 					<Route path="/" render={(routeProps: LDRouteProps) => {
-						if (routeProps.location.search === "?mode=designer" && this.state.mode !== "designer") {
-							console.log("switching to designer");
-							this.setState({ ...this.state, mode: "designer" });
+						if (routeProps.location.search === "?mode=editor" && this.state.mode !== "editor") {
+							console.log("switching to editor");
+							this.setState({ ...this.state, mode: "editor" });
 							this.forceUpdate();
 						}
-						if (routeProps.location.search === "?mode=app" && this.state.mode !== "app") {
+						if ((routeProps.location.search === "?mode=app" || !routeProps.location.search) && this.state.mode !== "app") {
 							console.log("switching to app");
 							this.setState({ ...this.state, mode: "app" });
 						}
-						if (this.state.mode === "designer") {
+						if (this.state.mode === "editor") {
 							return (
 								<div style={{ flex: "1", background: "white" }}>
 									<AppItptDesigner ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
-										notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })}/>
+										notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })} />
 									{!isProduction && <DevTools />}
 									<div className="mode-switcher">
 										<Link to={{ pathname: routeProps.location.pathname, search: "?mode=app" }}>
-											Switch to App
+											View in full size
 										</Link>
 									</div>
 								</div>
 							);
-						} else {
-							return (
-								<div className="app-actual">
-									<LDApproot ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
-										notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })}/>
-									<div className="mode-switcher">
-										<Link to={{ pathname: routeProps.location.pathname, search: "?mode=designer" }}>
-											Switch to Editor
+						} else
+							if (this.state.mode === "app") {
+								return (
+									<div className="app-actual">
+										<LDApproot ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
+											notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })} />
+										{!isProduction && <div className="mode-switcher">
+											<Link to={{ pathname: routeProps.location.pathname, search: "?mode=editor" }}>
+												Switch to Editor
 										</Link>
+										</div>
+										}
 									</div>
-								</div>
-							);
-						}
+								);
+							}
+							else {
+								return null;
+							}
 					}} />
 				</Router>
 			</Provider>

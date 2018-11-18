@@ -36,6 +36,7 @@
     "startfornetwork": "webpack-dev-server --host 0.0.0.0",
     "lint": "tslint ./src/**/*.ts -t verbose",
     "compcss": "node-sass --output-style compressed ./src/styles/styles.scss > cat ./dist/style.css",
+    "createmock" : "node ./scripts/createItptMock.js",
     "dl-tooling": "node ./scripts/dlTooling.js",
     "generateGoogleSheetsClient": "java -jar ./tooling/swagger-codegen-cli.jar generate -i https://raw.githubusercontent.com/APIs-guru/openapi-directory/master/APIs/googleapis.com/sheets/v4/swagger.yaml -l typescript-fetch -o ./src/google/apis/sheets-generated"
   },

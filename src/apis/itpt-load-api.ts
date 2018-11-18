@@ -5,7 +5,6 @@ import { NetworkPreferredToken } from "ldaccess/ildtoken";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { applicationStore } from "approot";
 import { ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
-import { LDError } from './../appstate/LDError';
 
 export interface ItptLoadResponse {
 	itptMetaInfo: [{}];
@@ -14,7 +13,7 @@ export interface ItptLoadResponse {
 
 export class ItptLoadApi {
 	getItptsForCurrentUser(): () => Promise<ItptLoadResponse> {
-		return this.getItptsFrom("/interpreters");
+		return this.getItptsFrom("/static/interpreters.json");
 	}
 	getItptsFrom(targetUrl: string): () => Promise<ItptLoadResponse> {
 		return () => {
@@ -32,7 +31,7 @@ export class ItptLoadApi {
 					if (response.status >= 400) {
 						reject("Bad response from server");
 					}
-					response.body.getReader().read().then((bodyVal) => {
+					response.json().then((bodyVal) => {
 						resolve(bodyVal as ItptLoadResponse);
 					}).catch((reason) => {
 						reject(reason);

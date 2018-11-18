@@ -6,63 +6,6 @@ import configuratorTestData from '../../../testing/configuratorTestData';
 import * as prefilledProductItptA from '../../../testing/prefilledProductInterpreter.json';
 import * as prefilledOrganizationItptA from '../../../testing/prefilledOrganizationInterpreter.json';
 
-import * as linearDataDisplayTest from '../../../testing/linearDataDisplayTest.json';
-import * as linearDataDisplayTest2_Inner from '../../../testing/linearDataDisplayTest2_inner.json';
-
-import { ComponentClass, StatelessComponent } from 'react';
-
-/*
-//Game
-import * as prefilledGame from '../../../testing/gamescreen.json';
-
-//YWQD
-import * as prefilledScndStepA from '../../../testing/prefilledScndStepA.json';
-import * as barcodePrefilled from '../../../testing/barcodeScanner.json';
-import * as prefilledSingleImageSel from '../../../testing/prefilledSingleImageSel.json';
-import * as prefilledYWQDApp from '../../../testing/ywqd-app.json';
-
-//demo
-
-import * as threeIconBottomBar from '../../../demos/three-icon-bottombar.json';
-import * as fourIconBottomBar from '../../../demos/four-icon-bottombar.json';
-import * as testImage from '../../../demos/test-image.json';
-import * as chartsImage from '../../../demos/charts-image.json';
-import * as singleChoiceGame from '../../../demos/single-choice-game.json';
-import * as actionPanel from '../../../demos/actionpanel.json';
-import * as usersPanel from '../../../demos/users-panel.json';
-
-import * as popoverCard from '../../../demos/popover-card.json';
-import * as barcodeScanPanel from '../../../demos/camerascanpanel.json';
-import * as expenseFormPanel from '../../../demos/expense-form-panel.json';
-import * as bookingFormPanel from '../../../demos/booking-form-panel.json';
-
-import * as bookingBuyFlight from '../../../demos/booking-flight-summary.json';
-import * as bookingBuyTrain from '../../../demos/booking-train-summary.json';
-import * as bookingBuyBus from '../../../demos/booking-bus-summary.json';
-
-import * as bookingSelectionTrain from '../../../demos/booking-sel-train.json';
-import * as bookingSelectionFlight from '../../../demos/booking-sel-flight.json';
-import * as bookingSelectionBus from '../../../demos/booking-sel-bus.json';
-import * as bookingSelectionPanel from '../../../demos/booking-selection-panel.json';
-import * as timetrackingPanel from '../../../demos/timetracking-form-panel.json';
-import * as mainScreen from '../../../demos/main-screen.json';
-import * as gameScreen from '../../../demos/game-screen.json';
-import * as searchScreen from '../../../demos/search-screen.json';
-import * as expenseScreen from '../../../demos/expense-screen.json';
-import * as timeTrackingScreen from '../../../demos/timetracking-screen.json';
-import * as bookingScreen from '../../../demos/booking-screen.json';
-import * as appMain from '../../../demos/app-main.json';
-import * as routehowto from '../../../demos/route-howto.json';
-import * as htmlhowto from '../../../demos/html-howto.json';
-import * as parisTrain from '../../../demos/img-paris-train.json';
-import * as londonBus from '../../../demos/img-london-bus.json';
-import * as planeLanding from '../../../demos/img-plane-landing.json';
-
-import * as aToBtravels from '../../../demos/img-a-to-b-travels.json';
-import * as shnyderlogo from '../../../demos/img-shnyderlogo.json';
-
-import * as gsheetsTester from '../../../demos/gsheets-tester.json';*/
-
 import Button from 'react-toolbox/lib/button';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import "storm-react-diagrams/dist/style.min.css";
@@ -90,6 +33,7 @@ import { FontIcon } from "react-toolbox/lib/font_icon";
 import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
 import { DemoCompleteReceiver } from "approot";
 import { itptLoadApi } from "appstate/store";
+import appItptRetrFn from "appconfig/appItptRetriever";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -100,16 +44,18 @@ export type AIDState = {
 	previewerToken: string;
 	previewDisplay: "phone" | "code";
 	hasCompletedFirstRender: boolean;
+	initiallyDisplayedItptName: string;
 };
 
 const DESIGNER_KV_KEY = "DesignerKvKey";
 
-class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver, AIDState> {
+export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver, AIDState> {
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the itpt you're designing is capable of interpreting -> usually a new generic type
 	logic: DesignerLogic;
 	errorNotAvailableMsg: string = "Itpt Designer environment not available. Please check your settings";
 	constructor(props?: any) {
 		super(props);
+		console.log("constructor");
 		let previewerToken = null;
 		previewerToken = props.ldTokenString + "-previewLDOptions";
 		if (!props.logic) {
@@ -118,10 +64,11 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 		} else {
 			this.logic = props.logic;
 		}
-		this.state = { serialized: "", previewerToken: previewerToken, previewDisplay: "phone", hasCompletedFirstRender: false };
+		this.state = { initiallyDisplayedItptName: 'shnyder-website/main-page', serialized: "", previewerToken: previewerToken, previewDisplay: "phone", hasCompletedFirstRender: false };
 	}
 
 	componentDidMount() {
+		console.log("cdM");
 		if (!this.props.ldOptions) {
 			this.props.notifyLDOptionsChange(null);
 		}
@@ -257,28 +204,25 @@ class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConn
 
 	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver) {
 		if (!this.state.hasCompletedFirstRender && prevProps.isInitDemo) {
-			//generate demos for compound itpts
-			/*let prefilledData: any[] = [
-				planeLanding, parisTrain, londonBus, aToBtravels, shnyderlogo,
-				fourIconBottomBar, threeIconBottomBar, testImage, chartsImage, singleChoiceGame, popoverCard,
-				actionPanel, barcodeScanPanel, usersPanel, expenseFormPanel, timetrackingPanel, bookingFormPanel, bookingSelectionPanel,
-				bookingSelectionFlight, bookingSelectionTrain, bookingSelectionBus,
-				bookingBuyFlight, bookingBuyTrain, bookingBuyBus,
-				mainScreen, searchScreen, expenseScreen, gameScreen, timeTrackingScreen, bookingScreen,
-				routehowto, htmlhowto, appMain,
-				gsheetsTester
-			];
-			for (let i = 0; i < prefilledData.length; i++) {
-				this.generatePrefilled(prefilledData[i]);
-			}*/
 			itptLoadApi.getItptsForCurrentUser()().then((val) => {
 				let numItpts = val.itptList.length;
+				val.itptList.forEach((itpt) => {
+					addBlueprintToRetriever(itpt);
+				});
 				if (numItpts > 0) {
-					this.generatePrefilled(val.itptList[numItpts - 1]);
+					//this.generatePrefilled(val.itptList[numItpts - 1]);
+					let newItpt = appItptRetrFn().getItptByNameSelf(this.state.initiallyDisplayedItptName).cfg as BlueprintConfig;
+					let newType = newItpt.canInterpretType;
+					let dummyInstance = intrprtrTypeInstanceFromBlueprint(newItpt);
+					let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+					newLDOptions.resource.kvStores = [
+						{ key: DESIGNER_KV_KEY, ldType: newType, value: dummyInstance }
+					];
+					this.props.notifyLDOptionsChange(newLDOptions);
 				}
-			});
-			this.setState({ ...this.state, hasCompletedFirstRender: true });
-			this.props.notifyDemoComplete();
+				this.setState({ ...this.state, hasCompletedFirstRender: true });
+				this.props.notifyDemoComplete();
+			}).catch((reason) => console.log(reason));
 		}
 	}
 	render() {

@@ -60,8 +60,16 @@
               "ldType": "InterpreterClassType"
             },
             {
+              "key": "foregroundPart",
+              "value": {
+                "objRef": "d36624ef-dd39-407d-9e80-ef8d7bc7b7ca",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
               "key": "previousBtnLabel",
-              "value": "Introduction",
+              "value": "Demo",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -71,6 +79,11 @@
             },
             {
               "key": "previousBtnLabel",
+              "value": "Introduction",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "previousBtnLabel",
               "value": "Get Started",
               "ldType": "http://schema.org/Text"
             },
@@ -82,6 +95,11 @@
             {
               "key": "nextBtnLabel",
               "value": "Introduction",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "nextBtnLabel",
+              "value": "Demo",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -100,6 +118,7 @@
             "backgroundPart",
             "backgroundPart",
             "backgroundPart",
+            "foregroundPart",
             "foregroundPart",
             "foregroundPart",
             "foregroundPart"
@@ -200,6 +219,14 @@
               "ldType": "http://schema.org/Text"
             }
           ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "d36624ef-dd39-407d-9e80-ef8d7bc7b7ca": {
+          "subItptOf": "shnyder-website/goto-editor-button",
+          "canInterpretType": "shnyder-website/goto-editor-button-ObjectType",
+          "nameSelf": "d36624ef-dd39-407d-9e80-ef8d7bc7b7ca",
+          "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }
