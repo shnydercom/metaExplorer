@@ -6,6 +6,7 @@ import { ILDOptions } from "ldaccess/ildoptions";
 import { LDDict } from "ldaccess/LDDict";
 import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from "components/generic/generatorFns";
 import { VisualDict } from "components/visualcomposition/visualDict";
+import { isProduction } from "approot";
 
 export const MailChimpSignupName = "mailchimp/condensedSignup";
 let cfgIntrprtKeys: string[] =
@@ -73,7 +74,8 @@ export class PureMailChimpSignup extends Component<LDConnectedState & LDConnecte
 	render() {
 		const { localValues, emailInputContent } = this.state;
 		let embedUrl = localValues.get(LDDict.embedUrl);
-		let subscribeText = localValues.get(VisualDict.headerTxt)
+		let subscribeText = localValues.get(VisualDict.headerTxt);
+		if (!isProduction) return null;
 		return <div id="mc_embed_signup">
 			<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"></link>
 			<form action={embedUrl} method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" noValidate>

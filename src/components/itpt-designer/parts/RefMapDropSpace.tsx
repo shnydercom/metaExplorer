@@ -11,7 +11,7 @@ export interface DropRefmapResult {
 }
 
 export interface RefMapDropSpaceProps {
-	currentDisplayedItpt: string;
+	currentlyEditingItpt: string;
 	dropText: string;
 	refMapDrop: (event: React.DragEvent<HTMLDivElement>) => DropRefmapResult;
 }
@@ -29,7 +29,7 @@ export class RefMapDropSpace extends Component<RefMapDropSpaceProps, RefMapDropS
 	}
 
 	render() {
-		let itptName: string | null = this.props.currentDisplayedItpt;
+		let itptName: string | null = this.props.currentlyEditingItpt;
 		return (
 			<TooltipDiv className="refmap-drop-outer" tooltipPosition="top" tooltip={this.props.dropText}>
 				<div
@@ -42,7 +42,7 @@ export class RefMapDropSpace extends Component<RefMapDropSpaceProps, RefMapDropS
 					}}
 					className="refmap-drop-inner"
 				>
-					<span>currently editing: </span>
+					<span>now editing: </span>
 					{/*!this.state.message ? this.props.dropText : '...dropped!...'*/}
 					<Input value={itptName ? itptName : "None"} disabled={true} />
 					{/*this.state.message ? <><br /><br />{this.state.message}</> : null*/}

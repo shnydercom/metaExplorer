@@ -87,11 +87,11 @@ export class AppRoot extends Component<AppRootProps, AppRootState>{
 									 ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
 										notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })} />
 									{!isProduction && <DevTools />}
-									<div className="mode-switcher">
+									{/*<div className="mode-switcher">
 										<Link to={{ pathname: routeProps.location.pathname, search: "?mode=app" }}>
 											View in full size
 										</Link>
-									</div>
+							</div>*/}
 								</div>
 							);
 						} else

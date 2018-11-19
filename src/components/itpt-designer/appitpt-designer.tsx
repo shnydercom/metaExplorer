@@ -1,12 +1,10 @@
 import { Component } from "react";
-import Splitter from 'm-react-splitters';
-import * as s from 'm-react-splitters/lib/splitters.css';
 
 import configuratorTestData from '../../../testing/configuratorTestData';
 import * as prefilledProductItptA from '../../../testing/prefilledProductInterpreter.json';
 import * as prefilledOrganizationItptA from '../../../testing/prefilledOrganizationInterpreter.json';
 
-import Button from 'react-toolbox/lib/button';
+import Button, { IconButton } from 'react-toolbox/lib/button';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import "storm-react-diagrams/dist/style.min.css";
 import { DesignerBody } from "./parts/DesignerBody";
@@ -34,6 +32,11 @@ import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appc
 import { DemoCompleteReceiver } from "approot";
 import { itptLoadApi } from "appstate/store";
 import appItptRetrFn from "appconfig/appItptRetriever";
+import { Layout, Panel, Sidebar } from "react-toolbox/lib/layout";
+import { NavDrawer } from "react-toolbox/lib/layout";
+import { DesignerTray } from "./parts/DesignerTray";
+import { DropRefmapResult } from "./parts/RefMapDropSpace";
+import { Input } from "react-toolbox/lib/input";
 
 export type AIDProps = {
 	logic?: DesignerLogic;
@@ -46,6 +49,8 @@ export type AIDState = {
 	previewDisplay: "phone" | "code";
 	hasCompletedFirstRender: boolean;
 	currentlyEditingItptName: string | null;
+	drawerActive: boolean;
+	sidebarActive: boolean;
 };
 
 const DESIGNER_KV_KEY = "DesignerKvKey";
@@ -64,7 +69,10 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 		} else {
 			this.logic = props.logic;
 		}
-		this.state = { currentlyEditingItptName: null, serialized: "", previewerToken: previewerToken, previewDisplay: "phone", hasCompletedFirstRender: false };
+		this.state = {
+			drawerActive: true, sidebarActive: true,
+			currentlyEditingItptName: null, serialized: "", previewerToken: previewerToken, previewDisplay: "phone", hasCompletedFirstRender: false
+		};
 	}
 
 	componentDidMount() {
@@ -98,47 +106,6 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 
 	// tslint:disable-next-line:member-ordering
 	hascreatedFirst: boolean = false;
-	/*onGenAppClick = (e) => {
-		if (!this.hascreatedFirst) {
-			let prefilledData: any = fourIconBottomBar;
-			this.generatePrefilled(prefilledData);
-		}
-		let prefilledScnd: any = prefilledScndStepA;
-		this.generatePrefilled(prefilledScnd);
-	}
-
-	onGenBarcodeClick = (e) => {
-		let prefilledData: any = barcodePrefilled;
-		this.generatePrefilled(prefilledData);
-	}
-
-	onGenSingleImageSel = (e) => {
-		if (!this.hascreatedFirst) {
-			let prefilledDataA: any = fourIconBottomBar;
-			this.generatePrefilled(prefilledDataA);
-		}
-		let prefilledDataB: any = prefilledSingleImageSel;
-		this.generatePrefilled(prefilledDataB);
-	}
-
-	onYWQDClick = (e) => {
-		if (!this.hascreatedFirst) {
-			let prefilledDataA: any = fourIconBottomBar;
-			this.generatePrefilled(prefilledDataA);
-		}
-		let prefilledDataB: any = prefilledYWQDApp;
-		this.generatePrefilled(prefilledDataB);
-	}
-
-	onGenLinearClick = (e) => {
-		let prefilledData: any = linearDataDisplayTest2_Inner; // linearDataDisplayTest; //
-		this.generatePrefilled(prefilledData);
-	}
-
-	onGameClick = (e) => {
-		let prefilledData: any = prefilledGame;
-		this.generatePrefilled(prefilledData);
-	}*/
 
 	generatePrefilled = (input: any) => {
 		let nodesBPCFG: BlueprintConfig = input as BlueprintConfig;
@@ -211,7 +178,6 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 					});
 					let itptName = null;
 					if (numItpts > 0) {
-						//this.generatePrefilled(val.itptList[numItpts - 1]);
 						itptName = this.state.currentlyEditingItptName ? this.state.currentlyEditingItptName : this.props.initiallyDisplayedItptName;
 						if (!itptName) return;
 						let newItpt = appItptRetrFn().getItptByNameSelf(itptName).cfg as BlueprintConfig;
@@ -233,110 +199,179 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 		}
 
 	}
+
+	toggleDrawerActive = () => {
+		console.log("toggle");
+		this.setState({ ...this.state, drawerActive: !this.state.drawerActive });
+	}
+	toggleSidebar = () => {
+		this.setState({ ...this.state, sidebarActive: !this.state.sidebarActive });
+	}
+
 	render() {
 		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
 			return <div>{this.errorNotAvailableMsg}</div>;
 		}
+		const { routes } = this.props;
+		const { drawerActive, currentlyEditingItptName, sidebarActive } = this.state;
 		let isDisplayDevContent = false;
 		return <div className="entrypoint-editor">
-			<Splitter className={s.splitter}
-				position="vertical"
-				primaryPaneMaxWidth="80%"
-				primaryPaneMinWidth="40%"
-				primaryPaneWidth="66%"
-				dispatchResize={true}
-				postPoned={false}
-				primaryPaneHeight="100%"
-			>
-				<ThemeProvider theme={designerTheme}>
-					<DesignerBody
-						changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
-						currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
-				</ThemeProvider>
-				<div className="phone-preview-container">
-					{isDisplayDevContent ? <div style={{ alignSelf: "flex-start", position: "absolute" }}>
-						<Button onClick={this.onInterpretBtnClick}>interpret!</Button>
-						{/*
-						<Button onClick={this.onGenAppClick}>Generate App!</Button>
-						<Button onClick={this.onGenSingleImageSel}>My Barcodes App</Button>
-						<Button onClick={this.onYWQDClick}>愿望清单</Button>
-						<Button onClick={this.onGenBarcodeClick}>Barcode Scanner</Button>
-						*/}
-						<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
-						<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>
-						<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>
-						<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
-						{/*
-						<Button onClick={this.onGenLinearClick}>Linear!</Button>
-						<Button onClick={this.onGameClick}>Game!</Button>
-						*/}
-						<Link to="/designerinitial">initial   </Link>
-						<Link to="/app">   app</Link>
-					</div> : null}
-					<div className="rotated-serialize">
-						<Button onClick={this.onInterpretBtnClick} raised primary style={{ background: '#010f27' }}>
-							<FontIcon value='arrow_upward' />
-							-
-							Interpret
-							-
-							<FontIcon value='arrow_upward' />
-						</Button>
-					</div>
-					<div className="phone-preview-centered vertical-scroll">
-						{this.state.previewDisplay === "phone" ?
-							<ThemeProvider theme={appTheme}>
-								<div className="app-preview">
-									<div className="app-content mdscrollbar">
-										<Switch>
-											<Route path="/designerinitial" render={() => (
-												<div><b>drag and drop items into the designer</b></div>
-											)} />
-											<Route path="/" render={(routeProps: LDRouteProps) => {
-												//routeProps.match.params.nextPath = "/";
-												return <>
-													<BaseContainerRewrite routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
-												</>;
-											}} />
-										</Switch>
-									</div>
-								</div>
-							</ThemeProvider>
-							:
-							<div className="code-preview">
-								<h4 className="designer-json-header">Current Component as Declarative Output</h4>
-								<pre className="designer-json">
-									<p>
-										<small>
-											{this.state.serialized ? this.state.serialized :
-												<span>Nothing to display yet! <br />Drag and drop elements in the design-tool on the right,
-												<br />and click "Interpret!"</span>
-											}
-										</small>
-									</p>
-								</pre>
+			<div className="nav-element top-left">
+				<IconButton className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
+			</div>
+			<div className="nav-element bottom-left">
+				<IconButton icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></IconButton>
+			</div>
+			<ThemeProvider theme={designerTheme}>
+				<Layout>
+					<NavDrawer active={drawerActive}
+						pinned={drawerActive} permanentAt='xxxl'
+						onOverlayClick={this.toggleDrawerActive}>
+						<DesignerTray
+							logic={this.logic}
+							onEditTrayItem={this.onEditTrayItem}
+							onClearBtnPress={() => {
+								this.props.logic.clear();
+								this.setState({ ...this.state, currentlyEditingItptName: null });
+							}}
+							onZoomAutoLayoutPress={() => {
+								this.props.logic.autoDistribute();
+								this.props.logic.getDiagramEngine().recalculatePortsVisually();
+								this.forceUpdate();
+							}}
+						>
+							<div className="fakeheader">
+								<Link to={{ pathname: routes.location.pathname, search: "?mode=app" }}>
+									View in full size <FontIcon>fullscreen</FontIcon>
+								</Link>
 							</div>
-						}
-					</div>
-					<div className="rotated-preview-switch">
-						<Button onClick={
-							() => {
-								if (this.state.previewDisplay === "phone") {
-									this.setState({ ...this.state, previewDisplay: "code" });
-								} else {
-									this.setState({ ...this.state, previewDisplay: "phone" });
+						</DesignerTray>
+					</NavDrawer>
+					<Panel style={{ bottom: 0 }}>
+						<DesignerBody
+							loadToDesignerByName={this.loadToDesignerByName}
+							onEditTrayItem={this.onEditTrayItem}
+							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
+							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
+					</Panel>
+					<Sidebar pinned={this.state.sidebarActive} width={5}>
+						<div className="phone-preview-container">
+							{isDisplayDevContent ? <div style={{ alignSelf: "flex-start", position: "absolute" }}>
+								<Button onClick={this.onInterpretBtnClick}>interpret!</Button>
+								<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
+								<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>
+								<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>
+								<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
+								<Link to="/designerinitial">initial   </Link>
+								<Link to="/app">   app</Link>
+							</div> : null}
+							<div className="rotated-serialize">
+								<Button onClick={this.onInterpretBtnClick} raised primary style={{ background: '#010f27' }}>
+									<FontIcon value='arrow_upward' />
+									-
+									Interpret
+									-
+							<FontIcon value='arrow_upward' />
+								</Button>
+							</div>
+							<div className="phone-preview-centered vertical-scroll">
+								{this.state.previewDisplay === "phone" ?
+									<ThemeProvider theme={appTheme}>
+										<div className="app-preview">
+											<div className="app-content mdscrollbar">
+												<Switch>
+													<Route path="/designerinitial" render={() => (
+														<div><b>drag and drop items into the designer</b></div>
+													)} />
+													<Route path="/" render={(routeProps: LDRouteProps) => {
+														return <>
+															<BaseContainerRewrite routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
+														</>;
+													}} />
+												</Switch>
+											</div>
+										</div>
+									</ThemeProvider>
+									:
+									<div className="code-preview">
+										<h4 className="designer-json-header">Current Component as Declarative Output</h4>
+										<pre className="designer-json">
+											<p>
+												<small>
+													{this.state.serialized ? this.state.serialized :
+														<span>Nothing to display yet! <br />Drag and drop elements in the design-tool on the right,
+												<br />and click "Interpret!"</span>
+													}
+												</small>
+											</p>
+										</pre>
+									</div>
 								}
-							}
-						} raised primary style={{ background: '#010f27' }}>
-							<FontIcon value={this.state.previewDisplay === "phone" ? "unfold_more" : "stay_current_landscape"} />
-							-
+							</div>
+							<div className="rotated-preview-switch">
+								<Button onClick={
+									() => {
+										if (this.state.previewDisplay === "phone") {
+											this.setState({ ...this.state, previewDisplay: "code" });
+										} else {
+											this.setState({ ...this.state, previewDisplay: "phone" });
+										}
+									}
+								} raised primary style={{ background: '#010f27' }}>
+									<FontIcon value={this.state.previewDisplay === "phone" ? "unfold_more" : "stay_current_landscape"} />
+									-
 							{this.state.previewDisplay === "phone" ? " show code " : " show phone "}
-							-
+									-
 							<FontIcon value={this.state.previewDisplay === "phone" ? "unfold_more" : "stay_current_landscape"} />
-						</Button>
-					</div>
-				</div>
-			</Splitter>
+								</Button>
+							</div>
+						</div>
+						<div className="button-row">
+							<div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+								<Input value={currentlyEditingItptName ? currentlyEditingItptName : "None"} disabled={true} />
+							</div>
+						</div>
+					</Sidebar>
+				</Layout>
+			</ThemeProvider>
+			<div className="nav-element bottom-right">
+				<IconButton icon={sidebarActive ? "chevron_right" : "chevron_left"} style={{ color: "white" }} onClick={this.toggleSidebar}></IconButton>
+			</div>
 		</div >;
+	}
+
+	protected onEditTrayItem(data): DropRefmapResult {
+		switch (data.type) {
+			case "ldbp":
+				this.props.logic.clear();
+				let isLoadSuccess = this.loadToDesignerByName(data.bpname);
+				if (!isLoadSuccess) return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
+				this.forceUpdate();
+				return { isSuccess: true, message: "check the diagram on the right to see your interpreter, or drop another Compound Block here to edit that one" };
+			case "bdt":
+				return { isSuccess: false, message: "simple data types can't be used here" };
+			case "inputtype":
+				return { isSuccess: false, message: "input type can't be used here" };
+			case "lineardata":
+				return { isSuccess: false, message: "linear data display can't be used here" };
+			default:
+				break;
+		}
+		return { isSuccess: false, message: JSON.stringify(data) };
+	}
+
+	protected loadToDesignerByName: (name: string) => boolean = (name: string) => {
+		let itptInfo = this.logic.getItptList().find((itm) => itm.nameSelf === name);
+		let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
+		if (!itptCfg.initialKvStores
+			|| itptCfg.initialKvStores.length !== 1
+			|| itptCfg.initialKvStores[0].key !== UserDefDict.intrprtrBPCfgRefMapKey) {
+			return false;
+		}
+		this.logic.diagramFromItptBlueprint(itptCfg);
+		this.logic.autoDistribute();
+		this.setState({ ...this.state, currentlyEditingItptName: itptCfg.nameSelf });
+		return true;
 	}
 }
 
