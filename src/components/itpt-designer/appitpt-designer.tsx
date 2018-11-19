@@ -193,7 +193,6 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 					this.props.notifyDemoComplete();
 				}).catch((reason) => console.log(reason));
 			} else {
-				console.log("cdu called");
 				this.setState({ ...this.state, hasCompletedFirstRender: true, currentlyEditingItptName: this.props.initiallyDisplayedItptName });
 			}
 		}
@@ -201,7 +200,6 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 	}
 
 	toggleDrawerActive = () => {
-		console.log("toggle");
 		this.setState({ ...this.state, drawerActive: !this.state.drawerActive });
 	}
 	toggleSidebar = () => {
@@ -216,27 +214,21 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 		const { drawerActive, currentlyEditingItptName, sidebarActive } = this.state;
 		let isDisplayDevContent = false;
 		return <div className="entrypoint-editor">
-			<div className="nav-element top-left">
-				<IconButton className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
-			</div>
-			<div className="nav-element bottom-left">
-				<IconButton icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></IconButton>
-			</div>
 			<ThemeProvider theme={designerTheme}>
-				<Layout>
-					<NavDrawer active={drawerActive}
-						pinned={drawerActive} permanentAt='xxxl'
-						onOverlayClick={this.toggleDrawerActive}>
+				<Layout theme={{ layout: 'editor-layout' }}>
+					<NavDrawer insideTree={true} theme={{ pinned: "navbar-pinned" }} active={drawerActive} withOverlay={false}
+						pinned={drawerActive} permanentAt='xxxl'>
 						<DesignerTray
 							logic={this.logic}
 							onEditTrayItem={this.onEditTrayItem}
 							onClearBtnPress={() => {
-								this.props.logic.clear();
+								this.logic.clear();
 								this.setState({ ...this.state, currentlyEditingItptName: null });
 							}}
 							onZoomAutoLayoutPress={() => {
-								this.props.logic.autoDistribute();
-								this.props.logic.getDiagramEngine().recalculatePortsVisually();
+								this.logic.autoDistribute();
+								this.logic.getDiagramEngine().recalculatePortsVisually();
+								this.logic.getDiagramEngine().zoomToFit();
 								this.forceUpdate();
 							}}
 						>
@@ -247,14 +239,14 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 							</div>
 						</DesignerTray>
 					</NavDrawer>
-					<Panel style={{ bottom: 0 }}>
+					<Panel theme={designerTheme} style={{ bottom: 0 }} >
 						<DesignerBody
 							loadToDesignerByName={this.loadToDesignerByName}
 							onEditTrayItem={this.onEditTrayItem}
 							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
 							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
 					</Panel>
-					<Sidebar pinned={this.state.sidebarActive} width={5}>
+					<Sidebar theme={{ pinned: 'sidebar-pinned' }} insideTree={true} pinned={sidebarActive} width={8} active={sidebarActive}>
 						<div className="phone-preview-container">
 							{isDisplayDevContent ? <div style={{ alignSelf: "flex-start", position: "absolute" }}>
 								<Button onClick={this.onInterpretBtnClick}>interpret!</Button>
@@ -266,7 +258,7 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 								<Link to="/app">   app</Link>
 							</div> : null}
 							<div className="rotated-serialize">
-								<Button onClick={this.onInterpretBtnClick} raised primary style={{ background: '#010f27' }}>
+								<Button onClick={this.onInterpretBtnClick} raised primary style={{ background: '#010f27aa' }}>
 									<FontIcon value='arrow_upward' />
 									-
 									Interpret
@@ -317,7 +309,7 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 											this.setState({ ...this.state, previewDisplay: "phone" });
 										}
 									}
-								} raised primary style={{ background: '#010f27' }}>
+								} raised primary style={{ background: '#010f27aa' }}>
 									<FontIcon value={this.state.previewDisplay === "phone" ? "unfold_more" : "stay_current_landscape"} />
 									-
 							{this.state.previewDisplay === "phone" ? " show code " : " show phone "}
@@ -334,6 +326,12 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 					</Sidebar>
 				</Layout>
 			</ThemeProvider>
+			<div className="nav-element top-left">
+				<IconButton className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
+			</div>
+			<div className="nav-element bottom-left">
+				<IconButton icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></IconButton>
+			</div>
 			<div className="nav-element bottom-right">
 				<IconButton icon={sidebarActive ? "chevron_right" : "chevron_left"} style={{ color: "white" }} onClick={this.toggleSidebar}></IconButton>
 			</div>
@@ -343,10 +341,9 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 	protected onEditTrayItem(data): DropRefmapResult {
 		switch (data.type) {
 			case "ldbp":
-				this.props.logic.clear();
+				this.logic.clear();
 				let isLoadSuccess = this.loadToDesignerByName(data.bpname);
 				if (!isLoadSuccess) return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
-				this.forceUpdate();
 				return { isSuccess: true, message: "check the diagram on the right to see your interpreter, or drop another Compound Block here to edit that one" };
 			case "bdt":
 				return { isSuccess: false, message: "simple data types can't be used here" };
@@ -368,6 +365,7 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 			|| itptCfg.initialKvStores[0].key !== UserDefDict.intrprtrBPCfgRefMapKey) {
 			return false;
 		}
+		this.generatePrefilled(itptCfg);
 		this.logic.diagramFromItptBlueprint(itptCfg);
 		this.logic.autoDistribute();
 		this.setState({ ...this.state, currentlyEditingItptName: itptCfg.nameSelf });

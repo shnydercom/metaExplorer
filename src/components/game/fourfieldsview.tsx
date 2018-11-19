@@ -106,7 +106,6 @@ export class PureFourFieldsView extends Component<LDConnectedState & LDConnected
 
 	constructor(props: any) {
 		super(props);
-		console.log("FourFieldsView Constructor called");
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
 			revealedArray: [false, false, false, false],

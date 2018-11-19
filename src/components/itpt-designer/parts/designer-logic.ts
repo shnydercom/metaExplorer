@@ -280,7 +280,7 @@ export class DesignerLogic {
 		};
 		node.addPort(new LDPortModel(false, exportSelfKV.key, exportSelfKV));
 		for (var j = intrprtrKeys.length; j < initialKvStores.length; j++) {
-			console.dir(node.getPorts());
+			//console.dir(node.getPorts());
 			var elemj = initialKvStores[j];
 			if (elemj.ldType === UserDefDict.intrprtrBPCfgRefMapType) continue;
 			let nName: string = elemj.key + "_out";

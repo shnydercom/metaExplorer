@@ -9,5 +9,5 @@ export const designerTheme = {
   [rdIDs.INPUT]: mdDesignerStyles,
   [rdIDs.DROPDOWN]: mdDesignerStyles,
   [rdIDs.SWITCH]: mdDesignerStyles,
-  [rdIDs.DRAWER]: mdDesignerStyles
+  [rdIDs.DRAWER]: mdDesignerStyles,
 };

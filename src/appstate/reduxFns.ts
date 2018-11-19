@@ -79,13 +79,13 @@ export const mapDispatchToProps = (dispatch: Dispatch<Action<any>>, ownProps: LD
 		if (!ldOptions) return;
 		const { canInterpretType } = refMap;
 		if (!ldOptions.resource || !ldOptions.resource.kvStores || ldOptions.resource.kvStores.length < 1) {
-			console.warn("can't dispatch RefMap Split");
+			//console.warn("can't dispatch RefMap Split");
 			return;
 		}
 		let newLDOptions = ldOptionsDeepCopy(ldOptions);
 		const matchingTypeKV = newLDOptions.resource.kvStores.find((a) => a.ldType === canInterpretType);
 		if (!matchingTypeKV) {
-			console.warn("can't dispatch RefMap Split");
+			//console.warn("can't dispatch RefMap Split");
 			//return;
 		} else {
 			const newKvArr: IKvStore[] = [];
@@ -111,7 +111,7 @@ export const mapDispatchToProps = (dispatch: Dispatch<Action<any>>, ownProps: LD
 	},
 	dispatchKvOutput: (changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => {
 		if (!(changedKvStores && thisLdTkStr && updatedKvMap)) {
-			console.warn("dispatching KVs failed because not all values were set");
+			//console.warn("dispatching KVs failed because not all values were set");
 			return;
 		}
 		dispatch(dispatchKvUpdateAction(changedKvStores, thisLdTkStr, updatedKvMap));

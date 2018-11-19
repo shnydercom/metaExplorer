@@ -37,6 +37,12 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
   background: $color-primary-dark !important;
 }
 
+.editor-layout {
+  >* {
+    z-index: unset !important;
+  }
+}
+
 .button-row {
   flex-direction: row-reverse;
   position: absolute;
@@ -84,6 +90,7 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
   border: 0px solid !important;
 }
 
+
 .fakeheader {
   display: flex;
   flex-direction: row-reverse;
@@ -106,21 +113,34 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
 .top-left {
   top: 0;
   left: 0;
+  z-index: 200;
 }
 
 .bottom-left {
   bottom: 0;
   left: 0;
+  position: fixed;
+  z-index: 199;
 }
 
 .bottom-right {
   bottom: 0;
   right: 0;
+  z-index: 201;
+}
+
+.navbar-pinned {
+  position: fixed;
+  z-index: 199 !important;
+}
+
+.sidebar-pinned {
+  position: fixed;
+  z-index: 200 !important;
 }
 
 .nav-element {
   position: fixed;
-  z-index: 999;
   color: white !important;
 
   display: flex;
@@ -171,13 +191,13 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
   transform: translate(0%, -60px) rotate(90deg);
   left: 0;
   position: absolute;
-  z-index: 999;
+  z-index: 150;
 }
 
 .rotated-preview-switch {
   position: absolute;
   right: 0;
-  z-index: 999;
+  z-index: 150;
   align-self: center;
   width: 36px;
   height: 36px;
@@ -240,7 +260,7 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
   border-radius: 50px;
   cursor: move;
   pointer-events: all;
-  z-index: 999999;
+  z-index: 150;
   color: white;
   font-family: Roboto, Arial;
   font-size: 11px;

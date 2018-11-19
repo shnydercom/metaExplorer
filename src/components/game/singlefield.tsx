@@ -77,7 +77,6 @@ export class PureSingleFieldView extends Component<LDConnectedState & LDConnecte
 
 	constructor(props: any) {
 		super(props);
-		console.log("SingleFieldView Constructor called");
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
 			...initLDLocalState(this.cfg, props,

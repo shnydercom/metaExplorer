@@ -213,9 +213,9 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		if (!outputKVMap) return;
 		this.props.dispatchKvOutput([outRouteKV], this.props.ldTokenString, outputKVMap);
 	}
-	generateTab(imgSrcActive, imgSrcInActive: string, route: string, isActive: boolean): JSX.Element {
+	generateTab(imgSrcActive, imgSrcInActive: string, route: string, isActive: boolean, key: string): JSX.Element {
 		//const mustRedirect = match && isActive && (match.params.lastPath !== undefined || match.params.lastPath !== null) && match.params.lastPath !== route;
-		return <Tab label='' className="bottom-nav-tab" icon={isActive
+		return <Tab label='' key={key} className="bottom-nav-tab" icon={isActive
 			? <img src={imgSrcActive} height="30px" />
 			: <img src={imgSrcInActive} height="30px" />}>
 		</Tab>;
@@ -251,7 +251,8 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 				iconEnabledURLs[idx],
 				iconDisabledURLs[idx],
 				routes[idx],
-				cleanedTabIdx === idx);
+				cleanedTabIdx === idx,
+				"t-" + idx);
 			tabs.push(newTab);
 		}
 		return <div className="bottom-nav">
@@ -291,7 +292,8 @@ export class PureTopNavigation extends PureBottomNavigation {
 				iconEnabledURLs[idx],
 				iconDisabledURLs[idx],
 				routes[idx],
-				cleanedTabIdx === idx);
+				cleanedTabIdx === idx,
+				't-' + idx);
 			tabs.push(newTab);
 		}
 		return <div className="top-nav">

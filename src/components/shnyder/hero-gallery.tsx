@@ -72,7 +72,6 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: null | HeroGalleryState)
 		: null | HeroGalleryState {
-		console.log("gdsfp");
 		let rvLD = getDerivedItptStateFromProps(
 			nextProps, prevState, [cfgIntrprtKeys[0], cfgIntrprtKeys[1]], [true, true]);
 		let rvLocal = getDerivedKVStateFromProps(
@@ -98,7 +97,6 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		console.log("init");
 		this.state = {
 			numGalleryItems: 0,
 			displayIdx: 0,

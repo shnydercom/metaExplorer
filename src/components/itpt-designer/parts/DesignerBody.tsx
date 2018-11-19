@@ -127,7 +127,7 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 						event.preventDefault();
 					}}
 				>
-					<DiagramWidget diagramEngine={this.props.logic.getDiagramEngine()} />
+					<DiagramWidget inverseZoom diagramEngine={this.props.logic.getDiagramEngine()} />
 					<div className="button-row">
 						<RefMapDropSpace
 							currentlyEditingItpt={this.state.currentlyEditingItpt}

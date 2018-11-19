@@ -42,7 +42,6 @@ export type DemoCompleteReceiver = {
 export interface AppRootProps {
 }
 export interface AppRootState {
-	mode: "editor" | "app" | "initial";
 	isDemoInitialized: boolean;
 }
 export const applicationStore: Store<ExplorerState> = configureStore(initialState);
@@ -60,42 +59,36 @@ function rootSetup(): void {
 
 rootSetup();
 export class AppRoot extends Component<AppRootProps, AppRootState>{
+
+	mode: "editor" | "app" | "initial" = "initial";
+
 	constructor(props) {
 		super(props);
-		this.state = { mode: "initial", isDemoInitialized: false };
+		this.state = { isDemoInitialized: false };
 	}
 
 	render() {
-		console.log("isDemoInitialized: " + this.state.isDemoInitialized);
 		return (
 			<Provider store={applicationStore}>
 				<Router>
 					<Route path="/" render={(routeProps: LDRouteProps) => {
-						if (routeProps.location.search === "?mode=editor" && this.state.mode !== "editor") {
-							console.log("switching to editor");
-							this.setState({ ...this.state, mode: "editor" });
-							this.forceUpdate();
+						if (routeProps.location.search === "?mode=editor" && this.mode !== "editor") {
+							this.mode = "editor";
 						}
-						if ((routeProps.location.search === "?mode=app" || !routeProps.location.search) && this.state.mode !== "app") {
-							console.log("switching to app");
-							this.setState({ ...this.state, mode: "app" });
+						if ((routeProps.location.search === "?mode=app" || !routeProps.location.search) && this.mode !== "app") {
+							this.mode = "app";
 						}
-						if (this.state.mode === "editor") {
+						if (this.mode === "editor") {
 							return (
 								<div style={{ flex: "1", background: "white" }}>
 									<AppItptDesigner initiallyDisplayedItptName="shnyder-website/main-page"
-									 ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
+										ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
 										notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })} />
 									{!isProduction && <DevTools />}
-									{/*<div className="mode-switcher">
-										<Link to={{ pathname: routeProps.location.pathname, search: "?mode=app" }}>
-											View in full size
-										</Link>
-							</div>*/}
 								</div>
 							);
 						} else
-							if (this.state.mode === "app") {
+							if (this.mode === "app") {
 								return (
 									<div className="app-actual">
 										<LDApproot ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
@@ -118,5 +111,3 @@ export class AppRoot extends Component<AppRootProps, AppRootState>{
 		);
 	}
 }
-// for Redux-DevTools, add:
-// <ImageUploadComponent />

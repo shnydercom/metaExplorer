@@ -20,13 +20,11 @@ export class DesignerTrayItem extends Component<DesignerTrayProps, DesignerTrayS
 	}
 
 	handleButtonPress() {
-		console.log("press");
 		this.buttonPressTimer = setTimeout(() =>
 			this.props.onLongPress(this.props.model), 1500);
 	}
 
 	handleButtonRelease() {
-		console.log("release");
 		clearTimeout(this.buttonPressTimer);
 	}
 
@@ -37,7 +35,6 @@ export class DesignerTrayItem extends Component<DesignerTrayProps, DesignerTrayS
 				onTouchStart={this.handleButtonPress} onTouchEnd={this.handleButtonRelease} onMouseDown={this.handleButtonPress} onMouseUp={this.handleButtonRelease}
 				draggable={true}
 				onDragStart={(event) => {
-					console.log("drag start");
 					clearTimeout(this.buttonPressTimer);
 					event.dataTransfer.setData("ld-node", JSON.stringify(this.props.model));
 				}}

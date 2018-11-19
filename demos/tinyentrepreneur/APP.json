@@ -69,7 +69,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "68e1a757-5b7e-43c0-925e-23eebaf85dec",
+                "objRef": "aadda0de-e5bc-4d59-8769-94de035067d7",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -85,10 +85,10 @@
             "freeContainer"
           ]
         },
-        "68e1a757-5b7e-43c0-925e-23eebaf85dec": {
+        "aadda0de-e5bc-4d59-8769-94de035067d7": {
           "subItptOf": "tinyentrepreneur/main-menu",
           "canInterpretType": "tinyentrepreneur/main-menu-ObjectType",
-          "nameSelf": "68e1a757-5b7e-43c0-925e-23eebaf85dec",
+          "nameSelf": "aadda0de-e5bc-4d59-8769-94de035067d7",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
@@ -101,7 +101,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "e6ebd602-494a-4d4b-80bc-f655b5186e28",
+                "objRef": "6fa90936-a3d3-41ba-a353-22412585def6",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -117,10 +117,10 @@
             "freeContainer"
           ]
         },
-        "e6ebd602-494a-4d4b-80bc-f655b5186e28": {
+        "6fa90936-a3d3-41ba-a353-22412585def6": {
           "subItptOf": "tinyentrepreneur/time-tracker-form",
           "canInterpretType": "tinyentrepreneur/time-tracker-form-ObjectType",
-          "nameSelf": "e6ebd602-494a-4d4b-80bc-f655b5186e28",
+          "nameSelf": "6fa90936-a3d3-41ba-a353-22412585def6",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
@@ -133,7 +133,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "e2efaf6c-a7a7-42c4-bafa-b6dc23be74a7",
+                "objRef": "c4f890c9-0967-431e-ae78-b5c29a8d08be",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -149,10 +149,10 @@
             "freeContainer"
           ]
         },
-        "e2efaf6c-a7a7-42c4-bafa-b6dc23be74a7": {
+        "c4f890c9-0967-431e-ae78-b5c29a8d08be": {
           "subItptOf": "tinyentrepreneur/income-record-form",
           "canInterpretType": "tinyentrepreneur/income-record-form-ObjectType",
-          "nameSelf": "e2efaf6c-a7a7-42c4-bafa-b6dc23be74a7",
+          "nameSelf": "c4f890c9-0967-431e-ae78-b5c29a8d08be",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
@@ -165,7 +165,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "ff804964-c0ca-4bce-a149-067f07bf6a42",
+                "objRef": "79e44940-30ae-4131-8e11-fcd17beeec6d",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -181,10 +181,10 @@
             "freeContainer"
           ]
         },
-        "ff804964-c0ca-4bce-a149-067f07bf6a42": {
+        "79e44940-30ae-4131-8e11-fcd17beeec6d": {
           "subItptOf": "tinyentrepreneur/expense-record-form",
           "canInterpretType": "tinyentrepreneur/expense-record-form-ObjectType",
-          "nameSelf": "ff804964-c0ca-4bce-a149-067f07bf6a42",
+          "nameSelf": "79e44940-30ae-4131-8e11-fcd17beeec6d",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
@@ -197,7 +197,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "d98c7fed-ec5e-46a2-a173-d6357b8d8633",
+                "objRef": "e30d670f-f557-4a5d-aee1-e89128b50895",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -213,10 +213,10 @@
             "freeContainer"
           ]
         },
-        "d98c7fed-ec5e-46a2-a173-d6357b8d8633": {
+        "e30d670f-f557-4a5d-aee1-e89128b50895": {
           "subItptOf": "tinyentrepreneur/measure-dashboard",
           "canInterpretType": "tinyentrepreneur/measure-dashboard-ObjectType",
-          "nameSelf": "d98c7fed-ec5e-46a2-a173-d6357b8d8633",
+          "nameSelf": "e30d670f-f557-4a5d-aee1-e89128b50895",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []

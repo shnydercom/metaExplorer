@@ -67,7 +67,6 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 
 	constructor(props: any) {
 		super(props);
-		console.log("TitleTextAndImage Constructor called");
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
 			...initLDLocalState(this.cfg, props,

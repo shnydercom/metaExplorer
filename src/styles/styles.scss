@@ -30,6 +30,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	text-overflow: ellipsis;
 	overflow-x: hidden;
 	min-width: 420px;
+	overflow-y: hidden;
 }
 
 .mode-switcher {
