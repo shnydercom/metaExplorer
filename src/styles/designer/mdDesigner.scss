@@ -38,6 +38,7 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
 }
 
 .editor-layout {
+  min-height: 100% !important;
   >* {
     z-index: unset !important;
   }
@@ -87,7 +88,9 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
 }
 
 .drawer {
+  height: 100% !important;
   border: 0px solid !important;
+  overflow-y: hidden;
 }
 
 
@@ -166,6 +169,7 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
   display: flex;
   justify-content: center;
   overflow: hidden;
+  max-height: 100%;
 }
 
 .phone-preview-container {

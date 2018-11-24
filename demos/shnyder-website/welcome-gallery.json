@@ -182,7 +182,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "This entire website is built with MetaExplorer. You can see its structure when you hit \"Switch to Editor\" and drag the Compound Block \"shnyder-website/main-page\" on the lower light blue field",
+              "value": "This entire website is built with MetaExplorer. You can see its structure when you go to the editor, it will load automatically.",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -215,7 +215,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "This is a placeholder for an introduction video. Like other blocks, you can freely replace it. Try \"Compound Blocks/demo/App\" for a more advanced demo",
+              "value": "For a more advanced demo, try dragging \"Compound Blocks/MainAppEntryPoint\" onto \"Now editing\". You can't break anything",
               "ldType": "http://schema.org/Text"
             }
           ],

@@ -1,16 +1,63 @@
 {
-  "subItptOf": "b4759e72-bdd3-4da9-ad54-b189cb8752c8",
+  "subItptOf": "bebc7a56-8702-4205-8806-da25b6a6a220",
   "canInterpretType": "MainAppEntryPoint-ObjectType",
   "nameSelf": "MainAppEntryPoint",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
+        "bebc7a56-8702-4205-8806-da25b6a6a220": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "bebc7a56-8702-4205-8806-da25b6a6a220",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "b4759e72-bdd3-4da9-ad54-b189cb8752c8",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "b5fcc841-4e35-4786-b3a1-30cb96a004cd",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
         "b4759e72-bdd3-4da9-ad54-b189cb8752c8": {
-          "subItptOf": "demo/App",
-          "canInterpretType": "demo/App-ObjectType",
+          "subItptOf": "tinyentrepreneur/APP",
+          "canInterpretType": "tinyentrepreneur/APP-ObjectType",
           "nameSelf": "b4759e72-bdd3-4da9-ad54-b189cb8752c8",
           "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "b5fcc841-4e35-4786-b3a1-30cb96a004cd": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "b5fcc841-4e35-4786-b3a1-30cb96a004cd",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "back to the editor",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "?mode=editor",
+              "ldType": "Route_Added"
+            }
+          ],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }
