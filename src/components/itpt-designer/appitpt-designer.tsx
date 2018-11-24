@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, createRef } from "react";
 
 import configuratorTestData from '../../../testing/configuratorTestData';
 import * as prefilledProductItptA from '../../../testing/prefilledProductInterpreter.json';
@@ -32,7 +32,7 @@ import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appc
 import { DemoCompleteReceiver } from "approot";
 import { itptLoadApi } from "appstate/store";
 import appItptRetrFn from "appconfig/appItptRetriever";
-import { Layout, Panel, Sidebar } from "react-toolbox/lib/layout";
+import { Layout, Panel, Sidebar, SidebarProps } from "react-toolbox/lib/layout";
 import { NavDrawer } from "react-toolbox/lib/layout";
 import { DesignerTray } from "./parts/DesignerTray";
 import { DropRefmapResult } from "./parts/RefMapDropSpace";
@@ -59,6 +59,7 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the itpt you're designing is capable of interpreting -> usually a new generic type
 	logic: DesignerLogic;
 	errorNotAvailableMsg: string = "Itpt Designer environment not available. Please check your settings";
+	private sideBarRef = createRef<HTMLDivElement>();
 	constructor(props?: any) {
 		super(props);
 		let previewerToken = null;
@@ -200,7 +201,16 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 	}
 
 	toggleDrawerActive = () => {
-		this.setState({ ...this.state, drawerActive: !this.state.drawerActive });
+		let sideBar = this.sideBarRef.current;
+		let sidebarActive = this.state.sidebarActive;
+		let drawerActive = !this.state.drawerActive;
+		if (sideBar) {
+			if (sideBar.clientWidth >= window.innerWidth) {
+				sidebarActive = false;
+				drawerActive = true;
+			}
+		}
+		this.setState({ ...this.state, drawerActive, sidebarActive });
 	}
 	toggleSidebar = () => {
 		this.setState({ ...this.state, sidebarActive: !this.state.sidebarActive });
@@ -247,7 +257,7 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
 					</Panel>
 					<Sidebar theme={{ pinned: 'sidebar-pinned' }} insideTree={true} pinned={sidebarActive} width={8} active={sidebarActive}>
-						<div className="phone-preview-container">
+						<div ref={this.sideBarRef} className="phone-preview-container">
 							{isDisplayDevContent ? <div style={{ alignSelf: "flex-start", position: "absolute" }}>
 								<Button onClick={this.onInterpretBtnClick}>interpret!</Button>
 								<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>

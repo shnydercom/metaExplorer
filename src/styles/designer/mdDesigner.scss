@@ -39,6 +39,7 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
 
 .editor-layout {
   min-height: 100% !important;
+
   >* {
     z-index: unset !important;
   }
@@ -117,6 +118,9 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
   top: 0;
   left: 0;
   z-index: 200;
+  width: min-content;
+  padding-right: 20px;
+  background: linear-gradient(to right, rgba($designer-background-elevated-color, 0.6), 80%, rgba(0, 0, 0, 0) 100%);
 }
 
 .bottom-left {
