@@ -26,12 +26,21 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "testA_eanScanner",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "in_0",
-            "in_1"
+            "in_1",
+            "in_2"
           ]
         },
         "testA_TextInput": {
@@ -61,6 +70,14 @@
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
+        },
+        "testA_eanScanner": {
+          "subItptOf": "shnyder/EANScanner",
+          "canInterpretType": "http://schema.org/ViewAction",
+          "nameSelf": "testA_eanScanner",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
@@ -70,6 +87,14 @@
       "value": {
         "objRef": "testA_TextInput",
         "propRef": "singleKvStore"
+      },
+      "ldType": "http://schema.org/Text"
+    },
+    {
+      "key": "http://schema.org/gtin8",
+      "value": {
+        "objRef": "testA_eanScanner",
+        "propRef": "http://schema.org/gtin8"
       },
       "ldType": "http://schema.org/Text"
     }

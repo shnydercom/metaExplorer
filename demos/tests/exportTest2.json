@@ -82,11 +82,20 @@
                 "propRef": "singleKvStore"
               },
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderText",
+              "value": {
+                "objRef": "testB_AinsideB",
+                "propRef": "http://schema.org/gtin8"
+              },
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "HeaderText"
+            "HeaderText",
+            "SubHeaderText"
           ]
         }
       },

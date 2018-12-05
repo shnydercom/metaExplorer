@@ -67,8 +67,14 @@ export const refMapReducer = (
 				stateCopy = createRuntimeRefMapLinks(stateCopy, modBPCfg, ldOptionsBase);
 				stateCopy = assignValuesToRuntimeRefMap(stateCopy, modBPCfg, ldOptionsBase);
 				stateCopy = assignOutputKvMaps(stateCopy, modBPCfg, ldOptionsBase);
-				ldOptionsBase.resource.kvStores.unshift(modBPCfg.initialKvStores.
-					find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType));
+				const preExistingRMKVidx = ldOptionsBase.resource.kvStores.findIndex((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
+				const rmKvToAdd = modBPCfg.initialKvStores.
+				find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
+				if (preExistingRMKVidx === -1) {
+					ldOptionsBase.resource.kvStores.unshift(rmKvToAdd);
+				}else{
+					ldOptionsBase.resource.kvStores.splice(preExistingRMKVidx, 1, rmKvToAdd);
+				}
 				stateCopy[ldOptionsBase.ldToken.get()] = ldOptionsBase;
 				return stateCopy;
 			} else {
