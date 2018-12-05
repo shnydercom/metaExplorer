@@ -1,5 +1,5 @@
 import { ActionsObservable, ofType } from 'redux-observable';
-import { Observable } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 //import "rxjs/Rx";
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { LDError, LDErrorMsgState } from './../LDError';
@@ -10,7 +10,7 @@ import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
 import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 import { OutputKVMap } from 'ldaccess/ldBlueprint';
-import { tap, mergeMap } from 'rxjs/operators';
+import { tap, mergeMap, map, catchError } from 'rxjs/operators';
 
 export const LDOPTIONS_CLIENTSIDE_CREATE = 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE';
 export const LDOPTIONS_CLIENTSIDE_UPDATE = 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE';
@@ -223,32 +223,32 @@ export const requestLDOptionsEpic = (action$: ActionsObservable<any>, store: any
 			console.log(action.targetReceiverLnk);
 			if (action.isExternalAPICall) {
 				let apiCallOverride: () => Promise<any> = externalAPICallDict.get(action.targetReceiverLnk);
-				let apiObservable = Observable.from(apiCallOverride());
-				return apiObservable.
-					map((val: any) => {
-						/*let response: IWebResource = {
-							hypermedia: val,
-							iri: null,
-							type: null
-						};*/
-						return ldOptionsResultAction(val, action.targetReceiverLnk);
-					}).catch((error): ActionsObservable<LDErrorMsgState> =>
-						ActionsObservable.of(ldOptionsFailureAction(
+				let apiObservable = from(apiCallOverride());
+				return apiObservable.pipe(map((val: any) => {
+					/*let response: IWebResource = {
+						hypermedia: val,
+						iri: null,
+						type: null
+					};*/
+					return ldOptionsResultAction(val, action.targetReceiverLnk);
+				}),
+					catchError((error) =>
+						of(ldOptionsFailureAction(
 							`An error occured during ld getting: ${error}`, action.targetReceiverLnk
-						)));
+						))));
 			} else {
 				if (action.uploadData === null) {
 					return ldOptionsAPI.getLDOptions(action.targetUrl)
 						.map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
-						.catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
-							ActionsObservable.of(ldOptionsFailureAction(
+						.catch((error: LDError) =>
+							of(ldOptionsFailureAction(
 								`An error occured during ld getting: ${error.message + " " + error.stack}`, action.targetReceiverLnk
 							)));
 				} else {
 					return ldOptionsAPI.postLDOptions(action.uploadData, action.targetUrl)
 						.map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
-						.catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
-							ActionsObservable.of(ldOptionsFailureAction(
+						.catch((error: LDError) =>
+							of(ldOptionsFailureAction(
 								`An error occured during ld posting: ${error.message + " " + error.stack}`, action.targetReceiverLnk
 							)));
 				}
