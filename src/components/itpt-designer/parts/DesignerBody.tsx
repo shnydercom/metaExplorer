@@ -102,6 +102,15 @@ export class DesignerBody extends Component<DesignerBodyProps, DesignerBodyState
 								node = new DeclarationPartNodeModel("External Input Marker", null, null, designerSpecificNodesColor);
 								node.addPort(new LDPortModel(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
 								break;
+							case "outputtype":
+								var outputDataTypeKVStore: IKvStore = {
+									key: UserDefDict.externalOutput,
+									value: undefined,
+									ldType: undefined
+								};
+								node = new DeclarationPartNodeModel("External Output Marker", null, null, designerSpecificNodesColor);
+								node.addPort(new LDPortModel(true, "in-4", outputDataTypeKVStore, UserDefDict.externalOutput));
+								break;
 							case "lineardata":
 								node = new ExtendableTypesNodeModel("Linear Data Display", null, null, designerSpecificNodesColor);
 								let exportSelfKV: IKvStore = {

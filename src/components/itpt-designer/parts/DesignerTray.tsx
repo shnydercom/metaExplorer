@@ -45,7 +45,8 @@ export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState
 			flatContent: [
 				<DesignerTrayItem onLongPress={(data) => this.props.onEditTrayItem(data)} key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />,
 				<DesignerTrayItem onLongPress={(data) => this.props.onEditTrayItem(data)} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />,
-				<DesignerTrayItem onLongPress={(data) => this.props.onEditTrayItem(data)} key={3} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />
+				<DesignerTrayItem onLongPress={(data) => this.props.onEditTrayItem(data)} key={3} model={{ type: "outputtype" }} name="External Output Marker" color={appStyles["$designer-secondary-color"]} />,
+				<DesignerTrayItem onLongPress={(data) => this.props.onEditTrayItem(data)} key={4} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />
 			],
 			label: 'Special Blocks',
 			subEntries: []

@@ -33,6 +33,7 @@ import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeM
 import { ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
 import { SettingsLabelFactory } from "./SettingsLabelFactory";
 import { SettingsLinkFactory } from "./SettingsLinkFactory";
+import { VisualDict } from "components/visualcomposition/visualDict";
 
 export interface NewNodeSig {
 	x: number;
@@ -216,6 +217,7 @@ export class DesignerLogic {
 		let initialKvStores: IKvStore[] = cfg.initialKvStores;
 		node.nameSelf = node.id;
 		node.subItptOf = cfg.nameSelf;
+		let numObjPropRef = 0;
 		let isInitKVsmallerThanKeys: boolean = initialKvStores.length < intrprtrKeys.length;
 		for (var i = 0; i < intrprtrKeys.length; i++) {
 			let elemi: IKvStore;
@@ -229,6 +231,7 @@ export class DesignerLogic {
 							value: undefined,
 							ldType: undefined //TODO: determine or type here
 						};
+						numObjPropRef++;
 					} else {
 						elemi = {
 							key: intrprtrKeys[i],
@@ -246,7 +249,6 @@ export class DesignerLogic {
 			if (!elemi.value) {
 				node.addPort(new LDPortModel(true, nName, elemi, elemi.key));
 			} else
-
 				if (elemi.ldType === UserDefDict.intrprtrBPCfgRefMapType) {
 					let objPropRef: ObjectPropertyRef = intrprtrKeys[i];
 					let nestedKey = objPropRef.propRef;
@@ -279,7 +281,7 @@ export class DesignerLogic {
 			ldType: UserDefDict.intrprtrClassType
 		};
 		node.addPort(new LDPortModel(false, exportSelfKV.key, exportSelfKV));
-		for (var j = intrprtrKeys.length; j < initialKvStores.length; j++) {
+		for (var j = intrprtrKeys.length - numObjPropRef; j < initialKvStores.length; j++) {
 			//console.dir(node.getPorts());
 			var elemj = initialKvStores[j];
 			if (elemj.ldType === UserDefDict.intrprtrBPCfgRefMapType) continue;
@@ -383,6 +385,29 @@ export class DesignerLogic {
 				inputMarkerLink.setSourcePort(inputMarkerPort);
 				inputMarkerLink.setTargetPort(targetPort);
 				linkArray.push(inputMarkerLink);
+			}
+		}
+
+		for (let outputKeysIdx = 0; outputKeysIdx < itpt.initialKvStores.length; outputKeysIdx++) {
+			const outputElement = itpt.initialKvStores[outputKeysIdx];
+			if (isObjPropertyRef(outputElement.value)) {
+				let outputInfo: ObjectPropertyRef = outputElement.value as ObjectPropertyRef;
+				let outputDataTypeKvStore: IKvStore = {
+					key: UserDefDict.externalOutput,
+					value: undefined,
+					ldType: undefined
+				};
+				let outputMarkerNode = new DeclarationPartNodeModel("External Output Marker", null, null, designerSpecificNodesColor);
+				let outputMarkerPort = outputMarkerNode.addPort(new LDPortModel(true, "in-4", outputDataTypeKvStore, UserDefDict.externalOutput));
+				this.getDiagramEngine()
+					.getDiagramModel()
+					.addNode(outputMarkerNode);
+				let targetNode = nodeMap.get(outputInfo.objRef);
+				let targetPort = targetNode.getPort(outputInfo.propRef + "_out");
+				let outputMarkerLink = new DefaultLinkModel();
+				outputMarkerLink.setSourcePort(outputMarkerPort);
+				outputMarkerLink.setTargetPort(targetPort);
+				linkArray.push(outputMarkerLink);
 			}
 		}
 
@@ -493,7 +518,7 @@ export class DesignerLogic {
 			ldType: UserDefDict.intrprtrBPCfgRefMapType
 		};
 		outputBPCfg.subItptOf = this.outputNode.subItptOf;
-		outputBPCfg.initialKvStores.push(intrprtMapKV);
+		outputBPCfg.initialKvStores.unshift(intrprtMapKV);
 		this.bakeKvStoresIntoBP(outputBPCfg);
 		return outputBPCfg;
 	}
@@ -510,6 +535,44 @@ export class DesignerLogic {
 		branchNode: ItptNodeModel,
 		otherIntrprtrCfgs: { [s: string]: BlueprintConfig },
 		topBPCfg: BlueprintConfig) {
+
+		let outPorts: LDPortModel[] = branchNode.getOutPorts();
+		outPorts.forEach((outport) => {
+			let lso = outport.getLinksSortOrder();
+			for (let index = 0; index < lso.length; index++) {
+				const element = lso[index];
+				/*let links = port.getLinks();
+				for (const key in links) {
+					if (links.hasOwnProperty(key)) {*/
+				//const oneLink = links[key];
+				const oneLink = outport.getLinks()[element];
+				let leafNode: NodeModel = oneLink.getSourcePort().getParent();
+				let leafPort: LDPortModel = oneLink.getSourcePort() as LDPortModel;
+				if (leafNode.getID() === branchNode.getID()) {
+					leafNode = oneLink.getTargetPort().getParent();
+					leafPort = oneLink.getTargetPort() as LDPortModel;
+				}
+				switch (leafNode.type) {
+					case DECLARATION_MODEL:
+						let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
+						let declarID = declarModel.getID();
+						if (leafPort.kv) {
+							if (leafPort.kv.key === UserDefDict.externalOutput) {
+								//is an external input marker
+								let keyOutputMarked = outport.kv.key;
+								let outputObjPropRef: ObjectPropertyRef = { objRef: branchNode.getID(), propRef: keyOutputMarked };
+								//let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.interpretableKeys;
+								//cfgIntrprtKeys.push(inputObjPropRef);
+								let externalOutputKV = this.copyKV(outport.kv);
+								externalOutputKV.value = outputObjPropRef;
+								topBPCfg.initialKvStores.push(externalOutputKV);
+								//branchBPCfg.interpretableKeys.push(port.kv.key);
+							}
+						}
+					default: break;
+				}
+			}
+		});
 		let inPorts: LDPortModel[] = branchNode.getInPorts();
 		inPorts.forEach((port) => {
 			let lso = port.getLinksSortOrder();
@@ -530,14 +593,25 @@ export class DesignerLogic {
 					case DECLARATION_MODEL:
 						let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
 						let declarID = declarModel.getID();
-						if (leafPort.kv && leafPort.kv.key === UserDefDict.externalInput) {
-							//is an external input marker
-							let keyInputMarked = port.kv.key;
-							let inputObjPropRef: ObjectPropertyRef = { objRef: branchNode.getID(), propRef: keyInputMarked };
-							let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.interpretableKeys;
-							cfgIntrprtKeys.push(inputObjPropRef);
-							branchBPCfg.initialKvStores.push(this.copyKV(port.kv));
-							branchBPCfg.interpretableKeys.push(port.kv.key);
+						if (leafPort.kv) {
+							if (leafPort.kv.key === UserDefDict.externalInput) {
+								//is an external input marker
+								//is an external input marker
+								let keyInputMarked = port.kv.key;
+								let inputObjPropRef: ObjectPropertyRef = { objRef: branchNode.getID(), propRef: keyInputMarked };
+								let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.interpretableKeys;
+								cfgIntrprtKeys.push(inputObjPropRef);
+								branchBPCfg.initialKvStores.push(this.copyKV(port.kv));
+								branchBPCfg.interpretableKeys.push(port.kv.key);
+							}
+							if (leafPort.kv.key === UserDefDict.externalOutput) {
+								let keyOutputMarked = port.kv.key;
+								let outputObjPropRef: ObjectPropertyRef = { objRef: branchNode.getID(), propRef: keyOutputMarked };
+								let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.interpretableKeys;
+								cfgIntrprtKeys.push(outputObjPropRef);
+								branchBPCfg.initialKvStores.push(this.copyKV(port.kv));
+								branchBPCfg.interpretableKeys.push(port.kv.key);
+							}
 						}
 						break;
 					case BASEDATATYPE_MODEL:

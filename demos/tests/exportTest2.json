@@ -1,0 +1,98 @@
+{
+  "subItptOf": "testB_linearContainer",
+  "canInterpretType": "b-ObjectType",
+  "nameSelf": "b",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "testB_linearContainer": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "testB_linearContainer",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "testB_AinsideB",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "testB_boldHtmlElement",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "testB_TextInputToChangeDescription",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2"
+          ]
+        },
+        "testB_AinsideB": {
+          "subItptOf": "a",
+          "canInterpretType": "a-ObjectType",
+          "nameSelf": "testB_AinsideB",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": {
+                "objRef": "testB_TextInputToChangeDescription",
+                "propRef": "singleKvStore"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "http://schema.org/description"
+          ]
+        },
+        "testB_TextInputToChangeDescription": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "testB_TextInputToChangeDescription",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "testB_boldHtmlElement": {
+          "subItptOf": "shnyder/basichtml/bold",
+          "canInterpretType": "shnyder/basichtml/bold-ObjectType",
+          "nameSelf": "testB_boldHtmlElement",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": {
+                "objRef": "testB_AinsideB",
+                "propRef": "singleKvStore"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "singleKvStore"
+          ]
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

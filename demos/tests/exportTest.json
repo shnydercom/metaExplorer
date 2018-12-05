@@ -1,0 +1,84 @@
+{
+  "subItptOf": "testA_linearBase",
+  "canInterpretType": "a-ObjectType",
+  "nameSelf": "a",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "testA_linearBase": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "testA_linearBase",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "testA_TextInput",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "testA_imgHeadsubdesc",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
+        "testA_TextInput": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "testA_TextInput",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "a",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "http://schema.org/description"
+          ]
+        },
+        "testA_imgHeadsubdesc": {
+          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "nameSelf": "testA_imgHeadsubdesc",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    },
+    {
+      "key": "singleKvStore",
+      "value": {
+        "objRef": "testA_TextInput",
+        "propRef": "singleKvStore"
+      },
+      "ldType": "http://schema.org/Text"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": [
+    {
+      "objRef": "testA_TextInput",
+      "propRef": "http://schema.org/description"
+    }
+  ]
+}

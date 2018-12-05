@@ -72,7 +72,7 @@ import { DemoCompleteReceiver } from "approot";
 import appItptRetrFn from "appconfig/appItptRetriever";
 
 export interface LDApprootProps {
-
+	initiallyDisplayedItptName: string | null;
 }
 export interface LDApprootState {
 	hasCompletedFirstRender: boolean;
@@ -83,7 +83,8 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 	public static APP_KEY = "app";
 	constructor(props?: any) {
 		super(props);
-		this.state = { initiallyDisplayedItptName: 'shnyder-website/main-page', hasCompletedFirstRender: false };
+		const {initiallyDisplayedItptName} = this.props;
+		this.state = { initiallyDisplayedItptName, hasCompletedFirstRender: false };
 	}
 	componentDidMount() {
 		if (!this.props.ldOptions) {

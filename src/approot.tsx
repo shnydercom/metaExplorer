@@ -58,6 +58,8 @@ function rootSetup(): void {
 }
 
 rootSetup();
+
+const firstDisplayedBlock: string = "b";
 export class AppRoot extends Component<AppRootProps, AppRootState>{
 
 	mode: "editor" | "app" | "initial" = "initial";
@@ -81,7 +83,7 @@ export class AppRoot extends Component<AppRootProps, AppRootState>{
 						if (this.mode === "editor") {
 							return (
 								<div style={{ flex: "1", background: "white" }}>
-									<AppItptDesigner initiallyDisplayedItptName="shnyder-website/main-page"
+									<AppItptDesigner initiallyDisplayedItptName={firstDisplayedBlock}
 										ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
 										notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })} />
 									{!isProduction && <DevTools />}
@@ -91,7 +93,8 @@ export class AppRoot extends Component<AppRootProps, AppRootState>{
 							if (this.mode === "app") {
 								return (
 									<div className="app-actual">
-										<LDApproot ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
+										<LDApproot initiallyDisplayedItptName={firstDisplayedBlock}
+										 ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
 											notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })} />
 										{!isProduction && <div className="mode-switcher">
 											<Link to={{ pathname: routeProps.location.pathname, search: "?mode=editor" }}>

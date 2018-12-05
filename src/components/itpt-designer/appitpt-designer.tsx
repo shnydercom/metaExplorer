@@ -359,6 +359,8 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 				return { isSuccess: false, message: "simple data types can't be used here" };
 			case "inputtype":
 				return { isSuccess: false, message: "input type can't be used here" };
+			case "outputtype":
+				return { isSuccess: false, message: "output type can't be used here" };
 			case "lineardata":
 				return { isSuccess: false, message: "linear data display can't be used here" };
 			default:
@@ -371,8 +373,8 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 		let itptInfo = this.logic.getItptList().find((itm) => itm.nameSelf === name);
 		let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
 		if (!itptCfg.initialKvStores
-			|| itptCfg.initialKvStores.length !== 1
-			|| itptCfg.initialKvStores[0].key !== UserDefDict.intrprtrBPCfgRefMapKey) {
+			|| itptCfg.initialKvStores.length < 1
+			|| itptCfg.initialKvStores.findIndex((searchVal) => searchVal.key === UserDefDict.intrprtrBPCfgRefMapKey) === -1) {
 			return false;
 		}
 		this.generatePrefilled(itptCfg);
