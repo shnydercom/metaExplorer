@@ -63,8 +63,6 @@ export const refMapReducer = (
 				//makes sure a copy of the RefMap-KV exists in the ILDOptions-Object (basically pushes itpt-declaration
 				// to runtime-model, while making sure the declaration isn't changed by being used)
 				let stateCopy = { ...state };
-				console.log("vorher:");
-				console.dir(stateCopy[ldOptionsBase.ldToken.get()]);
 				let modBPCfg: BlueprintConfig = ldBlueprintCfgDeepCopy(action.refMap);
 				stateCopy = createRuntimeRefMapLinks(stateCopy, modBPCfg, ldOptionsBase);
 				stateCopy = assignValuesToRuntimeRefMap(stateCopy, modBPCfg, ldOptionsBase);
@@ -72,8 +70,6 @@ export const refMapReducer = (
 				ldOptionsBase.resource.kvStores.unshift(modBPCfg.initialKvStores.
 					find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType));
 				stateCopy[ldOptionsBase.ldToken.get()] = ldOptionsBase;
-				console.log("nachher:");
-				console.dir(stateCopy[ldOptionsBase.ldToken.get()]);
 				return stateCopy;
 			} else {
 				return state;
@@ -99,18 +95,18 @@ export const refMapReducer = (
 										if (itptKeyItm === objPropRef.targetProperty) {
 											/*if (isObjPropertyRef(bpCfgElem.initialKvStores[idx].value)) {
 												if ((bpCfgElem.initialKvStores[idx].value as ObjectPropertyRef).objRef === thisLdTkStr) {*/
-													const subElementTkStr: string = createConcatNetworkPreferredToken(targetLDTkStr, rmElem).get();
-													let propIdx = stateCopyUpd[subElementTkStr].resource.kvStores.findIndex((ikv) => ikv.key === itptKeyItm);
-													let newInputKv: IKvStore = {
-														key: itptKeyItm,
-														value: cKvStore.value,
-														ldType: cKvStore.ldType
-													};
-													stateCopyUpd[subElementTkStr].resource.kvStores.splice(propIdx, 1, newInputKv);
-													break;
-												}
-											/*}
-										}*/
+											const subElementTkStr: string = createConcatNetworkPreferredToken(targetLDTkStr, rmElem).get();
+											let propIdx = stateCopyUpd[subElementTkStr].resource.kvStores.findIndex((ikv) => ikv.key === itptKeyItm);
+											let newInputKv: IKvStore = {
+												key: itptKeyItm,
+												value: cKvStore.value,
+												ldType: cKvStore.ldType
+											};
+											stateCopyUpd[subElementTkStr].resource.kvStores.splice(propIdx, 1, newInputKv);
+											break;
+										}
+										/*}
+									}*/
 									}
 								}
 							}
@@ -227,7 +223,7 @@ const assignOutputKvMaps: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 	rmBPCfg: BlueprintConfig,
 	ldOptions: ILDOptions
 ) => {
-	let nonRmKv: IKvStore[] = rmBPCfg.initialKvStores.filter((a) => a.ldType !== UserDefDict.intrprtrBPCfgRefMapType);
+	//let nonRmKv: IKvStore[] = rmBPCfg.initialKvStores.filter((a) => a.ldType !== UserDefDict.intrprtrBPCfgRefMapType);
 	let rmKv: IKvStore = rmBPCfg.initialKvStores.find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
 	let ldTkStr = ldOptions.ldToken.get();
 	const okvmMap: Map<string, OutputKVMap> = new Map();
@@ -258,11 +254,18 @@ const assignOutputKvMaps: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 			});
 		}
 	}
-	nonRmKv.forEach((kvStore, idx) => {
-		if (!isObjPropertyRef(kvStore.value)) return;
+	let rmIterator: number = 0;
+	rmBPCfg.initialKvStores.forEach((kvStore, idx) => {
+		if ((kvStore.ldType === UserDefDict.intrprtrBPCfgRefMapType)
+			|| !isObjPropertyRef(kvStore.value)) {
+			rmIterator++;
+			return;
+		}
 		const kvAsObjPropRef: ObjectPropertyRef = kvStore.value as ObjectPropertyRef;
 		let refString = "";
 		let newToken: NetworkPreferredToken = null;
+		/*		if ((idx - rmIterator < rmBPCfg.interpretableKeys.length)
+					&& (rmBPCfg.interpretableKeys[idx - rmIterator] === kvStore.key)) {*/
 		if (rmKv.value.rmb.nameSelf === kvAsObjPropRef.objRef) {
 			refString = refMapBaseTokenStr(ldTkStr);
 			newToken = new NetworkPreferredToken(refString);
@@ -271,17 +274,27 @@ const assignOutputKvMaps: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 			refString = concatNWTk.get();
 			newToken = concatNWTk;
 		}
-		const newOutputElem = { targetLDToken: newToken, targetProperty: kvStore.key };
-		const srcObjRef = kvAsObjPropRef.propRef;
-		if (!okvmMap.has(refString)) {
-			okvmMap.set(refString, {});
+		const ldOKV = ldOptions.resource.kvStores.find((val) => val.ldType === UserDefDict.outputKVMapType);
+		if (!ldOKV) return;
+		if (ldOKV.value.hasOwnProperty(kvStore.key)) {
+			const okvArr: OutputKVMapElement[] = ldOKV.value[kvStore.key];
+			okvArr.forEach((okvElem) => {
+				const newOutputElem = { ...okvElem };
+				const srcObjRef = kvAsObjPropRef.propRef;
+				if (!okvmMap.has(refString)) {
+					okvmMap.set(refString, {});
+				}
+				let outputElem = okvmMap.get(refString)[srcObjRef];
+				if (outputElem) {
+					outputElem.push(newOutputElem);
+				} else {
+					okvmMap.get(refString)[srcObjRef] = [newOutputElem];
+				}
+			});
 		}
-		let outputElem = okvmMap.get(refString)[srcObjRef];
-		if (outputElem) {
-			outputElem.push(newOutputElem);
-		} else {
-			okvmMap.get(refString)[srcObjRef] = [newOutputElem];
-		}
+		/*} else {
+			console.log("test");
+		}*/
 	});
 	okvmMap.forEach((val, key) => {
 		if (!modifiedObj[key]) {

@@ -22,7 +22,7 @@
             {
               "key": "in_1",
               "value": {
-                "objRef": "testA_imgHeadsubdesc",
+                "objRef": "testA_italics",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -54,10 +54,10 @@
             "http://schema.org/description"
           ]
         },
-        "testA_imgHeadsubdesc": {
-          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
-          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
-          "nameSelf": "testA_imgHeadsubdesc",
+        "testA_italics": {
+          "subItptOf": "shnyder/basichtml/italics",
+          "canInterpretType": "shnyder/basichtml/italics-ObjectType",
+          "nameSelf": "testA_italics",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []

@@ -22,7 +22,7 @@
             {
               "key": "in_1",
               "value": {
-                "objRef": "testB_boldHtmlElement",
+                "objRef": "testB_imgHeadSubDesc",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -70,13 +70,13 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "testB_boldHtmlElement": {
-          "subItptOf": "shnyder/basichtml/bold",
-          "canInterpretType": "shnyder/basichtml/bold-ObjectType",
-          "nameSelf": "testB_boldHtmlElement",
+        "testB_imgHeadSubDesc": {
+          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "nameSelf": "testB_imgHeadSubDesc",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "HeaderText",
               "value": {
                 "objRef": "testB_AinsideB",
                 "propRef": "singleKvStore"
@@ -86,7 +86,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "singleKvStore"
+            "HeaderText"
           ]
         }
       },
