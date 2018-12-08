@@ -31,7 +31,7 @@
           "nameSelf": "ImgHeadSubDesc",
           "initialKvStores": [
             {
-              "key": "HeaderInterpreter",
+              "key": "primaryInterpreter",
               "value": {
                 "objRef": "TextInputItpt",
                 "propRef": null
@@ -49,7 +49,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "HeaderInterpreter",
+            "primaryInterpreter",
             "SubHeaderText"
           ]
         },

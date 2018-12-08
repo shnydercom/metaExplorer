@@ -3,7 +3,7 @@ import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { VisualDict } from 'components/visualcomposition/visualDict';
+import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
@@ -12,20 +12,20 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 
 export var TitleTextAndImageName: string = "shnyder/TitleTextAndImage";
 let cfgIntrprtKeys: string[] =
-	[VisualDict.freeContainer, VisualDict.headerTxt, VisualDict.description];
+	[VisualKeysDict.freeContainer, VisualKeysDict.headerTxt, VisualKeysDict.description];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.freeContainer,
+		key: VisualKeysDict.freeContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
 	{
-		key: VisualDict.headerTxt,
+		key: VisualKeysDict.headerTxt,
 		value: undefined,
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualDict.description,
+		key: VisualKeysDict.description,
 		value: undefined,
 		ldType: LDDict.Text
 	}
@@ -47,9 +47,9 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 		prevState: null | LDLocalState)
 		: null | LDLocalState {
 		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualDict.freeContainer]);
+			nextProps, prevState, [VisualKeysDict.freeContainer]);
 		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualDict.headerTxt, VisualDict.description]);
+			nextProps, prevState, [VisualKeysDict.headerTxt, VisualKeysDict.description]);
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
@@ -70,17 +70,17 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
 			...initLDLocalState(this.cfg, props,
-				[VisualDict.freeContainer],
-				[VisualDict.headerTxt, VisualDict.description])
+				[VisualKeysDict.freeContainer],
+				[VisualKeysDict.headerTxt, VisualKeysDict.description])
 		};
 	}
 	render() {
 		const { localValues } = this.state;
-		const headerText = localValues.get(VisualDict.headerTxt);
-		const description = localValues.get(VisualDict.description);
+		const headerText = localValues.get(VisualKeysDict.headerTxt);
+		const description = localValues.get(VisualKeysDict.description);
 		return <div className="flex-container" style={{flexDirection: "column-reverse"}}>
 			<div className="flex-filler" style={{minHeight: "300px"}}>
-				{this.renderSub(VisualDict.freeContainer)}
+				{this.renderSub(VisualKeysDict.freeContainer)}
 			</div>
 			<div className="flex-filler vh-centered-column" style={{minHeight: "300px"}}>
 				<h2>{headerText ? headerText : 'headerTextPlaceholder'}</h2>

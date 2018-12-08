@@ -6,7 +6,7 @@ import { UserDefDict } from 'ldaccess/UserDefDict';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import Card from 'metaexplorer-react-components/lib/components/card/card';
 import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from '../../generic/generatorFns';
-import { VisualDict } from '../../visualcomposition/visualDict';
+import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 import { LDDict } from 'ldaccess/LDDict';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 import { Redirect } from 'react-router';
@@ -39,7 +39,7 @@ let initialKVStores: IKvStore[] = [
 	{
 		key: ROUTESEND_MIDDLE_CONTAINER,
 		value: undefined,
-		ldType: VisualDict.route_added,
+		ldType: VisualTypesDict.route_added,
 	},
 	{
 		key: ACTION_MIDDLE_CONTAINER,

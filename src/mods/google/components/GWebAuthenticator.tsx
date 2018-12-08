@@ -5,7 +5,7 @@ import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 
 
 import { initLDLocalState, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
-import { VisualDict } from 'components/visualcomposition/visualDict';
+import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { GoogleWebAuthAPI, gwaTestCfg, EVENT_GOOGLE_WEB_AUTH, GoogleWebAuthState } from '../apis/GoogleWebAuthAPI';
 import { Button } from 'react-toolbox/lib/button';
 
@@ -47,7 +47,7 @@ export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnec
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 	//generates child react components
-	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualDict.freeContainer);
+	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
 
 	constructor(props: any) {
 		super(props);

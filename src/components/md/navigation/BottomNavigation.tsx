@@ -6,7 +6,7 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { VisualDict } from '../../visualcomposition/visualDict';
+import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 
 import { Tab, TabTheme } from 'react-toolbox/lib/tabs/';
 import { Tabs, TabsTheme } from 'react-toolbox/lib/tabs/';
@@ -52,10 +52,10 @@ export const BottomNavigationName = "shnyder/md/BottomNavigation";
 export const TopNavigationName = "shnyder/md/TopNavigation";
 
 let cfgIntrprtKeys: string[] =
-	[VisualDict.freeContainer];
+	[VisualKeysDict.freeContainer];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.freeContainer,
+		key: VisualKeysDict.freeContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	}
@@ -78,13 +78,13 @@ for (let i = 0; i < ICON_URLS.length; i++) {
 	initialKVStores.push({
 		key: ROUTES_SEND[i],
 		value: undefined,
-		ldType: VisualDict.route_added
+		ldType: VisualTypesDict.route_added
 	});
 }
 initialKVStores.push({
 	key: CHANGED_ROUTE_OUTPUT,
 	value: undefined,
-	ldType: VisualDict.route_added
+	ldType: VisualTypesDict.route_added
 });
 
 let bottomBpCfg: BlueprintConfig = {
@@ -114,7 +114,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		prevState: null | BottomNavState & LDLocalState)
 		: null | BottomNavState & LDLocalState {
 		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualDict.freeContainer]);
+			nextProps, prevState, [VisualKeysDict.freeContainer]);
 		let rvLocal = getDerivedKVStateFromProps(
 			nextProps, prevState, BOTTOMNAV_VALUE_FIELDS);
 		let rvNew;
@@ -183,7 +183,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualDict.freeContainer);
+	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
@@ -196,7 +196,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			routes: [],
 			isGenerateAtPositions: [],
 			hasTabChanged: true,
-			...initLDLocalState(this.cfg, props, [VisualDict.freeContainer], BOTTOMNAV_VALUE_FIELDS)
+			...initLDLocalState(this.cfg, props, [VisualKeysDict.freeContainer], BOTTOMNAV_VALUE_FIELDS)
 		};
 	}
 
@@ -207,7 +207,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		const outRouteKV: IKvStore = {
 			key: CHANGED_ROUTE_OUTPUT,
 			value: undefined,
-			ldType: VisualDict.route_added
+			ldType: VisualTypesDict.route_added
 		};
 		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
 		if (!outputKVMap) return;

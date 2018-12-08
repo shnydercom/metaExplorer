@@ -1,5 +1,5 @@
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from "ldaccess/ldBlueprint";
-import { VisualDict } from "../visualcomposition/visualDict";
+import { VisualKeysDict, VisualTypesDict } from "../visualcomposition/visualDict";
 import { IKvStore } from "ldaccess/ikvstore";
 import { Component } from "react";
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from "appstate/LDProps";
@@ -10,12 +10,12 @@ import { cleanRouteString } from "./route-helper-fns";
 
 export const RouteRedirectName = "shnyder/routing/Redirect";
 let cfgIntrprtKeys: string[] =
-	[VisualDict.routeSend_confirm];
+	[VisualKeysDict.routeSend_confirm];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.routeSend_confirm,
+		key: VisualKeysDict.routeSend_confirm,
 		value: undefined,
-		ldType: VisualDict.route_added,
+		ldType: VisualTypesDict.route_added,
 	},
 ];
 const bpCfg: BlueprintConfig = {
@@ -38,7 +38,7 @@ export class PureRedirectComponent extends Component<LDConnectedState & LDConnec
 		let rvLD = getDerivedItptStateFromProps(
 			nextProps, prevState, []);
 		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualDict.routeSend_confirm]);
+			nextProps, prevState, [VisualKeysDict.routeSend_confirm]);
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
@@ -59,14 +59,14 @@ export class PureRedirectComponent extends Component<LDConnectedState & LDConnec
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, props,
 			[],
-			[VisualDict.routeSend_confirm]);
+			[VisualKeysDict.routeSend_confirm]);
 		this.state = {
 			...ldState,
 		};
 	}
 	render() {
 		const { localValues } = this.state;
-		let routeSendConfirm = localValues.get(VisualDict.routeSend_confirm);
+		let routeSendConfirm = localValues.get(VisualKeysDict.routeSend_confirm);
 		routeSendConfirm = cleanRouteString(routeSendConfirm, this.props.routes);
 		//handle routing for editor-switching:
 		/*let routeQuery = this.props.routes.location.search;

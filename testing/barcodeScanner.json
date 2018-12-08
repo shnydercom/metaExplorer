@@ -12,7 +12,7 @@
           "nameSelf": "topImgHeadSubDesc",
           "initialKvStores": [
             {
-              "key": "HeaderInterpreter",
+              "key": "primaryInterpreter",
               "value": {
                 "objRef": "scannerHead",
                 "propRef": null
@@ -30,7 +30,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "HeaderInterpreter",
+            "primaryInterpreter",
             "HeaderText"
           ]
         },

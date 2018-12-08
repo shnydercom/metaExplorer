@@ -5,12 +5,12 @@ import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 
 import { ILDOptions } from "ldaccess/ildoptions";
 import { LDDict } from "ldaccess/LDDict";
 import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from "components/generic/generatorFns";
-import { VisualDict } from "components/visualcomposition/visualDict";
+import { VisualKeysDict } from "components/visualcomposition/visualDict";
 import { isProduction } from "approot";
 
 export const MailChimpSignupName = "mailchimp/condensedSignup";
 let cfgIntrprtKeys: string[] =
-	[LDDict.embedUrl, VisualDict.headerTxt];
+	[LDDict.embedUrl, VisualKeysDict.headerTxt];
 let initialKVStores: IKvStore[] = [
 	{
 		key: LDDict.embedUrl,
@@ -18,7 +18,7 @@ let initialKVStores: IKvStore[] = [
 		ldType: LDDict.Text,
 	},
 	{
-		key: VisualDict.headerTxt,
+		key: VisualKeysDict.headerTxt,
 		value: undefined,
 		ldType: LDDict.Text
 	},
@@ -43,7 +43,7 @@ export class PureMailChimpSignup extends Component<LDConnectedState & LDConnecte
 		let rvLD = getDerivedItptStateFromProps(
 			nextProps, prevState, []);
 		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [LDDict.embedUrl, VisualDict.headerTxt]);
+			nextProps, prevState, [LDDict.embedUrl, VisualKeysDict.headerTxt]);
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
@@ -65,7 +65,7 @@ export class PureMailChimpSignup extends Component<LDConnectedState & LDConnecte
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, props,
 			[],
-			[LDDict.embedUrl, VisualDict.headerTxt]);
+			[LDDict.embedUrl, VisualKeysDict.headerTxt]);
 		this.state = {
 			emailInputContent: "",
 			...ldState,
@@ -74,7 +74,7 @@ export class PureMailChimpSignup extends Component<LDConnectedState & LDConnecte
 	render() {
 		const { localValues, emailInputContent } = this.state;
 		let embedUrl = localValues.get(LDDict.embedUrl);
-		let subscribeText = localValues.get(VisualDict.headerTxt);
+		let subscribeText = localValues.get(VisualKeysDict.headerTxt);
 		if (!isProduction) return null;
 		return <div id="mc_embed_signup">
 			<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"></link>

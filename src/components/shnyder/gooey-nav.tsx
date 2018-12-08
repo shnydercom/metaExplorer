@@ -3,7 +3,7 @@ import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { VisualDict } from 'components/visualcomposition/visualDict';
+import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
 import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
@@ -15,7 +15,7 @@ import { FontIcon } from 'react-toolbox/lib/font_icon';
 export var GooeyNavName: string = "shnyder/GooeyNav";
 export const centralIcon: string = "centralIcon";
 let cfgIntrprtKeys: string[] =
-	[centralIcon, VisualDict.iconName];
+	[centralIcon, VisualKeysDict.iconName];
 let initialKVStores: IKvStore[] = [
 	{
 		key: centralIcon,
@@ -23,7 +23,7 @@ let initialKVStores: IKvStore[] = [
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualDict.iconName,
+		key: VisualKeysDict.iconName,
 		value: undefined,
 		ldType: LDDict.Text
 	}
@@ -47,7 +47,7 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 		let rvLD = getDerivedItptStateFromProps(
 			nextProps, prevState, []);
 		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [centralIcon, VisualDict.iconName], [false, true]);
+			nextProps, prevState, [centralIcon, VisualKeysDict.iconName], [false, true]);
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
@@ -70,7 +70,7 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 		this.state = {
 			...initLDLocalState(this.cfg, props,
 				[],
-				[centralIcon, VisualDict.iconName],
+				[centralIcon, VisualKeysDict.iconName],
 				[],
 				[false, true])
 		};
@@ -78,7 +78,7 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 	render() {
 		const { localValues } = this.state;
 		const centralIconTxt = localValues.get(centralIcon);
-		const iconNames: string[] = localValues.get(VisualDict.iconName);
+		const iconNames: string[] = localValues.get(VisualKeysDict.iconName);
 		/*return <div className="flex-container" style={{ flexDirection: "column-reverse" }}>
 			<div className="flex-filler" style={{ minHeight: "300px" }}>
 				{iconNames ? <Menu orientation="bottom" >
@@ -107,7 +107,7 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 			<Item title="c">
 				DE
 			</Item>
-		</Menu >
+		</Menu >;
 	}
 
 }

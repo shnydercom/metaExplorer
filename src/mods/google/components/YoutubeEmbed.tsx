@@ -3,17 +3,17 @@ import { IKvStore } from "ldaccess/ikvstore";
 import { Component } from "react";
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from "appstate/LDProps";
 import { ILDOptions } from "ldaccess/ildoptions";
-import { VisualDict } from "components/visualcomposition/visualDict";
+import { VisualKeysDict } from "components/visualcomposition/visualDict";
 import { LDDict } from "ldaccess/LDDict";
 import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from "components/generic/generatorFns";
 import { isProduction } from "approot";
 
 export const YoutubeEmbedName = "google-api/YoutubeEmbed";
 let cfgIntrprtKeys: string[] =
-	[VisualDict.videoId];
+	[VisualKeysDict.videoId];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.videoId,
+		key: VisualKeysDict.videoId,
 		value: undefined,
 		ldType: LDDict.Text,
 	},
@@ -38,7 +38,7 @@ export class PureYoutubeEmbed extends Component<LDConnectedState & LDConnectedDi
 		let rvLD = getDerivedItptStateFromProps(
 			nextProps, prevState, []);
 		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualDict.videoId]);
+			nextProps, prevState, [VisualKeysDict.videoId]);
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
@@ -59,14 +59,14 @@ export class PureYoutubeEmbed extends Component<LDConnectedState & LDConnectedDi
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, props,
 			[],
-			[VisualDict.videoId]);
+			[VisualKeysDict.videoId]);
 		this.state = {
 			...ldState,
 		};
 	}
 	render() {
 		const { localValues } = this.state;
-		let ytVideoId = localValues.get(VisualDict.videoId);
+		let ytVideoId = localValues.get(VisualKeysDict.videoId);
 		if (!isProduction) return null;
 		return <iframe width="420" height="315"
 			style={{ marginLeft: "auto", marginRight: "auto", maxWidth: "100%", borderWidth: "0px" }}

@@ -6,7 +6,7 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { VisualDict } from '../../visualcomposition/visualDict';
+import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 import { Button } from 'react-toolbox/lib/button/';
@@ -18,47 +18,47 @@ import { cleanRouteString } from '../../routing/route-helper-fns';
 export const NavProcessAtomName = "shnyder/md/NavProcessAtom";
 let cfgIntrprtKeys: string[] =
 	[
-		VisualDict.freeContainer,
-		VisualDict.headerTxt,
-		VisualDict.cancelTxt,
-		VisualDict.confirmTxt,
-		VisualDict.routeSend_cancel,
-		VisualDict.routeSend_confirm,
-		VisualDict.action_confirm
+		VisualKeysDict.freeContainer,
+		VisualKeysDict.headerTxt,
+		VisualKeysDict.cancelTxt,
+		VisualKeysDict.confirmTxt,
+		VisualKeysDict.routeSend_cancel,
+		VisualKeysDict.routeSend_confirm,
+		VisualKeysDict.action_confirm
 	];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.freeContainer,
+		key: VisualKeysDict.freeContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
 	{
-		key: VisualDict.headerTxt,
+		key: VisualKeysDict.headerTxt,
 		value: undefined,
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualDict.cancelTxt,
+		key: VisualKeysDict.cancelTxt,
 		value: undefined,
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualDict.confirmTxt,
+		key: VisualKeysDict.confirmTxt,
 		value: undefined,
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualDict.routeSend_cancel,
+		key: VisualKeysDict.routeSend_cancel,
 		value: undefined,
-		ldType: VisualDict.route_added,
+		ldType: VisualTypesDict.route_added,
 	},
 	{
-		key: VisualDict.routeSend_confirm,
+		key: VisualKeysDict.routeSend_confirm,
 		value: undefined,
-		ldType: VisualDict.route_added,
+		ldType: VisualTypesDict.route_added,
 	},
 	{
-		key: VisualDict.action_confirm,
+		key: VisualKeysDict.action_confirm,
 		value: undefined,
 		ldType: LDDict.Action
 	}
@@ -83,14 +83,14 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 		prevState: null | NavProcessAtomState & LDLocalState)
 		: null | NavProcessAtomState & LDLocalState {
 		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualDict.freeContainer]);
+			nextProps, prevState, [VisualKeysDict.freeContainer]);
 		let rvLocal = getDerivedKVStateFromProps(
 			nextProps, prevState, [
-				VisualDict.headerTxt,
-				VisualDict.cancelTxt,
-				VisualDict.confirmTxt,
-				VisualDict.routeSend_cancel,
-				VisualDict.routeSend_confirm
+				VisualKeysDict.headerTxt,
+				VisualKeysDict.cancelTxt,
+				VisualKeysDict.confirmTxt,
+				VisualKeysDict.routeSend_cancel,
+				VisualKeysDict.routeSend_confirm
 			]);
 		if (!rvLD && !rvLocal) {
 			return null;
@@ -117,13 +117,13 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 		this.state = {
 			...navBarStatePart,
 			...initLDLocalState(this.cfg, props,
-				[VisualDict.freeContainer],
+				[VisualKeysDict.freeContainer],
 				[
-					VisualDict.headerTxt,
-					VisualDict.cancelTxt,
-					VisualDict.confirmTxt,
-					VisualDict.routeSend_cancel,
-					VisualDict.routeSend_confirm
+					VisualKeysDict.headerTxt,
+					VisualKeysDict.cancelTxt,
+					VisualKeysDict.confirmTxt,
+					VisualKeysDict.routeSend_cancel,
+					VisualKeysDict.routeSend_confirm
 				])
 		};
 	}
@@ -143,11 +143,11 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 	}
 	render() {
 		const { isDoRedirectCancel, isDoRedirectConfirm, localValues } = this.state;
-		let routeSendCancel: string = localValues.get(VisualDict.routeSend_cancel);
-		let routeSendConfirm = localValues.get(VisualDict.routeSend_confirm);
-		const headerText = localValues.get(VisualDict.headerTxt);
-		const cancelTxt = localValues.get(VisualDict.cancelTxt);
-		const confirmTxt = localValues.get(VisualDict.confirmTxt);
+		let routeSendCancel: string = localValues.get(VisualKeysDict.routeSend_cancel);
+		let routeSendConfirm = localValues.get(VisualKeysDict.routeSend_confirm);
+		const headerText = localValues.get(VisualKeysDict.headerTxt);
+		const cancelTxt = localValues.get(VisualKeysDict.cancelTxt);
+		const confirmTxt = localValues.get(VisualKeysDict.confirmTxt);
 		//don't display bottom content if no routes or button text values are defined
 		const isHideBottom: boolean = !routeSendConfirm
 			&& !cancelTxt && !confirmTxt;
@@ -166,7 +166,7 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 				onLeftIconClick={() => this.onCancelClick()}
 			/>
 			<div className="bottom-nav-topfree mdscrollbar">
-				{this.renderSub(VisualDict.freeContainer)}
+				{this.renderSub(VisualKeysDict.freeContainer)}
 			</div>
 			{isHideBottom ? null :
 				<div className="bottom-nav-tabs flex-container">

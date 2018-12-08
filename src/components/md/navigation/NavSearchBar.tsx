@@ -6,7 +6,7 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { VisualDict } from '../../visualcomposition/visualDict';
+import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 import { initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo } from '../../generic/generatorFns';
@@ -18,25 +18,25 @@ import { cleanRouteString } from '../../routing/route-helper-fns';
 
 export const NavSearchBarName = "shnyder/md/NavSearchBar";
 let cfgIntrprtKeys: string[] =
-	[VisualDict.freeContainer, VisualDict.searchText, VisualDict.routeSend_back];
+	[VisualKeysDict.freeContainer, VisualKeysDict.searchText, VisualKeysDict.routeSend_back];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.freeContainer,
+		key: VisualKeysDict.freeContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
 	{
-		key: VisualDict.searchText,
+		key: VisualKeysDict.searchText,
 		value: undefined,
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualDict.routeSend_back,
+		key: VisualKeysDict.routeSend_back,
 		value: undefined,
-		ldType: VisualDict.route_added,
+		ldType: VisualTypesDict.route_added,
 	},
 	{
-		key: VisualDict.searchText,
+		key: VisualKeysDict.searchText,
 		value: undefined,
 		ldType: LDDict.Text
 	}
@@ -63,15 +63,15 @@ NavSearchBarState>
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: NavSearchBarState): null | NavSearchBarState {
 		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualDict.freeContainer]);
+			nextProps, prevState, [VisualKeysDict.freeContainer]);
 		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualDict.searchText, VisualDict.routeSend_back, UserDefDict.outputKVMapKey]);
+			nextProps, prevState, [VisualKeysDict.searchText, VisualKeysDict.routeSend_back, UserDefDict.outputKVMapKey]);
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
 		let rvNew = { ...rvLD, ...rvLocal };
-		let searchValue = rvNew.localValues.get(VisualDict.searchText);
-		let routeSendBack = rvNew.localValues.get(VisualDict.routeSend_back);
+		let searchValue = rvNew.localValues.get(VisualKeysDict.searchText);
+		let routeSendBack = rvNew.localValues.get(VisualKeysDict.routeSend_back);
 		return { ...rvNew, searchValue, routeSendBack, isDoRedirect: prevState.isDoRedirect };
 	}
 
@@ -80,17 +80,17 @@ NavSearchBarState>
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	private renderFreeContainer = generateItptFromCompInfo.bind(this, VisualDict.freeContainer);
+	private renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
 
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, props,
-			[VisualDict.freeContainer],
-			[VisualDict.searchText, VisualDict.routeSend_back, UserDefDict.outputKVMapKey]);
+			[VisualKeysDict.freeContainer],
+			[VisualKeysDict.searchText, VisualKeysDict.routeSend_back, UserDefDict.outputKVMapKey]);
 		this.state = {
-			searchValue: ldState.localValues.get(VisualDict.searchText),
-			routeSendBack: ldState.localValues.get(VisualDict.routeSend_back),
+			searchValue: ldState.localValues.get(VisualKeysDict.searchText),
+			routeSendBack: ldState.localValues.get(VisualKeysDict.routeSend_back),
 			isDoRedirect: false,
 			...ldState
 		};
@@ -101,7 +101,7 @@ NavSearchBarState>
 		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
 		if (!outputKVMap) return;
 		let outSearchKv: IKvStore = {
-			key: VisualDict.searchText,
+			key: VisualKeysDict.searchText,
 			value: evtVal,
 			ldType: LDDict.Text
 		};

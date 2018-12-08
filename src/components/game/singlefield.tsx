@@ -3,7 +3,7 @@ import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { VisualDict } from 'components/visualcomposition/visualDict';
+import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDRouteProps, LDLocalState } from 'appstate/LDProps';
 import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
@@ -26,11 +26,11 @@ export var SingleFieldViewIntrprtrName: string = "game/SingleFieldView";
 let cfgType: string = SingleFieldViewIntrprtrName;
 let cfgIntrprtKeys: string[] =
 	[
-		VisualDict.headerTxt
+		VisualKeysDict.headerTxt
 	];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.headerTxt,
+		key: VisualKeysDict.headerTxt,
 		value: undefined,
 		ldType: LDDict.Text
 	}
@@ -58,7 +58,7 @@ export class PureSingleFieldView extends Component<LDConnectedState & LDConnecte
 			]);
 		let rvLocal = getDerivedKVStateFromProps(
 			nextProps, prevState, [
-				VisualDict.headerTxt
+				VisualKeysDict.headerTxt
 			]);
 		if (!rvLD && !rvLocal) {
 			return null;
@@ -83,7 +83,7 @@ export class PureSingleFieldView extends Component<LDConnectedState & LDConnecte
 				[
 				],
 				[
-					VisualDict.headerTxt
+					VisualKeysDict.headerTxt
 				])
 		};
 	}
@@ -96,7 +96,7 @@ export class PureSingleFieldView extends Component<LDConnectedState & LDConnecte
 
 	render() {
 		const { localValues } = this.state;
-		const headerTxt = localValues.get(VisualDict.headerTxt);
+		const headerTxt = localValues.get(VisualKeysDict.headerTxt);
 		const RippleLink = Ripple({ spread: 3 })(this.ripplefn);
 		return <div className="game-field">
 			<RippleLink >{headerTxt}</RippleLink>

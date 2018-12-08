@@ -3,17 +3,17 @@ import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldacc
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { VisualDict } from '../visualcomposition/visualDict';
+import { VisualKeysDict } from '../visualcomposition/visualDict';
 
 import { initLDLocalState, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import CircleView from 'metaexplorer-react-components/lib/components/circle/circleview';
 
 let cfgIntrprtKeys: string[] =
-	[VisualDict.freeContainer];
+	[VisualKeysDict.freeContainer];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.freeContainer,
+		key: VisualKeysDict.freeContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	}
@@ -38,7 +38,7 @@ export abstract class PureLayoutComponent extends Component<LDConnectedState & L
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: LayoutComponentState): null | LayoutComponentState {
 		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualDict.freeContainer]);
+			nextProps, prevState, [VisualKeysDict.freeContainer]);
 		let rvLocal = getDerivedKVStateFromProps(
 			nextProps, prevState, []);
 		if (!rvLD && !rvLocal) {
@@ -56,12 +56,12 @@ export abstract class PureLayoutComponent extends Component<LDConnectedState & L
 	initialKvStores: IKvStore[];
 	styleClassName: string;
 
-	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualDict.freeContainer);
+	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
 
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		const ldState = initLDLocalState(this.cfg, props, [VisualDict.freeContainer],
+		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.freeContainer],
 			[]);
 		this.state = {
 			...ldState,

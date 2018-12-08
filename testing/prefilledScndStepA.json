@@ -42,7 +42,7 @@
             "ldType": "http://schema.org/Text"
           },
           {
-            "key": "HeaderInterpreter",
+            "key": "primaryInterpreter",
             "value": {
               "objRef": "textInputComp",
               "propRef": null
@@ -60,7 +60,7 @@
         ],
         "crudSkills": "cRud",
         "interpretableKeys": [
-          "HeaderInterpreter", "SubHeaderText"
+          "primaryInterpreter", "SubHeaderText"
         ]
       },
       "textInputComp": {

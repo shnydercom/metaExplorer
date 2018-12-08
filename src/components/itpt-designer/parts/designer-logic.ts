@@ -33,7 +33,7 @@ import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeM
 import { ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
 import { SettingsLabelFactory } from "./SettingsLabelFactory";
 import { SettingsLinkFactory } from "./SettingsLinkFactory";
-import { VisualDict } from "components/visualcomposition/visualDict";
+import { VisualKeysDict } from "components/visualcomposition/visualDict";
 
 export interface NewNodeSig {
 	x: number;

@@ -12,7 +12,7 @@
           "nameSelf": "aaSub",
           "initialKvStores": [
             {
-              "key": "HeaderInterpreter",
+              "key": "primaryInterpreter",
               "value": {
                 "objRef": "aaBHead",
                 "propRef": null
@@ -22,7 +22,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "HeaderInterpreter"
+            "primaryInterpreter"
           ]
         },
         "aaBHead": {

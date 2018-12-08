@@ -12,7 +12,7 @@
           "nameSelf": "bcb9a710-c155-4c2b-bfa7-1b7cff7052d2",
           "initialKvStores": [
             {
-              "key": "HeaderInterpreter",
+              "key": "primaryInterpreter",
               "value": {
                 "objRef": "9b018134-ae17-4546-bfca-65f29ea8aabb",
                 "propRef": null
@@ -35,7 +35,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "FooterInterpreter",
+              "key": "secondaryInterpreter",
               "value": {
                 "objRef": "4628ff54-02b6-4bf0-bb2a-0c0b7ef57b35",
                 "propRef": null
@@ -45,8 +45,8 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "HeaderInterpreter",
-            "FooterInterpreter"
+            "primaryInterpreter",
+            "secondaryInterpreter"
           ]
         },
         "9b018134-ae17-4546-bfca-65f29ea8aabb": {

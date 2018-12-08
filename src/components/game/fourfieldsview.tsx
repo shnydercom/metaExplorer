@@ -3,7 +3,7 @@ import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { VisualDict } from 'components/visualcomposition/visualDict';
+import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
@@ -41,7 +41,7 @@ let cfgIntrprtKeys: string[] =
 		GAME_FIELD_ITPT_LL,
 		GAME_FIELD_ITPT_LR,
 		GAME_STATS,
-		VisualDict.freeContainer,
+		VisualKeysDict.freeContainer,
 		GAME_CORRECT_FIELD_IDX
 	];
 let initialKVStores: IKvStore[] = [
@@ -52,7 +52,7 @@ let initialKVStores: IKvStore[] = [
 	{ key: GAME_FIELD_ITPT_LL, value: undefined, ldType: UserDefDict.intrprtrClassType },
 	{ key: GAME_FIELD_ITPT_LR, value: undefined, ldType: UserDefDict.intrprtrClassType },
 	{ key: GAME_STATS, value: undefined, ldType: LDDict.Text },
-	{ key: VisualDict.freeContainer, value: undefined, ldType: UserDefDict.intrprtrClassType },
+	{ key: VisualKeysDict.freeContainer, value: undefined, ldType: UserDefDict.intrprtrClassType },
 	{ key: GAME_CORRECT_FIELD_IDX, value: 0, ldType: LDDict.Integer }
 ];
 let bpCfg: BlueprintConfig = {
@@ -80,7 +80,7 @@ export class PureFourFieldsView extends Component<LDConnectedState & LDConnected
 				GAME_FIELD_ITPT_UR,
 				GAME_FIELD_ITPT_LL,
 				GAME_FIELD_ITPT_LR,
-				VisualDict.freeContainer
+				VisualKeysDict.freeContainer
 			]);
 		let rvLocal = getDerivedKVStateFromProps(
 			nextProps, prevState, [
@@ -115,7 +115,7 @@ export class PureFourFieldsView extends Component<LDConnectedState & LDConnected
 					GAME_FIELD_ITPT_UR,
 					GAME_FIELD_ITPT_LL,
 					GAME_FIELD_ITPT_LR,
-					VisualDict.freeContainer
+					VisualKeysDict.freeContainer
 				],
 				[
 					GAME_TASK_HEADING,

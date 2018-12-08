@@ -59,7 +59,7 @@
         "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
         "nameSelf": "67384b7b-a5a2-413c-898b-2201412aa01b",
         "initialKvStores": [{
-            "key": "HeaderInterpreter",
+            "key": "primaryInterpreter",
             "value": {
               "objRef": "cd09fcc9-46be-4af9-a4bd-1f036739908f",
               "propRef": null
@@ -93,16 +93,16 @@
             "ldType": "http://schema.org/Text"
           },
           {
-            "key": "FooterInterpreter",
+            "key": "secondaryInterpreter",
             "ldType": "InterpreterClassType"
           }
         ],
         "crudSkills": "cRud",
         "interpretableKeys": [
-          "HeaderInterpreter",
+          "primaryInterpreter",
           "SubHeaderText",
           "Description",
-          "FooterInterpreter"
+          "secondaryInterpreter"
         ]
       },
       "cd09fcc9-46be-4af9-a4bd-1f036739908f": {
@@ -153,6 +153,6 @@
   "crudSkills": "cRud",
   "interpretableKeys": [{
     "objRef": "67384b7b-a5a2-413c-898b-2201412aa01b",
-    "propRef": "FooterInterpreter"
+    "propRef": "secondaryInterpreter"
   }]
 }

@@ -3,7 +3,7 @@ import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { VisualDict } from 'components/visualcomposition/visualDict';
+import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
@@ -12,30 +12,30 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 
 export var ImgHeadSubDescIntrprtrName: string = "shnyder/ImgHeadSubDescIntrprtr";
 let cfgIntrprtKeys: string[] =
-	[VisualDict.headerItpt, VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description, VisualDict.footerItpt];
+	[VisualKeysDict.primaryItpt, VisualKeysDict.headerTxt, VisualKeysDict.subHeaderTxt, VisualKeysDict.description, VisualKeysDict.secondaryItpt];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.headerItpt,
+		key: VisualKeysDict.primaryItpt,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
 	{
-		key: VisualDict.headerTxt,
+		key: VisualKeysDict.headerTxt,
 		value: undefined,
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualDict.subHeaderTxt,
+		key: VisualKeysDict.subHeaderTxt,
 		value: undefined,
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualDict.description,
+		key: VisualKeysDict.description,
 		value: undefined,
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualDict.footerItpt,
+		key: VisualKeysDict.secondaryItpt,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	}
@@ -57,9 +57,9 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 		prevState: null | LDLocalState)
 		: null | LDLocalState {
 		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualDict.headerItpt, VisualDict.footerItpt]);
+			nextProps, prevState, [VisualKeysDict.primaryItpt, VisualKeysDict.secondaryItpt]);
 		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description]);
+			nextProps, prevState, [VisualKeysDict.headerTxt, VisualKeysDict.subHeaderTxt, VisualKeysDict.description]);
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
@@ -81,18 +81,18 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
 			...initLDLocalState(this.cfg, props,
-				[VisualDict.headerItpt, VisualDict.footerItpt],
-				[VisualDict.headerTxt, VisualDict.subHeaderTxt, VisualDict.description])
+				[VisualKeysDict.primaryItpt, VisualKeysDict.secondaryItpt],
+				[VisualKeysDict.headerTxt, VisualKeysDict.subHeaderTxt, VisualKeysDict.description])
 		};
 	}
 	render() {
 		const { localValues } = this.state;
-		const headerText = localValues.get(VisualDict.headerTxt);
-		const subHeaderText = localValues.get(VisualDict.subHeaderTxt);
-		const description = localValues.get(VisualDict.description);
+		const headerText = localValues.get(VisualKeysDict.headerTxt);
+		const subHeaderText = localValues.get(VisualKeysDict.subHeaderTxt);
+		const description = localValues.get(VisualKeysDict.description);
 		return <div className="mdscrollbar">
 			<div className="header-img-container">
-				{this.renderSub(VisualDict.headerItpt)}
+				{this.renderSub(VisualKeysDict.primaryItpt)}
 			</div>
 			<div className="header-img-container gradient">
 				<div className="header-text">
@@ -108,7 +108,7 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 				</div>
 			</div>
 			<div>
-				{this.renderSub(VisualDict.footerItpt)}
+				{this.renderSub(VisualKeysDict.secondaryItpt)}
 			</div>
 		</div>;
 	}

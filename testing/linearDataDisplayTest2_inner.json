@@ -12,7 +12,7 @@
           "nameSelf": "RMObj_ImgHeadSubDesc",
           "initialKvStores": [
             {
-              "key": "HeaderInterpreter",
+              "key": "primaryInterpreter",
               "value": {
                 "objRef": "RMObj_LinearContainer",
                 "propRef": null
@@ -22,7 +22,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "HeaderInterpreter"
+            "primaryInterpreter"
           ]
         },
         "RMObj_LinearContainer": {

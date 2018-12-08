@@ -6,7 +6,7 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { VisualDict } from '../visualcomposition/visualDict';
+import { VisualKeysDict } from '../visualcomposition/visualDict';
 
 import { initLDLocalState, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../generic/generatorFns';
 import { Route } from 'react-router';
@@ -18,10 +18,10 @@ export const ROUTE_PATH = "routePath";
 
 export const RouteComponentName = "shnyder/routing/Route";
 let cfgIntrprtKeys: string[] =
-	[VisualDict.freeContainer, ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH];
+	[VisualKeysDict.freeContainer, ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.freeContainer,
+		key: VisualKeysDict.freeContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
@@ -66,7 +66,7 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: RouteComponentState): null | RouteComponentState {
 		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualDict.freeContainer]);
+			nextProps, prevState, [VisualKeysDict.freeContainer]);
 		let rvLocal = getDerivedKVStateFromProps(
 			nextProps, prevState, [ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH]);
 		if (!rvLD && !rvLocal) {
@@ -89,12 +89,12 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	private renderFreeContainer = generateItptFromCompInfo.bind(this, VisualDict.freeContainer);
+	private renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
 
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		const ldState = initLDLocalState(this.cfg, props, [VisualDict.freeContainer],
+		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.freeContainer],
 			[ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH]);
 		let isExact = !!ldState.localValues.get(ROUTE_ISEXACT);
 		let isAbsolute = !!ldState.localValues.get(ROUTE_ISABSOLUTE);

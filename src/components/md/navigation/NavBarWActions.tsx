@@ -6,7 +6,7 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { VisualDict } from '../../visualcomposition/visualDict';
+import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 import IconButton from 'react-toolbox/lib/button/';
@@ -20,30 +20,30 @@ import { cleanRouteString } from '../../routing/route-helper-fns';
 export const NavBarWActionsName = "shnyder/md/NavBarWActions";
 
 let cfgIntrprtKeys: string[] =
-	[VisualDict.freeContainer, VisualDict.headerTxt, VisualDict.routeSend_search, VisualDict.popOverContent, VisualDict.iconName];
+	[VisualKeysDict.freeContainer, VisualKeysDict.headerTxt, VisualKeysDict.routeSend_search, VisualKeysDict.popOverContent, VisualKeysDict.iconName];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.freeContainer,
+		key: VisualKeysDict.freeContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
 	{
-		key: VisualDict.headerTxt,
+		key: VisualKeysDict.headerTxt,
 		value: undefined,
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualDict.routeSend_search,
+		key: VisualKeysDict.routeSend_search,
 		value: undefined,
-		ldType: VisualDict.route_added,
+		ldType: VisualTypesDict.route_added,
 	},
 	{
-		key: VisualDict.popOverContent,
+		key: VisualKeysDict.popOverContent,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
 	{
-		key: VisualDict.iconName,
+		key: VisualKeysDict.iconName,
 		value: undefined,
 		ldType: LDDict.Text
 	},
@@ -69,9 +69,9 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		prevState: null | NavBarWActionState & LDLocalState)
 		: null | NavBarWActionState & LDLocalState {
 		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualDict.freeContainer, VisualDict.popOverContent]);
+			nextProps, prevState, [VisualKeysDict.freeContainer, VisualKeysDict.popOverContent]);
 		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualDict.headerTxt, VisualDict.routeSend_search, VisualDict.iconName]);
+			nextProps, prevState, [VisualKeysDict.headerTxt, VisualKeysDict.routeSend_search, VisualKeysDict.iconName]);
 		if (!rvLD && !rvLocal) {
 			return null;
 		}
@@ -97,8 +97,8 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		this.state = {
 			...navBarStatePart,
 			...initLDLocalState(this.cfg, props,
-				[VisualDict.freeContainer, VisualDict.popOverContent],
-				[VisualDict.routeSend_search, VisualDict.headerTxt, VisualDict.iconName])
+				[VisualKeysDict.freeContainer, VisualKeysDict.popOverContent],
+				[VisualKeysDict.routeSend_search, VisualKeysDict.headerTxt, VisualKeysDict.iconName])
 		};
 	}
 
@@ -115,10 +115,10 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 	render() {
 		const { ldOptions, routes } = this.props;
 		const { isDoRedirect, isRightMenuOpen, localValues, compInfos } = this.state;
-		const routeSendSearch = localValues.get(VisualDict.routeSend_search);
-		const headerText = localValues.get(VisualDict.headerTxt);
-		const iconName = localValues.get(VisualDict.iconName);
-		const hasPopOverContent = compInfos.has(VisualDict.popOverContent);
+		const routeSendSearch = localValues.get(VisualKeysDict.routeSend_search);
+		const headerText = localValues.get(VisualKeysDict.headerTxt);
+		const iconName = localValues.get(VisualKeysDict.iconName);
+		const hasPopOverContent = compInfos.has(VisualKeysDict.popOverContent);
 		if (isDoRedirect && routeSendSearch) {
 			let route: string = cleanRouteString(routeSendSearch, this.props.routes);
 			//if (match.params.nextPath === undefined) match.params.nextPath = route;
@@ -134,13 +134,13 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 						: null}
 					{hasPopOverContent
 						? <IconMenu icon={iconName ? iconName : 'account_circle'} position='topRight' menuRipple onClick={this.onAppBarRightIconMenuClick}>
-							<div className="menu-pop-over">{this.renderSub(VisualDict.popOverContent)}</div>
+							<div className="menu-pop-over">{this.renderSub(VisualKeysDict.popOverContent)}</div>
 						</IconMenu>
 						: null}
 				</Navigation>
 			</AppBar>
 			<div className="bottom-nav-topfree mdscrollbar">
-				{this.renderSub(VisualDict.freeContainer)}
+				{this.renderSub(VisualKeysDict.freeContainer)}
 			</div>
 		</>;
 	}

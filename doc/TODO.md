@@ -34,7 +34,7 @@ last serialized bits & pieces: seems to work!
           "nameSelf": "78e74a11-229b-4bdd-99ff-3f324b7920ca",
           "initialKvStores": [
             {
-              "key": "HeaderInterpreter",
+              "key": "primaryInterpreter",
               "value": {
                 "objRef": "50de35ae-191b-4fb4-a830-1f86855ccd7d",
                 "propRef": "exportSelf"

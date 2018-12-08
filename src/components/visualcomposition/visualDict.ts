@@ -1,24 +1,21 @@
-export enum VisualDict {
+export enum VisualKeysDict {
 	//Base data types:
-	headerItpt = "HeaderInterpreter",
 	headerTxt = "HeaderText",
 	subHeaderTxt = "SubHeaderText",
 	description = "Description",
-	freeContainer = "freeContainer", //e.g. for the bottomNavigation anything that is "top"
 	cancelTxt = "cancelTxt",
 	confirmTxt = "confirmTxt",
 
 	//other
-	footerItpt = "FooterInterpreter",
 	popOverContent = "PopOverContent",
 	iconImg = "IconImage",
 	videoId = "VideoID",
 	iconName = "iconName",
 
-	//Router-related Types
-	route_added = "Route_Added",
-	route_new = "Route_New",
-	route_popLast = "Route_PopLast", //for back-navigation
+	//Interpreters
+	primaryItpt = "primaryInterpreter", //e.g. left icon of a list, upper content of ImgHeadSubDesc
+	secondaryItpt = "secondaryInterpreter", //e.g. right icon of a list, bottom content of ImgHeadSubDesc
+	freeContainer = "freeContainer", //e.g. for the bottomNavigation anything that is "top"
 
 	//NavigationElement-keys
 	routeSend_search = "RouteSend_Search",
@@ -29,4 +26,13 @@ export enum VisualDict {
 
 	//Actions
 	action_confirm = "Action_Confirm"
+}
+
+export enum VisualTypesDict {
+	//List-relevant Types
+	compactInfoElement = "CompactInformationElement",
+	//Router-related Types
+	route_added = "Route_Added",
+	route_new = "Route_New",
+	route_popLast = "Route_PopLast", //for back-navigation
 }

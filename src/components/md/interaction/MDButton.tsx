@@ -5,7 +5,7 @@ import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldacc
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
-import { VisualDict } from '../../visualcomposition/visualDict';
+import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 
 import { Button } from 'react-toolbox/lib/button/';
 import { initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../../generic/generatorFns';
@@ -16,23 +16,23 @@ import { cleanRouteString } from '../../routing/route-helper-fns';
 export const MDButtonName = "shnyder/md/Button";
 let cfgIntrprtKeys: string[] =
 	[
-		VisualDict.confirmTxt,
-		VisualDict.routeSend_confirm,
-		VisualDict.action_confirm
+		VisualKeysDict.confirmTxt,
+		VisualKeysDict.routeSend_confirm,
+		VisualKeysDict.action_confirm
 	];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualDict.confirmTxt,
+		key: VisualKeysDict.confirmTxt,
 		value: undefined,
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualDict.routeSend_confirm,
+		key: VisualKeysDict.routeSend_confirm,
 		value: undefined,
-		ldType: VisualDict.route_added,
+		ldType: VisualTypesDict.route_added,
 	},
 	{
-		key: VisualDict.action_confirm,
+		key: VisualKeysDict.action_confirm,
 		value: undefined,
 		ldType: LDDict.Action
 	}
@@ -56,12 +56,12 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 		prevState: null | MDButtonState & LDLocalState)
 		: null | MDButtonState & LDLocalState {
 		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualDict.freeContainer]);
+			nextProps, prevState, [VisualKeysDict.freeContainer]);
 		let rvLocal = getDerivedKVStateFromProps(
 			nextProps, prevState, [
-				VisualDict.confirmTxt,
-				VisualDict.routeSend_confirm,
-				VisualDict.action_confirm
+				VisualKeysDict.confirmTxt,
+				VisualKeysDict.routeSend_confirm,
+				VisualKeysDict.action_confirm
 			]);
 		if (!rvLD && !rvLocal) {
 			return null;
@@ -88,16 +88,16 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 			...initLDLocalState(this.cfg, props,
 				[],
 				[
-					VisualDict.confirmTxt,
-					VisualDict.routeSend_cancel,
-					VisualDict.routeSend_confirm,
-					VisualDict.action_confirm
+					VisualKeysDict.confirmTxt,
+					VisualKeysDict.routeSend_cancel,
+					VisualKeysDict.routeSend_confirm,
+					VisualKeysDict.action_confirm
 				])
 		};
 	}
 
 	onConfirmClick = () => {
-		let confirmAction = this.state.localValues.get(VisualDict.action_confirm);
+		let confirmAction = this.state.localValues.get(VisualKeysDict.action_confirm);
 		//TODO: execute that action
 		this.setState({
 			...this.state,
@@ -106,8 +106,8 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 	}
 	render() {
 		const { isDoRedirectConfirm, localValues } = this.state;
-		const routeSendConfirm = localValues.get(VisualDict.routeSend_confirm);
-		const confirmTxt = localValues.get(VisualDict.confirmTxt);
+		const routeSendConfirm = localValues.get(VisualKeysDict.routeSend_confirm);
+		const confirmTxt = localValues.get(VisualKeysDict.confirmTxt);
 		if (isDoRedirectConfirm && routeSendConfirm) {
 			let route: string = cleanRouteString(routeSendConfirm, this.props.routes);
 			//if (match.params.nextPath === undefined) match.params.nextPath = route;

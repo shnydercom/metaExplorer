@@ -3,16 +3,16 @@ import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldacc
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { VisualDict } from './visualcomposition/visualDict';
+import { VisualKeysDict } from './visualcomposition/visualDict';
 
 import { initLDLocalState, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from './generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { LDDict } from 'ldaccess/LDDict';
 
-let allMyInputKeys: string[] = [VisualDict.freeContainer, "http://my-domain.com/my-class/my-member-a"];
+let allMyInputKeys: string[] = [VisualKeysDict.freeContainer, "http://my-domain.com/my-class/my-member-a"];
 let initialKVStores: IKvStore[] = [ //the content of the key-value stores at initialization
 	//is an input, because it is defined in var allMyInputKeys, and is a visual container
-	{ key: VisualDict.freeContainer, value: undefined, ldType: UserDefDict.intrprtrClassType },
+	{ key: VisualKeysDict.freeContainer, value: undefined, ldType: UserDefDict.intrprtrClassType },
 	//is an input, because it is defined in var allMyInputKeys, is NOT a visual container
 	{ key: "http://my-domain.com/my-class/my-member-a", value: undefined, ldType: LDDict.Text },
 	//is an output, because it is NOT defined in var allMyInputKey
@@ -35,7 +35,7 @@ export class PureMyTemplate extends Component<LDConnectedState & LDConnectedDisp
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: MyTemplateState): null | MyTemplateState {
-		let rvLD = getDerivedItptStateFromProps(nextProps, prevState, [VisualDict.freeContainer]); //gets the visual part
+		let rvLD = getDerivedItptStateFromProps(nextProps, prevState, [VisualKeysDict.freeContainer]); //gets the visual part
 		let rvLocal = getDerivedKVStateFromProps(nextProps, prevState, ["http://my-domain.com/my-class/my-member-a"]); //gets the non-visual
 		if (!rvLD && !rvLocal) {
 			return null;
@@ -50,12 +50,12 @@ export class PureMyTemplate extends Component<LDConnectedState & LDConnectedDisp
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 	//generates child react components
-	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualDict.freeContainer);
+	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
 
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		const ldState = initLDLocalState(this.cfg, props, [VisualDict.freeContainer], ["http://my-domain.com/my-class/my-member-a"]);
+		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.freeContainer], ["http://my-domain.com/my-class/my-member-a"]);
 		this.state = { ...ldState, };
 	}
 	outputMemberB = () => {

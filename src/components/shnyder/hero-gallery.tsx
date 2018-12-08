@@ -3,7 +3,7 @@ import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { VisualDict } from 'components/visualcomposition/visualDict';
+import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
@@ -18,7 +18,7 @@ const prevBtnLabel = "previousBtnLabel";
 const nextBtnLabel = "nextBtnLabel";
 
 let cfgIntrprtKeys: string[] =
-	[backgroundItpt, foregroundItpt, prevBtnLabel, nextBtnLabel, VisualDict.headerTxt, VisualDict.subHeaderTxt];
+	[backgroundItpt, foregroundItpt, prevBtnLabel, nextBtnLabel, VisualKeysDict.headerTxt, VisualKeysDict.subHeaderTxt];
 let initialKVStores: IKvStore[] = [
 	{
 		key: cfgIntrprtKeys[0],
@@ -125,8 +125,8 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 		const { routes } = this.props;
 		const prevBtnLabelStrings: string[] = localValues.get(prevBtnLabel);
 		const nxtBtnLabelStrings: string[] = localValues.get(nextBtnLabel);
-		const subHeaderTextStr: string = localValues.get(VisualDict.subHeaderTxt);
-		const topHeaderTextStr: string = localValues.get(VisualDict.headerTxt);
+		const subHeaderTextStr: string = localValues.get(VisualKeysDict.subHeaderTxt);
+		const topHeaderTextStr: string = localValues.get(VisualKeysDict.headerTxt);
 		return <HeroGallery
 			backgroundComp={this.renderSub(backgroundItpt, routes, displayIdx)}
 			foregroundComp={this.renderSub(foregroundItpt, routes, displayIdx)}

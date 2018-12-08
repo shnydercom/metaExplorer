@@ -188,6 +188,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	width: $app-inner-width-90;
 	white-space: normal;
 	display: flex;
+	flex-direction: column;
 
 	>* {
 		flex: 1;
