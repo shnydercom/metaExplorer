@@ -92,8 +92,8 @@ export function generateItptFromCompInfo(compKey: string, routes?: LDRouteProps,
 	if (!this || !this.props || !this.props.routes || !this.state.compInfos) throw new LDError('function must be bound to a IBlueprintItpt with LDOwnProps and LDLocalState before being called');
 	const compInfos = this.state.compInfos.get(compKey);
 	let compInfo = null;
+	let locIndex = !index ? 0 : index;
 	if (Array.isArray(compInfos)) {
-		let locIndex = !index ? 0 : index;
 		compInfo = compInfos[locIndex];
 	} else {
 		compInfo = compInfos;
@@ -103,7 +103,7 @@ export function generateItptFromCompInfo(compKey: string, routes?: LDRouteProps,
 	const compRoutes = routes ? routes : this.props.routes;
 	//console.log(compInfo.ldTokenString);
 	//console.dir(compRoutes);
-	return <BaseComp routes={compRoutes} ldTokenString={compInfo.ldTokenString} />;
+	return <BaseComp key={locIndex} routes={compRoutes} ldTokenString={compInfo.ldTokenString} />;
 }
 
 export function initLDLocalState(

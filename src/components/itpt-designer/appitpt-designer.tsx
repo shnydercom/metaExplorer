@@ -222,7 +222,7 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 		}
 		const { routes } = this.props;
 		const { drawerActive, currentlyEditingItptName, sidebarActive } = this.state;
-		let isDisplayDevContent = false;
+		let isDisplayDevContent = true;
 		return <div className="entrypoint-editor">
 			<ThemeProvider theme={designerTheme}>
 				<Layout theme={{ layout: 'editor-layout' }}>
@@ -287,7 +287,7 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 													)} />
 													<Route path="/" render={(routeProps: LDRouteProps) => {
 														return <>
-															<BaseContainerRewrite routes={routeProps} ldTokenString={this.props.ldTokenString} searchCrudSkills="cRud" />
+															<BaseContainerRewrite routes={routeProps} ldTokenString={this.props.ldTokenString} />
 														</>;
 													}} />
 												</Switch>

@@ -2,7 +2,6 @@ import { appItptRetrFn } from "appconfig/appItptRetriever";
 import { LDDict } from "ldaccess/LDDict";
 import { PureImgDisplay } from "../visualcomposition/imagedisplay-component";
 import { PureBoolInput, PureIntInput, PureDoubleInput, PureTextInput, PureDateInput, PureDateTimeInput } from "../md/content/BaseDataTypeInput";
-import { ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc } from "../shnyder/ImgHeadSubDescIntrprtr";
 import { PureNavBarWActions, NavBarWActionsName } from "../md/navigation/NavBarWActions";
 import { BottomNavigationName, PureBottomNavigation, TopNavigationName, PureTopNavigation } from "../md/navigation/BottomNavigation";
 import { PureRouteComponent, RouteComponentName } from "../routing/route-component";
@@ -20,6 +19,8 @@ import { PureRedirectComponent, RouteRedirectName } from "../routing/redirect";
 import { PureCard3itptLTR, Card3itptLTRName } from "./interaction/Card_3itptLTR";
 import { TwoDtoJSONArray, TwoDtoJSONArrayName } from "datatransformation/TwoDtoJSONArray";
 import { PureSimpleTextTable, SimpleTextTableName } from "./content/SimpleTextTable";
+import { SectionedListName, PureSectionedList } from "./content/SectionedList";
+import { CompactInfoListElementName, PureCompactInfoListElement } from "./content/CompactInfoListElement";
 
 /**
  * sorry for the long function name //TODO: change
@@ -63,6 +64,10 @@ export function initMDitptFnAsDefault() {
 	appIntRetr.addItpt(SingleImageSelectorName, PureSingleImageSelector, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(LayoutCircleDisplayName, PureCircleLayout, "cRud", [ITPT_TAG_ATOMIC]);
+
+	//register list-itpts
+	appIntRetr.addItpt(SectionedListName, PureSectionedList, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(CompactInfoListElementName, PureCompactInfoListElement, "cRud", [ITPT_TAG_ATOMIC]);
 
 	//data transformation itpts
 	appIntRetr.addItpt(TwoDtoJSONArrayName, TwoDtoJSONArray, "cRUd", [ITPT_TAG_ATOMIC]);

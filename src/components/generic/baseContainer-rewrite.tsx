@@ -18,7 +18,6 @@ import { ErrorBoundaryState } from "../errors/ErrorBoundaryState";
 // import { value } from "../../../node_modules/react-toolbox/lib/dropdown/theme.css";
 
 export interface BaseContOwnProps extends LDOwnProps {
-	searchCrudSkills: string;
 }
 
 export interface BaseContOwnState extends LDLocalState, ErrorBoundaryState {

@@ -32,3 +32,18 @@ export const typeMatrix: boolean[][] = [
 	[true, true, false],
 	[true, false, true]
 ];
+
+export function getLDPrototypeOf(typeName: string): object {
+	if (!ldPrototypeMap.has(typeName)) return {};
+	return ldPrototypeMap.get(typeName);
+}
+
+export const ldPrototypeMap: Map<string, object> = new Map();
+ldPrototypeMap.set(VisualTypesDict.compactInfoElement,
+	{
+		[VisualKeysDict.primaryItpt]: null,
+		[VisualKeysDict.secondaryItpt]: null,
+		[VisualKeysDict.headerTxt]: null,
+		[VisualKeysDict.subHeaderTxt]: null
+	}
+);

@@ -13,7 +13,6 @@ import { ErrorBoundaryState } from "../errors/ErrorBoundaryState";
 import { IReactCompInfoItm } from "../reactUtils/iReactCompInfo";
 
 export type OwnProps = LDOwnProps & {
-	searchCrudSkills: string;
 };
 
 export interface RefMapItptState extends LDLocalState, ErrorBoundaryState {

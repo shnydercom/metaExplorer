@@ -59,7 +59,7 @@ function rootSetup(): void {
 
 rootSetup();
 
-const firstDisplayedBlock: string = "b";
+const firstDisplayedBlock: string = "listtest";
 export class AppRoot extends Component<AppRootProps, AppRootState>{
 
 	mode: "editor" | "app" | "initial" = "initial";

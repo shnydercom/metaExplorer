@@ -149,7 +149,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 						LDDict.Date |
 						LDDict.DateTime}
 						selectionChange={(newType) => { this.onPortTypeChange(newType, this.props); }} />
-					{portType ? <BaseContainerRewrite ldTokenString={targetID} searchCrudSkills="CrUd" routes={null} /> : null}
+					{portType ? <BaseContainerRewrite ldTokenString={targetID} routes={null} /> : null}
 				</div>
 				{port}
 			</div>
