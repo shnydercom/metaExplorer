@@ -4,7 +4,7 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 
 import { initLDLocalState, getDerivedKVStateFromProps, generateItptFromCompInfo, getDerivedItptStateFromProps } from 'components/generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component, ComponentClass, StatelessComponent, Fragment } from 'react';
 import { List, ListSubHeader } from 'react-toolbox/lib/list';
 import { LDDict } from 'ldaccess/LDDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
@@ -86,10 +86,11 @@ export class PureSectionedList extends Component<LDConnectedState
 				listSections.map((listSection, idx) => {
 					if (!listSection) return null;
 					const sectHeader = (sectHeadStrngs && idx < sectHeadStrngs.length) ? sectHeadStrngs[idx] : null;
-					return <>
-						{sectHeader ? <ListSubHeader caption={sectHeader} /> : null}
+					//<Fragment> is the same as <></>, just fixes a warning about missing keys:
+					return <Fragment key={"frag" + idx}>
+						{sectHeader ? <ListSubHeader key={"lh" + idx} caption={sectHeader} /> : null}
 						{listSection}
-					</>;
+					</Fragment>;
 				}
 				)
 			}
