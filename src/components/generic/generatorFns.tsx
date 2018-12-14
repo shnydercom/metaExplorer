@@ -89,7 +89,9 @@ export function generateAllCompInfoItms(kvStores: IKvStore[], prop: string, retr
  */
 export function generateItptFromCompInfo(compKey: string, routes?: LDRouteProps, index?: number) {
 	if (!compKey) return null;
-	if (!this || !this.props || !this.props.routes || !this.state.compInfos) throw new LDError('function must be bound to a IBlueprintItpt with LDOwnProps and LDLocalState before being called');
+	if (!this || !this.props || !this.props.routes || !this.state.compInfos) {
+		throw new LDError('function must be bound to a IBlueprintItpt with LDOwnProps and LDLocalState before being called');
+	}
 	const compInfos = this.state.compInfos.get(compKey);
 	let compInfo = null;
 	let locIndex = !index ? 0 : index;

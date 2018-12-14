@@ -61,16 +61,16 @@ export class PureSimpleTextTable extends Component<LDConnectedState & LDConnecte
 		return <Table>
 			<TableHead>
 				{
-					(headingRow as string[]).map((headingRowElem) => {
-						return <TableCell>{headingRowElem}</TableCell>;
+					(headingRow as string[]).map((headingRowElem, hIdx) => {
+						return <TableCell key={"h" + hIdx}>{headingRowElem}</TableCell>;
 					})
 				}
 			</TableHead>
 			{contentRows.map((contentRow, rowIdx) => (
 				<TableRow key={rowIdx}>
 					{
-						headingRow.map((contentKey) => (
-							<TableCell>{contentRow[contentKey]}</TableCell>
+						headingRow.map((contentKey, cIdx) => (
+							<TableCell key={"c" + cIdx}>{contentRow[contentKey]}</TableCell>
 						))
 					}
 				</TableRow>

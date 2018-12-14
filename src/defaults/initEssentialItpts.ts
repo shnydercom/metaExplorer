@@ -3,7 +3,7 @@ import { PureRefMapItpt } from "components/generic/RefMapItpt-component";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { PureBaseContainerRewrite } from "components/generic/baseContainer-rewrite";
 import { ITPT_TAG_SPECIAL, ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
-import { magicCanInterpretType, PureMagicBox } from "components/generic/magicList";
+import { magicCanInterpretType, PureMagicBox } from "components/generic/magicBox";
 
 export function initEssentialItpts() {
 	let appIntRetr = appItptRetrFn();

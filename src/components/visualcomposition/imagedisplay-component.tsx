@@ -11,7 +11,7 @@ import { getKVValue } from 'ldaccess/ldUtils';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from '../generic/generatorFns';
 
-let cfgType: string = LDDict.ViewAction;
+let cfgType: string = LDDict.ImageObject;
 export const CSS_OBJECT_FIT = "CSSObjectFit";
 let cfgIntrprtKeys: string[] =
 	[LDDict.name, LDDict.fileFormat, LDDict.contentUrl, CSS_OBJECT_FIT];

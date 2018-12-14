@@ -62,5 +62,8 @@ export enum UserDefDict {
 
 	itptContainerObjType = "shnyder/ContainerObjType",
 
-	standardItptObjectTypeSuffix = "-ObjectType"
+	standardItptObjectTypeSuffix = "-ObjectType",
+
+	inputData = "inputdata",
+	outputData = "outputdata",
 }

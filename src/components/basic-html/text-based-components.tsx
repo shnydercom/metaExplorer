@@ -23,7 +23,8 @@ export const createTextBasedBpCfg: (nameSelf: string) => BlueprintConfig = (name
 		nameSelf: nameSelf,
 		initialKvStores: initialKVStores,
 		interpretableKeys: cfgIntrprtKeys,
-		crudSkills: "cRud"
+		crudSkills: "cRud",
+		canInterpretType: LDDict.Text
 	};
 };
 

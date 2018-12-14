@@ -20,7 +20,9 @@ import { PureCard3itptLTR, Card3itptLTRName } from "./interaction/Card_3itptLTR"
 import { TwoDtoJSONArray, TwoDtoJSONArrayName } from "datatransformation/TwoDtoJSONArray";
 import { PureSimpleTextTable, SimpleTextTableName } from "./content/SimpleTextTable";
 import { SectionedListName, PureSectionedList } from "./content/SectionedList";
-import { CompactInfoListElementName, PureCompactInfoListElement } from "./content/CompactInfoListElement";
+import { PureCompactInfoListElement } from "./content/CompactInfoListElement";
+import { JSONArrayToCompactInfoArrayName, JSONArrayToCompactInfoArray } from "datatransformation/JSONArrayToCompactInfoArray";
+import { VisualTypesDict } from "components/visualcomposition/visualDict";
 
 /**
  * sorry for the long function name //TODO: change
@@ -67,8 +69,9 @@ export function initMDitptFnAsDefault() {
 
 	//register list-itpts
 	appIntRetr.addItpt(SectionedListName, PureSectionedList, "cRud", [ITPT_TAG_ATOMIC]);
-	appIntRetr.addItpt(CompactInfoListElementName, PureCompactInfoListElement, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(VisualTypesDict.compactInfoElement, PureCompactInfoListElement, "cRud", [ITPT_TAG_ATOMIC]);
 
 	//data transformation itpts
 	appIntRetr.addItpt(TwoDtoJSONArrayName, TwoDtoJSONArray, "cRUd", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(JSONArrayToCompactInfoArrayName, JSONArrayToCompactInfoArray, "cRUD", [ITPT_TAG_ATOMIC]);
 }

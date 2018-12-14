@@ -14,7 +14,8 @@ import { getKVStoreByKey } from 'ldaccess/kvConvenienceFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 
 export const MagicBoxName = "shnyder/MagicBox";
-const inputdata = "inputdata";
+const inputdata = UserDefDict.inputData;
+const magicOutput = "mOut";
 export const magicCanInterpretType = "shnyder/MagicBoxType";
 
 let MagicBoxInputKeys: string[] = [inputdata];
@@ -49,6 +50,21 @@ export class PureMagicBox extends Component<LDConnectedState & LDConnectedDispat
 		if (!prevState.containertoken) {
 			const newLDOptionsFItpt: ILDOptions = ldOptionsDeepCopy(nextProps.ldOptions);
 			newLDOptionsFItpt.ldToken = nextContainerToken;
+			const modKV: IKvStore = getKVStoreByKey(nextProps.ldOptions.resource.kvStores, inputdata);
+			let outputNum: number = 1;
+			if (Array.isArray(modKV.value)) {
+				let newLdType = modKV.ldType;
+				let newKvStores: IKvStore[] = [];
+				outputNum = modKV.value.length;
+				for (let i = 0; i < outputNum; i++) {
+					newKvStores.push({
+						key: magicOutput + i,
+						value: modKV.value[i],
+						ldType: newLdType
+					});
+				}
+				newLDOptionsFItpt.resource.kvStores = newKvStores;
+			}
 			nextProps.notifyLDOptionsChange(newLDOptionsFItpt);
 		} else {
 			const modKV: IKvStore = getKVStoreByKey(nextProps.ldOptions.resource.kvStores, inputdata);
@@ -57,8 +73,17 @@ export class PureMagicBox extends Component<LDConnectedState & LDConnectedDispat
 			if (!outputKVMap) {
 				outputKVMap = {};
 			}
-			const newElems: OutputKVMapElement[] = [{ targetLDToken: nextContainerToken, targetProperty: inputdata }];
-			outputKVMap[inputdata] = newElems;
+			let outputNum: number = 1;
+			if (Array.isArray(modKV.value)) {
+				outputNum = modKV.value.length;
+				for (let i = 0; i < outputNum; i++) {
+					const newElems: OutputKVMapElement[] = [{ targetLDToken: nextContainerToken, targetProperty: magicOutput + i }];
+					outputKVMap[inputdata] = newElems;
+				}
+			} else {
+				const newElems: OutputKVMapElement[] = [{ targetLDToken: nextContainerToken, targetProperty: inputdata }];
+				outputKVMap[inputdata] = newElems;
+			}
 			nextProps.dispatchKvOutput([modKV], nextProps.ldTokenString, outputKVMap);
 		}
 		let rvNew = { ...rvLocal };
@@ -84,5 +109,3 @@ export class PureMagicBox extends Component<LDConnectedState & LDConnectedDispat
 		return <BaseContainerRewrite ldTokenString={this.state.containertoken} />;
 	}
 }
-
-export const MagicList = connect<LDConnectedState, LDConnectedDispatch, BaseContOwnProps>(mapStateToProps, mapDispatchToProps)(PureMagicBox);

@@ -11,7 +11,6 @@ import { LDDict } from 'ldaccess/LDDict';
 import { ListItem } from 'react-toolbox/lib/list';
 
 export const CompactInfoListElementName = "shnyder/CompactInfoListElement";
-export const magicCanInterpretType = VisualTypesDict.compactInfoElement;
 
 let CompactInfoListElementItptKeys: string[] = [VisualKeysDict.primaryItpt, VisualKeysDict.secondaryItpt];
 let compactInfoListElementValueKeys: string[] = [VisualKeysDict.headerTxt, VisualKeysDict.subHeaderTxt];
@@ -29,7 +28,7 @@ export const CompactInfoListElementCfg: BlueprintConfig = {
 	initialKvStores: initialKVStores,
 	interpretableKeys: CompactInfoListElementInputKeys,
 	crudSkills: "cRud",
-	canInterpretType: magicCanInterpretType
+	canInterpretType: VisualTypesDict.compactInfoElement
 };
 export interface CompactInfoListElementState extends LDLocalState {
 }
@@ -67,9 +66,13 @@ export class PureCompactInfoListElement extends Component<LDConnectedState & LDC
 	}
 
 	render() {
-		const { localValues } = this.state;
-		return <ListItem leftIcon={this.renderSub(VisualKeysDict.primaryItpt)}
-			rightIcon={this.renderSub(VisualKeysDict.secondaryItpt)}
+		const { localValues, compInfos } = this.state;
+		const leftIconItpt = compInfos.has(VisualKeysDict.primaryItpt) && compInfos.get(VisualKeysDict.primaryItpt)
+			? this.renderSub(VisualKeysDict.primaryItpt) : null;
+		const rightIconItpt = compInfos.has(VisualKeysDict.secondaryItpt) && compInfos.get(VisualKeysDict.secondaryItpt)
+			? this.renderSub(VisualKeysDict.secondaryItpt) : null;
+		return <ListItem leftIcon={leftIconItpt}
+			rightIcon={rightIconItpt}
 			caption={localValues.get(VisualKeysDict.headerTxt)}
 			legend={localValues.get(VisualKeysDict.subHeaderTxt)} />;
 	}

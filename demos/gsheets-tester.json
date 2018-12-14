@@ -54,6 +54,14 @@
             {
               "key": "in_5",
               "value": {
+                "objRef": "ce47b2f9-3999-4e23-94ca-7af7d0507ae1",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_6",
+              "value": {
                 "objRef": "3b154a92-d981-4ec6-a81f-824575095192",
                 "propRef": null
               },
@@ -67,7 +75,8 @@
             "in_2",
             "in_3",
             "in_4",
-            "in_5"
+            "in_5",
+            "in_6"
           ]
         },
         "0de650b7-8890-4e48-afdc-40b2241a66b6": {
@@ -149,30 +158,49 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "3b154a92-d981-4ec6-a81f-824575095192": {
-          "subItptOf": "shnyder/md/SimpleTextTable",
-          "canInterpretType": "shnyder/md/SimpleTextTable-ObjectType",
-          "nameSelf": "3b154a92-d981-4ec6-a81f-824575095192",
+        "ce47b2f9-3999-4e23-94ca-7af7d0507ae1": {
+          "subItptOf": "shnyder/MagicBox",
+          "canInterpretType": "shnyder/MagicBoxType",
+          "nameSelf": "ce47b2f9-3999-4e23-94ca-7af7d0507ae1",
           "initialKvStores": [
             {
-              "key": "headings",
+              "key": "inputdata",
               "value": {
-                "objRef": "c1068925-8bf3-46f4-a540-36af6990e057",
-                "propRef": "headings"
-              }
-            },
-            {
-              "key": "rows",
-              "value": {
-                "objRef": "c1068925-8bf3-46f4-a540-36af6990e057",
-                "propRef": "contentRow"
+                "objRef": "fdec6c75-1b20-4163-889b-211be0b4ba95",
+                "propRef": "outputdata"
               }
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "headings",
-            "rows"
+            "inputdata"
+          ]
+        },
+        "fdec6c75-1b20-4163-889b-211be0b4ba95": {
+          "subItptOf": "data/JSONArrayToCompactInfoArray",
+          "canInterpretType": "data/JSONArrayToCompactInfoArray-ObjectType",
+          "nameSelf": "fdec6c75-1b20-4163-889b-211be0b4ba95",
+          "initialKvStores": [
+            {
+              "key": "inputdata",
+              "value": {
+                "objRef": "c1068925-8bf3-46f4-a540-36af6990e057",
+                "propRef": "contentRow"
+              }
+            },
+            {
+              "key": "HeaderTextField",
+              "value": "SubProject",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderTextField",
+              "value": "TotalTime"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputdata"
           ]
         },
         "c1068925-8bf3-46f4-a540-36af6990e057": {
@@ -248,6 +276,32 @@
             "googleDocID",
             "sheetName",
             "range"
+          ]
+        },
+        "3b154a92-d981-4ec6-a81f-824575095192": {
+          "subItptOf": "shnyder/md/SimpleTextTable",
+          "canInterpretType": "shnyder/md/SimpleTextTable-ObjectType",
+          "nameSelf": "3b154a92-d981-4ec6-a81f-824575095192",
+          "initialKvStores": [
+            {
+              "key": "headings",
+              "value": {
+                "objRef": "c1068925-8bf3-46f4-a540-36af6990e057",
+                "propRef": "headings"
+              }
+            },
+            {
+              "key": "rows",
+              "value": {
+                "objRef": "c1068925-8bf3-46f4-a540-36af6990e057",
+                "propRef": "contentRow"
+              }
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "headings",
+            "rows"
           ]
         }
       },
