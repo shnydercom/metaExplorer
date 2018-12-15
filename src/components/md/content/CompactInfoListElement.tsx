@@ -5,7 +5,7 @@ import { LDLocalState, LDConnectedState, LDConnectedDispatch, LDOwnProps } from 
 import { Component } from 'react';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { getDerivedKVStateFromProps, initLDLocalState, getDerivedItptStateFromProps, generateItptFromCompInfo } from 'components/generic/generatorFns';
+import { getDerivedKVStateFromProps, initLDLocalState, getDerivedItptStateFromProps, generateItptFromCompInfo, gdsfpLD } from 'components/generic/generatorFns';
 import { VisualTypesDict, VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { LDDict } from 'ldaccess/LDDict';
 import { ListItem } from 'react-toolbox/lib/list';
@@ -40,13 +40,15 @@ export class PureCompactInfoListElement extends Component<LDConnectedState & LDC
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: CompactInfoListElementState): null | CompactInfoListElementState {
-		let rvLD = getDerivedItptStateFromProps(
+		/*let rvLD = getDerivedItptStateFromProps(
 			nextProps, prevState, CompactInfoListElementItptKeys);
 		let rvLocal = getDerivedKVStateFromProps(nextProps, prevState, compactInfoListElementValueKeys);
 		if (!rvLocal && !rvLD) {
 			return null;
 		}
-		let rvNew = { ...rvLD, ...rvLocal };
+		let rvNew = { ...rvLD, ...rvLocal };*/
+		let rvNew = gdsfpLD(nextProps, prevState, CompactInfoListElementItptKeys, compactInfoListElementValueKeys,
+			[false, false], [false, false], CompactInfoListElementCfg.canInterpretType);
 		return { ...prevState, ...rvNew, };
 	}
 

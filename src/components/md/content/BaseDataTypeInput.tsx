@@ -249,7 +249,7 @@ function wrapGDSF(cfg: BlueprintConfig) {
 		let rvLocal: BaseDataTypeState = null;
 		if (nextProps.ldOptions) {
 			let pLdOpts: ILDOptions = nextProps.ldOptions;
-			let newSingleKVKey: string = determineSingleKVKey(pLdOpts.resource.kvStores, cfg);
+			let newSingleKVKey: string = determineSingleKVKey(pLdOpts.resource.kvStores, cfg.canInterpretType, cfg.interpretableKeys as string[]);
 			let nextDescription = rvLD.localValues.get(LDDict.description);
 			let nextSingleKV = getKVStoreByKey(pLdOpts.resource.kvStores, newSingleKVKey);
 			if (!nextSingleKV) {

@@ -3,7 +3,6 @@ import { LDOwnProps, LDRouteProps, LDConnectedState, LDLocalState, ReactCompLDLo
 import { isObjPropertyRef, getKVValue } from "ldaccess/ldUtils";
 import { appItptMatcherFn } from "appconfig/appItptMatcher";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
-import { Component } from "react";
 import { isReactComponent } from "../reactUtils/reactUtilFns";
 import { IReactCompInfoItm, ReactCompInfoMap } from "../reactUtils/iReactCompInfo";
 import { LDError } from "appstate/LDError";
@@ -11,10 +10,6 @@ import { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { getKVStoreByKey, getAllKVStoresByKey } from "ldaccess/kvConvenienceFns";
-import { RouteComponentProps } from "react-router";
-
-type LDComponent = new () => Component<LDOwnProps>;
-const ReactWrapLDComp = Component as LDComponent;
 
 export function generateIntrprtrForProp(kvStores: IKvStore[], prop: string, retriever: string, routes: LDRouteProps): any {//JSX.Element {
 	let genKv = kvStores.find((elem) => elem.key === prop);
@@ -154,6 +149,83 @@ export function initLDLocalState(
 	return { compInfos: rvCompInfo, localValues: newValueMap, localLDTypes: newLDTypeMap };
 }
 
+export function gdsfpLD(
+	props: LDConnectedState & LDOwnProps,
+	prevState: null | LDLocalState,
+	itptKeys: string[],
+	kvKeys: string[],
+	itptIsMulti?: boolean[],
+	kvIsMulti?: boolean[],
+	canInterpretType?: string
+): LDLocalState {
+	let rvCompInfo = new Map<string, IReactCompInfoItm | IReactCompInfoItm[]>();
+	let newValueMap = new Map<string, any>();
+	let newLDTypeMap = new Map<string, any>();
+	// a) get state filled through the interpretableKeys
+	let reactCompLocalState = getDerivedItptStateFromProps(props, prevState, itptKeys, itptIsMulti);
+	let kvLocalState = getDerivedKVStateFromProps(props, prevState, kvKeys, kvIsMulti);
+	let itptsLen = 0;
+	let kvsLen = 0;
+	if (reactCompLocalState) {
+		rvCompInfo = reactCompLocalState.compInfos;
+		rvCompInfo.forEach((itpt) => {
+			if (itpt) {
+				itptsLen++;
+			}
+		});
+	} else {
+		rvCompInfo = prevState.compInfos;
+	}
+	if (kvLocalState) {
+		newValueMap = kvLocalState.localValues;
+		newLDTypeMap = kvLocalState.localLDTypes;
+		newValueMap.forEach((val) => {
+			if (val) {
+				kvsLen++;
+			}
+		});
+	} else {
+		newValueMap = prevState.localValues;
+		newLDTypeMap = prevState.localLDTypes;
+	}
+	// b) get state filled through a singleKv in the ldOptions.resources.kvstores,
+	// 		if interpretableKeys aren't really filled and the Itpt can interpret a type
+	if (canInterpretType && canInterpretType.length > 0 && itptsLen + kvsLen < itptKeys.length + kvKeys.length) {
+		let concatItptAndKvs = [...itptKeys, ...kvKeys];
+		let singleKvKey = determineSingleKVKey(props.ldOptions.resource.kvStores, canInterpretType, concatItptAndKvs);
+		if (singleKvKey) {
+			let singleKv = props.ldOptions.resource.kvStores.find((kvSt) => kvSt.key === singleKvKey);
+			if (singleKv && singleKv.value) {
+				let skvArray = [];
+				if (Array.isArray(singleKv.value)) {
+					skvArray = singleKv.value;
+				} else {
+					skvArray.push(singleKv.value);
+				}
+				skvArray.forEach((skvElem) => {
+					if (typeof skvElem === 'object' && skvElem !== null) {
+						concatItptAndKvs.forEach((anInterpretableKey, idx) => {
+							if (skvElem.hasOwnProperty(anInterpretableKey)) {
+								const skvElemMember = skvElem[anInterpretableKey];
+								newValueMap.set(anInterpretableKey, skvElemMember);
+								newLDTypeMap.set(anInterpretableKey, skvElemMember);
+							}
+						});
+					} else {
+						if (singleKv.ldType === UserDefDict.intrprtrClassType) {
+							rvCompInfo.set(UserDefDict.singleKvStore, skvElem);
+						} else {
+							newValueMap.set(UserDefDict.singleKvStore, skvElem);
+							newLDTypeMap.set(UserDefDict.singleKvStore, singleKv.ldType);
+						}
+					}
+				});
+			}
+		}
+	}
+	return { compInfos: rvCompInfo, localValues: newValueMap, localLDTypes: newLDTypeMap };
+}
+
 export function getDerivedItptStateFromProps(
 	props: LDConnectedState & LDOwnProps,
 	prevState: null | ReactCompLDLocalState,
@@ -270,7 +342,7 @@ export function getDerivedKVStateFromProps(
  * and "forProject" as the description
  * @param kvStores the kvStores to determine singleKVKey from
  */
-export function determineSingleKVKey(kvStores: IKvStore[], cfg: BlueprintConfig): string {
+export function determineSingleKVKey(kvStores: IKvStore[], canInterpretType: string, interpretableKeys: string[]): string {
 	let rv: string = UserDefDict.singleKvStore;
 	let candidates: IKvStore[] = [];
 	if (kvStores) {
@@ -278,7 +350,7 @@ export function determineSingleKVKey(kvStores: IKvStore[], cfg: BlueprintConfig)
 			const a = kvStores[idx];
 			if (a.key === UserDefDict.singleKvStore) return rv;
 			if (a.key === UserDefDict.outputKVMapKey) continue;
-			if (kvStores[idx].ldType === cfg.canInterpretType) {
+			if (kvStores[idx].ldType === canInterpretType) {
 				candidates.push(kvStores[idx]);
 			}
 		}
@@ -286,7 +358,7 @@ export function determineSingleKVKey(kvStores: IKvStore[], cfg: BlueprintConfig)
 	if (candidates.length === 1) {
 		rv = candidates[0].key as string;
 	} else {
-		candidates.filter((a) => cfg.interpretableKeys.includes(a.key));
+		candidates.filter((a) => interpretableKeys.includes(a.key));
 		rv = candidates.length > 0 ? candidates[0].key : rv;
 	}
 	return rv;
