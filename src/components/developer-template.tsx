@@ -5,7 +5,7 @@ import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualKeysDict } from './visualcomposition/visualDict';
 
-import { initLDLocalState, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from './generic/generatorFns';
+import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from './generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { LDDict } from 'ldaccess/LDDict';
 
@@ -35,12 +35,15 @@ export class PureMyTemplate extends Component<LDConnectedState & LDConnectedDisp
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: MyTemplateState): null | MyTemplateState {
-		let rvLD = getDerivedItptStateFromProps(nextProps, prevState, [VisualKeysDict.freeContainer]); //gets the visual part
-		let rvLocal = getDerivedKVStateFromProps(nextProps, prevState, ["http://my-domain.com/my-class/my-member-a"]); //gets the non-visual
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(nextProps, prevState,
+			[VisualKeysDict.freeContainer], //gets the visual part
+			["http://my-domain.com/my-class/my-member-a"], //gets the non-visual
+			"http://my-domain.com/my-class" // is the canInterpretType field
+			);
+		if (!rvLD) {
 			return null;
 		}
-		let rvNew = { ...rvLD, ...rvLocal };
+		let rvNew = { ...rvLD };
 		return { ...rvNew };
 	}
 
@@ -59,7 +62,7 @@ export class PureMyTemplate extends Component<LDConnectedState & LDConnectedDisp
 		this.state = { ...ldState, };
 	}
 	outputMemberB = () => {
-		const modifiedKV: IKvStore = {key: "http://my-domain.com/my-class/my-member-b", value: "some Text", ldType: LDDict.Text};
+		const modifiedKV: IKvStore = { key: "http://my-domain.com/my-class/my-member-b", value: "some Text", ldType: LDDict.Text };
 		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey); //internally set up for you
 		this.props.dispatchKvOutput([modifiedKV], this.props.ldTokenString, outputKVMap); //outputting to the state machine
 	}

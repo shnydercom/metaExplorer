@@ -1,13 +1,11 @@
 import { IKvStore } from 'ldaccess/ikvstore';
 import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap, OutputKVMapElement } from 'ldaccess/ldBlueprint';
 
-import { BaseContOwnProps, BaseContainerRewrite } from './baseContainer-rewrite';
+import { BaseContainerRewrite } from './baseContainer-rewrite';
 import { LDLocalState, LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
-import { connect } from 'react-redux';
-import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { Component } from 'react';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { getDerivedKVStateFromProps, initLDLocalState } from './generatorFns';
+import { gdsfpLD, initLDLocalState } from './generatorFns';
 import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 import { NetworkPreferredToken } from 'ldaccess/ildtoken';
 import { getKVStoreByKey } from 'ldaccess/kvConvenienceFns';
@@ -41,7 +39,7 @@ export class PureMagicBox extends Component<LDConnectedState & LDConnectedDispat
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: MagicBoxState): null | MagicBoxState {
-		let rvLocal = getDerivedKVStateFromProps(nextProps, prevState, MagicBoxInputKeys);
+		let rvLocal = gdsfpLD(nextProps, prevState, [], MagicBoxInputKeys, magicCanInterpretType);
 		if (!rvLocal) {
 			return null;
 		}

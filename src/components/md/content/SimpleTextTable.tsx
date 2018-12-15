@@ -3,7 +3,7 @@ import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldacc
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 
-import { initLDLocalState, getDerivedKVStateFromProps } from 'components/generic/generatorFns';
+import { initLDLocalState, gdsfpLD } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { Table, TableTheme, TableHead, TableCell, TableRow } from 'react-toolbox/lib/table/';
 
@@ -33,7 +33,7 @@ export class PureSimpleTextTable extends Component<LDConnectedState & LDConnecte
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: SimpleTextTableState): null | SimpleTextTableState {
-		let rvLocal = getDerivedKVStateFromProps(nextProps, prevState, simpleTextTableInputKeys);
+		let rvLocal = gdsfpLD(nextProps, prevState, [], simpleTextTableInputKeys);
 		if (!rvLocal) {
 			return null;
 		}

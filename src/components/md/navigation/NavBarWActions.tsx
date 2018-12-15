@@ -12,7 +12,7 @@ import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 import IconButton from 'react-toolbox/lib/button/';
 import { IconMenu } from 'react-toolbox/lib/menu/';
 import Navigation from 'react-toolbox/lib/navigation/Navigation.js';
-import { generateItptFromCompInfo, initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../../generic/generatorFns';
+import { generateItptFromCompInfo, initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
@@ -68,15 +68,14 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: null | NavBarWActionState & LDLocalState)
 		: null | NavBarWActionState & LDLocalState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualKeysDict.freeContainer, VisualKeysDict.popOverContent]);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualKeysDict.headerTxt, VisualKeysDict.routeSend_search, VisualKeysDict.iconName]);
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [VisualKeysDict.freeContainer, VisualKeysDict.popOverContent],
+			[VisualKeysDict.headerTxt, VisualKeysDict.routeSend_search, VisualKeysDict.iconName]);
+		if (!rvLD) {
 			return null;
 		}
 		return {
-			...prevState, ...rvLD, ...rvLocal
+			...prevState, ...rvLD
 		};
 	}
 

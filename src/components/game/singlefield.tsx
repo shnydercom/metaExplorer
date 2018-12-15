@@ -6,7 +6,7 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDRouteProps, LDLocalState } from 'appstate/LDProps';
-import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
+import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 
 import Ripple from 'react-toolbox/lib/ripple';
@@ -53,18 +53,16 @@ export class PureSingleFieldView extends Component<LDConnectedState & LDConnecte
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: null | LDLocalState & SingleFieldViewState)
 		: null | LDLocalState & SingleFieldViewState {
-		let rvLD = getDerivedItptStateFromProps(
+		let rvLD = gdsfpLD(
 			nextProps, prevState, [
-			]);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [
+			], [
 				VisualKeysDict.headerTxt
 			]);
-		if (!rvLD && !rvLocal) {
+		if (!rvLD) {
 			return null;
 		}
 		return {
-			...prevState, ...rvLD, ...rvLocal
+			...prevState, ...rvLD
 		};
 	}
 

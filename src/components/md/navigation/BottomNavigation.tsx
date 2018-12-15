@@ -11,7 +11,7 @@ import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualD
 import { Tab, TabTheme } from 'react-toolbox/lib/tabs/';
 import { Tabs, TabsTheme } from 'react-toolbox/lib/tabs/';
 
-import { generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from '../../generic/generatorFns';
+import { generateItptFromCompInfo, gdsfpLD, initLDLocalState } from '../../generic/generatorFns';
 import { checkAllFilled } from 'GeneralUtils';
 import { Redirect, Route } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
@@ -113,19 +113,17 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: null | BottomNavState & LDLocalState)
 		: null | BottomNavState & LDLocalState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualKeysDict.freeContainer]);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, BOTTOMNAV_VALUE_FIELDS);
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [VisualKeysDict.freeContainer], BOTTOMNAV_VALUE_FIELDS);
 		let rvNew;
-		if (!rvLD && !rvLocal) {
+		if (!rvLD) {
 			if (prevState.isInitial) {
 				rvNew = prevState;
 			} else {
 				return null;
 			}
 		} else {
-			rvNew = { ...rvLD, ...rvLocal };
+			rvNew = { ...rvLD, };
 		}
 		const iconEnabledURLs: string[] = [];
 		const iconDisabledURLs: string[] = [];

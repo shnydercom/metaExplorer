@@ -3,7 +3,7 @@ import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldacc
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 
-import { initLDLocalState, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from 'components/generic/generatorFns';
+import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { GoogleWebAuthAPI, gwaTestCfg, EVENT_GOOGLE_WEB_AUTH, GoogleWebAuthState } from '../apis/GoogleWebAuthAPI';
@@ -31,12 +31,11 @@ export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnec
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: GWebAuthenticatorState): null | GWebAuthenticatorState {
-		let rvLD = getDerivedItptStateFromProps(nextProps, prevState, []); //gets the visual part
-		let rvLocal = getDerivedKVStateFromProps(nextProps, prevState, []); //gets the non-visual
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(nextProps, prevState, [], []);
+		if (!rvLD) {
 			return null;
 		}
-		let rvNew = { ...rvLD, ...rvLocal };
+		let rvNew = { ...rvLD };
 		return { ...prevState, ...rvNew };
 	}
 

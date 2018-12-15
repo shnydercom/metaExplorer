@@ -7,7 +7,7 @@ import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
-import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
+import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 
 export var ImgHeadSubDescIntrprtrName: string = "shnyder/ImgHeadSubDescIntrprtr";
@@ -56,15 +56,13 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: null | LDLocalState)
 		: null | LDLocalState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualKeysDict.primaryItpt, VisualKeysDict.secondaryItpt]);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualKeysDict.headerTxt, VisualKeysDict.subHeaderTxt, VisualKeysDict.description]);
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [VisualKeysDict.primaryItpt, VisualKeysDict.secondaryItpt], [VisualKeysDict.headerTxt, VisualKeysDict.subHeaderTxt, VisualKeysDict.description]);
+		if (!rvLD) {
 			return null;
 		}
 		return {
-			...prevState, ...rvLD, ...rvLocal
+			...prevState, ...rvLD
 		};
 	}
 

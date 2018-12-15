@@ -5,7 +5,7 @@ import { LDLocalState, LDConnectedState, LDConnectedDispatch, LDOwnProps } from 
 import { Component } from 'react';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { getDerivedKVStateFromProps, initLDLocalState, getDerivedItptStateFromProps, generateItptFromCompInfo, gdsfpLD } from 'components/generic/generatorFns';
+import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from 'components/generic/generatorFns';
 import { VisualTypesDict, VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { LDDict } from 'ldaccess/LDDict';
 import { ListItem } from 'react-toolbox/lib/list';
@@ -48,7 +48,8 @@ export class PureCompactInfoListElement extends Component<LDConnectedState & LDC
 		}
 		let rvNew = { ...rvLD, ...rvLocal };*/
 		let rvNew = gdsfpLD(nextProps, prevState, CompactInfoListElementItptKeys, compactInfoListElementValueKeys,
-			[false, false], [false, false], CompactInfoListElementCfg.canInterpretType);
+			CompactInfoListElementCfg.canInterpretType,
+			[false, false], [false, false]);
 		return { ...prevState, ...rvNew, };
 	}
 

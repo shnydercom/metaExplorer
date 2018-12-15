@@ -6,7 +6,7 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
-import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
+import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 
 import { Menu, Item } from "react-gooey-nav";
@@ -44,15 +44,13 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: null | LDLocalState)
 		: null | LDLocalState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, []);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [centralIcon, VisualKeysDict.iconName], [false, true]);
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [], [centralIcon, VisualKeysDict.iconName], null, [false, true]);
+		if (!rvLD) {
 			return null;
 		}
 		return {
-			...prevState, ...rvLD, ...rvLocal
+			...prevState, ...rvLD
 		};
 	}
 

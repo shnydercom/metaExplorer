@@ -3,7 +3,7 @@ import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldacc
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 
-import { initLDLocalState, getDerivedKVStateFromProps, generateItptFromCompInfo, getDerivedItptStateFromProps } from 'components/generic/generatorFns';
+import { initLDLocalState, gdsfpLD, generateItptFromCompInfo } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent, Fragment } from 'react';
 import { List, ListSubHeader } from 'react-toolbox/lib/list';
 import { LDDict } from 'ldaccess/LDDict';
@@ -38,13 +38,12 @@ export class PureSectionedList extends Component<LDConnectedState
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: SectionedListState): null | SectionedListState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, sectionedListItptKeys, [true]);
-		let rvLocal = getDerivedKVStateFromProps(nextProps, prevState, sectionedListValueKeys, [true]);
-		if (!rvLocal && !rvLD) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, sectionedListItptKeys, sectionedListValueKeys, null, [true], [true]);
+		if (!rvLD) {
 			return null;
 		}
-		let rvNew = { ...rvLD, ...rvLocal };
+		let rvNew = { ...rvLD };
 		return { ...prevState, ...rvNew };
 	}
 

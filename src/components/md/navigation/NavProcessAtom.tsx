@@ -10,7 +10,7 @@ import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualD
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 import { Button } from 'react-toolbox/lib/button/';
-import { generateItptFromCompInfo, initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../../generic/generatorFns';
+import { generateItptFromCompInfo, initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
@@ -82,21 +82,19 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: null | NavProcessAtomState & LDLocalState)
 		: null | NavProcessAtomState & LDLocalState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualKeysDict.freeContainer]);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [VisualKeysDict.freeContainer], [
 				VisualKeysDict.headerTxt,
 				VisualKeysDict.cancelTxt,
 				VisualKeysDict.confirmTxt,
 				VisualKeysDict.routeSend_cancel,
 				VisualKeysDict.routeSend_confirm
 			]);
-		if (!rvLD && !rvLocal) {
+		if (!rvLD) {
 			return null;
 		}
 		return {
-			...prevState, ...rvLD, ...rvLocal
+			...prevState, ...rvLD
 		};
 	}
 

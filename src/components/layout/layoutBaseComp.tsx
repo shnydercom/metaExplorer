@@ -5,7 +5,7 @@ import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualKeysDict } from '../visualcomposition/visualDict';
 
-import { initLDLocalState, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../generic/generatorFns';
+import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from '../generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import CircleView from 'metaexplorer-react-components/lib/components/circle/circleview';
 
@@ -37,14 +37,12 @@ export abstract class PureLayoutComponent extends Component<LDConnectedState & L
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: LayoutComponentState): null | LayoutComponentState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualKeysDict.freeContainer]);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, []);
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [VisualKeysDict.freeContainer], []);
+		if (!rvLD) {
 			return null;
 		}
-		let rvNew = { ...rvLD, ...rvLocal };
+		let rvNew = { ...rvLD };
 		return {
 			...rvNew
 		};

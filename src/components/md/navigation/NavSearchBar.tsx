@@ -9,7 +9,7 @@ import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
-import { initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo } from '../../generic/generatorFns';
+import { initLDLocalState, gdsfpLD, generateItptFromCompInfo } from '../../generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 
 import { Input, InputTheme } from 'react-toolbox/lib/input';
@@ -62,14 +62,13 @@ NavSearchBarState>
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: NavSearchBarState): null | NavSearchBarState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualKeysDict.freeContainer]);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualKeysDict.searchText, VisualKeysDict.routeSend_back, UserDefDict.outputKVMapKey]);
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [VisualKeysDict.freeContainer],
+			[VisualKeysDict.searchText, VisualKeysDict.routeSend_back, UserDefDict.outputKVMapKey]);
+		if (!rvLD) {
 			return null;
 		}
-		let rvNew = { ...rvLD, ...rvLocal };
+		let rvNew = { ...rvLD, };
 		let searchValue = rvNew.localValues.get(VisualKeysDict.searchText);
 		let routeSendBack = rvNew.localValues.get(VisualKeysDict.routeSend_back);
 		return { ...rvNew, searchValue, routeSendBack, isDoRedirect: prevState.isDoRedirect };

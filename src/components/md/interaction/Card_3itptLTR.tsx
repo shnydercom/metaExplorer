@@ -5,7 +5,7 @@ import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import Card from 'metaexplorer-react-components/lib/components/card/card';
-import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from '../../generic/generatorFns';
+import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from '../../generic/generatorFns';
 import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 import { LDDict } from 'ldaccess/LDDict';
 import { cleanRouteString } from '../../routing/route-helper-fns';
@@ -74,16 +74,14 @@ export class PureCard3itptLTR extends Component<LDConnectedState & LDConnectedDi
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: Card3itptLTRState): null | Card3itptLTRState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, cfgIntrprtKeys.slice(0, 3));
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, cfgIntrprtKeys.slice(3));
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, cfgIntrprtKeys.slice(0, 3), cfgIntrprtKeys.slice(3));
+		if (!rvLD) {
 			return null;
 		}
 		let rvNew = {
 			...prevState,
-			...rvLD, ...rvLocal
+			...rvLD
 		};
 		return {
 			...rvNew

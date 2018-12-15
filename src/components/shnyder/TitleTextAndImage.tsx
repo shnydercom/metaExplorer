@@ -7,7 +7,7 @@ import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
-import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
+import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 
 export var TitleTextAndImageName: string = "shnyder/TitleTextAndImage";
@@ -46,15 +46,13 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: null | LDLocalState)
 		: null | LDLocalState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualKeysDict.freeContainer]);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualKeysDict.headerTxt, VisualKeysDict.description]);
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [VisualKeysDict.freeContainer], [VisualKeysDict.headerTxt, VisualKeysDict.description]);
+		if (!rvLD) {
 			return null;
 		}
 		return {
-			...prevState, ...rvLD, ...rvLocal
+			...prevState, ...rvLD
 		};
 	}
 

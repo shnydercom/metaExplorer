@@ -7,7 +7,7 @@ import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
-import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
+import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 
 type OwnProps = {
@@ -74,26 +74,24 @@ export class PureFourFieldsView extends Component<LDConnectedState & LDConnected
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: null | LDLocalState & FourFieldsViewState)
 		: null | LDLocalState & FourFieldsViewState {
-		let rvLD = getDerivedItptStateFromProps(
+		let rvLD = gdsfpLD(
 			nextProps, prevState, [
 				GAME_FIELD_ITPT_UL,
 				GAME_FIELD_ITPT_UR,
 				GAME_FIELD_ITPT_LL,
 				GAME_FIELD_ITPT_LR,
 				VisualKeysDict.freeContainer
-			]);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [
+			], [
 				GAME_TASK_HEADING,
 				GAME_TASK_TXT,
 				GAME_STATS,
 				GAME_CORRECT_FIELD_IDX
 			]);
-		if (!rvLD && !rvLocal) {
+		if (!rvLD) {
 			return null;
 		}
 		return {
-			...prevState, ...rvLD, ...rvLocal
+			...prevState, ...rvLD
 		};
 	}
 

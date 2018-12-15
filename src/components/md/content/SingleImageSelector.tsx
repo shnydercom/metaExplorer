@@ -13,7 +13,7 @@ import { mapDispatchToProps, mapStateToProps } from 'appstate/reduxFns';
 import { connect } from 'react-redux';
 import { Button } from 'react-toolbox/lib/button';
 import { DOMCamera } from '../../peripherals/camera/dom-camera';
-import { initLDLocalState, getDerivedKVStateFromProps } from '../../generic/generatorFns';
+import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 // TODO: drop file anim: https://css-tricks.com/examples/DragAndDropFileUploading/
 
 export enum SingleImageSelectorStateEnum {
@@ -60,7 +60,7 @@ SingleImageSelectorState>
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: SingleImageSelectorState): null | SingleImageSelectorState {
-		let rvLD = getDerivedKVStateFromProps(nextProps, prevState, [UserDefDict.outputKVMapKey]);
+		let rvLD = gdsfpLD(nextProps, prevState, [], [UserDefDict.outputKVMapKey]);
 		if (rvLD === null || rvLD === prevState) return null;
 		return { ...prevState, ...rvLD };
 	}

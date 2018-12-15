@@ -7,7 +7,7 @@ import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
-import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
+import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import HeroGallery from 'metaexplorer-react-components/lib/components/hero/hero';
 
@@ -72,17 +72,18 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: null | HeroGalleryState)
 		: null | HeroGalleryState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [cfgIntrprtKeys[0], cfgIntrprtKeys[1]], [true, true]);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [cfgIntrprtKeys[2], cfgIntrprtKeys[3], cfgIntrprtKeys[4], cfgIntrprtKeys[5]], [true, true, false, false]);
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [cfgIntrprtKeys[0], cfgIntrprtKeys[1]],
+			[cfgIntrprtKeys[2], cfgIntrprtKeys[3], cfgIntrprtKeys[4], cfgIntrprtKeys[5]],
+			null,
+			[true, true], [true, true, false, false]);
+		if (!rvLD) {
 			return null;
 		}
 		let galFrontItems = rvLD.compInfos.get(cfgIntrprtKeys[1]);
 		let numGalleryItems = galFrontItems ? (galFrontItems as []).length : 0;
 		return {
-			...prevState, ...rvLD, ...rvLocal,
+			...prevState, ...rvLD,
 			numGalleryItems
 		};
 	}

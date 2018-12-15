@@ -154,16 +154,21 @@ export function gdsfpLD(
 	prevState: null | LDLocalState,
 	itptKeys: string[],
 	kvKeys: string[],
+	canInterpretType?: string,
 	itptIsMulti?: boolean[],
-	kvIsMulti?: boolean[],
-	canInterpretType?: string
-): LDLocalState {
+	kvIsMulti?: boolean[]
+): LDLocalState | null {
 	let rvCompInfo = new Map<string, IReactCompInfoItm | IReactCompInfoItm[]>();
 	let newValueMap = new Map<string, any>();
 	let newLDTypeMap = new Map<string, any>();
 	// a) get state filled through the interpretableKeys
 	let reactCompLocalState = getDerivedItptStateFromProps(props, prevState, itptKeys, itptIsMulti);
 	let kvLocalState = getDerivedKVStateFromProps(props, prevState, kvKeys, kvIsMulti);
+	if (!reactCompLocalState && !kvLocalState) {
+		if (!canInterpretType) return null;
+		let candidate = props.ldOptions.resource.kvStores.find((kvStore) => kvStore.ldType === canInterpretType);
+		if (!candidate) return null;
+	}
 	let itptsLen = 0;
 	let kvsLen = 0;
 	if (reactCompLocalState) {
@@ -226,7 +231,7 @@ export function gdsfpLD(
 	return { compInfos: rvCompInfo, localValues: newValueMap, localLDTypes: newLDTypeMap };
 }
 
-export function getDerivedItptStateFromProps(
+function getDerivedItptStateFromProps(
 	props: LDConnectedState & LDOwnProps,
 	prevState: null | ReactCompLDLocalState,
 	itptKeys: string[],
@@ -268,7 +273,7 @@ export function getDerivedItptStateFromProps(
 	return rv;
 }
 
-export function getDerivedKVStateFromProps(
+function getDerivedKVStateFromProps(
 	props: LDOwnProps & LDConnectedState,
 	prevState: LDLocalKv,
 	kvKeys: string[],

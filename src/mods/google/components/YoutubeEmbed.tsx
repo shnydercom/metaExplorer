@@ -5,7 +5,7 @@ import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 
 import { ILDOptions } from "ldaccess/ildoptions";
 import { VisualKeysDict } from "components/visualcomposition/visualDict";
 import { LDDict } from "ldaccess/LDDict";
-import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from "components/generic/generatorFns";
+import { gdsfpLD, initLDLocalState } from "components/generic/generatorFns";
 import { isProduction } from "approot";
 
 export const YoutubeEmbedName = "google-api/YoutubeEmbed";
@@ -35,14 +35,12 @@ export class PureYoutubeEmbed extends Component<LDConnectedState & LDConnectedDi
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: YoutubeEmbedState): null | YoutubeEmbedState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, []);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualKeysDict.videoId]);
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [], [VisualKeysDict.videoId]);
+		if (!rvLD) {
 			return null;
 		}
-		let rvNew = { ...rvLD, ...rvLocal };
+		let rvNew = { ...rvLD };
 		return {
 			...rvNew
 		};

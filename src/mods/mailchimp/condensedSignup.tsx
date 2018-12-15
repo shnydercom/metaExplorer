@@ -4,7 +4,7 @@ import { Component } from "react";
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from "appstate/LDProps";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { LDDict } from "ldaccess/LDDict";
-import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from "components/generic/generatorFns";
+import { gdsfpLD, initLDLocalState } from "components/generic/generatorFns";
 import { VisualKeysDict } from "components/visualcomposition/visualDict";
 import { isProduction } from "approot";
 
@@ -40,14 +40,12 @@ export class PureMailChimpSignup extends Component<LDConnectedState & LDConnecte
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: MailChimpSignupState): null | MailChimpSignupState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, []);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [LDDict.embedUrl, VisualKeysDict.headerTxt]);
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [], [LDDict.embedUrl, VisualKeysDict.headerTxt]);
+		if (!rvLD) {
 			return null;
 		}
-		let rvNew = { ...rvLD, ...rvLocal };
+		let rvNew = { ...rvLD };
 		return {
 			...prevState,
 			...rvNew

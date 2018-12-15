@@ -20,7 +20,7 @@ import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { Component, ComponentClass, StatelessComponent } from "react";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
-import { getDerivedKVStateFromProps, initLDLocalState, determineSingleKVKey } from "../../generic/generatorFns";
+import { gdsfpLD, initLDLocalState, determineSingleKVKey } from "../../generic/generatorFns";
 import { parseDate, parseTime, parseText, parseNumber, parseBoolean } from "ldaccess/ldtypesystem/parseSimple";
 
 /**
@@ -244,7 +244,7 @@ function wrapGDSF(cfg: BlueprintConfig) {
 	return (
 		nextProps: LDConnectedState & LDConnectedDispatch & OwnProps,
 		prevState: BaseDataTypeState & LDLocalState) => {
-		let rvLD = getDerivedKVStateFromProps(nextProps, prevState, [LDDict.description, UserDefDict.singleKvStore, UserDefDict.outputKVMapKey]);
+		let rvLD = gdsfpLD(nextProps, prevState, [], [LDDict.description, UserDefDict.singleKvStore, UserDefDict.outputKVMapKey], cfg.canInterpretType);
 		if (!rvLD) return null;
 		let rvLocal: BaseDataTypeState = null;
 		if (nextProps.ldOptions) {

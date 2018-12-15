@@ -8,7 +8,7 @@ import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 
 import { Button } from 'react-toolbox/lib/button/';
-import { initLDLocalState, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../../generic/generatorFns';
+import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
@@ -55,19 +55,18 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: null | MDButtonState & LDLocalState)
 		: null | MDButtonState & LDLocalState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualKeysDict.freeContainer]);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [VisualKeysDict.freeContainer],
+			 [
 				VisualKeysDict.confirmTxt,
 				VisualKeysDict.routeSend_confirm,
 				VisualKeysDict.action_confirm
 			]);
-		if (!rvLD && !rvLocal) {
+		if (!rvLD) {
 			return null;
 		}
 		return {
-			...prevState, ...rvLD, ...rvLocal
+			...prevState, ...rvLD
 		};
 	}
 

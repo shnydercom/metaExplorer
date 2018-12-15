@@ -8,7 +8,7 @@ import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualKeysDict } from '../visualcomposition/visualDict';
 
-import { initLDLocalState, generateItptFromCompInfo, getDerivedItptStateFromProps, getDerivedKVStateFromProps } from '../generic/generatorFns';
+import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from '../generic/generatorFns';
 import { Route } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 
@@ -65,14 +65,12 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: RouteComponentState): null | RouteComponentState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, [VisualKeysDict.freeContainer]);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH]);
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [VisualKeysDict.freeContainer], [ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH]);
+		if (!rvLD) {
 			return null;
 		}
-		let rvNew = { ...rvLD, ...rvLocal };
+		let rvNew = { ...rvLD, };
 		let isExact = !!rvNew.localValues.get(ROUTE_ISEXACT);
 		let isAbsolute = !!rvNew.localValues.get(ROUTE_ISABSOLUTE);
 		let toPath = rvNew.localValues.get(ROUTE_PATH);

@@ -13,7 +13,7 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { compNeedsUpdate } from "components/reactUtils/compUtilFns";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { BaseContainerRewrite } from "../../../generic/baseContainer-rewrite";
-import { getDerivedKVStateFromProps } from "../../../generic/generatorFns";
+import { gdsfpLD } from "../../../generic/generatorFns";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { LDDict } from "ldaccess/LDDict";
@@ -77,14 +77,14 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 				portType: null
 			};
 		}
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [UserDefDict.singleKvStore]);
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [], [UserDefDict.singleKvStore]);
 		let newKV = nextProps.ldOptions && nextProps.ldOptions.resource && nextProps.ldOptions.resource.kvStores
 			? getKVStoreByKey(nextProps.ldOptions.resource.kvStores, UserDefDict.singleKvStore) : null;
 		newKV = newKV ? newKV : { key: UserDefDict.singleKvStore, value: null, ldType: null };
 		nextProps.model.kv = newKV;
 		let newType = newKV ? newKV.ldType : null;
-		if (!rvLocal) {
+		if (!rvLD) {
 			return { ...prevState, portKvStore: newKV, portType: newType };
 		} else {
 			if (!nextProps.ldOptions) return null;
@@ -92,7 +92,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 			newLDOptions.resource.kvStores = [newKV];
 			nextProps.notifyLDOptionsChange(newLDOptions);
 		}
-		return { ...prevState, ...rvLocal, portKvStore: newKV, portType: newType };
+		return { ...prevState, ...rvLD, portKvStore: newKV, portType: newType };
 	}
 
 	/*componentWillReceiveProps(nextProps, nextContext): void {

@@ -3,7 +3,7 @@ import { VisualKeysDict, VisualTypesDict } from "../visualcomposition/visualDict
 import { IKvStore } from "ldaccess/ikvstore";
 import { Component } from "react";
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from "appstate/LDProps";
-import { getDerivedItptStateFromProps, getDerivedKVStateFromProps, initLDLocalState } from "../generic/generatorFns";
+import { gdsfpLD, initLDLocalState } from "../generic/generatorFns";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { Redirect } from "react-router";
 import { cleanRouteString } from "./route-helper-fns";
@@ -35,14 +35,12 @@ export class PureRedirectComponent extends Component<LDConnectedState & LDConnec
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: RedirectComponentState): null | RedirectComponentState {
-		let rvLD = getDerivedItptStateFromProps(
-			nextProps, prevState, []);
-		let rvLocal = getDerivedKVStateFromProps(
-			nextProps, prevState, [VisualKeysDict.routeSend_confirm]);
-		if (!rvLD && !rvLocal) {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [], [VisualKeysDict.routeSend_confirm]);
+		if (!rvLD) {
 			return null;
 		}
-		let rvNew = { ...rvLD, ...rvLocal };
+		let rvNew = { ...rvLD, };
 		return {
 			...rvNew
 		};
