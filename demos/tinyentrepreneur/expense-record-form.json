@@ -141,6 +141,11 @@
               "key": "http://schema.org/description",
               "value": "What's it for?",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "",
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",

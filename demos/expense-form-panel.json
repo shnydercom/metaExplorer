@@ -102,6 +102,11 @@
               "key": "http://schema.org/description",
               "value": "Total amount (in €)",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "59.99",
+              "ldType": "http://schema.org/Number"
             }
           ],
           "crudSkills": "cRud",
@@ -115,6 +120,11 @@
             {
               "key": "http://schema.org/description",
               "value": "Summary",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "Pizza with John",
               "ldType": "http://schema.org/Text"
             }
           ],

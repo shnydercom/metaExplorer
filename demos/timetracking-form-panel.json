@@ -155,6 +155,11 @@
               "key": "http://schema.org/description",
               "value": "Customer",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "ACME Ltd",
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",
@@ -168,6 +173,11 @@
             {
               "key": "http://schema.org/description",
               "value": "Project",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "\"Ready for the future\"",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -183,6 +193,11 @@
               "key": "http://schema.org/description",
               "value": "Subproject",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "Employee Network App",
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",
@@ -196,6 +211,11 @@
             {
               "key": "http://schema.org/description",
               "value": "Task(s)",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "Fix Frontend issue #15",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -252,6 +272,11 @@
             {
               "key": "http://schema.org/description",
               "value": "Achievements",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "task finished earlier than expected",
               "ldType": "http://schema.org/Text"
             }
           ],
