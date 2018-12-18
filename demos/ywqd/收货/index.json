@@ -1,0 +1,107 @@
+{
+  "subItptOf": "fd4595a4-4b32-4df3-bced-4a09b665b915",
+  "canInterpretType": "ywqd/收货/index-ObjectType",
+  "nameSelf": "ywqd/收货/index",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "fd4595a4-4b32-4df3-bced-4a09b665b915": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "fd4595a4-4b32-4df3-bced-4a09b665b915",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "5bfc7168-df36-43d5-9c75-5cc81d54e941",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "a8419e59-db66-4fe7-a4d7-54f96884f33b",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
+        "5bfc7168-df36-43d5-9c75-5cc81d54e941": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "5bfc7168-df36-43d5-9c75-5cc81d54e941",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "9974d4dc-627f-4173-81cd-fd47476252e8",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "/",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "9974d4dc-627f-4173-81cd-fd47476252e8": {
+          "subItptOf": "ywqd/收货/概述表册",
+          "canInterpretType": "ywqd/收货/概述表册-ObjectType",
+          "nameSelf": "9974d4dc-627f-4173-81cd-fd47476252e8",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "a8419e59-db66-4fe7-a4d7-54f96884f33b": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "a8419e59-db66-4fe7-a4d7-54f96884f33b",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "291f1af9-b685-4f1b-a23d-d0208268c570",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "wishlist",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "291f1af9-b685-4f1b-a23d-d0208268c570": {
+          "subItptOf": "ywqd/收货/请货单册",
+          "canInterpretType": "ywqd/收货/请货单册-ObjectType",
+          "nameSelf": "291f1af9-b685-4f1b-a23d-d0208268c570",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

@@ -14,6 +14,7 @@ import { generateItptFromCompInfo, initLDLocalState, gdsfpLD } from '../../gener
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
+import { ActionKeysDict } from 'components/actions/ActionDict';
 
 export const NavProcessAtomName = "shnyder/md/NavProcessAtom";
 let cfgIntrprtKeys: string[] =
@@ -24,7 +25,7 @@ let cfgIntrprtKeys: string[] =
 		VisualKeysDict.confirmTxt,
 		VisualKeysDict.routeSend_cancel,
 		VisualKeysDict.routeSend_confirm,
-		VisualKeysDict.action_confirm
+		ActionKeysDict.action_confirm
 	];
 let initialKVStores: IKvStore[] = [
 	{
@@ -58,7 +59,7 @@ let initialKVStores: IKvStore[] = [
 		ldType: VisualTypesDict.route_added,
 	},
 	{
-		key: VisualKeysDict.action_confirm,
+		key: ActionKeysDict.action_confirm,
 		value: undefined,
 		ldType: LDDict.Action
 	}

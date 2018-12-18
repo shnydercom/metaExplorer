@@ -23,9 +23,6 @@ export enum VisualKeysDict {
 	searchText = "searchText",
 	routeSend_confirm = "RouteSend_confirm",
 	routeSend_cancel = "RouteSend_cancel",
-
-	//Actions
-	action_confirm = "Action_Confirm"
 }
 
 export enum VisualTypesDict {

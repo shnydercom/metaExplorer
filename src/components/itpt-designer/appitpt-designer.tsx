@@ -29,7 +29,7 @@ import { BaseContainerRewrite } from "../generic/baseContainer-rewrite";
 import { Tabs, Tab } from "react-toolbox/lib/tabs";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
-import { DemoCompleteReceiver } from "approot";
+import { DemoCompleteReceiver, isProduction } from "approot";
 import { itptLoadApi } from "appstate/store";
 import appItptRetrFn from "appconfig/appItptRetriever";
 import { Layout, Panel, Sidebar, SidebarProps } from "react-toolbox/lib/layout";
@@ -222,7 +222,7 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 		}
 		const { routes } = this.props;
 		const { drawerActive, currentlyEditingItptName, sidebarActive } = this.state;
-		let isDisplayDevContent = true;
+		let isDisplayDevContent = isProduction ? false : true;
 		return <div className="entrypoint-editor">
 			<ThemeProvider theme={designerTheme}>
 				<Layout theme={{ layout: 'editor-layout' }}>

@@ -59,7 +59,7 @@ function rootSetup(): void {
 
 rootSetup();
 
-const firstDisplayedBlock: string = "listtest";
+const firstDisplayedBlock: string = "ywqd/收货/index";
 export class AppRoot extends Component<AppRootProps, AppRootState>{
 
 	mode: "editor" | "app" | "initial" = "initial";

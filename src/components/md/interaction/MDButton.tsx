@@ -12,13 +12,14 @@ import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
+import { ActionKeysDict } from 'components/actions/ActionDict';
 
 export const MDButtonName = "shnyder/md/Button";
 let cfgIntrprtKeys: string[] =
 	[
 		VisualKeysDict.confirmTxt,
 		VisualKeysDict.routeSend_confirm,
-		VisualKeysDict.action_confirm
+		ActionKeysDict.action_confirm
 	];
 let initialKVStores: IKvStore[] = [
 	{
@@ -32,7 +33,7 @@ let initialKVStores: IKvStore[] = [
 		ldType: VisualTypesDict.route_added,
 	},
 	{
-		key: VisualKeysDict.action_confirm,
+		key: ActionKeysDict.action_confirm,
 		value: undefined,
 		ldType: LDDict.Action
 	}
@@ -60,7 +61,7 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 			 [
 				VisualKeysDict.confirmTxt,
 				VisualKeysDict.routeSend_confirm,
-				VisualKeysDict.action_confirm
+				ActionKeysDict.action_confirm
 			]);
 		if (!rvLD) {
 			return null;
@@ -90,13 +91,13 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 					VisualKeysDict.confirmTxt,
 					VisualKeysDict.routeSend_cancel,
 					VisualKeysDict.routeSend_confirm,
-					VisualKeysDict.action_confirm
+					ActionKeysDict.action_confirm
 				])
 		};
 	}
 
 	onConfirmClick = () => {
-		let confirmAction = this.state.localValues.get(VisualKeysDict.action_confirm);
+		let confirmAction = this.state.localValues.get(ActionKeysDict.action_confirm);
 		//TODO: execute that action
 		this.setState({
 			...this.state,

@@ -64,6 +64,20 @@ export enum UserDefDict {
 
 	standardItptObjectTypeSuffix = "-ObjectType",
 
+	/**
+	 * in order for e.g. list elements to generate their own visuals,
+	 * they need to know which data element they should access.
+	 * This is like an "id" or "key" field (but those are already used in js/react)
+	 */
+	iteratorElementKey = "iteratorElementKey",
+
+	/**
+	 * ambiguous input data, used when doing abstract data transformation
+	 */
 	inputData = "inputdata",
+
+	/**
+	 * ambiguous output data, used when doing abstract data transformation
+	 */
 	outputData = "outputdata",
 }

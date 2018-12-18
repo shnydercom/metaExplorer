@@ -1,0 +1,47 @@
+{
+  "subItptOf": "89cb4646-bb50-449e-b4b2-a36b7bd44623",
+  "canInterpretType": "ywqd/收货/概述表册-ObjectType",
+  "nameSelf": "ywqd/收货/概述表册",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "89cb4646-bb50-449e-b4b2-a36b7bd44623": {
+          "subItptOf": "shnyder/md/NavBarWActions",
+          "canInterpretType": "shnyder/md/NavBarWActions-ObjectType",
+          "nameSelf": "89cb4646-bb50-449e-b4b2-a36b7bd44623",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "56ad0608-60dc-4287-a480-921188196c72",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "愿望清单平台",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "56ad0608-60dc-4287-a480-921188196c72": {
+          "subItptOf": "ywqd/收货/概述表",
+          "canInterpretType": "ywqd/收货/概述表-ObjectType",
+          "nameSelf": "56ad0608-60dc-4287-a480-921188196c72",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

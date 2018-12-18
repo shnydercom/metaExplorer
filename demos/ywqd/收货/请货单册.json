@@ -1,0 +1,221 @@
+{
+  "subItptOf": "2143b34d-f038-4858-a1aa-519ad14e859e",
+  "canInterpretType": "ywqd/收货/请货单册-ObjectType",
+  "nameSelf": "ywqd/收货/请货单册",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "2143b34d-f038-4858-a1aa-519ad14e859e": {
+          "subItptOf": "shnyder/md/NavBarWActions",
+          "canInterpretType": "shnyder/md/NavBarWActions-ObjectType",
+          "nameSelf": "2143b34d-f038-4858-a1aa-519ad14e859e",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "bf806e98-16ad-463f-9972-81b68dcc5ff8",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "请货单",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "PopOverContent",
+              "value": {
+                "objRef": "7cfc3a26-35e4-4214-a33c-a49a64a6821d",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "iconName",
+              "value": "assignment",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_cancel",
+              "value": "../",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer",
+            "PopOverContent"
+          ]
+        },
+        "bf806e98-16ad-463f-9972-81b68dcc5ff8": {
+          "subItptOf": "shnyder/md/SectionedList",
+          "canInterpretType": "shnyder/md/SectionedList-ObjectType",
+          "nameSelf": "bf806e98-16ad-463f-9972-81b68dcc5ff8",
+          "initialKvStores": [
+            {
+              "key": "section-elements",
+              "value": {
+                "objRef": "613656c7-d4be-4090-b86c-00d978beee3d",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "section-elements",
+              "value": {
+                "objRef": "99a92d4b-68f6-4d0c-8b35-12957e4434d9",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "section-elements",
+            "section-elements"
+          ]
+        },
+        "613656c7-d4be-4090-b86c-00d978beee3d": {
+          "subItptOf": "shnyder/CompactInfoListElement",
+          "canInterpretType": "CompactInformationElement",
+          "nameSelf": "613656c7-d4be-4090-b86c-00d978beee3d",
+          "initialKvStores": [
+            {
+              "key": "primaryInterpreter",
+              "value": {
+                "objRef": "f9ac6eac-5e61-4940-9e73-44aeb76da97b",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "品牌名、货品名、我的外号",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderText",
+              "value": "想要；123个，88个在办理中",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "primaryInterpreter"
+          ]
+        },
+        "f9ac6eac-5e61-4940-9e73-44aeb76da97b": {
+          "subItptOf": "demo/images/planeLanding",
+          "canInterpretType": "demo/images/planeLanding-ObjectType",
+          "nameSelf": "f9ac6eac-5e61-4940-9e73-44aeb76da97b",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "99a92d4b-68f6-4d0c-8b35-12957e4434d9": {
+          "subItptOf": "shnyder/CompactInfoListElement",
+          "canInterpretType": "CompactInformationElement",
+          "nameSelf": "99a92d4b-68f6-4d0c-8b35-12957e4434d9",
+          "initialKvStores": [
+            {
+              "key": "primaryInterpreter",
+              "value": {
+                "objRef": "9542b417-fb21-4ffa-a06f-b3c8498e8f5e",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "品牌名、货品名、我的外号",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderText",
+              "value": "想要；12个，8个在办理中",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "primaryInterpreter"
+          ]
+        },
+        "9542b417-fb21-4ffa-a06f-b3c8498e8f5e": {
+          "subItptOf": "demo/images/parisTrain",
+          "canInterpretType": "demo/images/parisTrain-ObjectType",
+          "nameSelf": "9542b417-fb21-4ffa-a06f-b3c8498e8f5e",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "7cfc3a26-35e4-4214-a33c-a49a64a6821d": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "7cfc3a26-35e4-4214-a33c-a49a64a6821d",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "2494fc46-58b8-490a-8a59-1f69473ac208",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "0ebb2781-c29b-460e-8b13-44fee6167a6d",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
+        "2494fc46-58b8-490a-8a59-1f69473ac208": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "2494fc46-58b8-490a-8a59-1f69473ac208",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "调查素来的愿望",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "0ebb2781-c29b-460e-8b13-44fee6167a6d": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "0ebb2781-c29b-460e-8b13-44fee6167a6d",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "请其他的货品",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "addunknownproductwish",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

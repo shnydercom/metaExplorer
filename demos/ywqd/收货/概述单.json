@@ -1,0 +1,248 @@
+{
+  "subItptOf": "0469bd01-9d81-45bb-b787-c2d4fee80f16",
+  "canInterpretType": "ywqd/收货/概述表-ObjectType",
+  "nameSelf": "ywqd/收货/概述表",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "0469bd01-9d81-45bb-b787-c2d4fee80f16": {
+          "subItptOf": "shnyder/layout/vh-centered-column",
+          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
+          "nameSelf": "0469bd01-9d81-45bb-b787-c2d4fee80f16",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "35f6d149-9b8b-48d9-9cbf-e14e626147d4",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "35f6d149-9b8b-48d9-9cbf-e14e626147d4": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "35f6d149-9b8b-48d9-9cbf-e14e626147d4",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "7d38f992-b2dd-4054-9bc1-d2697870ab35",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "5bdf2763-63fb-4df3-8a3d-958aad9cb450",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "2c2c1f2e-83b5-45c9-bf8d-7cc7a6bc4397",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "c043da51-b80b-4232-9e60-140cbcf45140",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_4",
+              "value": {
+                "objRef": "664d6abd-559c-4d1d-9e28-d59ecb3fc393",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_5",
+              "value": {
+                "objRef": "f905f02c-67fc-45f6-8b0f-81c0e8ce5b84",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2",
+            "in_3",
+            "in_4",
+            "in_5"
+          ]
+        },
+        "7d38f992-b2dd-4054-9bc1-d2697870ab35": {
+          "subItptOf": "shnyder/md/SectionedList",
+          "canInterpretType": "shnyder/md/SectionedList-ObjectType",
+          "nameSelf": "7d38f992-b2dd-4054-9bc1-d2697870ab35",
+          "initialKvStores": [
+            {
+              "key": "section-elements",
+              "value": {
+                "objRef": "2bc7bb1e-a610-41be-8c7a-ffb4955df4b6",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "section-elements"
+          ]
+        },
+        "2bc7bb1e-a610-41be-8c7a-ffb4955df4b6": {
+          "subItptOf": "shnyder/CompactInfoListElement",
+          "canInterpretType": "CompactInformationElement",
+          "nameSelf": "2bc7bb1e-a610-41be-8c7a-ffb4955df4b6",
+          "initialKvStores": [
+            {
+              "key": "primaryInterpreter",
+              "value": {
+                "objRef": "e355889d-608e-40f2-81c6-c6555ebe60a3",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "我的账户名：jonathan_maihuo",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderText",
+              "value": "我在愿望清单平台上提供：在中国卖货",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "primaryInterpreter"
+          ]
+        },
+        "e355889d-608e-40f2-81c6-c6555ebe60a3": {
+          "subItptOf": "shnyder/layout/circle-display",
+          "canInterpretType": "shnyder/layout/circle-display-ObjectType",
+          "nameSelf": "e355889d-608e-40f2-81c6-c6555ebe60a3",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "a44f1162-6172-4568-99f9-1510baaf3283",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "a44f1162-6172-4568-99f9-1510baaf3283": {
+          "subItptOf": "demo/images/londonBus",
+          "canInterpretType": "demo/images/londonBus-ObjectType",
+          "nameSelf": "a44f1162-6172-4568-99f9-1510baaf3283",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "5bdf2763-63fb-4df3-8a3d-958aad9cb450": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "5bdf2763-63fb-4df3-8a3d-958aad9cb450",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "清单",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "wishlist",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "2c2c1f2e-83b5-45c9-bf8d-7cc7a6bc4397": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "2c2c1f2e-83b5-45c9-bf8d-7cc7a6bc4397",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "包裹",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "c043da51-b80b-4232-9e60-140cbcf45140": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "c043da51-b80b-4232-9e60-140cbcf45140",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "账簿",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "664d6abd-559c-4d1d-9e28-d59ecb3fc393": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "664d6abd-559c-4d1d-9e28-d59ecb3fc393",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "仓库",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "f905f02c-67fc-45f6-8b0f-81c0e8ce5b84": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "f905f02c-67fc-45f6-8b0f-81c0e8ce5b84",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "人脉",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

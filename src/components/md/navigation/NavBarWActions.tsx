@@ -19,8 +19,18 @@ import { cleanRouteString } from '../../routing/route-helper-fns';
 
 export const NavBarWActionsName = "shnyder/md/NavBarWActions";
 
-let cfgIntrprtKeys: string[] =
-	[VisualKeysDict.freeContainer, VisualKeysDict.headerTxt, VisualKeysDict.routeSend_search, VisualKeysDict.popOverContent, VisualKeysDict.iconName];
+let cfgIntrprtItptKeys: string[] =
+	[
+		VisualKeysDict.freeContainer,
+		VisualKeysDict.popOverContent
+	];
+let cfgIntrprtValueKeys: string[] = [
+	VisualKeysDict.headerTxt,
+	VisualKeysDict.routeSend_search,
+	VisualKeysDict.iconName,
+	VisualKeysDict.routeSend_cancel
+];
+let cfgIntrprtKeys: string[] = [...cfgIntrprtItptKeys, ...cfgIntrprtValueKeys];
 let initialKVStores: IKvStore[] = [
 	{
 		key: VisualKeysDict.freeContainer,
@@ -47,7 +57,11 @@ let initialKVStores: IKvStore[] = [
 		value: undefined,
 		ldType: LDDict.Text
 	},
-
+	{
+		key: VisualKeysDict.routeSend_cancel,
+		value: undefined,
+		ldType: VisualTypesDict.route_added,
+	},
 ];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
@@ -58,6 +72,7 @@ let bpCfg: BlueprintConfig = {
 };
 export type NavBarWActionState = {
 	isDoRedirect: boolean;
+	isDoRedirectCancel: boolean;
 	isRightMenuOpen: boolean;
 };
 @ldBlueprint(bpCfg)
@@ -69,8 +84,8 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		prevState: null | NavBarWActionState & LDLocalState)
 		: null | NavBarWActionState & LDLocalState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.freeContainer, VisualKeysDict.popOverContent],
-			[VisualKeysDict.headerTxt, VisualKeysDict.routeSend_search, VisualKeysDict.iconName]);
+			nextProps, prevState, cfgIntrprtItptKeys,
+			cfgIntrprtValueKeys);
 		if (!rvLD) {
 			return null;
 		}
@@ -91,13 +106,14 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		let navBarStatePart: NavBarWActionState = {
 			isDoRedirect: false,
+			isDoRedirectCancel: false,
 			isRightMenuOpen: false,
 		};
 		this.state = {
 			...navBarStatePart,
 			...initLDLocalState(this.cfg, props,
-				[VisualKeysDict.freeContainer, VisualKeysDict.popOverContent],
-				[VisualKeysDict.routeSend_search, VisualKeysDict.headerTxt, VisualKeysDict.iconName])
+				cfgIntrprtItptKeys,
+				cfgIntrprtValueKeys)
 		};
 	}
 
@@ -111,22 +127,40 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 			isRightMenuOpen: false
 		});
 	}
+
+	onCancelClick = () => {
+		this.setState({
+			...this.state,
+			isDoRedirectCancel: true,
+			isRightMenuOpen: false
+		});
+	}
+
 	render() {
 		const { ldOptions, routes } = this.props;
-		const { isDoRedirect, isRightMenuOpen, localValues, compInfos } = this.state;
+		const { isDoRedirect, isDoRedirectCancel, isRightMenuOpen, localValues, compInfos } = this.state;
 		const routeSendSearch = localValues.get(VisualKeysDict.routeSend_search);
 		const headerText = localValues.get(VisualKeysDict.headerTxt);
 		const iconName = localValues.get(VisualKeysDict.iconName);
+		let routeSendCancel = localValues.get(VisualKeysDict.routeSend_cancel);
 		const hasPopOverContent = compInfos.has(VisualKeysDict.popOverContent);
+		if (isDoRedirectCancel && routeSendCancel) {
+			routeSendCancel = cleanRouteString(routeSendCancel, this.props.routes);
+			this.setState({ ...this.state, isDoRedirect: false, isDoRedirectCancel: false });
+			return <Redirect to={routeSendCancel} />;
+		}
 		if (isDoRedirect && routeSendSearch) {
 			let route: string = cleanRouteString(routeSendSearch, this.props.routes);
 			//if (match.params.nextPath === undefined) match.params.nextPath = route;
-			this.setState({ ...this.state, isDoRedirect: false });
+			this.setState({ ...this.state, isDoRedirect: false, isDoRedirectCancel: false });
 			console.log("navBar redirect to: " + route);
 			return <Redirect to={route} />;
 		}
 		return <>
-			<AppBar title={headerText ? headerText : "Menu"}>
+			<AppBar title={headerText ? headerText : "Menu"}
+				leftIcon={routeSendCancel ? "arrow_back" : null}
+				onLeftIconClick={() => this.onCancelClick()}
+			>
 				<Navigation type='horizontal'>
 					{routeSendSearch
 						? <IconButton icon='search' onClick={this.onAppBarSearchBtnClick} />
