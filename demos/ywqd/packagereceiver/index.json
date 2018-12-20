@@ -1,7 +1,7 @@
 {
   "subItptOf": "fd4595a4-4b32-4df3-bced-4a09b665b915",
-  "canInterpretType": "ywqd/收货/index-ObjectType",
-  "nameSelf": "ywqd/收货/index",
+  "canInterpretType": "ywqd/packagereceiver/index-ObjectType",
+  "nameSelf": "ywqd/packagereceiver/index",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -26,12 +26,21 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "d0ee54ab-b727-4586-89ca-34be918460fc",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "in_0",
-            "in_1"
+            "in_1",
+            "in_2"
           ]
         },
         "5bfc7168-df36-43d5-9c75-5cc81d54e941": {
@@ -59,8 +68,8 @@
           ]
         },
         "9974d4dc-627f-4173-81cd-fd47476252e8": {
-          "subItptOf": "ywqd/收货/概述表册",
-          "canInterpretType": "ywqd/收货/概述表册-ObjectType",
+          "subItptOf": "ywqd/packagereceiver/main-screen",
+          "canInterpretType": "ywqd/packagereceiver/main-screen-ObjectType",
           "nameSelf": "9974d4dc-627f-4173-81cd-fd47476252e8",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -91,9 +100,41 @@
           ]
         },
         "291f1af9-b685-4f1b-a23d-d0208268c570": {
-          "subItptOf": "ywqd/收货/请货单册",
-          "canInterpretType": "ywqd/收货/请货单册-ObjectType",
+          "subItptOf": "ywqd/packagereceiver/productwishlist-screen",
+          "canInterpretType": "ywqd/packagereceiver/productwishlist-screen-ObjectType",
           "nameSelf": "291f1af9-b685-4f1b-a23d-d0208268c570",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "d0ee54ab-b727-4586-89ca-34be918460fc": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "d0ee54ab-b727-4586-89ca-34be918460fc",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "49bc948f-6c80-47b6-9da2-84c1b6e71c21",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "packages",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "49bc948f-6c80-47b6-9da2-84c1b6e71c21": {
+          "subItptOf": "ywqd/packagereceiver/packagelist-screen",
+          "canInterpretType": "ywqd/packagereceiver/packagelist-screen-ObjectType",
+          "nameSelf": "49bc948f-6c80-47b6-9da2-84c1b6e71c21",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []

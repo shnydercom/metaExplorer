@@ -1,0 +1,106 @@
+{
+  "subItptOf": "a59fd867-734e-4b38-918b-78d310a68a03",
+  "canInterpretType": "ywqd/packagereceiver/package-panel-ObjectType",
+  "nameSelf": "ywqd/packagereceiver/package-panel",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "a59fd867-734e-4b38-918b-78d310a68a03": {
+          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "nameSelf": "a59fd867-734e-4b38-918b-78d310a68a03",
+          "initialKvStores": [
+            {
+              "key": "HeaderText",
+              "value": "PJCY_2018-12-18",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderText",
+              "value": "内容；1500人民币， 190,68€",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "Description",
+              "value": "邮件号码；CY 745 123 456 DE",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "secondaryInterpreter",
+              "value": {
+                "objRef": "ceb135a2-a23b-430a-9b8d-ac0fc5d7b315",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "secondaryInterpreter"
+          ]
+        },
+        "ceb135a2-a23b-430a-9b8d-ac0fc5d7b315": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "ceb135a2-a23b-430a-9b8d-ac0fc5d7b315",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "e1e75ab9-61a8-4d6a-940d-0b362827cb8b",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0"
+          ]
+        },
+        "e1e75ab9-61a8-4d6a-940d-0b362827cb8b": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "e1e75ab9-61a8-4d6a-940d-0b362827cb8b",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "72914be0-c45b-47b3-bed1-6ee1e1c4f329",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0"
+          ]
+        },
+        "72914be0-c45b-47b3-bed1-6ee1e1c4f329": {
+          "subItptOf": "shnyder/basichtml/span",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "72914be0-c45b-47b3-bed1-6ee1e1c4f329",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": "包裹办理伙伴；",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "jonathan_packer",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

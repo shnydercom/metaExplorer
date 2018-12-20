@@ -70,6 +70,7 @@ import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { DemoCompleteReceiver } from "approot";
 import appItptRetrFn from "appconfig/appItptRetriever";
+import { LDError } from "appstate/LDError";
 
 export interface LDApprootProps {
 	initiallyDisplayedItptName: string | null;
@@ -83,7 +84,7 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 	public static APP_KEY = "app";
 	constructor(props?: any) {
 		super(props);
-		const {initiallyDisplayedItptName} = this.props;
+		const { initiallyDisplayedItptName } = this.props;
 		this.state = { initiallyDisplayedItptName, hasCompletedFirstRender: false };
 	}
 	componentDidMount() {
@@ -123,9 +124,11 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 				});
 				if (numItpts > 0) {
 					//this.generatePrefilled(val.itptList[numItpts - 1]);
-					let newItpt = appItptRetrFn().getItptByNameSelf(this.state.initiallyDisplayedItptName).cfg as BlueprintConfig;
-					let newType = newItpt.canInterpretType;
-					let dummyInstance = intrprtrTypeInstanceFromBlueprint(newItpt);
+					let newItpt = appItptRetrFn().getItptByNameSelf(this.state.initiallyDisplayedItptName);
+					if (!newItpt) throw new LDError("error in interpreterAPI: could not find " + this.state.initiallyDisplayedItptName);
+					let newItptCfg = newItpt.cfg as BlueprintConfig;
+					let newType = newItptCfg.canInterpretType;
+					let dummyInstance = intrprtrTypeInstanceFromBlueprint(newItptCfg);
 					let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 					newLDOptions.resource.kvStores = [
 						{ key: PureLDApproot.APP_KEY, ldType: newType, value: dummyInstance }
@@ -134,7 +137,9 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 				}
 				this.setState({ ...this.state, hasCompletedFirstRender: true });
 				this.props.notifyDemoComplete();
-			}).catch((reason) => console.log(reason));
+			}).catch((reason) => {
+				console.log(reason);
+			});
 		}
 	}
 	/*generatePrefilled = (input: any) => {

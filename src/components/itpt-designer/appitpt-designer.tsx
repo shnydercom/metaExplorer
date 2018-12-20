@@ -223,6 +223,7 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 		const { routes } = this.props;
 		const { drawerActive, currentlyEditingItptName, sidebarActive } = this.state;
 		let isDisplayDevContent = isProduction ? false : true;
+		let inputStyle = currentlyEditingItptName ? { width: currentlyEditingItptName.length + "ex", maxHeight: "100%" } : null;
 		return <div className="entrypoint-editor">
 			<ThemeProvider theme={designerTheme}>
 				<Layout theme={{ layout: 'editor-layout' }}>
@@ -330,7 +331,7 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 						</div>
 						<div className="button-row">
 							<div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-								<Input value={currentlyEditingItptName ? currentlyEditingItptName : "None"} disabled={true} />
+								<Input style={inputStyle} value={currentlyEditingItptName ? currentlyEditingItptName : "None"} disabled={true} />
 							</div>
 						</div>
 					</Sidebar>

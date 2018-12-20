@@ -30,6 +30,7 @@ export class RefMapDropSpace extends Component<RefMapDropSpaceProps, RefMapDropS
 
 	render() {
 		let itptName: string | null = this.props.currentlyEditingItpt;
+		let inputStyle = itptName ? { width: itptName.length + "ex", maxHeight: "100%" } : null;
 		return (
 			<TooltipDiv className="refmap-drop-outer" tooltipPosition="top" tooltip={this.props.dropText}>
 				<div
@@ -44,7 +45,7 @@ export class RefMapDropSpace extends Component<RefMapDropSpaceProps, RefMapDropS
 				>
 					<span>now editing: </span>
 					{/*!this.state.message ? this.props.dropText : '...dropped!...'*/}
-					<Input value={itptName ? itptName : "None"} disabled={true} />
+					<Input style={inputStyle} value={itptName ? itptName : "None"} disabled={true} />
 					{/*this.state.message ? <><br /><br />{this.state.message}</> : null*/}
 				</div>
 			</TooltipDiv>

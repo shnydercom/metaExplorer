@@ -1,7 +1,7 @@
 {
   "subItptOf": "2143b34d-f038-4858-a1aa-519ad14e859e",
-  "canInterpretType": "ywqd/收货/请货单册-ObjectType",
-  "nameSelf": "ywqd/收货/请货单册",
+  "canInterpretType": "ywqd/packagereceiver/productwishlist-screen-ObjectType",
+  "nameSelf": "ywqd/packagereceiver/productwishlist-screen",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

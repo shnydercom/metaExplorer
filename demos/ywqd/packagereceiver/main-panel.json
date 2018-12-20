@@ -1,7 +1,7 @@
 {
   "subItptOf": "0469bd01-9d81-45bb-b787-c2d4fee80f16",
-  "canInterpretType": "ywqd/收货/概述表-ObjectType",
-  "nameSelf": "ywqd/收货/概述表",
+  "canInterpretType": "ywqd/packagereceiver/main-panel-ObjectType",
+  "nameSelf": "ywqd/packagereceiver/main-panel",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -123,7 +123,7 @@
             },
             {
               "key": "HeaderText",
-              "value": "我的账户名：jonathan_maihuo",
+              "value": "我的账户名：jonny_jinkou",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -192,6 +192,11 @@
               "key": "confirmTxt",
               "value": "包裹",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "packages",
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",

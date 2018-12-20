@@ -1,7 +1,7 @@
 {
   "subItptOf": "89cb4646-bb50-449e-b4b2-a36b7bd44623",
-  "canInterpretType": "ywqd/收货/概述表册-ObjectType",
-  "nameSelf": "ywqd/收货/概述表册",
+  "canInterpretType": "ywqd/packagereceiver/main-screen-ObjectType",
+  "nameSelf": "ywqd/packagereceiver/main-screen",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -31,8 +31,8 @@
           ]
         },
         "56ad0608-60dc-4287-a480-921188196c72": {
-          "subItptOf": "ywqd/收货/概述表",
-          "canInterpretType": "ywqd/收货/概述表-ObjectType",
+          "subItptOf": "ywqd/packagereceiver/main-panel",
+          "canInterpretType": "ywqd/packagereceiver/main-panel-ObjectType",
           "nameSelf": "56ad0608-60dc-4287-a480-921188196c72",
           "initialKvStores": [],
           "crudSkills": "cRud",

@@ -38,7 +38,7 @@ export abstract class PureTextBasedComponent extends Component<LDConnectedState 
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: TextBasedComponentState): null | TextBasedComponentState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [], [UserDefDict.singleKvStore]);
+			nextProps, prevState, [], [UserDefDict.singleKvStore], null, [], [true]);
 		if (!rvLD) {
 			return null;
 		}
@@ -57,7 +57,7 @@ export abstract class PureTextBasedComponent extends Component<LDConnectedState 
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, props, [],
-			[UserDefDict.singleKvStore]);
+			[UserDefDict.singleKvStore], [], [true]);
 		this.state = {
 			...ldState,
 		};
