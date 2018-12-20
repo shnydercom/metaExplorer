@@ -1,0 +1,165 @@
+{
+  "subItptOf": "6690c113-db14-4d1e-a3c0-76092a1b9018",
+  "canInterpretType": "ywqd/packagereceiver/addnewproductwish-screen-ObjectType",
+  "nameSelf": "ywqd/packagereceiver/addnewproductwish-screen",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "6690c113-db14-4d1e-a3c0-76092a1b9018": {
+          "subItptOf": "shnyder/md/NavProcessAtom",
+          "canInterpretType": "shnyder/md/NavProcessAtom-ObjectType",
+          "nameSelf": "6690c113-db14-4d1e-a3c0-76092a1b9018",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "6a39e29f-cb5a-4ed1-b614-d77f9183770c",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "加新的愿望",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "cancelTxt",
+              "value": "取消",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "confirmTxt",
+              "value": "确认",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_cancel",
+              "value": "../",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "6a39e29f-cb5a-4ed1-b614-d77f9183770c": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "6a39e29f-cb5a-4ed1-b614-d77f9183770c",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "784dc260-3758-40ed-b6d3-f4827c448bc2",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "7629c797-c142-40ba-8246-22ac503434d4",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "d8102075-68c8-412c-8d64-c21ae634d954",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "26b8b066-43e3-4125-ac4b-e1ec2d1c6663",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2",
+            "in_3"
+          ]
+        },
+        "784dc260-3758-40ed-b6d3-f4827c448bc2": {
+          "subItptOf": "shnyder/md/SingleImageSelector",
+          "canInterpretType": "http://schema.org/CreateAction",
+          "nameSelf": "784dc260-3758-40ed-b6d3-f4827c448bc2",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "7629c797-c142-40ba-8246-22ac503434d4": {
+          "subItptOf": "shnyder/md/http://schema.org/Integer",
+          "canInterpretType": "http://schema.org/Integer",
+          "nameSelf": "7629c797-c142-40ba-8246-22ac503434d4",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "数量",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": null,
+              "ldType": "http://schema.org/Integer"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "d8102075-68c8-412c-8d64-c21ae634d954": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "d8102075-68c8-412c-8d64-c21ae634d954",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "货品名",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "26b8b066-43e3-4125-ac4b-e1ec2d1c6663": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "26b8b066-43e3-4125-ac4b-e1ec2d1c6663",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "详情",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

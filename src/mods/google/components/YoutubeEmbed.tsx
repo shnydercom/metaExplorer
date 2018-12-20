@@ -6,7 +6,7 @@ import { ILDOptions } from "ldaccess/ildoptions";
 import { VisualKeysDict } from "components/visualcomposition/visualDict";
 import { LDDict } from "ldaccess/LDDict";
 import { gdsfpLD, initLDLocalState } from "components/generic/generatorFns";
-import { isProduction } from "approot";
+import { isProduction } from "appstate/store";
 
 export const YoutubeEmbedName = "google-api/YoutubeEmbed";
 let cfgIntrprtKeys: string[] =

@@ -29,8 +29,8 @@ import { BaseContainerRewrite } from "../generic/baseContainer-rewrite";
 import { Tabs, Tab } from "react-toolbox/lib/tabs";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
-import { DemoCompleteReceiver, isProduction } from "approot";
-import { itptLoadApi } from "appstate/store";
+import { DemoCompleteReceiver } from "approot";
+import { itptLoadApi, isProduction } from "appstate/store";
 import appItptRetrFn from "appconfig/appItptRetriever";
 import { Layout, Panel, Sidebar, SidebarProps } from "react-toolbox/lib/layout";
 import { NavDrawer } from "react-toolbox/lib/layout";
@@ -224,13 +224,14 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 		const { drawerActive, currentlyEditingItptName, sidebarActive } = this.state;
 		let isDisplayDevContent = isProduction ? false : true;
 		let inputStyle = currentlyEditingItptName ? { width: currentlyEditingItptName.length + "ex", maxHeight: "100%" } : null;
+		const itpts = this.logic.getItptList();
 		return <div className="entrypoint-editor">
 			<ThemeProvider theme={designerTheme}>
 				<Layout theme={{ layout: 'editor-layout' }}>
 					<NavDrawer insideTree={true} theme={{ pinned: "navbar-pinned" }} active={drawerActive} withOverlay={false}
 						pinned={drawerActive} permanentAt='xxxl'>
 						<DesignerTray
-							logic={this.logic}
+							itpts={itpts}
 							onEditTrayItem={this.onEditTrayItem}
 							onClearBtnPress={() => {
 								this.logic.clear();

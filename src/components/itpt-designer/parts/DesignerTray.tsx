@@ -15,22 +15,38 @@ export interface FlatContentInfo {
 }
 
 export interface DesignerTrayProps {
-	logic: DesignerLogic;
+	itpts: IItptInfoItem[];
 	onZoomAutoLayoutPress: () => void;
 	onClearBtnPress: () => void;
 	onEditTrayItem: (data: any) => DropRefmapResult;
 }
 
-export interface DesignerTrayState { }
+export interface DesignerTrayState {
+	trayitpts: IItptInfoItem[];
+	trayElems: JSX.Element;
+}
 
 export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState> {
 
-	constructor(props: DesignerTrayProps) {
-		super(props);
-		this.state = {};
+	static getDerivedStateFromProps(nextProps: DesignerTrayProps, prevState: DesignerTrayState): DesignerTrayState {
+		if (
+			(!prevState.trayitpts && nextProps.itpts) ||
+			(prevState.trayitpts && !nextProps.itpts) ||
+			(prevState.trayitpts.length !== nextProps.itpts.length)
+		) {
+			return { trayitpts: nextProps.itpts, trayElems: DesignerTray.trayItemsFromItptList(nextProps, nextProps.itpts) };
+		}
+		for (let i = 0; i < prevState.trayitpts.length; i++) {
+			const prevItpt = prevState.trayitpts[i];
+			if (prevItpt.nameSelf !== nextProps.itpts[i].nameSelf) {
+				return { trayitpts: nextProps.itpts, trayElems: DesignerTray.trayItemsFromItptList(nextProps, nextProps.itpts) };
+			}
+		}
+		return null;
 	}
-	public trayItemsFromItptList() {
-		let itpts: IItptInfoItem[] = this.props.logic.getItptList();
+
+	protected static trayItemsFromItptList(nextProps: DesignerTrayProps, trayitpts: IItptInfoItem[]) {
+		const itpts = trayitpts.slice();
 		itpts.shift(); //rm basecontainer
 		itpts.shift(); //rm refMap
 		itpts.sort((a, b) => {
@@ -43,10 +59,10 @@ export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState
 		const specialNodesText: string = "Set standard values, mark a value for later input or build forms with as many interpreters as you want";
 		const specialNodesTreeItem: TreeEntry = {
 			flatContent: [
-				<DesignerTrayItem onLongPress={(data) => this.props.onEditTrayItem(data)} key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />,
-				<DesignerTrayItem onLongPress={(data) => this.props.onEditTrayItem(data)} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />,
-				<DesignerTrayItem onLongPress={(data) => this.props.onEditTrayItem(data)} key={3} model={{ type: "outputtype" }} name="External Output Marker" color={appStyles["$designer-secondary-color"]} />,
-				<DesignerTrayItem onLongPress={(data) => this.props.onEditTrayItem(data)} key={4} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />
+				<DesignerTrayItem onLongPress={(data) => nextProps.onEditTrayItem(data)} key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$designer-secondary-color"]} />,
+				<DesignerTrayItem onLongPress={(data) => nextProps.onEditTrayItem(data)} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$designer-secondary-color"]} />,
+				<DesignerTrayItem onLongPress={(data) => nextProps.onEditTrayItem(data)} key={3} model={{ type: "outputtype" }} name="External Output Marker" color={appStyles["$designer-secondary-color"]} />,
+				<DesignerTrayItem onLongPress={(data) => nextProps.onEditTrayItem(data)} key={4} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$designer-secondary-color"]} />
 			],
 			label: 'Special Blocks',
 			subEntries: []
@@ -71,14 +87,14 @@ export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState
 			let ldBPCfg = (iItptInfoItm.itpt as IBlueprintItpt).cfg;
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
 			if (iItptInfoItm.tags.includes(ITPT_TAG_ATOMIC)) {
-				this.addItptToTree(atomicNodesTreeItem, iItptInfoItm, trayName);
+				DesignerTray.addItptToTree(atomicNodesTreeItem, iItptInfoItm, trayName);
 			} else
 				if (iItptInfoItm.tags.includes(ITPT_TAG_COMPOUND)) {
-					this.addItptToTree(compoundNodesTreeItem, iItptInfoItm, trayName);
+					DesignerTray.addItptToTree(compoundNodesTreeItem, iItptInfoItm, trayName);
 				}
 		});
-		this.createFlatContentFromItpts(atomicNodesTreeItem);
-		this.createFlatContentFromItpts(compoundNodesTreeItem);
+		DesignerTray.createFlatContentFromItpts(atomicNodesTreeItem, nextProps.onEditTrayItem);
+		DesignerTray.createFlatContentFromItpts(compoundNodesTreeItem, nextProps.onEditTrayItem);
 		return <div style={{ paddingBottom: "40px", flex: 1 }} className="mdscrollbar">
 			<TreeView entry={specialNodesTreeItem}>{specialNodesText}</TreeView>
 			<TreeView entry={atomicNodesTreeItem}>{atomicNodesText}</TreeView>
@@ -86,25 +102,7 @@ export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState
 		</div>;
 	}
 
-	render() {
-		return <div className="designer-tray">
-			{this.props.children}
-			<div className="mdscrollbar">
-				{this.trayItemsFromItptList()}
-			</div>
-			<div className="button-row">
-				<Button style={{ color: "white" }} label="clear" onClick={(ev) => {
-					this.props.onClearBtnPress();
-				}} />
-				<Button style={{ color: "white" }} label="zoom + autolayout" onClick={(ev) => {
-					this.props.onZoomAutoLayoutPress();
-				}
-				} />
-			</div>
-		</div>;
-	}
-
-	protected addItptToTree(tree: TreeEntry & FlatContentInfo, infoItm: IItptInfoItem, remainingName: string) {
+	protected static addItptToTree(tree: TreeEntry & FlatContentInfo, infoItm: IItptInfoItem, remainingName: string) {
 		let remainerSplit = remainingName.split('/');
 		let isCreateHere: boolean = false;
 		if (remainerSplit.length === 1) {
@@ -146,7 +144,7 @@ export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState
 			if (treeToAddTo) {
 				remainerSplit = remainerSplit.slice(remainerIdx);
 				tree.subEntries.splice(treeToAddToIdx, 1, treeToAddTo);
-				this.addItptToTree(treeToAddTo as TreeEntry & FlatContentInfo, infoItm, remainerSplit.join('/'));
+				DesignerTray.addItptToTree(treeToAddTo as TreeEntry & FlatContentInfo, infoItm, remainerSplit.join('/'));
 				return;
 			}
 		}
@@ -178,7 +176,7 @@ export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState
 				tree.subEntries.push(newTree);
 				tree.itpts.splice(similarItm, 1);
 				tree.flatContentURLs.splice(similarItm, 1);
-				this.addItptToTree(newTree, infoItm, remainerSplit.join('/'));
+				DesignerTray.addItptToTree(newTree, infoItm, remainerSplit.join('/'));
 				return;
 			}
 		}
@@ -188,13 +186,15 @@ export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState
 		}
 	}
 
-	protected createFlatContentFromItpts(tree: TreeEntry & FlatContentInfo) {
+	protected static createFlatContentFromItpts(
+		tree: TreeEntry & FlatContentInfo,
+		onEditTrayItem: (data: any) => DropRefmapResult) {
 		tree.itpts.forEach((itpt, idx) => {
 			let ldBPCfg = itpt.cfg;
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
 			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : ldBPCfg.canInterpretType;
 			let remainingName = tree.flatContentURLs[idx];
-			tree.flatContent.push(<DesignerTrayItem onLongPress={(data) => this.props.onEditTrayItem(data)}
+			tree.flatContent.push(<DesignerTrayItem onLongPress={(data) => onEditTrayItem(data)}
 				key={trayName}
 				model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
 				name={remainingName}
@@ -202,7 +202,31 @@ export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState
 			);
 		});
 		tree.subEntries.forEach((treeEntry: TreeEntry & FlatContentInfo, idx) => {
-			this.createFlatContentFromItpts(treeEntry);
+			DesignerTray.createFlatContentFromItpts(treeEntry, onEditTrayItem);
 		});
+	}
+
+	constructor(props: DesignerTrayProps) {
+		super(props);
+		this.state = { trayitpts: null, isTrayElemsDirty: false, trayElems: null };
+	}
+
+	render() {
+		const { trayitpts, trayElems } = this.state;
+		return <div className="designer-tray">
+			{this.props.children}
+			<div className="mdscrollbar">
+				{trayitpts ? trayElems : null}
+			</div>
+			<div className="button-row">
+				<Button style={{ color: "white" }} label="clear" onClick={(ev) => {
+					this.props.onClearBtnPress();
+				}} />
+				<Button style={{ color: "white" }} label="zoom + autolayout" onClick={(ev) => {
+					this.props.onZoomAutoLayoutPress();
+				}
+				} />
+			</div>
+		</div>;
 	}
 }

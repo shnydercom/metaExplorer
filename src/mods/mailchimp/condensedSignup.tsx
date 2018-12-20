@@ -6,7 +6,7 @@ import { ILDOptions } from "ldaccess/ildoptions";
 import { LDDict } from "ldaccess/LDDict";
 import { gdsfpLD, initLDLocalState } from "components/generic/generatorFns";
 import { VisualKeysDict } from "components/visualcomposition/visualDict";
-import { isProduction } from "approot";
+import { isProduction } from "appstate/store";
 
 export const MailChimpSignupName = "mailchimp/condensedSignup";
 let cfgIntrprtKeys: string[] =

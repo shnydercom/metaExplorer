@@ -27,7 +27,7 @@ export interface ILDNonvisualIntrprtrMapStatePart {
   [s: string]: IBlueprintItpt;
 }
 
-const isProduction = process.env.NODE_ENV === 'production';
+export const isProduction = process.env.NODE_ENV === 'production';
 
 let middleWare = isProduction ? applyMiddleware(epicMiddleware) : compose(applyMiddleware(epicMiddleware), DevTools.instrument());
 
@@ -47,6 +47,5 @@ export function configureStore(initialState: ExplorerState): Store<ExplorerState
   epicMiddleware.run(rootEpic as any);
   return store;
 }
-
 
 export default configureStore;

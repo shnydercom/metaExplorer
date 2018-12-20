@@ -4,7 +4,7 @@ import { Store } from 'redux';
 import { Provider } from 'react-redux';
 
 import { Toolkit } from "storm-react-diagrams";
-import { ExplorerState, configureStore } from 'appstate/store';
+import { ExplorerState, configureStore, isProduction } from 'appstate/store';
 
 //import {Observable} from 'rxjs';
 import AppItptDesigner from 'components/itpt-designer/appitpt-designer';
@@ -32,8 +32,6 @@ const initialState: ExplorerState = {
 	ldoptionsMap: {},
 	ldNonVisualMap: {}
 };
-
-export const isProduction = process.env.NODE_ENV === 'production';
 
 export type DemoCompleteReceiver = {
 	isInitDemo: boolean,

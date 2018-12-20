@@ -57,7 +57,7 @@
             {
               "key": "section-elements",
               "value": {
-                "objRef": "613656c7-d4be-4090-b86c-00d978beee3d",
+                "objRef": "99a92d4b-68f6-4d0c-8b35-12957e4434d9",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -65,7 +65,7 @@
             {
               "key": "section-elements",
               "value": {
-                "objRef": "99a92d4b-68f6-4d0c-8b35-12957e4434d9",
+                "objRef": "613656c7-d4be-4090-b86c-00d978beee3d",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -76,49 +76,6 @@
             "section-elements",
             "section-elements"
           ]
-        },
-        "613656c7-d4be-4090-b86c-00d978beee3d": {
-          "subItptOf": "shnyder/CompactInfoListElement",
-          "canInterpretType": "CompactInformationElement",
-          "nameSelf": "613656c7-d4be-4090-b86c-00d978beee3d",
-          "initialKvStores": [
-            {
-              "key": "primaryInterpreter",
-              "value": {
-                "objRef": "f56dafa3-fade-469a-81c9-0865d8452f07",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
-            },
-            {
-              "key": "HeaderText",
-              "value": "寄出日期；2018-12-19",
-              "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "SubHeaderText",
-              "value": "包裹办理伙伴；jonathan_packer, 内容；233€，1833人民币",
-              "ldType": "http://schema.org/Text"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": [
-            "primaryInterpreter"
-          ]
-        },
-        "f56dafa3-fade-469a-81c9-0865d8452f07": {
-          "subItptOf": "shnyder/basichtml/bold",
-          "canInterpretType": "http://schema.org/Text",
-          "nameSelf": "f56dafa3-fade-469a-81c9-0865d8452f07",
-          "initialKvStores": [
-            {
-              "key": "singleKvStore",
-              "value": "德中",
-              "ldType": "http://schema.org/Text"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
         },
         "99a92d4b-68f6-4d0c-8b35-12957e4434d9": {
           "subItptOf": "shnyder/CompactInfoListElement",
@@ -157,6 +114,49 @@
             {
               "key": "singleKvStore",
               "value": "中德",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "613656c7-d4be-4090-b86c-00d978beee3d": {
+          "subItptOf": "shnyder/CompactInfoListElement",
+          "canInterpretType": "CompactInformationElement",
+          "nameSelf": "613656c7-d4be-4090-b86c-00d978beee3d",
+          "initialKvStores": [
+            {
+              "key": "primaryInterpreter",
+              "value": {
+                "objRef": "f56dafa3-fade-469a-81c9-0865d8452f07",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "寄出日期；2018-12-20",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "SubHeaderText",
+              "value": "包裹办理伙伴；jonathan_packer, 内容；233€，1833人民币",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "primaryInterpreter"
+          ]
+        },
+        "f56dafa3-fade-469a-81c9-0865d8452f07": {
+          "subItptOf": "shnyder/basichtml/bold",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "f56dafa3-fade-469a-81c9-0865d8452f07",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": "德中",
               "ldType": "http://schema.org/Text"
             }
           ],

@@ -34,13 +34,22 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "4bf549d6-3cc7-4899-bb1e-eb3eb6fe7f05",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "in_0",
             "in_1",
-            "in_2"
+            "in_2",
+            "in_3"
           ]
         },
         "5bfc7168-df36-43d5-9c75-5cc81d54e941": {
@@ -135,6 +144,38 @@
           "subItptOf": "ywqd/packagereceiver/packagelist-screen",
           "canInterpretType": "ywqd/packagereceiver/packagelist-screen-ObjectType",
           "nameSelf": "49bc948f-6c80-47b6-9da2-84c1b6e71c21",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "4bf549d6-3cc7-4899-bb1e-eb3eb6fe7f05": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "4bf549d6-3cc7-4899-bb1e-eb3eb6fe7f05",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "f9c864d4-14eb-40eb-8fb9-f41853b1ce40",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "addnewproductwish",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "f9c864d4-14eb-40eb-8fb9-f41853b1ce40": {
+          "subItptOf": "ywqd/packagereceiver/addnewproductwish-screen",
+          "canInterpretType": "ywqd/packagereceiver/addnewproductwish-screen-ObjectType",
+          "nameSelf": "f9c864d4-14eb-40eb-8fb9-f41853b1ce40",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
