@@ -57,7 +57,7 @@ function rootSetup(): void {
 
 rootSetup();
 
-const firstDisplayedBlock: string = "ywqd/packagereceiver/index";
+const firstDisplayedBlock: string = "shnyder-website/main-page";
 export class AppRoot extends Component<AppRootProps, AppRootState>{
 
 	mode: "editor" | "app" | "initial" = "initial";
