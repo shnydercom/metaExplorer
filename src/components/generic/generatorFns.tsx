@@ -103,6 +103,17 @@ export function generateItptFromCompInfo(compKey: string, routes?: LDRouteProps,
 	return <BaseComp key={locIndex} routes={compRoutes} ldTokenString={compInfo.ldTokenString} />;
 }
 
+/**
+ * initializes the state of a BlueprintInterpreter along with react interpreters
+ * @param cfg the BlueprintConfig to initialize from, usually: this.cfg = (this.constructor["cfg"] as BlueprintConfig);
+ * @param props props of a component that are relevant for the ld-part
+ * @param itptKeys //
+ * @param kvKeys //
+ * @param itptIsMulti //
+ * @param kvIsMulti //
+ * Optimization note: For performance reaosons, initialization of the state's react-part and
+ * ld-part are combined. Check commit 59b2a48 and previous to compare
+ */
 export function initLDLocalState(
 	cfg: BlueprintConfig,
 	props: LDConnectedState & LDOwnProps,

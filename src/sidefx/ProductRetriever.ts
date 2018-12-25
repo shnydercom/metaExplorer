@@ -2,8 +2,7 @@ import { SideFXDict } from "sidefx/SideFXDict";
 import { LDDict } from "ldaccess/LDDict";
 import { IKvStore } from "ldaccess/ikvstore";
 import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { LDRetrieverSuper, ldRetrCfgIntrprtKeys } from "sidefx/LDRetrieverSuper";
+import { LDRetrieverSuperRewrite, ldRetrCfgIntrprtKeys } from "./LDRetrieverSuper-rewrite";
 
 export const productRetrieverName = "shnyder/productRetriever";
 
@@ -48,4 +47,4 @@ let bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-export class ProductRetriever extends LDRetrieverSuper { }
+export class ProductRetriever extends LDRetrieverSuperRewrite { }

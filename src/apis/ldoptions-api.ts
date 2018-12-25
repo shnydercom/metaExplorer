@@ -1,7 +1,7 @@
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { HydraClientAPI } from './hydra-client';
 import { LDError } from './../appstate/LDError';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
 //let testTC = new TypesCollection(["someTypeInAnArray"] || new Array<string>());
@@ -49,7 +49,7 @@ export class LDOptionsAPI {  // URL to web api IRI resource
 				});
 				return procResource;
 			});
-		returnVal = Observable.from(fetchPromise);
+		returnVal = from(fetchPromise);
 		return returnVal;
 	}
 	postLDOptions(uploadData: ILDOptions, targetUrl: string): Observable<IWebResource> {//Observable<IWebResource> { //FETCH
@@ -77,7 +77,7 @@ export class LDOptionsAPI {  // URL to web api IRI resource
 				});
 				return procResource;
 			});
-		returnVal = Observable.from(fetchPromise);
+		returnVal = from(fetchPromise);
 		return returnVal;
 	}
 }
