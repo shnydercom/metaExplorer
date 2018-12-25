@@ -4,14 +4,14 @@ import { ILDOptions } from "ldaccess/ildoptions";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { SideFXDict } from "sidefx/SideFXDict";
 import { ldOptionsRequestAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
-import { expand } from 'urijs';
 import { applicationStore } from "approot";
 import { ILDToken } from 'ldaccess/ildtoken';
-import { isOutputKVSame, ldOptionsDeepCopy, getKVValue } from "ldaccess/ldUtils";
+import { isOutputKVSame, ldOptionsDeepCopy, getKVValue, isObjPropertyRef } from "ldaccess/ldUtils";
 import { IWebResource } from "hydraclient.js/src/DataModel/IWebResource";
 import { ILDOptionsMapStatePart } from "appstate/store";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { nameSpaceMap } from "ldaccess/ns/nameSpaceMap";
+// import URI from 'urijs';
 
 export let ldRetrCfgIntrprtKeys: string[] =
 	[SideFXDict.srvURL, SideFXDict.identifier];
@@ -113,22 +113,30 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 						if (nsMHasValue) {
 							let idNS = idStr.slice(0, idSplitIdx);
 							let idId = idStr.slice(idSplitIdx + 1, idStr.length);
-							let reqSplitString = srvUrl.value.replace('{' + SideFXDict.identifier + '}',
+							/*let reqSplitString = srvUrl.value.replace('{' + SideFXDict.identifier + '}',
 								'{namespace}/' + '{' + SideFXDict.identifier + '}');
 							requestURL = URI.expand(reqSplitString, {
 								namespace: idNS,
 								identifier: idId
 							});
+							requestURL = srvUrl.value;*/
+							requestURL = requestURL.replace('{' + SideFXDict.identifier + '}', idNS + '/' + idId);
 						} else {
 							//TODO: enter error state
 							return;
 						}
 					} else {
-						requestURL = URI.expand(srvUrl.value, {
+						const idVal = identifier.value;
+						if (!idVal || isObjPropertyRef(idVal)) {
+							return;
+						}
+						requestURL = srvUrl.value + idVal;
+						/*let test = URI;
+						requestURL = test.expand(srvUrl.value, {
 							identifier: identifier.value
-						});
+						});*/
 					}
-					let reqAsString = requestURL.valueOf();
+					let reqAsString = requestURL; // requestURL.valueOf();
 					this.callToAPI(null, reqAsString, this.retrieverStoreKey);
 				}
 			} else {
