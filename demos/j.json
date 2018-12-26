@@ -34,13 +34,22 @@
                 "propRef": "http://schema.org/name"
               },
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "secondaryInterpreter",
+              "value": {
+                "objRef": "3e5e98ea-048b-4688-990b-ba18634db416",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "primaryInterpreter",
             "HeaderText",
-            "SubHeaderText"
+            "SubHeaderText",
+            "secondaryInterpreter"
           ]
         },
         "7bf0ff14-7f17-4d4a-9fd0-48e5517ca5c9": {
@@ -66,6 +75,48 @@
               "value": {
                 "objRef": "7bf0ff14-7f17-4d4a-9fd0-48e5517ca5c9",
                 "propRef": "http://schema.org/gtin8"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "identifier"
+          ]
+        },
+        "3e5e98ea-048b-4688-990b-ba18634db416": {
+          "subItptOf": "shnyder/imageDisplay",
+          "canInterpretType": "http://schema.org/ImageObject",
+          "nameSelf": "3e5e98ea-048b-4688-990b-ba18634db416",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/contentUrl",
+              "value": {
+                "objRef": "24a8d989-305d-4226-b8fd-ada44b245574",
+                "propRef": "http://schema.org/contentUrl"
+              }
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "http://schema.org/contentUrl"
+          ]
+        },
+        "24a8d989-305d-4226-b8fd-ada44b245574": {
+          "subItptOf": "shnyder/imageRetriever",
+          "canInterpretType": "shnyder/imageRetriever-ObjectType",
+          "nameSelf": "24a8d989-305d-4226-b8fd-ada44b245574",
+          "initialKvStores": [
+            {
+              "key": "srvURL",
+              "value": "http://localhost:1111/api/ysj/ns/{identifier}",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "identifier",
+              "value": {
+                "objRef": "820f10af-ac5a-4cd4-8b6c-7a1b7f5a5b1f",
+                "propRef": "http://schema.org/image"
               },
               "ldType": "http://schema.org/Text"
             }

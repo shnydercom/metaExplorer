@@ -55,11 +55,11 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 		};
 	}
 
-	setState: (input: LDRetrieverSuperState) => void = (input: LDRetrieverSuperState) => {
+	setState(input: LDRetrieverSuperState) {
 		this.state = input;
 	}
 
-	consumeLDOptions = (ldOptions: ILDOptions) => {
+	consumeLDOptions(ldOptions: ILDOptions) {
 		if (!ldOptions || !ldOptions.resource || !ldOptions.resource.kvStores) return;
 		const gdsfpResult = this.consumeLDOptionsLikeGDSFP(ldOptions);
 		if (gdsfpResult) {
@@ -84,7 +84,7 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 		}
 	}
 
-	setWebContent = (value: ILDOptions) => {
+	setWebContent(value: ILDOptions) {
 		if (value.isLoading) return;
 		if (value.resource.webInResource && (value.resource.webInResource !== this.state.webContent)) {
 			const changedState = {
@@ -96,7 +96,7 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 		}
 	}
 
-	evalDirtyOutput = () => {
+	evalDirtyOutput() {
 		if (this.state.isInputDirty) return;
 		if (this.state.isOutputDirty && this.outputKVMap && this.state.webContent) {
 			this.setState({ ...this.state, isOutputDirty: false });
@@ -104,7 +104,7 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 		}
 	}
 
-	evalDirtyInput = () => {
+	evalDirtyInput() {
 		if (this.state.isInputDirty) {
 			if (!this.apiCallOverride) {
 				const { localValues } = this.state;
@@ -138,6 +138,7 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 								identifier: idId
 							});
 							requestURL = srvUrl.value;*/
+							requestURL = srvUrl;
 							requestURL = requestURL.replace('{' + SideFXDict.identifier + '}', idNS + '/' + idId);
 						} else {
 							//TODO: enter error state
@@ -210,26 +211,24 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 		}
 	}
 
-	protected consumeLDOptionsLikeGDSFP:
-		(ldOptions: ILDOptions) => LDRetrieverSuperState | null
-		= (ldOptions: ILDOptions) => {
-			const ldTkStr: string = ldOptions.ldToken.get();
-			let nextProps: LDConnectedState & LDOwnProps = {
-				ldOptions,
-				ldTokenString: ldTkStr
-			};
-			let prevState: LDRetrieverSuperState = this.state;
+	protected consumeLDOptionsLikeGDSFP(ldOptions: ILDOptions): LDRetrieverSuperState | null {
+		const ldTkStr: string = ldOptions.ldToken.get();
+		let nextProps: LDConnectedState & LDOwnProps = {
+			ldOptions,
+			ldTokenString: ldTkStr
+		};
+		let prevState: LDRetrieverSuperState = this.state;
 
-			let rvLD = gdsfpLD(nextProps, prevState,
-				[],
-				[...ldRetrCfgIntrprtKeys, UserDefDict.outputKVMapKey],
-				null
-			);
-			if (!rvLD) {
-				return null;
-			}
-			let rvNew = { ...this.state, ...rvLD, retrieverStoreKey: ldTkStr };
-			return { ...rvNew };
+		let rvLD = gdsfpLD(nextProps, prevState,
+			[],
+			[...ldRetrCfgIntrprtKeys, UserDefDict.outputKVMapKey],
+			null
+		);
+		if (!rvLD) {
+			return null;
 		}
+		let rvNew = { ...this.state, ...rvLD, retrieverStoreKey: ldTkStr };
+		return { ...rvNew };
+	}
 
 }

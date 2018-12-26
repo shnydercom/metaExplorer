@@ -13,7 +13,7 @@ import { nameSpaceMap } from "ldaccess/ns/nameSpaceMap";
 import { LDLocalKv } from "appstate/LDProps";
 // import URI from 'urijs';
 
-export type LDRetrieverSuperState = LDLocalKv;
+export type LDRetrieverSuperStateOld = LDLocalKv;
 
 export let ldRetrCfgIntrprtKeys: string[] =
 	[SideFXDict.srvURL, SideFXDict.identifier];
@@ -28,7 +28,7 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 	isOutputDirty: boolean = false;
 	retrieverStoreKey: string; //needed when requesting asynchronously, so that the output can find this
 	webContent: IWebResource;
-	state: LDRetrieverSuperState;
+	state: LDRetrieverSuperStateOld;
 
 	protected apiCallOverride: (() => Promise<any>) | null = null;
 
