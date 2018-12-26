@@ -1,5 +1,5 @@
 import { ActionsObservable, ofType } from 'redux-observable';
-import { Observable, from, of } from 'rxjs';
+import { from, of } from 'rxjs';
 //import "rxjs/Rx";
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { LDError, LDErrorMsgState } from './../LDError';
@@ -11,6 +11,7 @@ import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 import { OutputKVMap } from 'ldaccess/ldBlueprint';
 import { tap, mergeMap, map, catchError } from 'rxjs/operators';
+import { LDOptionsAPI } from 'apis/ldoptions-api';
 
 export const LDOPTIONS_CLIENTSIDE_CREATE = 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE';
 export const LDOPTIONS_CLIENTSIDE_UPDATE = 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE';
@@ -216,6 +217,7 @@ export const ldOptionsMapReducer = (
 };
 
 export const requestLDOptionsEpic = (action$: ActionsObservable<any>, store: any, { ldOptionsAPI }: any) => {
+	const _LDOAPI: LDOptionsAPI = ldOptionsAPI;
 	return action$.pipe(
 		ofType(LDOPTIONS_REQUEST_ASYNC),
 		tap(() => console.log("Requesting LD Options from network")),
@@ -238,19 +240,23 @@ export const requestLDOptionsEpic = (action$: ActionsObservable<any>, store: any
 						))));
 			} else {
 				if (action.uploadData === null) {
-					return ldOptionsAPI.getLDOptions(action.targetUrl)
-						.map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
-						.catch((error: LDError) =>
+					let rvGET = _LDOAPI.getLDOptions(action.targetUrl);
+					return rvGET.pipe(
+						map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
+						,
+						catchError((error: LDError) =>
 							of(ldOptionsFailureAction(
 								`An error occured during ld getting: ${error.message + " " + error.stack}`, action.targetReceiverLnk
-							)));
+							))));
 				} else {
-					return ldOptionsAPI.postLDOptions(action.uploadData, action.targetUrl)
-						.map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
-						.catch((error: LDError) =>
+					let rvPOST = _LDOAPI.postLDOptions(action.uploadData, action.targetUrl);
+					return rvPOST.pipe(
+						map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
+						,
+						catchError((error: LDError) =>
 							of(ldOptionsFailureAction(
 								`An error occured during ld posting: ${error.message + " " + error.stack}`, action.targetReceiverLnk
-							)));
+							))));
 				}
 			}
 		})

@@ -5,7 +5,6 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { SideFXDict } from "sidefx/SideFXDict";
 import { ldOptionsRequestAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
 import { applicationStore } from "approot";
-import { ILDToken } from 'ldaccess/ildtoken';
 import { isOutputKVSame, ldOptionsDeepCopy, getKVValue, isObjPropertyRef } from "ldaccess/ldUtils";
 import { IWebResource } from "hydraclient.js/src/DataModel/IWebResource";
 import { ILDOptionsMapStatePart } from "appstate/store";

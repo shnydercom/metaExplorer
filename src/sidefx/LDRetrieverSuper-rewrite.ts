@@ -1,8 +1,7 @@
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { UserDefDict } from 'ldaccess/UserDefDict';
+import { LDConnectedState, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { LDDict } from 'ldaccess/LDDict';
 import { SideFXDict } from './SideFXDict';
 import { gdsfpLD, initLDLocalState } from 'components/generic/generatorFns';
@@ -14,6 +13,7 @@ import { getKVStoreByKey } from 'ldaccess/kvConvenienceFns';
 import { ILDOptionsMapStatePart } from 'appstate/store';
 
 import { nameSpaceMap } from "ldaccess/ns/nameSpaceMap";
+import { UserDefDict } from 'ldaccess/UserDefDict';
 
 export const ldRetrCfgIntrprtKeys: string[] = [SideFXDict.srvURL, SideFXDict.identifier];
 let ldRetrInitialKVStores: IKvStore[] = [
@@ -40,7 +40,11 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 
 	constructor() {
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		const ldState = initLDLocalState(this.cfg, null, [], [...ldRetrCfgIntrprtKeys]);
+		const ldState = initLDLocalState(this.cfg, null, [], [...ldRetrCfgIntrprtKeys, UserDefDict.outputKVMapKey]);
+		let okvMap = ldState.localValues.get(UserDefDict.outputKVMapKey);
+		if (okvMap) {
+			this.outputKVMap = okvMap;
+		}
 		this.state = {
 			isInputDirty: false,
 			isOutputDirty: false,
@@ -68,6 +72,10 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 					gdsfpResult.isInputDirty = true;
 					break;
 				}
+			}
+			let okvMap = gdsfpResult.localValues.get(UserDefDict.outputKVMapKey);
+			if (okvMap) {
+				this.outputKVMap = okvMap;
 			}
 			this.setState(gdsfpResult);
 			this.setWebContent(ldOptions);
@@ -214,7 +222,7 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 
 			let rvLD = gdsfpLD(nextProps, prevState,
 				[],
-				[...ldRetrCfgIntrprtKeys],
+				[...ldRetrCfgIntrprtKeys, UserDefDict.outputKVMapKey],
 				null
 			);
 			if (!rvLD) {
