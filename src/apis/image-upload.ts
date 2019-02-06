@@ -1,5 +1,5 @@
 import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
-import { HydraClientAPI } from './hydra-client';
+import { HydraClientAPI } from '../mods/hydra/apis/hydra-client';
 import { LDError } from './../appstate/LDError';
 import { Observable, from } from 'rxjs';
 
@@ -21,8 +21,8 @@ export class ImageUploadAPI {  // URL to web api IRI resource
           if (response.status >= 400) {
             throw new LDError("Bad response from server");
           }
-          var testVar = HydraClientAPI.getHCSingleton().getHypermediaProcessor(response);
-          var procResource = HydraClientAPI.getHCSingleton().getHypermediaProcessor(response).process(response, HydraClientAPI.getHCSingleton()).then((hydraResponse) => {
+          var testVar = HydraClientAPI.getHC().getHypermediaProcessor(response);
+          var procResource = HydraClientAPI.getHC().getHypermediaProcessor(response).process(response, HydraClientAPI.getHC()).then((hydraResponse) => {
             console.dir(hydraResponse);
             return hydraResponse;
           });

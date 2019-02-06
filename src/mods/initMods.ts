@@ -1,7 +1,9 @@
-import { initGoogleServiceItpts } from "./google/initGoogleServiceItpts";
+import { initGoogleMod } from "./google/initGoogleMod";
 import { initMailChimpItpts } from "./mailchimp/initMailChimp";
+import { initHydraMod } from "./hydra/initHydraMod";
 
 export function initMods() {
-	initGoogleServiceItpts();
+	initHydraMod();
+	initGoogleMod();
 	initMailChimpItpts();
 }

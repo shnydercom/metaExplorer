@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { DesignerLogic } from "./designer-logic";
 import { Button, IconButton } from "react-toolbox/lib/button";
 import TreeView, { TreeEntry } from "metaexplorer-react-components/lib/components/treeview/treeview";
 import { IBlueprintItpt } from "ldaccess/ldBlueprint";
@@ -75,6 +74,16 @@ export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState
 			subEntries: [],
 			itpts: []
 		};
+
+		const hydraNodesText: string = "Interact with outside data from a hydra endpoint";
+		const hydraNodesTreeItem: TreeEntry & FlatContentInfo = {
+			flatContentURLs: [],
+			flatContent: [],
+			label: 'Hydra Blocks',
+			subEntries: [],
+			itpts: []
+		};
+
 		const compoundNodesText: string = "Combine any block type to make up new blocks, or drop one in the box below to see how it's been made";
 		const compoundNodesTreeItem: TreeEntry & FlatContentInfo = {
 			flatContentURLs: [],
@@ -98,6 +107,7 @@ export class DesignerTray extends Component<DesignerTrayProps, DesignerTrayState
 		return <div style={{ paddingBottom: "40px", flex: 1 }} className="mdscrollbar">
 			<TreeView entry={specialNodesTreeItem}>{specialNodesText}</TreeView>
 			<TreeView entry={atomicNodesTreeItem}>{atomicNodesText}</TreeView>
+			<TreeView entry={hydraNodesTreeItem}>{hydraNodesText}</TreeView>
 			<TreeView entry={compoundNodesTreeItem}>{compoundNodesText}</TreeView>
 		</div>;
 	}

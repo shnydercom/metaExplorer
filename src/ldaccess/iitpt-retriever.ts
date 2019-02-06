@@ -3,6 +3,7 @@ export const ITPT_REFMAP_BASE = "rmb";
 
 export const ITPT_TAG_SPECIAL = "special";
 export const ITPT_TAG_ATOMIC = "atomic";
+export const ITPT_TAG_MOD = "mod";
 export const ITPT_TAG_COMPOUND = "compound";
 
 export interface IItptRetriever {
