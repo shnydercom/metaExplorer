@@ -5,12 +5,13 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   // entry point of our application, within the `src` directory (which we add to resolve.modules below):
-  entry: {
-    //"index": 
-    //'@babel/polyfill',
-    main: "./src/index"
-    //"css": "./styles/styles.scss"
-  },
+  entry: ['@babel/polyfill', "./src/index"],
+  /*{
+      //"index": 
+      //'@babel/polyfill',
+      main: "./src/index"
+      //"css": "./styles/styles.scss"
+    },*/
 
   // configure the output directory and publicPath for the devServer
   output: {
@@ -105,10 +106,10 @@ module.exports = {
           'sass-loader'
         ]
       },
-     /* {
-        test: /\.html$/,
-        use: 'html-loader'
-      },*/
+      /* {
+         test: /\.html$/,
+         use: 'html-loader'
+       },*/
       {
         test: /\.png$/,
         use: 'url-loader?limit=10000'

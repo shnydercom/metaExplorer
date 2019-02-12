@@ -4,6 +4,10 @@ import { IApiDocumentation } from "hydraclient.js/src/DataModel/IApiDocumentatio
 import { hydra } from "hydraclient.js/src/namespaces";
 
 const hydraApiDocURL: string = "http://localhost:1111/api/ysj/hydra/ApiDocumentation";
+
+const serverURLMap: Map<string, string> = new Map();
+serverURLMap.set("http://shnyder.com", "http://localhost:1111");
+
 export class HydraClientAPI {
 
   public static getHC() {
@@ -22,6 +26,35 @@ export class HydraClientAPI {
     let rv: HydraClientAPI = new HydraClientAPI();
     let factory: HydraClientFactory = new HydraClientFactory();
     rv.hc = factory.withDefaults().andCreate() as HydraClient;
+    rv.hc.getResource = async (urlOrResource) => {
+      //START getUrl
+      let url: any = urlOrResource;
+      if (typeof url === "object") {
+        url = !!url.target ? url.target.iri : url.iri;
+      }
+      if (!!!url) {
+        throw new Error(HydraClient.noUrlProvided);
+      }
+      //END getUrl
+      serverURLMap.forEach((val, key) => {
+        if ((url as string).startsWith(key)) {
+          url = (url as string).replace(key, val);
+        }
+      });
+      const response = await fetch(url);
+      if (response.status !== 200) {
+        throw new Error(HydraClient.invalidResponse + response.status);
+      }
+      const hypermediaProcessor = rv.hc.getHypermediaProcessor(response);
+      if (!hypermediaProcessor) {
+        throw new Error(HydraClient.responseFormatNotSupported);
+      }
+      const result = await hypermediaProcessor.process(response, rv.hc);
+      Object.defineProperty(result, "iri", {
+        value: response.url
+      });
+      return result;
+    };
     rv.setHydraApiDoc(hydraApiDocURL);
     return rv;
   }
@@ -34,7 +67,17 @@ export class HydraClientAPI {
     this.hc.getResource(hydraApiDocUrl).then(
       (apiDocumentation) => {
         this.apiDoc = apiDocumentation.hypermedia.ofType(hydra.ApiDocumentation).first() as IApiDocumentation;
+        let firstSupportedClass = this.apiDoc.supportedClasses.first();
+        console.log(firstSupportedClass);
+        let firstSupportedOperation = firstSupportedClass.supportedOperations.first();
+        console.log(firstSupportedOperation);
+        //console.log(firstSupportedOperation.collections);
+        console.log(firstSupportedOperation.expects);
+        console.log(firstSupportedOperation.operations);
+        console.log(firstSupportedOperation.method);
+        console.log(firstSupportedClass.description);
 
+        this.apiDoc.getEntryPoint().then((a) => console.dir(a));
         /*
         getting ApiDocumentation over a link from the server's root doesn't work currently, uncommented:
       this.hc.getApiDocumentation(hydraApiDocUrl).then((apiDocumentation) => {
