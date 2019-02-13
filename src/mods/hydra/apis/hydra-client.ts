@@ -2,8 +2,10 @@ import HydraClient from "hydraclient.js/src/HydraClient";
 import HydraClientFactory from "hydraclient.js/src/HydraClientFactory";
 import { IApiDocumentation } from "hydraclient.js/src/DataModel/IApiDocumentation";
 import { hydra } from "hydraclient.js/src/namespaces";
+import { IWebResource } from "hydraclient.js/src/DataModel/IWebResource";
+import { IHydraResource } from "hydraclient.js/src/DataModel/IHydraResource";
 
-const hydraApiDocURL: string = "http://localhost:1111/api/ysj/hydra/ApiDocumentation";
+const hydraApiDocURL: string = "http://localhost:1111"; ///api/ysj/hydra/ApiDocumentation";
 
 const serverURLMap: Map<string, string> = new Map();
 serverURLMap.set("http://shnyder.com", "http://localhost:1111");
@@ -64,9 +66,9 @@ export class HydraClientAPI {
   protected apiDoc: IApiDocumentation;
 
   public setHydraApiDoc(hydraApiDocUrl: string) {
-    this.hc.getResource(hydraApiDocUrl).then(
+    this.hc.getApiDocumentation(hydraApiDocUrl).then(
       (apiDocumentation) => {
-        this.apiDoc = apiDocumentation.hypermedia.ofType(hydra.ApiDocumentation).first() as IApiDocumentation;
+        this.apiDoc = apiDocumentation; //apiDocumentation.hypermedia.ofType(hydra.ApiDocumentation).first() as IApiDocumentation;
         let firstSupportedClass = this.apiDoc.supportedClasses.first();
         console.log(firstSupportedClass);
         let firstSupportedOperation = firstSupportedClass.supportedOperations.first();
@@ -77,7 +79,7 @@ export class HydraClientAPI {
         console.log(firstSupportedOperation.method);
         console.log(firstSupportedClass.description);
 
-        this.apiDoc.getEntryPoint().then((a) => console.dir(a));
+        this.apiDoc.getEntryPoint().then((a) => this.itptsFromWebResource(a as any));
         /*
         getting ApiDocumentation over a link from the server's root doesn't work currently, uncommented:
       this.hc.getApiDocumentation(hydraApiDocUrl).then((apiDocumentation) => {
@@ -88,5 +90,26 @@ export class HydraClientAPI {
         console.log("hydra getApiDocumentation was rejected:");
         console.dir(reason);
       });
+  }
+
+  public itptsFromWebResource(wr: IWebResource) {
+    console.log(wr);
+    let firstCollection = wr.hypermedia.collections.first();
+    console.log(firstCollection.iri);
+    console.log(firstCollection.links);
+    console.log(firstCollection.memberTemplate);
+    console.log(firstCollection.members);
+    console.log(firstCollection.operations);
+    //this one:
+    console.log(firstCollection["supportedOperations"]);
+    console.log(firstCollection.totalItems);
+    console.log(firstCollection.type);
+    console.log(firstCollection.view);
+    console.log(firstCollection.collections);
+    console.log(firstCollection.getIterator());
+  }
+
+  public itptsFromDirectEntryPointChildren(wr: IWebResource) {
+
   }
 }
