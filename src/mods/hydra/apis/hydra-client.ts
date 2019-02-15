@@ -69,7 +69,7 @@ export class HydraClientAPI {
     this.hc.getApiDocumentation(hydraApiDocUrl).then(
       (apiDocumentation) => {
         this.apiDoc = apiDocumentation; //apiDocumentation.hypermedia.ofType(hydra.ApiDocumentation).first() as IApiDocumentation;
-        let firstSupportedClass = this.apiDoc.supportedClasses.first();
+        /*let firstSupportedClass = this.apiDoc.supportedClasses.first();
         console.log(firstSupportedClass);
         let firstSupportedOperation = firstSupportedClass.supportedOperations.first();
         console.log(firstSupportedOperation);
@@ -77,7 +77,7 @@ export class HydraClientAPI {
         console.log(firstSupportedOperation.expects);
         console.log(firstSupportedOperation.operations);
         console.log(firstSupportedOperation.method);
-        console.log(firstSupportedClass.description);
+        console.log(firstSupportedClass.description);*/
 
         this.apiDoc.getEntryPoint().then((a) => this.itptsFromWebResource(a as any));
         /*
@@ -94,7 +94,7 @@ export class HydraClientAPI {
 
   public itptsFromWebResource(wr: IWebResource) {
     console.log(wr);
-    let firstCollection = wr.hypermedia.collections.first();
+    /*let firstCollection = wr.hypermedia.collections.first();
     console.log(firstCollection.iri);
     console.log(firstCollection.links);
     console.log(firstCollection.memberTemplate);
@@ -106,7 +106,8 @@ export class HydraClientAPI {
     console.log(firstCollection.type);
     console.log(firstCollection.view);
     console.log(firstCollection.collections);
-    console.log(firstCollection.getIterator());
+    console.log(firstCollection.getIterator());*/
+    this.itptsFromDirectEntryPointChildren(wr);
   }
 
   public itptsFromDirectEntryPointChildren(wr: IWebResource) {

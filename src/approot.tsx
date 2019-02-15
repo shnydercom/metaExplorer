@@ -75,7 +75,10 @@ export class AppRoot extends Component<AppRootProps, AppRootState>{
 						if (routeProps.location.search === "?mode=editor" && this.mode !== "editor") {
 							this.mode = "editor";
 						}
-						if ((routeProps.location.search === "?mode=app" || !routeProps.location.search) && this.mode !== "app") {
+						if (routeProps.location.search === "?mode=app" && this.mode !== "app") {
+							this.mode = "app";
+						}
+						if (!routeProps.location.search && this.mode === "initial") {
 							this.mode = "app";
 						}
 						if (this.mode === "editor") {
@@ -92,7 +95,7 @@ export class AppRoot extends Component<AppRootProps, AppRootState>{
 								return (
 									<div className="app-actual">
 										<LDApproot initiallyDisplayedItptName={firstDisplayedBlock}
-										 ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
+											ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
 											notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })} />
 										{!isProduction && <div className="mode-switcher">
 											<Link to={{ pathname: routeProps.location.pathname, search: "?mode=editor" }}>
