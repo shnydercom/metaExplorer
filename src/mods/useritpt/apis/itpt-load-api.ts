@@ -6,33 +6,40 @@ import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { applicationStore } from "approot";
 import { ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
 
-export interface ItptLoadResponse {
+export interface UserItptLoadResponse {
 	itptMetaInfo: [{}];
 	itptList: BlueprintConfig[];
 }
 
-export class ItptLoadApi {
-	getItptsForCurrentUser(): () => Promise<ItptLoadResponse> {
+export class UserItptLoadApi {
+
+  public static getUserItptLoadApiSingleton(): UserItptLoadApi {
+    if (UserItptLoadApi.apiSingleton == null) {
+      UserItptLoadApi.apiSingleton = new UserItptLoadApi();
+    }
+    return UserItptLoadApi.apiSingleton;
+	}
+
+  private static apiSingleton: UserItptLoadApi;
+
+	getItptsForCurrentUser(): () => Promise<UserItptLoadResponse> {
 		return this.getItptsFrom("/static/interpreters.json");
 	}
-	getItptsFrom(targetUrl: string): () => Promise<ItptLoadResponse> {
+	getItptsFrom(targetUrl: string): () => Promise<UserItptLoadResponse> {
 		return () => {
-			return new Promise<ItptLoadResponse>((resolve, reject) => {
+			return new Promise<UserItptLoadResponse>((resolve, reject) => {
 				fetch(targetUrl, {
 					method: 'GET',
 					headers: {
 						Accept: "application/json"
 					},
-					/*
-					mode: 'cors',
-					cache: 'default'*/
 				}
 				).then((response) => {
 					if (response.status >= 400) {
 						reject("Bad response from server");
 					}
 					response.json().then((bodyVal) => {
-						resolve(bodyVal as ItptLoadResponse);
+						resolve(bodyVal as UserItptLoadResponse);
 					}).catch((reason) => {
 						reject(reason);
 					});

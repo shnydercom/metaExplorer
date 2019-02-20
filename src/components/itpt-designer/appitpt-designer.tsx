@@ -29,8 +29,7 @@ import { BaseContainerRewrite } from "../generic/baseContainer-rewrite";
 import { Tabs, Tab } from "react-toolbox/lib/tabs";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
-import { DemoCompleteReceiver } from "approot";
-import { itptLoadApi, isProduction } from "appstate/store";
+import { isProduction } from "appstate/store";
 import appItptRetrFn from "appconfig/appItptRetriever";
 import { Layout, Panel, Sidebar, SidebarProps } from "react-toolbox/lib/layout";
 import { NavDrawer } from "react-toolbox/lib/layout";
@@ -55,7 +54,7 @@ export type AIDState = {
 
 const DESIGNER_KV_KEY = "DesignerKvKey";
 
-export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver, AIDState> {
+export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps, AIDState> {
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the itpt you're designing is capable of interpreting -> usually a new generic type
 	logic: DesignerLogic;
 	errorNotAvailableMsg: string = "Itpt Designer environment not available. Please check your settings";
@@ -169,9 +168,9 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
-	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver) {
+	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps) {
 		if (!this.state.hasCompletedFirstRender) {
-			if (prevProps.isInitDemo) {
+			/*if (prevProps.isInitDemo) {
 				itptLoadApi.getItptsForCurrentUser()().then((val) => {
 					let numItpts = val.itptList.length;
 					val.itptList.forEach((itpt) => {
@@ -192,10 +191,10 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 					}
 					this.setState({ ...this.state, hasCompletedFirstRender: true, currentlyEditingItptName: itptName });
 					this.props.notifyDemoComplete();
-				}).catch((reason) => console.log(reason));
-			} else {
-				this.setState({ ...this.state, hasCompletedFirstRender: true, currentlyEditingItptName: this.props.initiallyDisplayedItptName });
-			}
+				}).catch((reason) => console.log(reason));*/
+			//} else {
+			this.setState({ ...this.state, hasCompletedFirstRender: true, currentlyEditingItptName: this.props.initiallyDisplayedItptName });
+			//}
 		}
 
 	}
@@ -387,4 +386,4 @@ export class PureAppItptDesigner extends Component<AIDProps & LDConnectedState &
 	}
 }
 
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps & DemoCompleteReceiver>(mapStateToProps, mapDispatchToProps)(PureAppItptDesigner);
+export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureAppItptDesigner);

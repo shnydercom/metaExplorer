@@ -6,16 +6,18 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDOptionsAPI } from 'apis/ldoptions-api';
 import DevTools from './devTools';
 import { IBlueprintItpt } from 'ldaccess/ldBlueprint';
-import { ItptLoadApi } from 'apis/itpt-load-api';
+import { IModStatePart } from './modstate';
+import { ModAPI } from 'apis/mod-api';
 
 const imgUploader: ImageUploadAPI = new ImageUploadAPI();
 const ldOptionsAPI: LDOptionsAPI = new LDOptionsAPI();
-export const itptLoadApi = new ItptLoadApi();
+export const modAPI: ModAPI = new ModAPI();
 
 const epicMiddleware = createEpicMiddleware({
   dependencies: {
     imgULAPI: imgUploader,
-    ldOptionsAPI: ldOptionsAPI
+    ldOptionsAPI,
+    modAPI
   }
 });
 
@@ -27,11 +29,18 @@ export interface ILDNonvisualIntrprtrMapStatePart {
   [s: string]: IBlueprintItpt;
 }
 
-export const isProduction = process.env.NODE_ENV === 'production';
+export const isProduction = false// process.env.NODE_ENV === 'production';
 
 let middleWare = isProduction ? applyMiddleware(epicMiddleware) : compose(applyMiddleware(epicMiddleware), DevTools.instrument());
 
+export interface IAppConfigStatePart {
+  appKey: string;
+  mainItpt: string;
+}
+
 export interface ExplorerState {
+  mods: IModStatePart;
+  appCfg: IAppConfigStatePart;
   isSaving?: boolean;
   isLoading?: boolean;
   //error: string,

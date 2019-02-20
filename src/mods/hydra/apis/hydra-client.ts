@@ -51,7 +51,9 @@ export class HydraClientAPI {
       if (!hypermediaProcessor) {
         throw new Error(HydraClient.responseFormatNotSupported);
       }
+      console.log("no processing hypermedia:");
       const result = await hypermediaProcessor.process(response, rv.hc);
+      console.log(result);
       Object.defineProperty(result, "iri", {
         value: response.url
       });
@@ -79,13 +81,13 @@ export class HydraClientAPI {
         console.log(firstSupportedOperation.method);
         console.log(firstSupportedClass.description);*/
 
-        this.apiDoc.getEntryPoint().then((a) => this.itptsFromWebResource(a as any));
         /*
         getting ApiDocumentation over a link from the server's root doesn't work currently, uncommented:
       this.hc.getApiDocumentation(hydraApiDocUrl).then((apiDocumentation) => {
        this.apiDoc = apiDocumentation;*/
         console.log("hydra getApiDocumentation was successful:");
         console.dir(this.apiDoc);
+        //this.apiDoc.getEntryPoint().then((a) => this.itptsFromWebResource(a as any));
       }).catch((reason) => {
         console.log("hydra getApiDocumentation was rejected:");
         console.dir(reason);
@@ -111,6 +113,21 @@ export class HydraClientAPI {
   }
 
   public itptsFromDirectEntryPointChildren(wr: IWebResource) {
-
+    /*const epColls = wr.hypermedia.collections;
+    for (const singleCollKey in epColls) {
+      if (epColls.hasOwnProperty(singleCollKey)) {
+        const singleColl = epColls[singleCollKey];
+        const operations = singleColl.operations;
+        for (const opKey in operations) {
+          if (operations.hasOwnProperty(opKey)) {
+            const op = operations[opKey];
+            const name = op.iri;
+            const outputTypes = op.expects;
+            const inputTypes = op["returns"];
+            console.log("name: " + name + " output " + outputTypes + " input " + inputTypes);
+          }
+        }
+      }
+    }*/
   }
 }

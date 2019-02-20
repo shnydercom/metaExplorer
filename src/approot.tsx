@@ -1,10 +1,9 @@
 import { SFC, Component } from 'react';
 
 import { Store } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 
-import { Toolkit } from "storm-react-diagrams";
-import { ExplorerState, configureStore, isProduction } from 'appstate/store';
+import { ExplorerState, configureStore, isProduction, modAPI, IAppConfigStatePart } from 'appstate/store';
 
 //import {Observable} from 'rxjs';
 import AppItptDesigner from 'components/itpt-designer/appitpt-designer';
@@ -27,23 +26,39 @@ import { initBaseHtmlItpt } from 'components/basic-html/initBaseHtmlItpt';
 import LDApproot, { PureLDApproot } from 'ldapproot';
 import { initShnyderItpts } from 'components/shnyder/initShnyderItpts';
 import { initMods } from 'mods/initMods';
+import { Button } from 'react-toolbox/lib/button';
+import { mapStateToPropsRoot } from 'appstate/reduxFns';
+
+export const APP_LD_KEY = "app";
+
+const firstDisplayedBlock: string = "shnyder-website/main-page";
 
 const initialState: ExplorerState = {
+	appCfg: {
+		appKey: APP_LD_KEY,
+		mainItpt: firstDisplayedBlock
+	},
 	ldoptionsMap: {},
-	ldNonVisualMap: {}
+	ldNonVisualMap: {},
+	mods: {
+		isIdle: true,
+		map: {}
+	}
 };
 
-export type DemoCompleteReceiver = {
+/*export type DemoCompleteReceiver = {
 	isInitDemo: boolean,
 	notifyDemoComplete: () => void
-};
+};*/
 export interface AppRootProps {
+	cfg: IAppConfigStatePart;
 }
 export interface AppRootState {
 	isDemoInitialized: boolean;
+	cfg: IAppConfigStatePart;
+	mode: "editor" | "app" | "initial";
 }
 export const applicationStore: Store<ExplorerState> = configureStore(initialState);
-const appItptToken: string = "tID"; //TODO: uncomment Toolkit.UID();
 function rootSetup(): void {
 	appItptMatcherFn();
 	initEssentialItpts();
@@ -51,67 +66,82 @@ function rootSetup(): void {
 	initMDitptFnAsDefault();
 	initGameItpt();
 	initLDConnect();
-	initMods();
+	initMods(modAPI);
 	initShnyderItpts();
 }
 
 rootSetup();
 
-const firstDisplayedBlock: string = "shnyder-website/main-page";
-export class AppRoot extends Component<AppRootProps, AppRootState>{
+export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 
-	mode: "editor" | "app" | "initial" = "initial";
+	static getDerivedStateFromProps(nextProps: AppRootProps, prevState: AppRootState): AppRootState | null {
+		if (!prevState || !prevState.cfg ||
+			prevState.cfg.appKey !== nextProps.cfg.appKey
+			|| prevState.cfg.mainItpt !== nextProps.cfg.mainItpt
+		) {
+			return { ...prevState, ...nextProps };
+		}
+		return null;
+	}
 
 	constructor(props) {
 		super(props);
-		this.state = { isDemoInitialized: false };
+		this.state = {
+			isDemoInitialized: false,
+			cfg: { appKey: "", mainItpt: "" },
+			mode: "initial"
+		};
 	}
 
 	render() {
+		const { mode, cfg, isDemoInitialized } = this.state;
 		return (
-			<Provider store={applicationStore}>
-				<Router>
-					<Route path="/" render={(routeProps: LDRouteProps) => {
-						if (routeProps.location.search === "?mode=editor" && this.mode !== "editor") {
-							this.mode = "editor";
-						}
-						if (routeProps.location.search === "?mode=app" && this.mode !== "app") {
-							this.mode = "app";
-						}
-						if (!routeProps.location.search && this.mode === "initial") {
-							this.mode = "app";
-						}
-						if (this.mode === "editor") {
+			<Router>
+				<Route path="/" render={(routeProps: LDRouteProps) => {
+					if (routeProps.location.search === "?mode=editor" && mode !== "editor") {
+						this.setState({ ...this.state, mode: "editor" });
+					}
+					if (routeProps.location.search === "?mode=app" && mode !== "app") {
+						this.setState({ ...this.state, mode: "app" });
+					}
+					if (!routeProps.location.search && mode === "initial") {
+						this.setState({ ...this.state, mode: "app" });
+					}
+					if (mode === "editor") {
+						return (
+							<div style={{ flex: "1", background: "white" }}>
+								<AppItptDesigner initiallyDisplayedItptName={cfg.mainItpt}
+									ldTokenString={cfg.appKey} routes={routeProps} />
+								{!isProduction && <DevTools />}
+							</div>
+						);
+					} else
+						if (mode === "app") {
 							return (
-								<div style={{ flex: "1", background: "white" }}>
-									<AppItptDesigner initiallyDisplayedItptName={firstDisplayedBlock}
-										ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
-										notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })} />
-									{!isProduction && <DevTools />}
+								<div className="app-actual">
+									<LDApproot initiallyDisplayedItptName={cfg.mainItpt}
+										ldTokenString={cfg.appKey} routes={routeProps} />
+									{!isProduction && <div className="mode-switcher">
+										<Link to={{ pathname: routeProps.location.pathname, search: "?mode=editor" }}>
+											Switch to Editor
+											</Link>
+									</div>
+									}
 								</div>
 							);
-						} else
-							if (this.mode === "app") {
-								return (
-									<div className="app-actual">
-										<LDApproot initiallyDisplayedItptName={firstDisplayedBlock}
-											ldTokenString={appItptToken} routes={routeProps} isInitDemo={!this.state.isDemoInitialized}
-											notifyDemoComplete={() => this.setState({ ...this.state, isDemoInitialized: true })} />
-										{!isProduction && <div className="mode-switcher">
-											<Link to={{ pathname: routeProps.location.pathname, search: "?mode=editor" }}>
-												Switch to Editor
-										</Link>
-										</div>
-										}
-									</div>
-								);
-							}
-							else {
-								return null;
-							}
-					}} />
-				</Router>
-			</Provider>
+						}
+						else {
+							return null;
+						}
+				}} />
+			</Router>
 		);
 	}
 }
+
+const ReduxAppRoot = connect<AppRootProps>(mapStateToPropsRoot)(PureAppRoot);
+
+export const AppRoot = () =>
+	<Provider store={applicationStore}>
+		<ReduxAppRoot />
+	</Provider>;

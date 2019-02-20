@@ -64,11 +64,8 @@ import * as chineseActivities from '../demos/video/chineseactivities.json';
 import * as imgBerlin from '../demos/video/img-berlin.json';
 import * as overview from '../demos/video/overview.json';*/
 
-import { itptLoadApi } from "appstate/store";
-
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
-import { DemoCompleteReceiver } from "approot";
 import appItptRetrFn from "appconfig/appItptRetriever";
 import { LDError } from "appstate/LDError";
 
@@ -80,8 +77,7 @@ export interface LDApprootState {
 	initiallyDisplayedItptName: string;
 }
 
-export class PureLDApproot extends Component<LDApprootProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver, LDApprootState>  {
-	public static APP_KEY = "app";
+export class PureLDApproot extends Component<LDApprootProps & LDConnectedState & LDConnectedDispatch & LDOwnProps, LDApprootState>  {
 	constructor(props?: any) {
 		super(props);
 		const { initiallyDisplayedItptName } = this.props;
@@ -92,8 +88,8 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 			this.props.notifyLDOptionsChange(null);
 		}
 	}
-	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps & DemoCompleteReceiver) {
-		if (!this.state.hasCompletedFirstRender && prevProps.isInitDemo) {
+	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps) {
+		/*if (!this.state.hasCompletedFirstRender && prevProps.isInitDemo) {
 			//generate demos for compound itpts
 			/*let prefilledData: any[] = [
 				planeLanding, parisTrain, londonBus, aToBtravels, shnyderlogo, shnyderlogoOnWhite,
@@ -117,30 +113,30 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 			for (let i = 0; i < prefilledData.length; i++) {
 				this.generatePrefilled(prefilledData[i]);
 			}*/
-			itptLoadApi.getItptsForCurrentUser()().then((val) => {
-				let numItpts = val.itptList.length;
-				val.itptList.forEach((itpt) => {
-					addBlueprintToRetriever(itpt);
-				});
-				if (numItpts > 0) {
-					//this.generatePrefilled(val.itptList[numItpts - 1]);
-					let newItpt = appItptRetrFn().getItptByNameSelf(this.state.initiallyDisplayedItptName);
-					if (!newItpt) throw new LDError("error in interpreterAPI: could not find " + this.state.initiallyDisplayedItptName);
-					let newItptCfg = newItpt.cfg as BlueprintConfig;
-					let newType = newItptCfg.canInterpretType;
-					let dummyInstance = intrprtrTypeInstanceFromBlueprint(newItptCfg);
-					let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
-					newLDOptions.resource.kvStores = [
-						{ key: PureLDApproot.APP_KEY, ldType: newType, value: dummyInstance }
-					];
-					this.props.notifyLDOptionsChange(newLDOptions);
-				}
-				this.setState({ ...this.state, hasCompletedFirstRender: true });
-				this.props.notifyDemoComplete();
-			}).catch((reason) => {
-				console.log(reason);
+		/*itptLoadApi.getItptsForCurrentUser()().then((val) => {
+			let numItpts = val.itptList.length;
+			val.itptList.forEach((itpt) => {
+				addBlueprintToRetriever(itpt);
 			});
-		}
+			if (numItpts > 0) {
+				//this.generatePrefilled(val.itptList[numItpts - 1]);
+				let newItpt = appItptRetrFn().getItptByNameSelf(this.state.initiallyDisplayedItptName);
+				if (!newItpt) throw new LDError("error in interpreterAPI: could not find " + this.state.initiallyDisplayedItptName);
+				let newItptCfg = newItpt.cfg as BlueprintConfig;
+				let newType = newItptCfg.canInterpretType;
+				let dummyInstance = intrprtrTypeInstanceFromBlueprint(newItptCfg);
+				let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+				newLDOptions.resource.kvStores = [
+					{ key: PureLDApproot.APP_KEY, ldType: newType, value: dummyInstance }
+				];
+				this.props.notifyLDOptionsChange(newLDOptions);
+			}
+			this.setState({ ...this.state, hasCompletedFirstRender: true });
+			this.props.notifyDemoComplete();
+		}).catch((reason) => {
+			console.log(reason);
+		});*/
+		//}
 	}
 	/*generatePrefilled = (input: any) => {
 		let nodesBPCFG: BlueprintConfig = input as BlueprintConfig;
@@ -166,4 +162,4 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 	}
 }
 
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps & DemoCompleteReceiver>(mapStateToProps, mapDispatchToProps)(PureLDApproot);
+export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureLDApproot);

@@ -185,7 +185,12 @@ export class DesignerLogic {
 		return this.diagramEngine;
 	}
 
+	public refreshItptList(): void {
+		this.itptList = (appIntprtrRetr() as ReduxItptRetriever).getItptList();
+	}
+
 	public getItptList(): IItptInfoItem[] {
+		this.refreshItptList();
 		//return only one Itpt for the simple data types, so remove others from return value
 		let rv: IItptInfoItem[] = [];
 		let baseTypeIntrprtr: IItptInfoItem;

@@ -12,6 +12,11 @@ import { refMapREQUESTAction, refMapSUCCESSAction } from "./epicducks/refMap-duc
 import { Dispatch, Action } from "redux";
 import { LDDict } from "ldaccess/LDDict";
 import { ITPT_REFMAP_BASE } from "ldaccess/iitpt-retriever";
+import { AppRootProps } from "approot";
+
+export const mapStateToPropsRoot = (state: ExplorerState, ownProps: AppRootProps): AppRootProps => {
+	return { cfg: { ...state.appCfg } };
+};
 
 //final:
 export const mapStateToProps = (state: ExplorerState, ownProps: LDOwnProps): LDOwnProps & LDConnectedState => {
