@@ -139,7 +139,7 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 		this.determineRenderFn(baseDT);*/
 		if (!this.state.singleKV || !this.state.singleKV.ldType) {
 			console.log('PureBaseDataTypeInput notifyLDOptionsChange');
-			//this self-creates an object. Used e.g. in the itpt-designer, bdt-part
+			//this self-creates an object. Used e.g. in the itpt-editor, bdt-part
 			console.dir(this.props.ldOptions);
 			if (this.props.ldOptions) {
 				let newLDOptionsObj = ldOptionsDeepCopy(this.props.ldOptions);

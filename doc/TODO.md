@@ -2,7 +2,7 @@ c) serialisierung des node-diagrams erfolgt so, dass in die cfg des Interpreters
 d) wenn values von einem Interpreter generiert werden, dann werden die im ExplorerStore gespeichert, indem sie einen Hashwert zugewiesen bekommen, damit beim Neubau eines Interpreters der richtige Wert zugewiesen wird
 
 #Cleanup
-- PureAppInterpreterDesigner State handling
+- PureAppInterpreterEditor State handling
 
 #UX
 - it shouldn't be possible to connect ports with non-matching kvStore.ldType
@@ -12,7 +12,7 @@ d) wenn values von einem Interpreter generiert werden, dann werden die im Explor
 done - flatten KvStores into BPCfg						!!!
 done - External Input Markers to main BPCfg   !!
 done - redux-connection soll erst in einem speziellen Interpreter connected werden, um sie davor beliebig extenden zu können
-done - Nächstes Todo ist in designer-logic.addBlueprintToRetriever() anzusetzen, eine Interpreter-Container-Klasse zu bauen, die dann von dem GenericContainer gelesen werden kann, das ist InterpreterReferenceMapType-component
+done - Nächstes Todo ist in editor-logic.addBlueprintToRetriever() anzusetzen, eine Interpreter-Container-Klasse zu bauen, die dann von dem GenericContainer gelesen werden kann, das ist InterpreterReferenceMapType-component
 done - Interpreter-ReferenceMapType.cfg lesen, daraus in componentWillMount() das Setup bauen, in componentWillReceiveProps() die entsprechenden Werte zuweisen 
 done - Im ImgHeadSubDescr-Component die cfg lesen und daraus eine Sub-Komponente erstellen und befüllen.
 done - Im InterpreterRefMap-Component die ILDOptions-Objekte erstellen und ggf füllen

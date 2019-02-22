@@ -50,7 +50,7 @@
     "dagre": "^0.8.2",
     "googleapis": "^32.0.0",
     "history": "^4.7.2",
-    "hydraclient.js": "https://github.com/aJonathanSchneider/Heracles.ts.git",
+    "hydraclient.js": "file:../Heracles.ts",
     "lodash": "^4.17.4",
     "m-react-splitters": "^1.0.4",
     "metaexplorer-react-components": "file:../metaExplorer-react-components",
@@ -70,6 +70,7 @@
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.3.3",
     "storm-react-diagrams": "^5.2.1",
+    "swagger-client": "^3.8.24",
     "urijs": "^1.19.1"
   },
   "devDependencies": {

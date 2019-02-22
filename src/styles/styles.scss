@@ -1,6 +1,6 @@
 @import 'm-react-splitters/lib/splitters.css';
 //@import url('https://fonts.googleapis.com/css?family=Roboto');
-@import './designer/colors.scss';
+@import './editor/colors.scss';
 @import "storm-react-diagrams/dist/style.min.css";
 @import "./game/game.scss";
 @import "./shnyder/shnyder.scss";
@@ -135,21 +135,21 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	height: 100%;
 	display: flex;
 	flex-direction: row;
-	background-color: $designer-background-color;
+	background-color: $editor-background-color;
 
-	.designer-content {
-		background-color: $designer-background-elevated-color;
+	.editor-content {
+		background-color: $editor-background-elevated-color;
 		display: flex;
 		width: 100%;
 		float: left;
 		position: relative;
 	}
 
-	.designer-tray {
+	.editor-tray {
 		position: relative;
 		min-width: 250px;
 		max-width: 400px;
-		background: $designer-background-elevated-color;
+		background: $editor-background-elevated-color;
 		flex-grow: 0;
 		flex: 1;
 		flex-shrink: 0;
@@ -158,7 +158,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 		overflow: hidden;
 		height: 100%;
 
-		.designer-tray-item {
+		.editor-tray-item {
 			overflow: hidden;
 			text-overflow: ellipsis;
 			color: white;
@@ -203,20 +203,20 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	cursor: move;
 	overflow: hidden;
 	height: 100%;
-	background: $designer-background-color;
+	background: $editor-background-color;
 
 	.point {
-		fill: $designer-secondary-color;
+		fill: $editor-secondary-color;
 
 		&.selected {
-			fill: $designer-selected-color;
+			fill: $editor-selected-color;
 		}
 	}
 
 	.selector {
 		position: absolute;
 		background-color: rgba(0, 195, 255, 0.2);
-		border: solid 2px $designer-selected-color;
+		border: solid 2px $editor-selected-color;
 	}
 
 	svg {
@@ -249,7 +249,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 
 		&.selected {
 			>* {
-				border-color: $designer-selected-color !important; //-webkit-filter: drop-shadow( 0 0 20px rgba(0,192,255,0.5));
+				border-color: $editor-selected-color !important; //-webkit-filter: drop-shadow( 0 0 20px rgba(0,192,255,0.5));
 			}
 		}
 	}
@@ -267,10 +267,10 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	path {
 		fill: none;
 		pointer-events: all;
-		stroke: $designer-secondary-color;
+		stroke: $editor-secondary-color;
 
 		&.selected {
-			stroke: $designer-selected-color !important;
+			stroke: $editor-selected-color !important;
 			stroke-dasharray: 10, 2;
 			animation: dash 1s linear infinite;
 		}
@@ -279,11 +279,11 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	.port {
 		width: 15px;
 		height: 15px;
-		background: $designer-secondary-color;
+		background: $editor-secondary-color;
 
 		&:hover,
 		&.selected {
-			background: $designer-selected-color;
+			background: $editor-selected-color;
 		}
 	}
 
@@ -291,8 +291,8 @@ $app-inner-width-90: $app-inner-width * 0.9;
 		background-color: rgb(30, 30, 30);
 		border-radius: 5px;
 		font-family: Roboto, Arial;
-		color: $designer-primary-color;
-		border: solid 2px $designer-secondary-color;
+		color: $editor-primary-color;
+		border: solid 2px $editor-secondary-color;
 		overflow: visible;
 		font-size: 11px; //box-shadow: 0 0 10px rgba(black,0.5);
 

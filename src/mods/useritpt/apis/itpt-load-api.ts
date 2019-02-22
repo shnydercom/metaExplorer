@@ -9,6 +9,7 @@ import { ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-du
 export interface UserItptLoadResponse {
 	itptMetaInfo: [{}];
 	itptList: BlueprintConfig[];
+	mainItpt: string;
 }
 
 export class UserItptLoadApi {

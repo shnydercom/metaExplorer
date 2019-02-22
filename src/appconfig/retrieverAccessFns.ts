@@ -7,7 +7,7 @@ import { ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
 import appIntprtrRetr from 'appconfig/appItptRetriever';
 
 /**
- * adds a blueprint defined in the designer to the AppItptRetriever, automatically looks
+ * adds a blueprint defined in the editor to the AppItptRetriever, automatically looks
  * for the correct React-Class to extend
  * @param input the BlueprintConfig used as a setup for the new Itpt
  */

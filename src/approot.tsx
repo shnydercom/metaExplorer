@@ -6,7 +6,6 @@ import { Provider, connect } from 'react-redux';
 import { ExplorerState, configureStore, isProduction, modAPI, IAppConfigStatePart } from 'appstate/store';
 
 //import {Observable} from 'rxjs';
-import AppItptDesigner from 'components/itpt-designer/appitpt-designer';
 import ImageUploadComponent from 'components/imageupload-component';
 //import { DiagramEngine } from 'storm-react-diagrams'
 import './styles/styles.scss';
@@ -98,41 +97,8 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 		return (
 			<Router>
 				<Route path="/" render={(routeProps: LDRouteProps) => {
-					if (routeProps.location.search === "?mode=editor" && mode !== "editor") {
-						this.setState({ ...this.state, mode: "editor" });
-					}
-					if (routeProps.location.search === "?mode=app" && mode !== "app") {
-						this.setState({ ...this.state, mode: "app" });
-					}
-					if (!routeProps.location.search && mode === "initial") {
-						this.setState({ ...this.state, mode: "app" });
-					}
-					if (mode === "editor") {
-						return (
-							<div style={{ flex: "1", background: "white" }}>
-								<AppItptDesigner initiallyDisplayedItptName={cfg.mainItpt}
-									ldTokenString={cfg.appKey} routes={routeProps} />
-								{!isProduction && <DevTools />}
-							</div>
-						);
-					} else
-						if (mode === "app") {
-							return (
-								<div className="app-actual">
-									<LDApproot initiallyDisplayedItptName={cfg.mainItpt}
-										ldTokenString={cfg.appKey} routes={routeProps} />
-									{!isProduction && <div className="mode-switcher">
-										<Link to={{ pathname: routeProps.location.pathname, search: "?mode=editor" }}>
-											Switch to Editor
-											</Link>
-									</div>
-									}
-								</div>
-							);
-						}
-						else {
-							return null;
-						}
+					return <LDApproot initiallyDisplayedItptName={cfg.mainItpt}
+						ldTokenString={cfg.appKey} routes={routeProps} />;
 				}} />
 			</Router>
 		);

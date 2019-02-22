@@ -4,7 +4,7 @@ import { LDRouteProps, LDOwnProps, LDConnectedDispatch, LDConnectedState } from 
 import ThemeProvider from "react-toolbox/lib/ThemeProvider";
 import { appTheme } from "styles/appTheme/appTheme";
 import { BlueprintConfig } from "ldaccess/ldBlueprint";
-import { AIDProps } from "components/itpt-designer/appitpt-designer";
+import { AIEProps } from "components/itpt-editor/appitpt-editor";
 import { Component } from "react";
 import { addBlueprintToRetriever, intrprtrTypeInstanceFromBlueprint } from "appconfig/retrieverAccessFns";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
@@ -88,7 +88,7 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 			this.props.notifyLDOptionsChange(null);
 		}
 	}
-	componentDidUpdate(prevProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps) {
+	componentDidUpdate(prevProps: AIEProps & LDConnectedState & LDConnectedDispatch & LDOwnProps) {
 		/*if (!this.state.hasCompletedFirstRender && prevProps.isInitDemo) {
 			//generate demos for compound itpts
 			/*let prefilledData: any[] = [
