@@ -42,7 +42,8 @@ const initialState: ExplorerState = {
 	mods: {
 		isIdle: true,
 		map: {}
-	}
+	},
+	isLoading: false
 };
 
 /*export type DemoCompleteReceiver = {
@@ -51,11 +52,12 @@ const initialState: ExplorerState = {
 };*/
 export interface AppRootProps {
 	cfg: IAppConfigStatePart;
+	isLoading: boolean;
 }
 export interface AppRootState {
 	isDemoInitialized: boolean;
 	cfg: IAppConfigStatePart;
-	mode: "editor" | "app" | "initial";
+	isLoading: boolean;
 }
 export const applicationStore: Store<ExplorerState> = configureStore(initialState);
 function rootSetup(): void {
@@ -77,6 +79,7 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 		if (!prevState || !prevState.cfg ||
 			prevState.cfg.appKey !== nextProps.cfg.appKey
 			|| prevState.cfg.mainItpt !== nextProps.cfg.mainItpt
+			|| prevState.isLoading !== nextProps.isLoading
 		) {
 			return { ...prevState, ...nextProps };
 		}
@@ -88,19 +91,23 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 		this.state = {
 			isDemoInitialized: false,
 			cfg: { appKey: "", mainItpt: "" },
-			mode: "initial"
+			mode: "initial",
+			isLoading: true
 		};
 	}
 
 	render() {
-		const { mode, cfg, isDemoInitialized } = this.state;
+		const { cfg, isLoading } = this.state;
 		return (
-			<Router>
-				<Route path="/" render={(routeProps: LDRouteProps) => {
-					return <LDApproot initiallyDisplayedItptName={cfg.mainItpt}
-						ldTokenString={cfg.appKey} routes={routeProps} />;
-				}} />
-			</Router>
+			<>{!isLoading ?
+				<Router>
+					<Route path="/" render={(routeProps: LDRouteProps) => {
+						return <LDApproot initiallyDisplayedItptName={cfg.mainItpt}
+							ldTokenString={cfg.appKey} routes={routeProps} />;
+					}} />
+				</Router>
+				: <div className="approot-loading">loading</div>}
+			</>
 		);
 	}
 }

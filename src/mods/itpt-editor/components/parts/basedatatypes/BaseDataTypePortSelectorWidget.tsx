@@ -12,11 +12,11 @@ import { ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { compNeedsUpdate } from "components/reactUtils/compUtilFns";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
-import { BaseContainerRewrite } from "../../../generic/baseContainer-rewrite";
-import { gdsfpLD } from "../../../generic/generatorFns";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { LDDict } from "ldaccess/LDDict";
+import { gdsfpLD } from "components/generic/generatorFns";
+import { BaseContainerRewrite } from "components/generic/baseContainer-rewrite";
 
 export type BaseDataTypePortSelectorProps = {
 	model?: LDPortModel;

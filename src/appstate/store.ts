@@ -42,7 +42,7 @@ export interface ExplorerState {
   mods: IModStatePart;
   appCfg: IAppConfigStatePart;
   isSaving?: boolean;
-  isLoading?: boolean;
+  isLoading: boolean;
   //error: string,
   ldoptionsMap: ILDOptionsMapStatePart;
   ldNonVisualMap: ILDNonvisualIntrprtrMapStatePart;

@@ -5,14 +5,17 @@ import { tap, mergeMap, map, catchError } from 'rxjs/operators';
 import { IModStatePart, SingleModStateKeysDict, IModStatus } from 'appstate/modstate';
 import { of, from } from 'rxjs';
 import { ModAPI } from 'apis/mod-api';
+import { changeMainAppItpt } from 'appconfig/retrieverAccessFns';
 
 export const MOD_LOAD_REQUEST = "Mod/MOD_LOAD_REQUEST";
 export const MOD_LOAD_RESULT = "Mod/MOD_LOAD_RESULT";
+export const MOD_LOAD_RESULT_ALL = "Mod/MOD_LOAD_RESULT_ALL";
 export const MOD_LOAD_ERROR = "Mod/MOD_LOAD_ERROR";
 
 export type ModAction =
 	{ type: 'Mod/MOD_LOAD_REQUEST', modId: string }
 	| { type: 'Mod/MOD_LOAD_RESULT', statusResult: IModStatus }
+	| { type: 'Mod/MOD_LOAD_RESULT_ALL', statusResult: IModStatus }
 	| { type: 'Mod/MOD_LOAD_ERROR', modId: string, message: string };
 
 export interface IModAjaxError {
@@ -22,11 +25,16 @@ export interface IModAjaxError {
 
 export const loadMod = (modId: string) => ({
 	type: MOD_LOAD_REQUEST,
-	id: modId
+	modId
 });
 
 export const loadModResult = (statusResult: IModStatus) => ({
 	type: MOD_LOAD_RESULT,
+	statusResult
+});
+
+export const loadModResultAll = (statusResult: IModStatus) => ({
+	type: MOD_LOAD_RESULT_ALL,
 	statusResult
 });
 
@@ -46,6 +54,9 @@ export const modStatePartReducer = (
 		case MOD_LOAD_RESULT:
 			newState.map[action.statusResult.id] = action.statusResult;
 			return newState;
+		case MOD_LOAD_RESULT_ALL:
+			newState.map[action.statusResult.id] = action.statusResult;
+			return newState;
 		case MOD_LOAD_ERROR:
 			newState.map[action.modId] = { id: action.modId, name: null, state: SingleModStateKeysDict.error, errorMsg: action.message };
 			return newState;
@@ -62,7 +73,14 @@ export const loadModEpic = (action$: ActionsObservable<any>, store: any, { modAP
 		mergeMap((action) => {
 			let rv = from(_MODAPI.getModData(action.modId));
 			return rv.pipe(
-				map((response) => loadModResult(response as any))
+				map((response) => {
+					_MODAPI.setRequiredModLoadingComplete(action.modId);
+					if (_MODAPI.isRequiredLoadingComplete()) {
+						return loadModResultAll(response as any);
+					} else {
+						return loadModResult(response as any);
+					}
+				})
 				,
 				catchError((error: Error) =>
 					of(loadModFailure(action.modId,

@@ -4,7 +4,13 @@ import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
 import { ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
-import appIntprtrRetr from 'appconfig/appItptRetriever';
+import appIntprtrRetr, { appItptRetrFn } from 'appconfig/appItptRetriever';
+import { applicationStore } from "approot";
+import { LDError } from "appstate/LDError";
+import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
+import { ldOptionsClientSideUpdateAction, ldOptionsClientSideCreateAction } from "appstate/epicducks/ldOptions-duck";
+import { appItptUpdateAction } from "appstate/epicducks/appCfg-duck";
+import { IKvStore } from "ldaccess/ikvstore";
 
 /**
  * adds a blueprint defined in the editor to the AppItptRetriever, automatically looks
@@ -39,4 +45,31 @@ export const intrprtrTypeInstanceFromBlueprint = (input: BlueprintConfig): any =
 		}
 	});
 	return rv;
+};
+
+export const changeMainAppItpt = (toItptName: string): void => {
+	const appState = applicationStore.getState();
+	const appKey = appState.appCfg.appKey;
+	//this.generatePrefilled(val.itptList[numItpts - 1]);
+	let newItpt = appItptRetrFn().getItptByNameSelf(toItptName);
+	if (!newItpt) throw new LDError("error in interpreterAPI: could not find " + toItptName);
+	let newItptCfg = newItpt.cfg as BlueprintConfig;
+	let newType = newItptCfg.canInterpretType;
+	let dummyInstance = intrprtrTypeInstanceFromBlueprint(newItptCfg);
+	const appKvKey = appKey + "KvKey";
+	if (appState.ldoptionsMap[appKey]) {
+		let newLDOptions = ldOptionsDeepCopy(appState.ldoptionsMap[appKey]);
+		newLDOptions.resource.kvStores = [
+			{ key: appKvKey, ldType: newType, value: dummyInstance }
+		];
+		applicationStore.dispatch(ldOptionsClientSideUpdateAction(newLDOptions));
+	} else {
+		let kvStores: IKvStore[] = [
+			{ key: appKvKey, ldType: newType, value: dummyInstance }
+		];
+		let lang: string;
+		let alias: string = appKey;
+		applicationStore.dispatch((ldOptionsClientSideCreateAction(kvStores, lang, alias)));
+	}
+	applicationStore.dispatch(appItptUpdateAction(toItptName));
 };

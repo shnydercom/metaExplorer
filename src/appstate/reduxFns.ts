@@ -15,7 +15,7 @@ import { ITPT_REFMAP_BASE } from "ldaccess/iitpt-retriever";
 import { AppRootProps } from "approot";
 
 export const mapStateToPropsRoot = (state: ExplorerState, ownProps: AppRootProps): AppRootProps => {
-	return { cfg: { ...state.appCfg } };
+	return { cfg: { ...state.appCfg }, isLoading: state.isLoading };
 };
 
 //final:

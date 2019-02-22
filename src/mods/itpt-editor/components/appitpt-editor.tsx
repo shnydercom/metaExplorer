@@ -1,9 +1,8 @@
 import { Component, createRef } from "react";
 
-import configuratorTestData from '../../../testing/configuratorTestData';
-import * as prefilledProductItptA from '../../../testing/prefilledProductInterpreter.json';
-import * as prefilledOrganizationItptA from '../../../testing/prefilledOrganizationInterpreter.json';
-import LDApproot, { PureLDApproot } from 'ldapproot';
+import configuratorTestData from './../../../../testing/configuratorTestData';
+import * as prefilledProductItptA from './../../../../testing/prefilledProductInterpreter.json';
+import * as prefilledOrganizationItptA from './../../../../testing/prefilledOrganizationInterpreter.json';
 import Button, { IconButton } from 'react-toolbox/lib/button';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import "storm-react-diagrams/dist/style.min.css";
@@ -13,9 +12,9 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
 import { connect } from "react-redux";
 import { LDDict } from "ldaccess/LDDict";
-import { BlueprintConfig } from "ldaccess/ldBlueprint";
+import ldBlueprint, { BlueprintConfig, OutputKVMap } from "ldaccess/ldBlueprint";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
-import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps } from "appstate/LDProps";
+import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps, LDLocalState } from "appstate/LDProps";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { editorTheme } from "styles/editor/editorTheme";
 import { appTheme } from "styles/appTheme/appTheme";
@@ -25,17 +24,18 @@ import {
 	Link
 } from 'react-router-dom';
 import { Switch } from "react-router";
-import { BaseContainerRewrite } from "../generic/baseContainer-rewrite";
-import { Tabs, Tab } from "react-toolbox/lib/tabs";
+import { BaseContainerRewrite } from "../../../components/generic/baseContainer-rewrite";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
 import { isProduction } from "appstate/store";
-import appItptRetrFn from "appconfig/appItptRetriever";
-import { Layout, Panel, Sidebar, SidebarProps } from "react-toolbox/lib/layout";
+import { Layout, Panel, Sidebar } from "react-toolbox/lib/layout";
 import { NavDrawer } from "react-toolbox/lib/layout";
 import { EditorTray as EditorTray } from "./parts/EditorTray";
 import { DropRefmapResult } from "./parts/RefMapDropSpace";
 import { Input } from "react-toolbox/lib/input";
+import { ILDOptions } from "ldaccess/ildoptions";
+import { initLDLocalState } from "components/generic/generatorFns";
+import { NetworkPreferredToken } from "ldaccess/ildtoken";
 
 export type AIEProps = {
 	logic?: EditorLogic;
@@ -51,21 +51,35 @@ export type AIEState = {
 	drawerActive: boolean;
 	sidebarActive: boolean;
 	mode: "editor" | "app" | "initial";
-};
+} & LDLocalState;
 
 const EDITOR_KV_KEY = "EditorKvKey";
 
+export const ITPT_BLOCK_EDITOR_NAME = "shnyder/block-editor";
+export const ITPT_BLOCK_EDITOR_TYPE = "http://shnyder.com/editortype";
+
+let allMyInputKeys: string[] = [];
+let initialKVStores: IKvStore[] = [];
+export const BlockEditorCfg: BlueprintConfig = {
+	subItptOf: null,
+	nameSelf: ITPT_BLOCK_EDITOR_NAME,
+	canInterpretType: ITPT_BLOCK_EDITOR_TYPE,
+	initialKvStores: initialKVStores,
+	interpretableKeys: allMyInputKeys,
+	crudSkills: "cRUd"
+};
+
+@ldBlueprint(BlockEditorCfg)
 export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & LDConnectedDispatch & LDOwnProps, AIEState> {
-	/*static getDerivedStateFromProps(nextProps: AIDProps & LDConnectedState & LDConnectedDispatch & LDOwnProps, prevState: AIDState): AIDState | null {
-		const curItpt = nextProps.ldOptions.visualInfo.interpretedBy;
-		if (!!curItpt && curItpt !== prevState.currentlyEditingItptName) {
-			return { ...prevState, currentlyEditingItptName: curItpt };
-		}
-		return null;
-	}*/
+
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the itpt you're designing is capable of interpreting -> usually a new generic type
 	logic: EditorLogic;
 	errorNotAvailableMsg: string = "Itpt Editor environment not available. Please check your settings";
+
+	cfg: BlueprintConfig;
+	outputKVMap: OutputKVMap;
+	consumeLDOptions: (ldOptions: ILDOptions) => any;
+	initialKvStores: IKvStore[];
 	private sideBarRef = createRef<HTMLDivElement>();
 
 	constructor(props?: any) {
@@ -78,7 +92,9 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 		} else {
 			this.logic = props.logic;
 		}
+		const ldState = initLDLocalState(this.cfg, props, [], []);
 		this.state = {
+			...ldState,
 			drawerActive: true, sidebarActive: true, mode: "initial",
 			currentlyEditingItptName: null, serialized: "", previewerToken: previewerToken, previewDisplay: "phone", hasCompletedFirstRender: false
 		};
@@ -123,23 +139,23 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
 		let newType = nodesBPCFG.canInterpretType;
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+		newLDOptions.ldToken = new NetworkPreferredToken(this.editTkString(newLDOptions.ldToken.get()));
 		newLDOptions.resource.kvStores = [
 			{ key: EDITOR_KV_KEY, ldType: newType, value: dummyInstance }
 		];
 		this.setState({ ...this.state, serialized: nodesSerialized });
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
-	onMultiConfiguratorButtonClick = (e) => {
+	onMultiConfiguratorButtonClick = () => {
 		this.props.notifyLDOptionsChange(null);
 		let prefilledData: IKvStore[] = configuratorTestData;
-		let newType = "configuratorType";
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		newLDOptions.resource.kvStores = prefilledData;
 		this.setState({ ...this.state, serialized: "" });
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
-	onPrefilledProductButtonClick = (e) => {
+	onPrefilledProductButtonClick = () => {
 		let prefilledData: any = prefilledProductItptA;
 		let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
 		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
@@ -154,7 +170,7 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
-	onPrefilledOrganizationButtonClick = (e) => {
+	onPrefilledOrganizationButtonClick = () => {
 		let prefilledData: any = prefilledOrganizationItptA;
 		let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
 		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
@@ -169,7 +185,7 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
-	onIncreaseIDButtonClick = (e) => {
+	onIncreaseIDButtonClick = () => {
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
 		let kvChangeVar = newLDOptions.resource.kvStores.find((val) => val.ldType && val.ldType.endsWith(UserDefDict.standardItptObjectTypeSuffix));
 		if (!kvChangeVar || !kvChangeVar.value) return;
@@ -229,10 +245,10 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 	}
 
 	renderApp() {
-		const { routes, initiallyDisplayedItptName } = this.props;
+		const { routes } = this.props;
 		return (
 			<div className="app-actual">
-				<BaseContainerRewrite routes={routes} ldTokenString={this.props.ldTokenString} />
+				<BaseContainerRewrite routes={routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
 				{!isProduction && <div className="mode-switcher">
 					<Link to={{ pathname: routes.location.pathname, search: "?mode=editor" }}>
 						Switch to Editor
@@ -313,7 +329,7 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 													)} />
 													<Route path="/" render={(routeProps: LDRouteProps) => {
 														return <>
-															<BaseContainerRewrite routes={routeProps} ldTokenString={this.props.ldTokenString} />
+															<BaseContainerRewrite routes={routeProps} ldTokenString={this.editTkString(this.props.ldTokenString)} />
 														</>;
 													}} />
 												</Switch>
@@ -408,6 +424,10 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 		this.logic.autoDistribute();
 		this.setState({ ...this.state, currentlyEditingItptName: itptCfg.nameSelf });
 		return true;
+	}
+
+	protected editTkString: (inputTkStr: string) => string = (inputTkStr: string) => {
+		return inputTkStr + "-edit";
 	}
 }
 

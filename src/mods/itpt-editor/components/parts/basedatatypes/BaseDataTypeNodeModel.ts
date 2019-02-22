@@ -1,5 +1,5 @@
-import { ItptNodeModel } from "components/itpt-editor/parts/ItptNodeModel";
-import { BASEDATATYPE_MODEL } from "components/itpt-editor/parts/editor-consts";
+import { ItptNodeModel } from "../ItptNodeModel";
+import { BASEDATATYPE_MODEL } from "../editor-consts";
 
 export class BaseDataTypeNodeModel extends ItptNodeModel {
 

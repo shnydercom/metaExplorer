@@ -8,15 +8,16 @@ import { ldNonVisMapReducer } from 'appstate/epicducks/ldNonVisual-duck';
 import { refMapReducer, refMapEpic } from './epicducks/refMap-duck';
 import reduceReducers from './reduceReducers';
 import { linearReducer, linearSplitEpic } from './epicducks/linearSplit-duck';
-import { modStatePartReducer } from './epicducks/mod-duck';
+import loadModEpic, { modStatePartReducer } from './epicducks/mod-duck';
 import { appCfgStatePartReducer } from './epicducks/appCfg-duck';
+import { isLoadingReducer, loadingEpic } from './epicducks/isLoading-duck';
 
 const combLdOptionsMapReducer = reduceReducers(ldOptionsMapReducer, refMapReducer, linearReducer);
 
 //at the level of the root reducer, next-action-predicates should be handled
 export const rootReducer = combineReducers<ExplorerState>({
     appCfg: appCfgStatePartReducer,
-    isLoading: isUploadingImgReducer,
+    isLoading: isLoadingReducer,
     isSaving: isLoadingSchemaReducer,
     ldoptionsMap: combLdOptionsMapReducer,
     ldNonVisualMap: ldNonVisMapReducer,
@@ -28,5 +29,7 @@ export const rootEpic = combineEpics(
     uploadImageEpic,
     loadSchemaEpic,
     requestLDOptionsEpic,
-    refMapEpic
+    refMapEpic,
+    loadModEpic,
+    loadingEpic
 );

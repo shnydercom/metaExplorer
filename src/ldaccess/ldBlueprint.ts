@@ -59,6 +59,7 @@ function handleKVInheritance(baseClassKV: IKvStore[], subClassKV: IKvStore[], is
     return rv;
 }
 
+// tslint:disable-next-line:callable-types
 function blueprintDecorator<T extends { new(...args: any[]): IBlueprintItpt }>(constructorFn: T, blueprintCfg: BlueprintConfig, replaceKVs: boolean = false) {
     var classToExtend = null;
     classToExtend = class extends constructorFn {
@@ -80,6 +81,7 @@ export default function ldBlueprint(blueprintCfg: BlueprintConfig, replaceKVs: b
     }
     if (blueprintCfg.crudSkills == null) throw new LDError("blueprintCfg.crudSkills must not be null");
     if (blueprintCfg.interpretableKeys == null) throw new LDError("blueprintCfg.interpretableKeys must not be null");
+    // tslint:disable-next-line:callable-types
     return <T extends { new(...args: any[]): IBlueprintItpt }>(target: T) => {
         return blueprintDecorator(target, blueprintCfg, replaceKVs);
     };

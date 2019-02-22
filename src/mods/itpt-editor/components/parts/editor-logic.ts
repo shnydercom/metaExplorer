@@ -21,7 +21,6 @@ import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from "ldaccess/kvC
 import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
 import { isObjPropertyRef } from "ldaccess/ldUtils";
 import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesWidgetFactory";
-import { COMP_BASE_CONTAINER } from "../../generic/baseContainer-rewrite";
 import { GeneralDataTypeNodeFactory } from "./generaldatatypes/GeneralDataTypeInstanceFactories";
 import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
 // import { value } from "../../../../node_modules/react-toolbox/lib/dropdown/theme.css";
@@ -34,6 +33,7 @@ import { ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
 import { SettingsLabelFactory } from "./SettingsLabelFactory";
 import { SettingsLinkFactory } from "./SettingsLinkFactory";
 import { VisualKeysDict } from "components/visualcomposition/visualDict";
+import { COMP_BASE_CONTAINER } from "components/generic/baseContainer-rewrite";
 
 export interface NewNodeSig {
 	x: number;
