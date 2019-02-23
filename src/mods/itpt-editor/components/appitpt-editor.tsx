@@ -34,13 +34,12 @@ import { EditorTray as EditorTray } from "./parts/EditorTray";
 import { DropRefmapResult } from "./parts/RefMapDropSpace";
 import { Input } from "react-toolbox/lib/input";
 import { ILDOptions } from "ldaccess/ildoptions";
-import { initLDLocalState } from "components/generic/generatorFns";
+import { initLDLocalState, gdsfpLD } from "components/generic/generatorFns";
 import { NetworkPreferredToken } from "ldaccess/ildtoken";
 
 export type AIEProps = {
 	logic?: EditorLogic;
-	initiallyDisplayedItptName: string | null;
-} & LDOwnProps;
+} & LDConnectedState & LDConnectedDispatch & LDOwnProps;
 
 export type AIEState = {
 	serialized: string;
@@ -56,10 +55,23 @@ export type AIEState = {
 const EDITOR_KV_KEY = "EditorKvKey";
 
 export const ITPT_BLOCK_EDITOR_NAME = "shnyder/block-editor";
-export const ITPT_BLOCK_EDITOR_TYPE = "http://shnyder.com/editortype";
+export const ITPT_BLOCK_EDITOR_TYPE = "http://shnyder.com/editor/blockeditortype";
+export const ITPT_BLOCK_EDITOR_EDITING_ITPT = "http://shnyder.com/editor/currentlyediting";
+export const ITPT_BLOCK_EDITOR_DISPLAYING_ITPT = "http://shnyder.com/editor/currentlydisplaying";
 
-let allMyInputKeys: string[] = [];
-let initialKVStores: IKvStore[] = [];
+let allMyInputKeys: string[] = [ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT];
+let initialKVStores: IKvStore[] = [
+	{
+		key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
+		value: undefined,
+		ldType: LDDict.Text
+	},
+	{
+		key: ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
+		value: undefined,
+		ldType: LDDict.Text
+	}
+];
 export const BlockEditorCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ITPT_BLOCK_EDITOR_NAME,
@@ -70,7 +82,25 @@ export const BlockEditorCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(BlockEditorCfg)
-export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & LDConnectedDispatch & LDOwnProps, AIEState> {
+export class PureAppItptEditor extends Component<AIEProps, AIEState> {
+
+	static getDerivedStateFromProps(nextProps: AIEProps, prevState: AIEState): AIEState | null {
+		let rvLD = gdsfpLD(
+			nextProps, prevState, [],
+			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT],
+			ITPT_BLOCK_EDITOR_TYPE,
+			[], [false, false]);
+		if (!rvLD) {
+			return null;
+		}
+		if (rvLD) {
+			let initiallyDisplayed = rvLD.localValues.get(ITPT_BLOCK_EDITOR_EDITING_ITPT);
+			if (!!initiallyDisplayed && !prevState.currentlyEditingItptName) {
+				return { ...prevState, currentlyEditingItptName: initiallyDisplayed };
+			}
+		}
+		return null;
+	}
 
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the itpt you're designing is capable of interpreting -> usually a new generic type
 	logic: EditorLogic;
@@ -84,6 +114,7 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 
 	constructor(props?: any) {
 		super(props);
+		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		let previewerToken = null;
 		previewerToken = props.ldTokenString + "-previewLDOptions";
 		if (!props.logic) {
@@ -92,7 +123,8 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 		} else {
 			this.logic = props.logic;
 		}
-		const ldState = initLDLocalState(this.cfg, props, [], []);
+		const ldState = initLDLocalState(this.cfg, props, [],
+			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT]);
 		this.state = {
 			...ldState,
 			drawerActive: true, sidebarActive: true, mode: "initial",
@@ -194,10 +226,15 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 	}
 
 	componentDidUpdate(prevProps: AIEProps & LDConnectedState & LDConnectedDispatch & LDOwnProps) {
-		if (!this.state.hasCompletedFirstRender) {
-			this.setState({ ...this.state, hasCompletedFirstRender: true, currentlyEditingItptName: this.props.initiallyDisplayedItptName });
+		const { hasCompletedFirstRender, currentlyEditingItptName, mode } = this.state;
+		if (!hasCompletedFirstRender && !!currentlyEditingItptName) {
+			if (mode === "editor") {
+				this.loadToEditorByName(this.state.currentlyEditingItptName, true);
+			} else {
+				this.loadToEditorByName(this.state.currentlyEditingItptName);
+			}
+			this.setState({ ...this.state, hasCompletedFirstRender: true });
 		}
-
 	}
 
 	toggleDrawerActive = () => {
@@ -247,16 +284,18 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 	renderApp() {
 		const { routes } = this.props;
 		return (
-			<div className="app-actual">
+			<div className="app-actual app-content">
 				<BaseContainerRewrite routes={routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
 				{!isProduction && <div className="mode-switcher">
-					<Link to={{ pathname: routes.location.pathname, search: "?mode=editor" }}>
-						Switch to Editor
-						</Link>
+					<Button label="Switch to Editor" onClick={() => this.setState({ ...this.state, mode: "editor" })} />
 				</div>
 				}
 			</div>
 		);
+		/*previously done through routing:
+		<!--Link to={{ pathname: routes.location.pathname, search: "?mode=editor" }}>
+							Switch to Editor
+						</Link-->*/
 	}
 
 	renderEditor() {
@@ -285,9 +324,10 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 							}}
 						>
 							<div className="fakeheader">
-								<Link to={{ pathname: routes.location.pathname, search: "?mode=app" }}>
+								<Button style={{ color: "white" }} onClick={() => this.setState({ ...this.state, mode: "app" })}>View in full size <FontIcon>fullscreen</FontIcon></Button>
+								{/*<Link to={{ pathname: routes.location.pathname, search: "?mode=app" }}>
 									View in full size <FontIcon>fullscreen</FontIcon>
-								</Link>
+						</Link>*/}
 							</div>
 						</EditorTray>
 					</NavDrawer>
@@ -411,7 +451,7 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 		return { isSuccess: false, message: JSON.stringify(data) };
 	}
 
-	protected loadToEditorByName: (name: string) => boolean = (name: string) => {
+	protected loadToEditorByName: (name: string, isAutodistribute?: boolean) => boolean = (name: string, isAutodistribute?: boolean) => {
 		let itptInfo = this.logic.getItptList().find((itm) => itm.nameSelf === name);
 		let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
 		if (!itptCfg.initialKvStores
@@ -421,7 +461,9 @@ export class PureAppItptEditor extends Component<AIEProps & LDConnectedState & L
 		}
 		this.generatePrefilled(itptCfg);
 		this.logic.diagramFromItptBlueprint(itptCfg);
-		this.logic.autoDistribute();
+		if (isAutodistribute) {
+			this.logic.autoDistribute();
+		}
 		this.setState({ ...this.state, currentlyEditingItptName: itptCfg.nameSelf });
 		return true;
 	}

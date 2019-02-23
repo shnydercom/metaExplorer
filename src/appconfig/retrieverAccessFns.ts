@@ -11,6 +11,8 @@ import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { ldOptionsClientSideUpdateAction, ldOptionsClientSideCreateAction } from "appstate/epicducks/ldOptions-duck";
 import { appItptUpdateAction } from "appstate/epicducks/appCfg-duck";
 import { IKvStore } from "ldaccess/ikvstore";
+import { string } from "prop-types";
+import { determineSingleKVKey } from "components/generic/generatorFns";
 
 /**
  * adds a blueprint defined in the editor to the AppItptRetriever, automatically looks
@@ -39,7 +41,19 @@ export const intrprtrTypeInstanceFromBlueprint = (input: BlueprintConfig): any =
 	input.interpretableKeys.forEach((val) => {
 		try {
 			let propID: string = (val as ObjectPropertyRef).propRef;
-			rv[propID] = null;
+			if (propID) {
+				rv[propID] = null;
+			} else if (val) {
+				const kv = getKVStoreByKey(input.initialKvStores, val as string);
+				if (!kv) {
+					let skvKey = determineSingleKVKey(input.initialKvStores, input.canInterpretType, input.interpretableKeys as string[]);
+					if (skvKey) {
+						rv[val as string] = getKVStoreByKey(input.initialKvStores, skvKey).value[val as string];
+						return;
+					}
+				}
+				rv[val as string] = kv.value;
+			}
 		} catch (error) {
 			rv[val as string] = null;
 		}
@@ -47,13 +61,14 @@ export const intrprtrTypeInstanceFromBlueprint = (input: BlueprintConfig): any =
 	return rv;
 };
 
-export const changeMainAppItpt = (toItptName: string): void => {
+export const changeMainAppItpt = (toItptName: string, startingInstance?: any): void => {
 	const appState = applicationStore.getState();
 	const appKey = appState.appCfg.appKey;
 	//this.generatePrefilled(val.itptList[numItpts - 1]);
 	let newItpt = appItptRetrFn().getItptByNameSelf(toItptName);
 	if (!newItpt) throw new LDError("error in interpreterAPI: could not find " + toItptName);
-	let newItptCfg = newItpt.cfg as BlueprintConfig;
+	let newItptCfg = { ...newItpt.cfg } as BlueprintConfig;
+	newItptCfg.initialKvStores = startingInstance;
 	let newType = newItptCfg.canInterpretType;
 	let dummyInstance = intrprtrTypeInstanceFromBlueprint(newItptCfg);
 	const appKvKey = appKey + "KvKey";

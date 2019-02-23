@@ -17,11 +17,12 @@ export interface EditorBodyProps {
 	currentlyEditingItpt: string | null;
 	changeCurrentlyEditingItpt: (newItpt: string | null) => void;
 	onEditTrayItem: (data: any) => DropRefmapResult;
-	loadToEditorByName: (name: string) => void;
+	loadToEditorByName: (name: string, isDoAutodistribute?: boolean) => void;
 }
 
 export interface EditorBodyState {
 	currentlyEditingItpt: string | null;
+	isReloadToEditor: boolean;
 }
 
 /**
@@ -29,14 +30,10 @@ export interface EditorBodyState {
  */
 export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 
-	static getDerivedStateFromProps(nextProps: EditorBodyProps, prevState: EditorBodyState) {
+	static getDerivedStateFromProps(nextProps: EditorBodyProps, prevState: EditorBodyState): EditorBodyState | null {
 		if (nextProps.currentlyEditingItpt !== prevState.currentlyEditingItpt) {
 			let nextCurEditItpt = nextProps.currentlyEditingItpt;
-			if (nextCurEditItpt) {
-				nextProps.logic.clear();
-				nextProps.loadToEditorByName(nextCurEditItpt);
-			}
-			return { currentlyEditingItpt: nextCurEditItpt };
+			return { currentlyEditingItpt: nextCurEditItpt, isReloadToEditor: true };
 		}
 		return null;
 	}
@@ -44,7 +41,18 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 	private privOnRMDrop = this.onRefMapDrop.bind(this);
 	constructor(props: EditorBodyProps) {
 		super(props);
-		this.state = { currentlyEditingItpt: null };
+		this.state = { currentlyEditingItpt: null, isReloadToEditor: false };
+	}
+
+	componentDidUpdate(nextProps: EditorBodyProps) {
+		const { currentlyEditingItpt, isReloadToEditor} = this.state;
+		if (!isReloadToEditor && currentlyEditingItpt) {
+			if (currentlyEditingItpt) {
+				nextProps.logic.clear();
+				nextProps.loadToEditorByName(currentlyEditingItpt, true);
+				this.setState({ ...this.state, isReloadToEditor: false });
+			}
+		}
 	}
 
 	onRefMapDrop(event) {
