@@ -55,8 +55,9 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 		}
 	}
 
-	onRefMapDrop(event) {
+	onRefMapDrop(event: DragEvent) {
 		var data = JSON.parse(event.dataTransfer.getData("ld-node"));
+		event.stopPropagation();
 		return this.props.onEditTrayItem(data);
 	}
 
