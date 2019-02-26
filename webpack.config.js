@@ -72,6 +72,10 @@ module.exports = { ...sharedWebpackCfg,
       filename: 'style.[contenthash].css',
     }),
     new HtmlWebpackPlugin({
+      //custom props:
+      materialIconsPath: "/static/material-design-icons/iconfont/material-icons.css",
+      robotoPath: "/static/typeface-roboto/index.css", 
+      //plugin props:
       inject: false,
       hash: true,
       template: './src/index.html',
@@ -85,7 +89,16 @@ module.exports = { ...sharedWebpackCfg,
         });
       }
     },
-    new CopyWebpackPlugin([{
+    new CopyWebpackPlugin([
+      {
+        from: 'node_modules/material-design-icons/iconfont',
+        to: 'static/material-design-icons/iconfont'
+      },
+      {
+        from: 'node_modules/typeface-roboto',
+        to: 'static/typeface-roboto'
+      },
+      {
         from: 'assets',
         to: 'static'
       },

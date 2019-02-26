@@ -74,6 +74,8 @@
     "urijs": "^1.19.1"
   },
   "devDependencies": {
+    "material-design-icons": "https://github.com/google/material-design-icons.git",
+    "typeface-roboto": "^0.0.54",
     "@babel/core": "^7.1.5",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.5",

@@ -29,6 +29,11 @@ module.exports = {
       filename: 'style.[contenthash].css',
     }),
     new HtmlWebpackPlugin({
+      //custom props:
+      materialIconsPath: "https://fonts.googleapis.com/icon?family=Material+Icons",
+      robotoPath: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700", 
+      //plugin props:
+      
       inject: false,
       hash: true,
       template: './src/index.html',
