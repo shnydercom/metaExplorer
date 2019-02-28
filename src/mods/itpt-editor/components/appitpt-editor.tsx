@@ -287,7 +287,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			<div className="app-actual app-content">
 				<BaseContainerRewrite routes={routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
 				{!isProduction && <div className="mode-switcher">
-					<Button label="Switch to Editor" onClick={() => this.setState({ ...this.state, mode: "editor" })} />
+					<Button className="editor-switch-btn" icon='edit' floating accent onClick={() => this.setState({ ...this.state, mode: "editor" })} />
 				</div>
 				}
 			</div>

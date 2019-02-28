@@ -130,6 +130,12 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	padding: 20px;
 }
 
+.editor-switch-btn{
+	position: absolute;
+	top: 30px;
+	right: 30px;
+}
+
 .entrypoint-editor {
 	width: 100vw;
 	height: 100%;
