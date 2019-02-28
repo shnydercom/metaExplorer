@@ -107,7 +107,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 		return <div style={{ paddingBottom: "40px", flex: 1 }} className="mdscrollbar">
 			<TreeView entry={specialNodesTreeItem}>{specialNodesText}</TreeView>
 			<TreeView entry={atomicNodesTreeItem}>{atomicNodesText}</TreeView>
-			<TreeView entry={hydraNodesTreeItem}>{hydraNodesText}</TreeView>
+			{/*<TreeView entry={hydraNodesTreeItem}>{hydraNodesText}</TreeView>*/}
 			<TreeView entry={compoundNodesTreeItem}>{compoundNodesText}</TreeView>
 		</div>;
 	}

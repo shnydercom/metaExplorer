@@ -365,3 +365,14 @@ $app-inner-width-90: $app-inner-width * 0.9;
 .flex-filler {
 	flex: 1;
 }
+
+.full-navbar {
+	padding:0 !important;
+	.inner {
+		display: flex;
+		>* {
+			flex: 1;
+			display: flex;
+		}
+	}
+}
