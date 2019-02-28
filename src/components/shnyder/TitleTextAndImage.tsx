@@ -8,11 +8,11 @@ import { UserDefDict } from 'ldaccess/UserDefDict';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
 import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component, ComponentClass, StatelessComponent, CSSProperties } from 'react';
 
 export var TitleTextAndImageName: string = "shnyder/TitleTextAndImage";
 let cfgIntrprtKeys: string[] =
-	[VisualKeysDict.freeContainer, VisualKeysDict.headerTxt, VisualKeysDict.description];
+	[VisualKeysDict.freeContainer, VisualKeysDict.headerTxt, VisualKeysDict.description, VisualKeysDict.directionChangeBreakPoint, VisualKeysDict.switchVerticalDirection, VisualKeysDict.switchHorizontalDirection];
 let initialKVStores: IKvStore[] = [
 	{
 		key: VisualKeysDict.freeContainer,
@@ -28,6 +28,21 @@ let initialKVStores: IKvStore[] = [
 		key: VisualKeysDict.description,
 		value: undefined,
 		ldType: LDDict.Text
+	},
+	{
+		key: VisualKeysDict.directionChangeBreakPoint,
+		value: undefined,
+		ldType: LDDict.Integer
+	},
+	{
+		key: VisualKeysDict.switchVerticalDirection,
+		value: undefined,
+		ldType: LDDict.Boolean
+	},
+	{
+		key: VisualKeysDict.switchHorizontalDirection,
+		value: undefined,
+		ldType: LDDict.Boolean
 	}
 ];
 let bpCfg: BlueprintConfig = {
@@ -38,16 +53,21 @@ let bpCfg: BlueprintConfig = {
 	crudSkills: "cRud"
 };
 
+const DEFAULT_BREAKPOINT = 300;
+
+interface TitleTextAndImageState {
+	isHorizontal: boolean;
+}
 @ldBlueprint(bpCfg)
-export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, LDLocalState>
+export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, LDLocalState & TitleTextAndImageState>
 	implements IBlueprintItpt {
 
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
-		prevState: null | LDLocalState)
-		: null | LDLocalState {
+		prevState: null | LDLocalState & TitleTextAndImageState)
+		: null | LDLocalState & TitleTextAndImageState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.freeContainer], [VisualKeysDict.headerTxt, VisualKeysDict.description]);
+			nextProps, prevState, [VisualKeysDict.freeContainer], [VisualKeysDict.headerTxt, VisualKeysDict.description, VisualKeysDict.directionChangeBreakPoint, VisualKeysDict.switchVerticalDirection, VisualKeysDict.switchHorizontalDirection]);
 		if (!rvLD) {
 			return null;
 		}
@@ -55,6 +75,8 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 			...prevState, ...rvLD
 		};
 	}
+
+	divElement = null;
 
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
@@ -67,23 +89,51 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
+			isHorizontal: false,
 			...initLDLocalState(this.cfg, props,
 				[VisualKeysDict.freeContainer],
-				[VisualKeysDict.headerTxt, VisualKeysDict.description])
+				[VisualKeysDict.headerTxt, VisualKeysDict.description, VisualKeysDict.directionChangeBreakPoint, VisualKeysDict.switchVerticalDirection, VisualKeysDict.switchHorizontalDirection])
 		};
 	}
+
+	determineDirection() {
+		const width = this.divElement.clientWidth;
+		let directionChangeBreakPoint = this.state.localValues.get(VisualKeysDict.directionChangeBreakPoint);
+		directionChangeBreakPoint = directionChangeBreakPoint ? directionChangeBreakPoint : DEFAULT_BREAKPOINT;
+		if (width > directionChangeBreakPoint && !this.state.isHorizontal) {
+			this.setState({ ...this.state, isHorizontal: true });
+		}
+		if (width < directionChangeBreakPoint && this.state.isHorizontal) {
+			this.setState({ ...this.state, isHorizontal: false });
+		}
+	}
+
+	componentDidMount() {
+		this.determineDirection();
+	}
+	componentDidUpdate() {
+		this.determineDirection();
+	}
+
 	render() {
-		const { localValues } = this.state;
+		const { localValues, isHorizontal } = this.state;
 		const headerText = localValues.get(VisualKeysDict.headerTxt);
 		const description = localValues.get(VisualKeysDict.description);
-		return <div className="flex-container" style={{flexDirection: "column-reverse"}}>
-			<div className="flex-filler" style={{minHeight: "300px"}}>
+		const switchVertical = localValues.get(VisualKeysDict.switchVerticalDirection);
+		const switchHorizontal = localValues.get(VisualKeysDict.switchHorizontalDirection);
+		const directionStyle: CSSProperties = isHorizontal
+			? switchHorizontal ? { flexDirection: "row" } : { flexDirection: "row-reverse" }
+			: switchVertical ? { flexDirection: "column" } : { flexDirection: "column-reverse" };
+		return <div className="flex-container"
+			ref={(divElement) => this.divElement = divElement}
+			style={directionStyle}>
+			<div className="flex-filler" style={{ minHeight: DEFAULT_BREAKPOINT }}>
 				{this.renderSub(VisualKeysDict.freeContainer)}
 			</div>
-			<div className="flex-filler vh-centered-column" style={{minHeight: "300px"}}>
-				<h2>{headerText ? headerText : 'headerTextPlaceholder'}</h2>
+			<div className="flex-filler vh-centered-column" style={{ minHeight: "300px" }}>
+				<h2>{headerText ? headerText : ''}</h2>
 				<span> </span>
-				<p>{description ? description : 'descriptionPlaceholder'}</p>
+				<p>{description ? description : ''}</p>
 			</div>
 		</div>;
 	}

@@ -14,7 +14,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "3aad372d-4ab6-4576-a6b2-dbfcb93e3a17",
+                "objRef": "dd5343d2-1cc5-4cfe-a5a5-ee52245c44c3",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -25,13 +25,13 @@
             "freeContainer"
           ]
         },
-        "3aad372d-4ab6-4576-a6b2-dbfcb93e3a17": {
-          "subItptOf": "shnyder/baseContainer",
-          "canInterpretType": "shnyder/ContainerObjType",
-          "nameSelf": "3aad372d-4ab6-4576-a6b2-dbfcb93e3a17",
+        "dd5343d2-1cc5-4cfe-a5a5-ee52245c44c3": {
+          "subItptOf": "shnyder/TitleTextAndImage",
+          "canInterpretType": "shnyder/TitleTextAndImage-ObjectType",
+          "nameSelf": "dd5343d2-1cc5-4cfe-a5a5-ee52245c44c3",
           "initialKvStores": [
             {
-              "key": "in_0",
+              "key": "freeContainer",
               "value": {
                 "objRef": "989393ca-a3e2-4f71-9b17-c421c61b7555",
                 "propRef": null
@@ -39,18 +39,33 @@
               "ldType": "InterpreterClassType"
             },
             {
-              "key": "in_1",
+              "key": "HeaderText",
+              "value": "scan result",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "Description",
               "value": {
-                "objRef": "9648c68e-23a6-4708-b239-c23b824b5066",
-                "propRef": null
+                "objRef": "12b47efe-a4ad-464b-8831-d60fdca73c14",
+                "propRef": "utf8textData"
               },
-              "ldType": "InterpreterClassType"
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "switchVerticalDirection",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
+            },
+            {
+              "key": "switchHorizontalDirection",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "in_0",
-            "in_1"
+            "freeContainer",
+            "Description"
           ]
         },
         "989393ca-a3e2-4f71-9b17-c421c61b7555": {
@@ -79,30 +94,6 @@
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
-        },
-        "9648c68e-23a6-4708-b239-c23b824b5066": {
-          "subItptOf": "shnyder/basichtml/bold",
-          "canInterpretType": "http://schema.org/Text",
-          "nameSelf": "9648c68e-23a6-4708-b239-c23b824b5066",
-          "initialKvStores": [
-            {
-              "key": "singleKvStore",
-              "value": "scan result",
-              "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "singleKvStore",
-              "value": {
-                "objRef": "12b47efe-a4ad-464b-8831-d60fdca73c14",
-                "propRef": "utf8textData"
-              },
-              "ldType": "http://schema.org/Text"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": [
-            "singleKvStore"
-          ]
         }
       },
       "ldType": "InterpreterReferenceMapType"

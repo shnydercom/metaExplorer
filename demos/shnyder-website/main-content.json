@@ -92,6 +92,11 @@
               "key": "Description",
               "value": "See how you and your team can gradually build highly reusable applications with less code.",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "switchHorizontalDirection",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
             }
           ],
           "crudSkills": "cRud",
