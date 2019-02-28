@@ -44,7 +44,9 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 				this.videoDispl.setAttribute('playsinline', 'true');
 				this.videoDispl.srcObject = stream;
 				this.videoDispl.play();
-				this.props.onVideoDisplayReady(this.videoDispl);
+				if (this.props.onVideoDisplayReady) {
+					this.props.onVideoDisplayReady(this.videoDispl);
+				}
 			})
 			.catch((err) => {
 				console.error(err);
@@ -65,7 +67,9 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 
 	setStateToError() {
 		this.setState({ ...this.state, curStep: DOMCameraStateEnum.isError });
-		this.props.onVideoDisplayRemoved();
+		if (this.props.onVideoDisplayRemoved) {
+			this.props.onVideoDisplayRemoved();
+		}
 	}
 	componentDidMount() {
 		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
