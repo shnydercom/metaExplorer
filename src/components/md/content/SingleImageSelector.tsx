@@ -195,7 +195,7 @@ SingleImageSelectorState>
 						return <div className="accept"> {isCamAvailable ? <Button className="btn-extension" icon="add_a_photo" onClick={() => { this.startCamera(); }}>Open Camera</Button> : null}
 							<Button className="btn-extension" icon="add_photo_alternate" onClick={() => { dropzoneRef.open(); }}>Select Image</Button></div>;
 					case SingleImageSelectorStateEnum.isCamShooting:
-						return <DOMCamera onImageCaptured={(a) => {
+						return <DOMCamera showControls onImageCaptured={(a) => {
 							this.onDropSuccess(null, a);
 						}} />;
 					case SingleImageSelectorStateEnum.isDragging:

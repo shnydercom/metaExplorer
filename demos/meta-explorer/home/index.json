@@ -1,0 +1,70 @@
+{
+  "subItptOf": "f425d56a-a9c9-4d0e-a6b1-bcbec23a730c",
+  "canInterpretType": "meta-explorer/home/index-ObjectType",
+  "nameSelf": "meta-explorer/home/index",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "f425d56a-a9c9-4d0e-a6b1-bcbec23a730c": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "f425d56a-a9c9-4d0e-a6b1-bcbec23a730c",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "65f11b15-6ed9-499b-9a4c-30840488ecee",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "c57e4be9-e446-4de4-8cf9-6f8780b65a2e",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
+        "65f11b15-6ed9-499b-9a4c-30840488ecee": {
+          "subItptOf": "meta-explorer/home/welcome-gallery",
+          "canInterpretType": "meta-explorer/home/welcome-gallery-ObjectType",
+          "nameSelf": "65f11b15-6ed9-499b-9a4c-30840488ecee",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "c57e4be9-e446-4de4-8cf9-6f8780b65a2e": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "c57e4be9-e446-4de4-8cf9-6f8780b65a2e",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "let me in!",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "enter",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

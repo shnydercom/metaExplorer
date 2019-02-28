@@ -62,6 +62,23 @@ module.exports = {
       {
         from: 'node_modules/quagga/dist/quagga.min.js',
         to: 'lib/quagga.js'
-      }]),
+      },
+      {
+        from: 'node_modules/swagger-client/browser/index.js',
+        to: 'lib/swagger-client.js'
+      },
+      {
+        from: 'node_modules/qrcode-generator/qrcode.js',
+        to: 'lib/qrcode-generator@1.4.3.js'
+      },
+      {
+        from: 'node_modules/qr-scanner/qr-scanner.min.js',
+        to: 'lib/qr-scanner@1.1.1.js'
+      },
+      {
+        from: 'node_modules/qr-scanner/qr-scanner-worker.min.js',
+        to: 'lib/qr-scanner-worker.min.js@1.1.1.js'
+      },
+    ]),
   ]
 }

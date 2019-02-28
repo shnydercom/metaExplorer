@@ -9,15 +9,18 @@ export enum DOMCameraStateEnum {
 	isVideoing = 4,
 }
 
-export type DOMCameraState = {
-	curStep: DOMCameraStateEnum,
-	vidDeviceList: MediaDeviceInfo[],
-	curId: string
-};
+export interface DOMCameraState {
+	curStep: DOMCameraStateEnum;
+	vidDeviceList: MediaDeviceInfo[];
+	curId: string;
+}
 
-export type DOMCameraProps = {
-	onImageCaptured: (imgURL: string) => void;
-};
+export interface DOMCameraProps {
+	showControls: boolean;
+	onImageCaptured?: (imgURL: string) => void;
+	onVideoDisplayReady?: (video: HTMLVideoElement) => void;
+	onVideoDisplayRemoved?: () => void;
+}
 
 export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 	videoDispl: HTMLVideoElement;
@@ -41,6 +44,12 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 				this.videoDispl.setAttribute('playsinline', 'true');
 				this.videoDispl.srcObject = stream;
 				this.videoDispl.play();
+				this.props.onVideoDisplayReady(this.videoDispl);
+			})
+			.catch((err) => {
+				console.error(err);
+				this.setStateToError();
+				return;
 			});
 	}
 
@@ -48,11 +57,15 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 		if (this.state.curStep !== DOMCameraStateEnum.isError)
 			this.setState({ curStep: DOMCameraStateEnum.isLoading, vidDeviceList: null, curId: null });
 		this.videoDispl.pause();
+		if (this.props.onVideoDisplayRemoved) {
+			this.props.onVideoDisplayRemoved();
+		}
 		this.videoDispl = null;
 	}
 
 	setStateToError() {
 		this.setState({ ...this.state, curStep: DOMCameraStateEnum.isError });
+		this.props.onVideoDisplayRemoved();
 	}
 	componentDidMount() {
 		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
@@ -117,6 +130,7 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 	}
 
 	render() {
+		const { showControls } = this.props;
 		const { curStep, curId } = this.state;
 		return (
 			<div className="dom-camera">
@@ -132,11 +146,13 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 									this.videoDispl = video;
 									this.startStream(curId);
 								}} />
-								<div className="controls-container">
-									<Button icon='camera' floating accent onClick={() => {
-										if (this.props.onImageCaptured) this.getScreenshotAsBlob();
-								}} />
-								</div>
+								{showControls ?
+									<div className="controls-container">
+										<Button icon='camera' floating accent onClick={() => {
+											if (this.props.onImageCaptured) this.getScreenshotAsBlob();
+										}} />
+									</div>
+									: null}
 							</>;
 						default:
 							return null;

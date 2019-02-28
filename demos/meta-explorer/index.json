@@ -1,0 +1,23 @@
+{
+  "subItptOf": "533b0930-66ac-4728-b483-84842ea7d59d",
+  "canInterpretType": "meta-explorer/index-ObjectType",
+  "nameSelf": "meta-explorer/index",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "533b0930-66ac-4728-b483-84842ea7d59d": {
+          "subItptOf": "meta-explorer/topnav",
+          "canInterpretType": "meta-explorer/topnav-ObjectType",
+          "nameSelf": "533b0930-66ac-4728-b483-84842ea7d59d",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

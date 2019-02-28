@@ -54,6 +54,8 @@
     "lodash": "^4.17.4",
     "m-react-splitters": "^1.0.4",
     "metaexplorer-react-components": "file:../metaExplorer-react-components",
+    "qr-scanner": "^1.1.1",
+    "qrcode-generator": "^1.4.3",
     "quagga": "^0.12.1",
     "react": "^16.8.2",
     "react-accessible-accordion": "^2.4.5",
@@ -74,8 +76,6 @@
     "urijs": "^1.19.1"
   },
   "devDependencies": {
-    "material-design-icons": "https://github.com/google/material-design-icons.git",
-    "typeface-roboto": "^0.0.54",
     "@babel/core": "^7.1.5",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.5",
@@ -109,6 +109,7 @@
     "jasmine": "^3.1.0",
     "jest": "^22.4.3",
     "json-loader": "^0.5.7",
+    "material-design-icons": "https://github.com/google/material-design-icons.git",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.5.3",
     "npm": "^5.6.0",
@@ -129,6 +130,7 @@
     "ts-jest": "^22.4.2",
     "ts-loader": "^5.3.0",
     "tslint": "^5.9.1",
+    "typeface-roboto": "^0.0.54",
     "typescript": "3.1.6",
     "typings-for-css-modules-loader": "^1.7.0",
     "uglifyjs-webpack-plugin": "^1.2.4",

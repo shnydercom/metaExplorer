@@ -5,7 +5,7 @@ import { IItptRetriever, ITPT_TAG_ATOMIC, ITPT_TAG_MOD } from "ldaccess/iitpt-re
 //import { Swagger } from 'swagger-client';
 
 // tslint:disable-next-line:no-var-requires
-const Swagger = require('swagger-client');
+//const Swagger = require('swagger-client');
 
 const swaggerURL = "swagger/";
 const swaggerLink = "http://localhost:2222/swagger.json";
@@ -59,6 +59,7 @@ export class SwaggerClientAPI {
   private static scSingleton: SwaggerClientAPI;
   private static async initSwagger(): Promise<SwaggerClientAPI> {
     let rv = new SwaggerClientAPI();
+    const Swagger = await rv.initScriptLoad() as (arg) => void;
     rv.sc = await Swagger(swaggerLink);
     rv.itptsFromClient(rv.sc);
     // Tags interface
@@ -72,6 +73,17 @@ export class SwaggerClientAPI {
 
   protected sc: any;
   protected itptBpcfSet: Map<string, any> = new Map();
+
+  public initScriptLoad() {
+		return new Promise((resolve, reject) => {
+			const script = document.createElement('script');
+			document.body.appendChild(script);
+			script.onload = resolve;
+			script.onerror = reject;
+			script.async = true;
+			script.src = '/lib/swagger-client.js';
+		});
+	}
 
   public itptsFromClient(client: ISwaggerClient) {
     const apis = client.apis;

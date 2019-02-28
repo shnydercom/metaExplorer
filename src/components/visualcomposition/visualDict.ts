@@ -11,6 +11,7 @@ export enum VisualKeysDict {
 	iconImg = "IconImage",
 	videoId = "VideoID",
 	iconName = "iconName",
+	utf8textData = "utf8textData",
 
 	//Interpreters
 	primaryItpt = "primaryInterpreter", //e.g. left icon of a list, upper content of ImgHeadSubDesc

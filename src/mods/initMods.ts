@@ -7,6 +7,7 @@ import { MOD_USERITPT_ID, initUSERITPTClientMod } from "./useritpt/initUserItptM
 import { MOD_ITPTEDITOR_ID, initItptEditorMod } from "./itpt-editor/initItptEditorMod";
 import { applicationStore } from "approot";
 import { loadMod } from "appstate/epicducks/mod-duck";
+import { initQRCODEGENClientMod, MOD_QRCODEGENSCAN_ID } from "./qr-code-genscan/initQRCodeGenScanMod";
 
 export function initMods(modAPI: ModAPI) {
 	//set the required mods (otherwise won't finish to load)
@@ -31,7 +32,14 @@ export function initMods(modAPI: ModAPI) {
 	modAPI.addModInitFn(MOD_ITPTEDITOR_ID,
 		() => initItptEditorMod(true)
 	);
+	modAPI.addModInitFn(MOD_QRCODEGENSCAN_ID,
+		() => initQRCODEGENClientMod()
+	);
 	//get data for mods
+	applicationStore.dispatch(loadMod(MOD_QRCODEGENSCAN_ID));
+	applicationStore.dispatch(loadMod(MOD_GOOGLE_ID));
+	applicationStore.dispatch(loadMod(MOD_MAILCHIMP_ID));
+	applicationStore.dispatch(loadMod(MOD_SWAGGER_ID));
 	applicationStore.dispatch(loadMod(MOD_USERITPT_ID));
 	applicationStore.dispatch(loadMod(MOD_ITPTEDITOR_ID));
 }
