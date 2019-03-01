@@ -1,7 +1,7 @@
 {
   "subItptOf": "7e9d2646-1e29-41b2-b6e0-bcc9fa809ebe",
-  "canInterpretType": "meta-explorer/qr/index-ObjectType",
-  "nameSelf": "meta-explorer/qr/index",
+  "canInterpretType": "shnyder/meta-explorer/qr/index-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/qr/index",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

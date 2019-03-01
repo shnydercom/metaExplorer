@@ -1,7 +1,7 @@
 {
   "subItptOf": "bf8b1635-c41c-474f-94d5-86c73ff1b4c0",
-  "canInterpretType": "demo/components/booking-form-panel-ObjectType",
-  "nameSelf": "demo/components/booking-form-panel",
+  "canInterpretType": "shnyder/generaldemo/components/booking-form-panel-ObjectType",
+  "nameSelf": "shnyder/generaldemo/components/booking-form-panel",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -129,8 +129,8 @@
           ]
         },
         "b4407026-4092-4ef7-88e0-e53f31aa9b30": {
-          "subItptOf": "demo/images/aToBtravels",
-          "canInterpretType": "demo/images/aToBtravels-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/aToBtravels",
+          "canInterpretType": "shnyder/generaldemo/images/aToBtravels-ObjectType",
           "nameSelf": "b4407026-4092-4ef7-88e0-e53f31aa9b30",
           "initialKvStores": [],
           "crudSkills": "cRud",

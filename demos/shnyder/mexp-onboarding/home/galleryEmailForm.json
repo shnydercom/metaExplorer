@@ -1,0 +1,131 @@
+{
+  "subItptOf": "3ceecf9b-c47a-4097-959c-5ef88ad48b70",
+  "canInterpretType": "shnyder/mexp-onboarding/home/galleryEmailForm-ObjectType",
+  "nameSelf": "shnyder/mexp-onboarding/home/galleryEmailForm",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "3ceecf9b-c47a-4097-959c-5ef88ad48b70": {
+          "subItptOf": "shnyder/layout/vh-centered-column",
+          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
+          "nameSelf": "3ceecf9b-c47a-4097-959c-5ef88ad48b70",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "0e9fcb75-e4ef-4e1a-9f22-aa07f27017c4",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "0e9fcb75-e4ef-4e1a-9f22-aa07f27017c4": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "0e9fcb75-e4ef-4e1a-9f22-aa07f27017c4",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "05a0c2aa-c702-4b1c-b635-e5f7552c98b2",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "742bd7d3-5b5d-44ad-b88a-062d1ce2f75a",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "ae694b90-ce4c-43bf-b801-95c8adb530c6",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2"
+          ]
+        },
+        "05a0c2aa-c702-4b1c-b635-e5f7552c98b2": {
+          "subItptOf": "shnyder/basichtml/h3",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "05a0c2aa-c702-4b1c-b635-e5f7552c98b2",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": "Enter",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "742bd7d3-5b5d-44ad-b88a-062d1ce2f75a": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "742bd7d3-5b5d-44ad-b88a-062d1ce2f75a",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "Your Email Address",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": null,
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "ae694b90-ce4c-43bf-b801-95c8adb530c6": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "ae694b90-ce4c-43bf-b801-95c8adb530c6",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "Try MetaExplorer now!",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "../onboarding_one",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    },
+    {
+      "key": "singleKvStore",
+      "value": {
+        "objRef": "742bd7d3-5b5d-44ad-b88a-062d1ce2f75a",
+        "propRef": "singleKvStore"
+      },
+      "ldType": "http://schema.org/Text"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

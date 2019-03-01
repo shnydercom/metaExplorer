@@ -1,7 +1,7 @@
 {
   "subItptOf": "8f44915d-affd-4387-b30f-78351fdd2f2e",
-  "canInterpretType": "demo/barcode-and-product-images-ObjectType",
-  "nameSelf": "demo/barcode-and-product-images",
+  "canInterpretType": "shnyder/generaldemo/barcode-and-product-images-ObjectType",
+  "nameSelf": "shnyder/generaldemo/barcode-and-product-images",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

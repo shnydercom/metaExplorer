@@ -1,7 +1,7 @@
 {
   "subItptOf": "d6cb25a0-15ff-4ceb-bb57-e8d45127a771",
-  "canInterpretType": "demo/screens/booking-ObjectType",
-  "nameSelf": "demo/screens/booking",
+  "canInterpretType": "shnyder/generaldemo/screens/booking-ObjectType",
+  "nameSelf": "shnyder/generaldemo/screens/booking",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -86,8 +86,8 @@
           ]
         },
         "5ef370bd-06f9-43c4-a8e6-3d77d1d0311f": {
-          "subItptOf": "demo/components/booking-form-panel",
-          "canInterpretType": "demo/components/booking-form-panel-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/booking-form-panel",
+          "canInterpretType": "shnyder/generaldemo/components/booking-form-panel-ObjectType",
           "nameSelf": "5ef370bd-06f9-43c4-a8e6-3d77d1d0311f",
           "initialKvStores": [
             {
@@ -153,32 +153,32 @@
           ]
         },
         "346b1d01-5bce-44c9-b8d4-b6842d135915": {
-          "subItptOf": "demo/components/booking-selection-panel",
-          "canInterpretType": "demo/components/booking-selection-panel-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/booking-selection-panel",
+          "canInterpretType": "shnyder/generaldemo/components/booking-selection-panel-ObjectType",
           "nameSelf": "346b1d01-5bce-44c9-b8d4-b6842d135915",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
         "11a65fc2-7b6c-4aa9-9d24-cfd67dfa7d1d": {
-          "subItptOf": "demo/screens/flight-summary",
-          "canInterpretType": "demo/screens/flight-summary-ObjectType",
+          "subItptOf": "shnyder/generaldemo/screens/flight-summary",
+          "canInterpretType": "shnyder/generaldemo/screens/flight-summary-ObjectType",
           "nameSelf": "11a65fc2-7b6c-4aa9-9d24-cfd67dfa7d1d",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
         "a10cf335-844e-4285-87b2-281533a06314": {
-          "subItptOf": "demo/screens/train-summary",
-          "canInterpretType": "demo/screens/train-summary-ObjectType",
+          "subItptOf": "shnyder/generaldemo/screens/train-summary",
+          "canInterpretType": "shnyder/generaldemo/screens/train-summary-ObjectType",
           "nameSelf": "a10cf335-844e-4285-87b2-281533a06314",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
         "92711ce7-df70-449e-ad5b-03210c81c249": {
-          "subItptOf": "demo/screens/bus-summary",
-          "canInterpretType": "demo/screens/train-summary-ObjectType",
+          "subItptOf": "shnyder/generaldemo/screens/bus-summary",
+          "canInterpretType": "shnyder/generaldemo/screens/train-summary-ObjectType",
           "nameSelf": "92711ce7-df70-449e-ad5b-03210c81c249",
           "initialKvStores": [],
           "crudSkills": "cRud",

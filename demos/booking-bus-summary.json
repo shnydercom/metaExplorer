@@ -1,7 +1,7 @@
 {
   "subItptOf": "b6c6d676-00d3-4144-be77-9292d011a000",
-  "canInterpretType": "demo/screens/bus-summary-ObjectType",
-  "nameSelf": "demo/screens/bus-summary",
+  "canInterpretType": "shnyder/generaldemo/screens/bus-summary-ObjectType",
+  "nameSelf": "shnyder/generaldemo/screens/bus-summary",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -75,8 +75,8 @@
           ]
         },
         "59c110f6-7db2-4f42-a215-e86787b5ed2e": {
-          "subItptOf": "demo/components/booking-sel-bus",
-          "canInterpretType": "demo/components/booking-sel-bus-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/booking-sel-bus",
+          "canInterpretType": "shnyder/generaldemo/components/booking-sel-bus-ObjectType",
           "nameSelf": "59c110f6-7db2-4f42-a215-e86787b5ed2e",
           "initialKvStores": [],
           "crudSkills": "cRud",

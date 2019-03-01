@@ -1,0 +1,67 @@
+{
+  "subItptOf": "fc6a6bd8-6ee8-4c59-a92f-d8551e4f085e",
+  "canInterpretType": "shnyder/mexp-onboarding/one/index-ObjectType",
+  "nameSelf": "shnyder/mexp-onboarding/one/index",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "fc6a6bd8-6ee8-4c59-a92f-d8551e4f085e": {
+          "subItptOf": "shnyder/md/NavProcessAtom",
+          "canInterpretType": "shnyder/md/NavProcessAtom-ObjectType",
+          "nameSelf": "fc6a6bd8-6ee8-4c59-a92f-d8551e4f085e",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "a7c512a1-b65e-4dd0-9928-43e0dce2fb56",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "back",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "cancelTxt",
+              "value": "back",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "confirmTxt",
+              "value": "next",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_cancel",
+              "value": "../home/m",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "onboarding_two",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "a7c512a1-b65e-4dd0-9928-43e0dce2fb56": {
+          "subItptOf": "shnyder/mexp-onboarding/one/text",
+          "canInterpretType": "shnyder/mexp-onboarding/one/text-ObjectType",
+          "nameSelf": "a7c512a1-b65e-4dd0-9928-43e0dce2fb56",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

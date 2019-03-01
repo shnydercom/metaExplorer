@@ -1,7 +1,7 @@
 {
   "subItptOf": "a2e085a4-4dc8-47e3-96cc-901d78a5b8e2",
-  "canInterpretType": "meta-explorer/scan/index-ObjectType",
-  "nameSelf": "meta-explorer/scan/index",
+  "canInterpretType": "shnyder/meta-explorer/scan/index-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/scan/index",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

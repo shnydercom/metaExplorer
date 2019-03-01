@@ -1,7 +1,7 @@
 {
   "subItptOf": "fda13943-ebaa-438f-abbf-388a122e0e34",
-  "canInterpretType": "demo/screens/timetracking-ObjectType",
-  "nameSelf": "demo/screens/timetracking",
+  "canInterpretType": "shnyder/generaldemo/screens/timetracking-ObjectType",
+  "nameSelf": "shnyder/generaldemo/screens/timetracking",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -31,8 +31,8 @@
           ]
         },
         "af6918c7-8b06-4510-bdc4-7332c8aad825": {
-          "subItptOf": "demo/components/timetracking-form-panel",
-          "canInterpretType": "demo/components/timetracking-form-panel-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/timetracking-form-panel",
+          "canInterpretType": "shnyder/generaldemo/components/timetracking-form-panel-ObjectType",
           "nameSelf": "af6918c7-8b06-4510-bdc4-7332c8aad825",
           "initialKvStores": [
             {

@@ -1,7 +1,7 @@
 {
   "subItptOf": "97371287-fc38-47ff-ad2b-0279236b2198",
-  "canInterpretType": "demo/screens/game-ObjectType",
-  "nameSelf": "demo/screens/game",
+  "canInterpretType": "shnyder/generaldemo/screens/game-ObjectType",
+  "nameSelf": "shnyder/generaldemo/screens/game",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -75,8 +75,8 @@
           ]
         },
         "214f63e3-dd73-481e-8f0f-187880b5560c": {
-          "subItptOf": "demo/Single-Choice-Game/Romeo-and-Julia",
-          "canInterpretType": "demo/Single-Choice-Game/Romeo-and-Julia-ObjectType",
+          "subItptOf": "shnyder/generaldemo/Single-Choice-Game/Romeo-and-Julia",
+          "canInterpretType": "shnyder/generaldemo/Single-Choice-Game/Romeo-and-Julia-ObjectType",
           "nameSelf": "214f63e3-dd73-481e-8f0f-187880b5560c",
           "initialKvStores": [],
           "crudSkills": "cRud",

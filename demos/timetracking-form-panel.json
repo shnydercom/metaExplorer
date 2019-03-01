@@ -1,7 +1,7 @@
 {
   "subItptOf": "66c1833f-9057-4cfc-b382-ab453c77fd5a",
-  "canInterpretType": "demo/components/timetracking-form-panel-ObjectType",
-  "nameSelf": "demo/components/timetracking-form-panel",
+  "canInterpretType": "shnyder/generaldemo/components/timetracking-form-panel-ObjectType",
+  "nameSelf": "shnyder/generaldemo/components/timetracking-form-panel",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

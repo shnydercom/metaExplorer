@@ -1,7 +1,7 @@
 {
   "subItptOf": "23219dbc-989f-4a61-a60c-55bd76ebc93d",
-  "canInterpretType": "demo/App-ObjectType",
-  "nameSelf": "demo/App",
+  "canInterpretType": "shnyder/generaldemo/App-ObjectType",
+  "nameSelf": "shnyder/generaldemo/App",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -128,48 +128,48 @@
           "interpretableKeys": []
         },
         "f3c5d09b-1a5f-409c-99c3-7871bad2df4c": {
-          "subItptOf": "demo/screens/main",
-          "canInterpretType": "demo/screens/main-ObjectType",
+          "subItptOf": "shnyder/generaldemo/screens/main",
+          "canInterpretType": "shnyder/generaldemo/screens/main-ObjectType",
           "nameSelf": "f3c5d09b-1a5f-409c-99c3-7871bad2df4c",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
         "8112df43-d2c7-434f-b300-f99371b522e7": {
-          "subItptOf": "demo/screens/search",
-          "canInterpretType": "demo/screens/search-ObjectType",
+          "subItptOf": "shnyder/generaldemo/screens/search",
+          "canInterpretType": "shnyder/generaldemo/screens/search-ObjectType",
           "nameSelf": "8112df43-d2c7-434f-b300-f99371b522e7",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
         "da64ede6-a0bb-4b06-b9f9-c1bce1c97468": {
-          "subItptOf": "demo/screens/expense-process",
-          "canInterpretType": "demo/screens/expense-process-ObjectType",
+          "subItptOf": "shnyder/generaldemo/screens/expense-process",
+          "canInterpretType": "shnyder/generaldemo/screens/expense-process-ObjectType",
           "nameSelf": "da64ede6-a0bb-4b06-b9f9-c1bce1c97468",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
         "af3cbaf7-ed5e-47b1-a4cb-467b1a0481cb": {
-          "subItptOf": "demo/screens/game",
-          "canInterpretType": "demo/screens/game-ObjectType",
+          "subItptOf": "shnyder/generaldemo/screens/game",
+          "canInterpretType": "shnyder/generaldemo/screens/game-ObjectType",
           "nameSelf": "af3cbaf7-ed5e-47b1-a4cb-467b1a0481cb",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
         "b2f8bebb-a976-4978-8661-88e22d0559c8": {
-          "subItptOf": "demo/screens/timetracking",
-          "canInterpretType": "demo/screens/timetracking-ObjectType",
+          "subItptOf": "shnyder/generaldemo/screens/timetracking",
+          "canInterpretType": "shnyder/generaldemo/screens/timetracking-ObjectType",
           "nameSelf": "b2f8bebb-a976-4978-8661-88e22d0559c8",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
         "bfda5e82-c896-49c0-a25e-497d258e66ab": {
-          "subItptOf": "demo/screens/booking",
-          "canInterpretType": "demo/screens/booking-ObjectType",
+          "subItptOf": "shnyder/generaldemo/screens/booking",
+          "canInterpretType": "shnyder/generaldemo/screens/booking-ObjectType",
           "nameSelf": "bfda5e82-c896-49c0-a25e-497d258e66ab",
           "initialKvStores": [],
           "crudSkills": "cRud",

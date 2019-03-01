@@ -1,7 +1,7 @@
 {
   "subItptOf": "f425d56a-a9c9-4d0e-a6b1-bcbec23a730c",
-  "canInterpretType": "meta-explorer/home/index-ObjectType",
-  "nameSelf": "meta-explorer/home/index",
+  "canInterpretType": "shnyder/meta-explorer/home/index-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/home/index",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -35,8 +35,8 @@
           ]
         },
         "65f11b15-6ed9-499b-9a4c-30840488ecee": {
-          "subItptOf": "meta-explorer/home/welcome-gallery",
-          "canInterpretType": "meta-explorer/home/welcome-gallery-ObjectType",
+          "subItptOf": "shnyder/meta-explorer/home/welcome-gallery",
+          "canInterpretType": "shnyder/meta-explorer/home/welcome-gallery-ObjectType",
           "nameSelf": "65f11b15-6ed9-499b-9a4c-30840488ecee",
           "initialKvStores": [],
           "crudSkills": "cRud",

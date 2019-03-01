@@ -107,8 +107,8 @@
           ]
         },
         "f9ac6eac-5e61-4940-9e73-44aeb76da97b": {
-          "subItptOf": "demo/images/planeLanding",
-          "canInterpretType": "demo/images/planeLanding-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/planeLanding",
+          "canInterpretType": "shnyder/generaldemo/images/planeLanding-ObjectType",
           "nameSelf": "f9ac6eac-5e61-4940-9e73-44aeb76da97b",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -144,8 +144,8 @@
           ]
         },
         "9542b417-fb21-4ffa-a06f-b3c8498e8f5e": {
-          "subItptOf": "demo/images/parisTrain",
-          "canInterpretType": "demo/images/parisTrain-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/parisTrain",
+          "canInterpretType": "shnyder/generaldemo/images/parisTrain-ObjectType",
           "nameSelf": "9542b417-fb21-4ffa-a06f-b3c8498e8f5e",
           "initialKvStores": [],
           "crudSkills": "cRud",

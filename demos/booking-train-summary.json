@@ -1,7 +1,7 @@
 {
   "subItptOf": "b6c6d676-00d3-4144-be77-9292d011a000",
-  "canInterpretType": "demo/screens/train-summary-ObjectType",
-  "nameSelf": "demo/screens/train-summary",
+  "canInterpretType": "shnyder/generaldemo/screens/train-summary-ObjectType",
+  "nameSelf": "shnyder/generaldemo/screens/train-summary",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -75,8 +75,8 @@
           ]
         },
         "ef5009f6-fe8b-4909-b116-0e9b744790c9": {
-          "subItptOf": "demo/components/booking-sel-train",
-          "canInterpretType": "demo/components/booking-sel-train-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/booking-sel-train",
+          "canInterpretType": "shnyder/generaldemo/components/booking-sel-train-ObjectType",
           "nameSelf": "ef5009f6-fe8b-4909-b116-0e9b744790c9",
           "initialKvStores": [],
           "crudSkills": "cRud",

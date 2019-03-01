@@ -157,8 +157,8 @@
           ]
         },
         "a44f1162-6172-4568-99f9-1510baaf3283": {
-          "subItptOf": "demo/images/londonBus",
-          "canInterpretType": "demo/images/londonBus-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/londonBus",
+          "canInterpretType": "shnyder/generaldemo/images/londonBus-ObjectType",
           "nameSelf": "a44f1162-6172-4568-99f9-1510baaf3283",
           "initialKvStores": [],
           "crudSkills": "cRud",

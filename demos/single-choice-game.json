@@ -1,7 +1,7 @@
 {
   "subItptOf": "b19ddc85-9995-48ae-8bfd-8052f567193b",
-  "canInterpretType": "demo/Single-Choice-Game/Romeo-and-Julia-ObjectType",
-  "nameSelf": "demo/Single-Choice-Game/Romeo-and-Julia",
+  "canInterpretType": "shnyder/generaldemo/Single-Choice-Game/Romeo-and-Julia-ObjectType",
+  "nameSelf": "shnyder/generaldemo/Single-Choice-Game/Romeo-and-Julia",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

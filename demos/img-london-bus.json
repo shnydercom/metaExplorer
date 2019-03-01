@@ -1,7 +1,7 @@
 {
   "subItptOf": "675f8f3d-76fb-40ff-b8a4-df3c6a3f376c",
-  "canInterpretType": "demo/images/londonBus-ObjectType",
-  "nameSelf": "demo/images/londonBus",
+  "canInterpretType": "shnyder/generaldemo/images/londonBus-ObjectType",
+  "nameSelf": "shnyder/generaldemo/images/londonBus",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

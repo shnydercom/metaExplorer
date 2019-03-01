@@ -1,7 +1,7 @@
 {
   "subItptOf": "a0d4ee65-72cf-4bc3-b619-76f72db409b9",
-  "canInterpretType": "demo/components/users-panel-ObjectType",
-  "nameSelf": "demo/components/users-panel",
+  "canInterpretType": "shnyder/generaldemo/components/users-panel-ObjectType",
+  "nameSelf": "shnyder/generaldemo/components/users-panel",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -115,8 +115,8 @@
           ]
         },
         "2a575035-86c1-45ad-82ba-a0e334d4a0a4": {
-          "subItptOf": "demo/components/test-image",
-          "canInterpretType": "demo/components/test-image-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/test-image",
+          "canInterpretType": "shnyder/generaldemo/components/test-image-ObjectType",
           "nameSelf": "2a575035-86c1-45ad-82ba-a0e334d4a0a4",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -458,8 +458,8 @@
           ]
         },
         "7418a11a-be3f-47dc-9ecb-ff476f13dac2": {
-          "subItptOf": "demo/components/charts-image",
-          "canInterpretType": "demo/components/charts-image-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/charts-image",
+          "canInterpretType": "shnyder/generaldemo/components/charts-image-ObjectType",
           "nameSelf": "7418a11a-be3f-47dc-9ecb-ff476f13dac2",
           "initialKvStores": [],
           "crudSkills": "cRud",

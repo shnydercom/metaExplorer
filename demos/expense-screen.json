@@ -1,7 +1,7 @@
 {
   "subItptOf": "554c3038-cd49-4b68-b8f7-6f26905e7cb3",
-  "canInterpretType": "demo/screens/expense-process-ObjectType",
-  "nameSelf": "demo/screens/expense-process",
+  "canInterpretType": "shnyder/generaldemo/screens/expense-process-ObjectType",
+  "nameSelf": "shnyder/generaldemo/screens/expense-process",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -70,8 +70,8 @@
           ]
         },
         "343fe09a-602d-4ae2-9239-3b61b5819147": {
-          "subItptOf": "demo/components/expense-form-panel",
-          "canInterpretType": "demo/components/expense-form-panel-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/expense-form-panel",
+          "canInterpretType": "shnyder/generaldemo/components/expense-form-panel-ObjectType",
           "nameSelf": "343fe09a-602d-4ae2-9239-3b61b5819147",
           "initialKvStores": [],
           "crudSkills": "cRud",

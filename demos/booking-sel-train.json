@@ -1,7 +1,7 @@
 {
   "subItptOf": "bcb9a710-c155-4c2b-bfa7-1b7cff7052d2",
-  "canInterpretType": "demo/components/booking-sel-train-ObjectType",
-  "nameSelf": "demo/components/booking-sel-train",
+  "canInterpretType": "shnyder/generaldemo/components/booking-sel-train-ObjectType",
+  "nameSelf": "shnyder/generaldemo/components/booking-sel-train",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -50,8 +50,8 @@
           ]
         },
         "47af9b40-a9f6-482d-9410-c8e42fa6458f": {
-          "subItptOf": "demo/images/parisTrain",
-          "canInterpretType": "demo/images/parisTrain-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/parisTrain",
+          "canInterpretType": "shnyder/generaldemo/images/parisTrain-ObjectType",
           "nameSelf": "47af9b40-a9f6-482d-9410-c8e42fa6458f",
           "initialKvStores": [],
           "crudSkills": "cRud",

@@ -1,7 +1,7 @@
 {
   "subItptOf": "26aa2efe-db2d-44ee-bb76-e2706c812069",
-  "canInterpretType": "tinyentrepreneur/income-record-form-ObjectType",
-  "nameSelf": "tinyentrepreneur/income-record-form",
+  "canInterpretType": "shnyder/tinyentrepreneur/income-record-form-ObjectType",
+  "nameSelf": "shnyder/tinyentrepreneur/income-record-form",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

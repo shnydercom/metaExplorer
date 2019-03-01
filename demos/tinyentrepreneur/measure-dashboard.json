@@ -1,7 +1,7 @@
 {
   "subItptOf": "185ebea6-e4c1-4307-bb04-3ab5ee556053",
-  "canInterpretType": "tinyentrepreneur/measure-dashboard-ObjectType",
-  "nameSelf": "tinyentrepreneur/measure-dashboard",
+  "canInterpretType": "shnyder/tinyentrepreneur/measure-dashboard-ObjectType",
+  "nameSelf": "shnyder/tinyentrepreneur/measure-dashboard",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

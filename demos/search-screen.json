@@ -1,7 +1,7 @@
 {
   "subItptOf": "16fa4268-e330-4b6f-b732-b0d1b9c6cc9f",
-  "canInterpretType": "demo/screens/search-ObjectType",
-  "nameSelf": "demo/screens/search",
+  "canInterpretType": "shnyder/generaldemo/screens/search-ObjectType",
+  "nameSelf": "shnyder/generaldemo/screens/search",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

@@ -1,7 +1,7 @@
 {
   "subItptOf": "5bd321d6-1bbd-4ba8-bf5e-fd19e6daa4cc",
-  "canInterpretType": "demo/components/actionpanel-ObjectType",
-  "nameSelf": "demo/components/actionpanel",
+  "canInterpretType": "shnyder/generaldemo/components/actionpanel-ObjectType",
+  "nameSelf": "shnyder/generaldemo/components/actionpanel",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -59,8 +59,8 @@
           ]
         },
         "a3836604-3193-4256-a329-51dd55cfbce6": {
-          "subItptOf": "demo/images/shnyderLogo",
-          "canInterpretType": "demo/images/shnyderLogo-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/shnyderLogo",
+          "canInterpretType": "shnyder/generaldemo/images/shnyderLogo-ObjectType",
           "nameSelf": "a3836604-3193-4256-a329-51dd55cfbce6",
           "initialKvStores": [],
           "crudSkills": "cRud",

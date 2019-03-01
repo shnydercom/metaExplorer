@@ -1,7 +1,7 @@
 {
   "subItptOf": "bSub",
-  "canInterpretType": "demo/components/3-Icon-BottomBar-ObjectType",
-  "nameSelf": "demo/components/3-Icon-BottomBar",
+  "canInterpretType": "shnyder/generaldemo/components/3-Icon-BottomBar-ObjectType",
+  "nameSelf": "shnyder/generaldemo/components/3-Icon-BottomBar",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

@@ -1,7 +1,7 @@
 {
   "subItptOf": "bcb9a710-c155-4c2b-bfa7-1b7cff7052d2",
-  "canInterpretType": "demo/components/booking-sel-flight-ObjectType",
-  "nameSelf": "demo/components/booking-sel-flight",
+  "canInterpretType": "shnyder/generaldemo/components/booking-sel-flight-ObjectType",
+  "nameSelf": "shnyder/generaldemo/components/booking-sel-flight",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -50,8 +50,8 @@
           ]
         },
         "e7b909d9-5c0f-4421-b9bd-c6c82f881d79": {
-          "subItptOf": "demo/images/planeLanding",
-          "canInterpretType": "demo/images/planeLanding-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/planeLanding",
+          "canInterpretType": "shnyder/generaldemo/images/planeLanding-ObjectType",
           "nameSelf": "e7b909d9-5c0f-4421-b9bd-c6c82f881d79",
           "initialKvStores": [],
           "crudSkills": "cRud",

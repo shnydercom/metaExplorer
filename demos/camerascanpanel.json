@@ -1,7 +1,7 @@
 {
   "subItptOf": "5bd321d6-1bbd-4ba8-bf5e-fd19e6daa4cc",
-  "canInterpretType": "demo/components/barcode-scan-panel-ObjectType",
-  "nameSelf": "demo/components/barcode-scan-panel",
+  "canInterpretType": "shnyder/generaldemo/components/barcode-scan-panel-ObjectType",
+  "nameSelf": "shnyder/generaldemo/components/barcode-scan-panel",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

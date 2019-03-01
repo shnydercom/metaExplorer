@@ -1,7 +1,7 @@
 {
   "subItptOf": "32b677cb-ce47-4bb6-a58d-6498c6c08149",
-  "canInterpretType": "demo/components/expense-form-panel-ObjectType",
-  "nameSelf": "demo/components/expense-form-panel",
+  "canInterpretType": "shnyder/generaldemo/components/expense-form-panel-ObjectType",
+  "nameSelf": "shnyder/generaldemo/components/expense-form-panel",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

@@ -1,7 +1,7 @@
 {
   "subItptOf": "4a4d2bb3-b5ce-4513-b051-4f93ad088820",
-  "canInterpretType": "tinyentrepreneur/main-menu-ObjectType",
-  "nameSelf": "tinyentrepreneur/main-menu",
+  "canInterpretType": "shnyder/tinyentrepreneur/main-menu-ObjectType",
+  "nameSelf": "shnyder/tinyentrepreneur/main-menu",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -105,8 +105,8 @@
           ]
         },
         "c5e6a443-0700-46f1-a21f-d143302ed9e4": {
-          "subItptOf": "demo/images/aToBtravels",
-          "canInterpretType": "demo/images/aToBtravels-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/aToBtravels",
+          "canInterpretType": "shnyder/generaldemo/images/aToBtravels-ObjectType",
           "nameSelf": "c5e6a443-0700-46f1-a21f-d143302ed9e4",
           "initialKvStores": [],
           "crudSkills": "cRud",

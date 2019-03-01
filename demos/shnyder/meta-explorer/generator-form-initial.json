@@ -1,7 +1,7 @@
 {
   "subItptOf": "0215e1d1-0582-46b3-a7bf-bf08ebd70aea",
-  "canInterpretType": "meta-explorer/generator-form-initial-ObjectType",
-  "nameSelf": "meta-explorer/generator-form-initial",
+  "canInterpretType": "shnyder/meta-explorer/generator-form-initial-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/generator-form-initial",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

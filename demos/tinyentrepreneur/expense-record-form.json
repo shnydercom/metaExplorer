@@ -1,7 +1,7 @@
 {
   "subItptOf": "26aa2efe-db2d-44ee-bb76-e2706c812069",
-  "canInterpretType": "tinyentrepreneur/expense-record-form-ObjectType",
-  "nameSelf": "tinyentrepreneur/expense-record-form",
+  "canInterpretType": "shnyder/tinyentrepreneur/expense-record-form-ObjectType",
+  "nameSelf": "shnyder/tinyentrepreneur/expense-record-form",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

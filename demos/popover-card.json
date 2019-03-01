@@ -1,7 +1,7 @@
 {
   "subItptOf": "b88bf822-4cb3-4e29-accf-dc20819765e0",
-  "canInterpretType": "demo/components/popover-me-ObjectType",
-  "nameSelf": "demo/components/popover-me",
+  "canInterpretType": "shnyder/generaldemo/components/popover-me-ObjectType",
+  "nameSelf": "shnyder/generaldemo/components/popover-me",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -129,8 +129,8 @@
           ]
         },
         "6ede6d86-30ed-47b9-a343-21fdfab2d8ca": {
-          "subItptOf": "demo/components/test-image",
-          "canInterpretType": "demo/components/test-image-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/test-image",
+          "canInterpretType": "shnyder/generaldemo/components/test-image-ObjectType",
           "nameSelf": "6ede6d86-30ed-47b9-a343-21fdfab2d8ca",
           "initialKvStores": [],
           "crudSkills": "cRud",

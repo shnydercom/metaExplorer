@@ -1,7 +1,7 @@
 {
   "subItptOf": "b6c6d676-00d3-4144-be77-9292d011a000",
-  "canInterpretType": "demo/screens/flight-summary-ObjectType",
-  "nameSelf": "demo/screens/flight-summary",
+  "canInterpretType": "shnyder/generaldemo/screens/flight-summary-ObjectType",
+  "nameSelf": "shnyder/generaldemo/screens/flight-summary",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -75,8 +75,8 @@
           ]
         },
         "178c4851-308b-4b54-86af-64141188e999": {
-          "subItptOf": "demo/components/booking-sel-flight",
-          "canInterpretType": "demo/components/booking-sel-flight-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/booking-sel-flight",
+          "canInterpretType": "shnyder/generaldemo/components/booking-sel-flight-ObjectType",
           "nameSelf": "178c4851-308b-4b54-86af-64141188e999",
           "initialKvStores": [],
           "crudSkills": "cRud",

@@ -1,7 +1,7 @@
 {
   "subItptOf": "8f9d5aec-e6cd-4220-9b2c-4115d35ffda4",
-  "canInterpretType": "meta-explorer/top-routing-ObjectType",
-  "nameSelf": "meta-explorer/top-routing",
+  "canInterpretType": "shnyder/meta-explorer/top-routing-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/top-routing",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -58,7 +58,7 @@
             },
             {
               "key": "routePath",
-              "value": "scan",
+              "value": "/scan",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -68,8 +68,8 @@
           ]
         },
         "d0826739-54aa-4f19-9dae-690049ea8243": {
-          "subItptOf": "meta-explorer/scan/index",
-          "canInterpretType": "meta-explorer/scan/index-ObjectType",
+          "subItptOf": "shnyder/meta-explorer/scan/index",
+          "canInterpretType": "shnyder/meta-explorer/scan/index-ObjectType",
           "nameSelf": "d0826739-54aa-4f19-9dae-690049ea8243",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -83,14 +83,14 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "69c35fb5-d0c1-405e-af7e-9374abe28251",
+                "objRef": "be7c355d-6605-4220-a602-fbc8dfb59250",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
             },
             {
               "key": "routePath",
-              "value": "/",
+              "value": "/m",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -99,10 +99,10 @@
             "freeContainer"
           ]
         },
-        "69c35fb5-d0c1-405e-af7e-9374abe28251": {
-          "subItptOf": "meta-explorer/home/index",
-          "canInterpretType": "meta-explorer/home/index-ObjectType",
-          "nameSelf": "69c35fb5-d0c1-405e-af7e-9374abe28251",
+        "be7c355d-6605-4220-a602-fbc8dfb59250": {
+          "subItptOf": "shnyder/mexp-onboarding/index",
+          "canInterpretType": "shnyder/mexp-onboarding/index-ObjectType",
+          "nameSelf": "be7c355d-6605-4220-a602-fbc8dfb59250",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
@@ -122,7 +122,7 @@
             },
             {
               "key": "routePath",
-              "value": "qr",
+              "value": "/qr",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -132,8 +132,8 @@
           ]
         },
         "055267d2-a2c0-43b9-95c4-8303a4c1410d": {
-          "subItptOf": "meta-explorer/qr/index",
-          "canInterpretType": "meta-explorer/qr/index-ObjectType",
+          "subItptOf": "shnyder/meta-explorer/qr/index",
+          "canInterpretType": "shnyder/meta-explorer/qr/index-ObjectType",
           "nameSelf": "055267d2-a2c0-43b9-95c4-8303a4c1410d",
           "initialKvStores": [],
           "crudSkills": "cRud",

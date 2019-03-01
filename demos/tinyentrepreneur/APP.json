@@ -1,7 +1,7 @@
 {
   "subItptOf": "57616b5e-d385-4550-88eb-c1932ad127c8",
-  "canInterpretType": "tinyentrepreneur/APP-ObjectType",
-  "nameSelf": "tinyentrepreneur/APP",
+  "canInterpretType": "shnyder/tinyentrepreneur/APP-ObjectType",
+  "nameSelf": "shnyder/tinyentrepreneur/APP",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -86,8 +86,8 @@
           ]
         },
         "aadda0de-e5bc-4d59-8769-94de035067d7": {
-          "subItptOf": "tinyentrepreneur/main-menu",
-          "canInterpretType": "tinyentrepreneur/main-menu-ObjectType",
+          "subItptOf": "shnyder/tinyentrepreneur/main-menu",
+          "canInterpretType": "shnyder/tinyentrepreneur/main-menu-ObjectType",
           "nameSelf": "aadda0de-e5bc-4d59-8769-94de035067d7",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -118,8 +118,8 @@
           ]
         },
         "6fa90936-a3d3-41ba-a353-22412585def6": {
-          "subItptOf": "tinyentrepreneur/time-tracker-form",
-          "canInterpretType": "tinyentrepreneur/time-tracker-form-ObjectType",
+          "subItptOf": "shnyder/tinyentrepreneur/time-tracker-form",
+          "canInterpretType": "shnyder/tinyentrepreneur/time-tracker-form-ObjectType",
           "nameSelf": "6fa90936-a3d3-41ba-a353-22412585def6",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -150,8 +150,8 @@
           ]
         },
         "c4f890c9-0967-431e-ae78-b5c29a8d08be": {
-          "subItptOf": "tinyentrepreneur/income-record-form",
-          "canInterpretType": "tinyentrepreneur/income-record-form-ObjectType",
+          "subItptOf": "shnyder/tinyentrepreneur/income-record-form",
+          "canInterpretType": "shnyder/tinyentrepreneur/income-record-form-ObjectType",
           "nameSelf": "c4f890c9-0967-431e-ae78-b5c29a8d08be",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -182,8 +182,8 @@
           ]
         },
         "79e44940-30ae-4131-8e11-fcd17beeec6d": {
-          "subItptOf": "tinyentrepreneur/expense-record-form",
-          "canInterpretType": "tinyentrepreneur/expense-record-form-ObjectType",
+          "subItptOf": "shnyder/tinyentrepreneur/expense-record-form",
+          "canInterpretType": "shnyder/tinyentrepreneur/expense-record-form-ObjectType",
           "nameSelf": "79e44940-30ae-4131-8e11-fcd17beeec6d",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -214,8 +214,8 @@
           ]
         },
         "e30d670f-f557-4a5d-aee1-e89128b50895": {
-          "subItptOf": "tinyentrepreneur/measure-dashboard",
-          "canInterpretType": "tinyentrepreneur/measure-dashboard-ObjectType",
+          "subItptOf": "shnyder/tinyentrepreneur/measure-dashboard",
+          "canInterpretType": "shnyder/tinyentrepreneur/measure-dashboard-ObjectType",
           "nameSelf": "e30d670f-f557-4a5d-aee1-e89128b50895",
           "initialKvStores": [],
           "crudSkills": "cRud",

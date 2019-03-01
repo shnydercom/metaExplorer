@@ -1,7 +1,7 @@
 {
   "subItptOf": "4240d82a-6bed-4542-9e59-c305c768435e",
-  "canInterpretType": "meta-explorer/home/welcome-gallery-ObjectType",
-  "nameSelf": "meta-explorer/home/welcome-gallery",
+  "canInterpretType": "shnyder/meta-explorer/home/welcome-gallery-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/home/welcome-gallery",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -69,7 +69,7 @@
             },
             {
               "key": "previousBtnLabel",
-              "value": "Demo",
+              "value": "demo",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -99,7 +99,7 @@
             },
             {
               "key": "nextBtnLabel",
-              "value": "Demo",
+              "value": "demo",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -133,16 +133,16 @@
           "interpretableKeys": []
         },
         "7e551c5c-b455-4700-a832-223d05bb91ab": {
-          "subItptOf": "demo/images/londonBus",
-          "canInterpretType": "demo/images/londonBus-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/londonBus",
+          "canInterpretType": "shnyder/generaldemo/images/londonBus-ObjectType",
           "nameSelf": "7e551c5c-b455-4700-a832-223d05bb91ab",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
         "fd88cff7-3a38-4926-a969-415b52968748": {
-          "subItptOf": "demo/images/parisTrain",
-          "canInterpretType": "demo/images/parisTrain-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/parisTrain",
+          "canInterpretType": "shnyder/generaldemo/images/parisTrain-ObjectType",
           "nameSelf": "fd88cff7-3a38-4926-a969-415b52968748",
           "initialKvStores": [],
           "crudSkills": "cRud",

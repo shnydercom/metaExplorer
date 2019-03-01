@@ -1,7 +1,7 @@
 {
   "subItptOf": "bcb9a710-c155-4c2b-bfa7-1b7cff7052d2",
-  "canInterpretType": "demo/components/booking-sel-bus-ObjectType",
-  "nameSelf": "demo/components/booking-sel-bus",
+  "canInterpretType": "shnyder/generaldemo/components/booking-sel-bus-ObjectType",
+  "nameSelf": "shnyder/generaldemo/components/booking-sel-bus",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -50,8 +50,8 @@
           ]
         },
         "9b018134-ae17-4546-bfca-65f29ea8aabb": {
-          "subItptOf": "demo/images/londonBus",
-          "canInterpretType": "demo/images/londonBus-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/londonBus",
+          "canInterpretType": "shnyder/generaldemo/images/londonBus-ObjectType",
           "nameSelf": "9b018134-ae17-4546-bfca-65f29ea8aabb",
           "initialKvStores": [],
           "crudSkills": "cRud",

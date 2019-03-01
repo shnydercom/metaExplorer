@@ -1,7 +1,7 @@
 {
   "subItptOf": "1023a41a-3f36-45e1-90ac-3ebca69f5715",
-  "canInterpretType": "demo/components/booking-selection-panel-ObjectType",
-  "nameSelf": "demo/components/booking-selection-panel",
+  "canInterpretType": "shnyder/generaldemo/components/booking-selection-panel-ObjectType",
+  "nameSelf": "shnyder/generaldemo/components/booking-selection-panel",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -115,8 +115,8 @@
           ]
         },
         "ba619113-b303-4f8c-b3da-d00a3129e424": {
-          "subItptOf": "demo/images/planeLanding",
-          "canInterpretType": "demo/images/planeLanding-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/planeLanding",
+          "canInterpretType": "shnyder/generaldemo/images/planeLanding-ObjectType",
           "nameSelf": "ba619113-b303-4f8c-b3da-d00a3129e424",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -231,8 +231,8 @@
           ]
         },
         "6a0eb6f1-6d44-4fea-8d22-c045bd655321": {
-          "subItptOf": "demo/images/parisTrain",
-          "canInterpretType": "demo/images/parisTrain-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/parisTrain",
+          "canInterpretType": "shnyder/generaldemo/images/parisTrain-ObjectType",
           "nameSelf": "6a0eb6f1-6d44-4fea-8d22-c045bd655321",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -347,8 +347,8 @@
           ]
         },
         "e7741996-e491-46f3-841a-9cd4d7573688": {
-          "subItptOf": "demo/images/londonBus",
-          "canInterpretType": "demo/images/londonBus-ObjectType",
+          "subItptOf": "shnyder/generaldemo/images/londonBus",
+          "canInterpretType": "shnyder/generaldemo/images/londonBus-ObjectType",
           "nameSelf": "e7741996-e491-46f3-841a-9cd4d7573688",
           "initialKvStores": [],
           "crudSkills": "cRud",

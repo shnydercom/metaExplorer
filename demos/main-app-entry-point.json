@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "b4759e72-bdd3-4da9-ad54-b189cb8752c8": {
-          "subItptOf": "tinyentrepreneur/APP",
-          "canInterpretType": "tinyentrepreneur/APP-ObjectType",
+          "subItptOf": "shnyder/tinyentrepreneur/APP",
+          "canInterpretType": "shnyder/tinyentrepreneur/APP-ObjectType",
           "nameSelf": "b4759e72-bdd3-4da9-ad54-b189cb8752c8",
           "initialKvStores": [],
           "crudSkills": "cRud",

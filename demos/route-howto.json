@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "b3fa86af-beba-484b-8e47-57e8818c1431": {
-          "subItptOf": "demo/components/4-Icon-BottomBar",
-          "canInterpretType": "demo/components/4-Icon-BottomBar-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/4-Icon-BottomBar",
+          "canInterpretType": "shnyder/generaldemo/components/4-Icon-BottomBar-ObjectType",
           "nameSelf": "b3fa86af-beba-484b-8e47-57e8818c1431",
           "initialKvStores": [
             {
@@ -78,8 +78,8 @@
           ]
         },
         "c8e6b251-0fd2-468d-8f85-41d2784ec846": {
-          "subItptOf": "demo/components/4-Icon-BottomBar",
-          "canInterpretType": "demo/components/4-Icon-BottomBar-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/4-Icon-BottomBar",
+          "canInterpretType": "shnyder/generaldemo/components/4-Icon-BottomBar-ObjectType",
           "nameSelf": "c8e6b251-0fd2-468d-8f85-41d2784ec846",
           "initialKvStores": [
             {
@@ -195,8 +195,8 @@
           ]
         },
         "daad360c-333d-4e79-a083-1c8df7976d45": {
-          "subItptOf": "demo/components/4-Icon-BottomBar",
-          "canInterpretType": "demo/components/4-Icon-BottomBar-ObjectType",
+          "subItptOf": "shnyder/generaldemo/components/4-Icon-BottomBar",
+          "canInterpretType": "shnyder/generaldemo/components/4-Icon-BottomBar-ObjectType",
           "nameSelf": "daad360c-333d-4e79-a083-1c8df7976d45",
           "initialKvStores": [
             {
