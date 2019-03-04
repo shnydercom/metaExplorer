@@ -75,7 +75,6 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 
 	constructor(props: any) {
 		super(props);
-		console.log("ImgHeadSubDesc Constructor called");
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
 			...initLDLocalState(this.cfg, props,

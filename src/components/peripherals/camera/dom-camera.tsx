@@ -58,7 +58,7 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 	componentWillUnmount() {
 		if (this.state.curStep !== DOMCameraStateEnum.isError)
 			this.setState({ curStep: DOMCameraStateEnum.isLoading, vidDeviceList: null, curId: null });
-		this.videoDispl.pause();
+		if (this.videoDispl) this.videoDispl.pause();
 		if (this.props.onVideoDisplayRemoved) {
 			this.props.onVideoDisplayRemoved();
 		}
