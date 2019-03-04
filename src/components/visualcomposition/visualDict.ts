@@ -6,6 +6,12 @@ export enum VisualKeysDict {
 	cancelTxt = "cancelTxt",
 	confirmTxt = "confirmTxt",
 
+	//layout
+	switchVerticalDirection = "switchVerticalDirection",
+	switchHorizontalDirection = "switchHorizontalDirection",
+	directionChangeBreakPoint = "directionChangeBreakPoint",
+	cssClassName = "cssClass", //TODO: follow development of http://pending.schema.org/cssSelector and adjust
+
 	//other
 	popOverContent = "PopOverContent",
 	iconImg = "IconImage",

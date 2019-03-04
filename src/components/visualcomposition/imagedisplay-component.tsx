@@ -5,16 +5,14 @@ import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldacc
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
-import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
-import { getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
-import { getKVValue } from 'ldaccess/ldUtils';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { gdsfpLD, initLDLocalState } from '../generic/generatorFns';
+import { VisualKeysDict } from './visualDict';
 
 let cfgType: string = LDDict.ImageObject;
 export const CSS_OBJECT_FIT = "CSSObjectFit";
 let cfgIntrprtKeys: string[] =
-	[LDDict.name, LDDict.fileFormat, LDDict.contentUrl, CSS_OBJECT_FIT];
+	[LDDict.name, LDDict.fileFormat, LDDict.contentUrl, CSS_OBJECT_FIT, VisualKeysDict.cssClassName];
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
@@ -33,7 +31,7 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: LDLocalState): null | LDLocalState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [], [LDDict.name, LDDict.fileFormat, LDDict.contentUrl, CSS_OBJECT_FIT], cfgType);
+			nextProps, prevState, [], [LDDict.name, LDDict.fileFormat, LDDict.contentUrl, CSS_OBJECT_FIT, VisualKeysDict.cssClassName], cfgType);
 		if (!rvLD) {
 			return null;
 		}
@@ -49,7 +47,7 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		this.state = initLDLocalState(this.cfg, props, [], [LDDict.name, LDDict.fileFormat, LDDict.contentUrl, CSS_OBJECT_FIT]);
+		this.state = initLDLocalState(this.cfg, props, [], [LDDict.name, LDDict.fileFormat, LDDict.contentUrl, CSS_OBJECT_FIT, VisualKeysDict.cssClassName]);
 	}
 
 	render() {
@@ -57,6 +55,8 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 		const { localValues } = this.state;
 		let objFit = localValues.get(CSS_OBJECT_FIT);
 		objFit = objFit ? objFit : "unset";
+		let cssClassName = localValues.get(VisualKeysDict.cssClassName);
+		cssClassName = cssClassName ? cssClassName : "";
 		let imgLnk: string = localValues.get(LDDict.contentUrl);
 		if (imgLnk
 			&& !imgLnk.startsWith("http://")
@@ -65,8 +65,8 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 			imgLnk = "http://localhost:1111/api/ysj/media/jpgs/" + imgLnk;
 		}
 		if (!ldOptions) return <div>no Image data</div>;
-		return <div className="imgdisplay">
-			<img alt="" src={imgLnk} className="imgdisplay is-loading"
+		return <div className={"imgdisplay " + cssClassName}>
+			<img alt="" src={imgLnk} className="is-loading"
 				onLoad={
 					(ev) => {
 						ev.currentTarget.classList.remove("is-loading");
