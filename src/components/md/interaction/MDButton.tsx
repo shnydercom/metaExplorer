@@ -7,7 +7,7 @@ import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 
 import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 
-import { Button } from 'react-toolbox/lib/button/';
+import { Button, IconButton } from 'react-toolbox/lib/button/';
 import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
@@ -15,11 +15,15 @@ import { cleanRouteString } from '../../routing/route-helper-fns';
 import { ActionKeysDict } from 'components/actions/ActionDict';
 
 export const MDButtonName = "shnyder/md/Button";
+const fontIcon = "fontIcon";
+const isIcon = "isIcon";
 let cfgIntrprtKeys: string[] =
 	[
 		VisualKeysDict.confirmTxt,
 		VisualKeysDict.routeSend_confirm,
-		ActionKeysDict.action_confirm
+		ActionKeysDict.action_confirm,
+		fontIcon,
+		isIcon
 	];
 let initialKVStores: IKvStore[] = [
 	{
@@ -36,7 +40,17 @@ let initialKVStores: IKvStore[] = [
 		key: ActionKeysDict.action_confirm,
 		value: undefined,
 		ldType: LDDict.Action
-	}
+	},
+	{
+		key: fontIcon,
+		value: undefined,
+		ldType: LDDict.Text
+	},
+	{
+		key: isIcon,
+		value: undefined,
+		ldType: LDDict.Boolean
+	},
 ];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
@@ -58,10 +72,13 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 		: null | MDButtonState & LDLocalState {
 		let rvLD = gdsfpLD(
 			nextProps, prevState, [VisualKeysDict.freeContainer],
-			 [
+			[
 				VisualKeysDict.confirmTxt,
+				VisualKeysDict.routeSend_cancel,
 				VisualKeysDict.routeSend_confirm,
-				ActionKeysDict.action_confirm
+				ActionKeysDict.action_confirm,
+				fontIcon,
+				isIcon
 			]);
 		if (!rvLD) {
 			return null;
@@ -91,7 +108,9 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 					VisualKeysDict.confirmTxt,
 					VisualKeysDict.routeSend_cancel,
 					VisualKeysDict.routeSend_confirm,
-					ActionKeysDict.action_confirm
+					ActionKeysDict.action_confirm,
+					fontIcon,
+					isIcon
 				])
 		};
 	}
@@ -108,13 +127,19 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 		const { isDoRedirectConfirm, localValues } = this.state;
 		const routeSendConfirm = localValues.get(VisualKeysDict.routeSend_confirm);
 		const confirmTxt = localValues.get(VisualKeysDict.confirmTxt);
+		const iconUrlVal = localValues.get(fontIcon);
+		let isIconVal = localValues.get(isIcon);
+		isIconVal = !!isIconVal;
 		if (isDoRedirectConfirm && routeSendConfirm) {
 			let route: string = cleanRouteString(routeSendConfirm, this.props.routes);
 			//if (match.params.nextPath === undefined) match.params.nextPath = route;
 			this.setState({ ...this.state, isDoRedirectConfirm: false });
 			return <Redirect to={route} />;
 		}
-		return <Button raised label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />;
+		if (isIconVal){
+			return <Button accent floating icon={iconUrlVal ? iconUrlVal : null} onClick={() => this.onConfirmClick()} ></Button>;
+		}
+		return <Button icon={iconUrlVal ? iconUrlVal : null} label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />;
 	}
 }
 export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureMDButton);

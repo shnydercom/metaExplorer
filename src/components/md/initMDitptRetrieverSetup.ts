@@ -25,6 +25,7 @@ import { JSONArrayToCompactInfoArrayName, JSONArrayToCompactInfoArray } from "da
 import { VisualTypesDict } from "components/visualcomposition/visualDict";
 import { NavBarFreeContainerName, PureNavBarFreeContainer } from "./navigation/NavBarFreeContainer";
 import { CSSWrapperName, PureCSSWrapper } from "components/layout/CSSWrapper";
+import { PureThemeProviderDark, ThemeProviderDarkName } from "./navigation/DarkThemeProvider";
 
 /**
  * sorry for the long function name //TODO: change
@@ -70,6 +71,7 @@ export function initMDitptFnAsDefault() {
 	appIntRetr.addItpt(LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(LayoutCircleDisplayName, PureCircleLayout, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(CSSWrapperName, PureCSSWrapper, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(ThemeProviderDarkName, PureThemeProviderDark, "cRud", [ITPT_TAG_ATOMIC]);
 
 	//register list-itpts
 	appIntRetr.addItpt(SectionedListName, PureSectionedList, "cRud", [ITPT_TAG_ATOMIC]);

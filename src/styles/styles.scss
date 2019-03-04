@@ -119,7 +119,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	max-height: fit-content;
 	min-height: inherit;
 
-	> img {
+	>img {
 		animation: fadein 250ms;
 		height: 100%;
 		width: 100%;
@@ -400,19 +400,24 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	width: 100%;
 	min-height: 3.5em;
 	padding: 1em;
-	> img {
+
+	>img {
 		animation: none !important;
 		transition: none !important;
 	}
 }
+
 .hero-gallery {
 	min-height: 80%;
+
 	.bg-container {
 		background-color: #00375f;
 	}
 }
+
 .hero-front-inner {
 	background-image: linear-gradient(to top, #0e1727, rgba(0, 27, 29, 0.8));
+	box-shadow: inset 0px 0px 15px 1px rgba(0, 0, 0, 0.54118);
 }
 
 .bluebg {
@@ -421,11 +426,15 @@ $app-inner-width-90: $app-inner-width * 0.9;
 
 .shnyder-nav {
 	background-color: #00375f;
+
 	div div {
 		box-shadow: none !important;
+
 		span {
-			background-color: rgba(255, 255, 255, 0.4);;
+			background-color: rgba(255, 255, 255, 0.4);
+			;
 		}
+
 		div span {
 			background-color: transparent;
 		}
@@ -435,7 +444,44 @@ $app-inner-width-90: $app-inner-width * 0.9;
 .onboarding-sig {
 	height: 7em;
 	min-height: 7em;
-	> img {
+
+	>img {
 		width: 6.2em;
+	}
+}
+
+.onboarding-form {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
+
+	button {
+		background-color: #edc11cff !important;
+		color: black !important;
+		align-self: center;
+		margin-top: 1.5em;
+		margin-right: 1em;
+	}
+}
+
+.dense-form {
+	flex: 1;
+	align-self: center;
+	display: flex;
+	flex-direction: column;
+	margin: 2em;
+	margin-top: 3em;
+	margin-right: 0.5em;
+
+	>* {
+		flex: 1;
+		margin: 0;
+		text-align: center !important;
+		padding-bottom: 0 !important;
+
+	}
+
+	label {
+		color: white;
 	}
 }
