@@ -405,8 +405,17 @@ $app-inner-width-90: $app-inner-width * 0.9;
 		transition: none !important;
 	}
 }
+.hero-gallery {
+	.bg-container {
+		background-color: #00375f;
+	}
+}
 .hero-front-inner {
 	background-image: linear-gradient(to top, #0e1727, rgba(0, 27, 29, 0.8));
+}
+
+.bluebg {
+	background-color: #00375f;
 }
 
 .onboarding-sig {

@@ -24,6 +24,7 @@ import { PureCompactInfoListElement } from "./content/CompactInfoListElement";
 import { JSONArrayToCompactInfoArrayName, JSONArrayToCompactInfoArray } from "datatransformation/JSONArrayToCompactInfoArray";
 import { VisualTypesDict } from "components/visualcomposition/visualDict";
 import { NavBarFreeContainerName, PureNavBarFreeContainer } from "./navigation/NavBarFreeContainer";
+import { CSSWrapperName, PureCSSWrapper } from "components/layout/CSSWrapper";
 
 /**
  * sorry for the long function name //TODO: change
@@ -68,6 +69,7 @@ export function initMDitptFnAsDefault() {
 	appIntRetr.addItpt(SingleImageSelectorName, PureSingleImageSelector, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(LayoutCircleDisplayName, PureCircleLayout, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(CSSWrapperName, PureCSSWrapper, "cRud", [ITPT_TAG_ATOMIC]);
 
 	//register list-itpts
 	appIntRetr.addItpt(SectionedListName, PureSectionedList, "cRud", [ITPT_TAG_ATOMIC]);
