@@ -16,6 +16,7 @@ import { generateItptFromCompInfo, initLDLocalState, gdsfpLD } from '../../gener
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
+import { classNamesLD } from 'components/reactUtils/compUtilFns';
 
 export const NavBarWActionsName = "shnyder/md/NavBarWActions";
 
@@ -28,7 +29,8 @@ let cfgIntrprtValueKeys: string[] = [
 	VisualKeysDict.headerTxt,
 	VisualKeysDict.routeSend_search,
 	VisualKeysDict.iconName,
-	VisualKeysDict.routeSend_cancel
+	VisualKeysDict.routeSend_cancel,
+	VisualKeysDict.cssClassName
 ];
 let cfgIntrprtKeys: string[] = [...cfgIntrprtItptKeys, ...cfgIntrprtValueKeys];
 let initialKVStores: IKvStore[] = [
@@ -62,6 +64,11 @@ let initialKVStores: IKvStore[] = [
 		value: undefined,
 		ldType: VisualTypesDict.route_added,
 	},
+	{
+		key: VisualKeysDict.cssClassName,
+		value: undefined,
+		ldType: LDDict.Text
+	}
 ];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
@@ -160,6 +167,7 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 			<AppBar title={headerText ? headerText : "Menu"}
 				leftIcon={routeSendCancel ? "arrow_back" : null}
 				onLeftIconClick={() => this.onCancelClick()}
+				className={classNamesLD(null, localValues)}
 			>
 				<Navigation type='horizontal'>
 					{routeSendSearch

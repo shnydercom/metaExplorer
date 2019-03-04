@@ -15,10 +15,11 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 import { Input, InputTheme } from 'react-toolbox/lib/input';
 import { Redirect } from 'react-router';
 import { cleanRouteString } from '../../routing/route-helper-fns';
+import { classNamesLD } from 'components/reactUtils/compUtilFns';
 
 export const NavSearchBarName = "shnyder/md/NavSearchBar";
 let cfgIntrprtKeys: string[] =
-	[VisualKeysDict.freeContainer, VisualKeysDict.searchText, VisualKeysDict.routeSend_back];
+	[VisualKeysDict.freeContainer, VisualKeysDict.searchText, VisualKeysDict.routeSend_back, VisualKeysDict.cssClassName];
 let initialKVStores: IKvStore[] = [
 	{
 		key: VisualKeysDict.freeContainer,
@@ -34,6 +35,11 @@ let initialKVStores: IKvStore[] = [
 		key: VisualKeysDict.routeSend_back,
 		value: undefined,
 		ldType: VisualTypesDict.route_added,
+	},
+	{
+		key: VisualKeysDict.cssClassName,
+		value: undefined,
+		ldType: LDDict.Text
 	},
 	{
 		key: VisualKeysDict.searchText,
@@ -64,7 +70,7 @@ NavSearchBarState>
 		prevState: NavSearchBarState): null | NavSearchBarState {
 		let rvLD = gdsfpLD(
 			nextProps, prevState, [VisualKeysDict.freeContainer],
-			[VisualKeysDict.searchText, VisualKeysDict.routeSend_back, UserDefDict.outputKVMapKey]);
+			[VisualKeysDict.searchText, VisualKeysDict.routeSend_back, VisualKeysDict.cssClassName, UserDefDict.outputKVMapKey]);
 		if (!rvLD) {
 			return null;
 		}
@@ -86,7 +92,7 @@ NavSearchBarState>
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, props,
 			[VisualKeysDict.freeContainer],
-			[VisualKeysDict.searchText, VisualKeysDict.routeSend_back, UserDefDict.outputKVMapKey]);
+			[VisualKeysDict.searchText, VisualKeysDict.routeSend_back, VisualKeysDict.cssClassName, UserDefDict.outputKVMapKey]);
 		this.state = {
 			searchValue: ldState.localValues.get(VisualKeysDict.searchText),
 			routeSendBack: ldState.localValues.get(VisualKeysDict.routeSend_back),
@@ -112,7 +118,7 @@ NavSearchBarState>
 		this.setState({ ...this.state, isDoRedirect: true });
 	}
 	render() {
-		const { searchValue, isDoRedirect, routeSendBack } = this.state;
+		const { searchValue, isDoRedirect, routeSendBack, localValues } = this.state;
 		if (isDoRedirect) {
 			let route: string = cleanRouteString(routeSendBack, this.props.routes);
 			this.setState({ ...this.state, isDoRedirect: false });
@@ -120,7 +126,9 @@ NavSearchBarState>
 		}
 		return (
 			<>
-				<AppBar leftIcon='arrow_back' onLeftIconClick={() => this.onBackBtnClick()} rightIcon='search'>
+				<AppBar
+					className={classNamesLD(null, localValues)}
+				leftIcon='arrow_back' onLeftIconClick={() => this.onBackBtnClick()} rightIcon='search'>
 					<Input type='text'
 						className='searchbar-input'
 						label=""

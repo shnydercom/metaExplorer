@@ -11,6 +11,8 @@ import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 import Navigation from 'react-toolbox/lib/navigation/Navigation.js';
 import { generateItptFromCompInfo, initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
+import { classNamesLD } from 'components/reactUtils/compUtilFns';
+import { LDDict } from 'ldaccess/LDDict';
 
 export const NavBarFreeContainerName = "shnyder/md/NavBarFreeContainer";
 
@@ -20,6 +22,7 @@ let cfgIntrprtItptKeys: string[] =
 		VisualKeysDict.primaryItpt
 	];
 let cfgIntrprtValueKeys: string[] = [
+	VisualKeysDict.cssClassName
 ];
 let cfgIntrprtKeys: string[] = [...cfgIntrprtItptKeys, ...cfgIntrprtValueKeys];
 let initialKVStores: IKvStore[] = [
@@ -33,7 +36,11 @@ let initialKVStores: IKvStore[] = [
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
-
+	{
+		key: VisualKeysDict.cssClassName,
+		value: undefined,
+		ldType: LDDict.Text
+	}
 ];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
@@ -84,10 +91,10 @@ export class PureNavBarFreeContainer extends Component<LDConnectedState & LDConn
 	}
 
 	render() {
-		const {  compInfos } = this.state;
+		const {  compInfos, localValues } = this.state;
 		const hasPrimaryContent = compInfos.has(VisualKeysDict.primaryItpt);
 		return <>
-			<AppBar className="full-navbar">
+			<AppBar className={classNamesLD("full-navbar", localValues)}>
 				<Navigation type='horizontal'>
 					{hasPrimaryContent
 						? <>{this.renderSub(VisualKeysDict.primaryItpt)}</>

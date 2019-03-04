@@ -180,6 +180,11 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "cssClass",
+              "value": "flat",
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",
@@ -203,12 +208,12 @@
           "initialKvStores": [
             {
               "key": "IconURL_1",
-              "value": "/static/scan_black.svg",
+              "value": "/static/scan_white.svg",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "IconURL_1_Disabled",
-              "value": "/static/scan_grey.svg",
+              "value": "/static/scan_lightblue.svg",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -218,12 +223,12 @@
             },
             {
               "key": "IconURL_2",
-              "value": "/static/home_black.svg",
+              "value": "/static/home_white.svg",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "IconURL_2_Disabled",
-              "value": "/static/home_grey.svg",
+              "value": "/static/home_lightblue.svg",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -233,18 +238,23 @@
             },
             {
               "key": "IconURL_3",
-              "value": "/static/qr_black.svg",
+              "value": "/static/qr_white.svg",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "IconURL_3_Disabled",
-              "value": "/static/qr_grey.svg",
+              "value": "/static/qr_lightblue.svg",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "RouteSend_3",
               "value": "/qr",
               "ldType": "Route_Added"
+            },
+            {
+              "key": "cssClass",
+              "value": "shnyder-nav",
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",

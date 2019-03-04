@@ -16,6 +16,7 @@ import { checkAllFilled } from 'GeneralUtils';
 import { Redirect, Route } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
+import { classNamesLD } from 'components/reactUtils/compUtilFns';
 
 export const ICON_URLS: string[] = [
 	"IconURL_1",
@@ -43,6 +44,7 @@ export const BOTTOMNAV_VALUE_FIELDS: string[] = [
 	...ICON_URLS,
 	...ICON_URLS_DISABLED,
 	...ROUTES_SEND,
+	VisualKeysDict.cssClassName,
 	UserDefDict.outputKVMapKey
 ];
 
@@ -81,6 +83,13 @@ for (let i = 0; i < ICON_URLS.length; i++) {
 		ldType: VisualTypesDict.route_added
 	});
 }
+cfgIntrprtKeys.push(VisualKeysDict.cssClassName);
+initialKVStores.push({
+	key: VisualKeysDict.cssClassName,
+	value: undefined,
+	ldType: LDDict.Text
+});
+
 initialKVStores.push({
 	key: CHANGED_ROUTE_OUTPUT,
 	value: undefined,
@@ -214,8 +223,8 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 	generateTab(imgSrcActive, imgSrcInActive: string, route: string, isActive: boolean, key: string): JSX.Element {
 		//const mustRedirect = match && isActive && (match.params.lastPath !== undefined || match.params.lastPath !== null) && match.params.lastPath !== route;
 		return <Tab label='' key={key} className="bottom-nav-tab" icon={isActive
-			? <img src={imgSrcActive} height="30px" />
-			: <img src={imgSrcInActive} height="30px" />}>
+			? <img src={imgSrcActive} height="inherit" />
+			: <img src={imgSrcInActive} height="inherit" />}>
 		</Tab>;
 	}
 	generateRedirect(tabIdx: number): JSX.Element {
@@ -236,7 +245,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 	}
 
 	render() {
-		const { numTabs, isGenerateAtPositions, iconEnabledURLs, iconDisabledURLs, routes, tabIdx } = this.state;
+		const { numTabs, isGenerateAtPositions, iconEnabledURLs, iconDisabledURLs, routes, tabIdx, localValues } = this.state;
 
 		let tabs = [];
 		let cleanedTabIdx = tabIdx;
@@ -254,7 +263,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 				"t-" + idx);
 			tabs.push(newTab);
 		}
-		return <div className="bottom-nav">
+		return <div className={classNamesLD("bottom-nav", localValues)}>
 			<div className="bottom-nav-topfree mdscrollbar">
 				{this.generateRedirect(tabIdx)}
 				<Route component={this.renderFreeContainer} />
@@ -277,7 +286,7 @@ let topBpCfg: BlueprintConfig = {
 @ldBlueprint(topBpCfg)
 export class PureTopNavigation extends PureBottomNavigation {
 	render() {
-		const { numTabs, isGenerateAtPositions, iconEnabledURLs, iconDisabledURLs, routes, tabIdx } = this.state;
+		const { numTabs, isGenerateAtPositions, iconEnabledURLs, iconDisabledURLs, routes, tabIdx, localValues } = this.state;
 
 		let tabs = [];
 		let cleanedTabIdx = tabIdx;
@@ -296,7 +305,7 @@ export class PureTopNavigation extends PureBottomNavigation {
 			tabs.push(newTab);
 		}
 		return <div className="top-nav">
-			<Tabs index={tabIdx} onChange={this.onTabChanged} fixed className="top-nav-tabs">
+			<Tabs index={tabIdx} onChange={this.onTabChanged} fixed className={classNamesLD("top-nav-tabs", localValues)}>
 				{tabs}
 			</Tabs>
 			<div className="mdscrollbar top-nav-bottomfree">

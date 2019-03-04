@@ -1,6 +1,7 @@
 import { isLDOptionsSame } from "ldaccess/ldUtils";
 import { LDRouteProps } from "appstate/LDProps";
 import { last } from "../../../node_modules/rxjs/operator/last";
+import { VisualKeysDict } from "components/visualcomposition/visualDict";
 
 export const compNeedsUpdate = (nextProps, lastProps): boolean => {
 	return nextProps.ldTokenString !== lastProps.ldTokenString ||
@@ -14,3 +15,20 @@ export const isRouteSame = (nextRoute: LDRouteProps, lastRoute: LDRouteProps): b
 	if (!nextRoute || !lastRoute) return false;
 	return nextRoute.match.path === lastRoute.match.path;
 };
+
+export const classNamesLD = (inputClassNames: string, localValues: Map<string, any>): string => {
+	let rv = "";
+	if (!!inputClassNames) rv = inputClassNames;
+	const localCSSVal = localValues.get(VisualKeysDict.cssClassName);
+	if (!!localCSSVal) {
+		let classArr = [];
+		if (Array.isArray(localCSSVal)) {
+			classArr.concat(localCSSVal);
+		}else{
+			classArr.push(localCSSVal);
+		}
+		classArr.push(rv);
+		rv = classArr.join(" ");
+	}
+	return rv;
+}

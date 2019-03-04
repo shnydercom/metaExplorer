@@ -15,6 +15,7 @@ import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 import { ActionKeysDict } from 'components/actions/ActionDict';
+import { classNamesLD } from 'components/reactUtils/compUtilFns';
 
 export const NavProcessAtomName = "shnyder/md/NavProcessAtom";
 let cfgIntrprtKeys: string[] =
@@ -25,7 +26,8 @@ let cfgIntrprtKeys: string[] =
 		VisualKeysDict.confirmTxt,
 		VisualKeysDict.routeSend_cancel,
 		VisualKeysDict.routeSend_confirm,
-		ActionKeysDict.action_confirm
+		ActionKeysDict.action_confirm,
+		VisualKeysDict.cssClassName
 	];
 let initialKVStores: IKvStore[] = [
 	{
@@ -62,6 +64,11 @@ let initialKVStores: IKvStore[] = [
 		key: ActionKeysDict.action_confirm,
 		value: undefined,
 		ldType: LDDict.Action
+	},
+	{
+		key: VisualKeysDict.cssClassName,
+		value: undefined,
+		ldType: LDDict.Text
 	}
 ];
 let bpCfg: BlueprintConfig = {
@@ -163,6 +170,7 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 				title={headerText ? headerText : "cancel"}
 				leftIcon="arrow_back"
 				onLeftIconClick={() => this.onCancelClick()}
+				className={classNamesLD(null, localValues)}
 			/>
 			<div className="bottom-nav-topfree mdscrollbar">
 				{this.renderSub(VisualKeysDict.freeContainer)}

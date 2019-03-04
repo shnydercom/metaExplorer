@@ -406,6 +406,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	}
 }
 .hero-gallery {
+	min-height: 80%;
 	.bg-container {
 		background-color: #00375f;
 	}
@@ -416,6 +417,19 @@ $app-inner-width-90: $app-inner-width * 0.9;
 
 .bluebg {
 	background-color: #00375f;
+}
+
+.shnyder-nav {
+	background-color: #00375f;
+	div div {
+		box-shadow: none !important;
+		span {
+			background-color: rgba(255, 255, 255, 0.4);;
+		}
+		div span {
+			background-color: transparent;
+		}
+	}
 }
 
 .onboarding-sig {
