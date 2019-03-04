@@ -64,8 +64,10 @@ export class PureRedirectComponent extends Component<LDConnectedState & LDConnec
 	}
 	render() {
 		const { localValues } = this.state;
+		const { match, location } = this.props.routes;
 		let routeSendConfirm = localValues.get(VisualKeysDict.routeSend_confirm);
 		routeSendConfirm = cleanRouteString(routeSendConfirm, this.props.routes);
+		if (location.pathname === routeSendConfirm) return null;
 		//handle routing for editor-switching:
 		/*let routeQuery = this.props.routes.location.search;
 		if (routeQuery && (routeQuery.indexOf('mode=editor') !== -1)

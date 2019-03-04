@@ -231,6 +231,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		//if (match.params.nextPath === undefined) match.params.nextPath = route;
 		let newPath: string = cleanRouteString(route, this.props.routes);
 		this.setState({ ...this.state, hasTabChanged: false });
+		if (location.pathname === newPath) return null;
 		return <Redirect to={newPath} />;
 	}
 
