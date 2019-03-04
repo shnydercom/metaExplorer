@@ -69,7 +69,7 @@
             },
             {
               "key": "previousBtnLabel",
-              "value": "demo",
+              "value": "Demo",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -99,7 +99,7 @@
             },
             {
               "key": "nextBtnLabel",
-              "value": "demo",
+              "value": "Demo",
               "ldType": "http://schema.org/Text"
             },
             {

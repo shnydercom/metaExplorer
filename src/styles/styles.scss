@@ -60,6 +60,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	background: #f9f9f9;
 }
 
 .header-img-container {
@@ -103,8 +104,13 @@ $app-inner-width-90: $app-inner-width * 0.9;
 
 
 @keyframes fadein {
-	from { opacity: 0; }
-	to   { opacity: 1; }
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
 }
 
 .imgdisplay {
@@ -113,8 +119,12 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	max-height: fit-content;
 	min-height: inherit;
 
-	animation: fadein 250ms;
-	#img {
+	> img {
+		animation: fadein 250ms;
+		height: 100%;
+		width: 100%;
+		max-height: fit-content;
+		min-height: inherit;
 		object-fit: cover;
 		transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1);
 	}
@@ -123,14 +133,14 @@ $app-inner-width-90: $app-inner-width * 0.9;
 .is-loading *,
 .is-loading *:before,
 .is-loading *:after {
-  animation-play-state: paused !important;
+	animation-play-state: paused !important;
 }
 
 .imgheadsubdesc-text {
 	padding: 20px;
 }
 
-.editor-switch-btn{
+.editor-switch-btn {
 	position: absolute;
 	top: 30px;
 	right: 30px;
@@ -373,12 +383,36 @@ $app-inner-width-90: $app-inner-width * 0.9;
 }
 
 .full-navbar {
-	padding:0 !important;
+	padding: 0 !important;
+
 	.inner {
 		display: flex;
+
 		>* {
 			flex: 1;
 			display: flex;
 		}
+	}
+}
+
+.onboarding-img {
+	height: 3.5em;
+	width: 100%;
+	min-height: 3.5em;
+	padding: 1em;
+	> img {
+		animation: none !important;
+		transition: none !important;
+	}
+}
+.hero-front-inner {
+	background-image: linear-gradient(to top, #0e1727, rgba(0, 27, 29, 0.8));
+}
+
+.onboarding-sig {
+	height: 7em;
+	min-height: 7em;
+	> img {
+		width: 6.2em;
 	}
 }
