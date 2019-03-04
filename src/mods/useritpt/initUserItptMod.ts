@@ -11,7 +11,7 @@ import { ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-du
 import { appItptUpdateAction } from "appstate/epicducks/appCfg-duck";
 
 export const MOD_USERITPT_ID = "useritpt";
-export const MOD_USERITPT_NAME = "OpenAPI Mod";
+export const MOD_USERITPT_NAME = "User Block Loader Mod";
 
 export function initUSERITPTClientMod(isMainItptChange: boolean): Promise<IModStatus> {
 	const appIntRetr = appItptRetrFn();

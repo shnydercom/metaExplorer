@@ -107,6 +107,7 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 					}} />
 				</Router>
 				: <div className="approot-loading">loading</div>}
+				{isProduction ? null : <DevTools />}
 			</>
 		);
 	}

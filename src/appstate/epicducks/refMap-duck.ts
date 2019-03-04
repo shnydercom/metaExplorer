@@ -44,10 +44,13 @@ export const refMapSUCCESSAction = (updatedLDOptions: ILDOptions): RefMapAction 
 
 export const refMapReducer = (
 	state: ILDOptionsMapStatePart = {}, action: RefMapAction): ILDOptionsMapStatePart => {
+	let ldOptionsBase: ILDOptions = null;
+	let stateCopy: ILDOptionsMapStatePart = null;
 	switch (action.type) {
 		case REFMAP_REQUEST:
 			let baseRefMap: BlueprintConfig = action.refMap;
-			let ldOptionsBase = action.ldOptionsBase;
+			ldOptionsBase = action.ldOptionsBase;
+			ldOptionsBase.isLoading = true;
 			let isRefMapNeedsUpdate: boolean = true;
 			//make sure the creation algorithm only runs once
 			/*if (ldOptionsBase.visualInfo.interpretedBy) {
@@ -62,17 +65,17 @@ export const refMapReducer = (
 			if (isRefMapNeedsUpdate) {
 				//makes sure a copy of the RefMap-KV exists in the ILDOptions-Object (basically pushes itpt-declaration
 				// to runtime-model, while making sure the declaration isn't changed by being used)
-				let stateCopy = { ...state };
+				stateCopy = { ...state };
 				let modBPCfg: BlueprintConfig = ldBlueprintCfgDeepCopy(action.refMap);
 				stateCopy = createRuntimeRefMapLinks(stateCopy, modBPCfg, ldOptionsBase);
 				stateCopy = assignValuesToRuntimeRefMap(stateCopy, modBPCfg, ldOptionsBase);
 				stateCopy = assignOutputKvMaps(stateCopy, modBPCfg, ldOptionsBase);
 				const preExistingRMKVidx = ldOptionsBase.resource.kvStores.findIndex((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
 				const rmKvToAdd = modBPCfg.initialKvStores.
-				find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
+					find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
 				if (preExistingRMKVidx === -1) {
 					ldOptionsBase.resource.kvStores.unshift(rmKvToAdd);
-				}else{
+				} else {
 					ldOptionsBase.resource.kvStores.splice(preExistingRMKVidx, 1, rmKvToAdd);
 				}
 				stateCopy[ldOptionsBase.ldToken.get()] = ldOptionsBase;
@@ -81,7 +84,11 @@ export const refMapReducer = (
 				return state;
 			}
 		case REFMAP_SUCCESS:
-			return state;
+			stateCopy = { ...state };
+			ldOptionsBase = action.ldOptionsBase;
+			//ldOptionsBase.isLoading = false;
+			stateCopy[ldOptionsBase.ldToken.get()] = ldOptionsBase;
+			return stateCopy;
 		case LDOPTIONS_KV_UPDATE:
 			let stateCopyUpd = { ...state };
 			let { changedKvStores, updatedKvMap, thisLdTkStr } = action;
@@ -156,6 +163,9 @@ const createRuntimeRefMapLinks: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 		}
 	});
 	let rmKv: IKvStore = rmBPCfg.initialKvStores.find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
+	if (!rmKv) {
+		console.error("no RefMap found: " + rmBPCfg.canInterpretType);
+	}
 	for (const rmSubCfgKey in rmKv.value) {
 		if (rmKv.value.hasOwnProperty(rmSubCfgKey)) {
 			//create links on refMap-Copy

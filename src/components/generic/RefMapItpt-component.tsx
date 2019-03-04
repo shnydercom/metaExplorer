@@ -69,7 +69,8 @@ RefMapItptState>
 		let baseRMTkStr = refMapBaseTokenStr(ldTokenString);
 		let BaseComp = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(baseRMTkStr);
 		if (BaseComp === null || BaseComp === undefined) {
-			console.error("ItptReferenceMapType-component: itpt null or undefined");
+			console.log(prevState.routes);
+			console.error("ItptReferenceMapType-component: itpt null or undefined: " + baseRMTkStr);
 			return null;
 		}
 		if (isReactComponent(BaseComp)) {
@@ -80,6 +81,12 @@ RefMapItptState>
 		}
 		return { ...prevState, compInfos: newreactCompInfos };
 	}
+
+	static getDerivedStateFromError(error) {
+		// Update state so the next render will show the fallback UI.
+		return { hasError: true, errorMsg: error };
+	}
+
 	cfg: BlueprintConfig;
 	initialKvStores: IKvStore[];
 
@@ -147,10 +154,6 @@ RefMapItptState>
 		} else {
 			return null;
 		}
-	}
-
-	componentDidCatch(error, info) {
-		this.setState({ ...this.state, hasError: true, errorMsg: info });
 	}
 
 	render() {

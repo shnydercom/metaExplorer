@@ -11,6 +11,10 @@ import { initQRCODEGENClientMod, MOD_QRCODEGENSCAN_ID } from "./qr-code-genscan/
 
 export function initMods(modAPI: ModAPI) {
 	//set the required mods (otherwise won't finish to load)
+
+	modAPI.addRequiredMod(MOD_QRCODEGENSCAN_ID);
+	modAPI.addRequiredMod(MOD_GOOGLE_ID);
+	modAPI.addRequiredMod(MOD_MAILCHIMP_ID);
 	modAPI.addRequiredMod(MOD_USERITPT_ID);
 	modAPI.addRequiredMod(MOD_ITPTEDITOR_ID);
 	//mod initialization functions

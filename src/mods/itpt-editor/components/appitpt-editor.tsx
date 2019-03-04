@@ -338,7 +338,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
 							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
 					</Panel>
-					<Sidebar theme={{ pinned: 'sidebar-pinned' }} insideTree={true} pinned={sidebarActive} width={8} active={sidebarActive}>
+					<Sidebar theme={{ pinned: 'sidebar-pinned' }} insideTree={true} pinned={sidebarActive} width={10} active={sidebarActive}>
 						<div ref={this.sideBarRef} className="phone-preview-container">
 							{isDisplayDevContent ? <div style={{ alignSelf: "flex-start", position: "absolute" }}>
 								<Button onClick={this.onInterpretBtnClick}>interpret!</Button>
@@ -347,7 +347,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 								<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>
 								<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
 								<Link to="/editorinitial">initial   </Link>
-								<Link to="/app">   app</Link>
+								<Link to="/">   top route</Link>
 							</div> : null}
 							<div className="rotated-serialize">
 								<Button onClick={this.onInterpretBtnClick} raised primary style={{ background: '#010f27aa' }}>
