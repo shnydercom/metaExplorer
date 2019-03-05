@@ -55,11 +55,22 @@ export type AIEState = {
 const EDITOR_KV_KEY = "EditorKvKey";
 
 export const ITPT_BLOCK_EDITOR_NAME = "shnyder/block-editor";
-export const ITPT_BLOCK_EDITOR_TYPE = "http://shnyder.com/editor/blockeditortype";
-export const ITPT_BLOCK_EDITOR_EDITING_ITPT = "http://shnyder.com/editor/currentlyediting";
-export const ITPT_BLOCK_EDITOR_DISPLAYING_ITPT = "http://shnyder.com/editor/currentlydisplaying";
+export const ITPT_BLOCK_EDITOR_TYPE = "blockeditortype";
 
-let allMyInputKeys: string[] = [ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT];
+export const ITPT_BLOCK_EDITOR_EDITING_ITPT = "currentlyediting";
+export const ITPT_BLOCK_EDITOR_DISPLAYING_ITPT = "currentlydisplaying";
+export const ITPT_BLOCK_EDITOR_IS_GLOBAL = "isGlobal";
+export const ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW = "isFullScreenPreview";
+export const ITPT_BLOCK_EDITOR_ACTIVE_VIEWS = "activeviews";
+
+//active view-constants:
+export const ITPT_BLOCK_EDITOR_AV_DRAWER = "drawer";
+export const ITPT_BLOCK_EDITOR_AV_SIDEBAR = "sidebar";
+
+let allMyInputKeys: string[] = [
+	ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
+	ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS
+];
 let initialKVStores: IKvStore[] = [
 	{
 		key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
@@ -68,6 +79,21 @@ let initialKVStores: IKvStore[] = [
 	},
 	{
 		key: ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
+		value: undefined,
+		ldType: LDDict.Text
+	},
+	{
+		key: ITPT_BLOCK_EDITOR_IS_GLOBAL,
+		value: undefined,
+		ldType: LDDict.Boolean
+	},
+	{
+		key: ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW,
+		value: undefined,
+		ldType: LDDict.Boolean
+	},
+	{
+		key: ITPT_BLOCK_EDITOR_ACTIVE_VIEWS,
 		value: undefined,
 		ldType: LDDict.Text
 	}
@@ -87,16 +113,33 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	static getDerivedStateFromProps(nextProps: AIEProps, prevState: AIEState): AIEState | null {
 		let rvLD = gdsfpLD(
 			nextProps, prevState, [],
-			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT],
+			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
+				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS
+			],
 			ITPT_BLOCK_EDITOR_TYPE,
-			[], [false, false]);
+			[], [false, false, false, false, true]);
 		if (!rvLD) {
 			return null;
 		}
 		if (rvLD) {
 			let initiallyDisplayed = rvLD.localValues.get(ITPT_BLOCK_EDITOR_EDITING_ITPT);
-			if (!!initiallyDisplayed && !prevState.currentlyEditingItptName) {
-				return { ...prevState, currentlyEditingItptName: initiallyDisplayed };
+			let isGlobal = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
+			let isFSPreview = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW);
+			let activeViews = rvLD.localValues.get(ITPT_BLOCK_EDITOR_ACTIVE_VIEWS);
+
+			let mode = isGlobal
+				? prevState.mode
+				: isFSPreview ? "app" : "editor";
+			let drawerActive = prevState.drawerActive;
+			let sidebarActive = prevState.drawerActive;
+			if (!!activeViews && activeViews.length() > 0) {
+				drawerActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_DRAWER);
+				sidebarActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_SIDEBAR);
+			}
+			if (!!initiallyDisplayed && !prevState.currentlyEditingItptName !== initiallyDisplayed) {
+				return { ...prevState, currentlyEditingItptName: initiallyDisplayed, mode, drawerActive, sidebarActive };
+			} else {
+				return { ...prevState, mode, drawerActive, sidebarActive };
 			}
 		}
 		return null;
@@ -123,118 +166,42 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		} else {
 			this.logic = props.logic;
 		}
-		const ldState = initLDLocalState(this.cfg, props, [],
-			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT]);
+		const rvLD = initLDLocalState(this.cfg, props, [],
+			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
+				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS],
+			[], [false, false, false, false, true]);
+
+		let initiallyDisplayed = rvLD.localValues.get(ITPT_BLOCK_EDITOR_EDITING_ITPT);
+		let isGlobal = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
+		let isFSPreview = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW);
+		let activeViews = rvLD.localValues.get(ITPT_BLOCK_EDITOR_ACTIVE_VIEWS);
+
+		let mode: "initial" | "app" | "editor" = isGlobal
+			? "initial"
+			: isFSPreview ? "app" : "editor";
+		let drawerActive = true;
+		let sidebarActive = true;
+		if (!!activeViews && activeViews.length() > 0) {
+			drawerActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_DRAWER);
+			sidebarActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_SIDEBAR);
+		}
 		this.state = {
-			...ldState,
-			drawerActive: true, sidebarActive: true, mode: "initial",
-			currentlyEditingItptName: null, serialized: "", previewerToken: previewerToken, previewDisplay: "phone", hasCompletedFirstRender: false
+			...rvLD,
+			mode, drawerActive, sidebarActive,
+			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone", hasCompletedFirstRender: false
 		};
 	}
 
 	componentDidMount() {
 		if (!this.props.ldOptions) {
 			this.props.notifyLDOptionsChange(null);
+		} else {
+			this.evalPreviewReload();
 		}
-	}
-
-	onInterpretBtnClick = (e) => {
-		e.preventDefault();
-		let nodesBPCFG: BlueprintConfig = this.logic.intrprtrBlueprintFromDiagram(null);
-		let newType = nodesBPCFG.canInterpretType;
-		if (!newType) {
-			if (!nodesBPCFG.nameSelf) return;
-			newType = nodesBPCFG.nameSelf + UserDefDict.standardItptObjectTypeSuffix;
-			nodesBPCFG.canInterpretType = newType;
-		}
-		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
-		addBlueprintToRetriever(nodesBPCFG);
-		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
-		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
-		newLDOptions.resource.kvStores = [
-			{ key: EDITOR_KV_KEY, ldType: newType, value: dummyInstance }
-		];
-		this.setState({ ...this.state, serialized: nodesSerialized });
-		let blankLDOptions = ldOptionsDeepCopy(newLDOptions);
-		blankLDOptions.resource.kvStores = [];
-		this.props.notifyLDOptionsChange(blankLDOptions);
-		this.props.notifyLDOptionsChange(newLDOptions);
-	}
-
-	// tslint:disable-next-line:member-ordering
-	hascreatedFirst: boolean = false;
-
-	generatePrefilled = (input: any) => {
-		let nodesBPCFG: BlueprintConfig = input as BlueprintConfig;
-		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
-		addBlueprintToRetriever(nodesBPCFG);
-		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
-		let newType = nodesBPCFG.canInterpretType;
-		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
-		newLDOptions.ldToken = new NetworkPreferredToken(this.editTkString(newLDOptions.ldToken.get()));
-		newLDOptions.resource.kvStores = [
-			{ key: EDITOR_KV_KEY, ldType: newType, value: dummyInstance }
-		];
-		this.setState({ ...this.state, serialized: nodesSerialized });
-		this.props.notifyLDOptionsChange(newLDOptions);
-	}
-	onMultiConfiguratorButtonClick = () => {
-		this.props.notifyLDOptionsChange(null);
-		let prefilledData: IKvStore[] = configuratorTestData;
-		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
-		newLDOptions.resource.kvStores = prefilledData;
-		this.setState({ ...this.state, serialized: "" });
-		this.props.notifyLDOptionsChange(newLDOptions);
-	}
-
-	onPrefilledProductButtonClick = () => {
-		let prefilledData: any = prefilledProductItptA;
-		let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
-		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
-		addBlueprintToRetriever(nodesBPCFG);
-		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
-		let newType = nodesBPCFG.canInterpretType;
-		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
-		newLDOptions.resource.kvStores = [
-			{ key: EDITOR_KV_KEY, ldType: newType, value: dummyInstance }
-		];
-		this.setState({ ...this.state, serialized: nodesSerialized });
-		this.props.notifyLDOptionsChange(newLDOptions);
-	}
-
-	onPrefilledOrganizationButtonClick = () => {
-		let prefilledData: any = prefilledOrganizationItptA;
-		let nodesBPCFG: BlueprintConfig = prefilledData as BlueprintConfig;
-		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
-		addBlueprintToRetriever(nodesBPCFG);
-		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
-		let newType = nodesBPCFG.canInterpretType;
-		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
-		newLDOptions.resource.kvStores = [
-			{ key: EDITOR_KV_KEY, ldType: newType, value: dummyInstance }
-		];
-		this.setState({ ...this.state, serialized: nodesSerialized });
-		this.props.notifyLDOptionsChange(newLDOptions);
-	}
-
-	onIncreaseIDButtonClick = () => {
-		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
-		let kvChangeVar = newLDOptions.resource.kvStores.find((val) => val.ldType && val.ldType.endsWith(UserDefDict.standardItptObjectTypeSuffix));
-		if (!kvChangeVar || !kvChangeVar.value) return;
-		kvChangeVar.value.identifier = kvChangeVar.value.identifier !== null ? kvChangeVar.value.identifier + 1 : 0;
-		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
 	componentDidUpdate(prevProps: AIEProps & LDConnectedState & LDConnectedDispatch & LDOwnProps) {
-		const { hasCompletedFirstRender, currentlyEditingItptName, mode } = this.state;
-		if (!hasCompletedFirstRender && !!currentlyEditingItptName) {
-			if (mode === "editor") {
-				this.loadToEditorByName(this.state.currentlyEditingItptName, true);
-			} else {
-				this.loadToEditorByName(this.state.currentlyEditingItptName);
-			}
-			this.setState({ ...this.state, hasCompletedFirstRender: true });
-		}
+		this.evalPreviewReload();
 	}
 
 	toggleDrawerActive = () => {
@@ -257,28 +224,40 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
 			return <div>{this.errorNotAvailableMsg}</div>;
 		}
-		const { mode } = this.state;
+		const { mode, localValues } = this.state;
+		let isGlobal = !!localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 
-		return <Route path="/" render={(routeProps: LDRouteProps) => {
-			if (routeProps.location.search === "?mode=editor" && mode !== "editor") {
-				this.setState({ ...this.state, mode: "editor" });
-			}
-			if (routeProps.location.search === "?mode=app" && mode !== "app") {
-				this.setState({ ...this.state, mode: "app" });
-			}
-			if (!routeProps.location.search && mode === "initial") {
-				this.setState({ ...this.state, mode: "app" });
-			}
-			if (mode === "editor") {
-				return this.renderEditor();
-			} else
-				if (mode === "app") {
-					return this.renderApp();
+		if (isGlobal) {
+			return <Route path="/" render={(routeProps: LDRouteProps) => {
+				if (routeProps.location.search === "?mode=editor" && mode !== "editor") {
+					this.setState({ ...this.state, mode: "editor" });
 				}
-				else {
-					return null;
+				if (routeProps.location.search === "?mode=app" && mode !== "app") {
+					this.setState({ ...this.state, mode: "app" });
 				}
-		}} />;
+				if (!routeProps.location.search && mode === "initial") {
+					this.setState({ ...this.state, mode: "app" });
+				}
+				if (mode === "editor") {
+					return this.renderEditor();
+				} else
+					if (mode === "app") {
+						return this.renderApp();
+					}
+					else {
+						return null;
+					}
+			}} />;
+		}
+		if (mode === "editor") {
+			return this.renderEditor();
+		} else
+			if (mode === "app") {
+				return this.renderApp();
+			}
+			else {
+				return null;
+			}
 	}
 
 	renderApp() {
@@ -292,15 +271,12 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				}
 			</div>
 		);
-		/*previously done through routing:
-		<!--Link to={{ pathname: routes.location.pathname, search: "?mode=editor" }}>
-							Switch to Editor
-						</Link-->*/
 	}
 
 	renderEditor() {
 		const { routes } = this.props;
-		const { drawerActive, currentlyEditingItptName, sidebarActive } = this.state;
+		const { drawerActive, currentlyEditingItptName, sidebarActive, localValues } = this.state;
+		const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		let isDisplayDevContent = isProduction ? false : true;
 		let inputStyle = currentlyEditingItptName ? { width: currentlyEditingItptName.length + "ex", maxHeight: "100%" } : null;
 		const itpts = this.logic.getItptList();
@@ -308,10 +284,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			<ThemeProvider theme={editorTheme}>
 				<Layout theme={{ layout: 'editor-layout' }}>
 					<NavDrawer insideTree={true} theme={{ pinned: "navbar-pinned" }} active={drawerActive} withOverlay={false}
-						pinned={drawerActive} permanentAt='xxxl'>
-						<EditorTray
-							itpts={itpts}
-							onEditTrayItem={this.onEditTrayItem}
+						 permanentAt='xxxl'>
+						<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem}
 							onClearBtnPress={() => {
 								this.logic.clear();
 								this.setState({ ...this.state, currentlyEditingItptName: null });
@@ -324,10 +298,11 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							}}
 						>
 							<div className="fakeheader">
-								<Button style={{ color: "white" }} onClick={() => this.setState({ ...this.state, mode: "app" })}>View in full size <FontIcon>fullscreen</FontIcon></Button>
-								{/*<Link to={{ pathname: routes.location.pathname, search: "?mode=app" }}>
-									View in full size <FontIcon>fullscreen</FontIcon>
-						</Link>*/}
+								{
+									isGlobal
+										? <Button style={{ color: "white" }} onClick={() => this.setState({ ...this.state, mode: "app" })}>View in full size <FontIcon>fullscreen</FontIcon></Button>
+										: null
+								}
 							</div>
 						</EditorTray>
 					</NavDrawer>
@@ -337,85 +312,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							onEditTrayItem={this.onEditTrayItem}
 							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
 							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
+						{this.renderPreview()}
 					</Panel>
-					<Sidebar theme={{ pinned: 'sidebar-pinned' }} insideTree={true} pinned={sidebarActive} width={10} active={sidebarActive}>
-						<div ref={this.sideBarRef} className="phone-preview-container">
-							{isDisplayDevContent ? <div style={{ alignSelf: "flex-start", position: "absolute" }}>
-								<Button onClick={this.onInterpretBtnClick}>interpret!</Button>
-								<Button onClick={this.onIncreaseIDButtonClick}>increaseID!</Button>
-								<Button onClick={this.onPrefilledProductButtonClick}>Product!</Button>
-								<Button onClick={this.onPrefilledOrganizationButtonClick}>Organization</Button>
-								<Button onClick={this.onMultiConfiguratorButtonClick}>configuratorTest!</Button>
-								<Link to="/editorinitial">initial   </Link>
-								<Link to="/">   top route</Link>
-							</div> : null}
-							<div className="rotated-serialize">
-								<Button onClick={this.onInterpretBtnClick} raised primary style={{ background: '#010f27aa' }}>
-									<FontIcon value='arrow_upward' />
-									-
-									Interpret
-									-
-							<FontIcon value='arrow_upward' />
-								</Button>
-							</div>
-							<div className="phone-preview-centered vertical-scroll">
-								{this.state.previewDisplay === "phone" ?
-									<ThemeProvider theme={appTheme}>
-										<div className="app-preview">
-											<div className="app-content mdscrollbar">
-												<Switch>
-													<Route path="/editorinitial" render={() => (
-														<div><b>drag and drop items into the editor</b></div>
-													)} />
-													<Route path="/" render={(routeProps: LDRouteProps) => {
-														return <>
-															<BaseContainerRewrite routes={routeProps} ldTokenString={this.editTkString(this.props.ldTokenString)} />
-														</>;
-													}} />
-												</Switch>
-											</div>
-										</div>
-									</ThemeProvider>
-									:
-									<div className="code-preview">
-										<h4 className="editor-json-header">Current Component as Declarative Output</h4>
-										<pre className="editor-json">
-											<p>
-												<small>
-													{this.state.serialized ? this.state.serialized :
-														<span>Nothing to display yet! <br />Drag and drop elements in the design-tool on the right,
-												<br />and click "Interpret!"</span>
-													}
-												</small>
-											</p>
-										</pre>
-									</div>
-								}
-							</div>
-							<div className="rotated-preview-switch">
-								<Button onClick={
-									() => {
-										if (this.state.previewDisplay === "phone") {
-											this.setState({ ...this.state, previewDisplay: "code" });
-										} else {
-											this.setState({ ...this.state, previewDisplay: "phone" });
-										}
-									}
-								} raised primary style={{ background: '#010f27aa' }}>
-									<FontIcon value={this.state.previewDisplay === "phone" ? "unfold_more" : "stay_current_landscape"} />
-									-
-							{this.state.previewDisplay === "phone" ? " show code " : " show phone "}
-									-
-							<FontIcon value={this.state.previewDisplay === "phone" ? "unfold_more" : "stay_current_landscape"} />
-								</Button>
-							</div>
-						</div>
-						<div className="button-row">
-							<div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-								<Input style={inputStyle} value={currentlyEditingItptName ? currentlyEditingItptName : "None"} disabled={true} />
-							</div>
-						</div>
-					</Sidebar>
 				</Layout>
 			</ThemeProvider>
 			<div className="nav-element top-left">
@@ -424,10 +322,87 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			<div className="nav-element bottom-left">
 				<IconButton icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></IconButton>
 			</div>
-			<div className="nav-element bottom-right">
-				<IconButton icon={sidebarActive ? "chevron_right" : "chevron_left"} style={{ color: "white" }} onClick={this.toggleSidebar}></IconButton>
-			</div>
 		</div >;
+	}
+
+	protected renderPreview() {
+		return <div className="phone-preview-centered">
+			{this.state.previewDisplay === "phone" ?
+				<ThemeProvider theme={appTheme}>
+					<div className="app-preview">
+						<div className="app-content mdscrollbar">
+							<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
+						</div>
+					</div>
+				</ThemeProvider>
+				:
+				<div className="code-preview">
+					<h4 className="editor-json-header">Current Component as Declarative Output</h4>
+					<pre className="editor-json">
+						<p>
+							<small>
+								{this.state.serialized ? this.state.serialized :
+									<span>Nothing to display yet! <br />Drag and drop elements in the design-tool on the right,
+				<br />and click "Interpret!"</span>
+								}
+							</small>
+						</p>
+					</pre>
+				</div>
+			}
+		</div>;
+	}
+
+	protected renderBtnInterpret() {
+		return <Button onClick={this.onInterpretBtnClick} raised primary style={{ background: '#010f27aa' }}>
+			<FontIcon value='arrow_upward' />
+			-
+			Interpret
+			-
+<FontIcon value='arrow_upward' />
+		</Button>;
+	}
+
+	protected renderBtnSwitchPreviewOrCode() {
+		return <Button
+			onClick={
+				() => {
+					if (this.state.previewDisplay === "phone") {
+						this.setState({ ...this.state, previewDisplay: "code" });
+					} else {
+						this.setState({ ...this.state, previewDisplay: "phone" });
+					}
+				}
+			} raised primary style={{ background: '#010f27aa' }}>
+			<FontIcon value={this.state.previewDisplay === "phone" ? "unfold_more" : "stay_current_landscape"} />
+			-
+	{this.state.previewDisplay === "phone" ? " show code " : " show phone "}
+			-
+	<FontIcon value={this.state.previewDisplay === "phone" ? "unfold_more" : "stay_current_landscape"} />
+		</Button>;
+	}
+
+	protected onInterpretBtnClick = (e) => {
+		e.preventDefault();
+		let nodesBPCFG: BlueprintConfig = this.logic.intrprtrBlueprintFromDiagram(null);
+		let newType = nodesBPCFG.canInterpretType;
+		if (!newType) {
+			if (!nodesBPCFG.nameSelf) return;
+			newType = nodesBPCFG.nameSelf + UserDefDict.standardItptObjectTypeSuffix;
+			nodesBPCFG.canInterpretType = newType;
+		}
+		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
+		addBlueprintToRetriever(nodesBPCFG);
+		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
+		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+		newLDOptions.resource.kvStores = [
+			{ key: EDITOR_KV_KEY, ldType: newType, value: dummyInstance }
+		];
+		this.setState({ ...this.state, serialized: nodesSerialized });
+		let blankLDOptions = ldOptionsDeepCopy(newLDOptions);
+		blankLDOptions.resource.kvStores = [];
+		this.props.notifyLDOptionsChange(blankLDOptions);
+		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
 	protected onEditTrayItem(data): DropRefmapResult {
@@ -451,6 +426,19 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		return { isSuccess: false, message: JSON.stringify(data) };
 	}
 
+	protected evalPreviewReload() {
+		const { hasCompletedFirstRender, currentlyEditingItptName, mode } = this.state;
+		if (!hasCompletedFirstRender && !!currentlyEditingItptName) {
+			console.log("evaluating preview reload");
+			if (mode === "editor") {
+				this.loadToEditorByName(this.state.currentlyEditingItptName, true);
+			} else {
+				this.loadToEditorByName(this.state.currentlyEditingItptName);
+			}
+			this.setState({ ...this.state, hasCompletedFirstRender: true });
+		}
+	}
+
 	protected loadToEditorByName: (name: string, isAutodistribute?: boolean) => boolean = (name: string, isAutodistribute?: boolean) => {
 		let itptInfo = this.logic.getItptList().find((itm) => itm.nameSelf === name);
 		let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
@@ -466,6 +454,21 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		this.setState({ ...this.state, currentlyEditingItptName: itptCfg.nameSelf });
 		return true;
+	}
+
+	protected generatePrefilled = (input: any) => {
+		let nodesBPCFG: BlueprintConfig = input as BlueprintConfig;
+		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
+		addBlueprintToRetriever(nodesBPCFG);
+		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
+		let newType = nodesBPCFG.canInterpretType;
+		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+		newLDOptions.ldToken = new NetworkPreferredToken(this.editTkString(newLDOptions.ldToken.get()));
+		newLDOptions.resource.kvStores = [
+			{ key: EDITOR_KV_KEY, ldType: newType, value: dummyInstance }
+		];
+		this.setState({ ...this.state, serialized: nodesSerialized });
+		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
 	protected editTkString: (inputTkStr: string) => string = (inputTkStr: string) => {
