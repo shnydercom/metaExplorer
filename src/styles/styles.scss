@@ -397,9 +397,11 @@ $app-inner-width-90: $app-inner-width * 0.9;
 
 .onboarding-img {
 	height: 3.5em;
-	width: 100%;
+	width: unset !important;
 	min-height: 3.5em;
 	padding: 1em;
+	display: flex;
+	align-content: center;
 
 	>img {
 		animation: none !important;
@@ -445,10 +447,13 @@ $app-inner-width-90: $app-inner-width * 0.9;
 }
 
 .onboarding-sig {
-	height: 7em;
-	min-height: 7em;
+	justify-content: center;
+	display: flex;
+	margin-bottom: 1em;
 
 	>img {
+		height: 7em;
+		min-height: 7em;
 		width: 6.2em;
 	}
 }
@@ -465,6 +470,34 @@ $app-inner-width-90: $app-inner-width * 0.9;
 		margin-top: 1.5em;
 		margin-right: 1em;
 	}
+}
+
+.center-text {
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.onboarding-text {
+	display: flex;
+	align-content: flex-start;
+	flex-direction: column;
+	text-justify: newspaper;
+	text-align: justify;
+	max-width: 500px;
+	align-self: center;
+
+	p {
+		margin-left: 1em;
+		margin-right: 1em;
+	}
+	i,p:last-of-type {
+		margin-bottom: 1em;
+	}
+	span,
+	h3 {
+		flex: 1;
+	}
+
 }
 
 .dense-form {

@@ -22,7 +22,7 @@
             {
               "key": "in_1",
               "value": {
-                "objRef": "3bf02e66-fe60-4111-bb23-13c575187fea",
+                "objRef": "63f8cb13-613e-43d4-91ea-1e83d0432345",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -30,7 +30,7 @@
             {
               "key": "in_2",
               "value": {
-                "objRef": "6f83a9f1-7c50-4368-b29e-e9a062ef183d",
+                "objRef": "27243277-57a1-4fbd-9590-12c175a2fd28",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -51,6 +51,30 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
+        "63f8cb13-613e-43d4-91ea-1e83d0432345": {
+          "subItptOf": "shnyder/layout/CSSWrapper",
+          "canInterpretType": "shnyder/layout/CSSWrapper-ObjectType",
+          "nameSelf": "63f8cb13-613e-43d4-91ea-1e83d0432345",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "3bf02e66-fe60-4111-bb23-13c575187fea",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "cssClass",
+              "value": "center-text",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
         "3bf02e66-fe60-4111-bb23-13c575187fea": {
           "subItptOf": "shnyder/basichtml/bold",
           "canInterpretType": "http://schema.org/Text",
@@ -65,10 +89,10 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "6f83a9f1-7c50-4368-b29e-e9a062ef183d": {
-          "subItptOf": "shnyder/layout/vh-centered-column",
-          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
-          "nameSelf": "6f83a9f1-7c50-4368-b29e-e9a062ef183d",
+        "27243277-57a1-4fbd-9590-12c175a2fd28": {
+          "subItptOf": "shnyder/layout/CSSWrapper",
+          "canInterpretType": "shnyder/layout/CSSWrapper-ObjectType",
+          "nameSelf": "27243277-57a1-4fbd-9590-12c175a2fd28",
           "initialKvStores": [
             {
               "key": "freeContainer",
@@ -77,6 +101,11 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "cssClass",
+              "value": "onboarding-text vh-centered-column",
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",

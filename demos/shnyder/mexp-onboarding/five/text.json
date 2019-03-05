@@ -22,7 +22,7 @@
             {
               "key": "in_1",
               "value": {
-                "objRef": "3bf02e66-fe60-4111-bb23-13c575187fea",
+                "objRef": "753ccb4a-90b8-48db-a80e-915c4e1edc61",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -50,6 +50,30 @@
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
+        },
+        "753ccb4a-90b8-48db-a80e-915c4e1edc61": {
+          "subItptOf": "shnyder/layout/CSSWrapper",
+          "canInterpretType": "shnyder/layout/CSSWrapper-ObjectType",
+          "nameSelf": "753ccb4a-90b8-48db-a80e-915c4e1edc61",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "3bf02e66-fe60-4111-bb23-13c575187fea",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "cssClass",
+              "value": "center-text",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
         },
         "3bf02e66-fe60-4111-bb23-13c575187fea": {
           "subItptOf": "shnyder/basichtml/bold",

@@ -14,7 +14,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "56376d62-4402-4780-b8fc-d4859f2235fa",
+                "objRef": "ba2c2bdf-bbf5-4161-a2a6-30954420fcd8",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -50,10 +50,46 @@
             "freeContainer"
           ]
         },
+        "ba2c2bdf-bbf5-4161-a2a6-30954420fcd8": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "ba2c2bdf-bbf5-4161-a2a6-30954420fcd8",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "56376d62-4402-4780-b8fc-d4859f2235fa",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "72e91f55-a3be-4aa9-bff0-34f13da5d375",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
         "56376d62-4402-4780-b8fc-d4859f2235fa": {
           "subItptOf": "shnyder/mexp-onboarding/two/text",
           "canInterpretType": "shnyder/mexp-onboarding/two/text-ObjectType",
           "nameSelf": "56376d62-4402-4780-b8fc-d4859f2235fa",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "72e91f55-a3be-4aa9-bff0-34f13da5d375": {
+          "subItptOf": "shnyder/block-editor",
+          "canInterpretType": "http://shnyder.com/editor/blockeditortype",
+          "nameSelf": "72e91f55-a3be-4aa9-bff0-34f13da5d375",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []

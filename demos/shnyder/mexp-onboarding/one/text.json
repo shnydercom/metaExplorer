@@ -22,7 +22,7 @@
             {
               "key": "in_1",
               "value": {
-                "objRef": "e220d8fa-5731-4fcf-ac07-a7f68b3fe551",
+                "objRef": "cae456a0-2e04-4861-96d3-05ba6723e60e",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -30,7 +30,7 @@
             {
               "key": "in_2",
               "value": {
-                "objRef": "855aeb6c-e423-441a-b65e-7cdba219c1de",
+                "objRef": "451a2e64-5716-4a27-a74c-c6a16471f43d",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -51,6 +51,30 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
+        "cae456a0-2e04-4861-96d3-05ba6723e60e": {
+          "subItptOf": "shnyder/layout/CSSWrapper",
+          "canInterpretType": "shnyder/layout/CSSWrapper-ObjectType",
+          "nameSelf": "cae456a0-2e04-4861-96d3-05ba6723e60e",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "e220d8fa-5731-4fcf-ac07-a7f68b3fe551",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "cssClass",
+              "value": "center-text",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
         "e220d8fa-5731-4fcf-ac07-a7f68b3fe551": {
           "subItptOf": "shnyder/basichtml/bold",
           "canInterpretType": "http://schema.org/Text",
@@ -64,6 +88,30 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": []
+        },
+        "451a2e64-5716-4a27-a74c-c6a16471f43d": {
+          "subItptOf": "shnyder/layout/CSSWrapper",
+          "canInterpretType": "shnyder/layout/CSSWrapper-ObjectType",
+          "nameSelf": "451a2e64-5716-4a27-a74c-c6a16471f43d",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "855aeb6c-e423-441a-b65e-7cdba219c1de",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "cssClass",
+              "value": "onboarding-text vh-centered-column",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
         },
         "855aeb6c-e423-441a-b65e-7cdba219c1de": {
           "subItptOf": "shnyder/md/CardW3Containers",
@@ -124,7 +172,7 @@
             {
               "key": "in_6",
               "value": {
-                "objRef": "6e433841-405c-4aff-8e3a-f0154e08bb05",
+                "objRef": "b78511be-ab58-4f9a-b599-ef5b8f662d83",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -203,25 +251,6 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": []
-        },
-        "6e433841-405c-4aff-8e3a-f0154e08bb05": {
-          "subItptOf": "shnyder/layout/vh-centered-column",
-          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
-          "nameSelf": "6e433841-405c-4aff-8e3a-f0154e08bb05",
-          "initialKvStores": [
-            {
-              "key": "freeContainer",
-              "value": {
-                "objRef": "b78511be-ab58-4f9a-b599-ef5b8f662d83",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": [
-            "freeContainer"
-          ]
         },
         "b78511be-ab58-4f9a-b599-ef5b8f662d83": {
           "subItptOf": "shnyder/mexp-onboarding/images/onboarding_lettersig",
