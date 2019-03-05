@@ -144,7 +144,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "c10fc9d7-3b4f-456d-ab4c-1df6d3ef2e26",
+                "objRef": "5d931c8a-581e-4858-ba33-6ee8eedcda9f",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -160,21 +160,37 @@
             "freeContainer"
           ]
         },
-        "c10fc9d7-3b4f-456d-ab4c-1df6d3ef2e26": {
-          "subItptOf": "shnyder/md/NavBarFreeContainer",
-          "canInterpretType": "shnyder/md/NavBarFreeContainer-ObjectType",
-          "nameSelf": "c10fc9d7-3b4f-456d-ab4c-1df6d3ef2e26",
+        "5d931c8a-581e-4858-ba33-6ee8eedcda9f": {
+          "subItptOf": "shnyder/layout/CSSWrapper",
+          "canInterpretType": "shnyder/layout/CSSWrapper-ObjectType",
+          "nameSelf": "5d931c8a-581e-4858-ba33-6ee8eedcda9f",
           "initialKvStores": [
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "311dea5a-a86b-42c7-b8ab-c250100f5a83",
+                "objRef": "e9cd490f-5993-4364-aea1-801c05ce24ed",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
             },
             {
-              "key": "primaryInterpreter",
+              "key": "cssClass",
+              "value": "mdscrollbar",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "e9cd490f-5993-4364-aea1-801c05ce24ed": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "e9cd490f-5993-4364-aea1-801c05ce24ed",
+          "initialKvStores": [
+            {
+              "key": "in_0",
               "value": {
                 "objRef": "015c137e-56a4-4f72-aad7-ce4aeaadf4c8",
                 "propRef": null
@@ -182,24 +198,19 @@
               "ldType": "InterpreterClassType"
             },
             {
-              "key": "cssClass",
-              "value": "flat",
-              "ldType": "http://schema.org/Text"
+              "key": "in_1",
+              "value": {
+                "objRef": "311dea5a-a86b-42c7-b8ab-c250100f5a83",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer",
-            "primaryInterpreter"
+            "in_0",
+            "in_1"
           ]
-        },
-        "311dea5a-a86b-42c7-b8ab-c250100f5a83": {
-          "subItptOf": "shnyder/meta-explorer/top-routing",
-          "canInterpretType": "shnyder/meta-explorer/top-routing-ObjectType",
-          "nameSelf": "311dea5a-a86b-42c7-b8ab-c250100f5a83",
-          "initialKvStores": [],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
         },
         "015c137e-56a4-4f72-aad7-ce4aeaadf4c8": {
           "subItptOf": "shnyder/md/TopNavigation",
@@ -257,6 +268,14 @@
               "ldType": "http://schema.org/Text"
             }
           ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "311dea5a-a86b-42c7-b8ab-c250100f5a83": {
+          "subItptOf": "shnyder/meta-explorer/top-routing",
+          "canInterpretType": "shnyder/meta-explorer/top-routing-ObjectType",
+          "nameSelf": "311dea5a-a86b-42c7-b8ab-c250100f5a83",
+          "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },

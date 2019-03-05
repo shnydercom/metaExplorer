@@ -408,7 +408,10 @@ $app-inner-width-90: $app-inner-width * 0.9;
 }
 
 .hero-gallery {
-	min-height: 80%;
+	height: 80%;
+	min-height: 300px;
+	flex: 1;
+	flex-shrink: 0;
 
 	.bg-container {
 		background-color: #00375f;

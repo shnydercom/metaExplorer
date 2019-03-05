@@ -31,4 +31,4 @@ export const classNamesLD = (inputClassNames: string, localValues: Map<string, a
 		rv = classArr.join(" ");
 	}
 	return rv;
-}
+};

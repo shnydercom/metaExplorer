@@ -140,35 +140,6 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 		>
 
 		</HeroGallery>;
-		/*return <div className="hero-gallery">
-			<div className="bg-container">
-				{this.renderSub(backgroundItpt)}
-			</div>
-			<div className="hero-front-outer overlay-gradient">
-				<div className="hero-front-inner" ref="innerDiv">
-					<div>
-						<div className="fg-container">
-							{this.renderSub(foregroundItpt)}
-						</div>
-						<div className="btns">
-							<div className="prev">
-								<div className="start"></div>
-								<div className="mid">{prevBtnLabelStrings}</div>
-								<div className="end"></div>
-							</div>
-							<div className="nxt">
-								<div className="start"></div>
-								<div className="mid">{nxtBtnLabelStrings}</div>
-								<div className="end"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="hero-text">
-				<h4>{subHeaderTextStr}</h4>
-			</div>
-		</div>;*/
 	}
 
 }

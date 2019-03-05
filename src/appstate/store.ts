@@ -29,7 +29,7 @@ export interface ILDNonvisualIntrprtrMapStatePart {
   [s: string]: IBlueprintItpt;
 }
 
-export const isProduction = false// process.env.NODE_ENV === 'production';
+export const isProduction = process.env.NODE_ENV === 'production';
 
 let middleWare = isProduction ? applyMiddleware(epicMiddleware) : compose(applyMiddleware(epicMiddleware), DevTools.instrument());
 
