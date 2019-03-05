@@ -464,8 +464,8 @@
           ]
         },
         "3c82ebbd-a56b-4be9-b19d-998558d84c51": {
-          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
-          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "subItptOf": "shnyder/block-editor",
+          "canInterpretType": "http://shnyder.com/editor/blockeditortype",
           "nameSelf": "3c82ebbd-a56b-4be9-b19d-998558d84c51",
           "initialKvStores": [],
           "crudSkills": "cRud",

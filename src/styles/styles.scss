@@ -31,6 +31,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	overflow-x: hidden;
 	min-width: 420px;
 	overflow-y: hidden;
+	margin: auto;
 }
 
 .mode-switcher {
@@ -399,7 +400,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	height: 3.5em;
 	width: unset !important;
 	min-height: 3.5em;
-	padding: 1em;
+	margin: 1em;
 	display: flex;
 	align-content: center;
 

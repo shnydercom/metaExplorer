@@ -115,7 +115,13 @@
           "subItptOf": "google-api/YoutubeEmbed",
           "canInterpretType": "google-api/YoutubeEmbed-ObjectType",
           "nameSelf": "43ceca07-cf08-426a-91b3-662c9938aff4",
-          "initialKvStores": [],
+          "initialKvStores": [
+            {
+              "key": "VideoID",
+              "value": "jEa_ygNrtyw",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }
