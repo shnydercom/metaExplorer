@@ -3,7 +3,6 @@ export enum UserDefDict {
 	/**
 	 * the name of a component defined by a user
 	 */
-	intrprtrNameKey = "InterpreterName",
 	exportSelfKey = "exportSelf",
 	finalInputKey = "finalInput",
 	externalInput = "externalInput",
@@ -26,7 +25,7 @@ export enum UserDefDict {
 	singleKvStore = "singleKvStore",
 
 	//values
-	outputItpt = "Output interpreter",
+	outputItpt = "Output Info",
 
 	//types
 	/**

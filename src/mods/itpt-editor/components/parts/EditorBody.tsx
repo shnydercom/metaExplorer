@@ -137,7 +137,7 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 						event.preventDefault();
 					}}
 				>
-					<DiagramWidget inverseZoom diagramEngine={this.props.logic.getDiagramEngine()} />
+					<DiagramWidget inverseZoom diagramEngine={this.props.logic.getDiagramEngine()} maxNumberPointsPerLink={0}/>
 					<div className="button-row">
 						<RefMapDropSpace
 							currentlyEditingItpt={this.state.currentlyEditingItpt}

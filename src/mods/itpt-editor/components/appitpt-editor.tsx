@@ -162,6 +162,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		previewerToken = props.ldTokenString + "-previewLDOptions";
 		if (!props.logic) {
 			var logic: EditorLogic = new EditorLogic(props.ldTokenString);
+			logic.setOnOutputInfoSaved((val) => this.onInterpretBtnClick(null));
 			this.logic = logic;
 		} else {
 			this.logic = props.logic;
@@ -284,7 +285,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			<ThemeProvider theme={editorTheme}>
 				<Layout theme={{ layout: 'editor-layout' }}>
 					<NavDrawer insideTree={true} theme={{ pinned: "navbar-pinned" }} active={drawerActive} withOverlay={false}
-						 permanentAt='xxxl'>
+						permanentAt='xxxl'>
 						<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem}
 							onClearBtnPress={() => {
 								this.logic.clear();
@@ -383,7 +384,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	protected onInterpretBtnClick = (e) => {
-		e.preventDefault();
+		if (e) e.preventDefault();
 		let nodesBPCFG: BlueprintConfig = this.logic.intrprtrBlueprintFromDiagram(null);
 		let newType = nodesBPCFG.canInterpretType;
 		if (!newType) {

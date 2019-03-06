@@ -1,39 +1,35 @@
-import { keys } from "lodash";
-import { DiagramModel, DiagramEngine, NodeModel, DefaultLinkModel } from "storm-react-diagrams";
-import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
-import { LDPortModel } from "./LDPortModel";
 import appIntprtrRetr from 'appconfig/appItptRetriever';
+import { COMP_BASE_CONTAINER } from "components/generic/baseContainer-rewrite";
 import { IItptInfoItem } from "defaults/DefaultItptRetriever";
-import { LDBaseDataType, ldBaseDataTypeList } from "ldaccess/LDBaseDataType";
-import ldBlueprint, { IBlueprintItpt, BlueprintConfig } from "ldaccess/ldBlueprint";
-import { IKvStore } from "ldaccess/ikvstore";
-import { GeneralDataTypeNodeModel } from "./generaldatatypes/GeneralDataTypeNodeModel";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { LDDict } from "ldaccess/LDDict";
-import { DeclarationWidgetFactory } from "./declarationtypes/DeclarationNodeWidgetFactory";
-import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeModel";
-import { DECLARATION_MODEL, BASEDATATYPE_MODEL, GENERALDATATYPE_MODEL, EXTENDABLETYPES_MODEL } from "./editor-consts";
-import { ItptNodeModel } from "./ItptNodeModel";
-import { elementAt } from "rxjs/operators/elementAt";
-import { ObjectPropertyRef, OBJECT_PROP_REF } from "ldaccess/ObjectPropertyRef";
-import { DeclarationNodeProps } from "./declarationtypes/DeclarationNodeWidget";
-import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from "ldaccess/kvConvenienceFns";
 import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
+import { IKvStore } from "ldaccess/ikvstore";
+import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from "ldaccess/kvConvenienceFns";
+import { ldBaseDataTypeList } from "ldaccess/LDBaseDataType";
+import { BlueprintConfig, IBlueprintItpt } from "ldaccess/ldBlueprint";
+import { LDDict } from "ldaccess/LDDict";
+import { isInputValueValidFor } from "ldaccess/ldtypesystem/typeChecking";
 import { isObjPropertyRef } from "ldaccess/ldUtils";
+import { ObjectPropertyRef, OBJECT_PROP_REF } from "ldaccess/ObjectPropertyRef";
+import { UserDefDict } from "ldaccess/UserDefDict";
+import { DefaultLinkModel, DiagramEngine, DiagramModel, NodeModel } from "storm-react-diagrams";
+import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
+import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
+// import { value } from "../../../../node_modules/react-toolbox/lib/dropdown/theme.css";
+import { distributeElements } from "./dagre-utils";
+import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeModel";
+import { DeclarationWidgetFactory } from "./declarationtypes/DeclarationNodeWidgetFactory";
+import { BASEDATATYPE_MODEL, DECLARATION_MODEL, EXTENDABLETYPES_MODEL, GENERALDATATYPE_MODEL, OUTPUT_INFO_MODEL } from "./editor-consts";
+import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
 import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesWidgetFactory";
 import { GeneralDataTypeNodeFactory } from "./generaldatatypes/GeneralDataTypeInstanceFactories";
-import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
-// import { value } from "../../../../node_modules/react-toolbox/lib/dropdown/theme.css";
-
-import { distributeElements } from "./dagre-utils";
+import { GeneralDataTypeNodeModel } from "./generaldatatypes/GeneralDataTypeNodeModel";
+import { ItptNodeModel } from "./ItptNodeModel";
 import { LDPortInstanceFactory } from "./LDPortInstanceFactory";
-import { isInputValueValidFor } from "ldaccess/ldtypesystem/typeChecking";
-import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
-import { ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
+import { LDPortModel } from "./LDPortModel";
+import { OutputInfoPartNodeModel } from "./outputinfotypes/OutputInfoNodeModel";
+import { OutputInfoWidgetFactory } from "./outputinfotypes/OutputInfoWidgetFactory";
 import { SettingsLabelFactory } from "./SettingsLabelFactory";
 import { SettingsLinkFactory } from "./SettingsLinkFactory";
-import { VisualKeysDict } from "components/visualcomposition/visualDict";
-import { COMP_BASE_CONTAINER } from "components/generic/baseContainer-rewrite";
 
 export interface NewNodeSig {
 	x: number;
@@ -54,24 +50,37 @@ export class EditorLogic {
 	protected activeModel: DiagramModel;
 	protected diagramEngine: DiagramEngine;
 	protected itptList: IItptInfoItem[];
-	protected outputNode: DeclarationPartNodeModel;
+	protected outputNode: OutputInfoPartNodeModel;
 	protected outputLDOptionsToken: string;
+	protected onOutputInfoSaved: (itptName: string) => void;
 
 	constructor(outputLDOptionsToken: string) {
 		this.outputLDOptionsToken = outputLDOptionsToken;
 		this.diagramEngine = new DiagramEngine();
-		//this.diagramEngine.installDefaultFactories();
-		//this.diagramEngine.registerNodeFactory(new DefaultNodeFactory());
-		//this.diagramEngine.registerLinkFactory(new DefaultLinkFactory());
+		//label factories
 		this.diagramEngine.registerLabelFactory(new SettingsLabelFactory());
+		//link factories
 		this.diagramEngine.registerLinkFactory(new SettingsLinkFactory());
+		//node factories
 		this.diagramEngine.registerNodeFactory(new BaseDataTypeNodeFactory());
 		this.diagramEngine.registerNodeFactory(new GeneralDataTypeNodeFactory());
 		this.diagramEngine.registerNodeFactory(new DeclarationWidgetFactory());
 		this.diagramEngine.registerNodeFactory(new ExtendableTypesWidgetFactory());
+		this.diagramEngine.registerNodeFactory(new OutputInfoWidgetFactory());
+		//port factories
 		this.diagramEngine.registerPortFactory(new LDPortInstanceFactory());
 		this.newModel(outputLDOptionsToken);
 		this.itptList = (appIntprtrRetr() as ReduxItptRetriever).getItptList();
+		this.onOutputInfoSaved = (itptName: string) => {
+			//
+		};
+	}
+
+	public getOnOutputInfoSaved(): (itptName: string) => void {
+		return this.onOutputInfoSaved;
+	}
+	public setOnOutputInfoSaved(value: (itptName: string) => void) {
+		this.onOutputInfoSaved = value;
 	}
 
 	public clear() {
@@ -83,7 +92,13 @@ export class EditorLogic {
 		const model = engine.getDiagramModel();
 		let distributedModel = this.getDistributedModel(engine, model);
 		this.activeModel = distributedModel;
-		this.outputNode = this.activeModel.getNode(this.outputLDOptionsToken) as DeclarationPartNodeModel;
+		this.outputNode = this.activeModel.getNode(this.outputLDOptionsToken) as OutputInfoPartNodeModel;
+		this.outputNode.addListener({
+			outputInfoSaved: (evtVal) => {
+				const newItpt = evtVal.itptName;
+				this.onOutputInfoSaved(newItpt);
+			}
+		} as any);
 		engine.setDiagramModel(distributedModel);
 		engine.recalculatePortsVisually();
 		engine.zoomToFit();
@@ -111,65 +126,28 @@ export class EditorLogic {
 		//2) setup the diagram model
 		var model = new DiagramModel();
 
-		/*var baseDataTypeKVStore: IKvStore = {
-			key: UserDefDict.exportSelfKey,
-			value: undefined,
-			ldType: undefined
-		};
-		var newNode1 = new BaseDataTypeNodeModel("Simple Data Type",  "rgba(250,250,250,0.2)");
-		var newPort1 = newNode1.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "someLabel"));
-		newNode1.x = 100;
-		newNode1.y = 200;
-		model.addNode(newNode1);
-
-		//3-A) create a default node
-		var node1 = new DefaultNodeModel("Node 1",  "rgba(250,250,250,0.2)");
-		var port1 = node1.addPort(new DefaultPortModel(false, "out-1", "Out"));
-		node1.x = 100;
-		node1.y = 100;
-
-		//3-B) create another default node
-		var node2 = new DefaultNodeModel("Node 2",  "rgba(250,250,250,0.2)");
-		var port2 = node2.addPort(new DefaultPortModel(true, "in-1", "IN"));
-		node2.x = 400;
-		node2.y = 100;
-
-		//3-C) link the 2 nodes together
-		var link1 = new LinkModel();
-		link1.setSourcePort(port1);
-		link1.setTargetPort(port2);
-
-		//4) add the models to the root graph
-		model.addNode(node1);
-		model.addNode(node2);
-		model.addLink(link1);
-
-		var linkNew = new LinkModel();
-		linkNew.setSourcePort(newPort1);
-		linkNew.setTargetPort(port1);
-		model.addLink(linkNew);*/
-
 		//create fixed output node
 		//TODO: make fixed but ports should still be settable, make outputNode singleton per Itpt
-		let outputNode = new DeclarationPartNodeModel(UserDefDict.outputItpt, null, null, editorSpecificNodesColor,
+		let outputNode = new OutputInfoPartNodeModel(UserDefDict.outputItpt, null, null, editorSpecificNodesColor,
 			outputLDOptionsToken);
-		//outputNode.setLocked(true); locking would lock the ports as well
+		//outputNode.setLocked(true); // locking would lock the ports as well
 		outputNode.x = 200;
 		outputNode.y = 200;
+		outputNode.addListener({
+			outputInfoSaved: (evtVal) => {
+				const newItpt = evtVal.itptName;
+				this.onOutputInfoSaved(newItpt);
+			}
+		} as any);
+
 		let outputFinalInputKV: IKvStore = {
 			key: UserDefDict.finalInputKey,
 			value: undefined,
 			ldType: UserDefDict.intrprtrClassType
 		};
 		let finalInputName: string = outputFinalInputKV.key;
-		outputNode.addPort(new LDPortModel(true, finalInputName, outputFinalInputKV));
-		let itptNameKV: IKvStore = {
-			key: UserDefDict.intrprtrNameKey,
-			value: undefined,
-			ldType: LDDict.Text
-		};
-		let itptNameString: string = UserDefDict.intrprtrNameKey;
-		outputNode.addPort(new LDPortModel(true, itptNameString, itptNameKV));
+		let outputNodeInputPort = new LDPortModel(true, finalInputName, outputFinalInputKV);
+		outputNode.addPort(outputNodeInputPort);
 		model.addNode(outputNode);
 		this.outputNode = outputNode;
 		//5) load model into engine
@@ -299,27 +277,19 @@ export class EditorLogic {
 	}
 
 	public diagramFromItptBlueprint(itpt: BlueprintConfig): void {
-		let newSigBaseTxt: NewNodeSig = {
-			id: this.outputNode.id + UserDefDict.intrprtrNameKey,
-			x: this.outputNode.x + DIAG_TRANSF_X,
-			y: this.outputNode.y + DIAG_TRANSF_Y
-		};
-		let nameTextNode = this.addNewBDTNode(newSigBaseTxt, LDDict.Text, itpt.nameSelf);
-		let nameTextNodeOutPort = nameTextNode.getPort(PORTNAME_OUT_EXPORTSELF);
+
 		let refMap = getKVStoreByKey(itpt.initialKvStores, UserDefDict.intrprtrBPCfgRefMapKey);
 
-		// let mainItpt = refMap.value[itpt.subItptOf];
-		let newSigBaseItpt: NewNodeSig = { id: itpt.subItptOf, x: newSigBaseTxt.x, y: newSigBaseTxt.y - DIAG_TRANSF_Y };
-		//let baseNode = this.addNewGeneralNode(newSigBaseItpt, mainItpt);
+		let newX = this.outputNode.x + DIAG_TRANSF_X;
+		let newY = this.outputNode.y + DIAG_TRANSF_Y;
+		let newSigBaseItpt: NewNodeSig = { id: itpt.subItptOf, x: newX, y: newY - DIAG_TRANSF_Y };
 
 		//create nodes first
 		let nodeMap = new Map<string, GeneralDataTypeNodeModel>();
-		//nodeMap.set(itpt.subItptOf, baseNode);
 		let yIterator = 0;
 		for (const itm in refMap.value) {
 			if (refMap.value.hasOwnProperty(itm)) {
 				const subItpt: BlueprintConfig = refMap.value[itm];
-				//if (subItpt === mainItpt) continue;
 				yIterator++;
 				let newSigSubItpt: NewNodeSig = { id: itm, x: newSigBaseItpt.x, y: newSigBaseItpt.y - DIAG_TRANSF_Y * yIterator };
 				if (subItpt.canInterpretType === UserDefDict.itptContainerObjType) {
@@ -418,21 +388,15 @@ export class EditorLogic {
 
 		let baseNode = nodeMap.get(itpt.subItptOf);
 
+		this.outputNode.setItptName(itpt.nameSelf);
 		let outputNodeItptInPort = this.outputNode.getPort(UserDefDict.finalInputKey);
-		let outputNodeNameInPort = this.outputNode.getPort(UserDefDict.intrprtrNameKey);
 
 		let outputItptLink = new DefaultLinkModel();
 		outputItptLink.setTargetPort(outputNodeItptInPort);
 		outputItptLink.setSourcePort(baseNode.getPort(UserDefDict.exportSelfKey));
 
-		let outputNameLink = new DefaultLinkModel();
-		outputNameLink.setTargetPort(outputNodeNameInPort);
-		outputNameLink.setSourcePort(nameTextNodeOutPort);
-
 		this.getDiagramEngine().getDiagramModel().addLink(outputItptLink);
-		this.getDiagramEngine().getDiagramModel().addLink(outputNameLink);
 		this.getDiagramEngine().recalculatePortsVisually();
-		//console.log(linkArray.length);
 		linkArray.forEach((link) => {
 			this.getDiagramEngine().getDiagramModel().addLink(link);
 		});
@@ -501,17 +465,17 @@ export class EditorLogic {
 		let rv: BlueprintConfig;
 		if (!this.outputNode) return null;
 		let crudSkills = "cRud";
-		let nameSelf = null;
+		let subItptOf = null; //set later, relies on info from fillBPCfgFromGraph
+		let nameSelf = this.outputNode.getItptName();
 		let initialKvStores = [];
 		let interpretableKeysArr = [];
 		let canInterpretType = finalCanInterpretType ? finalCanInterpretType : null;
-		//TODO: fill the above recursively
 		let outputBPCfg: BlueprintConfig = {
-			subItptOf: null,
-			canInterpretType: canInterpretType,
-			nameSelf: nameSelf,
-			initialKvStores: initialKvStores,
-			crudSkills: crudSkills,
+			subItptOf,
+			canInterpretType,
+			nameSelf,
+			initialKvStores,
+			crudSkills,
 			interpretableKeys: interpretableKeysArr,
 		};
 		let subIntrprtrCfgMap: { [s: string]: BlueprintConfig } = {};
@@ -663,7 +627,7 @@ export class EditorLogic {
 						let gdtKV = this.composeKVs(outputKV, port.kv);
 						branchBPCfg.initialKvStores.push(gdtKV);
 						//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
-						if (branchNode.type === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
+						if (branchNode.type === OUTPUT_INFO_MODEL && port.kv.key === UserDefDict.finalInputKey) {
 							branchNode.subItptOf = leafNode.getID();
 						} else {
 							branchBPCfg.interpretableKeys.push(gdtKV.key);
@@ -766,23 +730,9 @@ export class EditorLogic {
 					case UserDefDict.finalInputKey:
 						idxMap.set(itm.key, idx);
 						break;
-					case UserDefDict.intrprtrNameKey:
-						idxMap.set(itm.key, idx);
-						break;
 					default:
 						break;
 				}
-			}
-		});
-		idxMap.forEach((val, key) => {
-			switch (key) {
-				case UserDefDict.finalInputKey:
-					break;
-				case UserDefDict.intrprtrNameKey:
-					targetBP.nameSelf = kvStores[val].value;
-					break;
-				default:
-					break;
 			}
 		});
 		//delete at the end
