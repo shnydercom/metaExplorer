@@ -11,8 +11,10 @@ import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
 import { ThemeProvider } from 'react-css-themr';
 import { editorTheme } from 'styles/editor/editorTheme';
+import { appTheme } from 'styles/appTheme/appTheme';
 
 export const ThemeProviderDarkName = "shnyder/md/ThemeProvider-dark";
+export const ThemeProviderLightName = "shnyder/md/ThemeProvider-light";
 
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.freeContainer];
@@ -25,18 +27,26 @@ let initialKVStores: IKvStore[] = [
 	}
 ];
 
-let bpCfg: BlueprintConfig = {
+let darkBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ThemeProviderDarkName,
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
+
+let lightBpCfg: BlueprintConfig = {
+	subItptOf: null,
+	nameSelf: ThemeProviderLightName,
+	initialKvStores: initialKVStores,
+	interpretableKeys: cfgIntrprtKeys,
+	crudSkills: "cRud"
+};
+
 export interface ThemeProviderDarkState extends LDLocalState {
 }
 
-@ldBlueprint(bpCfg)
-export class PureThemeProviderDark extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, ThemeProviderDarkState>
+class PureThemeProviderDark extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, ThemeProviderDarkState>
 	implements IBlueprintItpt {
 
 	static getDerivedStateFromProps(
@@ -74,3 +84,13 @@ export class PureThemeProviderDark extends Component<LDConnectedState & LDConnec
 		return <ThemeProvider theme={editorTheme}>{renderFreeResult}</ThemeProvider>;
 	}
 }
+
+class PureThemeProviderLight extends PureThemeProviderDark {
+	render() {
+		let renderFreeResult: JSX.Element = this.renderFreeContainer();
+		return <ThemeProvider theme={appTheme}>{renderFreeResult}</ThemeProvider>;
+	}
+}
+
+export const ThemeProviderDark = ldBlueprint(darkBpCfg)(PureThemeProviderDark);
+export const ThemeProviderLight = ldBlueprint(lightBpCfg)(PureThemeProviderLight);

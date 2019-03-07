@@ -30,7 +30,7 @@
             {
               "key": "in_2",
               "value": {
-                "objRef": "6f83a9f1-7c50-4368-b29e-e9a062ef183d",
+                "objRef": "81a4ff9a-7a42-46c5-a4b9-e7ae334143d3",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -89,10 +89,10 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "6f83a9f1-7c50-4368-b29e-e9a062ef183d": {
-          "subItptOf": "shnyder/layout/vh-centered-column",
-          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
-          "nameSelf": "6f83a9f1-7c50-4368-b29e-e9a062ef183d",
+        "81a4ff9a-7a42-46c5-a4b9-e7ae334143d3": {
+          "subItptOf": "shnyder/layout/CSSWrapper",
+          "canInterpretType": "shnyder/layout/CSSWrapper-ObjectType",
+          "nameSelf": "81a4ff9a-7a42-46c5-a4b9-e7ae334143d3",
           "initialKvStores": [
             {
               "key": "freeContainer",
@@ -101,6 +101,11 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "cssClass",
+              "value": "onboarding-text vh-centered-column",
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",
@@ -169,5 +174,7 @@
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "interpretableKeys": [
+    "finalInput"
+  ]
 }

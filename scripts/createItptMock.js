@@ -9,7 +9,7 @@ let concatenatedObj = {
 	itptList: [
 
 	],
-	mainItpt: "ywqd/packagereceiver/index"
+	mainItpt: "MainAppEntryPoint"
 }
 
 const rootDir = path.resolve("demos"); // or whatever directory you want to read

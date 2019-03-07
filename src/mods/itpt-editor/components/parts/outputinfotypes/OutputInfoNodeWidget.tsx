@@ -23,7 +23,7 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 	static getDerivedStateFromProps(nextProps, prevState) {
 		const itptName = nextProps.node.getItptName();
 		if (itptName !== prevState.stItptName) {
-			return { stItptName: itptName};
+			return { stItptName: itptName };
 		}
 		return null;
 	}
@@ -51,6 +51,13 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 					<div className="dense-form">
 						<div style={{ marginLeft: "-2em" }}
 							className="in">{map(node.getInPorts(), this.generatePort.bind(this))}</div>
+						<Input type='text'
+							label="Organization"
+							name="orgNameField"
+							 />
+						<Input type='text'
+							label="Project Name"
+							name="projectNameField"/>
 						<Input type='text'
 							label="Block Name"
 							name="blockNameField"

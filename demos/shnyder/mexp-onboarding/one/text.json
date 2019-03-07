@@ -104,7 +104,7 @@
             },
             {
               "key": "cssClass",
-              "value": "onboarding-text vh-centered-column",
+              "value": "onboarding-card-container vh-centered-column",
               "ldType": "http://schema.org/Text"
             }
           ],

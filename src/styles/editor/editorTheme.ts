@@ -10,4 +10,5 @@ export const editorTheme = {
   [rdIDs.DROPDOWN]: mdEditorStyles,
   [rdIDs.SWITCH]: mdEditorStyles,
   [rdIDs.DRAWER]: mdEditorStyles,
+  [rdIDs.OVERLAY]: mdEditorStyles,
 };

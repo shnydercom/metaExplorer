@@ -1,11 +1,30 @@
 {
-  "subItptOf": "b4759e72-bdd3-4da9-ad54-b189cb8752c8",
+  "subItptOf": "e32954d7-318f-49c1-9e41-554b46abcdf0",
   "canInterpretType": "MainAppEntryPoint-ObjectType",
   "nameSelf": "MainAppEntryPoint",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
+        "e32954d7-318f-49c1-9e41-554b46abcdf0": {
+          "subItptOf": "shnyder/md/ThemeProvider-light",
+          "canInterpretType": "shnyder/md/ThemeProvider-light-ObjectType",
+          "nameSelf": "e32954d7-318f-49c1-9e41-554b46abcdf0",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "b4759e72-bdd3-4da9-ad54-b189cb8752c8",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
         "b4759e72-bdd3-4da9-ad54-b189cb8752c8": {
           "subItptOf": "shnyder/meta-explorer/index",
           "canInterpretType": "shnyder/meta-explorer/index-ObjectType",

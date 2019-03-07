@@ -402,8 +402,10 @@ body {
   overflow-x: auto;
   border: 1px solid #aaa;
   border-radius: 0px 0px 10px 10px;
-  background: #eee;
+  background: #191919;
+  color: lime;
   margin-top: 0px;
+  padding-left: 1em;
   flex: 0.85;
 }
 
@@ -411,13 +413,21 @@ body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   border: 1px solid #353535;
   border-radius: 10px;
-  background: #0c1e3a;
+  background: white;
   margin: 0px;
   margin-top: 69px;
-  color: white;
-  padding: 10px;
+  color:  #0c1e3a;
+  //padding: 10px;
+  justify-content: center;
+  align-items: center;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
+  display: flex;
+  button {
+    margin-left: 1em;
+    color: white !important;
+    background-color: #d6d6d6 !important;
+  }
 }
 
 .dateTimePicker {

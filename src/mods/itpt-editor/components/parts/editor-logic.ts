@@ -26,7 +26,7 @@ import { GeneralDataTypeNodeModel } from "./generaldatatypes/GeneralDataTypeNode
 import { ItptNodeModel } from "./ItptNodeModel";
 import { LDPortInstanceFactory } from "./LDPortInstanceFactory";
 import { LDPortModel } from "./LDPortModel";
-import { OutputInfoPartNodeModel } from "./outputinfotypes/OutputInfoNodeModel";
+import { OutputInfoPartNodeModel, OUTPUT_NODE_WIDTH } from "./outputinfotypes/OutputInfoNodeModel";
 import { OutputInfoWidgetFactory } from "./outputinfotypes/OutputInfoWidgetFactory";
 import { SettingsLabelFactory } from "./SettingsLabelFactory";
 import { SettingsLinkFactory } from "./SettingsLinkFactory";
@@ -93,6 +93,7 @@ export class EditorLogic {
 		let distributedModel = this.getDistributedModel(engine, model);
 		this.activeModel = distributedModel;
 		this.outputNode = this.activeModel.getNode(this.outputLDOptionsToken) as OutputInfoPartNodeModel;
+		this.outputNode.width = OUTPUT_NODE_WIDTH;
 		this.outputNode.addListener({
 			outputInfoSaved: (evtVal) => {
 				const newItpt = evtVal.itptName;

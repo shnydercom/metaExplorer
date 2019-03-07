@@ -7,6 +7,8 @@ export interface OutputInfoNodeModelListener extends BaseModelListener {
 	outputInfoSaved?(event: BaseEvent<OutputInfoPartNodeModel> & { itptName: null | string }): void;
 }
 
+export const OUTPUT_NODE_WIDTH = 600;
+
 export class OutputInfoPartNodeModel extends ItptNodeModel {
 
 	protected itptName: string | null;
@@ -16,7 +18,7 @@ export class OutputInfoPartNodeModel extends ItptNodeModel {
 		this.nameSelf = nameSelf;
 		this.color = color;
 		this.itptName = null;
-		this.width = 600;
+		this.width = OUTPUT_NODE_WIDTH;
 	}
 
 	deSerialize(object, engine: DiagramEngine) {

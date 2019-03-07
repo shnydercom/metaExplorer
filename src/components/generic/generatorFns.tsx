@@ -340,7 +340,7 @@ function getDerivedKVStateFromProps(
 			} catch (error) {
 				return { localValues: newValueMap, localLDTypes: newLDTypeMap };
 			}
-		} else {
+		} else if (newValueMap.size !== 0) {
 			return { localValues: newValueMap, localLDTypes: newLDTypeMap };
 		}
 		return null;

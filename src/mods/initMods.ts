@@ -8,6 +8,7 @@ import { MOD_ITPTEDITOR_ID, initItptEditorMod } from "./itpt-editor/initItptEdit
 import { applicationStore } from "approot";
 import { loadMod } from "appstate/epicducks/mod-duck";
 import { initQRCODEGENClientMod, MOD_QRCODEGENSCAN_ID } from "./qr-code-genscan/initQRCodeGenScanMod";
+import { isProduction } from "appstate/store";
 
 export function initMods(modAPI: ModAPI) {
 	//set the required mods (otherwise won't finish to load)
@@ -31,10 +32,10 @@ export function initMods(modAPI: ModAPI) {
 		() => initSwaggerClientMod()
 	);
 	modAPI.addModInitFn(MOD_USERITPT_ID,
-		() => initUSERITPTClientMod(false)
+		() => initUSERITPTClientMod(isProduction)
 	);
 	modAPI.addModInitFn(MOD_ITPTEDITOR_ID,
-		() => initItptEditorMod(true)
+		() => initItptEditorMod(!isProduction)
 	);
 	modAPI.addModInitFn(MOD_QRCODEGENSCAN_ID,
 		() => initQRCODEGENClientMod()

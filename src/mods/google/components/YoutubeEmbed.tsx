@@ -66,8 +66,8 @@ export class PureYoutubeEmbed extends Component<LDConnectedState & LDConnectedDi
 		const { localValues } = this.state;
 		let ytVideoId = localValues.get(VisualKeysDict.videoId);
 		if (!isProduction) return null;
-		return <iframe width="420" height="315" title="YouTube video"
-			style={{ marginLeft: "auto", marginRight: "auto", maxWidth: "100%", borderWidth: "0px" }}
+		return <iframe width="100%" height="100%" title="YouTube video"
+			style={{ marginLeft: "auto", marginRight: "auto", maxWidth: "100%", borderWidth: "0px", flex: 1 }}
 			src={"https://www.youtube.com/embed/" + ytVideoId + "?modestbranding=1&autohide=1&showinfo=0&controls=0autoplay=0&showinfo=0"}
 			frameBorder={0} allowFullScreen>
 		</iframe>;

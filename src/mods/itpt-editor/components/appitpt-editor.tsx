@@ -23,7 +23,7 @@ import {
 	Route,
 	Link
 } from 'react-router-dom';
-import { Switch } from "react-router";
+import { Switch, Redirect } from "react-router";
 import { BaseContainerRewrite } from "../../../components/generic/baseContainer-rewrite";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
@@ -48,8 +48,9 @@ export type AIEState = {
 	hasCompletedFirstRender: boolean;
 	currentlyEditingItptName: string | null;
 	drawerActive: boolean;
-	sidebarActive: boolean;
+	previewActive: boolean;
 	mode: "editor" | "app" | "initial";
+	redirect: null | string;
 } & LDLocalState;
 
 const EDITOR_KV_KEY = "EditorKvKey";
@@ -111,6 +112,10 @@ export const BlockEditorCfg: BlueprintConfig = {
 export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	static getDerivedStateFromProps(nextProps: AIEProps, prevState: AIEState): AIEState | null {
+		let redirState = null;
+		if (nextProps.routes && nextProps.routes.location + "" === prevState.redirect){
+			redirState = {...prevState, redirect: null};
+		}
 		let rvLD = gdsfpLD(
 			nextProps, prevState, [],
 			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
@@ -119,7 +124,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			ITPT_BLOCK_EDITOR_TYPE,
 			[], [false, false, false, false, true]);
 		if (!rvLD) {
-			return null;
+			return redirState;
 		}
 		if (rvLD) {
 			let initiallyDisplayed = rvLD.localValues.get(ITPT_BLOCK_EDITOR_EDITING_ITPT);
@@ -131,18 +136,18 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				? prevState.mode
 				: isFSPreview ? "app" : "editor";
 			let drawerActive = prevState.drawerActive;
-			let sidebarActive = prevState.drawerActive;
+			let previewActive = prevState.drawerActive;
 			if (!!activeViews && activeViews.length() > 0) {
 				drawerActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_DRAWER);
-				sidebarActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_SIDEBAR);
+				previewActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_SIDEBAR);
 			}
 			if (!!initiallyDisplayed && !prevState.currentlyEditingItptName !== initiallyDisplayed) {
-				return { ...prevState, currentlyEditingItptName: initiallyDisplayed, mode, drawerActive, sidebarActive };
+				return { ...prevState, currentlyEditingItptName: initiallyDisplayed, mode, drawerActive, previewActive: previewActive };
 			} else {
-				return { ...prevState, mode, drawerActive, sidebarActive };
+				return { ...prevState, mode, drawerActive, previewActive: previewActive };
 			}
 		}
-		return null;
+		return redirState;
 	}
 
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the itpt you're designing is capable of interpreting -> usually a new generic type
@@ -181,14 +186,15 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			? "initial"
 			: isFSPreview ? "app" : "editor";
 		let drawerActive = true;
-		let sidebarActive = true;
+		let previewActive = true;
 		if (!!activeViews && activeViews.length() > 0) {
 			drawerActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_DRAWER);
-			sidebarActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_SIDEBAR);
+			previewActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_SIDEBAR);
 		}
 		this.state = {
 			...rvLD,
-			mode, drawerActive, sidebarActive,
+			redirect: null,
+			mode, drawerActive, previewActive: previewActive,
 			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone", hasCompletedFirstRender: false
 		};
 	}
@@ -207,27 +213,30 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	toggleDrawerActive = () => {
 		let sideBar = this.sideBarRef.current;
-		let sidebarActive = this.state.sidebarActive;
+		let previewActive = this.state.previewActive;
 		let drawerActive = !this.state.drawerActive;
 		if (sideBar) {
 			if (sideBar.clientWidth >= window.innerWidth) {
-				sidebarActive = false;
+				previewActive = false;
 				drawerActive = true;
 			}
 		}
-		this.setState({ ...this.state, drawerActive, sidebarActive });
+		this.setState({ ...this.state, drawerActive, previewActive: previewActive });
 	}
-	toggleSidebar = () => {
-		this.setState({ ...this.state, sidebarActive: !this.state.sidebarActive });
+	togglePreview = () => {
+		this.setState({ ...this.state, previewActive: !this.state.previewActive });
 	}
 
 	render() {
 		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
 			return <div>{this.errorNotAvailableMsg}</div>;
 		}
-		const { mode, localValues } = this.state;
+		const { mode, localValues, redirect } = this.state;
 		let isGlobal = !!localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 
+		if (!!redirect){
+			return <Redirect to={redirect}/>;
+		}
 		if (isGlobal) {
 			return <Route path="/" render={(routeProps: LDRouteProps) => {
 				if (routeProps.location.search === "?mode=editor" && mode !== "editor") {
@@ -261,29 +270,43 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			}
 	}
 
+	toggleFullScreen(){
+		if (this.state.mode === "editor"){
+			this.setState({ ...this.state, mode: "app" });
+		}else{
+			this.setState({ ...this.state, mode: "editor" });
+		}
+	}
+
+	triggerNavToTop(){
+		const redirTo = "/";
+		if (this.props.routes.location + "" !== redirTo){
+			this.setState({ ...this.state, redirect: redirTo});
+		}
+	}
+
 	renderApp() {
 		const { routes } = this.props;
 		return (
 			<div className="app-actual app-content">
 				<BaseContainerRewrite routes={routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
-				{!isProduction && <div className="mode-switcher">
-					<Button className="editor-switch-btn" icon='edit' floating accent onClick={() => this.setState({ ...this.state, mode: "editor" })} />
+				<div className="mode-switcher">
+					<Button className="editor-switch-btn" icon='edit' floating accent onClick={() => this.toggleFullScreen.apply(this)} />
 				</div>
-				}
 			</div>
 		);
 	}
 
 	renderEditor() {
 		const { routes } = this.props;
-		const { drawerActive, currentlyEditingItptName, sidebarActive, localValues } = this.state;
+		const { drawerActive, currentlyEditingItptName, previewActive, localValues } = this.state;
 		const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		let isDisplayDevContent = isProduction ? false : true;
 		let inputStyle = currentlyEditingItptName ? { width: currentlyEditingItptName.length + "ex", maxHeight: "100%" } : null;
 		const itpts = this.logic.getItptList();
 		return <div className="entrypoint-editor">
 			<ThemeProvider theme={editorTheme}>
-				<Layout theme={{ layout: 'editor-layout' }}>
+				<Layout theme={{ layout: 'editor-layout', navDrawerClipped: 'editor-navbar-clipped' }}>
 					<NavDrawer insideTree={true} theme={{ pinned: "navbar-pinned" }} active={drawerActive} withOverlay={false}
 						permanentAt='xxxl'>
 						<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem}
@@ -301,7 +324,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							<div className="fakeheader">
 								{
 									isGlobal
-										? <Button style={{ color: "white" }} onClick={() => this.setState({ ...this.state, mode: "app" })}>View in full size <FontIcon>fullscreen</FontIcon></Button>
+										? <Button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size <FontIcon>fullscreen</FontIcon></Button>
 										: null
 								}
 							</div>
@@ -313,32 +336,51 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							onEditTrayItem={this.onEditTrayItem}
 							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
 							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
-						{this.renderPreview()}
+						{this.renderPreview(isGlobal, previewActive)}
 					</Panel>
+					<div className="nav-element top-left">
+						<IconButton className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
+					</div>
+					<div className="nav-element bottom-left">
+						<IconButton icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></IconButton>
+					</div>
 				</Layout>
 			</ThemeProvider>
-			<div className="nav-element top-left">
-				<IconButton className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
-			</div>
-			<div className="nav-element bottom-left">
-				<IconButton icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></IconButton>
-			</div>
 		</div >;
 	}
 
-	protected renderPreview() {
-		return <div className="phone-preview-centered">
+	protected renderPreview(isGlobal: boolean, previewActive: boolean) {
+		let isDisplayDevContent = isProduction ? false : true;
+		let previewContainerClass = "phone-preview-centered";
+		if (previewActive) {
+			previewContainerClass += " active";
+		} else {
+			previewContainerClass += " inactive";
+		}
+		return <div className={previewContainerClass}>
 			{this.state.previewDisplay === "phone" ?
-				<ThemeProvider theme={appTheme}>
-					<div className="app-preview">
-						<div className="app-content mdscrollbar">
-							<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
-						</div>
+				<>
+					<div className="preview-hidden-btn">
+						<IconButton onClick={() => this.togglePreview.apply(this)} primary icon="chevron_left"/>
 					</div>
-				</ThemeProvider>
+					<ThemeProvider theme={appTheme}>
+						<div className="app-preview">
+							<div className="phone-preview-btns">
+								{isDisplayDevContent ? this.renderBtnSwitchPreviewOrCode() : null}
+								{this.renderPhoneNavBtns(isGlobal)}
+							</div>
+							<div className="app-content mdscrollbar">
+								<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
+							</div>
+						</div>
+					</ThemeProvider>
+				</>
 				:
 				<div className="code-preview">
-					<h4 className="editor-json-header">Current Component as Declarative Output</h4>
+					<div className="editor-json-header">
+					<h4>Developer Mode: Declarative Output</h4>
+					{this.renderBtnSwitchPreviewOrCode()}
+					</div>
 					<pre className="editor-json">
 						<p>
 							<small>
@@ -354,18 +396,22 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		</div>;
 	}
 
-	protected renderBtnInterpret() {
-		return <Button onClick={this.onInterpretBtnClick} raised primary style={{ background: '#010f27aa' }}>
-			<FontIcon value='arrow_upward' />
-			-
-			Interpret
-			-
-<FontIcon value='arrow_upward' />
-		</Button>;
+	protected renderPhoneNavBtns(isGlobal: boolean) {
+		return <>
+		{isGlobal
+			? <>
+				<IconButton onClick={() => this.toggleFullScreen.apply(this)} primary icon="fullscreen"/>
+				<IconButton onClick={() => this.triggerNavToTop.apply(this)} primary icon="
+				arrow_upward"/>
+			</>
+			: null
+			}
+			<IconButton onClick={() => this.togglePreview.apply(this)} primary icon="chevron_right"/>
+		</>;
 	}
 
 	protected renderBtnSwitchPreviewOrCode() {
-		return <Button
+		return <IconButton icon={"phone" ? "unfold_more" : "stay_current_landscape"}
 			onClick={
 				() => {
 					if (this.state.previewDisplay === "phone") {
@@ -374,13 +420,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						this.setState({ ...this.state, previewDisplay: "phone" });
 					}
 				}
-			} raised primary style={{ background: '#010f27aa' }}>
-			<FontIcon value={this.state.previewDisplay === "phone" ? "unfold_more" : "stay_current_landscape"} />
-			-
-	{this.state.previewDisplay === "phone" ? " show code " : " show phone "}
-			-
-	<FontIcon value={this.state.previewDisplay === "phone" ? "unfold_more" : "stay_current_landscape"} />
-		</Button>;
+			} primary style={{ background: '#010f27aa' }}>
+		</IconButton>;
 	}
 
 	protected onInterpretBtnClick = (e) => {

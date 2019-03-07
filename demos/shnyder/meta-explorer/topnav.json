@@ -467,7 +467,18 @@
           "subItptOf": "shnyder/block-editor",
           "canInterpretType": "http://shnyder.com/editor/blockeditortype",
           "nameSelf": "3c82ebbd-a56b-4be9-b19d-998558d84c51",
-          "initialKvStores": [],
+          "initialKvStores": [
+            {
+              "key": "currentlyediting",
+              "value": "shnyder/tinyentrepreneur/APP",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "isGlobal",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
+            }
+          ],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }
@@ -484,5 +495,7 @@
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "interpretableKeys": [
+    "finalInput"
+  ]
 }
