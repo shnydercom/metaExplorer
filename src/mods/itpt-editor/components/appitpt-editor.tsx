@@ -36,6 +36,7 @@ import { Input } from "react-toolbox/lib/input";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { initLDLocalState, gdsfpLD } from "components/generic/generatorFns";
 import { NetworkPreferredToken } from "ldaccess/ildtoken";
+import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 
 export type AIEProps = {
 	logic?: EditorLogic;
@@ -63,7 +64,8 @@ export const ITPT_BLOCK_EDITOR_EDITING_ITPT = "currentlyediting";
 export const ITPT_BLOCK_EDITOR_DISPLAYING_ITPT = "currentlydisplaying";
 export const ITPT_BLOCK_EDITOR_IS_GLOBAL = "isGlobal";
 export const ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW = "isFullScreenPreview";
-export const ITPT_BLOCK_EDITOR_ACTIVE_VIEWS = "activeviews";
+export const ITPT_BLOCK_EDITOR_ACTIVE_VIEWS = "inactiveviews";
+export const ITPT_BLOCK_EDITOR_RETRIEVER_NAME = "retrieverName";
 
 //active view-constants:
 export const ITPT_BLOCK_EDITOR_AV_DRAWER = "drawer";
@@ -71,7 +73,7 @@ export const ITPT_BLOCK_EDITOR_AV_SIDEBAR = "sidebar";
 
 let allMyInputKeys: string[] = [
 	ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-	ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS
+	ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME
 ];
 let initialKVStores: IKvStore[] = [
 	{
@@ -98,6 +100,11 @@ let initialKVStores: IKvStore[] = [
 		key: ITPT_BLOCK_EDITOR_ACTIVE_VIEWS,
 		value: undefined,
 		ldType: LDDict.Text
+	},
+	{
+		key: ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
+		value: undefined,
+		ldType: LDDict.Text
 	}
 ];
 export const BlockEditorCfg: BlueprintConfig = {
@@ -120,10 +127,10 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		let rvLD = gdsfpLD(
 			nextProps, prevState, [],
 			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS
+				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME
 			],
 			ITPT_BLOCK_EDITOR_TYPE,
-			[], [false, false, false, false, true]);
+			[], [false, false, false, false, true, false]);
 		if (!rvLD) {
 			return redirState;
 		}
@@ -176,8 +183,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		const rvLD = initLDLocalState(this.cfg, props, [],
 			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS],
-			[], [false, false, false, false, true]);
+				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME],
+			[], [false, false, false, false, true, false]);
 
 		let initiallyDisplayed = rvLD.localValues.get(ITPT_BLOCK_EDITOR_EDITING_ITPT);
 		let isGlobal = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
@@ -197,14 +204,16 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			...rvLD,
 			redirect: null,
 			mode, drawerActive, previewActive: previewActive,
-			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone", 
+			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone",
 			hasCompletedFirstRender: false, hasCompletedEditorRender: false
 		};
 	}
 
 	componentDidMount() {
 		if (!this.logic){
-			var logic: EditorLogic = new EditorLogic(this.props.ldTokenString);
+			let retrieverName = this.state.localValues.get(ITPT_BLOCK_EDITOR_RETRIEVER_NAME);
+			retrieverName = retrieverName ? retrieverName : DEFAULT_ITPT_RETRIEVER_NAME;
+			var logic: EditorLogic = new EditorLogic(this.props.ldTokenString, retrieverName);
 			if (this.editorWrapperRef.current){
 				let height = this.editorWrapperRef.current.clientHeight;
 				let width = this.editorWrapperRef.current.clientWidth;

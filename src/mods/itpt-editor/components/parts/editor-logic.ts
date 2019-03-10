@@ -1,6 +1,5 @@
-import appIntprtrRetr from 'appconfig/appItptRetriever';
 import { COMP_BASE_CONTAINER } from "components/generic/baseContainer-rewrite";
-import { IItptInfoItem } from "defaults/DefaultItptRetriever";
+import { IItptInfoItem, DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
 import { IKvStore } from "ldaccess/ikvstore";
 import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from "ldaccess/kvConvenienceFns";
@@ -30,6 +29,7 @@ import { OutputInfoPartNodeModel, OUTPUT_NODE_WIDTH } from "./outputinfotypes/Ou
 import { OutputInfoWidgetFactory } from "./outputinfotypes/OutputInfoWidgetFactory";
 import { SettingsLabelFactory } from "./SettingsLabelFactory";
 import { SettingsLinkFactory } from "./SettingsLinkFactory";
+import { appItptMatcherFn } from "appconfig/appItptMatcher";
 
 export interface NewNodeSig {
 	x: number;
@@ -53,12 +53,15 @@ export class EditorLogic {
 	protected outputNode: OutputInfoPartNodeModel;
 	protected outputLDOptionsToken: string;
 	protected onOutputInfoSaved: (itptName: string) => void;
+	protected retrieverName: string = DEFAULT_ITPT_RETRIEVER_NAME;
 
 	protected width: number = 300;
 	protected height: number = 100;
+	protected retriever: ReduxItptRetriever;
 
-	constructor(outputLDOptionsToken: string) {
+	constructor(outputLDOptionsToken: string, retrieverName?: string) {
 		this.outputLDOptionsToken = outputLDOptionsToken;
+		this.retrieverName = retrieverName;
 		this.diagramEngine = new DiagramEngine();
 		//label factories
 		this.diagramEngine.registerLabelFactory(new SettingsLabelFactory());
@@ -73,7 +76,10 @@ export class EditorLogic {
 		//port factories
 		this.diagramEngine.registerPortFactory(new LDPortInstanceFactory());
 		this.newModel(outputLDOptionsToken);
-		this.itptList = (appIntprtrRetr() as ReduxItptRetriever).getItptList();
+		let retriever = appItptMatcherFn().getItptRetriever(this.retrieverName);
+		if (!retriever) retriever = appItptMatcherFn().getItptRetriever(DEFAULT_ITPT_RETRIEVER_NAME);
+		this.retriever = retriever as ReduxItptRetriever;
+		this.itptList = retriever.getItptList();
 		this.onOutputInfoSaved = (itptName: string) => {
 			//
 		};
@@ -111,7 +117,7 @@ export class EditorLogic {
 		engine.setDiagramModel(distributedModel);
 		engine.recalculatePortsVisually();
 		let prevZoomlvl = distributedModel.getZoomLevel();
-		engine.zoomToFit();
+		if (engine.canvas) engine.zoomToFit();
 		let newZoomLevel = distributedModel.getZoomLevel() * .8;
 		const lowerBnd = prevZoomlvl * .79;
 		const higherBnd = prevZoomlvl * .81;
@@ -189,7 +195,7 @@ export class EditorLogic {
 	}
 
 	public refreshItptList(): void {
-		this.itptList = (appIntprtrRetr() as ReduxItptRetriever).getItptList();
+		this.itptList = this.retriever.getItptList();
 	}
 
 	public getItptList(): IItptInfoItem[] {
@@ -215,7 +221,7 @@ export class EditorLogic {
 	}
 
 	public addLDPortModelsToNodeFromItptRetr(node: ItptNodeModel, bpname: string): void {//: LDPortModel[] {
-		let itpt: IBlueprintItpt = appIntprtrRetr().getItptByNameSelf(bpname);
+		let itpt: IBlueprintItpt = this.retriever.getItptByNameSelf(bpname);
 		let cfg: BlueprintConfig = itpt.cfg;
 		this.addLDPortModelsToNodeFromCfg(node, cfg);
 	}

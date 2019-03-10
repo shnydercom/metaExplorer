@@ -1,0 +1,39 @@
+{
+  "subItptOf": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
+  "canInterpretType": "onboardingEditor-ObjectType",
+  "nameSelf": "onboardingEditor",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "2f9e4459-ce85-4dee-8b60-ab815e9374ee": {
+          "subItptOf": "shnyder/block-editor",
+          "canInterpretType": "blockeditortype",
+          "nameSelf": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
+          "initialKvStores": [
+            {
+              "key": "isGlobal",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
+            },
+            {
+              "key": "isFullScreenPreview",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
+            },
+            {
+              "key": "retrieverName",
+              "value": "onboardingRetriever",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

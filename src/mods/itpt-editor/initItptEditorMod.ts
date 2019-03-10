@@ -2,7 +2,7 @@ import appItptRetrFn from "appconfig/appItptRetriever";
 import { IModStatus, SingleModStateKeysDict } from "appstate/modstate";
 import { changeMainAppItpt } from "appconfig/retrieverAccessFns";
 import { ITPT_TAG_ATOMIC, ITPT_TAG_MOD } from "ldaccess/iitpt-retriever";
-import { ITPT_BLOCK_EDITOR_NAME, PureAppItptEditor, ITPT_BLOCK_EDITOR_TYPE, ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT, ITPT_BLOCK_EDITOR_IS_GLOBAL } from "./components/appitpt-editor";
+import { ITPT_BLOCK_EDITOR_NAME, PureAppItptEditor, ITPT_BLOCK_EDITOR_TYPE, ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT, ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_RETRIEVER_NAME, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS as ITPT_BLOCK_EDITOR_INACTIVE_VIEWS } from "./components/appitpt-editor";
 import { LDDict } from "ldaccess/LDDict";
 
 export const MOD_ITPTEDITOR_ID = "itpt-editor";
@@ -26,6 +26,16 @@ export function initItptEditorMod(isMainItptChange: boolean): Promise<IModStatus
 			key: ITPT_BLOCK_EDITOR_IS_GLOBAL,
 			value: true,
 			ldType: LDDict.Boolean
+		},
+		{
+			key: ITPT_BLOCK_EDITOR_INACTIVE_VIEWS,
+			value: undefined,
+			ldType: LDDict.Text
+		},
+		{
+			key: ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
+			value: undefined,
+			ldType: LDDict.Text
 		}
 		];
 		if (isMainItptChange) changeMainAppItpt(ITPT_BLOCK_EDITOR_NAME, startingInstance);

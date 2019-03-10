@@ -9,6 +9,7 @@ import { applicationStore } from "approot";
 import { loadMod } from "appstate/epicducks/mod-duck";
 import { initQRCODEGENClientMod, MOD_QRCODEGENSCAN_ID } from "./qr-code-genscan/initQRCodeGenScanMod";
 import { isProduction } from "appstate/store";
+import { MOD_ONBOARDING_ID, initOnboardingMod } from "./onboarding/initOnboarding";
 
 export function initMods(modAPI: ModAPI) {
 	//set the required mods (otherwise won't finish to load)
@@ -18,6 +19,7 @@ export function initMods(modAPI: ModAPI) {
 	modAPI.addRequiredMod(MOD_MAILCHIMP_ID);
 	modAPI.addRequiredMod(MOD_USERITPT_ID);
 	modAPI.addRequiredMod(MOD_ITPTEDITOR_ID);
+	modAPI.addRequiredMod(MOD_ONBOARDING_ID);
 	//mod initialization functions
 	modAPI.addModInitFn(MOD_HYDRA_ID,
 		() => initHydraMod()
@@ -40,6 +42,9 @@ export function initMods(modAPI: ModAPI) {
 	modAPI.addModInitFn(MOD_QRCODEGENSCAN_ID,
 		() => initQRCODEGENClientMod()
 	);
+	modAPI.addModInitFn(MOD_ONBOARDING_ID,
+		() => initOnboardingMod()
+	);
 	//get data for mods
 	applicationStore.dispatch(loadMod(MOD_QRCODEGENSCAN_ID));
 	applicationStore.dispatch(loadMod(MOD_GOOGLE_ID));
@@ -47,4 +52,5 @@ export function initMods(modAPI: ModAPI) {
 	applicationStore.dispatch(loadMod(MOD_SWAGGER_ID));
 	applicationStore.dispatch(loadMod(MOD_USERITPT_ID));
 	applicationStore.dispatch(loadMod(MOD_ITPTEDITOR_ID));
+	applicationStore.dispatch(loadMod(MOD_ONBOARDING_ID));
 }
