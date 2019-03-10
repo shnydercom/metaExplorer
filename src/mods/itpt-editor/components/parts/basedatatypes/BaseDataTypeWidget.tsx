@@ -1,12 +1,13 @@
-import { DefaultNodeModel, DefaultPortLabel, DiagramEngine } from "storm-react-diagrams";
+import { DefaultNodeModel, DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { BaseDataTypeDropDown } from './BaseDataTypeDropDown';
 import { BaseDataTypePortSelector } from "./BaseDataTypePortSelectorWidget";
 import { BaseDataTypeNodeModel } from "./BaseDataTypeNodeModel";
 import { Component, createFactory, ClassAttributes, ComponentElement, ReactElement, ReactPortal } from "react";
 import { map } from "lodash";
+import { BASEDATATYPE_MODEL } from "../editor-consts";
 
-export interface BaseDataTypeNodeProps {
+export interface BaseDataTypeNodeProps extends BaseWidgetProps {
 	node: BaseDataTypeNodeModel;
 	diagramEngine: DiagramEngine;
 }
@@ -16,9 +17,9 @@ export interface BaseDataTypeNodeState { }
 /**
  * @author Jonathan Schneider
  */
-export class BaseDataTypeNodeWidget extends Component<BaseDataTypeNodeProps, BaseDataTypeNodeState> {
+export class BaseDataTypeNodeWidget extends BaseWidget<BaseDataTypeNodeProps, BaseDataTypeNodeState> {
 	constructor(props: BaseDataTypeNodeProps) {
-		super(props);
+		super(BASEDATATYPE_MODEL, props);
 		this.state = {};
 	}
 

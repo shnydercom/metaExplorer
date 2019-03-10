@@ -1,4 +1,4 @@
-import { DefaultNodeModel, DefaultPortLabel, DiagramEngine } from "storm-react-diagrams";
+import { DefaultNodeModel, DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { ExtendableTypesNodeModel } from "./ExtendableTypesNodeModel";
 import { Component, createFactory, ClassAttributes, ComponentElement, ReactElement, ReactPortal } from "react";
@@ -7,8 +7,9 @@ import { Button } from "react-toolbox/lib/button";
 import { LDPortModel } from "../LDPortModel";
 import { IKvStore } from "ldaccess/ikvstore";
 import { UserDefDict } from "ldaccess/UserDefDict";
+import { EXTENDABLETYPES_MODEL } from "../editor-consts";
 
-export interface ExtendableTypesNodeProps {
+export interface ExtendableTypesNodeProps  extends BaseWidgetProps {
 	node: ExtendableTypesNodeModel;
 	diagramEngine: DiagramEngine;
 }
@@ -18,9 +19,9 @@ export interface ExtendableTypesTypeNodeState { }
 /**
  * @author Jonathan Schneider
  */
-export class ExtendableTypesNodeWidget extends Component<ExtendableTypesNodeProps, ExtendableTypesTypeNodeState> {
+export class ExtendableTypesNodeWidget extends BaseWidget<ExtendableTypesNodeProps, ExtendableTypesTypeNodeState> {
 	constructor(props: ExtendableTypesNodeProps) {
-		super(props);
+		super(EXTENDABLETYPES_MODEL, props);
 		this.state = {};
 	}
 

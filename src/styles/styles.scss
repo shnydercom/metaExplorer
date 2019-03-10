@@ -221,6 +221,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 .srd-diagram {
 	position: relative;
 	flex-grow: 1;
+	flex: 1;
 	display: flex;
 	cursor: move;
 	overflow: hidden;

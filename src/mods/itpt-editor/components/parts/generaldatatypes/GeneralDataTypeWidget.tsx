@@ -1,10 +1,11 @@
-import { DefaultNodeModel, DefaultPortLabel, DiagramEngine } from "storm-react-diagrams";
+import { DefaultNodeModel, DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { GeneralDataTypeNodeModel } from "./GeneralDataTypeNodeModel";
 import { createFactory, Component, ClassAttributes, ComponentElement, ReactElement, ReactPortal } from "react";
 import { map } from 'lodash';
+import { GENERALDATATYPE_MODEL } from "../editor-consts";
 
-export interface GeneralDataTypeNodeProps {
+export interface GeneralDataTypeNodeProps extends BaseWidgetProps {
 	node: GeneralDataTypeNodeModel;
 	diagramEngine: DiagramEngine;
 }
@@ -14,9 +15,9 @@ export interface GeneralDataTypeNodeState { }
 /**
  * @author Jonathan Schneider
  */
-export class GeneralDataTypeNodeWidget extends Component<GeneralDataTypeNodeProps, GeneralDataTypeNodeState> {
+export class GeneralDataTypeNodeWidget extends BaseWidget<GeneralDataTypeNodeProps, GeneralDataTypeNodeState> {
 	constructor(props: GeneralDataTypeNodeProps) {
-		super(props);
+		super(GENERALDATATYPE_MODEL, props);
 		this.state = {};
 	}
 

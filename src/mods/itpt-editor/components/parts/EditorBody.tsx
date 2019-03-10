@@ -45,7 +45,7 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 	}
 
 	componentDidUpdate(nextProps: EditorBodyProps) {
-		const { currentlyEditingItpt, isReloadToEditor} = this.state;
+		const { currentlyEditingItpt, isReloadToEditor } = this.state;
 		if (!isReloadToEditor && currentlyEditingItpt) {
 			if (currentlyEditingItpt) {
 				nextProps.logic.clear();
@@ -62,9 +62,12 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 	}
 
 	render() {
+		const { logic } = this.props;
 		return (
 			<div className="diagram-body">
-				<div
+				<div ref={(ref) => {
+					if (ref) { logic.setDimensions(ref.clientWidth, ref.clientHeight); }
+				}}
 					className="diagram-layer"
 					onDrop={(event) => {
 						var data = JSON.parse(event.dataTransfer.getData("ld-node"));
@@ -137,7 +140,7 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 						event.preventDefault();
 					}}
 				>
-					<DiagramWidget inverseZoom diagramEngine={this.props.logic.getDiagramEngine()} maxNumberPointsPerLink={0}/>
+					<DiagramWidget inverseZoom diagramEngine={this.props.logic.getDiagramEngine()} maxNumberPointsPerLink={0} />
 					<div className="button-row">
 						<RefMapDropSpace
 							currentlyEditingItpt={this.state.currentlyEditingItpt}

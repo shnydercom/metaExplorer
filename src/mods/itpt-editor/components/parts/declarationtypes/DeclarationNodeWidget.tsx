@@ -1,10 +1,11 @@
-import { DefaultNodeModel, DefaultPortLabel, DiagramEngine } from "storm-react-diagrams";
+import { DefaultNodeModel, DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { DeclarationPartNodeModel } from "./DeclarationNodeModel";
 import { Component, createFactory, ClassAttributes, ComponentElement, ReactElement, ReactPortal } from "react";
 import { map } from "lodash";
+import { DECLARATION_MODEL } from "../editor-consts";
 
-export interface DeclarationNodeProps {
+export interface DeclarationNodeProps extends BaseWidgetProps {
 	node: DeclarationPartNodeModel;
 	diagramEngine: DiagramEngine;
 }
@@ -14,9 +15,9 @@ export interface DeclarationTypeNodeState { }
 /**
  * @author Jonathan Schneider
  */
-export class DeclarationNodeWidget extends Component<DeclarationNodeProps, DeclarationTypeNodeState> {
+export class DeclarationNodeWidget extends BaseWidget<DeclarationNodeProps, DeclarationTypeNodeState> {
 	constructor(props: DeclarationNodeProps) {
-		super(props);
+		super(DECLARATION_MODEL, props);
 		this.state = {};
 	}
 

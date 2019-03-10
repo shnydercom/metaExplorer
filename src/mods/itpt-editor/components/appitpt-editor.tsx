@@ -46,6 +46,7 @@ export type AIEState = {
 	previewerToken: string;
 	previewDisplay: "phone" | "code";
 	hasCompletedFirstRender: boolean;
+	hasCompletedEditorRender: boolean;
 	currentlyEditingItptName: string | null;
 	drawerActive: boolean;
 	previewActive: boolean;
@@ -160,6 +161,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	initialKvStores: IKvStore[];
 	private sideBarRef = createRef<HTMLDivElement>();
 
+	private diagramRef = createRef<EditorBody>();
+
 	constructor(props?: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
@@ -195,7 +198,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			...rvLD,
 			redirect: null,
 			mode, drawerActive, previewActive: previewActive,
-			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone", hasCompletedFirstRender: false
+			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone", 
+			hasCompletedFirstRender: false, hasCompletedEditorRender: false
 		};
 	}
 
@@ -316,9 +320,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							}}
 							onZoomAutoLayoutPress={() => {
 								this.logic.autoDistribute();
-								this.logic.getDiagramEngine().recalculatePortsVisually();
-								this.logic.getDiagramEngine().zoomToFit();
-								this.forceUpdate();
+								this.diagramRef.current.forceUpdate();
 							}}
 						>
 							<div className="fakeheader">
@@ -332,6 +334,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					</NavDrawer>
 					<Panel theme={editorTheme} style={{ bottom: 0 }} >
 						<EditorBody
+							ref={this.diagramRef}
 							loadToEditorByName={this.loadToEditorByName}
 							onEditTrayItem={this.onEditTrayItem}
 							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
@@ -451,7 +454,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		switch (data.type) {
 			case "ldbp":
 				this.logic.clear();
-				let isLoadSuccess = this.loadToEditorByName(data.bpname);
+				let isLoadSuccess = this.loadToEditorByName(data.bpname, true);
 				if (!isLoadSuccess) return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
 				return { isSuccess: true, message: "check the diagram on the right to see your interpreter, or drop another Compound Block here to edit that one" };
 			case "bdt":
@@ -469,15 +472,23 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	protected evalPreviewReload() {
-		const { hasCompletedFirstRender, currentlyEditingItptName, mode } = this.state;
-		if (!hasCompletedFirstRender && !!currentlyEditingItptName) {
-			console.log("evaluating preview reload");
-			if (mode === "editor") {
+		const { hasCompletedFirstRender, currentlyEditingItptName, mode, hasCompletedEditorRender } = this.state;
+		if (!!currentlyEditingItptName) {
+			if (!hasCompletedFirstRender ){
+				console.log("evaluating preview reload");
+				if (mode === "editor") {
+					this.loadToEditorByName(this.state.currentlyEditingItptName, true);
+					this.setState({ ...this.state, hasCompletedFirstRender: true, hasCompletedEditorRender: true });
+					return;
+				} else if (mode === "initial")  {
+					this.loadToEditorByName(this.state.currentlyEditingItptName);
+				}
+				this.setState({ ...this.state, hasCompletedFirstRender: true });
+				return;
+			} else if (!hasCompletedEditorRender && !!this.diagramRef.current) {
 				this.loadToEditorByName(this.state.currentlyEditingItptName, true);
-			} else {
-				this.loadToEditorByName(this.state.currentlyEditingItptName);
+				this.setState({ ...this.state, hasCompletedEditorRender: true });
 			}
-			this.setState({ ...this.state, hasCompletedFirstRender: true });
 		}
 	}
 
@@ -490,6 +501,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			return false;
 		}
 		this.generatePrefilled(itptCfg);
+		this.logic.clear();
 		this.logic.diagramFromItptBlueprint(itptCfg);
 		if (isAutodistribute) {
 			this.logic.autoDistribute();

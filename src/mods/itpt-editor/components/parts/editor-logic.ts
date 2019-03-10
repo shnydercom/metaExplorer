@@ -54,6 +54,9 @@ export class EditorLogic {
 	protected outputLDOptionsToken: string;
 	protected onOutputInfoSaved: (itptName: string) => void;
 
+	protected width: number = 300;
+	protected height: number = 100;
+
 	constructor(outputLDOptionsToken: string) {
 		this.outputLDOptionsToken = outputLDOptionsToken;
 		this.diagramEngine = new DiagramEngine();
@@ -74,6 +77,11 @@ export class EditorLogic {
 		this.onOutputInfoSaved = (itptName: string) => {
 			//
 		};
+	}
+
+	public setDimensions(width: number, height: number) {
+		this.width = width;
+		this.height = height;
 	}
 
 	public getOnOutputInfoSaved(): (itptName: string) => void {
@@ -102,7 +110,15 @@ export class EditorLogic {
 		} as any);
 		engine.setDiagramModel(distributedModel);
 		engine.recalculatePortsVisually();
+		let prevZoomlvl = distributedModel.getZoomLevel();
 		engine.zoomToFit();
+		let newZoomLevel = distributedModel.getZoomLevel() * .8;
+		const lowerBnd = prevZoomlvl * .79;
+		const higherBnd = prevZoomlvl * .81;
+		if (!(lowerBnd < newZoomLevel && newZoomLevel < higherBnd)) {
+			distributedModel.setZoomLevel(newZoomLevel);
+		}
+		distributedModel.setOffsetX(this.width / 4);
 	}
 
 	public getDistributedModel(engine, model) {
@@ -132,8 +148,8 @@ export class EditorLogic {
 		let outputNode = new OutputInfoPartNodeModel(UserDefDict.outputItpt, null, null, editorSpecificNodesColor,
 			outputLDOptionsToken);
 		//outputNode.setLocked(true); // locking would lock the ports as well
-		outputNode.x = 200;
-		outputNode.y = 200;
+		outputNode.x = this.width / 2 - 60;
+		outputNode.y = this.width / 2 - 60;
 		outputNode.addListener({
 			outputInfoSaved: (evtVal) => {
 				const newItpt = evtVal.itptName;

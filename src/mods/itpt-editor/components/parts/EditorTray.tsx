@@ -232,7 +232,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 				<Button style={{ color: "white" }} label="clear" onClick={(ev) => {
 					this.props.onClearBtnPress();
 				}} />
-				<Button style={{ color: "white" }} label="zoom + autolayout" onClick={(ev) => {
+				<Button style={{ color: "white" }} label="beautify" onClick={(ev) => {
 					this.props.onZoomAutoLayoutPress();
 				}
 				} />
