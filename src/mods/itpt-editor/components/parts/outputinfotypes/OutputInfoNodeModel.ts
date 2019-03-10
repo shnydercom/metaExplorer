@@ -7,7 +7,7 @@ export interface OutputInfoNodeModelListener extends BaseModelListener {
 	outputInfoSaved?(event: BaseEvent<OutputInfoPartNodeModel> & { itptName: null | string }): void;
 }
 
-export const OUTPUT_NODE_WIDTH = 600;
+export const OUTPUT_NODE_WIDTH = 275;
 
 export class OutputInfoPartNodeModel extends ItptNodeModel {
 

@@ -65,9 +65,7 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 		const { logic } = this.props;
 		return (
 			<div className="diagram-body">
-				<div ref={(ref) => {
-					if (ref) { logic.setDimensions(ref.clientWidth, ref.clientHeight); }
-				}}
+				<div
 					className="diagram-layer"
 					onDrop={(event) => {
 						var data = JSON.parse(event.dataTransfer.getData("ld-node"));

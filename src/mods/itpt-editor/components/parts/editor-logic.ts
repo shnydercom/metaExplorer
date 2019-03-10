@@ -148,8 +148,12 @@ export class EditorLogic {
 		let outputNode = new OutputInfoPartNodeModel(UserDefDict.outputItpt, null, null, editorSpecificNodesColor,
 			outputLDOptionsToken);
 		//outputNode.setLocked(true); // locking would lock the ports as well
-		outputNode.x = this.width / 2 - 60;
-		outputNode.y = this.width / 2 - 60;
+		const canvas = this.diagramEngine.canvas;
+		if (canvas) {
+			this.setDimensions(canvas.clientWidth, canvas.clientHeight);
+		}
+		outputNode.x = this.width / 2 - OUTPUT_NODE_WIDTH / 2;
+		outputNode.y = this.height / 2 - OUTPUT_NODE_WIDTH / 2;
 		outputNode.addListener({
 			outputInfoSaved: (evtVal) => {
 				const newItpt = evtVal.itptName;
@@ -171,9 +175,9 @@ export class EditorLogic {
 		//5) load model into engine
 		this.activeModel = model;
 		this.diagramEngine.setDiagramModel(model);
-		if (this.diagramEngine.canvas) {
+		/*if (this.diagramEngine.canvas) {
 			this.diagramEngine.zoomToFit();
-		}
+		}*/
 	}
 
 	public getActiveModel(): DiagramModel {

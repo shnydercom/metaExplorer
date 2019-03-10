@@ -159,7 +159,10 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
+
 	private sideBarRef = createRef<HTMLDivElement>();
+
+	private editorWrapperRef = createRef<HTMLDivElement>();
 
 	private diagramRef = createRef<EditorBody>();
 
@@ -168,11 +171,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		let previewerToken = null;
 		previewerToken = props.ldTokenString + "-previewLDOptions";
-		if (!props.logic) {
-			var logic: EditorLogic = new EditorLogic(props.ldTokenString);
-			logic.setOnOutputInfoSaved((val) => this.onInterpretBtnClick(null));
-			this.logic = logic;
-		} else {
+		if (props.logic) {
 			this.logic = props.logic;
 		}
 		const rvLD = initLDLocalState(this.cfg, props, [],
@@ -204,6 +203,17 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	componentDidMount() {
+		if (!this.logic){
+			var logic: EditorLogic = new EditorLogic(this.props.ldTokenString);
+			if (this.editorWrapperRef.current){
+				let height = this.editorWrapperRef.current.clientHeight;
+				let width = this.editorWrapperRef.current.clientWidth;
+				logic.setDimensions(width, height);
+				logic.newModel(this.props.ldTokenString);
+			}
+			logic.setOnOutputInfoSaved((val) => this.onInterpretBtnClick(null));
+			this.logic = logic;
+		}
 		if (!this.props.ldOptions) {
 			this.props.notifyLDOptionsChange(null);
 		} else {
@@ -307,8 +317,11 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		let isDisplayDevContent = isProduction ? false : true;
 		let inputStyle = currentlyEditingItptName ? { width: currentlyEditingItptName.length + "ex", maxHeight: "100%" } : null;
+		if (!this.logic){
+			return <div className="entrypoint-editor" ref={this.editorWrapperRef}></div>;
+		}
 		const itpts = this.logic.getItptList();
-		return <div className="entrypoint-editor">
+		return <div className="entrypoint-editor" ref={this.editorWrapperRef}>
 			<ThemeProvider theme={editorTheme}>
 				<Layout theme={{ layout: 'editor-layout', navDrawerClipped: 'editor-navbar-clipped' }}>
 					<NavDrawer insideTree={true} theme={{ pinned: "navbar-pinned" }} active={drawerActive} withOverlay={false}
@@ -332,14 +345,14 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							</div>
 						</EditorTray>
 					</NavDrawer>
-					<Panel theme={editorTheme} style={{ bottom: 0 }} >
-						<EditorBody
-							ref={this.diagramRef}
-							loadToEditorByName={this.loadToEditorByName}
-							onEditTrayItem={this.onEditTrayItem}
-							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
-							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
-						{this.renderPreview(isGlobal, previewActive)}
+					<Panel theme={editorTheme} style={{ bottom: 0 }}>
+							<EditorBody
+								ref={this.diagramRef}
+								loadToEditorByName={this.loadToEditorByName}
+								onEditTrayItem={this.onEditTrayItem}
+								changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
+								currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
+							{this.renderPreview(isGlobal, previewActive)}
 					</Panel>
 					<div className="nav-element top-left">
 						<IconButton className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
