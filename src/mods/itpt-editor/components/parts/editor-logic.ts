@@ -118,7 +118,7 @@ export class EditorLogic {
 		if (!(lowerBnd < newZoomLevel && newZoomLevel < higherBnd)) {
 			distributedModel.setZoomLevel(newZoomLevel);
 		}
-		distributedModel.setOffsetX(this.width / 4);
+		distributedModel.setOffsetX(this.width / 5);
 	}
 
 	public getDistributedModel(engine, model) {
@@ -166,10 +166,14 @@ export class EditorLogic {
 		let outputNodeInputPort = new LDPortModel(true, finalInputName, outputFinalInputKV);
 		outputNode.addPort(outputNodeInputPort);
 		model.addNode(outputNode);
+		//model.setOffsetX(this.width / 4);
 		this.outputNode = outputNode;
 		//5) load model into engine
 		this.activeModel = model;
 		this.diagramEngine.setDiagramModel(model);
+		if (this.diagramEngine.canvas) {
+			this.diagramEngine.zoomToFit();
+		}
 	}
 
 	public getActiveModel(): DiagramModel {
