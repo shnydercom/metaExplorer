@@ -111,8 +111,8 @@
           ]
         },
         "0635fa5a-35b9-415b-8bd7-bbb148b57d27": {
-          "subItptOf": "shnyder/block-editor",
-          "canInterpretType": "http://shnyder.com/editor/blockeditortype",
+          "subItptOf": "shnyder/onboardingEditor",
+          "canInterpretType": "shnyder/onboardingEditor-ObjectType",
           "nameSelf": "0635fa5a-35b9-415b-8bd7-bbb148b57d27",
           "initialKvStores": [],
           "crudSkills": "cRud",

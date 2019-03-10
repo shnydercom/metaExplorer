@@ -51,6 +51,9 @@ export type AIEState = {
 	currentlyEditingItptName: string | null;
 	drawerActive: boolean;
 	previewActive: boolean;
+	drawerHidden: boolean;
+	previewHidden: boolean;
+	bottomBarHidden: boolean;
 	mode: "editor" | "app" | "initial";
 	redirect: null | string;
 } & LDLocalState;
@@ -64,16 +67,17 @@ export const ITPT_BLOCK_EDITOR_EDITING_ITPT = "currentlyediting";
 export const ITPT_BLOCK_EDITOR_DISPLAYING_ITPT = "currentlydisplaying";
 export const ITPT_BLOCK_EDITOR_IS_GLOBAL = "isGlobal";
 export const ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW = "isFullScreenPreview";
-export const ITPT_BLOCK_EDITOR_ACTIVE_VIEWS = "inactiveviews";
+export const ITPT_BLOCK_EDITOR_HIDDEN_VIEWS = "hiddenViews";
 export const ITPT_BLOCK_EDITOR_RETRIEVER_NAME = "retrieverName";
 
 //active view-constants:
 export const ITPT_BLOCK_EDITOR_AV_DRAWER = "drawer";
-export const ITPT_BLOCK_EDITOR_AV_SIDEBAR = "sidebar";
+export const ITPT_BLOCK_EDITOR_AV_PREVIEW = "preview";
+export const ITPT_BLOCK_EDITOR_AV_BOTTOMBAR = "bottombar";
 
 let allMyInputKeys: string[] = [
 	ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-	ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME
+	ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME
 ];
 let initialKVStores: IKvStore[] = [
 	{
@@ -97,7 +101,7 @@ let initialKVStores: IKvStore[] = [
 		ldType: LDDict.Boolean
 	},
 	{
-		key: ITPT_BLOCK_EDITOR_ACTIVE_VIEWS,
+		key: ITPT_BLOCK_EDITOR_HIDDEN_VIEWS,
 		value: undefined,
 		ldType: LDDict.Text
 	},
@@ -127,7 +131,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		let rvLD = gdsfpLD(
 			nextProps, prevState, [],
 			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME
+				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME
 			],
 			ITPT_BLOCK_EDITOR_TYPE,
 			[], [false, false, false, false, true, false]);
@@ -138,21 +142,23 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			let initiallyDisplayed = rvLD.localValues.get(ITPT_BLOCK_EDITOR_EDITING_ITPT);
 			let isGlobal = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 			let isFSPreview = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW);
-			let activeViews = rvLD.localValues.get(ITPT_BLOCK_EDITOR_ACTIVE_VIEWS);
+			let hiddenViews = rvLD.localValues.get(ITPT_BLOCK_EDITOR_HIDDEN_VIEWS);
 
 			let mode = isGlobal
 				? prevState.mode
 				: isFSPreview ? "app" : "editor";
-			let drawerActive = prevState.drawerActive;
-			let previewActive = prevState.drawerActive;
-			if (!!activeViews && activeViews.length() > 0) {
-				drawerActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_DRAWER);
-				previewActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_SIDEBAR);
+			let bottomBarHidden = prevState.bottomBarHidden;
+			let drawerHidden = prevState.drawerHidden;
+			let previewHidden = prevState.previewHidden;
+			if (!!hiddenViews && hiddenViews.length > 0) {
+				drawerHidden = !!(hiddenViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_DRAWER);
+				previewHidden = !!(hiddenViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_PREVIEW);
+				bottomBarHidden = !!(hiddenViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_BOTTOMBAR);
 			}
 			if (!!initiallyDisplayed && !prevState.currentlyEditingItptName !== initiallyDisplayed) {
-				return { ...prevState, currentlyEditingItptName: initiallyDisplayed, mode, drawerActive, previewActive: previewActive };
+				return { ...prevState, currentlyEditingItptName: initiallyDisplayed, mode, bottomBarHidden, drawerHidden, previewHidden };
 			} else {
-				return { ...prevState, mode, drawerActive, previewActive: previewActive };
+				return { ...prevState, mode, bottomBarHidden, drawerHidden, previewHidden };
 			}
 		}
 		return redirState;
@@ -183,27 +189,32 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		const rvLD = initLDLocalState(this.cfg, props, [],
 			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_ACTIVE_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME],
+				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME],
 			[], [false, false, false, false, true, false]);
 
 		let initiallyDisplayed = rvLD.localValues.get(ITPT_BLOCK_EDITOR_EDITING_ITPT);
 		let isGlobal = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		let isFSPreview = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW);
-		let activeViews = rvLD.localValues.get(ITPT_BLOCK_EDITOR_ACTIVE_VIEWS);
+		let hiddenViews = rvLD.localValues.get(ITPT_BLOCK_EDITOR_HIDDEN_VIEWS);
 
 		let mode: "initial" | "app" | "editor" = isGlobal
 			? "initial"
 			: isFSPreview ? "app" : "editor";
 		let drawerActive = true;
 		let previewActive = true;
-		if (!!activeViews && activeViews.length() > 0) {
-			drawerActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_DRAWER);
-			previewActive = !!(activeViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_SIDEBAR);
+		let bottomBarHidden = false;
+		let drawerHidden = false;
+		let previewHidden = false;
+
+		if (!!hiddenViews && hiddenViews.length > 0) {
+			drawerHidden = !!(hiddenViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_DRAWER);
+			previewHidden = !!(hiddenViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_PREVIEW);
+			bottomBarHidden = !!(hiddenViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_BOTTOMBAR);
 		}
 		this.state = {
 			...rvLD,
 			redirect: null,
-			mode, drawerActive, previewActive: previewActive,
+			mode, drawerActive, previewActive, bottomBarHidden, drawerHidden, previewHidden,
 			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone",
 			hasCompletedFirstRender: false, hasCompletedEditorRender: false
 		};
@@ -322,7 +333,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	renderEditor() {
 		const { routes } = this.props;
-		const { drawerActive, currentlyEditingItptName, previewActive, localValues } = this.state;
+		const { drawerActive, currentlyEditingItptName, previewActive, localValues, bottomBarHidden, previewHidden } = this.state;
 		const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		let isDisplayDevContent = isProduction ? false : true;
 		let inputStyle = currentlyEditingItptName ? { width: currentlyEditingItptName.length + "ex", maxHeight: "100%" } : null;
@@ -355,13 +366,13 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						</EditorTray>
 					</NavDrawer>
 					<Panel theme={editorTheme} style={{ bottom: 0 }}>
-							<EditorBody
+							<EditorBody hideRefMapDropSpace={bottomBarHidden}
 								ref={this.diagramRef}
 								loadToEditorByName={this.loadToEditorByName}
 								onEditTrayItem={this.onEditTrayItem}
 								changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
 								currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
-							{this.renderPreview(isGlobal, previewActive)}
+							{ previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
 					</Panel>
 					<div className="nav-element top-left">
 						<IconButton className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />

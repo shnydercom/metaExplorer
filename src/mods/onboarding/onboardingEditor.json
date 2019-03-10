@@ -1,7 +1,7 @@
 {
   "subItptOf": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
-  "canInterpretType": "onboardingEditor-ObjectType",
-  "nameSelf": "onboardingEditor",
+  "canInterpretType": "shnyder/onboardingEditor-ObjectType",
+  "nameSelf": "shnyder/onboardingEditor",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -13,13 +13,17 @@
           "initialKvStores": [
             {
               "key": "isGlobal",
-              "value": true,
+              "value": false,
               "ldType": "http://schema.org/Boolean"
             },
             {
               "key": "isFullScreenPreview",
-              "value": true,
+              "value": false,
               "ldType": "http://schema.org/Boolean"
+            },
+            {
+              "key": "hiddenViews",
+              "ldType": "http://schema.org/Text"
             },
             {
               "key": "retrieverName",
@@ -28,12 +32,19 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "interpretableKeys": [
+            "hiddenViews"
+          ]
         }
       },
       "ldType": "InterpreterReferenceMapType"
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "interpretableKeys": [
+    {
+      "objRef": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
+      "propRef": "hiddenViews"
+    }
+  ]
 }

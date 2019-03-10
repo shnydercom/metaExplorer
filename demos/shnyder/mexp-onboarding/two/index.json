@@ -111,10 +111,21 @@
           ]
         },
         "72e91f55-a3be-4aa9-bff0-34f13da5d375": {
-          "subItptOf": "shnyder/block-editor",
-          "canInterpretType": "http://shnyder.com/editor/blockeditortype",
+          "subItptOf": "shnyder/onboardingEditor",
+          "canInterpretType": "shnyder/onboardingEditor-ObjectType",
           "nameSelf": "72e91f55-a3be-4aa9-bff0-34f13da5d375",
-          "initialKvStores": [],
+          "initialKvStores": [
+            {
+              "key": "hiddenViews",
+              "value": "preview",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "hiddenViews",
+              "value": "bottombar",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }

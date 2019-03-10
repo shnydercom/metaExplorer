@@ -9,11 +9,12 @@ export const MOD_LOAD_RESULT = "Mod/MOD_LOAD_RESULT";
 export const MOD_LOAD_RESULT_ALL = "Mod/MOD_LOAD_RESULT_ALL";
 export const MOD_LOAD_ERROR = "Mod/MOD_LOAD_ERROR";
 
+export type ModErrorAction = { type: 'Mod/MOD_LOAD_ERROR', modId: string, message: string };
 export type ModAction =
 	{ type: 'Mod/MOD_LOAD_REQUEST', modId: string }
 	| { type: 'Mod/MOD_LOAD_RESULT', statusResult: IModStatus }
 	| { type: 'Mod/MOD_LOAD_RESULT_ALL', statusResult: IModStatus }
-	| { type: 'Mod/MOD_LOAD_ERROR', modId: string, message: string };
+	| ModErrorAction;
 
 export interface IModAjaxError {
 	type: string;
@@ -64,25 +65,38 @@ export const modStatePartReducer = (
 
 export const loadModEpic = (action$: ActionsObservable<any>, store: any, { modAPI }: any) => {
 	const _MODAPI: ModAPI = modAPI;
+	const modQueue: string[] = [];
 	return action$.pipe(
 		ofType(MOD_LOAD_REQUEST),
 		tap(() => console.log("requesting Mod...")), // debugging
 		mergeMap((action) => {
-			let rv = from(_MODAPI.getModData(action.modId));
-			return rv.pipe(
-				map((response) => {
-					_MODAPI.setRequiredModLoadingComplete(action.modId);
-					if (_MODAPI.isRequiredLoadingComplete()) {
-						return loadModResultAll(response as any);
-					} else {
-						return loadModResult(response as any);
-					}
-				})
-				,
-				catchError((error: Error) =>
-					of(loadModFailure(action.modId,
-						`An error occurred: ${error.message}`
-					))));
+			if (!_MODAPI.checkDependencies(action.modId)) {
+				modQueue.push(action.modId);
+				return from([]);
+			} else {
+				let rv = from(_MODAPI.getModData(action.modId));
+				return rv.pipe(
+					map((response) => {
+						_MODAPI.setModLoadingComplete(action.modId);
+						for (let idx = 0; idx < modQueue.length; idx++) {
+							const mod = modQueue[idx];
+							if (_MODAPI.checkDependencies(mod)) {
+								modQueue.splice(idx, 1);
+								return loadMod(mod);
+							}
+						}
+						if (_MODAPI.isRequiredLoadingComplete()) {
+							return loadModResultAll(response as any);
+						} else {
+							return loadModResult(response as any);
+						}
+					})
+					,
+					catchError((error: Error) =>
+						of(loadModFailure(action.modId,
+							`An error occurred: ${error.message}`
+						))));
+			}
 		}
 		)
 	);

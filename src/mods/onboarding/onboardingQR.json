@@ -1,0 +1,115 @@
+{
+  "subItptOf": "7e9d2646-1e29-41b2-b6e0-bcc9fa809ebe",
+  "canInterpretType": "shnyder/meta-explorer/QRcodeFromText-ObjectType",
+  "nameSelf": "shnyder/qr/QRcodeFromText",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "7e9d2646-1e29-41b2-b6e0-bcc9fa809ebe": {
+          "subItptOf": "shnyder/layout/vh-centered-column",
+          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
+          "nameSelf": "7e9d2646-1e29-41b2-b6e0-bcc9fa809ebe",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "124871c4-dedc-4bbe-ac32-cd54984e91ae",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "124871c4-dedc-4bbe-ac32-cd54984e91ae": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "124871c4-dedc-4bbe-ac32-cd54984e91ae",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "831f4e45-c7b9-48af-9d89-c214669404a6",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "348aa3f5-1106-4819-a1f8-67eecf777aa3",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
+        "831f4e45-c7b9-48af-9d89-c214669404a6": {
+          "subItptOf": "qr/QRCodeDisplay",
+          "canInterpretType": "qr/QRCodeDisplay-ObjectType",
+          "nameSelf": "831f4e45-c7b9-48af-9d89-c214669404a6",
+          "initialKvStores": [
+            {
+              "key": "utf8textData",
+              "value": "This could be your text",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "utf8textData",
+              "value": {
+                "objRef": "348aa3f5-1106-4819-a1f8-67eecf777aa3",
+                "propRef": "singleKvStore"
+              },
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "qr/typeNumber",
+              "value": "016",
+              "ldType": "http://schema.org/Integer"
+            },
+            {
+              "key": "qr/correctionLevel",
+              "value": "L",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "utf8textData"
+          ]
+        },
+        "348aa3f5-1106-4819-a1f8-67eecf777aa3": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "348aa3f5-1106-4819-a1f8-67eecf777aa3",
+          "initialKvStores": [
+            {
+              "key": "http://schema.org/description",
+              "value": "encode this:",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "value": "This could be your text",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

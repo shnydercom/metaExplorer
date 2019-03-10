@@ -148,7 +148,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "Our Block \"shnyder/qr/CodeFromText\" is made up of other Blocks. Drag it from the list on the right onto \"now editing\" at the bottom to see its structure.",
+              "value": "Our Block \"shnyder/qr/QRcodeFromText\" is made up of other Blocks. Drag it from the drawer on the left onto \"now editing\" at the bottom to see its structure.",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -162,7 +162,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "Create a copy of it to finish the tour.",
+              "value": "Create a copy of it to finish the tour. This way, your changes won't affect the other author's Block.",
               "ldType": "http://schema.org/Text"
             }
           ],

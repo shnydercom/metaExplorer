@@ -13,14 +13,16 @@ import { appItptUpdateAction } from "appstate/epicducks/appCfg-duck";
 import { IKvStore } from "ldaccess/ikvstore";
 import { string } from "prop-types";
 import { determineSingleKVKey } from "components/generic/generatorFns";
+import { appItptMatcherFn } from "./appItptMatcher";
 
 /**
  * adds a blueprint defined in the editor to the AppItptRetriever, automatically looks
  * for the correct React-Class to extend
  * @param input the BlueprintConfig used as a setup for the new Itpt
  */
-export const addBlueprintToRetriever = (input: BlueprintConfig) => {
-	let retriever = appIntprtrRetr() as ReduxItptRetriever;
+export const addBlueprintToRetriever = (input: BlueprintConfig, retrieverName?: string) => {
+	let retriever = retrieverName ? appItptMatcherFn().getItptRetriever(retrieverName) as ReduxItptRetriever : appIntprtrRetr() as ReduxItptRetriever;
+	if (!retriever) throw new LDError("retriever " + retrieverName + " not found");
 	let candidate = retriever.getUnconnectedByNameSelf(input.subItptOf);
 	if (!candidate) {
 		//check if it's well-defined

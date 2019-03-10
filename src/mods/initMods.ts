@@ -22,34 +22,42 @@ export function initMods(modAPI: ModAPI) {
 	modAPI.addRequiredMod(MOD_ONBOARDING_ID);
 	//mod initialization functions
 	modAPI.addModInitFn(MOD_HYDRA_ID,
-		() => initHydraMod()
+		() => initHydraMod(),
+		[]
 	);
 	modAPI.addModInitFn(MOD_GOOGLE_ID,
-		() => initGoogleMod()
+		() => initGoogleMod(),
+		[]
 	);
 	modAPI.addModInitFn(MOD_MAILCHIMP_ID,
-		() => initMailchimpMod()
+		() => initMailchimpMod(),
+		[]
 	);
 	modAPI.addModInitFn(MOD_SWAGGER_ID,
-		() => initSwaggerClientMod()
+		() => initSwaggerClientMod(),
+		[]
 	);
 	modAPI.addModInitFn(MOD_USERITPT_ID,
-		() => initUSERITPTClientMod(isProduction)
+		() => initUSERITPTClientMod(isProduction),
+		[]
 	);
 	modAPI.addModInitFn(MOD_ITPTEDITOR_ID,
-		() => initItptEditorMod(!isProduction)
+		() => initItptEditorMod(!isProduction),
+		[]
 	);
 	modAPI.addModInitFn(MOD_QRCODEGENSCAN_ID,
-		() => initQRCODEGENClientMod()
+		() => initQRCODEGENClientMod(),
+		[]
 	);
 	modAPI.addModInitFn(MOD_ONBOARDING_ID,
-		() => initOnboardingMod()
+		() => initOnboardingMod(),
+		[MOD_QRCODEGENSCAN_ID]
 	);
 	//get data for mods
 	applicationStore.dispatch(loadMod(MOD_QRCODEGENSCAN_ID));
 	applicationStore.dispatch(loadMod(MOD_GOOGLE_ID));
 	applicationStore.dispatch(loadMod(MOD_MAILCHIMP_ID));
-	applicationStore.dispatch(loadMod(MOD_SWAGGER_ID));
+	//applicationStore.dispatch(loadMod(MOD_SWAGGER_ID));
 	applicationStore.dispatch(loadMod(MOD_USERITPT_ID));
 	applicationStore.dispatch(loadMod(MOD_ITPTEDITOR_ID));
 	applicationStore.dispatch(loadMod(MOD_ONBOARDING_ID));

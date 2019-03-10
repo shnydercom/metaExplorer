@@ -18,6 +18,7 @@ export interface EditorBodyProps {
 	changeCurrentlyEditingItpt: (newItpt: string | null) => void;
 	onEditTrayItem: (data: any) => DropRefmapResult;
 	loadToEditorByName: (name: string, isDoAutodistribute?: boolean) => void;
+	hideRefMapDropSpace: boolean;
 }
 
 export interface EditorBodyState {
@@ -62,7 +63,7 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 	}
 
 	render() {
-		const { logic } = this.props;
+		const { logic, hideRefMapDropSpace } = this.props;
 		return (
 			<div className="diagram-body">
 				<div
@@ -139,13 +140,16 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 					}}
 				>
 					<DiagramWidget inverseZoom diagramEngine={this.props.logic.getDiagramEngine()} maxNumberPointsPerLink={0} />
-					<div className="button-row">
-						<RefMapDropSpace
-							currentlyEditingItpt={this.state.currentlyEditingItpt}
-							dropText="...drop a Compound Block here to edit it, or long-press on it, then hit the 'INTERPRET' button in the middle..."
-							refMapDrop={this.privOnRMDrop}
-						/>
-					</div>
+					{hideRefMapDropSpace
+						? null
+						: <div className="button-row">
+							<RefMapDropSpace
+								currentlyEditingItpt={this.state.currentlyEditingItpt}
+								dropText="...drop a Compound Block here to edit it, or long-press on it, then hit the 'INTERPRET' button in the middle..."
+								refMapDrop={this.privOnRMDrop}
+							/>
+						</div>
+					}
 				</div>
 			</div>
 		);

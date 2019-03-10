@@ -464,7 +464,7 @@
           ]
         },
         "3c82ebbd-a56b-4be9-b19d-998558d84c51": {
-          "subItptOf": "shnyder/block-editor",
+          "subItptOf": "shnyder/onboardingEditor",
           "canInterpretType": "http://shnyder.com/editor/blockeditortype",
           "nameSelf": "3c82ebbd-a56b-4be9-b19d-998558d84c51",
           "initialKvStores": [

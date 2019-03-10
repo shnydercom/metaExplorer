@@ -52,13 +52,6 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 						<div style={{ marginLeft: "-2em" }}
 							className="in">{map(node.getInPorts(), this.generatePort.bind(this))}</div>
 						<Input type='text'
-							label="Organization"
-							name="orgNameField"
-							 />
-						<Input type='text'
-							label="Project Name"
-							name="projectNameField"/>
-						<Input type='text'
 							label="Block Name"
 							name="blockNameField"
 							value={itptName}
@@ -67,6 +60,13 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 								node.setItptName(evtVal);
 								this.setState({ stItptName: evtVal });
 							}} />
+						<Input type='text'
+							label="Project Name"
+							name="projectNameField" />
+						<Input type='text'
+							label="User Name"
+							name="userNameField"
+						/>
 					</div>
 					<IconButton style={{ marginTop: "0" }} disabled={!isBtnEnabled}
 						icon={!isBtnEnabled ? "warning" : "chevron_right"} onClick={() => node.handleOutputInfoSaved()} />

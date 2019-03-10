@@ -36,6 +36,7 @@ let middleWare = isProduction ? applyMiddleware(epicMiddleware) : compose(applyM
 export interface IAppConfigStatePart {
   appKey: string;
   mainItpt: string;
+  errorMsg: string;
 }
 
 export interface ExplorerState {

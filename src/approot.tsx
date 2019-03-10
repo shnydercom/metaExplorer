@@ -35,7 +35,8 @@ const firstDisplayedBlock: string = "shnyder-website/main-page";
 const initialState: ExplorerState = {
 	appCfg: {
 		appKey: APP_LD_KEY,
-		mainItpt: firstDisplayedBlock
+		mainItpt: firstDisplayedBlock,
+		errorMsg: null
 	},
 	ldoptionsMap: {},
 	ldNonVisualMap: {},
@@ -80,6 +81,7 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 			prevState.cfg.appKey !== nextProps.cfg.appKey
 			|| prevState.cfg.mainItpt !== nextProps.cfg.mainItpt
 			|| prevState.isLoading !== nextProps.isLoading
+			|| !!nextProps.cfg.errorMsg
 		) {
 			return { ...prevState, ...nextProps };
 		}
@@ -90,7 +92,7 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 		super(props);
 		this.state = {
 			isDemoInitialized: false,
-			cfg: { appKey: "", mainItpt: "" },
+			cfg: { appKey: "", mainItpt: "", errorMsg: null },
 			mode: "initial",
 			isLoading: true
 		};
@@ -98,6 +100,10 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 
 	render() {
 		const { cfg, isLoading } = this.state;
+		const errorMsg = cfg.errorMsg;
+		if (errorMsg){
+			return <div>encountered an error while loading a Mod: {errorMsg}</div>;
+		}
 		return (
 			<>{!isLoading ?
 				<Router>

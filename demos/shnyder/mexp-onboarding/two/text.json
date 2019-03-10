@@ -120,7 +120,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "Create your first Block of functionality using the \"shnyder/qr/CodeFromText\" - block. Give your own Block a name, and specify your project name and organization name: This will be the home address of your new Block.",
+              "value": "Create your first Block of functionality using the \"shnyder/qr/QRcodeFromText\" - block: Drag it from the light blue drawer to the dark blue canvas, then connect \"exportSelf\" to \"finalInput\". Give your own Block a name, and specify your project and user name: This will be the home address of your new Block.",
               "ldType": "http://schema.org/Text"
             }
           ],

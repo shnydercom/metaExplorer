@@ -66,6 +66,9 @@ export const refMapReducer = (
 				//makes sure a copy of the RefMap-KV exists in the ILDOptions-Object (basically pushes itpt-declaration
 				// to runtime-model, while making sure the declaration isn't changed by being used)
 				stateCopy = { ...state };
+				if (ldOptionsBase.ldToken.get() === "app-l0-edit-l0_b4759e72-bdd3-4da9-ad54-b189cb8752c8_rmb_b491155c-d2e4-4429-b825-6b5373d98719_72e91f55-a3be-4aa9-bff0-34f13da5d375") {
+					console.dir(action.refMap);
+				}
 				let modBPCfg: BlueprintConfig = ldBlueprintCfgDeepCopy(action.refMap);
 				stateCopy = createRuntimeRefMapLinks(stateCopy, modBPCfg, ldOptionsBase);
 				stateCopy = assignValuesToRuntimeRefMap(stateCopy, modBPCfg, ldOptionsBase);
@@ -219,13 +222,27 @@ const assignValuesToRuntimeRefMap: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 			let sKeyAsObjPropRef: ObjectPropertyRef = singleIntrpblKey as ObjectPropertyRef;
 			let propName: string = sKeyAsObjPropRef.propRef;
 			let stateLdTkStr: string = sKeyAsObjPropRef.objRef;
-			let actualInputKv: IKvStore = ldOptions.resource.kvStores.find((a) => a.key === propName);
+			let kvs = ldOptions.resource.kvStores;
+			let actualInputIdx = kvs.findIndex((a) => a.key === propName);
+			if (actualInputIdx === -1) return;
+			let lastActualInputIdx = actualInputIdx + 1;
+			//if handing over multiple kvStores with the same field, they'll be grouped together
+			while (kvs.length - 1 >= lastActualInputIdx && kvs[lastActualInputIdx].key === propName) {
+				lastActualInputIdx++;
+			}
+			let actualInputKv: IKvStore[] = kvs.slice(actualInputIdx, lastActualInputIdx);
 			if (!actualInputKv) return;
-			let propIdx = modifiedObj[stateLdTkStr].resource.kvStores.findIndex((b) => b.key === propName);
+			let targetKvStores = modifiedObj[stateLdTkStr].resource.kvStores;
+			let propIdx = targetKvStores.findIndex((b) => b.key === propName);
 			if (propIdx === -1) {
-				modifiedObj[stateLdTkStr].resource.kvStores.unshift(actualInputKv);
+				targetKvStores.unshift(...actualInputKv);
 			} else {
-				modifiedObj[stateLdTkStr].resource.kvStores.splice(propIdx, 1, actualInputKv);
+				//same here for replacing group of kvs on the target
+				let lastPropIdx = propIdx + 1;
+				while (targetKvStores.length - 1 >= lastPropIdx && targetKvStores[lastPropIdx].key === propName) {
+					lastPropIdx++;
+				}
+				targetKvStores.splice(propIdx, propIdx - lastPropIdx, ...actualInputKv);
 			}
 		} else {
 			//is string, property on this BPConfig

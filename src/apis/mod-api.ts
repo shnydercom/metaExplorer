@@ -3,7 +3,8 @@ import { IModStatus } from "appstate/modstate";
 
 export class ModAPI {  // URL to web api IRI resource
 	protected modInitFns: Map<string, () => Promise<IModStatus>> = new Map();
-	protected requiredMods: Map<string, boolean> = new Map();
+	protected loadedModsMap: Map<string, boolean> = new Map();
+	protected modDependencies: Map<string, string[]> = new Map();
 	getModData(id: string): Observable<IModStatus> {
 		if (id == null) {
 			throw new Error(("no id defined for loading Mod"));
@@ -16,18 +17,36 @@ export class ModAPI {  // URL to web api IRI resource
 		returnVal = from(modPromise());
 		return returnVal;
 	}
-	addModInitFn(id: string, initFn: () => Promise<IModStatus>) {
+	addModInitFn(id: string, initFn: () => Promise<IModStatus>, dependencies: string[]) {
 		this.modInitFns.set(id, initFn);
+		this.modDependencies.set(id, dependencies);
 	}
 	addRequiredMod(modId: string) {
-		this.requiredMods.set(modId, false);
+		this.loadedModsMap.set(modId, false);
 	}
-	setRequiredModLoadingComplete(modId: string){
-		this.requiredMods.set(modId, true);
+	setModLoadingComplete(modId: string) {
+		this.loadedModsMap.set(modId, true);
+	}
+	checkDependencies(modId: string): boolean {
+		const deps = this.modDependencies.get(modId);
+		for (let idx = 0; idx < deps.length; idx++) {
+			const dep = deps[idx];
+			if (this.loadedModsMap.has(dep)) {
+				if (!this.loadedModsMap.get(dep)){
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+	getDepenciesfor(modId: string): string[] {
+		return this.modDependencies.get(modId);
 	}
 	isRequiredLoadingComplete(): boolean {
 		let rv = true;
-		this.requiredMods.forEach((val, key) => {
+		this.loadedModsMap.forEach((val, key) => {
 			if (val === false) rv = false;
 		});
 		return rv;
