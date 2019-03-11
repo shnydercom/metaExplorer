@@ -77,7 +77,8 @@ export const ITPT_BLOCK_EDITOR_AV_BOTTOMBAR = "bottombar";
 
 let allMyInputKeys: string[] = [
 	ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-	ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME
+	ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
+	UserDefDict.username, UserDefDict.projectname
 ];
 let initialKVStores: IKvStore[] = [
 	{
@@ -109,6 +110,16 @@ let initialKVStores: IKvStore[] = [
 		key: ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
 		value: undefined,
 		ldType: LDDict.Text
+	},
+	{
+		key: UserDefDict.username,
+		value: undefined,
+		ldType: LDDict.Text
+	},
+	{
+		key: UserDefDict.projectname,
+		value: undefined,
+		ldType: LDDict.Text
 	}
 ];
 export const BlockEditorCfg: BlueprintConfig = {
@@ -131,10 +142,11 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		let rvLD = gdsfpLD(
 			nextProps, prevState, [],
 			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME
+				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
+				UserDefDict.username, UserDefDict.projectname
 			],
 			ITPT_BLOCK_EDITOR_TYPE,
-			[], [false, false, false, false, true, false]);
+			[], [false, false, false, false, true, false, false, false]);
 		if (!rvLD) {
 			return redirState;
 		}
@@ -189,8 +201,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		const rvLD = initLDLocalState(this.cfg, props, [],
 			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME],
-			[], [false, false, false, false, true, false]);
+				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
+				UserDefDict.username, UserDefDict.projectname],
+			[], [false, false, false, false, true, false, false, false]);
 
 		let initiallyDisplayed = rvLD.localValues.get(ITPT_BLOCK_EDITOR_EDITING_ITPT);
 		let isGlobal = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
@@ -224,7 +237,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		if (!this.logic){
 			let retrieverName = this.state.localValues.get(ITPT_BLOCK_EDITOR_RETRIEVER_NAME);
 			retrieverName = retrieverName ? retrieverName : DEFAULT_ITPT_RETRIEVER_NAME;
-			var logic: EditorLogic = new EditorLogic(this.props.ldTokenString, retrieverName);
+			const username = this.state.localValues.get(UserDefDict.username);
+			const userproj = this.state.localValues.get(UserDefDict.projectname);
+			var logic: EditorLogic = new EditorLogic(this.props.ldTokenString, retrieverName, username, userproj);
 			if (this.editorWrapperRef.current){
 				let height = this.editorWrapperRef.current.clientHeight;
 				let width = this.editorWrapperRef.current.clientWidth;

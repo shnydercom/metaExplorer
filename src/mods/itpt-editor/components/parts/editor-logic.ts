@@ -58,10 +58,20 @@ export class EditorLogic {
 	protected width: number = 300;
 	protected height: number = 100;
 	protected retriever: ReduxItptRetriever;
+	/**
+	 * userName of the currently logged in user, used for constructing new itptNames
+	 */
+	protected userName: string;
+	/**
+	 * project that the currently logged in user is editing, used for constructing new itptNames
+	 */
+	protected userProject: string;
 
-	constructor(outputLDOptionsToken: string, retrieverName?: string) {
+	constructor(outputLDOptionsToken: string, retrieverName?: string, userName?: string, userProject?: string) {
 		this.outputLDOptionsToken = outputLDOptionsToken;
 		this.retrieverName = retrieverName;
+		this.userName = userName;
+		this.userProject = userProject;
 		this.diagramEngine = new DiagramEngine();
 		//label factories
 		this.diagramEngine.registerLabelFactory(new SettingsLabelFactory());
@@ -152,7 +162,7 @@ export class EditorLogic {
 		//create fixed output node
 		//TODO: make fixed but ports should still be settable, make outputNode singleton per Itpt
 		let outputNode = new OutputInfoPartNodeModel(UserDefDict.outputItpt, null, null, editorSpecificNodesColor,
-			outputLDOptionsToken);
+			outputLDOptionsToken, this.userName, this.userProject);
 		//outputNode.setLocked(true); // locking would lock the ports as well
 		const canvas = this.diagramEngine.canvas;
 		if (canvas) {

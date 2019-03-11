@@ -13,6 +13,11 @@ export interface OutputInfoNodeProps {
 
 export interface OutputInfoTypeNodeState {
 	stItptName: string;
+	blockNameInput: string;
+	userNameInput: string;
+	userProjectInput: string;
+	userName: string;
+	projName: string;
 }
 
 /**
@@ -20,17 +25,25 @@ export interface OutputInfoTypeNodeState {
  */
 export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputInfoTypeNodeState> {
 
-	static getDerivedStateFromProps(nextProps, prevState) {
+	static getDerivedStateFromProps(nextProps: OutputInfoNodeProps, prevState: OutputInfoTypeNodeState): OutputInfoTypeNodeState | null {
 		const itptName = nextProps.node.getItptName();
-		if (itptName !== prevState.stItptName) {
-			return { stItptName: itptName };
+		const userName: string = nextProps.node.getUserName();
+		const projName: string = nextProps.node.getUserProject();
+		if (itptName !== prevState.stItptName
+			|| userName !== prevState.userName
+			|| projName !== prevState.projName
+		) {
+			return { ...prevState, stItptName: itptName, userName, projName };
 		}
 		return null;
 	}
 
 	constructor(props: OutputInfoNodeProps) {
 		super(props);
-		this.state = { stItptName: props.node.getItptName() };
+		this.state = { blockNameInput: props.node.getItptBlockName(),
+			userNameInput: props.node.getItptProjName(),
+			userProjectInput: props.node.getItptProjName(),
+			stItptName: props.node.getItptName(), userName: props.node.getUserName(), projName: props.node.getUserProject() };
 	}
 
 	generatePort(port) {
@@ -39,9 +52,18 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 
 	render() {
 		const { node } = this.props;
-		const { stItptName } = this.state;
+		const { stItptName, blockNameInput, projName, userName, userProjectInput, userNameInput } = this.state;
 		let itptName = stItptName ? stItptName : "";
-		let isBtnEnabled = !!itptName && node.hasMainItpt();
+		let isBtnEnabled = !!blockNameInput && !!userProjectInput && !!userNameInput && node.hasMainItpt();
+		const usrProj = node.getUserProject();
+		const usrName = node.getUserName();
+		const itptProj = node.getItptProjName();
+		const itptUN = node.getItptUserName();
+		let isShowInputUsrNameAndProj = !!!usrProj && !!!usrName;
+		let isForeignItpt = !isShowInputUsrNameAndProj && usrName !== itptUN && usrProj !== itptProj;
+		let pathPrefix: string = usrName ? usrName + "/" : null;
+		if (!!pathPrefix) pathPrefix = usrProj ? pathPrefix + usrProj + "/" : pathPrefix;
+		if (isForeignItpt) pathPrefix = stItptName;
 		return (
 			<div className="basic-node" style={{ background: node.color }}>
 				<div className="title">
@@ -51,25 +73,48 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 					<div className="dense-form">
 						<div style={{ marginLeft: "-2em" }}
 							className="in">{map(node.getInPorts(), this.generatePort.bind(this))}</div>
-						<Input type='text'
-							label="Block Name"
-							name="blockNameField"
-							value={itptName}
+						{isShowInputUsrNameAndProj
+							? null
+							: <div>{pathPrefix}</div>
+						}
+						{isForeignItpt
+							? null
+							: <Input type='text'
+								label="Block Name"
+								name="blockNameField"
+								value={blockNameInput}
 
-							onChange={(evtVal) => {
-								node.setItptName(evtVal);
-								this.setState({ stItptName: evtVal });
-							}} />
-						<Input type='text'
-							label="Project Name"
-							name="projectNameField" />
-						<Input type='text'
-							label="User Name"
-							name="userNameField"
-						/>
+								onChange={(evtVal) => {
+									this.setState({ ...this.state, blockNameInput: evtVal });
+								}} />
+						}
+						{isShowInputUsrNameAndProj
+							? <>
+								<Input type='text'
+									label="Project Name"
+									name="projectNameField"
+									value={userProjectInput}
+									onChange={(evtVal) => {
+										this.setState({ ...this.state, userProjectInput: evtVal });
+									}}
+								/>
+								<Input type='text'
+									label="User Name"
+									name="userNameField"
+									value={userNameInput}
+									onChange={(evtVal) => {
+										this.setState({ ...this.state, userNameInput: evtVal });
+									}}
+								/>
+							</>
+							: null}
 					</div>
 					<IconButton style={{ marginTop: "0" }} disabled={!isBtnEnabled}
-						icon={!isBtnEnabled ? "warning" : "chevron_right"} onClick={() => node.handleOutputInfoSaved()} />
+						icon={!isBtnEnabled ? "warning" : "chevron_right"} onClick={() => {
+							const newItptName = userNameInput + "/" + userProjectInput + "/" + blockNameInput;
+							node.setItptName(newItptName);
+							node.handleOutputInfoSaved();
+						}} />
 				</div>
 			</div>
 		);
