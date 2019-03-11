@@ -33,6 +33,15 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 			|| userName !== prevState.userName
 			|| projName !== prevState.projName
 		) {
+			if (itptName !== prevState.stItptName) {
+				return {
+					...prevState,
+					blockNameInput: nextProps.node.getItptBlockName(),
+					userNameInput: nextProps.node.getItptUserName(),
+					userProjectInput: nextProps.node.getItptProjName(),
+					stItptName: itptName, userName, projName
+				};
+			}
 			return { ...prevState, stItptName: itptName, userName, projName };
 		}
 		return null;
@@ -40,10 +49,12 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 
 	constructor(props: OutputInfoNodeProps) {
 		super(props);
-		this.state = { blockNameInput: props.node.getItptBlockName(),
-			userNameInput: props.node.getItptProjName(),
+		this.state = {
+			blockNameInput: props.node.getItptBlockName(),
+			userNameInput: props.node.getItptUserName(),
 			userProjectInput: props.node.getItptProjName(),
-			stItptName: props.node.getItptName(), userName: props.node.getUserName(), projName: props.node.getUserProject() };
+			stItptName: props.node.getItptName(), userName: props.node.getUserName(), projName: props.node.getUserProject()
+		};
 	}
 
 	generatePort(port) {
@@ -52,7 +63,7 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 
 	render() {
 		const { node } = this.props;
-		const { stItptName, blockNameInput, projName, userName, userProjectInput, userNameInput } = this.state;
+		let { stItptName, blockNameInput, projName, userName, userProjectInput, userNameInput } = this.state;
 		let itptName = stItptName ? stItptName : "";
 		let isBtnEnabled = !!blockNameInput && !!userProjectInput && !!userNameInput && node.hasMainItpt();
 		const usrProj = node.getUserProject();
@@ -64,6 +75,9 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 		let pathPrefix: string = usrName ? usrName + "/" : null;
 		if (!!pathPrefix) pathPrefix = usrProj ? pathPrefix + usrProj + "/" : pathPrefix;
 		if (isForeignItpt) pathPrefix = stItptName;
+		blockNameInput = !blockNameInput ? "" : blockNameInput;
+		userProjectInput = !userProjectInput ? "" : userProjectInput;
+		userNameInput = !userNameInput ? "" : userNameInput;
 		return (
 			<div className="basic-node" style={{ background: node.color }}>
 				<div className="title">

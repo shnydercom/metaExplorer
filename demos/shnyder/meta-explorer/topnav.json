@@ -304,8 +304,8 @@
           ]
         },
         "7278caa6-8c12-4566-bd6a-a39c314ef0b2": {
-          "subItptOf": "shnyder/mexp-onboarding/one/index",
-          "canInterpretType": "shnyder/mexp-onboarding/one/index-ObjectType",
+          "subItptOf": "shnyder/meta-explorer/onboarding/one/index",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/one/index-ObjectType",
           "nameSelf": "7278caa6-8c12-4566-bd6a-a39c314ef0b2",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -336,8 +336,8 @@
           ]
         },
         "b491155c-d2e4-4429-b825-6b5373d98719": {
-          "subItptOf": "shnyder/mexp-onboarding/two/index",
-          "canInterpretType": "shnyder/mexp-onboarding/two/index-ObjectType",
+          "subItptOf": "shnyder/meta-explorer/onboarding/two/index",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/two/index-ObjectType",
           "nameSelf": "b491155c-d2e4-4429-b825-6b5373d98719",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -368,8 +368,8 @@
           ]
         },
         "249f7949-7d01-4d70-b107-f84212a23dcc": {
-          "subItptOf": "shnyder/mexp-onboarding/three/index",
-          "canInterpretType": "shnyder/mexp-onboarding/three/index-ObjectType",
+          "subItptOf": "shnyder/meta-explorer/onboarding/three/index",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/three/index-ObjectType",
           "nameSelf": "249f7949-7d01-4d70-b107-f84212a23dcc",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -400,8 +400,8 @@
           ]
         },
         "134deba3-15fd-4e82-9fc2-590bfd5e83ed": {
-          "subItptOf": "shnyder/mexp-onboarding/four/index",
-          "canInterpretType": "shnyder/mexp-onboarding/four/index-ObjectType",
+          "subItptOf": "shnyder/meta-explorer/onboarding/four/index",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/four/index-ObjectType",
           "nameSelf": "134deba3-15fd-4e82-9fc2-590bfd5e83ed",
           "initialKvStores": [],
           "crudSkills": "cRud",
@@ -432,8 +432,8 @@
           ]
         },
         "b3625e2e-831f-4ea9-b840-ed7ea4733a70": {
-          "subItptOf": "shnyder/mexp-onboarding/five/index",
-          "canInterpretType": "shnyder/mexp-onboarding/five/index-ObjectType",
+          "subItptOf": "shnyder/meta-explorer/onboarding/five/index",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/five/index-ObjectType",
           "nameSelf": "b3625e2e-831f-4ea9-b840-ed7ea4733a70",
           "initialKvStores": [],
           "crudSkills": "cRud",

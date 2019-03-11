@@ -1,0 +1,100 @@
+{
+  "subItptOf": "be7a96cd-1fd9-480e-8530-9c4edb51048e",
+  "canInterpretType": "shnyder/meta-explorer/onboarding/home/gallerySignupLoginForm-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/onboarding/home/gallerySignupLoginForm",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "be7a96cd-1fd9-480e-8530-9c4edb51048e": {
+          "subItptOf": "shnyder/layout/CSSWrapper",
+          "canInterpretType": "shnyder/layout/CSSWrapper-ObjectType",
+          "nameSelf": "be7a96cd-1fd9-480e-8530-9c4edb51048e",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "217ac193-4f0b-45aa-bc14-0ae0291f3c39",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "cssClass",
+              "value": "dense-form",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "217ac193-4f0b-45aa-bc14-0ae0291f3c39": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "217ac193-4f0b-45aa-bc14-0ae0291f3c39",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "5b00be25-db9b-49db-913e-2a299d4989be",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "43aeff94-c0e9-4ef9-8012-d106f38141bc",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
+        "5b00be25-db9b-49db-913e-2a299d4989be": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "5b00be25-db9b-49db-913e-2a299d4989be",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "login",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "43aeff94-c0e9-4ef9-8012-d106f38141bc": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "43aeff94-c0e9-4ef9-8012-d106f38141bc",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "signup",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "../onboarding_one",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

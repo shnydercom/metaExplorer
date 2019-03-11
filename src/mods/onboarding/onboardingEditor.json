@@ -1,7 +1,7 @@
 {
   "subItptOf": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
-  "canInterpretType": "shnyder/onboardingEditor-ObjectType",
-  "nameSelf": "shnyder/onboardingEditor",
+  "canInterpretType": "shnyder/meta-explorer/onboarding/onboardingEditor-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/onboarding/onboardingEditor",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -29,11 +29,21 @@
               "key": "retrieverName",
               "value": "onboardingRetriever",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "userName",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "projectName",
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "hiddenViews"
+            "hiddenViews",
+            "userName",
+            "projectName"
           ]
         }
       },
@@ -45,6 +55,14 @@
     {
       "objRef": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
       "propRef": "hiddenViews"
+    },
+    {
+      "objRef": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
+      "propRef": "userName"
+    },
+    {
+      "objRef": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
+      "propRef": "projectName"
     }
   ]
 }

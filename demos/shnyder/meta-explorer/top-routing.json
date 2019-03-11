@@ -100,8 +100,8 @@
           ]
         },
         "be7c355d-6605-4220-a602-fbc8dfb59250": {
-          "subItptOf": "shnyder/mexp-onboarding/index",
-          "canInterpretType": "shnyder/mexp-onboarding/index-ObjectType",
+          "subItptOf": "shnyder/meta-explorer/onboarding/index",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/index-ObjectType",
           "nameSelf": "be7c355d-6605-4220-a602-fbc8dfb59250",
           "initialKvStores": [],
           "crudSkills": "cRud",
