@@ -120,7 +120,12 @@ let initialKVStores: IKvStore[] = [
 		key: UserDefDict.projectname,
 		value: undefined,
 		ldType: LDDict.Text
-	}
+	},
+	{
+		key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
+		value: undefined,
+		ldType: LDDict.Text
+	},
 ];
 export const BlockEditorCfg: BlueprintConfig = {
 	subItptOf: null,
@@ -141,12 +146,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		let rvLD = gdsfpLD(
 			nextProps, prevState, [],
-			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
-				UserDefDict.username, UserDefDict.projectname
-			],
+			[...allMyInputKeys, UserDefDict.outputKVMapKey],
 			ITPT_BLOCK_EDITOR_TYPE,
-			[], [false, false, false, false, true, false, false, false]);
+			[], [false, false, false, false, true, false, false, false, false]);
 		if (!rvLD) {
 			return redirState;
 		}
@@ -200,10 +202,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			this.logic = props.logic;
 		}
 		const rvLD = initLDLocalState(this.cfg, props, [],
-			[ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-				ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
-				UserDefDict.username, UserDefDict.projectname],
-			[], [false, false, false, false, true, false, false, false]);
+			[...allMyInputKeys, UserDefDict.outputKVMapKey],
+			[], [false, false, false, false, true, false, false, false, false]);
 
 		let initiallyDisplayed = rvLD.localValues.get(ITPT_BLOCK_EDITOR_EDITING_ITPT);
 		let isGlobal = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
@@ -348,7 +348,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	renderEditor() {
 		const { routes } = this.props;
-		const { drawerActive, currentlyEditingItptName, previewActive, localValues, bottomBarHidden, previewHidden } = this.state;
+		const { drawerActive, currentlyEditingItptName, previewActive, localValues, bottomBarHidden, previewHidden, drawerHidden } = this.state;
 		const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		let isDisplayDevContent = isProduction ? false : true;
 		let inputStyle = currentlyEditingItptName ? { width: currentlyEditingItptName.length + "ex", maxHeight: "100%" } : null;
@@ -359,7 +359,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		return <div className="entrypoint-editor" ref={this.editorWrapperRef}>
 			<ThemeProvider theme={editorTheme}>
 				<Layout theme={{ layout: 'editor-layout', navDrawerClipped: 'editor-navbar-clipped' }}>
-					<NavDrawer insideTree={true} theme={{ pinned: "navbar-pinned" }} active={drawerActive} withOverlay={false}
+					{drawerHidden
+					? null
+					: <NavDrawer insideTree={true} theme={{ pinned: "navbar-pinned" }} active={drawerActive} withOverlay={false}
 						permanentAt='xxxl'>
 						<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem}
 							onClearBtnPress={() => {
@@ -380,6 +382,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							</div>
 						</EditorTray>
 					</NavDrawer>
+					}
 					<Panel theme={editorTheme} style={{ bottom: 0 }}>
 							<EditorBody hideRefMapDropSpace={bottomBarHidden}
 								ref={this.diagramRef}
@@ -389,12 +392,17 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 								currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
 							{ previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
 					</Panel>
+					{drawerHidden
+					? null
+					: <>
 					<div className="nav-element top-left">
-						<IconButton className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
-					</div>
-					<div className="nav-element bottom-left">
-						<IconButton icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></IconButton>
-					</div>
+							<IconButton className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
+						</div>
+						<div className="nav-element bottom-left">
+							<IconButton icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></IconButton>
+						</div>
+					</>
+				}
 				</Layout>
 			</ThemeProvider>
 		</div >;
@@ -496,6 +504,18 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		blankLDOptions.resource.kvStores = [];
 		this.props.notifyLDOptionsChange(blankLDOptions);
 		this.props.notifyLDOptionsChange(newLDOptions);
+		this.dispatchCurrentlyEditingChange(nodesBPCFG.nameSelf);
+	}
+
+	protected dispatchCurrentlyEditingChange = (currentlyEditingName: string) => {
+		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
+		if (!outputKVMap) return;
+		let outCurItptKV: IKvStore = {
+			key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
+			value: currentlyEditingName,
+			ldType: LDDict.Text
+		};
+		this.props.dispatchKvOutput([outCurItptKV], this.props.ldTokenString, outputKVMap);
 	}
 
 	protected onEditTrayItem(data): DropRefmapResult {

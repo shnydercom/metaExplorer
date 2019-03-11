@@ -710,7 +710,7 @@ export class EditorLogic {
 						let extDtKV = this.composeKVs(extOutputKV, port.kv);
 						branchBPCfg.initialKvStores.push(extDtKV);
 						//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
-						if (branchNode.type === DECLARATION_MODEL && port.kv.key === UserDefDict.finalInputKey) {
+						if (branchNode.type === OUTPUT_INFO_MODEL && port.kv.key === UserDefDict.finalInputKey) {
 							branchNode.subItptOf = leafNode.getID();
 						} else {
 							branchBPCfg.interpretableKeys.push(extDtKV.key);

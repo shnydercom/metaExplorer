@@ -145,7 +145,7 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 						: <div className="button-row">
 							<RefMapDropSpace
 								currentlyEditingItpt={this.state.currentlyEditingItpt}
-								dropText="...drop a Compound Block here to edit it, or long-press on it, then hit the 'INTERPRET' button in the middle..."
+								dropText="...drop a Compound Block here to edit and load it to the preview..."
 								refMapDrop={this.privOnRMDrop}
 							/>
 						</div>
