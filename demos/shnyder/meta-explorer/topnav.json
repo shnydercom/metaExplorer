@@ -464,8 +464,8 @@
           ]
         },
         "3c82ebbd-a56b-4be9-b19d-998558d84c51": {
-          "subItptOf": "shnyder/onboardingEditor",
-          "canInterpretType": "http://shnyder.com/editor/blockeditortype",
+          "subItptOf": "shnyder/block-editor",
+          "canInterpretType": "blockeditortype",
           "nameSelf": "3c82ebbd-a56b-4be9-b19d-998558d84c51",
           "initialKvStores": [
             {
@@ -477,6 +477,11 @@
               "key": "isGlobal",
               "value": true,
               "ldType": "http://schema.org/Boolean"
+            },
+            {
+              "key": "retrieverName",
+              "value": "default",
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",
@@ -496,6 +501,5 @@
   ],
   "crudSkills": "cRud",
   "interpretableKeys": [
-    "finalInput"
   ]
 }

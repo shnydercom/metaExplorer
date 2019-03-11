@@ -28,13 +28,8 @@ export function initItptEditorMod(isMainItptChange: boolean): Promise<IModStatus
 			ldType: LDDict.Boolean
 		},
 		{
-			key: ITPT_BLOCK_EDITOR_HIDDEN_VIEWS,
-			value: undefined,
-			ldType: LDDict.Text
-		},
-		{
 			key: ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
-			value: undefined,
+			value: "default",
 			ldType: LDDict.Text
 		}
 		];

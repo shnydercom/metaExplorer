@@ -223,8 +223,8 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 	generateTab(imgSrcActive, imgSrcInActive: string, route: string, isActive: boolean, key: string): JSX.Element {
 		//const mustRedirect = match && isActive && (match.params.lastPath !== undefined || match.params.lastPath !== null) && match.params.lastPath !== route;
 		return <Tab label='' key={key} className="bottom-nav-tab" icon={isActive
-			? <img src={imgSrcActive} height="inherit" />
-			: <img src={imgSrcInActive} height="inherit" />}>
+			? <img src={imgSrcActive} style={{height: "inherit"}} />
+			: <img src={imgSrcInActive} style={{height: "inherit"}}/>}>
 		</Tab>;
 	}
 	generateRedirect(tabIdx: number): JSX.Element {
