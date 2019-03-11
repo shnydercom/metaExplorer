@@ -1,7 +1,7 @@
 {
   "subItptOf": "831f4e45-c7b9-48af-9d89-c214669404a6",
-  "canInterpretType": "how-to/qr-display-ObjectType",
-  "nameSelf": "how-to/qr-display",
+  "canInterpretType": "shnyder/how-to/qr-display-ObjectType",
+  "nameSelf": "shnyder/how-to/qr-display",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

@@ -1,7 +1,7 @@
 {
   "subItptOf": "b3fa86af-beba-484b-8e47-57e8818c1431",
-  "canInterpretType": "how-to/routes-ObjectType",
-  "nameSelf": "how-to/routes",
+  "canInterpretType": "shnyder/how-to/routes-ObjectType",
+  "nameSelf": "shnyder/how-to/routes",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

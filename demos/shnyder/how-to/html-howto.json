@@ -1,7 +1,7 @@
 {
   "subItptOf": "a8b85eeb-e3d2-4054-a33e-14a4165722c1",
-  "canInterpretType": "how-to/basic-html-components-ObjectType",
-  "nameSelf": "how-to/basic-html-components",
+  "canInterpretType": "shnyder/how-to/basic-html-components-ObjectType",
+  "nameSelf": "shnyder/how-to/basic-html-components",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
