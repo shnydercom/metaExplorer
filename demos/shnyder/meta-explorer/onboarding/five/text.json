@@ -97,7 +97,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "1f6fc521-d1a9-4d31-ad60-83dc5c74ee94",
+                "objRef": "a7a8e162-644a-4317-bbfd-1e74f49f69b0",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -108,23 +108,39 @@
             "freeContainer"
           ]
         },
+        "a7a8e162-644a-4317-bbfd-1e74f49f69b0": {
+          "subItptOf": "shnyder/md/CardW3Containers",
+          "canInterpretType": "shnyder/md/CardW3Containers-ObjectType",
+          "nameSelf": "a7a8e162-644a-4317-bbfd-1e74f49f69b0",
+          "initialKvStores": [
+            {
+              "key": "middleContainer",
+              "value": {
+                "objRef": "1f6fc521-d1a9-4d31-ad60-83dc5c74ee94",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "RouteSend_middleContainer",
+              "value": "editor",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "middleContainer"
+          ]
+        },
         "1f6fc521-d1a9-4d31-ad60-83dc5c74ee94": {
           "subItptOf": "shnyder/baseContainer",
           "canInterpretType": "shnyder/ContainerObjType",
           "nameSelf": "1f6fc521-d1a9-4d31-ad60-83dc5c74ee94",
           "initialKvStores": [
             {
-              "key": "in_2",
-              "value": {
-                "objRef": "b53be021-a21f-4b5d-b2ae-b47b50d3446d",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
-            },
-            {
               "key": "in_3",
               "value": {
-                "objRef": "2f3240eb-badc-48fd-a649-f55f441ef2bd",
+                "objRef": "021a1c76-5690-4129-8974-2f20e1e42a93",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -162,17 +178,9 @@
               "ldType": "InterpreterClassType"
             },
             {
-              "key": "in_8",
-              "value": {
-                "objRef": "f24213fa-3701-427f-8f50-7a1066ed2acd",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
-            },
-            {
               "key": "in_9",
               "value": {
-                "objRef": "e4c62e95-4525-4b5e-b335-8dadd9552b4c",
+                "objRef": "76c3b239-1be8-473c-b266-46d850f9ce96",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -180,38 +188,22 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "in_2",
             "in_3",
             "in_4",
             "in_5",
             "in_6",
             "in_7",
-            "in_8",
             "in_9"
           ]
         },
-        "b53be021-a21f-4b5d-b2ae-b47b50d3446d": {
-          "subItptOf": "shnyder/basichtml/bold",
+        "021a1c76-5690-4129-8974-2f20e1e42a93": {
+          "subItptOf": "shnyder/basichtml/h3",
           "canInterpretType": "http://schema.org/Text",
-          "nameSelf": "b53be021-a21f-4b5d-b2ae-b47b50d3446d",
+          "nameSelf": "021a1c76-5690-4129-8974-2f20e1e42a93",
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "You're almost ready! Set a password to protect your creations!",
-              "ldType": "http://schema.org/Text"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
-        },
-        "2f3240eb-badc-48fd-a649-f55f441ef2bd": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
-          "canInterpretType": "http://schema.org/Text",
-          "nameSelf": "2f3240eb-badc-48fd-a649-f55f441ef2bd",
-          "initialKvStores": [
-            {
-              "key": "http://schema.org/description",
-              "value": "Your Password",
+              "value": "Done, congratulations!",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -225,7 +217,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "here are some more tips:",
+              "value": "Here are some more tips:",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -274,28 +266,14 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "f24213fa-3701-427f-8f50-7a1066ed2acd": {
-          "subItptOf": "shnyder/basichtml/paragraph",
+        "76c3b239-1be8-473c-b266-46d850f9ce96": {
+          "subItptOf": "shnyder/basichtml/bold",
           "canInterpretType": "http://schema.org/Text",
-          "nameSelf": "f24213fa-3701-427f-8f50-7a1066ed2acd",
+          "nameSelf": "76c3b239-1be8-473c-b266-46d850f9ce96",
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "Want to connect an API? Upload your swagger file here:",
-              "ldType": "http://schema.org/Text"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
-        },
-        "e4c62e95-4525-4b5e-b335-8dadd9552b4c": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
-          "nameSelf": "e4c62e95-4525-4b5e-b335-8dadd9552b4c",
-          "initialKvStores": [
-            {
-              "key": "confirmTxt",
-              "value": "upload swagger",
+              "value": "Let me in!",
               "ldType": "http://schema.org/Text"
             }
           ],

@@ -133,12 +133,21 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "c4acfa3f-9662-46af-933c-9b999afa5c11",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "in_0",
-            "in_1"
+            "in_1",
+            "in_2"
           ]
         },
         "18894dd2-6d3b-4a3f-b326-297f1a0cae01": {
@@ -168,12 +177,30 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": []
+        },
+        "c4acfa3f-9662-46af-933c-9b999afa5c11": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "c4acfa3f-9662-46af-933c-9b999afa5c11",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "continue",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "onboarding_four",
+              "ldType": "Route_Added"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": [
-  ]
+  "interpretableKeys": []
 }

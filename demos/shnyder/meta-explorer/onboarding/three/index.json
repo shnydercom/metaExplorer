@@ -1,59 +1,15 @@
 {
-  "subItptOf": "fc6a6bd8-6ee8-4c59-a92f-d8551e4f085e",
+  "subItptOf": "aedaa1af-6632-4a3d-a2d4-b8b57ed5cfcf",
   "canInterpretType": "shnyder/meta-explorer/onboarding/three/index-ObjectType",
   "nameSelf": "shnyder/meta-explorer/onboarding/three/index",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
-        "fc6a6bd8-6ee8-4c59-a92f-d8551e4f085e": {
-          "subItptOf": "shnyder/md/NavProcessAtom",
-          "canInterpretType": "shnyder/md/NavProcessAtom-ObjectType",
-          "nameSelf": "fc6a6bd8-6ee8-4c59-a92f-d8551e4f085e",
-          "initialKvStores": [
-            {
-              "key": "freeContainer",
-              "value": {
-                "objRef": "794baf8d-d929-4e9a-8c43-9175f47e4b9d",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
-            },
-            {
-              "key": "HeaderText",
-              "value": "back",
-              "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "cancelTxt",
-              "value": "back",
-              "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "confirmTxt",
-              "value": "next",
-              "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "RouteSend_cancel",
-              "value": "onboarding_two",
-              "ldType": "Route_Added"
-            },
-            {
-              "key": "RouteSend_confirm",
-              "value": "onboarding_four",
-              "ldType": "Route_Added"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": [
-            "freeContainer"
-          ]
-        },
-        "794baf8d-d929-4e9a-8c43-9175f47e4b9d": {
+        "aedaa1af-6632-4a3d-a2d4-b8b57ed5cfcf": {
           "subItptOf": "shnyder/baseContainer",
           "canInterpretType": "shnyder/ContainerObjType",
-          "nameSelf": "794baf8d-d929-4e9a-8c43-9175f47e4b9d",
+          "nameSelf": "aedaa1af-6632-4a3d-a2d4-b8b57ed5cfcf",
           "initialKvStores": [
             {
               "key": "in_0",
@@ -114,7 +70,12 @@
           "subItptOf": "shnyder/meta-explorer/onboarding/onboardingEditor",
           "canInterpretType": "shnyder/meta-explorer/onboarding/onboardingEditor-ObjectType",
           "nameSelf": "2d5d2eee-5e9c-419b-92c6-6f50cb630f48",
-          "initialKvStores": [],
+          "initialKvStores": [
+            {
+              "key": "hiddenViews",
+              "value": "drawer"
+            }
+          ],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }
