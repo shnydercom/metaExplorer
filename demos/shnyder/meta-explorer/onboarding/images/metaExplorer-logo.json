@@ -1,7 +1,7 @@
 {
   "subItptOf": "675f8f3d-76fb-40ff-b8a4-df3c6a3f376c",
-  "canInterpretType": "shnyder/meta-explorer/onboarding/images/beachBirdsEye-ObjectType",
-  "nameSelf": "shnyder/meta-explorer/onboarding/images/beachBirdsEye",
+  "canInterpretType": "shnyder/meta-explorer/onboarding/images/metaExplorer-logo-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/onboarding/images/metaExplorer-logo",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -13,15 +13,15 @@
           "initialKvStores": [
             {
               "key": "http://schema.org/contentUrl",
-              "value": "/static/welcome-bg.jpg"
+              "value": "/static/metaexplorer_logo.svg"
             },
             {
               "key": "CSSObjectFit",
-              "value": "cover"
+              "value": "contain"
             },
             {
               "key": "cssClass",
-              "value": "mexpbg"
+              "value": "maxminheight100"
             }
           ],
           "crudSkills": "cRud",

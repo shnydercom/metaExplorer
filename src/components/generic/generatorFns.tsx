@@ -92,6 +92,9 @@ export function generateItptFromCompInfo(compKey: string, routes?: LDRouteProps,
 	let locIndex = !index ? 0 : index;
 	if (Array.isArray(compInfos)) {
 		compInfo = compInfos[locIndex];
+		if (compInfos.length === 1){
+			compInfo = compInfos[0];
+		}
 	} else {
 		compInfo = compInfos;
 	}
