@@ -563,3 +563,18 @@ $app-inner-width-90: $app-inner-width * 0.9;
 		transition: none;
 	}
 }
+
+.onboarding-logo {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
+
+	button {
+		position: absolute;
+		background-color: #edc11cff !important;
+		color: black !important;
+		align-self: center;
+		margin-top: 1.5em;
+		right: 0.5em;
+	}
+}

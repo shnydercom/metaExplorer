@@ -1,0 +1,104 @@
+{
+  "subItptOf": "2221d8bc-8c57-4dbb-ad89-c536b0a72b4b",
+  "canInterpretType": "shnyder/meta-explorer/onboarding/home/galleryLogoAndBtn-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/onboarding/home/galleryLogoAndBtn",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "2221d8bc-8c57-4dbb-ad89-c536b0a72b4b": {
+          "subItptOf": "shnyder/layout/CSSWrapper",
+          "canInterpretType": "shnyder/layout/CSSWrapper-ObjectType",
+          "nameSelf": "2221d8bc-8c57-4dbb-ad89-c536b0a72b4b",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "80526bc6-7378-412c-aa9c-b77386a590fe",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "cssClass",
+              "value": "onboarding-logo",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "80526bc6-7378-412c-aa9c-b77386a590fe": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "80526bc6-7378-412c-aa9c-b77386a590fe",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "eb4bbb46-db44-446c-a894-2e19949e9b28",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "ae694b90-ce4c-43bf-b801-95c8adb530c6",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
+        "eb4bbb46-db44-446c-a894-2e19949e9b28": {
+          "subItptOf": "shnyder/meta-explorer/onboarding/images/metaExplorer-logo",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/images/metaExplorer-logo-ObjectType",
+          "nameSelf": "eb4bbb46-db44-446c-a894-2e19949e9b28",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "ae694b90-ce4c-43bf-b801-95c8adb530c6": {
+          "subItptOf": "shnyder/md/Button",
+          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "nameSelf": "ae694b90-ce4c-43bf-b801-95c8adb530c6",
+          "initialKvStores": [
+            {
+              "key": "confirmTxt",
+              "value": "confirm email and password",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_confirm",
+              "value": "/login",
+              "ldType": "Route_Added"
+            },
+            {
+              "key": "fontIcon",
+              "value": "chevron_right",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "isIcon",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

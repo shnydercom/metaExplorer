@@ -22,15 +22,7 @@
             {
               "key": "foregroundPart",
               "value": {
-                "objRef": "6ce12890-67d0-40a2-8eab-5c2fe40154d1",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
-            },
-            {
-              "key": "foregroundPart",
-              "value": {
-                "objRef": "8a53b54b-852b-4190-b9f6-9b8f033c60f7",
+                "objRef": "58e1ce7e-d543-40a3-8514-dfa12527b056",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -83,7 +75,6 @@
           "interpretableKeys": [
             "backgroundPart",
             "foregroundPart",
-            "foregroundPart",
             "foregroundPart"
           ]
         },
@@ -95,18 +86,10 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "6ce12890-67d0-40a2-8eab-5c2fe40154d1": {
-          "subItptOf": "shnyder/meta-explorer/onboarding/images/metaExplorer-logo",
-          "canInterpretType": "shnyder/meta-explorer/onboarding/images/metaExplorer-logo-ObjectType",
-          "nameSelf": "6ce12890-67d0-40a2-8eab-5c2fe40154d1",
-          "initialKvStores": [],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
-        },
-        "8a53b54b-852b-4190-b9f6-9b8f033c60f7": {
-          "subItptOf": "shnyder/meta-explorer/onboarding/home/galleryEmailForm",
-          "canInterpretType": "shnyder/meta-explorer/onboarding/home/galleryEmailForm-ObjectType",
-          "nameSelf": "8a53b54b-852b-4190-b9f6-9b8f033c60f7",
+        "58e1ce7e-d543-40a3-8514-dfa12527b056": {
+          "subItptOf": "shnyder/meta-explorer/onboarding/home/galleryLogoAndBtn",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/home/galleryLogoAndBtn-ObjectType",
+          "nameSelf": "58e1ce7e-d543-40a3-8514-dfa12527b056",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
