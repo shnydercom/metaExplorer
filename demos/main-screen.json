@@ -21,7 +21,7 @@
             },
             {
               "key": "routePath",
-              "value": "demo",
+              "value": "/demo",
               "ldType": "http://schema.org/Text"
             }
           ],

@@ -1,0 +1,148 @@
+{
+  "subItptOf": "5b16277c-a882-4dc4-a1d1-8ae833fd5277",
+  "canInterpretType": "shnyder/me-beta/routing-ObjectType",
+  "nameSelf": "shnyder/me-beta/routing",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "5b16277c-a882-4dc4-a1d1-8ae833fd5277": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "5b16277c-a882-4dc4-a1d1-8ae833fd5277",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "ec2ab8b8-bd12-4edb-86b0-d1a49663f1a8",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "60c1f687-e9dd-4705-8875-cb44e6484d8c",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "9ceade5a-095d-41b0-bf78-f8b29e480ef1",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2"
+          ]
+        },
+        "ec2ab8b8-bd12-4edb-86b0-d1a49663f1a8": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "ec2ab8b8-bd12-4edb-86b0-d1a49663f1a8",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "23c99331-fa00-4942-ad41-129174aaa706",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "/",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "23c99331-fa00-4942-ad41-129174aaa706": {
+          "subItptOf": "shnyder/meta-explorer/onboarding/home/index",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/home/index-ObjectType",
+          "nameSelf": "23c99331-fa00-4942-ad41-129174aaa706",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "60c1f687-e9dd-4705-8875-cb44e6484d8c": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "60c1f687-e9dd-4705-8875-cb44e6484d8c",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "5215e2be-278b-432c-a5cf-a4a8fc5327e7",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "tinyentrepreneur",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "5215e2be-278b-432c-a5cf-a4a8fc5327e7": {
+          "subItptOf": "shnyder/tinyentrepreneur/APP",
+          "canInterpretType": "shnyder/tinyentrepreneur/APP-ObjectType",
+          "nameSelf": "5215e2be-278b-432c-a5cf-a4a8fc5327e7",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "9ceade5a-095d-41b0-bf78-f8b29e480ef1": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "9ceade5a-095d-41b0-bf78-f8b29e480ef1",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "bf7220a6-3d30-4339-9e29-4c525bbdb037",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "generaldemo",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
+        "bf7220a6-3d30-4339-9e29-4c525bbdb037": {
+          "subItptOf": "shnyder/generaldemo/App",
+          "canInterpretType": "shnyder/generaldemo/App-ObjectType",
+          "nameSelf": "bf7220a6-3d30-4339-9e29-4c525bbdb037",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

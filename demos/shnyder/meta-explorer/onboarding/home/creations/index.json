@@ -40,7 +40,7 @@
           "nameSelf": "bce06068-01b0-438c-8334-5726a7755de7",
           "initialKvStores": [
             {
-              "key": "frontContainer",
+              "key": "middleContainer",
               "value": {
                 "objRef": "21931d6f-420f-4c0e-923c-8ebd37ca2861",
                 "propRef": null
@@ -54,11 +54,16 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "RouteSend_middleContainer",
+              "value": "tinyentrepreneur",
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "frontContainer",
+            "middleContainer",
             "lastContainer"
           ]
         },
@@ -159,18 +164,23 @@
               "ldType": "InterpreterClassType"
             },
             {
-              "key": "lastContainer",
+              "key": "middleContainer",
               "value": {
                 "objRef": "738498e9-e7c6-44a9-a160-022b22ab7b1c",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "RouteSend_middleContainer",
+              "value": "generaldemo",
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "frontContainer",
-            "lastContainer"
+            "middleContainer"
           ]
         },
         "ea340b47-325b-425b-81aa-19d920e4598d": {

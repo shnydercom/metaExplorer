@@ -1,11 +1,35 @@
 {
-  "subItptOf": "6a392593-1c29-4fce-9586-5e0c700b09e5",
+  "subItptOf": "9c50d3e8-a636-4627-8545-bc1805338bd5",
   "canInterpretType": "shnyder/meta-explorer/onboarding/home/index-ObjectType",
   "nameSelf": "shnyder/meta-explorer/onboarding/home/index",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
+        "9c50d3e8-a636-4627-8545-bc1805338bd5": {
+          "subItptOf": "shnyder/layout/CSSWrapper",
+          "canInterpretType": "shnyder/layout/CSSWrapper-ObjectType",
+          "nameSelf": "9c50d3e8-a636-4627-8545-bc1805338bd5",
+          "initialKvStores": [
+            {
+              "key": "freeContainer",
+              "value": {
+                "objRef": "6a392593-1c29-4fce-9586-5e0c700b09e5",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "cssClass",
+              "value": "mdscrollbar",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "freeContainer"
+          ]
+        },
         "6a392593-1c29-4fce-9586-5e0c700b09e5": {
           "subItptOf": "shnyder/baseContainer",
           "canInterpretType": "shnyder/ContainerObjType",

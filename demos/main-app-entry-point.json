@@ -14,7 +14,7 @@
             {
               "key": "freeContainer",
               "value": {
-                "objRef": "b4759e72-bdd3-4da9-ad54-b189cb8752c8",
+                "objRef": "4e085a67-2b12-40c3-8b34-afd78bdde68b",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -25,10 +25,10 @@
             "freeContainer"
           ]
         },
-        "b4759e72-bdd3-4da9-ad54-b189cb8752c8": {
-          "subItptOf": "shnyder/meta-explorer/index",
-          "canInterpretType": "shnyder/meta-explorer/index-ObjectType",
-          "nameSelf": "b4759e72-bdd3-4da9-ad54-b189cb8752c8",
+        "4e085a67-2b12-40c3-8b34-afd78bdde68b": {
+          "subItptOf": "shnyder/me-beta/index",
+          "canInterpretType": "shnyder/me-beta/index-ObjectType",
+          "nameSelf": "4e085a67-2b12-40c3-8b34-afd78bdde68b",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []

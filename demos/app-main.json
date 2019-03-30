@@ -94,12 +94,12 @@
             },
             {
               "key": "isRouteExact",
-              "value": true,
+              "value": false,
               "ldType": "http://schema.org/Boolean"
             },
             {
               "key": "isRouteAbsolute",
-              "value": true,
+              "value": false,
               "ldType": "http://schema.org/Boolean"
             },
             {
@@ -120,7 +120,7 @@
           "initialKvStores": [
             {
               "key": "RouteSend_confirm",
-              "value": "demo/actions",
+              "value": "/demo/actions",
               "ldType": "Route_Added"
             }
           ],
