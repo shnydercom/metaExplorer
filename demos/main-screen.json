@@ -55,6 +55,11 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "RouteSend_cancel",
+              "value": "../../",
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",
