@@ -30,6 +30,14 @@
             {
               "key": "foregroundPart",
               "value": {
+                "objRef": "75796e17-d90f-4541-80c1-22e7886f89db",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "foregroundPart",
+              "value": {
                 "objRef": "43ceca07-cf08-426a-91b3-662c9938aff4",
                 "propRef": null
               },
@@ -37,7 +45,7 @@
             },
             {
               "key": "previousBtnLabel",
-              "value": "Demo",
+              "value": "Action!",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -47,17 +55,17 @@
             },
             {
               "key": "previousBtnLabel",
-              "value": "Try now!",
+              "value": "Connect!",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "nextBtnLabel",
-              "value": "Try now!",
+              "value": "Connect!",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "nextBtnLabel",
-              "value": "Demo",
+              "value": "Action!",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -74,6 +82,7 @@
           "crudSkills": "cRud",
           "interpretableKeys": [
             "backgroundPart",
+            "foregroundPart",
             "foregroundPart",
             "foregroundPart"
           ]
@@ -105,6 +114,14 @@
               "ldType": "http://schema.org/Text"
             }
           ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "75796e17-d90f-4541-80c1-22e7886f89db": {
+          "subItptOf": "shnyder/meta-explorer/onboarding/home/galleryNewsletterSignup",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/home/galleryNewsletterSignup-ObjectType",
+          "nameSelf": "75796e17-d90f-4541-80c1-22e7886f89db",
+          "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }

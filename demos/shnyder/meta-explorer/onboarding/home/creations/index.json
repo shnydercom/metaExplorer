@@ -26,12 +26,21 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "ec1aca8e-734a-4857-b1ed-710d5db01de8",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "in_0",
-            "in_1"
+            "in_1",
+            "in_2"
           ]
         },
         "bce06068-01b0-438c-8334-5726a7755de7": {
@@ -263,6 +272,14 @@
               "ldType": "http://schema.org/Text"
             }
           ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "ec1aca8e-734a-4857-b1ed-710d5db01de8": {
+          "subItptOf": "shnyder/meta-explorer/onboarding/home/creations/signupForm",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/home/creations/signupForm-ObjectType",
+          "nameSelf": "ec1aca8e-734a-4857-b1ed-710d5db01de8",
+          "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }
