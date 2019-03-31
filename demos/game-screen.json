@@ -21,7 +21,7 @@
             },
             {
               "key": "routePath",
-              "value": "game",
+              "value": "/game",
               "ldType": "http://schema.org/Text"
             }
           ],

@@ -21,7 +21,7 @@
             },
             {
               "key": "routePath",
-              "value": "booking-train",
+              "value": "/booking-train",
               "ldType": "http://schema.org/Text"
             }
           ],

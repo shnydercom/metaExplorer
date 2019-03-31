@@ -21,7 +21,7 @@
             },
             {
               "key": "routePath",
-              "value": "expense-form",
+              "value": "/expense-form",
               "ldType": "http://schema.org/Text"
             }
           ],

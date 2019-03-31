@@ -21,8 +21,13 @@
             },
             {
               "key": "HeaderText",
-              "value": " My little empire",
+              "value": " My little travel agency",
               "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "RouteSend_cancel",
+              "value": "../",
+              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",
@@ -124,7 +129,7 @@
             },
             {
               "key": "RouteSend_confirm",
-              "value": "addworkingtime",
+              "value": "/addworkingtime",
               "ldType": "Route_Added"
             }
           ],
@@ -143,7 +148,7 @@
             },
             {
               "key": "RouteSend_confirm",
-              "value": "addincome",
+              "value": "/addincome",
               "ldType": "Route_Added"
             }
           ],
@@ -162,7 +167,7 @@
             },
             {
               "key": "RouteSend_confirm",
-              "value": "addexpense",
+              "value": "/addexpense",
               "ldType": "Route_Added"
             }
           ],
@@ -184,7 +189,7 @@
             },
             {
               "key": "RouteSend_middleContainer",
-              "value": "measure",
+              "value": "/measure",
               "ldType": "Route_Added"
             }
           ],

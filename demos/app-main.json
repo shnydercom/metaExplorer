@@ -94,7 +94,7 @@
             },
             {
               "key": "isRouteExact",
-              "value": false,
+              "value": true,
               "ldType": "http://schema.org/Boolean"
             },
             {

@@ -21,7 +21,7 @@
             },
             {
               "key": "routePath",
-              "value": "timetracking-form",
+              "value": "/timetracking-form",
               "ldType": "http://schema.org/Text"
             }
           ],

@@ -21,7 +21,7 @@
             },
             {
               "key": "routePath",
-              "value": "search",
+              "value": "/search",
               "ldType": "http://schema.org/Text"
             }
           ],
