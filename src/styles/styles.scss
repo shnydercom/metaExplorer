@@ -578,3 +578,51 @@ $app-inner-width-90: $app-inner-width * 0.9;
 		right: 0.5em;
 	}
 }
+
+.me-beta-mailchimp {
+	display: flex;
+	flex: 1;
+	#mc_embed_signup {
+		background: transparent;
+		clear: left;
+		font: 14px Helvetica, Arial, sans-serif;
+		width: 100%;
+		align-self: center;
+		margin-top: 2em;
+	}
+	
+	#mc_embed_signup_scroll {
+		>* {
+			margin: 1em !important;
+		}
+	}
+	
+	#mc-embedded-subscribe-form input[type=checkbox] {
+		display: inline;
+		width: auto;
+		margin-right: 10px;
+	}
+	
+	#mergeRow-gdpr {
+		margin-top: 20px;
+	}
+	
+	#mergeRow-gdpr fieldset label {
+		font-weight: normal;
+	}
+	
+	#mc-embedded-subscribe-form .mc_fieldset {
+		border: none;
+		min-height: 0px;
+		padding-bottom: 0px;
+	}
+	
+	#mc-embedded-subscribe.button {
+		background-color: rgb(237, 193, 28) !important;
+		color: black !important;
+		&:hover {
+			background-color:whitesmoke !important;
+			color: black;
+		}
+	}
+}
