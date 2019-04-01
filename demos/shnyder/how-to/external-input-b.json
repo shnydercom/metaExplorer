@@ -1,0 +1,69 @@
+{
+  "subItptOf": "a31c099d-86a3-4878-8c6f-7574b630c86a",
+  "canInterpretType": "shnyder/how-to/external-input-b-ObjectType",
+  "nameSelf": "shnyder/how-to/external-input-b",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "a31c099d-86a3-4878-8c6f-7574b630c86a": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "a31c099d-86a3-4878-8c6f-7574b630c86a",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "86c80a52-a778-412a-a240-bfb13981b4e9",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "6d4036dc-60c6-4b39-bb8e-786577818e7a",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1"
+          ]
+        },
+        "86c80a52-a778-412a-a240-bfb13981b4e9": {
+          "subItptOf": "shnyder/how-to/external-input-a",
+          "canInterpretType": "shnyder/how-to/external-input-a-ObjectType",
+          "nameSelf": "86c80a52-a778-412a-a240-bfb13981b4e9",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": {
+                "objRef": "6d4036dc-60c6-4b39-bb8e-786577818e7a",
+                "propRef": "singleKvStore"
+              }
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "singleKvStore"
+          ]
+        },
+        "6d4036dc-60c6-4b39-bb8e-786577818e7a": {
+          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "6d4036dc-60c6-4b39-bb8e-786577818e7a",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

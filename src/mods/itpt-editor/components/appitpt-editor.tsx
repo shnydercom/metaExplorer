@@ -284,6 +284,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		let isGlobal = !!localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 
 		if (!!redirect){
+			this.setState({...this.state, redirect: null});
 			return <Redirect to={redirect}/>;
 		}
 		if (isGlobal) {

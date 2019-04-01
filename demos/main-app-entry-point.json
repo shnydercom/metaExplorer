@@ -1,35 +1,32 @@
 {
-  "subItptOf": "e32954d7-318f-49c1-9e41-554b46abcdf0",
+  "subItptOf": "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725",
   "canInterpretType": "MainAppEntryPoint-ObjectType",
   "nameSelf": "MainAppEntryPoint",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
-        "e32954d7-318f-49c1-9e41-554b46abcdf0": {
-          "subItptOf": "shnyder/md/ThemeProvider-light",
-          "canInterpretType": "shnyder/md/ThemeProvider-light-ObjectType",
-          "nameSelf": "e32954d7-318f-49c1-9e41-554b46abcdf0",
+        "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725": {
+          "subItptOf": "shnyder/block-editor",
+          "canInterpretType": "blockeditortype",
+          "nameSelf": "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725",
           "initialKvStores": [
             {
-              "key": "freeContainer",
-              "value": {
-                "objRef": "4e085a67-2b12-40c3-8b34-afd78bdde68b",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
+              "key": "currentlyediting",
+              "value": "shnyder/me-beta/index",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "isGlobal",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
+            },
+            {
+              "key": "isFullScreenPreview",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
             }
           ],
-          "crudSkills": "cRud",
-          "interpretableKeys": [
-            "freeContainer"
-          ]
-        },
-        "4e085a67-2b12-40c3-8b34-afd78bdde68b": {
-          "subItptOf": "shnyder/me-beta/index",
-          "canInterpretType": "shnyder/me-beta/index-ObjectType",
-          "nameSelf": "4e085a67-2b12-40c3-8b34-afd78bdde68b",
-          "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }

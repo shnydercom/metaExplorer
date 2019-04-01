@@ -127,7 +127,7 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 		return <div className="flex-container"
 			ref={(divElement) => this.divElement = divElement}
 			style={directionStyle}>
-			<div className="flex-filler" style={{ minHeight: DEFAULT_BREAKPOINT }}>
+			<div className="flex-filler vh-centered-column" style={{ minHeight: DEFAULT_BREAKPOINT }}>
 				{this.renderSub(VisualKeysDict.freeContainer)}
 			</div>
 			<div className="flex-filler vh-centered-column" style={{ minHeight: "300px" }}>

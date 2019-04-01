@@ -1,0 +1,92 @@
+{
+  "subItptOf": "649cbc35-2331-45f6-aaee-a64b96e203ed",
+  "canInterpretType": "shnyder/how-to/external-input-a-ObjectType",
+  "nameSelf": "shnyder/how-to/external-input-a",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "649cbc35-2331-45f6-aaee-a64b96e203ed": {
+          "subItptOf": "shnyder/md/CardW3Containers",
+          "canInterpretType": "shnyder/md/CardW3Containers-ObjectType",
+          "nameSelf": "649cbc35-2331-45f6-aaee-a64b96e203ed",
+          "initialKvStores": [
+            {
+              "key": "frontContainer",
+              "value": {
+                "objRef": "7c379a0f-945d-4550-8d24-b959edca93a3",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "middleContainer",
+              "value": {
+                "objRef": "0be73e1c-f558-4630-8532-9b013d6ce34a",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "frontContainer",
+            "middleContainer"
+          ]
+        },
+        "7c379a0f-945d-4550-8d24-b959edca93a3": {
+          "subItptOf": "shnyder/basichtml/bold",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "7c379a0f-945d-4550-8d24-b959edca93a3",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": "front starting text",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "singleKvStore"
+          ]
+        },
+        "0be73e1c-f558-4630-8532-9b013d6ce34a": {
+          "subItptOf": "shnyder/basichtml/paragraph",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "0be73e1c-f558-4630-8532-9b013d6ce34a",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": "middle starting text",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "singleKvStore",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "singleKvStore"
+          ]
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": [
+    {
+      "objRef": "7c379a0f-945d-4550-8d24-b959edca93a3",
+      "propRef": "singleKvStore"
+    },
+    {
+      "objRef": "0be73e1c-f558-4630-8532-9b013d6ce34a",
+      "propRef": "singleKvStore"
+    }
+  ]
+}
