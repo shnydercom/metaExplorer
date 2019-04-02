@@ -141,8 +141,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	static getDerivedStateFromProps(nextProps: AIEProps, prevState: AIEState): AIEState | null {
 		let redirState = null;
-		if (nextProps.routes && nextProps.routes.location + "" === prevState.redirect){
-			redirState = {...prevState, redirect: null};
+		if (nextProps.routes && nextProps.routes.location + "" === prevState.redirect) {
+			redirState = { ...prevState, redirect: null };
 		}
 		let rvLD = gdsfpLD(
 			nextProps, prevState, [],
@@ -234,13 +234,13 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	componentDidMount() {
-		if (!this.logic){
+		if (!this.logic) {
 			let retrieverName = this.state.localValues.get(ITPT_BLOCK_EDITOR_RETRIEVER_NAME);
 			retrieverName = retrieverName ? retrieverName : DEFAULT_ITPT_RETRIEVER_NAME;
 			const username = this.state.localValues.get(UserDefDict.username);
 			const userproj = this.state.localValues.get(UserDefDict.projectname);
 			var logic: EditorLogic = new EditorLogic(this.props.ldTokenString, retrieverName, username, userproj);
-			if (this.editorWrapperRef.current){
+			if (this.editorWrapperRef.current) {
 				let height = this.editorWrapperRef.current.clientHeight;
 				let width = this.editorWrapperRef.current.clientWidth;
 				logic.setDimensions(width, height);
@@ -283,9 +283,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		const { mode, localValues, redirect } = this.state;
 		let isGlobal = !!localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 
-		if (!!redirect){
-			this.setState({...this.state, redirect: null});
-			return <Redirect to={redirect}/>;
+		if (!!redirect) {
+			this.setState({ ...this.state, redirect: null });
+			return <Redirect to={redirect} />;
 		}
 		if (isGlobal) {
 			return <Route path="/" render={(routeProps: LDRouteProps) => {
@@ -320,18 +320,18 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			}
 	}
 
-	toggleFullScreen(){
-		if (this.state.mode === "editor"){
+	toggleFullScreen() {
+		if (this.state.mode === "editor") {
 			this.setState({ ...this.state, mode: "app" });
-		}else{
+		} else {
 			this.setState({ ...this.state, mode: "editor" });
 		}
 	}
 
-	triggerNavToTop(){
+	triggerNavToTop() {
 		const redirTo = "/";
-		if (this.props.routes.location + "" !== redirTo){
-			this.setState({ ...this.state, redirect: redirTo});
+		if (this.props.routes.location + "" !== redirTo) {
+			this.setState({ ...this.state, redirect: redirTo });
 		}
 	}
 
@@ -353,7 +353,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		let isDisplayDevContent = isProduction ? false : true;
 		let inputStyle = currentlyEditingItptName ? { width: currentlyEditingItptName.length + "ex", maxHeight: "100%" } : null;
-		if (!this.logic){
+		if (!this.logic) {
 			return <div className="entrypoint-editor" ref={this.editorWrapperRef}></div>;
 		}
 		const itpts = this.logic.getItptList();
@@ -361,49 +361,49 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			<ThemeProvider theme={editorTheme}>
 				<Layout theme={{ layout: 'editor-layout', navDrawerClipped: 'editor-navbar-clipped' }}>
 					{drawerHidden
-					? null
-					: <NavDrawer insideTree={true} theme={{ pinned: "navbar-pinned" }} active={drawerActive} withOverlay={false}
-						permanentAt='xxxl'>
-						<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
-							onClearBtnPress={() => {
-								this.logic.clear();
-								this.setState({ ...this.state, currentlyEditingItptName: null });
-							}}
-							onZoomAutoLayoutPress={() => {
-								this.logic.autoDistribute();
-								this.diagramRef.current.forceUpdate();
-							}}
-						>
-							<div className="fakeheader">
-								{
-									isGlobal
-										? <Button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size <FontIcon>fullscreen</FontIcon></Button>
-										: null
-								}
-							</div>
-						</EditorTray>
-					</NavDrawer>
+						? null
+						: <NavDrawer insideTree={true} theme={{ pinned: "navbar-pinned" }} active={drawerActive} withOverlay={false}
+							permanentAt='xxxl'>
+							<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
+								onClearBtnPress={() => {
+									this.logic.clear();
+									this.setState({ ...this.state, currentlyEditingItptName: null });
+								}}
+								onZoomAutoLayoutPress={() => {
+									this.logic.autoDistribute();
+									this.diagramRef.current.forceUpdate();
+								}}
+							>
+								<div className="fakeheader">
+									{
+										isGlobal
+											? <Button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size <FontIcon>fullscreen</FontIcon></Button>
+											: null
+									}
+								</div>
+							</EditorTray>
+						</NavDrawer>
 					}
 					<Panel theme={editorTheme} style={{ bottom: 0 }}>
-							<EditorBody hideRefMapDropSpace={bottomBarHidden}
-								ref={this.diagramRef}
-								loadToEditorByName={this.loadToEditorByName}
-								onEditTrayItem={this.onEditTrayItem.bind(this)}
-								changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
-								currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
-							{ previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
+						<EditorBody hideRefMapDropSpace={bottomBarHidden}
+							ref={this.diagramRef}
+							loadToEditorByName={this.loadToEditorByName}
+							onEditTrayItem={this.onEditTrayItem.bind(this)}
+							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
+							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
+						{previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
 					</Panel>
 					{drawerHidden
-					? null
-					: <>
-					<div className="nav-element top-left">
-							<IconButton className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
-						</div>
-						<div className="nav-element bottom-left">
-							<IconButton icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></IconButton>
-						</div>
-					</>
-				}
+						? null
+						: <>
+							<div className="nav-element top-left">
+								<IconButton className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
+							</div>
+							<div className="nav-element bottom-left">
+								<IconButton icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></IconButton>
+							</div>
+						</>
+					}
 				</Layout>
 			</ThemeProvider>
 		</div >;
@@ -421,7 +421,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			{this.state.previewDisplay === "phone" ?
 				<>
 					<div className="preview-hidden-btn">
-						<IconButton onClick={() => this.togglePreview.apply(this)} primary icon="chevron_left"/>
+						<IconButton onClick={() => this.togglePreview.apply(this)} primary icon="chevron_left" />
 					</div>
 					<ThemeProvider theme={appTheme}>
 						<div className="app-preview">
@@ -438,8 +438,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				:
 				<div className="code-preview">
 					<div className="editor-json-header">
-					<h4>Developer Mode: Declarative Output</h4>
-					{this.renderBtnSwitchPreviewOrCode()}
+						<h4>Developer Mode: Declarative Output</h4>
+						{this.renderBtnSwitchPreviewOrCode()}
 					</div>
 					<pre className="editor-json">
 						<p>
@@ -458,15 +458,14 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	protected renderPhoneNavBtns(isGlobal: boolean) {
 		return <>
-		{isGlobal
-			? <>
-				<IconButton onClick={() => this.toggleFullScreen.apply(this)} primary icon="fullscreen"/>
-				<IconButton onClick={() => this.triggerNavToTop.apply(this)} primary icon="
-				arrow_upward"/>
-			</>
-			: null
+			{isGlobal
+				? <>
+					<IconButton onClick={() => this.toggleFullScreen.apply(this)} primary icon="fullscreen" className="fullscreen" />
+					<IconButton onClick={() => this.triggerNavToTop.apply(this)} primary icon="arrow_upward" />
+				</>
+				: null
 			}
-			<IconButton onClick={() => this.togglePreview.apply(this)} primary icon="chevron_right"/>
+			<IconButton onClick={() => this.togglePreview.apply(this)} primary icon="chevron_right" />
 		</>;
 	}
 
@@ -543,13 +542,13 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	protected evalPreviewReload() {
 		const { hasCompletedFirstRender, currentlyEditingItptName, mode, hasCompletedEditorRender } = this.state;
 		if (!!currentlyEditingItptName) {
-			if (!hasCompletedFirstRender ){
+			if (!hasCompletedFirstRender) {
 				console.log("evaluating preview reload");
 				if (mode === "editor") {
 					this.loadToEditorByName(this.state.currentlyEditingItptName, true);
 					this.setState({ ...this.state, hasCompletedFirstRender: true, hasCompletedEditorRender: true });
 					return;
-				} else if (mode === "initial")  {
+				} else if (mode === "initial") {
 					this.loadToEditorByName(this.state.currentlyEditingItptName);
 				}
 				this.setState({ ...this.state, hasCompletedFirstRender: true });

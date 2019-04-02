@@ -58,7 +58,8 @@ export class EditorTrayItem extends Component<EditorTrayProps, EditorTrayState> 
 			>
 				{this.props.name}
 				<IconButton className={btnCssClass}
-					icon={"chevron_right"} onClick={() => {
+					icon={"chevron_right"} onClick={(e) => {
+						e.stopPropagation();
 						this.props.onLongPress(this.props.model);
 					}} />
 			</div>
