@@ -58,15 +58,15 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 		const specialNodesText: string = "Set standard values, mark a value for later input or build forms with as many interpreters as you want";
 		const specialNodesTreeItem: TreeEntry = {
 			flatContent: [
-				<EditorTrayItem onLongPress={(data) => nextProps.onEditTrayItem(data)} key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$editor-secondary-color"]} />,
-				<EditorTrayItem onLongPress={(data) => nextProps.onEditTrayItem(data)} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$editor-secondary-color"]} />,
-				<EditorTrayItem onLongPress={(data) => nextProps.onEditTrayItem(data)} key={3} model={{ type: "outputtype" }} name="External Output Marker" color={appStyles["$editor-secondary-color"]} />,
-				<EditorTrayItem onLongPress={(data) => nextProps.onEditTrayItem(data)} key={4} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$editor-secondary-color"]} />
+				<EditorTrayItem isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$editor-secondary-color"]} />,
+				<EditorTrayItem isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$editor-secondary-color"]} />,
+				<EditorTrayItem isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={3} model={{ type: "outputtype" }} name="External Output Marker" color={appStyles["$editor-secondary-color"]} />,
+				<EditorTrayItem isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={4} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$editor-secondary-color"]} />
 			],
 			label: 'Special Blocks',
 			subEntries: []
 		};
-		const atomicNodesText: string = "Use these elements to create compound blocks. As basic functional blocks, they can't be split up into smaller parts";
+		const atomicNodesText: string = "Drag and drop these elements to create compound blocks. As basic functional blocks, they can't be split up into smaller parts";
 		const atomicNodesTreeItem: TreeEntry & FlatContentInfo = {
 			flatContentURLs: [],
 			flatContent: [],
@@ -84,7 +84,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			itpts: []
 		};
 
-		const compoundNodesText: string = "Combine any block type to make up new blocks, or drop one in the box below to see how it's been made";
+		const compoundNodesText: string = "Click on a block to see how it's been made, or drag and drop it to the right to re-use your creations";
 		const compoundNodesTreeItem: TreeEntry & FlatContentInfo = {
 			flatContentURLs: [],
 			flatContent: [],
@@ -102,12 +102,11 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 					EditorTray.addItptToTree(compoundNodesTreeItem, iItptInfoItm, trayName);
 				}
 		});
-		EditorTray.createFlatContentFromItpts(atomicNodesTreeItem, nextProps.onEditTrayItem);
-		EditorTray.createFlatContentFromItpts(compoundNodesTreeItem, nextProps.onEditTrayItem);
+		EditorTray.createFlatContentFromItpts(atomicNodesTreeItem, nextProps.onEditTrayItem, false);
+		EditorTray.createFlatContentFromItpts(compoundNodesTreeItem, nextProps.onEditTrayItem, true);
 		return <div style={{ paddingBottom: "40px", flex: 1 }} className="mdscrollbar">
 			<TreeView entry={specialNodesTreeItem}>{specialNodesText}</TreeView>
 			<TreeView entry={atomicNodesTreeItem}>{atomicNodesText}</TreeView>
-			{/*<TreeView entry={hydraNodesTreeItem}>{hydraNodesText}</TreeView>*/}
 			<TreeView entry={compoundNodesTreeItem}>{compoundNodesText}</TreeView>
 		</div>;
 	}
@@ -200,13 +199,13 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 
 	protected static createFlatContentFromItpts(
 		tree: TreeEntry & FlatContentInfo,
-		onEditTrayItem: (data: any) => DropRefmapResult) {
+		onEditTrayItem: (data: any) => DropRefmapResult, isCompoundBlock: boolean) {
 		tree.itpts.forEach((itpt, idx) => {
 			let ldBPCfg = itpt.cfg;
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
 			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : ldBPCfg.canInterpretType;
 			let remainingName = tree.flatContentURLs[idx];
-			tree.flatContent.push(<EditorTrayItem onLongPress={(data) => onEditTrayItem(data)}
+			tree.flatContent.push(<EditorTrayItem isCompoundBlock={isCompoundBlock} onLongPress={(data) => onEditTrayItem(data)}
 				key={trayName}
 				model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
 				name={remainingName}
@@ -214,7 +213,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			);
 		});
 		tree.subEntries.forEach((treeEntry: TreeEntry & FlatContentInfo, idx) => {
-			EditorTray.createFlatContentFromItpts(treeEntry, onEditTrayItem);
+			EditorTray.createFlatContentFromItpts(treeEntry, onEditTrayItem, isCompoundBlock);
 		});
 	}
 

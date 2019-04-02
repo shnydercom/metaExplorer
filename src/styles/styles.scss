@@ -32,6 +32,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	min-width: 420px;
 	overflow-y: hidden;
 	margin: auto;
+
 	.app-content {
 		border: solid 1px rgba(0, 0, 0, 0.16);
 	}
@@ -191,6 +192,35 @@ $app-inner-width-90: $app-inner-width * 0.9;
 			border-radius: 5px;
 			margin-bottom: 3px;
 			cursor: pointer;
+			display: flex;
+			align-items: center;
+			height: 2em;
+			min-height: fit-content;
+			transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+			position: relative;
+
+			&.opened {
+				transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+				height: 5em;
+			}
+
+			.load-iconbtn {
+				visibility: hidden;
+				opacity: 0;
+				margin-top: 0;
+				position: absolute;
+				background-color: #edc11cff !important;
+				color: black !important;
+				align-self: center;
+				right: 0.5em;
+				transition: opacity 0.1s ease-in, visibility 0.3s linear;
+
+				&.opened {
+					visibility: visible;
+					opacity: 1;
+					transition: opacity 0.2s ease-out;
+				}
+			}
 		}
 	}
 
@@ -510,9 +540,12 @@ $app-inner-width-90: $app-inner-width * 0.9;
 		margin-left: 1em;
 		margin-right: 1em;
 	}
-	i,p:last-of-type {
+
+	i,
+	p:last-of-type {
 		margin-bottom: 1em;
 	}
+
 	span,
 	h3 {
 		flex: 1;
@@ -582,6 +615,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 .me-beta-mailchimp {
 	display: flex;
 	flex: 1;
+
 	#mc_embed_signup {
 		background: transparent;
 		clear: left;
@@ -589,45 +623,92 @@ $app-inner-width-90: $app-inner-width * 0.9;
 		width: 100%;
 		align-self: center;
 		margin-top: 2em;
+
 		input.email {
 			width: 95% !important;
 			max-width: 350px;
 			min-width: 100px;
 		}
 	}
-	
+
 	#mc_embed_signup_scroll {
 		>* {
 			margin: .5em !important;
 		}
 	}
-	
+
 	#mc-embedded-subscribe-form input[type=checkbox] {
 		display: inline;
-		width: auto;
 		margin-right: 10px;
 	}
-	
+
 	#mergeRow-gdpr {
 		margin-top: 20px;
 	}
-	
+
 	#mergeRow-gdpr fieldset label {
 		font-weight: normal;
 	}
-	
+
 	#mc-embedded-subscribe-form .mc_fieldset {
 		border: none;
 		min-height: 0px;
 		padding-bottom: 0px;
 	}
-	
+
 	#mc-embedded-subscribe.button {
 		background-color: rgb(237, 193, 28) !important;
 		color: black !important;
+
 		&:hover {
-			background-color:whitesmoke !important;
+			background-color: whitesmoke !important;
 			color: black;
 		}
+	}
+}
+
+.me-beta-imprint {
+	height: 150px;
+	width: 100%;
+	background-image: linear-gradient($editor-background-elevated-color, $editor-background-color);
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 1px -2px 6px 0px rgba(0, 0, 0, .4);
+
+	p {
+		margin: 0;
+		height: fit-content;
+		border: 5px white;
+		/* border: 2px solid rgba(255, 255, 255, 0.1); */
+		border-radius: 5px;
+		padding: 15px 30px;
+		box-shadow: inset 0px 0px 15px 1px rgba(0, 0, 0, .25);
+		/* background-color: white; */
+	}
+
+	.imprint_imprint {
+		opacity: 0.4;
+	}
+
+	.imprint_name {
+		opacity: 0.9;
+	}
+
+	.imprint_country {
+		opacity: 0.9;
+	}
+
+	.imprint_zipcode {
+		opacity: 0.9;
+	}
+
+	.imprint_locality {
+		opacity: 0.9;
+	}
+
+	.imprint_street {
+		opacity: 0.9;
 	}
 }

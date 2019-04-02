@@ -65,7 +65,7 @@
     "react-gooey-nav": "^2.0.0",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
-    "react-toolbox": "2.0.0-beta.13",
+    "react-toolbox": "file:../react-toolbox",
     "react-transition-group": "2.5.0",
     "redux": "^4.0.1",
     "redux-observable": "^1.0.0",

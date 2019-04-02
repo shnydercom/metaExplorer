@@ -58,13 +58,22 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_4",
+              "value": {
+                "objRef": "28d9254b-0890-4e6d-9eeb-4add83d9c468",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "in_0",
             "in_2",
-            "in_3"
+            "in_3",
+            "in_4"
           ]
         },
         "dadefd77-20d4-492f-9fc0-04676c9055aa": {
@@ -197,6 +206,50 @@
           "canInterpretType": "shnyder/meta-explorer/onboarding/home/creations/index-ObjectType",
           "nameSelf": "7cf62688-4d55-4df7-b47b-fd6fc6f2872a",
           "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "28d9254b-0890-4e6d-9eeb-4add83d9c468": {
+          "subItptOf": "shnyder/compliance/Imprint",
+          "canInterpretType": "shnyder/compliance/Imprint-ObjectType",
+          "nameSelf": "28d9254b-0890-4e6d-9eeb-4add83d9c468",
+          "initialKvStores": [
+            {
+              "key": "cssClass",
+              "value": "me-beta-imprint",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "https://schema.org/name",
+              "value": "Jonathan Schneider",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "https://schema.org/addressCountry",
+              "value": "Germany",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "https://schema.org/postalCode",
+              "value": "13357",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "https://schema.org/addressLocality",
+              "value": "Berlin",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "https://schema.org/streetAddress",
+              "value": "Thurneysserstr. 6",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "isPersonNotOrganization",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
+            }
+          ],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }

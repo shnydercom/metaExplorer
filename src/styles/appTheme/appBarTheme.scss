@@ -1,10 +1,10 @@
-@import 'react-toolbox/lib/media.css';
-@import 'react-toolbox/lib/variables.css';
-@import 'react-toolbox/lib/app_bar/config.css';
-@import 'react-toolbox/lib/button/config.css';
-@import 'react-toolbox/lib/button/theme.css';
-@import 'react-toolbox/lib/ripple/config.css';
-@import 'react-toolbox/lib/ripple/theme.css';
+@import 'react-toolbox/lib/media.module.css';
+@import 'react-toolbox/lib/variables.module.css';
+@import 'react-toolbox/lib/app_bar/config.module.css';
+@import 'react-toolbox/lib/button/config.module.css';
+@import 'react-toolbox/lib/button/theme.module.css';
+@import 'react-toolbox/lib/ripple/config.module.css';
+@import 'react-toolbox/lib/ripple/theme.module.css';
 @import './colors.scss';
 @import "../../../node_modules/metaexplorer-react-components/src/components/treeview/treeview.scss";
 @import "../../../node_modules/metaexplorer-react-components/src/components/circle/circleview.scss";

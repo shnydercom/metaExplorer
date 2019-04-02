@@ -364,7 +364,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					? null
 					: <NavDrawer insideTree={true} theme={{ pinned: "navbar-pinned" }} active={drawerActive} withOverlay={false}
 						permanentAt='xxxl'>
-						<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem}
+						<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
 							onClearBtnPress={() => {
 								this.logic.clear();
 								this.setState({ ...this.state, currentlyEditingItptName: null });
@@ -388,7 +388,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							<EditorBody hideRefMapDropSpace={bottomBarHidden}
 								ref={this.diagramRef}
 								loadToEditorByName={this.loadToEditorByName}
-								onEditTrayItem={this.onEditTrayItem}
+								onEditTrayItem={this.onEditTrayItem.bind(this)}
 								changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
 								currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
 							{ previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
