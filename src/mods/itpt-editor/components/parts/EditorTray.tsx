@@ -123,7 +123,8 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			let treeToAddTo: TreeEntry = tree.subEntries[treeToAddToIdx];
 			let remainerIdx: number = 1;
 			if (!treeToAddTo) {
-				treeToAddToIdx = tree.subEntries.findIndex((val, idx) => val.label.startsWith(remainerSplit[0]));
+				let urlPathStartPattern = new RegExp('^' + remainerSplit[0] + "\/");
+				treeToAddToIdx = tree.subEntries.findIndex((val, idx) => urlPathStartPattern.test(val.label));
 				treeToAddTo = tree.subEntries[treeToAddToIdx];
 				if (treeToAddTo) {
 					let searchTerm = remainerSplit[0];
@@ -136,7 +137,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 						searchTerm = newSearchTerm;
 					}
 					if (treeToAddTo.label !== searchTerm) {
-						let splitTreeLabelA = treeToAddTo.label.slice(searchTerm.length - 1);
+						let splitTreeLabelA = treeToAddTo.label.slice(searchTerm.length + 1);
 						treeToAddTo.label = splitTreeLabelA;
 						let newRoot: TreeEntry & FlatContentInfo = {
 							flatContent: [],
@@ -159,7 +160,8 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			}
 		}
 		if (!isCreateHere) {
-			let similarItm = tree.flatContentURLs.findIndex((val, idx) => val.startsWith(remainerSplit[0]));
+			let urlPathStartPattern = new RegExp('^' + remainerSplit[0] + "\/");
+			let similarItm = tree.flatContentURLs.findIndex((val, idx) => urlPathStartPattern.test(val));
 			if (similarItm === -1) {
 				isCreateHere = true;
 			} else {
