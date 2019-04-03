@@ -16,7 +16,7 @@ import {
 } from 'react-router-dom';
 import { appItptMatcherFn } from 'appconfig/appItptMatcher';
 import { initMDitptFnAsDefault } from 'components/md/initMDitptRetrieverSetup';
-import { Route } from 'react-router';
+import { Route, Switch } from 'react-router';
 import { LDRouteProps } from 'appstate/LDProps';
 import { initEssentialItpts } from 'defaults/initEssentialItpts';
 import 'mods/google/components/GWebAuthenticator';
@@ -27,6 +27,7 @@ import { initShnyderItpts } from 'components/shnyder/initShnyderItpts';
 import { initMods } from 'mods/initMods';
 import { Button } from 'react-toolbox/lib/button';
 import { mapStateToPropsRoot } from 'appstate/reduxFns';
+import { FourOhFournomatch } from 'components/routing/404nomatch';
 
 export const APP_LD_KEY = "app";
 
@@ -101,16 +102,19 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 	render() {
 		const { cfg, isLoading } = this.state;
 		const errorMsg = cfg.errorMsg;
-		if (errorMsg){
+		if (errorMsg) {
 			return <div>encountered an error while loading a Mod: {errorMsg}</div>;
 		}
 		return (
 			<>{!isLoading ?
 				<Router>
-					<Route path="/" render={(routeProps: LDRouteProps) => {
-						return <LDApproot initiallyDisplayedItptName={cfg.mainItpt}
-							ldTokenString={cfg.appKey} routes={routeProps} />;
-					}} />
+					<Switch>
+						<Route path="/" render={(routeProps: LDRouteProps) => {
+							return <LDApproot initiallyDisplayedItptName={cfg.mainItpt}
+								ldTokenString={cfg.appKey} routes={routeProps} />;
+						}} />
+						{/*<Route component={FourOhFournomatch} />*/}
+					</Switch>
 				</Router>
 				: <div className="approot-loading">loading</div>}
 				{isProduction ? null : <DevTools />}

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
+  <link rel="icon" type="image/png" href="static/favicon.png">
   <meta charset="UTF-8">
   <title>MetaExplorer</title>
   <link rel="stylesheet" href="/<%=htmlWebpackPlugin.files.chunks.main.css %>">
@@ -16,8 +17,10 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="HandheldFriendly" content="True">
   <meta http-equiv="cleartype" content="on">
-  <meta http-equiv="Content-Security-Policy" content="worker-src 'self' blob:; script-src 'self' https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval';">
-  <link href="<%= htmlWebpackPlugin.options.materialIconsPath %>" rel="stylesheet" media="none" onload="this.media='all';">
+  <meta http-equiv="Content-Security-Policy"
+    content="worker-src 'self' blob:; script-src 'self' https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval';">
+  <link href="<%= htmlWebpackPlugin.options.materialIconsPath %>" rel="stylesheet" media="none"
+    onload="this.media='all';">
   <link href="<%= htmlWebpackPlugin.options.robotoPath %>" rel="stylesheet" media="none" onload="this.media='all';">
 </head>
 
