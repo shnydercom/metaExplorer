@@ -12,7 +12,7 @@
           "nameSelf": "e50eca39-5c21-42ec-a0bf-207f266e5b46",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "a39b2dbf-e61e-4650-a0fb-95980e368759",
                 "propRef": null
@@ -42,7 +42,7 @@
           "nameSelf": "a39b2dbf-e61e-4650-a0fb-95980e368759",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "bda01b43-6805-4490-be80-b9ce7cc95916",
                 "propRef": null

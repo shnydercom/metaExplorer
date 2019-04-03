@@ -46,7 +46,7 @@ export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnec
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 	//generates child react components
-	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
+	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 
 	constructor(props: any) {
 		super(props);

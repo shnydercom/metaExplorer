@@ -13,11 +13,11 @@ import { isReactComponent } from 'components/reactUtils/reactUtilFns';
 export const CSSWrapperName = "shnyder/layout/CSSWrapper";
 
 let cfgIntrprtKeys: string[] =
-	[VisualKeysDict.freeContainer, VisualKeysDict.cssClassName];
+	[VisualKeysDict.inputContainer, VisualKeysDict.cssClassName];
 
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualKeysDict.freeContainer,
+		key: VisualKeysDict.inputContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
@@ -46,7 +46,7 @@ export class PureCSSWrapper extends Component<LDConnectedState & LDConnectedDisp
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: CSSWrapperState): null | CSSWrapperState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.freeContainer], [VisualKeysDict.cssClassName]);
+			nextProps, prevState, [VisualKeysDict.inputContainer], [VisualKeysDict.cssClassName]);
 		if (!rvLD) {
 			return null;
 		}
@@ -62,19 +62,19 @@ export class PureCSSWrapper extends Component<LDConnectedState & LDConnectedDisp
 	initialKvStores: IKvStore[];
 	styleClassName: string;
 
-	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
+	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.freeContainer],
+		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.inputContainer],
 			[VisualKeysDict.cssClassName]);
 		this.state = {
 			...ldState,
 		};
 	}
 	render() {
-		let renderFreeResult: JSX.Element = this.renderFreeContainer();
+		let renderFreeResult: JSX.Element = this.renderInputContainer();
 		const { localValues } = this.state;
 		if (isReactComponent(renderFreeResult)) {
 			const cssClassName = localValues.get(VisualKeysDict.cssClassName);

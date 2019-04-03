@@ -162,7 +162,7 @@
           "nameSelf": "1ffe3d3d-1c09-4e59-a13a-95e549f2d688",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "7f03db15-d145-46ee-a360-642abcff4e4b",
                 "propRef": null
@@ -172,7 +172,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "7f03db15-d145-46ee-a360-642abcff4e4b": {
@@ -195,7 +195,7 @@
           "nameSelf": "bf01c5fd-172a-4e32-8845-36b9654a5675",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "924c8073-c0c9-4c71-b616-ad2c6fe8230c",
                 "propRef": null
@@ -205,7 +205,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "924c8073-c0c9-4c71-b616-ad2c6fe8230c": {
@@ -215,7 +215,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "For a more advanced demo, try dragging \"Compound Blocks/MainAppEntryPoint\" onto \"Now editing\". You can't break anything",
+              "value": "For a more advanced demo, try dragging \"Compound Blocks/shnyder/meta-explorer/MainAppEntryPoint\" onto \"Now editing\". You can't break anything",
               "ldType": "http://schema.org/Text"
             }
           ],

@@ -79,8 +79,8 @@ export function generateAllCompInfoItms(kvStores: IKvStore[], prop: string, retr
 /**
  * use this function in a react component for sub-render functions that return a component
  * example usage:	private renderSub = generateItptFromCompInfo.bind(this);
- * render(){<>{this.renderSub(VisualDict.freeContainer)}<>}
- * @param compKey the key of the itpt-kv, e.g. VisualDict.freeContainer
+ * render(){<>{this.renderSub(VisualDict.inputContainer)}<>}
+ * @param compKey the key of the itpt-kv, e.g. VisualDict.inputContainer
  */
 export function generateItptFromCompInfo(compKey: string, routes?: LDRouteProps, index?: number) {
 	if (!compKey) return null;

@@ -41,7 +41,7 @@ let cfgIntrprtKeys: string[] =
 		GAME_FIELD_ITPT_LL,
 		GAME_FIELD_ITPT_LR,
 		GAME_STATS,
-		VisualKeysDict.freeContainer,
+		VisualKeysDict.inputContainer,
 		GAME_CORRECT_FIELD_IDX
 	];
 let initialKVStores: IKvStore[] = [
@@ -52,7 +52,7 @@ let initialKVStores: IKvStore[] = [
 	{ key: GAME_FIELD_ITPT_LL, value: undefined, ldType: UserDefDict.intrprtrClassType },
 	{ key: GAME_FIELD_ITPT_LR, value: undefined, ldType: UserDefDict.intrprtrClassType },
 	{ key: GAME_STATS, value: undefined, ldType: LDDict.Text },
-	{ key: VisualKeysDict.freeContainer, value: undefined, ldType: UserDefDict.intrprtrClassType },
+	{ key: VisualKeysDict.inputContainer, value: undefined, ldType: UserDefDict.intrprtrClassType },
 	{ key: GAME_CORRECT_FIELD_IDX, value: 0, ldType: LDDict.Integer }
 ];
 let bpCfg: BlueprintConfig = {
@@ -80,7 +80,7 @@ export class PureFourFieldsView extends Component<LDConnectedState & LDConnected
 				GAME_FIELD_ITPT_UR,
 				GAME_FIELD_ITPT_LL,
 				GAME_FIELD_ITPT_LR,
-				VisualKeysDict.freeContainer
+				VisualKeysDict.inputContainer
 			], [
 				GAME_TASK_HEADING,
 				GAME_TASK_TXT,
@@ -113,7 +113,7 @@ export class PureFourFieldsView extends Component<LDConnectedState & LDConnected
 					GAME_FIELD_ITPT_UR,
 					GAME_FIELD_ITPT_LL,
 					GAME_FIELD_ITPT_LR,
-					VisualKeysDict.freeContainer
+					VisualKeysDict.inputContainer
 				],
 				[
 					GAME_TASK_HEADING,

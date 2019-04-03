@@ -19,10 +19,10 @@ import { classNamesLD } from 'components/reactUtils/compUtilFns';
 
 export const NavSearchBarName = "shnyder/md/NavSearchBar";
 let cfgIntrprtKeys: string[] =
-	[VisualKeysDict.freeContainer, VisualKeysDict.searchText, VisualKeysDict.routeSend_back, VisualKeysDict.cssClassName];
+	[VisualKeysDict.inputContainer, VisualKeysDict.searchText, VisualKeysDict.routeSend_back, VisualKeysDict.cssClassName];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualKeysDict.freeContainer,
+		key: VisualKeysDict.inputContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
@@ -69,7 +69,7 @@ NavSearchBarState>
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: NavSearchBarState): null | NavSearchBarState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.freeContainer],
+			nextProps, prevState, [VisualKeysDict.inputContainer],
 			[VisualKeysDict.searchText, VisualKeysDict.routeSend_back, VisualKeysDict.cssClassName, UserDefDict.outputKVMapKey]);
 		if (!rvLD) {
 			return null;
@@ -85,13 +85,13 @@ NavSearchBarState>
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	private renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
+	private renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, props,
-			[VisualKeysDict.freeContainer],
+			[VisualKeysDict.inputContainer],
 			[VisualKeysDict.searchText, VisualKeysDict.routeSend_back, VisualKeysDict.cssClassName, UserDefDict.outputKVMapKey]);
 		this.state = {
 			searchValue: ldState.localValues.get(VisualKeysDict.searchText),
@@ -136,7 +136,7 @@ NavSearchBarState>
 						value={searchValue}
 						onChange={(evt) => this.onSearchChange(evt)} />
 				</AppBar>
-				{this.renderFreeContainer()}
+				{this.renderInputContainer()}
 			</>);
 	}
 }

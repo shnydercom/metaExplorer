@@ -9,10 +9,10 @@ import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from './generic/g
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { LDDict } from 'ldaccess/LDDict';
 
-let allMyInputKeys: string[] = [VisualKeysDict.freeContainer, "http://my-domain.com/my-class/my-member-a"];
+let allMyInputKeys: string[] = [VisualKeysDict.inputContainer, "http://my-domain.com/my-class/my-member-a"];
 let initialKVStores: IKvStore[] = [ //the content of the key-value stores at initialization
 	//is an input, because it is defined in var allMyInputKeys, and is a visual container
-	{ key: VisualKeysDict.freeContainer, value: undefined, ldType: UserDefDict.intrprtrClassType },
+	{ key: VisualKeysDict.inputContainer, value: undefined, ldType: UserDefDict.intrprtrClassType },
 	//is an input, because it is defined in var allMyInputKeys, is NOT a visual container
 	{ key: "http://my-domain.com/my-class/my-member-a", value: undefined, ldType: LDDict.Text },
 	//is an output, because it is NOT defined in var allMyInputKey
@@ -36,7 +36,7 @@ export class PureMyTemplate extends Component<LDConnectedState & LDConnectedDisp
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: MyTemplateState): null | MyTemplateState {
 		let rvLD = gdsfpLD(nextProps, prevState,
-			[VisualKeysDict.freeContainer], //gets the visual part
+			[VisualKeysDict.inputContainer], //gets the visual part
 			["http://my-domain.com/my-class/my-member-a"], //gets the non-visual
 			"http://my-domain.com/my-class" // is the canInterpretType field
 			);
@@ -53,12 +53,12 @@ export class PureMyTemplate extends Component<LDConnectedState & LDConnectedDisp
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 	//generates child react components
-	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
+	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.freeContainer], ["http://my-domain.com/my-class/my-member-a"]);
+		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.inputContainer], ["http://my-domain.com/my-class/my-member-a"]);
 		this.state = { ...ldState, };
 	}
 	outputMemberB = () => {
@@ -71,7 +71,7 @@ export class PureMyTemplate extends Component<LDConnectedState & LDConnectedDisp
 		const myMemberA = localValues.get("http://my-domain.com/my-class/my-member-a");
 		return <>
 			<div onClick={() => this.outputMemberB()}>{myMemberA}</div>
-			<div>{this.renderFreeContainer()}</div>
+			<div>{this.renderInputContainer()}</div>
 		</>;
 	}
 }

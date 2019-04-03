@@ -12,10 +12,10 @@ import { Component, ComponentClass, StatelessComponent, CSSProperties } from 're
 
 export var TitleTextAndImageName: string = "shnyder/TitleTextAndImage";
 let cfgIntrprtKeys: string[] =
-	[VisualKeysDict.freeContainer, VisualKeysDict.headerTxt, VisualKeysDict.description, VisualKeysDict.directionChangeBreakPoint, VisualKeysDict.switchVerticalDirection, VisualKeysDict.switchHorizontalDirection];
+	[VisualKeysDict.inputContainer, VisualKeysDict.headerTxt, VisualKeysDict.description, VisualKeysDict.directionChangeBreakPoint, VisualKeysDict.switchVerticalDirection, VisualKeysDict.switchHorizontalDirection];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualKeysDict.freeContainer,
+		key: VisualKeysDict.inputContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
@@ -67,7 +67,7 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 		prevState: null | LDLocalState & TitleTextAndImageState)
 		: null | LDLocalState & TitleTextAndImageState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.freeContainer], [VisualKeysDict.headerTxt, VisualKeysDict.description, VisualKeysDict.directionChangeBreakPoint, VisualKeysDict.switchVerticalDirection, VisualKeysDict.switchHorizontalDirection]);
+			nextProps, prevState, [VisualKeysDict.inputContainer], [VisualKeysDict.headerTxt, VisualKeysDict.description, VisualKeysDict.directionChangeBreakPoint, VisualKeysDict.switchVerticalDirection, VisualKeysDict.switchHorizontalDirection]);
 		if (!rvLD) {
 			return null;
 		}
@@ -91,7 +91,7 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 		this.state = {
 			isHorizontal: false,
 			...initLDLocalState(this.cfg, props,
-				[VisualKeysDict.freeContainer],
+				[VisualKeysDict.inputContainer],
 				[VisualKeysDict.headerTxt, VisualKeysDict.description, VisualKeysDict.directionChangeBreakPoint, VisualKeysDict.switchVerticalDirection, VisualKeysDict.switchHorizontalDirection])
 		};
 	}
@@ -128,7 +128,7 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 			ref={(divElement) => this.divElement = divElement}
 			style={directionStyle}>
 			<div className="flex-filler vh-centered-column" style={{ minHeight: DEFAULT_BREAKPOINT }}>
-				{this.renderSub(VisualKeysDict.freeContainer)}
+				{this.renderSub(VisualKeysDict.inputContainer)}
 			</div>
 			<div className="flex-filler vh-centered-column" style={{ minHeight: "300px" }}>
 				<h2>{headerText ? headerText : ''}</h2>

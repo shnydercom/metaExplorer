@@ -12,7 +12,7 @@
           "nameSelf": "d57234da-46f2-443a-87d1-4a9b02e6b237",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "6d06988c-606b-4862-9698-bbf1c21ec283",
                 "propRef": null
@@ -32,7 +32,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "6d06988c-606b-4862-9698-bbf1c21ec283": {
@@ -41,7 +41,7 @@
           "nameSelf": "6d06988c-606b-4862-9698-bbf1c21ec283",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "aacd1cf2-b8d4-4546-b38d-71adaa580c00",
                 "propRef": null
@@ -51,7 +51,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "aacd1cf2-b8d4-4546-b38d-71adaa580c00": {
@@ -97,7 +97,7 @@
           "nameSelf": "078c5817-632f-44cc-a088-03d29edf795d",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "e6726813-b826-455f-b993-fe7ad70af5f0",
                 "propRef": null
@@ -112,7 +112,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "e6726813-b826-455f-b993-fe7ad70af5f0": {
@@ -153,7 +153,7 @@
           "nameSelf": "70e96539-0b43-43d2-aaa3-be5e8fb7cd1a",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "75807a16-9f05-40f6-be32-ed445c846dfe",
                 "propRef": null
@@ -168,7 +168,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "75807a16-9f05-40f6-be32-ed445c846dfe": {
@@ -218,7 +218,7 @@
           "nameSelf": "9f3a4457-e185-47b0-bc02-27e28256eb57",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "eb48f2e7-52db-4e23-9dba-79159a2cfd4e",
                 "propRef": null
@@ -233,7 +233,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "eb48f2e7-52db-4e23-9dba-79159a2cfd4e": {

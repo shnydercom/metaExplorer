@@ -31,7 +31,7 @@
           "nameSelf": "aaBHead",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "aaImgDisp",
                 "propRef": null
@@ -41,7 +41,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "aaImgDisp": {

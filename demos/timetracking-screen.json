@@ -12,7 +12,7 @@
           "nameSelf": "fda13943-ebaa-438f-abbf-388a122e0e34",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "af6918c7-8b06-4510-bdc4-7332c8aad825",
                 "propRef": null
@@ -27,7 +27,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "af6918c7-8b06-4510-bdc4-7332c8aad825": {

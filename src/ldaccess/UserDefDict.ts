@@ -3,7 +3,7 @@ export enum UserDefDict {
 	/**
 	 * the name of a component defined by a user
 	 */
-	exportSelfKey = "exportSelf",
+	outputSelfKey = "outputSelf",
 	finalInputKey = "finalInput",
 	externalInput = "externalInput",
 	externalOutput = "externalOutput",

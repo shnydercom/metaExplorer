@@ -94,7 +94,7 @@ export class PureCard3itptLTR extends Component<LDConnectedState & LDConnectedDi
 	initialKvStores: IKvStore[];
 	styleClassName: string = "card-style";
 
-	protected renderFreeContainer = generateItptFromCompInfo.bind(this);
+	protected renderInputContainer = generateItptFromCompInfo.bind(this);
 
 	constructor(props: any) {
 		super(props);
@@ -127,9 +127,9 @@ export class PureCard3itptLTR extends Component<LDConnectedState & LDConnectedDi
 			return <Redirect to={route} />;
 		}
 		return <Card
-			frontContent={this.renderFreeContainer(CONTAINER_FRONT)}
-			middleContent={this.renderFreeContainer(CONTAINER_MIDDLE)}
-			lastContent={this.renderFreeContainer(CONTAINER_LAST)}
+			frontContent={this.renderInputContainer(CONTAINER_FRONT)}
+			middleContent={this.renderInputContainer(CONTAINER_MIDDLE)}
+			lastContent={this.renderInputContainer(CONTAINER_LAST)}
 			className={this.styleClassName}
 			onMiddleContentClick={() => this.onConfirmClick()}
 		>

@@ -11,7 +11,7 @@ export class LDPortInstanceFactory extends AbstractPortFactory<LDPortModel> {
 
 	getNewInstance() {
 		var baseDataTypeKVStore: IKvStore = {
-			key: UserDefDict.exportSelfKey,
+			key: UserDefDict.outputSelfKey,
 			value: undefined,
 			ldType: undefined
 		};

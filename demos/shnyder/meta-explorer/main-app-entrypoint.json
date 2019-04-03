@@ -1,7 +1,7 @@
 {
   "subItptOf": "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725",
-  "canInterpretType": "MainAppEntryPoint-ObjectType",
-  "nameSelf": "MainAppEntryPoint",
+  "canInterpretType": "shnyder/meta-explorer/MainAppEntryPoint-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/MainAppEntryPoint",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

@@ -9,7 +9,7 @@ let concatenatedObj = {
 	itptList: [
 
 	],
-	mainItpt: "MainAppEntryPoint"
+	mainItpt: "shnyder/meta-explorer/MainAppEntryPoint"
 }
 
 const rootDir = path.resolve("demos"); // or whatever directory you want to read

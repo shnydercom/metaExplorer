@@ -57,7 +57,7 @@
           "nameSelf": "63f8cb13-613e-43d4-91ea-1e83d0432345",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "3bf02e66-fe60-4111-bb23-13c575187fea",
                 "propRef": null
@@ -72,7 +72,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "3bf02e66-fe60-4111-bb23-13c575187fea": {
@@ -95,7 +95,7 @@
           "nameSelf": "27243277-57a1-4fbd-9590-12c175a2fd28",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "18894dd2-6d3b-4a3f-b326-297f1a0cae01",
                 "propRef": null
@@ -110,7 +110,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "18894dd2-6d3b-4a3f-b326-297f1a0cae01": {
@@ -120,7 +120,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "Create your first Block of functionality using the \"shnyder/qr/QRcodeFromText\" - block: Drag it from the light blue drawer to the dark blue canvas, then connect \"exportSelf\" to \"finalInput\". Give your own Block a name, and specify your project and user name: This will be the home address of your new Block.",
+              "value": "Create your first Block of functionality using the \"shnyder/qr/QRcodeFromText\" - block: Drag it from the light blue drawer to the dark blue canvas, then connect \"outputSelf\" to \"finalInput\". Give your own Block a name, and specify your project and user name: This will be the home address of your new Block.",
               "ldType": "http://schema.org/Text"
             }
           ],

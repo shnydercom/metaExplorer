@@ -22,7 +22,7 @@ export enum VisualKeysDict {
 	//Interpreters
 	primaryItpt = "primaryInterpreter", //e.g. left icon of a list, upper content of ImgHeadSubDesc
 	secondaryItpt = "secondaryInterpreter", //e.g. right icon of a list, bottom content of ImgHeadSubDesc
-	freeContainer = "freeContainer", //e.g. for the bottomNavigation anything that is "top"
+	inputContainer = "inputContainer", //e.g. for the bottomNavigation anything that is "top"
 
 	//NavigationElement-keys
 	routeSend_search = "RouteSend_Search",

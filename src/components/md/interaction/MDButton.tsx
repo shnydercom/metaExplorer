@@ -71,7 +71,7 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 		prevState: null | MDButtonState & LDLocalState)
 		: null | MDButtonState & LDLocalState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.freeContainer],
+			nextProps, prevState, [VisualKeysDict.inputContainer],
 			[
 				VisualKeysDict.confirmTxt,
 				VisualKeysDict.routeSend_cancel,

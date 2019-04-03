@@ -22,7 +22,7 @@ export const NavBarWActionsName = "shnyder/md/NavBarWActions";
 
 let cfgIntrprtItptKeys: string[] =
 	[
-		VisualKeysDict.freeContainer,
+		VisualKeysDict.inputContainer,
 		VisualKeysDict.popOverContent
 	];
 let cfgIntrprtValueKeys: string[] = [
@@ -35,7 +35,7 @@ let cfgIntrprtValueKeys: string[] = [
 let cfgIntrprtKeys: string[] = [...cfgIntrprtItptKeys, ...cfgIntrprtValueKeys];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualKeysDict.freeContainer,
+		key: VisualKeysDict.inputContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
@@ -181,7 +181,7 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 				</Navigation>
 			</AppBar>
 			<div className="bottom-nav-topfree mdscrollbar">
-				{this.renderSub(VisualKeysDict.freeContainer)}
+				{this.renderSub(VisualKeysDict.inputContainer)}
 			</div>
 		</>;
 	}

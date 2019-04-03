@@ -14,12 +14,12 @@ export function initItptEditorMod(isMainItptChange: boolean): Promise<IModStatus
 		appIntRetr.addItpt(ITPT_BLOCK_EDITOR_TYPE, PureAppItptEditor, "cRud", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
 		let startingInstance = [ {
 			key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
-			value: "MainAppEntryPoint",
+			value: "shnyder/meta-explorer/MainAppEntryPoint",
 			ldType: LDDict.Text
 		},
 		{
 			key: ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-			value: "MainAppEntryPoint",
+			value: "shnyder/meta-explorer/MainAppEntryPoint",
 			ldType: LDDict.Text
 		},
 		{

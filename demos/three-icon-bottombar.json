@@ -12,7 +12,7 @@
           "nameSelf": "bSub",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "ldType": "InterpreterClassType"
             },
             {
@@ -63,7 +63,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         }
       },
@@ -74,7 +74,7 @@
   "interpretableKeys": [
     {
       "objRef": "bSub",
-      "propRef": "freeContainer"
+      "propRef": "inputContainer"
     }
   ]
 }

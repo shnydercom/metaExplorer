@@ -10,7 +10,7 @@
         "canInterpretType": "愿望清单/BottomBar-ObjectType",
         "nameSelf": "aSub",
         "initialKvStores": [{
-          "key": "freeContainer",
+          "key": "inputContainer",
           "value": {
             "objRef": "aImgHS",
             "propRef": null
@@ -19,7 +19,7 @@
         }],
         "crudSkills": "cRud",
         "interpretableKeys": [
-          "freeContainer"
+          "inputContainer"
         ]
       },
       "aImgHS": {

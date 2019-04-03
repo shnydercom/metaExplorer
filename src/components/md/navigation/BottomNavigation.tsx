@@ -54,10 +54,10 @@ export const BottomNavigationName = "shnyder/md/BottomNavigation";
 export const TopNavigationName = "shnyder/md/TopNavigation";
 
 let cfgIntrprtKeys: string[] =
-	[VisualKeysDict.freeContainer];
+	[VisualKeysDict.inputContainer];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualKeysDict.freeContainer,
+		key: VisualKeysDict.inputContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	}
@@ -123,7 +123,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		prevState: null | BottomNavState & LDLocalState)
 		: null | BottomNavState & LDLocalState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.freeContainer], BOTTOMNAV_VALUE_FIELDS);
+			nextProps, prevState, [VisualKeysDict.inputContainer], BOTTOMNAV_VALUE_FIELDS);
 		let rvNew;
 		if (!rvLD) {
 			if (prevState.isInitial) {
@@ -190,7 +190,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
+	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
@@ -203,7 +203,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 			routes: [],
 			isGenerateAtPositions: [],
 			hasTabChanged: true,
-			...initLDLocalState(this.cfg, props, [VisualKeysDict.freeContainer], BOTTOMNAV_VALUE_FIELDS)
+			...initLDLocalState(this.cfg, props, [VisualKeysDict.inputContainer], BOTTOMNAV_VALUE_FIELDS)
 		};
 	}
 
@@ -266,7 +266,7 @@ export class PureBottomNavigation extends Component<LDConnectedState & LDConnect
 		return <div className={classNamesLD("bottom-nav", localValues)}>
 			<div className="bottom-nav-topfree mdscrollbar">
 				{this.generateRedirect(tabIdx)}
-				<Route component={this.renderFreeContainer} />
+				<Route component={this.renderInputContainer} />
 				{this.props.children}
 			</div>
 			<Tabs index={tabIdx} onChange={this.onTabChanged} fixed className="bottom-nav-tabs">
@@ -310,7 +310,7 @@ export class PureTopNavigation extends PureBottomNavigation {
 			</Tabs>
 			<div className="mdscrollbar top-nav-bottomfree">
 				{this.generateRedirect(tabIdx)}
-				<Route component={this.renderFreeContainer} />
+				<Route component={this.renderInputContainer} />
 				{this.props.children}
 			</div>
 		</div>;

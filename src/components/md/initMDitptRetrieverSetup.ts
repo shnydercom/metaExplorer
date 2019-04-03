@@ -23,7 +23,7 @@ import { SectionedListName, PureSectionedList } from "./content/SectionedList";
 import { PureCompactInfoListElement } from "./content/CompactInfoListElement";
 import { JSONArrayToCompactInfoArrayName, JSONArrayToCompactInfoArray } from "datatransformation/JSONArrayToCompactInfoArray";
 import { VisualTypesDict } from "components/visualcomposition/visualDict";
-import { NavBarFreeContainerName, PureNavBarFreeContainer } from "./navigation/NavBarFreeContainer";
+import { NavBarInputContainerName, PureNavBarInputContainer } from "./navigation/NavBarInputContainer";
 import { CSSWrapperName, PureCSSWrapper } from "components/layout/CSSWrapper";
 import { ThemeProviderDarkName, ThemeProviderDark, ThemeProviderLight, ThemeProviderLightName } from "./content/DarkLightThemeProviders";
 
@@ -44,7 +44,7 @@ export function initMDitptFnAsDefault() {
 	appIntRetr.addItpt(LDDict.DateTime, PureDateTimeInput, "CRUd", [ITPT_TAG_ATOMIC]);
 
 	//register visual composition itpts.
-	appIntRetr.addItpt(NavBarFreeContainerName, PureNavBarFreeContainer, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(NavBarInputContainerName, PureNavBarInputContainer, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(NavBarWActionsName, PureNavBarWActions, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(BottomNavigationName, PureBottomNavigation, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(TopNavigationName, PureTopNavigation, "cRud", [ITPT_TAG_ATOMIC]);

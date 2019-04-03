@@ -17,11 +17,11 @@ export const ThemeProviderDarkName = "shnyder/md/ThemeProvider-dark";
 export const ThemeProviderLightName = "shnyder/md/ThemeProvider-light";
 
 let cfgIntrprtKeys: string[] =
-	[VisualKeysDict.freeContainer];
+	[VisualKeysDict.inputContainer];
 
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualKeysDict.freeContainer,
+		key: VisualKeysDict.inputContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	}
@@ -53,7 +53,7 @@ class PureThemeProviderDark extends Component<LDConnectedState & LDConnectedDisp
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: ThemeProviderDarkState): null | ThemeProviderDarkState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.freeContainer], []);
+			nextProps, prevState, [VisualKeysDict.inputContainer], []);
 		if (!rvLD) {
 			return null;
 		}
@@ -68,26 +68,26 @@ class PureThemeProviderDark extends Component<LDConnectedState & LDConnectedDisp
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
+	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.freeContainer],
+		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.inputContainer],
 			[]);
 		this.state = {
 			...ldState,
 		};
 	}
 	render() {
-		let renderFreeResult: JSX.Element = this.renderFreeContainer();
+		let renderFreeResult: JSX.Element = this.renderInputContainer();
 		return <ThemeProvider theme={editorTheme}>{renderFreeResult}</ThemeProvider>;
 	}
 }
 
 class PureThemeProviderLight extends PureThemeProviderDark {
 	render() {
-		let renderFreeResult: JSX.Element = this.renderFreeContainer();
+		let renderFreeResult: JSX.Element = this.renderInputContainer();
 		return <ThemeProvider theme={appTheme}>{renderFreeResult}</ThemeProvider>;
 	}
 }

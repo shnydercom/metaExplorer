@@ -14,11 +14,11 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 import { classNamesLD } from 'components/reactUtils/compUtilFns';
 import { LDDict } from 'ldaccess/LDDict';
 
-export const NavBarFreeContainerName = "shnyder/md/NavBarFreeContainer";
+export const NavBarInputContainerName = "shnyder/md/NavBarInputContainer";
 
 let cfgIntrprtItptKeys: string[] =
 	[
-		VisualKeysDict.freeContainer,
+		VisualKeysDict.inputContainer,
 		VisualKeysDict.primaryItpt
 	];
 let cfgIntrprtValueKeys: string[] = [
@@ -27,7 +27,7 @@ let cfgIntrprtValueKeys: string[] = [
 let cfgIntrprtKeys: string[] = [...cfgIntrprtItptKeys, ...cfgIntrprtValueKeys];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualKeysDict.freeContainer,
+		key: VisualKeysDict.inputContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
@@ -44,21 +44,21 @@ let initialKVStores: IKvStore[] = [
 ];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
-	nameSelf: NavBarFreeContainerName,
+	nameSelf: NavBarInputContainerName,
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
-export type NavBarFreeContainerState = {
+export type NavBarInputContainerState = {
 };
 @ldBlueprint(bpCfg)
-export class PureNavBarFreeContainer extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavBarFreeContainerState & LDLocalState>
+export class PureNavBarInputContainer extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavBarInputContainerState & LDLocalState>
 	implements IBlueprintItpt {
 
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
-		prevState: null | NavBarFreeContainerState & LDLocalState)
-		: null | NavBarFreeContainerState & LDLocalState {
+		prevState: null | NavBarInputContainerState & LDLocalState)
+		: null | NavBarInputContainerState & LDLocalState {
 		let rvLD = gdsfpLD(
 			nextProps, prevState, cfgIntrprtItptKeys,
 			cfgIntrprtValueKeys);
@@ -80,7 +80,7 @@ export class PureNavBarFreeContainer extends Component<LDConnectedState & LDConn
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		let navBarStatePart: NavBarFreeContainerState = {
+		let navBarStatePart: NavBarInputContainerState = {
 		};
 		this.state = {
 			...navBarStatePart,
@@ -102,9 +102,9 @@ export class PureNavBarFreeContainer extends Component<LDConnectedState & LDConn
 				</Navigation>
 			</AppBar>
 			<div className="bottom-nav-topfree mdscrollbar">
-				{this.renderSub(VisualKeysDict.freeContainer)}
+				{this.renderSub(VisualKeysDict.inputContainer)}
 			</div>
 		</>;
 	}
 }
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureNavBarFreeContainer);
+export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureNavBarInputContainer);

@@ -39,7 +39,7 @@ export interface NewNodeSig {
 
 export const DIAG_TRANSF_X = -250;
 export const DIAG_TRANSF_Y = 200;
-export const PORTNAME_OUT_EXPORTSELF = "out-expSelf";
+export const PORTNAME_OUT_OUTPUTSELF = "out-outputSelf";
 
 export var editorSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 
@@ -299,12 +299,12 @@ export class EditorLogic {
 			//rv.push(newLDPM);
 		}
 		//Itpt always exports itself
-		let exportSelfKV: IKvStore = {
-			key: UserDefDict.exportSelfKey,
+		let outputSelfKV: IKvStore = {
+			key: UserDefDict.outputSelfKey,
 			value: undefined,
 			ldType: UserDefDict.intrprtrClassType
 		};
-		node.addPort(new LDPortModel(false, exportSelfKV.key, exportSelfKV));
+		node.addPort(new LDPortModel(false, outputSelfKV.key, outputSelfKV));
 		for (var j = intrprtrKeys.length - numObjPropRef; j < initialKvStores.length; j++) {
 			//console.dir(node.getPorts());
 			var elemj = initialKvStores[j];
@@ -357,7 +357,7 @@ export class EditorLogic {
 						const kvValAsObjPropRef: ObjectPropertyRef = kvItm.value as ObjectPropertyRef;
 						let sourceNode = nodeMap.get(kvValAsObjPropRef.objRef);
 						if (kvValAsObjPropRef.propRef === null) {
-							sourcePort = sourceNode.getPort(UserDefDict.exportSelfKey) as LDPortModel;
+							sourcePort = sourceNode.getPort(UserDefDict.outputSelfKey) as LDPortModel;
 						} else {
 							sourcePort = sourceNode.getPort(kvValAsObjPropRef.propRef + "_out") as LDPortModel;
 						}
@@ -370,7 +370,7 @@ export class EditorLogic {
 						} else {
 							bdtStaticNode = this.addNewBDTNode(newBDTSig, kvItm.ldType, kvItm.value);
 						}
-						sourcePort = bdtStaticNode.getPort(PORTNAME_OUT_EXPORTSELF) as LDPortModel;
+						sourcePort = bdtStaticNode.getPort(PORTNAME_OUT_OUTPUTSELF) as LDPortModel;
 					}
 					let subItptLink = new DefaultLinkModel();
 					subItptLink.setSourcePort(sourcePort);
@@ -434,7 +434,7 @@ export class EditorLogic {
 
 		let outputItptLink = new DefaultLinkModel();
 		outputItptLink.setTargetPort(outputNodeItptInPort);
-		outputItptLink.setSourcePort(baseNode.getPort(UserDefDict.exportSelfKey));
+		outputItptLink.setSourcePort(baseNode.getPort(UserDefDict.outputSelfKey));
 
 		this.getDiagramEngine().getDiagramModel().addLink(outputItptLink);
 		this.getDiagramEngine().recalculatePortsVisually();
@@ -449,8 +449,8 @@ export class EditorLogic {
 		extendableNode.x = signature.x;
 		extendableNode.y = signature.y;
 		extendableNode.canInterpretType = itpt.canInterpretType;
-		let exportSelfKV: IKvStore = {
-			key: UserDefDict.exportSelfKey,
+		let outputSelfKV: IKvStore = {
+			key: UserDefDict.outputSelfKey,
 			value: undefined,
 			ldType: UserDefDict.intrprtrClassType
 		};
@@ -460,7 +460,6 @@ export class EditorLogic {
 		this.getDiagramEngine()
 			.getDiagramModel()
 			.addNode(extendableNode);
-		//extendableNode.addPort(new LDPortModel(false, exportSelfKV.key, exportSelfKV));
 		return extendableNode;
 	}
 
@@ -495,7 +494,7 @@ export class EditorLogic {
 		let node = new BaseDataTypeNodeModel("Simple Data Type", null, null, "rgba(250,250,250,0.2)");
 		node.x = signature.x;
 		node.y = signature.y;
-		node.addPort(new LDPortModel(false, PORTNAME_OUT_EXPORTSELF, baseDataTypeKVStore, "output", signature.id));
+		node.addPort(new LDPortModel(false, PORTNAME_OUT_OUTPUTSELF, baseDataTypeKVStore, "output", signature.id));
 		this.getDiagramEngine()
 			.getDiagramModel()
 			.addNode(node);
@@ -655,7 +654,7 @@ export class EditorLogic {
 							initialKvStores = outputBPCfg.initialKvStores;
 						}
 						let outputType: string = leafPort.kv.ldType;
-						let propRef = leafPort.kv.key === UserDefDict.exportSelfKey ? null : leafPort.kv.key;
+						let propRef = leafPort.kv.key === UserDefDict.outputSelfKey ? null : leafPort.kv.key;
 						let outputRef: ObjectPropertyRef = {
 							objRef: leafNodeID,
 							propRef: propRef
@@ -697,7 +696,7 @@ export class EditorLogic {
 							extInitialKvStores = extendableBPCfg.initialKvStores;
 						}
 						let extOutputType: string = leafPort.kv.ldType;
-						let extPropRef = leafPort.kv.key === UserDefDict.exportSelfKey ? null : leafPort.kv.key;
+						let extPropRef = leafPort.kv.key === UserDefDict.outputSelfKey ? null : leafPort.kv.key;
 						let extOutputRef: ObjectPropertyRef = {
 							objRef: extendableNodeID,
 							propRef: extPropRef

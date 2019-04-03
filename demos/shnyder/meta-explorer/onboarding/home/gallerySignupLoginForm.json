@@ -12,7 +12,7 @@
           "nameSelf": "be7a96cd-1fd9-480e-8530-9c4edb51048e",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "217ac193-4f0b-45aa-bc14-0ae0291f3c39",
                 "propRef": null
@@ -27,7 +27,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "217ac193-4f0b-45aa-bc14-0ae0291f3c39": {

@@ -10,10 +10,10 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 import CircleView from 'metaexplorer-react-components/lib/components/circle/circleview';
 
 let cfgIntrprtKeys: string[] =
-	[VisualKeysDict.freeContainer];
+	[VisualKeysDict.inputContainer];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualKeysDict.freeContainer,
+		key: VisualKeysDict.inputContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	}
@@ -38,7 +38,7 @@ export abstract class PureLayoutComponent extends Component<LDConnectedState & L
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: LayoutComponentState): null | LayoutComponentState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.freeContainer], []);
+			nextProps, prevState, [VisualKeysDict.inputContainer], []);
 		if (!rvLD) {
 			return null;
 		}
@@ -54,19 +54,19 @@ export abstract class PureLayoutComponent extends Component<LDConnectedState & L
 	initialKvStores: IKvStore[];
 	styleClassName: string;
 
-	protected renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
+	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.freeContainer],
+		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.inputContainer],
 			[]);
 		this.state = {
 			...ldState,
 		};
 	}
 	render() {
-		return <div className={this.styleClassName}>{this.renderFreeContainer()}</div>;
+		return <div className={this.styleClassName}>{this.renderInputContainer()}</div>;
 	}
 }
 
@@ -81,7 +81,7 @@ export const LayoutCircleDisplayName = 'shnyder/layout/circle-display';
 export class PureCircleLayout extends PureLayoutComponent {
 	styleClassName = ""; //can be set, default behaviour is centering vertically and horizontally
 	render() {
-		return <CircleView>{this.renderFreeContainer()}</CircleView>;
+		return <CircleView>{this.renderInputContainer()}</CircleView>;
 	}
 }
 

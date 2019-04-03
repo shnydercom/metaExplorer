@@ -89,7 +89,7 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 								break;
 							case "bdt":
 								var baseDataTypeKVStore: IKvStore = {
-									key: UserDefDict.exportSelfKey,
+									key: UserDefDict.outputSelfKey,
 									value: undefined,
 									ldType: undefined
 								};
@@ -116,12 +116,12 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 								break;
 							case "lineardata":
 								node = new ExtendableTypesNodeModel("Linear Data Display", null, null, editorSpecificNodesColor);
-								let exportSelfKV: IKvStore = {
-									key: UserDefDict.exportSelfKey,
+								let outputSelfKV: IKvStore = {
+									key: UserDefDict.outputSelfKey,
 									value: undefined,
 									ldType: UserDefDict.intrprtrClassType
 								};
-								node.addPort(new LDPortModel(false, exportSelfKV.key, exportSelfKV));
+								node.addPort(new LDPortModel(false, outputSelfKV.key, outputSelfKV));
 								break;
 							default:
 								break;

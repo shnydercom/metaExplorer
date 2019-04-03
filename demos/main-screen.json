@@ -12,7 +12,7 @@
           "nameSelf": "b5ab8003-c730-4960-a831-67cf6515e52a",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "ff202649-116f-426e-b891-527c4ed76c3c",
                 "propRef": null
@@ -27,7 +27,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "ff202649-116f-426e-b891-527c4ed76c3c": {
@@ -36,7 +36,7 @@
           "nameSelf": "ff202649-116f-426e-b891-527c4ed76c3c",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "62764da2-6b35-4d54-8cc7-e779201c33de",
                 "propRef": null
@@ -64,7 +64,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer",
+            "inputContainer",
             "PopOverContent"
           ]
         },
@@ -74,7 +74,7 @@
           "nameSelf": "62764da2-6b35-4d54-8cc7-e779201c33de",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "b2d0e262-9f4e-4ae3-9e21-a74945b55c90",
                 "propRef": null
@@ -84,7 +84,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "b2d0e262-9f4e-4ae3-9e21-a74945b55c90": {

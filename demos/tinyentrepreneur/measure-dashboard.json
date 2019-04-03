@@ -12,7 +12,7 @@
           "nameSelf": "185ebea6-e4c1-4307-bb04-3ab5ee556053",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "54a959b1-f768-4c53-ab8a-f2edde80e1df",
                 "propRef": null
@@ -37,7 +37,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "54a959b1-f768-4c53-ab8a-f2edde80e1df": {
@@ -46,7 +46,7 @@
           "nameSelf": "54a959b1-f768-4c53-ab8a-f2edde80e1df",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "fc52a993-9d48-4964-b935-e35f6e6bfe84",
                 "propRef": null
@@ -56,7 +56,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "fc52a993-9d48-4964-b935-e35f6e6bfe84": {

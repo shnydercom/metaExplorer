@@ -18,10 +18,10 @@ export const ROUTE_PATH = "routePath";
 
 export const RouteComponentName = "shnyder/routing/Route";
 let cfgIntrprtKeys: string[] =
-	[VisualKeysDict.freeContainer, ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH];
+	[VisualKeysDict.inputContainer, ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualKeysDict.freeContainer,
+		key: VisualKeysDict.inputContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
@@ -66,7 +66,7 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: RouteComponentState): null | RouteComponentState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.freeContainer], [ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH]);
+			nextProps, prevState, [VisualKeysDict.inputContainer], [ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH]);
 		if (!rvLD) {
 			return null;
 		}
@@ -87,12 +87,12 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	private renderFreeContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.freeContainer);
+	private renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.freeContainer],
+		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.inputContainer],
 			[ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH]);
 		let isExact = !!ldState.localValues.get(ROUTE_ISEXACT);
 		let isAbsolute = !!ldState.localValues.get(ROUTE_ISABSOLUTE);
@@ -114,7 +114,7 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 		} else {
 			newPath += toPath;
 		}
-		return <Route exact={isExact} path={newPath} component={this.renderFreeContainer} />;
+		return <Route exact={isExact} path={newPath} component={this.renderInputContainer} />;
 	}
 }
 export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureRouteComponent);

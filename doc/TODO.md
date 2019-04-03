@@ -37,7 +37,7 @@ last serialized bits & pieces: seems to work!
               "key": "primaryInterpreter",
               "value": {
                 "objRef": "50de35ae-191b-4fb4-a830-1f86855ccd7d",
-                "propRef": "exportSelf"
+                "propRef": "outputSelf"
               },
               "ldType": "InterpreterType"
             },

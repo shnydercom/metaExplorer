@@ -20,7 +20,7 @@ import { classNamesLD } from 'components/reactUtils/compUtilFns';
 export const NavProcessAtomName = "shnyder/md/NavProcessAtom";
 let cfgIntrprtKeys: string[] =
 	[
-		VisualKeysDict.freeContainer,
+		VisualKeysDict.inputContainer,
 		VisualKeysDict.headerTxt,
 		VisualKeysDict.cancelTxt,
 		VisualKeysDict.confirmTxt,
@@ -31,7 +31,7 @@ let cfgIntrprtKeys: string[] =
 	];
 let initialKVStores: IKvStore[] = [
 	{
-		key: VisualKeysDict.freeContainer,
+		key: VisualKeysDict.inputContainer,
 		value: undefined,
 		ldType: UserDefDict.intrprtrClassType
 	},
@@ -91,7 +91,7 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 		prevState: null | NavProcessAtomState & LDLocalState)
 		: null | NavProcessAtomState & LDLocalState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.freeContainer], [
+			nextProps, prevState, [VisualKeysDict.inputContainer], [
 				VisualKeysDict.headerTxt,
 				VisualKeysDict.cancelTxt,
 				VisualKeysDict.confirmTxt,
@@ -123,7 +123,7 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 		this.state = {
 			...navBarStatePart,
 			...initLDLocalState(this.cfg, props,
-				[VisualKeysDict.freeContainer],
+				[VisualKeysDict.inputContainer],
 				[
 					VisualKeysDict.headerTxt,
 					VisualKeysDict.cancelTxt,
@@ -173,7 +173,7 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 				className={classNamesLD(null, localValues)}
 			/>
 			<div className="bottom-nav-topfree mdscrollbar">
-				{this.renderSub(VisualKeysDict.freeContainer)}
+				{this.renderSub(VisualKeysDict.inputContainer)}
 			</div>
 			{isHideBottom ? null :
 				<div className="bottom-nav-tabs flex-container">

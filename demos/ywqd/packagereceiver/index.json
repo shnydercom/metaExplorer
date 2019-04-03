@@ -58,7 +58,7 @@
           "nameSelf": "5bfc7168-df36-43d5-9c75-5cc81d54e941",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "9974d4dc-627f-4173-81cd-fd47476252e8",
                 "propRef": null
@@ -73,7 +73,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "9974d4dc-627f-4173-81cd-fd47476252e8": {
@@ -90,7 +90,7 @@
           "nameSelf": "a8419e59-db66-4fe7-a4d7-54f96884f33b",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "291f1af9-b685-4f1b-a23d-d0208268c570",
                 "propRef": null
@@ -105,7 +105,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "291f1af9-b685-4f1b-a23d-d0208268c570": {
@@ -122,7 +122,7 @@
           "nameSelf": "d0ee54ab-b727-4586-89ca-34be918460fc",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "49bc948f-6c80-47b6-9da2-84c1b6e71c21",
                 "propRef": null
@@ -137,7 +137,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "49bc948f-6c80-47b6-9da2-84c1b6e71c21": {
@@ -154,7 +154,7 @@
           "nameSelf": "4bf549d6-3cc7-4899-bb1e-eb3eb6fe7f05",
           "initialKvStores": [
             {
-              "key": "freeContainer",
+              "key": "inputContainer",
               "value": {
                 "objRef": "f9c864d4-14eb-40eb-8fb9-f41853b1ce40",
                 "propRef": null
@@ -169,7 +169,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "freeContainer"
+            "inputContainer"
           ]
         },
         "f9c864d4-14eb-40eb-8fb9-f41853b1ce40": {
