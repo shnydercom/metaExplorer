@@ -5,6 +5,8 @@ import { Component, createFactory, ClassAttributes, ComponentElement, ReactEleme
 import { map } from "lodash";
 import { IconButton } from "react-toolbox/lib/button";
 import { Input } from "react-toolbox/lib/input";
+import { isLoggedIn } from "appstate/store";
+import { Dialog } from "react-toolbox/lib/dialog";
 
 export interface OutputInfoNodeProps {
 	node: OutputInfoPartNodeModel;
@@ -18,6 +20,7 @@ export interface OutputInfoTypeNodeState {
 	userProjectInput: string;
 	userName: string;
 	projName: string;
+	isModalActive: boolean;
 }
 
 /**
@@ -49,7 +52,9 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 
 	constructor(props: OutputInfoNodeProps) {
 		super(props);
+		this.handleModalToggle = this.handleModalToggle.bind(this);
 		this.state = {
+			isModalActive: false,
 			blockNameInput: props.node.getItptBlockName(),
 			userNameInput: props.node.getItptUserName(),
 			userProjectInput: props.node.getItptProjName(),
@@ -61,9 +66,34 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 		return <DefaultPortLabel model={port} key={port.id} />;
 	}
 
+	handleModalToggle() {
+		this.setState({
+			...this.state,
+			isModalActive: !this.state.isModalActive,
+		});
+	}
+
+	generateWarningDialog(showDialog: boolean) {
+		if (!showDialog) return null;
+		const actions = [
+			{ label: 'OK', primary: true, onClick: this.handleModalToggle },
+		];
+		return <Dialog
+			actions={actions}
+			active={this.state.isModalActive}
+			type={"small"}
+			title="A little reminder"
+			onOverlayClick={this.handleModalToggle}
+			onEscKeyDown={this.handleModalToggle}
+		>
+			<p>Your changes won't be saved in the demo of MetaExplorer, leave us an email to get notified about our release!</p>
+		</Dialog>;
+	}
+
 	render() {
 		const { node } = this.props;
 		let { stItptName, blockNameInput, projName, userName, userProjectInput, userNameInput } = this.state;
+		let canChangeItpt: boolean = isLoggedIn;
 		let itptName = stItptName ? stItptName : "";
 		let isBtnEnabled = !!blockNameInput && !!userProjectInput && !!userNameInput && node.hasMainItpt();
 		const usrProj = node.getUserProject();
@@ -94,6 +124,7 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 						{isForeignItpt
 							? null
 							: <Input type='text'
+								disabled={!canChangeItpt}
 								label="Block Name"
 								name="blockNameField"
 								value={blockNameInput}
@@ -105,6 +136,7 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 						{isShowInputUsrNameAndProj
 							? <>
 								<Input type='text'
+									disabled={!canChangeItpt}
 									label="Project Name"
 									name="projectNameField"
 									value={userProjectInput}
@@ -113,6 +145,7 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 									}}
 								/>
 								<Input type='text'
+									disabled={!canChangeItpt}
 									label="User Name"
 									name="userNameField"
 									value={userNameInput}
@@ -125,10 +158,12 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 					</div>
 					<IconButton style={{ marginTop: "0" }} disabled={!isBtnEnabled}
 						icon={!isBtnEnabled ? "warning" : "chevron_right"} onClick={() => {
+							this.handleModalToggle();
 							const newItptName = userNameInput + "/" + userProjectInput + "/" + blockNameInput;
 							node.setItptName(newItptName);
 							node.handleOutputInfoSaved();
 						}} />
+					{this.generateWarningDialog(!canChangeItpt)}
 				</div>
 			</div>
 		);

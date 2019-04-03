@@ -126,10 +126,10 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
   top: 0;
   transition: opacity var(--animation-duration) var(--animation-curve-default);
   width: 100vw;*/
-  display: none;
+  //display: none;
 
   &.active {
-    display: none;
+    //display: none;
     /*opacity: var(--overlay-opacity);
     pointer-events: all;*/
   }
