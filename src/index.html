@@ -7,7 +7,8 @@
   <title>MetaExplorer</title>
   <link rel="stylesheet" href="/<%=htmlWebpackPlugin.files.chunks.main.css %>">
   <meta charset="utf-8">
-  <meta name="description" content="A set of complementary tools to ReactJS.">
+  <meta name="description" property="og:description"
+    content="Create your App piece by piece, and use the good stuff again easily">
   <meta name="author" content="shnyder.com">
   <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
   <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)">
@@ -17,6 +18,9 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="HandheldFriendly" content="True">
   <meta http-equiv="cleartype" content="on">
+  <meta property="og:image" content="/static/previewimg.png" />
+  <meta property="og:url" content="https://metaexplorer.io" />
+  <meta property="og:type" content="website" />
   <meta http-equiv="Content-Security-Policy"
     content="worker-src 'self' blob:; script-src 'self' https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval';">
   <link href="<%= htmlWebpackPlugin.options.materialIconsPath %>" rel="stylesheet" media="none"
