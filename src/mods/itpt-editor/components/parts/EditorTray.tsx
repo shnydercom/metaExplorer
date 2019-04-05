@@ -230,7 +230,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 				{trayitpts ? trayElems : null}
 			</div>
 			<div className="button-row">
-				<Button style={{ color: "white" }} label="clear" onClick={(ev) => {
+				<Button className="newbtn" icon="add" label="new" onClick={(ev) => {
 					this.props.onClearBtnPress();
 				}} />
 				<Button style={{ color: "white" }} label="beautify" onClick={(ev) => {

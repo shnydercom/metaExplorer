@@ -68,6 +68,14 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
   >div>* {
     padding: 0 5px !important;
   }
+  .newbtn {
+    background-color: #41ae3fff;
+    color: #00375f;
+    font-weight: bold;
+    &:hover {
+      color: white !important;
+    }
+  }
 }
 
 .refmap-drop-outer {
