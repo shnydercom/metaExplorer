@@ -245,7 +245,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "Your mini App is at http://shnyder.com/yourcompany/yourproject. Share it with others through the QR code",
+              "value": "Check out your app at http://shnyder.com/yourcompany/yourproject. Share it with others through the QR code",
               "ldType": "http://schema.org/Text"
             }
           ],

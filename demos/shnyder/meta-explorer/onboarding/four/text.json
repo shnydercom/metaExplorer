@@ -148,7 +148,7 @@
           "initialKvStores": [
             {
               "key": "singleKvStore",
-              "value": "Our Block \"shnyder/qr/QRcodeFromText\" is made up of other Blocks. Drag it from the drawer on the left onto \"now editing\" at the bottom to see its structure.",
+              "value": "Our Block \"shnyder/qr/QRcodeFromText\" is made up of other Blocks. Find it in the drawer on the left, open it and click its yellow button to see its structure.",
               "ldType": "http://schema.org/Text"
             }
           ],
