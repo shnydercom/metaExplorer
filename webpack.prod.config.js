@@ -79,6 +79,10 @@ module.exports = {
         from: 'node_modules/qr-scanner/qr-scanner-worker.min.js',
         to: 'lib/qr-scanner-worker.min.js@1.1.1.js'
       },
+      {
+        from: 'node_modules/keycloak-js/dist/keycloak.min.js',
+        to: 'lib/keycloak-js@6.0.0.js'
+      },
     ]),
   ]
 }

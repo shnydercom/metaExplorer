@@ -51,6 +51,7 @@
     "googleapis": "^32.0.0",
     "history": "^4.7.2",
     "hydraclient.js": "file:../Heracles.ts",
+    "keycloak-js": "^6.0.0",
     "lodash": "^4.17.4",
     "m-react-splitters": "^1.0.4",
     "metaexplorer-react-components": "file:../metaExplorer-react-components",
