@@ -1,0 +1,118 @@
+{
+  "subItptOf": "5b7e4439-c46e-4fff-b3ad-5d654fec5f6e",
+  "canInterpretType": "shnyder/how-to/keycloakAuth-ObjectType",
+  "nameSelf": "shnyder/how-to/keycloakAuth",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "5b7e4439-c46e-4fff-b3ad-5d654fec5f6e": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "5b7e4439-c46e-4fff-b3ad-5d654fec5f6e",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "67979026-1d58-4d97-8b3d-67152f0f61ee",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "30a71739-11b7-4163-b5c4-47e59620ad1e",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "28bed663-ac23-452a-baa5-b00feefab576",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2"
+          ]
+        },
+        "67979026-1d58-4d97-8b3d-67152f0f61ee": {
+          "subItptOf": "shnyder/basichtml/h3",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "67979026-1d58-4d97-8b3d-67152f0f61ee",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": "Token value:",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "30a71739-11b7-4163-b5c4-47e59620ad1e": {
+          "subItptOf": "shnyder/basichtml/italics",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "30a71739-11b7-4163-b5c4-47e59620ad1e",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": {
+                "objRef": "7a8e4b1e-cd8c-4c2f-9e2b-de3ce6c1f338",
+                "propRef": "token"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "singleKvStore"
+          ]
+        },
+        "7a8e4b1e-cd8c-4c2f-9e2b-de3ce6c1f338": {
+          "subItptOf": "keycloak/auth/config",
+          "canInterpretType": "keycloak/auth/config-ObjectType",
+          "nameSelf": "7a8e4b1e-cd8c-4c2f-9e2b-de3ce6c1f338",
+          "initialKvStores": [
+            {
+              "key": "jsonConfigurationPath",
+              "value": "/static/public-cfg.json",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "28bed663-ac23-452a-baa5-b00feefab576": {
+          "subItptOf": "keycloak/auth/AuthenticatorButton",
+          "canInterpretType": "keycloak/auth/AuthenticatorButton-ObjectType",
+          "nameSelf": "28bed663-ac23-452a-baa5-b00feefab576",
+          "initialKvStores": [
+            {
+              "key": "redirAfterLogin",
+              "value": "login",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "redirAfterLogout",
+              "value": "logout",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

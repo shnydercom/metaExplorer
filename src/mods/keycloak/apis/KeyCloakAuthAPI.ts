@@ -23,7 +23,7 @@ export type KeycloakEventListenerOrEventListenerObject = KeycloakEventListener |
 export class KeyCloakAuthAPI {
 
 	public static getKC() {
-		return KeyCloakAuthAPI.getKeyCloakAuthAPISingleton();
+		return KeyCloakAuthAPI.getKeyCloakAuthAPISingleton().kc;
 	}
 
 	public static getKeyCloakAuthAPISingleton(cfgSrc?: string): KeyCloakAuthAPI {
@@ -43,12 +43,20 @@ export class KeyCloakAuthAPI {
 			if (!authenticated) {
 				rv.setState({ isAuthenticated: false, token: "" });
 			}else{
-				let token = rv.kc.token;
-				rv.setState({ isAuthenticated: false, token });
+				rv.setState({ isAuthenticated: true, token: rv.kc.token });
 			}
 		}).error(() => {
 			throw new LDError("Keycloak client adapter failed to initialize");
 		});
+		rv.kc.onAuthSuccess = () => {
+			rv.setState({ isAuthenticated: true, token: rv.kc.token });
+		};
+		rv.kc.onAuthLogout = () => {
+			rv.setState({ isAuthenticated: false, token: "" });
+		};
+		rv.kc.onAuthError = () => {
+			rv.setState({ isAuthenticated: false, token: "" });
+		};
 		return rv;
 	}
 
@@ -118,6 +126,7 @@ export class KeyCloakAuthAPI {
 		const oldState = this._state;
 		this._state = state;
 		let isAuthChanged = oldState.isAuthenticated !== this._state.isAuthenticated;
+		console.log(state);
 		this.dispatchEvent({
 			isAuthChanged,
 			kcState: state,
