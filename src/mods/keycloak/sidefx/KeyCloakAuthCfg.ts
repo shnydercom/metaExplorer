@@ -11,7 +11,7 @@ import { initLDLocalState } from "components/generic/generatorFns";
 export const kcloakAuthCfgName = "keycloak/auth/config";
 export const jsonCfgPath = "jsonConfigurationPath";
 export const isAuthenticated = "isAuthenticated";
-export const token = "token";
+export const tokenStr = "bearertoken";
 export const kcCfgItptKeys = [jsonCfgPath];
 let initialKVStores: IKvStore[] = [
 	{
@@ -25,7 +25,7 @@ let initialKVStores: IKvStore[] = [
 		ldType: LDDict.Boolean
 	},
 	{
-		key: token,
+		key: tokenStr,
 		value: undefined,
 		ldType: LDDict.Text
 	}
@@ -59,6 +59,11 @@ export class KeyCloakAuthCfg extends LDRetrieverSuperRewrite {
 			...ldState
 		};
 		this.initKCApi();
+		this.kcAuthApi.addEventListener(EVENT_KEYCLOAK_WEB_AUTH,
+			(event) => {
+				this.propagateChange();
+			});
+		this.propagateChange();
 	}
 
 	initKCApi = () => {
@@ -123,5 +128,10 @@ export class KeyCloakAuthCfg extends LDRetrieverSuperRewrite {
 				});
 			});*/
 		}
+	}
+
+	protected propagateChange() {
+		this.setState({...this.state, isOutputDirty: true});
+		this.evalDirtyOutput();
 	}
 }

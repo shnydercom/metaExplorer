@@ -30,6 +30,14 @@
             {
               "key": "in_2",
               "value": {
+                "objRef": "11a62407-2e1f-440c-b94d-5542dd175fb1",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
                 "objRef": "28bed663-ac23-452a-baa5-b00feefab576",
                 "propRef": null
               },
@@ -40,7 +48,8 @@
           "interpretableKeys": [
             "in_0",
             "in_1",
-            "in_2"
+            "in_2",
+            "in_3"
           ]
         },
         "67979026-1d58-4d97-8b3d-67152f0f61ee": {
@@ -66,7 +75,7 @@
               "key": "singleKvStore",
               "value": {
                 "objRef": "7a8e4b1e-cd8c-4c2f-9e2b-de3ce6c1f338",
-                "propRef": "token"
+                "propRef": "bearertoken"
               },
               "ldType": "http://schema.org/Text"
             }
@@ -87,6 +96,33 @@
               "ldType": "http://schema.org/Text"
             }
           ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "11a62407-2e1f-440c-b94d-5542dd175fb1": {
+          "subItptOf": "shnyder/basichtml/bold",
+          "canInterpretType": "http://schema.org/Text",
+          "nameSelf": "11a62407-2e1f-440c-b94d-5542dd175fb1",
+          "initialKvStores": [
+            {
+              "key": "singleKvStore",
+              "value": {
+                "objRef": "5f5024c3-0042-430d-b6bb-8d309d299365",
+                "propRef": "bearertoken"
+              },
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "singleKvStore"
+          ]
+        },
+        "5f5024c3-0042-430d-b6bb-8d309d299365": {
+          "subItptOf": "keycloak/auth/tokenstate",
+          "canInterpretType": "keycloak/auth/tokenstate-ObjectType",
+          "nameSelf": "5f5024c3-0042-430d-b6bb-8d309d299365",
+          "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
