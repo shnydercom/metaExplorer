@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "2143b34d-f038-4858-a1aa-519ad14e859e": {
-          "subItptOf": "shnyder/md/NavBarWActions",
-          "canInterpretType": "shnyder/md/NavBarWActions-ObjectType",
+          "subItptOf": "shnyder/material-design/NavBarWActions",
+          "canInterpretType": "shnyder/material-design/NavBarWActions-ObjectType",
           "nameSelf": "2143b34d-f038-4858-a1aa-519ad14e859e",
           "initialKvStores": [
             {
@@ -50,8 +50,8 @@
           ]
         },
         "bf806e98-16ad-463f-9972-81b68dcc5ff8": {
-          "subItptOf": "shnyder/md/SectionedList",
-          "canInterpretType": "shnyder/md/SectionedList-ObjectType",
+          "subItptOf": "shnyder/material-design/SectionedList",
+          "canInterpretType": "shnyder/material-design/SectionedList-ObjectType",
           "nameSelf": "bf806e98-16ad-463f-9972-81b68dcc5ff8",
           "initialKvStores": [
             {
@@ -180,8 +180,8 @@
           ]
         },
         "2494fc46-58b8-490a-8a59-1f69473ac208": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "2494fc46-58b8-490a-8a59-1f69473ac208",
           "initialKvStores": [
             {
@@ -194,8 +194,8 @@
           "interpretableKeys": []
         },
         "0ebb2781-c29b-460e-8b13-44fee6167a6d": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "0ebb2781-c29b-460e-8b13-44fee6167a6d",
           "initialKvStores": [
             {

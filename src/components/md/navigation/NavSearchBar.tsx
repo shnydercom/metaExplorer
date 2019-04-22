@@ -17,7 +17,7 @@ import { Redirect } from 'react-router';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 import { classNamesLD } from 'components/reactUtils/compUtilFns';
 
-export const NavSearchBarName = "shnyder/md/NavSearchBar";
+export const NavSearchBarName = "shnyder/material-design/NavSearchBar";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer, VisualKeysDict.searchText, VisualKeysDict.routeSend_back, VisualKeysDict.cssClassName];
 let initialKVStores: IKvStore[] = [

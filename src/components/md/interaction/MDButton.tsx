@@ -14,7 +14,7 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 import { ActionKeysDict } from 'components/actions/ActionDict';
 
-export const MDButtonName = "shnyder/md/Button";
+export const MDButtonName = "shnyder/material-design/Button";
 const fontIcon = "fontIcon";
 const isIcon = "isIcon";
 let cfgIntrprtKeys: string[] =

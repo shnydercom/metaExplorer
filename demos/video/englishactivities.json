@@ -31,8 +31,8 @@
           ]
         },
         "1d84d276-df6f-4ccd-92aa-b7fb95be60ad": {
-          "subItptOf": "shnyder/md/NavBarWActions",
-          "canInterpretType": "shnyder/md/NavBarWActions-ObjectType",
+          "subItptOf": "shnyder/material-design/NavBarWActions",
+          "canInterpretType": "shnyder/material-design/NavBarWActions-ObjectType",
           "nameSelf": "1d84d276-df6f-4ccd-92aa-b7fb95be60ad",
           "initialKvStores": [
             {
@@ -260,8 +260,8 @@
           "interpretableKeys": []
         },
         "c85afc41-472f-4561-90e3-506c30a4dd01": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "c85afc41-472f-4561-90e3-506c30a4dd01",
           "initialKvStores": [
             {
@@ -279,8 +279,8 @@
           "interpretableKeys": []
         },
         "cfa495fa-682d-431f-8467-bd60ef89fddd": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "cfa495fa-682d-431f-8467-bd60ef89fddd",
           "initialKvStores": [
             {

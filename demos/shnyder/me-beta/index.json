@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "24febf37-3ce4-4244-81e5-11463737ea88": {
-          "subItptOf": "shnyder/md/ThemeProvider-light",
-          "canInterpretType": "shnyder/md/ThemeProvider-light-ObjectType",
+          "subItptOf": "shnyder/material-design/ThemeProvider-light",
+          "canInterpretType": "shnyder/material-design/ThemeProvider-light-ObjectType",
           "nameSelf": "24febf37-3ce4-4244-81e5-11463737ea88",
           "initialKvStores": [
             {

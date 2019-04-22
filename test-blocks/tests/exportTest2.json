@@ -63,7 +63,7 @@
           ]
         },
         "testB_TextInputToChangeDescription": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "testB_TextInputToChangeDescription",
           "initialKvStores": [],

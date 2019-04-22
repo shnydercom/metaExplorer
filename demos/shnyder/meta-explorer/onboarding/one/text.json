@@ -114,8 +114,8 @@
           ]
         },
         "855aeb6c-e423-441a-b65e-7cdba219c1de": {
-          "subItptOf": "shnyder/md/CardW3Containers",
-          "canInterpretType": "shnyder/md/CardW3Containers-ObjectType",
+          "subItptOf": "shnyder/material-design/CardW3Containers",
+          "canInterpretType": "shnyder/material-design/CardW3Containers-ObjectType",
           "nameSelf": "855aeb6c-e423-441a-b65e-7cdba219c1de",
           "initialKvStores": [
             {

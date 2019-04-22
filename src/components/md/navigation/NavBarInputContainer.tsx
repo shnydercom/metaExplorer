@@ -14,7 +14,7 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 import { classNamesLD } from 'components/reactUtils/compUtilFns';
 import { LDDict } from 'ldaccess/LDDict';
 
-export const NavBarInputContainerName = "shnyder/md/NavBarInputContainer";
+export const NavBarInputContainerName = "shnyder/material-design/NavBarInputContainer";
 
 let cfgIntrprtItptKeys: string[] =
 	[

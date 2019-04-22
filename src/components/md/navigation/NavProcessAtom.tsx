@@ -17,7 +17,7 @@ import { cleanRouteString } from '../../routing/route-helper-fns';
 import { ActionKeysDict } from 'components/actions/ActionDict';
 import { classNamesLD } from 'components/reactUtils/compUtilFns';
 
-export const NavProcessAtomName = "shnyder/md/NavProcessAtom";
+export const NavProcessAtomName = "shnyder/material-design/NavProcessAtom";
 let cfgIntrprtKeys: string[] =
 	[
 		VisualKeysDict.inputContainer,

@@ -83,8 +83,8 @@
           ]
         },
         "fc93b656-ab3d-47ee-a280-32d65a80922f": {
-          "subItptOf": "shnyder/md/ThemeProvider-dark",
-          "canInterpretType": "shnyder/md/ThemeProvider-dark-ObjectType",
+          "subItptOf": "shnyder/material-design/ThemeProvider-dark",
+          "canInterpretType": "shnyder/material-design/ThemeProvider-dark-ObjectType",
           "nameSelf": "fc93b656-ab3d-47ee-a280-32d65a80922f",
           "initialKvStores": [
             {
@@ -130,7 +130,7 @@
           ]
         },
         "742bd7d3-5b5d-44ad-b88a-062d1ce2f75a": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "742bd7d3-5b5d-44ad-b88a-062d1ce2f75a",
           "initialKvStores": [
@@ -149,7 +149,7 @@
           "interpretableKeys": []
         },
         "9bf2c1a5-5160-402a-afbc-811bd8ec07db": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "9bf2c1a5-5160-402a-afbc-811bd8ec07db",
           "initialKvStores": [
@@ -168,8 +168,8 @@
           "interpretableKeys": []
         },
         "ae694b90-ce4c-43bf-b801-95c8adb530c6": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "ae694b90-ce4c-43bf-b801-95c8adb530c6",
           "initialKvStores": [
             {

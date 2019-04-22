@@ -44,8 +44,8 @@
           ]
         },
         "bce06068-01b0-438c-8334-5726a7755de7": {
-          "subItptOf": "shnyder/md/CardW3Containers",
-          "canInterpretType": "shnyder/md/CardW3Containers-ObjectType",
+          "subItptOf": "shnyder/material-design/CardW3Containers",
+          "canInterpretType": "shnyder/material-design/CardW3Containers-ObjectType",
           "nameSelf": "bce06068-01b0-438c-8334-5726a7755de7",
           "initialKvStores": [
             {
@@ -160,8 +160,8 @@
           "interpretableKeys": []
         },
         "d725a620-e873-419a-9c88-0c0464a9ef9d": {
-          "subItptOf": "shnyder/md/CardW3Containers",
-          "canInterpretType": "shnyder/md/CardW3Containers-ObjectType",
+          "subItptOf": "shnyder/material-design/CardW3Containers",
+          "canInterpretType": "shnyder/material-design/CardW3Containers-ObjectType",
           "nameSelf": "d725a620-e873-419a-9c88-0c0464a9ef9d",
           "initialKvStores": [
             {

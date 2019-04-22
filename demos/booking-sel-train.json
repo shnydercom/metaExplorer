@@ -86,7 +86,7 @@
           ]
         },
         "5fb6d490-20e2-4f2d-86aa-222c0d50baad": {
-          "subItptOf": "shnyder/md/http://schema.org/Boolean",
+          "subItptOf": "shnyder/material-design/http://schema.org/Boolean",
           "canInterpretType": "http://schema.org/Boolean",
           "nameSelf": "5fb6d490-20e2-4f2d-86aa-222c0d50baad",
           "initialKvStores": [
@@ -105,7 +105,7 @@
           "interpretableKeys": []
         },
         "4628ff54-02b6-4bf0-bb2a-0c0b7ef57b35": {
-          "subItptOf": "shnyder/md/http://schema.org/Boolean",
+          "subItptOf": "shnyder/material-design/http://schema.org/Boolean",
           "canInterpretType": "http://schema.org/Boolean",
           "nameSelf": "4628ff54-02b6-4bf0-bb2a-0c0b7ef57b35",
           "initialKvStores": [

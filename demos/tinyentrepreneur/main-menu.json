@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "4a4d2bb3-b5ce-4513-b051-4f93ad088820": {
-          "subItptOf": "shnyder/md/NavBarWActions",
-          "canInterpretType": "shnyder/md/NavBarWActions-ObjectType",
+          "subItptOf": "shnyder/material-design/NavBarWActions",
+          "canInterpretType": "shnyder/material-design/NavBarWActions-ObjectType",
           "nameSelf": "4a4d2bb3-b5ce-4513-b051-4f93ad088820",
           "initialKvStores": [
             {
@@ -118,8 +118,8 @@
           "interpretableKeys": []
         },
         "8d29e4cd-8123-490a-a347-8c67d4bf53f9": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "8d29e4cd-8123-490a-a347-8c67d4bf53f9",
           "initialKvStores": [
             {
@@ -137,8 +137,8 @@
           "interpretableKeys": []
         },
         "082dca97-e156-4347-a5e6-355a7b08ad37": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "082dca97-e156-4347-a5e6-355a7b08ad37",
           "initialKvStores": [
             {
@@ -156,8 +156,8 @@
           "interpretableKeys": []
         },
         "8fee84f1-25a8-4b17-bb84-f477e6dde85d": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "8fee84f1-25a8-4b17-bb84-f477e6dde85d",
           "initialKvStores": [
             {
@@ -175,8 +175,8 @@
           "interpretableKeys": []
         },
         "47a0a690-4843-4084-ba26-503aca5ab26a": {
-          "subItptOf": "shnyder/md/CardW3Containers",
-          "canInterpretType": "shnyder/md/CardW3Containers-ObjectType",
+          "subItptOf": "shnyder/material-design/CardW3Containers",
+          "canInterpretType": "shnyder/material-design/CardW3Containers-ObjectType",
           "nameSelf": "47a0a690-4843-4084-ba26-503aca5ab26a",
           "initialKvStores": [
             {

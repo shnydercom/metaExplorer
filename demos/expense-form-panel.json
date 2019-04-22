@@ -72,7 +72,7 @@
           ]
         },
         "e8016df1-1a7f-4fad-aa1e-1138cda392d5": {
-          "subItptOf": "shnyder/md/SingleImageSelector",
+          "subItptOf": "shnyder/material-design/SingleImageSelector",
           "canInterpretType": "http://schema.org/CreateAction",
           "nameSelf": "e8016df1-1a7f-4fad-aa1e-1138cda392d5",
           "initialKvStores": [],
@@ -80,7 +80,7 @@
           "interpretableKeys": []
         },
         "64d00460-f088-46c7-87c4-8fd7dd6b63d5": {
-          "subItptOf": "shnyder/md/http://schema.org/Date",
+          "subItptOf": "shnyder/material-design/http://schema.org/Date",
           "canInterpretType": "http://schema.org/Date",
           "nameSelf": "64d00460-f088-46c7-87c4-8fd7dd6b63d5",
           "initialKvStores": [
@@ -94,7 +94,7 @@
           "interpretableKeys": []
         },
         "6255886a-5226-42aa-a9db-4bf21e76be04": {
-          "subItptOf": "shnyder/md/http://schema.org/Number",
+          "subItptOf": "shnyder/material-design/http://schema.org/Number",
           "canInterpretType": "http://schema.org/Number",
           "nameSelf": "6255886a-5226-42aa-a9db-4bf21e76be04",
           "initialKvStores": [
@@ -113,7 +113,7 @@
           "interpretableKeys": []
         },
         "b644c4ad-dcd2-48a1-ac9b-09ec55ea381f": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "b644c4ad-dcd2-48a1-ac9b-09ec55ea381f",
           "initialKvStores": [

@@ -90,8 +90,8 @@
           ]
         },
         "7d38f992-b2dd-4054-9bc1-d2697870ab35": {
-          "subItptOf": "shnyder/md/SectionedList",
-          "canInterpretType": "shnyder/md/SectionedList-ObjectType",
+          "subItptOf": "shnyder/material-design/SectionedList",
+          "canInterpretType": "shnyder/material-design/SectionedList-ObjectType",
           "nameSelf": "7d38f992-b2dd-4054-9bc1-d2697870ab35",
           "initialKvStores": [
             {
@@ -165,8 +165,8 @@
           "interpretableKeys": []
         },
         "5bdf2763-63fb-4df3-8a3d-958aad9cb450": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "5bdf2763-63fb-4df3-8a3d-958aad9cb450",
           "initialKvStores": [
             {
@@ -184,8 +184,8 @@
           "interpretableKeys": []
         },
         "2c2c1f2e-83b5-45c9-bf8d-7cc7a6bc4397": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "2c2c1f2e-83b5-45c9-bf8d-7cc7a6bc4397",
           "initialKvStores": [
             {
@@ -203,8 +203,8 @@
           "interpretableKeys": []
         },
         "c043da51-b80b-4232-9e60-140cbcf45140": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "c043da51-b80b-4232-9e60-140cbcf45140",
           "initialKvStores": [
             {
@@ -217,8 +217,8 @@
           "interpretableKeys": []
         },
         "664d6abd-559c-4d1d-9e28-d59ecb3fc393": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "664d6abd-559c-4d1d-9e28-d59ecb3fc393",
           "initialKvStores": [
             {
@@ -231,8 +231,8 @@
           "interpretableKeys": []
         },
         "f905f02c-67fc-45f6-8b0f-81c0e8ce5b84": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "f905f02c-67fc-45f6-8b0f-81c0e8ce5b84",
           "initialKvStores": [
             {

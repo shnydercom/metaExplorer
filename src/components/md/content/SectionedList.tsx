@@ -9,7 +9,7 @@ import { List, ListSubHeader } from 'react-toolbox/lib/list';
 import { LDDict } from 'ldaccess/LDDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 
-export const SectionedListName = "shnyder/md/SectionedList";
+export const SectionedListName = "shnyder/material-design/SectionedList";
 const sectionHeadings = "section-headings";
 const sectionElements = "section-elements";
 

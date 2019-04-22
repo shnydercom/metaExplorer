@@ -31,7 +31,7 @@ export interface ILDNonvisualIntrprtrMapStatePart {
 
 export const isProduction = process.env.NODE_ENV === 'production';
 
-export const isLoggedIn = false;
+export const isLoggedIn = true;
 
 let middleWare = isProduction ? applyMiddleware(epicMiddleware) : compose(applyMiddleware(epicMiddleware), DevTools.instrument());
 

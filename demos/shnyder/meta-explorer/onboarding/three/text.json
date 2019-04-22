@@ -179,8 +179,8 @@
           "interpretableKeys": []
         },
         "c4acfa3f-9662-46af-933c-9b999afa5c11": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "c4acfa3f-9662-46af-933c-9b999afa5c11",
           "initialKvStores": [
             {

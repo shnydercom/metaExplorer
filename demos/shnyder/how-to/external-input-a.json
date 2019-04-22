@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "649cbc35-2331-45f6-aaee-a64b96e203ed": {
-          "subItptOf": "shnyder/md/CardW3Containers",
-          "canInterpretType": "shnyder/md/CardW3Containers-ObjectType",
+          "subItptOf": "shnyder/material-design/CardW3Containers",
+          "canInterpretType": "shnyder/material-design/CardW3Containers-ObjectType",
           "nameSelf": "649cbc35-2331-45f6-aaee-a64b96e203ed",
           "initialKvStores": [
             {

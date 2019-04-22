@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "bSub": {
-          "subItptOf": "shnyder/md/BottomNavigation",
-          "canInterpretType": "shnyder/md/BottomNavigation-ObjectType",
+          "subItptOf": "shnyder/material-design/BottomNavigation",
+          "canInterpretType": "shnyder/material-design/BottomNavigation-ObjectType",
           "nameSelf": "bSub",
           "initialKvStores": [
             {

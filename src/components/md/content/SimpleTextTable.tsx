@@ -7,7 +7,7 @@ import { initLDLocalState, gdsfpLD } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { Table, TableTheme, TableHead, TableCell, TableRow } from 'react-toolbox/lib/table/';
 
-export const SimpleTextTableName = "shnyder/md/SimpleTextTable";
+export const SimpleTextTableName = "shnyder/material-design/SimpleTextTable";
 const tableHeadings = "headings";
 const tableRows = "rows";
 

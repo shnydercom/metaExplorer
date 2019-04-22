@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "bf8b1635-c41c-474f-94d5-86c73ff1b4c0": {
-          "subItptOf": "shnyder/md/NavProcessAtom",
-          "canInterpretType": "shnyder/md/NavProcessAtom-ObjectType",
+          "subItptOf": "shnyder/material-design/NavProcessAtom",
+          "canInterpretType": "shnyder/material-design/NavProcessAtom-ObjectType",
           "nameSelf": "bf8b1635-c41c-474f-94d5-86c73ff1b4c0",
           "initialKvStores": [
             {
@@ -137,7 +137,7 @@
           "interpretableKeys": []
         },
         "53c2b550-14fc-4965-8398-68e234117b74": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "53c2b550-14fc-4965-8398-68e234117b74",
           "initialKvStores": [
@@ -156,7 +156,7 @@
           "interpretableKeys": []
         },
         "74a5d0df-fada-4d75-9044-21d6fb2f0f1d": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "74a5d0df-fada-4d75-9044-21d6fb2f0f1d",
           "initialKvStores": [
@@ -175,7 +175,7 @@
           "interpretableKeys": []
         },
         "00c11ed9-25a1-499f-9ec1-eab4be1abdd0": {
-          "subItptOf": "shnyder/md/http://schema.org/Date",
+          "subItptOf": "shnyder/material-design/http://schema.org/Date",
           "canInterpretType": "http://schema.org/Date",
           "nameSelf": "00c11ed9-25a1-499f-9ec1-eab4be1abdd0",
           "initialKvStores": [
@@ -194,7 +194,7 @@
           "interpretableKeys": []
         },
         "c41bf539-039c-46c1-98ad-def4d48e6b31": {
-          "subItptOf": "shnyder/md/http://schema.org/Date",
+          "subItptOf": "shnyder/material-design/http://schema.org/Date",
           "canInterpretType": "http://schema.org/Date",
           "nameSelf": "c41bf539-039c-46c1-98ad-def4d48e6b31",
           "initialKvStores": [
@@ -213,7 +213,7 @@
           "interpretableKeys": []
         },
         "96250689-aa39-446b-aeba-57fffd9f8759": {
-          "subItptOf": "shnyder/md/http://schema.org/Integer",
+          "subItptOf": "shnyder/material-design/http://schema.org/Integer",
           "canInterpretType": "http://schema.org/Integer",
           "nameSelf": "96250689-aa39-446b-aeba-57fffd9f8759",
           "initialKvStores": [

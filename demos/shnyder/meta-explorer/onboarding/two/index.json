@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "fc6a6bd8-6ee8-4c59-a92f-d8551e4f085e": {
-          "subItptOf": "shnyder/md/NavProcessAtom",
-          "canInterpretType": "shnyder/md/NavProcessAtom-ObjectType",
+          "subItptOf": "shnyder/material-design/NavProcessAtom",
+          "canInterpretType": "shnyder/material-design/NavProcessAtom-ObjectType",
           "nameSelf": "fc6a6bd8-6ee8-4c59-a92f-d8551e4f085e",
           "initialKvStores": [
             {

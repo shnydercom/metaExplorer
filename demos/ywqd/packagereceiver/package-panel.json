@@ -354,8 +354,8 @@
           "interpretableKeys": []
         },
         "e02f23a9-957a-455f-8f02-33d2f5cff91d": {
-          "subItptOf": "shnyder/md/SectionedList",
-          "canInterpretType": "shnyder/md/SectionedList-ObjectType",
+          "subItptOf": "shnyder/material-design/SectionedList",
+          "canInterpretType": "shnyder/material-design/SectionedList-ObjectType",
           "nameSelf": "e02f23a9-957a-455f-8f02-33d2f5cff91d",
           "initialKvStores": [
             {

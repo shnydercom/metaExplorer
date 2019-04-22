@@ -31,7 +31,7 @@ export function initOnboardingMod(): Promise<IModStatus> {
 		let qrGenName = "qr/QRCodeDisplay";
 		onboardingRetrieverRedux.addItpt(qrGenName, appIntRetr.getItptByNameSelf(qrGenName), "cRud", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
 		let textInputName = LDDict.Text;
-		onboardingRetrieverRedux.addItpt(textInputName, appIntRetr.getItptByNameSelf("shnyder/md/" + textInputName), "CRUd", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
+		onboardingRetrieverRedux.addItpt(textInputName, appIntRetr.getItptByNameSelf("shnyder/material-design/" + textInputName), "CRUd", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
 		onboardingRetrieverRedux.addItpt(LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, "cRud", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
 		onboardingRetrieverRedux.addItpt(UserDefDict.intrprtrBPCfgRefMapType, PureRefMapItpt, "cRud", [ITPT_TAG_SPECIAL]);
 		onboardingRetrieverRedux.addItpt(UserDefDict.itptContainerObjType, PureBaseContainerRewrite, "cRud", [ITPT_TAG_SPECIAL]);

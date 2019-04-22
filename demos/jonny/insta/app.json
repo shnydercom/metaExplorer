@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "f2462f38-3250-4874-a774-bf6d33b16278": {
-          "subItptOf": "shnyder/md/NavBarWActions",
-          "canInterpretType": "shnyder/md/NavBarWActions-ObjectType",
+          "subItptOf": "shnyder/material-design/NavBarWActions",
+          "canInterpretType": "shnyder/material-design/NavBarWActions-ObjectType",
           "nameSelf": "f2462f38-3250-4874-a774-bf6d33b16278",
           "initialKvStores": [
             {
@@ -118,7 +118,7 @@
           "interpretableKeys": []
         },
         "193a573e-8128-44c7-9dc7-f8733c6fb815": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "193a573e-8128-44c7-9dc7-f8733c6fb815",
           "initialKvStores": [

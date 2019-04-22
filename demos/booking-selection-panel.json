@@ -63,8 +63,8 @@
           ]
         },
         "519ae450-a2df-4f2c-9f45-05e42d2325ba": {
-          "subItptOf": "shnyder/md/CardW3Containers",
-          "canInterpretType": "shnyder/md/CardW3Containers-ObjectType",
+          "subItptOf": "shnyder/material-design/CardW3Containers",
+          "canInterpretType": "shnyder/material-design/CardW3Containers-ObjectType",
           "nameSelf": "519ae450-a2df-4f2c-9f45-05e42d2325ba",
           "initialKvStores": [
             {
@@ -179,8 +179,8 @@
           "interpretableKeys": []
         },
         "43adc3a7-6c69-4621-97da-a2023e55c635": {
-          "subItptOf": "shnyder/md/CardW3Containers",
-          "canInterpretType": "shnyder/md/CardW3Containers-ObjectType",
+          "subItptOf": "shnyder/material-design/CardW3Containers",
+          "canInterpretType": "shnyder/material-design/CardW3Containers-ObjectType",
           "nameSelf": "43adc3a7-6c69-4621-97da-a2023e55c635",
           "initialKvStores": [
             {
@@ -295,8 +295,8 @@
           "interpretableKeys": []
         },
         "e4e43590-2f17-475d-9240-525fa72c5005": {
-          "subItptOf": "shnyder/md/CardW3Containers",
-          "canInterpretType": "shnyder/md/CardW3Containers-ObjectType",
+          "subItptOf": "shnyder/material-design/CardW3Containers",
+          "canInterpretType": "shnyder/material-design/CardW3Containers-ObjectType",
           "nameSelf": "e4e43590-2f17-475d-9240-525fa72c5005",
           "initialKvStores": [
             {

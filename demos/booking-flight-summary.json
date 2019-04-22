@@ -31,8 +31,8 @@
           ]
         },
         "e86dde77-f576-4dd5-b061-95cb876edfe8": {
-          "subItptOf": "shnyder/md/NavProcessAtom",
-          "canInterpretType": "shnyder/md/NavProcessAtom-ObjectType",
+          "subItptOf": "shnyder/material-design/NavProcessAtom",
+          "canInterpretType": "shnyder/material-design/NavProcessAtom-ObjectType",
           "nameSelf": "e86dde77-f576-4dd5-b061-95cb876edfe8",
           "initialKvStores": [
             {

@@ -30,7 +30,7 @@ export interface SingleImageSelectorState extends LDLocalState {
 	previewURL: string;
 }
 
-export const SingleImageSelectorName = "shnyder/md/SingleImageSelector";
+export const SingleImageSelectorName = "shnyder/material-design/SingleImageSelector";
 let cfgType: string = LDDict.CreateAction;
 let cfgIntrprtKeys: string[] =
 	[];

@@ -53,7 +53,7 @@
           ]
         },
         "6d4036dc-60c6-4b39-bb8e-786577818e7a": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "6d4036dc-60c6-4b39-bb8e-786577818e7a",
           "initialKvStores": [],

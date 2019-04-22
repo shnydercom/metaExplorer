@@ -5,6 +5,7 @@ import { NetworkPreferredToken } from "ldaccess/ildtoken";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { applicationStore } from "approot";
 import { ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
+import { isProduction } from "appstate/store";
 
 export interface UserItptLoadResponse {
 	itptMetaInfo: [{}];
@@ -23,8 +24,8 @@ export class UserItptLoadApi {
 
   private static apiSingleton: UserItptLoadApi;
 
-	getItptsForCurrentUser(): () => Promise<UserItptLoadResponse> {
-		return this.getItptsFrom("/static/interpreters.json");
+	getItptsUnauthed(): () => Promise<UserItptLoadResponse> {
+		return this.getItptsFrom(isProduction ? "/blocks" : "/static/interpreters.json");
 	}
 	getItptsFrom(targetUrl: string): () => Promise<UserItptLoadResponse> {
 		return () => {

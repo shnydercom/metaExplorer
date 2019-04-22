@@ -31,8 +31,8 @@
           ]
         },
         "ff202649-116f-426e-b891-527c4ed76c3c": {
-          "subItptOf": "shnyder/md/NavBarWActions",
-          "canInterpretType": "shnyder/md/NavBarWActions-ObjectType",
+          "subItptOf": "shnyder/material-design/NavBarWActions",
+          "canInterpretType": "shnyder/material-design/NavBarWActions-ObjectType",
           "nameSelf": "ff202649-116f-426e-b891-527c4ed76c3c",
           "initialKvStores": [
             {

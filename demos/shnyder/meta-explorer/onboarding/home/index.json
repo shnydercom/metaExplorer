@@ -46,7 +46,7 @@
             {
               "key": "in_2",
               "value": {
-                "objRef": "d234eaa1-4cb9-46d2-8ca3-b36c38e919be",
+                "objRef": "09f055a4-deab-4571-8a0f-9cd1221faf31",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -54,13 +54,21 @@
             {
               "key": "in_3",
               "value": {
-                "objRef": "a94d709c-d6a3-4c88-8107-1f6aa0e2b9c8",
+                "objRef": "d234eaa1-4cb9-46d2-8ca3-b36c38e919be",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
             },
             {
               "key": "in_4",
+              "value": {
+                "objRef": "a94d709c-d6a3-4c88-8107-1f6aa0e2b9c8",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_5",
               "value": {
                 "objRef": "28d9254b-0890-4e6d-9eeb-4add83d9c468",
                 "propRef": null
@@ -73,7 +81,8 @@
             "in_0",
             "in_2",
             "in_3",
-            "in_4"
+            "in_4",
+            "in_5"
           ]
         },
         "dadefd77-20d4-492f-9fc0-04676c9055aa": {
@@ -81,6 +90,25 @@
           "canInterpretType": "shnyder/meta-explorer/onboarding/home/gallery-ObjectType",
           "nameSelf": "dadefd77-20d4-492f-9fc0-04676c9055aa",
           "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "09f055a4-deab-4571-8a0f-9cd1221faf31": {
+          "subItptOf": "keycloak/auth/AuthenticatorButton",
+          "canInterpretType": "keycloak/auth/AuthenticatorButton-ObjectType",
+          "nameSelf": "09f055a4-deab-4571-8a0f-9cd1221faf31",
+          "initialKvStores": [
+            {
+              "key": "redirAfterLogin",
+              "value": "login",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "redirAfterLogout",
+              "value": "logout",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },

@@ -13,8 +13,8 @@ import { ThemeProvider } from 'react-css-themr';
 import { editorTheme } from 'styles/editor/editorTheme';
 import { appTheme } from 'styles/appTheme/appTheme';
 
-export const ThemeProviderDarkName = "shnyder/md/ThemeProvider-dark";
-export const ThemeProviderLightName = "shnyder/md/ThemeProvider-light";
+export const ThemeProviderDarkName = "shnyder/material-design/ThemeProvider-dark";
+export const ThemeProviderLightName = "shnyder/material-design/ThemeProvider-light";
 
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer];

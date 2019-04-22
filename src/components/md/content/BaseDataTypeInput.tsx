@@ -66,7 +66,7 @@ for (var bdt in bdts) {
 		let bpCfg: BlueprintConfig = {
 			subItptOf: undefined,
 			canInterpretType: elem,
-			nameSelf: "shnyder/md/" + elem,
+			nameSelf: "shnyder/material-design/" + elem,
 			initialKvStores: initialKVStores,
 			interpretableKeys: cfgIntrprtKeys,
 			crudSkills: "CRUd"

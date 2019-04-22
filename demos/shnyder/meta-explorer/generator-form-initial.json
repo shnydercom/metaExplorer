@@ -183,7 +183,7 @@
           ]
         },
         "86cf473a-f728-4c02-b933-9a144add7770": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "86cf473a-f728-4c02-b933-9a144add7770",
           "initialKvStores": [
@@ -240,7 +240,7 @@
           ]
         },
         "d1d94c27-c701-49ba-b484-72721fcf0f1f": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "d1d94c27-c701-49ba-b484-72721fcf0f1f",
           "initialKvStores": [
@@ -273,7 +273,7 @@
           "interpretableKeys": []
         },
         "f9b8588a-d31f-4762-a555-a5f76f12d6c0": {
-          "subItptOf": "shnyder/md/http://schema.org/Boolean",
+          "subItptOf": "shnyder/material-design/http://schema.org/Boolean",
           "canInterpretType": "http://schema.org/Boolean",
           "nameSelf": "f9b8588a-d31f-4762-a555-a5f76f12d6c0",
           "initialKvStores": [
@@ -287,7 +287,7 @@
           "interpretableKeys": []
         },
         "1b52fd94-37fd-4207-b5bd-5b7284257fbd": {
-          "subItptOf": "shnyder/md/SingleImageSelector",
+          "subItptOf": "shnyder/material-design/SingleImageSelector",
           "canInterpretType": "http://schema.org/CreateAction",
           "nameSelf": "1b52fd94-37fd-4207-b5bd-5b7284257fbd",
           "initialKvStores": [],
@@ -295,8 +295,8 @@
           "interpretableKeys": []
         },
         "c29fd521-a52c-45c6-9b0f-787d179956bc": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "c29fd521-a52c-45c6-9b0f-787d179956bc",
           "initialKvStores": [
             {

@@ -54,7 +54,7 @@
           ]
         },
         "RMObj_Date": {
-          "subItptOf": "shnyder/md/http://schema.org/Date",
+          "subItptOf": "shnyder/material-design/http://schema.org/Date",
           "canInterpretType": "http://schema.org/Date",
           "nameSelf": "RMObj_Date",
           "initialKvStores": [],
@@ -62,7 +62,7 @@
           "interpretableKeys": []
         },
         "RMObj_Boolean": {
-          "subItptOf": "shnyder/md/http://schema.org/Boolean",
+          "subItptOf": "shnyder/material-design/http://schema.org/Boolean",
           "canInterpretType": "http://schema.org/Boolean",
           "nameSelf": "RMObj_Boolean",
           "initialKvStores": [],

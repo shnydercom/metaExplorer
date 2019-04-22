@@ -88,7 +88,7 @@
           "interpretableKeys": []
         },
         "03172f8c-20fa-42ee-a208-721ff6631881": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "03172f8c-20fa-42ee-a208-721ff6631881",
           "initialKvStores": [
@@ -107,7 +107,7 @@
           "interpretableKeys": []
         },
         "0bceb3a1-20b5-4ffd-b9b3-07a78fdc1ebd": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "0bceb3a1-20b5-4ffd-b9b3-07a78fdc1ebd",
           "initialKvStores": [
@@ -126,7 +126,7 @@
           "interpretableKeys": []
         },
         "63d651d3-b428-42a2-ad32-ce441d0308ce": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "63d651d3-b428-42a2-ad32-ce441d0308ce",
           "initialKvStores": [
@@ -279,8 +279,8 @@
           ]
         },
         "3b154a92-d981-4ec6-a81f-824575095192": {
-          "subItptOf": "shnyder/md/SimpleTextTable",
-          "canInterpretType": "shnyder/md/SimpleTextTable-ObjectType",
+          "subItptOf": "shnyder/material-design/SimpleTextTable",
+          "canInterpretType": "shnyder/material-design/SimpleTextTable-ObjectType",
           "nameSelf": "3b154a92-d981-4ec6-a81f-824575095192",
           "initialKvStores": [
             {

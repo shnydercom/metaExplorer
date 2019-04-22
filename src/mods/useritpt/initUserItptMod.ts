@@ -17,7 +17,7 @@ export function initUSERITPTClientMod(isMainItptChange: boolean): Promise<IModSt
 	const appIntRetr = appItptRetrFn();
 	const rv: Promise<IModStatus> = new Promise((resolve, reject) => {
 		let api = UserItptLoadApi.getUserItptLoadApiSingleton();
-		api.getItptsForCurrentUser()().then((val) => {
+		api.getItptsUnauthed()().then((val) => {
 			let numItpts = val.itptList.length;
 			val.itptList.forEach((itpt) => {
 				addBlueprintToRetriever(itpt);

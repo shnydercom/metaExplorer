@@ -213,8 +213,8 @@
           ]
         },
         "015c137e-56a4-4f72-aad7-ce4aeaadf4c8": {
-          "subItptOf": "shnyder/md/TopNavigation",
-          "canInterpretType": "shnyder/md/TopNavigation-ObjectType",
+          "subItptOf": "shnyder/material-design/TopNavigation",
+          "canInterpretType": "shnyder/material-design/TopNavigation-ObjectType",
           "nameSelf": "015c137e-56a4-4f72-aad7-ce4aeaadf4c8",
           "initialKvStores": [
             {

@@ -35,7 +35,7 @@
           ]
         },
         "742bd7d3-5b5d-44ad-b88a-062d1ce2f75a": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "742bd7d3-5b5d-44ad-b88a-062d1ce2f75a",
           "initialKvStores": [
@@ -54,8 +54,8 @@
           "interpretableKeys": []
         },
         "ae694b90-ce4c-43bf-b801-95c8adb530c6": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "ae694b90-ce4c-43bf-b801-95c8adb530c6",
           "initialKvStores": [
             {

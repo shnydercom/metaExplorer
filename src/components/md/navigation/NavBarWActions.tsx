@@ -18,7 +18,7 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 import { classNamesLD } from 'components/reactUtils/compUtilFns';
 
-export const NavBarWActionsName = "shnyder/md/NavBarWActions";
+export const NavBarWActionsName = "shnyder/material-design/NavBarWActions";
 
 let cfgIntrprtItptKeys: string[] =
 	[

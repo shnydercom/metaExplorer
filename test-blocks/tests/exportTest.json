@@ -44,7 +44,7 @@
           ]
         },
         "testA_TextInput": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "testA_TextInput",
           "initialKvStores": [

@@ -214,7 +214,7 @@
           ]
         },
         "48ad61ed-a9a2-4711-b03b-96b93020bf4c": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "48ad61ed-a9a2-4711-b03b-96b93020bf4c",
           "initialKvStores": [
@@ -228,8 +228,8 @@
           "interpretableKeys": []
         },
         "12a4fcf7-b289-459e-9736-10edda53e2d1": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "12a4fcf7-b289-459e-9736-10edda53e2d1",
           "initialKvStores": [
             {
@@ -247,8 +247,8 @@
           "interpretableKeys": []
         },
         "5ac598ad-aebd-4907-87d3-0949dde46c8b": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "5ac598ad-aebd-4907-87d3-0949dde46c8b",
           "initialKvStores": [
             {
@@ -266,8 +266,8 @@
           "interpretableKeys": []
         },
         "ca1294a8-94dc-4396-ac90-176c3e2def71": {
-          "subItptOf": "shnyder/md/Button",
-          "canInterpretType": "shnyder/md/Button-ObjectType",
+          "subItptOf": "shnyder/material-design/Button",
+          "canInterpretType": "shnyder/material-design/Button-ObjectType",
           "nameSelf": "ca1294a8-94dc-4396-ac90-176c3e2def71",
           "initialKvStores": [
             {
@@ -309,7 +309,7 @@
           ]
         },
         "466a1af2-2c9d-4919-b0ac-361a3f6b55e6": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "466a1af2-2c9d-4919-b0ac-361a3f6b55e6",
           "initialKvStores": [
@@ -347,7 +347,7 @@
           ]
         },
         "f9a43b06-bd46-4953-b043-5bf801c817e8": {
-          "subItptOf": "shnyder/md/http://schema.org/Text",
+          "subItptOf": "shnyder/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "f9a43b06-bd46-4953-b043-5bf801c817e8",
           "initialKvStores": [

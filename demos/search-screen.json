@@ -31,8 +31,8 @@
           ]
         },
         "04b29471-bd7a-4227-8017-2a9b2dc3db7b": {
-          "subItptOf": "shnyder/md/NavSearchBar",
-          "canInterpretType": "shnyder/md/NavSearchBar-ObjectType",
+          "subItptOf": "shnyder/material-design/NavSearchBar",
+          "canInterpretType": "shnyder/material-design/NavSearchBar-ObjectType",
           "nameSelf": "04b29471-bd7a-4227-8017-2a9b2dc3db7b",
           "initialKvStores": [
             {
