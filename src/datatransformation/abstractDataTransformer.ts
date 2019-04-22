@@ -7,6 +7,7 @@ import { ILDOptionsMapStatePart } from "appstate/store";
 import { applicationStore } from "approot";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { ldOptionsClientSideUpdateAction, dispatchKvUpdateAction } from "appstate/epicducks/ldOptions-duck";
+import { LDError } from "appstate/LDError";
 
 export const AbstractDataTransformerItptKeys = [];
 export const AbstractDataTransformerOutputKVs: IKvStore[] = [];
@@ -30,8 +31,9 @@ export abstract class AbstractDataTransformer implements IBlueprintItpt {
 	isOutputDirty: boolean = false;
 	ldTkStr: string;
 
-	constructor() {
+	constructor(ldTkStr?: string) {
 		this.cfg = this.constructor["cfg"];
+		this.ldTkStr = ldTkStr;
 		this.itptKeys = AbstractDataTransformerItptKeys;
 		this.outputKvStores = AbstractDataTransformerOutputKVs;
 	}
@@ -88,8 +90,12 @@ export abstract class AbstractDataTransformer implements IBlueprintItpt {
 		const changedKvStores: IKvStore[] = this.mappingFunction(this.inputParams,
 			newOutputKvStores);
 		const thisLdTkStr: string = this.ldTkStr;
-		const updatedKvMap: OutputKVMap = this.outputKVMap;
-		applicationStore.dispatch(dispatchKvUpdateAction(changedKvStores, thisLdTkStr, updatedKvMap));
+		if (!thisLdTkStr) {
+			throw new LDError("ldTkStr hasn't been set, can't refresh output");
+		} else {
+			const updatedKvMap: OutputKVMap = this.outputKVMap;
+			applicationStore.dispatch(dispatchKvUpdateAction(changedKvStores, thisLdTkStr, updatedKvMap));
+		}
 	}
 
 }

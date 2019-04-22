@@ -511,7 +511,7 @@ const createItpts: (
 			itpt = ldBlueprint(subCfg)(itpt);
 			if (!isReactComponent(itpt)) {
 				//instantiation of non-visual blueprints here
-				connectNonVisLDComp(concatNWTkStr, new itpt());
+				connectNonVisLDComp(concatNWTkStr, new itpt(concatNWTkStr));
 				// TODO: determine outputKVMap here, maybe assign it to itpt-Blueprint-Class earlier, so that delta is always output
 			} else {
 				//instantiation done in React, Class defined here
