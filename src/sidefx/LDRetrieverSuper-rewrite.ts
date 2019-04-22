@@ -38,7 +38,7 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 	//non-interface declarations
 	protected apiCallOverride: (() => Promise<any>) | null = null;
 
-	constructor() {
+	constructor(ldTkStr?: string) {
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, null, [], [...ldRetrCfgIntrprtKeys, UserDefDict.outputKVMapKey]);
 		let okvMap = ldState.localValues.get(UserDefDict.outputKVMapKey);
@@ -49,7 +49,7 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 			isInputDirty: false,
 			isOutputDirty: false,
 			webContent: null,
-			retrieverStoreKey: null,
+			retrieverStoreKey: ldTkStr,
 			interpretableKeys: ldRetrCfgIntrprtKeys,
 			...ldState
 		};
