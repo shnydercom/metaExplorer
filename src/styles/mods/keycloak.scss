@@ -1,0 +1,26 @@
+.kc-signup {
+	height: 4em;
+	width: 100%;
+	//background-image: linear-gradient( $editor-background-color, $editor-background-elevated-color);
+	//color: #fff;
+
+	color: #00375f;
+	background-color: #41ae3fff;
+
+	display: flex;
+	justify-content: center;
+	align-items: stretch;
+	box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, .4);
+
+	.signinoutbtn {
+		flex: 1;
+		background-color: #41ae3fff;
+		color: white !important;// #00375f !important;
+		font-weight: bold;
+		height: 100%;
+
+		&:hover {
+			color: white !important;
+		}
+	}
+}

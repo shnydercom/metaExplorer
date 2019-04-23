@@ -27,4 +27,4 @@ export class MockItptRetriever implements IItptRetriever {
 }
 
 export let mockItptRetrieverFn = () => new MockItptRetriever();
-//"http://localhost:3000/static/productTestObjs/{identifier}.json",
+//"http://localhost:5000/static/productTestObjs/{identifier}.json",

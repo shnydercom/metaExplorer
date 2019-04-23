@@ -33,6 +33,10 @@ export class KeyCloakAuthAPI {
 		return KeyCloakAuthAPI.kcSingleton;
 	}
 
+	public static isInitialized(): boolean {
+		return !!KeyCloakAuthAPI.kcSingleton;
+	}
+
 	private static kcSingleton: KeyCloakAuthAPI;
 
 	private static initKeycloak(cfgSrc?: string): KeyCloakAuthAPI {

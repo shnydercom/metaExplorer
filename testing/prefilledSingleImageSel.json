@@ -142,7 +142,7 @@
         "nameSelf": "db530b76-baca-4370-ae6b-41a994ab1e4b",
         "initialKvStores": [{
           "key": "http://schema.org/contentUrl",
-          "value": "http://localhost:3000/static/localhost.png"
+          "value": "http://localhost:5000/static/localhost.png"
         }],
         "crudSkills": "cRud",
         "interpretableKeys": []

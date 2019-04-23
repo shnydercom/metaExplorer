@@ -12,6 +12,8 @@ export enum UserDefDict {
 	projectname = "projectName",
 	username = "userName",
 
+	configItpt = "configurationBlock",
+
 	/**
 	 * if a editor-defined interpreter references another interpreter that shall _not_ be sub-instantiated in the editor-defined
 	 * interpreter, a reference key to an external Interpreter is necessary

@@ -4,8 +4,6 @@ import { LDDict } from "ldaccess/LDDict";
 import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { KeyCloakAuthAPI, EVENT_KEYCLOAK_WEB_AUTH } from "../apis/KeyCloakAuthAPI";
-import { isObjPropertyRef } from "ldaccess/ldUtils";
-import { LDRetrieverSuperRewrite } from "sidefx/LDRetrieverSuper-rewrite";
 import { initLDLocalState } from "components/generic/generatorFns";
 import { AbstractDataTransformer } from "datatransformation/abstractDataTransformer";
 

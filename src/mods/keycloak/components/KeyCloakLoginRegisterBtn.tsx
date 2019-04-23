@@ -36,6 +36,7 @@ export const KCAuthenticatorCfg: BlueprintConfig = {
 };
 
 export interface KCAuthenticatorBtnState extends LDLocalState {
+	isKCAPIavailable: boolean;
 	isAuthenticated: boolean;
 }
 
@@ -46,7 +47,7 @@ export class KCAuthenticatorBtn extends Component<LDConnectedState & LDConnected
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: KCAuthenticatorBtnState): null | KCAuthenticatorBtnState {
-		let rvLD = gdsfpLD(nextProps, prevState, [], []);
+		let rvLD = gdsfpLD(nextProps, prevState, [], allMyInputKeys);
 		if (!rvLD) {
 			return null;
 		}
@@ -66,29 +67,42 @@ export class KCAuthenticatorBtn extends Component<LDConnectedState & LDConnected
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		const ldState = initLDLocalState(this.cfg, props, [], []);
+		const ldState = initLDLocalState(this.cfg, props, [], allMyInputKeys);
 
-		this.kcAPI = KeyCloakAuthAPI.getKeyCloakAuthAPISingleton();
-		this.kcAPI.addEventListener(EVENT_KEYCLOAK_WEB_AUTH,
-			(event) => {
-				this.setState({ ...this.state, isAuthenticated: event.kcState.isAuthenticated });
-			});
-		this.state = { ...ldState, isAuthenticated: this.kcAPI.getState().isAuthenticated };
+		if (KeyCloakAuthAPI.isInitialized()) {
+			this.kcAPI = KeyCloakAuthAPI.getKeyCloakAuthAPISingleton();
+			this.kcAPI.addEventListener(EVENT_KEYCLOAK_WEB_AUTH,
+				(event) => {
+					this.setState({ ...this.state, isAuthenticated: event.kcState.isAuthenticated });
+				});
+			this.state = { ...ldState, isAuthenticated: this.kcAPI.getState().isAuthenticated, isKCAPIavailable: true };
+		} else {
+			this.state = { ...ldState, isAuthenticated: false, isKCAPIavailable: false };
+		}
+
 	}
 	render() {
-		const { isAuthenticated, localValues } = this.state;
-		const redirLogin = localValues.get(loginRedir);
-		const redirLogout = localValues.get(logoutRedir);
-		return <div>
-			<h3>authenticate to keycloak</h3>
+		const { isAuthenticated, isKCAPIavailable, localValues } = this.state;
+		let redirLogin: string = localValues.get(loginRedir);
+		let redirLogout: string = localValues.get(logoutRedir);
+		if (redirLogin && !redirLogin.startsWith("http")) {
+			redirLogin = /*"http://" + window.location.host +*/ "/" + redirLogin;
+		}
+		if (redirLogout && !redirLogout.startsWith("http")) {
+			redirLogout = "http://" + window.location.host + "/" + redirLogout;
+		}
+		if (!isKCAPIavailable) {
+			return <div className="kc-signup"><b style={{ alignSelf: "center" }}>Keycloak adapter not initialised</b></div>;
+		}
+		return <div className="kc-signup">
 			{
 				isAuthenticated
 					?
-					<Button onClick={() => {
+					<Button className="signinoutbtn" onClick={() => {
 						KeyCloakAuthAPI.getKC().logout({ redirectUri: redirLogout });
 					}}>sign out</Button>
 					:
-					<Button onClick={() => {
+					<Button className="signinoutbtn" onClick={() => {
 						KeyCloakAuthAPI.getKC().login({ redirectUri: redirLogin });
 					}}>sign in</Button>
 			}
