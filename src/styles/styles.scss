@@ -712,3 +712,19 @@ $app-inner-width-90: $app-inner-width * 0.9;
 		opacity: 0.9;
 	}
 }
+
+.valueprop {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.valuepropimg {
+	min-height: 4em;
+	height: 4em;
+	margin-bottom: 1em;
+	padding-top: 1em;
+}
