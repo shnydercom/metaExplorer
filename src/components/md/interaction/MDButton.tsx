@@ -13,6 +13,7 @@ import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 import { ActionKeysDict } from 'components/actions/ActionDict';
+import { UserDefDict } from 'ldaccess/UserDefDict';
 
 export const MDButtonName = "shnyder/material-design/Button";
 const fontIcon = "fontIcon";
@@ -39,7 +40,7 @@ let initialKVStores: IKvStore[] = [
 	{
 		key: ActionKeysDict.action_confirm,
 		value: undefined,
-		ldType: LDDict.Action
+		ldType: UserDefDict.metaExplorerAction
 	},
 	{
 		key: fontIcon,

@@ -3,7 +3,7 @@ import { SFC, Component } from 'react';
 import { Store } from 'redux';
 import { Provider, connect } from 'react-redux';
 
-import { ExplorerState, configureStore, isProduction, modAPI, IAppConfigStatePart } from 'appstate/store';
+import { ExplorerState, configureStore, isProduction, modAPI, IAppConfigStatePart, isStateDebug } from 'appstate/store';
 
 //import {Observable} from 'rxjs';
 import ImageUploadComponent from 'components/imageupload-component';
@@ -117,7 +117,7 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 					</Switch>
 				</Router>
 				: <div className="approot-loading">loading</div>}
-				{isProduction ? null : <DevTools />}
+				{isProduction ? null : isStateDebug ? <DevTools /> : null}
 			</>
 		);
 	}

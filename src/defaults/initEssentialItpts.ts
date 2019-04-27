@@ -5,6 +5,7 @@ import { PureBaseContainerRewrite } from "components/generic/baseContainer-rewri
 import { ITPT_TAG_SPECIAL, ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
 import { magicCanInterpretType, PureMagicBox } from "components/generic/magicBox";
 import { projCfgName, PureProjectConfig } from "components/project-config";
+import { ActionComp, ActionCompName } from "components/generic/ActionComp";
 
 export function initEssentialItpts() {
 	let appIntRetr = appItptRetrFn();
@@ -12,4 +13,5 @@ export function initEssentialItpts() {
 	appIntRetr.addItpt(UserDefDict.itptContainerObjType, PureBaseContainerRewrite, "cRud", [ITPT_TAG_SPECIAL]);
 	appIntRetr.addItpt(magicCanInterpretType, PureMagicBox, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(projCfgName, PureProjectConfig, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(ActionCompName, ActionComp, "cRud", [ITPT_TAG_ATOMIC]);
 }

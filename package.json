@@ -32,7 +32,7 @@
   "scripts": {
     "test": "jest --watch",
     "build": "webpack --config=webpack.prod.config.js",
-    "start": "cross-env NODE_ENV=development webpack-dev-server",
+    "start": "cross-env NODE_ENV=development METAEXPLORER_MODE=demo webpack-dev-server",
     "startfornetwork": "webpack-dev-server --host 0.0.0.0",
     "lint": "tslint ./src/**/*.ts -t verbose",
     "compcss": "node-sass --output-style compressed ./src/styles/styles.scss > cat ./dist/style.css",

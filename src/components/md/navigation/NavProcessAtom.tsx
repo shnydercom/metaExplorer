@@ -63,7 +63,7 @@ let initialKVStores: IKvStore[] = [
 	{
 		key: ActionKeysDict.action_confirm,
 		value: undefined,
-		ldType: LDDict.Action
+		ldType: UserDefDict.metaExplorerAction
 	},
 	{
 		key: VisualKeysDict.cssClassName,

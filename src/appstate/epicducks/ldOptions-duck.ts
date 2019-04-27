@@ -19,15 +19,20 @@ export const LDOPTIONS_REQUEST_ASYNC = 'shnyder/LDOPTIONS_REQUEST_ASYNC';
 export const LDOPTIONS_REQUEST_ERROR = 'shnyder/LDOPTIONS_REQUEST_ERROR';
 export const LDOPTIONS_REQUEST_RESULT = 'shnyder/LDOPTIONS_REQUEST_RESULT';
 export const LDOPTIONS_KV_UPDATE = 'shnyder/LDOPTIONS_KV_UPDATE';
+export const ACTION_LDACTION = 'shnyder/ACTION_LDACTION';
 
 export type LD_KVUpdateAction = { type: 'shnyder/LDOPTIONS_KV_UPDATE', changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap };
+
+export type LDActionType = { type: 'shnyder/ACTION_LDACTION', ldId: string, ldType: string, payload: any };
+
 export type LDAction =
 	{ type: 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE', kvStores: IKvStore[], lang: string, alias: string }
 	| { type: 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE', updatedLDOptions: ILDOptions }
 	| { type: 'shnyder/LDOPTIONS_REQUEST_ASYNC', isExternalAPICall: boolean, uploadData: ILDOptions, targetUrl: string, targetReceiverLnk: string }
 	| { type: 'shnyder/LDOPTIONS_REQUEST_RESULT', ldOptionsPayload: IWebResource, targetReceiverLnk: string }
 	| { type: 'shnyder/LDOPTIONS_REQUEST_ERROR', message: string, targetReceiverLnk: string }
-	| LD_KVUpdateAction;
+	| LD_KVUpdateAction
+	| LDActionType;
 
 const externalAPICallDict = new Map<string, () => Promise<any>>();
 
@@ -97,10 +102,20 @@ export const dispatchKvUpdateAction = (changedKvStores: IKvStore[], thisLdTkStr:
 	updatedKvMap
 });
 
+/**
+ * dispatches an LDAction that can be handled globally by a type- or id- action-handler. Used for handling button-pressing etc.
+ * @param ldId one of id or ldType has to be defined
+ * @param ldType one of id or ldType has to be defined
+ * @param payload the payload for the actionhandler
+ */
+export const ldAction = (ldId: string, ldType: string, payload): LDActionType => ({ type: ACTION_LDACTION, ldId, ldType, payload });
+
 //this will modify the hashmap containing all the ILDOptions
 export const ldOptionsMapReducer = (
 	state: ILDOptionsMapStatePart = {}, action: LDAction): ILDOptionsMapStatePart => {
 	switch (action.type) {
+		case ACTION_LDACTION:
+			break;
 		case LDOPTIONS_CLIENTSIDE_CREATE:
 			let isUpdateNeeded: boolean = false;
 			let actionAlias: string = action.alias;

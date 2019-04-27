@@ -31,9 +31,11 @@ export interface ILDNonvisualIntrprtrMapStatePart {
 
 export const isProduction = process.env.NODE_ENV === 'production';
 
-export const isLoggedIn = true;
+export const isDemo = process.env.METAEXPLORER_MODE === 'demo';
+export const isStateDebug = process.env.METAEXPLORER_MODE === 'statedebug';
 
-let middleWare = isProduction ? applyMiddleware(epicMiddleware) : compose(applyMiddleware(epicMiddleware), DevTools.instrument());
+let middleWare = isProduction ? applyMiddleware(epicMiddleware) :
+  isStateDebug ? compose(applyMiddleware(epicMiddleware), DevTools.instrument()) : applyMiddleware(epicMiddleware);
 
 export interface IAppConfigStatePart {
   appKey: string;

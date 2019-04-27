@@ -11,11 +11,12 @@ import { initQRCODEGENClientMod, MOD_QRCODEGENSCAN_ID } from "./qr-code-genscan/
 import { isProduction } from "appstate/store";
 import { MOD_ONBOARDING_ID, initOnboardingMod } from "./onboarding/initOnboarding";
 import { MOD_KEYCLOAK_ID, initKeycloakMod } from "./keycloak/initKeyCloakMod";
+import { MOD_DEMO_ID, initDemoMod } from "./demo/initDemoMod";
 
 export function initMods(modAPI: ModAPI) {
 	//set the required mods (otherwise won't finish to load)
-
 	modAPI.addRequiredMod(MOD_KEYCLOAK_ID);
+	modAPI.addRequiredMod(MOD_DEMO_ID);
 	modAPI.addRequiredMod(MOD_QRCODEGENSCAN_ID);
 	modAPI.addRequiredMod(MOD_GOOGLE_ID);
 	modAPI.addRequiredMod(MOD_MAILCHIMP_ID);
@@ -25,6 +26,10 @@ export function initMods(modAPI: ModAPI) {
 	//mod initialization functions
 	modAPI.addModInitFn(MOD_KEYCLOAK_ID,
 		() => initKeycloakMod(),
+		[]
+	);
+	modAPI.addModInitFn(MOD_DEMO_ID,
+		() => initDemoMod(),
 		[]
 	);
 	modAPI.addModInitFn(MOD_HYDRA_ID,
@@ -61,6 +66,7 @@ export function initMods(modAPI: ModAPI) {
 	);
 	//get data for mods
 	applicationStore.dispatch(loadMod(MOD_KEYCLOAK_ID));
+	applicationStore.dispatch(loadMod(MOD_DEMO_ID));
 	applicationStore.dispatch(loadMod(MOD_QRCODEGENSCAN_ID));
 	applicationStore.dispatch(loadMod(MOD_GOOGLE_ID));
 	applicationStore.dispatch(loadMod(MOD_MAILCHIMP_ID));

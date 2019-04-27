@@ -5,7 +5,7 @@ import { Component, createFactory, ClassAttributes, ComponentElement, ReactEleme
 import { map } from "lodash";
 import { IconButton } from "react-toolbox/lib/button";
 import { Input } from "react-toolbox/lib/input";
-import { isLoggedIn } from "appstate/store";
+import { isDemo } from "appstate/store";
 import { Dialog } from "react-toolbox/lib/dialog";
 
 export interface OutputInfoNodeProps {
@@ -93,7 +93,7 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 	render() {
 		const { node } = this.props;
 		let { stItptName, blockNameInput, projName, userName, userProjectInput, userNameInput } = this.state;
-		let canChangeItpt: boolean = isLoggedIn;
+		let canChangeItpt: boolean = !isDemo;
 		let itptName = stItptName ? stItptName : "";
 		let isBtnEnabled = !!blockNameInput && !!userProjectInput && !!userNameInput && node.hasMainItpt();
 		const usrProj = node.getUserProject();

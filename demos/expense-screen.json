@@ -14,7 +14,7 @@
             {
               "key": "inputContainer",
               "value": {
-                "objRef": "a1d416fa-f99d-4ae7-a3b5-463c93a1d887",
+                "objRef": "343fe09a-602d-4ae2-9239-3b61b5819147",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -23,45 +23,6 @@
               "key": "routePath",
               "value": "/expense-form",
               "ldType": "http://schema.org/Text"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": [
-            "inputContainer"
-          ]
-        },
-        "a1d416fa-f99d-4ae7-a3b5-463c93a1d887": {
-          "subItptOf": "shnyder/material-design/NavProcessAtom",
-          "canInterpretType": "shnyder/material-design/NavProcessAtom-ObjectType",
-          "nameSelf": "a1d416fa-f99d-4ae7-a3b5-463c93a1d887",
-          "initialKvStores": [
-            {
-              "key": "inputContainer",
-              "value": {
-                "objRef": "343fe09a-602d-4ae2-9239-3b61b5819147",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
-            },
-            {
-              "key": "HeaderText",
-              "value": "Fill in an expense",
-              "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "confirmTxt",
-              "value": "save",
-              "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "RouteSend_cancel",
-              "value": "../",
-              "ldType": "Route_Added"
-            },
-            {
-              "key": "RouteSend_confirm",
-              "value": "../",
-              "ldType": "Route_Added"
             }
           ],
           "crudSkills": "cRud",

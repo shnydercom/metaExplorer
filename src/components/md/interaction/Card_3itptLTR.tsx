@@ -44,7 +44,7 @@ let initialKVStores: IKvStore[] = [
 	{
 		key: ACTION_MIDDLE_CONTAINER,
 		value: undefined,
-		ldType: LDDict.Action
+		ldType: UserDefDict.metaExplorerAction
 	}
 ];
 export const createLayoutBpCfg: (nameSelf: string) => BlueprintConfig = (nameSelf: string) => {
