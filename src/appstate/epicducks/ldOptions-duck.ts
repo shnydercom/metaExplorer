@@ -115,6 +115,7 @@ export const ldOptionsMapReducer = (
 	state: ILDOptionsMapStatePart = {}, action: LDAction): ILDOptionsMapStatePart => {
 	switch (action.type) {
 		case ACTION_LDACTION:
+			console.log("metaExplorer-Action dispatched");
 			break;
 		case LDOPTIONS_CLIENTSIDE_CREATE:
 			let isUpdateNeeded: boolean = false;

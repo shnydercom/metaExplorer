@@ -2,7 +2,7 @@ import { ExplorerState } from "appstate/store";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { IKvStore } from "ldaccess/ikvstore";
-import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction, dispatchKvUpdateAction } from "appstate/epicducks/ldOptions-duck";
+import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction, dispatchKvUpdateAction, ldAction } from "appstate/epicducks/ldOptions-duck";
 import { ILDResource } from "ldaccess/ildresource";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { OutputKVMapElement, OutputKVMap, BlueprintConfig } from "ldaccess/ldBlueprint";
@@ -121,5 +121,10 @@ export const mapDispatchToProps = (dispatch: Dispatch<Action<any>>, ownProps: LD
 		}
 		dispatch(dispatchKvUpdateAction(changedKvStores, thisLdTkStr, updatedKvMap));
 		return;
+	},
+	dispatchLdAction: (ldId: string, ldType: string, payload) => {
+		if (!payload) return;
+		if (!ldId && !ldType) return;
+		dispatch(ldAction(ldId, ldType, payload));
 	}
 });

@@ -11,6 +11,12 @@ export const typeField = "actionType";
 
 export const ActionCompName: string = "ActionComponent";
 
+export interface ActionType {
+	ldId: string;
+	ldType: string;
+	payload: any;
+}
+
 export const ActionCompKeys: string[] = [idField, typeField, payloadInputKey];
 export const ActionCompOutputKVs: IKvStore[] = [
 	{
@@ -67,14 +73,13 @@ export class ActionComp extends AbstractDataTransformer {
 		let idFieldKv = inputParams.get(idField);
 		let typeFieldKv = inputParams.get(typeField);
 		if (payloadInputKv && idFieldKv && typeFieldKv) {
-			if (payloadInputKv.value && idFieldKv.value && typeFieldKv.value
-				&& Array.isArray(payloadInputKv.value)) {
+			if (payloadInputKv.value && (idFieldKv.value || typeFieldKv.value)) {
 				let payload: any[] = payloadInputKv.value;
 				//source type constants
 				const idFieldConst = idFieldKv.value;
 				const typeFieldConst = typeFieldKv.value;
 
-				const newAction = {
+				const newAction: ActionType = {
 					ldId: idFieldConst,
 					ldType: typeFieldConst,
 					payload: payload

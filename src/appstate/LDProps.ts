@@ -37,6 +37,8 @@ export type LDConnectedDispatch = {
 	 * @param updatedKvMap the values that shall be updated. Unchanged values of the kvMap aren't affected
 	 */
 	dispatchKvOutput: (changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => void;
+
+	dispatchLdAction: (ldId: string, ldType: string, payload) => void;
 };
 
 export type LDConnectedState = {

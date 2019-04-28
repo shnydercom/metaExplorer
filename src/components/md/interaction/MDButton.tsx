@@ -14,6 +14,7 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 import { ActionKeysDict } from 'components/actions/ActionDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
+import { ActionType } from 'components/generic/ActionComp';
 
 export const MDButtonName = "shnyder/material-design/Button";
 const fontIcon = "fontIcon";
@@ -117,8 +118,10 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 	}
 
 	onConfirmClick = () => {
-		let confirmAction = this.state.localValues.get(ActionKeysDict.action_confirm);
-		//TODO: execute that action
+		let confirmAction: ActionType = this.state.localValues.get(ActionKeysDict.action_confirm);
+		if (confirmAction) {
+			this.props.dispatchLdAction(confirmAction.ldId, confirmAction.ldType, confirmAction.payload);
+		}
 		this.setState({
 			...this.state,
 			isDoRedirectConfirm: true
@@ -137,7 +140,7 @@ export class PureMDButton extends Component<LDConnectedState & LDConnectedDispat
 			this.setState({ ...this.state, isDoRedirectConfirm: false });
 			return <Redirect to={route} />;
 		}
-		if (isIconVal){
+		if (isIconVal) {
 			return <Button accent floating icon={iconUrlVal ? iconUrlVal : null} onClick={() => this.onConfirmClick()} ></Button>;
 		}
 		return <Button icon={iconUrlVal ? iconUrlVal : null} label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />;

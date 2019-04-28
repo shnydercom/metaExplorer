@@ -16,6 +16,7 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 import { ActionKeysDict } from 'components/actions/ActionDict';
 import { classNamesLD } from 'components/reactUtils/compUtilFns';
+import { ActionType } from 'components/generic/ActionComp';
 
 export const NavProcessAtomName = "shnyder/material-design/NavProcessAtom";
 let cfgIntrprtKeys: string[] =
@@ -96,7 +97,9 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 				VisualKeysDict.cancelTxt,
 				VisualKeysDict.confirmTxt,
 				VisualKeysDict.routeSend_cancel,
-				VisualKeysDict.routeSend_confirm
+				VisualKeysDict.routeSend_confirm,
+				ActionKeysDict.action_confirm,
+				VisualKeysDict.cssClassName
 			]);
 		if (!rvLD) {
 			return null;
@@ -129,7 +132,9 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 					VisualKeysDict.cancelTxt,
 					VisualKeysDict.confirmTxt,
 					VisualKeysDict.routeSend_cancel,
-					VisualKeysDict.routeSend_confirm
+					VisualKeysDict.routeSend_confirm,
+					ActionKeysDict.action_confirm,
+					VisualKeysDict.cssClassName
 				])
 		};
 	}
@@ -142,6 +147,10 @@ export class PureNavProcessAtom extends Component<LDConnectedState & LDConnected
 	}
 
 	onConfirmClick = () => {
+		let confirmAction: ActionType = this.state.localValues.get(ActionKeysDict.action_confirm);
+		if (confirmAction) {
+			this.props.dispatchLdAction(confirmAction.ldId, confirmAction.ldType, confirmAction.payload);
+		}
 		this.setState({
 			...this.state,
 			isDoRedirectConfirm: true
