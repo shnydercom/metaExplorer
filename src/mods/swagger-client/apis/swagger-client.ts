@@ -109,8 +109,9 @@ export class SwaggerClientAPI {
     }
     for (let idx = 0; idx < bpcfgs.length; idx++) {
       const cfg = bpcfgs[idx];
-      const RetrieverItptClass = ldBlueprint(cfg)(LDRetrieverSuperRewrite);
-      this.itptBpcfSet.set(cfg.nameSelf, RetrieverItptClass);
+      //TODO: review this because of use of abstract LDRetrieverSuperRewrite's constructor with 2 params
+      //const RetrieverItptClass = ldBlueprint(cfg)(LDRetrieverSuperRewrite);
+      //this.itptBpcfSet.set(cfg.nameSelf, RetrieverItptClass);
     }
   }
 

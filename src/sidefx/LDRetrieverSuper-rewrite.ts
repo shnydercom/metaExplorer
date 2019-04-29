@@ -29,18 +29,21 @@ export interface LDRetrieverSuperState extends LDLocalState {
 	interpretableKeys: string[];
 }
 
-export class LDRetrieverSuperRewrite implements IBlueprintItpt {
+export abstract class LDRetrieverSuperRewrite implements IBlueprintItpt {
 	//member-declarations for the interface
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	initialKvStores: IKvStore[];
+	inputKeys: string[];
 	protected state: LDRetrieverSuperState;
 	//non-interface declarations
 	protected apiCallOverride: (() => Promise<any>) | null = null;
 
-	constructor(ldTkStr?: string) {
+	constructor(ldTkStr?: string, inputKeys?: string[]) {
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		const ldState = initLDLocalState(this.cfg, null, [], [...ldRetrCfgIntrprtKeys, UserDefDict.outputKVMapKey]);
+		inputKeys = inputKeys ? inputKeys : ldRetrCfgIntrprtKeys;
+		this.inputKeys = inputKeys;
+		const ldState = initLDLocalState(this.cfg, null, [], [...inputKeys, UserDefDict.outputKVMapKey]);
 		let okvMap = ldState.localValues.get(UserDefDict.outputKVMapKey);
 		if (okvMap) {
 			this.outputKVMap = okvMap;
@@ -50,7 +53,7 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 			isOutputDirty: false,
 			webContent: null,
 			retrieverStoreKey: ldTkStr,
-			interpretableKeys: ldRetrCfgIntrprtKeys,
+			interpretableKeys: this.inputKeys,
 			...ldState
 		};
 	}
@@ -63,8 +66,8 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 		if (!ldOptions || !ldOptions.resource || !ldOptions.resource.kvStores) return;
 		const gdsfpResult = this.consumeLDOptionsLikeGDSFP(ldOptions);
 		if (gdsfpResult) {
-			for (let idx = 0; idx < ldRetrCfgIntrprtKeys.length; idx++) {
-				const inputKey = ldRetrCfgIntrprtKeys[idx];
+			for (let idx = 0; idx < this.inputKeys.length; idx++) {
+				const inputKey = this.inputKeys[idx];
 				let param = gdsfpResult.localValues.get(inputKey);
 				if (!param) break;
 				let prevParam = this.state.localValues.get(inputKey);
@@ -109,8 +112,8 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 			if (!this.apiCallOverride) {
 				const { localValues } = this.state;
 				//if it's an jsonld-request
-				let srvUrl: string = localValues.get(ldRetrCfgIntrprtKeys[0]);
-				let identifier: string = localValues.get(ldRetrCfgIntrprtKeys[1]);
+				let srvUrl: string = localValues.get(this.inputKeys[0]);
+				let identifier: string = localValues.get(this.inputKeys[1]);
 				if (srvUrl && srvUrl.length > 0
 					&& identifier !== null && identifier !== undefined) {
 					this.setState({ ...this.state, isInputDirty: false });
@@ -221,7 +224,7 @@ export class LDRetrieverSuperRewrite implements IBlueprintItpt {
 
 		let rvLD = gdsfpLD(nextProps, prevState,
 			[],
-			[...ldRetrCfgIntrprtKeys, UserDefDict.outputKVMapKey],
+			[...this.inputKeys, UserDefDict.outputKVMapKey],
 			null
 		);
 		if (!rvLD) {
