@@ -12,7 +12,7 @@ import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
-import { ActionKeysDict } from 'components/actions/ActionDict';
+import { ActionKeysDict, ActionTypesDict } from 'components/actions/ActionDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { ActionType } from 'components/generic/ActionComp';
 
@@ -41,7 +41,7 @@ let initialKVStores: IKvStore[] = [
 	{
 		key: ActionKeysDict.action_confirm,
 		value: undefined,
-		ldType: UserDefDict.metaExplorerAction
+		ldType: ActionTypesDict.metaExplorerAction
 	},
 	{
 		key: fontIcon,

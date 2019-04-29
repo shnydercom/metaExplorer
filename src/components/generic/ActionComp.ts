@@ -3,6 +3,7 @@ import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { LDDict } from "ldaccess/LDDict";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { AbstractDataTransformer } from "datatransformation/abstractDataTransformer";
+import { ActionTypesDict } from "components/actions/ActionDict";
 
 export const payloadInputKey = UserDefDict.inputData;
 export const transfOutputKey = UserDefDict.outputData;
@@ -22,7 +23,7 @@ export const ActionCompOutputKVs: IKvStore[] = [
 	{
 		key: transfOutputKey,
 		value: undefined,
-		ldType: UserDefDict.metaExplorerAction
+		ldType: ActionTypesDict.metaExplorerAction
 	}
 ];
 

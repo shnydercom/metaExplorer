@@ -4,4 +4,5 @@ export enum ActionKeysDict {
 }
 
 export enum ActionTypesDict {
+	metaExplorerAction = "MetaExplorerAction",
 }

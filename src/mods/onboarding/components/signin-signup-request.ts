@@ -50,7 +50,7 @@ export class SignInSignupRequest extends LDRetrieverSuperRewrite {
 						Authorization: 'Bearer ' + tokenValue,
 					}
 				)
-			}				//'/api/login'
+			}
 			).then((response) => {
 				if (response.status >= 400) {
 					reject("Bad response from server");

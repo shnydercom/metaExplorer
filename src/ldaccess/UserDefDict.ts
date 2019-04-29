@@ -70,8 +70,6 @@ export enum UserDefDict {
 
 	standardItptObjectTypeSuffix = "-ObjectType",
 
-	metaExplorerAction = "MetaExplorerAction",
-
 	/**
 	 * in order for e.g. list elements to generate their own visuals,
 	 * they need to know which data element they should access.

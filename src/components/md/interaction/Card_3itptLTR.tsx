@@ -10,6 +10,7 @@ import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualD
 import { LDDict } from 'ldaccess/LDDict';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 import { Redirect } from 'react-router';
+import { ActionTypesDict } from 'components/actions/ActionDict';
 
 export const CONTAINER_FRONT = "frontContainer";
 export const CONTAINER_MIDDLE = "middleContainer";
@@ -44,7 +45,7 @@ let initialKVStores: IKvStore[] = [
 	{
 		key: ACTION_MIDDLE_CONTAINER,
 		value: undefined,
-		ldType: UserDefDict.metaExplorerAction
+		ldType: ActionTypesDict.metaExplorerAction
 	}
 ];
 export const createLayoutBpCfg: (nameSelf: string) => BlueprintConfig = (nameSelf: string) => {
@@ -100,7 +101,7 @@ export class PureCard3itptLTR extends Component<LDConnectedState & LDConnectedDi
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, props, cfgIntrprtKeys.slice(0, 3),
-		cfgIntrprtKeys.slice(3));
+			cfgIntrprtKeys.slice(3));
 		this.state = {
 			isDoRedirectFromMiddleContent: false,
 			...ldState,
