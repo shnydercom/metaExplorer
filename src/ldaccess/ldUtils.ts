@@ -138,3 +138,11 @@ export const getKVValue = (input: IKvStore | string | number): any => {
 	if (isObjPropertyRef(input.value)) return null;
 	return input.value;
 };
+
+export const itptKeysFromInputKvs = (inputKvStores: IKvStore[]): string[] => {
+	let rv = [];
+	inputKvStores.forEach((value) => {
+		rv.push(value.key);
+	});
+	return rv;
+};

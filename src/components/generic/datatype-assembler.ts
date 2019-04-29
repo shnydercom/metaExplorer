@@ -3,6 +3,7 @@ import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { VisualTypesDict } from "components/visualcomposition/visualDict";
 import { AbstractDataTransformer } from "datatransformation/abstractDataTransformer";
+import { itptKeysFromInputKvs } from "ldaccess/ldUtils";
 
 const transfOutputKey = UserDefDict.outputData;
 
@@ -48,10 +49,7 @@ export function flatDataTypeAssemblerFactory(inputKvStores: IKvStore[], nameSelf
 		...ActionCompOutputKVs
 	];
 
-	const interpretableKeys: string[] = [];
-	inputKvStores.forEach((value, idx) => {
-		interpretableKeys.push(value.key);
-	});
+	const interpretableKeys: string[] = itptKeysFromInputKvs(inputKvStores);
 
 	let bpCfg: BlueprintConfig = {
 		subItptOf: null,

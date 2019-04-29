@@ -20,7 +20,7 @@
               "ldType": "InterpreterClassType"
             },
             {
-              "key": "configurationBlock",
+              "key": "configurationBlocks",
               "value": {
                 "objRef": "8e8a7d7d-1013-4965-a9a9-9207ca899014",
                 "propRef": null
@@ -31,7 +31,7 @@
           "crudSkills": "cRud",
           "interpretableKeys": [
             "inputContainer",
-            "configurationBlock"
+            "configurationBlocks"
           ]
         },
         "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725": {

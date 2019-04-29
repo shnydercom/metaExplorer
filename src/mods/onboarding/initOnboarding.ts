@@ -13,6 +13,7 @@ import { LayoutVHCenteredColumnName, PureVHcenteredColumnLayout } from "componen
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { PureBaseContainerRewrite } from "components/generic/baseContainer-rewrite";
 import { PureRefMapItpt } from "components/generic/RefMapItpt-component";
+import { SignInSignupRequest, signinSignupName } from "./components/signin-signup-request";
 
 export const MOD_ONBOARDING_ID = "onboarding";
 export const MOD_ONBOARDING_NAME = "Onboarding Mod";
@@ -33,6 +34,7 @@ export function initOnboardingMod(): Promise<IModStatus> {
 		let textInputName = LDDict.Text;
 		onboardingRetrieverRedux.addItpt(textInputName, appIntRetr.getItptByNameSelf("shnyder/material-design/" + textInputName), "CRUd", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
 		onboardingRetrieverRedux.addItpt(LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, "cRud", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
+		appIntRetr.addItpt(signinSignupName, SignInSignupRequest, "cRud", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
 		onboardingRetrieverRedux.addItpt(UserDefDict.intrprtrBPCfgRefMapType, PureRefMapItpt, "cRud", [ITPT_TAG_SPECIAL]);
 		onboardingRetrieverRedux.addItpt(UserDefDict.itptContainerObjType, PureBaseContainerRewrite, "cRud", [ITPT_TAG_SPECIAL]);
 		addBlueprintToRetriever(onboardingQRCfg, MOD_ONBOARDING_RETRIEVER_NAME);
