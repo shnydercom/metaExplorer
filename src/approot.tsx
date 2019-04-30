@@ -45,7 +45,11 @@ const initialState: ExplorerState = {
 		isIdle: true,
 		map: {}
 	},
-	isLoading: false
+	isLoading: false,
+	actionHandlerMap: {
+		idHandler: {},
+		typehandler: {}
+	}
 };
 
 /*export type DemoCompleteReceiver = {

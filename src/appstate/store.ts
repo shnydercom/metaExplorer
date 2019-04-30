@@ -25,6 +25,15 @@ export interface ILDOptionsMapStatePart {
   [s: string]: ILDOptions;
 }
 
+export interface ILDActionsHandlerStatePart {
+  typehandler: {
+    [s: string]: string;
+  };
+  idHandler: {
+    [s: string]: string;
+  };
+}
+
 export interface ILDNonvisualIntrprtrMapStatePart {
   [s: string]: IBlueprintItpt;
 }
@@ -51,6 +60,7 @@ export interface ExplorerState {
   //error: string,
   ldoptionsMap: ILDOptionsMapStatePart;
   ldNonVisualMap: ILDNonvisualIntrprtrMapStatePart;
+  actionHandlerMap: ILDActionsHandlerStatePart;
 }
 export function configureStore(initialState: ExplorerState): Store<ExplorerState> {
   const store: Store<ExplorerState> = createStore<ExplorerState, any, any, any>(

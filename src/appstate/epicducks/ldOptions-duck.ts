@@ -12,6 +12,8 @@ import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
 import { OutputKVMap } from 'ldaccess/ldBlueprint';
 import { tap, mergeMap, map, catchError } from 'rxjs/operators';
 import { LDOptionsAPI } from 'apis/ldoptions-api';
+import { applicationStore } from 'approot';
+import { ActionKeysDict } from 'components/actions/ActionDict';
 
 export const LDOPTIONS_CLIENTSIDE_CREATE = 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE';
 export const LDOPTIONS_CLIENTSIDE_UPDATE = 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE';
@@ -115,8 +117,42 @@ export const ldOptionsMapReducer = (
 	state: ILDOptionsMapStatePart = {}, action: LDAction): ILDOptionsMapStatePart => {
 	switch (action.type) {
 		case ACTION_LDACTION:
-			console.log("metaExplorer-Action dispatched");
-			break;
+			const allState = applicationStore.getState();
+			const { ldId, ldType } = action;
+			let typedCfg = {};
+			let idCfg = {};
+			if (ldId) {
+				const idHandler = allState.actionHandlerMap.idHandler[ldId];
+				let idLDOptions: ILDOptions = ldOptionsDeepCopy(state[idHandler]);
+				let internalAction = idLDOptions.resource.kvStores.find((a) => a.key === ActionKeysDict.action_internal);
+				if (internalAction) {
+					internalAction.value = action.payload;
+				} else {
+					idLDOptions.resource.kvStores.unshift({
+						key: ActionKeysDict.action_internal,
+						value: action.payload,
+						ldType: undefined
+					});
+				}
+				idCfg = { [idHandler]: idLDOptions };
+			}
+			if (ldType) {
+				const typeHandler = allState.actionHandlerMap.typehandler[ldType];
+				let typeLDOptions: ILDOptions = ldOptionsDeepCopy(state[typeHandler]);
+				let internalAction = typeLDOptions.resource.kvStores.find((a) => a.key === ActionKeysDict.action_internal);
+				if (internalAction) {
+					internalAction.value = action.payload;
+				} else {
+					typeLDOptions.resource.kvStores.unshift({
+						key: ActionKeysDict.action_internal,
+						value: action.payload,
+						ldType: undefined
+					});
+				}
+				typedCfg = { [typeHandler]: typeLDOptions };
+			}
+			let newState = Object.assign({}, state, { ...idCfg, ...typedCfg });
+			return newState;
 		case LDOPTIONS_CLIENTSIDE_CREATE:
 			let isUpdateNeeded: boolean = false;
 			let actionAlias: string = action.alias;

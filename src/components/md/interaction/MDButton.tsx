@@ -12,9 +12,8 @@ import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
-import { ActionKeysDict, ActionTypesDict } from 'components/actions/ActionDict';
+import { ActionKeysDict, ActionTypesDict, ActionType } from 'components/actions/ActionDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { ActionType } from 'components/generic/ActionComp';
 
 export const MDButtonName = "shnyder/material-design/Button";
 const fontIcon = "fontIcon";

@@ -6,7 +6,6 @@ export const ACTION_APPCFG_UPDATE_ITPT = 'shnyder/APPCFG_UPDATE_ITPT';
 
 export type AppCfgAction =
 	{ type: 'shnyder/APPCFG_UPDATE_KEY', appKey: string } |
-
 	{ type: 'shnyder/APPCFG_UPDATE_ITPT', mainItpt: string } |
 	ModErrorAction;
 

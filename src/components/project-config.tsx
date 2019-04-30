@@ -4,7 +4,7 @@ import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component, ComponentClass, StatelessComponent, Fragment } from 'react';
 import { LDDict } from 'ldaccess/LDDict';
 import { isReactComponent } from 'components/reactUtils/reactUtilFns';
 import { VisualKeysDict } from './visualcomposition/visualDict';
@@ -53,7 +53,7 @@ export class PureProjectConfig extends Component<LDConnectedState & LDConnectedD
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: ProjectConfigState): null | ProjectConfigState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.inputContainer], [VisualKeysDict.cssClassName]);
+			nextProps, prevState, [VisualKeysDict.inputContainer], [UserDefDict.configItpt, VisualKeysDict.cssClassName], null, [true]);
 		if (!rvLD) {
 			return null;
 		}
@@ -69,27 +69,52 @@ export class PureProjectConfig extends Component<LDConnectedState & LDConnectedD
 	initialKvStores: IKvStore[];
 	styleClassName: string;
 
-	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
+	protected renderInputContainer = generateItptFromCompInfo.bind(this);
 
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.inputContainer],
-			[VisualKeysDict.cssClassName]);
+			[UserDefDict.configItpt, VisualKeysDict.cssClassName]);
 		this.state = {
 			...ldState,
 		};
 	}
 	render() {
-		let renderFreeResult: JSX.Element = this.renderInputContainer();
-		const { localValues } = this.state;
-		if (isReactComponent(renderFreeResult)) {
-			const cssClassName = localValues.get(VisualKeysDict.cssClassName);
-			if (!!renderFreeResult && !!cssClassName /*&& renderFreeResult.hasOwnProperty("className")*/) {
-				/*renderFreeResult["className"] = cssClassName;*/
-				return <div className={cssClassName}>{renderFreeResult}</div>;
+		//let renderFreeResult: JSX.Element = this.renderInputContainer();
+		let listSections = [];
+		const sectionElems = this.state.compInfos.get(VisualKeysDict.inputContainer);
+		const { routes } = this.props;
+		if (Array.isArray(sectionElems)) {
+			sectionElems.forEach((elem, displayIdx) => {
+				listSections.push(this.renderInputContainer(VisualKeysDict.inputContainer, routes, displayIdx));
 			}
+			);
+		} else {
+			listSections.push(this.renderInputContainer(VisualKeysDict.inputContainer, routes));
 		}
-		return <>{renderFreeResult}</>;
+		if (!listSections || listSections.length === 0) return null;
+
+		const cssClassName = this.state.localValues.get(VisualKeysDict.cssClassName);
+		if (!!cssClassName) {
+			return <div className={cssClassName}>{
+				listSections.map((listSection, idx) => {
+					if (!listSection) return null;
+					return <Fragment key={"frag" + idx}>
+						{listSection}
+					</Fragment>;
+				}
+				)
+			}</div>;
+		}
+		return <>{
+			listSections.map((listSection, idx) => {
+				if (!listSection) return null;
+				return <Fragment key={"frag" + idx}>
+					{listSection}
+				</Fragment>;
+			}
+			)
+		}</>;
 	}
 }

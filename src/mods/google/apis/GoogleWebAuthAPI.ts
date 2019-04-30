@@ -5,8 +5,8 @@ import { getAPI } from 'googleapis/build/src/shared/src';*/
 //test data, to be ld-input parameters later:
 export let gwaTestCfg: GoogleWebAuthAPICfg = {
 	scope: 'https://www.googleapis.com/auth/spreadsheets.readonly',
-	apiKey: 'AIzaSyBGoOzD583AP7izQdrdDjvCIKnXln1v38c',
-	clientID: '988991312764-rj2bejoo1n2li9gala129dobmfpeminf.apps.googleusercontent.com',
+	apiKey: 'yourAPIKey',
+	clientID: 'somelongid.apps.googleusercontent.com',
 	docsToLoad: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
 };
 

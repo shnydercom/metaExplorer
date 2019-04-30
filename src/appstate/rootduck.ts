@@ -11,6 +11,7 @@ import { linearReducer, linearSplitEpic } from './epicducks/linearSplit-duck';
 import loadModEpic, { modStatePartReducer } from './epicducks/mod-duck';
 import { appCfgStatePartReducer } from './epicducks/appCfg-duck';
 import { isLoadingReducer, loadingEpic } from './epicducks/isLoading-duck';
+import { actionHandlerReducer } from './epicducks/action-duck';
 
 const combLdOptionsMapReducer = reduceReducers(ldOptionsMapReducer, refMapReducer, linearReducer);
 
@@ -21,7 +22,8 @@ export const rootReducer = combineReducers<ExplorerState>({
     isSaving: isLoadingSchemaReducer,
     ldoptionsMap: combLdOptionsMapReducer,
     ldNonVisualMap: ldNonVisMapReducer,
-    mods: modStatePartReducer
+    mods: modStatePartReducer,
+    actionHandlerMap: actionHandlerReducer
 });
 
 export const rootEpic = combineEpics(

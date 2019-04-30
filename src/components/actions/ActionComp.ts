@@ -3,7 +3,7 @@ import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { LDDict } from "ldaccess/LDDict";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { AbstractDataTransformer } from "datatransformation/abstractDataTransformer";
-import { ActionTypesDict } from "components/actions/ActionDict";
+import { ActionTypesDict, ActionType } from "components/actions/ActionDict";
 
 export const payloadInputKey = UserDefDict.inputData;
 export const transfOutputKey = UserDefDict.outputData;
@@ -11,12 +11,6 @@ export const idField = "actionId";
 export const typeField = "actionType";
 
 export const ActionCompName: string = "ActionComponent";
-
-export interface ActionType {
-	ldId: string;
-	ldType: string;
-	payload: any;
-}
 
 export const ActionCompKeys: string[] = [idField, typeField, payloadInputKey];
 export const ActionCompOutputKVs: IKvStore[] = [

@@ -14,9 +14,8 @@ import { generateItptFromCompInfo, initLDLocalState, gdsfpLD } from '../../gener
 import { Redirect } from 'react-router';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
-import { ActionKeysDict, ActionTypesDict } from 'components/actions/ActionDict';
+import { ActionKeysDict, ActionTypesDict, ActionType } from 'components/actions/ActionDict';
 import { classNamesLD } from 'components/reactUtils/compUtilFns';
-import { ActionType } from 'components/generic/ActionComp';
 
 export const NavProcessAtomName = "shnyder/material-design/NavProcessAtom";
 let cfgIntrprtKeys: string[] =
