@@ -25,7 +25,7 @@ export const ACTION_LDACTION = 'shnyder/ACTION_LDACTION';
 
 export type LD_KVUpdateAction = { type: 'shnyder/LDOPTIONS_KV_UPDATE', changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap };
 
-export type LDActionType = { type: 'shnyder/ACTION_LDACTION', ldId: string, ldType: string, payload: any };
+export type LDActionType = { type: 'shnyder/ACTION_LDACTION', payload: any, idHandler: string, typeHandler: string };
 
 export type LDAction =
 	{ type: 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE', kvStores: IKvStore[], lang: string, alias: string }
@@ -110,19 +110,28 @@ export const dispatchKvUpdateAction = (changedKvStores: IKvStore[], thisLdTkStr:
  * @param ldType one of id or ldType has to be defined
  * @param payload the payload for the actionhandler
  */
-export const ldAction = (ldId: string, ldType: string, payload): LDActionType => ({ type: ACTION_LDACTION, ldId, ldType, payload });
+export const ldAction = (ldId: string, ldType: string, payload): LDActionType => {
+	const allState = applicationStore.getState();
+	let idHandler = null;
+	let typeHandler = null;
+	if (ldId) {
+		idHandler = allState.actionHandlerMap.idHandler[ldId];
+	}
+	if (ldType) {
+		typeHandler = allState.actionHandlerMap.typehandler[ldType];
+	}
+	return { type: ACTION_LDACTION, payload, idHandler, typeHandler };
+};
 
 //this will modify the hashmap containing all the ILDOptions
 export const ldOptionsMapReducer = (
 	state: ILDOptionsMapStatePart = {}, action: LDAction): ILDOptionsMapStatePart => {
 	switch (action.type) {
 		case ACTION_LDACTION:
-			const allState = applicationStore.getState();
-			const { ldId, ldType } = action;
+			const { idHandler, typeHandler } = action;
 			let typedCfg = {};
 			let idCfg = {};
-			if (ldId) {
-				const idHandler = allState.actionHandlerMap.idHandler[ldId];
+			if (idHandler) {
 				let idLDOptions: ILDOptions = ldOptionsDeepCopy(state[idHandler]);
 				let internalAction = idLDOptions.resource.kvStores.find((a) => a.key === ActionKeysDict.action_internal);
 				if (internalAction) {
@@ -136,8 +145,7 @@ export const ldOptionsMapReducer = (
 				}
 				idCfg = { [idHandler]: idLDOptions };
 			}
-			if (ldType) {
-				const typeHandler = allState.actionHandlerMap.typehandler[ldType];
+			if (typeHandler) {
 				let typeLDOptions: ILDOptions = ldOptionsDeepCopy(state[typeHandler]);
 				let internalAction = typeLDOptions.resource.kvStores.find((a) => a.key === ActionKeysDict.action_internal);
 				if (internalAction) {
@@ -151,8 +159,8 @@ export const ldOptionsMapReducer = (
 				}
 				typedCfg = { [typeHandler]: typeLDOptions };
 			}
-			let newState = Object.assign({}, state, { ...idCfg, ...typedCfg });
-			return newState;
+			let newLDActionState = Object.assign({}, state, { ...idCfg, ...typedCfg });
+			return newLDActionState;
 		case LDOPTIONS_CLIENTSIDE_CREATE:
 			let isUpdateNeeded: boolean = false;
 			let actionAlias: string = action.alias;

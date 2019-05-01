@@ -35,8 +35,8 @@ export const ActionHandlerInputKVs: IKvStore[] = [
 ];
 
 const initialKVStores: IKvStore[] = [
-	...ActionHandlerOutputKVs,
-	...ActionHandlerInputKVs
+	...ActionHandlerInputKVs,
+	...ActionHandlerOutputKVs
 ];
 
 let bpCfg: BlueprintConfig = {
@@ -50,7 +50,7 @@ let bpCfg: BlueprintConfig = {
 export class ActionHandler extends AbstractDataTransformer {
 	constructor(ldTkStr?: string) {
 		super(ldTkStr);
-		this.itptKeys = ActionHandlerKeys;
+		this.itptKeys = [ActionKeysDict.action_internal, ...ActionHandlerKeys];
 		this.outputKvStores = ActionHandlerOutputKVs;
 		let typeKv = this.cfg.initialKvStores.find((val) => val.key === handleTypeKey);
 		let idKv = this.cfg.initialKvStores.find((val) => val.key === handleIdKey);
@@ -73,13 +73,11 @@ export class ActionHandler extends AbstractDataTransformer {
 		let handleTypeInputKv = inputParams.get(handleTypeKey);
 		let handleIdInputKv = inputParams.get(handleIdKey);
 		let internalActionKv = inputParams.get(ActionKeysDict.action_internal);
-		if (handleTypeInputKv && handleIdInputKv && internalActionKv) {
-			if (handleTypeInputKv.value && handleIdInputKv.value && internalActionKv.value) {
-				const payload = internalActionKv.value;
-				const transfOutputKV = outputKvStores.get(payloadOutputKey);
-				transfOutputKV.value = payload;
-				rv = [transfOutputKV];
-			}
+		if (((handleTypeInputKv && handleTypeInputKv.value) || (handleIdInputKv && handleIdInputKv.value)) && internalActionKv && internalActionKv.value) {
+			const payload = internalActionKv.value;
+			const transfOutputKV = outputKvStores.get(payloadOutputKey);
+			transfOutputKV.value = payload;
+			rv = [transfOutputKV];
 		}
 		return rv;
 	}

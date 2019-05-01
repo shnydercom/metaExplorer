@@ -34,13 +34,22 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_3",
+              "value": {
+                "objRef": "42e166d7-b138-4f9e-9b19-e9e7265e5353",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
             "in_0",
             "in_1",
-            "in_2"
+            "in_2",
+            "in_3"
           ]
         },
         "ec2ab8b8-bd12-4edb-86b0-d1a49663f1a8": {
@@ -136,6 +145,48 @@
           "canInterpretType": "shnyder/generaldemo/App-ObjectType",
           "nameSelf": "bf7220a6-3d30-4339-9e29-4c525bbdb037",
           "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "42e166d7-b138-4f9e-9b19-e9e7265e5353": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "42e166d7-b138-4f9e-9b19-e9e7265e5353",
+          "initialKvStores": [
+            {
+              "key": "routePath",
+              "value": "login",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "Action_onRoute",
+              "value": {
+                "objRef": "c8de7d83-f923-4443-b2a2-fb80ec6c8754",
+                "propRef": "outputdata"
+              },
+              "ldType": "MetaExplorerAction"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "Action_onRoute"
+          ]
+        },
+        "c8de7d83-f923-4443-b2a2-fb80ec6c8754": {
+          "subItptOf": "ActionComponent",
+          "canInterpretType": "ActionComponent-ObjectType",
+          "nameSelf": "c8de7d83-f923-4443-b2a2-fb80ec6c8754",
+          "initialKvStores": [
+            {
+              "key": "actionType",
+              "value": "loginAction",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "inputdata",
+              "value": "login"
+            }
+          ],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }

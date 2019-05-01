@@ -36,6 +36,8 @@ export abstract class AbstractDataTransformer implements IBlueprintItpt {
 		this.ldTkStr = ldTkStr;
 		this.itptKeys = AbstractDataTransformerItptKeys;
 		this.outputKvStores = AbstractDataTransformerOutputKVs;
+		const outputKVMap = this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
+		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : null);
 	}
 
 	consumeLDOptions = (ldOptions: ILDOptions) => {

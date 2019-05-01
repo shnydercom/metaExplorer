@@ -4,6 +4,8 @@ import { LDDict } from "ldaccess/LDDict";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { AbstractDataTransformer } from "datatransformation/abstractDataTransformer";
 import { ActionTypesDict, ActionType } from "components/actions/ActionDict";
+import { ILDOptions } from "ldaccess/ildoptions";
+import { isObjPropertyRef } from "ldaccess/ldUtils";
 
 export const payloadInputKey = UserDefDict.inputData;
 export const transfOutputKey = UserDefDict.outputData;
@@ -49,10 +51,21 @@ let bpCfg: BlueprintConfig = {
 };
 @ldBlueprint(bpCfg)
 export class ActionComp extends AbstractDataTransformer {
-	constructor() {
-		super();
+	constructor(ldTkStr?: string) {
+		super(ldTkStr);
 		this.itptKeys = ActionCompKeys;
 		this.outputKvStores = ActionCompOutputKVs;
+		let kvs = this.cfg.initialKvStores;
+		//setting inputParams on first load, refresh output if necessary
+		for (let inputidx = 0; inputidx < this.itptKeys.length; inputidx++) {
+			const inputKey = this.itptKeys[inputidx];
+			let param = kvs.find((val) => val.key === inputKey);
+			if (param && param.value !== null && !isObjPropertyRef(param.value)
+				&& JSON.stringify(param) !== JSON.stringify(this.inputParams.get(inputKey))) {
+				this.inputParams.set(inputKey, param);
+			}
+		}
+		this.refreshOutput();
 	}
 
 	/**
@@ -67,24 +80,22 @@ export class ActionComp extends AbstractDataTransformer {
 		let payloadInputKv = inputParams.get(payloadInputKey);
 		let idFieldKv = inputParams.get(idField);
 		let typeFieldKv = inputParams.get(typeField);
-		if (payloadInputKv && idFieldKv && typeFieldKv) {
-			if (payloadInputKv.value && (idFieldKv.value || typeFieldKv.value)) {
-				let payload: any[] = payloadInputKv.value;
-				//source type constants
-				const idFieldConst = idFieldKv.value;
-				const typeFieldConst = typeFieldKv.value;
+		if (payloadInputKv && payloadInputKv.value && ((idFieldKv && idFieldKv.value) || (typeFieldKv && typeFieldKv.value))) {
+			let payload: any[] = payloadInputKv.value;
+			//source type constants
+			const idFieldConst = idFieldKv ? idFieldKv.value : null;
+			const typeFieldConst = typeFieldKv ? typeFieldKv.value : null;
 
-				const newAction: ActionType = {
-					ldId: idFieldConst,
-					ldType: typeFieldConst,
-					payload: payload
-				};
-				//output var
-				let outputValArr = [newAction];
-				const transfOutputKV = outputKvStores.get(transfOutputKey);
-				transfOutputKV.value = outputValArr;
-				rv = [transfOutputKV];
-			}
+			const newAction: ActionType = {
+				ldId: idFieldConst,
+				ldType: typeFieldConst,
+				payload: payload
+			};
+			//output var
+			let outputValArr = [newAction];
+			const transfOutputKV = outputKvStores.get(transfOutputKey);
+			transfOutputKV.value = outputValArr;
+			rv = [transfOutputKV];
 		}
 		return rv;
 	}
