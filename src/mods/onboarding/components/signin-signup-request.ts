@@ -4,6 +4,8 @@ import { itptKeysFromInputKvs } from "ldaccess/ldUtils";
 import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { tokenStr } from "mods/keycloak/sidefx/KeyCloakAuthCfg";
 import { LDDict } from "ldaccess/LDDict";
+import { ILoginResponse, RESPONSE_CONTENT } from "../apis/datatypes";
+import { OnboardingAPI } from "../apis/onboardingAPI";
 
 export const signinSignupName = "shnyder/meta-explorer/onboarding/signinSignupRequest";
 let inputKVStores: IKvStore[] = [
@@ -21,7 +23,7 @@ let inputKVStores: IKvStore[] = [
 
 let outputKVStores: IKvStore[] = [
 	{
-		key: "signinOrSignupText",
+		key: RESPONSE_CONTENT,
 		value: undefined,
 		ldType: LDDict.Text
 	},
@@ -44,23 +46,7 @@ export class SignInSignupRequest extends LDRetrieverSuperRewrite {
 		super(parameters, interpretableKeys);
 		this.apiCallOverride = () => new Promise((resolve, reject) => {
 			const tokenValue = this.state.localValues.get(tokenStr);
-			fetch('/api/login', {
-				headers: new Headers(
-					{
-						Authorization: 'Bearer ' + tokenValue,
-					}
-				)
-			}
-			).then((response) => {
-				if (response.status >= 400) {
-					reject("Bad response from server");
-				}
-				response.json().then((bodyVal) => {
-					resolve(bodyVal);
-				}).catch((reason) => {
-					reject(reason);
-				});
-			});
+			OnboardingAPI.getOnboardingAPISingleton().loginFetch(resolve, reject, tokenValue);
 		});
 	}
 }

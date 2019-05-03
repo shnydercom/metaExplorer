@@ -20,9 +20,9 @@
               "ldType": "InterpreterClassType"
             },
             {
-              "key": "configurationBlocks",
+              "key": "inputContainer",
               "value": {
-                "objRef": "8e8a7d7d-1013-4965-a9a9-9207ca899014",
+                "objRef": "a344ac17-7174-4f9e-9c0e-43a44928facb",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -30,7 +30,7 @@
             {
               "key": "configurationBlocks",
               "value": {
-                "objRef": "a344ac17-7174-4f9e-9c0e-43a44928facb",
+                "objRef": "8e8a7d7d-1013-4965-a9a9-9207ca899014",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -39,7 +39,7 @@
           "crudSkills": "cRud",
           "interpretableKeys": [
             "inputContainer",
-            "configurationBlocks",
+            "inputContainer",
             "configurationBlocks"
           ]
         },
@@ -67,6 +67,14 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
+        "a344ac17-7174-4f9e-9c0e-43a44928facb": {
+          "subItptOf": "shnyder/meta-explorer/config/login",
+          "canInterpretType": "shnyder/meta-explorer/config/login-ObjectType",
+          "nameSelf": "a344ac17-7174-4f9e-9c0e-43a44928facb",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
         "8e8a7d7d-1013-4965-a9a9-9207ca899014": {
           "subItptOf": "keycloak/auth/config",
           "canInterpretType": "keycloak/auth/config-ObjectType",
@@ -78,14 +86,6 @@
               "ldType": "http://schema.org/Text"
             }
           ],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
-        },
-        "a344ac17-7174-4f9e-9c0e-43a44928facb": {
-          "subItptOf": "shnyder/meta-explorer/config/login",
-          "canInterpretType": "shnyder/meta-explorer/config/login-ObjectType",
-          "nameSelf": "a344ac17-7174-4f9e-9c0e-43a44928facb",
-          "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         }

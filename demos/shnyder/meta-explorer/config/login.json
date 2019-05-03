@@ -43,7 +43,7 @@
               "key": "RouteSend_confirm",
               "value": {
                 "objRef": "98aacda3-e5d8-4432-8e1c-0fd9519cccfc",
-                "propRef": "signinOrSignupText"
+                "propRef": "content"
               },
               "ldType": "Route_Added"
             }
