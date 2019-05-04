@@ -14,7 +14,7 @@
             {
               "key": "in_0",
               "value": {
-                "objRef": "ec2ab8b8-bd12-4edb-86b0-d1a49663f1a8",
+                "objRef": "8e3c69e8-ef1c-4e77-9649-e51cd8af6e81",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -52,34 +52,10 @@
             "in_3"
           ]
         },
-        "ec2ab8b8-bd12-4edb-86b0-d1a49663f1a8": {
-          "subItptOf": "shnyder/routing/Route",
-          "canInterpretType": "shnyder/routing/Route-ObjectType",
-          "nameSelf": "ec2ab8b8-bd12-4edb-86b0-d1a49663f1a8",
-          "initialKvStores": [
-            {
-              "key": "inputContainer",
-              "value": {
-                "objRef": "23c99331-fa00-4942-ad41-129174aaa706",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
-            },
-            {
-              "key": "routePath",
-              "value": "/",
-              "ldType": "http://schema.org/Text"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": [
-            "inputContainer"
-          ]
-        },
-        "23c99331-fa00-4942-ad41-129174aaa706": {
-          "subItptOf": "shnyder/meta-explorer/onboarding/home/index",
-          "canInterpretType": "shnyder/meta-explorer/onboarding/home/index-ObjectType",
-          "nameSelf": "23c99331-fa00-4942-ad41-129174aaa706",
+        "8e3c69e8-ef1c-4e77-9649-e51cd8af6e81": {
+          "subItptOf": "shnyder/meta-explorer/onboarding/index",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/index-ObjectType",
+          "nameSelf": "8e3c69e8-ef1c-4e77-9649-e51cd8af6e81",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []

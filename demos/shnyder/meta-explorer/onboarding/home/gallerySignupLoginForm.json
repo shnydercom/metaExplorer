@@ -84,7 +84,7 @@
             },
             {
               "key": "RouteSend_confirm",
-              "value": "../onboarding_one",
+              "value": "../signup",
               "ldType": "Route_Added"
             }
           ],

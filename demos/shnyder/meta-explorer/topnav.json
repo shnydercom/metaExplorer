@@ -192,7 +192,7 @@
             {
               "key": "in_0",
               "value": {
-                "objRef": "015c137e-56a4-4f72-aad7-ce4aeaadf4c8",
+                "objRef": "79563330-fc54-431a-89c2-f2f6150850ea",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -210,6 +210,30 @@
           "interpretableKeys": [
             "in_0",
             "in_1"
+          ]
+        },
+        "79563330-fc54-431a-89c2-f2f6150850ea": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "79563330-fc54-431a-89c2-f2f6150850ea",
+          "initialKvStores": [
+            {
+              "key": "inputContainer",
+              "value": {
+                "objRef": "015c137e-56a4-4f72-aad7-ce4aeaadf4c8",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "deprecated",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputContainer"
           ]
         },
         "015c137e-56a4-4f72-aad7-ce4aeaadf4c8": {
@@ -294,7 +318,7 @@
             },
             {
               "key": "routePath",
-              "value": "onboarding_one",
+              "value": "signup",
               "ldType": "http://schema.org/Text"
             }
           ],
@@ -500,6 +524,5 @@
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": [
-  ]
+  "interpretableKeys": []
 }
