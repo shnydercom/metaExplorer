@@ -14,7 +14,7 @@
             {
               "key": "inputContainer",
               "value": {
-                "objRef": "90182bb7-ce5d-4b6a-bae8-b22835b1d539",
+                "objRef": "8e25b917-0e9e-4aa5-a79b-0e3d627eb7ca",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -32,6 +32,30 @@
           "interpretableKeys": [
             "inputContainer",
             "configurationBlocks"
+          ]
+        },
+        "8e25b917-0e9e-4aa5-a79b-0e3d627eb7ca": {
+          "subItptOf": "shnyder/routing/Route",
+          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "nameSelf": "8e25b917-0e9e-4aa5-a79b-0e3d627eb7ca",
+          "initialKvStores": [
+            {
+              "key": "inputContainer",
+              "value": {
+                "objRef": "90182bb7-ce5d-4b6a-bae8-b22835b1d539",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "routePath",
+              "value": "login",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputContainer"
           ]
         },
         "90182bb7-ce5d-4b6a-bae8-b22835b1d539": {
