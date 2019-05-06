@@ -53,7 +53,7 @@ let bpCfg: BlueprintConfig = {
 	crudSkills: "cRud"
 };
 
-const DEFAULT_BREAKPOINT = 300;
+const DEFAULT_BREAKPOINT = 350;
 
 interface TitleTextAndImageState {
 	isHorizontal: boolean;

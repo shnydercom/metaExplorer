@@ -1,3 +1,66 @@
 @import "../../../node_modules/metaexplorer-react-components/src/components/hero/hero.scss";
 @import "../mods/mailchimp.scss";
 @import "../mods/keycloak.scss";
+
+.fadefromright {
+	margin-left: 100%;
+	opacity: 0;
+	animation: slidefromright 2s forwards;
+	animation-delay: 1.5s;
+}
+
+@keyframes slidefromright {
+	from {
+		margin-left: 110%;
+		opacity: 0;
+	}
+
+	to {
+		margin-left: 0;
+		opacity: 1;
+	}
+}
+
+.fadefromleft {
+	margin-left: -100%;
+	opacity: 0;
+	animation: slidefromleft 2s forwards;
+	animation-delay: 0.5s;
+}
+
+@keyframes slidefromleft {
+	from {
+		margin-left: -110%;
+		opacity: 0;
+	}
+
+	to {
+		margin-left: 0;
+		opacity: 1;
+	}
+}
+
+.stackedimages {
+	overflow: hidden;
+	position: relative;
+	flex: 1;
+	max-height: fit-content;
+
+	:nth-child(2) {
+		position: absolute;
+		top: 0;
+
+		img {
+			object-position: right;
+		}
+	}
+}
+
+.onboarding-bg {
+	background-color: #00375f;
+	color: #ffffffaa;
+
+	h2 {
+		color: white;
+	}
+}

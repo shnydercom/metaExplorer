@@ -14,7 +14,7 @@
             {
               "key": "inputContainer",
               "value": {
-                "objRef": "6a392593-1c29-4fce-9586-5e0c700b09e5",
+                "objRef": "f880941d-9a4f-488a-937a-7fc2e233c265",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -30,15 +30,15 @@
             "inputContainer"
           ]
         },
-        "6a392593-1c29-4fce-9586-5e0c700b09e5": {
+        "f880941d-9a4f-488a-937a-7fc2e233c265": {
           "subItptOf": "shnyder/baseContainer",
           "canInterpretType": "shnyder/ContainerObjType",
-          "nameSelf": "6a392593-1c29-4fce-9586-5e0c700b09e5",
+          "nameSelf": "f880941d-9a4f-488a-937a-7fc2e233c265",
           "initialKvStores": [
             {
-              "key": "in_0",
+              "key": "in_1",
               "value": {
-                "objRef": "dadefd77-20d4-492f-9fc0-04676c9055aa",
+                "objRef": "770dde6e-0e61-4c75-8931-d885240b9adf",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -46,7 +46,7 @@
             {
               "key": "in_2",
               "value": {
-                "objRef": "09f055a4-deab-4571-8a0f-9cd1221faf31",
+                "objRef": "dadefd77-20d4-492f-9fc0-04676c9055aa",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -78,37 +78,26 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "in_0",
+            "in_1",
             "in_2",
             "in_3",
             "in_4",
             "in_5"
           ]
         },
+        "770dde6e-0e61-4c75-8931-d885240b9adf": {
+          "subItptOf": "shnyder/meta-explorer/onboarding/home/benefits",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/home/benefits-ObjectType",
+          "nameSelf": "770dde6e-0e61-4c75-8931-d885240b9adf",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
         "dadefd77-20d4-492f-9fc0-04676c9055aa": {
           "subItptOf": "shnyder/meta-explorer/onboarding/home/gallery",
           "canInterpretType": "shnyder/meta-explorer/onboarding/home/gallery-ObjectType",
           "nameSelf": "dadefd77-20d4-492f-9fc0-04676c9055aa",
           "initialKvStores": [],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
-        },
-        "09f055a4-deab-4571-8a0f-9cd1221faf31": {
-          "subItptOf": "keycloak/auth/AuthenticatorButton",
-          "canInterpretType": "keycloak/auth/AuthenticatorButton-ObjectType",
-          "nameSelf": "09f055a4-deab-4571-8a0f-9cd1221faf31",
-          "initialKvStores": [
-            {
-              "key": "redirAfterLogin",
-              "value": "login",
-              "ldType": "http://schema.org/Text"
-            },
-            {
-              "key": "redirAfterLogout",
-              "value": "logout",
-              "ldType": "http://schema.org/Text"
-            }
-          ],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },

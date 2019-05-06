@@ -20,14 +20,6 @@
               "ldType": "InterpreterClassType"
             },
             {
-              "key": "inputContainer",
-              "value": {
-                "objRef": "a344ac17-7174-4f9e-9c0e-43a44928facb",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
-            },
-            {
               "key": "configurationBlocks",
               "value": {
                 "objRef": "8e8a7d7d-1013-4965-a9a9-9207ca899014",
@@ -38,7 +30,6 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "inputContainer",
             "inputContainer",
             "configurationBlocks"
           ]
@@ -64,14 +55,6 @@
               "ldType": "http://schema.org/Boolean"
             }
           ],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
-        },
-        "a344ac17-7174-4f9e-9c0e-43a44928facb": {
-          "subItptOf": "shnyder/meta-explorer/config/login",
-          "canInterpretType": "shnyder/meta-explorer/config/login-ObjectType",
-          "nameSelf": "a344ac17-7174-4f9e-9c0e-43a44928facb",
-          "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },

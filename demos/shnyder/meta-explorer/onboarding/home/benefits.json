@@ -1,0 +1,170 @@
+{
+  "subItptOf": "93e853b2-4244-4691-9248-a63a50e5af66",
+  "canInterpretType": "shnyder/meta-explorer/onboarding/home/benefits-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/onboarding/home/benefits",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "93e853b2-4244-4691-9248-a63a50e5af66": {
+          "subItptOf": "shnyder/layout/vh-centered-column",
+          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
+          "nameSelf": "93e853b2-4244-4691-9248-a63a50e5af66",
+          "initialKvStores": [
+            {
+              "key": "inputContainer",
+              "value": {
+                "objRef": "f0fa2311-1739-42a0-b2fe-6b59fb33e9eb",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputContainer"
+          ]
+        },
+        "f0fa2311-1739-42a0-b2fe-6b59fb33e9eb": {
+          "subItptOf": "shnyder/baseContainer",
+          "canInterpretType": "shnyder/ContainerObjType",
+          "nameSelf": "f0fa2311-1739-42a0-b2fe-6b59fb33e9eb",
+          "initialKvStores": [
+            {
+              "key": "in_0",
+              "value": {
+                "objRef": "8e4c38db-bad7-4ad4-8730-10a6a6ee7f5b",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_1",
+              "value": {
+                "objRef": "b16fc332-e78f-4ecf-a4b3-2556de2c15f7",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "in_2",
+              "value": {
+                "objRef": "fbfbdf30-b996-45c5-a338-ed225b288727",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "in_0",
+            "in_1",
+            "in_2"
+          ]
+        },
+        "8e4c38db-bad7-4ad4-8730-10a6a6ee7f5b": {
+          "subItptOf": "shnyder/TitleTextAndImage",
+          "canInterpretType": "shnyder/TitleTextAndImage-ObjectType",
+          "nameSelf": "8e4c38db-bad7-4ad4-8730-10a6a6ee7f5b",
+          "initialKvStores": [
+            {
+              "key": "inputContainer",
+              "value": {
+                "objRef": "0711fa30-818c-4b91-a025-00de141cd84c",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "Building WebApps just got a whole lot easier",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "Description",
+              "value": "With a drag & drop editor and a big collection of standard components, MetaExplorer helps you focus on what's really important in your application, and reach project milestones quicker",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputContainer"
+          ]
+        },
+        "0711fa30-818c-4b91-a025-00de141cd84c": {
+          "subItptOf": "shnyder/meta-explorer/onboarding/images/worktracker",
+          "canInterpretType": "shnyder/meta-explorer/onboarding/images/worktracker-ObjectType",
+          "nameSelf": "0711fa30-818c-4b91-a025-00de141cd84c",
+          "initialKvStores": [],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "b16fc332-e78f-4ecf-a4b3-2556de2c15f7": {
+          "subItptOf": "shnyder/TitleTextAndImage",
+          "canInterpretType": "shnyder/TitleTextAndImage-ObjectType",
+          "nameSelf": "b16fc332-e78f-4ecf-a4b3-2556de2c15f7",
+          "initialKvStores": [
+            {
+              "key": "HeaderText",
+              "value": "Clean, modular and highly reusable",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "Description",
+              "value": "Just connect components' inputs and outputs, with typed interfaces safeguarding your creations",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "fbfbdf30-b996-45c5-a338-ed225b288727": {
+          "subItptOf": "shnyder/TitleTextAndImage",
+          "canInterpretType": "shnyder/TitleTextAndImage-ObjectType",
+          "nameSelf": "fbfbdf30-b996-45c5-a338-ed225b288727",
+          "initialKvStores": [
+            {
+              "key": "inputContainer",
+              "value": {
+                "objRef": "c07a5468-811c-4a29-bdfc-606ef4b5a77b",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "HeaderText",
+              "value": "Lower complexity",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "Description",
+              "value": "Easily nest one component in another one, deep dive into the application structure or simplify a component with default inputs",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputContainer"
+          ]
+        },
+        "c07a5468-811c-4a29-bdfc-606ef4b5a77b": {
+          "subItptOf": "google-api/YoutubeEmbed",
+          "canInterpretType": "google-api/YoutubeEmbed-ObjectType",
+          "nameSelf": "c07a5468-811c-4a29-bdfc-606ef4b5a77b",
+          "initialKvStores": [
+            {
+              "key": "VideoID",
+              "value": "8gP7iKijkIE",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}
