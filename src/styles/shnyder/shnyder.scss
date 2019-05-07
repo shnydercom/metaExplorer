@@ -57,7 +57,9 @@
 }
 
 .onboarding-bg {
-	background-color: #00375f;
+	//background-color: #00375f;
+	//background-image: linear-gradient(#00375f, #001e34);
+	background: linear-gradient(55deg, #001e34,  #00375f);
 	color: #ffffffaa;
 
 	h2 {

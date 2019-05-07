@@ -14,7 +14,7 @@
             {
               "key": "inputContainer",
               "value": {
-                "objRef": "f880941d-9a4f-488a-937a-7fc2e233c265",
+                "objRef": "c2142d9b-6764-4966-b8da-54375bf0aa73",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -22,6 +22,30 @@
             {
               "key": "cssClass",
               "value": "mdscrollbar",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputContainer"
+          ]
+        },
+        "c2142d9b-6764-4966-b8da-54375bf0aa73": {
+          "subItptOf": "shnyder/layout/CSSWrapper",
+          "canInterpretType": "shnyder/layout/CSSWrapper-ObjectType",
+          "nameSelf": "c2142d9b-6764-4966-b8da-54375bf0aa73",
+          "initialKvStores": [
+            {
+              "key": "inputContainer",
+              "value": {
+                "objRef": "f880941d-9a4f-488a-937a-7fc2e233c265",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "cssClass",
+              "value": "onboarding-bg",
               "ldType": "http://schema.org/Text"
             }
           ],

@@ -46,7 +46,7 @@ export class PureCSSWrapper extends Component<LDConnectedState & LDConnectedDisp
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: CSSWrapperState): null | CSSWrapperState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [VisualKeysDict.inputContainer], [VisualKeysDict.cssClassName]);
+			nextProps, prevState, [VisualKeysDict.inputContainer], [VisualKeysDict.cssClassName], null, [false], [true]);
 		if (!rvLD) {
 			return null;
 		}
@@ -68,7 +68,7 @@ export class PureCSSWrapper extends Component<LDConnectedState & LDConnectedDisp
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, props, [VisualKeysDict.inputContainer],
-			[VisualKeysDict.cssClassName]);
+			[VisualKeysDict.cssClassName], [false], [true]);
 		this.state = {
 			...ldState,
 		};
@@ -77,10 +77,11 @@ export class PureCSSWrapper extends Component<LDConnectedState & LDConnectedDisp
 		let renderFreeResult: JSX.Element = this.renderInputContainer();
 		const { localValues } = this.state;
 		if (isReactComponent(renderFreeResult)) {
-			const cssClassName = localValues.get(VisualKeysDict.cssClassName);
-			if (!!renderFreeResult && !!cssClassName /*&& renderFreeResult.hasOwnProperty("className")*/) {
+			const cssClassNames: string[] = localValues.get(VisualKeysDict.cssClassName);
+			const cssClassStrings = cssClassNames.join(" ");
+			if (!!renderFreeResult && !!cssClassNames /*&& renderFreeResult.hasOwnProperty("className")*/) {
 				/*renderFreeResult["className"] = cssClassName;*/
-				return <div className={cssClassName}>{renderFreeResult}</div>;
+				return <div className={cssClassStrings}>{renderFreeResult}</div>;
 			}
 		}
 		return <>{renderFreeResult}</>;
