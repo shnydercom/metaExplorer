@@ -140,7 +140,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": null,
               "ldType": "http://schema.org/Text"
             }
@@ -159,7 +159,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": null,
               "ldType": "http://schema.org/Text"
             }
@@ -200,18 +200,18 @@
       "ldType": "InterpreterReferenceMapType"
     },
     {
-      "key": "singleKvStore",
+      "key": "inputdata",
       "value": {
         "objRef": "742bd7d3-5b5d-44ad-b88a-062d1ce2f75a",
-        "propRef": "singleKvStore"
+        "propRef": "outputdata"
       },
       "ldType": "http://schema.org/Text"
     },
     {
-      "key": "singleKvStore",
+      "key": "inputdata",
       "value": {
         "objRef": "9bf2c1a5-5160-402a-afbc-811bd8ec07db",
-        "propRef": "singleKvStore"
+        "propRef": "outputdata"
       },
       "ldType": "http://schema.org/Text"
     }

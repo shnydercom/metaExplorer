@@ -67,7 +67,7 @@
               "key": "utf8textData",
               "value": {
                 "objRef": "348aa3f5-1106-4819-a1f8-67eecf777aa3",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             },
@@ -98,7 +98,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "This could be your text",
               "ldType": "http://schema.org/Text"
             }

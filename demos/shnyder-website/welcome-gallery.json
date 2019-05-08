@@ -181,7 +181,7 @@
           "nameSelf": "7f03db15-d145-46ee-a360-642abcff4e4b",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "This entire website is built with MetaExplorer. You can see its structure when you go to the editor, it will load automatically.",
               "ldType": "http://schema.org/Text"
             }
@@ -214,7 +214,7 @@
           "nameSelf": "924c8073-c0c9-4c71-b616-ad2c6fe8230c",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "For a more advanced demo, try dragging \"Compound Blocks/shnyder/meta-explorer/MainAppEntryPoint\" onto \"Now editing\". You can't break anything",
               "ldType": "http://schema.org/Text"
             }

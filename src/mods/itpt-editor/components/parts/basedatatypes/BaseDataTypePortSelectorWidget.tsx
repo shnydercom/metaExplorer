@@ -78,10 +78,10 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 			};
 		}
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [], [UserDefDict.singleKvStore]);
+			nextProps, prevState, [], [UserDefDict.inputData]);
 		let newKV = nextProps.ldOptions && nextProps.ldOptions.resource && nextProps.ldOptions.resource.kvStores
-			? getKVStoreByKey(nextProps.ldOptions.resource.kvStores, UserDefDict.singleKvStore) : null;
-		newKV = newKV ? newKV : { key: UserDefDict.singleKvStore, value: null, ldType: null };
+			? getKVStoreByKey(nextProps.ldOptions.resource.kvStores, UserDefDict.inputData) : null;
+		newKV = newKV ? newKV : { key: UserDefDict.inputData, value: null, ldType: null };
 		nextProps.model.kv = newKV;
 		let newType = newKV ? newKV.ldType : null;
 		if (!rvLD) {
@@ -122,7 +122,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 		let changedKvStore: IKvStore = this.props.model.kv;
 		if (newType !== changedKvStore.ldType) {
 			changedKvStore.ldType = newType;
-			changedKvStore.key = UserDefDict.singleKvStore;
+			changedKvStore.key = UserDefDict.inputData;
 			changedKvStore.value = null;
 		}
 		this.setState({ ...this.state, portType: newType, portKvStore: changedKvStore });

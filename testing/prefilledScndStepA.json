@@ -53,7 +53,7 @@
             "key": "SubHeaderText",
             "value": {
               "objRef": "textInputComp",
-              "propRef": "singleKvStore"
+              "propRef": "outputdata"
             },
             "ldType": "http://schema.org/Text"
           }
@@ -73,7 +73,7 @@
             "ldType": "http://schema.org/Text"
           },
           {
-            "key": "singleKvStore",
+            "key": "inputdata",
             "value": "some Text",
             "ldType": "http://schema.org/Text"
           }

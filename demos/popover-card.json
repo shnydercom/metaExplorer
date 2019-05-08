@@ -68,7 +68,7 @@
           "nameSelf": "671b1959-9ae3-4a4d-b3c1-dbb178e55687",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "You!",
               "ldType": "http://schema.org/Text"
             }
@@ -101,7 +101,7 @@
           "nameSelf": "a0885890-f8c8-49b8-99dd-bea1c1c82a7c",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "@your_handle, you@email.com",
               "ldType": "http://schema.org/Text"
             }

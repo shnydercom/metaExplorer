@@ -52,7 +52,7 @@
               "key": "http://schema.org/description",
               "value": {
                 "objRef": "testB_TextInputToChangeDescription",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             }
@@ -79,7 +79,7 @@
               "key": "HeaderText",
               "value": {
                 "objRef": "testB_AinsideB",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             },

@@ -81,7 +81,7 @@
           "nameSelf": "3bf02e66-fe60-4111-bb23-13c575187fea",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Step #4 of 5",
               "ldType": "http://schema.org/Text"
             }
@@ -147,7 +147,7 @@
           "nameSelf": "18894dd2-6d3b-4a3f-b326-297f1a0cae01",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Our Block \"shnyder/qr/QRcodeFromText\" is made up of other Blocks. Find it in the drawer on the left, open it and click its yellow button to see its structure.",
               "ldType": "http://schema.org/Text"
             }
@@ -161,7 +161,7 @@
           "nameSelf": "14f76915-e719-4fa7-8439-4b75b22005b9",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Create a copy of it to finish the tour. This way, your changes won't affect the other author's Block.",
               "ldType": "http://schema.org/Text"
             }

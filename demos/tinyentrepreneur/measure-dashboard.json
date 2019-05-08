@@ -65,7 +65,7 @@
           "nameSelf": "fc52a993-9d48-4964-b935-e35f6e6bfe84",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Tables and charts are the next items on our Todo-list, so this section will soon have interesting, interactive content",
               "ldType": "http://schema.org/Text"
             }

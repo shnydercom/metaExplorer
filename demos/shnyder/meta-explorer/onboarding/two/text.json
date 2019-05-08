@@ -81,7 +81,7 @@
           "nameSelf": "3bf02e66-fe60-4111-bb23-13c575187fea",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Step #2 of 5",
               "ldType": "http://schema.org/Text"
             }
@@ -119,7 +119,7 @@
           "nameSelf": "18894dd2-6d3b-4a3f-b326-297f1a0cae01",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Your first Project needs a name, and the world needs to know who made it! Your organization and project name will be used to make the home address of your creations.",
               "ldType": "http://schema.org/Text"
             }

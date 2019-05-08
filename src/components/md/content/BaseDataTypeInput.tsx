@@ -34,8 +34,9 @@ type OwnProps = {
 } & LDOwnProps;
 
 type BaseDataTypeState = {
-	singleKV: IKvStore,
-	singleKVKey: string
+	singleKVOutput: IKvStore,
+	singleKVInputKey: string,
+	singleKVOutputKey: string
 };
 
 let bdts: LDBaseDataType[] = [LDDict.Boolean, LDDict.Integer, LDDict.Double, LDDict.Text, LDDict.Date, LDDict.DateTime];
@@ -45,20 +46,20 @@ for (var bdt in bdts) {
 	if (bdts.hasOwnProperty(bdt)) {
 		var elem = bdts[bdt];
 		//let cfgType: string = LDDict.CreateAction;
-		let cfgIntrprtKeys: string[] = [LDDict.description, UserDefDict.singleKvStore];
+		let cfgIntrprtKeys: string[] = [LDDict.description, UserDefDict.inputData];
 		let initialKVStores: IKvStore[] = [
 			{
 				key: LDDict.description,
 				value: undefined,
 				ldType: LDDict.Text
 			},
-			{//if singleKvStore is not used explicitly, BaseDataTypeInput tries to determine the key dynamically
-				key: UserDefDict.singleKvStore,
+			{//if inputdata is not used explicitly, BaseDataTypeInput tries to determine the key dynamically
+				key: UserDefDict.inputData,
 				value: undefined,
 				ldType: elem
 			},
 			{//one for output, gets ignored
-				key: UserDefDict.singleKvStore,
+				key: UserDefDict.outputData,
 				value: undefined,
 				ldType: elem
 			},
@@ -86,22 +87,23 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 		this.cfg = this.constructor["cfg"];
 		//this.render = () => null;
 		let bdtState: BaseDataTypeState = {
-			singleKV: null,
-			singleKVKey: UserDefDict.singleKvStore
+			singleKVOutput: null,
+			singleKVInputKey: UserDefDict.inputData,
+			singleKVOutputKey: UserDefDict.outputData
 		};
 		this.state = {
 			...bdtState,
 			...initLDLocalState(
 				this.cfg, props,
 				[],
-				[LDDict.description, UserDefDict.singleKvStore, UserDefDict.outputKVMapKey])
+				[LDDict.description, UserDefDict.inputData, UserDefDict.outputKVMapKey])
 		};
 		this.state = {
-			...this.state, singleKV:
+			...this.state, singleKVOutput:
 			{
-				key: this.state.singleKVKey,
-				value: this.state.localValues.get(this.state.singleKVKey),
-				ldType: this.state.localLDTypes.get(this.state.singleKVKey)
+				key: this.state.singleKVOutputKey,
+				value: this.state.localValues.get(this.state.singleKVInputKey),
+				ldType: this.state.localLDTypes.get(this.state.singleKVInputKey)
 			}
 		};
 	}
@@ -118,18 +120,18 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 
 	handleChange = (evtval) => {
 		//let newLDOptionsObj = ldOptionsDeepCopy(this.props.ldOptions);
-		let singleKey: string = this.state.singleKVKey;
+		let singleInputKey: string = this.state.singleKVInputKey;
 		let modSingleKV: IKvStore = {
-			key: this.state.singleKVKey,
-			ldType: this.state.localLDTypes.get(singleKey),
-			value: this.state.localValues.get(singleKey)
+			key: this.state.singleKVOutputKey,
+			ldType: this.state.localLDTypes.get(singleInputKey),
+			value: this.state.localValues.get(singleInputKey)
 		};
 		//getKVStoreByKey(newLDOptionsObj.resource.kvStores, this.state.singleKVKey);
 		modSingleKV.value = evtval;
-		this.setState({ ...this.state, singleKV: modSingleKV });
+		this.setState({ ...this.state, singleKVOutput: modSingleKV });
 		//TODO: it might be a good idea to debounce before updating the application state
 		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
-		if (!outputKVMap || !outputKVMap[this.state.singleKVKey]) return;
+		if (!outputKVMap || !outputKVMap[this.state.singleKVOutputKey]) return;
 		this.props.dispatchKvOutput([modSingleKV], this.props.ldTokenString, outputKVMap);
 	}
 
@@ -137,7 +139,7 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 		/*let initialSingleKV = { ...getKVStoreByKey(this.initialKvStores, this.state.singleKVKey) };
 		let baseDT: LDBaseDataType = initialSingleKV.ldType as LDBaseDataType;
 		this.determineRenderFn(baseDT);*/
-		if (!this.state.singleKV || !this.state.singleKV.ldType) {
+		if (!this.state.singleKVOutput || !this.state.singleKVOutput.ldType) {
 			console.log('PureBaseDataTypeInput notifyLDOptionsChange');
 			//this self-creates an object. Used e.g. in the itpt-editor, bdt-part
 			console.dir(this.props.ldOptions);
@@ -189,41 +191,41 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 		const heading = this.state.localValues.get(LDDict.description);
 		switch (baseDT) {
 			case LDDict.Boolean:
-				let parsedBoolean = parseBoolean(this.state.singleKV);
+				let parsedBoolean = parseBoolean(this.state.singleKVOutput);
 				return <Switch checked={parsedBoolean}
 					label={heading}
 					onChange={(evt) => this.handleChange(evt)} />;
 			case LDDict.Integer:
-				const parsedInt = parseNumber(this.state.singleKV);
+				const parsedInt = parseNumber(this.state.singleKVOutput);
 				return <Input type='number'
 					label={heading}
 					name={heading}
 					value={parsedInt}
 					onChange={(evt) => this.handleChange(evt)} />;
 			case LDDict.Double:
-				const parsedDouble = parseNumber(this.state.singleKV);
+				const parsedDouble = parseNumber(this.state.singleKVOutput);
 				return <Input type='number'
 					label={heading}
 					name={heading}
 					value={parsedDouble}
 					onChange={(evt) => this.handleChange(evt)} />;
 			case LDDict.Text:
-				let parsedText = parseText(this.state.singleKV);
+				let parsedText = parseText(this.state.singleKVOutput);
 				return <Input type='text'
 					label={heading}
 					name={heading}
 					value={parsedText}
 					onChange={(evt) => this.handleChange(evt)} />;
 			case LDDict.Date:
-				var parsedDate = parseDate(this.state.singleKV);
+				var parsedDate = parseDate(this.state.singleKVOutput);
 				return <DatePicker
 					label={heading}
 					onChange={(evt) => this.handleChange(evt)}
 					value={parsedDate}
 					sundayFirstDayOfWeek />;
 			case LDDict.DateTime:
-				var parsedDate = parseDate(this.state.singleKV);
-				var parsedTime = parseTime(this.state.singleKV);
+				var parsedDate = parseDate(this.state.singleKVOutput);
+				var parsedTime = parseTime(this.state.singleKVOutput);
 				return <div className="dateTimePicker">
 					<DatePicker
 						label={heading}
@@ -244,7 +246,7 @@ function wrapGDSF(cfg: BlueprintConfig) {
 	return (
 		nextProps: LDConnectedState & LDConnectedDispatch & OwnProps,
 		prevState: BaseDataTypeState & LDLocalState) => {
-		let rvLD = gdsfpLD(nextProps, prevState, [], [LDDict.description, UserDefDict.singleKvStore, UserDefDict.outputKVMapKey], cfg.canInterpretType);
+		let rvLD = gdsfpLD(nextProps, prevState, [], [LDDict.description, UserDefDict.inputData, UserDefDict.outputKVMapKey], cfg.canInterpretType);
 		if (!rvLD) return null;
 		let rvLocal: BaseDataTypeState = null;
 		if (nextProps.ldOptions) {
@@ -261,7 +263,9 @@ function wrapGDSF(cfg: BlueprintConfig) {
 			rvLD.localValues.set(newSingleKVKey, nextSingleKV.value);
 			rvLD.localLDTypes.set(LDDict.description, LDDict.Text);
 			rvLD.localValues.set(LDDict.description, desc);
-			rvLocal = { singleKV: nextSingleKV, singleKVKey: newSingleKVKey };
+			let singleKVOutputKeyStr: string = UserDefDict.outputData;
+			if (newSingleKVKey !== UserDefDict.inputData) singleKVOutputKeyStr = newSingleKVKey;
+			rvLocal = { singleKVOutput: nextSingleKV, singleKVInputKey: newSingleKVKey, singleKVOutputKey: singleKVOutputKeyStr };
 		}
 		if (!rvLocal) return null;
 		return { ...prevState, ...rvLD, ...rvLocal };

@@ -59,7 +59,7 @@
           "nameSelf": "bc22429f-b9fb-4d2e-8b69-cbc1dbfd753c",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Clicking this button will take you directly to MetaExplorer editor",
               "ldType": "http://schema.org/Text"
             }

@@ -53,7 +53,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "a",
               "ldType": "http://schema.org/Text"
             }
@@ -83,10 +83,10 @@
       "ldType": "InterpreterReferenceMapType"
     },
     {
-      "key": "singleKvStore",
+      "key": "inputdata",
       "value": {
         "objRef": "testA_TextInput",
-        "propRef": "singleKvStore"
+        "propRef": "outputdata"
       },
       "ldType": "http://schema.org/Text"
     },

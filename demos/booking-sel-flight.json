@@ -96,7 +96,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "2",
               "ldType": "http://schema.org/Integer"
             }

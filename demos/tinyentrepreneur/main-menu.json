@@ -277,7 +277,7 @@
           "nameSelf": "7cdb3539-6e78-455f-90d5-ee46600a1c2c",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "This month:",
               "ldType": "http://schema.org/Text"
             }
@@ -291,7 +291,7 @@
           "nameSelf": "f0adbbe0-b56f-4a01-94e6-cf3d66af6e4a",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Total working hours:",
               "ldType": "http://schema.org/Text"
             }
@@ -305,7 +305,7 @@
           "nameSelf": "a44cc746-ccd8-4b57-9615-e015600c01ae",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "15",
               "ldType": "http://schema.org/Text"
             }
@@ -319,7 +319,7 @@
           "nameSelf": "ecf93623-7544-4789-b339-c3dca4b126bf",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Total income:",
               "ldType": "http://schema.org/Text"
             }
@@ -333,7 +333,7 @@
           "nameSelf": "639004da-b5fc-4f7f-8184-a476f814d9b0",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "199,98 €",
               "ldType": "http://schema.org/Text"
             }
@@ -347,7 +347,7 @@
           "nameSelf": "3ee7a782-4a77-44db-9ea3-121d7068a1a9",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Total expenses:",
               "ldType": "http://schema.org/Text"
             }
@@ -361,7 +361,7 @@
           "nameSelf": "bbbc1a65-e334-43ed-b001-c44e243d034c",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "123,45 €",
               "ldType": "http://schema.org/Text"
             }

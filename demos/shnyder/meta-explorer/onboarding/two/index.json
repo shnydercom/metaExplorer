@@ -124,7 +124,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "",
               "ldType": "http://schema.org/Text"
             }
@@ -143,7 +143,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "",
               "ldType": "http://schema.org/Text"
             }
@@ -157,7 +157,7 @@
           "nameSelf": "3fd5ce36-ab9b-4db2-8232-c01948173429",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "this is what it will look like in the editor",
               "ldType": "http://schema.org/Text"
             }
@@ -190,31 +190,31 @@
           "nameSelf": "c792582e-a0e1-492f-b7c0-f105c64357e4",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": {
                 "objRef": "231d3fd6-405c-4c97-b950-14bfb9fbe6a5",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": {
                 "objRef": "e399b63c-ccaa-43c9-88ad-488b75cd2b62",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "/",
               "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "singleKvStore",
-            "singleKvStore"
+            "inputdata",
+            "inputdata"
           ]
         }
       },

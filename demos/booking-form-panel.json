@@ -147,7 +147,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "London",
               "ldType": "http://schema.org/Text"
             }
@@ -166,7 +166,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Paris",
               "ldType": "http://schema.org/Text"
             }
@@ -185,7 +185,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "2019-03-09T15:10:46.168Z",
               "ldType": "http://schema.org/Date"
             }
@@ -204,7 +204,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "2019-03-16T15:11:18.055Z",
               "ldType": "http://schema.org/Date"
             }
@@ -223,7 +223,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "1",
               "ldType": "http://schema.org/Integer"
             }

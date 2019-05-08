@@ -165,7 +165,7 @@
           "nameSelf": "be797249-bf16-470a-9c7b-da12c40d268c",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "...we're searching for...",
               "ldType": "http://schema.org/Text"
             }
@@ -179,12 +179,12 @@
           "nameSelf": "939bf5d0-9b0c-414b-8362-819208e3f2fa",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "chocolate",
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": {
                 "objRef": "04b29471-bd7a-4227-8017-2a9b2dc3db7b",
                 "propRef": "searchText"
@@ -194,7 +194,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "singleKvStore"
+            "inputdata"
           ]
         },
         "97325fe6-774e-4710-9dda-0fa1022206e6": {
@@ -203,7 +203,7 @@
           "nameSelf": "97325fe6-774e-4710-9dda-0fa1022206e6",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "...for you now...",
               "ldType": "http://schema.org/Text"
             }
@@ -225,7 +225,7 @@
           "nameSelf": "3306faa9-4f1f-4cfd-bb19-c34638b0da5a",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "since this is only a tech demo, there are no results yet",
               "ldType": "http://schema.org/Text"
             }
@@ -239,7 +239,7 @@
           "nameSelf": "53d1a247-0a28-4e65-87e8-e3af88a9d01c",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "However, since this is only a tech demo, you can use the text search input as a performance test, because debouncing isn't setup there, and it will update the application state on each key stroke",
               "ldType": "http://schema.org/Text"
             }

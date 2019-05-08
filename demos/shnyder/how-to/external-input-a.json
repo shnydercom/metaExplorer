@@ -40,18 +40,18 @@
           "nameSelf": "7c379a0f-945d-4550-8d24-b959edca93a3",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "front starting text",
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "singleKvStore"
+            "inputdata"
           ]
         },
         "0be73e1c-f558-4630-8532-9b013d6ce34a": {
@@ -60,18 +60,18 @@
           "nameSelf": "0be73e1c-f558-4630-8532-9b013d6ce34a",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "middle starting text",
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "singleKvStore"
+            "inputdata"
           ]
         }
       },
@@ -82,11 +82,11 @@
   "interpretableKeys": [
     {
       "objRef": "7c379a0f-945d-4550-8d24-b959edca93a3",
-      "propRef": "singleKvStore"
+      "propRef": "outputdata"
     },
     {
       "objRef": "0be73e1c-f558-4630-8532-9b013d6ce34a",
-      "propRef": "singleKvStore"
+      "propRef": "outputdata"
     }
   ]
 }

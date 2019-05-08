@@ -187,7 +187,7 @@
           "nameSelf": "370831b0-2dbf-4629-bc8b-702d06293187",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": " .",
               "ldType": "http://schema.org/Text"
             }
@@ -201,7 +201,7 @@
           "nameSelf": "ed59644c-82ce-4583-8284-b821a5a08b6d",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "- Latest Creations -",
               "ldType": "http://schema.org/Text"
             }
@@ -215,7 +215,7 @@
           "nameSelf": "9cd7452e-f339-4b6b-8ccc-61edb7221646",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": " .",
               "ldType": "http://schema.org/Text"
             }

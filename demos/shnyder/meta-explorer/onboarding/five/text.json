@@ -81,7 +81,7 @@
           "nameSelf": "3bf02e66-fe60-4111-bb23-13c575187fea",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Step #5 of 5",
               "ldType": "http://schema.org/Text"
             }
@@ -202,7 +202,7 @@
           "nameSelf": "021a1c76-5690-4129-8974-2f20e1e42a93",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Done, congratulations!",
               "ldType": "http://schema.org/Text"
             }
@@ -216,7 +216,7 @@
           "nameSelf": "02306865-9f7e-44e5-98a9-e919105e195f",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Here are some more tips:",
               "ldType": "http://schema.org/Text"
             }
@@ -230,7 +230,7 @@
           "nameSelf": "405504bb-9a86-43af-a1a8-1426088fac3a",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "We've automatically added the Block \"yourcompany/yourproject/index\". This is the entry point of your app project.",
               "ldType": "http://schema.org/Text"
             }
@@ -244,7 +244,7 @@
           "nameSelf": "0d882519-02e5-4c64-adc5-c3f0bbb3fbf0",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Check out your app at http://shnyder.com/yourcompany/yourproject. Share it with others through the QR code",
               "ldType": "http://schema.org/Text"
             }
@@ -258,7 +258,7 @@
           "nameSelf": "7d494f69-e185-41da-b743-78548293c3d0",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Create dynamic Blocks with external input/output markers",
               "ldType": "http://schema.org/Text"
             }
@@ -272,7 +272,7 @@
           "nameSelf": "76c3b239-1be8-473c-b266-46d850f9ce96",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Let me in!",
               "ldType": "http://schema.org/Text"
             }

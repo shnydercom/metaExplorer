@@ -40,16 +40,16 @@
           "nameSelf": "86c80a52-a778-412a-a240-bfb13981b4e9",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": {
                 "objRef": "6d4036dc-60c6-4b39-bb8e-786577818e7a",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               }
             }
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "singleKvStore"
+            "inputdata"
           ]
         },
         "6d4036dc-60c6-4b39-bb8e-786577818e7a": {

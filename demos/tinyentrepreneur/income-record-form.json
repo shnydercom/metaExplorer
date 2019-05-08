@@ -143,7 +143,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "",
               "ldType": "http://schema.org/Text"
             }

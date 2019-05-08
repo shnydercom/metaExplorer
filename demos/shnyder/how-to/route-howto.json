@@ -219,7 +219,7 @@
           "nameSelf": "48ad61ed-a9a2-4711-b03b-96b93020bf4c",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "The bar below reacts to sub-routing",
               "ldType": "http://schema.org/Text"
             }
@@ -314,7 +314,7 @@
           "nameSelf": "466a1af2-2c9d-4919-b0ac-361a3f6b55e6",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "please click the \"explore\" icon (#3)",
               "ldType": "http://schema.org/Text"
             }
@@ -352,7 +352,7 @@
           "nameSelf": "f9a43b06-bd46-4953-b043-5bf801c817e8",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "please click the \"users\" icon (#4)",
               "ldType": "http://schema.org/Text"
             }

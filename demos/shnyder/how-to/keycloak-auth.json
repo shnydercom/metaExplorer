@@ -58,7 +58,7 @@
           "nameSelf": "67979026-1d58-4d97-8b3d-67152f0f61ee",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Token value:",
               "ldType": "http://schema.org/Text"
             }
@@ -72,7 +72,7 @@
           "nameSelf": "30a71739-11b7-4163-b5c4-47e59620ad1e",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": {
                 "objRef": "7a8e4b1e-cd8c-4c2f-9e2b-de3ce6c1f338",
                 "propRef": "bearertoken"
@@ -82,7 +82,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "singleKvStore"
+            "inputdata"
           ]
         },
         "7a8e4b1e-cd8c-4c2f-9e2b-de3ce6c1f338": {
@@ -105,7 +105,7 @@
           "nameSelf": "11a62407-2e1f-440c-b94d-5542dd175fb1",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": {
                 "objRef": "5f5024c3-0042-430d-b6bb-8d309d299365",
                 "propRef": "bearertoken"
@@ -115,7 +115,7 @@
           ],
           "crudSkills": "cRud",
           "interpretableKeys": [
-            "singleKvStore"
+            "inputdata"
           ]
         },
         "5f5024c3-0042-430d-b6bb-8d309d299365": {

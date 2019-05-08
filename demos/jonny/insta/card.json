@@ -67,7 +67,7 @@
           "nameSelf": "0fc07c31-5e7c-4d23-9502-edeadf4a8dfd",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "this is a Material Design card that includes a circle-display which includes an image",
               "ldType": "http://schema.org/Text"
             }

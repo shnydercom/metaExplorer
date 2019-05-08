@@ -42,7 +42,7 @@
               "key": "SubHeaderText",
               "value": {
                 "objRef": "TextInputItpt",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             }
@@ -59,7 +59,7 @@
           "nameSelf": "TextInputItpt",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "predefinedInputfromTest",
               "ldType": "http://schema.org/Text"
             }

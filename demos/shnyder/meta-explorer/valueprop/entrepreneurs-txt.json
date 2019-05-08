@@ -72,7 +72,7 @@
           "nameSelf": "4e60e3bf-f825-4ac2-a759-4e97142ccd65",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "test your ideas quicker by copying your creations across projects",
               "ldType": "http://schema.org/Text"
             }

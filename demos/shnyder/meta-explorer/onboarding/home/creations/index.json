@@ -129,7 +129,7 @@
           "nameSelf": "a4d7ee5b-0947-4eb9-b820-900fa9d9fd4b",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "'TinyEntrepreneur' by shnyder.com",
               "ldType": "http://schema.org/Text"
             }
@@ -143,7 +143,7 @@
           "nameSelf": "0d938ceb-f49e-4b2c-9b81-a4a1e0d7d89c",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "An example mini App with tools for self-employed people or bootstrapping entrepreneurs",
               "ldType": "http://schema.org/Text"
             }
@@ -253,7 +253,7 @@
           "nameSelf": "ce904f50-5843-4ced-9f05-856a58e068cc",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "'generaldemo' by shnyder.com",
               "ldType": "http://schema.org/Text"
             }
@@ -267,7 +267,7 @@
           "nameSelf": "c69b12eb-bf54-4ed7-840a-4b4c0ebc5af4",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "A mini App showing examples of screens you can create with MetaExplorer",
               "ldType": "http://schema.org/Text"
             }

@@ -156,7 +156,7 @@
           "nameSelf": "a184f356-6e6b-4eb5-9923-556f564c6bd6",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Flight: LHR - CDG",
               "ldType": "http://schema.org/Text"
             }
@@ -170,7 +170,7 @@
           "nameSelf": "40cfd031-8182-44e9-a27b-7999c53f7a8f",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "09:00 - 11:20",
               "ldType": "http://schema.org/Text"
             }
@@ -272,7 +272,7 @@
           "nameSelf": "44819576-4716-4dc8-b22f-2865a1a0d092",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Train: St Pancras International - Gare du Nord",
               "ldType": "http://schema.org/Text"
             }
@@ -286,7 +286,7 @@
           "nameSelf": "3e3f0af7-8160-4b8f-8563-cf0b91928f57",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "09:22 - 12:47",
               "ldType": "http://schema.org/Text"
             }
@@ -388,7 +388,7 @@
           "nameSelf": "b02b40b5-6510-4868-9260-6ad2d396b6a2",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Bus: London - Paris (Bercy Seine)",
               "ldType": "http://schema.org/Text"
             }
@@ -402,7 +402,7 @@
           "nameSelf": "171c87eb-f750-4e68-9861-19ee6316f1fb",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "13:00 - 21:45",
               "ldType": "http://schema.org/Text"
             }

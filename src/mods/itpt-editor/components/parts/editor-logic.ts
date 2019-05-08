@@ -487,7 +487,7 @@ export class EditorLogic {
 			ldType = LDDict.Text;
 		}
 		var baseDataTypeKVStore: IKvStore = {
-			key: UserDefDict.singleKvStore,
+			key: UserDefDict.inputData,
 			value: value,
 			ldType: ldType
 		};

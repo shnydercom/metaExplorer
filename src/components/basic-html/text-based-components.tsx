@@ -9,10 +9,10 @@ import { Component, ComponentClass, StatelessComponent } from 'react';
 import { LDDict } from 'ldaccess/LDDict';
 
 let cfgIntrprtKeys: string[] =
-	[UserDefDict.singleKvStore];
+	[UserDefDict.inputData];
 let initialKVStores: IKvStore[] = [
 	{
-		key: UserDefDict.singleKvStore,
+		key: UserDefDict.inputData,
 		value: undefined,
 		ldType: LDDict.Text
 	}
@@ -38,7 +38,7 @@ export abstract class PureTextBasedComponent extends Component<LDConnectedState 
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
 		prevState: TextBasedComponentState): null | TextBasedComponentState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [], [UserDefDict.singleKvStore], null, [], [true]);
+			nextProps, prevState, [], [UserDefDict.inputData], null, [], [true]);
 		if (!rvLD) {
 			return null;
 		}
@@ -57,14 +57,14 @@ export abstract class PureTextBasedComponent extends Component<LDConnectedState 
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		const ldState = initLDLocalState(this.cfg, props, [],
-			[UserDefDict.singleKvStore], [], [true]);
+			[UserDefDict.inputData], [], [true]);
 		this.state = {
 			...ldState,
 		};
 	}
 	render() {
 		const { localValues } = this.state;
-		const singleTextValue = localValues.get(UserDefDict.singleKvStore);
+		const singleTextValue = localValues.get(UserDefDict.inputData);
 		return <div>{singleTextValue ? singleTextValue : null}</div>;
 	}
 }
@@ -74,7 +74,7 @@ export const H1TextComponentName = 'shnyder/basichtml/h1';
 export class PureH1TextComponent extends PureTextBasedComponent {
 	render() {
 		const { localValues } = this.state;
-		const singleTextValue = localValues.get(UserDefDict.singleKvStore);
+		const singleTextValue = localValues.get(UserDefDict.inputData);
 		return <h1>{singleTextValue ? singleTextValue : null}</h1>;
 	}
 }
@@ -84,7 +84,7 @@ export const H2TextComponentName = 'shnyder/basichtml/h2';
 export class PureH2TextComponent extends PureTextBasedComponent {
 	render() {
 		const { localValues } = this.state;
-		const singleTextValue = localValues.get(UserDefDict.singleKvStore);
+		const singleTextValue = localValues.get(UserDefDict.inputData);
 		return <h2>{singleTextValue ? singleTextValue : null}</h2>;
 	}
 }
@@ -94,7 +94,7 @@ export const H3TextComponentName = 'shnyder/basichtml/h3';
 export class PureH3TextComponent extends PureTextBasedComponent {
 	render() {
 		const { localValues } = this.state;
-		const singleTextValue = localValues.get(UserDefDict.singleKvStore);
+		const singleTextValue = localValues.get(UserDefDict.inputData);
 		return <h3>{singleTextValue ? singleTextValue : null}</h3>;
 	}
 }
@@ -104,7 +104,7 @@ export const H4TextComponentName = 'shnyder/basichtml/h4';
 export class PureH4TextComponent extends PureTextBasedComponent {
 	render() {
 		const { localValues } = this.state;
-		const singleTextValue = localValues.get(UserDefDict.singleKvStore);
+		const singleTextValue = localValues.get(UserDefDict.inputData);
 		return <h4>{singleTextValue ? singleTextValue : null}</h4>;
 	}
 }
@@ -114,7 +114,7 @@ export const SpanTextComponentName = 'shnyder/basichtml/span';
 export class PureSpanTextComponent extends PureTextBasedComponent {
 	render() {
 		const { localValues } = this.state;
-		const singleTextValue = localValues.get(UserDefDict.singleKvStore);
+		const singleTextValue = localValues.get(UserDefDict.inputData);
 		return <span>{singleTextValue ? singleTextValue : null}</span>;
 	}
 }
@@ -124,7 +124,7 @@ export const BoldTextComponentName = 'shnyder/basichtml/bold';
 export class PureBoldTextComponent extends PureTextBasedComponent {
 	render() {
 		const { localValues } = this.state;
-		const singleTextValue = localValues.get(UserDefDict.singleKvStore);
+		const singleTextValue = localValues.get(UserDefDict.inputData);
 		return <b>{singleTextValue ? singleTextValue : null}</b>;
 	}
 }
@@ -134,7 +134,7 @@ export const ItalicsTextComponentName = 'shnyder/basichtml/italics';
 export class PureItalicsTextComponent extends PureTextBasedComponent {
 	render() {
 		const { localValues } = this.state;
-		const singleTextValue = localValues.get(UserDefDict.singleKvStore);
+		const singleTextValue = localValues.get(UserDefDict.inputData);
 		return <i>{singleTextValue ? singleTextValue : null}</i>;
 	}
 }
@@ -144,7 +144,7 @@ export const ParagraphTextComponentName = 'shnyder/basichtml/paragraph';
 export class PureParagraphTextComponent extends PureTextBasedComponent {
 	render() {
 		const { localValues } = this.state;
-		const singleTextValue = localValues.get(UserDefDict.singleKvStore);
+		const singleTextValue = localValues.get(UserDefDict.inputData);
 		return <p>{singleTextValue ? singleTextValue : null}</p>;
 	}
 }

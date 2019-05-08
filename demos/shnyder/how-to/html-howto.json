@@ -94,7 +94,7 @@
           "nameSelf": "3ff5087c-e48d-4e13-8078-fda40b28ecd7",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "demo text for basic html evaluation",
               "ldType": "http://schema.org/Text"
             }
@@ -108,7 +108,7 @@
           "nameSelf": "8fe0e2e2-564f-484c-8464-d25002ba84a4",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "demo text for basic html evaluation",
               "ldType": "http://schema.org/Text"
             }
@@ -122,7 +122,7 @@
           "nameSelf": "593aa720-1c1d-4108-9d44-aebc6f0c569c",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "demo text for basic html evaluation",
               "ldType": "http://schema.org/Text"
             }
@@ -136,7 +136,7 @@
           "nameSelf": "0b3b24cf-cb79-45de-bbab-9bb1976b4c8a",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "demo text for basic html evaluation",
               "ldType": "http://schema.org/Text"
             }
@@ -150,7 +150,7 @@
           "nameSelf": "779a9164-46b5-4a1f-b653-121077a1c4e4",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "demo text for basic html evaluation",
               "ldType": "http://schema.org/Text"
             }
@@ -164,7 +164,7 @@
           "nameSelf": "e575f03a-3bfd-4efb-8264-0f2a45defb63",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "demo text for basic html evaluation",
               "ldType": "http://schema.org/Text"
             }
@@ -178,7 +178,7 @@
           "nameSelf": "152d7bcf-ead9-4968-9a31-231477e7dd63",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "demo text for basic html evaluation",
               "ldType": "http://schema.org/Text"
             }
@@ -192,7 +192,7 @@
           "nameSelf": "3d587316-93e0-42c6-9c7c-b3ee9eb084a0",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "demo text for basic html evaluation",
               "ldType": "http://schema.org/Text"
             }

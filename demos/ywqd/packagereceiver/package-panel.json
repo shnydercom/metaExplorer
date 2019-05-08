@@ -156,12 +156,12 @@
           "nameSelf": "f6fb50c7-52b4-4e20-ac8a-9baddb2545aa",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "包裹办理伙伴：",
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "jonathan_packer",
               "ldType": "http://schema.org/Text"
             }
@@ -175,12 +175,12 @@
           "nameSelf": "5cd0fb13-5fbe-4d8e-b9f5-e44e20db91fd",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "寄出日期：",
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "2018-12-20",
               "ldType": "http://schema.org/Text"
             }
@@ -194,12 +194,12 @@
           "nameSelf": "1a4aea3f-7222-43f7-b86d-7e9aded7d5e3",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "收到日期：",
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "没到",
               "ldType": "http://schema.org/Text"
             }
@@ -213,12 +213,12 @@
           "nameSelf": "e4c28ed0-02b1-41b6-ba72-7fa15769bb5d",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "邮费：",
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "58,99€",
               "ldType": "http://schema.org/Text"
             }
@@ -232,12 +232,12 @@
           "nameSelf": "2a96a6de-09a9-4523-b893-c6c9a234a5c0",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "其他的消费：",
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "9,45€",
               "ldType": "http://schema.org/Text"
             }
@@ -251,12 +251,12 @@
           "nameSelf": "664d2b40-78bc-4793-a8ee-e4e4d5f4e8aa",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "合作交易：",
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "分50/50",
               "ldType": "http://schema.org/Text"
             }
@@ -270,7 +270,7 @@
           "nameSelf": "0d9a5a74-2dd0-4c88-ac9c-064ab8c1ad60",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "本包裹汇率：",
               "ldType": "http://schema.org/Text"
             }
@@ -331,7 +331,7 @@
           "nameSelf": "c9180939-dd0b-4aca-8741-0429e2073e05",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "1€ ≙ 7,88人民币",
               "ldType": "http://schema.org/Text"
             }
@@ -345,7 +345,7 @@
           "nameSelf": "1da95dba-61b3-4390-b233-cabf84e2775b",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "1人民币 ≙ 0,13€",
               "ldType": "http://schema.org/Text"
             }

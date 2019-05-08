@@ -110,7 +110,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": null,
               "ldType": "http://schema.org/Integer"
             }
@@ -129,7 +129,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "",
               "ldType": "http://schema.org/Text"
             }
@@ -148,7 +148,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "",
               "ldType": "http://schema.org/Text"
             }

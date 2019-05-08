@@ -166,7 +166,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "ACME Ltd",
               "ldType": "http://schema.org/Text"
             }
@@ -185,7 +185,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "\"Ready for the future\"",
               "ldType": "http://schema.org/Text"
             }
@@ -204,7 +204,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Employee Network App",
               "ldType": "http://schema.org/Text"
             }
@@ -223,7 +223,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Fix Frontend issue #15",
               "ldType": "http://schema.org/Text"
             }
@@ -284,7 +284,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "task finished earlier than expected",
               "ldType": "http://schema.org/Text"
             }
@@ -324,7 +324,7 @@
               "key": "customer",
               "value": {
                 "objRef": "49376ec9-7113-4f3a-bb93-7e6a2190c63a",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             },
@@ -332,7 +332,7 @@
               "key": "project",
               "value": {
                 "objRef": "0d391bc6-45a7-4050-8c09-63183f9bab20",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             },
@@ -340,7 +340,7 @@
               "key": "subproject",
               "value": {
                 "objRef": "87ca034c-bd8d-4896-9229-1e9528255e1e",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             },
@@ -348,7 +348,7 @@
               "key": "tasks",
               "value": {
                 "objRef": "c7556fa8-ef67-4d45-bae3-c41d8848508b",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             },
@@ -356,7 +356,7 @@
               "key": "description",
               "value": {
                 "objRef": "f30ca349-c379-4ef5-b9f9-93f8b3e0fa1f",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             },
@@ -364,7 +364,7 @@
               "key": "workstart",
               "value": {
                 "objRef": "b178bdbe-cabf-436d-9a70-30472d3bfdbb",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/DateTime"
             },
@@ -372,7 +372,7 @@
               "key": "workend",
               "value": {
                 "objRef": "cf7af0b1-a0c2-4717-82ed-12dd56a91e02",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/DateTime"
             },
@@ -380,7 +380,7 @@
               "key": "achievements",
               "value": {
                 "objRef": "ce4ae0ee-c711-4078-83fe-e7b510b06aaa",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             }

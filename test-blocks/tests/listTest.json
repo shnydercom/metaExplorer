@@ -94,7 +94,7 @@
               "key": "inputdata",
               "value": {
                 "objRef": "3f2a6f85-e736-4850-9863-741f1dedff7e",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               }
             }
           ],
@@ -109,7 +109,7 @@
           "nameSelf": "3f2a6f85-e736-4850-9863-741f1dedff7e",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "listtest",
               "ldType": "http://schema.org/Text"
             }
@@ -126,7 +126,7 @@
               "key": "inputdata",
               "value": {
                 "objRef": "c9c940c1-c2c2-4c96-89d5-15d3a5dca0b8",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               }
             }
           ],
@@ -141,7 +141,7 @@
           "nameSelf": "c9c940c1-c2c2-4c96-89d5-15d3a5dca0b8",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": false,
               "ldType": "http://schema.org/Boolean"
             }

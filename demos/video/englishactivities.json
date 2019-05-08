@@ -167,7 +167,7 @@
           "nameSelf": "7787887c-2a2a-4cd9-99e3-02710a3cf01d",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Language exchange in Friedrichshain",
               "ldType": "http://schema.org/Text"
             }
@@ -181,7 +181,7 @@
           "nameSelf": "a0c18a84-6943-407d-8ef4-a9c30abfc1f9",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Meet up with people from all around the world to practice with native speakers from over 16 countries!",
               "ldType": "http://schema.org/Text"
             }
@@ -251,7 +251,7 @@
           "nameSelf": "60e5490d-1b98-44ea-94a4-0084cc2da996",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Select a language",
               "ldType": "http://schema.org/Text"
             }

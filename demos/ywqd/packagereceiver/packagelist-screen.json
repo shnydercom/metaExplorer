@@ -112,7 +112,7 @@
           "nameSelf": "39286fc2-4be4-4193-80d5-4de0a9f23dd4",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "中德",
               "ldType": "http://schema.org/Text"
             }
@@ -155,7 +155,7 @@
           "nameSelf": "f56dafa3-fade-469a-81c9-0865d8452f07",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "德中",
               "ldType": "http://schema.org/Text"
             }

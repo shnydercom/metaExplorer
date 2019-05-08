@@ -156,7 +156,7 @@
           "nameSelf": "1c7cf5b6-dc05-4165-8f3a-a353709feebe",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Juanita Cortador",
               "ldType": "http://schema.org/Text"
             }
@@ -170,7 +170,7 @@
           "nameSelf": "84aa6787-38a7-4d75-be3e-47397284246e",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "@juanita_c, jc@shnyder.de",
               "ldType": "http://schema.org/Text"
             }
@@ -231,7 +231,7 @@
           "nameSelf": "6bec94d2-f7e3-45b5-9bb0-298f94f547cc",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "follows: 232",
               "ldType": "http://schema.org/Text"
             }
@@ -245,7 +245,7 @@
           "nameSelf": "02307129-6195-4cb4-a143-c12ebc65a089",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "following: 300",
               "ldType": "http://schema.org/Text"
             }

@@ -81,7 +81,7 @@
           "nameSelf": "3bf02e66-fe60-4111-bb23-13c575187fea",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Step #3 of 5",
               "ldType": "http://schema.org/Text"
             }
@@ -156,7 +156,7 @@
           "nameSelf": "18894dd2-6d3b-4a3f-b326-297f1a0cae01",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Great, check out what your first Block looks like in the preview.",
               "ldType": "http://schema.org/Text"
             }
@@ -170,7 +170,7 @@
           "nameSelf": "14f76915-e719-4fa7-8439-4b75b22005b9",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "The QR code changes when you type in the text field.",
               "ldType": "http://schema.org/Text"
             }

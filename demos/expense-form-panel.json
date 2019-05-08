@@ -152,7 +152,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "59.99",
               "ldType": "http://schema.org/Number"
             }
@@ -171,7 +171,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Pizza with John",
               "ldType": "http://schema.org/Text"
             }
@@ -219,7 +219,7 @@
               "key": "billeddate",
               "value": {
                 "objRef": "64d00460-f088-46c7-87c4-8fd7dd6b63d5",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Date"
             },
@@ -227,7 +227,7 @@
               "key": "expenseamount",
               "value": {
                 "objRef": "6255886a-5226-42aa-a9db-4bf21e76be04",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Number"
             },
@@ -235,7 +235,7 @@
               "key": "summary",
               "value": {
                 "objRef": "b644c4ad-dcd2-48a1-ac9b-09ec55ea381f",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             }

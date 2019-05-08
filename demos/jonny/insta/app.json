@@ -28,7 +28,7 @@
               "key": "HeaderText",
               "value": {
                 "objRef": "193a573e-8128-44c7-9dc7-f8733c6fb815",
-                "propRef": "singleKvStore"
+                "propRef": "outputdata"
               },
               "ldType": "http://schema.org/Text"
             }
@@ -82,7 +82,7 @@
           "nameSelf": "37139e35-2646-466d-9326-6e1d5dbb7857",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "This is an app container including a Material Design card, including a circle display with an included image",
               "ldType": "http://schema.org/Text"
             }
@@ -128,7 +128,7 @@
               "ldType": "http://schema.org/Text"
             },
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Jonny's Insta Project",
               "ldType": "http://schema.org/Text"
             }

@@ -81,7 +81,7 @@
           "nameSelf": "e220d8fa-5731-4fcf-ac07-a7f68b3fe551",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Step #1 of 5",
               "ldType": "http://schema.org/Text"
             }
@@ -207,7 +207,7 @@
           "nameSelf": "16331318-6be7-4b14-8291-7238f7b0ee92",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Hello,",
               "ldType": "http://schema.org/Text"
             }
@@ -221,7 +221,7 @@
           "nameSelf": "896e6733-9cf0-4cff-84e7-1fbe41d97957",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "thanks for trying out MetaExplorer.",
               "ldType": "http://schema.org/Text"
             }
@@ -235,7 +235,7 @@
           "nameSelf": "021b40a4-0364-4ff0-82e5-afbb3fcd3643",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "I've created a little walkthrough to show you what you can do with this little piece of software. The 5 steps take you through the creation of mini-Apps and show you how to create functionality that is usable across Apps.",
               "ldType": "http://schema.org/Text"
             }
@@ -249,7 +249,7 @@
           "nameSelf": "836b894e-558d-4016-9f81-742897ec8cf8",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Hope you'll have a creative time!",
               "ldType": "http://schema.org/Text"
             }
@@ -271,7 +271,7 @@
           "nameSelf": "2dfd98cb-15fe-4a8c-9110-b985e0cdd714",
           "initialKvStores": [
             {
-              "key": "singleKvStore",
+              "key": "inputdata",
               "value": "Jonathan Schneider, Founder",
               "ldType": "http://schema.org/Text"
             }
