@@ -557,7 +557,7 @@ export class EditorLogic {
 				const oneLink = outport.getLinks()[element];
 				let leafNode: NodeModel = oneLink.getSourcePort().getParent();
 				let leafPort: LDPortModel = oneLink.getSourcePort() as LDPortModel;
-				if (leafNode.getID() === branchNode.getID()) {
+				if (!leafPort.in) {//leafNode.getID() === branchNode.getID()) {
 					leafNode = oneLink.getTargetPort().getParent();
 					leafPort = oneLink.getTargetPort() as LDPortModel;
 				}
@@ -594,7 +594,7 @@ export class EditorLogic {
 				const oneLink = port.getLinks()[element];
 				let leafNode: NodeModel = oneLink.getSourcePort().getParent();
 				let leafPort: LDPortModel = oneLink.getSourcePort() as LDPortModel;
-				if (leafNode.getID() === branchNode.getID()) {
+				if (leafPort.in) {//leafNode.getID() === branchNode.getID()) {
 					leafNode = oneLink.getTargetPort().getParent();
 					leafPort = oneLink.getTargetPort() as LDPortModel;
 				}

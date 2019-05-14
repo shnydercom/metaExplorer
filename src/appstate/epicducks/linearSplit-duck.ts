@@ -55,12 +55,37 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 	let ldTkStr = ldOptionsObj.ldToken.get();
 	let lang = ldOptionsObj.lang;
 	let retriever = ldOptionsObj.visualInfo.retriever;
+	let keyIdxMap: Map<string, number> = new Map();
 	ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
 		const elemKey = itm.key;
+		keyIdxMap.set(elemKey, idx);
 		let newLDTokenStr: string = linearLDTokenStr(ldTkStr, idx);
 		let newLDToken = new NetworkPreferredToken(newLDTokenStr);
 		//assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
 		let targetLDToken: ILDToken = new NetworkPreferredToken(ldTkStr);
+		if (itm.ldType === UserDefDict.outputKVMapType || itm.key === UserDefDict.outputKVMapKey) {
+			//TODO: if an outputKvMap exists in the list of kvStores to split, then look for the right value and modify
+			//the okvmap on that ikvstore
+			const splitOKV: OutputKVMap = itm.value;
+			for (const okvElemStr in splitOKV) {
+				if (splitOKV.hasOwnProperty(okvElemStr)) {
+					let okvElem = splitOKV[okvElemStr];
+					let targetProp = okvElem[0].targetProperty;
+					let curSC = stateCopy[linearLDTokenStr(ldTkStr, keyIdxMap.get(targetProp))];
+					//besser ist es, beim itererieren eine map mit den Indices der Positionen zu erstellen, und dann aus dem State
+					//sich stateCopy[token + "-l" + idx] zu holen
+					let outputKvMaps = curSC.resource.kvStores.filter((val) => val.key === UserDefDict.outputKVMapKey);
+					let newOutputKvMapInStore: OutputKVMap = { [okvElemStr]: [{ targetLDToken: targetLDToken, targetProperty: targetProp }] };
+					if (outputKvMaps.length === 0) {
+						let newOKVStoreInStore: IKvStore = { key: UserDefDict.outputKVMapKey, value: newOutputKvMapInStore, ldType: UserDefDict.outputKVMapType };
+						curSC.resource.kvStores.push(newOKVStoreInStore);
+					} else {
+						outputKvMaps[0].value = newOutputKvMapInStore;
+					}
+				}
+			}
+			return;
+		}
 		let newOutputKvMap: OutputKVMap = { [elemKey]: [{ targetLDToken: targetLDToken, targetProperty: elemKey }] };
 		let newOKVStore: IKvStore = { key: UserDefDict.outputKVMapKey, value: newOutputKvMap, ldType: UserDefDict.outputKVMapType };
 		let newLDOptions: ILDOptions = {

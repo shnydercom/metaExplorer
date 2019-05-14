@@ -82,11 +82,11 @@
   "interpretableKeys": [
     {
       "objRef": "7c379a0f-945d-4550-8d24-b959edca93a3",
-      "propRef": "outputdata"
+      "propRef": "inputdata"
     },
     {
       "objRef": "0be73e1c-f558-4630-8532-9b013d6ce34a",
-      "propRef": "outputdata"
+      "propRef": "inputdata"
     }
   ]
 }

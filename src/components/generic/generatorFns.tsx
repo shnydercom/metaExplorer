@@ -368,7 +368,7 @@ export function determineSingleKVKey(kvStores: IKvStore[], canInterpretType: str
 		for (let idx = 0; idx < kvStores.length; idx++) {
 			const a = kvStores[idx];
 			if (a.key === UserDefDict.singleKvStore) return rv;
-			if (a.key === UserDefDict.inputData) return rv;
+			if (a.key === UserDefDict.inputData) return UserDefDict.outputData;
 			if (a.key === UserDefDict.outputKVMapKey) continue;
 			if (kvStores[idx].ldType === canInterpretType) {
 				candidates.push(kvStores[idx]);
