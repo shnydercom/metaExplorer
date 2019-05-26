@@ -1,11 +1,3 @@
-import assertNever from "assert-never";
-import { connect } from 'react-redux';
-
-import { Input, InputTheme } from 'react-toolbox/lib/input';
-import { DatePicker, DatePickerTheme } from 'react-toolbox/lib/date_picker';
-import { Switch } from 'react-toolbox/lib/switch';
-import { TimePicker, TimePickerTheme } from 'react-toolbox/lib/time_picker';
-
 import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
 import ldBlueprint, { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
@@ -17,11 +9,10 @@ import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDLocalState } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
-import { Component, ComponentClass, StatelessComponent } from "react";
+import { Component, ComponentClass, StatelessComponent, ReactNode } from "react";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { gdsfpLD, initLDLocalState, determineSingleKVKey } from "../../generic/generatorFns";
-import { parseDate, parseTime, parseText, parseNumber, parseBoolean } from "ldaccess/ldtypesystem/parseSimple";
 
 /**
  * @author Jonathan Schneider
@@ -39,8 +30,12 @@ type BaseDataTypeState = {
 	singleKVOutputKey: string
 };
 
+export interface PureBaseDataTypeInputComponent {
+	renderSingleKv(baseDT: LDBaseDataType): ReactNode;
+}
+
 let bdts: LDBaseDataType[] = [LDDict.Boolean, LDDict.Integer, LDDict.Double, LDDict.Text, LDDict.Date, LDDict.DateTime];
-let bpcfgs: BlueprintConfig[] = new Array();
+export const baseDataTypeBpcfgs: BlueprintConfig[] = new Array();
 
 for (var bdt in bdts) {
 	if (bdts.hasOwnProperty(bdt)) {
@@ -72,20 +67,18 @@ for (var bdt in bdts) {
 			interpretableKeys: cfgIntrprtKeys,
 			crudSkills: "CRUd"
 		};
-		bpcfgs.push(bpCfg);
+		baseDataTypeBpcfgs.push(bpCfg);
 	}
 }
-class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDispatch & OwnProps, BaseDataTypeState & LDLocalState>
-	implements IBlueprintItpt {
+export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDispatch & OwnProps, BaseDataTypeState & LDLocalState>
+	implements IBlueprintItpt, PureBaseDataTypeInputComponent {
 
 	cfg: BlueprintConfig;
-	//outputKVMap: OutputKVMap;
 	initialKvStores: IKvStore[];
 
 	constructor(props?: LDConnectedState & LDConnectedDispatch & OwnProps) {
 		super(props);
 		this.cfg = this.constructor["cfg"];
-		//this.render = () => null;
 		let bdtState: BaseDataTypeState = {
 			singleKVOutput: null,
 			singleKVInputKey: UserDefDict.inputData,
@@ -112,21 +105,13 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 		return;
 	}
 
-	/*componentWillReceiveProps(nextProps, nextContext): void {
-		if (compNeedsUpdate(nextProps, this.props)) {
-			this.handleKVs(nextProps);
-		}
-	}*/
-
 	handleChange = (evtval) => {
-		//let newLDOptionsObj = ldOptionsDeepCopy(this.props.ldOptions);
 		let singleInputKey: string = this.state.singleKVInputKey;
 		let modSingleKV: IKvStore = {
 			key: this.state.singleKVOutputKey,
 			ldType: this.state.localLDTypes.get(singleInputKey),
 			value: this.state.localValues.get(singleInputKey)
 		};
-		//getKVStoreByKey(newLDOptionsObj.resource.kvStores, this.state.singleKVKey);
 		modSingleKV.value = evtval;
 		this.setState({ ...this.state, singleKVOutput: modSingleKV });
 		//TODO: it might be a good idea to debounce before updating the application state
@@ -136,9 +121,6 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 	}
 
 	componentDidMount() {
-		/*let initialSingleKV = { ...getKVStoreByKey(this.initialKvStores, this.state.singleKVKey) };
-		let baseDT: LDBaseDataType = initialSingleKV.ldType as LDBaseDataType;
-		this.determineRenderFn(baseDT);*/
 		if (!this.state.singleKVOutput || !this.state.singleKVOutput.ldType) {
 			console.log('PureBaseDataTypeInput notifyLDOptionsChange');
 			//this self-creates an object. Used e.g. in the itpt-editor, bdt-part
@@ -154,95 +136,19 @@ class PureBaseDataTypeInput extends Component<LDConnectedState & LDConnectedDisp
 					newLDOptionsObj.resource.kvStores.push(singleKv);
 					this.props.notifyLDOptionsChange(newLDOptionsObj);
 				}
-				/*else {
-					singleKv = newLDOptionsObj.resource.kvStores[kvStoreIdx];
-				}*/
 			} else {
 				this.props.notifyLDOptionsChange(null);
 			}
-		}/* else {
-			if (this.props.ldOptions.resource.kvStores.length > 0) {
-				this.handleKVs(this.props);
-			}
-		}*/
+		}
 	}
 	render() {
 		return <>{this.renderSingleKv(this.cfg.canInterpretType as LDBaseDataType)}</>;
 	}
-	/*private handleKVs(props: LDOwnProps & LDConnectedState) {
-		if (props.ldOptions) {
-			let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
-			let newSingleKVKey: string = this.determineSingleKVKey(pLdOpts.resource.kvStores);
-			let nextDescription = getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, LDDict.description);
-			let nextSingleKV = getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, newSingleKVKey);
-			if (this.props.ldOptions && nextSingleKV) {
-				let prevKVStore = getKVStoreByKey(this.props.ldOptions.resource.kvStores, newSingleKVKey);
-				if ((!prevKVStore && nextSingleKV) || prevKVStore.ldType !== nextSingleKV.ldType) {
-					this.determineRenderFn(nextSingleKV.ldType as LDBaseDataType);
-				}
-			}
-			this.outputKVMap = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, UserDefDict.outputKVMapKey));
-			let desc = this.parseLabel(nextSingleKV, nextDescription);
-			this.setState({ ...this.state, singleKV: nextSingleKV, heading: desc, singleKVKey: newSingleKVKey });
-		}
-	}*/
-
-	private renderSingleKv(baseDT: LDBaseDataType) {
-		const heading = this.state.localValues.get(LDDict.description);
-		switch (baseDT) {
-			case LDDict.Boolean:
-				let parsedBoolean = parseBoolean(this.state.singleKVOutput);
-				return <Switch checked={parsedBoolean}
-					label={heading}
-					onChange={(evt) => this.handleChange(evt)} />;
-			case LDDict.Integer:
-				const parsedInt = parseNumber(this.state.singleKVOutput);
-				return <Input type='number'
-					label={heading}
-					name={heading}
-					value={parsedInt}
-					onChange={(evt) => this.handleChange(evt)} />;
-			case LDDict.Double:
-				const parsedDouble = parseNumber(this.state.singleKVOutput);
-				return <Input type='number'
-					label={heading}
-					name={heading}
-					value={parsedDouble}
-					onChange={(evt) => this.handleChange(evt)} />;
-			case LDDict.Text:
-				let parsedText = parseText(this.state.singleKVOutput);
-				return <Input type='text'
-					label={heading}
-					name={heading}
-					value={parsedText}
-					onChange={(evt) => this.handleChange(evt)} />;
-			case LDDict.Date:
-				var parsedDate = parseDate(this.state.singleKVOutput);
-				return <DatePicker
-					label={heading}
-					onChange={(evt) => this.handleChange(evt)}
-					value={parsedDate}
-					sundayFirstDayOfWeek />;
-			case LDDict.DateTime:
-				var parsedDate = parseDate(this.state.singleKVOutput);
-				var parsedTime = parseTime(this.state.singleKVOutput);
-				return <div className="dateTimePicker">
-					<DatePicker
-						label={heading}
-						onChange={(evt) => this.handleChange(evt)}
-						value={parsedDate}
-						sundayFirstDayOfWeek />
-					<TimePicker
-						label='Time'
-						onChange={(evt) => this.handleChange(evt)}
-						value={parsedTime}
-					/></div>;
-			default:
-				return assertNever(baseDT);
-		}
+	renderSingleKv(baseDT: LDBaseDataType): ReactNode {
+		throw new Error("Method not implemented in abstract class");
 	}
 }
-function wrapGDSF(cfg: BlueprintConfig) {
+export function wrapBaseDataTypeGDSF(cfg: BlueprintConfig) {
 	return (
 		nextProps: LDConnectedState & LDConnectedDispatch & OwnProps,
 		prevState: BaseDataTypeState & LDLocalState) => {
@@ -271,35 +177,3 @@ function wrapGDSF(cfg: BlueprintConfig) {
 		return { ...prevState, ...rvLD, ...rvLocal };
 	};
 }
-class PureBoolBase extends PureBaseDataTypeInput {
-	static getDerivedStateFromProps = wrapGDSF(bpcfgs[0]);
-}
-class PureIntBase extends PureBaseDataTypeInput {
-	static getDerivedStateFromProps = wrapGDSF(bpcfgs[1]);
-}
-class PureDoubleBase extends PureBaseDataTypeInput {
-	static getDerivedStateFromProps = wrapGDSF(bpcfgs[2]);
-}
-class PureTextBase extends PureBaseDataTypeInput {
-	static getDerivedStateFromProps = wrapGDSF(bpcfgs[3]);
-}
-class PureDateBase extends PureBaseDataTypeInput {
-	static getDerivedStateFromProps = wrapGDSF(bpcfgs[4]);
-}
-class PureDateTimeBase extends PureBaseDataTypeInput {
-	static getDerivedStateFromProps = wrapGDSF(bpcfgs[5]);
-}
-//this is the same as using a decorator function on individual classes
-export const PureBoolInput = ldBlueprint(bpcfgs[0])(PureBoolBase);
-export const PureIntInput = ldBlueprint(bpcfgs[1])(PureIntBase);
-export const PureDoubleInput = ldBlueprint(bpcfgs[2])(PureDoubleBase);
-export const PureTextInput = ldBlueprint(bpcfgs[3])(PureTextBase);
-export const PureDateInput = ldBlueprint(bpcfgs[4])(PureDateBase);
-export const PureDateTimeInput = ldBlueprint(bpcfgs[5])(PureDateTimeBase);
-
-export const BooleanValInput = connect(mapStateToProps, mapDispatchToProps)(PureBoolInput);
-export const IntegerValInput = connect(mapStateToProps, mapDispatchToProps)(PureIntInput);
-export const DoubleValInput = connect(mapStateToProps, mapDispatchToProps)(PureDoubleInput);
-export const TextValInput = connect(mapStateToProps, mapDispatchToProps)(PureTextInput);
-export const DateValInput = connect(mapStateToProps, mapDispatchToProps)(PureDateInput);
-export const DateTimeValInput = connect(mapStateToProps, mapDispatchToProps)(PureDateTimeInput);

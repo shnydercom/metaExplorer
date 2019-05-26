@@ -1,15 +1,14 @@
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 
 import { initLDLocalState, gdsfpLD } from 'components/generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
-import { Table, TableTheme, TableHead, TableCell, TableRow } from 'react-toolbox/lib/table/';
+import { Component, ReactNode } from 'react';
 
 export const SimpleTextTableName = "shnyder/material-design/SimpleTextTable";
-const tableHeadings = "headings";
-const tableRows = "rows";
+export const tableHeadings = "headings";
+export const tableRows = "rows";
 
 let simpleTextTableInputKeys: string[] = [tableHeadings, tableRows];
 let initialKVStores: IKvStore[] = [
@@ -26,8 +25,7 @@ export const simpleTextTableCfg: BlueprintConfig = {
 export interface SimpleTextTableState extends LDLocalState {
 }
 
-@ldBlueprint(simpleTextTableCfg)
-export class PureSimpleTextTable extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, SimpleTextTableState>
+export abstract class AbstractSimpleTextTable extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, SimpleTextTableState>
 	implements IBlueprintItpt {
 
 	static getDerivedStateFromProps(
@@ -53,28 +51,8 @@ export class PureSimpleTextTable extends Component<LDConnectedState & LDConnecte
 		const ldState = initLDLocalState(this.cfg, props, [], simpleTextTableInputKeys);
 		this.state = { ...ldState };
 	}
-	render() {
-		const { localValues } = this.state;
-		const headingRow = localValues.get(tableHeadings);
-		const contentRows = localValues.get(tableRows);
-		if (!headingRow || !contentRows) return null;
-		return <Table>
-			<TableHead>
-				{
-					(headingRow as string[]).map((headingRowElem, hIdx) => {
-						return <TableCell key={"h" + hIdx}>{headingRowElem}</TableCell>;
-					})
-				}
-			</TableHead>
-			{contentRows.map((contentRow, rowIdx) => (
-				<TableRow key={rowIdx}>
-					{
-						headingRow.map((contentKey, cIdx) => (
-							<TableCell key={"c" + cIdx}>{contentRow[contentKey]}</TableCell>
-						))
-					}
-				</TableRow>
-			))}
-		</Table>;
+
+	render(): ReactNode {
+		throw new Error("Method not implemented in abstract class");
 	}
 }

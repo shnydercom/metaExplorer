@@ -1,18 +1,10 @@
-import Dropzone from 'react-dropzone';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component, ReactNode } from 'react';
 import { LDConnectedDispatch, LDConnectedState, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig, IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import { compNeedsUpdate } from '../../reactUtils/compUtilFns';
 import { ILDOptions } from 'ldaccess/ildoptions';
-import { getKVValue } from 'ldaccess/ldUtils';
-import { getKVStoreByKeyFromLDOptionsOrCfg } from 'ldaccess/kvConvenienceFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { mapDispatchToProps, mapStateToProps } from 'appstate/reduxFns';
-import { connect } from 'react-redux';
-import { Button } from 'react-toolbox/lib/button';
-import { DOMCamera } from '../../peripherals/camera/dom-camera';
 import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 // TODO: drop file anim: https://css-tricks.com/examples/DragAndDropFileUploading/
 
@@ -42,7 +34,7 @@ const RESULT_KV: IKvStore = {
 let initialKVStores: IKvStore[] = [
 	RESULT_KV
 ];
-let bpCfg: BlueprintConfig = {
+export let SingleImageSelectorBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: SingleImageSelectorName,
@@ -51,10 +43,9 @@ let bpCfg: BlueprintConfig = {
 	crudSkills: "cRud"
 };
 
-@ldBlueprint(bpCfg)
-export class PureSingleImageSelector extends Component<
-LDConnectedState & LDConnectedDispatch & LDOwnProps,
-SingleImageSelectorState>
+export abstract class AbstractSingleImageSelector extends Component<
+	LDConnectedState & LDConnectedDispatch & LDOwnProps,
+	SingleImageSelectorState>
 	implements IBlueprintItpt {
 
 	static getDerivedStateFromProps(
@@ -66,7 +57,6 @@ SingleImageSelectorState>
 	}
 
 	cfg: BlueprintConfig;
-	//outputKVMap: OutputKVMap;
 	loadingImgLink: string = "/static/camera_negative_black.svg";
 	errorImgLink: string = "/static/nocamera_negative_black.svg";
 	draggingImgLink: string = "/static/dragndrop.svg";
@@ -89,9 +79,6 @@ SingleImageSelectorState>
 				[UserDefDict.outputKVMapKey]
 			)
 		};
-		/*if (props) {
-			this.handleKVs(props);
-		}*/
 	}
 
 	/**
@@ -104,12 +91,6 @@ SingleImageSelectorState>
 		this.props.dispatchKvOutput([outputKV], this.props.ldTokenString, outputKVMap);
 	}
 
-	/*componentWillReceiveProps(nextProps: LDOwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
-		if (compNeedsUpdate(nextProps, this.props)) {
-			this.handleKVs(nextProps);
-			//this.consumeLDOptions(nextProps.ldOptions);
-		}
-	}*/
 	consumeLDOptions = (ldOptions: ILDOptions) => {
 		/*if (ldOptions && ldOptions.resource && ldOptions.resource.kvStores) {
 			let kvs = ldOptions.resource.kvStores;
@@ -166,57 +147,7 @@ SingleImageSelectorState>
 			window.URL.revokeObjectURL(this.state.previewURL);
 		}
 	}
-
-	render() {
-		const { curStep, isCamAvailable, previewURL } = this.state;
-		let dropzoneRef;
-		return (<Dropzone className={curStep === SingleImageSelectorStateEnum.isPreviewing ? "single-img-sel accept" : "single-img-sel"}
-			accept="image/*"
-			multiple={false}
-			disableClick={true}
-			ref={(node) => { dropzoneRef = node; }}
-			onDropAccepted={(acceptedOrRejected) => {
-				let files = acceptedOrRejected.map((file) => ({
-					...file,
-					preview: URL.createObjectURL(file)
-				}));
-				this.onDropSuccess(files[0], files[0].preview);
-			}}
-			onDropRejected={() => this.onDropFailure()}
-			onDragStart={() => this.startDrag()}
-			onDragEnter={() => this.startDrag()}
-			onDragOver={() => this.startDrag()}
-			onDragLeave={() => this.onDropFailure()}
-			onFileDialogCancel={() => this.onDropFailure()}
-		>
-			{(() => {
-				switch (curStep) {
-					case SingleImageSelectorStateEnum.isSelectInputType:
-						return <div className="accept"> {isCamAvailable ? <Button className="btn-extension" icon="add_a_photo" onClick={() => { this.startCamera(); }}>Open Camera</Button> : null}
-							<Button className="btn-extension" icon="add_photo_alternate" onClick={() => { dropzoneRef.open(); }}>Select Image</Button></div>;
-					case SingleImageSelectorStateEnum.isCamShooting:
-						return <DOMCamera showControls onImageCaptured={(a) => {
-							this.onDropSuccess(null, a);
-						}} />;
-					case SingleImageSelectorStateEnum.isDragging:
-						return <div className="accept"><img className="md-large-image" style={{ flex: 1 }} src={this.draggingImgLink} height="100px" /></div>;
-					case SingleImageSelectorStateEnum.isPreviewing:
-						return <img className="cover-img" src={previewURL} alt="image preview" ></img>;
-					case SingleImageSelectorStateEnum.isError:
-						return <span>isError</span>;
-					default:
-						return null;
-				}
-			})()}
-		</Dropzone >);
+	render(): ReactNode {
+		throw new Error("Method not implemented in abstract class");
 	}
-
-	/*private handleKVs(props: LDOwnProps & LDConnectedState) {
-		let pLdOpts: ILDOptions = props && props.ldOptions && props.ldOptions ? props.ldOptions : null;
-		this.outputKVMap = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, UserDefDict.outputKVMapKey));
-		//this.imgLink = getKVValue(getKVStoreByKeyFromLDOptionsOrCfg(pLdOpts, this.cfg, LDDict.contentUrl));
-	}*/
-
 }
-
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureSingleImageSelector);

@@ -1,8 +1,5 @@
 import { Component, createRef } from "react";
 
-import configuratorTestData from './../../../../testing/configuratorTestData';
-import * as prefilledProductItptA from './../../../../testing/prefilledProductInterpreter.json';
-import * as prefilledOrganizationItptA from './../../../../testing/prefilledOrganizationInterpreter.json';
 import Button, { IconButton } from 'react-toolbox/lib/button';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import "storm-react-diagrams/dist/style.min.css";
@@ -20,19 +17,16 @@ import { editorTheme } from "styles/editor/editorTheme";
 import { appTheme } from "styles/appTheme/appTheme";
 
 import {
-	Route,
-	Link
-} from 'react-router-dom';
-import { Switch, Redirect } from "react-router";
+	Route} from 'react-router-dom';
+import { Redirect } from "react-router";
 import { BaseContainerRewrite } from "../../../components/generic/baseContainer-rewrite";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
 import { isProduction } from "appstate/store";
-import { Layout, Panel, Sidebar } from "react-toolbox/lib/layout";
+import { Layout, Panel } from "react-toolbox/lib/layout";
 import { NavDrawer } from "react-toolbox/lib/layout";
 import { EditorTray as EditorTray } from "./parts/EditorTray";
 import { DropRefmapResult } from "./parts/RefMapDropSpace";
-import { Input } from "react-toolbox/lib/input";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { initLDLocalState, gdsfpLD } from "components/generic/generatorFns";
 import { NetworkPreferredToken } from "ldaccess/ildtoken";
@@ -246,7 +240,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				logic.setDimensions(width, height);
 				logic.newModel(this.props.ldTokenString);
 			}
-			logic.setOnOutputInfoSaved((val) => this.onInterpretBtnClick(null));
+			logic.setOnOutputInfoSaved(() => this.onInterpretBtnClick(null));
 			this.logic = logic;
 		}
 		if (!this.props.ldOptions) {
@@ -348,11 +342,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	renderEditor() {
-		const { routes } = this.props;
 		const { drawerActive, currentlyEditingItptName, previewActive, localValues, bottomBarHidden, previewHidden, drawerHidden } = this.state;
 		const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
-		let isDisplayDevContent = isProduction ? false : true;
-		let inputStyle = currentlyEditingItptName ? { width: currentlyEditingItptName.length + "ex", maxHeight: "100%" } : null;
 		if (!this.logic) {
 			return <div className="entrypoint-editor" ref={this.editorWrapperRef}></div>;
 		}

@@ -1,9 +1,8 @@
 import { appItptRetrFn } from "appconfig/appItptRetriever";
 import { LDDict } from "ldaccess/LDDict";
 import { PureImgDisplay } from "../visualcomposition/imagedisplay-component";
-import { PureBoolInput, PureIntInput, PureDoubleInput, PureTextInput, PureDateInput, PureDateTimeInput } from "../md/content/BaseDataTypeInput";
 import { PureNavBarWActions, NavBarWActionsName } from "../md/navigation/NavBarWActions";
-import { BottomNavigationName, PureBottomNavigation, TopNavigationName, PureTopNavigation } from "../md/navigation/BottomNavigation";
+import { BottomNavigationName, PureBottomNavigation, TopNavigationName, PureTopNavigation } from "./navigation/NavWMax5Choices";
 import { PureRouteComponent, RouteComponentName } from "../routing/route-component";
 import { imageRetrieverName, ImageRetriever } from "sidefx/ImageRetriever";
 import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
@@ -12,20 +11,16 @@ import { EANScannerName, EANScanner } from "../peripherals/camera/EAN-scanner";
 import { SingleImageSelectorName, PureSingleImageSelector } from "../md/content/SingleImageSelector";
 import { NavSearchBarName, PureNavSearchBar } from "../md/navigation/NavSearchBar";
 import { NavProcessAtomName, PureNavProcessAtom } from "./navigation/NavProcessAtom";
-import { PureMDButton } from "./interaction/MDButton";
+import { PureMDButton } from "./interaction/AbstractButton";
 import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
 import { LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, PureCircleLayout, LayoutCircleDisplayName } from "../layout/layoutBaseComp";
 import { PureRedirectComponent, RouteRedirectName } from "../routing/redirect";
-import { PureCard3itptLTR, Card3itptLTRName } from "./interaction/Card_3itptLTR";
+import { PureCard3itptLTR, Card3itptLTRName } from "./interaction/AbstractCardW3Containers";
 import { TwoDtoJSONArray, TwoDtoJSONArrayName } from "datatransformation/TwoDtoJSONArray";
 import { PureSimpleTextTable, SimpleTextTableName } from "./content/SimpleTextTable";
-import { SectionedListName, PureSectionedList } from "./content/SectionedList";
-import { PureCompactInfoListElement } from "./content/CompactInfoListElement";
 import { JSONArrayToCompactInfoArrayName, JSONArrayToCompactInfoArray } from "datatransformation/JSONArrayToCompactInfoArray";
-import { VisualTypesDict } from "components/visualcomposition/visualDict";
 import { NavBarInputContainerName, PureNavBarInputContainer } from "./navigation/NavBarInputContainer";
 import { CSSWrapperName, PureCSSWrapper } from "components/layout/CSSWrapper";
-import { ThemeProviderDarkName, ThemeProviderDark, ThemeProviderLight, ThemeProviderLightName } from "./content/DarkLightThemeProviders";
 
 /**
  * sorry for the long function name //TODO: change
@@ -34,14 +29,6 @@ export function initMDitptFnAsDefault() {
 	let appIntRetr = appItptRetrFn();
 	//appIntRetr.addItpt(LDDict.CreateAction, ImageUploadComponent, "Crud");
 	appIntRetr.addItpt(LDDict.ViewAction, PureImgDisplay, "cRud", [ITPT_TAG_ATOMIC]);
-
-	//register base data type inputs:
-	appIntRetr.addItpt(LDDict.Boolean, PureBoolInput, "crud", [ITPT_TAG_ATOMIC]);
-	appIntRetr.addItpt(LDDict.Integer, PureIntInput, "CRUd", [ITPT_TAG_ATOMIC]);
-	appIntRetr.addItpt(LDDict.Double, PureDoubleInput, "CRUd", [ITPT_TAG_ATOMIC]);
-	appIntRetr.addItpt(LDDict.Text, PureTextInput, "CRUd", [ITPT_TAG_ATOMIC]);
-	appIntRetr.addItpt(LDDict.Date, PureDateInput, "CRUd", [ITPT_TAG_ATOMIC]);
-	appIntRetr.addItpt(LDDict.DateTime, PureDateTimeInput, "CRUd", [ITPT_TAG_ATOMIC]);
 
 	//register visual composition itpts.
 	appIntRetr.addItpt(NavBarInputContainerName, PureNavBarInputContainer, "cRud", [ITPT_TAG_ATOMIC]);
@@ -71,12 +58,7 @@ export function initMDitptFnAsDefault() {
 	appIntRetr.addItpt(LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(LayoutCircleDisplayName, PureCircleLayout, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(CSSWrapperName, PureCSSWrapper, "cRud", [ITPT_TAG_ATOMIC]);
-	appIntRetr.addItpt(ThemeProviderDarkName, ThemeProviderDark, "cRud", [ITPT_TAG_ATOMIC]);
-	appIntRetr.addItpt(ThemeProviderLightName, ThemeProviderLight, "cRud", [ITPT_TAG_ATOMIC]);
 
-	//register list-itpts
-	appIntRetr.addItpt(SectionedListName, PureSectionedList, "cRud", [ITPT_TAG_ATOMIC]);
-	appIntRetr.addItpt(VisualTypesDict.compactInfoElement, PureCompactInfoListElement, "cRud", [ITPT_TAG_ATOMIC]);
 
 	//data transformation itpts
 	appIntRetr.addItpt(TwoDtoJSONArrayName, TwoDtoJSONArray, "cRUd", [ITPT_TAG_ATOMIC]);
