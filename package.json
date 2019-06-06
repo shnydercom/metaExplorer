@@ -41,6 +41,9 @@
     "generateGoogleSheetsClient": "java -jar ./tooling/swagger-codegen-cli.jar generate -i https://raw.githubusercontent.com/APIs-guru/openapi-directory/master/APIs/googleapis.com/sheets/v4/swagger.yaml -l typescript-fetch -o ./src/google/apis/sheets-generated"
   },
   "dependencies": {
+    "@material-ui/core": "^4.0.1",
+    "@material-ui/icons": "^4.0.1",
+    "@material-ui/pickers": "^3.0.0",
     "@types/dagre": "^0.7.40",
     "@types/gapi": "^0.0.36",
     "@types/gapi.auth2": "^0.0.48",
