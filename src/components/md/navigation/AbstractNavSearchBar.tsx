@@ -10,7 +10,7 @@ import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualD
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 import { initLDLocalState, gdsfpLD, generateItptFromCompInfo } from '../../generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component, ComponentClass, StatelessComponent, ReactNode } from 'react';
 
 import { Input, InputTheme } from 'react-toolbox/lib/input';
 import { Redirect } from 'react-router';
@@ -47,7 +47,7 @@ let initialKVStores: IKvStore[] = [
 		ldType: LDDict.Text
 	}
 ];
-let bpCfg: BlueprintConfig = {
+export const NavSearchBarBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: NavSearchBarName,
 	initialKvStores: initialKVStores,
@@ -59,8 +59,8 @@ export interface NavSearchBarState extends LDLocalState {
 	routeSendBack: string;
 	isDoRedirect: boolean;
 }
-@ldBlueprint(bpCfg)
-export class PureNavSearchBar extends Component<
+
+export abstract class AbstractNavSearchBar extends Component<
 LDConnectedState & LDConnectedDispatch & LDOwnProps,
 NavSearchBarState>
 	implements IBlueprintItpt {
@@ -85,7 +85,7 @@ NavSearchBarState>
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	private renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
+	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 
 	constructor(props: any) {
 		super(props);
@@ -117,27 +117,7 @@ NavSearchBarState>
 		if (this.state.routeSendBack === undefined || this.state.routeSendBack === null) return;
 		this.setState({ ...this.state, isDoRedirect: true });
 	}
-	render() {
-		const { searchValue, isDoRedirect, routeSendBack, localValues } = this.state;
-		if (isDoRedirect) {
-			let route: string = cleanRouteString(routeSendBack, this.props.routes);
-			this.setState({ ...this.state, isDoRedirect: false });
-			return <Redirect to={route} />;
-		}
-		return (
-			<>
-				<AppBar
-					className={classNamesLD(null, localValues)}
-				leftIcon='arrow_back' onLeftIconClick={() => this.onBackBtnClick()} rightIcon='search'>
-					<Input type='text'
-						className='searchbar-input'
-						label=""
-						name="searchInput"
-						value={searchValue}
-						onChange={(evt) => this.onSearchChange(evt)} />
-				</AppBar>
-				{this.renderInputContainer()}
-			</>);
+	render(): ReactNode {
+		throw new Error("Method not implemented in abstract class");
 	}
 }
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureNavSearchBar);

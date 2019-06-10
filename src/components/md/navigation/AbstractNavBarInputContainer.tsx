@@ -10,7 +10,7 @@ import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualD
 import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 import Navigation from 'react-toolbox/lib/navigation/Navigation.js';
 import { generateItptFromCompInfo, initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component, ComponentClass, StatelessComponent, ReactNode } from 'react';
 import { classNamesLD } from 'components/reactUtils/compUtilFns';
 import { LDDict } from 'ldaccess/LDDict';
 
@@ -42,7 +42,7 @@ let initialKVStores: IKvStore[] = [
 		ldType: LDDict.Text
 	}
 ];
-let bpCfg: BlueprintConfig = {
+export const NavBarInputContainerBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: NavBarInputContainerName,
 	initialKvStores: initialKVStores,
@@ -51,8 +51,7 @@ let bpCfg: BlueprintConfig = {
 };
 export type NavBarInputContainerState = {
 };
-@ldBlueprint(bpCfg)
-export class NavBarInputContainer extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavBarInputContainerState & LDLocalState>
+export abstract class AbstractNavBarInputContainer extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavBarInputContainerState & LDLocalState>
 	implements IBlueprintItpt {
 
 	static getDerivedStateFromProps(
@@ -75,7 +74,7 @@ export class NavBarInputContainer extends Component<LDConnectedState & LDConnect
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	private renderSub = generateItptFromCompInfo.bind(this);
+	protected renderSub = generateItptFromCompInfo.bind(this);
 
 	constructor(props: any) {
 		super(props);
@@ -89,21 +88,7 @@ export class NavBarInputContainer extends Component<LDConnectedState & LDConnect
 				cfgIntrprtValueKeys)
 		};
 	}
-
-	render() {
-		const {  compInfos, localValues } = this.state;
-		const hasPrimaryContent = compInfos.has(VisualKeysDict.primaryItpt);
-		return <>
-			<AppBar className={classNamesLD("full-navbar", localValues)}>
-				<Navigation type='horizontal'>
-					{hasPrimaryContent
-						? <>{this.renderSub(VisualKeysDict.primaryItpt)}</>
-						: null}
-				</Navigation>
-			</AppBar>
-			<div className="bottom-nav-topfree mdscrollbar">
-				{this.renderSub(VisualKeysDict.inputContainer)}
-			</div>
-		</>;
+	render(): ReactNode {
+		throw new Error("Method not implemented in abstract class");
 	}
 }

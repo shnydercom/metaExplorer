@@ -1,22 +1,14 @@
-import { connect } from 'react-redux';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 
-import { Tab, TabTheme } from 'react-toolbox/lib/tabs/';
-import { Tabs, TabsTheme } from 'react-toolbox/lib/tabs/';
-
 import { generateItptFromCompInfo, gdsfpLD, initLDLocalState } from '../../generic/generatorFns';
 import { checkAllFilled } from 'GeneralUtils';
-import { Redirect, Route } from 'react-router';
-import { Component, ComponentClass, StatelessComponent } from 'react';
-import { cleanRouteString } from '../../routing/route-helper-fns';
-import { classNamesLD } from 'components/reactUtils/compUtilFns';
+import { Component, ReactNode } from 'react';
 
 export const ICON_URLS: string[] = [
 	"IconURL_1",
@@ -96,9 +88,17 @@ initialKVStores.push({
 	ldType: VisualTypesDict.route_added
 });
 
-let bottomBpCfg: BlueprintConfig = {
+export const BottomNavW5ChoicesBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: BottomNavigationName,
+	initialKvStores: initialKVStores,
+	interpretableKeys: cfgIntrprtKeys,
+	crudSkills: "cRud"
+};
+
+export const TopNavW5ChoicesBpCfg: BlueprintConfig = {
+	subItptOf: null,
+	nameSelf: TopNavigationName,
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
@@ -114,8 +114,8 @@ export interface BottomNavState extends LDLocalState {
 	hasTabChanged: boolean;
 	numTabs: number;
 }
-@ldBlueprint(bottomBpCfg)
-export class BottomNavigation extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, BottomNavState>
+
+export abstract class AbstractBottomNavigation extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, BottomNavState>
 	implements IBlueprintItpt {
 
 	static getDerivedStateFromProps(
@@ -220,99 +220,8 @@ export class BottomNavigation extends Component<LDConnectedState & LDConnectedDi
 		if (!outputKVMap) return;
 		this.props.dispatchKvOutput([outRouteKV], this.props.ldTokenString, outputKVMap);
 	}
-	generateTab(imgSrcActive, imgSrcInActive: string, route: string, isActive: boolean, key: string): JSX.Element {
-		//const mustRedirect = match && isActive && (match.params.lastPath !== undefined || match.params.lastPath !== null) && match.params.lastPath !== route;
-		return <Tab label='' key={key} className="bottom-nav-tab" icon={isActive
-			? <img src={imgSrcActive} style={{height: "inherit"}} />
-			: <img src={imgSrcInActive} style={{height: "inherit"}}/>}>
-		</Tab>;
-	}
-	generateRedirect(tabIdx: number): JSX.Element {
-		if (!this.props.routes || !this.state.hasTabChanged) return null;
-		const { match, location } = this.props.routes;
-		let cleanedTabIdx: number = tabIdx;
-		for (let idx = tabIdx; idx >= 0; idx--) {
-			if (!this.state.isGenerateAtPositions[idx]) {
-				cleanedTabIdx++;
-			}
-		}
-		let route: string = this.state.routes[cleanedTabIdx];
-		//if (match.params.nextPath === undefined) match.params.nextPath = route;
-		let newPath: string = cleanRouteString(route, this.props.routes);
-		this.setState({ ...this.state, hasTabChanged: false });
-		if (location.pathname === newPath) return null;
-		return <Redirect to={newPath} />;
-	}
 
-	render() {
-		const { numTabs, isGenerateAtPositions, iconEnabledURLs, iconDisabledURLs, routes, tabIdx, localValues } = this.state;
-
-		let tabs = [];
-		let cleanedTabIdx = tabIdx;
-		for (let idx = 0; idx < numTabs; idx++) {
-			const isGen = isGenerateAtPositions[idx];
-			if (!isGen) {
-				cleanedTabIdx++;
-				continue;
-			}
-			let newTab = this.generateTab(
-				iconEnabledURLs[idx],
-				iconDisabledURLs[idx],
-				routes[idx],
-				cleanedTabIdx === idx,
-				"t-" + idx);
-			tabs.push(newTab);
-		}
-		return <div className={classNamesLD("bottom-nav", localValues)}>
-			<div className="bottom-nav-topfree mdscrollbar">
-				{this.generateRedirect(tabIdx)}
-				<Route component={this.renderInputContainer} />
-				{this.props.children}
-			</div>
-			<Tabs index={tabIdx} onChange={this.onTabChanged} fixed className="bottom-nav-tabs">
-				{tabs}
-			</Tabs>
-		</div>;
-	}
-}
-
-let topBpCfg: BlueprintConfig = {
-	subItptOf: null,
-	nameSelf: TopNavigationName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
-	crudSkills: "cRud"
-};
-@ldBlueprint(topBpCfg)
-export class TopNavigation extends PureBottomNavigation {
-	render() {
-		const { numTabs, isGenerateAtPositions, iconEnabledURLs, iconDisabledURLs, routes, tabIdx, localValues } = this.state;
-
-		let tabs = [];
-		let cleanedTabIdx = tabIdx;
-		for (let idx = 0; idx < numTabs; idx++) {
-			const isGen = isGenerateAtPositions[idx];
-			if (!isGen) {
-				cleanedTabIdx++;
-				continue;
-			}
-			let newTab = this.generateTab(
-				iconEnabledURLs[idx],
-				iconDisabledURLs[idx],
-				routes[idx],
-				cleanedTabIdx === idx,
-				't-' + idx);
-			tabs.push(newTab);
-		}
-		return <div className="top-nav">
-			<Tabs index={tabIdx} onChange={this.onTabChanged} fixed className={classNamesLD("top-nav-tabs", localValues)}>
-				{tabs}
-			</Tabs>
-			<div className="mdscrollbar top-nav-bottomfree">
-				{this.generateRedirect(tabIdx)}
-				<Route component={this.renderInputContainer} />
-				{this.props.children}
-			</div>
-		</div>;
+	render(): ReactNode {
+		throw new Error("Method not implemented in abstract class");
 	}
 }

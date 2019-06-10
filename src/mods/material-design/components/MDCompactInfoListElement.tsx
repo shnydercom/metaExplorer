@@ -3,7 +3,7 @@ import { VisualKeysDict } from "components/visualcomposition/visualDict";
 import ldBlueprint from "ldaccess/ldBlueprint";
 
 @ldBlueprint(CompactInfoListElementCfg)
-export class CompactInfoListElement extends AbstractCompactInfoListElement {
+export class MDCompactInfoListElement extends AbstractCompactInfoListElement {
 
 	render() {
 		const { localValues, compInfos } = this.state;

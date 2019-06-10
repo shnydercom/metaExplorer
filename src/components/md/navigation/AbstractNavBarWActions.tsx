@@ -1,22 +1,14 @@
-import { connect } from 'react-redux';
-import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
-import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
-
-import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
-import IconButton from 'react-toolbox/lib/button/';
-import { IconMenu } from 'react-toolbox/lib/menu/';
-import Navigation from 'react-toolbox/lib/navigation/Navigation.js';
-import { generateItptFromCompInfo, initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
+import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component, ReactNode } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
-import { classNamesLD } from 'components/reactUtils/compUtilFns';
+import { LDDict } from 'ldaccess/LDDict';
+import { UserDefDict } from 'ldaccess/UserDefDict';
 
 export const NavBarWActionsName = "shnyder/material-design/NavBarWActions";
 
@@ -32,6 +24,12 @@ let cfgIntrprtValueKeys: string[] = [
 	VisualKeysDict.routeSend_cancel,
 	VisualKeysDict.cssClassName
 ];
+export type NavBarWActionState = {
+	isDoRedirect: boolean;
+	isDoRedirectCancel: boolean;
+	isRightMenuOpen: boolean;
+};
+
 let cfgIntrprtKeys: string[] = [...cfgIntrprtItptKeys, ...cfgIntrprtValueKeys];
 let initialKVStores: IKvStore[] = [
 	{
@@ -70,20 +68,15 @@ let initialKVStores: IKvStore[] = [
 		ldType: LDDict.Text
 	}
 ];
-let bpCfg: BlueprintConfig = {
+
+export const NavBarWActionsBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: NavBarWActionsName,
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
-export type NavBarWActionState = {
-	isDoRedirect: boolean;
-	isDoRedirectCancel: boolean;
-	isRightMenuOpen: boolean;
-};
-@ldBlueprint(bpCfg)
-export class PureNavBarWActions extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavBarWActionState & LDLocalState>
+export abstract class AbstractNavBarWActions extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavBarWActionState & LDLocalState>
 	implements IBlueprintItpt {
 
 	static getDerivedStateFromProps(
@@ -106,8 +99,6 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	private renderSub = generateItptFromCompInfo.bind(this);
-
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
@@ -124,10 +115,10 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 		};
 	}
 
-	onAppBarRightIconMenuClick = (e) => {
+	onAppBarRightIconMenuClick = () => {
 		//will be called on opening and clicking inside the menu
 	}
-	onAppBarSearchBtnClick = (e) => {
+	onAppBarSearchBtnClick = () => {
 		this.setState({
 			...this.state,
 			isDoRedirect: true,
@@ -144,13 +135,9 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 	}
 
 	render() {
-		const { ldOptions, routes } = this.props;
-		const { isDoRedirect, isDoRedirectCancel, isRightMenuOpen, localValues, compInfos } = this.state;
+		const { isDoRedirect, isDoRedirectCancel, localValues } = this.state;
 		const routeSendSearch = localValues.get(VisualKeysDict.routeSend_search);
-		const headerText = localValues.get(VisualKeysDict.headerTxt);
-		const iconName = localValues.get(VisualKeysDict.iconName);
 		let routeSendCancel = localValues.get(VisualKeysDict.routeSend_cancel);
-		const hasPopOverContent = compInfos.has(VisualKeysDict.popOverContent);
 		if (isDoRedirectCancel && routeSendCancel) {
 			routeSendCancel = cleanRouteString(routeSendCancel, this.props.routes);
 			this.setState({ ...this.state, isDoRedirect: false, isDoRedirectCancel: false });
@@ -163,27 +150,9 @@ export class PureNavBarWActions extends Component<LDConnectedState & LDConnected
 			console.log("navBar redirect to: " + route);
 			return <Redirect to={route} />;
 		}
-		return <>
-			<AppBar title={headerText ? headerText : "Menu"}
-				leftIcon={routeSendCancel ? "arrow_back" : null}
-				onLeftIconClick={() => this.onCancelClick()}
-				className={classNamesLD(null, localValues)}
-			>
-				<Navigation type='horizontal'>
-					{routeSendSearch
-						? <IconButton icon='search' onClick={this.onAppBarSearchBtnClick} />
-						: null}
-					{hasPopOverContent
-						? <IconMenu icon={iconName ? iconName : 'account_circle'} position='topRight' menuRipple onClick={this.onAppBarRightIconMenuClick}>
-							<div className="menu-pop-over">{this.renderSub(VisualKeysDict.popOverContent)}</div>
-						</IconMenu>
-						: null}
-				</Navigation>
-			</AppBar>
-			<div className="bottom-nav-topfree mdscrollbar">
-				{this.renderSub(VisualKeysDict.inputContainer)}
-			</div>
-		</>;
+		return this.renderCore();
+	}
+	protected renderCore(): ReactNode {
+		throw new Error("Method not implemented in abstract class");
 	}
 }
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureNavBarWActions);

@@ -2,7 +2,7 @@ import ldBlueprint from "ldaccess/ldBlueprint";
 import { AbstractSingleImageSelector, SingleImageSelectorBpCfg, SingleImageSelectorStateEnum } from "components/md/content/AbstractSingleImageSelector";
 
 @ldBlueprint(SingleImageSelectorBpCfg)
-export class SingleImageSelector extends AbstractSingleImageSelector {
+export class MDSingleImageSelector extends AbstractSingleImageSelector {
 
 	render() {
 		const { curStep, isCamAvailable, previewURL } = this.state;

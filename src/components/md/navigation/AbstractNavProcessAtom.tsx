@@ -12,7 +12,7 @@ import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 import { Button } from 'react-toolbox/lib/button/';
 import { generateItptFromCompInfo, initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component, ComponentClass, StatelessComponent, ReactNode } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 import { ActionKeysDict, ActionTypesDict, ActionType } from 'components/actions/ActionDict';
 import { classNamesLD } from 'components/reactUtils/compUtilFns';
@@ -71,7 +71,7 @@ let initialKVStores: IKvStore[] = [
 		ldType: LDDict.Text
 	}
 ];
-let bpCfg: BlueprintConfig = {
+export const NavProcessAtomBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: NavProcessAtomName,
 	initialKvStores: initialKVStores,
@@ -82,8 +82,8 @@ export type NavProcessAtomState = {
 	isDoRedirectConfirm: boolean;
 	isDoRedirectCancel: boolean;
 };
-@ldBlueprint(bpCfg)
-export class NavProcessAtom extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavProcessAtomState & LDLocalState>
+
+export abstract class AbstractNavProcessAtom extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavProcessAtomState & LDLocalState>
 	implements IBlueprintItpt {
 
 	static getDerivedStateFromProps(
@@ -155,7 +155,8 @@ export class NavProcessAtom extends Component<LDConnectedState & LDConnectedDisp
 			isDoRedirectConfirm: true
 		});
 	}
-	render() {
+
+	render(): ReactNode {
 		const { isDoRedirectCancel, isDoRedirectConfirm, localValues } = this.state;
 		let routeSendCancel: string = localValues.get(VisualKeysDict.routeSend_cancel);
 		let routeSendConfirm = localValues.get(VisualKeysDict.routeSend_confirm);
@@ -173,24 +174,10 @@ export class NavProcessAtom extends Component<LDConnectedState & LDConnectedDisp
 			routeSendConfirm = cleanRouteString(routeSendConfirm, this.props.routes);
 			return <Redirect to={routeSendConfirm} />;
 		}
-		return <div className="bottom-nav">
-			<AppBar
-				title={headerText ? headerText : "cancel"}
-				leftIcon="arrow_back"
-				onLeftIconClick={() => this.onCancelClick()}
-				className={classNamesLD(null, localValues)}
-			/>
-			<div className="bottom-nav-topfree mdscrollbar">
-				{this.renderSub(VisualKeysDict.inputContainer)}
-			</div>
-			{isHideBottom ? null :
-				<div className="bottom-nav-tabs flex-container">
-					<Button className="flex-filler"
-						label={cancelTxt ? cancelTxt : "cancel"} onClick={() => this.onCancelClick()} />
-					<Button className="flex-filler"
-						label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />
-				</div>
-			}
-		</div>;
+		return this.renderCore();
+	}
+
+	protected renderCore(): ReactNode {
+		throw new Error("Method not implemented in abstract class");
 	}
 }

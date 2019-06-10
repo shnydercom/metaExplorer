@@ -2,7 +2,7 @@ import ldBlueprint from "ldaccess/ldBlueprint";
 import { AbstractSimpleTextTable, simpleTextTableCfg, tableHeadings, tableRows } from "components/md/content/AbstractSimpleTextTable";
 
 @ldBlueprint(simpleTextTableCfg)
-export class SimpleTextTable extends AbstractSimpleTextTable {
+export class MDSimpleTextTable extends AbstractSimpleTextTable {
 
 	render() {
 		const { localValues } = this.state;

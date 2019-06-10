@@ -108,9 +108,9 @@ class PureDateTimeBase extends PureBaseDataTypeInput {
 	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(baseDataTypeBpcfgs[5]);
 }
 
-export const MaterialDesignBoolInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureBoolBase);
-export const MaterialDesignIntInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureIntBase);
-export const MaterialDesignDoubleInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureDoubleBase);
-export const MaterialDesignTextInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureTextBase);
-export const MaterialDesignDateInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureDateBase);
-export const MaterialDesignDateTimeInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureDateTimeBase);
+export const MDBoolInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureBoolBase);
+export const MDIntInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureIntBase);
+export const MDDoubleInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureDoubleBase);
+export const MDTextInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureTextBase);
+export const MDDateInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureDateBase);
+export const MDDateTimeInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureDateTimeBase);

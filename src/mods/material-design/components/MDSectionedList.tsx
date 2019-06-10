@@ -2,7 +2,7 @@ import ldBlueprint from "ldaccess/ldBlueprint";
 import { AbstractSectionedList, SectionedListCfg, sectionElements, sectionHeadings } from "components/md/content/AbstractSectionedList";
 
 @ldBlueprint(SectionedListCfg)
-export class SectionedList extends AbstractSectionedList {
+export class MDSectionedList extends AbstractSectionedList {
 
 	render() {
 		const { localValues, compInfos } = this.state;
