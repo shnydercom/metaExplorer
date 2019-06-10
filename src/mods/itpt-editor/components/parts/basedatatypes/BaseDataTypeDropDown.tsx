@@ -1,4 +1,3 @@
-import { Dropdown, DropdownTheme } from 'react-toolbox/lib/dropdown';
 import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
 import { LDDict } from "ldaccess/LDDict";
 import { Component } from 'react';
@@ -59,12 +58,14 @@ export class BaseDataTypeDropDown extends Component<IDataTypeDropDownProps, IDat
 	}
 
 	render() {
+		return <div>DropDown</div>;
+/*
 		return (
 			<Dropdown className={this.props.className}
 				onChange={this.handleChange}
 				source={baseDataTypes}
 				value={this.state.selectedDataType}
 			/>
-		);
+		);*/
 	}
 }

@@ -1,17 +1,11 @@
-import { connect } from 'react-redux';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
-
-import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
-import Navigation from 'react-toolbox/lib/navigation/Navigation.js';
+import { VisualKeysDict } from '../../visualcomposition/visualDict';
 import { generateItptFromCompInfo, initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent, ReactNode } from 'react';
-import { classNamesLD } from 'components/reactUtils/compUtilFns';
+import { Component, ReactNode } from 'react';
 import { LDDict } from 'ldaccess/LDDict';
 
 export const NavBarInputContainerName = "shnyder/material-design/NavBarInputContainer";

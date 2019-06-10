@@ -1,6 +1,5 @@
 import * as React from "react";
-import { BaseWidgetProps, DefaultLabelModel, BaseWidget, LinkModel } from "storm-react-diagrams";
-import { FontIcon } from "react-toolbox/lib/font_icon";
+import { BaseWidgetProps, DefaultLabelModel, BaseWidget } from "storm-react-diagrams";
 import { indexOf } from "lodash";
 import { LDPortModel } from "./LDPortModel";
 export interface SettingsLabelWidgetProps extends BaseWidgetProps {
@@ -82,7 +81,7 @@ export class SettingsLabelWidget extends BaseWidget<SettingsLabelWidgetProps, Se
 		return <div {...thisProps} className={isOpened ? thisProps.className + "anim" : thisProps.className}
 			onMouseEnter={(event) => this.setState({ ...this.state, isOpened: true })}
 			onMouseLeave={() => this.setState({ ...this.state, isOpened: false })}
-		><FontIcon>settings</FontIcon>
+		>
 			{
 				isOpened ?
 					<div className="menu-col">

@@ -20,8 +20,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "types": ["node", "react", "react-router", "rxjs",
-      "gapi", "gapi.auth2", "gapi", "gapi.auth2", "gapi.client", "gapi.client.sheets", 
-      "react-toolbox"],
+      "gapi", "gapi.auth2", "gapi", "gapi.auth2", "gapi.client", "gapi.client.sheets"],
     "typeRoots": ["./node_modules/@types"],
     "suppressExcessPropertyErrors": true,
     "declaration": true,
@@ -43,8 +42,7 @@
     "compilerOptions": {
       "declaration": false,
       "types": ["node", "react", "react-router", "rxjs",
-        "gapi", "gapi.auth2", "gapi", "gapi.auth2", "gapi.client", "gapi.client.sheets", 
-        "react-toolbox"],
+        "gapi", "gapi.auth2", "gapi", "gapi.auth2", "gapi.client", "gapi.client.sheets"],
     },
     "exclude": [
       "public/js",

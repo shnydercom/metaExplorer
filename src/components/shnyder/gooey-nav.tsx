@@ -10,7 +10,6 @@ import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/
 import { Component, ComponentClass, StatelessComponent } from 'react';
 
 import { Menu, Item } from "react-gooey-nav";
-import { FontIcon } from 'react-toolbox/lib/font_icon';
 
 export var GooeyNavName: string = "shnyder/GooeyNav";
 export const centralIcon: string = "centralIcon";
@@ -90,6 +89,14 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 				</Menu>
 					: null*/
 		return <Menu orientation="bottom">
+			<Item title="c">
+				EN
+			</Item>
+			<Item title="c">
+				DE
+			</Item>
+		</Menu >;
+		/*
 			<Item title="a">
 				<FontIcon value="translate" />
 			</Item>
@@ -99,13 +106,7 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 			<Item title="c">
 				<FontIcon value="中文" />
 			</Item>
-			<Item title="c">
-				EN
-			</Item>
-			<Item title="c">
-				DE
-			</Item>
-		</Menu >;
+			*/
 	}
 
 }

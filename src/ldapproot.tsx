@@ -1,8 +1,6 @@
 import { BaseContainerRewrite } from "components/generic/baseContainer-rewrite";
 import { Route } from "react-router";
 import { LDRouteProps, LDOwnProps, LDConnectedDispatch, LDConnectedState } from "appstate/LDProps";
-import ThemeProvider from "react-toolbox/lib/ThemeProvider";
-import { appTheme } from "styles/appTheme/appTheme";
 import { Component } from "react";
 
 import { connect } from "react-redux";
@@ -28,7 +26,7 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 		}
 	}
 	render() {
-		return <ThemeProvider theme={appTheme}>
+		return <div>
 			<div className="app-content" style={{background: "white"}}>
 				<Route path="/" render={(routeProps: LDRouteProps) => {
 					return <>
@@ -36,7 +34,7 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 					</>;
 				}} />
 			</div>
-		</ThemeProvider>;
+		</div>;
 	}
 }
 

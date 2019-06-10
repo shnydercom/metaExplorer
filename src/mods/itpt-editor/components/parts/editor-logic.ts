@@ -13,7 +13,6 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { DefaultLinkModel, DiagramEngine, DiagramModel, NodeModel } from "storm-react-diagrams";
 import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
-// import { value } from "../../../../node_modules/react-toolbox/lib/dropdown/theme.css";
 import { distributeElements } from "./dagre-utils";
 import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeModel";
 import { DeclarationWidgetFactory } from "./declarationtypes/DeclarationNodeWidgetFactory";

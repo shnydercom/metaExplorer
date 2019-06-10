@@ -1,7 +1,5 @@
 import { Component, createRef } from "react";
 
-import Button, { IconButton } from 'react-toolbox/lib/button';
-import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import "storm-react-diagrams/dist/style.min.css";
 import { EditorBody } from "./parts/EditorBody";
 import { EditorLogic } from "./parts/editor-logic";
@@ -13,18 +11,13 @@ import ldBlueprint, { BlueprintConfig, OutputKVMap } from "ldaccess/ldBlueprint"
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps, LDLocalState } from "appstate/LDProps";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
-import { editorTheme } from "styles/editor/editorTheme";
-import { appTheme } from "styles/appTheme/appTheme";
 
 import {
 	Route} from 'react-router-dom';
 import { Redirect } from "react-router";
 import { BaseContainerRewrite } from "../../../components/generic/baseContainer-rewrite";
-import { FontIcon } from "react-toolbox/lib/font_icon";
 import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
 import { isProduction } from "appstate/store";
-import { Layout, Panel } from "react-toolbox/lib/layout";
-import { NavDrawer } from "react-toolbox/lib/layout";
 import { EditorTray as EditorTray } from "./parts/EditorTray";
 import { DropRefmapResult } from "./parts/RefMapDropSpace";
 import { ILDOptions } from "ldaccess/ildoptions";
@@ -335,7 +328,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			<div className="app-actual app-content">
 				<BaseContainerRewrite routes={routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
 				<div className="mode-switcher">
-					<Button className="editor-switch-btn" icon='edit' floating accent onClick={() => this.toggleFullScreen.apply(this)} />
+					<button className="editor-switch-btn" icon='edit' floating accent onClick={() => this.toggleFullScreen.apply(this)} />
 				</div>
 			</div>
 		);
@@ -349,12 +342,13 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		const itpts = this.logic.getItptList();
 		return <div className="entrypoint-editor" ref={this.editorWrapperRef}>
-			<ThemeProvider theme={editorTheme}>
-				<Layout theme={{ layout: 'editor-layout', navDrawerClipped: 'editor-navbar-clipped' }}>
+			<div>ThemeProvider
+				<div>Layout theme= layout: 'editor-layout', navDrawerClipped: 'editor-navbar-clipped'
 					{drawerHidden
 						? null
-						: <NavDrawer insideTree={true} theme={{ pinned: "navbar-pinned" }} active={drawerActive} withOverlay={false}
-							permanentAt='xxxl'>
+						: <div>
+								NavDrawer insideTree=true theme= pinned: "navbar-pinned" active=drawerActive withOverlay=false
+							permanentAt='xxxl'
 							<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
 								onClearBtnPress={() => {
 									this.logic.clear();
@@ -368,14 +362,15 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 								<div className="fakeheader">
 									{
 										isGlobal
-											? <Button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size <FontIcon>fullscreen</FontIcon></Button>
+											? <button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size FontIconfullscreenFontIcon</button>
 											: null
 									}
 								</div>
 							</EditorTray>
-						</NavDrawer>
+						</div>
 					}
-					<Panel theme={editorTheme} style={{ bottom: 0 }}>
+					<div>
+						Panel theme=editorTheme style= bottom: 0
 						<EditorBody hideRefMapDropSpace={bottomBarHidden}
 							ref={this.diagramRef}
 							loadToEditorByName={this.loadToEditorByName}
@@ -383,20 +378,20 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
 							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
 						{previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
-					</Panel>
+					</div>
 					{drawerHidden
 						? null
 						: <>
 							<div className="nav-element top-left">
-								<IconButton className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
+								<button className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
 							</div>
 							<div className="nav-element bottom-left">
-								<IconButton icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></IconButton>
+								<button icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></button>
 							</div>
 						</>
 					}
-				</Layout>
-			</ThemeProvider>
+				</div>
+			</div>
 		</div >;
 	}
 
@@ -412,9 +407,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			{this.state.previewDisplay === "phone" ?
 				<>
 					<div className="preview-hidden-btn">
-						<IconButton onClick={() => this.togglePreview.apply(this)} primary icon="chevron_left" />
+						<button onClick={() => this.togglePreview.apply(this)} primary icon="chevron_left" />
 					</div>
-					<ThemeProvider theme={appTheme}>
+					<div> ThemeProvider theme=appTheme
 						<div className="app-preview">
 							<div className="phone-preview-btns">
 								{isDisplayDevContent ? this.renderBtnSwitchPreviewOrCode() : null}
@@ -424,7 +419,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 								<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
 							</div>
 						</div>
-					</ThemeProvider>
+					</div>
 				</>
 				:
 				<div className="code-preview">
@@ -451,17 +446,17 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		return <>
 			{isGlobal
 				? <>
-					<IconButton onClick={() => this.toggleFullScreen.apply(this)} primary icon="fullscreen" className="fullscreen" />
-					<IconButton onClick={() => this.triggerNavToTop.apply(this)} primary icon="arrow_upward" />
+					<button onClick={() => this.toggleFullScreen.apply(this)} primary icon="fullscreen" className="fullscreen" />
+					<button onClick={() => this.triggerNavToTop.apply(this)} primary icon="arrow_upward" />
 				</>
 				: null
 			}
-			<IconButton onClick={() => this.togglePreview.apply(this)} primary icon="chevron_right" />
+			<button onClick={() => this.togglePreview.apply(this)} primary icon="chevron_right" />
 		</>;
 	}
 
 	protected renderBtnSwitchPreviewOrCode() {
-		return <IconButton icon={"phone" ? "unfold_more" : "stay_current_landscape"}
+		return <button icon={"phone" ? "unfold_more" : "stay_current_landscape"}
 			onClick={
 				() => {
 					if (this.state.previewDisplay === "phone") {
@@ -471,7 +466,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					}
 				}
 			} primary style={{ background: '#010f27aa' }}>
-		</IconButton>;
+		</button>;
 	}
 
 	protected onInterpretBtnClick = (e) => {

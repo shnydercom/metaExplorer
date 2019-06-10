@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { IconButton } from "react-toolbox/lib/button";
 
 export interface EditorTrayProps {
 	model: any;
@@ -57,7 +56,7 @@ export class EditorTrayItem extends Component<EditorTrayProps, EditorTrayState> 
 				className={trayCssClass}
 			>
 				{this.props.name}
-				<IconButton className={btnCssClass}
+				<button className={btnCssClass}
 					icon={"chevron_right"} onClick={(e) => {
 						e.stopPropagation();
 						this.props.onLongPress(this.props.model);

@@ -7,7 +7,6 @@ import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from 'components/
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { GoogleWebAuthAPI, gwaTestCfg, EVENT_GOOGLE_WEB_AUTH, GoogleWebAuthState } from '../apis/GoogleWebAuthAPI';
-import { Button } from 'react-toolbox/lib/button';
 
 export const GoogleWebAuthenticatorName: string = "google-api/WebAuthenticator";
 let allMyInputKeys: string[] = [];
@@ -73,21 +72,21 @@ export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnec
 			<h3>authenticate to google</h3>
 			{
 				canReSignIn ?
-					<Button onClick={() => {
+					<button onClick={() => {
 						this.googleAPI.reSignIn();
-					}}>sign in</Button>
+					}}>sign in</button>
 					: null
 			}
 			{isInitial ?
-				<Button onClick={() => {
+				<button onClick={() => {
 					this.googleAPI.initClient(gwaTestCfg);
-				}}>init google Web API</Button>
+				}}>init google Web API</button>
 				: null
 			}
 			{isLoggedIn ?
-				<Button onClick={() => {
+				<button onClick={() => {
 					this.googleAPI.signOut();
-				}}>sign out</Button>
+				}}>sign out</button>
 				: null
 			}
 		</div>;

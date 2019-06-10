@@ -1,11 +1,4 @@
-import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-
-import { initLDLocalState, gdsfpLD } from 'components/generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
-import { Table, TableTheme, TableHead, TableCell, TableRow } from 'react-toolbox/lib/table/';
+import ldBlueprint, {  } from 'ldaccess/ldBlueprint';
 import { AbstractSimpleTextTable, tableHeadings, tableRows, simpleTextTableCfg } from 'components/md/content/AbstractSimpleTextTable';
 
 @ldBlueprint(simpleTextTableCfg)

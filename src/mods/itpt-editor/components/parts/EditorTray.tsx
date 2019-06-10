@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { Button, IconButton } from "react-toolbox/lib/button";
 import TreeView, { TreeEntry } from "metaexplorer-react-components/lib/components/treeview/treeview";
 import { IBlueprintItpt } from "ldaccess/ldBlueprint";
 import { IItptInfoItem } from "defaults/DefaultItptRetriever";
@@ -230,10 +229,10 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 				{trayitpts ? trayElems : null}
 			</div>
 			<div className="button-row">
-				<Button className="newbtn" icon="add" label="new" onClick={(ev) => {
+				<button className="newbtn" icon="add" label="new" onClick={(ev) => {
 					this.props.onClearBtnPress();
 				}} />
-				<Button style={{ color: "white" }} label="beautify" onClick={(ev) => {
+				<button style={{ color: "white" }} label="beautify" onClick={(ev) => {
 					this.props.onZoomAutoLayoutPress();
 				}
 				} />

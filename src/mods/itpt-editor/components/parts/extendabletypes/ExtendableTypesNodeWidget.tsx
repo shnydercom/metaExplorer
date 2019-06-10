@@ -1,9 +1,6 @@
-import { DefaultNodeModel, DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
-import Dropdown from 'react-toolbox/lib/dropdown';
+import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
 import { ExtendableTypesNodeModel } from "./ExtendableTypesNodeModel";
-import { Component, createFactory, ClassAttributes, ComponentElement, ReactElement, ReactPortal } from "react";
 import { map } from "lodash";
-import { Button } from "react-toolbox/lib/button";
 import { LDPortModel } from "../LDPortModel";
 import { IKvStore } from "ldaccess/ikvstore";
 import { UserDefDict } from "ldaccess/UserDefDict";
@@ -52,7 +49,7 @@ export class ExtendableTypesNodeWidget extends BaseWidget<ExtendableTypesNodePro
 					<div className="in">{map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>
 					<div className="out">{map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
 				</div>
-				<Button className="input-highlight" label="+ in" onClick={this.addInPort.bind(this)} />
+				<button className="input-highlight" label="+ in" onClick={this.addInPort.bind(this)} />
 			</div>
 		);
 	}

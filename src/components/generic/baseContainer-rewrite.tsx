@@ -15,8 +15,6 @@ import { linearLDTokenStr } from "ldaccess/ildtoken";
 import { isReactComponent } from "../reactUtils/reactUtilFns";
 import { LDError } from "appstate/LDError";
 import { ErrorBoundaryState } from "../errors/ErrorBoundaryState";
-// import { value } from "../../../node_modules/react-toolbox/lib/dropdown/theme.css";
-
 export interface BaseContOwnProps extends LDOwnProps {
 }
 

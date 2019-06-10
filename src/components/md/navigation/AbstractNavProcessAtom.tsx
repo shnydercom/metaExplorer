@@ -1,21 +1,15 @@
-import { connect } from 'react-redux';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
-
-import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
-import { Button } from 'react-toolbox/lib/button/';
-import { generateItptFromCompInfo, initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
+import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
-import { Component, ComponentClass, StatelessComponent, ReactNode } from 'react';
+import { Component, ReactNode } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 import { ActionKeysDict, ActionTypesDict, ActionType } from 'components/actions/ActionDict';
-import { classNamesLD } from 'components/reactUtils/compUtilFns';
 
 export const NavProcessAtomName = "shnyder/material-design/NavProcessAtom";
 let cfgIntrprtKeys: string[] =
@@ -113,8 +107,6 @@ export abstract class AbstractNavProcessAtom extends Component<LDConnectedState 
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	private renderSub = generateItptFromCompInfo.bind(this);
-
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
@@ -160,12 +152,8 @@ export abstract class AbstractNavProcessAtom extends Component<LDConnectedState 
 		const { isDoRedirectCancel, isDoRedirectConfirm, localValues } = this.state;
 		let routeSendCancel: string = localValues.get(VisualKeysDict.routeSend_cancel);
 		let routeSendConfirm = localValues.get(VisualKeysDict.routeSend_confirm);
-		const headerText = localValues.get(VisualKeysDict.headerTxt);
 		const cancelTxt = localValues.get(VisualKeysDict.cancelTxt);
 		const confirmTxt = localValues.get(VisualKeysDict.confirmTxt);
-		//don't display bottom content if no routes or button text values are defined
-		const isHideBottom: boolean = !routeSendConfirm
-			&& !cancelTxt && !confirmTxt;
 		if (isDoRedirectCancel && routeSendCancel) {
 			routeSendCancel = cleanRouteString(routeSendCancel, this.props.routes);
 			return <Redirect to={routeSendCancel} />;

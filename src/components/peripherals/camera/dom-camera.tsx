@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import FontIcon from 'react-toolbox/lib/font_icon';
-import { Button } from 'react-toolbox/lib/button';
 
 let imageFormat: string = 'image/jpeg';
 export enum DOMCameraStateEnum {
@@ -32,7 +30,6 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 	}
 
 	startStream(strDeviceId: string) {
-		let test: MediaStreamConstraints = {};
 		if (!this.videoDispl || !strDeviceId) return;
 		if (this.videoDispl.srcObject) return;
 		navigator.mediaDevices.getUserMedia({ video: { deviceId: strDeviceId }, audio: false })
@@ -93,7 +90,7 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 					return;
 				}
 			})
-			.catch((err) => {
+			.catch(() => {
 				this.setStateToError();
 				return;
 			});
@@ -141,9 +138,11 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 				{(() => {
 					switch (curStep) {
 						case DOMCameraStateEnum.isError:
-							return <FontIcon className="vid-big-icons" value='videocam_off' />;
+							return <div>placeHolder for videocam-error</div>;
+							/*<FontIcon className="vid-big-icons" value='videocam_off' />;*/
 						case DOMCameraStateEnum.isLoading:
-							return <FontIcon className="vid-big-icons" value='videocam' />;
+							return <div>placeholder for videocam-loading</div>;
+							/*<FontIcon className="vid-big-icons" value='videocam' />;*/
 						case DOMCameraStateEnum.isVideoing:
 							return <>
 								<video ref={(video) => {
@@ -152,7 +151,7 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 								}} />
 								{showControls ?
 									<div className="controls-container">
-										<Button icon='camera' floating accent onClick={() => {
+										<button icon='camera' floating accent onClick={() => {
 											if (this.props.onImageCaptured) this.getScreenshotAsBlob();
 										}} />
 									</div>

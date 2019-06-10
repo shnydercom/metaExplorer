@@ -1,18 +1,12 @@
-import { SFC, Component } from 'react';
-
+import { Component } from 'react';
 import { Store } from 'redux';
 import { Provider, connect } from 'react-redux';
-
 import { ExplorerState, configureStore, isProduction, modAPI, IAppConfigStatePart, isStateDebug } from 'appstate/store';
-
-//import {Observable} from 'rxjs';
-import ImageUploadComponent from 'components/imageupload-component';
-//import { DiagramEngine } from 'storm-react-diagrams'
 import './styles/styles.scss';
 import DevTools from './appstate/devTools';
 import { initLDConnect } from 'sidefx/nonVisualConnect';
 import {
-	BrowserRouter as Router, Link
+	BrowserRouter as Router
 } from 'react-router-dom';
 import { appItptMatcherFn } from 'appconfig/appItptMatcher';
 import { initDefaultInterpreters } from 'components/md/initMDitptRetrieverSetup';
@@ -22,12 +16,10 @@ import { initEssentialItpts } from 'defaults/initEssentialItpts';
 import 'mods/google/components/GWebAuthenticator';
 import { initGameItpt } from 'components/game/initGameItpts';
 import { initBaseHtmlItpt } from 'components/basic-html/initBaseHtmlItpt';
-import LDApproot, { PureLDApproot } from 'ldapproot';
+import LDApproot from 'ldapproot';
 import { initShnyderItpts } from 'components/shnyder/initShnyderItpts';
 import { initMods } from 'mods/initMods';
-import { Button } from 'react-toolbox/lib/button';
 import { mapStateToPropsRoot } from 'appstate/reduxFns';
-import { FourOhFournomatch } from 'components/routing/404nomatch';
 
 export const APP_LD_KEY = "app";
 
@@ -52,10 +44,6 @@ const initialState: ExplorerState = {
 	}
 };
 
-/*export type DemoCompleteReceiver = {
-	isInitDemo: boolean,
-	notifyDemoComplete: () => void
-};*/
 export interface AppRootProps {
 	cfg: IAppConfigStatePart;
 	isLoading: boolean;

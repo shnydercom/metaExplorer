@@ -1,9 +1,7 @@
-import { DefaultNodeModel, DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
-import Dropdown from 'react-toolbox/lib/dropdown';
-import { BaseDataTypeDropDown } from './BaseDataTypeDropDown';
+import { DiagramEngine, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
 import { BaseDataTypePortSelector } from "./BaseDataTypePortSelectorWidget";
 import { BaseDataTypeNodeModel } from "./BaseDataTypeNodeModel";
-import { Component, createFactory, ClassAttributes, ComponentElement, ReactElement, ReactPortal } from "react";
+import { createFactory } from "react";
 import { map } from "lodash";
 import { BASEDATATYPE_MODEL } from "../editor-consts";
 

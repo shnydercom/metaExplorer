@@ -1,21 +1,12 @@
-import { connect } from 'react-redux';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
-
-import AppBar from 'react-toolbox/lib/app_bar/AppBar.js';
 import { initLDLocalState, gdsfpLD, generateItptFromCompInfo } from '../../generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent, ReactNode } from 'react';
-
-import { Input, InputTheme } from 'react-toolbox/lib/input';
-import { Redirect } from 'react-router';
-import { cleanRouteString } from '../../routing/route-helper-fns';
-import { classNamesLD } from 'components/reactUtils/compUtilFns';
+import { Component, ReactNode } from 'react';
 
 export const NavSearchBarName = "shnyder/material-design/NavSearchBar";
 let cfgIntrprtKeys: string[] =

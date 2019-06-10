@@ -6,7 +6,6 @@ import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 
 import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent } from 'react';
 import { VisualKeysDict } from 'components/visualcomposition/visualDict';
-import { Button } from 'react-toolbox/lib/button';
 import { KeyCloakAuthAPI, EVENT_KEYCLOAK_WEB_AUTH } from '../apis/KeyCloakAuthAPI';
 import { LDDict } from 'ldaccess/LDDict';
 
@@ -98,13 +97,13 @@ export class KCAuthenticatorBtn extends Component<LDConnectedState & LDConnected
 			{
 				isAuthenticated
 					?
-					<Button className="signinoutbtn" onClick={() => {
+					<button className="signinoutbtn" onClick={() => {
 						KeyCloakAuthAPI.getKC().logout({ redirectUri: redirLogout });
-					}}>sign out</Button>
+					}}>sign out</button>
 					:
-					<Button className="signinoutbtn" onClick={() => {
+					<button className="signinoutbtn" onClick={() => {
 						KeyCloakAuthAPI.getKC().login({ redirectUri: redirLogin });
-					}}>sign in</Button>
+					}}>sign in</button>
 			}
 		</div>;
 	}

@@ -1,9 +1,7 @@
 import { Component } from "react";
-import Tooltip, { TooltipProps, TooltipComponent, TooltippedComponentClass, tooltipFactory } from "react-toolbox/lib/tooltip";
-import { Input, InputProps } from "react-toolbox/lib/input";
 
 //const TooltipDiv = tooltipFactory({ passthrough: false })(({children}) => <div>{children}</div>) as TooltippedComponentClass<{}>;
-const TooltipDiv = Tooltip((props) => <div {...props}></div>) as TooltippedComponentClass<{}>;
+const TooltipDiv = ((props) => <div {...props}></div>);
 
 export interface DropRefmapResult {
 	isSuccess: boolean;
@@ -45,7 +43,7 @@ export class RefMapDropSpace extends Component<RefMapDropSpaceProps, RefMapDropS
 				>
 					<span>now editing: </span>
 					{/*!this.state.message ? this.props.dropText : '...dropped!...'*/}
-					<Input style={inputStyle} value={itptName ? itptName : "None"} disabled={true} />
+					<input style={inputStyle} value={itptName ? itptName : "None"} disabled={true} />
 					{/*this.state.message ? <><br /><br />{this.state.message}</> : null*/}
 				</div>
 			</TooltipDiv>

@@ -1,12 +1,8 @@
-import { DefaultNodeModel, DefaultPortLabel, DiagramEngine } from "storm-react-diagrams";
-import Dropdown from 'react-toolbox/lib/dropdown';
+import { DefaultPortLabel, DiagramEngine } from "storm-react-diagrams";
 import { OutputInfoPartNodeModel } from "./OutputInfoNodeModel";
-import { Component, createFactory, ClassAttributes, ComponentElement, ReactElement, ReactPortal } from "react";
+import { Component, createFactory } from "react";
 import { map } from "lodash";
-import { IconButton } from "react-toolbox/lib/button";
-import { Input } from "react-toolbox/lib/input";
 import { isDemo } from "appstate/store";
-import { Dialog } from "react-toolbox/lib/dialog";
 
 export interface OutputInfoNodeProps {
 	node: OutputInfoPartNodeModel;
@@ -78,23 +74,22 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 		const actions = [
 			{ label: 'OK', primary: true, onClick: this.handleModalToggle },
 		];
-		return <Dialog
-			actions={actions}
-			active={this.state.isModalActive}
-			type={"small"}
+		return <div>
+			Dialog
+			actions=actions
+			active=this.state.isModalActive
+			type="small"
 			title="A little reminder"
-			onOverlayClick={this.handleModalToggle}
-			onEscKeyDown={this.handleModalToggle}
-		>
+			onOverlayClick=this.handleModalToggle
+			onEscKeyDown=this.handleModalToggle
 			<p>Your changes won't be saved in the demo of MetaExplorer, leave us an email to get notified about our release!</p>
-		</Dialog>;
+		</div>;
 	}
 
 	render() {
 		const { node } = this.props;
-		let { stItptName, blockNameInput, projName, userName, userProjectInput, userNameInput } = this.state;
+		let { stItptName, blockNameInput, userProjectInput, userNameInput } = this.state;
 		let canChangeItpt: boolean = !isDemo;
-		let itptName = stItptName ? stItptName : "";
 		let isBtnEnabled = !!blockNameInput && !!userProjectInput && !!userNameInput && node.hasMainItpt();
 		const usrProj = node.getUserProject();
 		const usrName = node.getUserName();
@@ -123,40 +118,40 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 						}
 						{isForeignItpt
 							? null
-							: <Input type='text'
+							: <input type='text'
 								disabled={!canChangeItpt}
 								label="Block Name"
 								name="blockNameField"
 								value={blockNameInput}
 
 								onChange={(evtVal) => {
-									this.setState({ ...this.state, blockNameInput: evtVal });
+									this.setState({ ...this.state, blockNameInput: evtVal.target.value });
 								}} />
 						}
 						{isShowInputUsrNameAndProj
 							? <>
-								<Input type='text'
+								<input type='text'
 									disabled={!canChangeItpt}
 									label="Project Name"
 									name="projectNameField"
 									value={userProjectInput}
 									onChange={(evtVal) => {
-										this.setState({ ...this.state, userProjectInput: evtVal });
+										this.setState({ ...this.state, userProjectInput: evtVal.target.value });
 									}}
 								/>
-								<Input type='text'
+								<input type='text'
 									disabled={!canChangeItpt}
 									label="User Name"
 									name="userNameField"
 									value={userNameInput}
 									onChange={(evtVal) => {
-										this.setState({ ...this.state, userNameInput: evtVal });
+										this.setState({ ...this.state, userNameInput: evtVal.target.value });
 									}}
 								/>
 							</>
 							: null}
 					</div>
-					<IconButton style={{ marginTop: "0" }} disabled={!isBtnEnabled}
+					<button style={{ marginTop: "0" }} disabled={!isBtnEnabled}
 						icon={!isBtnEnabled ? "warning" : "chevron_right"} onClick={() => {
 							this.handleModalToggle();
 							const newItptName = userNameInput + "/" + userProjectInput + "/" + blockNameInput;
