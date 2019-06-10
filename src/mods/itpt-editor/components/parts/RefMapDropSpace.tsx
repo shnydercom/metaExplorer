@@ -30,7 +30,8 @@ export class RefMapDropSpace extends Component<RefMapDropSpaceProps, RefMapDropS
 		let itptName: string | null = this.props.currentlyEditingItpt;
 		let inputStyle = itptName ? { width: itptName.length + "ex", maxHeight: "100%" } : null;
 		return (
-			<TooltipDiv className="refmap-drop-outer" tooltipPosition="top" tooltip={this.props.dropText}>
+			<TooltipDiv className="refmap-drop-outer" >
+				{/**tooltipPosition="top" tooltip={this.props.dropText} */}
 				<div
 					onDrop={(event) => {
 						let dropResult = this.props.refMapDrop(event);

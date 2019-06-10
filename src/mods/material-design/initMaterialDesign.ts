@@ -23,6 +23,7 @@ import { MDNavProcessAtom } from "./components/navigation/MDNavProcessAtom";
 import { SimpleTextTableName } from "components/md/content/AbstractSimpleTextTable";
 import { MDTopNavigation } from "./components/navigation/MDTopNavigation";
 import { MDSimpleTextTable } from "./components/content/MDSimpleTextTable";
+import { ThemeProviderDarkName, ThemeProviderLightName, ThemeProviderLight, ThemeProviderDark } from "./components/content/DarkLightThemeProviders";
 
 export const MOD_MATERIALDESIGN_ID = "material-design";
 export const MOD_MATERIALDESIGN_NAME = "Material Design Mod";
@@ -59,6 +60,10 @@ export function initMaterialDesignMod(): Promise<IModStatus> {
 
 		//composition itpts new from this mod
 		appIntRetr.addItpt(Card3itptLTRName, PureCard3itptLTR, "cRud", [ITPT_TAG_ATOMIC]);
+
+		//theming for this mod:
+		appIntRetr.addItpt(ThemeProviderDarkName, ThemeProviderDark, "cRud", [ITPT_TAG_ATOMIC]);
+		appIntRetr.addItpt(ThemeProviderLightName, ThemeProviderLight, "cRud", [ITPT_TAG_ATOMIC]);
 
 		resolve({ id: MOD_MATERIALDESIGN_ID, name: MOD_MATERIALDESIGN_NAME, state: SingleModStateKeysDict.readyToUse, errorMsg: null });
 	});

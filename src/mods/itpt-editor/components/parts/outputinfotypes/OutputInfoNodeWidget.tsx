@@ -118,30 +118,33 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 						}
 						{isForeignItpt
 							? null
-							: <input type='text'
+							:
+							<input type='text'
 								disabled={!canChangeItpt}
-								label="Block Name"
 								name="blockNameField"
 								value={blockNameInput}
 
 								onChange={(evtVal) => {
 									this.setState({ ...this.state, blockNameInput: evtVal.target.value });
-								}} />
+								}} >{/**
+						label="Block Name" */}</input>
 						}
 						{isShowInputUsrNameAndProj
 							? <>
+								{/**
+									label="Project Name" */}
 								<input type='text'
 									disabled={!canChangeItpt}
-									label="Project Name"
 									name="projectNameField"
 									value={userProjectInput}
 									onChange={(evtVal) => {
 										this.setState({ ...this.state, userProjectInput: evtVal.target.value });
 									}}
 								/>
+								{/**
+									label="User Name" */}
 								<input type='text'
 									disabled={!canChangeItpt}
-									label="User Name"
 									name="userNameField"
 									value={userNameInput}
 									onChange={(evtVal) => {
@@ -151,8 +154,9 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 							</>
 							: null}
 					</div>
+					{/**icon={!isBtnEnabled ? "warning" : "chevron_right"} */}
 					<button style={{ marginTop: "0" }} disabled={!isBtnEnabled}
-						icon={!isBtnEnabled ? "warning" : "chevron_right"} onClick={() => {
+						 onClick={() => {
 							this.handleModalToggle();
 							const newItptName = userNameInput + "/" + userProjectInput + "/" + blockNameInput;
 							node.setItptName(newItptName);

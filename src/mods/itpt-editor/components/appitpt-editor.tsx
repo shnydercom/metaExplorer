@@ -13,7 +13,8 @@ import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps, LDLoca
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 
 import {
-	Route} from 'react-router-dom';
+	Route
+} from 'react-router-dom';
 import { Redirect } from "react-router";
 import { BaseContainerRewrite } from "../../../components/generic/baseContainer-rewrite";
 import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
@@ -328,7 +329,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			<div className="app-actual app-content">
 				<BaseContainerRewrite routes={routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
 				<div className="mode-switcher">
-					<button className="editor-switch-btn" icon='edit' floating accent onClick={() => this.toggleFullScreen.apply(this)} />
+					{/**icon='edit' floating accent  */}
+					<button className="editor-switch-btn" onClick={() => this.toggleFullScreen.apply(this)} />
 				</div>
 			</div>
 		);
@@ -347,8 +349,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					{drawerHidden
 						? null
 						: <div>
-								NavDrawer insideTree=true theme= pinned: "navbar-pinned" active=drawerActive withOverlay=false
-							permanentAt='xxxl'
+							NavDrawer insideTree=true theme= pinned: "navbar-pinned" active=drawerActive withOverlay=false
+						permanentAt='xxxl'
 							<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
 								onClearBtnPress={() => {
 									this.logic.clear();
@@ -383,10 +385,12 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						? null
 						: <>
 							<div className="nav-element top-left">
-								<button className="large" icon='menu' onClick={this.toggleDrawerActive} inverse />
+								{/** icon='menu' inverse*/}
+								<button className="large" onClick={this.toggleDrawerActive}  />
 							</div>
 							<div className="nav-element bottom-left">
-								<button icon={drawerActive ? "chevron_left" : "chevron_right"} style={{ color: "white" }} onClick={this.toggleDrawerActive}></button>
+								{/**icon={drawerActive ? "chevron_left" : "chevron_right"} */}
+								<button  style={{ color: "white" }} onClick={this.toggleDrawerActive}></button>
 							</div>
 						</>
 					}
@@ -407,7 +411,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			{this.state.previewDisplay === "phone" ?
 				<>
 					<div className="preview-hidden-btn">
-						<button onClick={() => this.togglePreview.apply(this)} primary icon="chevron_left" />
+						{/** primary icon="chevron_left"  */}
+						<button onClick={() => this.togglePreview.apply(this)}/>
 					</div>
 					<div> ThemeProvider theme=appTheme
 						<div className="app-preview">
@@ -446,17 +451,19 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		return <>
 			{isGlobal
 				? <>
-					<button onClick={() => this.toggleFullScreen.apply(this)} primary icon="fullscreen" className="fullscreen" />
-					<button onClick={() => this.triggerNavToTop.apply(this)} primary icon="arrow_upward" />
+					<button onClick={() => this.toggleFullScreen.apply(this)} className="fullscreen" />{/*primary icon="fullscreen"*/}
+					<button onClick={() => this.triggerNavToTop.apply(this)} />{/**primary icon="arrow_upward" */}
 				</>
 				: null
 			}
-			<button onClick={() => this.togglePreview.apply(this)} primary icon="chevron_right" />
+			{/**primary icon="chevron_right"  */}
+			<button onClick={() => this.togglePreview.apply(this)} />
 		</>;
 	}
 
 	protected renderBtnSwitchPreviewOrCode() {
-		return <button icon={"phone" ? "unfold_more" : "stay_current_landscape"}
+		// icon={"phone" ? "unfold_more" : "stay_current_landscape"}
+		return <button
 			onClick={
 				() => {
 					if (this.state.previewDisplay === "phone") {
@@ -465,7 +472,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						this.setState({ ...this.state, previewDisplay: "phone" });
 					}
 				}
-			} primary style={{ background: '#010f27aa' }}>
+			}  style={{ background: '#010f27aa' }}>{/**primary */}
 		</button>;
 	}
 

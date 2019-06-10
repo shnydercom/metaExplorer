@@ -151,7 +151,8 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 								}} />
 								{showControls ?
 									<div className="controls-container">
-										<button icon='camera' floating accent onClick={() => {
+										{/* icon='camera' floating accent  */}
+										<button onClick={() => {
 											if (this.props.onImageCaptured) this.getScreenshotAsBlob();
 										}} />
 									</div>
