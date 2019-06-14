@@ -7,6 +7,8 @@ import { UserDefDict } from 'ldaccess/UserDefDict';
 import { Component } from 'react';
 import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core';
 /*import { ThemeProvider } from 'react-css-themr';
 import { editorTheme } from 'styles/editor/editorTheme';
 import { appTheme } from 'styles/appTheme/appTheme';*/
@@ -44,6 +46,14 @@ let lightBpCfg: BlueprintConfig = {
 export interface ThemeProviderDarkState extends LDLocalState {
 }
 
+const lightTheme = createMuiTheme({
+
+});
+
+const darkTheme = createMuiTheme({
+
+});
+
 class PureThemeProviderDark extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, ThemeProviderDarkState>
 	implements IBlueprintItpt {
 
@@ -79,16 +89,14 @@ class PureThemeProviderDark extends Component<LDConnectedState & LDConnectedDisp
 	}
 	render() {
 		let renderFreeResult: JSX.Element = this.renderInputContainer();
-		return <div>ThemeProviderDark</div>;
-		//<ThemeProvider theme={editorTheme}>{renderFreeResult}</ThemeProvider>;
+		return <ThemeProvider theme={darkTheme}>{renderFreeResult}</ThemeProvider>;
 	}
 }
 
 class PureThemeProviderLight extends PureThemeProviderDark {
 	render() {
 		let renderFreeResult: JSX.Element = this.renderInputContainer();
-		return <div>ThemeProviderLight</div>;
-		//<ThemeProvider theme={appTheme}>{renderFreeResult}</ThemeProvider>;
+		return <ThemeProvider theme={lightTheme}>{renderFreeResult}</ThemeProvider>;
 	}
 }
 

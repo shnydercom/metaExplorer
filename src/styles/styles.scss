@@ -1,9 +1,11 @@
-@import 'm-react-splitters/lib/splitters.css';
+//@import 'm-react-splitters/lib/splitters.css';
 //@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import './editor/colors.scss';
 @import "storm-react-diagrams/dist/style.min.css";
 @import "./game/game.scss";
 @import "./shnyder/shnyder.scss";
+@import "./../mods/itpt-editor/styles/itpt-editor.scss";
+@import "./../mods/material-design/styles/material-design.scss";
 
 $app-outer-width: 420px;
 $app-inner-width: 304px;

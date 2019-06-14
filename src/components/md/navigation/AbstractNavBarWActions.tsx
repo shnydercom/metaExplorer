@@ -3,7 +3,7 @@ import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBluepri
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
-import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
+import { initLDLocalState, gdsfpLD, generateItptFromCompInfo } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ReactNode } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
@@ -98,6 +98,8 @@ export abstract class AbstractNavBarWActions extends Component<LDConnectedState 
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
+
+	protected renderSub = generateItptFromCompInfo.bind(this);
 
 	constructor(props: any) {
 		super(props);

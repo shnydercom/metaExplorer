@@ -26,14 +26,12 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 		}
 	}
 	render() {
-		return <div>
-			<div className="app-content" style={{background: "white"}}>
-				<Route path="/" render={(routeProps: LDRouteProps) => {
-					return <>
-						<BaseContainerRewrite routes={routeProps} ldTokenString={this.props.ldTokenString} />
-					</>;
-				}} />
-			</div>
+		return <div className="app-content" style={{ background: "white" }}>
+			<Route path="/" render={(routeProps: LDRouteProps) => {
+				return <>
+					<BaseContainerRewrite routes={routeProps} ldTokenString={this.props.ldTokenString} />
+				</>;
+			}} />
 		</div>;
 	}
 }
