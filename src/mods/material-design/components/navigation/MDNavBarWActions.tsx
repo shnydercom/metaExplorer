@@ -6,31 +6,38 @@ import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { classNamesLD } from 'components/reactUtils/compUtilFns';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, ReactCompLDLocalState, LDLocalKv } from 'appstate/LDProps';
 
 /*
 TODOs:
 -	dynamic icons for front and back button
 - theming
 */
-@ldBlueprint(NavBarWActionsBpCfg)
-export class MDNavBarWActions extends AbstractNavBarWActions {
 
-	protected anchor;
+interface IAnchorState {
+	anchor: any;
+}
+
+@ldBlueprint(NavBarWActionsBpCfg)
+export class MDNavBarWActions extends AbstractNavBarWActions<IAnchorState> {
+
+	constructor(props?: LDConnectedState & LDConnectedDispatch & LDOwnProps) {
+		super(props, { anchor: null });
+	}
 
 	protected handleClick(event) {
-		this.anchor = event.currentTarget;
+		this.setState({ ...this.state, anchor: event.currentTarget });
 	}
 
 	protected handleClose() {
-		this.anchor = null;
-		this.setState({ ...this.state, isRightMenuOpen: false });
+		this.setState({ ...this.state, isRightMenuOpen: false, anchor: null });
 	}
 
 	protected onTriggerOpenRightMenu() {
 		this.setState({ ...this.state, isRightMenuOpen: true });
 	}
 	protected renderCore() {
-		const { localValues, isRightMenuOpen } = this.state;
+		const { localValues, isRightMenuOpen, anchor } = this.state;
 		const headerText = localValues.get(VisualKeysDict.headerTxt);
 		const routeSendSearch = localValues.get(VisualKeysDict.routeSend_search);
 		const id = isRightMenuOpen ? 'simple-popover' : null;
@@ -59,7 +66,7 @@ export class MDNavBarWActions extends AbstractNavBarWActions {
 			<Popover
 				id={id}
 				open={isRightMenuOpen}
-				anchorEl={this.anchor}
+				anchorEl={anchor}
 				onClose={() => this.handleClose()}
 				anchorOrigin={{
 					vertical: 'bottom',

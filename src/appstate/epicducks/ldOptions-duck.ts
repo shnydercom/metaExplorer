@@ -1,7 +1,5 @@
 import { ActionsObservable, ofType } from 'redux-observable';
 import { from, of } from 'rxjs';
-//import "rxjs/Rx";
-import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { LDError, LDErrorMsgState } from './../LDError';
 import { ILDOptionsMapStatePart } from 'appstate/store';
 import { IKvStore } from 'ldaccess/ikvstore';
@@ -14,6 +12,7 @@ import { tap, mergeMap, map, catchError } from 'rxjs/operators';
 import { LDOptionsAPI } from 'apis/ldoptions-api';
 import { applicationStore } from 'approot';
 import { ActionKeysDict } from 'components/actions/ActionDict';
+import { ILDWebResource } from 'ldaccess/ildresource';
 
 export const LDOPTIONS_CLIENTSIDE_CREATE = 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE';
 export const LDOPTIONS_CLIENTSIDE_UPDATE = 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE';
@@ -31,7 +30,7 @@ export type LDAction =
 	{ type: 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE', kvStores: IKvStore[], lang: string, alias: string }
 	| { type: 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE', updatedLDOptions: ILDOptions }
 	| { type: 'shnyder/LDOPTIONS_REQUEST_ASYNC', isExternalAPICall: boolean, uploadData: ILDOptions, targetUrl: string, targetReceiverLnk: string }
-	| { type: 'shnyder/LDOPTIONS_REQUEST_RESULT', ldOptionsPayload: IWebResource, targetReceiverLnk: string }
+	| { type: 'shnyder/LDOPTIONS_REQUEST_RESULT', ldOptionsPayload: ILDWebResource, targetReceiverLnk: string }
 	| { type: 'shnyder/LDOPTIONS_REQUEST_ERROR', message: string, targetReceiverLnk: string }
 	| LD_KVUpdateAction
 	| LDActionType;
@@ -79,7 +78,7 @@ export const ldOptionsRequestAction = (apiCallOverride: () => Promise<any>, uplo
 	}
 };
 
-export const ldOptionsResultAction = (ldOptionsPayload: IWebResource, targetReceiverLnk) => {
+export const ldOptionsResultAction = (ldOptionsPayload: ILDWebResource, targetReceiverLnk) => {
 	externalAPICallDict.delete(targetReceiverLnk);
 	return {
 		type: LDOPTIONS_REQUEST_RESULT,
@@ -302,7 +301,7 @@ export const requestLDOptionsEpic = (action$: ActionsObservable<any>, store: any
 				if (action.uploadData === null) {
 					let rvGET = _LDOAPI.getLDOptions(action.targetUrl);
 					return rvGET.pipe(
-						map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
+						map((response: ILDWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
 						,
 						catchError((error: LDError) =>
 							of(ldOptionsFailureAction(
@@ -311,7 +310,7 @@ export const requestLDOptionsEpic = (action$: ActionsObservable<any>, store: any
 				} else {
 					let rvPOST = _LDOAPI.postLDOptions(action.uploadData, action.targetUrl);
 					return rvPOST.pipe(
-						map((response: IWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
+						map((response: ILDWebResource) => ldOptionsResultAction(response, action.targetReceiverLnk))
 						,
 						catchError((error: LDError) =>
 							of(ldOptionsFailureAction(

@@ -3,8 +3,6 @@ import { LDError } from 'appstate/LDError';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { ObjectPropertyRef } from 'ldaccess/ObjectPropertyRef';
-import { InferableComponentEnhancerWithProps } from 'react-redux';
-import { LDDictWildCard } from 'ldaccess/LDDict';
 import { ILDToken } from 'ldaccess/ildtoken';
 
 export type ConsumeLDOptionsFunc = (ldOptions: ILDOptions) => any;
@@ -65,7 +63,9 @@ function blueprintDecorator<T extends { new(...args: any[]): IBlueprintItpt }>(c
     classToExtend = class extends constructorFn {
         static nameSelf = blueprintCfg.nameSelf;
         static cfg = blueprintCfg;
-        initialKvStores = handleKVInheritance(this.initialKvStores, blueprintCfg.initialKvStores, replaceKVs);
+        initialKvStores = this["initialKvStores"]
+            ? handleKVInheritance(this["initialKvStores"], blueprintCfg.initialKvStores, replaceKVs)
+            : blueprintCfg.initialKvStores;
         interpretableKeys = blueprintCfg.interpretableKeys;
     };
     return classToExtend;

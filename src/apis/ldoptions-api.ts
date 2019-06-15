@@ -1,8 +1,7 @@
-import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
-import { HydraClientAPI } from '../mods/hydra/apis/hydra-client';
 import { LDError } from './../appstate/LDError';
 import { Observable, from } from 'rxjs';
 import { ILDOptions } from 'ldaccess/ildoptions';
+import { ILDWebResource } from 'ldaccess/ildresource';
 
 //let testTC = new TypesCollection(["someTypeInAnArray"] || new Array<string>());
 //console.log(testTC.contains("someTypeInAnArray"));
@@ -24,11 +23,11 @@ myArray.logCount();
 */
 
 export class LDOptionsAPI {  // URL to web api IRI resource
-	getLDOptions(targetUrl: string): Observable<IWebResource> {
+	getLDOptions(targetUrl: string): Observable<ILDWebResource> {
 		if (targetUrl == null) {
 			throw new Error(("no targetUrl defined for LDOptionsAPI"));
 		}
-		let returnVal: Observable<IWebResource>;
+		let returnVal: Observable<ILDWebResource>;
 		let fetchPromise = fetch(targetUrl, {
 			method: 'GET',
 			headers: {
@@ -42,21 +41,23 @@ export class LDOptionsAPI {  // URL to web api IRI resource
 				if (response.status >= 400) {
 					throw new LDError("Bad response from server");
 				}
+				return response.json();
+				/*
 				var testVar = HydraClientAPI.getHC().getHypermediaProcessor(response);
 				var procResource = HydraClientAPI.getHC().getHypermediaProcessor(response).process(response, HydraClientAPI.getHC()).then((hydraResponse) => {
 					console.dir(hydraResponse);
 					return hydraResponse;
 				});
-				return procResource;
+				return procResource;*/
 			});
 		returnVal = from(fetchPromise);
 		return returnVal;
 	}
-	postLDOptions(uploadData: ILDOptions, targetUrl: string): Observable<IWebResource> {//Observable<IWebResource> { //FETCH
+	postLDOptions(uploadData: ILDOptions, targetUrl: string): Observable<ILDWebResource> {//Observable<ILDWebResource> { //FETCH
 		if (targetUrl == null) {
 			throw new Error(("no targetUrl defined for LDOptionsAPI"));
 		}
-		let returnVal: Observable<IWebResource>;
+		let returnVal: Observable<ILDWebResource>;
 		let uploadDataSerialized: string;
 		let fetchPromise = fetch(targetUrl, {
 			method: 'POST',
@@ -70,12 +71,14 @@ export class LDOptionsAPI {  // URL to web api IRI resource
 				if (response.status >= 400) {
 					throw new LDError("Bad response from server");
 				}
+				return response.json();
+				/*
 				var testVar = HydraClientAPI.getHC().getHypermediaProcessor(response);
 				var procResource = HydraClientAPI.getHC().getHypermediaProcessor(response).process(response, HydraClientAPI.getHC()).then((hydraResponse) => {
 					console.dir(hydraResponse);
 					return hydraResponse;
 				});
-				return procResource;
+				return procResource;*/
 			});
 		returnVal = from(fetchPromise);
 		return returnVal;

@@ -1,4 +1,3 @@
-import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { ILDToken } from 'ldaccess/ildtoken';
 import { ILDResource } from 'ldaccess/ildresource';
 

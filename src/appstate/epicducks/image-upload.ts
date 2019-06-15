@@ -1,9 +1,8 @@
-import { Action, Store } from 'redux';
-import { ActionsObservable, Epic, Options, ofType } from 'redux-observable';
-//import "rxjs/Rx";
-import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
+import { Action } from 'redux';
+import { ActionsObservable, ofType } from 'redux-observable';
 import { LDError, LDErrorMsgState } from './../LDError';
 import { tap, mergeMap } from 'rxjs/operators';
+import { ILDWebResource } from 'ldaccess/ildresource';
 
 export const IMG_UPLOAD_REQUEST = 'shnyder/IMG_UPLOAD_REQUEST';
 export const IMG_UPLOAD_RESULT = 'shnyder/IMG_UPLOAD_RESULT';
@@ -16,7 +15,7 @@ export const uploadImgRequestAction = (fileList: FileList, targetUrl: string) =>
     targetUrl: targetUrl
 });
 
-export const uploadImgResultAction = (imgULpayload: IWebResource) => ({
+export const uploadImgResultAction = (imgULpayload: ILDWebResource) => ({
     type: IMG_UPLOAD_RESULT,
     imgULpayload
 });
@@ -46,7 +45,7 @@ export const uploadImageEpic = (action$: ActionsObservable<any>, store: any, { i
         tap(() => console.log("uploading image epic...")),
         mergeMap((action) =>
             imgULAPI.postNewImage(action.imgUL, action.targetUrl)
-                .map((response: IWebResource) => uploadImgResultAction(response))
+                .map((response: ILDWebResource) => uploadImgResultAction(response))
                 .catch((error: LDError): ActionsObservable<LDErrorMsgState> =>
                     ActionsObservable.of(loadImgFailure(
                         'An error occured during image uploading: ${error.message}'

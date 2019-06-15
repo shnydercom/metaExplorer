@@ -1,6 +1,4 @@
 import { IKvStore } from "ldaccess/ikvstore";
-import { IHypermediaContainer } from "hydraclient.js/src/DataModel/IHypermediaContainer";
-import { LDDict } from "ldaccess/LDDict";
 
 export let singleHyperMediaToKvStores = (inputHM: any): IKvStore[] => {
 	var kvStoreArray: IKvStore[] = new Array<IKvStore>();
@@ -20,8 +18,10 @@ export let singleHyperMediaToKvStores = (inputHM: any): IKvStore[] => {
 	return kvStoreArray;
 };
 
+/*
 export let multiHyperMediaToKvStores = (inputHMs: IHypermediaContainer): IKvStore[] => {
 	let kvStoreArray: IKvStore[] = new Array<IKvStore>();
 	console.log(inputHMs);
 	return kvStoreArray;
 };
+*/

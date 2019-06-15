@@ -5,12 +5,12 @@ import { UserDefDict } from "ldaccess/UserDefDict";
 import { SideFXDict } from "sidefx/SideFXDict";
 import { ldOptionsRequestAction, ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
 import { applicationStore } from "approot";
-import { isOutputKVSame, ldOptionsDeepCopy, getKVValue, isObjPropertyRef } from "ldaccess/ldUtils";
-import { IWebResource } from "hydraclient.js/src/DataModel/IWebResource";
+import { isOutputKVSame, ldOptionsDeepCopy, isObjPropertyRef } from "ldaccess/ldUtils";
 import { ILDOptionsMapStatePart } from "appstate/store";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { nameSpaceMap } from "ldaccess/ns/nameSpaceMap";
 import { LDLocalKv } from "appstate/LDProps";
+import { ILDWebResource } from "ldaccess/ildresource";
 // import URI from 'urijs';
 
 export type LDRetrieverSuperStateOld = LDLocalKv;
@@ -27,7 +27,7 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 	isInputDirty: boolean = false;
 	isOutputDirty: boolean = false;
 	retrieverStoreKey: string; //needed when requesting asynchronously, so that the output can find this
-	webContent: IWebResource;
+	webContent: ILDWebResource;
 	state: LDRetrieverSuperStateOld;
 
 	protected apiCallOverride: (() => Promise<any>) | null = null;

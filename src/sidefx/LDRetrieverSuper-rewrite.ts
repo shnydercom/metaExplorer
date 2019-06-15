@@ -5,7 +5,6 @@ import { LDConnectedState, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { LDDict } from 'ldaccess/LDDict';
 import { SideFXDict } from './SideFXDict';
 import { gdsfpLD, initLDLocalState } from 'components/generic/generatorFns';
-import { IWebResource } from 'hydraclient.js/src/DataModel/IWebResource';
 import { applicationStore } from 'approot';
 import { ldOptionsClientSideUpdateAction, ldOptionsRequestAction } from 'appstate/epicducks/ldOptions-duck';
 import { ldOptionsDeepCopy, isObjPropertyRef } from 'ldaccess/ldUtils';
@@ -14,6 +13,7 @@ import { ILDOptionsMapStatePart } from 'appstate/store';
 
 import { nameSpaceMap } from "ldaccess/ns/nameSpaceMap";
 import { UserDefDict } from 'ldaccess/UserDefDict';
+import { ILDWebResource } from 'ldaccess/ildresource';
 
 export const ldRetrCfgIntrprtKeys: string[] = [SideFXDict.srvURL, SideFXDict.identifier];
 let ldRetrInitialKVStores: IKvStore[] = [
@@ -24,7 +24,7 @@ let ldRetrInitialKVStores: IKvStore[] = [
 export interface LDRetrieverSuperState extends LDLocalState {
 	isInputDirty: boolean;
 	isOutputDirty: boolean;
-	webContent: IWebResource;
+	webContent: ILDWebResource;
 	retrieverStoreKey: string;
 	interpretableKeys: string[];
 }

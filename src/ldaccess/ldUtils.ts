@@ -1,9 +1,7 @@
 import { OBJECT_REF } from "ldaccess/ObjectPropertyRef";
 import { ILDOptions } from "ldaccess/ildoptions";
-import { ILDResource } from "ldaccess/ildresource";
+import { ILDResource, ILDWebResource } from "ldaccess/ildresource";
 import { IKvStore } from "ldaccess/ikvstore";
-import { IWebResource } from "hydraclient.js/src/DataModel/IWebResource";
-import { elementAt } from "rxjs/operator/elementAt";
 import { OutputKVMap, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { LDError } from "appstate/LDError";
 
@@ -97,7 +95,7 @@ export const ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {
 		};
 		newKVStores.push(newKvSingle);
 	});
-	let newWebInResource: IWebResource = null;
+	let newWebInResource: ILDWebResource = null;
 	let newWebOutResource: string = null;
 	let newResource: ILDResource = { kvStores: newKVStores, webOutResource: newWebOutResource, webInResource: newWebInResource };
 	rv = {

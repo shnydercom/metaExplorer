@@ -76,7 +76,8 @@ export const NavBarWActionsBpCfg: BlueprintConfig = {
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
-export abstract class AbstractNavBarWActions extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavBarWActionState & LDLocalState>
+export abstract class AbstractNavBarWActions<TStateExtension = {}> extends
+	Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, NavBarWActionState & LDLocalState & TStateExtension>
 	implements IBlueprintItpt {
 
 	static getDerivedStateFromProps(
@@ -101,7 +102,7 @@ export abstract class AbstractNavBarWActions extends Component<LDConnectedState 
 
 	protected renderSub = generateItptFromCompInfo.bind(this);
 
-	constructor(props: any) {
+	constructor(props: any, stateExtensionInit: TStateExtension) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		let navBarStatePart: NavBarWActionState = {
@@ -110,6 +111,7 @@ export abstract class AbstractNavBarWActions extends Component<LDConnectedState 
 			isRightMenuOpen: false,
 		};
 		this.state = {
+			...stateExtensionInit,
 			...navBarStatePart,
 			...initLDLocalState(this.cfg, props,
 				cfgIntrprtItptKeys,
