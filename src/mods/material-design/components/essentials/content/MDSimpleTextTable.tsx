@@ -1,5 +1,5 @@
 import ldBlueprint, {  } from 'ldaccess/ldBlueprint';
-import { AbstractSimpleTextTable, tableHeadings, tableRows, simpleTextTableCfg } from 'components/md/content/AbstractSimpleTextTable';
+import { AbstractSimpleTextTable, tableHeadings, tableRows, simpleTextTableCfg } from 'components/essentials/content/AbstractSimpleTextTable';
 
 @ldBlueprint(simpleTextTableCfg)
 export class MDSimpleTextTable extends AbstractSimpleTextTable {

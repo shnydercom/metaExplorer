@@ -1,5 +1,5 @@
 import ldBlueprint from "ldaccess/ldBlueprint";
-import { TopNavW5ChoicesBpCfg } from "components/md/navigation/AbstractNavW5Choices";
+import { TopNavW5ChoicesBpCfg } from "components/essentials/navigation/AbstractNavW5Choices";
 import { MDBottomNavigation } from "./MDBottomNavigation";
 
 @ldBlueprint(TopNavW5ChoicesBpCfg)

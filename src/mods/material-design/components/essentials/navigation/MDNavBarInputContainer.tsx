@@ -1,6 +1,6 @@
 import ldBlueprint, {  } from 'ldaccess/ldBlueprint';
 
-import { NavBarInputContainerBpCfg, AbstractNavBarInputContainer } from 'components/md/navigation/AbstractNavBarInputContainer';
+import { NavBarInputContainerBpCfg, AbstractNavBarInputContainer } from 'components/essentials/navigation/AbstractNavBarInputContainer';
 
 @ldBlueprint(NavBarInputContainerBpCfg)
 export class MDNavBarInputContainer extends AbstractNavBarInputContainer {

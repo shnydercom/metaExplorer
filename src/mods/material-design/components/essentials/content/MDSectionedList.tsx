@@ -1,5 +1,5 @@
 import ldBlueprint from "ldaccess/ldBlueprint";
-import { AbstractSectionedList, SectionedListCfg, sectionElements, sectionHeadings } from "components/md/content/AbstractSectionedList";
+import { AbstractSectionedList, SectionedListCfg, sectionElements, sectionHeadings } from "components/essentials/content/AbstractSectionedList";
 
 @ldBlueprint(SectionedListCfg)
 export class MDSectionedList extends AbstractSectionedList {

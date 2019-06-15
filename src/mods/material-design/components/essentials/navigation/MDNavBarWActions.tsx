@@ -1,12 +1,12 @@
 import ldBlueprint, { } from 'ldaccess/ldBlueprint';
 
-import { AbstractNavBarWActions, NavBarWActionsBpCfg, NavBarWActionState } from 'components/md/navigation/AbstractNavBarWActions';
+import { AbstractNavBarWActions, NavBarWActionsBpCfg } from 'components/essentials/navigation/AbstractNavBarWActions';
 import { AppBar, Toolbar, IconButton, Typography, Popover, withStyles } from '@material-ui/core';
 import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { classNamesLD } from 'components/reactUtils/compUtilFns';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, ReactCompLDLocalState, LDLocalKv } from 'appstate/LDProps';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
 
 /*
 TODOs:

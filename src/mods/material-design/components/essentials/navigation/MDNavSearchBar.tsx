@@ -1,7 +1,7 @@
 import ldBlueprint from 'ldaccess/ldBlueprint';
 import { LDLocalState } from 'appstate/LDProps';
 import { Redirect } from 'react-router';
-import { AbstractNavSearchBar, NavSearchBarBpCfg } from 'components/md/navigation/AbstractNavSearchBar';
+import { AbstractNavSearchBar, NavSearchBarBpCfg } from 'components/essentials/navigation/AbstractNavSearchBar';
 import { cleanRouteString } from 'components/routing/route-helper-fns';
 
 export const NavSearchBarName = "shnyder/material-design/NavSearchBar";

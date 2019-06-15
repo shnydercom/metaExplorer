@@ -1,5 +1,5 @@
 import ldBlueprint, {  } from 'ldaccess/ldBlueprint';
-import { NavProcessAtomBpCfg, AbstractNavProcessAtom } from 'components/md/navigation/AbstractNavProcessAtom';
+import { NavProcessAtomBpCfg, AbstractNavProcessAtom } from 'components/essentials/navigation/AbstractNavProcessAtom';
 
 @ldBlueprint(NavProcessAtomBpCfg)
 export class MDNavProcessAtom extends AbstractNavProcessAtom {

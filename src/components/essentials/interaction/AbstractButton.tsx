@@ -1,6 +1,6 @@
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { Redirect } from 'react-router';
@@ -133,11 +133,15 @@ export abstract class AbstractButton extends Component<LDConnectedState & LDConn
 			this.setState({ ...this.state, isDoRedirectConfirm: false });
 			return <Redirect to={route} />;
 		}
-		return <div>MdButton</div>;
+		return this.renderButton(isIconVal, iconUrlVal, confirmTxt);
 		/*if (isIconVal) {
 			return <Button accent floating icon={iconUrlVal ? iconUrlVal : null} onClick={() => this.onConfirmClick()} ></Button>;
 		}
 		return <Button icon={iconUrlVal ? iconUrlVal : null} label={confirmTxt ? confirmTxt : "confirm"} onClick={() => this.onConfirmClick()} />;
 		*/
+	}
+
+	protected renderButton(isIconVal: boolean, iconUrlVal: string, confirmTxt: string): JSX.Element {
+		throw new Error("Method not implemented in abstract class");
 	}
 }

@@ -1,4 +1,4 @@
-import { AbstractCompactInfoListElement, CompactInfoListElementCfg } from "components/md/content/AbstractCompactInfoListElement";
+import { AbstractCompactInfoListElement, CompactInfoListElementCfg } from "components/essentials/content/AbstractCompactInfoListElement";
 import { VisualKeysDict } from "components/visualcomposition/visualDict";
 import ldBlueprint from "ldaccess/ldBlueprint";
 

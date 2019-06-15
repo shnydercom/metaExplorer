@@ -23,8 +23,8 @@ module.exports = { ...sharedWebpackCfg,
   devServer: {
     port: 5000,
     historyApiFallback: true,
-    inline: true,
-    proxy: {
+    inline: true //,
+    //proxy: {
       /*'/static/interpreters.json': {
         bypass: function (req, res, opt){
           res.writeHead(200, {'Content-Type': 'application/json', 'Content-Encoding': 'deflate'});
@@ -32,7 +32,7 @@ module.exports = { ...sharedWebpackCfg,
           return '';
         }
       },*/
-      '/demo/**': { //catch all requests
+    /*  '/demo/**': { //catch all requests
         target: '/index.html', //default target
         secure: false,
         bypass: function (req, res, opt) {
@@ -44,7 +44,7 @@ module.exports = { ...sharedWebpackCfg,
             return '/index.html';
           }
         } */
-          if (
+       /*   if (
             (req.path.indexOf('/static/') !== -1) ||
             (req.path.indexOf('/lib/') !== -1) ||
             (req.path.indexOf('main.') !== -1) ||
@@ -56,8 +56,8 @@ module.exports = { ...sharedWebpackCfg,
             return '/index.html';
           }
         }
-      }
-    }
+      }*/
+    //}
   },
   plugins: [
     ...sharedWebpackCfg.plugins,

@@ -1,5 +1,5 @@
 import assertNever from "assert-never";
-import { AbstractBaseDataTypeInput, wrapBaseDataTypeGDSF, baseDataTypeBpcfgs } from "components/md/content/AbstractBaseDataTypeInput";
+import { AbstractBaseDataTypeInput, wrapBaseDataTypeGDSF, baseDataTypeBpcfgs } from "components/essentials/content/AbstractBaseDataTypeInput";
 import { LDBaseDataType } from "ldaccess/LDBaseDataType";
 import ldBlueprint from "ldaccess/ldBlueprint";
 import { parseDate, parseTime, parseText, parseNumber, parseBoolean } from "ldaccess/ldtypesystem/parseSimple";

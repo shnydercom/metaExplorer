@@ -1,5 +1,5 @@
 import ldBlueprint from "ldaccess/ldBlueprint";
-import { AbstractSingleImageSelector, SingleImageSelectorBpCfg, SingleImageSelectorStateEnum } from "components/md/content/AbstractSingleImageSelector";
+import { AbstractSingleImageSelector, SingleImageSelectorBpCfg } from "components/essentials/content/AbstractSingleImageSelector";
 
 @ldBlueprint(SingleImageSelectorBpCfg)
 export class MDSingleImageSelector extends AbstractSingleImageSelector {

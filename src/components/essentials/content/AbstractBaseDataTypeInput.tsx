@@ -1,5 +1,5 @@
-import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
-import ldBlueprint, { IBlueprintItpt } from 'ldaccess/ldBlueprint';
+import { BlueprintConfig } from 'ldaccess/ldBlueprint';
+import { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
 import { IKvStore } from 'ldaccess/ikvstore';
@@ -7,9 +7,8 @@ import { LDDict } from 'ldaccess/LDDict';
 
 import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDLocalState } from "appstate/LDProps";
-import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
-import { Component, ComponentClass, StatelessComponent, ReactNode } from "react";
+import { Component, ReactNode } from "react";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { gdsfpLD, initLDLocalState, determineSingleKVKey } from "../../generic/generatorFns";

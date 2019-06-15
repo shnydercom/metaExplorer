@@ -1,6 +1,6 @@
 import ldBlueprint, { } from 'ldaccess/ldBlueprint';
 import { Redirect } from 'react-router';
-import { BottomNavW5ChoicesBpCfg, AbstractBottomNavigation, TopNavW5ChoicesBpCfg } from 'components/md/navigation/AbstractNavW5Choices';
+import { BottomNavW5ChoicesBpCfg, AbstractBottomNavigation } from 'components/essentials/navigation/AbstractNavW5Choices';
 import { cleanRouteString } from 'components/routing/route-helper-fns';
 
 @ldBlueprint(BottomNavW5ChoicesBpCfg)

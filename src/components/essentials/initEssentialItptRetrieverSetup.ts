@@ -13,7 +13,7 @@ import { TwoDtoJSONArray, TwoDtoJSONArrayName } from "datatransformation/TwoDtoJ
 import { JSONArrayToCompactInfoArrayName, JSONArrayToCompactInfoArray } from "datatransformation/JSONArrayToCompactInfoArray";
 import { CSSWrapperName, PureCSSWrapper } from "components/layout/CSSWrapper";
 
-export function initDefaultInterpreters() {
+export function initEssentialInterpreters() {
 	let appIntRetr = appItptRetrFn();
 	appIntRetr.addItpt(LDDict.ViewAction, PureImgDisplay, "cRud", [ITPT_TAG_ATOMIC]);
 

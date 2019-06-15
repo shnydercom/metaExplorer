@@ -9,7 +9,7 @@ import {
 	BrowserRouter as Router
 } from 'react-router-dom';
 import { appItptMatcherFn } from 'appconfig/appItptMatcher';
-import { initDefaultInterpreters } from 'components/md/initMDitptRetrieverSetup';
+import { initEssentialInterpreters } from 'components/essentials/initEssentialItptRetrieverSetup';
 import { Route, Switch } from 'react-router';
 import { LDRouteProps } from 'appstate/LDProps';
 import { initEssentialItpts } from 'defaults/initEssentialItpts';
@@ -58,7 +58,7 @@ function rootSetup(): void {
 	appItptMatcherFn();
 	initEssentialItpts();
 	initBaseHtmlItpt();
-	initDefaultInterpreters();
+	initEssentialInterpreters();
 	initGameItpt();
 	initLDConnect();
 	initMods(modAPI);
