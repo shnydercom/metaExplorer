@@ -1,9 +1,6 @@
 const webpack = require('webpack')
-const path = require('path')
 
-//const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const WriteFilePlugin = require('write-file-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 var CompressionPlugin = require("compression-webpack-plugin");
@@ -46,7 +43,6 @@ module.exports = {
       threshold: 10240,
       minRatio: 0
     }),
-    new WriteFilePlugin(),
     new CopyWebpackPlugin([{
         from: 'assets',
         to: 'static'

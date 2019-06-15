@@ -73,15 +73,15 @@ module.exports = { ...sharedWebpackCfg,
     }),
     new HtmlWebpackPlugin({
       //custom props:
-      materialIconsPath: "/static/material-design-icons/iconfont/material-icons.css",
-      robotoPath: "/static/typeface-roboto/index.css", 
+      //materialIconsPath: "/static/material-design-icons/iconfont/material-icons.css",
+      //robotoPath: "/static/typeface-roboto/index.css", 
       //plugin props:
       inject: false,
       hash: true,
       template: './src/index.html',
       filename: 'index.html'
     }),
-    new WriteFilePlugin(),
+    new WriteFilePlugin({log: false}),
     {
       apply: (compiler) => {
         compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
@@ -90,14 +90,14 @@ module.exports = { ...sharedWebpackCfg,
       }
     },
     new CopyWebpackPlugin([
-      {
+      /*{
         from: 'node_modules/material-design-icons/iconfont',
         to: 'static/material-design-icons/iconfont'
       },
       {
         from: 'node_modules/typeface-roboto',
         to: 'static/typeface-roboto'
-      },
+      },*/
       {
         from: 'assets',
         to: 'static'

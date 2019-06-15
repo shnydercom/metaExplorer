@@ -11,7 +11,6 @@ import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { ldOptionsClientSideUpdateAction, ldOptionsClientSideCreateAction } from "appstate/epicducks/ldOptions-duck";
 import { appItptUpdateAction } from "appstate/epicducks/appCfg-duck";
 import { IKvStore } from "ldaccess/ikvstore";
-import { string } from "prop-types";
 import { determineSingleKVKey } from "components/generic/generatorFns";
 import { appItptMatcherFn } from "./appItptMatcher";
 

@@ -11,7 +11,6 @@ import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { nameSpaceMap } from "ldaccess/ns/nameSpaceMap";
 import { LDLocalKv } from "appstate/LDProps";
 import { ILDWebResource } from "ldaccess/ildresource";
-// import URI from 'urijs';
 
 export type LDRetrieverSuperStateOld = LDLocalKv;
 
