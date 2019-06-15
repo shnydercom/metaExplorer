@@ -1,5 +1,5 @@
 const path = require('path')
-
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -47,7 +47,10 @@ module.exports = {
             loader: 'babel-loader'
           },
           {
-            loader: 'ts-loader'
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true
+            }
           }
         ]
       }, {
@@ -97,5 +100,6 @@ module.exports = {
       commonjs: 'quagga',
       amd: 'quagga'
     }
-  }
+  },
+  plugins: [new ForkTsCheckerWebpackPlugin()]
 }

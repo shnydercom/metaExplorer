@@ -12,7 +12,9 @@ const sharedWebpackCfg = require('./webpack.shared');
 module.exports = {
   ...sharedWebpackCfg,
   mode: 'production',
+  devtool: "source-map",
   plugins: [
+    ...sharedWebpackCfg.plugins,
     new CleanWebpackPlugin('dist', {} ),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
