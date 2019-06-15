@@ -154,6 +154,7 @@ export abstract class AbstractNavProcessAtom extends Component<LDConnectedState 
 		let routeSendConfirm = localValues.get(VisualKeysDict.routeSend_confirm);
 		const cancelTxt = localValues.get(VisualKeysDict.cancelTxt);
 		const confirmTxt = localValues.get(VisualKeysDict.confirmTxt);
+		const headerText = localValues.get(VisualKeysDict.headerTxt);
 		if (isDoRedirectCancel && routeSendCancel) {
 			routeSendCancel = cleanRouteString(routeSendCancel, this.props.routes);
 			return <Redirect to={routeSendCancel} />;
@@ -162,10 +163,12 @@ export abstract class AbstractNavProcessAtom extends Component<LDConnectedState 
 			routeSendConfirm = cleanRouteString(routeSendConfirm, this.props.routes);
 			return <Redirect to={routeSendConfirm} />;
 		}
-		return this.renderCore();
+		const isHideBottom: boolean = !routeSendConfirm
+			&& !cancelTxt && !confirmTxt;
+		return this.renderCore(headerText, cancelTxt, confirmTxt, isHideBottom);
 	}
 
-	protected renderCore(): ReactNode {
+	protected renderCore(headerText: string, cancelTxt: string, confirmTxt: string, isHideBottom: boolean): ReactNode {
 		throw new Error("Method not implemented in abstract class");
 	}
 }
