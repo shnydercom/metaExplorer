@@ -1,5 +1,8 @@
 import ldBlueprint from "ldaccess/ldBlueprint";
-import { AbstractSingleImageSelector, SingleImageSelectorBpCfg } from "components/essentials/content/AbstractSingleImageSelector";
+import { AbstractSingleImageSelector, SingleImageSelectorBpCfg, SingleImageSelectorStateEnum } from "components/essentials/content/AbstractSingleImageSelector";
+import { Button } from "@material-ui/core";
+import { DOMCamera } from "components/peripherals/camera/dom-camera";
+import { default as Dropzone } from "react-dropzone";
 
 @ldBlueprint(SingleImageSelectorBpCfg)
 export class MDSingleImageSelector extends AbstractSingleImageSelector {
@@ -7,8 +10,6 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 	render() {
 		const { curStep, isCamAvailable, previewURL } = this.state;
 		let dropzoneRef;
-		return <div>SingleImageSelector</div>;
-		/*
 		return (<Dropzone className={curStep === SingleImageSelectorStateEnum.isPreviewing ? "single-img-sel accept" : "single-img-sel"}
 			accept="image/*"
 			multiple={false}
@@ -47,6 +48,6 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 						return null;
 				}
 			})()}
-		</Dropzone >);*/
+		</Dropzone >);
 	}
 }

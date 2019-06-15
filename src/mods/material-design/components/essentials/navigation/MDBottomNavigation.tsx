@@ -1,13 +1,18 @@
 import ldBlueprint, { } from 'ldaccess/ldBlueprint';
-import { Redirect } from 'react-router';
+import { Redirect, Route } from 'react-router';
 import { BottomNavW5ChoicesBpCfg, AbstractBottomNavigation } from 'components/essentials/navigation/AbstractNavW5Choices';
 import { cleanRouteString } from 'components/routing/route-helper-fns';
+import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import { classNamesLD } from 'components/reactUtils/compUtilFns';
 
 @ldBlueprint(BottomNavW5ChoicesBpCfg)
 export class MDBottomNavigation extends AbstractBottomNavigation {
-	generateTab(): JSX.Element {
+	generateTab(imgSrcActive, imgSrcInActive: string, route: string, isActive: boolean, key: string, label: string): JSX.Element {
 		//const mustRedirect = match && isActive && (match.params.lastPath !== undefined || match.params.lastPath !== null) && match.params.lastPath !== route;
-		return <div>this is a Tab</div>; /*<Tab label='' key={key} className="bottom-nav-tab" icon={isActive
+		return <BottomNavigationAction key={key} label={label} icon={isActive
+			? <img src={imgSrcActive} style={{ height: "inherit" }} />
+			: <img src={imgSrcInActive} style={{ height: "inherit" }} />} />;
+		/*<Tab label='' key={key} className="bottom-nav-tab" icon={isActive
 			? <img src={imgSrcActive} style={{ height: "inherit" }} />
 			: <img src={imgSrcInActive} style={{ height: "inherit" }} />}>
 		</Tab>;*/
@@ -30,7 +35,7 @@ export class MDBottomNavigation extends AbstractBottomNavigation {
 	}
 
 	render() {
-		const { numTabs, isGenerateAtPositions, iconEnabledURLs, iconDisabledURLs, routes, tabIdx } = this.state;
+		const { numTabs, isGenerateAtPositions, localValues, iconEnabledURLs, iconDisabledURLs, labels, routes, tabIdx } = this.state;
 
 		let tabs = [];
 		let cleanedTabIdx = tabIdx;
@@ -41,10 +46,31 @@ export class MDBottomNavigation extends AbstractBottomNavigation {
 				continue;
 			}
 			let newTab = this.generateTab(
-				);
+				iconEnabledURLs[idx],
+				iconDisabledURLs[idx],
+				routes[idx],
+				cleanedTabIdx === idx,
+				"t-" + idx,
+				labels[idx]
+			);
 			tabs.push(newTab);
 		}
-		return <div>BottomNav</div>;
+		return <div className={classNamesLD("bottom-nav", localValues)}>
+			<div className="bottom-nav-topfree mdscrollbar">
+				{this.generateRedirect(tabIdx)}
+				<Route component={this.renderInputContainer} />
+				{this.props.children}
+			</div>
+			<BottomNavigation
+				value={tabIdx}
+				onChange={(event, newValue) => {
+					this.onTabChanged(newValue);
+				}}
+				showLabels
+			>
+				{tabs}
+			</BottomNavigation>
+		</div>;
 		/*
 		<div className={classNamesLD("bottom-nav", localValues)}>
 			<div className="bottom-nav-topfree mdscrollbar">

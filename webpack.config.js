@@ -11,7 +11,7 @@ const sharedWebpackCfg = require('./webpack.shared');
 
 module.exports = { ...sharedWebpackCfg,
   mode: 'development',
-  devtool: "cheap-module-eval-source-map",
+  devtool: "source-map",
 
   output: {
     filename: '[name].[chunkhash].js',

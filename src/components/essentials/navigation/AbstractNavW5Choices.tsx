@@ -32,10 +32,19 @@ export const ROUTES_SEND: string[] = [
 	"RouteSend_5"
 ];
 
+export const LABELS: string[] = [
+	"Labels_1",
+	"Labels_2",
+	"Labels_3",
+	"Labels_4",
+	"Labels_5"
+];
+
 export const BOTTOMNAV_VALUE_FIELDS: string[] = [
 	...ICON_URLS,
 	...ICON_URLS_DISABLED,
 	...ROUTES_SEND,
+	...LABELS,
 	VisualKeysDict.cssClassName,
 	UserDefDict.outputKVMapKey
 ];
@@ -59,6 +68,7 @@ for (let i = 0; i < ICON_URLS.length; i++) {
 	cfgIntrprtKeys.push(ICON_URLS[i]);
 	cfgIntrprtKeys.push(ICON_URLS_DISABLED[i]);
 	cfgIntrprtKeys.push(ROUTES_SEND[i]);
+	cfgIntrprtKeys.push(LABELS[i]);
 	initialKVStores.push({
 		key: ICON_URLS[i],
 		value: undefined,
@@ -73,6 +83,11 @@ for (let i = 0; i < ICON_URLS.length; i++) {
 		key: ROUTES_SEND[i],
 		value: undefined,
 		ldType: VisualTypesDict.route_added
+	});
+	initialKVStores.push({
+		key: LABELS[i],
+		value: undefined,
+		ldType: LDDict.Text
 	});
 }
 cfgIntrprtKeys.push(VisualKeysDict.cssClassName);
@@ -111,6 +126,7 @@ export interface BottomNavState extends LDLocalState {
 	iconDisabledURLs: string[];
 	routes: string[];
 	isGenerateAtPositions: boolean[];
+	labels: string[];
 	hasTabChanged: boolean;
 	numTabs: number;
 }
@@ -138,15 +154,18 @@ export abstract class AbstractBottomNavigation extends Component<LDConnectedStat
 		const iconDisabledURLs: string[] = [];
 		const routes: string[] = [];
 		const isGenerateAtPositions: boolean[] = [];
+		const labels: string[] = [];
 		//handle KVs
 		for (let idx = 0; idx < prevState.numTabs; idx++) {
 			iconEnabledURLs[idx] = rvNew.localValues.get(ICON_URLS[idx]);
 			iconDisabledURLs[idx] = rvNew.localValues.get(ICON_URLS_DISABLED[idx]);
 			routes[idx] = rvNew.localValues.get(ROUTES_SEND[idx]);
+			labels[idx] = rvNew.localValues.get(LABELS[idx]);
 			isGenerateAtPositions[idx] = checkAllFilled(
 				iconEnabledURLs[idx],
 				iconDisabledURLs[idx],
-				routes[idx]
+				routes[idx],
+				labels[idx]
 			);
 		}
 		//handle routes if some tabs are not entirely filled
@@ -180,6 +199,7 @@ export abstract class AbstractBottomNavigation extends Component<LDConnectedStat
 			tabIdx,
 			iconEnabledURLs,
 			iconDisabledURLs,
+			labels,
 			routes,
 			isGenerateAtPositions
 		};
@@ -200,6 +220,7 @@ export abstract class AbstractBottomNavigation extends Component<LDConnectedStat
 			numTabs: 5,
 			iconEnabledURLs: [],
 			iconDisabledURLs: [],
+			labels: [],
 			routes: [],
 			isGenerateAtPositions: [],
 			hasTabChanged: true,

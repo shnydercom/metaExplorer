@@ -14,7 +14,7 @@ abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 				let parsedBoolean = parseBoolean(this.state.singleKVOutput);
 				return <FormControlLabel
 					control={<Switch checked={parsedBoolean}
-						onChange={(evt) => this.handleChange(evt)} />
+						onChange={(evt) => this.handleChange(evt.currentTarget.value)} />
 					}
 					label={heading}
 				/>;
@@ -24,26 +24,26 @@ abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 					label={heading}
 					name={heading}
 					value={parsedInt}
-					onChange={(evt) => this.handleChange(evt)} />;
+					onChange={(evt) => this.handleChange(evt.currentTarget.value)} />;
 			case LDDict.Double:
 				const parsedDouble = parseNumber(this.state.singleKVOutput);
 				return <TextField type='number'
 					label={heading}
 					name={heading}
 					value={parsedDouble}
-					onChange={(evt) => this.handleChange(evt)} />;
+					onChange={(evt) => this.handleChange(evt.currentTarget.value)} />;
 			case LDDict.Text:
 				let parsedText = parseText(this.state.singleKVOutput);
 				return <TextField type='text'
 					label={heading}
 					name={heading}
 					value={parsedText}
-					onChange={(evt) => this.handleChange(evt)} />;
+					onChange={(evt) => this.handleChange(evt.currentTarget.value)} />;
 			case LDDict.Date:
 				var parsedDate = parseDate(this.state.singleKVOutput);
 				return <TextField
 					id="date"
-					label="Birthday"
+					label={heading}
 					type="date"
 					defaultValue={parsedDate}
 					InputLabelProps={{
@@ -52,7 +52,7 @@ abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 				/>;
 			/*<DatePicker
 				label={heading}
-				onChange={(evt) => this.handleChange(evt)}
+				onChange={(evt) => this.handleChange(evt.currentTarget.value)}
 				value={parsedDate}
 	sundayFirstDayOfWeek />*/
 			case LDDict.DateTime:
@@ -61,7 +61,7 @@ abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 				return <div className="dateTimePicker">
 					<TextField
 						id="datetime-local"
-						label="Next appointment"
+						label={heading}
 						type="datetime-local"
 						defaultValue="2017-05-24T10:30"
 						InputLabelProps={{
@@ -71,12 +71,12 @@ abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 					{/*
 					<DatePicker
 						label={heading}
-						onChange={(evt) => this.handleChange(evt)}
+						onChange={(evt) => this.handleChange(evt.currentTarget.value)}
 						value={parsedDate}
 						sundayFirstDayOfWeek />
 					<TimePicker
 						label='Time'
-						onChange={(evt) => this.handleChange(evt)}
+						onChange={(evt) => this.handleChange(evt.currentTarget.value)}
 						value={parsedTime}
 					/>*/
 					}
