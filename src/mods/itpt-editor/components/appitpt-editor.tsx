@@ -343,60 +343,59 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			return <div className="entrypoint-editor" ref={this.editorWrapperRef}></div>;
 		}
 		const itpts = this.logic.getItptList();
+		// , navDrawerClipped: 'editor-navbar-clipped'
 		return <div className="entrypoint-editor" ref={this.editorWrapperRef}>
-			<div>ThemeProvider
-				<div>Layout theme= layout: 'editor-layout', navDrawerClipped: 'editor-navbar-clipped'
-					{drawerHidden
-						? null
-						: <div>
-							NavDrawer insideTree=true theme= pinned: "navbar-pinned" active=drawerActive withOverlay=false
-						permanentAt='xxxl'
+			<div className='editor-layout'>
+				{drawerHidden
+					? null
+					: <div>
+						NavDrawer insideTree=true theme= pinned: "navbar-pinned" active=drawerActive withOverlay=false
+					permanentAt='xxxl'
 							<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
-								onClearBtnPress={() => {
-									this.logic.clear();
-									this.setState({ ...this.state, currentlyEditingItptName: null });
-								}}
-								onZoomAutoLayoutPress={() => {
-									this.logic.autoDistribute();
-									this.diagramRef.current.forceUpdate();
-								}}
-							>
-								<div className="fakeheader">
-									{
-										isGlobal
-											? <button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size FontIconfullscreenFontIcon</button>
-											: null
-									}
-								</div>
-							</EditorTray>
-						</div>
-					}
-					<div>
-						Panel theme=editorTheme style= bottom: 0
-						<EditorBody hideRefMapDropSpace={bottomBarHidden}
-							ref={this.diagramRef}
-							loadToEditorByName={this.loadToEditorByName}
-							onEditTrayItem={this.onEditTrayItem.bind(this)}
-							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
-							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
-						{previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
+							onClearBtnPress={() => {
+								this.logic.clear();
+								this.setState({ ...this.state, currentlyEditingItptName: null });
+							}}
+							onZoomAutoLayoutPress={() => {
+								this.logic.autoDistribute();
+								this.diagramRef.current.forceUpdate();
+							}}
+						>
+							<div className="fakeheader">
+								{
+									isGlobal
+										? <button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size FontIconfullscreenFontIcon</button>
+										: null
+								}
+							</div>
+						</EditorTray>
 					</div>
-					{drawerHidden
-						? null
-						: <>
-							<div className="nav-element top-left">
-								{/** icon='menu' inverse*/}
-								<button className="large" onClick={this.toggleDrawerActive}  />
-							</div>
-							<div className="nav-element bottom-left">
-								{/**icon={drawerActive ? "chevron_left" : "chevron_right"} */}
-								<button  style={{ color: "white" }} onClick={this.toggleDrawerActive}></button>
-							</div>
-						</>
-					}
+				}
+				<div>
+					Panel theme=editorTheme style= bottom: 0
+						<EditorBody hideRefMapDropSpace={bottomBarHidden}
+						ref={this.diagramRef}
+						loadToEditorByName={this.loadToEditorByName}
+						onEditTrayItem={this.onEditTrayItem.bind(this)}
+						changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
+						currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
+					{previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
 				</div>
+				{drawerHidden
+					? null
+					: <>
+						<div className="nav-element top-left">
+							{/** icon='menu' inverse*/}
+							<button className="large" onClick={this.toggleDrawerActive} />
+						</div>
+						<div className="nav-element bottom-left">
+							{/**icon={drawerActive ? "chevron_left" : "chevron_right"} */}
+							<button style={{ color: "white" }} onClick={this.toggleDrawerActive}></button>
+						</div>
+					</>
+				}
 			</div>
-		</div >;
+		</div>;
 	}
 
 	protected renderPreview(isGlobal: boolean, previewActive: boolean) {
@@ -412,7 +411,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				<>
 					<div className="preview-hidden-btn">
 						{/** primary icon="chevron_left"  */}
-						<button onClick={() => this.togglePreview.apply(this)}/>
+						<button onClick={() => this.togglePreview.apply(this)} />
 					</div>
 					<div> ThemeProvider theme=appTheme
 						<div className="app-preview">
@@ -472,7 +471,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						this.setState({ ...this.state, previewDisplay: "phone" });
 					}
 				}
-			}  style={{ background: '#010f27aa' }}>{/**primary */}
+			} style={{ background: '#010f27aa' }}>{/**primary */}
 		</button>;
 	}
 
