@@ -13,6 +13,8 @@ import { createMuiTheme } from '@material-ui/core';
 import { editorTheme } from 'styles/editor/editorTheme';
 import { appTheme } from 'styles/appTheme/appTheme';*/
 
+import { green, orange } from '@material-ui/core/colors';
+
 export const ThemeProviderDarkName = "shnyder/material-design/ThemeProvider-dark";
 export const ThemeProviderLightName = "shnyder/material-design/ThemeProvider-light";
 
@@ -46,12 +48,23 @@ let lightBpCfg: BlueprintConfig = {
 export interface ThemeProviderDarkState extends LDLocalState {
 }
 
-const lightTheme = createMuiTheme({
+const lightPalette = {
+	primary: { main: '#FAFAFA', contrastText: '#2b2b2b' },
+	secondary: { main: '#86c5f2', contrastText: '#ffffff' }
+};
+const themeNameLight = 'MetaExplorer Material-UI Theme light';
 
-});
+const lightTheme = createMuiTheme({ palette: lightPalette, themeNameLight });
+
+const darkPalette = {
+	primary: { main: '#FAFAFA', contrastText: '#2b2b2b' },
+	secondary: { main: '#86c5f2', contrastText: '#ffffff' }
+};
+
+const themeNameDark = 'MetaExplorer Material-UI Theme dark';
 
 const darkTheme = createMuiTheme({
-
+	palette: darkPalette, themeNameDark
 });
 
 class PureThemeProviderDark extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, ThemeProviderDarkState>
