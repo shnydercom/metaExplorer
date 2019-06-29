@@ -51,17 +51,25 @@ export class EditorTrayItem extends Component<EditorTrayProps, EditorTrayState> 
 				draggable={true}
 				onDragStart={(event) => {
 					//clearTimeout(this.buttonPressTimer);
+					//event.currentTarget.style.backgroundColor = "#ff00ff";
+					//event.currentTarget.classList.add("dragging");
 					event.dataTransfer.setData("ld-node", JSON.stringify(this.props.model));
+					//event.dataTransfer.setDragImage(<img>hallo</img>, 20, 20);
 				}}
+				onDragEnd={
+					(event) => {
+						//event.currentTarget.classList.remove("dragging");
+					}
+				}
 				className={trayCssClass}
 			>
 				{this.props.name}
 				{/**
 					icon={"chevron_right"} */}
 				<button className={btnCssClass} onClick={(e) => {
-						e.stopPropagation();
-						this.props.onLongPress(this.props.model);
-					}} />
+					e.stopPropagation();
+					this.props.onLongPress(this.props.model);
+				}} />
 			</div>
 		);
 	}

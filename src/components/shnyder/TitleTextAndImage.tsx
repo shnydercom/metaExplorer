@@ -139,5 +139,3 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 	}
 
 }
-
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureTitleTextAndImage);

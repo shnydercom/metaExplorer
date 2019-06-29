@@ -29,7 +29,7 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 			onDragLeave={() => this.onDropFailure()}
 			onFileDialogCancel={() => this.onDropFailure()}
 		>
-			{(() => {
+			{((dzstate) => {
 				switch (curStep) {
 					case SingleImageSelectorStateEnum.isSelectInputType:
 						return <div className="accept"> {isCamAvailable ? <Button className="btn-extension" icon="add_a_photo" onClick={() => { this.startCamera(); }}>Open Camera</Button> : null}
@@ -47,7 +47,7 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 					default:
 						return null;
 				}
-			})()}
+			})}
 		</Dropzone >);
 	}
 }

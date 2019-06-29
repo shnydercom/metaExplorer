@@ -14,13 +14,18 @@ export function isFunctionComponent(component) {
 	) ? true : false;
 }
 
+export function isSomeWhatReact(component) {
+	return !!component["$$typeof"];
+}
+
 export function isReactComponent(component) {
 	if (!component) return false;
 	return (
 		isClassComponent(component) ||
 		isFunctionComponent(component) ||
 		isCompositeTypeElement(component) ||
-		isRouteWrappedComponent(component)
+		isRouteWrappedComponent(component) ||
+		isSomeWhatReact(component)
 	) ? true : false;
 }
 

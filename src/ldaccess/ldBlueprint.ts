@@ -60,6 +60,7 @@ function handleKVInheritance(baseClassKV: IKvStore[], subClassKV: IKvStore[], is
 // tslint:disable-next-line:callable-types
 function blueprintDecorator<T extends { new(...args: any[]): IBlueprintItpt }>(constructorFn: T, blueprintCfg: BlueprintConfig, replaceKVs: boolean = false) {
     var classToExtend = null;
+    if (typeof constructorFn !== 'function') throw new LDError("blueprint was not decorated on a function, but on: " + constructorFn);
     classToExtend = class extends constructorFn {
         static nameSelf = blueprintCfg.nameSelf;
         static cfg = blueprintCfg;

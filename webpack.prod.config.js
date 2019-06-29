@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 var CompressionPlugin = require("compression-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 const sharedWebpackCfg = require('./webpack.shared');
 
@@ -15,7 +15,7 @@ module.exports = {
   devtool: "source-map",
   plugins: [
     ...sharedWebpackCfg.plugins,
-    new CleanWebpackPlugin('dist', {} ),
+    new CleanWebpackPlugin( ),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),

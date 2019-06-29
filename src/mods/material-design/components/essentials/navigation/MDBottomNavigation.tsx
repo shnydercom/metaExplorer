@@ -10,8 +10,8 @@ export class MDBottomNavigation extends AbstractBottomNavigation {
 	generateTab(imgSrcActive, imgSrcInActive: string, route: string, isActive: boolean, key: string, label: string): JSX.Element {
 		//const mustRedirect = match && isActive && (match.params.lastPath !== undefined || match.params.lastPath !== null) && match.params.lastPath !== route;
 		return <BottomNavigationAction key={key} label={label} icon={isActive
-			? <img src={imgSrcActive} style={{ height: "inherit" }} />
-			: <img src={imgSrcInActive} style={{ height: "inherit" }} />} />;
+			? <img src={imgSrcActive} style={{ height: "24px" }} />
+			: <img src={imgSrcInActive} style={{ height: "24px" }} />} />;
 		/*<Tab label='' key={key} className="bottom-nav-tab" icon={isActive
 			? <img src={imgSrcActive} style={{ height: "inherit" }} />
 			: <img src={imgSrcInActive} style={{ height: "inherit" }} />}>

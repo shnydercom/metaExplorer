@@ -1,13 +1,15 @@
 import ldBlueprint, { } from 'ldaccess/ldBlueprint';
+import { create } from 'jss';
 
 import { AbstractNavBarWActions, NavBarWActionsBpCfg } from 'components/essentials/navigation/AbstractNavBarWActions';
-import { AppBar, Toolbar, IconButton, Typography, Popover } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, Popover, makeStyles, Theme } from '@material-ui/core';
 import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { classNamesLD } from 'components/reactUtils/compUtilFns';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
+import { StylesProvider, styled, createStyles } from '@material-ui/styles';
 
 /*
 TODOs:
@@ -18,6 +20,70 @@ TODOs:
 interface IAnchorState {
 	anchor: any;
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		root: {
+		},
+		searchbtn: {
+			//marginRight: theme.spacing(2),
+		},
+		popoverbtn: {
+			//marginRight: theme.spacing(2),
+		},
+		title: {
+			flexGrow: 1,
+		},
+	}),
+);
+
+interface IStyledAppBarProps {
+	localValues: any;
+	routeSendCancel: any;
+	headerText: any;
+	routeSendSearch: any;
+	hasPopOverContent: any;
+	onCancelClick: () => void;
+	onTriggerOpenRightMenu: (evt) => void;
+}
+
+const StyledAppBar: React.SFC<IStyledAppBarProps> = (props) => {
+	const classes = useStyles(props);
+	const { localValues,
+		routeSendCancel,
+		headerText,
+		routeSendSearch,
+		hasPopOverContent,
+		onCancelClick,
+		onTriggerOpenRightMenu } = props;
+	return (
+		<>
+			<AppBar position="static"
+				className={`${classNamesLD(null, localValues)} ${classes.root}`}
+			>
+				<Toolbar>
+					{routeSendCancel
+						? <IconButton edge="start" color="inherit" aria-label="Menu"
+							onClick={() => onCancelClick()}>
+							<ArrowBackIcon />
+						</IconButton>
+						: null}
+					<Typography variant="h6" className={classes.title}>
+						{headerText ? headerText : "Menu"}
+					</Typography>
+					{routeSendSearch
+						? <IconButton className={classes.searchbtn} onClick={this.onAppBarSearchBtnClick}><SearchIcon /></IconButton>
+						: null}
+					{hasPopOverContent
+						? <IconButton edge="end" className={classes.popoverbtn} aria-label="additional actions" color="inherit"
+							onClick={(evt) => onTriggerOpenRightMenu(evt)}
+						><MoreVertIcon /></IconButton> // TODO: interpret font icon
+						: null}
+				</Toolbar>
+			</AppBar>
+		</>
+	);
+};
 
 @ldBlueprint(NavBarWActionsBpCfg)
 export class MDNavBarWActions extends AbstractNavBarWActions<IAnchorState> {
@@ -40,30 +106,17 @@ export class MDNavBarWActions extends AbstractNavBarWActions<IAnchorState> {
 		const id = isRightMenuOpen ? 'simple-popover' : null;
 		let routeSendCancel = localValues.get(VisualKeysDict.routeSend_cancel);
 		const routeSendSearch = localValues.get(VisualKeysDict.routeSend_search);
+		const styledAppBarProps: IStyledAppBarProps = {
+			localValues,
+			routeSendCancel,
+			headerText,
+			routeSendSearch,
+			hasPopOverContent,
+			onCancelClick: this.onCancelClick.bind(this),
+			onTriggerOpenRightMenu: this.onTriggerOpenRightMenu.bind(this)
+		};
 		return <>
-			<AppBar position="static"
-				className={classNamesLD(null, localValues)}
-			>
-				<Toolbar>
-					{routeSendCancel
-						? <IconButton edge="start" color="inherit" aria-label="Menu"
-							onClick={() => this.onCancelClick()}>
-							<ArrowBackIcon />
-						</IconButton>
-						: null}
-					<Typography variant="h6">
-						{headerText ? headerText : "Menu"}
-					</Typography>
-					{routeSendSearch
-						? <IconButton onClick={this.onAppBarSearchBtnClick}><SearchIcon /></IconButton>
-						: null}
-					{hasPopOverContent
-						? <IconButton edge="end" aria-label="additional actions" color="inherit"
-							onClick={(evt) => this.onTriggerOpenRightMenu(evt)}
-						><MoreVertIcon /></IconButton> // TODO: interpret font icon
-						: null}
-				</Toolbar>
-			</AppBar>
+			<StyledAppBar {...styledAppBarProps} />
 			<div className="bottom-nav-topfree mdscrollbar">
 				{this.renderSub(VisualKeysDict.inputContainer)}
 			</div>
