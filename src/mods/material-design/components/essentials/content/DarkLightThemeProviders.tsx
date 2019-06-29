@@ -57,8 +57,8 @@ const themeNameLight = 'MetaExplorer Material-UI Theme light';
 const lightTheme = createMuiTheme({ palette: lightPalette, themeNameLight });
 
 const darkPalette = {
-	primary: { main: '#FAFAFA', contrastText: '#2b2b2b' },
-	secondary: { main: '#86c5f2', contrastText: '#ffffff' }
+  primary: { main: '#00375f' },
+  secondary: { main: '#86c5f2', contrastText: '#00375f' }
 };
 
 const themeNameDark = 'MetaExplorer Material-UI Theme dark';

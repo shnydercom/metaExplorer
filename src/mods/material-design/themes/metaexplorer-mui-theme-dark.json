@@ -190,7 +190,7 @@
       "main": "#86c5f2",
       "light": "rgb(158, 208, 244)",
       "dark": "rgb(93, 137, 169)",
-      "contrastText": "#ffffff"
+      "contrastText": "#00375f"
     },
     "common": { "black": "#000", "white": "#fff" },
     "error": {
@@ -209,10 +209,10 @@
       "active": "rgba(0, 0, 0, 0.54)"
     },
     "primary": {
-      "main": "#FAFAFA",
-      "light": "rgb(251, 251, 251)",
-      "dark": "rgb(175, 175, 175)",
-      "contrastText": "#2b2b2b"
+      "main": "#00375f",
+      "light": "rgb(51, 95, 127)",
+      "dark": "rgb(0, 38, 66)",
+      "contrastText": "#fff"
     }
   },
   "themeName": "MetaExplorer Material-UI Theme dark"
