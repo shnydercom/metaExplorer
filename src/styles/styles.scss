@@ -86,7 +86,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 	min-width: 40px;
 
 	>* {
-		margin: 5px;
+		margin: 6px;
 	}
 }
 
@@ -121,7 +121,7 @@ $app-inner-width-90: $app-inner-width * 0.9;
 }
 
 .imgdisplay {
-	//height: 100%;
+	height: 100%;
 	width: 100%;
 	max-height: fit-content;
 	min-height: inherit;

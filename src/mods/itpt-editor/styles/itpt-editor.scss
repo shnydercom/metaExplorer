@@ -10,7 +10,7 @@
 $color-primary: #FF00FF; //$palette-green-600;
 $color-primary-dark: #AA00AA; //$palette-purple-a700;
 
-$tray-item-color-primary: white;
+$tray-item-color-primary: #dadada;
 $tray-item-color-secondary: $editor-background-elevated-color;
 
 .inputElement {
@@ -68,9 +68,14 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   right: 0;
   display: flex;
   background-color: rgba($editor-background-elevated-color, 0.6);
+  height: 36px;
 
   >div>* {
     padding: 0 5px !important;
+  }
+
+  &.small {
+    min-width: 36px;
   }
 
   .newbtn {
@@ -80,6 +85,64 @@ $tray-item-color-secondary: $editor-background-elevated-color;
 
     &:hover {
       color: white !important;
+    }
+  }
+}
+
+.editorbtn {
+  min-width: 36px;
+  min-height: 36px;
+  border: none;
+  background-color: #ffffff00;
+
+  &-large {
+    height: 64px;
+    width: 64px;
+  }
+
+  &-small {}
+
+  &-toleft {
+    padding-left: 15px;
+    background: linear-gradient(to right, rgba(0, 55, 95, 0.6), 85%, #001e34 100%);
+
+    &.isopen{
+      background: rgba(0, 55, 95, 0.6);
+    }
+
+    &:before {
+      display: block;
+      position: absolute;
+      top: 50%;
+      width: 8px;
+      height: 2px;
+      background-color: currentColor;
+      content: '';
+      left: 40%;
+      transition: transform 0.25s ease;
+      transform: rotate(-45deg) translateY(2px);
+    }
+
+    &.isopen:before {
+      transform: rotate(-90deg) translate(-3px, -1px);
+    }
+
+    &:after {
+      display: block;
+      /* visibility: hidden; */
+      position: absolute;
+      bottom: 50%;
+      width: 8px;
+      height: 2px;
+      background-color: currentColor;
+      content: '';
+      left: 40%;
+      transition: transform 0.25s ease;
+      transform: rotate(45deg) translateY(-2px);
+    }
+
+    &.isopen:after {
+      transform: rotate(90deg) translate(-3px, 1px);
     }
   }
 }
@@ -112,11 +175,24 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   }
 }
 
-.navDrawerWrapper {
+.nav-drawer-wrapper {
   left: 0;
   position: absolute;
   right: 0;
   top: 0;
+  bottom: 0;
+
+  &.active>* {
+    transition-timing-function: ease-in;
+    transition: 0.3s;
+  }
+
+  &.inactive>* {
+    transition-timing-function: ease-out;
+    transition: 0.2s;
+    transform: translateX(-100%);
+    overflow: visible;
+  }
 }
 
 .drawer {
@@ -127,6 +203,7 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   bottom: 0;
   top: 0;
   z-index: 200 !important;
+
 }
 
 .overlay {
@@ -208,15 +285,6 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  >button.large {
-    height: 64px;
-    width: 64px;
-
-    >span {
-      font-size: 36px !important;
-    }
-  }
 }
 
 .input-highlight {
@@ -266,7 +334,7 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   &.inactive {
     transition-timing-function: ease-out;
     transition: 0.2s;
-    transform: translateX(100%);
+    transform: translateY(100%);
     overflow: visible;
 
     .app-preview {
@@ -281,7 +349,7 @@ $tray-item-color-secondary: $editor-background-elevated-color;
       transition-delay: 0.2s;
       transition: 0.3s;
       opacity: 1;
-      transform: translateX(-4.5em);
+      transform: translateY(-4.5em);
     }
   }
 }
@@ -503,6 +571,8 @@ $tray-item-color-secondary: $editor-background-elevated-color;
     flex-direction: column;
     overflow: hidden;
     height: 100%;
+
+    opacity: 0.9;
 
     .editor-tray-item {
       overflow: hidden;

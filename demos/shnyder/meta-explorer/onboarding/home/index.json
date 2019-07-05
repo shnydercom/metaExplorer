@@ -133,10 +133,34 @@
             {
               "key": "inputContainer",
               "value": {
+                "objRef": "629bc037-7c07-407f-97cc-60b2c6ceee4f",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputContainer"
+          ]
+        },
+        "629bc037-7c07-407f-97cc-60b2c6ceee4f": {
+          "subItptOf": "shnyder/layout/CSSWrapper",
+          "canInterpretType": "shnyder/layout/CSSWrapper-ObjectType",
+          "nameSelf": "629bc037-7c07-407f-97cc-60b2c6ceee4f",
+          "initialKvStores": [
+            {
+              "key": "inputContainer",
+              "value": {
                 "objRef": "0f93c03d-fa63-4cbe-9e30-7df2094ac64f",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "cssClass",
+              "value": "headings",
+              "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",

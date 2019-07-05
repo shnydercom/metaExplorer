@@ -42,7 +42,7 @@ export class BaseDataTypeDropDown extends Component<IDataTypeDropDownProps, IDat
 	static getDerivedStateFromProps(nextProps: IDataTypeDropDownProps, prevState: IDataTypeState): IDataTypeState {
 		if (nextProps.selection) {
 			if (nextProps.selection === prevState.selectedDataType) return null;
-			return {selectedDataType: nextProps.selection};
+			return { selectedDataType: nextProps.selection };
 		}
 		return null;
 	}
@@ -53,19 +53,24 @@ export class BaseDataTypeDropDown extends Component<IDataTypeDropDownProps, IDat
 	}
 
 	handleChange = (value) => {
+		console.log(value)
 		this.setState({ selectedDataType: value });
 		this.props.selectionChange(value);
 	}
 
 	render() {
-		return <div>DropDown</div>;
-/*
-		return (
-			<Dropdown className={this.props.className}
-				onChange={this.handleChange}
-				source={baseDataTypes}
-				value={this.state.selectedDataType}
-			/>
-		);*/
+		//return <div>DropDown</div>;
+		return <select name="cars"
+			value={this.state.selectedDataType} onChange={(event) => this.handleChange(event.currentTarget.value)}>
+			{baseDataTypes.map((val, idx) => <option key={`option-${idx}`} value={val.value}>{val.label}</option>)}
+		</select>;
+		/*
+				return (
+					<Dropdown className={this.props.className}
+						onChange={this.handleChange}
+						source={baseDataTypes}
+						value={this.state.selectedDataType}
+					/>
+				);*/
 	}
 }

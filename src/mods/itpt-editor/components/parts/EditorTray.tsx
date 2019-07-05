@@ -103,11 +103,11 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 		});
 		EditorTray.createFlatContentFromItpts(atomicNodesTreeItem, nextProps.onEditTrayItem, false);
 		EditorTray.createFlatContentFromItpts(compoundNodesTreeItem, nextProps.onEditTrayItem, true);
-		return <div style={{ paddingBottom: "40px", flex: 1 }} className="mdscrollbar">
+		return <>
 			<TreeView entry={specialNodesTreeItem}>{specialNodesText}</TreeView>
 			<TreeView entry={atomicNodesTreeItem}>{atomicNodesText}</TreeView>
 			<TreeView entry={compoundNodesTreeItem}>{compoundNodesText}</TreeView>
-		</div>;
+		</>;
 	}
 
 	protected static addItptToTree(tree: TreeEntry & FlatContentInfo, infoItm: IItptInfoItem, remainingName: string) {
@@ -225,16 +225,16 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 		const { trayitpts, trayElems } = this.state;
 		return <div className="editor-tray">
 			{this.props.children}
-			<div className="mdscrollbar">
+			<div className="mdscrollbar" style={{ paddingBottom: "36px", flex: 1 }}>
 				{trayitpts ? trayElems : null}
 			</div>
 			<div className="button-row">
 				{/** icon="add" label="new"*/}
-				<button className="newbtn"  onClick={(ev) => {
+				<button className="editorbtn-small newbtn"  onClick={(ev) => {
 					this.props.onClearBtnPress();
 				}} />
 				{/*label="beautify" */}
-				<button style={{ color: "white" }} onClick={(ev) => {
+				<button className="editorbtn-small" style={{ color: "white" }} onClick={(ev) => {
 					this.props.onZoomAutoLayoutPress();
 				}
 				} />

@@ -61,11 +61,18 @@
 	//background-image: linear-gradient(#00375f, #001e34);
 	background: linear-gradient(55deg, #001e34, #00375f);
 
-	.onboarding-txt {
-		color: #ffffffaa;
+	.titletextandimage {
+		&-heading {
+			color: white;
+			margin-bottom: 24px;
+		}
+
+		&-text {
+			color: #e1e1e1;
+		}
 	}
 
-	h2 {
+	.headings {
 		color: white;
 	}
 }

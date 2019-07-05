@@ -348,10 +348,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			<div className='editor-layout'>
 				{drawerHidden
 					? null
-					: <div>
-						NavDrawer insideTree=true theme= pinned: "navbar-pinned" active=drawerActive withOverlay=false
-					permanentAt='xxxl'
-							<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
+					: <div className={`nav-drawer-wrapper ${drawerActive ? "active" : "inactive"}`}>
+						<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
 							onClearBtnPress={() => {
 								this.logic.clear();
 								this.setState({ ...this.state, currentlyEditingItptName: null });
@@ -362,6 +360,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							}}
 						>
 							<div className="fakeheader">
+								<div><div></div></div>
 								{
 									isGlobal
 										? <button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size FontIconfullscreenFontIcon</button>
@@ -372,8 +371,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					</div>
 				}
 				<div>
-					Panel theme=editorTheme style= bottom: 0
-						<EditorBody hideRefMapDropSpace={bottomBarHidden}
+					<EditorBody hideRefMapDropSpace={bottomBarHidden}
 						ref={this.diagramRef}
 						loadToEditorByName={this.loadToEditorByName}
 						onEditTrayItem={this.onEditTrayItem.bind(this)}
@@ -386,11 +384,14 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					: <>
 						<div className="nav-element top-left">
 							{/** icon='menu' inverse*/}
-							<button className="large" onClick={this.toggleDrawerActive} />
+							<button className="editorbtn editorbtn-large" onClick={this.toggleDrawerActive} />
 						</div>
 						<div className="nav-element bottom-left">
 							{/**icon={drawerActive ? "chevron_left" : "chevron_right"} */}
-							<button style={{ color: "white" }} onClick={this.toggleDrawerActive}></button>
+							<button
+								className={`editorbtn editorbtn-small editorbtn-toleft ${drawerActive ? "isopen" : ""}`}
+								style={{ color: "white" }}
+								onClick={this.toggleDrawerActive}></button>
 						</div>
 					</>
 				}
@@ -413,7 +414,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						{/** primary icon="chevron_left"  */}
 						<button onClick={() => this.togglePreview.apply(this)} />
 					</div>
-					<div> ThemeProvider theme=appTheme
+					<div>
 						<div className="app-preview">
 							<div className="phone-preview-btns">
 								{isDisplayDevContent ? this.renderBtnSwitchPreviewOrCode() : null}

@@ -10,6 +10,7 @@ import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 
 import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
 import { Component, ComponentClass, StatelessComponent, CSSProperties } from 'react';
 
+export const CSS_BASECLASS = "titletextandimage";
 export var TitleTextAndImageName: string = "shnyder/TitleTextAndImage";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer, VisualKeysDict.headerTxt, VisualKeysDict.description, VisualKeysDict.directionChangeBreakPoint, VisualKeysDict.switchVerticalDirection, VisualKeysDict.switchHorizontalDirection];
@@ -124,16 +125,15 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 		const directionStyle: CSSProperties = isHorizontal
 			? switchHorizontal ? { flexDirection: "row" } : { flexDirection: "row-reverse" }
 			: switchVertical ? { flexDirection: "column" } : { flexDirection: "column-reverse" };
-		return <div className="flex-container"
+		return <div className={`flex-container ${CSS_BASECLASS}`}
 			ref={(divElement) => this.divElement = divElement}
 			style={directionStyle}>
-			<div className="flex-filler vh-centered-column" style={{ minHeight: DEFAULT_BREAKPOINT }}>
+			<div className={`flex-filler vh-centered-column ${CSS_BASECLASS}-inputcontainer`} style={{ minHeight: DEFAULT_BREAKPOINT }}>
 				{this.renderSub(VisualKeysDict.inputContainer)}
 			</div>
-			<div className="flex-filler vh-centered-column" style={{ minHeight: "300px" }}>
-				<h2>{headerText ? headerText : ''}</h2>
-				<span> </span>
-				<p>{description ? description : ''}</p>
+			<div className={`flex-filler vh-centered-column ${CSS_BASECLASS}-textcontainer`} style={{ minHeight: "300px" }}>
+				<h2 className={`${CSS_BASECLASS}-heading`}>{headerText ? headerText : ''}</h2>
+				<p className={`${CSS_BASECLASS}-text`}>{description ? description : ''}</p>
 			</div>
 		</div>;
 	}
