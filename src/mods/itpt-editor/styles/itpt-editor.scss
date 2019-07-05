@@ -4,6 +4,7 @@
 @import "../../../../node_modules/metaexplorer-react-components/src/components/treeview/treeview.scss";
 @import "../../../../node_modules/metaexplorer-react-components/src/components/circle/circleview.scss";
 @import "./diagram.scss";
+@import "./user-info.scss";
 //@import "../../../../node_modules/metaexplorer-react-components/src/components/card/card.scss";
 
 
@@ -69,9 +70,10 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   display: flex;
   background-color: rgba($editor-background-elevated-color, 0.6);
   height: 36px;
+  padding-right: 3px;
 
   >div>* {
-    padding: 0 5px !important;
+    padding: 0 6px !important;
   }
 
   &.small {
@@ -81,7 +83,6 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   .newbtn {
     background-color: #41ae3fff;
     color: #00375f;
-    font-weight: bold;
 
     &:hover {
       color: white !important;
@@ -94,19 +95,54 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   min-height: 36px;
   border: none;
   background-color: #ffffff00;
+  color: white;
+  font-family: Roboto, Arial;
+  font-weight: normal;
+  letter-spacing: 1px;
 
   &-large {
-    height: 64px;
-    width: 64px;
+    height: 63px;
+    width: 84px;
+    background: #001e3400 !important;
+  }
+
+  &-action {
+    background: linear-gradient(to bottom, rgba(0, 55, 95, 1), 85%, #001e34 100%);
+    width: 108px;
+    color: white;
+    margin: 0 3px 0 3px;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+      &:before {
+        opacity: 1;
+      }
+    }
+
+    &:before {
+      transition: opacity 0.25s ease;
+      content: '';
+      background: linear-gradient(to bottom, #001e3400, 85%, #86c5f2c8 100%);
+      top: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      right: 0;
+      position: absolute;
+      opacity: 0;
+    }
+
   }
 
   &-small {}
 
-  &-toleft {
-    padding-left: 15px;
-    background: linear-gradient(to right, rgba(0, 55, 95, 0.6), 85%, #001e34 100%);
+  &-autolayout {}
 
-    &.isopen{
+  &-toleft {
+    background: linear-gradient(to right, rgba(0, 55, 95, 0.6), 85%, #001e3400 100%);
+
+    &.isopen {
       background: rgba(0, 55, 95, 0.6);
     }
 
@@ -124,7 +160,7 @@ $tray-item-color-secondary: $editor-background-elevated-color;
     }
 
     &.isopen:before {
-      transform: rotate(-90deg) translate(-3px, -1px);
+      transform: rotate(-135deg) translate(-1px, -1px);
     }
 
     &:after {
@@ -142,9 +178,23 @@ $tray-item-color-secondary: $editor-background-elevated-color;
     }
 
     &.isopen:after {
-      transform: rotate(90deg) translate(-3px, 1px);
+      transform: rotate(135deg) translate(-1px, 1px);
     }
   }
+}
+
+.editor-top-bar {
+  flex-direction: row;
+  position: absolute;
+  //background-color: $editor-background-elevated-color;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background-color: rgba($editor-background-elevated-color, 0.6);
+  height: 24px;
+  font-size: xx-small;
+  color: white;
 }
 
 .refmap-drop-outer {
@@ -171,7 +221,7 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   justify-content: center;
 
   >* {
-    padding: 0 5px !important;
+    padding: 0 6px !important;
   }
 }
 
@@ -230,9 +280,8 @@ $tray-item-color-secondary: $editor-background-elevated-color;
 .fakeheader {
   display: flex;
   flex-direction: row-reverse;
-  height: 64px;
+  height: 63px;
   align-items: center;
-  line-height: 36px;
 
   >a {
     display: flex;
@@ -251,7 +300,6 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   left: 0;
   z-index: 200;
   width: min-content;
-  padding-right: 20px;
   background: linear-gradient(to right, rgba($editor-background-elevated-color, 0.6), 80%, rgba(0, 0, 0, 0) 100%);
 }
 
@@ -442,7 +490,7 @@ $tray-item-color-secondary: $editor-background-elevated-color;
     max-height: 300px;
     width: 120px;
     border: solid 0px;
-    border-radius: 5px;
+    border-radius: 6px;
     color: #fff;
   }
 }
@@ -471,7 +519,7 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   height: fit-content;
   width: 120px;
   border: solid 0px;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 .srd-link-menu {
@@ -491,8 +539,8 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   font-size: 11px;
 
   h3 {
-    padding: 5px;
-    margin: 5px 0px 15px 0px;
+    padding: 6px;
+    margin: 6px 0px 15px 0px;
     white-space: nowrap;
     overflow: hidden;
   }
@@ -561,8 +609,8 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   .editor-tray {
     z-index: 99;
     position: relative;
-    min-width: 250px;
-    max-width: 400px;
+    min-width: 240px;
+    max-width: 390px;
     background: $editor-background-elevated-color;
     flex-grow: 0;
     flex: 1;
@@ -580,10 +628,10 @@ $tray-item-color-secondary: $editor-background-elevated-color;
       color: $tray-item-color-primary;
       background-color: $tray-item-color-secondary;
       font-family: Roboto, Arial;
-      padding: 5px;
+      padding: 6px;
       margin: 0px 10px;
       border: solid 1px;
-      border-radius: 5px;
+      border-radius: 6px;
       margin-bottom: 3px;
       cursor: pointer;
       display: flex;

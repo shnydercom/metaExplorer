@@ -25,6 +25,7 @@ import { ILDOptions } from "ldaccess/ildoptions";
 import { initLDLocalState, gdsfpLD } from "components/generic/generatorFns";
 import { NetworkPreferredToken } from "ldaccess/ildtoken";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
+import { UserInfo } from "./status/UserInfo";
 
 export type AIEProps = {
 	logic?: EditorLogic;
@@ -360,7 +361,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							}}
 						>
 							<div className="fakeheader">
-								<div><div></div></div>
+								<UserInfo userLabel="John Doe" projectLabel="JohnsPersonalProject" userIconSrc=""/>
 								{
 									isGlobal
 										? <button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size FontIconfullscreenFontIcon</button>
@@ -384,12 +385,14 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					: <>
 						<div className="nav-element top-left">
 							{/** icon='menu' inverse*/}
-							<button className="editorbtn editorbtn-large" onClick={this.toggleDrawerActive} />
+							<button
+								className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-large`}
+								onClick={this.toggleDrawerActive} />
 						</div>
 						<div className="nav-element bottom-left">
 							{/**icon={drawerActive ? "chevron_left" : "chevron_right"} */}
 							<button
-								className={`editorbtn editorbtn-small editorbtn-toleft ${drawerActive ? "isopen" : ""}`}
+								className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-small`}
 								style={{ color: "white" }}
 								onClick={this.toggleDrawerActive}></button>
 						</div>

@@ -1,6 +1,6 @@
 import { keys } from "lodash";
 
-import { EditorLogic, editorSpecificNodesColor } from "./editor-logic";
+import { EditorLogic, editorSpecificNodesColor, editorDefaultNodesColor } from "./editor-logic";
 import { DiagramWidget } from "storm-react-diagrams";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
 import { LDPortModel } from "./LDPortModel";
@@ -81,7 +81,7 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 						switch (data.type) {
 							case "ldbp":
 								let nodeName: string = "Node " + (nodesCount + 1) + ":";
-								node = new GeneralDataTypeNodeModel(nodeName, null, null, "rgba(250,250,250,0.2)");
+								node = new GeneralDataTypeNodeModel(nodeName, null, null, editorDefaultNodesColor);
 								if (data.bpname) {
 									this.props.logic.addLDPortModelsToNodeFromItptRetr(node, data.bpname);
 								}
@@ -93,7 +93,7 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 									value: undefined,
 									ldType: undefined
 								};
-								node = new BaseDataTypeNodeModel("Simple Data Type", null, null, "rgba(250,250,250,0.2)");
+								node = new BaseDataTypeNodeModel("Simple Data Type", null, null, editorDefaultNodesColor);
 								node.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "output"));
 								break;
 							case "inputtype":
@@ -142,12 +142,12 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 					<DiagramWidget inverseZoom diagramEngine={this.props.logic.getDiagramEngine()} maxNumberPointsPerLink={0} />
 					{hideRefMapDropSpace
 						? null
-						: <div className="button-row">
-							<RefMapDropSpace
+						: <div className="editor-top-bar">
+							{/*<RefMapDropSpace
 								currentlyEditingItpt={this.state.currentlyEditingItpt}
 								dropText="...drop a Compound Block here to edit and load it to the preview..."
 								refMapDrop={this.privOnRMDrop}
-							/>
+							/>*/}
 						</div>
 					}
 				</div>

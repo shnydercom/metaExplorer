@@ -42,6 +42,8 @@ export const PORTNAME_OUT_OUTPUTSELF = "out-outputSelf";
 
 export var editorSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
 
+export const editorDefaultNodesColor = "rgba(87, 161, 245, 0.4)"; // "#00375f";
+
 /**
  * @author Jonathan Schneider
  */
@@ -464,7 +466,7 @@ export class EditorLogic {
 
 	public addNewGeneralNode(signature: NewNodeSig, itpt: BlueprintConfig): GeneralDataTypeNodeModel {
 		let nodeName: string = itpt.subItptOf;
-		let generalNode = new GeneralDataTypeNodeModel(nodeName, null, null, "rgba(250,250,250,0.2)");
+		let generalNode = new GeneralDataTypeNodeModel(nodeName, null, null, editorDefaultNodesColor);
 		generalNode.id = signature.id;
 		generalNode.x = signature.x;
 		generalNode.y = signature.y;
@@ -490,7 +492,7 @@ export class EditorLogic {
 			value: value,
 			ldType: ldType
 		};
-		let node = new BaseDataTypeNodeModel("Simple Data Type", null, null, "rgba(250,250,250,0.2)");
+		let node = new BaseDataTypeNodeModel("Simple Data Type", null, null, editorDefaultNodesColor);
 		node.x = signature.x;
 		node.y = signature.y;
 		node.addPort(new LDPortModel(false, PORTNAME_OUT_OUTPUTSELF, baseDataTypeKVStore, "output", signature.id));

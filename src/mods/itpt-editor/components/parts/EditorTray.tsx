@@ -230,14 +230,14 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			</div>
 			<div className="button-row">
 				{/** icon="add" label="new"*/}
-				<button className="editorbtn-small newbtn"  onClick={(ev) => {
+				<button className="editorbtn editorbtn-small editorbtn-action editorbtn-new" onClick={(ev) => {
 					this.props.onClearBtnPress();
-				}} />
+				}} >new</button>
 				{/*label="beautify" */}
-				<button className="editorbtn-small" style={{ color: "white" }} onClick={(ev) => {
+				<button className="editorbtn editorbtn-small editorbtn-action editorbtn-autolayout" onClick={(ev) => {
 					this.props.onZoomAutoLayoutPress();
 				}
-				} />
+				} >beautify</button>
 			</div>
 		</div>;
 	}

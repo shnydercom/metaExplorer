@@ -92,13 +92,13 @@
 	}
 
 	.basic-node {
-		background-color: rgb(30, 30, 30);
-		border-radius: 5px;
-		font-family: Roboto, Arial;
-		color: $editor-primary-color;
-		border: solid 2px $editor-secondary-color;
-		overflow: visible;
-		font-size: 11px; //box-shadow: 0 0 10px rgba(black,0.5);
+    background-color: #00375f;
+    border-radius: 6px;
+    font-family: Roboto, Arial;
+    color: #dadada;
+    border: solid 1px #ffffffc8;
+    overflow: visible;
+    font-size: 11px;
 
 		.title {
 			/*			background-image: linear-gradient(rgba(black,0.1),rgba(black,0.2));*/
