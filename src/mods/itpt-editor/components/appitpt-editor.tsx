@@ -27,6 +27,11 @@ import { NetworkPreferredToken } from "ldaccess/ildtoken";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { UserInfo } from "./status/UserInfo";
 
+import { MiniToolBox } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag';
+import { DropContainer } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/dropcontainer';
+import { DndProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
 export type AIEProps = {
 	logic?: EditorLogic;
 } & LDConnectedState & LDConnectedDispatch & LDOwnProps;
@@ -361,7 +366,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							}}
 						>
 							<div className="fakeheader">
-								<UserInfo userLabel="John Doe" projectLabel="JohnsPersonalProject" userIconSrc=""/>
+								<UserInfo userLabel="John Doe" projectLabel="JohnsPersonalProject" userIconSrc="" />
 								{
 									isGlobal
 										? <button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size FontIconfullscreenFontIcon</button>
@@ -404,7 +409,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	protected renderPreview(isGlobal: boolean, previewActive: boolean) {
 		let isDisplayDevContent = isProduction ? false : true;
-		let previewContainerClass = "phone-preview-centered";
+		let previewContainerClass = "editorpreview";
 		if (previewActive) {
 			previewContainerClass += " active";
 		} else {
@@ -413,8 +418,22 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		return <div className={previewContainerClass}>
 			{this.state.previewDisplay === "phone" ?
 				<>
-					<div className="preview-hidden-btn">
-						{/** primary icon="chevron_left"  */}
+					<DndProvider backend={HTML5Backend}>
+						<DropContainer>
+							<MiniToolBox
+								id="a"
+								left={0}
+								top={0}
+								type="asdf"
+							>
+								<div className="app-content mdscrollbar">
+									<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
+								</div>
+							</MiniToolBox>
+						</DropContainer>
+					</DndProvider >
+					{/*
+					<div className={`${previewContainerClass}-minimenu`}>
 						<button onClick={() => this.togglePreview.apply(this)} />
 					</div>
 					<div>
@@ -427,7 +446,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 								<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
 							</div>
 						</div>
-					</div>
+					</div>*/}
 				</>
 				:
 				<div className="code-preview">

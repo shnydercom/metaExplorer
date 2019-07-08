@@ -3,8 +3,11 @@
 //@import './colors.scss';
 @import "../../../../node_modules/metaexplorer-react-components/src/components/treeview/treeview.scss";
 @import "../../../../node_modules/metaexplorer-react-components/src/components/circle/circleview.scss";
+
+@import "../../../../node_modules/metaexplorer-react-components/src/components/minitoolbox/minitoolbox.scss";
 @import "./diagram.scss";
 @import "./user-info.scss";
+@import "./preview.scss";
 //@import "../../../../node_modules/metaexplorer-react-components/src/components/card/card.scss";
 
 
@@ -350,58 +353,7 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   }
 }
 
-.phone-preview-centered {
-
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-  max-height: 100%;
-
-  position: absolute;
-  right: 0.5em;
-  top: 0;
-  bottom: 0;
-
-  &.active {
-    transition-timing-function: ease-in;
-    transition: 0.3s;
-
-    .app-preview {
-      transition-timing-function: ease-in;
-      transition: 0.3s;
-      visibility: visible;
-    }
-
-    .preview-hidden-btn {
-      transition-timing-function: ease-out;
-      transition: 0.2s;
-      opacity: 0;
-    }
-  }
-
-  &.inactive {
-    transition-timing-function: ease-out;
-    transition: 0.2s;
-    transform: translateY(100%);
-    overflow: visible;
-
-    .app-preview {
-      transition-timing-function: ease-out;
-      transition: 0.2s;
-      visibility: hidden;
-      opacity: 0;
-    }
-
-    .preview-hidden-btn {
-      transition-timing-function: ease-in;
-      transition-delay: 0.2s;
-      transition: 0.3s;
-      opacity: 1;
-      transform: translateY(-4.5em);
-    }
-  }
-}
-
+/*
 .preview-hidden-btn {
   width: 0;
   height: 746px;
@@ -418,7 +370,7 @@ $tray-item-color-secondary: $editor-background-elevated-color;
     transform: translateX(-100%);
     background-color: #d6d6d6 !important;
   }
-}
+}*/
 
 .phone-preview-container {
   position: relative;
