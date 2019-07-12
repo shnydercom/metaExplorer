@@ -98,17 +98,18 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 			return <div>encountered an error while loading a Mod: {errorMsg}</div>;
 		}
 		return (
-			<>{!isLoading ?
-				<Router>
-					<Switch>
-						<Route path="/" render={(routeProps: LDRouteProps) => {
-							return <LDApproot initiallyDisplayedItptName={cfg.mainItpt}
-								ldTokenString={cfg.appKey} routes={routeProps} />;
-						}} />
-						{/*<Route component={FourOhFournomatch} />*/}
-					</Switch>
-				</Router>
-				: <div className="approot-loading">loading</div>}
+			<>
+				{!isLoading ?
+					<Router>
+						<Switch>
+							<Route path="/" render={(routeProps: LDRouteProps) => {
+								return <LDApproot initiallyDisplayedItptName={cfg.mainItpt}
+									ldTokenString={cfg.appKey} routes={routeProps} />;
+							}} />
+							{/*<Route component={FourOhFournomatch} />*/}
+						</Switch>
+					</Router>
+					: <div className="approot-loading">loading</div>}
 				{isProduction ? null : isStateDebug ? <DevTools /> : null}
 			</>
 		);

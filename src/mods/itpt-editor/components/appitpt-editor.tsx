@@ -31,6 +31,7 @@ import { MiniToolBox } from 'metaexplorer-react-components/lib/components/minito
 import { DropContainer } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/dropcontainer';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import { DND_MINI_TOOLBOX_TYPE } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/interfaces";
 
 export type AIEProps = {
 	logic?: EditorLogic;
@@ -350,61 +351,63 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		const itpts = this.logic.getItptList();
 		// , navDrawerClipped: 'editor-navbar-clipped'
-		return <div className="entrypoint-editor" ref={this.editorWrapperRef}>
-			<div className='editor-layout'>
-				{drawerHidden
-					? null
-					: <div className={`nav-drawer-wrapper ${drawerActive ? "active" : "inactive"}`}>
-						<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
-							onClearBtnPress={() => {
-								this.logic.clear();
-								this.setState({ ...this.state, currentlyEditingItptName: null });
-							}}
-							onZoomAutoLayoutPress={() => {
-								this.logic.autoDistribute();
-								this.diagramRef.current.forceUpdate();
-							}}
-						>
-							<div className="fakeheader">
-								<UserInfo userLabel="John Doe" projectLabel="JohnsPersonalProject" userIconSrc="" />
-								{
-									isGlobal
-										? <button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size FontIconfullscreenFontIcon</button>
-										: null
-								}
-							</div>
-						</EditorTray>
+		return <DndProvider backend={HTML5Backend}>
+			<div className="entrypoint-editor" ref={this.editorWrapperRef}>
+				<div className='editor-layout'>
+					{drawerHidden
+						? null
+						: <div className={`nav-drawer-wrapper ${drawerActive ? "active" : "inactive"}`}>
+							<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
+								onClearBtnPress={() => {
+									this.logic.clear();
+									this.setState({ ...this.state, currentlyEditingItptName: null });
+								}}
+								onZoomAutoLayoutPress={() => {
+									this.logic.autoDistribute();
+									this.diagramRef.current.forceUpdate();
+								}}
+							>
+								<div className="fakeheader">
+									<UserInfo userLabel="John Doe" projectLabel="JohnsPersonalProject" userIconSrc="" />
+									{
+										isGlobal
+											? <button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size FontIconfullscreenFontIcon</button>
+											: null
+									}
+								</div>
+							</EditorTray>
+						</div>
+					}
+					<div>
+						<EditorBody hideRefMapDropSpace={bottomBarHidden}
+							ref={this.diagramRef}
+							loadToEditorByName={this.loadToEditorByName}
+							onEditTrayItem={this.onEditTrayItem.bind(this)}
+							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
+							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
+						{previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
 					</div>
-				}
-				<div>
-					<EditorBody hideRefMapDropSpace={bottomBarHidden}
-						ref={this.diagramRef}
-						loadToEditorByName={this.loadToEditorByName}
-						onEditTrayItem={this.onEditTrayItem.bind(this)}
-						changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
-						currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
-					{previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
+					{drawerHidden
+						? null
+						: <>
+							<div className="nav-element top-left">
+								{/** icon='menu' inverse*/}
+								<button
+									className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-large`}
+									onClick={this.toggleDrawerActive} />
+							</div>
+							<div className="nav-element bottom-left">
+								{/**icon={drawerActive ? "chevron_left" : "chevron_right"} */}
+								<button
+									className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-small`}
+									style={{ color: "white" }}
+									onClick={this.toggleDrawerActive}></button>
+							</div>
+						</>
+					}
 				</div>
-				{drawerHidden
-					? null
-					: <>
-						<div className="nav-element top-left">
-							{/** icon='menu' inverse*/}
-							<button
-								className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-large`}
-								onClick={this.toggleDrawerActive} />
-						</div>
-						<div className="nav-element bottom-left">
-							{/**icon={drawerActive ? "chevron_left" : "chevron_right"} */}
-							<button
-								className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-small`}
-								style={{ color: "white" }}
-								onClick={this.toggleDrawerActive}></button>
-						</div>
-					</>
-				}
 			</div>
-		</div>;
+		</DndProvider>;
 	}
 
 	protected renderPreview(isGlobal: boolean, previewActive: boolean) {
@@ -415,23 +418,23 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		} else {
 			previewContainerClass += " inactive";
 		}
-		return <div className={previewContainerClass}>
+		//
+		//div className={previewContainerClass}>
+		return <>
 			{this.state.previewDisplay === "phone" ?
 				<>
-					<DndProvider backend={HTML5Backend}>
-						<DropContainer>
-							<MiniToolBox
-								id="a"
-								left={0}
-								top={0}
-								type="asdf"
-							>
-								<div className="app-content mdscrollbar">
-									<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
-								</div>
-							</MiniToolBox>
-						</DropContainer>
-					</DndProvider >
+					<DropContainer isDropZoneClickthrough>
+						<MiniToolBox
+							id="a"
+							left={0}
+							top={0}
+							type={DND_MINI_TOOLBOX_TYPE}
+						>
+							<div className="app-content mdscrollbar">
+								<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
+							</div>
+						</MiniToolBox>
+					</DropContainer>
 					{/*
 					<div className={`${previewContainerClass}-minimenu`}>
 						<button onClick={() => this.togglePreview.apply(this)} />
@@ -466,7 +469,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					</pre>
 				</div>
 			}
-		</div>;
+		</>;
 	}
 
 	protected renderPhoneNavBtns(isGlobal: boolean) {
