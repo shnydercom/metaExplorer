@@ -51,6 +51,7 @@ export type AIEState = {
 	bottomBarHidden: boolean;
 	mode: "editor" | "app" | "initial";
 	redirect: null | string;
+	isDropZoneClickThrough: boolean;
 } & LDLocalState;
 
 const EDITOR_KV_KEY = "EditorKvKey";
@@ -224,7 +225,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			redirect: null,
 			mode, drawerActive, previewActive, bottomBarHidden, drawerHidden, previewHidden,
 			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone",
-			hasCompletedFirstRender: false, hasCompletedEditorRender: false
+			hasCompletedFirstRender: false, hasCompletedEditorRender: false,
+			isDropZoneClickThrough: true
 		};
 	}
 
@@ -357,7 +359,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					{drawerHidden
 						? null
 						: <div className={`nav-drawer-wrapper ${drawerActive ? "active" : "inactive"}`}>
-							<EditorTray itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
+							<EditorTray
+							setDropZoneClickThrough={(val) => this.setState({...this.state, isDropZoneClickThrough: val})} itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
 								onClearBtnPress={() => {
 									this.logic.clear();
 									this.setState({ ...this.state, currentlyEditingItptName: null });
@@ -423,7 +426,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		return <>
 			{this.state.previewDisplay === "phone" ?
 				<>
-					<DropContainer isDropZoneClickthrough>
+					<DropContainer isDropZoneClickthrough={this.state.isDropZoneClickThrough}>
 						<MiniToolBox
 							id="a"
 							left={0}

@@ -3,9 +3,11 @@ import TreeView, { TreeEntry } from "metaexplorer-react-components/lib/component
 import { IBlueprintItpt } from "ldaccess/ldBlueprint";
 import { IItptInfoItem } from "defaults/DefaultItptRetriever";
 import { EditorTrayItem } from "./EditorTrayItem";
+import { default as ItemTypes } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/ItemTypes";
 import { ITPT_TAG_ATOMIC, ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
 import * as appStyles from 'styles/styles.scss';
 import { DropRefmapResult } from "./RefMapDropSpace";
+import { StylableDragItemProps } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag";
 
 export interface FlatContentInfo {
 	flatContentURLs: string[];
@@ -17,6 +19,7 @@ export interface EditorTrayProps {
 	onZoomAutoLayoutPress: () => void;
 	onClearBtnPress: () => void;
 	onEditTrayItem: (data: any) => DropRefmapResult;
+	setDropZoneClickThrough: (val: boolean) => void;
 }
 
 export interface EditorTrayState {
@@ -44,6 +47,16 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 	}
 
 	protected static trayItemsFromItptList(nextProps: EditorTrayProps, trayitpts: IItptInfoItem[]) {
+
+		const baseDragProps: StylableDragItemProps = {
+			id: "b",
+			data: {},
+			left: 0,
+			top: 0,
+			type: ItemTypes.Block,
+			onOutDragHandle: () => nextProps.setDropZoneClickThrough(true),
+			onOverDragHandle: () => nextProps.setDropZoneClickThrough(false)
+		};
 		const itpts = trayitpts.slice();
 		itpts.shift(); //rm basecontainer
 		itpts.shift(); //rm refMap
@@ -57,10 +70,10 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 		const specialNodesText: string = "Set standard values, mark a value for later input or build forms with as many interpreters as you want";
 		const specialNodesTreeItem: TreeEntry = {
 			flatContent: [
-				<EditorTrayItem isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$editor-secondary-color"]} />,
-				<EditorTrayItem isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$editor-secondary-color"]} />,
-				<EditorTrayItem isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={3} model={{ type: "outputtype" }} name="External Output Marker" color={appStyles["$editor-secondary-color"]} />,
-				<EditorTrayItem isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={4} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$editor-secondary-color"]} />
+				<EditorTrayItem {...baseDragProps} isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$editor-secondary-color"]} />,
+				<EditorTrayItem {...baseDragProps} isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$editor-secondary-color"]} />,
+				<EditorTrayItem {...baseDragProps} isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={3} model={{ type: "outputtype" }} name="External Output Marker" color={appStyles["$editor-secondary-color"]} />,
+				<EditorTrayItem {...baseDragProps} isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={4} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$editor-secondary-color"]} />
 			],
 			label: 'Special Blocks',
 			subEntries: []
@@ -101,8 +114,8 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 					EditorTray.addItptToTree(compoundNodesTreeItem, iItptInfoItm, trayName);
 				}
 		});
-		EditorTray.createFlatContentFromItpts(atomicNodesTreeItem, nextProps.onEditTrayItem, false);
-		EditorTray.createFlatContentFromItpts(compoundNodesTreeItem, nextProps.onEditTrayItem, true);
+		EditorTray.createFlatContentFromItpts(atomicNodesTreeItem, nextProps.onEditTrayItem, false, nextProps);
+		EditorTray.createFlatContentFromItpts(compoundNodesTreeItem, nextProps.onEditTrayItem, true, nextProps);
 		return <>
 			<TreeView entry={specialNodesTreeItem}>{specialNodesText}</TreeView>
 			<TreeView entry={atomicNodesTreeItem}>{atomicNodesText}</TreeView>
@@ -198,13 +211,23 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 
 	protected static createFlatContentFromItpts(
 		tree: TreeEntry & FlatContentInfo,
-		onEditTrayItem: (data: any) => DropRefmapResult, isCompoundBlock: boolean) {
+		onEditTrayItem: (data: any) => DropRefmapResult, isCompoundBlock: boolean,
+		nextProps: EditorTrayProps) {
+		const baseDragProps: StylableDragItemProps = {
+			id: tree.label,
+			data: {},
+			left: 0,
+			top: 0,
+			type: ItemTypes.Block,
+			onOutDragHandle: () => nextProps.setDropZoneClickThrough(true),
+			onOverDragHandle: () => nextProps.setDropZoneClickThrough(false)
+		};
 		tree.itpts.forEach((itpt, idx) => {
 			let ldBPCfg = itpt.cfg;
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
 			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : ldBPCfg.canInterpretType;
 			let remainingName = tree.flatContentURLs[idx];
-			tree.flatContent.push(<EditorTrayItem isCompoundBlock={isCompoundBlock} onLongPress={(data) => onEditTrayItem(data)}
+			tree.flatContent.push(<EditorTrayItem {...baseDragProps} isCompoundBlock={isCompoundBlock} onLongPress={(data) => onEditTrayItem(data)}
 				key={trayName}
 				model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
 				name={remainingName}
@@ -212,7 +235,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			);
 		});
 		tree.subEntries.forEach((treeEntry: TreeEntry & FlatContentInfo, idx) => {
-			EditorTray.createFlatContentFromItpts(treeEntry, onEditTrayItem, isCompoundBlock);
+			EditorTray.createFlatContentFromItpts(treeEntry, onEditTrayItem, isCompoundBlock, nextProps);
 		});
 	}
 
