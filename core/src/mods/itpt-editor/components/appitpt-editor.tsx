@@ -432,6 +432,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							left={0}
 							top={0}
 							type={DND_MINI_TOOLBOX_TYPE}
+							onOutDragHandle={() => this.setState({...this.state, isDropZoneClickThrough: true})}
+							onOverDragHandle={() => this.setState({...this.state, isDropZoneClickThrough: false})}
 						>
 							<div className="app-content mdscrollbar">
 								<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
