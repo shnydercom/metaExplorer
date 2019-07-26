@@ -1,0 +1,59 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+
+		{
+			"name": "Tests",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceRoot}/node_modules/jest-cli/bin/jest.js",
+			"stopOnEntry": false,
+			"args": [
+				"--runInBand"
+			],
+			"cwd": "${workspaceRoot}",
+			"preLaunchTask": null,
+			"runtimeExecutable": null,
+			"runtimeArgs": [
+				"--nolazy"
+			],
+			"env": {
+				"NODE_ENV": "development"
+			},
+			"console": "integratedTerminal",
+			"sourceMaps": false,
+			"outFiles": [
+				"allmytests.js"
+			]
+		},
+		{
+			"type": "chrome",
+			"request": "attach",
+			"name": "Attach to Chrome",
+			"port": 9222,
+			"url": "http://localhost:5000*",
+			"webRoot": "${workspaceRoot}/src"
+		},
+		/*	{
+			"type": "chrome",
+			"request": "launch",
+			"name": "Launch Chrome against localhost",
+			"url": "http://localhost:8080",
+			"webRoot": "${workspaceRoot}"
+		}*/
+		{
+			"type": "chrome",
+			"request": "attach",
+			"name": "Attach Karma Chrome",
+			"address": "localhost",
+			"port": 9333,
+			"pathMapping": {
+				"/": "${workspaceRoot}",
+				"/base/": "${workspaceRoot}/"
+			}
+		}
+	]
+}

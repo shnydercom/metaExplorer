@@ -1,6 +1,6 @@
 {
   "author": "Jonathan Schneider",
-  "name": "bizsys-editor",
+  "name": "@metaexplorer/core",
   "version": "0.0.1",
   "description": "a GUI editor for configuring bizSys-Server",
   "license": "MIT",
