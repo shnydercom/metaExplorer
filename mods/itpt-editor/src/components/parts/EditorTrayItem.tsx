@@ -1,7 +1,7 @@
 import { Component, useState } from "react";
 import { StylableDragItemProps } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag";
 import { default as ItemTypes } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/ItemTypes";
-import MiniToolBoxDragLayer from 'metaexplorer-react-components/lib/components/minitoolbox/dnd//minitoolbox-draglayer';
+import MiniToolBoxDragLayer from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-draglayer';
 import { useDrag } from "react-dnd";
 
 export interface EditorTrayProps extends StylableDragItemProps {

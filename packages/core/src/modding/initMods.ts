@@ -1,18 +1,18 @@
-import { initGoogleMod, MOD_GOOGLE_ID } from "./google/initGoogleMod";
-import { initMailchimpMod, MOD_MAILCHIMP_ID } from "./mailchimp/initMailChimpMod";
+import { initGoogleMod, MOD_GOOGLE_ID } from "../../../../mods/google/src/initGoogleMod";
+import { initMailchimpMod, MOD_MAILCHIMP_ID } from "../../../../mods/mailchimp/src/initMailChimpMod";
 // import { initHydraMod, MOD_HYDRA_ID } from "./hydra/initHydraMod";
-import { initSwaggerClientMod, MOD_SWAGGER_ID } from "./swagger-client/initSwaggerClientMod";
+import { initSwaggerClientMod, MOD_SWAGGER_ID } from "../../../../mods/swagger-client/src/initSwaggerClientMod";
 import { ModAPI } from "apis/mod-api";
-import { MOD_USERITPT_ID, initUSERITPTClientMod } from "./useritpt/initUserItptMod";
-import { MOD_ITPTEDITOR_ID, initItptEditorMod } from "./itpt-editor/initItptEditorMod";
+import { MOD_USERITPT_ID, initUSERITPTClientMod } from "../../../../mods/useritpt/src/initUserItptMod";
+import { MOD_ITPTEDITOR_ID, initItptEditorMod } from "../../../../mods/itpt-editor/src/initItptEditorMod";
 import { applicationStore } from "approot";
 import { loadMod } from "appstate/epicducks/mod-duck";
-import { initQRCODEGENClientMod, MOD_QRCODEGENSCAN_ID } from "./qr-code-genscan/initQRCodeGenScanMod";
+import { initQRCODEGENClientMod, MOD_QRCODEGENSCAN_ID } from "../../../../mods/qr-code-genscan/src/initQRCodeGenScanMod";
 import { isProduction } from "appstate/store";
-import { MOD_ONBOARDING_ID, initOnboardingMod } from "./onboarding/initOnboarding";
-import { MOD_KEYCLOAK_ID, initKeycloakMod } from "./keycloak/initKeyCloakMod";
-import { MOD_DEMO_ID, initDemoMod } from "./demo/initDemoMod";
-import { MOD_MATERIALDESIGN_ID, initMaterialDesignMod } from "./material-design/initMaterialDesign";
+import { MOD_ONBOARDING_ID, initOnboardingMod } from "../../../../mods/onboarding/src/initOnboarding";
+import { MOD_KEYCLOAK_ID, initKeycloakMod } from "../../../../mods/keycloak/src/initKeyCloakMod";
+import { MOD_DEMO_ID, initDemoMod } from "../../../../mods/demo/src/initDemoMod";
+import { MOD_MATERIALDESIGN_ID, initMaterialDesignMod } from "../../../../mods/material-design/src/initMaterialDesign";
 
 export function initMods(modAPI: ModAPI) {
 	//set the required mods (otherwise won't finish to load)

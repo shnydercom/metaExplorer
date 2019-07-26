@@ -1,5 +1,5 @@
 import { GeneralDataTypeNodeModel } from "./GeneralDataTypeNodeModel";
-import { LDPortModel } from "./../LDPortModel";
+import { LDPortModel } from "../LDPortModel";
 import { GENERALDATATYPE_MODEL } from "../editor-consts";
 import { AbstractNodeFactory, DiagramEngine } from "storm-react-diagrams";
 import { GeneralDataTypeNodeWidget } from "./GeneralDataTypeWidget";

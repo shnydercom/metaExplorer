@@ -1,5 +1,5 @@
-import { SinglePortWidget } from "./../SinglePortWidget";
-import { LDPortModel } from "./../LDPortModel";
+import { SinglePortWidget } from "../SinglePortWidget";
+import { LDPortModel } from "../LDPortModel";
 import { BaseDataTypeDropDown } from "./BaseDataTypeDropDown";
 import { IKvStore } from "ldaccess/ikvstore";
 import { connect } from "react-redux";
