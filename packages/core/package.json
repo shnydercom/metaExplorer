@@ -4,31 +4,8 @@
   "version": "0.0.1",
   "description": "a GUI editor for configuring bizSys-Server",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "src/index.tsx",
   "private": true,
-  "jest": {
-    "verbose": false,
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "modulePaths": [
-      "<rootDir>/src/"
-    ],
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ],
-    "globals": {
-      "ts-jest": {
-        "tsConfigFile": "tsconfig-jest.json"
-      }
-    }
-  },
   "scripts": {
     "test": "jest --watch",
     "build": "webpack --config=webpack.prod.config.js",
@@ -36,9 +13,7 @@
     "startfornetwork": "webpack-dev-server --host 0.0.0.0",
     "lint": "tslint ./src/**/*.ts -t verbose",
     "compcss": "node-sass --output-style compressed ./src/styles/styles.scss > cat ./dist/style.css",
-    "createmock": "node ./scripts/createItptMock.js",
-    "dl-tooling": "node ./scripts/dlTooling.js",
-    "generateGoogleSheetsClient": "java -jar ./tooling/swagger-codegen-cli.jar generate -i https://raw.githubusercontent.com/APIs-guru/openapi-directory/master/APIs/googleapis.com/sheets/v4/swagger.yaml -l typescript-fetch -o ./src/google/apis/sheets-generated"
+    "createmock": "node ./scripts/createItptMock.js"
   },
   "dependencies": {
     "@material-ui/core": "^4.1.3",
