@@ -1,0 +1,11 @@
+{
+  "name": "@metaexplorer/mods/google",
+  "version": "0.0.1",
+  "description": "TODO:changeDescription",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Jonathan Schneider",
+  "license": "MIT"
+}
