@@ -1,5 +1,5 @@
 {
-  "name": "@metaexplorer/mods/swagger-client",
+  "name": "@metaexplorer-mods/swagger-client",
   "version": "0.0.1",
   "description": "TODO:changeDescription",
   "main": "src/index.ts",

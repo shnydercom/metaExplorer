@@ -1,5 +1,5 @@
 {
-  "name": "@metaexplorer/mods/demo",
+  "name": "@metaexplorer-mods/demo",
   "version": "0.0.1",
   "description": "TODO:changeDescription",
   "main": "src/index.ts",

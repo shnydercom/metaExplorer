@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "description": "a GUI editor for configuring bizSys-Server",
   "license": "MIT",
-  "main": "src/index.tsx",
+  "main": "dist/src/index",
+  "types": "dist/src/index.d.ts",
   "private": true,
   "scripts": {
     "test": "jest --watch",

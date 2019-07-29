@@ -1,5 +1,5 @@
 {
-  "name": "@metaexplorer/mods/onboarding",
+  "name": "@metaexplorer-mods/onboarding",
   "version": "0.0.1",
   "description": "TODO:changeDescription",
   "main": "src/index.ts",

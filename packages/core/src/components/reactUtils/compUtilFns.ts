@@ -1,6 +1,5 @@
 import { isLDOptionsSame } from "ldaccess/ldUtils";
 import { LDRouteProps } from "appstate/LDProps";
-import { last } from "../../../node_modules/rxjs/operator/last";
 import { VisualKeysDict } from "components/visualcomposition/visualDict";
 
 export const compNeedsUpdate = (nextProps, lastProps): boolean => {

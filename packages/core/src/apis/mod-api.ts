@@ -1,6 +1,12 @@
 import { Observable, from } from "rxjs";
 import { IModStatus } from "appstate/modstate";
 
+export interface IModSpec {
+	id: string;
+	initFn: () => Promise<IModStatus>;
+	dependencies: string[];
+}
+
 export class ModAPI {  // URL to web api IRI resource
 	protected modInitFns: Map<string, () => Promise<IModStatus>> = new Map();
 	protected loadedModsMap: Map<string, boolean> = new Map();
@@ -17,9 +23,9 @@ export class ModAPI {  // URL to web api IRI resource
 		returnVal = from(modPromise());
 		return returnVal;
 	}
-	addModInitFn(id: string, initFn: () => Promise<IModStatus>, dependencies: string[]) {
-		this.modInitFns.set(id, initFn);
-		this.modDependencies.set(id, dependencies);
+	addModInitFn(modSpec: IModSpec) {
+		this.modInitFns.set(modSpec.id, modSpec.initFn);
+		this.modDependencies.set(modSpec.id, modSpec.dependencies);
 	}
 	addRequiredMod(modId: string) {
 		this.loadedModsMap.set(modId, false);

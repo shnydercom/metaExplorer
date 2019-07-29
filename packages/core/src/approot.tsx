@@ -18,8 +18,9 @@ import { initGameItpt } from 'components/game/initGameItpts';
 import { initBaseHtmlItpt } from 'components/basic-html/initBaseHtmlItpt';
 import LDApproot from 'ldapproot';
 import { initShnyderItpts } from 'components/shnyder/initShnyderItpts';
-import { initMods } from 'mods/initMods';
+import { initRequiredMods } from 'modding/initMods';
 import { mapStateToPropsRoot } from 'appstate/reduxFns';
+import { IModSpec } from 'apis/mod-api';
 
 export const APP_LD_KEY = "app";
 
@@ -54,18 +55,16 @@ export interface AppRootState {
 	isLoading: boolean;
 }
 export const applicationStore: Store<ExplorerState> = configureStore(initialState);
-function rootSetup(): void {
+export function rootSetup(requiredMods: IModSpec[]): void {
 	appItptMatcherFn();
 	initEssentialItpts();
 	initBaseHtmlItpt();
 	initEssentialInterpreters();
 	initGameItpt();
 	initLDConnect();
-	initMods(modAPI);
+	initRequiredMods(modAPI, requiredMods);
 	initShnyderItpts();
 }
-
-rootSetup();
 
 export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 
