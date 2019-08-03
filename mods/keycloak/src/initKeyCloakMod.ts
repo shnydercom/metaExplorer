@@ -1,7 +1,5 @@
-import appItptRetrFn from "appconfig/appItptRetriever";
 //import { PureMailChimpSignup, MailChimpSignupName } from "./condensedSignup";
-import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
-import { SingleModStateKeysDict, IModStatus } from "appstate/modstate";
+import { ITPT_TAG_ATOMIC, appItptRetrFn, SingleModStateKeysDict, IModStatus  } from "@metaexplorer/core";
 import { KeyCloakAuthCfg, kcloakAuthCfgName } from "./sidefx/KeyCloakAuthCfg";
 import { KCAuthenticatorBtnName, KCAuthenticatorBtn } from "./components/KeyCloakLoginRegisterBtn";
 import { keyCloakTokenStateName, KeyCloakTokenRetriever } from "./components/KeyCloakTokenRetriever";

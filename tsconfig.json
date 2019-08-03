@@ -35,6 +35,15 @@
   "references": [
     { "path": "packages/core" },
     { "path": "mods/material-design" },
-    { "path": "packages/metaexplorer.io" }
+    { "path": "mods/keycloak"},
+    /*{ "path": "mods/demo"},
+    { "path": "mods/google"},
+    { "path": "mods/mailchimp"},
+    { "path": "mods/mailchimp"},
+    { "path": "mods/useritpt"},
+    { "path": "mods/itpt-editor"},
+    { "path": "mods/qr-code-genscan"},
+    { "path": "mods/onboarding"},
+    { "path": "packages/metaexplorer.io" }*/
   ]
 }

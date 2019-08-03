@@ -1,4 +1,5 @@
 import { IModSpec } from '@metaexplorer/core/src/apis/mod-api';
+import { MOD_MATERIALDESIGN_ID, initMaterialDesignMod } from '@metaexplorer-mods/material-design';
 
 export function setupRequiredMods(): IModSpec[] {
 	//mod initialization functions
@@ -37,11 +38,11 @@ export function setupRequiredMods(): IModSpec[] {
 		dependencies: []
 	}
 	);
-	modSpecs.push({
+	/*modSpecs.push({
 		id: MOD_SWAGGER_ID,
 		initFn: () => initSwaggerClientMod(),
 		dependencies: []
-	}
+	}*/
 	);
 	modSpecs.push({
 		id: MOD_USERITPT_ID,

@@ -1,11 +1,5 @@
-import { ILDOptions } from "ldaccess/ildoptions";
-import { IKvStore } from "ldaccess/ikvstore";
-import { LDDict } from "ldaccess/LDDict";
-import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
-import { UserDefDict } from "ldaccess/UserDefDict";
+import { IKvStore, LDDict, ldBlueprint, BlueprintConfig, UserDefDict, initLDLocalState,AbstractDataTransformer } from "@metaexplorer/core";
 import { KeyCloakAuthAPI, EVENT_KEYCLOAK_WEB_AUTH } from "../apis/KeyCloakAuthAPI";
-import { initLDLocalState } from "components/generic/generatorFns";
-import { AbstractDataTransformer } from "datatransformation/abstractDataTransformer";
 
 export const kcloakAuthCfgName = "keycloak/auth/config";
 export const jsonCfgPath = "jsonConfigurationPath";
@@ -95,7 +89,7 @@ export class KeyCloakAuthCfg extends AbstractDataTransformer {
 		inputParams: Map<string, IKvStore>,
 		outputKvStores: Map<string, IKvStore>): IKvStore[] {
 		let rv = [];
-		let jsonCfgStr = inputParams.get(jsonCfgPath);
+		//let jsonCfgStr = inputParams.get(jsonCfgPath);
 		const tokenOutputKV = outputKvStores.get(tokenStr);
 		tokenOutputKV.value = this.kcAPI.getState().token;
 		const isAuthKv = outputKvStores.get(isAuthenticated);

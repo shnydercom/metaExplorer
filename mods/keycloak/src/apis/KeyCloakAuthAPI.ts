@@ -1,6 +1,7 @@
-import { LDError } from "appstate/LDError";
+import { LDError } from "@metaexplorer/core";
 //isn't yet an ES6 module, has to be imported like this
-import Keycloak = require("keycloak-js");
+//import Keycloak = require("keycloak-js");
+import Keycloak from 'keycloak-js';
 
 export const EVENT_KEYCLOAK_WEB_AUTH = "KeycloakEvent";
 
@@ -149,8 +150,8 @@ export class KeyCloakAuthAPI {
 			AT_TARGET: 0, BUBBLING_PHASE: 0, CAPTURING_PHASE: 0, NONE: 0,
 			initEvent: () => { return; },
 			preventDefault: () => { return; },
-			scoped: false,
-			deepPath: null,
+			//scoped: false,
+			//deepPath: null,
 		});
 	}
 }

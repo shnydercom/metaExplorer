@@ -1,13 +1,10 @@
-import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-
-import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from 'components/generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
-import { VisualKeysDict } from 'components/visualcomposition/visualDict';
+import { IKvStore, ldBlueprint, ILDOptions, BlueprintConfig, IBlueprintItpt, OutputKVMap,
+	 LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState,
+	 initLDLocalState, generateItptFromCompInfo, gdsfpLD, VisualKeysDict, LDDict
+	} from '@metaexplorer/core';
+import { Component } from 'react';
 import { KeyCloakAuthAPI, EVENT_KEYCLOAK_WEB_AUTH } from '../apis/KeyCloakAuthAPI';
-import { LDDict } from 'ldaccess/LDDict';
+import React from 'react';
 
 export const KCAuthenticatorBtnName: string = "keycloak/auth/AuthenticatorButton";
 export const loginRedir: string = "redirAfterLogin";
