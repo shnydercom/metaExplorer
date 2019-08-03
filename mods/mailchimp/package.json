@@ -2,10 +2,21 @@
   "name": "@metaexplorer-mods/mailchimp",
   "version": "0.0.1",
   "description": "TODO:changeDescription",
-  "main": "src/index.ts",
   "scripts": {
     "test": "test"
   },
   "author": "Jonathan Schneider",
-  "license": "MIT"
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "repository": "",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "@metaexplorer/core": "^0.0.1"
+  }
 }

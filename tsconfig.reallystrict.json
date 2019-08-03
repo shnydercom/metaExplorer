@@ -10,7 +10,7 @@
     "rootDir": ".",
     "outDir": "lib",
     "downlevelIteration": true,
-    "strict": false,
+    "strict": true,
     "removeComments": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

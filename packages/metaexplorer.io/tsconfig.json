@@ -17,10 +17,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
-    "composite": true
+    "jsx": "preserve"
   },
   "include": [
     "src"
+  ],
+  "references": [
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../../mods/material-design"
+    }
   ]
 }

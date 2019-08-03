@@ -6,7 +6,9 @@
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "private": true,
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "jest --watch",
     "build": "webpack --config=webpack.prod.config.js",

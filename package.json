@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "prestart": "yarn build",
-    "start": "run-p start:*"
+    "start": "run-p start:*",
+    "build": "tsc --build"
   }
 }

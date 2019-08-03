@@ -2,14 +2,15 @@
   "name": "@metaexplorer-mods/material-design",
   "version": "0.0.1",
   "description": "TODO:changeDescription",
-  "main": "lib/index",
-  "types": "lib/index.d.ts",
-  "scripts": {
-    "test": "test",
-    "tsc": "tsc"
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "repository": "",
+  "publishConfig": {
+    "access": "public"
   },
-  "author": "Jonathan Schneider",
-  "license": "MIT",
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "@metaexplorer/core": "^0.0.1"
   }
