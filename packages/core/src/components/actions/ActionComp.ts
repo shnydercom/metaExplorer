@@ -1,14 +1,13 @@
 import { IKvStore } from "ldaccess/ikvstore";
-import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
+import { ldBlueprint, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { LDDict } from "ldaccess/LDDict";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { AbstractDataTransformer } from "datatransformation/abstractDataTransformer";
 import { ActionTypesDict, ActionType } from "components/actions/ActionDict";
-import { ILDOptions } from "ldaccess/ildoptions";
 import { isObjPropertyRef } from "ldaccess/ldUtils";
 
 export const payloadInputKey = UserDefDict.inputData;
-export const transfOutputKey = UserDefDict.outputData;
+const transfOutputKey = UserDefDict.outputData;
 export const idField = "actionId";
 export const typeField = "actionType";
 

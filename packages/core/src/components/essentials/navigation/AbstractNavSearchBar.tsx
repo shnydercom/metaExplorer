@@ -45,7 +45,7 @@ export const NavSearchBarBpCfg: BlueprintConfig = {
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
-export interface NavSearchBarState extends LDLocalState {
+export type NavSearchBarState = LDLocalState & {
 	searchValue: string;
 	routeSendBack: string;
 	isDoRedirect: boolean;

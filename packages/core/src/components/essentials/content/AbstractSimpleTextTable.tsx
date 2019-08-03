@@ -22,8 +22,7 @@ export const simpleTextTableCfg: BlueprintConfig = {
 	interpretableKeys: simpleTextTableInputKeys,
 	crudSkills: "cRud"
 };
-export interface SimpleTextTableState extends LDLocalState {
-}
+export type SimpleTextTableState = LDLocalState;
 
 export abstract class AbstractSimpleTextTable extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, SimpleTextTableState>
 	implements IBlueprintItpt {

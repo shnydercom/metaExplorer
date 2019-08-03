@@ -1,8 +1,8 @@
 import { LDOwnProps, LDLocalState, LDConnectedState, LDConnectedDispatch, LDRouteProps } from "appstate/LDProps";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
-import ldBlueprint, { BlueprintConfig, OutputKVMap, IBlueprintItpt } from "ldaccess/ldBlueprint";
-import { Component, ComponentClass, StatelessComponent } from "react";
+import { ldBlueprint, BlueprintConfig, OutputKVMap, IBlueprintItpt } from "ldaccess/ldBlueprint";
+import { Component } from "react";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
@@ -15,6 +15,7 @@ import { linearLDTokenStr } from "ldaccess/ildtoken";
 import { isReactComponent } from "../reactUtils/reactUtilFns";
 import { LDError } from "appstate/LDError";
 import { ErrorBoundaryState } from "../errors/ErrorBoundaryState";
+import React from "react";
 export interface BaseContOwnProps extends LDOwnProps {
 }
 

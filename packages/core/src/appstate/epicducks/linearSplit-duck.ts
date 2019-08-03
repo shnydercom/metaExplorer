@@ -109,7 +109,7 @@ function assignDerivedItpt(retriever: string, newLDTokenStr: string, ldType: str
 	//appItptMatcherFn().getItptRetriever(retriever).setDerivedItpt(newLDTokenStr, baseItpt);
 }
 
-function clearDerivedItpt(retriever: string, oldLDTokenStr: string) {
+export function clearDerivedItpt(retriever: string, oldLDTokenStr: string) {
 	//TODO: implement peakAhead-Algorithm to remove all ...-l[0..n] ldTokenStrings
 	if (appItptMatcherFn().getItptRetriever(retriever).hasDerivedItpt(oldLDTokenStr)) {
 		appItptMatcherFn().getItptRetriever(retriever).setDerivedItpt(oldLDTokenStr, null);
@@ -121,7 +121,7 @@ export const linearSplitEpic = (action$: ActionsObservable<any>, store: any) => 
 		ofType(LINEAR_SPLIT_REQUEST),
 		mergeMap(
 			(action) => {
-				if (!action.ldOptionsBase) return;
+				if (!action.ldOptionsBase) return undefined;
 				let ldOptionsObj = action.ldOptionsBase;
 				let retriever = action.ldOptionsBase.visualInfo.retriever;
 				let ldTkStr = action.ldOptionsBase.ldToken.get();
@@ -130,7 +130,7 @@ export const linearSplitEpic = (action$: ActionsObservable<any>, store: any) => 
 					// clearDerivedItpt(retriever, ldTkStr);
 					ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
 						let newLDTokenStr: string = linearLDTokenStr(ldTkStr, idx);
-						let newLDToken = new NetworkPreferredToken(newLDTokenStr);
+						//let newLDToken = new NetworkPreferredToken(newLDTokenStr);
 						assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
 					});
 					ldOptionsObj.isLoading = false;

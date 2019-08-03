@@ -1,6 +1,6 @@
-import { InferableComponentEnhancerWithProps, connect } from "react-redux";
-import { DefaultItptRetriever, IItptInfoItem } from "defaults/DefaultItptRetriever";
-import { IBlueprintItpt, BlueprintConfig } from "ldaccess/ldBlueprint";
+import { connect } from "react-redux";
+import { DefaultItptRetriever } from "defaults/DefaultItptRetriever";
+import { IBlueprintItpt } from "ldaccess/ldBlueprint";
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
 

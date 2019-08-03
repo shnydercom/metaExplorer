@@ -32,5 +32,8 @@ export class ImageUploadAPI {  // URL to web api IRI resource
       returnVal = from(fetchPromise);
       return returnVal;
     }
+    else {
+      throw new Error(("fileList for images was empty"));
+    }
   }
 }

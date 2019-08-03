@@ -1,4 +1,4 @@
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt } from "ldaccess/ldBlueprint";
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt } from "ldaccess/ldBlueprint";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { IKvStore } from "ldaccess/ikvstore";
 import { ILDOptions } from "ldaccess/ildoptions";
@@ -11,6 +11,7 @@ import { Component } from "react";
 import { appItptMatcherFn } from "appconfig/appItptMatcher";
 import { ErrorBoundaryState } from "../errors/ErrorBoundaryState";
 import { IReactCompInfoItm } from "../reactUtils/iReactCompInfo";
+import React from "react";
 
 export type OwnProps = LDOwnProps & {
 };
@@ -49,7 +50,7 @@ RefMapItptState>
 		if (ldOptions.isLoading) return null;
 		let ldTokenString = ldOptions.ldToken.get();
 		let retriever: string = ldOptions.visualInfo.retriever;
-		let interpretedBy = ldOptions.visualInfo.interpretedBy;
+		//let interpretedBy = ldOptions.visualInfo.interpretedBy;
 		let newreactCompInfos: Map<string, IReactCompInfoItm> = new Map();
 		//let newLDTypes: Map<string, string> = new Map();
 		if (
@@ -142,7 +143,7 @@ RefMapItptState>
 	*/
 	buildIntrprtrJSX(ldOptions: ILDOptions, routes: LDRouteProps): any { //TODO: search for right type ?! React.Component<LDOwnProps>
 		let { ldTokenString } = this.props;
-		let { interpretedBy, retriever } = ldOptions.visualInfo;
+		let { retriever } = ldOptions.visualInfo;
 		let baseRMTkStr = refMapBaseTokenStr(ldTokenString);
 		let BaseComp = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(baseRMTkStr);
 		if (BaseComp === null || BaseComp === undefined) {

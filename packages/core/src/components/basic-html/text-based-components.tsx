@@ -1,11 +1,12 @@
+import React from 'react';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 
 import { initLDLocalState, gdsfpLD } from '../generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component } from 'react';
 import { LDDict } from 'ldaccess/LDDict';
 
 let cfgIntrprtKeys: string[] =

@@ -2,7 +2,6 @@ import { IKvStore } from 'ldaccess/ikvstore';
 import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { LDDict } from 'ldaccess/LDDict';
 import { SideFXDict } from './SideFXDict';
 import { gdsfpLD, initLDLocalState } from 'components/generic/generatorFns';
 import { applicationStore } from 'approot';
@@ -16,10 +15,10 @@ import { UserDefDict } from 'ldaccess/UserDefDict';
 import { ILDWebResource } from 'ldaccess/ildresource';
 
 export const ldRetrCfgIntrprtKeys: string[] = [SideFXDict.srvURL, SideFXDict.identifier];
-let ldRetrInitialKVStores: IKvStore[] = [
+/*let ldRetrInitialKVStores: IKvStore[] = [
 	{ key: SideFXDict.srvURL, value: undefined, ldType: LDDict.Text },
 	{ key: SideFXDict.identifier, value: undefined, ldType: LDDict.Text }
-];
+];*/
 
 export interface LDRetrieverSuperState extends LDLocalState {
 	isInputDirty: boolean;

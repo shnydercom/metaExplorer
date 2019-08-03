@@ -214,6 +214,5 @@
       "dark": "rgb(175, 175, 175)",
       "contrastText": "#2b2b2b"
     }
-  },
-  "themeName": "MetaExplorer Material-UI Theme light"
+  }
 }

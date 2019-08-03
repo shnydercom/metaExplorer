@@ -1,3 +1,4 @@
+import React from 'react';
 import { BaseContainerRewrite } from "components/generic/baseContainer-rewrite";
 import { Route } from "react-router";
 import { LDRouteProps, LDOwnProps, LDConnectedDispatch, LDConnectedState } from "appstate/LDProps";
@@ -36,4 +37,4 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 	}
 }
 
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureLDApproot);
+export const LDApproot = connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureLDApproot);

@@ -1,4 +1,3 @@
-import { IKvStore } from "ldaccess/ikvstore";
 import { IItptRetriever } from "./iitpt-retriever";
 import { ILDOptions } from "./ildoptions";
 

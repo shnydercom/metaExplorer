@@ -1,10 +1,10 @@
-import ldBlueprint, { } from 'ldaccess/ldBlueprint';
-import { NavProcessAtomBpCfg, AbstractNavProcessAtom } from 'components/essentials/navigation/AbstractNavProcessAtom';
+import {
+	ldBlueprint, NavProcessAtomBpCfg, AbstractNavProcessAtom,
+	classNamesLD, VisualKeysDict, generateItptFromCompInfo
+} from '@metaexplorer/core';
 import { AppBar, Toolbar, IconButton, Typography, Button } from '@material-ui/core';
-import { classNamesLD } from 'components/reactUtils/compUtilFns';
-import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { generateItptFromCompInfo } from 'components/generic/generatorFns';
+import React from 'react';
 @ldBlueprint(NavProcessAtomBpCfg)
 export class MDNavProcessAtom extends AbstractNavProcessAtom {
 

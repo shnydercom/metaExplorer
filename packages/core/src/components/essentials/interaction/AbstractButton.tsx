@@ -1,3 +1,4 @@
+import React from 'react';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
 import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
@@ -92,7 +93,6 @@ export abstract class AbstractButton extends Component<LDConnectedState & LDConn
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		let navBarStatePart: MDButtonState = {
-			isDoRedirectCancel: false,
 			isDoRedirectConfirm: false
 		};
 		this.state = {

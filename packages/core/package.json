@@ -4,8 +4,11 @@
   "version": "0.0.1",
   "description": "a GUI editor for configuring bizSys-Server",
   "license": "MIT",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "./lib",
+  "types": "./lib/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "lib"
   ],
@@ -19,9 +22,6 @@
     "createmock": "node ./scripts/createItptMock.js"
   },
   "dependencies": {
-    "@material-ui/core": "^4.1.3",
-    "@material-ui/icons": "^4.2.1",
-    "@material-ui/pickers": "^3.1.2",
     "@types/dagre": "^0.7.42",
     "@types/gapi": "^0.0.38",
     "@types/gapi.auth2": "^0.0.50",
@@ -42,7 +42,6 @@
     "react": "^16.8.6",
     "react-dnd": "^9.0.1",
     "react-dom": "^16.8.6",
-    "react-dropzone": "^10.1.5",
     "react-gooey-nav": "^2.0.0",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
@@ -59,12 +58,10 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "@types/classnames": "^2.2.8",
-    "@types/jest": "^24.0.15",
     "@types/lodash": "^4.14.135",
     "@types/node": "12.0.10",
     "@types/react": "^16.8.22",
     "@types/react-dom": "^16.8.4",
-    "@types/react-dropzone": "^4.2.2",
     "@types/react-redux": "^7.1.1",
     "@types/react-router": "^5.0.2",
     "@types/react-router-dom": "^4.3.4",
@@ -79,7 +76,7 @@
     "file-loader": "^4.0.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
-    "jest": "^24.8.0",
+    "jest": "24.7.1",
     "mini-css-extract-plugin": "^0.7.0",
     "node-sass": "^4.12.0",
     "redux-devtools": "^3.5.0",

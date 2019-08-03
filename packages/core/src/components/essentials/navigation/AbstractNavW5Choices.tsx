@@ -119,7 +119,7 @@ export const TopNavW5ChoicesBpCfg: BlueprintConfig = {
 	crudSkills: "cRud"
 };
 
-export interface BottomNavState extends LDLocalState {
+export type BottomNavState = LDLocalState & {
 	isInitial: boolean;
 	tabIdx: number;
 	iconEnabledURLs: string[];

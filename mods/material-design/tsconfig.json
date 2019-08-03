@@ -1,14 +1,19 @@
 {
-  "include": ["src"],
+  "include": ["src", "src/**/*.json"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
     "baseUrl": ".",
+    "resolveJsonModule": true
   },
   "references": [
     {
       "path": "../../packages/core"
+    },
+    {
+      "*": "*"
     }
+
   ]
 }

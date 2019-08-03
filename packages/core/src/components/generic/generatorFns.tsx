@@ -10,6 +10,7 @@ import { BlueprintConfig } from "ldaccess/ldBlueprint";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { getKVStoreByKey, getAllKVStoresByKey } from "ldaccess/kvConvenienceFns";
+import React from "react";
 
 export function generateIntrprtrForProp(kvStores: IKvStore[], prop: string, retriever: string, routes: LDRouteProps): any {//JSX.Element {
 	let genKv = kvStores.find((elem) => elem.key === prop);
@@ -256,7 +257,7 @@ function getDerivedItptStateFromProps(
 			if (isMulti && isMulti.length !== itptKeys.length) {
 				console.warn("parameter isMulti in getDerivedItptStateFromProps has been set, " +
 					"but is not set for all itptKeys. Aborting function");
-				return;
+				return undefined;
 			}
 			let kvs: IKvStore[];
 			let retriever = props.ldOptions.visualInfo.retriever;
@@ -292,15 +293,15 @@ function getDerivedKVStateFromProps(
 	prevState: LDLocalKv,
 	kvKeys: string[],
 	isMulti?: boolean[]
-): LDLocalKv {
+): LDLocalKv | null {
 	if (props.ldOptions && props.ldOptions.resource && props.ldOptions.resource.kvStores && kvKeys.length > 0) {
 		if (isMulti && isMulti.length !== kvKeys.length) {
 			console.warn("parameter isMulti in getDerivedKVStateFromProps has been set, " +
 				"but is not set for all kvKeys. Aborting function");
-			return;
+			return null;
 		}
 		let kvs: IKvStore[];
-		let retriever = props.ldOptions.visualInfo.retriever;
+		//let retriever = props.ldOptions.visualInfo.retriever;
 		kvs = props.ldOptions.resource.kvStores;
 		let newValueMap = new Map<string, any>();
 		let newLDTypeMap = new Map<string, any>();
@@ -348,6 +349,7 @@ function getDerivedKVStateFromProps(
 		}
 		return null;
 	}
+	return null;
 }
 
 /**

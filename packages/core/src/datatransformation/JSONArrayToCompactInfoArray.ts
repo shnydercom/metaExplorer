@@ -1,12 +1,12 @@
 import { AbstractDataTransformer } from "./abstractDataTransformer";
 import { IKvStore } from "ldaccess/ikvstore";
-import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
+import { ldBlueprint, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { LDDict } from "ldaccess/LDDict";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { VisualTypesDict, VisualKeysDict } from "components/visualcomposition/visualDict";
 
 export const transfInputKey = UserDefDict.inputData;
-export const transfOutputKey = UserDefDict.outputData;
+const transfOutputKey = UserDefDict.outputData;
 export const headerField = "HeaderTextField";
 export const shField = "SubHeaderTextField";
 

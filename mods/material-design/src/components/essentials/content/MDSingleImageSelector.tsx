@@ -1,8 +1,11 @@
-import ldBlueprint from "ldaccess/ldBlueprint";
-import { AbstractSingleImageSelector, SingleImageSelectorBpCfg, SingleImageSelectorStateEnum } from "components/essentials/content/AbstractSingleImageSelector";
 import { Button } from "@material-ui/core";
-import { DOMCamera } from "components/peripherals/camera/dom-camera";
+import { DOMCamera, ldBlueprint, AbstractSingleImageSelector, SingleImageSelectorBpCfg, SingleImageSelectorStateEnum } from "@metaexplorer/core";
 import { default as Dropzone } from "react-dropzone";
+import React from "react";
+
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+
+import AddPhotoAlternate from '@material-ui/icons/AddPhotoAlternate';
 
 @ldBlueprint(SingleImageSelectorBpCfg)
 export class MDSingleImageSelector extends AbstractSingleImageSelector {
@@ -10,10 +13,11 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 	render() {
 		const { curStep, isCamAvailable, previewURL } = this.state;
 		let dropzoneRef;
-		return (<Dropzone className={curStep === SingleImageSelectorStateEnum.isPreviewing ? "single-img-sel accept" : "single-img-sel"}
+		return (<Dropzone
+			// className={curStep === SingleImageSelectorStateEnum.isPreviewing ? "single-img-sel accept" : "single-img-sel"}
 			accept="image/*"
 			multiple={false}
-			disableClick={true}
+			//disableClick={true}
 			ref={(node) => { dropzoneRef = node; }}
 			onDropAccepted={(acceptedOrRejected) => {
 				let files = acceptedOrRejected.map((file) => ({
@@ -23,7 +27,7 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 				this.onDropSuccess(files[0], files[0].preview);
 			}}
 			onDropRejected={() => this.onDropFailure()}
-			onDragStart={() => this.startDrag()}
+			//onDragStart={() => this.startDrag()}
 			onDragEnter={() => this.startDrag()}
 			onDragOver={() => this.startDrag()}
 			onDragLeave={() => this.onDropFailure()}
@@ -32,8 +36,14 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 			{((dzstate) => {
 				switch (curStep) {
 					case SingleImageSelectorStateEnum.isSelectInputType:
-						return <div className="accept"> {isCamAvailable ? <Button className="btn-extension" icon="add_a_photo" onClick={() => { this.startCamera(); }}>Open Camera</Button> : null}
-							<Button className="btn-extension" icon="add_photo_alternate" onClick={() => { dropzoneRef.open(); }}>Select Image</Button></div>;
+						return <div className="accept"> {isCamAvailable ? <Button className="btn-extension" onClick={() => { this.startCamera(); }}>
+							<AddAPhotoIcon />
+							Open Camera
+							</Button> : null}
+							<Button className="btn-extension" onClick={() => { dropzoneRef.open(); }}>
+								<AddPhotoAlternate />
+								Select Image
+								</Button></div>;
 					case SingleImageSelectorStateEnum.isCamShooting:
 						return <DOMCamera showControls onImageCaptured={(a) => {
 							this.onDropSuccess(null, a);

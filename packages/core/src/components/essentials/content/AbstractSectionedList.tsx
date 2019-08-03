@@ -26,8 +26,7 @@ export const SectionedListCfg: BlueprintConfig = {
 	interpretableKeys: sectionedListInputKeys,
 	crudSkills: "cRud"
 };
-export interface SectionedListState extends LDLocalState {
-}
+export type SectionedListState = LDLocalState;
 export abstract class AbstractSectionedList extends Component<LDConnectedState
 	& LDConnectedDispatch & LDOwnProps, SectionedListState>
 	implements IBlueprintItpt {

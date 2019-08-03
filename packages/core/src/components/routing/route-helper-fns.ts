@@ -1,7 +1,7 @@
 import { LDRouteProps } from "appstate/LDProps";
 
 export function cleanRouteString(destination: string, routes: LDRouteProps) {
-	const { match, location } = routes;
+	const { match } = routes;
 	let route: string = destination;
 	if (route.startsWith("/")) {//i.e attach to path/create sub-path
 		route = route.substring(1);

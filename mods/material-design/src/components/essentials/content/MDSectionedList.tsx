@@ -1,7 +1,7 @@
-import ldBlueprint from "ldaccess/ldBlueprint";
-import { AbstractSectionedList, SectionedListCfg, sectionElements, sectionHeadings } from "components/essentials/content/AbstractSectionedList";
+import { AbstractSectionedList, SectionedListCfg, sectionElements, sectionHeadings, ldBlueprint } from "@metaexplorer/core";
 import { List, ListSubheader } from "@material-ui/core";
 import { Fragment } from "react";
+import React from "react";
 
 @ldBlueprint(SectionedListCfg)
 export class MDSectionedList extends AbstractSectionedList {

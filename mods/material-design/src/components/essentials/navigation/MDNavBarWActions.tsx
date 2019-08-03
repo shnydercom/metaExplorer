@@ -1,15 +1,11 @@
-import ldBlueprint, { } from 'ldaccess/ldBlueprint';
-import { create } from 'jss';
-
-import { AbstractNavBarWActions, NavBarWActionsBpCfg } from 'components/essentials/navigation/AbstractNavBarWActions';
+import {ldBlueprint, AbstractNavBarWActions, NavBarWActionsBpCfg, VisualKeysDict
+, classNamesLD, LDConnectedState, LDConnectedDispatch, LDOwnProps } from '@metaexplorer/core';
 import { AppBar, Toolbar, IconButton, Typography, Popover, makeStyles, Theme } from '@material-ui/core';
-import { VisualKeysDict } from 'components/visualcomposition/visualDict';
-import { classNamesLD } from 'components/reactUtils/compUtilFns';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
-import { StylesProvider, styled, createStyles } from '@material-ui/styles';
+import { createStyles } from '@material-ui/styles';
+import React from 'react';
 
 /*
 TODOs:

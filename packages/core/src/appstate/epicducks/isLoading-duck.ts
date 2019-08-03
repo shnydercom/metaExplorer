@@ -1,9 +1,8 @@
 import { Action } from 'redux';
 import { MOD_LOAD_REQUEST, MOD_LOAD_RESULT_ALL } from './mod-duck';
 import { ActionsObservable, ofType, StateObservable } from 'redux-observable';
-import { tap, mergeMap, mapTo } from 'rxjs/operators';
+import { tap, mapTo } from 'rxjs/operators';
 import { changeMainAppItpt } from 'appconfig/retrieverAccessFns';
-import { Observable } from 'rxjs';
 import { ExplorerState } from 'appstate/store';
 export const IS_LOADING_TRUE = 'shnyder/IS_LOADING_TRUE';
 export const IS_LOADING_FALSE = 'shnyder/IS_LOADING_FALSE';

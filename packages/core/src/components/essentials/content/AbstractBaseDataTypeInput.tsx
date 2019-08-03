@@ -1,3 +1,4 @@
+import React from 'react';
 import { BlueprintConfig } from 'ldaccess/ldBlueprint';
 import { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';

@@ -1,9 +1,8 @@
-import ldBlueprint from "ldaccess/ldBlueprint";
-import { TopNavW5ChoicesBpCfg } from "components/essentials/navigation/AbstractNavW5Choices";
+import {ldBlueprint, TopNavW5ChoicesBpCfg, classNamesLD} from "@metaexplorer/core";
 import { MDBottomNavigation } from "./MDBottomNavigation";
-import { classNamesLD } from "components/reactUtils/compUtilFns";
 import { Route } from "react-router";
 import { BottomNavigation } from "@material-ui/core";
+import React from "react";
 
 @ldBlueprint(TopNavW5ChoicesBpCfg)
 export class MDTopNavigation extends MDBottomNavigation {

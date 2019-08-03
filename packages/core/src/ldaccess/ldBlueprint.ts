@@ -72,7 +72,7 @@ function blueprintDecorator<T extends { new(...args: any[]): IBlueprintItpt }>(c
     return classToExtend;
 }
 
-export default function ldBlueprint(blueprintCfg: BlueprintConfig, replaceKVs: boolean = false) {
+export const ldBlueprint = (blueprintCfg: BlueprintConfig, replaceKVs: boolean = false) => {
     //eval phase
     if (blueprintCfg == null) throw new LDError("blueprintCfg must not be null");
     if (blueprintCfg.nameSelf == null) throw new LDError("blueprintCfg.nameSelf must not be null");

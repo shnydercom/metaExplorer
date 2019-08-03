@@ -15,5 +15,3 @@ export let appItptMatcherFn = (): IItptMatcher => {
 	}
 	return appItptMatcher;
 };
-
-//export default appItptMatcherFn;

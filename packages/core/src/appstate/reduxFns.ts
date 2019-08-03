@@ -3,14 +3,12 @@ import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDPr
 import { ILDOptions } from "ldaccess/ildoptions";
 import { IKvStore } from "ldaccess/ikvstore";
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction, dispatchKvUpdateAction, ldAction } from "appstate/epicducks/ldOptions-duck";
-import { ILDResource } from "ldaccess/ildresource";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { OutputKVMapElement, OutputKVMap, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 import { linearSplitRequestAction } from "./epicducks/linearSplit-duck";
 import { refMapREQUESTAction, refMapSUCCESSAction } from "./epicducks/refMap-duck";
 import { Dispatch, Action } from "redux";
-import { LDDict } from "ldaccess/LDDict";
 import { ITPT_REFMAP_BASE } from "ldaccess/iitpt-retriever";
 import { AppRootProps } from "approot";
 
@@ -36,7 +34,8 @@ export const mapStateToProps = (state: ExplorerState, ownProps: LDOwnProps): LDO
 const ldTkStrRefToFilledProp = (state: ExplorerState, ownProps: LDOwnProps, ldOptionsLoc: ILDOptions): ILDOptions => {
 	let rv: ILDOptions = { ...ldOptionsLoc };
 	let ldTokenString: string = ldOptionsLoc.ldToken.get();
-	let newKVStores = ldOptionsLoc.resource.kvStores.map((val, idx) => {
+	/*let newKVStores = */
+	ldOptionsLoc.resource.kvStores.map((val, idx) => {
 		if (val.ldType !== UserDefDict.ldTokenStringReference) return val;
 		let ldOptionsSub = state.ldoptionsMap[val.value];
 		if (!ldOptionsSub) return val;
@@ -57,11 +56,11 @@ const ldTkStrRefToFilledProp = (state: ExplorerState, ownProps: LDOwnProps, ldOp
 		if (!rvInner) return val;
 		return rvInner;
 	});
-	let newResource: ILDResource = {
+	/*let newResource: ILDResource = {
 		kvStores: newKVStores,
 		webInResource: ldOptionsLoc.resource.webInResource,
 		webOutResource: ldOptionsLoc.resource.webOutResource
-	};
+	};*/
 	return rv;
 };
 

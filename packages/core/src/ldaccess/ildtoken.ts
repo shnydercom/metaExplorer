@@ -54,7 +54,7 @@ export class NetworkPreferredToken implements ILDToken {
 		this.clientVal = val;
 	}
 	get(): string {
-		let rv: string = null;
+		//let rv: string = null;
 		if (this.clientVal && this.nwVal) return this.nwVal;
 		if (!this.clientVal && !this.nwVal) return null;
 		return this.clientVal ? this.clientVal : this.nwVal;

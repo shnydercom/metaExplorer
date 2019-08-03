@@ -2,11 +2,9 @@ import { IBlueprintItpt, BlueprintConfig, OutputKVMap } from "ldaccess/ldBluepri
 import { IKvStore } from "ldaccess/ikvstore";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { UserDefDict } from "ldaccess/UserDefDict";
-import { isObjPropertyRef, isOutputKVSame, ldOptionsDeepCopy } from "ldaccess/ldUtils";
-import { ILDOptionsMapStatePart } from "appstate/store";
+import { isObjPropertyRef, isOutputKVSame } from "ldaccess/ldUtils";
 import { applicationStore } from "approot";
-import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
-import { ldOptionsClientSideUpdateAction, dispatchKvUpdateAction } from "appstate/epicducks/ldOptions-duck";
+import { dispatchKvUpdateAction } from "appstate/epicducks/ldOptions-duck";
 import { LDError } from "appstate/LDError";
 
 export const AbstractDataTransformerItptKeys = [];

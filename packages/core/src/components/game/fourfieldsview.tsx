@@ -1,25 +1,13 @@
-import { connect } from 'react-redux';
+import React from 'react';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { VisualKeysDict } from 'components/visualcomposition/visualDict';
 import { UserDefDict } from 'ldaccess/UserDefDict';
-import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
 import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
-
-type OwnProps = {
-	test: string;
-};
-type ConnectedState = {
-	test: string;
-};
-
-type ConnectedDispatch = {
-	test: string;
-};
+import { Component } from 'react';
 
 export const GAME_TASK_HEADING = "GameTaskHeading";
 export const GAME_TASK_TXT = "GameTaskText";
@@ -57,7 +45,7 @@ let initialKVStores: IKvStore[] = [
 ];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
-	nameSelf: FourFieldsViewIntrprtrName,
+	nameSelf: cfgType,
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
@@ -191,5 +179,3 @@ export class PureFourFieldsView extends Component<LDConnectedState & LDConnected
 	}
 
 }
-
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureFourFieldsView);

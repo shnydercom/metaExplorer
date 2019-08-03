@@ -96,7 +96,7 @@ export class DefaultItptRetriever implements IItptRetriever {
 	 * @param crudSkillsA
 	 * @param crudSkillsB
 	 */
-	private extendCrudSkills(crudSkillsA: string, crudSkillsB: string): string {
+/*	private extendCrudSkills(crudSkillsA: string, crudSkillsB: string): string {
 		if (crudSkillsA === crudSkillsB) return crudSkillsA;
 		let rv: string = "";
 		for (var i = 0; i < crudSkillsA.length; i++) {
@@ -105,11 +105,11 @@ export class DefaultItptRetriever implements IItptRetriever {
 			rv += a < b ? a : b;
 		}
 		return rv;
-	}
+	}*/
 
 	private searchSingleObjItpt(term: string, crudSkills: string) {
 		let searchBaseType: string = this.getBaseTypeFromType(term);
-		let searchAdditionalTypes: string[] = this.getAdditionalTypesFromType(term);
+		//let searchAdditionalTypes: string[] = this.getAdditionalTypesFromType(term);
 		let candidates: IItptInfoItem[] = this.itptCollection.filter(
 			(curItm) => curItm.baseType === searchBaseType);
 		if (candidates == null) return null;

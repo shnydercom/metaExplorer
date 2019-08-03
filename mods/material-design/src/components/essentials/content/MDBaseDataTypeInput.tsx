@@ -1,10 +1,10 @@
 import assertNever from "assert-never";
-import { AbstractBaseDataTypeInput, wrapBaseDataTypeGDSF, baseDataTypeBpcfgs } from "components/essentials/content/AbstractBaseDataTypeInput";
-import { LDBaseDataType } from "ldaccess/LDBaseDataType";
-import ldBlueprint from "ldaccess/ldBlueprint";
-import { parseDate, parseTime, parseText, parseNumber, parseBoolean } from "ldaccess/ldtypesystem/parseSimple";
-import { LDDict } from "ldaccess/LDDict";
+import {
+	AbstractBaseDataTypeInput, wrapBaseDataTypeGDSF, baseDataTypeBpcfgs, LDBaseDataType, ldBlueprint,
+	parseDate, parseText, parseNumber, parseBoolean, LDDict
+} from "@metaexplorer/core";
 import { Switch, TextField, FormControlLabel, } from "@material-ui/core";
+import React from "react";
 
 abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 	renderSingleKv(baseDT: LDBaseDataType) {
@@ -57,7 +57,7 @@ abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 	sundayFirstDayOfWeek />*/
 			case LDDict.DateTime:
 				var parsedDate = parseDate(this.state.singleKVOutput);
-				var parsedTime = parseTime(this.state.singleKVOutput);
+				//var parsedTime = parseTime(this.state.singleKVOutput);
 				return <div className="dateTimePicker">
 					<TextField
 						id="datetime-local"

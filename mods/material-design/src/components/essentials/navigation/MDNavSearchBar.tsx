@@ -1,13 +1,9 @@
-import ldBlueprint from 'ldaccess/ldBlueprint';
-import { LDLocalState } from 'appstate/LDProps';
+import {ldBlueprint, LDLocalState, AbstractNavSearchBar, NavSearchBarBpCfg,
+	cleanRouteString, classNamesLD, VisualKeysDict} from '@metaexplorer/core';
 import { Redirect } from 'react-router';
-import { AbstractNavSearchBar, NavSearchBarBpCfg } from 'components/essentials/navigation/AbstractNavSearchBar';
-import { cleanRouteString } from 'components/routing/route-helper-fns';
-import { Toolbar, IconButton, AppBar, Input, InputBase } from '@material-ui/core';
+import { Toolbar, IconButton, AppBar,InputBase } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import SearchIcon from '@material-ui/icons/Search';
-import { classNamesLD } from 'components/reactUtils/compUtilFns';
-import { VisualKeysDict } from 'components/visualcomposition/visualDict';
+import React from 'react';
 
 export const NavSearchBarName = "shnyder/material-design/NavSearchBar";
 export interface NavSearchBarState extends LDLocalState {

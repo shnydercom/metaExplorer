@@ -1,17 +1,16 @@
-import { connect } from 'react-redux';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualKeysDict } from '../visualcomposition/visualDict';
 
 import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from '../generic/generatorFns';
 import { Route } from 'react-router';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component} from 'react';
 import { ActionKeysDict, ActionTypesDict, ActionType } from 'components/actions/ActionDict';
+import React from 'react';
 
 export const ROUTE_ISABSOLUTE = "isRouteAbsolute";
 export const ROUTE_ISEXACT = "isRouteExact";
@@ -131,4 +130,3 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 		return <Route exact={isExact} path={newPath} component={this.renderInputContainer} />;
 	}
 }
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureRouteComponent);

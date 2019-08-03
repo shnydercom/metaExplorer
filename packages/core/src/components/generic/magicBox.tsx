@@ -1,5 +1,5 @@
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap, OutputKVMapElement } from 'ldaccess/ldBlueprint';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap, OutputKVMapElement } from 'ldaccess/ldBlueprint';
 
 import { BaseContainerRewrite } from './baseContainer-rewrite';
 import { LDLocalState, LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
@@ -10,6 +10,7 @@ import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
 import { NetworkPreferredToken } from 'ldaccess/ildtoken';
 import { getKVStoreByKey } from 'ldaccess/kvConvenienceFns';
 import { UserDefDict } from 'ldaccess/UserDefDict';
+import React from 'react';
 
 export const MagicBoxName = "shnyder/MagicBox";
 const inputdata = UserDefDict.inputData;

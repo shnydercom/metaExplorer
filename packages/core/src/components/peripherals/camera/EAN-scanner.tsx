@@ -1,15 +1,13 @@
-import { connect } from 'react-redux';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
-import { compNeedsUpdate } from 'components/reactUtils/compUtilFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component } from 'react';
 import { CameraSwitcherTabs } from './cameraSwitcherTabs';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { initLDLocalState } from '../../generic/generatorFns';
+import React from 'react';
 
 //TODO: find proper way to include quagga with types, compiling
 //import * as Quagga from 'quagga';
@@ -211,4 +209,3 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 	}
 
 }
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(EANScanner);

@@ -1,6 +1,6 @@
-import { Action, Store } from 'redux';
-import { ActionsObservable, Epic, Options, ofType } from "redux-observable";
-import { AjaxError, Observable } from "rxjs/Rx";
+import { Action } from 'redux';
+import { ActionsObservable, ofType } from "redux-observable";
+import { AjaxError } from "rxjs/Rx";
 import { tap, mergeMap } from 'rxjs/operators';
 //import "rxjs/Rx"; //TODO: re-check this line and only import what's needed
 //source: https://mikebridge.github.io/articles/typescript-redux-observable-epic-test/
@@ -62,5 +62,3 @@ export const loadSchemaEpic = (action$: ActionsObservable<any>, store: any, { ge
         )
     );
 };
-
-export default loadSchemaEpic;

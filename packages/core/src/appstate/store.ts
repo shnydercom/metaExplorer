@@ -4,7 +4,7 @@ import { rootEpic, rootReducer } from './rootduck';
 import { ImageUploadAPI } from 'apis/image-upload';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDOptionsAPI } from 'apis/ldoptions-api';
-import DevTools from './devTools';
+import { DevTools } from './devTools';
 import { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { IModStatePart } from './modstate';
 import { ModAPI } from 'apis/mod-api';
@@ -71,5 +71,3 @@ export function configureStore(initialState: ExplorerState): Store<ExplorerState
   epicMiddleware.run(rootEpic as any);
   return store;
 }
-
-export default configureStore;

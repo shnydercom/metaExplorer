@@ -1,13 +1,12 @@
-import { connect } from 'react-redux';
+import React from 'react';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { VisualKeysDict } from 'components/visualcomposition/visualDict';
-import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
 import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
-import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { gdsfpLD, initLDLocalState } from 'components/generic/generatorFns';
+import { Component } from 'react';
 
 import { Menu, Item } from "react-gooey-nav";
 
@@ -58,7 +57,7 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	initialKvStores: IKvStore[];
 
-	private renderSub = generateItptFromCompInfo.bind(this);
+	//private renderSub = generateItptFromCompInfo.bind(this);
 
 	constructor(props: any) {
 		super(props);
@@ -73,9 +72,9 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 		};
 	}
 	render() {
-		const { localValues } = this.state;
-		const centralIconTxt = localValues.get(centralIcon);
-		const iconNames: string[] = localValues.get(VisualKeysDict.iconName);
+		// const { localValues } = this.state;
+		//const centralIconTxt = localValues.get(centralIcon);
+		//const iconNames: string[] = localValues.get(VisualKeysDict.iconName);
 		/*return <div className="flex-container" style={{ flexDirection: "column-reverse" }}>
 			<div className="flex-filler" style={{ minHeight: "300px" }}>
 				{iconNames ? <Menu orientation="bottom" >
@@ -110,5 +109,3 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 	}
 
 }
-
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureGooeyNav);

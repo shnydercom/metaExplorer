@@ -1,9 +1,6 @@
-import ldBlueprint, { } from 'ldaccess/ldBlueprint';
-
-import { NavBarInputContainerBpCfg, AbstractNavBarInputContainer } from 'components/essentials/navigation/AbstractNavBarInputContainer';
+import {ldBlueprint, NavBarInputContainerBpCfg, AbstractNavBarInputContainer, classNamesLD, VisualKeysDict} from '@metaexplorer/core';
 import { AppBar, Toolbar } from '@material-ui/core';
-import { classNamesLD } from 'components/reactUtils/compUtilFns';
-import { VisualKeysDict } from 'components/visualcomposition/visualDict';
+import React from 'react';
 
 @ldBlueprint(NavBarInputContainerBpCfg)
 export class MDNavBarInputContainer extends AbstractNavBarInputContainer {

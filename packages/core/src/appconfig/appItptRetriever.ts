@@ -1,6 +1,5 @@
-import { IItptRetriever } from "ldaccess/iItpt-retriever";
+import { IItptRetriever } from "ldaccess/iitpt-retriever";
 
-import { LDDict } from "ldaccess/LDDict";
 import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
 
 class AppItptRetriever extends ReduxItptRetriever{
@@ -15,5 +14,3 @@ export let appItptRetrFn = (): IItptRetriever => {
 	}
 	return appIntRetr;
 };
-
-export default appItptRetrFn;

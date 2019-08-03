@@ -1,7 +1,7 @@
 import { SideFXDict } from "sidefx/SideFXDict";
 import { LDDict } from "ldaccess/LDDict";
 import { IKvStore } from "ldaccess/ikvstore";
-import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
+import { ldBlueprint, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { resolveNS } from "ldaccess/ns/nameSpaceResolution";
 import { LDRetrieverSuperRewrite, ldRetrCfgIntrprtKeys, LDRetrieverSuperState } from "./LDRetrieverSuper-rewrite";

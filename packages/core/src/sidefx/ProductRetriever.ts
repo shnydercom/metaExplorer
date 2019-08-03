@@ -1,7 +1,7 @@
 import { SideFXDict } from "sidefx/SideFXDict";
 import { LDDict } from "ldaccess/LDDict";
 import { IKvStore } from "ldaccess/ikvstore";
-import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
+import { ldBlueprint, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { LDRetrieverSuperRewrite, ldRetrCfgIntrprtKeys } from "./LDRetrieverSuper-rewrite";
 
 export const productRetrieverName = "shnyder/productRetriever";

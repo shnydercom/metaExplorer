@@ -1,5 +1,4 @@
 import { IKvStore } from "../ikvstore";
-import { LDDict } from "../LDDict";
 
 export const parseBoolean = (inputKv: IKvStore): boolean => {
 	if (!inputKv) return false;

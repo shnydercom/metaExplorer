@@ -1,16 +1,13 @@
-import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { UserDefDict } from 'ldaccess/UserDefDict';
 import { Component } from 'react';
 import Card from 'metaexplorer-react-components/lib/components/card/card';
 
 import { Redirect } from 'react-router';
-import { ActionTypesDict } from '@metaexplorer/core/components/actions/ActionDict';
-import { VisualTypesDict } from 'components/visualcomposition/visualDict';
-import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
-import { cleanRouteString } from 'components/routing/route-helper-fns';
+import {
+	ActionTypesDict, UserDefDict, LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState,
+	ILDOptions, BlueprintConfig, IBlueprintItpt, OutputKVMap, ldBlueprint, IKvStore, VisualTypesDict,
+	gdsfpLD, generateItptFromCompInfo, initLDLocalState, cleanRouteString
+} from '@metaexplorer/core';
+import React from 'react';
 
 export const CONTAINER_FRONT = "frontContainer";
 export const CONTAINER_MIDDLE = "middleContainer";

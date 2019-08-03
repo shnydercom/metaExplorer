@@ -1,4 +1,4 @@
-import { ActionsObservable, Epic, Options, ofType } from "redux-observable";
+import { ActionsObservable, ofType } from "redux-observable";
 import { tap, mergeMap, map, catchError } from 'rxjs/operators';
 import { IModStatePart, SingleModStateKeysDict, IModStatus } from 'appstate/modstate';
 import { of, from } from 'rxjs';
@@ -18,6 +18,7 @@ export type ModAction =
 
 export interface IModAjaxError {
 	type: string;
+	modId: string;
 	message: string;
 }
 
@@ -101,5 +102,3 @@ export const loadModEpic = (action$: ActionsObservable<any>, store: any, { modAP
 		)
 	);
 };
-
-export default loadModEpic;

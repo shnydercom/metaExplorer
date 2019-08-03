@@ -1,13 +1,12 @@
-import { connect } from 'react-redux';
 import { LDDict } from 'ldaccess/LDDict';
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { mapStateToProps, mapDispatchToProps } from 'appstate/reduxFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component } from 'react';
 import { gdsfpLD, initLDLocalState } from '../generic/generatorFns';
 import { VisualKeysDict } from './visualDict';
+import React from 'react';
 
 let cfgType: string = LDDict.ImageObject;
 export const CSS_OBJECT_FIT = "CSSObjectFit";
@@ -78,4 +77,3 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 		</div>;
 	}
 }
-export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureImgDisplay);

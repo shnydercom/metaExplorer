@@ -1,5 +1,3 @@
-import { LDConsts } from "ldaccess/LDconsts";
-
 import { IItptMatcher } from "ldaccess/iitpt-matcher";
 import { IKvStore } from "ldaccess/ikvstore";
 
@@ -7,10 +5,11 @@ import { IItptRetriever } from "ldaccess/iitpt-retriever";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 
+/*
 let matchIsType = (a: IKvStore) => a.key === LDConsts.type || a.key === LDConsts.isA;
 let matchIsLang = (a: IKvStore) => a.key === LDConsts.lang;
 let matchIsId = (a: IKvStore) => a.key === LDConsts.id || a.key === LDConsts.iri;
-
+*/
 /**
  * the matcher is used for encapsuling the decision process that associates keys and values in a kv-store a matching itpt.
  * Currently, this is also the place where additional itpts are registered to the AppItptRetriever, because it's not

@@ -1,6 +1,6 @@
-import ldBlueprint, { } from 'ldaccess/ldBlueprint';
-import { AbstractSimpleTextTable, tableHeadings, tableRows, simpleTextTableCfg } from '@metaexplorer/core/components/essentials/content/AbstractSimpleTextTable';
+import {ldBlueprint, AbstractSimpleTextTable, tableHeadings, tableRows, simpleTextTableCfg } from '@metaexplorer/core';
 import { TableBody, Table, TableHead, TableRow, TableCell } from '@material-ui/core';
+import React from 'react';
 
 @ldBlueprint(simpleTextTableCfg)
 export class MDSimpleTextTable extends AbstractSimpleTextTable {

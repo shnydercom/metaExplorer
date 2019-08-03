@@ -214,6 +214,5 @@
       "dark": "rgb(0, 38, 66)",
       "contrastText": "#fff"
     }
-  },
-  "themeName": "MetaExplorer Material-UI Theme dark"
+  }
 }

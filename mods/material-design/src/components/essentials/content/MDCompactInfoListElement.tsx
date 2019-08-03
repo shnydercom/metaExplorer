@@ -1,7 +1,6 @@
-import { AbstractCompactInfoListElement, CompactInfoListElementCfg } from "components/essentials/content/AbstractCompactInfoListElement";
-import { VisualKeysDict } from "components/visualcomposition/visualDict";
-import ldBlueprint from "ldaccess/ldBlueprint";
+import {ldBlueprint, VisualKeysDict,  AbstractCompactInfoListElement, CompactInfoListElementCfg } from "@metaexplorer/core";
 import { ListItem, ListItemText } from "@material-ui/core";
+import React from "react";
 
 @ldBlueprint(CompactInfoListElementCfg)
 export class MDCompactInfoListElement extends AbstractCompactInfoListElement {

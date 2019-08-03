@@ -1,3 +1,4 @@
+import React from 'react';
 import { IKvStore } from 'ldaccess/ikvstore';
 import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';

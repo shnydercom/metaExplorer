@@ -29,8 +29,7 @@ export const CompactInfoListElementCfg: BlueprintConfig = {
 	crudSkills: "cRud",
 	canInterpretType: VisualTypesDict.compactInfoElement
 };
-export interface CompactInfoListElementState extends LDLocalState {
-}
+export type CompactInfoListElementState = LDLocalState;
 
 export abstract class AbstractCompactInfoListElement extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, CompactInfoListElementState>
 	implements IBlueprintItpt {

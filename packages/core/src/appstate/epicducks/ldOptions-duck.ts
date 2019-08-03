@@ -92,7 +92,7 @@ export const ldOptionsFailureAction = (message: string, targetReceiverLnk): LDEr
 	return {
 		type: LDOPTIONS_REQUEST_ERROR,
 		message,
-		targetReceiverLnk
+		//targetReceiverLnk
 	};
 };
 

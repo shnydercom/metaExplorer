@@ -6,7 +6,7 @@ import DockMonitor from 'redux-devtools-dock-monitor';
 /**
  * Create the DevTools component and export it.
  */
-export default createDevTools(
+export const DevTools = createDevTools(
   <DockMonitor
     /**
      * Hide or show the dock with "ctrl-h".

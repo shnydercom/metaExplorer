@@ -1,10 +1,10 @@
-import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
+import { ldBlueprint, BlueprintConfig } from "ldaccess/ldBlueprint";
 import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
 import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
 import { ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
-import appIntprtrRetr, { appItptRetrFn } from 'appconfig/appItptRetriever';
+import { appItptRetrFn } from 'appconfig/appItptRetriever';
 import { applicationStore } from "approot";
 import { LDError } from "appstate/LDError";
 import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
@@ -20,7 +20,7 @@ import { appItptMatcherFn } from "./appItptMatcher";
  * @param input the BlueprintConfig used as a setup for the new Itpt
  */
 export const addBlueprintToRetriever = (input: BlueprintConfig, retrieverName?: string) => {
-	let retriever = retrieverName ? appItptMatcherFn().getItptRetriever(retrieverName) as ReduxItptRetriever : appIntprtrRetr() as ReduxItptRetriever;
+	let retriever = retrieverName ? appItptMatcherFn().getItptRetriever(retrieverName) as ReduxItptRetriever : appItptRetrFn() as ReduxItptRetriever;
 	if (!retriever) throw new LDError("retriever " + retrieverName + " not found");
 	let candidate = retriever.getUnconnectedByNameSelf(input.subItptOf);
 	if (!candidate) {

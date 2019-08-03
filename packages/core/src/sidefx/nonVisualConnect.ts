@@ -1,5 +1,5 @@
 import { applicationStore } from "approot";
-import { ConsumeLDOptionsFunc, IBlueprintItpt } from "ldaccess/ldBlueprint";
+import { IBlueprintItpt } from "ldaccess/ldBlueprint";
 import { ILDOptionsMapStatePart } from "appstate/store";
 import { isLDOptionsSame } from "ldaccess/ldUtils";
 

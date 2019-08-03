@@ -1,13 +1,14 @@
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 import { VisualKeysDict } from '../visualcomposition/visualDict';
 
 import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from '../generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
+import { Component } from 'react';
 import CircleView from 'metaexplorer-react-components/lib/components/circle/circleview';
+import React from 'react';
 
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer];
@@ -84,5 +85,3 @@ export class PureCircleLayout extends PureLayoutComponent {
 		return <CircleView>{this.renderInputContainer()}</CircleView>;
 	}
 }
-
-//export default connect<LDConnectedState, LDConnectedDispatch, LDOwnProps>(mapStateToProps, mapDispatchToProps)(PureVHcenteredColumnLayout);

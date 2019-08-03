@@ -1,14 +1,14 @@
 import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
 import { UserDefDict } from 'ldaccess/UserDefDict';
 
-import { Component, ComponentClass, StatelessComponent, Fragment } from 'react';
+import { Component, Fragment } from 'react';
 import { LDDict } from 'ldaccess/LDDict';
-import { isReactComponent } from 'components/reactUtils/reactUtilFns';
 import { VisualKeysDict } from './visualcomposition/visualDict';
 import { gdsfpLD, initLDLocalState, generateItptFromCompInfo } from './generic/generatorFns';
+import React from 'react';
 
 export const projCfgName = "ProjectConfiguration";
 

@@ -1,9 +1,7 @@
-import ldBlueprint, { } from 'ldaccess/ldBlueprint';
+import {ldBlueprint, BottomNavW5ChoicesBpCfg, AbstractBottomNavigation,cleanRouteString, classNamesLD } from '@metaexplorer/core';
 import { Redirect, Route } from 'react-router';
-import { BottomNavW5ChoicesBpCfg, AbstractBottomNavigation } from 'components/essentials/navigation/AbstractNavW5Choices';
-import { cleanRouteString } from 'components/routing/route-helper-fns';
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
-import { classNamesLD } from 'components/reactUtils/compUtilFns';
+import React from 'react';
 
 @ldBlueprint(BottomNavW5ChoicesBpCfg)
 export class MDBottomNavigation extends AbstractBottomNavigation {

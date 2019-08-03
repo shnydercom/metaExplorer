@@ -1,4 +1,4 @@
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from "ldaccess/ldBlueprint";
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from "ldaccess/ldBlueprint";
 import { VisualKeysDict, VisualTypesDict } from "../visualcomposition/visualDict";
 import { IKvStore } from "ldaccess/ikvstore";
 import { Component } from "react";
@@ -7,6 +7,7 @@ import { gdsfpLD, initLDLocalState } from "../generic/generatorFns";
 import { ILDOptions } from "ldaccess/ildoptions";
 import { Redirect } from "react-router";
 import { cleanRouteString } from "./route-helper-fns";
+import React from "react";
 
 export const RouteRedirectName = "shnyder/routing/Redirect";
 let cfgIntrprtKeys: string[] =
@@ -64,7 +65,7 @@ export class PureRedirectComponent extends Component<LDConnectedState & LDConnec
 	}
 	render() {
 		const { localValues } = this.state;
-		const { match, location } = this.props.routes;
+		const { location } = this.props.routes;
 		let routeSendConfirm = localValues.get(VisualKeysDict.routeSend_confirm);
 		if (!routeSendConfirm) return null;
 		routeSendConfirm = cleanRouteString(routeSendConfirm, this.props.routes);

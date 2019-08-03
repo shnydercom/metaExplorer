@@ -1,19 +1,17 @@
 import { ILDOptionsMapStatePart, ExplorerState } from "../store";
 import { ILDOptions } from "ldaccess/ildoptions";
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap, OutputKVMapElement } from "ldaccess/ldBlueprint";
+import { ldBlueprint, BlueprintConfig, OutputKVMap, OutputKVMapElement } from "ldaccess/ldBlueprint";
 import { ActionsObservable, ofType } from "redux-observable";
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { IKvStore } from "ldaccess/ikvstore";
 import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
-import { LDDict } from "ldaccess/LDDict";
 import { UserDefDict } from "ldaccess/UserDefDict";
 import { isObjPropertyRef, ldBlueprintCfgDeepCopy } from "ldaccess/ldUtils";
-import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { ITPT_REFMAP_BASE } from "ldaccess/iitpt-retriever";
 import { refMapBaseTokenStr, ILDToken, NetworkPreferredToken, createConcatNetworkPreferredToken } from "ldaccess/ildtoken";
 import { appItptMatcherFn } from "appconfig/appItptMatcher";
 import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
-import { Store, Action } from "redux";
+import { Store } from "redux";
 import { isReactComponent } from "components/reactUtils/reactUtilFns";
 import { connectNonVisLDComp } from "sidefx/nonVisualConnect";
 
@@ -48,7 +46,7 @@ export const refMapReducer = (
 	let stateCopy: ILDOptionsMapStatePart = null;
 	switch (action.type) {
 		case REFMAP_REQUEST:
-			let baseRefMap: BlueprintConfig = action.refMap;
+			// let baseRefMap: BlueprintConfig = action.refMap;
 			ldOptionsBase = action.ldOptionsBase;
 			ldOptionsBase.isLoading = true;
 			let isRefMapNeedsUpdate: boolean = true;
@@ -94,7 +92,7 @@ export const refMapReducer = (
 			return stateCopy;
 		case LDOPTIONS_KV_UPDATE:
 			let stateCopyUpd = { ...state };
-			let { changedKvStores, updatedKvMap, thisLdTkStr } = action;
+			let { changedKvStores, updatedKvMap } = action;
 			changedKvStores.forEach((cKvStore) => {
 				let updElem = updatedKvMap[cKvStore.key];
 				if (updElem) {
@@ -151,7 +149,7 @@ const createRuntimeRefMapLinks: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 	rmBPCfg: BlueprintConfig,
 	ldOptions: ILDOptions
 ) => {
-	let { subItptOf, canInterpretType, nameSelf } = rmBPCfg;
+	let { subItptOf } = rmBPCfg;
 	let ldTkStr = ldOptions.ldToken.get();
 	let ldBaseTokenStr = refMapBaseTokenStr(ldTkStr);
 	//RefMaps have only one base, but are stored under individual ids. This will rename the base at runtime, for easier access
@@ -214,7 +212,7 @@ const assignValuesToRuntimeRefMap: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 			modifiedObj[rtNewTkStr] = rtLDOptions;
 		}
 	}
-	let { interpretableKeys, initialKvStores } = rmBPCfg;
+	let { interpretableKeys } = rmBPCfg;
 	//let modRefMapKV: IKvStore = rmBPCfg.initialKvStores.find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
 	interpretableKeys.forEach((singleIntrpblKey) => {
 		if (isObjPropertyRef(singleIntrpblKey)) {
@@ -266,7 +264,7 @@ const assignOutputKvMaps: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 			const concatNWTkStr = concatNWTk.get();
 			const rmSubCfg: BlueprintConfig = rmKv.value[rmSubCfgKey];
 			let targetLDToken: ILDToken = new NetworkPreferredToken(concatNWTkStr);
-			let outputKVs: OutputKVMap = {};
+			//let outputKVs: OutputKVMap = {};
 			rmSubCfg.initialKvStores.forEach((kv) => {
 				const iKey = rmSubCfg.interpretableKeys.find((a) => a === kv.key);
 				const iKeyStr: string = iKey as string;
@@ -287,25 +285,25 @@ const assignOutputKvMaps: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 			});
 		}
 	}
-	let rmIterator: number = 0;
+	//let rmIterator: number = 0;
 	rmBPCfg.initialKvStores.forEach((kvStore, idx) => {
 		if ((kvStore.ldType === UserDefDict.intrprtrBPCfgRefMapType)
 			|| !isObjPropertyRef(kvStore.value)) {
-			rmIterator++;
+		//	rmIterator++;
 			return;
 		}
 		const kvAsObjPropRef: ObjectPropertyRef = kvStore.value as ObjectPropertyRef;
 		let refString = "";
-		let newToken: NetworkPreferredToken = null;
+		//let newToken: NetworkPreferredToken = null;
 		/*		if ((idx - rmIterator < rmBPCfg.interpretableKeys.length)
 					&& (rmBPCfg.interpretableKeys[idx - rmIterator] === kvStore.key)) {*/
 		if (rmKv.value.rmb.nameSelf === kvAsObjPropRef.objRef) {
 			refString = refMapBaseTokenStr(ldTkStr);
-			newToken = new NetworkPreferredToken(refString);
+		//	newToken = new NetworkPreferredToken(refString);
 		} else {
 			const concatNWTk = createConcatNetworkPreferredToken(ldTkStr, kvAsObjPropRef.objRef);
 			refString = concatNWTk.get();
-			newToken = concatNWTk;
+		//	newToken = concatNWTk;
 		}
 		const ldOKV = ldOptions.resource.kvStores.find((val) => val.ldType === UserDefDict.outputKVMapType);
 		if (!ldOKV) return;
@@ -427,7 +425,7 @@ export const refMapEpic = (action$: ActionsObservable<any>, store: Store<Explore
 		/*.do(() => console.log("REQUESTing Refmap Async part (itpt-retrieval)"))*/
 		mergeMap((action: RefMapRequestAction) => {
 			let ldOptionsObj: ILDOptions = action.ldOptionsBase;
-			let baseRefMap: BlueprintConfig = action.refMap;
+			// let baseRefMap: BlueprintConfig = action.refMap;
 			//let refMapREQUESTPromise = new Promise((resolve, reject) => {
 			let rv = createItpts(ldOptionsObj, store);
 			//	ldOptionsObj.isLoading = false;
@@ -458,7 +456,7 @@ const createItpts: (
 	ldOptions: ILDOptions,
 	store: Store<ExplorerState>
 ) => {
-		let { retriever, interpretedBy } = ldOptions.visualInfo;
+		let { retriever } = ldOptions.visualInfo;
 		let itptRetriever: ReduxItptRetriever = appItptMatcherFn().getItptRetriever(retriever) as ReduxItptRetriever;
 		let ldTkStr = ldOptions.ldToken.get();
 		let rmKv = ldOptions.resource.kvStores.find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
@@ -482,7 +480,7 @@ const createItpts: (
 		}
 		//prepare data
 		instancePrep.forEach((element, prepSubCfgKey) => {
-			let { subCfg, concatNWTkStr } = element;
+			let { subCfg } = element;
 			const subCfgsubItptOf: string = subCfg.subItptOf;
 			let itpt: any = null;
 			itpt = itptRetriever.getUnconnectedByNameSelf(subCfgsubItptOf);
@@ -505,7 +503,7 @@ const createItpts: (
 		let rvActions: Array<RefMapAction> = [];
 		//assign data, create instances
 		instancePrep.forEach((element, prepSubCfgKey) => {
-			let { itpt, outputKVs, subCfg, originalBPCfgCopy, concatNWTkStr, concatNWTk } = element;
+			let { itpt,  subCfg, originalBPCfgCopy, concatNWTkStr, concatNWTk } = element;
 			//subCfg.initialKvStores.push({ key: UserDefDict.outputKVMapKey, value: outputKVs, ldType: UserDefDict.outputKVMapType });
 			//this line will do the inheritance
 			itpt = ldBlueprint(subCfg)(itpt);
@@ -517,7 +515,7 @@ const createItpts: (
 				//instantiation done in React, Class defined here
 				itptRetriever.setDerivedItpt(concatNWTkStr, itpt);
 			}
-			let itptAsCfg: BlueprintConfig = itpt.cfg as BlueprintConfig;
+			// let itptAsCfg: BlueprintConfig = itpt.cfg as BlueprintConfig;
 			if (!originalBPCfgCopy.initialKvStores) return;
 			let itptRM = originalBPCfgCopy.initialKvStores.find((a) => a.ldType === UserDefDict.intrprtrBPCfgRefMapType);
 			if (itptRM) {

@@ -1,15 +1,12 @@
-import { connect } from 'react-redux';
-
-import { ExplorerState } from 'appstate/store';
-import { uploadImgRequestAction } from 'appstate/epicducks/image-upload';
+import React from 'react';
 import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
-import ldBlueprint, { IBlueprintItpt } from 'ldaccess/ldBlueprint';
+import { ldBlueprint, IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { ILDOptions } from 'ldaccess/ildoptions';
 
 import { IKvStore } from 'ldaccess/ikvstore';
 import { LDDict } from 'ldaccess/LDDict';
-import { Component, ComponentClass, StatelessComponent } from 'react';
-import { Dispatch, Action } from 'redux';
+import { Component } from 'react';
+//import { Dispatch, Action } from 'redux';
 
 type OwnProps = {
 };
@@ -19,7 +16,7 @@ type ConnectedState = {
 type ConnectedDispatch = {
     fileChange: (fileList: FileList, url: string) => void;
 };
-
+/*
 const mapStateToProps = (state: ExplorerState, ownProps: OwnProps): ConnectedState => ({
 });
 
@@ -28,7 +25,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action<any>>): ConnectedDispatch 
         dispatch(uploadImgRequestAction(fileList, url));
         return;
     }
-});
+});*/
 
 let cfgType: string = LDDict.CreateAction;
 let cfgIntrprtKeys: string[] =
@@ -59,7 +56,7 @@ var bpCfg: BlueprintConfig = {
 };
 
 @ldBlueprint(bpCfg)
-class PureImgUploader extends Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
+export class PureImgUploader extends Component<ConnectedState & ConnectedDispatch & OwnProps, {}>
     implements IBlueprintItpt {
     cfg: BlueprintConfig;
     outputKVMap: OutputKVMap;
@@ -74,7 +71,6 @@ class PureImgUploader extends Component<ConnectedState & ConnectedDispatch & Own
         }
     }
     render() {
-        const { fileChange } = this.props;
         return <div>
             <input type="file" onChange={(evt) => this.onClickFileChange(evt)}
                 placeholder="Upload file" accept=".jpg,.png,.txt" />
@@ -94,5 +90,3 @@ class PureImgUploader extends Component<ConnectedState & ConnectedDispatch & Own
         return null;
     }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(PureImgUploader);

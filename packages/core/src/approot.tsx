@@ -1,9 +1,10 @@
+import React from 'react';
 import { Component } from 'react';
 import { Store } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { ExplorerState, configureStore, isProduction, modAPI, IAppConfigStatePart, isStateDebug } from 'appstate/store';
 import './styles/styles.scss';
-import DevTools from './appstate/devTools';
+import { DevTools } from './appstate/devTools';
 import { initLDConnect } from 'sidefx/nonVisualConnect';
 import {
 	BrowserRouter as Router
@@ -16,7 +17,7 @@ import { initEssentialItpts } from 'defaults/initEssentialItpts';
 import 'mods/google/components/GWebAuthenticator';
 import { initGameItpt } from 'components/game/initGameItpts';
 import { initBaseHtmlItpt } from 'components/basic-html/initBaseHtmlItpt';
-import LDApproot from 'ldapproot';
+import { LDApproot } from 'ldapproot';
 import { initShnyderItpts } from 'components/shnyder/initShnyderItpts';
 import { initRequiredMods } from 'modding/initMods';
 import { mapStateToPropsRoot } from 'appstate/reduxFns';
@@ -85,7 +86,6 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 		this.state = {
 			isDemoInitialized: false,
 			cfg: { appKey: "", mainItpt: "", errorMsg: null },
-			mode: "initial",
 			isLoading: true
 		};
 	}
