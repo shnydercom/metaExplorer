@@ -1,5 +1,5 @@
 import ldBlueprint, { } from 'ldaccess/ldBlueprint';
-import { AbstractSimpleTextTable, tableHeadings, tableRows, simpleTextTableCfg } from 'components/essentials/content/AbstractSimpleTextTable';
+import { AbstractSimpleTextTable, tableHeadings, tableRows, simpleTextTableCfg } from '@metaexplorer/core/components/essentials/content/AbstractSimpleTextTable';
 import { TableBody, Table, TableHead, TableRow, TableCell } from '@material-ui/core';
 
 @ldBlueprint(simpleTextTableCfg)
