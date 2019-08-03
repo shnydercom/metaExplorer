@@ -1,7 +1,7 @@
-import appItptRetrFn from "appconfig/appItptRetriever";
-import { IModStatus, SingleModStateKeysDict } from "appstate/modstate";
-import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
-import { LDDict } from "ldaccess/LDDict";
+import appItptRetrFn from "@metaexplorer/core/appconfig/appItptRetriever";
+import { IModStatus, SingleModStateKeysDict } from "@metaexplorer/core/appstate/modstate";
+import { ITPT_TAG_ATOMIC } from "@metaexplorer/core/ldaccess/iitpt-retriever";
+import { LDDict } from "@metaexplorer/core/ldaccess/LDDict";
 import { MDDateTimeInput, MDDateInput, MDTextInput, MDDoubleInput, MDIntInput, MDBoolInput } from "./components/essentials/content/MDBaseDataTypeInput";
 import { SectionedListName } from "components/essentials/content/AbstractSectionedList";
 import { MDSectionedList } from "./components/essentials/content/MDSectionedList";

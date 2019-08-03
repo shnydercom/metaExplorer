@@ -7,7 +7,7 @@ import { Component } from 'react';
 import Card from 'metaexplorer-react-components/lib/components/card/card';
 
 import { Redirect } from 'react-router';
-import { ActionTypesDict } from 'components/actions/ActionDict';
+import { ActionTypesDict } from '@metaexplorer/core/components/actions/ActionDict';
 import { VisualTypesDict } from 'components/visualcomposition/visualDict';
 import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
 import { cleanRouteString } from 'components/routing/route-helper-fns';

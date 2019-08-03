@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@metaexplorer-mods/material-design": "^0.0.1",
     "@metaexplorer/core": "^0.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

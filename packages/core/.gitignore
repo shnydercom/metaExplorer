@@ -6,6 +6,7 @@ yarn.lock
 .settings
 .vscode
 dist
+lib
 
 #
 # github node standard ignores
