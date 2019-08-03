@@ -3,28 +3,18 @@ import { Component, createRef } from "react";
 import "storm-react-diagrams/dist/style.min.css";
 import { EditorBody } from "./parts/EditorBody";
 import { EditorLogic } from "./parts/editor-logic";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { IKvStore } from "ldaccess/ikvstore";
+import { UserDefDict, IKvStore,LDDict, BlueprintConfig, OutputKVMap, ldBlueprint, mapStateToProps, mapDispatchToProps,
+	LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps, LDLocalState, ldOptionsDeepCopy,
+	BaseContainerRewrite, intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever, DEFAULT_ITPT_RETRIEVER_NAME,
+	NetworkPreferredToken, initLDLocalState, gdsfpLD, ILDOptions } from "@metaexplorer/core";
 import { connect } from "react-redux";
-import { LDDict } from "ldaccess/LDDict";
-import ldBlueprint, { BlueprintConfig, OutputKVMap } from "ldaccess/ldBlueprint";
-import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
-import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps, LDLocalState } from "appstate/LDProps";
-import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
 
 import {
 	Route
 } from 'react-router-dom';
 import { Redirect } from "react-router";
-import { BaseContainerRewrite } from "../../../components/generic/baseContainer-rewrite";
-import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
-import { isProduction } from "appstate/store";
 import { EditorTray as EditorTray } from "./parts/EditorTray";
 import { DropRefmapResult } from "./parts/RefMapDropSpace";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { initLDLocalState, gdsfpLD } from "components/generic/generatorFns";
-import { NetworkPreferredToken } from "ldaccess/ildtoken";
-import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { UserInfo } from "./status/UserInfo";
 
 import { MiniToolBox } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag';
@@ -32,6 +22,7 @@ import { DropContainer } from 'metaexplorer-react-components/lib/components/mini
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DND_MINI_TOOLBOX_TYPE } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/interfaces";
+import React from "react";
 
 export type AIEProps = {
 	logic?: EditorLogic;
@@ -346,7 +337,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	renderEditor() {
-		const { drawerActive, currentlyEditingItptName, previewActive, localValues, bottomBarHidden, previewHidden, drawerHidden } = this.state;
+		const { drawerActive, previewActive, localValues, bottomBarHidden, previewHidden, drawerHidden } = this.state;
 		const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		if (!this.logic) {
 			return <div className="entrypoint-editor" ref={this.editorWrapperRef}></div>;
@@ -414,13 +405,13 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	protected renderPreview(isGlobal: boolean, previewActive: boolean) {
-		let isDisplayDevContent = isProduction ? false : true;
+		/*let isDisplayDevContent = isProduction ? false : true;
 		let previewContainerClass = "editorpreview";
 		if (previewActive) {
 			previewContainerClass += " active";
 		} else {
 			previewContainerClass += " inactive";
-		}
+		}*/
 		//
 		//div className={previewContainerClass}>
 		return <>

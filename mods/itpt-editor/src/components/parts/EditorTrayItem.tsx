@@ -1,8 +1,8 @@
-import { Component, useState } from "react";
+import { useState } from "react";
 import { StylableDragItemProps } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag";
 import { default as ItemTypes } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/ItemTypes";
-import MiniToolBoxDragLayer from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-draglayer';
 import { useDrag } from "react-dnd";
+import React from "react";
 
 export interface EditorTrayProps extends StylableDragItemProps {
 	model: any;
@@ -20,7 +20,8 @@ export const EditorTrayItem: React.FC<EditorTrayProps> = (props) => {
 
 	const [isOpen, setIsOpen] = useState(false);
 
-	const [{ isDragging }, drag, preview] = useDrag({
+	// tslint:disable-next-line
+	const [{ /*isDragging*/ }, drag, /*preview*/] = useDrag({
 		item: { id: props.id, left: props.left, top: props.top, type: ItemTypes.Block },
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging()

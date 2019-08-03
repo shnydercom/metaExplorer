@@ -2238,8 +2238,8 @@
         "signature": "78b7d8a4274cc63c76af8c5b50215611c5a78d68cee0c4cf9c0c1248e21d95b1"
       },
       "c:/users/jonat/git/metaexplorer/packages/core/src/ld-react-redux-connect/reduxitptretriever.ts": {
-        "version": "354c2e29a0f42df3bf1c16f7a6ab2a2101b025404eca83ea2e3e936b31990491",
-        "signature": "e222f3c7d589ebcb5ac6554db6345aa89d4fd007dfa39655684ded28c016c1ae"
+        "version": "151acd40c88cd19787c2ab9ba1bcfcd8280a9b421682315c19ff4f532d80884a",
+        "signature": "a5a21653423881eef6fd85707d44120c23b0ccc1f02461e810807189f77a5a9a"
       },
       "c:/users/jonat/git/metaexplorer/packages/core/src/appconfig/appitptretriever.ts": {
         "version": "a315e5ea49f1996b6082ac895e4bf46ca88293bc19714b147421e68d7c5ef5fe",
@@ -2346,8 +2346,8 @@
         "signature": "66849c6f1eb07a781fc222c2357bbb4fa9ad489168d064beddfa7e1566882ace"
       },
       "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/ldretrieversuper-rewrite.ts": {
-        "version": "c7a0a0bbdcab8433aa37ec68dabdabacd75fc014f5edba02ddac96bdb1dde93d",
-        "signature": "c12377645b8b5936bbe80141ee88279e3bf4dc7b581bbe0269a923363a645616"
+        "version": "f7567174fc9e54c33d25fab6e0475aaca1349f81baccc95b4b6bb01c0c2a5e1e",
+        "signature": "86a8a0f49c8b4ba823dd1e791e698ebc0884043f4a9ad8c30894f7f5154e36a9"
       },
       "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/imageretriever.ts": {
         "version": "5169e1ee6ddc47d4bc2a838034e1b277494860b1f83d77fda8208d202d6dc87f",
@@ -2358,12 +2358,12 @@
         "signature": "14f9c5faddee06c5bfa2b4417faea9c2b17887fade5e24f0309c0220e7627d2b"
       },
       "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/ldretrieversuper.ts": {
-        "version": "7e79c3959c0cc57232175ca1206e71f9d7b6179a53025dda2dd66d7be5ed0bb1",
-        "signature": "d68003b110d81da26f18697a8b7a65e916da9b057e38c9421b5f8dd5b36909eb"
+        "version": "69bd0d25c9baa6821ba289a370f670c1016104d5a4ccbb0ff2cda3f7799b3fef",
+        "signature": "919bfee0823c03b24d23942d281128b9bddbd1b966efe0054201dba377c2cfc5"
       },
       "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/organizationretriever.ts": {
-        "version": "99d731089dda44429ccc63094286ecb60a7e39233cc809485e5bee1a92762c90",
-        "signature": "f0f92ce4cf8cc60cbb4a4ba32f05ef2595616b9c83f9887b7bc6f95689eeb255"
+        "version": "7877e7d872c94119632d93a768238dae82878e329b45ba43603b8f9daf3c8ecd",
+        "signature": "d6e0ec55541463ee1ea7aea0a9b4300cc57097debc272583599918c35e6bab78"
       },
       "c:/users/jonat/git/metaexplorer/packages/core/src/components/peripherals/camera/cameraswitchertabs.tsx": {
         "version": "ce77efb975c7c1d08a4e346ff885fded6970b97e9aec7b3040074375900264d8",
@@ -2517,9 +2517,13 @@
         "version": "8a00824eae052439f01eb797f7d4595e6705a0159420c09ede05dcae2924b990",
         "signature": "5ccfe74d817a9244eb4987995d2e0ad003b9a6e771f29021fab84494b9574210"
       },
+      "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/index.ts": {
+        "version": "d6ffa08c8db042670586a6dce5758ee72b03c2f8064f6196df78926146a56c23",
+        "signature": "701e962e6bf9ed26008fc9722192110ac5a1edff7483290c0e1f8e4576eadb11"
+      },
       "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/index.ts": {
-        "version": "f09064db4d28e436519544e0657933579bfd69b9fa38bc67ee9ce46a07c70d3b",
-        "signature": "f8a1235b299053723a75ff9cf5eda664632e8387a18eca27b8beebebf7d0291d"
+        "version": "876096bea0d03b1ec10b750262aee897c65253146857f28556a56bfab58625c2",
+        "signature": "03017a5d5008c599a4db53496e20d99f118852e01a78cb6321b14a97b31af3c7"
       },
       "c:/users/jonat/git/metaexplorer/packages/core/src/components/imageupload-component.tsx": {
         "version": "90358a2e73e7a10c14832cd3560aca711b96b6e8d38a85454e89ee221ecc9024",
@@ -2710,16 +2714,12 @@
         "signature": "6dd346d33385a8b6aadb131c51767a4975d207e46bfba85ee1b8f2ae3a964341"
       },
       "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/index.ts": {
-        "version": "1082a7a923378575ed9235e664b3726f17c218efb570a846cf491d9f57bd03f3",
-        "signature": "e002973b9cd90942da77df377f8265690df9e2a2b02ed99ae3c0e18eb6b35066"
+        "version": "3b6c7b8be444ee809e6e4d057596a8ae2332f7153de7d37b73397bede552f6ac",
+        "signature": "70f0ff5e721fb432c976d2277c6e34116b5e19335af5687c87f3a565e78be703"
       },
       "c:/users/jonat/git/metaexplorer/packages/core/src/index.ts": {
-        "version": "9a71c74e817c8c447632268303f903d41f86c3df247432ce2389000d3cff170f",
-        "signature": "55d5b96567b27c70d0b23e2e60c31676c7a69e787b3067a2ef8b0355f2b85336"
-      },
-      "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/index.ts": {
-        "version": "d6ffa08c8db042670586a6dce5758ee72b03c2f8064f6196df78926146a56c23",
-        "signature": "701e962e6bf9ed26008fc9722192110ac5a1edff7483290c0e1f8e4576eadb11"
+        "version": "77841c128c3dbb638173811db8df592c6cc257bf7587489f09d3761be9eae1fa",
+        "signature": "74fd3d445f4f877f98d52226e971c44ac3b9a1f6992b5c49904f1e49bf159928"
       },
       "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/globals.d.ts": {
         "version": "bd8e096b13681e3aa148c869e7f3bb397145bfde49b53f6dd4b297ce131ea077",
@@ -23079,6 +23079,7 @@
         "c:/users/jonat/git/metaexplorer/packages/core/src/ldaccess/ns/namespacemap.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/ldprops.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/ldaccess/ildresource.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/ldretrieversuper-rewrite.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -23088,6 +23089,7 @@
         "c:/users/jonat/git/metaexplorer/packages/core/src/ldaccess/ikvstore.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/ldaccess/ldblueprint.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/ldretrieversuper.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/ldretrieversuper-rewrite.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -23511,6 +23513,20 @@
         "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/index.ts": [
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/action-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/appcfg-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/image-upload.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/isloading-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/ldnonvisual-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/ldoptions-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/linearsplit-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/mod-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/refmap-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/schemameta.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/index.ts": [
         "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/lderror.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/ldprops.ts",
@@ -23520,6 +23536,7 @@
         "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/reduxfns.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/rootduck.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/store.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/index.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -23944,6 +23961,7 @@
       ],
       "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/index.ts": [
         "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/imageretriever.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/ldretrieversuper.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/ldretrieversuper-rewrite.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/organizationretriever.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/productretriever.ts",
@@ -23963,22 +23981,9 @@
         "c:/users/jonat/git/metaexplorer/packages/core/src/ldaccess/index.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/modding/index.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/index.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/generalutils.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/approot.tsx",
         "c:/users/jonat/git/metaexplorer/packages/core/src/ldapproot.tsx",
-        "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/index.ts": [
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/action-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/appcfg-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/image-upload.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/isloading-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/ldnonvisual-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/ldoptions-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/linearsplit-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/mod-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/refmap-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/schemameta.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -44525,6 +44530,18 @@
         "c:/users/jonat/git/metaexplorer/packages/core/src/appconfig/appitptretriever.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/appconfig/retrieveraccessfns.ts"
       ],
+      "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/index.ts": [
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/action-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/appcfg-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/image-upload.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/isloading-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/ldnonvisual-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/ldoptions-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/linearsplit-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/mod-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/refmap-duck.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/schemameta.ts"
+      ],
       "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/index.ts": [
         "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/lderror.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/ldprops.ts",
@@ -44533,7 +44550,8 @@
         "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/reducereducers.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/reduxfns.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/rootduck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/store.ts"
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/store.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/index.ts"
       ],
       "c:/users/jonat/git/metaexplorer/packages/core/src/components/imageupload-component.tsx": [
         "c:/users/jonat/git/metaexplorer/packages/core/src/ldaccess/ldblueprint.ts",
@@ -44798,6 +44816,7 @@
       ],
       "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/index.ts": [
         "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/imageretriever.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/ldretrieversuper.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/ldretrieversuper-rewrite.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/organizationretriever.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/productretriever.ts",
@@ -44815,20 +44834,9 @@
         "c:/users/jonat/git/metaexplorer/packages/core/src/ldaccess/index.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/modding/index.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/index.ts",
+        "c:/users/jonat/git/metaexplorer/packages/core/src/generalutils.ts",
         "c:/users/jonat/git/metaexplorer/packages/core/src/approot.tsx",
         "c:/users/jonat/git/metaexplorer/packages/core/src/ldapproot.tsx"
-      ],
-      "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/index.ts": [
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/action-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/appcfg-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/image-upload.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/isloading-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/ldnonvisual-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/ldoptions-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/linearsplit-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/mod-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/refmap-duck.ts",
-        "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/schemameta.ts"
       ],
       "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/globals.d.ts": [
         "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/util.d.ts",
@@ -46210,6 +46218,7 @@
       "c:/users/jonat/git/metaexplorer/packages/core/src/approot.tsx",
       "c:/users/jonat/git/metaexplorer/packages/core/src/apis/index.ts",
       "c:/users/jonat/git/metaexplorer/packages/core/src/appconfig/index.ts",
+      "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/index.ts",
       "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/index.ts",
       "c:/users/jonat/git/metaexplorer/packages/core/src/components/imageupload-component.tsx",
       "c:/users/jonat/git/metaexplorer/packages/core/src/components/developer-template.tsx",
@@ -46260,7 +46269,6 @@
       "c:/users/jonat/git/metaexplorer/packages/core/src/modding/index.ts",
       "c:/users/jonat/git/metaexplorer/packages/core/src/sidefx/index.ts",
       "c:/users/jonat/git/metaexplorer/packages/core/src/index.ts",
-      "c:/users/jonat/git/metaexplorer/packages/core/src/appstate/epicducks/index.ts",
       "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/globals.d.ts",
       "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/assert.d.ts",
       "c:/users/jonat/git/metaexplorer/packages/core/node_modules/@types/node/async_hooks.d.ts",

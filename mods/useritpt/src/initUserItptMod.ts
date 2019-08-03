@@ -1,20 +1,10 @@
-import appItptRetrFn from "appconfig/appItptRetriever";
-import { IModStatus, SingleModStateKeysDict } from "appstate/modstate";
+import { IModStatus, SingleModStateKeysDict, addBlueprintToRetriever, changeMainAppItpt} from "@metaexplorer/core";
 import { UserItptLoadApi } from "./apis/itpt-load-api";
-import { PureLDApproot } from "ldapproot";
-import { addBlueprintToRetriever, intrprtrTypeInstanceFromBlueprint, changeMainAppItpt } from "appconfig/retrieverAccessFns";
-import { BlueprintConfig } from "ldaccess/ldBlueprint";
-import { LDError } from "appstate/LDError";
-import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
-import { applicationStore } from "approot";
-import { ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
-import { appItptUpdateAction } from "appstate/epicducks/appCfg-duck";
-
 export const MOD_USERITPT_ID = "useritpt";
 export const MOD_USERITPT_NAME = "User Block Loader Mod";
 
 export function initUSERITPTClientMod(isMainItptChange: boolean): Promise<IModStatus> {
-	const appIntRetr = appItptRetrFn();
+	//const appIntRetr = appItptRetrFn();
 	const rv: Promise<IModStatus> = new Promise((resolve, reject) => {
 		let api = UserItptLoadApi.getUserItptLoadApiSingleton();
 		api.getItptsUnauthed()().then((val) => {

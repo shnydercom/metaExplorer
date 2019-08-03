@@ -1,11 +1,8 @@
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from "ldaccess/ldBlueprint";
-import { IKvStore } from "ldaccess/ikvstore";
+import {ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap, IKvStore,
+	LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState, VisualKeysDict, ILDOptions,
+	LDDict, gdsfpLD, initLDLocalState } from "@metaexplorer/core";
 import { Component } from "react";
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from "appstate/LDProps";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { VisualKeysDict } from "components/visualcomposition/visualDict";
-import { LDDict } from "ldaccess/LDDict";
-import { gdsfpLD, initLDLocalState } from "components/generic/generatorFns";
+import React from "react";
 
 export const QRCodeDisplayName = "qr/QRCodeDisplay";
 export const QRCodeDisplayStngTypeNumber = "qr/typeNumber";
@@ -37,9 +34,10 @@ const bpCfg: BlueprintConfig = {
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
-export interface QRCodeDisplayState extends LDLocalState {
+export type QRCodeDisplayState = LDLocalState & {
 	qr: any;
 }
+
 @ldBlueprint(bpCfg)
 export class PureQRCodeDisplay extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, QRCodeDisplayState>
 	implements IBlueprintItpt {
@@ -88,7 +86,7 @@ export class PureQRCodeDisplay extends Component<LDConnectedState & LDConnectedD
 		this.state = PureQRCodeDisplay.makeQRpartInState(ldState);
 	}
 	render() {
-		const { localValues, qr } = this.state;
+		const { qr } = this.state;
 		return <div id="qr-gen-target" dangerouslySetInnerHTML={qr ? { __html: qr.createImgTag() } : { __html: "" }}>
 		</div>;
 	}

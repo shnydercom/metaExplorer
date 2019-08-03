@@ -1,9 +1,7 @@
-import { PortModel, DiagramEngine, LinkModel, DefaultPortModel, DefaultLinkModel } from "storm-react-diagrams";
+import { PortModel, DiagramEngine, LinkModel, DefaultLinkModel } from "storm-react-diagrams";
 import { merge } from "lodash";
-import { IKvStore } from "ldaccess/ikvstore";
+import { IKvStore, isInputValueValidFor, arrayMove } from "@metaexplorer/core";
 import { LD_PORTMODEL } from "./editor-consts";
-import { isInputValueValidFor } from "ldaccess/ldtypesystem/typeChecking";
-import { arrayMove } from "GeneralUtils";
 
 /**
  * @author Dylan Vorster

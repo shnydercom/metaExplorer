@@ -1,12 +1,8 @@
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from "ldaccess/ldBlueprint";
-import { IKvStore } from "ldaccess/ikvstore";
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap, ldBlueprint, IKvStore, 
+	LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState, ILDOptions, LDDict,
+	gdsfpLD, initLDLocalState, VisualKeysDict, isProduction } from "@metaexplorer/core";
 import { Component } from "react";
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from "appstate/LDProps";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { LDDict } from "ldaccess/LDDict";
-import { gdsfpLD, initLDLocalState } from "components/generic/generatorFns";
-import { VisualKeysDict } from "components/visualcomposition/visualDict";
-import { isProduction } from "appstate/store";
+import React from "react";
 
 export const MailChimpSignupName = "mailchimp/condensedSignup";
 let cfgIntrprtKeys: string[] =

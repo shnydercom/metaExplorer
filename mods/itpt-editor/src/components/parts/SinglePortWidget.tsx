@@ -1,6 +1,5 @@
-import { ItptNodeModel } from "./ItptNodeModel";
 import { NodeModel, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
-import { Component } from "react";
+import React from "react";
 
 export interface PortProps extends BaseWidgetProps {
 	name: string;

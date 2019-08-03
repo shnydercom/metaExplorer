@@ -1,7 +1,5 @@
-import appItptRetrFn from "appconfig/appItptRetriever";
+import {appItptRetrFn, ITPT_TAG_ATOMIC, SingleModStateKeysDict, IModStatus } from "@metaexplorer/core";
 import { PureMailChimpSignup, MailChimpSignupName } from "./condensedSignup";
-import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
-import { SingleModStateKeysDict, IModStatus } from "appstate/modstate";
 
 export const MOD_MAILCHIMP_ID = "mailchimp";
 export const MOD_MAILCHIMP_NAME = "Mailchimp Mod";

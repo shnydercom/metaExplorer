@@ -11,11 +11,12 @@ import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
 import { nameSpaceMap } from "ldaccess/ns/nameSpaceMap";
 import { LDLocalKv } from "appstate/LDProps";
 import { ILDWebResource } from "ldaccess/ildresource";
+import { ldRetrCfgIntrprtKeys } from "./LDRetrieverSuper-rewrite";
 
 export type LDRetrieverSuperStateOld = LDLocalKv;
 
-export let ldRetrCfgIntrprtKeys: string[] =
-	[SideFXDict.srvURL, SideFXDict.identifier];
+//export let ldRetrCfgIntrprtKeys: string[] =
+//	[SideFXDict.srvURL, SideFXDict.identifier];
 export class LDRetrieverSuper implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;

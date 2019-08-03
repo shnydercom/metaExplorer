@@ -1,6 +1,6 @@
-import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
-import { LDDict } from "ldaccess/LDDict";
+import { LDBaseDataType, LDDict } from '@metaexplorer/core';
 import { Component } from 'react';
+import React from 'react';
 
 /**
  * this component is not supposed to be used as a blueprint, only for

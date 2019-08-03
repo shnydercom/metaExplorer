@@ -2,9 +2,9 @@ import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "st
 import { ExtendableTypesNodeModel } from "./ExtendableTypesNodeModel";
 import { map } from "lodash";
 import { LDPortModel } from "../LDPortModel";
-import { IKvStore } from "ldaccess/ikvstore";
-import { UserDefDict } from "ldaccess/UserDefDict";
+import { IKvStore, UserDefDict } from "@metaexplorer/core";
 import { EXTENDABLETYPES_MODEL } from "../editor-consts";
+import React from "react";
 
 export interface ExtendableTypesNodeProps  extends BaseWidgetProps {
 	node: ExtendableTypesNodeModel;

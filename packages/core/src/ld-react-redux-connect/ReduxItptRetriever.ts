@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { DefaultItptRetriever } from "defaults/DefaultItptRetriever";
+import { DefaultItptRetriever, DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { IBlueprintItpt } from "ldaccess/ldBlueprint";
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from "appstate/LDProps";
 import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
@@ -8,6 +8,9 @@ export class ReduxItptRetriever extends DefaultItptRetriever {
 	//maps by nameSelf of the Itpt
 	private connectedItpts: Map<string, any> = new Map();
 
+	constructor(name: string = DEFAULT_ITPT_RETRIEVER_NAME) {
+		super(name);
+	}
 	searchForObjItpt(term: string | string[], crudSkills: string) {
 		let searchResult = super.searchForObjItpt(term, crudSkills) as IBlueprintItpt;
 		if (searchResult) {

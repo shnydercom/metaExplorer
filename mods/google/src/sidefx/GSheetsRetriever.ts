@@ -1,11 +1,5 @@
-import { LDRetrieverSuper } from "sidefx/LDRetrieverSuper";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { IKvStore } from "ldaccess/ikvstore";
-import { LDDict } from "ldaccess/LDDict";
-import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
-import { UserDefDict } from "ldaccess/UserDefDict";
+import { LDRetrieverSuper, ILDOptions, IKvStore, LDDict, BlueprintConfig, ldBlueprint, UserDefDict, isObjPropertyRef } from "@metaexplorer/core";
 import { GoogleWebAuthAPI, EVENT_GOOGLE_WEB_AUTH } from "../apis/GoogleWebAuthAPI";
-import { isObjPropertyRef } from "ldaccess/ldUtils";
 
 //import { sheets_v4 } from "googleapis";
 //import { GlobalOptions } from "googleapis/build/src/shared/src";

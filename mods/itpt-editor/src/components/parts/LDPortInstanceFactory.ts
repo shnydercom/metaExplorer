@@ -1,7 +1,6 @@
 import { LDPortModel } from "./LDPortModel";
 import { AbstractPortFactory } from "storm-react-diagrams";
-import { IKvStore } from "ldaccess/ikvstore";
-import { UserDefDict } from "ldaccess/UserDefDict";
+import { IKvStore,UserDefDict } from "@metaexplorer/core";
 import { LD_PORTMODEL } from "./editor-consts";
 
 export class LDPortInstanceFactory extends AbstractPortFactory<LDPortModel> {

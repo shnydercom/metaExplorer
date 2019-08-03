@@ -1,7 +1,7 @@
-import { PortWidget, DefaultPortModel } from "storm-react-diagrams";
 import { SinglePortWidget } from "./SinglePortWidget";
 import { LDPortModel } from "./LDPortModel";
 import { Component } from "react";
+import React from "react";
 
 export interface SinglePortLabelProps {
 	model?: LDPortModel;

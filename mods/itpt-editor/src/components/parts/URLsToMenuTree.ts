@@ -52,11 +52,10 @@ export class URLToMenuTree<T> {
       }
       else if (treeNode.children.length > 0) {
         var possibleParent = false;
-
         treeNode.children.forEach((item) => {
           if (path.indexOf(item.path + '/' + item.title) === 0) {
             possibleParent = true;
-            return false;
+            //return false;
           }
         });
 

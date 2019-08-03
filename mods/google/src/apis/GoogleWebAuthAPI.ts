@@ -116,8 +116,8 @@ export class GoogleWebAuthAPI implements EventTarget {
 			AT_TARGET: 0, BUBBLING_PHASE: 0, CAPTURING_PHASE: 0, NONE: 0,
 			initEvent: () => { return; },
 			preventDefault: () => { return; },
-			scoped: false,
-			deepPath: null,
+			//scoped: false,
+			//deepPath: null,
 		});
 	}
 	initScriptLoad() {

@@ -1,5 +1,6 @@
 import { NodeModel } from "storm-react-diagrams";
 import { Component } from "react";
+import React from "react";
 
 export interface PortProps {
 	name: string;

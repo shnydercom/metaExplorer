@@ -17,6 +17,7 @@
     "lib"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.1"
+    "@metaexplorer/core": "^0.0.1",
+    "@metaexplorer-mods/keycloak": "^0.0.1"
   }
 }

@@ -1,13 +1,13 @@
 import { Component } from "react";
 import TreeView, { TreeEntry } from "metaexplorer-react-components/lib/components/treeview/treeview";
-import { IBlueprintItpt } from "ldaccess/ldBlueprint";
-import { IItptInfoItem } from "defaults/DefaultItptRetriever";
+import { IBlueprintItpt, IItptInfoItem, ITPT_TAG_ATOMIC, ITPT_TAG_COMPOUND } from "@metaexplorer/core"; 
 import { EditorTrayItem } from "./EditorTrayItem";
 import { default as ItemTypes } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/ItemTypes";
-import { ITPT_TAG_ATOMIC, ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
-import * as appStyles from 'styles/styles.scss';
+//TODO: change this:
+import * as appStyles from '../../../../../packages/core/src/styles/styles.scss';
 import { DropRefmapResult } from "./RefMapDropSpace";
 import { StylableDragItemProps } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag";
+import React from "react";
 
 export interface FlatContentInfo {
 	flatContentURLs: string[];
@@ -86,15 +86,15 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			subEntries: [],
 			itpts: []
 		};
-
-		const hydraNodesText: string = "Interact with outside data from a hydra endpoint";
-		const hydraNodesTreeItem: TreeEntry & FlatContentInfo = {
-			flatContentURLs: [],
-			flatContent: [],
-			label: 'Hydra Blocks',
-			subEntries: [],
-			itpts: []
-		};
+		/*
+				const hydraNodesText: string = "Interact with outside data from a hydra endpoint";
+				const hydraNodesTreeItem: TreeEntry & FlatContentInfo = {
+					flatContentURLs: [],
+					flatContent: [],
+					label: 'Hydra Blocks',
+					subEntries: [],
+					itpts: []
+				};*/
 
 		const compoundNodesText: string = "Click on a block to see how it's been made, or drag and drop it to the right to re-use your creations";
 		const compoundNodesTreeItem: TreeEntry & FlatContentInfo = {
@@ -241,7 +241,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 
 	constructor(props: EditorTrayProps) {
 		super(props);
-		this.state = { trayitpts: null, isTrayElemsDirty: false, trayElems: null };
+		this.state = { trayitpts: null, trayElems: null };
 	}
 
 	render() {

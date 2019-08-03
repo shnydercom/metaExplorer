@@ -4,6 +4,7 @@ import { BaseDataTypeNodeModel } from "./BaseDataTypeNodeModel";
 import { createFactory } from "react";
 import { map } from "lodash";
 import { BASEDATATYPE_MODEL } from "../editor-consts";
+import React from "react";
 
 export interface BaseDataTypeNodeProps extends BaseWidgetProps {
 	node: BaseDataTypeNodeModel;

@@ -1,12 +1,9 @@
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from "ldaccess/ldBlueprint";
-import { IKvStore } from "ldaccess/ikvstore";
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap, ldBlueprint, IKvStore,
+	LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState, ILDOptions, VisualKeysDict,
+	LDDict, gdsfpLD, initLDLocalState, isProduction
+ } from "@metaexplorer/core";
 import { Component } from "react";
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from "appstate/LDProps";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { VisualKeysDict } from "components/visualcomposition/visualDict";
-import { LDDict } from "ldaccess/LDDict";
-import { gdsfpLD, initLDLocalState } from "components/generic/generatorFns";
-import { isProduction } from "appstate/store";
+import React from "react";
 
 export const YoutubeEmbedName = "google-api/YoutubeEmbed";
 let cfgIntrprtKeys: string[] =

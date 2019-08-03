@@ -1,4 +1,5 @@
 import QrScanner from "qr-scanner";
+/* tslint:disable */
 import QRCodeFactory from "qrcode-generator";
 
 export class QrCodeGenScanClientAPI {

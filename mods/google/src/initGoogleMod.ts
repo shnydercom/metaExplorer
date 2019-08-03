@@ -1,9 +1,7 @@
-import appItptRetrFn from "appconfig/appItptRetriever";
-import { ITPT_TAG_ATOMIC, ITPT_TAG_MOD } from "ldaccess/iitpt-retriever";
+import { appItptRetrFn, ITPT_TAG_ATOMIC, ITPT_TAG_MOD, SingleModStateKeysDict, IModStatus } from "@metaexplorer/core";
 import { PureGWebAuthenticator, GoogleWebAuthenticatorName } from "./components/GWebAuthenticator";
 import { GSheetsRetriever, gSheetsRangeRetrieverName } from "./sidefx/GSheetsRetriever";
 import { YoutubeEmbedName, PureYoutubeEmbed } from "./components/YoutubeEmbed";
-import { SingleModStateKeysDict, IModStatus } from "appstate/modstate";
 
 export const MOD_GOOGLE_ID = "google";
 export const MOD_GOOGLE_NAME = "Google Mod";

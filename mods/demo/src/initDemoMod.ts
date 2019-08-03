@@ -1,10 +1,5 @@
-import appItptRetrFn from "appconfig/appItptRetriever";
-import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
-import { SingleModStateKeysDict, IModStatus } from "appstate/modstate";
-import { flatDataTypeAssemblerFactory } from "components/generic/datatype-assembler";
-import { IKvStore } from "ldaccess/ikvstore";
-import { IVisInfo } from "ldaccess/ildoptions";
-import { LDDict } from "ldaccess/LDDict";
+import { appItptRetrFn, ITPT_TAG_ATOMIC, SingleModStateKeysDict, IModStatus, flatDataTypeAssemblerFactory, IKvStore, LDDict } from "@metaexplorer/core";
+
 
 export const MOD_DEMO_ID = "demo";
 export const MOD_DEMO_NAME = "MetaExplorer Demo Mod";

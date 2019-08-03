@@ -6,3 +6,5 @@ export * from './reduceReducers';
 export * from './reduxFns';
 export * from './rootduck';
 export * from './store';
+
+export * from './epicducks';

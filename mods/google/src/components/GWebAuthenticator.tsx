@@ -1,12 +1,9 @@
-import { IKvStore } from 'ldaccess/ikvstore';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-
-import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from 'components/generic/generatorFns';
-import { Component, ComponentClass, StatelessComponent } from 'react';
-import { VisualKeysDict } from 'components/visualcomposition/visualDict';
+import { IKvStore, BlueprintConfig, IBlueprintItpt, OutputKVMap, ldBlueprint, ILDOptions,
+	LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState,
+	initLDLocalState, generateItptFromCompInfo, gdsfpLD, VisualKeysDict } from '@metaexplorer/core';
+import { Component } from 'react';
 import { GoogleWebAuthAPI, gwaTestCfg, EVENT_GOOGLE_WEB_AUTH, GoogleWebAuthState } from '../apis/GoogleWebAuthAPI';
+import React from 'react';
 
 export const GoogleWebAuthenticatorName: string = "google-api/WebAuthenticator";
 let allMyInputKeys: string[] = [];

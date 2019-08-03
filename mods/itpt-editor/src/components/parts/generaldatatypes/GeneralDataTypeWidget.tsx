@@ -2,6 +2,7 @@ import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "st
 import { GeneralDataTypeNodeModel } from "./GeneralDataTypeNodeModel";
 import { map } from 'lodash';
 import { GENERALDATATYPE_MODEL } from "../editor-consts";
+import React from "react";
 
 export interface GeneralDataTypeNodeProps extends BaseWidgetProps {
 	node: GeneralDataTypeNodeModel;

@@ -2,7 +2,8 @@ import { DefaultPortLabel, DiagramEngine } from "storm-react-diagrams";
 import { OutputInfoPartNodeModel } from "./OutputInfoNodeModel";
 import { Component, createFactory } from "react";
 import { map } from "lodash";
-import { isDemo } from "appstate/store";
+import { isDemo } from "@metaexplorer/core";
+import React from "react";
 
 export interface OutputInfoNodeProps {
 	node: OutputInfoPartNodeModel;
@@ -71,9 +72,9 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 
 	generateWarningDialog(showDialog: boolean) {
 		if (!showDialog) return null;
-		const actions = [
+		/*const actions = [
 			{ label: 'OK', primary: true, onClick: this.handleModalToggle },
-		];
+		];*/
 		return <div>
 			Dialog
 			actions=actions

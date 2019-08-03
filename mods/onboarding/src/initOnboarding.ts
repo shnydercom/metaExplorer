@@ -1,18 +1,8 @@
-import appItptRetrFn from "appconfig/appItptRetriever";
-import { IModStatus, SingleModStateKeysDict } from "appstate/modstate";
-import { addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
-import { ITPT_TAG_ATOMIC, ITPT_TAG_SPECIAL, ITPT_TAG_MOD } from "ldaccess/iitpt-retriever";
-import { LDDict } from "ldaccess/LDDict";
-import { BlueprintConfig } from "ldaccess/ldBlueprint";
-import { appItptMatcherFn } from "appconfig/appItptMatcher";
-
-import * as onboardingEditorJson from './onBoardingEditor.json';
-import * as onboardingQRJson from './onBoardingQR.json';
-import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
-import { LayoutVHCenteredColumnName, PureVHcenteredColumnLayout } from "components/layout/layoutBaseComp";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { PureBaseContainerRewrite } from "components/generic/baseContainer-rewrite";
-import { PureRefMapItpt } from "components/generic/RefMapItpt-component";
+import * as onboardingEditorJson from './onboardingEditor.json';
+import * as onboardingQRJson from './onboardingQR.json';
+import { PureRefMapItpt, PureBaseContainerRewrite, UserDefDict, LayoutVHCenteredColumnName, PureVHcenteredColumnLayout,
+	ReduxItptRetriever, appItptMatcherFn, BlueprintConfig, LDDict,IModStatus, SingleModStateKeysDict ,
+	ITPT_TAG_ATOMIC, ITPT_TAG_SPECIAL, ITPT_TAG_MOD, addBlueprintToRetriever, appItptRetrFn} from "@metaexplorer/core";
 import { SignInSignupRequest, signinSignupName } from "./components/signin-signup-request";
 
 export const MOD_ONBOARDING_ID = "onboarding";

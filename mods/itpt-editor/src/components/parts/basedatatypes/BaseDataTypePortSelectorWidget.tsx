@@ -1,22 +1,14 @@
 import { SinglePortWidget } from "../SinglePortWidget";
 import { LDPortModel } from "../LDPortModel";
 import { BaseDataTypeDropDown } from "./BaseDataTypeDropDown";
-import { IKvStore } from "ldaccess/ikvstore";
+import {
+	IKvStore, LDOwnProps, LDConnectedState, LDConnectedDispatch, LDLocalState, mapStateToProps, mapDispatchToProps,
+	OutputKVMapElement, ldOptionsDeepCopy, UserDefDict, ILDToken, NetworkPreferredToken, getKVStoreByKey,
+	ILDOptions, DEFAULT_ITPT_RETRIEVER_NAME, LDDict, gdsfpLD, BaseContainerRewrite
+} from "@metaexplorer/core";
 import { connect } from "react-redux";
-import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDLocalState } from "appstate/LDProps";
-import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
-import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
-import { Component, ComponentClass, StatelessComponent } from "react";
-import { OutputKVMap, OutputKVMapElement } from "ldaccess/ldBlueprint";
-import { ILDToken, NetworkPreferredToken } from "ldaccess/ildtoken";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { compNeedsUpdate } from "components/reactUtils/compUtilFns";
-import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
-import { LDDict } from "ldaccess/LDDict";
-import { gdsfpLD } from "components/generic/generatorFns";
-import { BaseContainerRewrite } from "components/generic/baseContainer-rewrite";
+import { Component } from "react";
+import React from "react";
 
 export type BaseDataTypePortSelectorProps = {
 	model?: LDPortModel;
@@ -122,7 +114,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 		super(props);
 		this.state = {
 			portType: null,
-			ldOptions: null,
+			//ldOptions: null,
 			portKvStore: null,
 			compInfos: null,
 			localValues: null,

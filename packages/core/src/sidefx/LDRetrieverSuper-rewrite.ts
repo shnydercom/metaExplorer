@@ -20,13 +20,13 @@ export const ldRetrCfgIntrprtKeys: string[] = [SideFXDict.srvURL, SideFXDict.ide
 	{ key: SideFXDict.identifier, value: undefined, ldType: LDDict.Text }
 ];*/
 
-export interface LDRetrieverSuperState extends LDLocalState {
+export type LDRetrieverSuperState = LDLocalState & {
 	isInputDirty: boolean;
 	isOutputDirty: boolean;
 	webContent: ILDWebResource;
 	retrieverStoreKey: string;
 	interpretableKeys: string[];
-}
+};
 
 export abstract class LDRetrieverSuperRewrite implements IBlueprintItpt {
 	//member-declarations for the interface

@@ -1,16 +1,10 @@
-import { LDLocalState, LDConnectedState, LDConnectedDispatch, LDOwnProps } from "appstate/LDProps";
-import { LDDict } from "ldaccess/LDDict";
-import { IKvStore } from "ldaccess/ikvstore";
-import { VisualKeysDict } from "components/visualcomposition/visualDict";
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from "ldaccess/ldBlueprint";
 import { Component } from "react";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { initLDLocalState } from "components/generic/generatorFns";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { DOMCamera } from "components/peripherals/camera/dom-camera";
 import { connect } from "react-redux";
-import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
+import { mapStateToProps, mapDispatchToProps, DOMCamera, UserDefDict, initLDLocalState, ILDOptions,
+    ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap, VisualKeysDict, IKvStore, LDDict,
+    LDLocalState, LDConnectedState, LDConnectedDispatch, LDOwnProps  } from "@metaexplorer/core";
 import { QrCodeGenScanClientAPI } from "../apis/qr-code-genscan-api";
+import React from "react";
 
 /*import QrScanner from 'qr-scanner';
 
@@ -93,11 +87,11 @@ export class QRCodeScanner extends Component<LDConnectedState & LDConnectedDispa
     }
 
     render() {
-        let stateVisLnk = this.loadingImgLink;
-        const { curStep, curId, vidDeviceList } = this.state;
-        let isDisplayImage: boolean = true;
-        const isMultiVidSource: boolean = vidDeviceList && vidDeviceList.length > 1;
-        switch (curStep) {
+        //let stateVisLnk = this.loadingImgLink;
+       // const { curStep, /*curId, vidDeviceList*/ } = this.state;
+        //let isDisplayImage: boolean = true;
+        //const isMultiVidSource: boolean = vidDeviceList && vidDeviceList.length > 1;
+        /*switch (curStep) {
             case QRCodeScannerStateEnum.isError:
                 stateVisLnk = this.errorImgLink;
                 break;
@@ -106,7 +100,7 @@ export class QRCodeScanner extends Component<LDConnectedState & LDConnectedDispa
                 break;
             default:
                 break;
-        }
+        }*/
         return (
             <div className="md-barcode-reader" >
                 <DOMCamera showControls={false} onVideoDisplayReady={(video) => {

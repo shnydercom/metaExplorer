@@ -1,6 +1,16 @@
 import { IModSpec } from '@metaexplorer/core/src/apis/mod-api';
 import { MOD_MATERIALDESIGN_ID, initMaterialDesignMod } from '@metaexplorer-mods/material-design';
 
+import { MOD_KEYCLOAK_ID, initKeycloakMod } from '@metaexplorer-mods/keycloak';
+import { MOD_DEMO_ID, initDemoMod } from '@metaexplorer-mods/demo';
+import { MOD_GOOGLE_ID, initGoogleMod } from '@metaexplorer-mods/google';
+import { MOD_MAILCHIMP_ID, initMailchimpMod } from '@metaexplorer-mods/mailchimp';
+import { MOD_USERITPT_ID, initUSERITPTClientMod } from '@metaexplorer-mods/useritpt';
+import { MOD_ITPTEDITOR_ID, initItptEditorMod } from '@metaexplorer-mods/itpt-editor';
+import { MOD_QRCODEGENSCAN_ID, initQRCODEGENClientMod } from '@metaexplorer-mods/qr-code-genscan';
+import { initOnboardingMod, MOD_ONBOARDING_ID } from '@metaexplorer-mods/onboarding';
+import { isProduction } from '@metaexplorer/core';
+
 export function setupRequiredMods(): IModSpec[] {
 	//mod initialization functions
 	const modSpecs: IModSpec[] = [];
@@ -42,8 +52,8 @@ export function setupRequiredMods(): IModSpec[] {
 		id: MOD_SWAGGER_ID,
 		initFn: () => initSwaggerClientMod(),
 		dependencies: []
-	}*/
-	);
+	}
+	);*/
 	modSpecs.push({
 		id: MOD_USERITPT_ID,
 		initFn: () => initUSERITPTClientMod(isProduction),

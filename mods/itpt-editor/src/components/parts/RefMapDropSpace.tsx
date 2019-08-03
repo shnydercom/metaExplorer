@@ -1,4 +1,5 @@
 import { Component } from "react";
+import React from "react";
 
 //const TooltipDiv = tooltipFactory({ passthrough: false })(({children}) => <div>{children}</div>) as TooltippedComponentClass<{}>;
 const TooltipDiv = ((props) => <div {...props}></div>);

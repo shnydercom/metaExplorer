@@ -1,7 +1,5 @@
-import appItptRetrFn from "appconfig/appItptRetriever";
 import { QrCodeGenScanClientAPI } from "./apis/qr-code-genscan-api";
-import { IModStatus, SingleModStateKeysDict } from "appstate/modstate";
-import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
+import { ITPT_TAG_ATOMIC, appItptRetrFn, IModStatus, SingleModStateKeysDict } from "@metaexplorer/core";
 import { QRCodeDisplayName, PureQRCodeDisplay } from "./components/qr-code-display";
 import { QRCodeScanner, QRCodeScannerName } from "./components/qr-code-scanner";
 

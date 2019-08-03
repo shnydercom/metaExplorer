@@ -4,13 +4,13 @@ import { EditorLogic, editorSpecificNodesColor, editorDefaultNodesColor } from "
 import { DiagramWidget } from "storm-react-diagrams";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
 import { LDPortModel } from "./LDPortModel";
-import { IKvStore } from "ldaccess/ikvstore";
+import { IKvStore, UserDefDict } from "@metaexplorer/core";
 import { GeneralDataTypeNodeModel } from "./generaldatatypes/GeneralDataTypeNodeModel";
-import { UserDefDict } from "ldaccess/UserDefDict";
 import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeModel";
 import { Component } from "react";
 import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
-import { RefMapDropSpace, DropRefmapResult } from "./RefMapDropSpace";
+import { DropRefmapResult } from "./RefMapDropSpace";
+import React from "react";
 
 export interface EditorBodyProps {
 	logic: EditorLogic;
@@ -39,7 +39,7 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 		return null;
 	}
 
-	private privOnRMDrop = this.onRefMapDrop.bind(this);
+	// private privOnRMDrop = this.onRefMapDrop.bind(this);
 	constructor(props: EditorBodyProps) {
 		super(props);
 		this.state = { currentlyEditingItpt: null, isReloadToEditor: false };
@@ -63,7 +63,7 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 	}
 
 	render() {
-		const { logic, hideRefMapDropSpace } = this.props;
+		const { hideRefMapDropSpace } = this.props;
 		return (
 			<div className="diagram-body">
 				<div

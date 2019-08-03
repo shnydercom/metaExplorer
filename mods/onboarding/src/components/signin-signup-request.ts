@@ -1,10 +1,6 @@
-import { LDRetrieverSuperRewrite } from "sidefx/LDRetrieverSuper-rewrite";
-import { IKvStore } from "ldaccess/ikvstore";
-import { itptKeysFromInputKvs } from "ldaccess/ldUtils";
-import ldBlueprint, { BlueprintConfig } from "ldaccess/ldBlueprint";
-import { tokenStr } from "mods/keycloak/sidefx/KeyCloakAuthCfg";
-import { LDDict } from "ldaccess/LDDict";
-import { ILoginResponse, RESPONSE_CONTENT } from "../apis/datatypes";
+import { LDRetrieverSuperRewrite, IKvStore, itptKeysFromInputKvs, ldBlueprint, BlueprintConfig,LDDict } from "@metaexplorer/core";
+import { tokenStr } from "@metaexplorer-mods/keycloak";
+import { RESPONSE_CONTENT } from "../apis/datatypes";
 import { OnboardingAPI } from "../apis/onboardingAPI";
 
 export const signinSignupName = "shnyder/meta-explorer/onboarding/signinSignupRequest";

@@ -1,11 +1,7 @@
-import { BlueprintConfig } from "ldaccess/ldBlueprint";
-import { intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever } from "appconfig/retrieverAccessFns";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { NetworkPreferredToken } from "ldaccess/ildtoken";
-import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
-import { applicationStore } from "approot";
-import { ldOptionsClientSideUpdateAction } from "appstate/epicducks/ldOptions-duck";
-import { isProduction } from "appstate/store";
+import {
+	BlueprintConfig, intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever, ILDOptions, NetworkPreferredToken, DEFAULT_ITPT_RETRIEVER_NAME,
+	applicationStore, ldOptionsClientSideUpdateAction, isProduction
+} from "@metaexplorer/core";
 
 export interface UserItptLoadResponse {
 	itptMetaInfo: [{}];
@@ -15,14 +11,14 @@ export interface UserItptLoadResponse {
 
 export class UserItptLoadApi {
 
-  public static getUserItptLoadApiSingleton(): UserItptLoadApi {
-    if (UserItptLoadApi.apiSingleton == null) {
-      UserItptLoadApi.apiSingleton = new UserItptLoadApi();
-    }
-    return UserItptLoadApi.apiSingleton;
+	public static getUserItptLoadApiSingleton(): UserItptLoadApi {
+		if (UserItptLoadApi.apiSingleton == null) {
+			UserItptLoadApi.apiSingleton = new UserItptLoadApi();
+		}
+		return UserItptLoadApi.apiSingleton;
 	}
 
-  private static apiSingleton: UserItptLoadApi;
+	private static apiSingleton: UserItptLoadApi;
 
 	getItptsUnauthed(): () => Promise<UserItptLoadResponse> {
 		return this.getItptsFrom(isProduction ? "/blocks" : "/static/interpreters.json");

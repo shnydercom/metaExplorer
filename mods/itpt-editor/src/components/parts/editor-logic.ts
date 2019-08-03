@@ -1,15 +1,6 @@
-import { COMP_BASE_CONTAINER } from "components/generic/baseContainer-rewrite";
-import { IItptInfoItem, DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
-import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
-import { IKvStore } from "ldaccess/ikvstore";
-import { getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg } from "ldaccess/kvConvenienceFns";
-import { ldBaseDataTypeList } from "ldaccess/LDBaseDataType";
-import { BlueprintConfig, IBlueprintItpt } from "ldaccess/ldBlueprint";
-import { LDDict } from "ldaccess/LDDict";
-import { isInputValueValidFor } from "ldaccess/ldtypesystem/typeChecking";
-import { isObjPropertyRef } from "ldaccess/ldUtils";
-import { ObjectPropertyRef, OBJECT_PROP_REF } from "ldaccess/ObjectPropertyRef";
-import { UserDefDict } from "ldaccess/UserDefDict";
+import { COMP_BASE_CONTAINER, IItptInfoItem, DEFAULT_ITPT_RETRIEVER_NAME, ReduxItptRetriever, getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg,
+	ldBaseDataTypeList, BlueprintConfig, IBlueprintItpt, LDDict, IKvStore, isInputValueValidFor, isObjPropertyRef,
+	ObjectPropertyRef, UserDefDict, appItptMatcherFn } from "@metaexplorer/core";
 import { DefaultLinkModel, DiagramEngine, DiagramModel, NodeModel } from "storm-react-diagrams";
 import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
@@ -28,7 +19,6 @@ import { OutputInfoPartNodeModel, OUTPUT_NODE_WIDTH } from "./outputinfotypes/Ou
 import { OutputInfoWidgetFactory } from "./outputinfotypes/OutputInfoWidgetFactory";
 import { SettingsLabelFactory } from "./SettingsLabelFactory";
 import { SettingsLinkFactory } from "./SettingsLinkFactory";
-import { appItptMatcherFn } from "appconfig/appItptMatcher";
 
 export interface NewNodeSig {
 	x: number;
@@ -215,12 +205,12 @@ export class EditorLogic {
 		let rv: IItptInfoItem[] = [];
 		let baseTypeIntrprtr: IItptInfoItem;
 		this.itptList.forEach((itm) => {
-			let firstBTIfound: boolean = false;
+			//let firstBTIfound: boolean = false;
 			for (var index = 0; index < ldBaseDataTypeList.length; index++) {
 				var element = ldBaseDataTypeList[index];
 				if (itm.baseType === element) {
 					if (!baseTypeIntrprtr) baseTypeIntrprtr = itm;
-					firstBTIfound = true;
+					//firstBTIfound = true;
 					break;
 				}
 			}
@@ -237,7 +227,7 @@ export class EditorLogic {
 		this.addLDPortModelsToNodeFromCfg(node, cfg);
 	}
 	public addLDPortModelsToNodeFromCfg(node: ItptNodeModel, cfg: BlueprintConfig) {
-		let rv: LDPortModel[] = [];
+		//let rv: LDPortModel[] = [];
 		let intrprtrKeys: any[] = cfg.interpretableKeys;
 		let initialKvStores: IKvStore[] = cfg.initialKvStores;
 		node.nameSelf = node.id;
@@ -446,15 +436,15 @@ export class EditorLogic {
 
 	public addNewExtendableNode(signature: NewNodeSig, itpt: BlueprintConfig): ExtendableTypesNodeModel {
 		let extendableNode = new ExtendableTypesNodeModel("Linear Data Display", null, null, editorSpecificNodesColor);
-		let nodeName: string = itpt.subItptOf;
+		//let nodeName: string = itpt.subItptOf;
 		extendableNode.x = signature.x;
 		extendableNode.y = signature.y;
 		extendableNode.canInterpretType = itpt.canInterpretType;
-		let outputSelfKV: IKvStore = {
+		/*let outputSelfKV: IKvStore = {
 			key: UserDefDict.outputSelfKey,
 			value: undefined,
 			ldType: UserDefDict.intrprtrClassType
-		};
+		};*/
 		this.addLDPortModelsToNodeFromCfg(extendableNode, itpt);
 		extendableNode.id = signature.id;
 		extendableNode.nameSelf = "Linear Data Display";
@@ -503,7 +493,7 @@ export class EditorLogic {
 	}
 
 	public intrprtrBlueprintFromDiagram(finalCanInterpretType?: string): BlueprintConfig {
-		let rv: BlueprintConfig;
+		//let rv: BlueprintConfig;
 		if (!this.outputNode) return null;
 		let crudSkills = "cRud";
 		let subItptOf = null; //set later, relies on info from fillBPCfgFromGraph
@@ -564,8 +554,8 @@ export class EditorLogic {
 				}
 				switch (leafNode.type) {
 					case DECLARATION_MODEL:
-						let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
-						let declarID = declarModel.getID();
+						//let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
+						//let declarID = declarModel.getID();
 						if (leafPort.kv) {
 							if (leafPort.kv.key === UserDefDict.externalOutput) {
 								//is an external input marker
@@ -579,6 +569,7 @@ export class EditorLogic {
 								//branchBPCfg.interpretableKeys.push(port.kv.key);
 							}
 						}
+						break;
 					default: break;
 				}
 			}
@@ -601,8 +592,8 @@ export class EditorLogic {
 				}
 				switch (leafNode.type) {
 					case DECLARATION_MODEL:
-						let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
-						let declarID = declarModel.getID();
+						//let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
+						//let declarID = declarModel.getID();
 						if (leafPort.kv) {
 							if (leafPort.kv.key === UserDefDict.externalInput) {
 								//is an external input marker
@@ -741,13 +732,13 @@ export class EditorLogic {
 		return rv;
 	}
 
-	private copyKVforExport(sourceKV: IKvStore): IKvStore {
+	/*private copyKVforExport(sourceKV: IKvStore): IKvStore {
 		let newKVStore: IKvStore = this.copyKV(sourceKV);
 		if (newKVStore.value && newKVStore.value.hasOwnProperty(OBJECT_PROP_REF)) {
 			(sourceKV.value as ObjectPropertyRef).propRef = null;
 		}
 		return newKVStore;
-	}
+	}*/
 
 	private copyKV(sourceKV: IKvStore): IKvStore {
 		let rv: IKvStore = {
@@ -777,7 +768,7 @@ export class EditorLogic {
 			}
 		});
 		//delete at the end
-		let lastVal = 0;
+		//let lastVal = 0;
 		idxMap.forEach((val, key) => {
 			kvStores.splice(val, 1);
 			idxMap.forEach((val2, key2) => {
