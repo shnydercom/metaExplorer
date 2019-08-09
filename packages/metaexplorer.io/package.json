@@ -1,7 +1,6 @@
 {
   "name": "metaexplorer.io",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@metaexplorer-mods/material-design": "^0.0.1",
     "@metaexplorer/core": "^0.0.1",
@@ -9,17 +8,17 @@
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "typescript": "^3.5.3",
-    "@metaexplorer-mods/keycloak": "*",
-    "@metaexplorer-mods/demo" : "*",
-    "@metaexplorer-mods/google" : "*",
-    "@metaexplorer-mods/mailchimp" : "*",
-    "@metaexplorer-mods/useritpt" : "*",
-    "@metaexplorer-mods/itpt" : "*",
-    "@metaexplorer-mods/qr" : "*",
-    "@metaexplorer-mods/onboarding" : "*"
+    "@metaexplorer-mods/keycloak": "0.0.1",
+    "@metaexplorer-mods/demo" : "0.0.1",
+    "@metaexplorer-mods/google" : "0.0.1",
+    "@metaexplorer-mods/mailchimp" : "0.0.1",
+    "@metaexplorer-mods/useritpt" : "0.0.1",
+    "@metaexplorer-mods/itpt-editor" : "0.0.1",
+    "@metaexplorer-mods/qr-code-genscan" : "0.0.1",
+    "@metaexplorer-mods/onboarding" : "0.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start --verbose",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

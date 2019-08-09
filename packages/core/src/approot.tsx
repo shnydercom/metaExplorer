@@ -14,7 +14,6 @@ import { initEssentialInterpreters } from 'components/essentials/initEssentialIt
 import { Route, Switch } from 'react-router';
 import { LDRouteProps } from 'appstate/LDProps';
 import { initEssentialItpts } from 'defaults/initEssentialItpts';
-import 'mods/google/components/GWebAuthenticator';
 import { initGameItpt } from 'components/game/initGameItpts';
 import { initBaseHtmlItpt } from 'components/basic-html/initBaseHtmlItpt';
 import { LDApproot } from 'ldapproot';

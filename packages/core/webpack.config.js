@@ -14,8 +14,8 @@ module.exports = { ...sharedWebpackCfg,
   devtool: "source-map",
 
   output: {
-    filename: '[name].[chunkhash].js',
-    path: 'dist',
+    filename: 'index.js',
+    path: 'lib',
     libraryTarget: 'umd',
     path: path.resolve('dist')
   },

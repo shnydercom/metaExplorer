@@ -6,7 +6,7 @@ module.exports = {
   // entry point of our application, within the `src` directory (which we add to resolve.modules below):
   // entry: [/*'@babel/polyfill',*/ "./src/index"],
   entry: {
-    main: ['@babel/polyfill', './src/index.tsx'],
+    main: ['@babel/polyfill', './src/index.ts'],
     vendor: [
       'babel-polyfill',
       'react',
@@ -15,10 +15,10 @@ module.exports = {
   },
   // configure the output directory and publicPath for the devServer
   output: {
-    filename: '[name].[chunkhash].js',
-    path: 'dist',
+    filename: 'index.js',
+    path: 'lib',
     libraryTarget: 'umd',
-    path: path.resolve('dist')
+    path: path.resolve('lib')
   },
 
   // configure the dev server to run 
@@ -102,5 +102,5 @@ module.exports = {
       amd: 'quagga'
     }
   },
-  plugins: [new ForkTsCheckerWebpackPlugin()]
+  plugins: [new ForkTsCheckerWebpackPlugin({ workers: 1 , memoryLimit: 4098*2})]
 }

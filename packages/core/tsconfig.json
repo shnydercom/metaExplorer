@@ -6,6 +6,10 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
+    "declarationDir": "lib",
+    "declaration": true,
+    "declarationMap": false,
+    "composite": true,
     "baseUrl": "./src",
     "paths": {
       "*": [

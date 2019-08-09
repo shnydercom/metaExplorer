@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "a GUI editor for configuring bizSys-Server",
   "license": "MIT",
-  "main": "./lib",
+  "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "publishConfig": {
     "access": "public"
@@ -14,8 +14,8 @@
   ],
   "scripts": {
     "test": "jest --watch",
+    "buildcra": "react-scripts build",
     "build": "webpack --config=webpack.prod.config.js",
-    "start": "cross-env NODE_ENV=development METAEXPLORER_MODE=demo webpack-dev-server",
     "startfornetwork": "webpack-dev-server --host 0.0.0.0",
     "lint": "tslint ./src/**/*.ts -t verbose",
     "compcss": "node-sass --output-style compressed ./src/styles/styles.scss > cat ./dist/style.css",
@@ -85,7 +85,7 @@
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
     "ts-jest": "^24.0.2",
-    "ts-loader": "^6.0.2",
+    "ts-loader": "^6.0.4",
     "tslint": "^5.18.0",
     "typeface-roboto": "^0.0.54",
     "typescript": "3.5.2",
