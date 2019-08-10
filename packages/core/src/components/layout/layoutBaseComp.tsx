@@ -7,7 +7,6 @@ import { VisualKeysDict } from '../visualcomposition/visualDict';
 
 import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from '../generic/generatorFns';
 import { Component } from 'react';
-import CircleView from 'metaexplorer-react-components/lib/components/circle/circleview';
 import React from 'react';
 
 let cfgIntrprtKeys: string[] =
@@ -75,13 +74,4 @@ export const LayoutVHCenteredColumnName = 'shnyder/layout/vh-centered-column';
 @ldBlueprint(createLayoutBpCfg(LayoutVHCenteredColumnName))
 export class PureVHcenteredColumnLayout extends PureLayoutComponent {
 	styleClassName = "vh-centered-column";
-}
-
-export const LayoutCircleDisplayName = 'shnyder/layout/circle-display';
-@ldBlueprint(createLayoutBpCfg(LayoutCircleDisplayName))
-export class PureCircleLayout extends PureLayoutComponent {
-	styleClassName = ""; //can be set, default behaviour is centering vertically and horizontally
-	render() {
-		return <CircleView>{this.renderInputContainer()}</CircleView>;
-	}
 }

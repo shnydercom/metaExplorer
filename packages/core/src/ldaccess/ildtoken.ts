@@ -1,4 +1,4 @@
-import { Toolkit } from "storm-react-diagrams";
+import * as shortId from "shortid";
 import { ITPT_LINEAR_SPLIT, ITPT_REFMAP_BASE } from "./iitpt-retriever";
 /**
  * adds the requirement for a getter and setter function for the token value.
@@ -35,7 +35,7 @@ export class NetworkPreferredToken implements ILDToken {
 
 	constructor(initialVal: string) {
 		if (!initialVal || initialVal.length === 0)
-			this.clientVal = Toolkit.UID();
+			this.clientVal = shortId.generate();
 		else
 			this.clientVal = initialVal;
 	}

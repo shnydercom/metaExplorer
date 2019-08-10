@@ -6,19 +6,19 @@ module.exports = {
   // entry point of our application, within the `src` directory (which we add to resolve.modules below):
   // entry: [/*'@babel/polyfill',*/ "./src/index"],
   entry: {
-    main: ['@babel/polyfill', './src/index.ts'],
-    vendor: [
+    main: [/*'@babel/polyfill',*/ './src/index.ts'],
+    /*vendor: [
       'babel-polyfill',
       'react',
       'react-dom'
-    ]
+    ]*/
   },
   // configure the output directory and publicPath for the devServer
   output: {
-    filename: 'index.js',
-    path: 'lib',
+    filename: '[name].js',
     libraryTarget: 'umd',
-    path: path.resolve('lib')
+    library: 'metaexplorer-core',
+    path: path.resolve('_bundles')
   },
 
   // configure the dev server to run 
@@ -34,7 +34,7 @@ module.exports = {
     extensions: ['.json', '.css', '.scss', '.ts', '.tsx', '.js'],
 
     // add 'src' to the modules, so that when you import files you can do so with 'src' as the relative route
-    modules: ['src', 'node_modules'],
+    modules: ['src']//, 'node_modules'],
   },
 
   module: {
@@ -48,9 +48,9 @@ module.exports = {
           },
           {
             loader: 'ts-loader',
-            options: {
+            /*options: {
               transpileOnly: true
-            }
+            }*/
           }
         ]
       }, {
@@ -95,12 +95,56 @@ module.exports = {
       commonjs: 'react-dom',
       amd: 'react-dom'
     },
-    'quagga': {
-      root: 'Quagga',
-      commonjs2: 'quagga',
-      commonjs: 'quagga',
-      amd: 'quagga'
-    }
+    'react-redux': {
+      root: 'ReactRedux',
+      commonjs2: 'react-redux',
+      commonjs: 'react-redux',
+      amd: 'react-redux'
+    },
+    'react-router-dom': {
+      root: 'ReactRouterDOM',
+      commonjs2: 'react-router-dom',
+      commonjs: 'react-router-dom',
+      amd: 'react-router-dom'
+    },
+    'react-router': {
+      root: 'ReactRouter',
+      commonjs2: 'react-router',
+      commonjs: 'react-router',
+      amd: 'react-router'
+    },
+    'redux': {
+      root: 'redux',
+      commonjs2: 'redux',
+      commonjs: 'redux',
+      amd: 'redux'
+    },
+    'redux-observable': {
+      root: 'reduxObservable',
+      commonjs2: 'redux-observable',
+      commonjs: 'redux-observable',
+      amd: 'redux-observable'
+    },
+    'shortid': {
+      root: 'shortid',
+      commonjs2: 'shortid',
+      commonjs: 'shortid',
+      amd: 'shortid'
+    },
+    'rxjs': {
+      root: 'rxjs',
+      commonjs2: 'rxjs',
+      commonjs: 'rxjs',
+      amd: 'rxjs'
+    },
+    'rxjs/operators': {
+      root: 'rxjsOperators',
+      commonjs2: 'rxjs/operators',
+      commonjs: 'rxjs/operators',
+      amd: 'rxjs/operators'
+    },
   },
-  plugins: [new ForkTsCheckerWebpackPlugin({ workers: 1 , memoryLimit: 4098*2})]
+  plugins: [
+    //new ForkTsCheckerWebpackPlugin({ workers: 1 , memoryLimit: 4098*2})
+  ]
 }

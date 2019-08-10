@@ -1,10 +1,10 @@
-import { createStore, applyMiddleware, Store, compose } from 'redux';
+import { createStore, applyMiddleware, Store } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { rootEpic, rootReducer } from './rootduck';
 import { ImageUploadAPI } from 'apis/image-upload';
 import { ILDOptions } from 'ldaccess/ildoptions';
 import { LDOptionsAPI } from 'apis/ldoptions-api';
-import { DevTools } from './devTools';
+//import { DevTools } from './devTools';
 import { IBlueprintItpt } from 'ldaccess/ldBlueprint';
 import { IModStatePart } from './modstate';
 import { ModAPI } from 'apis/mod-api';
@@ -43,8 +43,8 @@ export const isProduction = process.env.NODE_ENV === 'production';
 export const isDemo = process.env.METAEXPLORER_MODE === 'demo';
 export const isStateDebug = process.env.METAEXPLORER_MODE === 'statedebug';
 
-let middleWare = isProduction ? applyMiddleware(epicMiddleware) :
-  isStateDebug ? compose(applyMiddleware(epicMiddleware), DevTools.instrument()) : applyMiddleware(epicMiddleware);
+let middleWare = /*isProduction ?*/ applyMiddleware(epicMiddleware); /* :
+  isStateDebug ? compose(applyMiddleware(epicMiddleware), DevTools.instrument()) : applyMiddleware(epicMiddleware);*/
 
 export interface IAppConfigStatePart {
   appKey: string;

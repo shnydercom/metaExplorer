@@ -1,6 +1,5 @@
-import { appItptRetrFn } from "appconfig/appItptRetriever";
 import { ImgHeadSubDescIntrprtrName, PureImgHeadSubDesc } from "./ImgHeadSubDescIntrprtr";
-import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
+import { ITPT_TAG_ATOMIC, PureCircleLayout, LayoutCircleDisplayName, appItptRetrFn } from "@metaexplorer/core";
 import { PureHeroGallery, HeroGalleryName } from "./hero-gallery";
 import { PureTitleTextAndImage, TitleTextAndImageName } from "./TitleTextAndImage";
 import { GooeyNavName, PureGooeyNav } from "./gooey-nav";
@@ -13,4 +12,5 @@ export function initShnyderItpts() {
 	appIntRetr.addItpt(TitleTextAndImageName, PureTitleTextAndImage, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(GooeyNavName, PureGooeyNav, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(ImprintName, PureImprint, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(LayoutCircleDisplayName, PureCircleLayout, "cRud", [ITPT_TAG_ATOMIC]);
 }

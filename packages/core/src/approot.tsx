@@ -2,9 +2,9 @@ import React from 'react';
 import { Component } from 'react';
 import { Store } from 'redux';
 import { Provider, connect } from 'react-redux';
-import { ExplorerState, configureStore, isProduction, modAPI, IAppConfigStatePart, isStateDebug } from 'appstate/store';
+import { ExplorerState, configureStore, modAPI, IAppConfigStatePart } from 'appstate/store';
 import './styles/styles.scss';
-import { DevTools } from './appstate/devTools';
+//import { DevTools } from './appstate/devTools';
 import { initLDConnect } from 'sidefx/nonVisualConnect';
 import {
 	BrowserRouter as Router
@@ -17,7 +17,7 @@ import { initEssentialItpts } from 'defaults/initEssentialItpts';
 import { initGameItpt } from 'components/game/initGameItpts';
 import { initBaseHtmlItpt } from 'components/basic-html/initBaseHtmlItpt';
 import { LDApproot } from 'ldapproot';
-import { initShnyderItpts } from 'components/shnyder/initShnyderItpts';
+//import { initShnyderItpts } from 'components/shnyder/initShnyderItpts';
 import { initRequiredMods } from 'modding/initMods';
 import { mapStateToPropsRoot } from 'appstate/reduxFns';
 import { IModSpec } from 'apis/mod-api';
@@ -63,7 +63,7 @@ export function rootSetup(requiredMods: IModSpec[]): void {
 	initGameItpt();
 	initLDConnect();
 	initRequiredMods(modAPI, requiredMods);
-	initShnyderItpts();
+	//initShnyderItpts();
 }
 
 export class PureAppRoot extends Component<AppRootProps, AppRootState>{
@@ -108,7 +108,7 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 						</Switch>
 					</Router>
 					: <div className="approot-loading">loading</div>}
-				{isProduction ? null : isStateDebug ? <DevTools /> : null}
+				{/*isProduction ? null : isStateDebug ? <DevTools /> : null*/}
 			</>
 		);
 	}

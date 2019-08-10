@@ -1,0 +1,23 @@
+{
+  "name": "@metaexplorer-mods/shnyder",
+  "version": "0.0.1",
+  "description": "TODO:changeDescription",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Jonathan Schneider",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "repository": "",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "@metaexplorer/core": "^0.0.1",
+    "react-gooey-nav": "^2.0.0"
+  }
+}

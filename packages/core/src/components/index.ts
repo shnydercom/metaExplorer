@@ -12,5 +12,4 @@ export * from './layout';
 export * from './peripherals';
 export * from './reactUtils';
 export * from './routing';
-export * from './shnyder';
 export * from './visualcomposition';

@@ -21,13 +21,13 @@ module.exports = {
     }),
     new webpack.ProvidePlugin({
       "React": "react",
-      "Quagga": "quagga"
+      //"Quagga": "quagga"
     }),
     new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.[contenthash].css',
     }),
-    new HtmlWebpackPlugin({
+    /*new HtmlWebpackPlugin({
       //custom props:
       materialIconsPath: "https://fonts.googleapis.com/icon?family=Material+Icons",
       robotoPath: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700", 
@@ -37,7 +37,7 @@ module.exports = {
       hash: true,
       template: './src/index.html',
       filename: 'index.html'
-    }),
+    }),*/
     new CompressionPlugin({
       //asset: "[path].gz[query]",
       algorithm: "gzip",
@@ -45,7 +45,7 @@ module.exports = {
       threshold: 10240,
       minRatio: 0
     }),
-    new CopyWebpackPlugin([{
+    /*new CopyWebpackPlugin([{
         from: 'assets',
         to: 'static'
       },
@@ -81,6 +81,6 @@ module.exports = {
         from: 'node_modules/keycloak-js/dist/keycloak.min.js',
         to: 'lib/keycloak-js@6.0.0.js'
       },
-    ]),
+    ]),*/
   ]
 }

@@ -3,7 +3,7 @@ const path = require('path')
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const WriteFilePlugin = require('write-file-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+//const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
@@ -14,10 +14,10 @@ module.exports = { ...sharedWebpackCfg,
   devtool: "source-map",
 
   output: {
-    filename: 'index.js',
-    path: 'lib',
+    filename: '[name].js',
     libraryTarget: 'umd',
-    path: path.resolve('dist')
+    library: 'metaexplorer-core',
+    path: path.resolve(__dirname, '_bundles'),
   },
   // configure the dev server to run 
   devServer: {
@@ -72,16 +72,6 @@ module.exports = { ...sharedWebpackCfg,
     new MiniCssExtractPlugin({
       filename: 'style.[contenthash].css',
     }),
-    new HtmlWebpackPlugin({
-      //custom props:
-      //materialIconsPath: "/static/material-design-icons/iconfont/material-icons.css",
-      //robotoPath: "/static/typeface-roboto/index.css", 
-      //plugin props:
-      inject: false,
-      hash: true,
-      template: './src/index.html',
-      filename: 'index.html'
-    }),
     new WriteFilePlugin({log: false}),
     {
       apply: (compiler) => {
@@ -99,7 +89,7 @@ module.exports = { ...sharedWebpackCfg,
         from: 'node_modules/typeface-roboto',
         to: 'static/typeface-roboto'
       },*/
-      {
+      /*{
         from: 'assets',
         to: 'static'
       },
@@ -138,7 +128,7 @@ module.exports = { ...sharedWebpackCfg,
       {
         from: 'node_modules/keycloak-js/dist/keycloak.min.js',
         to: 'lib/keycloak-js@6.0.0.js'
-      },
+      },*/
     ])
   ]
 }

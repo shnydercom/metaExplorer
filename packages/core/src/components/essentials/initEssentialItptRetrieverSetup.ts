@@ -7,7 +7,7 @@ import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever"
 import { organizationRetrieverName, OrganizationRetriever } from "sidefx/OrganizationRetriever";
 import { EANScannerName, EANScanner } from "../peripherals/camera/EAN-scanner";
 import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
-import { LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, PureCircleLayout, LayoutCircleDisplayName } from "../layout/layoutBaseComp";
+import { LayoutVHCenteredColumnName, PureVHcenteredColumnLayout,  } from "../layout/layoutBaseComp";
 import { PureRedirectComponent, RouteRedirectName } from "../routing/redirect";
 import { TwoDtoJSONArray, TwoDtoJSONArrayName } from "datatransformation/TwoDtoJSONArray";
 import { JSONArrayToCompactInfoArrayName, JSONArrayToCompactInfoArray } from "datatransformation/JSONArrayToCompactInfoArray";
@@ -31,7 +31,6 @@ export function initEssentialInterpreters() {
 
 	//register layout itpts
 	appIntRetr.addItpt(LayoutVHCenteredColumnName, PureVHcenteredColumnLayout, "cRud", [ITPT_TAG_ATOMIC]);
-	appIntRetr.addItpt(LayoutCircleDisplayName, PureCircleLayout, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(CSSWrapperName, PureCSSWrapper, "cRud", [ITPT_TAG_ATOMIC]);
 
 	//data transformation itpts

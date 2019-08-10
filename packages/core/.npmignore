@@ -1,0 +1,11 @@
+.*
+**/tsconfig.json
+**/webpack.config.js
+
+node_modules
+src
+tests
+testing
+prodcfg
+test-blocks
+tooling
