@@ -1,17 +1,17 @@
 import React from 'react';
-import { BlueprintConfig } from 'ldaccess/ldBlueprint';
-import { IBlueprintItpt } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
+import { BlueprintConfig } from '../../../ldaccess/ldBlueprint';
+import { IBlueprintItpt } from '../../../ldaccess/ldBlueprint';
+import { ILDOptions } from '../../../ldaccess/ildoptions';
 
-import { IKvStore } from 'ldaccess/ikvstore';
-import { LDDict } from 'ldaccess/LDDict';
+import { IKvStore } from '../../../ldaccess/ikvstore';
+import { LDDict } from '../../../ldaccess/LDDict';
 
-import { LDBaseDataType } from 'ldaccess/LDBaseDataType';
-import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDLocalState } from "appstate/LDProps";
-import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
+import { LDBaseDataType } from '../../../ldaccess/LDBaseDataType';
+import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDLocalState } from "../../../appstate/LDProps";
+import { ldOptionsDeepCopy } from "../../../ldaccess/ldUtils";
 import { Component, ReactNode } from "react";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
+import { UserDefDict } from "../../../ldaccess/UserDefDict";
+import { getKVStoreByKey } from "../../../ldaccess/kvConvenienceFns";
 import { gdsfpLD, initLDLocalState, determineSingleKVKey } from "../../generic/generatorFns";
 
 /**

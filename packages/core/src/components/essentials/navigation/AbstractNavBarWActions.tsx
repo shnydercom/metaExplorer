@@ -1,15 +1,15 @@
 import React from 'react';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
+import { IKvStore } from '../../../ldaccess/ikvstore';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../../ldaccess/ldBlueprint';
+import { ILDOptions } from '../../../ldaccess/ildoptions';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
 import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 import { initLDLocalState, gdsfpLD, generateItptFromCompInfo } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ReactNode } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
-import { LDDict } from 'ldaccess/LDDict';
-import { UserDefDict } from 'ldaccess/UserDefDict';
+import { LDDict } from '../../../ldaccess/LDDict';
+import { UserDefDict } from '../../../ldaccess/UserDefDict';
 
 export const NavBarWActionsName = "shnyder/material-design/NavBarWActions";
 

@@ -2,7 +2,7 @@ import { Action } from 'redux';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { LDError, LDErrorMsgState } from './../LDError';
 import { tap, mergeMap } from 'rxjs/operators';
-import { ILDWebResource } from 'ldaccess/ildresource';
+import { ILDWebResource } from '../../ldaccess/ildresource';
 
 export const IMG_UPLOAD_REQUEST = 'shnyder/IMG_UPLOAD_REQUEST';
 export const IMG_UPLOAD_RESULT = 'shnyder/IMG_UPLOAD_RESULT';

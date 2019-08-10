@@ -1,16 +1,16 @@
-import { ExplorerState } from "appstate/store";
-import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "appstate/LDProps";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { IKvStore } from "ldaccess/ikvstore";
-import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction, dispatchKvUpdateAction, ldAction } from "appstate/epicducks/ldOptions-duck";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { OutputKVMapElement, OutputKVMap, BlueprintConfig } from "ldaccess/ldBlueprint";
-import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
+import { ExplorerState } from "../appstate/store";
+import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "../appstate/LDProps";
+import { ILDOptions } from "../ldaccess/ildoptions";
+import { IKvStore } from "../ldaccess/ikvstore";
+import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction, dispatchKvUpdateAction, ldAction } from "../appstate/epicducks/ldOptions-duck";
+import { UserDefDict } from "../ldaccess/UserDefDict";
+import { OutputKVMapElement, OutputKVMap, BlueprintConfig } from "../ldaccess/ldBlueprint";
+import { ldOptionsDeepCopy } from "../ldaccess/ldUtils";
 import { linearSplitRequestAction } from "./epicducks/linearSplit-duck";
 import { refMapREQUESTAction, refMapSUCCESSAction } from "./epicducks/refMap-duck";
 import { Dispatch, Action } from "redux";
-import { ITPT_REFMAP_BASE } from "ldaccess/iitpt-retriever";
-import { AppRootProps } from "approot";
+import { ITPT_REFMAP_BASE } from "../ldaccess/iitpt-retriever";
+import { AppRootProps } from "../approot";
 
 export const mapStateToPropsRoot = (state: ExplorerState, ownProps: AppRootProps): AppRootProps => {
 	return { cfg: { ...state.appCfg }, isLoading: state.isLoading };

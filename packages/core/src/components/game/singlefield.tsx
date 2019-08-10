@@ -1,10 +1,10 @@
-import { LDDict } from 'ldaccess/LDDict';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { VisualKeysDict } from 'components/visualcomposition/visualDict';
-import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
-import { gdsfpLD, initLDLocalState } from 'components/generic/generatorFns';
+import { LDDict } from '../../ldaccess/LDDict';
+import { IKvStore } from '../../ldaccess/ikvstore';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../ldaccess/ldBlueprint';
+import { ILDOptions } from '../../ldaccess/ildoptions';
+import { VisualKeysDict } from '../../components/visualcomposition/visualDict';
+import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from '../../appstate/LDProps';
+import { gdsfpLD, initLDLocalState } from '../../components/generic/generatorFns';
 import { Component } from 'react';
 import React from 'react';
 

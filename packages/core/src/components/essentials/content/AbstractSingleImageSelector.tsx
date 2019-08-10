@@ -1,10 +1,10 @@
 import { Component, ReactNode } from 'react';
-import { LDConnectedDispatch, LDConnectedState, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { BlueprintConfig, IBlueprintItpt } from 'ldaccess/ldBlueprint';
-import { LDDict } from 'ldaccess/LDDict';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { UserDefDict } from 'ldaccess/UserDefDict';
+import { LDConnectedDispatch, LDConnectedState, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
+import { BlueprintConfig, IBlueprintItpt } from '../../../ldaccess/ldBlueprint';
+import { LDDict } from '../../../ldaccess/LDDict';
+import { IKvStore } from '../../../ldaccess/ikvstore';
+import { ILDOptions } from '../../../ldaccess/ildoptions';
+import { UserDefDict } from '../../../ldaccess/UserDefDict';
 import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 // TODO: drop file anim: https://css-tricks.com/examples/DragAndDropFileUploading/
 

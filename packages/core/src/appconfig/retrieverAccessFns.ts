@@ -1,17 +1,17 @@
-import { ldBlueprint, BlueprintConfig } from "ldaccess/ldBlueprint";
-import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
-import { getKVStoreByKey } from "ldaccess/kvConvenienceFns";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
-import { ITPT_TAG_COMPOUND } from "ldaccess/iitpt-retriever";
-import { appItptRetrFn } from 'appconfig/appItptRetriever';
-import { applicationStore } from "approot";
-import { LDError } from "appstate/LDError";
-import { ldOptionsDeepCopy } from "ldaccess/ldUtils";
-import { ldOptionsClientSideUpdateAction, ldOptionsClientSideCreateAction } from "appstate/epicducks/ldOptions-duck";
-import { appItptUpdateAction } from "appstate/epicducks/appCfg-duck";
-import { IKvStore } from "ldaccess/ikvstore";
-import { determineSingleKVKey } from "components/generic/generatorFns";
+import { ldBlueprint, BlueprintConfig } from "../ldaccess/ldBlueprint";
+import { ReduxItptRetriever } from "../ld-react-redux-connect/ReduxItptRetriever";
+import { getKVStoreByKey } from "../ldaccess/kvConvenienceFns";
+import { UserDefDict } from "../ldaccess/UserDefDict";
+import { ObjectPropertyRef } from "../ldaccess/ObjectPropertyRef";
+import { ITPT_TAG_COMPOUND } from "../ldaccess/iitpt-retriever";
+import { appItptRetrFn } from '../appconfig/appItptRetriever';
+import { applicationStore } from "../approot";
+import { LDError } from "../appstate/LDError";
+import { ldOptionsDeepCopy } from "../ldaccess/ldUtils";
+import { ldOptionsClientSideUpdateAction, ldOptionsClientSideCreateAction } from "../appstate/epicducks/ldOptions-duck";
+import { appItptUpdateAction } from "../appstate/epicducks/appCfg-duck";
+import { IKvStore } from "../ldaccess/ikvstore";
+import { determineSingleKVKey } from "../components/generic/generatorFns";
 import { appItptMatcherFn } from "./appItptMatcher";
 
 /**

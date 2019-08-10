@@ -1,6 +1,11 @@
-import { appItptRetrFn } from "appconfig/appItptRetriever";
-import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
-import { PureParagraphTextComponent, PureItalicsTextComponent, PureBoldTextComponent, PureSpanTextComponent, PureH4TextComponent, PureH3TextComponent, PureH2TextComponent, PureH1TextComponent, ParagraphTextComponentName, ItalicsTextComponentName, BoldTextComponentName, SpanTextComponentName, H4TextComponentName, H3TextComponentName, H2TextComponentName, H1TextComponentName } from "./text-based-components";
+import { appItptRetrFn } from "../../appconfig/appItptRetriever";
+import { ITPT_TAG_ATOMIC } from "../../ldaccess/iitpt-retriever";
+import {
+	PureParagraphTextComponent, PureItalicsTextComponent, PureBoldTextComponent, PureSpanTextComponent,
+	PureH4TextComponent, PureH3TextComponent, PureH2TextComponent, PureH1TextComponent, ParagraphTextComponentName,
+	ItalicsTextComponentName, BoldTextComponentName, SpanTextComponentName, H4TextComponentName, H3TextComponentName,
+	H2TextComponentName, H1TextComponentName
+} from "./text-based-components";
 
 export function initBaseHtmlItpt() {
 	let appIntRetr = appItptRetrFn();

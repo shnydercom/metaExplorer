@@ -1,10 +1,10 @@
-import { IKvStore } from "ldaccess/ikvstore";
-import { ldBlueprint, BlueprintConfig } from "ldaccess/ldBlueprint";
-import { LDDict } from "ldaccess/LDDict";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { AbstractDataTransformer } from "datatransformation/abstractDataTransformer";
-import { ActionTypesDict, ActionType } from "components/actions/ActionDict";
-import { isObjPropertyRef } from "ldaccess/ldUtils";
+import { IKvStore } from "../../ldaccess/ikvstore";
+import { ldBlueprint, BlueprintConfig } from "../../ldaccess/ldBlueprint";
+import { LDDict } from "../../ldaccess/LDDict";
+import { UserDefDict } from "../../ldaccess/UserDefDict";
+import { AbstractDataTransformer } from "../../datatransformation/abstractDataTransformer";
+import { ActionTypesDict, ActionType } from "../../components/actions/ActionDict";
+import { isObjPropertyRef } from "../../ldaccess/ldUtils";
 
 export const payloadInputKey = UserDefDict.inputData;
 const transfOutputKey = UserDefDict.outputData;

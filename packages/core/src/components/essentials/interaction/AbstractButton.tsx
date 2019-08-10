@@ -1,15 +1,15 @@
 import React from 'react';
-import { LDDict } from 'ldaccess/LDDict';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
+import { LDDict } from '../../../ldaccess/LDDict';
+import { IKvStore } from '../../../ldaccess/ikvstore';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../../ldaccess/ldBlueprint';
+import { ILDOptions } from '../../../ldaccess/ildoptions';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
 import { Redirect } from 'react-router';
 import { Component } from 'react';
-import { ActionKeysDict, ActionTypesDict, ActionType } from 'components/actions/ActionDict';
-import { VisualKeysDict, VisualTypesDict } from 'components/visualcomposition/visualDict';
-import { gdsfpLD, initLDLocalState } from 'components/generic/generatorFns';
-import { cleanRouteString } from 'components/routing/route-helper-fns';
+import { ActionKeysDict, ActionTypesDict, ActionType } from '../../../components/actions/ActionDict';
+import { VisualKeysDict, VisualTypesDict } from '../../../components/visualcomposition/visualDict';
+import { gdsfpLD, initLDLocalState } from '../../../components/generic/generatorFns';
+import { cleanRouteString } from '../../../components/routing/route-helper-fns';
 
 export const MDButtonName = "shnyder/material-design/Button";
 export const fontIcon = "fontIcon";

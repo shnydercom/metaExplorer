@@ -1,10 +1,10 @@
 import React from 'react';
-import { BlueprintConfig, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ldBlueprint, IBlueprintItpt } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
+import { BlueprintConfig, OutputKVMap } from '../ldaccess/ldBlueprint';
+import { ldBlueprint, IBlueprintItpt } from '../ldaccess/ldBlueprint';
+import { ILDOptions } from '../ldaccess/ildoptions';
 
-import { IKvStore } from 'ldaccess/ikvstore';
-import { LDDict } from 'ldaccess/LDDict';
+import { IKvStore } from '../ldaccess/ikvstore';
+import { LDDict } from '../ldaccess/LDDict';
 import { Component } from 'react';
 //import { Dispatch, Action } from 'redux';
 

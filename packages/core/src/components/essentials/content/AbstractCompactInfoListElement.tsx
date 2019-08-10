@@ -1,13 +1,13 @@
-import { IKvStore } from 'ldaccess/ikvstore';
-import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
+import { IKvStore } from '../../../ldaccess/ikvstore';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../../ldaccess/ldBlueprint';
 
-import { LDLocalState, LDConnectedState, LDConnectedDispatch, LDOwnProps } from 'appstate/LDProps';
+import { LDLocalState, LDConnectedState, LDConnectedDispatch, LDOwnProps } from '../../../appstate/LDProps';
 import { Component, ReactNode } from 'react';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { UserDefDict } from 'ldaccess/UserDefDict';
-import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from 'components/generic/generatorFns';
-import { VisualTypesDict, VisualKeysDict } from 'components/visualcomposition/visualDict';
-import { LDDict } from 'ldaccess/LDDict';
+import { ILDOptions } from '../../../ldaccess/ildoptions';
+import { UserDefDict } from '../../../ldaccess/UserDefDict';
+import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from '../../../components/generic/generatorFns';
+import { VisualTypesDict, VisualKeysDict } from '../../../components/visualcomposition/visualDict';
+import { LDDict } from '../../../ldaccess/LDDict';
 
 export const CompactInfoListElementName = "shnyder/CompactInfoListElement";
 

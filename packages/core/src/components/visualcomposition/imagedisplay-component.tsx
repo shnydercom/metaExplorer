@@ -1,8 +1,8 @@
-import { LDDict } from 'ldaccess/LDDict';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
+import { LDDict } from '../../ldaccess/LDDict';
+import { IKvStore } from '../../ldaccess/ikvstore';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../ldaccess/ldBlueprint';
+import { ILDOptions } from '../../ldaccess/ildoptions';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../appstate/LDProps';
 import { Component } from 'react';
 import { gdsfpLD, initLDLocalState } from '../generic/generatorFns';
 import { VisualKeysDict } from './visualDict';

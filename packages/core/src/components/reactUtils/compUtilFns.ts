@@ -1,6 +1,6 @@
-import { isLDOptionsSame } from "ldaccess/ldUtils";
-import { LDRouteProps } from "appstate/LDProps";
-import { VisualKeysDict } from "components/visualcomposition/visualDict";
+import { isLDOptionsSame } from "../../ldaccess/ldUtils";
+import { LDRouteProps } from "../../appstate/LDProps";
+import { VisualKeysDict } from "../../components/visualcomposition/visualDict";
 
 export const compNeedsUpdate = (nextProps, lastProps): boolean => {
 	return nextProps.ldTokenString !== lastProps.ldTokenString ||

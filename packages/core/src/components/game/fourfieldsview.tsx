@@ -1,12 +1,12 @@
 import React from 'react';
-import { LDDict } from 'ldaccess/LDDict';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { VisualKeysDict } from 'components/visualcomposition/visualDict';
-import { UserDefDict } from 'ldaccess/UserDefDict';
-import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
-import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
+import { LDDict } from '../../ldaccess/LDDict';
+import { IKvStore } from '../../ldaccess/ikvstore';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../ldaccess/ldBlueprint';
+import { ILDOptions } from '../../ldaccess/ildoptions';
+import { VisualKeysDict } from '../../components/visualcomposition/visualDict';
+import { UserDefDict } from '../../ldaccess/UserDefDict';
+import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from '../../appstate/LDProps';
+import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from '../../components/generic/generatorFns';
 import { Component } from 'react';
 
 export const GAME_TASK_HEADING = "GameTaskHeading";

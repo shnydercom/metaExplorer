@@ -1,8 +1,8 @@
-import { SideFXDict } from "sidefx/SideFXDict";
-import { LDDict } from "ldaccess/LDDict";
-import { IKvStore } from "ldaccess/ikvstore";
-import { ldBlueprint, BlueprintConfig } from "ldaccess/ldBlueprint";
-import { LDRetrieverSuper } from "sidefx/LDRetrieverSuper";
+import { SideFXDict } from "./../sidefx/SideFXDict";
+import { LDDict } from "./../ldaccess/LDDict";
+import { IKvStore } from "./../ldaccess/ikvstore";
+import { ldBlueprint, BlueprintConfig } from "./../ldaccess/ldBlueprint";
+import { LDRetrieverSuper } from "./../sidefx/LDRetrieverSuper";
 import { ldRetrCfgIntrprtKeys } from "./LDRetrieverSuper-rewrite";
 
 export const organizationRetrieverName = "shnyder/organizationRetriever";

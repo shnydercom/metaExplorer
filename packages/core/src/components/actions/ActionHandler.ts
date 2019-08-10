@@ -1,11 +1,11 @@
-import { AbstractDataTransformer } from "datatransformation/abstractDataTransformer";
-import { UserDefDict } from "ldaccess/UserDefDict";
+import { AbstractDataTransformer } from "../../datatransformation/abstractDataTransformer";
+import { UserDefDict } from "../../ldaccess/UserDefDict";
 import { ActionKeysDict } from "./ActionDict";
-import { IKvStore } from "ldaccess/ikvstore";
-import { LDDict } from "ldaccess/LDDict";
-import { ldBlueprint, BlueprintConfig } from "ldaccess/ldBlueprint";
-import { applicationStore } from "approot";
-import { registerIdActionHandlerAction, registerTypeActionHandlerAction } from "appstate/epicducks/action-duck";
+import { IKvStore } from "../../ldaccess/ikvstore";
+import { LDDict } from "../../ldaccess/LDDict";
+import { ldBlueprint, BlueprintConfig } from "../../ldaccess/ldBlueprint";
+import { applicationStore } from "../../approot";
+import { registerIdActionHandlerAction, registerTypeActionHandlerAction } from "../../appstate/epicducks/action-duck";
 
 export const handleTypeKey = ActionKeysDict.canHandleType;
 export const handleIdKey = ActionKeysDict.canHandleId;

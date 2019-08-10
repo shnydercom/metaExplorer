@@ -1,4 +1,4 @@
-import { IKvStore } from "ldaccess/ikvstore";
+import { IKvStore } from "./ikvstore";
 
 export let singleHyperMediaToKvStores = (inputHM: any): IKvStore[] => {
 	var kvStoreArray: IKvStore[] = new Array<IKvStore>();

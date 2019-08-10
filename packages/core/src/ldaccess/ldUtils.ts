@@ -1,9 +1,9 @@
-import { OBJECT_REF } from "ldaccess/ObjectPropertyRef";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { ILDResource, ILDWebResource } from "ldaccess/ildresource";
-import { IKvStore } from "ldaccess/ikvstore";
-import { OutputKVMap, BlueprintConfig } from "ldaccess/ldBlueprint";
-import { LDError } from "appstate/LDError";
+import { OBJECT_REF } from "./ObjectPropertyRef";
+import { ILDOptions } from "./ildoptions";
+import { ILDResource, ILDWebResource } from "./ildresource";
+import { IKvStore } from "./ikvstore";
+import { OutputKVMap, BlueprintConfig } from "./ldBlueprint";
+import { LDError } from "../appstate/LDError";
 
 export const isItpt = (input: any): boolean => {
 	if (!input) return false;

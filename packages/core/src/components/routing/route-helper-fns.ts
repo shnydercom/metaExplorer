@@ -1,4 +1,4 @@
-import { LDRouteProps } from "appstate/LDProps";
+import { LDRouteProps } from "../../appstate/LDProps";
 
 export function cleanRouteString(destination: string, routes: LDRouteProps) {
 	const { match } = routes;

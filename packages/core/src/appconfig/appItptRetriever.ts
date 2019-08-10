@@ -1,6 +1,6 @@
-import { IItptRetriever } from "ldaccess/iitpt-retriever";
+import { IItptRetriever } from "../ldaccess/iitpt-retriever";
 
-import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
+import { ReduxItptRetriever } from "../ld-react-redux-connect/ReduxItptRetriever";
 
 class AppItptRetriever extends ReduxItptRetriever{
 

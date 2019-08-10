@@ -1,14 +1,14 @@
 import React from 'react';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { UserDefDict } from 'ldaccess/UserDefDict';
+import { IKvStore } from '../ldaccess/ikvstore';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../ldaccess/ldBlueprint';
+import { ILDOptions } from '../ldaccess/ildoptions';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../appstate/LDProps';
+import { UserDefDict } from '../ldaccess/UserDefDict';
 import { VisualKeysDict } from './visualcomposition/visualDict';
 
 import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from './generic/generatorFns';
 import { Component } from 'react';
-import { LDDict } from 'ldaccess/LDDict';
+import { LDDict } from '../ldaccess/LDDict';
 
 let allMyInputKeys: string[] = [VisualKeysDict.inputContainer, "http://my-domain.com/my-class/my-member-a"];
 let initialKVStores: IKvStore[] = [ //the content of the key-value stores at initialization

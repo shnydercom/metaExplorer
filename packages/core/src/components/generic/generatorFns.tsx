@@ -1,15 +1,15 @@
-import { IKvStore } from "ldaccess/ikvstore";
-import { LDOwnProps, LDRouteProps, LDConnectedState, LDLocalState, ReactCompLDLocalState, LDLocalKv } from "appstate/LDProps";
-import { isObjPropertyRef, getKVValue } from "ldaccess/ldUtils";
-import { appItptMatcherFn } from "appconfig/appItptMatcher";
-import { ObjectPropertyRef } from "ldaccess/ObjectPropertyRef";
+import { IKvStore } from "../../ldaccess/ikvstore";
+import { LDOwnProps, LDRouteProps, LDConnectedState, LDLocalState, ReactCompLDLocalState, LDLocalKv } from "../../appstate/LDProps";
+import { isObjPropertyRef, getKVValue } from "../../ldaccess/ldUtils";
+import { appItptMatcherFn } from "../../appconfig/appItptMatcher";
+import { ObjectPropertyRef } from "../../ldaccess/ObjectPropertyRef";
 import { isReactComponent } from "../reactUtils/reactUtilFns";
 import { IReactCompInfoItm, ReactCompInfoMap } from "../reactUtils/iReactCompInfo";
-import { LDError } from "appstate/LDError";
-import { BlueprintConfig } from "ldaccess/ldBlueprint";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
-import { getKVStoreByKey, getAllKVStoresByKey } from "ldaccess/kvConvenienceFns";
+import { LDError } from "../../appstate/LDError";
+import { BlueprintConfig } from "../../ldaccess/ldBlueprint";
+import { UserDefDict } from "../../ldaccess/UserDefDict";
+import { DEFAULT_ITPT_RETRIEVER_NAME } from "../../defaults/DefaultItptRetriever";
+import { getKVStoreByKey, getAllKVStoresByKey } from "../../ldaccess/kvConvenienceFns";
 import React from "react";
 
 export function generateIntrprtrForProp(kvStores: IKvStore[], prop: string, retriever: string, routes: LDRouteProps): any {//JSX.Element {

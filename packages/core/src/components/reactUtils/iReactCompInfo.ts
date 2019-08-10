@@ -1,5 +1,5 @@
-import { LDOwnProps } from "appstate/LDProps";
-import { IBlueprintItpt } from "ldaccess/ldBlueprint";
+import { LDOwnProps } from "../../appstate/LDProps";
+import { IBlueprintItpt } from "../../ldaccess/ldBlueprint";
 
 export interface IReactCompInfoItm {
 	compClass: React.ComponentClass<LDOwnProps> & IBlueprintItpt;

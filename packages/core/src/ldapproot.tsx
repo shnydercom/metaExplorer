@@ -1,11 +1,11 @@
 import React from 'react';
-import { BaseContainerRewrite } from "components/generic/baseContainer-rewrite";
+import { BaseContainerRewrite } from "./components/generic/baseContainer-rewrite";
 import { Route } from "react-router";
-import { LDRouteProps, LDOwnProps, LDConnectedDispatch, LDConnectedState } from "appstate/LDProps";
+import { LDRouteProps, LDOwnProps, LDConnectedDispatch, LDConnectedState } from "./appstate/LDProps";
 import { Component } from "react";
 
 import { connect } from "react-redux";
-import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
+import { mapStateToProps, mapDispatchToProps } from "./appstate/reduxFns";
 
 export interface LDApprootProps {
 	initiallyDisplayedItptName: string | null;

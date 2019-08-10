@@ -1,7 +1,7 @@
 import { LDError } from './../appstate/LDError';
 import { Observable, from } from 'rxjs';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { ILDWebResource } from 'ldaccess/ildresource';
+import { ILDOptions } from '../ldaccess/ildoptions';
+import { ILDWebResource } from '../ldaccess/ildresource';
 
 //let testTC = new TypesCollection(["someTypeInAnArray"] || new Array<string>());
 //console.log(testTC.contains("someTypeInAnArray"));

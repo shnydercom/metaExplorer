@@ -1,12 +1,12 @@
-import { IKvStore } from 'ldaccess/ikvstore';
-import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
+import { IKvStore } from '../../../ldaccess/ikvstore';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../../ldaccess/ldBlueprint';
+import { ILDOptions } from '../../../ldaccess/ildoptions';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
 
-import { initLDLocalState, gdsfpLD, generateItptFromCompInfo } from 'components/generic/generatorFns';
+import { initLDLocalState, gdsfpLD, generateItptFromCompInfo } from '../../../components/generic/generatorFns';
 import { Component, ReactNode } from 'react';
-import { LDDict } from 'ldaccess/LDDict';
-import { UserDefDict } from 'ldaccess/UserDefDict';
+import { LDDict } from '../../../ldaccess/LDDict';
+import { UserDefDict } from '../../../ldaccess/UserDefDict';
 
 export const SectionedListName = "shnyder/material-design/SectionedList";
 export const sectionHeadings = "section-headings";

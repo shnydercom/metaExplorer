@@ -1,7 +1,7 @@
 import { AbstractDataTransformer } from "./abstractDataTransformer";
-import { IKvStore } from "ldaccess/ikvstore";
-import { ldBlueprint, BlueprintConfig } from "ldaccess/ldBlueprint";
-import { LDDict } from "ldaccess/LDDict";
+import { IKvStore } from "../ldaccess/ikvstore";
+import { ldBlueprint, BlueprintConfig } from "../ldaccess/ldBlueprint";
+import { LDDict } from "../ldaccess/LDDict";
 
 export const rowsAndCols = "rowsAndCols";
 export const isFirstRowHeading = "isFirstRowHeading";

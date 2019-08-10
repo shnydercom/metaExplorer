@@ -1,4 +1,4 @@
-import { IKvStore } from "ldaccess/ikvstore";
+import { IKvStore } from "./ikvstore";
 
 export interface ILDWebResource {
 	hypermedia: {};

@@ -5,22 +5,22 @@ import { Provider, connect } from 'react-redux';
 import { ExplorerState, configureStore, modAPI, IAppConfigStatePart } from './appstate/store';
 import './styles/styles.scss';
 //import { DevTools } from './appstate/devTools';
-import { initLDConnect } from 'sidefx/nonVisualConnect';
+import { initLDConnect } from './sidefx/nonVisualConnect';
 import {
 	BrowserRouter as Router
 } from 'react-router-dom';
-import { appItptMatcherFn } from 'appconfig/appItptMatcher';
-import { initEssentialInterpreters } from 'components/essentials/initEssentialItptRetrieverSetup';
+import { appItptMatcherFn } from './appconfig/appItptMatcher';
+import { initEssentialInterpreters } from './components/essentials/initEssentialItptRetrieverSetup';
 import { Route, Switch } from 'react-router';
-import { LDRouteProps } from 'appstate/LDProps';
-import { initEssentialItpts } from 'defaults/initEssentialItpts';
-import { initGameItpt } from 'components/game/initGameItpts';
-import { initBaseHtmlItpt } from 'components/basic-html/initBaseHtmlItpt';
-import { LDApproot } from 'ldapproot';
+import { LDRouteProps } from './appstate/LDProps';
+import { initEssentialItpts } from './defaults/initEssentialItpts';
+import { initGameItpt } from './components/game/initGameItpts';
+import { initBaseHtmlItpt } from './components/basic-html/initBaseHtmlItpt';
+import { LDApproot } from './ldapproot';
 //import { initShnyderItpts } from 'components/shnyder/initShnyderItpts';
-import { initRequiredMods } from 'modding/initMods';
-import { mapStateToPropsRoot } from 'appstate/reduxFns';
-import { IModSpec } from 'apis/mod-api';
+import { initRequiredMods } from './modding/initMods';
+import { mapStateToPropsRoot } from './appstate/reduxFns';
+import { IModSpec } from './apis/mod-api';
 
 export const APP_LD_KEY = "app";
 

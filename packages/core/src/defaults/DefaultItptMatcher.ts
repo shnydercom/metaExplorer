@@ -1,9 +1,9 @@
-import { IItptMatcher } from "ldaccess/iitpt-matcher";
-import { IKvStore } from "ldaccess/ikvstore";
+import { IItptMatcher } from "../ldaccess/iitpt-matcher";
+import { IKvStore } from "../ldaccess/ikvstore";
 
-import { IItptRetriever } from "ldaccess/iitpt-retriever";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
+import { IItptRetriever } from "../ldaccess/iitpt-retriever";
+import { ILDOptions } from "../ldaccess/ildoptions";
+import { DEFAULT_ITPT_RETRIEVER_NAME } from "../defaults/DefaultItptRetriever";
 
 /*
 let matchIsType = (a: IKvStore) => a.key === LDConsts.type || a.key === LDConsts.isA;

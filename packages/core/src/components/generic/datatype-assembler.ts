@@ -1,9 +1,9 @@
-import { IKvStore } from "ldaccess/ikvstore";
-import { ldBlueprint, BlueprintConfig } from "ldaccess/ldBlueprint";
-import { UserDefDict } from "ldaccess/UserDefDict";
-import { VisualTypesDict } from "components/visualcomposition/visualDict";
-import { AbstractDataTransformer } from "datatransformation/abstractDataTransformer";
-import { itptKeysFromInputKvs } from "ldaccess/ldUtils";
+import { IKvStore } from "../../ldaccess/ikvstore";
+import { ldBlueprint, BlueprintConfig } from "../../ldaccess/ldBlueprint";
+import { UserDefDict } from "../../ldaccess/UserDefDict";
+import { VisualTypesDict } from "../../components/visualcomposition/visualDict";
+import { AbstractDataTransformer } from "../../datatransformation/abstractDataTransformer";
+import { itptKeysFromInputKvs } from "../../ldaccess/ldUtils";
 
 const transfOutputKey = UserDefDict.outputData;
 

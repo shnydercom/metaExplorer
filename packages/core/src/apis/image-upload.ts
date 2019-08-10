@@ -1,6 +1,6 @@
 import { LDError } from './../appstate/LDError';
 import { Observable, from } from 'rxjs';
-import { ILDWebResource } from 'ldaccess/ildresource';
+import { ILDWebResource } from '../ldaccess/ildresource';
 
 export class ImageUploadAPI {  // URL to web api IRI resource
   postNewImage(fileList: FileList, targetUrl: string): Observable<ILDWebResource> {//Observable<IWebResource> { //FETCH

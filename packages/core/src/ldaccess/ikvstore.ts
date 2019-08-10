@@ -1,4 +1,4 @@
-import { LDDictWildCard } from "ldaccess/LDDict";
+import { LDDictWildCard } from "./LDDict";
 
 export interface IKvStore {
     key: LDDictWildCard;

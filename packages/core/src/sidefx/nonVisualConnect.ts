@@ -1,7 +1,7 @@
-import { applicationStore } from "approot";
-import { IBlueprintItpt } from "ldaccess/ldBlueprint";
-import { ILDOptionsMapStatePart } from "appstate/store";
-import { isLDOptionsSame } from "ldaccess/ldUtils";
+import { applicationStore } from "../approot";
+import { IBlueprintItpt } from "../ldaccess/ldBlueprint";
+import { ILDOptionsMapStatePart } from "../appstate/store";
+import { isLDOptionsSame } from "../ldaccess/ldUtils";
 
 const connectedMap: Map<string, IBlueprintItpt> = new Map();
 let lastLDOptionsMap: ILDOptionsMapStatePart = null;

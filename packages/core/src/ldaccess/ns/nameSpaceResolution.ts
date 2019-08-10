@@ -1,4 +1,4 @@
-import { nameSpaceMap } from "ldaccess/ns/nameSpaceMap";
+import { nameSpaceMap } from "./nameSpaceMap";
 
 export const resolveNS = (input: string): string => {
 	if (input === null || input === undefined) return input;

@@ -1,18 +1,18 @@
-import { IKvStore } from 'ldaccess/ikvstore';
-import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDOwnProps, LDLocalState } from 'appstate/LDProps';
+import { IKvStore } from '../ldaccess/ikvstore';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../ldaccess/ldBlueprint';
+import { ILDOptions } from '../ldaccess/ildoptions';
+import { LDConnectedState, LDOwnProps, LDLocalState } from '../appstate/LDProps';
 import { SideFXDict } from './SideFXDict';
-import { gdsfpLD, initLDLocalState } from 'components/generic/generatorFns';
-import { applicationStore } from 'approot';
-import { ldOptionsClientSideUpdateAction, ldOptionsRequestAction } from 'appstate/epicducks/ldOptions-duck';
-import { ldOptionsDeepCopy, isObjPropertyRef } from 'ldaccess/ldUtils';
-import { getKVStoreByKey } from 'ldaccess/kvConvenienceFns';
-import { ILDOptionsMapStatePart } from 'appstate/store';
+import { gdsfpLD, initLDLocalState } from '../components/generic/generatorFns';
+import { applicationStore } from '../approot';
+import { ldOptionsClientSideUpdateAction, ldOptionsRequestAction } from '../appstate/epicducks/ldOptions-duck';
+import { ldOptionsDeepCopy, isObjPropertyRef } from '../ldaccess/ldUtils';
+import { getKVStoreByKey } from '../ldaccess/kvConvenienceFns';
+import { ILDOptionsMapStatePart } from '../appstate/store';
 
-import { nameSpaceMap } from "ldaccess/ns/nameSpaceMap";
-import { UserDefDict } from 'ldaccess/UserDefDict';
-import { ILDWebResource } from 'ldaccess/ildresource';
+import { nameSpaceMap } from "../ldaccess/ns/nameSpaceMap";
+import { UserDefDict } from '../ldaccess/UserDefDict';
+import { ILDWebResource } from '../ldaccess/ildresource';
 
 export const ldRetrCfgIntrprtKeys: string[] = [SideFXDict.srvURL, SideFXDict.identifier];
 /*let ldRetrInitialKVStores: IKvStore[] = [

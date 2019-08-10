@@ -1,8 +1,8 @@
-import { ILDOptions } from "ldaccess/ildoptions";
-import { OutputKVMap, BlueprintConfig } from "ldaccess/ldBlueprint";
+import { ILDOptions } from "../ldaccess/ildoptions";
+import { OutputKVMap, BlueprintConfig } from "../ldaccess/ldBlueprint";
 import { RouteComponentProps } from 'react-router';
-import { IKvStore } from "ldaccess/ikvstore";
-import { ReactCompInfoMap } from "components/reactUtils/iReactCompInfo";
+import { IKvStore } from "../ldaccess/ikvstore";
+import { ReactCompInfoMap } from "../components/reactUtils/iReactCompInfo";
 
 export interface LDRouteParams {
 	//nextPath: string;

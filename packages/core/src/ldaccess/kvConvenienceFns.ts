@@ -1,4 +1,4 @@
-import { IKvStore } from "ldaccess/ikvstore";
+import { IKvStore } from "./ikvstore";
 import { ILDOptions } from "./ildoptions";
 import { BlueprintConfig } from "./ldBlueprint";
 

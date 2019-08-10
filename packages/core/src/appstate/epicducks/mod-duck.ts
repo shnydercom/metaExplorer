@@ -1,8 +1,8 @@
 import { ActionsObservable, ofType } from "redux-observable";
 import { tap, mergeMap, map, catchError } from 'rxjs/operators';
-import { IModStatePart, SingleModStateKeysDict, IModStatus } from 'appstate/modstate';
+import { IModStatePart, SingleModStateKeysDict, IModStatus } from '../../appstate/modstate';
 import { of, from } from 'rxjs';
-import { ModAPI } from 'apis/mod-api';
+import { ModAPI } from '../../apis/mod-api';
 
 export const MOD_LOAD_REQUEST = "Mod/MOD_LOAD_REQUEST";
 export const MOD_LOAD_RESULT = "Mod/MOD_LOAD_RESULT";

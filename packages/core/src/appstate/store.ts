@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware, Store } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { rootEpic, rootReducer } from './rootduck';
-import { ImageUploadAPI } from 'apis/image-upload';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDOptionsAPI } from 'apis/ldoptions-api';
+import { ImageUploadAPI } from '../apis/image-upload';
+import { ILDOptions } from '../ldaccess/ildoptions';
+import { LDOptionsAPI } from '../apis/ldoptions-api';
 //import { DevTools } from './devTools';
-import { IBlueprintItpt } from 'ldaccess/ldBlueprint';
+import { IBlueprintItpt } from '../ldaccess/ldBlueprint';
 import { IModStatePart } from './modstate';
-import { ModAPI } from 'apis/mod-api';
+import { ModAPI } from '../apis/mod-api';
 
 const imgUploader: ImageUploadAPI = new ImageUploadAPI();
 const ldOptionsAPI: LDOptionsAPI = new LDOptionsAPI();

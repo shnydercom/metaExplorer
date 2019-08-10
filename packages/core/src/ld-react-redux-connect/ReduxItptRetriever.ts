@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
-import { DefaultItptRetriever, DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
-import { IBlueprintItpt } from "ldaccess/ldBlueprint";
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from "appstate/LDProps";
-import { mapStateToProps, mapDispatchToProps } from "appstate/reduxFns";
+import { DefaultItptRetriever, DEFAULT_ITPT_RETRIEVER_NAME } from "../defaults/DefaultItptRetriever";
+import { IBlueprintItpt } from "../ldaccess/ldBlueprint";
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps } from "../appstate/LDProps";
+import { mapStateToProps, mapDispatchToProps } from "../appstate/reduxFns";
 
 export class ReduxItptRetriever extends DefaultItptRetriever {
 	//maps by nameSelf of the Itpt

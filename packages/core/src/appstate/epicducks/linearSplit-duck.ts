@@ -1,13 +1,13 @@
 import { ILDOptionsMapStatePart } from "../store";
-import { ILDOptions } from "ldaccess/ildoptions";
-import { linearLDTokenStr, NetworkPreferredToken, ILDToken } from "ldaccess/ildtoken";
-import { appItptMatcherFn } from "appconfig/appItptMatcher";
+import { ILDOptions } from "../../ldaccess/ildoptions";
+import { linearLDTokenStr, NetworkPreferredToken, ILDToken } from "../../ldaccess/ildtoken";
+import { appItptMatcherFn } from "../../appconfig/appItptMatcher";
 import { ActionsObservable, ofType } from "redux-observable";
 import { from } from 'rxjs';
-import { ReduxItptRetriever } from "ld-react-redux-connect/ReduxItptRetriever";
-import { OutputKVMap } from "ldaccess/ldBlueprint";
-import { IKvStore } from "ldaccess/ikvstore";
-import { UserDefDict } from "ldaccess/UserDefDict";
+import { ReduxItptRetriever } from "../../ld-react-redux-connect/ReduxItptRetriever";
+import { OutputKVMap } from "../../ldaccess/ldBlueprint";
+import { IKvStore } from "../../ldaccess/ikvstore";
+import { UserDefDict } from "../../ldaccess/UserDefDict";
 import { mergeMap, map } from "rxjs/operators";
 
 /**

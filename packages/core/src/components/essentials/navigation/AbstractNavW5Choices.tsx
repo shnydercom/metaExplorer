@@ -1,13 +1,13 @@
-import { LDDict } from 'ldaccess/LDDict';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { UserDefDict } from 'ldaccess/UserDefDict';
+import { LDDict } from '../../../ldaccess/LDDict';
+import { IKvStore } from '../../../ldaccess/ikvstore';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../../ldaccess/ldBlueprint';
+import { ILDOptions } from '../../../ldaccess/ildoptions';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
+import { UserDefDict } from '../../../ldaccess/UserDefDict';
 import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 
 import { generateItptFromCompInfo, gdsfpLD, initLDLocalState } from '../../generic/generatorFns';
-import { checkAllFilled } from 'GeneralUtils';
+import { checkAllFilled } from '../../../GeneralUtils';
 import { Component, ReactNode } from 'react';
 
 export const ICON_URLS: string[] = [

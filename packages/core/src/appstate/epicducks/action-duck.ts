@@ -1,4 +1,4 @@
-import { ILDActionsHandlerStatePart } from 'appstate/store';
+import { ILDActionsHandlerStatePart } from '../store';
 export const REGISTER_ID_HANDLER = 'shnyder/REGISTER_ID_HANDLER';
 export const REGISTER_TYPE_HANDLER = 'shnyder/REGISTER_TYPE_HANDLER';
 export const UNREGISTER_HANDLER = 'shnyder/UNREGISTER_HANDLER';

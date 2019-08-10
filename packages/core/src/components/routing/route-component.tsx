@@ -1,15 +1,15 @@
-import { LDDict } from 'ldaccess/LDDict';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { UserDefDict } from 'ldaccess/UserDefDict';
+import { LDDict } from '../../ldaccess/LDDict';
+import { IKvStore } from '../../ldaccess/ikvstore';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../ldaccess/ldBlueprint';
+import { ILDOptions } from '../../ldaccess/ildoptions';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../appstate/LDProps';
+import { UserDefDict } from '../../ldaccess/UserDefDict';
 import { VisualKeysDict } from '../visualcomposition/visualDict';
 
 import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from '../generic/generatorFns';
 import { Route } from 'react-router';
 import { Component} from 'react';
-import { ActionKeysDict, ActionTypesDict, ActionType } from 'components/actions/ActionDict';
+import { ActionKeysDict, ActionTypesDict, ActionType } from '../../components/actions/ActionDict';
 import React from 'react';
 
 export const ROUTE_ISABSOLUTE = "isRouteAbsolute";

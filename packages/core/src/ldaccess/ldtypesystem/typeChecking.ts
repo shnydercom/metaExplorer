@@ -1,6 +1,6 @@
 import { IKvStore } from "../ikvstore";
 import { LDDict } from "../LDDict";
-import { VisualKeysDict, VisualTypesDict } from "components/visualcomposition/visualDict";
+import { VisualKeysDict, VisualTypesDict } from "../../components/visualcomposition/visualDict";
 
 /**
  * type checking, which largely ignores unset types but enforces type mapping setup for existing types

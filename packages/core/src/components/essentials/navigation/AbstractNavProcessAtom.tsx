@@ -1,16 +1,16 @@
 import React from 'react';
-import { LDDict } from 'ldaccess/LDDict';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { UserDefDict } from 'ldaccess/UserDefDict';
+import { LDDict } from '../../../ldaccess/LDDict';
+import { IKvStore } from '../../../ldaccess/ikvstore';
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../../ldaccess/ldBlueprint';
+import { ILDOptions } from '../../../ldaccess/ildoptions';
+import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
+import { UserDefDict } from '../../../ldaccess/UserDefDict';
 import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualDict';
 import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
 import { Redirect } from 'react-router';
 import { Component, ReactNode } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
-import { ActionKeysDict, ActionTypesDict, ActionType } from 'components/actions/ActionDict';
+import { ActionKeysDict, ActionTypesDict, ActionType } from '../../../components/actions/ActionDict';
 
 export const NavProcessAtomName = "shnyder/material-design/NavProcessAtom";
 let cfgIntrprtKeys: string[] =

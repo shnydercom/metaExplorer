@@ -1,4 +1,4 @@
-import { IAppConfigStatePart } from "appstate/store";
+import { IAppConfigStatePart } from "../store";
 import { MOD_LOAD_ERROR, ModErrorAction } from "./mod-duck";
 
 export const ACTION_APPCFG_UPDATE_KEY = 'shnyder/APPCFG_UPDATE_KEY';

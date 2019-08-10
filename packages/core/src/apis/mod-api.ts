@@ -1,5 +1,5 @@
 import { Observable, from } from "rxjs";
-import { IModStatus } from "appstate/modstate";
+import { IModStatus } from "../appstate/modstate";
 
 export interface IModSpec {
 	id: string;

@@ -1,5 +1,5 @@
-import { IBlueprintItpt } from "ldaccess/ldBlueprint";
-import { ILDNonvisualIntrprtrMapStatePart } from "appstate/store";
+import { IBlueprintItpt } from "../../ldaccess/ldBlueprint";
+import { ILDNonvisualIntrprtrMapStatePart } from "../store";
 
 export const LDNONVIS_SET = 'shnyder/LDNONVIS_SET';
 export const LDNONVIS_DELETE = 'shnyder/LDNONVIS_DELETE';

@@ -1,17 +1,17 @@
-import { appItptRetrFn } from "appconfig/appItptRetriever";
-import { LDDict } from "ldaccess/LDDict";
+import { appItptRetrFn } from "../../appconfig/appItptRetriever";
+import { LDDict } from "../../ldaccess/LDDict";
 import { PureImgDisplay } from "../visualcomposition/imagedisplay-component";
 import { PureRouteComponent, RouteComponentName } from "../routing/route-component";
-import { imageRetrieverName, ImageRetriever } from "sidefx/ImageRetriever";
-import { productRetrieverName, ProductRetriever } from "sidefx/ProductRetriever";
-import { organizationRetrieverName, OrganizationRetriever } from "sidefx/OrganizationRetriever";
+import { imageRetrieverName, ImageRetriever } from "../../sidefx/ImageRetriever";
+import { productRetrieverName, ProductRetriever } from "../../sidefx/ProductRetriever";
+import { organizationRetrieverName, OrganizationRetriever } from "../../sidefx/OrganizationRetriever";
 import { EANScannerName, EANScanner } from "../peripherals/camera/EAN-scanner";
-import { ITPT_TAG_ATOMIC } from "ldaccess/iitpt-retriever";
+import { ITPT_TAG_ATOMIC } from "../../ldaccess/iitpt-retriever";
 import { LayoutVHCenteredColumnName, PureVHcenteredColumnLayout,  } from "../layout/layoutBaseComp";
 import { PureRedirectComponent, RouteRedirectName } from "../routing/redirect";
-import { TwoDtoJSONArray, TwoDtoJSONArrayName } from "datatransformation/TwoDtoJSONArray";
-import { JSONArrayToCompactInfoArrayName, JSONArrayToCompactInfoArray } from "datatransformation/JSONArrayToCompactInfoArray";
-import { CSSWrapperName, PureCSSWrapper } from "components/layout/CSSWrapper";
+import { TwoDtoJSONArray, TwoDtoJSONArrayName } from "../../datatransformation/TwoDtoJSONArray";
+import { JSONArrayToCompactInfoArrayName, JSONArrayToCompactInfoArray } from "../../datatransformation/JSONArrayToCompactInfoArray";
+import { CSSWrapperName, PureCSSWrapper } from "../../components/layout/CSSWrapper";
 
 export function initEssentialInterpreters() {
 	let appIntRetr = appItptRetrFn();

@@ -1,9 +1,9 @@
-import { IKvStore } from 'ldaccess/ikvstore';
-import { LDError } from 'appstate/LDError';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { UserDefDict } from 'ldaccess/UserDefDict';
-import { ObjectPropertyRef } from 'ldaccess/ObjectPropertyRef';
-import { ILDToken } from 'ldaccess/ildtoken';
+import { IKvStore } from './ikvstore';
+import { LDError } from '../appstate/LDError';
+import { ILDOptions } from './ildoptions';
+import { UserDefDict } from './UserDefDict';
+import { ObjectPropertyRef } from './ObjectPropertyRef';
+import { ILDToken } from './ildtoken';
 
 export type ConsumeLDOptionsFunc = (ldOptions: ILDOptions) => any;
 
