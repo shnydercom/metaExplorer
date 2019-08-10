@@ -15,7 +15,7 @@ module.exports = {
   },
   // configure the output directory and publicPath for the devServer
   output: {
-    filename: '[name].js',
+    filename: 'index.min.js',
     libraryTarget: 'umd',
     library: 'metaexplorer-core',
     path: path.resolve('_bundles')
@@ -34,7 +34,7 @@ module.exports = {
     extensions: ['.json', '.css', '.scss', '.ts', '.tsx', '.js'],
 
     // add 'src' to the modules, so that when you import files you can do so with 'src' as the relative route
-    modules: ['src']//, 'node_modules'],
+    //modules: ['src']//, 'node_modules'],
   },
 
   module: {
@@ -48,6 +48,7 @@ module.exports = {
           },
           {
             loader: 'ts-loader',
+            
             /*options: {
               transpileOnly: true
             }*/

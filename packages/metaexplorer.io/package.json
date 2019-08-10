@@ -6,6 +6,17 @@
     "@metaexplorer/core": "^0.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+
+    "react-dnd": "^9.0.1",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "redux": "^4.0.1",
+    "redux-observable": "^1.1.0",
+    "react-gooey-nav": "^2.0.0",
+    "rxjs": "^6.5.2",
+    "rxjs-compat": "^6.5.2",
+    "shortid": "^2.2.14",
+
     "react-scripts": "3.0.1",
     "typescript": "^3.5.3",
     "@metaexplorer-mods/keycloak": "0.0.1",

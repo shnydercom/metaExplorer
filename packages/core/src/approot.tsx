@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { Store } from 'redux';
 import { Provider, connect } from 'react-redux';
-import { ExplorerState, configureStore, modAPI, IAppConfigStatePart } from 'appstate/store';
+import { ExplorerState, configureStore, modAPI, IAppConfigStatePart } from './appstate/store';
 import './styles/styles.scss';
 //import { DevTools } from './appstate/devTools';
 import { initLDConnect } from 'sidefx/nonVisualConnect';

@@ -17,6 +17,8 @@
     "lib"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.1"
+    "@metaexplorer/core": "^0.0.1",
+    "storm-react-diagrams": "^5.2.1",
+    "metaExplorer-react-components": "https://github.com/aJonathanSchneider/metaExplorer-react-components.git"
   }
 }

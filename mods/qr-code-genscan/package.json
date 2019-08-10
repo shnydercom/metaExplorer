@@ -17,6 +17,9 @@
     "lib"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.1"
+    "@metaexplorer/core": "^0.0.1",
+    "qr-scanner": "^1.1.1",
+    "qrcode-generator": "^1.4.3",
+    "quagga": "^0.12.1"
   }
 }

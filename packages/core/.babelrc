@@ -9,7 +9,8 @@
             ]
         },
         "production": {
-            "presets": ["minify", "@babel/preset-env", "@babel/preset-react"]
+            "presets": [//"minify",
+                 "@babel/preset-env", "@babel/preset-react"]
         }
     }
 }

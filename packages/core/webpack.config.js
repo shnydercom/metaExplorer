@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const WriteFilePlugin = require('write-file-webpack-plugin');
@@ -18,6 +19,33 @@ module.exports = { ...sharedWebpackCfg,
     libraryTarget: 'umd',
     library: 'metaexplorer-core',
     path: path.resolve(__dirname, '_bundles'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader'
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true
+            }
+          }
+        ]
+      }, {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ]
+      }
+    ]
   },
   // configure the dev server to run 
   devServer: {
@@ -72,14 +100,14 @@ module.exports = { ...sharedWebpackCfg,
     new MiniCssExtractPlugin({
       filename: 'style.[contenthash].css',
     }),
-    new WriteFilePlugin({log: false}),
+    /*new WriteFilePlugin({log: false}),
     {
       apply: (compiler) => {
         compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
           require(path.resolve('scripts') + '/' + 'createItptMock.js');
         });
       }
-    },
+    },*/
     new CopyWebpackPlugin([
       /*{
         from: 'node_modules/material-design-icons/iconfont',
@@ -130,5 +158,8 @@ module.exports = { ...sharedWebpackCfg,
         to: 'lib/keycloak-js@6.0.0.js'
       },*/
     ])
+  ],
+  plugins: [
+    new ForkTsCheckerWebpackPlugin({ workers: 1 , memoryLimit: 4098*2})
   ]
 }

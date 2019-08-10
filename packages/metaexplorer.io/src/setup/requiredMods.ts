@@ -1,4 +1,4 @@
-import { IModSpec } from '@metaexplorer/core/src/apis/mod-api';
+import { IModSpec } from '@metaexplorer/core';
 import { MOD_MATERIALDESIGN_ID, initMaterialDesignMod } from '@metaexplorer-mods/material-design';
 
 import { MOD_KEYCLOAK_ID, initKeycloakMod } from '@metaexplorer-mods/keycloak';

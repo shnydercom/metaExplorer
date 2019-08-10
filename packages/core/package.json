@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "a GUI editor for configuring bizSys-Server",
   "license": "MIT",
-  "main": "./lib/index.js",
+  "main": "./lib-esm/index.js",
   "types": "./lib/index.d.ts",
   "publishConfig": {
     "access": "public"
@@ -19,6 +19,7 @@
     "startfornetwork": "webpack-dev-server --host 0.0.0.0",
     "buildesm": "tsc -m es6 --outDir lib-esm",
     "buildregular": "tsc",
+    "build": "yarn buildesm && yarn buildwp",
     "lint": "tslint ./src/**/*.ts -t verbose",
     "compcss": "node-sass --output-style compressed ./src/styles/styles.scss > cat ./dist/style.css",
     "createmock": "node ./scripts/createItptMock.js"

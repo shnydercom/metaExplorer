@@ -3,7 +3,7 @@ import { combineEpics } from 'redux-observable';
 import { isLoadingSchemaReducer, loadSchemaEpic } from './epicducks/schemameta';
 import { uploadImageEpic } from 'appstate/epicducks/image-upload';
 import { ExplorerState } from 'appstate/store';
-import { ldOptionsMapReducer, requestLDOptionsEpic } from 'appstate/epicducks/ldOptions-duck';
+import { ldOptionsMapReducer, requestLDOptionsEpic } from './../appstate/epicducks/ldOptions-duck';
 import { ldNonVisMapReducer } from 'appstate/epicducks/ldNonVisual-duck';
 import { refMapReducer, refMapEpic } from './epicducks/refMap-duck';
 import { reduceReducers } from './reduceReducers';

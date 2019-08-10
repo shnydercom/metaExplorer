@@ -1,7 +1,7 @@
-import { DefaultItptMatcher } from "defaults/DefaultItptMatcher";
 import { IItptMatcher } from "ldaccess/iitpt-matcher";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "defaults/DefaultItptRetriever";
 import { appItptRetrFn } from "./appItptRetriever";
+import { DefaultItptMatcher } from "./../defaults";
 
 class AppItptMatcher extends DefaultItptMatcher {
 }

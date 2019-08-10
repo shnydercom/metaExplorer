@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import { AppRoot } from '@metaexplorer/core/src/approot';
+import { AppRoot } from '@metaexplorer/core';
 
 ReactDOM.render(
 	<AppRoot />
