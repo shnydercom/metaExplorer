@@ -13,6 +13,7 @@
     "sourceMap": true,
     "module": "esnext",
     "emitDeclarationOnly": false,
+    "resolveJsonModule": true,
     "lib": ["dom", "esnext"],
     "paths": {
       "*": [

@@ -1,6 +1,6 @@
 import {
 	BlueprintConfig, intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever, ILDOptions, NetworkPreferredToken, DEFAULT_ITPT_RETRIEVER_NAME,
-	applicationStore, ldOptionsClientSideUpdateAction, isProduction
+	getApplicationStore, ldOptionsClientSideUpdateAction, isProduction
 } from "@metaexplorer/core";
 
 export interface UserItptLoadResponse {
@@ -69,6 +69,6 @@ export class UserItptLoadApi {
 				retriever: DEFAULT_ITPT_RETRIEVER_NAME
 			}
 		};
-		applicationStore.dispatch(ldOptionsClientSideUpdateAction(newLDOptions));
+		getApplicationStore().dispatch(ldOptionsClientSideUpdateAction(newLDOptions));
 	}
 }

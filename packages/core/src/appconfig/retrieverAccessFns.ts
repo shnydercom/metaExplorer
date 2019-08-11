@@ -5,7 +5,7 @@ import { UserDefDict } from "../ldaccess/UserDefDict";
 import { ObjectPropertyRef } from "../ldaccess/ObjectPropertyRef";
 import { ITPT_TAG_COMPOUND } from "../ldaccess/iitpt-retriever";
 import { appItptRetrFn } from '../appconfig/appItptRetriever';
-import { applicationStore } from "../approot";
+import { getApplicationStore } from "../approot";
 import { LDError } from "../appstate/LDError";
 import { ldOptionsDeepCopy } from "../ldaccess/ldUtils";
 import { ldOptionsClientSideUpdateAction, ldOptionsClientSideCreateAction } from "../appstate/epicducks/ldOptions-duck";
@@ -63,7 +63,7 @@ export const intrprtrTypeInstanceFromBlueprint = (input: BlueprintConfig): any =
 };
 
 export const changeMainAppItpt = (toItptName: string, startingInstance?: any): void => {
-	const appState = applicationStore.getState();
+	const appState = getApplicationStore().getState();
 	const appKey = appState.appCfg.appKey;
 	//this.generatePrefilled(val.itptList[numItpts - 1]);
 	let newItpt = appItptRetrFn().getItptByNameSelf(toItptName);
@@ -78,14 +78,14 @@ export const changeMainAppItpt = (toItptName: string, startingInstance?: any): v
 		newLDOptions.resource.kvStores = [
 			{ key: appKvKey, ldType: newType, value: dummyInstance }
 		];
-		applicationStore.dispatch(ldOptionsClientSideUpdateAction(newLDOptions));
+		getApplicationStore().dispatch(ldOptionsClientSideUpdateAction(newLDOptions));
 	} else {
 		let kvStores: IKvStore[] = [
 			{ key: appKvKey, ldType: newType, value: dummyInstance }
 		];
 		let lang: string;
 		let alias: string = appKey;
-		applicationStore.dispatch((ldOptionsClientSideCreateAction(kvStores, lang, alias)));
+		getApplicationStore().dispatch((ldOptionsClientSideCreateAction(kvStores, lang, alias)));
 	}
-	applicationStore.dispatch(appItptUpdateAction(toItptName));
+	getApplicationStore().dispatch(appItptUpdateAction(toItptName));
 };

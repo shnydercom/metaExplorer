@@ -4,7 +4,7 @@ import { ILDOptions } from "../ldaccess/ildoptions";
 import { UserDefDict } from "../ldaccess/UserDefDict";
 import { SideFXDict } from "../sidefx/SideFXDict";
 import { ldOptionsRequestAction, ldOptionsClientSideUpdateAction } from "../appstate/epicducks/ldOptions-duck";
-import { applicationStore } from "../approot";
+import { getApplicationStore } from "../approot";
 import { isOutputKVSame, ldOptionsDeepCopy, isObjPropertyRef } from "../ldaccess/ldUtils";
 import { ILDOptionsMapStatePart } from "../appstate/store";
 import { getKVStoreByKey } from "../ldaccess/kvConvenienceFns";
@@ -151,7 +151,7 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 	}
 
 	protected callToAPI(uploadData?: ILDOptions, targetUrl?: string, targetReceiverLnk?): void {
-		applicationStore.dispatch(ldOptionsRequestAction(this.apiCallOverride, uploadData, targetUrl, targetReceiverLnk));
+		getApplicationStore().dispatch(ldOptionsRequestAction(this.apiCallOverride, uploadData, targetUrl, targetReceiverLnk));
 	}
 
 	private refreshOutput(): void {
@@ -173,7 +173,7 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 				if (statePart[targetTokenLnk]) {
 					newLDOptions = statePart[targetTokenLnk];
 				} else {
-					newLDOptions = applicationStore.getState().ldoptionsMap[targetTokenLnk];
+					newLDOptions = getApplicationStore().getState().ldoptionsMap[targetTokenLnk];
 					newLDOptions = ldOptionsDeepCopy(newLDOptions);
 					statePart[targetTokenLnk] = newLDOptions;
 				}
@@ -190,7 +190,7 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 		for (const key in statePart) {
 			if (statePart.hasOwnProperty(key)) {
 				const element = statePart[key];
-				applicationStore.dispatch(ldOptionsClientSideUpdateAction(element));
+				getApplicationStore().dispatch(ldOptionsClientSideUpdateAction(element));
 			}
 		}
 	}

@@ -10,7 +10,7 @@ import { DEFAULT_ITPT_RETRIEVER_NAME } from '../../defaults/DefaultItptRetriever
 import { OutputKVMap } from '../../ldaccess/ldBlueprint';
 import { tap, mergeMap, map, catchError } from 'rxjs/operators';
 import { LDOptionsAPI } from '../../apis/ldoptions-api';
-import { applicationStore } from '../../approot';
+import { getApplicationStore } from '../../approot';
 import { ActionKeysDict } from '../../components/actions/ActionDict';
 import { ILDWebResource } from '../../ldaccess/ildresource';
 
@@ -110,7 +110,7 @@ export const dispatchKvUpdateAction = (changedKvStores: IKvStore[], thisLdTkStr:
  * @param payload the payload for the actionhandler
  */
 export const ldAction = (ldId: string, ldType: string, payload): LDActionType => {
-	const allState = applicationStore.getState();
+	const allState = getApplicationStore().getState();
 	let idHandler = null;
 	let typeHandler = null;
 	if (ldId) {

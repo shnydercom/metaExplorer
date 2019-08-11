@@ -3,7 +3,7 @@ import { IKvStore } from "../ldaccess/ikvstore";
 import { ILDOptions } from "../ldaccess/ildoptions";
 import { UserDefDict } from "../ldaccess/UserDefDict";
 import { isObjPropertyRef, isOutputKVSame } from "../ldaccess/ldUtils";
-import { applicationStore } from "../approot";
+import { getApplicationStore } from "../approot";
 import { dispatchKvUpdateAction } from "../appstate/epicducks/ldOptions-duck";
 import { LDError } from "../appstate/LDError";
 
@@ -94,7 +94,7 @@ export abstract class AbstractDataTransformer implements IBlueprintItpt {
 			throw new LDError("ldTkStr hasn't been set, can't refresh output");
 		} else {
 			const updatedKvMap: OutputKVMap = this.outputKVMap;
-			applicationStore.dispatch(dispatchKvUpdateAction(changedKvStores, thisLdTkStr, updatedKvMap));
+			getApplicationStore().dispatch(dispatchKvUpdateAction(changedKvStores, thisLdTkStr, updatedKvMap));
 		}
 	}
 

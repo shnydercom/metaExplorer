@@ -1,8 +1,8 @@
 import { Component } from "react";
 import TreeView, { TreeEntry } from "metaexplorer-react-components/lib/components/treeview/treeview";
-import { IBlueprintItpt, IItptInfoItem, ITPT_TAG_ATOMIC, ITPT_TAG_COMPOUND } from "@metaexplorer/core"; 
+import { IBlueprintItpt, IItptInfoItem, ITPT_TAG_ATOMIC, ITPT_TAG_COMPOUND } from "@metaexplorer/core";
 import { EditorTrayItem } from "./EditorTrayItem";
-import { default as ItemTypes } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/ItemTypes";
+import { ItemTypes } from "metaexplorer-react-components";
 //TODO: change this:
 import * as appStyles from '../../../../../packages/core/src/styles/styles.scss';
 import { DropRefmapResult } from "./RefMapDropSpace";

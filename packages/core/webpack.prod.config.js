@@ -23,7 +23,7 @@ module.exports = {
       "React": "react",
       //"Quagga": "quagga"
     }),
-    new BundleAnalyzerPlugin(),
+    //new BundleAnalyzerPlugin({}),
     new MiniCssExtractPlugin({
       filename: 'style.[contenthash].css',
     }),

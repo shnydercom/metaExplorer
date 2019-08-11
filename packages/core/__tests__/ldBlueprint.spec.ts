@@ -1,7 +1,7 @@
-import jasmine from 'jasmine';
-import ldBlueprint, { BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { IKvStore } from 'ldaccess/ikvstore';
+//import jasmine from 'jasmine';
+import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../src/ldaccess/ldBlueprint';
+import { ILDOptions } from '../src/ldaccess/ildoptions';
+import { IKvStore } from '../src/ldaccess/ikvstore';
 
 let bpCfg: BlueprintConfig = {
     //TODO: property forType needs to be renamed, maybe split up into multiple properties. I need a clear
@@ -34,7 +34,7 @@ describe("ldBlueprint decorator func", () => {
         //var dir: PureImgDisplay = new PureImgDisplay({});
         it("POJO should be created", () => {
             expect(newLDContainer).toBeDefined();
-          //  expect(dir).toBeDefined();
+            //  expect(dir).toBeDefined();
         });
         /* it("should have a consumeWebResource function", () => {
              expect(newLDContainer.consumeLDOptions).toBeDefined();

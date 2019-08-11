@@ -1,4 +1,4 @@
-import { applicationStore } from "../approot";
+import { getApplicationStore } from "../approot";
 import { IBlueprintItpt } from "../ldaccess/ldBlueprint";
 import { ILDOptionsMapStatePart } from "../appstate/store";
 import { isLDOptionsSame } from "../ldaccess/ldUtils";
@@ -6,7 +6,7 @@ import { isLDOptionsSame } from "../ldaccess/ldUtils";
 const connectedMap: Map<string, IBlueprintItpt> = new Map();
 let lastLDOptionsMap: ILDOptionsMapStatePart = null;
 const nonVisListener = () => {
-	let state = applicationStore.getState();
+	let state = getApplicationStore().getState();
 	connectedMap.forEach((bpIntrprtr, key) => {
 		let ldOptions = state.ldoptionsMap[key];
 		if (!ldOptions) return;
@@ -17,7 +17,7 @@ const nonVisListener = () => {
 };
 
 export const initLDConnect = () => {
-	applicationStore.subscribe(nonVisListener);
+	getApplicationStore().subscribe(nonVisListener);
 };
 
 export const connectNonVisLDComp = (alias: string, itpt: IBlueprintItpt) => {

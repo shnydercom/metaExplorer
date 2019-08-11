@@ -1,15 +1,14 @@
-import jasmine from 'jasmine';
+//import jasmine from 'jasmine';
 
 import * as refMapAHeadjson from '../testing/refMapAHead.json';
-import * as refMapBHeadjson from '../testing/refMapBHead.json';
-import { ILDToken, NetworkPreferredToken } from 'ldaccess/ildtoken';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { BlueprintConfig } from 'ldaccess/ldBlueprint';
-import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
-import { ILDOptionsMapStatePart } from 'appstate/store';
-import { RefMapAction, refMapREQUESTAction, refMapReducer } from 'appstate/epicducks/refMap-duck';
-import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
+import { ILDToken, NetworkPreferredToken } from '../src/ldaccess/ildtoken';
+import { ILDOptions } from '../src/ldaccess/ildoptions';
+import { IKvStore } from '../src/ldaccess/ikvstore';
+import { BlueprintConfig } from '../src/ldaccess/ldBlueprint';
+import { DEFAULT_ITPT_RETRIEVER_NAME } from '../src/defaults/DefaultItptRetriever';
+import { ILDOptionsMapStatePart } from '../src/appstate/store';
+import { RefMapAction, refMapREQUESTAction, refMapReducer } from '../src/appstate/epicducks/refMap-duck';
+import { ldOptionsDeepCopy } from '../src/ldaccess/ldUtils';
 
 let testTokenStr: string = "testRefMapTokenString";
 let testToken: ILDToken = new NetworkPreferredToken(testTokenStr);
@@ -32,12 +31,12 @@ let startALDOptions: ILDOptions = {
 };
 
 describe("refMap reducer function", () => {
-	let testStartOptionsA: ILDOptions;
+	//let testStartOptionsA: ILDOptions;
 	let startStore: ILDOptionsMapStatePart;
 	let testExecAOptions: ILDOptions;
 	let execAAction: RefMapAction;
 	beforeEach(() => {
-		testStartOptionsA = ldOptionsDeepCopy(startALDOptions);
+		//testStartOptionsA = ldOptionsDeepCopy(startALDOptions);
 		startStore = {
 			[testTokenStr]: startALDOptions
 		};

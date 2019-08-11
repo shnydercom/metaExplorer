@@ -1,12 +1,12 @@
-import jasmine from 'jasmine';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { DEFAULT_ITPT_RETRIEVER_NAME } from 'defaults/DefaultItptRetriever';
-import { ILDToken, NetworkPreferredToken, linearLDTokenStr } from 'ldaccess/ildtoken';
-import { LDDict } from 'ldaccess/LDDict';
-import { ILDOptionsMapStatePart } from 'appstate/store';
-import { ldOptionsDeepCopy } from 'ldaccess/ldUtils';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { linearReducer, linearSplitRequestAction, LinearSplitAction } from 'appstate/epicducks/linearSplit-duck';
+//import jasmine from 'jasmine';
+import { ILDOptions } from '../src/ldaccess/ildoptions';
+import { DEFAULT_ITPT_RETRIEVER_NAME } from '../src/defaults/DefaultItptRetriever';
+import { ILDToken, NetworkPreferredToken, linearLDTokenStr } from '../src/ldaccess/ildtoken';
+import { LDDict } from '../src/ldaccess/LDDict';
+import { ILDOptionsMapStatePart } from '../src/appstate/store';
+import { ldOptionsDeepCopy } from '../src/ldaccess/ldUtils';
+import { IKvStore } from '../src/ldaccess/ikvstore';
+import { linearReducer, linearSplitRequestAction, LinearSplitAction } from '../src/appstate/epicducks/linearSplit-duck';
 
 let testTokenStr: string = "testTokenString";
 let testToken: ILDToken = new NetworkPreferredToken(testTokenStr);
@@ -52,6 +52,7 @@ describe("linear split reducer function", () => {
 	});
 
 	describe("for an ldOptions-Obj to be split...", () => {
+		expect(testStartOptions).toBe(undefined);
 		it("nothing should happen if it's loading", () => {
 			execAction.ldOptionsBase.isLoading = true;
 			let reducerResult = linearReducer(startStore, execAction);

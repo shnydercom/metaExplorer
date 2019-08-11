@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "prestart": "yarn build",
+    "prestart": "lerna run build",
     "start": "lerna run start",
     "build": "tsc --build"
   }

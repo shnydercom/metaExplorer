@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import { AppRoot } from '@metaexplorer/core';
+import { AppRoot, rootSetup } from '@metaexplorer/core';
+import { setupRequiredMods } from './setup/requiredMods';
+
+rootSetup(setupRequiredMods());
 
 ReactDOM.render(
 	<AppRoot />

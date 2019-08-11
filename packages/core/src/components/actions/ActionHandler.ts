@@ -4,7 +4,7 @@ import { ActionKeysDict } from "./ActionDict";
 import { IKvStore } from "../../ldaccess/ikvstore";
 import { LDDict } from "../../ldaccess/LDDict";
 import { ldBlueprint, BlueprintConfig } from "../../ldaccess/ldBlueprint";
-import { applicationStore } from "../../approot";
+import { getApplicationStore } from "../../approot";
 import { registerIdActionHandlerAction, registerTypeActionHandlerAction } from "../../appstate/epicducks/action-duck";
 
 export const handleTypeKey = ActionKeysDict.canHandleType;
@@ -59,10 +59,10 @@ export class ActionHandler extends AbstractDataTransformer {
 
 	protected triggerRegisterIfNecessary(typeKv: IKvStore, idKv: IKvStore) {
 		if (idKv && !!idKv.value) {
-			applicationStore.dispatch(registerIdActionHandlerAction(idKv.value, this.ldTkStr));
+			getApplicationStore().dispatch(registerIdActionHandlerAction(idKv.value, this.ldTkStr));
 		}
 		if (typeKv && !!typeKv.value) {
-			applicationStore.dispatch(registerTypeActionHandlerAction(typeKv.value, this.ldTkStr));
+			getApplicationStore().dispatch(registerTypeActionHandlerAction(typeKv.value, this.ldTkStr));
 		}
 	}
 

@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { Store } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { ExplorerState, configureStore, modAPI, IAppConfigStatePart } from './appstate/store';
-import './styles/styles.scss';
+//import './styles/styles.scss';
 //import { DevTools } from './appstate/devTools';
 import { initLDConnect } from './sidefx/nonVisualConnect';
 import {
@@ -54,7 +54,12 @@ export interface AppRootState {
 	cfg: IAppConfigStatePart;
 	isLoading: boolean;
 }
-export const applicationStore: Store<ExplorerState> = configureStore(initialState);
+const applStore = null;
+export const getApplicationStore: () => Store<ExplorerState> = () => {
+	if (applStore) return applStore;
+	return configureStore(initialState);
+};
+
 export function rootSetup(requiredMods: IModSpec[]): void {
 	appItptMatcherFn();
 	initEssentialItpts();
@@ -114,9 +119,9 @@ export class PureAppRoot extends Component<AppRootProps, AppRootState>{
 	}
 }
 
-const ReduxAppRoot = connect<AppRootProps>(mapStateToPropsRoot)(PureAppRoot);
-
-export const AppRoot = () =>
-	<Provider store={applicationStore}>
+export const AppRoot = () => {
+	const ReduxAppRoot = connect<AppRootProps>(mapStateToPropsRoot)(PureAppRoot);
+	return <Provider store={getApplicationStore()}>
 		<ReduxAppRoot />
 	</Provider>;
+};
