@@ -8,8 +8,8 @@ export interface CameraSwitcherTabsProps {
 }
 
 export class CameraSwitcherTabs extends Component<CameraSwitcherTabsProps, {}>{
-	selectedImgLink: string = "/static/camera_white.svg";
-	unselectedImgLink: string = "/static/camera_grey.svg";
+	selectedImgLink: string = "/media/camera_white.svg";
+	unselectedImgLink: string = "/media/camera_grey.svg";
 	render() {
 		let { vidDeviceList, activeCameraId, onTabChanged } = this.props;
 		let reactComps = vidDeviceList.map((itm, idx) => {

@@ -13,7 +13,7 @@
           "initialKvStores": [
             {
               "key": "http://schema.org/contentUrl",
-              "value": "/static/charts_big.png"
+              "value": "/media/charts_big.png"
             },
             {
               "key": "CSSObjectFit",

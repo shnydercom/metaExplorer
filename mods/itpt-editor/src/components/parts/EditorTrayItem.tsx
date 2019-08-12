@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { StylableDragItemProps } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag";
-import { default as ItemTypes } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/ItemTypes";
+import { ItemTypes, StylableDragItemProps } from "metaexplorer-react-components";
 import { useDrag } from "react-dnd";
 import React from "react";
 

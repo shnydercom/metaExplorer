@@ -13,7 +13,7 @@
           "initialKvStores": [
             {
               "key": "http://schema.org/contentUrl",
-              "value": "/static/paris-train.jpg"
+              "value": "/media/paris-train.jpg"
             },
             {
               "key": "CSSObjectFit",

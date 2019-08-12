@@ -92,7 +92,7 @@
           "initialKvStores": [
             {
               "key": "jsonConfigurationPath",
-              "value": "/static/public-cfg.json",
+              "value": "/media/public-cfg.json",
               "ldType": "http://schema.org/Text"
             }
           ],

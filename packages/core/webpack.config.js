@@ -53,7 +53,7 @@ module.exports = { ...sharedWebpackCfg,
     historyApiFallback: true,
     inline: true //,
     //proxy: {
-      /*'/static/interpreters.json': {
+      /*'/api/interpreters.json': {
         bypass: function (req, res, opt){
           res.writeHead(200, {'Content-Type': 'application/json', 'Content-Encoding': 'deflate'});
           //res.json(JSON.stringify(opt));
@@ -73,7 +73,7 @@ module.exports = { ...sharedWebpackCfg,
           }
         } */
        /*   if (
-            (req.path.indexOf('/static/') !== -1) ||
+            (req.path.indexOf('/media/') !== -1) ||
             (req.path.indexOf('/lib/') !== -1) ||
             (req.path.indexOf('main.') !== -1) ||
             (req.path.indexOf('style.') !== -1)) {

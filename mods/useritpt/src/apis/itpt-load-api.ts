@@ -21,7 +21,7 @@ export class UserItptLoadApi {
 	private static apiSingleton: UserItptLoadApi;
 
 	getItptsUnauthed(): () => Promise<UserItptLoadResponse> {
-		return this.getItptsFrom(isProduction ? "/blocks" : "/static/interpreters.json");
+		return this.getItptsFrom(isProduction ? "/blocks" : "/api-static/interpreters.json");
 	}
 	getItptsFrom(targetUrl: string): () => Promise<UserItptLoadResponse> {
 		return () => {

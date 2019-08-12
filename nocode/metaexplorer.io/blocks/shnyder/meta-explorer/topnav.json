@@ -243,12 +243,12 @@
           "initialKvStores": [
             {
               "key": "IconURL_1",
-              "value": "/static/scan_white.svg",
+              "value": "/media/scan_white.svg",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "IconURL_1_Disabled",
-              "value": "/static/scan_lightblue.svg",
+              "value": "/media/scan_lightblue.svg",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -258,12 +258,12 @@
             },
             {
               "key": "IconURL_2",
-              "value": "/static/home_white.svg",
+              "value": "/media/home_white.svg",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "IconURL_2_Disabled",
-              "value": "/static/home_lightblue.svg",
+              "value": "/media/home_lightblue.svg",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -273,12 +273,12 @@
             },
             {
               "key": "IconURL_3",
-              "value": "/static/qr_white.svg",
+              "value": "/media/qr_white.svg",
               "ldType": "http://schema.org/Text"
             },
             {
               "key": "IconURL_3_Disabled",
-              "value": "/static/qr_lightblue.svg",
+              "value": "/media/qr_lightblue.svg",
               "ldType": "http://schema.org/Text"
             },
             {

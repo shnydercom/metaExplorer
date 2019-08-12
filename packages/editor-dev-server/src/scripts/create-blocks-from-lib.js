@@ -12,9 +12,9 @@ function readDirectory(sourceDir, cObj) {
 		} else {
 			//is a directory or will fail
 			try {
-				readDirectory(sourceDir + "/" + file);
+				readDirectory(sourceDir + "/" + file, cObj);
 			} catch (error) {
-
+				console.log(error)
 			}
 		}
 	});

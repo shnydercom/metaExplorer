@@ -54,10 +54,11 @@ export interface AppRootState {
 	cfg: IAppConfigStatePart;
 	isLoading: boolean;
 }
-const applStore = null;
+let applStore = null;
 export const getApplicationStore: () => Store<ExplorerState> = () => {
 	if (applStore) return applStore;
-	return configureStore(initialState);
+	applStore = configureStore(initialState);
+	return applStore;
 };
 
 export function rootSetup(requiredMods: IModSpec[]): void {

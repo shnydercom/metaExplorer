@@ -13,7 +13,7 @@
           "initialKvStores": [
             {
               "key": "http://schema.org/contentUrl",
-              "value": "/static/tinyentrepreneur_app.jpg"
+              "value": "/media/tinyentrepreneur_app.jpg"
             },
             {
               "key": "CSSObjectFit",

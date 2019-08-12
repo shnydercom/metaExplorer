@@ -65,7 +65,7 @@
           "initialKvStores": [
             {
               "key": "http://schema.org/contentUrl",
-              "value": "/static/worktracker_bg.png"
+              "value": "/media/worktracker_bg.png"
             },
             {
               "key": "CSSObjectFit",
@@ -86,7 +86,7 @@
           "initialKvStores": [
             {
               "key": "http://schema.org/contentUrl",
-              "value": "/static/worktracker_app.png"
+              "value": "/media/worktracker_app.png"
             },
             {
               "key": "CSSObjectFit",

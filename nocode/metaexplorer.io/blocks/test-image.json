@@ -13,7 +13,7 @@
           "initialKvStores": [
             {
               "key": "http://schema.org/contentUrl",
-              "value": "/static/localhost.png"
+              "value": "/media/localhost.png"
             }
           ],
           "crudSkills": "cRud",

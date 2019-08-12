@@ -57,9 +57,9 @@ export abstract class AbstractSingleImageSelector extends Component<
 	}
 
 	cfg: BlueprintConfig;
-	loadingImgLink: string = "/static/camera_negative_black.svg";
-	errorImgLink: string = "/static/nocamera_negative_black.svg";
-	draggingImgLink: string = "/static/dragndrop.svg";
+	loadingImgLink: string = "/media/camera_negative_black.svg";
+	errorImgLink: string = "/media/nocamera_negative_black.svg";
+	draggingImgLink: string = "/media/dragndrop.svg";
 
 	initialKvStores: IKvStore[];
 	constructor(props: any) {

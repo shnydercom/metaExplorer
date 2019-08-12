@@ -289,7 +289,7 @@ const assignOutputKvMaps: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 	rmBPCfg.initialKvStores.forEach((kvStore, idx) => {
 		if ((kvStore.ldType === UserDefDict.intrprtrBPCfgRefMapType)
 			|| !isObjPropertyRef(kvStore.value)) {
-		//	rmIterator++;
+			//	rmIterator++;
 			return;
 		}
 		const kvAsObjPropRef: ObjectPropertyRef = kvStore.value as ObjectPropertyRef;
@@ -299,11 +299,11 @@ const assignOutputKvMaps: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 					&& (rmBPCfg.interpretableKeys[idx - rmIterator] === kvStore.key)) {*/
 		if (rmKv.value.rmb.nameSelf === kvAsObjPropRef.objRef) {
 			refString = refMapBaseTokenStr(ldTkStr);
-		//	newToken = new NetworkPreferredToken(refString);
+			//	newToken = new NetworkPreferredToken(refString);
 		} else {
 			const concatNWTk = createConcatNetworkPreferredToken(ldTkStr, kvAsObjPropRef.objRef);
 			refString = concatNWTk.get();
-		//	newToken = concatNWTk;
+			//	newToken = concatNWTk;
 		}
 		const ldOKV = ldOptions.resource.kvStores.find((val) => val.ldType === UserDefDict.outputKVMapType);
 		if (!ldOKV) return;
@@ -484,6 +484,7 @@ const createItpts: (
 			const subCfgsubItptOf: string = subCfg.subItptOf;
 			let itpt: any = null;
 			itpt = itptRetriever.getUnconnectedByNameSelf(subCfgsubItptOf);
+			if (!itpt) throw new Error("couldn't find block: " + subCfgsubItptOf);
 			let originalBPCfgCopy: BlueprintConfig = ldBlueprintCfgDeepCopy(itpt.cfg);
 
 			//let nonRMKvStores = ldOptions.resource.kvStores.filter(
@@ -503,7 +504,7 @@ const createItpts: (
 		let rvActions: Array<RefMapAction> = [];
 		//assign data, create instances
 		instancePrep.forEach((element, prepSubCfgKey) => {
-			let { itpt,  subCfg, originalBPCfgCopy, concatNWTkStr, concatNWTk } = element;
+			let { itpt, subCfg, originalBPCfgCopy, concatNWTkStr, concatNWTk } = element;
 			//subCfg.initialKvStores.push({ key: UserDefDict.outputKVMapKey, value: outputKVs, ldType: UserDefDict.outputKVMapType });
 			//this line will do the inheritance
 			itpt = ldBlueprint(subCfg)(itpt);

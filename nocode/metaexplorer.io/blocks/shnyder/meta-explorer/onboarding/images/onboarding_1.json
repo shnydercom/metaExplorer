@@ -13,7 +13,7 @@
           "initialKvStores": [
             {
               "key": "http://schema.org/contentUrl",
-              "value": "/static/onboarding_1.svg"
+              "value": "/media/onboarding_1.svg"
             },
             {
               "key": "CSSObjectFit",

@@ -13,7 +13,7 @@
           "initialKvStores": [
             {
               "key": "http://schema.org/contentUrl",
-              "value": "/static/berlin.jpg"
+              "value": "/media/berlin.jpg"
             },
             {
               "key": "CSSObjectFit",

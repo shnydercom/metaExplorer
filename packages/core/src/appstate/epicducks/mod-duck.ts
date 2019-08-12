@@ -46,6 +46,7 @@ export const loadModFailure = (modId: string, message: string): IModAjaxError =>
 export const modStatePartReducer = (
 	state: IModStatePart, action: ModAction): IModStatePart => {
 	let newState = Object.assign({}, state);
+	console.dir(action);
 	switch (action.type) {
 		case MOD_LOAD_REQUEST:
 			newState.map[action.modId] = { id: action.modId, name: null, state: SingleModStateKeysDict.loading };

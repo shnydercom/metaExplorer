@@ -54,8 +54,8 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	loadingImgLink: string = "/static/camera_negative_black.svg";
-	errorImgLink: string = "/static/nocamera_negative_black.svg";
+	loadingImgLink: string = "/media/camera_negative_black.svg";
+	errorImgLink: string = "/media/nocamera_negative_black.svg";
 
 	initialKvStores: IKvStore[];
 	constructor(props: any) {

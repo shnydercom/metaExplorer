@@ -13,7 +13,7 @@
           "initialKvStores": [
             {
               "key": "http://schema.org/contentUrl",
-              "value": "/static/shnyderlogo.png"
+              "value": "/media/shnyderlogo.png"
             },
             {
               "key": "CSSObjectFit",

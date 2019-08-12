@@ -13,7 +13,7 @@
           "initialKvStores": [
             {
               "key": "http://schema.org/contentUrl",
-              "value": "/static/plane-landing.jpg"
+              "value": "/media/plane-landing.jpg"
             },
             {
               "key": "CSSObjectFit",
