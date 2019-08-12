@@ -86,4 +86,4 @@ export const ldBlueprint = (blueprintCfg: BlueprintConfig, replaceKVs: boolean =
     return <T extends { new(...args: any[]): IBlueprintItpt }>(target: T) => {
         return blueprintDecorator(target, blueprintCfg, replaceKVs);
     };
-}
+};
