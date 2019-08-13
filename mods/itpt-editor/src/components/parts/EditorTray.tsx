@@ -4,7 +4,7 @@ import { IBlueprintItpt, IItptInfoItem, ITPT_TAG_ATOMIC, ITPT_TAG_COMPOUND } fro
 import { EditorTrayItem } from "./EditorTrayItem";
 import { ItemTypes } from "metaexplorer-react-components";
 //TODO: change this:
-import * as appStyles from '../../../../../packages/core/src/styles/styles.scss';
+import * as appStyles from '@metaexplorer/core/src/styles/core-index.scss';
 import { DropRefmapResult } from "./RefMapDropSpace";
 import { StylableDragItemProps } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag";
 import React from "react";

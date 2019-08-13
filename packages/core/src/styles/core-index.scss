@@ -11,6 +11,17 @@ $app-outer-width: 420px;
 $app-inner-width: 304px;
 $app-inner-width-90: $app-inner-width * 0.9;
 
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0pt;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 #app {
 	margin: 0;
 	padding: 0;

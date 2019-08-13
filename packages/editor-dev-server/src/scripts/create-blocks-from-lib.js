@@ -31,5 +31,8 @@ module.exports = function createBlocksFromLib(mainItpt, startDir) {
 	}
 	const rootDir = path.resolve(startDir ? startDir : "blocks"); // or whatever directory you want to read
 	readDirectory(rootDir, concatenatedObj);
+	fs.mkdir('lib', { recursive: true }, (err) => {
+		if (err) throw err;
+	});
 	fs.writeFileSync("lib/interpreters.json", JSON.stringify(concatenatedObj));
 }
