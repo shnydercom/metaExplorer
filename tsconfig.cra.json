@@ -1,0 +1,11 @@
+{
+	"extends": "./tsconfig.json",
+  "compilerOptions": {
+    // https://github.com/RyanCavanaugh/learn-a/#tsconfigsettingsjson
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+		"sourceMap": true,
+		"resolveJsonModule": true
+  }
+}

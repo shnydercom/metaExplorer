@@ -17,7 +17,7 @@ module.exports = { ...sharedWebpackCfg,
   output: {
     filename: '[name].js',
     libraryTarget: 'umd',
-    library: 'metaexplorer-core',
+    library: '@metaexplorer/core',
     path: path.resolve(__dirname, '_bundles'),
   },
   module: {

@@ -1,5 +1,5 @@
 const proxy = require('http-proxy-middleware');
-//const path = require('path');
+const path = require('path');
 const mxpIOItpts = require('@metaexplorer-nocode/metaexplorer.io/lib/interpreters.json');
 const qrCodeGenScanMod = require('@metaexplorer-mods/qr-code-genscan/server-bom.js');
 
@@ -9,7 +9,8 @@ module.exports = function(app) {
     res.send(mxpIOItpts);
   });
   app.get('/media/*', function (req, res) {
-    res.sendFile(path.join(__dirname + '/assets/' + req.path));
+    const noMediaPath = req.path.replace('/media/', '');
+    res.sendFile(path.join(__dirname, './../assets/', noMediaPath));
   });
   qrCodeGenScanMod(app);
 };

@@ -1,9 +1,12 @@
 import { IKvStore } from "./ikvstore";
 import { ILDOptions } from "./ildoptions";
 import { BlueprintConfig } from "./ldBlueprint";
+import { LDError } from "../appstate";
 
 export function getKVStoreByKey(input: IKvStore[], searchKey: string): IKvStore {
 	let rv: IKvStore = null;
+	if (input === undefined || input === null) throw new LDError("input must be set");
+	if (!searchKey) throw new LDError("searchKey must be set");
 	if (input && input.length > 0) {
 		for (let i = 0; i < input.length; i++) {
 			const elem = input[i];

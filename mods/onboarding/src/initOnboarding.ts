@@ -1,5 +1,5 @@
-import * as onboardingEditorJson from './onboardingEditor.json';
-import * as onboardingQRJson from './onboardingQR.json';
+const onboardingEditorJson = require('./onboardingEditor.json'); //CRA doesn't import sub-module json correctly, would have to be packed
+const onboardingQRJson = require('./onboardingQR.json');
 import { PureRefMapItpt, PureBaseContainerRewrite, UserDefDict, LayoutVHCenteredColumnName, PureVHcenteredColumnLayout,
 	ReduxItptRetriever, appItptMatcherFn, BlueprintConfig, LDDict,IModStatus, SingleModStateKeysDict ,
 	ITPT_TAG_ATOMIC, ITPT_TAG_SPECIAL, ITPT_TAG_MOD, addBlueprintToRetriever, appItptRetrFn} from "@metaexplorer/core";
@@ -12,8 +12,8 @@ export const MOD_ONBOARDING_RETRIEVER_NAME = "onboardingRetriever";
 export function initOnboardingMod(): Promise<IModStatus> {
 	const appIntRetr = appItptRetrFn();
 	const rv: Promise<IModStatus> = new Promise((resolve) => {
-		let onboardingEditorCfg: BlueprintConfig = onboardingEditorJson as any;
-		let onboardingQRCfg: BlueprintConfig = onboardingQRJson as any;
+		let onboardingEditorCfg: BlueprintConfig = onboardingEditorJson;
+		let onboardingQRCfg: BlueprintConfig = onboardingQRJson;
 		addBlueprintToRetriever(onboardingEditorCfg);
 		//new retriever for onboarding, limits the number of blocks displayed
 		let onboardingRetrieverRedux = new ReduxItptRetriever(MOD_ONBOARDING_RETRIEVER_NAME);

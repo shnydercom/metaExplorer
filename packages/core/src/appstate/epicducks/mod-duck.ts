@@ -94,10 +94,13 @@ export const loadModEpic = (action$: ActionsObservable<any>, store: any, { modAP
 						}
 					})
 					,
-					catchError((error: Error) =>
-						of(loadModFailure(action.modId,
+					catchError((error: Error) => {
+						console.warn(error);
+						return of(loadModFailure(action.modId,
 							`An error occurred: ${error.message}`
-						))));
+						));
+					}
+					));
 			}
 		}
 		)

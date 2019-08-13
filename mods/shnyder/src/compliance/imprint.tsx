@@ -1,13 +1,9 @@
 import React from 'react';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 'appstate/LDProps';
-import { VisualKeysDict } from '../../visualcomposition/visualDict';
-
-import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
+import { IKvStore, ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap,
+	ILDOptions, LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState,
+	VisualKeysDict, initLDLocalState, gdsfpLD, LDDict
+} from '@metaexplorer/core';
 import { Component } from 'react';
-import { LDDict } from 'ldaccess/LDDict';
 
 export const ImprintName = "shnyder/compliance/Imprint";
 

@@ -1,11 +1,16 @@
 {
-  "include": ["src", "src/**/*.json"],
+  "include": ["src/**/*", "src/onboardingEditor.json", "src/onboardingQR.json"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
     "baseUrl": ".",
-    "resolveJsonModule": true
+    "composite": true,
+    
+    "module": "esnext",
+    "emitDeclarationOnly": false,
+    "resolveJsonModule": true,
+    "lib": ["dom", "esnext"],
   },
   "references": [
     {

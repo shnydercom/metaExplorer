@@ -27,6 +27,7 @@
     "@metaexplorer-mods/itpt-editor" : "0.0.1",
     "@metaexplorer-mods/qr-code-genscan" : "0.0.1",
     "@metaexplorer-mods/onboarding" : "0.0.1",
+    "@metaexplorer-mods/shnyder": "0.0.1",
     
     "@metaexplorer-nocode/metaexplorer.io" : "1.0.0"
   },

@@ -1,13 +1,10 @@
 import React from 'react';
-import { LDDict } from 'ldaccess/LDDict';
-import { IKvStore } from 'ldaccess/ikvstore';
-import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from 'ldaccess/ldBlueprint';
-import { ILDOptions } from 'ldaccess/ildoptions';
-import { VisualKeysDict } from 'components/visualcomposition/visualDict';
-import { UserDefDict } from 'ldaccess/UserDefDict';
-import { LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState } from 'appstate/LDProps';
-import { gdsfpLD, generateItptFromCompInfo, initLDLocalState } from 'components/generic/generatorFns';
-import { Component} from 'react';
+import {
+	LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState,
+	gdsfpLD, generateItptFromCompInfo, initLDLocalState, LDDict, IKvStore,
+	ldBlueprint, ILDOptions, VisualKeysDict, UserDefDict, BlueprintConfig, IBlueprintItpt, OutputKVMap
+} from '@metaexplorer/core';
+import { Component } from 'react';
 import HeroGallery from 'metaexplorer-react-components/lib/components/hero/hero';
 
 export var HeroGalleryName: string = "shnyder/HeroGallery";

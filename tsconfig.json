@@ -1,6 +1,6 @@
 {
   "exclude": ["node_modules", "dist", "lib", "__tests__", "**/*.test*", "**/*.spec*"],
-  "files":  [],
+  "files":  ["./typings.d.ts"],
   "compilerOptions": {
     "skipLibCheck": true,
     "target": "esnext",
@@ -43,6 +43,6 @@
     { "path": "mods/itpt-editor"},
     { "path": "mods/qr-code-genscan"},
     { "path": "mods/onboarding"},
-    { "path": "packages/metaexplorer.io" }
+    { "path": "mods/shnyder" }
   ]
 }
