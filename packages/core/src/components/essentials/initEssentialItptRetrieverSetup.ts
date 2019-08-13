@@ -5,7 +5,6 @@ import { PureRouteComponent, RouteComponentName } from "../routing/route-compone
 import { imageRetrieverName, ImageRetriever } from "../../sidefx/ImageRetriever";
 import { productRetrieverName, ProductRetriever } from "../../sidefx/ProductRetriever";
 import { organizationRetrieverName, OrganizationRetriever } from "../../sidefx/OrganizationRetriever";
-import { EANScannerName, EANScanner } from "../peripherals/camera/EAN-scanner";
 import { ITPT_TAG_ATOMIC } from "../../ldaccess/iitpt-retriever";
 import { LayoutVHCenteredColumnName, PureVHcenteredColumnLayout,  } from "../layout/layoutBaseComp";
 import { PureRedirectComponent, RouteRedirectName } from "../routing/redirect";
@@ -16,9 +15,6 @@ import { CSSWrapperName, PureCSSWrapper } from "../../components/layout/CSSWrapp
 export function initEssentialInterpreters() {
 	let appIntRetr = appItptRetrFn();
 	appIntRetr.addItpt(LDDict.ViewAction, PureImgDisplay, "cRud", [ITPT_TAG_ATOMIC]);
-
-	//TODO: move the EAN scanner to a mod, implement a generator maybe
-	appIntRetr.addItpt(EANScannerName, EANScanner, "cRud", [ITPT_TAG_ATOMIC]); //new version
 
 	//register routing itpts
 	appIntRetr.addItpt(RouteComponentName, PureRouteComponent, "cRud", [ITPT_TAG_ATOMIC]);

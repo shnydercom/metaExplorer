@@ -28,6 +28,7 @@ export class QrCodeGenScanClientAPI {
 		let rv = new QrCodeGenScanClientAPI();
 		const genApi = await rv.initGenScriptLoad() as QRCodeFactory;
 		await rv.initScanScriptLoad();
+		await rv.initQuaggaScriptLoad();
 		rv.generator = genApi;
 		//rv.scanner = scanApi;
 		return rv;
@@ -56,6 +57,18 @@ export class QrCodeGenScanClientAPI {
 			script.onerror = reject;
 			script.async = true;
 			script.src = '/lib/qr-scanner@1.1.1.js';
+		});
+	}
+
+	public initQuaggaScriptLoad() {
+		return new Promise((resolve, reject) => {
+			const script = document.createElement('script');
+			document.body.appendChild(script);
+			//script.type = "module"; module does not work for quagga!
+			script.onload = resolve;
+			script.onerror = reject;
+			script.async = true;
+			script.src = '/lib/quagga@0.12.1.js';
 		});
 	}
 

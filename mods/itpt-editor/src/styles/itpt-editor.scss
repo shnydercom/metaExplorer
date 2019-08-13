@@ -301,7 +301,7 @@ $tray-item-color-secondary: $editor-background-elevated-color;
 .top-left {
   top: 0;
   left: 0;
-  z-index: 200;
+  z-index: 2200;
   width: min-content;
   background: linear-gradient(to right, rgba($editor-background-elevated-color, 0.6), 80%, rgba(0, 0, 0, 0) 100%);
 }
@@ -310,7 +310,7 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   bottom: 0;
   left: 0;
   position: fixed;
-  z-index: 200;
+  z-index: 2200;
 }
 
 .bottom-right {
@@ -559,7 +559,7 @@ $tray-item-color-secondary: $editor-background-elevated-color;
   }
 
   .editor-tray {
-    z-index: 99;
+    z-index: 2000;
     position: relative;
     min-width: 240px;
     max-width: 390px;

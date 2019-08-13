@@ -3,7 +3,11 @@ const path = require('path');
 const mxpIOItpts = require('@metaexplorer-nocode/metaexplorer.io/lib/interpreters.json');
 const qrCodeGenScanMod = require('@metaexplorer-mods/qr-code-genscan/server-bom.js');
 
+const itptEditorMod = require('@metaexplorer-mods/itpt-editor/server-bom.js');
+
 module.exports = function(app) {
+  itptEditorMod(app);
+  qrCodeGenScanMod(app);
   app.use(proxy('/interpreters', { target: 'http://localhost:7000/' }));
   app.get('/api-static/interpreters.json', function (req, res) {
     res.send(mxpIOItpts);
@@ -12,5 +16,4 @@ module.exports = function(app) {
     const noMediaPath = req.path.replace('/media/', '');
     res.sendFile(path.join(__dirname, './../assets/', noMediaPath));
   });
-  qrCodeGenScanMod(app);
 };

@@ -41,6 +41,7 @@ interface IStyledAppBarProps {
 	hasPopOverContent: any;
 	onCancelClick: () => void;
 	onTriggerOpenRightMenu: (evt) => void;
+	onTriggerSearchBtnClick: (evt) => void;
 }
 
 const StyledAppBar: React.SFC<IStyledAppBarProps> = (props) => {
@@ -51,7 +52,8 @@ const StyledAppBar: React.SFC<IStyledAppBarProps> = (props) => {
 		routeSendSearch,
 		hasPopOverContent,
 		onCancelClick,
-		onTriggerOpenRightMenu } = props;
+		onTriggerOpenRightMenu,
+		onTriggerSearchBtnClick } = props;
 	return (
 		<>
 			<AppBar position="static"
@@ -68,7 +70,7 @@ const StyledAppBar: React.SFC<IStyledAppBarProps> = (props) => {
 						{headerText ? headerText : "Menu"}
 					</Typography>
 					{routeSendSearch
-						? <IconButton className={classes.searchbtn} onClick={this.onAppBarSearchBtnClick}><SearchIcon /></IconButton>
+						? <IconButton className={classes.searchbtn} onClick={(evt) => onTriggerSearchBtnClick(evt)}><SearchIcon /></IconButton>
 						: null}
 					{hasPopOverContent
 						? <IconButton edge="end" className={classes.popoverbtn} aria-label="additional actions" color="inherit"
@@ -109,7 +111,8 @@ export class MDNavBarWActions extends AbstractNavBarWActions<IAnchorState> {
 			routeSendSearch,
 			hasPopOverContent,
 			onCancelClick: this.onCancelClick.bind(this),
-			onTriggerOpenRightMenu: this.onTriggerOpenRightMenu.bind(this)
+			onTriggerOpenRightMenu: this.onTriggerOpenRightMenu.bind(this),
+			onTriggerSearchBtnClick: this.onAppBarSearchBtnClick.bind(this)
 		};
 		return <>
 			<StyledAppBar {...styledAppBarProps} />
