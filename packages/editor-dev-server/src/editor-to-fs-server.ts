@@ -52,9 +52,9 @@ export function editorToFileSystem(basePath?: string, srvrPort?: number) {
 		let resolvedFullPath = path.join(resolvedBasePath, FS_BLOCKS_SUBPATH, subDir);
 		fs.mkdir(resolvedFullPath, { recursive: true }, (err) => {
 			if (err) throw err;
+			fs.writeFileSync(path.join(resolvedFullPath, '/', fileName), JSON.stringify(req.body));
+			res.sendStatus(200);
 		});
-		fs.writeFileSync(path.join(resolvedFullPath, '/', fileName), req.body);
-		res.sendStatus(200);
 	});
 
 	app.listen(srvrPort, function () {
