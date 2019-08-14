@@ -1,0 +1,25 @@
+{
+  "include": [
+    "src"
+  ],
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "./lib",
+    "rootDir": "src",
+    "declarationDir": "lib",
+    "declaration": true,
+    "declarationMap": true,
+    "composite": true,
+    "sourceMap": true,
+    "emitDeclarationOnly": false,
+    "resolveJsonModule": true,
+    "lib": ["dom", "esnext"],
+    "paths": {
+      "*": [
+        "*"
+      ]
+    }
+  }
+}

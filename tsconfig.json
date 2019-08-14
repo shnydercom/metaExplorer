@@ -23,8 +23,8 @@
     "baseUrl": ".",
     "experimentalDecorators": true,
     "paths": {
-      "@metaexplorer/*": ["packages/*/src/lib"],
-      "@metaexplorer-mods/*": ["mods/*/src/lib"]
+      "@metaexplorer/*": ["packages/*/src"],
+      "@metaexplorer-mods/*": ["mods/*/src"]
     },
     // https://github.com/RyanCavanaugh/learn-a/#tsconfigsettingsjson
     "composite": true,
