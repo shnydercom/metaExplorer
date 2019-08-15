@@ -16,6 +16,7 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
 
 $tray-item-color-primary: #dadada;
 $tray-item-color-secondary: $editor-background-elevated-color;
+$traybuttonheight: 20px;
 
 .inputElement {
   background-color: transparent;
@@ -613,10 +614,29 @@ $tray-item-color-secondary: $editor-background-elevated-color;
         color: $tray-item-color-secondary;
       }
 
-      .load-iconbtn {
+      .edit-iconbtn {
         visibility: hidden;
         opacity: 0;
-        margin-top: 0;
+        height: $traybuttonheight;
+        margin-bottom: $traybuttonheight;
+        position: absolute;
+        background-color: #edc11cff !important;
+        color: black !important;
+        align-self: center;
+        right: 0.5em;
+        transition: opacity 0.1s ease-in, visibility 0.3s linear;
+
+        &.opened {
+          visibility: visible;
+          opacity: 1;
+          transition: opacity 0.2s ease-out;
+        }
+      }
+      .preview-iconbtn {
+        visibility: hidden;
+        opacity: 0;
+        height: $traybuttonheight;
+        margin-top: $traybuttonheight;
         position: absolute;
         background-color: #edc11cff !important;
         color: black !important;

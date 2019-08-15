@@ -21,7 +21,7 @@ export const EditorTrayItem: React.FC<EditorTrayProps> = (props) => {
 
 	// tslint:disable-next-line
 	const [{ /*isDragging*/ }, drag, /*preview*/] = useDrag({
-		item: { id: props.id, left: props.left, top: props.top, type: ItemTypes.Block },
+		item: { id: props.id, left: props.left, top: props.top, type: ItemTypes.Block, data: props.model },
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging()
 		}),
@@ -31,7 +31,8 @@ export const EditorTrayItem: React.FC<EditorTrayProps> = (props) => {
 		setIsOpen(props.isCompoundBlock ? !isOpen : false);
 	}
 	const trayCssClass = isOpen ? "editor-tray-item opened" : "editor-tray-item";
-	const btnCssClass = isOpen ? "load-iconbtn opened" : "load-iconbtn";
+	const btnEditCssClass = isOpen ? "edit-iconbtn opened" : "edit-iconbtn";
+	const btnPreviewCssClass = isOpen ? "preview-iconbtn opened" : "preview-iconbtn";
 	return (
 		<div
 			ref={drag}
@@ -59,10 +60,14 @@ export const EditorTrayItem: React.FC<EditorTrayProps> = (props) => {
 			{props.name}
 			{/**
 					icon={"chevron_right"} */}
-			<button className={btnCssClass} onClick={(e) => {
+			<button className={btnEditCssClass} onClick={(e) => {
 				e.stopPropagation();
 				props.onLongPress(props.model);
-			}} />
+			}} >edit</button>
+			<button className={btnPreviewCssClass} onClick={(e) => {
+				e.stopPropagation();
+				props.onLongPress(props.model);
+			}} >preview</button>
 		</div >
 	);
 };

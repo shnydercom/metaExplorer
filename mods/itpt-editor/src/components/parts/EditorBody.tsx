@@ -1,16 +1,7 @@
-import { keys } from "lodash";
-
-import { EditorLogic, editorSpecificNodesColor, editorDefaultNodesColor } from "./editor-logic";
+import React, { Component } from "react";
 import { DiagramWidget } from "storm-react-diagrams";
-import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
-import { LDPortModel } from "./LDPortModel";
-import { IKvStore, UserDefDict } from "@metaexplorer/core";
-import { GeneralDataTypeNodeModel } from "./generaldatatypes/GeneralDataTypeNodeModel";
-import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeModel";
-import { Component } from "react";
-import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
+import { EditorLogic } from "./editor-logic";
 import { DropRefmapResult } from "./RefMapDropSpace";
-import React from "react";
 
 export interface EditorBodyProps {
 	logic: EditorLogic;
@@ -56,85 +47,17 @@ export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
 		}
 	}
 
-	onRefMapDrop(event: DragEvent) {
-		var data = JSON.parse(event.dataTransfer.getData("ld-node"));
-		event.stopPropagation();
-		return this.props.onEditTrayItem(data);
-	}
-
 	render() {
 		const { hideRefMapDropSpace } = this.props;
+		/*onDrop={(event) => {
+						var data = JSON.parse(event.dataTransfer.getData("ld-node"));
+						
+						this.forceUpdate();
+					}}*/
 		return (
 			<div className="diagram-body">
 				<div
 					className="diagram-layer"
-					onDrop={(event) => {
-						var data = JSON.parse(event.dataTransfer.getData("ld-node"));
-						var nodesCount = keys(
-							this.props.logic
-								.getDiagramEngine()
-								.getDiagramModel()
-								.getNodes()
-						).length;
-
-						var node = null;
-						switch (data.type) {
-							case "ldbp":
-								let nodeName: string = "Node " + (nodesCount + 1) + ":";
-								node = new GeneralDataTypeNodeModel(nodeName, null, null, editorDefaultNodesColor);
-								if (data.bpname) {
-									this.props.logic.addLDPortModelsToNodeFromItptRetr(node, data.bpname);
-								}
-								if (data.canInterpretType) node.canInterpretType = data.canInterpretType;
-								break;
-							case "bdt":
-								var baseDataTypeKVStore: IKvStore = {
-									key: UserDefDict.outputSelfKey,
-									value: undefined,
-									ldType: undefined
-								};
-								node = new BaseDataTypeNodeModel("Simple Data Type", null, null, editorDefaultNodesColor);
-								node.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "output"));
-								break;
-							case "inputtype":
-								var inputDataTypeKVStore: IKvStore = {
-									key: UserDefDict.externalInput,
-									value: undefined,
-									ldType: undefined
-								};
-								node = new DeclarationPartNodeModel("External Input Marker", null, null, editorSpecificNodesColor);
-								node.addPort(new LDPortModel(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
-								break;
-							case "outputtype":
-								var outputDataTypeKVStore: IKvStore = {
-									key: UserDefDict.externalOutput,
-									value: undefined,
-									ldType: undefined
-								};
-								node = new DeclarationPartNodeModel("External Output Marker", null, null, editorSpecificNodesColor);
-								node.addPort(new LDPortModel(true, "in-4", outputDataTypeKVStore, UserDefDict.externalOutput));
-								break;
-							case "lineardata":
-								node = new ExtendableTypesNodeModel("Linear Data Display", null, null, editorSpecificNodesColor);
-								let outputSelfKV: IKvStore = {
-									key: UserDefDict.outputSelfKey,
-									value: undefined,
-									ldType: UserDefDict.intrprtrClassType
-								};
-								node.addPort(new LDPortModel(false, outputSelfKV.key, outputSelfKV));
-								break;
-							default:
-								break;
-						}
-						var points = this.props.logic.getDiagramEngine().getRelativeMousePoint(event);
-						node.x = points.x;
-						node.y = points.y;
-						this.props.logic
-							.getDiagramEngine()
-							.getDiagramModel()
-							.addNode(node);
-						this.forceUpdate();
-					}}
 					onDragOver={(event) => {
 						event.preventDefault();
 					}}

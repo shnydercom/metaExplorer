@@ -1,28 +1,32 @@
-import { Component, createRef } from "react";
-
-import "storm-react-diagrams/dist/style.min.css";
-import { EditorBody } from "./parts/EditorBody";
-import { EditorLogic } from "./parts/editor-logic";
-import { UserDefDict, IKvStore,LDDict, BlueprintConfig, OutputKVMap, ldBlueprint, mapStateToProps, mapDispatchToProps,
-	LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps, LDLocalState, ldOptionsDeepCopy,
-	BaseContainerRewrite, intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever, DEFAULT_ITPT_RETRIEVER_NAME,
-	NetworkPreferredToken, initLDLocalState, gdsfpLD, ILDOptions } from "@metaexplorer/core";
-import { connect } from "react-redux";
-
 import {
-	Route
-} from 'react-router-dom';
+	addBlueprintToRetriever, BaseContainerRewrite, BlueprintConfig, DEFAULT_ITPT_RETRIEVER_NAME, gdsfpLD, IKvStore, ILDOptions,
+	initLDLocalState, intrprtrTypeInstanceFromBlueprint, ldBlueprint, LDConnectedDispatch, LDConnectedState, LDDict, LDLocalState,
+	ldOptionsDeepCopy, LDOwnProps, LDRouteProps, mapDispatchToProps, mapStateToProps, NetworkPreferredToken, OutputKVMap, UserDefDict
+} from "@metaexplorer/core";
+import { keys } from "lodash";
+import { DragItem } from "metaexplorer-react-components";
+import { DropContainer } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/dropcontainer';
+import { DND_MINI_TOOLBOX_TYPE } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/interfaces";
+import { MiniToolBox } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag';
+import React, { Component, createRef } from "react";
+import { DndProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { connect } from "react-redux";
 import { Redirect } from "react-router";
+import { Route } from 'react-router-dom';
+import "storm-react-diagrams/dist/style.min.css";
+import { IEditorBlockData } from "./editorInterfaces";
+import { BaseDataTypeNodeModel } from "./parts/basedatatypes/BaseDataTypeNodeModel";
+import { DeclarationPartNodeModel } from "./parts/declarationtypes/DeclarationNodeModel";
+import { editorDefaultNodesColor, EditorLogic, editorSpecificNodesColor } from "./parts/editor-logic";
+import { EditorBody } from "./parts/EditorBody";
 import { EditorTray as EditorTray } from "./parts/EditorTray";
+import { ExtendableTypesNodeModel } from "./parts/extendabletypes/ExtendableTypesNodeModel";
+import { GeneralDataTypeNodeModel } from "./parts/generaldatatypes/GeneralDataTypeNodeModel";
+import { LDPortModel } from "./parts/LDPortModel";
 import { DropRefmapResult } from "./parts/RefMapDropSpace";
 import { UserInfo } from "./status/UserInfo";
 
-import { MiniToolBox } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag';
-import { DropContainer } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/dropcontainer';
-import { DndProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DND_MINI_TOOLBOX_TYPE } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/interfaces";
-import React from "react";
 
 export type AIEProps = {
 	logic?: EditorLogic;
@@ -351,7 +355,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						? null
 						: <div className={`nav-drawer-wrapper ${drawerActive ? "active" : "inactive"}`}>
 							<EditorTray
-							setDropZoneClickThrough={(val) => this.setState({...this.state, isDropZoneClickThrough: val})} itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
+								setDropZoneClickThrough={(val) => this.setState({ ...this.state, isDropZoneClickThrough: val })} itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
 								onClearBtnPress={() => {
 									this.logic.clear();
 									this.setState({ ...this.state, currentlyEditingItptName: null });
@@ -417,14 +421,18 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		return <>
 			{this.state.previewDisplay === "phone" ?
 				<>
-					<DropContainer isDropZoneClickthrough={this.state.isDropZoneClickThrough}>
+					<DropContainer isDropZoneClickthrough={this.state.isDropZoneClickThrough}
+						onBlockDropped={(itm: DragItem) => {
+							console.dir(itm);
+							this.addBlockToDiagram(itm)
+						}}>
 						<MiniToolBox
 							id="a"
 							left={0}
 							top={0}
 							type={DND_MINI_TOOLBOX_TYPE}
-							onOutDragHandle={() => this.setState({...this.state, isDropZoneClickThrough: true})}
-							onOverDragHandle={() => this.setState({...this.state, isDropZoneClickThrough: false})}
+							onOutDragHandle={() => this.setState({ ...this.state, isDropZoneClickThrough: true })}
+							onOverDragHandle={() => this.setState({ ...this.state, isDropZoneClickThrough: false })}
 						>
 							<div className="app-content mdscrollbar">
 								<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
@@ -532,7 +540,73 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.props.dispatchKvOutput([outCurItptKV], this.props.ldTokenString, outputKVMap);
 	}
 
-	protected onEditTrayItem(data): DropRefmapResult {
+	protected addBlockToDiagram = (dndItem: DragItem) => {
+		const data: IEditorBlockData = dndItem.data;
+		var nodesCount = keys(
+			this.logic
+				.getDiagramEngine()
+				.getDiagramModel()
+				.getNodes()
+		).length;
+		var node = null;
+		switch (data.type) {
+			case "ldbp":
+				let nodeName: string = "Node " + (nodesCount + 1) + ":";
+				node = new GeneralDataTypeNodeModel(nodeName, null, null, editorDefaultNodesColor);
+				if (data.bpname) {
+					this.logic.addLDPortModelsToNodeFromItptRetr(node, data.bpname);
+				}
+				if (data.canInterpretType) node.canInterpretType = data.canInterpretType;
+				break;
+			case "bdt":
+				var baseDataTypeKVStore: IKvStore = {
+					key: UserDefDict.outputSelfKey,
+					value: undefined,
+					ldType: undefined
+				};
+				node = new BaseDataTypeNodeModel("Simple Data Type", null, null, editorDefaultNodesColor);
+				node.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "output"));
+				break;
+			case "inputtype":
+				var inputDataTypeKVStore: IKvStore = {
+					key: UserDefDict.externalInput,
+					value: undefined,
+					ldType: undefined
+				};
+				node = new DeclarationPartNodeModel("External Input Marker", null, null, editorSpecificNodesColor);
+				node.addPort(new LDPortModel(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
+				break;
+			case "outputtype":
+				var outputDataTypeKVStore: IKvStore = {
+					key: UserDefDict.externalOutput,
+					value: undefined,
+					ldType: undefined
+				};
+				node = new DeclarationPartNodeModel("External Output Marker", null, null, editorSpecificNodesColor);
+				node.addPort(new LDPortModel(true, "in-4", outputDataTypeKVStore, UserDefDict.externalOutput));
+				break;
+			case "lineardata":
+				node = new ExtendableTypesNodeModel("Linear Data Display", null, null, editorSpecificNodesColor);
+				let outputSelfKV: IKvStore = {
+					key: UserDefDict.outputSelfKey,
+					value: undefined,
+					ldType: UserDefDict.intrprtrClassType
+				};
+				node.addPort(new LDPortModel(false, outputSelfKV.key, outputSelfKV));
+				break;
+			default:
+				break;
+		}
+		var points = this.logic.getDiagramEngine().getRelativeMousePoint(event);
+		node.x = points.x;
+		node.y = points.y;
+		this.logic
+			.getDiagramEngine()
+			.getDiagramModel()
+			.addNode(node);
+	}
+
+	protected onEditTrayItem(data: IEditorBlockData): DropRefmapResult {
 		switch (data.type) {
 			case "ldbp":
 				this.logic.clear();
