@@ -68,12 +68,18 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			return 0;
 		});
 		const specialNodesText: string = "Set standard values, mark a value for later input or build forms with as many interpreters as you want";
+		const specialBlocksCommonProps = {
+			...baseDragProps,
+			isCompoundBlock:false,
+			onPreviewBtnPress: (data) => nextProps.onEditTrayItem(data),
+			onEditBtnPress: (data) => nextProps.onEditTrayItem(data)
+		}
 		const specialNodesTreeItem: TreeEntry = {
 			flatContent: [
-				<EditorTrayItem {...baseDragProps} isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$editor-secondary-color"]} />,
-				<EditorTrayItem {...baseDragProps} isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$editor-secondary-color"]} />,
-				<EditorTrayItem {...baseDragProps} isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={3} model={{ type: "outputtype" }} name="External Output Marker" color={appStyles["$editor-secondary-color"]} />,
-				<EditorTrayItem {...baseDragProps} isCompoundBlock={false} onLongPress={(data) => nextProps.onEditTrayItem(data)} key={4} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$editor-secondary-color"]} />
+				<EditorTrayItem {...specialBlocksCommonProps} key={1} model={{ type: "bdt" }} name="Simple Data Type" color={appStyles["$editor-secondary-color"]} />,
+				<EditorTrayItem {...specialBlocksCommonProps} key={2} model={{ type: "inputtype" }} name="External Input Marker" color={appStyles["$editor-secondary-color"]} />,
+				<EditorTrayItem {...specialBlocksCommonProps} key={3} model={{ type: "outputtype" }} name="External Output Marker" color={appStyles["$editor-secondary-color"]} />,
+				<EditorTrayItem {...specialBlocksCommonProps} key={4} model={{ type: "lineardata" }} name="Linear Data Display" color={appStyles["$editor-secondary-color"]} />
 			],
 			label: 'Special Blocks',
 			subEntries: []
@@ -227,7 +233,9 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
 			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : ldBPCfg.canInterpretType;
 			let remainingName = tree.flatContentURLs[idx];
-			tree.flatContent.push(<EditorTrayItem {...baseDragProps} isCompoundBlock={isCompoundBlock} onLongPress={(data) => onEditTrayItem(data)}
+			tree.flatContent.push(<EditorTrayItem {...baseDragProps} isCompoundBlock={isCompoundBlock} 
+				onPreviewBtnPress={(data) => onEditTrayItem(data)}
+				onEditBtnPress={(data) => onEditTrayItem(data)}
 				key={trayName}
 				model={{ type: "ldbp", bpname: trayName, canInterpretType: trayItptType, subItptOf: null }}
 				name={remainingName}

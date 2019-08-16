@@ -11,6 +11,7 @@ import { MiniToolBox } from 'metaexplorer-react-components/lib/components/minito
 import React, { Component, createRef } from "react";
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+//import TouchBackend from 'react-dnd-touch-backend';
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import { Route } from 'react-router-dom';
@@ -27,6 +28,7 @@ import { LDPortModel } from "./parts/LDPortModel";
 import { DropRefmapResult } from "./parts/RefMapDropSpace";
 import { UserInfo } from "./status/UserInfo";
 
+const DNDBackend = HTML5Backend;// TouchBackend; //HTML5Backend
 
 export type AIEProps = {
 	logic?: EditorLogic;
@@ -348,7 +350,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		const itpts = this.logic.getItptList();
 		// , navDrawerClipped: 'editor-navbar-clipped'
-		return <DndProvider backend={HTML5Backend}>
+		return <DndProvider backend={DNDBackend}>
 			<div className="entrypoint-editor" ref={this.editorWrapperRef}>
 				<div className='editor-layout'>
 					{drawerHidden

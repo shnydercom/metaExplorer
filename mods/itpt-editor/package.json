@@ -20,7 +20,7 @@
   "dependencies": {
     "@metaexplorer/core": "^0.0.1",
     "dagre": "^0.8.4",
-    "storm-react-diagrams": "^5.2.1",
-    "metaexplorer-react-components": "https://github.com/aJonathanSchneider/metaExplorer-react-components.git"
+    "metaexplorer-react-components": "https://github.com/aJonathanSchneider/metaExplorer-react-components.git",
+    "storm-react-diagrams": "^5.2.1"
   }
 }

@@ -2,12 +2,14 @@ import { useState } from "react";
 import { ItemTypes, StylableDragItemProps } from "metaexplorer-react-components";
 import { useDrag } from "react-dnd";
 import React from "react";
+import { IEditorBlockData } from "../editorInterfaces";
 
 export interface EditorTrayProps extends StylableDragItemProps {
-	model: any;
+	model: IEditorBlockData;
 	color?: string;
 	name: string;
-	onLongPress: (jsonData) => {};
+	onEditBtnPress: (jsonData) => {};
+	onPreviewBtnPress: (jsonData) => {};
 	isCompoundBlock: boolean;
 }
 
@@ -33,6 +35,7 @@ export const EditorTrayItem: React.FC<EditorTrayProps> = (props) => {
 	const trayCssClass = isOpen ? "editor-tray-item opened" : "editor-tray-item";
 	const btnEditCssClass = isOpen ? "edit-iconbtn opened" : "edit-iconbtn";
 	const btnPreviewCssClass = isOpen ? "preview-iconbtn opened" : "preview-iconbtn";
+
 	return (
 		<div
 			ref={drag}
@@ -62,11 +65,11 @@ export const EditorTrayItem: React.FC<EditorTrayProps> = (props) => {
 					icon={"chevron_right"} */}
 			<button className={btnEditCssClass} onClick={(e) => {
 				e.stopPropagation();
-				props.onLongPress(props.model);
+				props.onEditBtnPress(props.model);
 			}} >edit</button>
 			<button className={btnPreviewCssClass} onClick={(e) => {
 				e.stopPropagation();
-				props.onLongPress(props.model);
+				props.onPreviewBtnPress(props.model);
 			}} >preview</button>
 		</div >
 	);
