@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, Store } from 'redux';
+import { createStore, applyMiddleware, Store, compose } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { rootEpic, rootReducer } from './rootduck';
 import { ImageUploadAPI } from '../apis/image-upload';
@@ -43,8 +43,10 @@ export const isProduction = process.env.NODE_ENV === 'production';
 export const isDemo = process.env.METAEXPLORER_MODE === 'demo';
 export const isStateDebug = process.env.METAEXPLORER_MODE === 'statedebug';
 
-let middleWare = /*isProduction ?*/ applyMiddleware(epicMiddleware); /* :
-  isStateDebug ? compose(applyMiddleware(epicMiddleware), DevTools.instrument()) : applyMiddleware(epicMiddleware);*/
+const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
+
+let middleWare = composeEnhancers(applyMiddleware(epicMiddleware)); // /*isProduction ?*/ applyMiddleware(epicMiddleware); /* :
+  //isStateDebug ? compose(applyMiddleware(epicMiddleware), DevTools.instrument()) : applyMiddleware(epicMiddleware);*/
 
 export interface IAppConfigStatePart {
   appKey: string;
