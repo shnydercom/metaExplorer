@@ -27,6 +27,7 @@ import { GeneralDataTypeNodeModel } from "./parts/generaldatatypes/GeneralDataTy
 import { LDPortModel } from "./parts/LDPortModel";
 import { DropRefmapResult } from "./parts/RefMapDropSpace";
 import { UserInfo } from "./status/UserInfo";
+//import debounce from 'debounce'
 
 const DNDBackend = HTML5Backend;// TouchBackend; //HTML5Backend
 
@@ -49,6 +50,7 @@ export type AIEState = {
 	mode: "editor" | "app" | "initial";
 	redirect: null | string;
 	isDropZoneClickThrough: boolean;
+	ignoreExternalProps: boolean;
 } & LDLocalState;
 
 const EDITOR_KV_KEY = "EditorKvKey";
@@ -133,6 +135,7 @@ export const BlockEditorCfg: BlueprintConfig = {
 export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	static getDerivedStateFromProps(nextProps: AIEProps, prevState: AIEState): AIEState | null {
+		if (prevState.ignoreExternalProps) return { ...prevState, ignoreExternalProps: false };
 		let redirState = null;
 		if (nextProps.routes && nextProps.routes.location + "" === prevState.redirect) {
 			redirState = { ...prevState, redirect: null };
@@ -162,13 +165,22 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				previewHidden = !!(hiddenViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_PREVIEW);
 				bottomBarHidden = !!(hiddenViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_BOTTOMBAR);
 			}
+			let newState = null;
 			if (!!initiallyDisplayed && !prevState.currentlyEditingItptName !== initiallyDisplayed) {
-				return { ...prevState, currentlyEditingItptName: initiallyDisplayed, mode, bottomBarHidden, drawerHidden, previewHidden };
+				newState = { ...prevState, ...rvLD, currentlyEditingItptName: initiallyDisplayed, mode, bottomBarHidden, drawerHidden, previewHidden };
 			} else {
-				return { ...prevState, mode, bottomBarHidden, drawerHidden, previewHidden };
+				newState = { ...prevState, ...rvLD, mode, bottomBarHidden, drawerHidden, previewHidden };
 			}
+			if (JSON.stringify(newState) === JSON.stringify(prevState)) return null;
+			return newState;
 		}
 		return redirState;
+	}
+
+	protected setIsDropZoneClickThrough(val: boolean) {
+		/*if (val !== this.state.isDropZoneClickThrough) {
+			debounce(() => { this.setState({ ...this.state, isDropZoneClickThrough: val, ignoreExternalProps: true }) }, 200);
+		}*/
 	}
 
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the itpt you're designing is capable of interpreting -> usually a new generic type
@@ -223,7 +235,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			mode, drawerActive, previewActive, bottomBarHidden, drawerHidden, previewHidden,
 			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone",
 			hasCompletedFirstRender: false, hasCompletedEditorRender: false,
-			isDropZoneClickThrough: true
+			isDropZoneClickThrough: true,
+			ignoreExternalProps: false
 		};
 	}
 
@@ -342,6 +355,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		);
 	}
 
+
+
 	renderEditor() {
 		const { drawerActive, previewActive, localValues, bottomBarHidden, previewHidden, drawerHidden } = this.state;
 		const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
@@ -357,7 +372,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						? null
 						: <div className={`nav-drawer-wrapper ${drawerActive ? "active" : "inactive"}`}>
 							<EditorTray
-								setDropZoneClickThrough={(val) => this.setState({ ...this.state, isDropZoneClickThrough: val })} itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
+								setDropZoneClickThrough={(val) => this.setIsDropZoneClickThrough(val)} itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
 								onClearBtnPress={() => {
 									this.logic.clear();
 									this.setState({ ...this.state, currentlyEditingItptName: null });
@@ -430,11 +445,11 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						}}>
 						<MiniToolBox
 							id="a"
-							left={0}
-							top={0}
+							left={300}
+							top={500}
 							type={DND_MINI_TOOLBOX_TYPE}
-							onOutDragHandle={() => this.setState({ ...this.state, isDropZoneClickThrough: true })}
-							onOverDragHandle={() => this.setState({ ...this.state, isDropZoneClickThrough: false })}
+							onOutDragHandle={() => this.setIsDropZoneClickThrough(true)}
+							onOverDragHandle={() => this.setIsDropZoneClickThrough(false)}
 						>
 							<div className="app-content mdscrollbar">
 								<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />

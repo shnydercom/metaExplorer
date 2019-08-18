@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ItemTypes, StylableDragItemProps } from "metaexplorer-react-components";
+import { StylableDragItemProps, DragLayerWChildren, ItemTypes } from "metaexplorer-react-components";
 import { useDrag } from "react-dnd";
 import React from "react";
 import { IEditorBlockData } from "../editorInterfaces";
@@ -22,7 +22,7 @@ export const EditorTrayItem: React.FC<EditorTrayProps> = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	// tslint:disable-next-line
-	const [{ /*isDragging*/ }, drag, /*preview*/] = useDrag({
+	const [{ isDragging }, drag, preview] = useDrag({
 		item: { id: props.id, left: props.left, top: props.top, type: ItemTypes.Block, data: props.model },
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging()
@@ -36,41 +36,56 @@ export const EditorTrayItem: React.FC<EditorTrayProps> = (props) => {
 	const btnEditCssClass = isOpen ? "edit-iconbtn opened" : "edit-iconbtn";
 	const btnPreviewCssClass = isOpen ? "preview-iconbtn opened" : "preview-iconbtn";
 
+	const renderContent = (isDragLayer: boolean) => {
+		return (
+			<div
+				style={{ borderColor: props.color, left: props.left, top: props.top }}
+				onClick={props.isCompoundBlock ? handleClick : () => { return; }}
+				onMouseOut={(e) => { if (props.onOutDragHandle) props.onOutDragHandle(); }}
+				onMouseEnter={(e) => { if (props.onOverDragHandle) props.onOverDragHandle(); }}
+				//onTouchStart={this.handleButtonPress} onTouchEnd={this.handleButtonRelease} onMouseDown={this.handleButtonPress} onMouseUp={this.handleButtonRelease}
+				//draggable={true}
+				//onDragStart={(event) => {
+				//clearTimeout(this.buttonPressTimer);
+				//event.currentTarget.style.backgroundColor = "#ff00ff";
+				//event.currentTarget.classList.add("dragging");
+				//	event.dataTransfer.setData("ld-node", JSON.stringify(props.model));
+				//event.dataTransfer.setDragImage(<img>hallo</img>, 20, 20);
+				//}
+				//}
+				//onDragEnd={
+				//	(event) => {
+				//event.currentTarget.classList.remove("dragging");
+				//	}
+				//}
+				className={trayCssClass}
+			>
+				{props.name}
+				{/**
+						icon={"chevron_right"} */}
+				<button className={btnEditCssClass} onClick={(e) => {
+					e.stopPropagation();
+					props.onEditBtnPress(props.model);
+				}} >edit</button>
+				<button className={btnPreviewCssClass} onClick={(e) => {
+					e.stopPropagation();
+					props.onPreviewBtnPress(props.model);
+				}} >preview</button>
+			</div >
+		);
+	}
+
 	return (
-		<div
-			ref={drag}
-			style={{ borderColor: props.color, left: props.left, top: props.top }}
-			onClick={props.isCompoundBlock ? handleClick : () => { return; }}
-			onMouseOut={(e) => { if (props.onOutDragHandle) props.onOutDragHandle(); }}
-			onMouseEnter={(e) => { if (props.onOverDragHandle) props.onOverDragHandle(); }}
-			//onTouchStart={this.handleButtonPress} onTouchEnd={this.handleButtonRelease} onMouseDown={this.handleButtonPress} onMouseUp={this.handleButtonRelease}
-			//draggable={true}
-			//onDragStart={(event) => {
-			//clearTimeout(this.buttonPressTimer);
-			//event.currentTarget.style.backgroundColor = "#ff00ff";
-			//event.currentTarget.classList.add("dragging");
-			//	event.dataTransfer.setData("ld-node", JSON.stringify(props.model));
-			//event.dataTransfer.setDragImage(<img>hallo</img>, 20, 20);
-			//}
-			//}
-			//onDragEnd={
-			//	(event) => {
-			//event.currentTarget.classList.remove("dragging");
-			//	}
-			//}
-			className={trayCssClass}
-		>
-			{props.name}
-			{/**
-					icon={"chevron_right"} */}
-			<button className={btnEditCssClass} onClick={(e) => {
-				e.stopPropagation();
-				props.onEditBtnPress(props.model);
-			}} >edit</button>
-			<button className={btnPreviewCssClass} onClick={(e) => {
-				e.stopPropagation();
-				props.onPreviewBtnPress(props.model);
-			}} >preview</button>
-		</div >
-	);
+		//style={{ left: props.left, top: props.top }}
+		<>
+			<DragLayerWChildren
+				includedItemId={props.id}
+				acceptedItemTypes={[ItemTypes.Block]}>
+				{renderContent(true)}
+			</DragLayerWChildren>
+			<div ref={preview} style={{ height: 0, width: 0 }}></div>
+			{isDragging ? null : <div ref={drag}>{renderContent(false)}</div>}
+		</>
+	)
+
 };
