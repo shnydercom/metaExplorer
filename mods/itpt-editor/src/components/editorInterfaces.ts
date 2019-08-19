@@ -6,7 +6,9 @@ export interface IEditorBlockData {
 	subItptOf?: string 
 }
 
-//export type EDITOR_DND_ITEMTYPE = 'block' | 'preview';
+export interface IEditorPreviewData {
+	
+}
 
 export enum EditorDNDItemType {
 	block = 'block',

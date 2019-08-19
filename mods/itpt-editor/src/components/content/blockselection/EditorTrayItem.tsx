@@ -3,9 +3,8 @@ import React from "react";
 import { IEditorBlockData, EditorDNDItemType } from "../../editorInterfaces";
 import { DragContainer, StylableDragItemProps } from "metaexplorer-react-components";
 
-export interface EditorTrayProps {
+export interface EditorTrayItemProps {
 	model: IEditorBlockData;
-	color?: string;
 	onEditBtnPress: (data) => void;
 	onPreviewBtnPress: (data) => void;
 	isCompoundBlock: boolean;
@@ -15,7 +14,7 @@ export interface EditorTrayState {
 	isOpen: boolean;
 }
 
-export const EditorTrayItem: React.FC<EditorTrayProps> = (props) => {
+export const EditorTrayItem: React.FC<EditorTrayItemProps> = (props) => {
 
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -29,7 +28,6 @@ export const EditorTrayItem: React.FC<EditorTrayProps> = (props) => {
 	const renderContent = () => {
 		return (
 			<div
-				style={{ borderColor: props.color }}
 				onClick={props.isCompoundBlock ? handleClick : () => { return; }}
 				className={trayCssClass}
 			>
@@ -52,15 +50,15 @@ export const EditorTrayItem: React.FC<EditorTrayProps> = (props) => {
 
 };
 
-export const DraggableEditorTrayItem: React.FC<EditorTrayProps & StylableDragItemProps<EditorDNDItemType>> = (props) => {
+export const DraggableEditorTrayItem: React.FC<EditorTrayItemProps & StylableDragItemProps<EditorDNDItemType, IEditorBlockData>> = (props) => {
 	//assigns part of the props to properties of a sub-element https://stackoverflow.com/a/39333479/1149845
-	const dragContainerProps: StylableDragItemProps<EditorDNDItemType> =
+	const dragContainerProps: StylableDragItemProps<EditorDNDItemType, IEditorBlockData> =
 		(({ className, data, id, isWithDragHandle, onOutDragHandle, onOverDragHandle, sourceBhv, targetBhv, type }) =>
 			({ className, data, id, isWithDragHandle, onOutDragHandle, onOverDragHandle, sourceBhv, targetBhv, type }))(props);
-	const editorTrayItemProps: EditorTrayProps =
-		(({ color, isCompoundBlock, model, onEditBtnPress, onPreviewBtnPress }) =>
-			({ color, isCompoundBlock, model, onEditBtnPress, onPreviewBtnPress }))(props);
-	return (<DragContainer<EditorDNDItemType>
+	const editorTrayItemProps: EditorTrayItemProps =
+		(({ isCompoundBlock, model, onEditBtnPress, onPreviewBtnPress }) =>
+			({ isCompoundBlock, model, onEditBtnPress, onPreviewBtnPress }))(props);
+	return (<DragContainer<EditorDNDItemType, IEditorBlockData>
 		{...dragContainerProps}
 	>
 		<EditorTrayItem {...editorTrayItemProps}/>
