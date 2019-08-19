@@ -27,6 +27,7 @@ import { GeneralDataTypeNodeModel } from "./parts/generaldatatypes/GeneralDataTy
 import { LDPortModel } from "./parts/LDPortModel";*/
 import { UserInfo } from "./content/status/UserInfo";
 import debounce from 'debounce'
+import { EditorMain } from "./EditorMain";
 
 const DNDBackend = HTML5Backend;// TouchBackend; //HTML5Backend
 
@@ -284,7 +285,11 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	render() {
 		console.log("itpt-editor render()")
-		return null;
+		return <EditorMain
+			isPreviewFullScreen={false}
+			previewLDTokenString={this.state.previewerToken}
+			routes={this.props.routes}
+		></EditorMain>;
 		/*if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
 			return <div>{this.errorNotAvailableMsg}</div>;
 		}

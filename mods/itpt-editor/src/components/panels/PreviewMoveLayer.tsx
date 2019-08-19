@@ -27,6 +27,7 @@ export function PreviewMoveLayer<TItemType extends string>(props: React.PropsWit
 		</DragContainer >
 	}
 	return (
+		<div>
 		<MoveContainer
 			className='editor-movecontainer'
 			positionMap={{
@@ -40,5 +41,6 @@ export function PreviewMoveLayer<TItemType extends string>(props: React.PropsWit
 				}
 			}}
 		/>
+		</div>
 	)
 }
