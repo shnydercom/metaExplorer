@@ -246,8 +246,8 @@
         "signature": "e0070c45bf15b872f58eee948f71ad6f4f424f36330b2477753fc1aed3ece36e"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/node/readline.d.ts": {
-        "version": "0870ded99753a8561f19452466e7d094f122ef12960024946ea45d8694693f54",
-        "signature": "0870ded99753a8561f19452466e7d094f122ef12960024946ea45d8694693f54"
+        "version": "b0bc3b2fd4113d182da1af2442ac532b987401579b291669859b60a261b7ee24",
+        "signature": "b0bc3b2fd4113d182da1af2442ac532b987401579b291669859b60a261b7ee24"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/node/repl.d.ts": {
         "version": "65dbe15ed8a8ed5d4707a63868178dc38111cfc06de28a2e50713ca017a9c157",
@@ -322,28 +322,28 @@
         "signature": "4e88b833be14c7f384e0dcd57bb30acd799e8e34d212635d693e41a75a71164b"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/express-serve-static-core/index.d.ts": {
-        "version": "0e844fd1a3d13a837b300785b632ceb2cdced5797e189183ece36a0785a453e5",
-        "signature": "0e844fd1a3d13a837b300785b632ceb2cdced5797e189183ece36a0785a453e5"
+        "version": "d73f61d755e6f17b9dc315cbd8e6522a47c2153a07b67fd8295ef48b40ad6344",
+        "signature": "d73f61d755e6f17b9dc315cbd8e6522a47c2153a07b67fd8295ef48b40ad6344"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/mime/index.d.ts": {
         "version": "be27a64e821a3e5af838650e4aa25805c60f057d0c37a9762c378d19d364b3e6",
         "signature": "be27a64e821a3e5af838650e4aa25805c60f057d0c37a9762c378d19d364b3e6"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/serve-static/index.d.ts": {
-        "version": "b27dd918d8c3f10270cadea529c69e3a9b37ce59db0852945a39068cc5c10fff",
-        "signature": "b27dd918d8c3f10270cadea529c69e3a9b37ce59db0852945a39068cc5c10fff"
+        "version": "cdbae5083ef8f786069519405ca1f1e2ce72b9efebdf5e1931584fba747f3bc0",
+        "signature": "cdbae5083ef8f786069519405ca1f1e2ce72b9efebdf5e1931584fba747f3bc0"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/connect/index.d.ts": {
         "version": "c3be42b83b5f57ae2f65280fa395f6d31f61304ac1a29b7b406b6a0e71da8c82",
         "signature": "c3be42b83b5f57ae2f65280fa395f6d31f61304ac1a29b7b406b6a0e71da8c82"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/body-parser/index.d.ts": {
-        "version": "1b7919dbb6b43ff272f38f6f6522fb9f4e9e854356b2932a36aa4674f4a2fcf2",
-        "signature": "1b7919dbb6b43ff272f38f6f6522fb9f4e9e854356b2932a36aa4674f4a2fcf2"
+        "version": "599abfa56230d73afc30a3bde749c2efd90acb58301b446835d5e235b35e2768",
+        "signature": "599abfa56230d73afc30a3bde749c2efd90acb58301b446835d5e235b35e2768"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/express/index.d.ts": {
-        "version": "a6742e25ac12860727c22a379707e050a126c48c4dd98ddd795a3a33dd0a63c7",
-        "signature": "a6742e25ac12860727c22a379707e050a126c48c4dd98ddd795a3a33dd0a63c7"
+        "version": "1f92cdebe2b1e0e6309ccdb6e8700cfd2d3e7131c7842f91b38ed1e4ff2a7090",
+        "signature": "1f92cdebe2b1e0e6309ccdb6e8700cfd2d3e7131c7842f91b38ed1e4ff2a7090"
       },
       "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/create-blocks-from-lib.ts": {
         "version": "b005da1c4608d2f5bc8fd66eb46510894f546197e3ad0fd579ca821d33d38e76",
@@ -474,8 +474,8 @@
         "signature": "5e632216dfe01f2ff76f1c312c28632fde75364c24d659b732f2ee59e9ccf1b2"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts": {
-        "version": "81d7e951aa7e684a3901429a3141faf0db81348842daf1157d99d1ab98c5a3bb",
-        "signature": "81d7e951aa7e684a3901429a3141faf0db81348842daf1157d99d1ab98c5a3bb"
+        "version": "c491e7f2d9261f84d648ef1096d577e4317ac3dff5df49acc055cd9196de3a88",
+        "signature": "c491e7f2d9261f84d648ef1096d577e4317ac3dff5df49acc055cd9196de3a88"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/hoist-non-react-statics/index.d.ts": {
         "version": "bfe1b52cf71aea9bf8815810cc5d9490fa9617313e3d3c2ee3809a28b80d0bb4",
@@ -522,8 +522,8 @@
         "signature": "7d194050bddceaddf8956706259fd6076cff3b5505ae83857f33fb03db6eda76"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/react-redux/index.d.ts": {
-        "version": "343582fd11e4133304f7d6158f964e625ec03bb8db5e46286bc4b2dba02fb820",
-        "signature": "343582fd11e4133304f7d6158f964e625ec03bb8db5e46286bc4b2dba02fb820"
+        "version": "fcd0604ab6f5998b9b1fc024d6456f3a15eeee18e4a5a0fbb116638124f058ec",
+        "signature": "fcd0604ab6f5998b9b1fc024d6456f3a15eeee18e4a5a0fbb116638124f058ec"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/react-router/index.d.ts": {
         "version": "210518ab20f243c47f2fb1999bf672901eb6ebd29b328519df5c76c39bae7618",
@@ -650,12 +650,16 @@
         "signature": "bdc18dd47aea9977e419a8e03e7e5d04ed8cf8265e014d8788848b76b969cbba"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack/index.d.ts": {
-        "version": "c5535ef842832704946a3273ea8f9e231fec015fea2b3c673333ba7559d31824",
-        "signature": "c5535ef842832704946a3273ea8f9e231fec015fea2b3c673333ba7559d31824"
+        "version": "8a678eb9d807ae39df916c4b9d2fa657ec2ee63e9861121786337dfff11f1d26",
+        "signature": "8a678eb9d807ae39df916c4b9d2fa657ec2ee63e9861121786337dfff11f1d26"
+      },
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs-parser/index.d.ts": {
+        "version": "7b48555954a556ad80cc5fda89473d339f570eeac7a7b4d99c88ff5e646c24f7",
+        "signature": "7b48555954a556ad80cc5fda89473d339f570eeac7a7b4d99c88ff5e646c24f7"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs/index.d.ts": {
-        "version": "8f3237f03af87871a18d49ff52dec94d71eabecca464d5f2a81e34b55fb60bb5",
-        "signature": "8f3237f03af87871a18d49ff52dec94d71eabecca464d5f2a81e34b55fb60bb5"
+        "version": "6f15cf4b24659aa2b9f957dc0b4254b89f35a77978f9da1f161587b66ef75663",
+        "signature": "6f15cf4b24659aa2b9f957dc0b4254b89f35a77978f9da1f161587b66ef75663"
       }
     },
     "options": {
@@ -1551,7 +1555,12 @@
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs-parser/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs-parser/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ]
@@ -2392,7 +2401,12 @@
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs-parser/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs-parser/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ]
@@ -2561,6 +2575,7 @@
       "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/uglify-js/index.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs-parser/index.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs/index.d.ts"
     ]
   },

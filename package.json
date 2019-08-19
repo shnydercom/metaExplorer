@@ -1,8 +1,7 @@
 {
   "private": true,
   "devDependencies": {
-    "lerna": "^3.16.4",
-    "metaexplorer-react-components": "../metaExplorer-react-components"
+    "lerna": "^3.16.4"
   },
   "workspaces": [
     "packages/*",
