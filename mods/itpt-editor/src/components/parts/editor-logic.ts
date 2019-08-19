@@ -12,13 +12,13 @@ import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeM
 import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesWidgetFactory";
 import { GeneralDataTypeNodeFactory } from "./generaldatatypes/GeneralDataTypeInstanceFactories";
 import { GeneralDataTypeNodeModel } from "./generaldatatypes/GeneralDataTypeNodeModel";
-import { ItptNodeModel } from "./ItptNodeModel";
-import { LDPortInstanceFactory } from "./LDPortInstanceFactory";
-import { LDPortModel } from "./LDPortModel";
+import { ItptNodeModel } from "./_super/ItptNodeModel";
+import { LDPortInstanceFactory } from "./_super/LDPortInstanceFactory";
+import { LDPortModel } from "./_super/LDPortModel";
 import { OutputInfoPartNodeModel, OUTPUT_NODE_WIDTH } from "./outputinfotypes/OutputInfoNodeModel";
 import { OutputInfoWidgetFactory } from "./outputinfotypes/OutputInfoWidgetFactory";
-import { SettingsLabelFactory } from "./SettingsLabelFactory";
-import { SettingsLinkFactory } from "./SettingsLinkFactory";
+import { SettingsLabelFactory } from "./edgesettings/SettingsLabelFactory";
+import { SettingsLinkFactory } from "./edgesettings/SettingsLinkFactory";
 
 export interface NewNodeSig {
 	x: number;

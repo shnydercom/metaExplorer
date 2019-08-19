@@ -5,7 +5,6 @@ import { EditorTrayItem } from "./EditorTrayItem";
 import { ItemTypes } from "metaexplorer-react-components";
 //TODO: change this:
 import * as appStyles from '@metaexplorer/core/src/styles/core-index.scss';
-import { DropRefmapResult } from "./RefMapDropSpace";
 import { StylableDragItemProps } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag";
 import React from "react";
 
@@ -18,7 +17,7 @@ export interface EditorTrayProps {
 	itpts: IItptInfoItem[];
 	onZoomAutoLayoutPress: () => void;
 	onClearBtnPress: () => void;
-	onEditTrayItem: (data: any) => DropRefmapResult;
+	onEditTrayItem: (data: any) => void;
 	setDropZoneClickThrough: (val: boolean) => void;
 }
 
@@ -67,7 +66,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			if (x > y) { return 1; }
 			return 0;
 		});
-		const specialNodesText: string = "Set standard values, mark a value for later input or build forms with as many interpreters as you want";
+		const specialNodesText: string = "Set standard values, mark a value for later input or build forms with as many blocks as you want";
 		const specialBlocksCommonProps = {
 			...baseDragProps,
 			isCompoundBlock:false,
@@ -217,7 +216,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 
 	protected static createFlatContentFromItpts(
 		tree: TreeEntry & FlatContentInfo,
-		onEditTrayItem: (data: any) => DropRefmapResult, isCompoundBlock: boolean,
+		onEditTrayItem: (data: any) => void, isCompoundBlock: boolean,
 		nextProps: EditorTrayProps) {
 		const baseDragProps: StylableDragItemProps = {
 			id: tree.label,

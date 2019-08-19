@@ -1,5 +1,5 @@
 import { SinglePortWidget } from "./SinglePortWidget";
-import { LDPortModel } from "./LDPortModel";
+import { LDPortModel } from "../_super/LDPortModel";
 import { Component } from "react";
 import React from "react";
 

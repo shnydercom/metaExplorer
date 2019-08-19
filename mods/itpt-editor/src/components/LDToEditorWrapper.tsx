@@ -1,32 +1,31 @@
 import {
 	addBlueprintToRetriever, BaseContainerRewrite, BlueprintConfig, DEFAULT_ITPT_RETRIEVER_NAME, gdsfpLD, IKvStore, ILDOptions,
 	initLDLocalState, intrprtrTypeInstanceFromBlueprint, ldBlueprint, LDConnectedDispatch, LDConnectedState, LDDict, LDLocalState,
-	ldOptionsDeepCopy, LDOwnProps, LDRouteProps, mapDispatchToProps, mapStateToProps, NetworkPreferredToken, OutputKVMap, UserDefDict
+	ldOptionsDeepCopy, LDOwnProps, mapDispatchToProps, mapStateToProps, NetworkPreferredToken, OutputKVMap, UserDefDict
 } from "@metaexplorer/core";
-import { keys } from "lodash";
+/*import { keys } from "lodash";
 import { DragItem } from "metaexplorer-react-components";
 import { DropContainer } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/dropcontainer';
 import { DND_MINI_TOOLBOX_TYPE } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/interfaces";
-import { MiniToolBox } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag';
+import { MiniToolBox } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag';*/
 import React, { Component, createRef } from "react";
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 //import TouchBackend from 'react-dnd-touch-backend';
-import { connect } from "react-redux";
+import { connect } from "react-redux";/*
 import { Redirect } from "react-router";
-import { Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';*/
 import "storm-react-diagrams/dist/style.min.css";
-import { IEditorBlockData } from "./editorInterfaces";
+import { IEditorBlockData } from "./editorInterfaces";/*
 import { BaseDataTypeNodeModel } from "./parts/basedatatypes/BaseDataTypeNodeModel";
-import { DeclarationPartNodeModel } from "./parts/declarationtypes/DeclarationNodeModel";
-import { editorDefaultNodesColor, EditorLogic, editorSpecificNodesColor } from "./parts/editor-logic";
+import { DeclarationPartNodeModel } from "./parts/declarationtypes/DeclarationNodeModel";*/
+import { EditorLogic } from "./parts/editor-logic";
 import { EditorBody } from "./parts/EditorBody";
-import { EditorTray as EditorTray } from "./parts/EditorTray";
+import { EditorTray as EditorTray } from "./content/blockselection/EditorTray";/*
 import { ExtendableTypesNodeModel } from "./parts/extendabletypes/ExtendableTypesNodeModel";
 import { GeneralDataTypeNodeModel } from "./parts/generaldatatypes/GeneralDataTypeNodeModel";
-import { LDPortModel } from "./parts/LDPortModel";
-import { DropRefmapResult } from "./parts/RefMapDropSpace";
-import { UserInfo } from "./status/UserInfo";
+import { LDPortModel } from "./parts/LDPortModel";*/
+import { UserInfo } from "./content/status/UserInfo";
 import debounce from 'debounce'
 
 const DNDBackend = HTML5Backend;// TouchBackend; //HTML5Backend
@@ -286,7 +285,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	render() {
 		console.log("itpt-editor render()")
 		return null;
-		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
+		/*if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
 			return <div>{this.errorNotAvailableMsg}</div>;
 		}
 		const { mode, localValues, redirect } = this.state;
@@ -326,7 +325,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			}
 			else {
 				return null;
-			}
+			}*/
 	}
 
 	toggleFullScreen() {
@@ -350,7 +349,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			<div className="app-actual app-content">
 				<BaseContainerRewrite routes={routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
 				<div className="mode-switcher">
-					{/**icon='edit' floating accent  */}
 					<button className="editor-switch-btn" onClick={() => this.toggleFullScreen.apply(this)} />
 				</div>
 			</div>
@@ -366,7 +364,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			return <div className="entrypoint-editor" ref={this.editorWrapperRef}></div>;
 		}
 		const itpts = this.logic.getItptList();
-		// , navDrawerClipped: 'editor-navbar-clipped'
 		return <DndProvider backend={DNDBackend}>
 			<div className="entrypoint-editor" ref={this.editorWrapperRef}>
 				<div className='editor-layout'>
@@ -399,7 +396,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						<EditorBody hideRefMapDropSpace={bottomBarHidden}
 							ref={this.diagramRef}
 							loadToEditorByName={this.loadToEditorByName}
-							onEditTrayItem={this.onEditTrayItem.bind(this)}
 							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
 							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
 						{previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
@@ -408,13 +404,11 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						? null
 						: <>
 							<div className="nav-element top-left">
-								{/** icon='menu' inverse*/}
 								<button
 									className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-large`}
 									onClick={this.toggleDrawerActive} />
 							</div>
 							<div className="nav-element bottom-left">
-								{/**icon={drawerActive ? "chevron_left" : "chevron_right"} */}
 								<button
 									className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-small`}
 									style={{ color: "white" }}
@@ -428,17 +422,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	protected renderPreview(isGlobal: boolean, previewActive: boolean) {
-		/*let isDisplayDevContent = isProduction ? false : true;
-		let previewContainerClass = "editorpreview";
-		if (previewActive) {
-			previewContainerClass += " active";
-		} else {
-			previewContainerClass += " inactive";
-		}*/
-		//
-		//div className={previewContainerClass}>
 		return <>
-			{this.state.previewDisplay === "phone" ?
+			{/*this.state.previewDisplay === "phone" ?
 				<>
 					<DropContainer isDropZoneClickthrough={this.state.isDropZoneClickThrough}
 						onBlockDropped={(itm: DragItem) => {
@@ -458,21 +443,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							</div>
 						</MiniToolBox>
 					</DropContainer>
-					{/*
-					<div className={`${previewContainerClass}-minimenu`}>
-						<button onClick={() => this.togglePreview.apply(this)} />
-					</div>
-					<div>
-						<div className="app-preview">
-							<div className="phone-preview-btns">
-								{isDisplayDevContent ? this.renderBtnSwitchPreviewOrCode() : null}
-								{this.renderPhoneNavBtns(isGlobal)}
-							</div>
-							<div className="app-content mdscrollbar">
-								<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
-							</div>
-						</div>
-					</div>*/}
 				</>
 				:
 				<div className="code-preview">
@@ -491,7 +461,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						</p>
 					</pre>
 				</div>
-			}
+			*/}
 		</>;
 	}
 
@@ -499,18 +469,16 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		return <>
 			{isGlobal
 				? <>
-					<button onClick={() => this.toggleFullScreen.apply(this)} className="fullscreen" />{/*primary icon="fullscreen"*/}
-					<button onClick={() => this.triggerNavToTop.apply(this)} />{/**primary icon="arrow_upward" */}
+					<button onClick={() => this.toggleFullScreen.apply(this)} className="fullscreen" />
+					<button onClick={() => this.triggerNavToTop.apply(this)} />
 				</>
 				: null
 			}
-			{/**primary icon="chevron_right"  */}
 			<button onClick={() => this.togglePreview.apply(this)} />
 		</>;
 	}
 
 	protected renderBtnSwitchPreviewOrCode() {
-		// icon={"phone" ? "unfold_more" : "stay_current_landscape"}
 		return <button
 			onClick={
 				() => {
@@ -520,7 +488,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						this.setState({ ...this.state, previewDisplay: "phone" });
 					}
 				}
-			} style={{ background: '#010f27aa' }}>{/**primary */}
+			} style={{ background: '#010f27aa' }}>
 		</button>;
 	}
 
@@ -559,6 +527,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.props.dispatchKvOutput([outCurItptKV], this.props.ldTokenString, outputKVMap);
 	}
 
+	/*
 	protected addBlockToDiagram = (dndItem: DragItem) => {
 		const data: IEditorBlockData = dndItem.data;
 		var nodesCount = keys(
@@ -623,9 +592,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			.getDiagramEngine()
 			.getDiagramModel()
 			.addNode(node);
-	}
+	}*/
 
-	protected onEditTrayItem(data: IEditorBlockData): DropRefmapResult {
+	protected onEditTrayItem(data: IEditorBlockData): {} {
 		switch (data.type) {
 			case "ldbp":
 				this.logic.clear();

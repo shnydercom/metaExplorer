@@ -4,7 +4,7 @@ import {
 import {
 	ITPT_BLOCK_EDITOR_NAME, PureAppItptEditor, ITPT_BLOCK_EDITOR_TYPE, ITPT_BLOCK_EDITOR_EDITING_ITPT,
 	ITPT_BLOCK_EDITOR_DISPLAYING_ITPT, ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_RETRIEVER_NAME
-} from "./components/appitpt-editor";
+} from "./components/LDToEditorWrapper";
 
 export const MOD_ITPTEDITOR_ID = "itpt-editor";
 export const MOD_ITPTEDITOR_NAME = "Block Editor Mod";

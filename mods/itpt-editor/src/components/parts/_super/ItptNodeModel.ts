@@ -1,7 +1,7 @@
 import { NodeModel, DiagramEngine } from "storm-react-diagrams";
 import { LDPortModel } from './LDPortModel';
 import { merge, filter } from "lodash";
-import { INTERPRETERDATATYPE_MODEL } from "./editor-consts";
+import { INTERPRETERDATATYPE_MODEL } from "../editor-consts";
 
 export class ItptNodeModel extends NodeModel {
 	nameSelf: string;

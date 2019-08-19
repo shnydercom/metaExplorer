@@ -1,6 +1,6 @@
 import { BaseEvent, BaseModelListener, DiagramEngine } from "storm-react-diagrams";
 import { OUTPUT_INFO_MODEL } from "../editor-consts";
-import { ItptNodeModel } from "../ItptNodeModel";
+import { ItptNodeModel } from "../_super/ItptNodeModel";
 import { merge } from "lodash";
 
 export interface OutputInfoNodeModelListener extends BaseModelListener {

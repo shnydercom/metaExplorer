@@ -1,5 +1,5 @@
-import { SinglePortWidget } from "../SinglePortWidget";
-import { LDPortModel } from "../LDPortModel";
+import { SinglePortWidget } from "../edgesettings/SinglePortWidget";
+import { LDPortModel } from "../_super/LDPortModel";
 import { BaseDataTypeDropDown } from "./BaseDataTypeDropDown";
 import {
 	IKvStore, LDOwnProps, LDConnectedState, LDConnectedDispatch, LDLocalState, mapStateToProps, mapDispatchToProps,

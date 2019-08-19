@@ -1,7 +1,7 @@
 import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
 import { ExtendableTypesNodeModel } from "./ExtendableTypesNodeModel";
 import { map } from "lodash";
-import { LDPortModel } from "../LDPortModel";
+import { LDPortModel } from "../_super/LDPortModel";
 import { IKvStore, UserDefDict } from "@metaexplorer/core";
 import { EXTENDABLETYPES_MODEL } from "../editor-consts";
 import React from "react";

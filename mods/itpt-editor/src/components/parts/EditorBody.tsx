@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { DiagramWidget } from "storm-react-diagrams";
 import { EditorLogic } from "./editor-logic";
-import { DropRefmapResult } from "./RefMapDropSpace";
 
 export interface EditorBodyProps {
 	logic: EditorLogic;
 	currentlyEditingItpt: string | null;
 	changeCurrentlyEditingItpt: (newItpt: string | null) => void;
-	onEditTrayItem: (data: any) => DropRefmapResult;
 	loadToEditorByName: (name: string, isDoAutodistribute?: boolean) => void;
 	hideRefMapDropSpace: boolean;
 }
