@@ -1,5 +1,5 @@
 import { ItptNodeModel } from "../_super/ItptNodeModel";
-import { DECLARATION_MODEL } from "../editor-consts";
+import { DECLARATION_MODEL } from "../node-editor-consts";
 
 export class DeclarationPartNodeModel extends ItptNodeModel {
 

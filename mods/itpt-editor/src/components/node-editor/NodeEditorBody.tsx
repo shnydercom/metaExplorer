@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { DiagramWidget } from "storm-react-diagrams";
-import { EditorLogic } from "./editor-logic";
+import { NodeEditorLogic } from "./NodeEditorLogic";
 
 export interface EditorBodyProps {
-	logic: EditorLogic;
+	logic: NodeEditorLogic;
 	currentlyEditingItpt: string | null;
 	changeCurrentlyEditingItpt: (newItpt: string | null) => void;
 	loadToEditorByName: (name: string, isDoAutodistribute?: boolean) => void;
@@ -18,7 +18,7 @@ export interface EditorBodyState {
 /**
  * @author Jonathan Schneider
  */
-export class EditorBody extends Component<EditorBodyProps, EditorBodyState> {
+export class NodeEditorBody extends Component<EditorBodyProps, EditorBodyState> {
 
 	static getDerivedStateFromProps(nextProps: EditorBodyProps, prevState: EditorBodyState): EditorBodyState | null {
 		if (nextProps.currentlyEditingItpt !== prevState.currentlyEditingItpt) {

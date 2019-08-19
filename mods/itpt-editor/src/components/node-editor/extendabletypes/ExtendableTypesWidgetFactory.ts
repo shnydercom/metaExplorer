@@ -1,6 +1,6 @@
 import { DiagramEngine, AbstractNodeFactory } from "storm-react-diagrams";
 import { ExtendableTypesNodeWidget } from "./ExtendableTypesNodeWidget";
-import { EXTENDABLETYPES_MODEL } from "../editor-consts";
+import { EXTENDABLETYPES_MODEL } from "../node-editor-consts";
 import { ExtendableTypesNodeModel } from "./ExtendableTypesNodeModel";
 import * as React from "react";
 

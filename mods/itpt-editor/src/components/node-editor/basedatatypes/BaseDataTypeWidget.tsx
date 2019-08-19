@@ -3,7 +3,7 @@ import { BaseDataTypePortSelector } from "./BaseDataTypePortSelectorWidget";
 import { BaseDataTypeNodeModel } from "./BaseDataTypeNodeModel";
 import { createFactory } from "react";
 import { map } from "lodash";
-import { BASEDATATYPE_MODEL } from "../editor-consts";
+import { BASEDATATYPE_MODEL } from "../node-editor-consts";
 import React from "react";
 
 export interface BaseDataTypeNodeProps extends BaseWidgetProps {

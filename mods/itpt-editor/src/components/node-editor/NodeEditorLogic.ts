@@ -7,7 +7,7 @@ import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
 import { distributeElements } from "./dagre-utils";
 import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeModel";
 import { DeclarationWidgetFactory } from "./declarationtypes/DeclarationNodeWidgetFactory";
-import { BASEDATATYPE_MODEL, DECLARATION_MODEL, EXTENDABLETYPES_MODEL, GENERALDATATYPE_MODEL, OUTPUT_INFO_MODEL } from "./editor-consts";
+import { BASEDATATYPE_MODEL, DECLARATION_MODEL, EXTENDABLETYPES_MODEL, GENERALDATATYPE_MODEL, OUTPUT_INFO_MODEL } from "./node-editor-consts";
 import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
 import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesWidgetFactory";
 import { GeneralDataTypeNodeFactory } from "./generaldatatypes/GeneralDataTypeInstanceFactories";
@@ -37,7 +37,7 @@ export const editorDefaultNodesColor = "rgba(87, 161, 245, 0.4)"; // "#00375f";
 /**
  * @author Jonathan Schneider
  */
-export class EditorLogic {
+export class NodeEditorLogic {
 	protected activeModel: DiagramModel;
 	protected diagramEngine: DiagramEngine;
 	protected itptList: IItptInfoItem[];

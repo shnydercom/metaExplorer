@@ -1,5 +1,5 @@
 import { ItptNodeModel } from "../_super/ItptNodeModel";
-import { EXTENDABLETYPES_MODEL } from "../editor-consts";
+import { EXTENDABLETYPES_MODEL } from "../node-editor-consts";
 
 export class ExtendableTypesNodeModel extends ItptNodeModel {
 

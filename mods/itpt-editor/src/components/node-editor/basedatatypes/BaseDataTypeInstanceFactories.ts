@@ -1,6 +1,6 @@
 import { AbstractNodeFactory, DiagramEngine } from "storm-react-diagrams";
 import { BaseDataTypeNodeModel } from "./BaseDataTypeNodeModel";
-import { BASEDATATYPE_MODEL } from "../editor-consts";
+import { BASEDATATYPE_MODEL } from "../node-editor-consts";
 import * as React from "react";
 import { BaseDataTypeNodeWidget } from "./BaseDataTypeWidget";
 

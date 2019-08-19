@@ -1,6 +1,6 @@
 import { DiagramEngine, AbstractNodeFactory } from "storm-react-diagrams";
 import { OutputInfoNodeWidgetFactory } from "./OutputInfoNodeWidget";
-import { OUTPUT_INFO_MODEL } from "../editor-consts";
+import { OUTPUT_INFO_MODEL } from "../node-editor-consts";
 import { OutputInfoPartNodeModel } from "./OutputInfoNodeModel";
 
 export class OutputInfoWidgetFactory extends AbstractNodeFactory<OutputInfoPartNodeModel> {

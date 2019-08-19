@@ -19,8 +19,8 @@ import "storm-react-diagrams/dist/style.min.css";
 import { IEditorBlockData } from "./editorInterfaces";/*
 import { BaseDataTypeNodeModel } from "./parts/basedatatypes/BaseDataTypeNodeModel";
 import { DeclarationPartNodeModel } from "./parts/declarationtypes/DeclarationNodeModel";*/
-import { EditorLogic } from "./parts/editor-logic";
-import { EditorBody } from "./parts/EditorBody";
+import { NodeEditorLogic } from "./node-editor/NodeEditorLogic";
+import { NodeEditorBody } from "./node-editor/NodeEditorBody";
 import { EditorTray as EditorTray } from "./content/blockselection/EditorTray";/*
 import { ExtendableTypesNodeModel } from "./parts/extendabletypes/ExtendableTypesNodeModel";
 import { GeneralDataTypeNodeModel } from "./parts/generaldatatypes/GeneralDataTypeNodeModel";
@@ -31,7 +31,7 @@ import debounce from 'debounce'
 const DNDBackend = HTML5Backend;// TouchBackend; //HTML5Backend
 
 export type AIEProps = {
-	logic?: EditorLogic;
+	logic?: NodeEditorLogic;
 } & LDConnectedState & LDConnectedDispatch & LDOwnProps;
 
 export type AIEState = {
@@ -183,7 +183,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the itpt you're designing is capable of interpreting -> usually a new generic type
-	logic: EditorLogic;
+	logic: NodeEditorLogic;
 	errorNotAvailableMsg: string = "Itpt Editor environment not available. Please check your settings";
 
 	cfg: BlueprintConfig;
@@ -195,7 +195,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	private editorWrapperRef = createRef<HTMLDivElement>();
 
-	private diagramRef = createRef<EditorBody>();
+	private diagramRef = createRef<NodeEditorBody>();
 
 	constructor(props?: any) {
 		super(props);
@@ -245,7 +245,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			retrieverName = retrieverName ? retrieverName : DEFAULT_ITPT_RETRIEVER_NAME;
 			const username = this.state.localValues.get(UserDefDict.username);
 			const userproj = this.state.localValues.get(UserDefDict.projectname);
-			var logic: EditorLogic = new EditorLogic(this.props.ldTokenString, retrieverName, username, userproj);
+			var logic: NodeEditorLogic = new NodeEditorLogic(this.props.ldTokenString, retrieverName, username, userproj);
 			if (this.editorWrapperRef.current) {
 				let height = this.editorWrapperRef.current.clientHeight;
 				let width = this.editorWrapperRef.current.clientWidth;
@@ -393,7 +393,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						</div>
 					}
 					<div>
-						<EditorBody hideRefMapDropSpace={bottomBarHidden}
+						<NodeEditorBody hideRefMapDropSpace={bottomBarHidden}
 							ref={this.diagramRef}
 							loadToEditorByName={this.loadToEditorByName}
 							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}

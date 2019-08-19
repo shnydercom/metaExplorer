@@ -1,5 +1,5 @@
 import { ItptNodeModel } from "../_super/ItptNodeModel";
-import { GENERALDATATYPE_MODEL } from "../editor-consts";
+import { GENERALDATATYPE_MODEL } from "../node-editor-consts";
 
 export class GeneralDataTypeNodeModel extends ItptNodeModel {
 

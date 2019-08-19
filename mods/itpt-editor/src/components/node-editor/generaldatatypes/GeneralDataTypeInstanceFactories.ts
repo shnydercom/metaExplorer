@@ -1,5 +1,5 @@
 import { GeneralDataTypeNodeModel } from "./GeneralDataTypeNodeModel";
-import { GENERALDATATYPE_MODEL } from "../editor-consts";
+import { GENERALDATATYPE_MODEL } from "../node-editor-consts";
 import { AbstractNodeFactory, DiagramEngine } from "storm-react-diagrams";
 import { GeneralDataTypeNodeWidget } from "./GeneralDataTypeWidget";
 import * as React from "react";

@@ -1,7 +1,7 @@
 import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
 import { GeneralDataTypeNodeModel } from "./GeneralDataTypeNodeModel";
 import { map } from 'lodash';
-import { GENERALDATATYPE_MODEL } from "../editor-consts";
+import { GENERALDATATYPE_MODEL } from "../node-editor-consts";
 import React from "react";
 
 export interface GeneralDataTypeNodeProps extends BaseWidgetProps {

@@ -1,5 +1,5 @@
 import { BaseEvent, BaseModelListener, DiagramEngine } from "storm-react-diagrams";
-import { OUTPUT_INFO_MODEL } from "../editor-consts";
+import { OUTPUT_INFO_MODEL } from "../node-editor-consts";
 import { ItptNodeModel } from "../_super/ItptNodeModel";
 import { merge } from "lodash";
 

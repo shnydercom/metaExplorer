@@ -2,7 +2,7 @@ import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "st
 import { DeclarationPartNodeModel } from "./DeclarationNodeModel";
 import { createFactory } from "react";
 import { map } from "lodash";
-import { DECLARATION_MODEL } from "../editor-consts";
+import { DECLARATION_MODEL } from "../node-editor-consts";
 import React from "react";
 
 export interface DeclarationNodeProps extends BaseWidgetProps {
