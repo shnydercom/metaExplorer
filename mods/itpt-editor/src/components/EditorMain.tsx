@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { ITPTFullscreen } from './content/ITPTFullscreen';
 import { LDRouteProps } from '@metaexplorer/core';
-// import { ITabData, Tabs } from 'metaexplorer-react-components';
-import { ITransitComp /*, MiniToolBox*/ } from 'metaexplorer-react-components';
+import { ITransitComp, ITabData, Tabs, MiniToolBox } from 'metaexplorer-react-components';
 import { EditorDNDItemType, IEditorBlockData, IEditorPreviewData } from './editorInterfaces';
 import { EditorTrayItem, EditorTrayItemProps } from './content/blockselection/EditorTrayItem';
 import { PreviewMoveLayer } from './panels/PreviewMoveLayer';
@@ -44,7 +43,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 		//Minitoolbox
 		rv.push({
 			forType: EditorDNDItemType.preview,
-			componentFactory: (dragItem) => (props) => (<div></div>)//<MiniToolBox className='minitoolbox'></MiniToolBox>)
+			componentFactory: (dragItem) => (props) => (<MiniToolBox className='minitoolbox'></MiniToolBox>)
 		})
 		return rv;
 	}
@@ -55,14 +54,10 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 			ldTokenString={props.previewLDTokenString}
 			routes={props.routes} />;
 	}
-	/*const tabDatas: ITabData<string>[] = [
-		{ data: 'Elem1', label: 'first Element' },
-		{ data: 'Elem2', label: 'second Element' },
-		{ data: 'Elem3', label: 'third Element' },
-		{ data: 'Elem4', label: 'fourth Element' },
-		{ data: 'Elem5', label: 'fifth Element' },
-		{ data: 'Elem6', label: 'sixth Element' }
-	];*/
+	const tabDatas: ITabData<string>[] = [
+		{ data: 'Elem1', label: 'currently editing' },
+		{ data: 'newElem', label: 'new*' }
+	];
 
 	const onMainEditorDrop = (item, left, top) => {
 		console.log(item)
@@ -70,18 +65,18 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 		if (item.type === EditorDNDItemType.preview)
 			setPreviewPosition({ left, top });
 	}
-
 	return (
-		/*<Tabs
-	className='editor-tabs'
-	selectedIdx={ 0}
-	tabs={tabDatas}
-		></Tabs>*/
+
 		<DNDEnabler
 			className={DND_CLASS}
 			transitClassName={TRANSIT_CLASS}
 			transitComponents={createTransitComponents()}
 		>
+			<Tabs
+				className='editor-tabs'
+				selectedIdx={0}
+				tabs={tabDatas}
+			></Tabs>
 			<MainEditorDropLayer onDrop={onMainEditorDrop}></MainEditorDropLayer>
 			<PreviewMoveLayer<EditorDNDItemType>
 				previewPos={{ left: previewPosition.left, top: previewPosition.top }}

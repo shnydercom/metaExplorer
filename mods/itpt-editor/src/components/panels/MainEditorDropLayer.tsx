@@ -15,6 +15,8 @@ const itptEditorDropContainerProps: StylableDropContainerProps<EditorDNDItemType
 export function MainEditorDropLayer<TItemType extends string>(props: MainEditorDropLayerProps) {
 	return (<DropContainer {...itptEditorDropContainerProps}
 		onItemDropped={(item, pos) => props.onDrop(item, pos.left, pos.top)}
-		style={{ height: '100%', width: '100%', backgroundColor: 'red', pointerEvents: "all", visibility: 'visible', opacity: 1, zIndex: 999 }}>
+		style={{ height: '100%', width: '100%', backgroundColor: 'red', opacity: 0.0 }}
+	>
+
 	</DropContainer>)
 }
