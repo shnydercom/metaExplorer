@@ -506,8 +506,8 @@
         "signature": "57427a9a368f8f0ee4ce03c36a762e19166756b95ab688948b29be553b24a78a"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/react-dom/index.d.ts": {
-        "version": "5fe76ea99187e695f2e7ee00ddb0c9db41b217397ade188b8a137504728f687f",
-        "signature": "5fe76ea99187e695f2e7ee00ddb0c9db41b217397ade188b8a137504728f687f"
+        "version": "66a69dbb56cb094e025c78b4620615e9b8a432487e2c242a955626ce85ebe7de",
+        "signature": "66a69dbb56cb094e025c78b4620615e9b8a432487e2c242a955626ce85ebe7de"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/react-dropzone/index.d.ts": {
         "version": "cc7a2e0bef60e761605add612fe5056acc847fda782819dee8b0c068064bd52a",
@@ -613,6 +613,10 @@
         "version": "30783d97bd0231ae2c4b9320043d61442a8177e81c7df826a5536b95fdd63280",
         "signature": "30783d97bd0231ae2c4b9320043d61442a8177e81c7df826a5536b95fdd63280"
       },
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/source-list-map/index.d.ts": {
+        "version": "67fc055eb86a0632e2e072838f889ffe1754083cb13c8c80a06a7d895d877aae",
+        "signature": "67fc055eb86a0632e2e072838f889ffe1754083cb13c8c80a06a7d895d877aae"
+      },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/stack-utils/index.d.ts": {
         "version": "41422586881bcd739b4e62d9b91cd29909f8572aa3e3cdf316b7c50f14708d49",
         "signature": "41422586881bcd739b4e62d9b91cd29909f8572aa3e3cdf316b7c50f14708d49"
@@ -649,9 +653,13 @@
         "version": "bdc18dd47aea9977e419a8e03e7e5d04ed8cf8265e014d8788848b76b969cbba",
         "signature": "bdc18dd47aea9977e419a8e03e7e5d04ed8cf8265e014d8788848b76b969cbba"
       },
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack-sources/index.d.ts": {
+        "version": "7429e36c7e860a83e1166d6f0977fa4938b7a7a346255169a678939594394375",
+        "signature": "7429e36c7e860a83e1166d6f0977fa4938b7a7a346255169a678939594394375"
+      },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack/index.d.ts": {
-        "version": "8a678eb9d807ae39df916c4b9d2fa657ec2ee63e9861121786337dfff11f1d26",
-        "signature": "8a678eb9d807ae39df916c4b9d2fa657ec2ee63e9861121786337dfff11f1d26"
+        "version": "73df9e10fc95f9773e9acf1409423cb32b0c6f0d4c0cf602d09d59e36b2de8a8",
+        "signature": "73df9e10fc95f9773e9acf1409423cb32b0c6f0d4c0cf602d09d59e36b2de8a8"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs-parser/index.d.ts": {
         "version": "7b48555954a556ad80cc5fda89473d339f570eeac7a7b4d99c88ff5e646c24f7",
@@ -1505,6 +1513,10 @@
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/source-list-map/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "c:/users/jonat/git/metaexplorer/node_modules/@types/stack-utils/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
@@ -1546,11 +1558,20 @@
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack-sources/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/crypto.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/source-list-map/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/tapable/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/uglify-js/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/anymatch/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack-sources/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
@@ -2351,6 +2372,10 @@
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/source-list-map/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "c:/users/jonat/git/metaexplorer/node_modules/@types/stack-utils/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
@@ -2392,11 +2417,20 @@
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack-sources/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/crypto.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/source-list-map/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/tapable/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/uglify-js/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/anymatch/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack-sources/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
@@ -2565,6 +2599,7 @@
       "c:/users/jonat/git/metaexplorer/node_modules/@types/rx/index.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/shallowequal/index.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/shortid/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/source-list-map/index.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/stack-utils/index.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/strip-bom/index.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/strip-json-comments/index.d.ts",
@@ -2574,6 +2609,7 @@
       "c:/users/jonat/git/metaexplorer/node_modules/@types/tapable/index.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/uglify-js/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack-sources/index.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack/index.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs-parser/index.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs/index.d.ts"

@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "TODO:changeDescription",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "tsc"
   },
   "author": "Jonathan Schneider",
   "license": "MIT",

@@ -4,6 +4,10 @@ import { IEditorPreviewData } from '../editorInterfaces';
 
 export interface PreviewMoveLayerProps<TItemType extends string> {
 	previewItemType: TItemType;
+	previewPos: {
+		top: number;
+		left: number
+	}
 }
 
 export function PreviewMoveLayer<TItemType extends string>(props: React.PropsWithChildren<PreviewMoveLayerProps<TItemType>>) {
@@ -22,25 +26,22 @@ export function PreviewMoveLayer<TItemType extends string>(props: React.PropsWit
 	const MTBItemDragContainer = (props) => {
 		return <DragContainer<TItemType, IEditorPreviewData>
 			{...mtbStylableDragItem}
-		>
-			<div>{props.children}</div>
+		>{props.children}
 		</DragContainer >
 	}
 	return (
-		<div>
 		<MoveContainer
 			className='editor-movecontainer'
 			positionMap={{
 				mtb: {
-					pos: { top: 20, left: 200 },
+					pos: { top: props.previewPos.top, left: props.previewPos.left },
 					child: <MTBItemDragContainer>
-						<MiniToolBox className='minitoolbox'>
-							{props.children}
-						</MiniToolBox>
+							<MiniToolBox className='minitoolbox'>
+								{props.children}
+							</MiniToolBox>
 					</MTBItemDragContainer>
 				}
 			}}
 		/>
-		</div>
 	)
 }

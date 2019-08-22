@@ -5,6 +5,8 @@
 @import "../../../../node_modules/metaexplorer-react-components/src/components/circle/circleview.scss";
 
 @import "../../../../node_modules/metaexplorer-react-components/src/components/minitoolbox/minitoolbox.scss";
+@import "../../../../node_modules/metaexplorer-react-components/src/components/dnd/editor-dnd.scss";
+
 @import "./diagram.scss";
 @import "./user-info.scss";
 @import "./preview.scss";
@@ -542,6 +544,13 @@ $traybuttonheight: 20px;
   top: 30px;
   right: 30px;
   background-color: #edc11cff !important;
+}
+
+
+.entrypoint-editor-inner {
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
 
 .entrypoint-editor {

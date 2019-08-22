@@ -11,6 +11,10 @@
   "files": [
     "lib"
   ],
+  "scripts": {
+    "test": "test",
+    "build": "tsc"
+  },
   "devDependencies": {
     "@metaexplorer/core": "*",
     "@material-ui/core": "^4.1.3",

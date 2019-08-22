@@ -13,7 +13,7 @@
     "prestart": "lerna run build",
     "start": "lerna run start",
     "tsc": "lerna run tsc",
-    "build": "tsc --build",
+    "build": "lerna run build",
     "startdynamic": "set MIO_DYNAMIC=true && lerna run startdynamic"
   }
 }

@@ -7,7 +7,6 @@ export interface IEditorBlockData {
 }
 
 export interface IEditorPreviewData {
-	
 }
 
 export enum EditorDNDItemType {
