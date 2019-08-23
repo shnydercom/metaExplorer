@@ -21,7 +21,7 @@ import { BaseDataTypeNodeModel } from "./parts/basedatatypes/BaseDataTypeNodeMod
 import { DeclarationPartNodeModel } from "./parts/declarationtypes/DeclarationNodeModel";*/
 import { NodeEditorLogic } from "./node-editor/NodeEditorLogic";
 import { NodeEditorBody } from "./node-editor/NodeEditorBody";
-import { EditorTray as EditorTray } from "./content/blockselection/EditorTray";/*
+import { EditorTray as EditorTray, EditorTrayProps } from "./content/blockselection/EditorTray";/*
 import { ExtendableTypesNodeModel } from "./parts/extendabletypes/ExtendableTypesNodeModel";
 import { GeneralDataTypeNodeModel } from "./parts/generaldatatypes/GeneralDataTypeNodeModel";
 import { LDPortModel } from "./parts/LDPortModel";*/
@@ -284,12 +284,51 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	render() {
+		const { drawerActive, previewActive, localValues, bottomBarHidden, previewHidden, drawerHidden } = this.state;
+		const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
+		const itpts = this.logic ? this.logic.getItptList() : [];
+		const editorTrayProps: EditorTrayProps = {
+			itpts,
+			onEditTrayItem: this.onEditTrayItem.bind(this),
+			onZoomAutoLayoutPress: () => {
+				this.logic.autoDistribute();
+				this.diagramRef.current.forceUpdate();
+			}
+		}
+		if (!this.logic) return <div>loading Editor</div>
 		console.log("itpt-editor render()")
 		return <EditorMain
+			isLeftDrawerActive={drawerActive}
+			trayProps={editorTrayProps}
 			isPreviewFullScreen={false}
 			previewLDTokenString={this.state.previewerToken}
 			routes={this.props.routes}
-		></EditorMain>;
+		>
+			<div>
+				<NodeEditorBody hideRefMapDropSpace={bottomBarHidden}
+					ref={this.diagramRef}
+					loadToEditorByName={this.loadToEditorByName}
+					changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
+					currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
+				{previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
+			</div>
+			{drawerHidden
+				? null
+				: <>
+					<div className="nav-element top-left">
+						<button
+							className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-large`}
+							onClick={this.toggleDrawerActive} />
+					</div>
+					<div className="nav-element bottom-left">
+						<button
+							className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-small`}
+							style={{ color: "white" }}
+							onClick={this.toggleDrawerActive}></button>
+					</div>
+				</>
+			}
+		</EditorMain >;
 		/*if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
 			return <div>{this.errorNotAvailableMsg}</div>;
 		}
@@ -360,7 +399,10 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		);
 	}
 
-
+	setNodeEditorToNew() {
+		this.logic.clear();
+		this.setState({ ...this.state, currentlyEditingItptName: null });
+	}
 
 	renderEditor() {
 		const { drawerActive, previewActive, localValues, bottomBarHidden, previewHidden, drawerHidden } = this.state;
@@ -376,11 +418,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						? null
 						: <div className={`nav-drawer-wrapper ${drawerActive ? "active" : "inactive"}`}>
 							<EditorTray
-								setDropZoneClickThrough={(val) => this.setIsDropZoneClickThrough(val)} itpts={itpts} onEditTrayItem={this.onEditTrayItem.bind(this)}
-								onClearBtnPress={() => {
-									this.logic.clear();
-									this.setState({ ...this.state, currentlyEditingItptName: null });
-								}}
+								itpts={itpts}
+								onEditTrayItem={this.onEditTrayItem.bind(this)}
 								onZoomAutoLayoutPress={() => {
 									this.logic.autoDistribute();
 									this.diagramRef.current.forceUpdate();

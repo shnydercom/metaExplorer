@@ -235,7 +235,7 @@ $traybuttonheight: 20px;
 .nav-drawer-wrapper {
   left: 0;
   position: absolute;
-  right: 0;
+  //right: 0;
   top: 0;
   bottom: 0;
 
@@ -572,7 +572,7 @@ $traybuttonheight: 20px;
   .editor-tray {
     z-index: 2000;
     position: relative;
-    min-width: 240px;
+    min-width: 390px;
     max-width: 390px;
     background: $editor-background-elevated-color;
     flex-grow: 0;

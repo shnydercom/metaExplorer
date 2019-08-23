@@ -1,10 +1,10 @@
 import { Component } from "react";
 import TreeView, { TreeEntry } from "metaexplorer-react-components/lib/components/treeview/treeview";
 import { IBlueprintItpt, IItptInfoItem, ITPT_TAG_ATOMIC, ITPT_TAG_COMPOUND } from "@metaexplorer/core";
-import { EditorTrayItem } from "./EditorTrayItem";
-import { ItemTypes } from "metaexplorer-react-components";
-import { StylableDragItemProps } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag";
+import { DraggableEditorTrayItem } from "./EditorTrayItem";
+import { StylableDragItemProps, DragItem } from "metaexplorer-react-components";
 import React from "react";
+import { EditorDNDItemType, IEditorBlockData } from "../../editorInterfaces";
 
 export interface FlatContentInfo {
 	flatContentURLs: string[];
@@ -14,9 +14,7 @@ export interface FlatContentInfo {
 export interface EditorTrayProps {
 	itpts: IItptInfoItem[];
 	onZoomAutoLayoutPress: () => void;
-	onClearBtnPress: () => void;
 	onEditTrayItem: (data: any) => void;
-	setDropZoneClickThrough: (val: boolean) => void;
 }
 
 export interface EditorTrayState {
@@ -24,6 +22,22 @@ export interface EditorTrayState {
 	trayElems: JSX.Element;
 }
 
+const editorDragItem: DragItem<EditorDNDItemType, IEditorBlockData> = {
+	id: 'a',
+	type: EditorDNDItemType.block,
+	sourceBhv: 'sCopy',
+	targetBhv: 'tGone',
+	data: {
+		type: 'bdt',
+		label: "base data type"
+	}
+}
+
+const editorStylableDragItem: StylableDragItemProps<EditorDNDItemType, IEditorBlockData> = {
+	...editorDragItem,
+	isWithDragHandle: false,
+	className: 'block-dragcontainer'
+}
 export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 
 	static getDerivedStateFromProps(nextProps: EditorTrayProps, prevState: EditorTrayState): EditorTrayState {
@@ -45,14 +59,8 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 
 	protected static trayItemsFromItptList(nextProps: EditorTrayProps, trayitpts: IItptInfoItem[]) {
 
-		const baseDragProps: StylableDragItemProps = {
-			id: "b",
-			data: {},
-			left: 0,
-			top: 0,
-			type: ItemTypes.Block,
-			onOutDragHandle: () => nextProps.setDropZoneClickThrough(true),
-			onOverDragHandle: () => nextProps.setDropZoneClickThrough(false)
+		const baseDragProps: StylableDragItemProps<EditorDNDItemType, IEditorBlockData> = {
+			...editorStylableDragItem
 		};
 		const itpts = trayitpts.slice();
 		itpts.shift(); //rm basecontainer
@@ -73,10 +81,10 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 		}
 		const specialNodesTreeItem: TreeEntry = {
 			flatContent: [
-				<EditorTrayItem {...specialBlocksCommonProps} key={1} model={{ type: "bdt", label: "Simple Data Type" }} />,
-				<EditorTrayItem {...specialBlocksCommonProps} key={2} model={{ type: "inputtype", label: "External Input Marker" }} />,
-				<EditorTrayItem {...specialBlocksCommonProps} key={3} model={{ type: "outputtype", label: "External Output Marker" }} />,
-				<EditorTrayItem {...specialBlocksCommonProps} key={4} model={{ type: "lineardata", label: "Linear Data Display" }} />
+				<DraggableEditorTrayItem {...specialBlocksCommonProps} key={1} model={{ type: "bdt", label: "Simple Data Type" }} />,
+				<DraggableEditorTrayItem {...specialBlocksCommonProps} key={2} model={{ type: "inputtype", label: "External Input Marker" }} />,
+				<DraggableEditorTrayItem {...specialBlocksCommonProps} key={3} model={{ type: "outputtype", label: "External Output Marker" }} />,
+				<DraggableEditorTrayItem {...specialBlocksCommonProps} key={4} model={{ type: "lineardata", label: "Linear Data Display" }} />
 			],
 			label: 'Special Blocks',
 			subEntries: []
@@ -216,21 +224,15 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 		tree: TreeEntry & FlatContentInfo,
 		onEditTrayItem: (data: any) => void, isCompoundBlock: boolean,
 		nextProps: EditorTrayProps) {
-		const baseDragProps: StylableDragItemProps = {
-			id: tree.label,
-			data: {},
-			left: 0,
-			top: 0,
-			type: ItemTypes.Block,
-			onOutDragHandle: () => nextProps.setDropZoneClickThrough(true),
-			onOverDragHandle: () => nextProps.setDropZoneClickThrough(false)
+		const baseDragProps: StylableDragItemProps<EditorDNDItemType, IEditorBlockData> = {
+			...editorStylableDragItem
 		};
 		tree.itpts.forEach((itpt, idx) => {
 			let ldBPCfg = itpt.cfg;
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
 			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : ldBPCfg.canInterpretType;
 			let remainingName = tree.flatContentURLs[idx];
-			tree.flatContent.push(<EditorTrayItem {...baseDragProps} isCompoundBlock={isCompoundBlock}
+			tree.flatContent.push(<DraggableEditorTrayItem  {...baseDragProps} isCompoundBlock={isCompoundBlock}
 				onPreviewBtnPress={(data) => onEditTrayItem(data)}
 				onEditBtnPress={(data) => onEditTrayItem(data)}
 				key={trayName}
@@ -255,11 +257,6 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 				{trayitpts ? trayElems : null}
 			</div>
 			<div className="button-row">
-				{/** icon="add" label="new"*/}
-				<button className="editorbtn editorbtn-small editorbtn-action editorbtn-new" onClick={(ev) => {
-					this.props.onClearBtnPress();
-				}} >new</button>
-				{/*label="beautify" */}
 				<button className="editorbtn editorbtn-small editorbtn-action editorbtn-autolayout" onClick={(ev) => {
 					this.props.onZoomAutoLayoutPress();
 				}

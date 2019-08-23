@@ -8,6 +8,8 @@ import { PreviewMoveLayer } from './panels/PreviewMoveLayer';
 
 import { DNDEnabler } from './panels/DNDEnabler';
 import { MainEditorDropLayer } from './panels/MainEditorDropLayer';
+import { EditorTrayProps, EditorTray } from './content/blockselection/EditorTray';
+import { UserInfo } from './content/status/UserInfo';
 const DND_CLASS = 'entrypoint-editor'
 const TRANSIT_CLASS = 'editor-transit'
 
@@ -15,6 +17,8 @@ export interface EditorMainProps {
 	isPreviewFullScreen: boolean;
 	previewLDTokenString: string;
 	routes: LDRouteProps;
+	trayProps: EditorTrayProps;
+	isLeftDrawerActive: boolean;
 }
 
 export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
@@ -66,7 +70,6 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 			setPreviewPosition({ left, top });
 	}
 	return (
-
 		<DNDEnabler
 			className={DND_CLASS}
 			transitClassName={TRANSIT_CLASS}
@@ -81,6 +84,25 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 			<PreviewMoveLayer<EditorDNDItemType>
 				previewPos={{ left: previewPosition.left, top: previewPosition.top }}
 				previewItemType={EditorDNDItemType.preview}></PreviewMoveLayer>
+			<div className={`nav-drawer-wrapper ${props.isLeftDrawerActive ? "active" : "inactive"}`}>
+				<EditorTray
+					itpts={props.trayProps.itpts}
+					onEditTrayItem={props.trayProps.onEditTrayItem.bind(this)}
+					onZoomAutoLayoutPress={() => {
+						this.logic.autoDistribute();
+						this.diagramRef.current.forceUpdate();
+					}}
+				>
+					<div className="fakeheader">
+						<UserInfo userLabel="John Doe" projectLabel="JohnsPersonalProject" userIconSrc="" />
+						{/*
+							isGlobal
+								? <button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size FontIconfullscreenFontIcon</button>
+								: null
+						*/}
+					</div>
+				</EditorTray>
+			</div>
 			{props.children}
 		</DNDEnabler>
 	)
