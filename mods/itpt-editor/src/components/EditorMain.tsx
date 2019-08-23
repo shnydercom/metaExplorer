@@ -36,6 +36,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 				type: 'TODO',
 				label: 'TODO'
 			},
+			isOpen: false,
 			onEditBtnPress: () => { },
 			onPreviewBtnPress: () => { }
 		};

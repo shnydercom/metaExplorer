@@ -8,27 +8,23 @@ export interface EditorTrayItemProps {
 	onEditBtnPress: (data) => void;
 	onPreviewBtnPress: (data) => void;
 	isCompoundBlock: boolean;
+	isOpen: boolean;
+	onClick?: () => void;
 }
 
 export interface EditorTrayState {
-	isOpen: boolean;
 }
 
 export const EditorTrayItem: React.FC<EditorTrayItemProps> = (props) => {
 
-	const [isOpen, setIsOpen] = useState(false);
-
-	function handleClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-		setIsOpen(props.isCompoundBlock ? !isOpen : false);
-	}
-	const trayCssClass = isOpen ? "editor-tray-item opened" : "editor-tray-item";
-	const btnEditCssClass = isOpen ? "edit-iconbtn opened" : "edit-iconbtn";
-	const btnPreviewCssClass = isOpen ? "preview-iconbtn opened" : "preview-iconbtn";
+	const trayCssClass = props.isOpen ? "editor-tray-item opened" : "editor-tray-item";
+	const btnEditCssClass = props.isOpen ? "edit-iconbtn opened" : "edit-iconbtn";
+	const btnPreviewCssClass = props.isOpen ? "preview-iconbtn opened" : "preview-iconbtn";
 
 	const renderContent = () => {
 		return (
 			<div
-				onClick={props.isCompoundBlock ? handleClick : () => { return; }}
+				onClick={props.isCompoundBlock ? () => props.onClick() : () => { return; }}
 				className={trayCssClass}
 			>
 				{props.model.label}
@@ -51,16 +47,30 @@ export const EditorTrayItem: React.FC<EditorTrayItemProps> = (props) => {
 };
 
 export const DraggableEditorTrayItem: React.FC<EditorTrayItemProps & StylableDragItemProps<EditorDNDItemType, IEditorBlockData>> = (props) => {
+
+	const [isOpen, setIsOpen] = useState(false);
+	function handleClick() {
+		setIsOpen(props.isCompoundBlock ? !isOpen : false);
+	}
 	//assigns part of the props to properties of a sub-element https://stackoverflow.com/a/39333479/1149845
 	const dragContainerProps: StylableDragItemProps<EditorDNDItemType, IEditorBlockData> =
 		(({ className, data, id, isWithDragHandle, onOutDragHandle, onOverDragHandle, sourceBhv, targetBhv, type }) =>
 			({ className, data, id, isWithDragHandle, onOutDragHandle, onOverDragHandle, sourceBhv, targetBhv, type }))(props);
 	const editorTrayItemProps: EditorTrayItemProps =
-		(({ isCompoundBlock, model, onEditBtnPress, onPreviewBtnPress }) =>
-			({ isCompoundBlock, model, onEditBtnPress, onPreviewBtnPress }))(props);
+		(({ isCompoundBlock, model, onEditBtnPress, onPreviewBtnPress, isOpen, onClick }) =>
+			({ isCompoundBlock, model, onEditBtnPress, onPreviewBtnPress, isOpen, onClick }))(props);
+	editorTrayItemProps.isOpen = isOpen;
+	if (editorTrayItemProps.onClick) {
+		editorTrayItemProps.onClick = () => {
+			handleClick();
+			props.onClick()
+		}
+	} else {
+		editorTrayItemProps.onClick = handleClick;
+	}
 	return (<DragContainer<EditorDNDItemType, IEditorBlockData>
 		{...dragContainerProps}
 	>
-		<EditorTrayItem {...editorTrayItemProps}/>
+		<EditorTrayItem {...editorTrayItemProps} />
 	</DragContainer >)
 }

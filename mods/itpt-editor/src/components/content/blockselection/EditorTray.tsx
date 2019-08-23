@@ -81,10 +81,10 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 		}
 		const specialNodesTreeItem: TreeEntry = {
 			flatContent: [
-				<DraggableEditorTrayItem {...specialBlocksCommonProps} key={1} model={{ type: "bdt", label: "Simple Data Type" }} />,
-				<DraggableEditorTrayItem {...specialBlocksCommonProps} key={2} model={{ type: "inputtype", label: "External Input Marker" }} />,
-				<DraggableEditorTrayItem {...specialBlocksCommonProps} key={3} model={{ type: "outputtype", label: "External Output Marker" }} />,
-				<DraggableEditorTrayItem {...specialBlocksCommonProps} key={4} model={{ type: "lineardata", label: "Linear Data Display" }} />
+				<DraggableEditorTrayItem isOpen={false} {...specialBlocksCommonProps} key={1} model={{ type: "bdt", label: "Simple Data Type" }} />,
+				<DraggableEditorTrayItem isOpen={false} {...specialBlocksCommonProps} key={2} model={{ type: "inputtype", label: "External Input Marker" }} />,
+				<DraggableEditorTrayItem isOpen={false} {...specialBlocksCommonProps} key={3} model={{ type: "outputtype", label: "External Output Marker" }} />,
+				<DraggableEditorTrayItem isOpen={false} {...specialBlocksCommonProps} key={4} model={{ type: "lineardata", label: "Linear Data Display" }} />
 			],
 			label: 'Special Blocks',
 			subEntries: []
@@ -232,7 +232,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			let trayName = ldBPCfg ? ldBPCfg.nameSelf : "unnamed";
 			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : ldBPCfg.canInterpretType;
 			let remainingName = tree.flatContentURLs[idx];
-			tree.flatContent.push(<DraggableEditorTrayItem  {...baseDragProps} isCompoundBlock={isCompoundBlock}
+			tree.flatContent.push(<DraggableEditorTrayItem isOpen={false} {...baseDragProps} isCompoundBlock={isCompoundBlock}
 				onPreviewBtnPress={(data) => onEditTrayItem(data)}
 				onEditBtnPress={(data) => onEditTrayItem(data)}
 				key={trayName}
