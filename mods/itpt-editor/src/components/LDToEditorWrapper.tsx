@@ -3,11 +3,8 @@ import {
 	initLDLocalState, intrprtrTypeInstanceFromBlueprint, ldBlueprint, LDConnectedDispatch, LDConnectedState, LDDict, LDLocalState,
 	ldOptionsDeepCopy, LDOwnProps, mapDispatchToProps, mapStateToProps, NetworkPreferredToken, OutputKVMap, UserDefDict
 } from "@metaexplorer/core";
-/*import { keys } from "lodash";
+import { keys } from "lodash";
 import { DragItem } from "metaexplorer-react-components";
-import { DropContainer } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/dropcontainer';
-import { DND_MINI_TOOLBOX_TYPE } from "metaexplorer-react-components/lib/components/minitoolbox/dnd/interfaces";
-import { MiniToolBox } from 'metaexplorer-react-components/lib/components/minitoolbox/dnd/minitoolbox-drag';*/
 import React, { Component, createRef } from "react";
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -16,15 +13,15 @@ import { connect } from "react-redux";/*
 import { Redirect } from "react-router";
 import { Route } from 'react-router-dom';*/
 import "storm-react-diagrams/dist/style.min.css";
-import { IEditorBlockData } from "./editorInterfaces";/*
-import { BaseDataTypeNodeModel } from "./parts/basedatatypes/BaseDataTypeNodeModel";
-import { DeclarationPartNodeModel } from "./parts/declarationtypes/DeclarationNodeModel";*/
-import { NodeEditorLogic } from "./node-editor/NodeEditorLogic";
+import { IEditorBlockData, EditorDNDItemType } from "./editorInterfaces";
+import { BaseDataTypeNodeModel } from "./node-editor/basedatatypes/BaseDataTypeNodeModel";
+import { DeclarationPartNodeModel } from "./node-editor/declarationtypes/DeclarationNodeModel";
+import { NodeEditorLogic, editorSpecificNodesColor, editorDefaultNodesColor } from "./node-editor/NodeEditorLogic";
 import { NodeEditorBody } from "./node-editor/NodeEditorBody";
-import { EditorTray as EditorTray, EditorTrayProps } from "./content/blockselection/EditorTray";/*
-import { ExtendableTypesNodeModel } from "./parts/extendabletypes/ExtendableTypesNodeModel";
-import { GeneralDataTypeNodeModel } from "./parts/generaldatatypes/GeneralDataTypeNodeModel";
-import { LDPortModel } from "./parts/LDPortModel";*/
+import { EditorTray as EditorTray, EditorTrayProps } from "./content/blockselection/EditorTray";
+import { ExtendableTypesNodeModel } from "./node-editor/extendabletypes/ExtendableTypesNodeModel";
+import { GeneralDataTypeNodeModel } from "./node-editor/generaldatatypes/GeneralDataTypeNodeModel";
+import { LDPortModel } from "./node-editor/_super/LDPortModel";
 import { UserInfo } from "./content/status/UserInfo";
 import debounce from 'debounce'
 import { EditorMain } from "./EditorMain";
@@ -298,6 +295,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		if (!this.logic) return <div>loading Editor</div>
 		console.log("itpt-editor render()")
 		return <EditorMain
+			onBlockItemDropped={(blockItem) => this.addBlockToDiagram(blockItem)}
 			isLeftDrawerActive={drawerActive}
 			trayProps={editorTrayProps}
 			isPreviewFullScreen={false}
@@ -573,8 +571,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.props.dispatchKvOutput([outCurItptKV], this.props.ldTokenString, outputKVMap);
 	}
 
-	/*
-	protected addBlockToDiagram = (dndItem: DragItem) => {
+	protected addBlockToDiagram = (dndItem: DragItem<EditorDNDItemType, IEditorBlockData>) => {
 		const data: IEditorBlockData = dndItem.data;
 		var nodesCount = keys(
 			this.logic
@@ -638,7 +635,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			.getDiagramEngine()
 			.getDiagramModel()
 			.addNode(node);
-	}*/
+	}
 
 	protected changeNodeCurrentlyEditing(data: IEditorBlockData): {} {
 		switch (data.type) {

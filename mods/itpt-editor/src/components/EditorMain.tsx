@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ITPTFullscreen } from './content/ITPTFullscreen';
 import { LDRouteProps } from '@metaexplorer/core';
-import { ITransitComp, ITabData, Tabs, MiniToolBox } from 'metaexplorer-react-components';
+import { ITransitComp, ITabData, Tabs, MiniToolBox, DragItem } from 'metaexplorer-react-components';
 import { EditorDNDItemType, IEditorBlockData, IEditorPreviewData } from './editorInterfaces';
 import { EditorTrayItem, EditorTrayItemProps } from './content/blockselection/EditorTrayItem';
 import { PreviewMoveLayer } from './panels/PreviewMoveLayer';
@@ -20,6 +20,7 @@ export interface EditorMainProps {
 	trayProps: EditorTrayProps;
 	isLeftDrawerActive: boolean;
 	onZoomAutoLayoutPress: () => void;
+	onBlockItemDropped: (blockItem: DragItem<EditorDNDItemType, IEditorBlockData>) => void;
 }
 
 export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
@@ -33,7 +34,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 		//Blocks
 		const editorTrayItemProps: EditorTrayItemProps = {
 			isCompoundBlock: true,
-			model: {
+			data: {
 				type: 'TODO',
 				label: 'TODO'
 			},
@@ -66,10 +67,13 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 	];
 
 	const onMainEditorDrop = (item, left, top) => {
-		console.log(item)
-		console.log(left)
-		if (item.type === EditorDNDItemType.preview)
+		if (item.type === EditorDNDItemType.preview){
 			setPreviewPosition({ left, top });
+		}
+		if(item.type == EditorDNDItemType.block){
+			props.onBlockItemDropped(item);
+		}
+		
 	}
 	return (
 		<DNDEnabler
