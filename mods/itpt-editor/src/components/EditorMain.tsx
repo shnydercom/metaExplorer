@@ -19,6 +19,7 @@ export interface EditorMainProps {
 	routes: LDRouteProps;
 	trayProps: EditorTrayProps;
 	isLeftDrawerActive: boolean;
+	onZoomAutoLayoutPress: () => void;
 }
 
 export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
@@ -76,6 +77,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 			transitClassName={TRANSIT_CLASS}
 			transitComponents={createTransitComponents()}
 		>
+			{props.children}
 			<Tabs
 				className='editor-tabs'
 				selectedIdx={0}
@@ -89,10 +91,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 				<EditorTray
 					itpts={props.trayProps.itpts}
 					onEditTrayItem={props.trayProps.onEditTrayItem.bind(this)}
-					onZoomAutoLayoutPress={() => {
-						this.logic.autoDistribute();
-						this.diagramRef.current.forceUpdate();
-					}}
+					onZoomAutoLayoutPress={() => props.onZoomAutoLayoutPress()}
 				>
 					<div className="fakeheader">
 						<UserInfo userLabel="John Doe" projectLabel="JohnsPersonalProject" userIconSrc="" />
@@ -104,7 +103,6 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 					</div>
 				</EditorTray>
 			</div>
-			{props.children}
 		</DNDEnabler>
 	)
 }

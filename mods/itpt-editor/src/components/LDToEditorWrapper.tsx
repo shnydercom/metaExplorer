@@ -284,12 +284,12 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	render() {
-		const { drawerActive, previewActive, localValues, bottomBarHidden, previewHidden, drawerHidden } = this.state;
-		const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
+		const { drawerActive, bottomBarHidden, drawerHidden } = this.state;
+		//const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		const itpts = this.logic ? this.logic.getItptList() : [];
 		const editorTrayProps: EditorTrayProps = {
 			itpts,
-			onEditTrayItem: this.onEditTrayItem.bind(this),
+			onEditTrayItem: this.changeNodeCurrentlyEditing.bind(this),
 			onZoomAutoLayoutPress: () => {
 				this.logic.autoDistribute();
 				this.diagramRef.current.forceUpdate();
@@ -303,15 +303,17 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			isPreviewFullScreen={false}
 			previewLDTokenString={this.state.previewerToken}
 			routes={this.props.routes}
+			onZoomAutoLayoutPress={() => {
+				this.logic.autoDistribute();
+				this.diagramRef.current.forceUpdate();
+			}}
 		>
-			<div>
-				<NodeEditorBody hideRefMapDropSpace={bottomBarHidden}
-					ref={this.diagramRef}
-					loadToEditorByName={this.loadToEditorByName}
-					changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
-					currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
-				{previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
-			</div>
+			<NodeEditorBody hideRefMapDropSpace={bottomBarHidden}
+				ref={this.diagramRef}
+				loadToEditorByName={this.loadToEditorByName}
+				changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
+				currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
+			{/*previewHidden ? null : this.renderPreview(isGlobal, previewActive)*/}
 			{drawerHidden
 				? null
 				: <>
@@ -419,7 +421,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 						: <div className={`nav-drawer-wrapper ${drawerActive ? "active" : "inactive"}`}>
 							<EditorTray
 								itpts={itpts}
-								onEditTrayItem={this.onEditTrayItem.bind(this)}
+								onEditTrayItem={this.changeNodeCurrentlyEditing.bind(this)}
 								onZoomAutoLayoutPress={() => {
 									this.logic.autoDistribute();
 									this.diagramRef.current.forceUpdate();
@@ -638,7 +640,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			.addNode(node);
 	}*/
 
-	protected onEditTrayItem(data: IEditorBlockData): {} {
+	protected changeNodeCurrentlyEditing(data: IEditorBlockData): {} {
 		switch (data.type) {
 			case "ldbp":
 				this.logic.clear();

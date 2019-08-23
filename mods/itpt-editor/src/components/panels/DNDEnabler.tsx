@@ -2,6 +2,9 @@ import * as React from 'react';
 import { TransitComponent, ITransitComp, StylableTransitComponentProps } from 'metaexplorer-react-components';
 
 import HTML5Backend from 'react-dnd-html5-backend';
+
+//import TouchBackend from 'react-dnd-touch-backend';
+
 import { DndProvider } from 'react-dnd';
 import { IEditorPreviewData, IEditorBlockData } from '../editorInterfaces';
 
