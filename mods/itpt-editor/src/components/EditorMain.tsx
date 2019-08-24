@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITPTFullscreen } from './content/ITPTFullscreen';
-import { LDRouteProps } from '@metaexplorer/core';
+import { LDRouteProps, BaseContainerRewrite } from '@metaexplorer/core';
 import { ITransitComp, ITabData, Tabs, MiniToolBox, DragItem } from 'metaexplorer-react-components';
 import { EditorDNDItemType, IEditorBlockData, IEditorPreviewData } from './editorInterfaces';
 import { EditorTrayItem, EditorTrayItemProps } from './content/blockselection/EditorTrayItem';
@@ -67,13 +67,12 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 	];
 
 	const onMainEditorDrop = (item, left, top) => {
-		if (item.type === EditorDNDItemType.preview){
+		if (item.type === EditorDNDItemType.preview) {
 			setPreviewPosition({ left, top });
 		}
-		if(item.type == EditorDNDItemType.block){
+		if (item.type == EditorDNDItemType.block) {
 			props.onBlockItemDropped(item);
 		}
-		
 	}
 	return (
 		<DNDEnabler
@@ -90,7 +89,11 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 			<MainEditorDropLayer onDrop={onMainEditorDrop}></MainEditorDropLayer>
 			<PreviewMoveLayer<EditorDNDItemType>
 				previewPos={{ left: previewPosition.left, top: previewPosition.top }}
-				previewItemType={EditorDNDItemType.preview}></PreviewMoveLayer>
+				previewItemType={EditorDNDItemType.preview}>
+				<div className="app-content mdscrollbar">
+					<BaseContainerRewrite key={props.previewLDTokenString} routes={props.routes} ldTokenString={props.previewLDTokenString} />
+				</div>
+			</PreviewMoveLayer>
 			<div className={`nav-drawer-wrapper ${props.isLeftDrawerActive ? "active" : "inactive"}`}>
 				<EditorTray
 					itpts={props.trayProps.itpts}

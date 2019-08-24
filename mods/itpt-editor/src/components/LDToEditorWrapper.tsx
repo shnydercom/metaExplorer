@@ -198,8 +198,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	constructor(props?: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		let previewerToken = null;
-		previewerToken = props.ldTokenString + "-previewLDOptions";
+		let previewerToken = this.editTkString(props.ldTokenString);
 		if (props.logic) {
 			this.logic = props.logic;
 		}
@@ -293,7 +292,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			}
 		}
 		if (!this.logic) return <div>loading Editor</div>
-		console.log("itpt-editor render()")
 		return <EditorMain
 			onBlockItemDropped={(blockItem) => this.addBlockToDiagram(blockItem)}
 			isLeftDrawerActive={drawerActive}
@@ -311,7 +309,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				loadToEditorByName={this.loadToEditorByName}
 				changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
 				currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
-			{/*previewHidden ? null : this.renderPreview(isGlobal, previewActive)*/}
 			{drawerHidden
 				? null
 				: <>

@@ -35,7 +35,7 @@
 			"name": "Attach to Chrome",
 			"port": 9222,
 			"url": "http://localhost:3000*",
-			"webRoot": "${workspaceRoot}/src",
+			"webRoot": "${workspaceRoot}/packages/metaexplorer.io/src",
 			"sourceMaps": true
 		},
 		/*	{

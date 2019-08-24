@@ -23,25 +23,27 @@ export function PreviewMoveLayer<TItemType extends string>(props: React.PropsWit
 		isWithDragHandle: true,
 		className: 'mtb-dragcontainer'
 	}
-	const MTBItemDragContainer = (props) => {
-		return <DragContainer<TItemType, IEditorPreviewData>
-			{...mtbStylableDragItem}
-		>{props.children}
-		</DragContainer >
-	}
+
 	return (
 		<MoveContainer
 			className='editor-movecontainer'
 			positionMap={{
 				mtb: {
 					pos: { top: props.previewPos.top, left: props.previewPos.left },
-					child: <MTBItemDragContainer>
-							<MiniToolBox className='minitoolbox'>
-								{props.children}
-							</MiniToolBox>
+					child: <MTBItemDragContainer {...mtbStylableDragItem}>
+						<MiniToolBox className='minitoolbox'>
+							{props.children}
+						</MiniToolBox>
 					</MTBItemDragContainer>
 				}
 			}}
 		/>
 	)
+}
+
+export function MTBItemDragContainer<TItemType extends string>(props: StylableDragItemProps<TItemType, IEditorPreviewData>) {
+	return <DragContainer<TItemType, IEditorPreviewData>
+		{...props}
+	>
+	</DragContainer >
 }
