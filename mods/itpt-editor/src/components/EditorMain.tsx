@@ -52,7 +52,8 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 		rv.push({
 			forType: EditorDNDItemType.block,
 			componentFactory: (dragItem) => (props) => <EditorTrayItem {...editorTrayItemProps}
-			>{(dragItem.data as IEditorBlockData).label}</EditorTrayItem>
+			data={(props.data as IEditorBlockData)}
+			></EditorTrayItem>
 		})
 		//Minitoolbox
 		rv.push({

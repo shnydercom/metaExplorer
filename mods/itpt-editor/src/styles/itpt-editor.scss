@@ -584,83 +584,6 @@ $traybuttonheight: 20px;
     height: 100%;
 
     opacity: 0.9;
-
-    .editor-tray-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: $tray-item-color-primary;
-      background-color: $tray-item-color-secondary;
-      font-family: Roboto, Arial;
-      padding: 6px;
-      margin: 0px 10px;
-      border: solid 1px;
-      border-radius: 6px;
-      margin-bottom: 3px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      height: 2em;
-      min-height: fit-content;
-      transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      ;
-      position: relative;
-
-      &.opened {
-        transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        height: 5em;
-        background-color: rgba($tray-item-color-primary, 0.8);
-        color: $tray-item-color-secondary;
-      }
-
-      &:active {
-        transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        background-color: $tray-item-color-primary;
-        color: $tray-item-color-secondary;
-      }
-
-      &:hover {
-        transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        background-color: $tray-item-color-primary;
-        color: $tray-item-color-secondary;
-      }
-
-      .edit-iconbtn {
-        visibility: hidden;
-        opacity: 0;
-        height: $traybuttonheight;
-        margin-bottom: $traybuttonheight;
-        position: absolute;
-        background-color: #edc11cff !important;
-        color: black !important;
-        align-self: center;
-        right: 0.5em;
-        transition: opacity 0.1s ease-in, visibility 0.3s linear;
-
-        &.opened {
-          visibility: visible;
-          opacity: 1;
-          transition: opacity 0.2s ease-out;
-        }
-      }
-      .preview-iconbtn {
-        visibility: hidden;
-        opacity: 0;
-        height: $traybuttonheight;
-        margin-top: $traybuttonheight;
-        position: absolute;
-        background-color: #edc11cff !important;
-        color: black !important;
-        align-self: center;
-        right: 0.5em;
-        transition: opacity 0.1s ease-in, visibility 0.3s linear;
-
-        &.opened {
-          visibility: visible;
-          opacity: 1;
-          transition: opacity 0.2s ease-out;
-        }
-      }
-    }
   }
 
   .diagram-body {
@@ -677,6 +600,91 @@ $traybuttonheight: 20px;
     flex-grow: 3;
   }
 
+}
+
+.editor-tray-item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $tray-item-color-primary;
+  background-color: $tray-item-color-secondary;
+  font-family: Roboto, Arial;
+  padding: 6px;
+  margin: 0px 10px;
+  border: solid 1px;
+  border-radius: 6px;
+  margin-bottom: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 2em;
+  min-height: fit-content;
+  transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  ;
+  position: relative;
+
+  &.opened {
+    transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 5em;
+    background-color: rgba($tray-item-color-primary, 0.8);
+    color: $tray-item-color-secondary;
+  }
+
+  &:active {
+    transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: $tray-item-color-primary;
+    color: $tray-item-color-secondary;
+  }
+
+  &:hover {
+    transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: $tray-item-color-primary;
+    color: $tray-item-color-secondary;
+  }
+
+  .edit-iconbtn {
+    visibility: hidden;
+    opacity: 0;
+    height: $traybuttonheight;
+    margin-bottom: $traybuttonheight;
+    position: absolute;
+    background-color: #edc11cff !important;
+    color: black !important;
+    align-self: center;
+    right: 0.5em;
+    transition: opacity 0.1s ease-in, visibility 0.3s linear;
+
+    &.opened {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.2s ease-out;
+    }
+  }
+  .preview-iconbtn {
+    visibility: hidden;
+    opacity: 0;
+    height: $traybuttonheight;
+    margin-top: $traybuttonheight;
+    position: absolute;
+    background-color: #edc11cff !important;
+    color: black !important;
+    align-self: center;
+    right: 0.5em;
+    transition: opacity 0.1s ease-in, visibility 0.3s linear;
+
+    &.opened {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.2s ease-out;
+    }
+  }
+}
+
+.editor-transit {
+  .editor-tray-item {
+    width: 224px;
+    background-color: $tray-item-color-primary;
+    color: $tray-item-color-secondary;
+  }
 }
 
 .editor-tabs-dropcontainer {
