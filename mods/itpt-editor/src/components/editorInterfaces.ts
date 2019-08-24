@@ -1,5 +1,5 @@
 export interface IEditorBlockData { 
-	type: string;
+	type: "bdt" | "inputtype" | "outputtype" | "lineardata" | "ldbp";
 	label: string;
 	bpname?: string;
 	canInterpretType?: string;

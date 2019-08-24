@@ -239,12 +239,12 @@ $traybuttonheight: 20px;
   top: 0;
   bottom: 0;
 
-  &.active>* {
+  &.active {
     transition-timing-function: ease-in;
     transition: 0.3s;
   }
 
-  &.inactive>* {
+  &.inactive {
     transition-timing-function: ease-out;
     transition: 0.2s;
     transform: translateX(-100%);
@@ -572,8 +572,8 @@ $traybuttonheight: 20px;
   .editor-tray {
     z-index: 2000;
     position: relative;
-    min-width: 390px;
-    max-width: 390px;
+    min-width: 304px;
+    max-width: 304px;
     background: $editor-background-elevated-color;
     flex-grow: 0;
     flex: 1;
@@ -677,4 +677,12 @@ $traybuttonheight: 20px;
     flex-grow: 3;
   }
 
+}
+
+.editor-tabs-dropcontainer {
+  top: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 32px;
 }

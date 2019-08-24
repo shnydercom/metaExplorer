@@ -12,7 +12,7 @@ const itptEditorDropContainerProps: StylableDropContainerProps<EditorDNDItemType
 	className: 'editor-dropcontainer'
 }
 
-export function MainEditorDropLayer<TItemType extends string>(props: MainEditorDropLayerProps) {
+export function MainEditorDropLayer(props: MainEditorDropLayerProps) {
 	return (<DropContainer {...itptEditorDropContainerProps}
 		onItemDropped={(item, pos) => {
 			props.onDrop(item, pos.left, pos.top)}

@@ -163,7 +163,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				bottomBarHidden = !!(hiddenViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_BOTTOMBAR);
 			}
 			let newState = null;
-			if (!!initiallyDisplayed && !prevState.currentlyEditingItptName !== initiallyDisplayed) {
+			if (!!initiallyDisplayed && !prevState.currentlyEditingItptName) {
 				newState = { ...prevState, ...rvLD, currentlyEditingItptName: initiallyDisplayed, mode, bottomBarHidden, drawerHidden, previewHidden };
 			} else {
 				newState = { ...prevState, ...rvLD, mode, bottomBarHidden, drawerHidden, previewHidden };
@@ -280,7 +280,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	render() {
-		const { drawerActive, bottomBarHidden, drawerHidden } = this.state;
+		const { drawerActive, bottomBarHidden, drawerHidden, currentlyEditingItptName } = this.state;
 		//const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		const itpts = this.logic ? this.logic.getItptList() : [];
 		const editorTrayProps: EditorTrayProps = {
@@ -293,6 +293,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		if (!this.logic) return <div>loading Editor</div>
 		return <EditorMain
+			changeNodeCurrentlyEditing={this.changeNodeCurrentlyEditing.bind(this)}
+			currentlyEditingItpt={currentlyEditingItptName}
 			onBlockItemDropped={(blockItem) => this.addBlockToDiagram(blockItem)}
 			isLeftDrawerActive={drawerActive}
 			trayProps={editorTrayProps}

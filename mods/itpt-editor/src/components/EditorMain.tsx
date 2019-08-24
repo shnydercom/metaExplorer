@@ -10,6 +10,7 @@ import { DNDEnabler } from './panels/DNDEnabler';
 import { MainEditorDropLayer } from './panels/MainEditorDropLayer';
 import { EditorTrayProps, EditorTray } from './content/blockselection/EditorTray';
 import { UserInfo } from './content/status/UserInfo';
+import { TabDropLayer } from './panels/TabDropLayer';
 const DND_CLASS = 'entrypoint-editor'
 const TRANSIT_CLASS = 'editor-transit'
 
@@ -19,11 +20,17 @@ export interface EditorMainProps {
 	routes: LDRouteProps;
 	trayProps: EditorTrayProps;
 	isLeftDrawerActive: boolean;
+	currentlyEditingItpt: string;
 	onZoomAutoLayoutPress: () => void;
 	onBlockItemDropped: (blockItem: DragItem<EditorDNDItemType, IEditorBlockData>) => void;
+	changeNodeCurrentlyEditing(data: IEditorBlockData): {} ;
 }
 
+type TabTypes = "nodeEditor" | "newNode";
+
 export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
+
+	const [activeTab, setActiveTab] = React.useState<TabTypes>("nodeEditor")
 
 	const [isPreviewFullScreen, setIsPreviewFullScreen] = React.useState<boolean>(props.isPreviewFullScreen)
 
@@ -35,7 +42,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 		const editorTrayItemProps: EditorTrayItemProps = {
 			isCompoundBlock: true,
 			data: {
-				type: 'TODO',
+				type: 'bdt',
 				label: 'TODO'
 			},
 			isOpen: false,
@@ -55,16 +62,14 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 		return rv;
 	}
 
-	if (isPreviewFullScreen) {
-		return <ITPTFullscreen
-			onExitFullscreen={() => setIsPreviewFullScreen(false)}
-			ldTokenString={props.previewLDTokenString}
-			routes={props.routes} />;
-	}
-	const tabDatas: ITabData<string>[] = [
-		{ data: 'Elem1', label: 'currently editing' },
-		{ data: 'newElem', label: 'new*' }
+	const tabDatas: ITabData<TabTypes>[] = [
+		{ data: 'nodeEditor', label: `current compound block: ${props.currentlyEditingItpt}` },
+		{ data: 'newNode', label: 'new*' }
 	];
+
+	const onTabDrop = (item: DragItem<EditorDNDItemType, (IEditorBlockData)>, left, top) => {
+		props.changeNodeCurrentlyEditing(item.data)
+	}
 
 	const onMainEditorDrop = (item, left, top) => {
 		if (item.type === EditorDNDItemType.preview) {
@@ -74,6 +79,24 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 			props.onBlockItemDropped(item);
 		}
 	}
+
+	//conditional returns
+	if (isPreviewFullScreen) {
+		return <ITPTFullscreen
+			onExitFullscreen={() => setIsPreviewFullScreen(false)}
+			ldTokenString={props.previewLDTokenString}
+			routes={props.routes} />;
+	}
+	if (activeTab === 'newNode') {
+		return <div className={DND_CLASS}>
+			<Tabs<TabTypes>
+				className='editor-tabs'
+				selectedIdx={1}
+				tabs={tabDatas}
+				onSelectionChange={(tabData) => { setActiveTab(tabData.data) }}
+			></Tabs>
+		</div>
+	}
 	return (
 		<DNDEnabler
 			className={DND_CLASS}
@@ -81,11 +104,16 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 			transitComponents={createTransitComponents()}
 		>
 			{props.children}
-			<Tabs
+			<Tabs<TabTypes>
 				className='editor-tabs'
 				selectedIdx={0}
 				tabs={tabDatas}
+				onSelectionChange={(tabData) => {
+					console.log("called onSelChange")
+					setActiveTab(tabData.data);
+				}}
 			></Tabs>
+			<TabDropLayer onDrop={onTabDrop} ></TabDropLayer>
 			<MainEditorDropLayer onDrop={onMainEditorDrop}></MainEditorDropLayer>
 			<PreviewMoveLayer<EditorDNDItemType>
 				previewPos={{ left: previewPosition.left, top: previewPosition.top }}
