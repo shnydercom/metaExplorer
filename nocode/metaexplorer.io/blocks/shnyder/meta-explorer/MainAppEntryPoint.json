@@ -1,1 +1,170 @@
-{"subItptOf":"5447468d-5c5b-4f2f-a56a-9b4a508b8d40","canInterpretType":"shnyder/meta-explorer/MainAppEntryPoint-ObjectType","nameSelf":"shnyder/meta-explorer/MainAppEntryPoint","initialKvStores":[{"key":"InterpreterReferenceMapKey","value":{"5447468d-5c5b-4f2f-a56a-9b4a508b8d40":{"subItptOf":"ProjectConfiguration","canInterpretType":"ProjectConfiguration-ObjectType","nameSelf":"5447468d-5c5b-4f2f-a56a-9b4a508b8d40","initialKvStores":[{"key":"inputContainer","value":{"objRef":"b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725","propRef":null},"ldType":"InterpreterClassType"},{"key":"configurationBlocks","value":{"objRef":"8e8a7d7d-1013-4965-a9a9-9207ca899014","propRef":null},"ldType":"InterpreterClassType"}],"crudSkills":"cRud","interpretableKeys":["inputContainer","configurationBlocks"]},"b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725":{"subItptOf":"shnyder/block-editor","canInterpretType":"blockeditortype","nameSelf":"b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725","initialKvStores":[{"key":"currentlyediting","value":"shnyder/me-beta/index","ldType":"http://schema.org/Text"},{"key":"isGlobal","value":true,"ldType":"http://schema.org/Boolean"},{"key":"isFullScreenPreview","value":true,"ldType":"http://schema.org/Boolean"}],"crudSkills":"cRud","interpretableKeys":[]},"8e8a7d7d-1013-4965-a9a9-9207ca899014":{"subItptOf":"keycloak/auth/config","canInterpretType":"keycloak/auth/config-ObjectType","nameSelf":"8e8a7d7d-1013-4965-a9a9-9207ca899014","initialKvStores":[{"key":"jsonConfigurationPath","value":"/media/public-cfg.json","ldType":"http://schema.org/Text"}],"crudSkills":"cRud","interpretableKeys":[]}},"ldType":"InterpreterReferenceMapType"}],"crudSkills":"cRud","interpretableKeys":[]}
+{
+  "subItptOf": "5447468d-5c5b-4f2f-a56a-9b4a508b8d40",
+  "canInterpretType": "shnyder/meta-explorer/MainAppEntryPoint-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/MainAppEntryPoint",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "5447468d-5c5b-4f2f-a56a-9b4a508b8d40": {
+          "subItptOf": "ProjectConfiguration",
+          "canInterpretType": "ProjectConfiguration-ObjectType",
+          "nameSelf": "5447468d-5c5b-4f2f-a56a-9b4a508b8d40",
+          "initialKvStores": [
+            {
+              "key": "inputContainer",
+              "value": {
+                "objRef": "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "configurationBlocks",
+              "value": {
+                "objRef": "8e8a7d7d-1013-4965-a9a9-9207ca899014",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "configurationBlocks",
+              "value": {
+                "objRef": "ebccd6e8-892e-403a-81fb-0e74a20e6bf5",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputContainer",
+            "configurationBlocks",
+            "configurationBlocks"
+          ]
+        },
+        "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725": {
+          "subItptOf": "shnyder/block-editor",
+          "canInterpretType": "blockeditortype",
+          "nameSelf": "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725",
+          "initialKvStores": [
+            {
+              "key": "currentlyediting",
+              "value": "shnyder/me-beta/index",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "isGlobal",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
+            },
+            {
+              "key": "isFullScreenPreview",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
+            },
+            {
+              "key": "Action_Save",
+              "value": {
+                "objRef": "54e5dec6-09b2-4155-9022-ae4adaf03e0e",
+                "propRef": "outputdata"
+              },
+              "ldType": "MetaExplorerAction"
+            },
+            {
+              "key": "savingStatus",
+              "value": {
+                "objRef": "a3dfcb7a-3909-4060-8098-c7d6ea0b88cb",
+                "propRef": "shnyder/responsewrapper"
+              },
+              "ldType": "shnyder/responsewrapperType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "Action_Save",
+            "savingStatus"
+          ]
+        },
+        "54e5dec6-09b2-4155-9022-ae4adaf03e0e": {
+          "subItptOf": "ActionAssembler",
+          "canInterpretType": "ActionAssembler-ObjectType",
+          "nameSelf": "54e5dec6-09b2-4155-9022-ae4adaf03e0e",
+          "initialKvStores": [
+            {
+              "key": "actionType",
+              "value": "editor-action-save",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "inputdata",
+              "value": {
+                "objRef": "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725",
+                "propRef": "shnyder/serialized-refmap"
+              }
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputdata"
+          ]
+        },
+        "a3dfcb7a-3909-4060-8098-c7d6ea0b88cb": {
+          "subItptOf": "shnyder/meta-explorer/RefMapBpCfgSender",
+          "canInterpretType": "shnyder/meta-explorer/RefMapBpCfgSenderType",
+          "nameSelf": "a3dfcb7a-3909-4060-8098-c7d6ea0b88cb",
+          "initialKvStores": [
+            {
+              "key": "srvURL",
+              "value": "/api/blocks",
+              "ldType": "https://schema.org/URL"
+            },
+            {
+              "key": "inputRefMap",
+              "value": {
+                "objRef": "ebccd6e8-892e-403a-81fb-0e74a20e6bf5",
+                "propRef": "outputdata"
+              },
+              "ldType": "shnyder/refmap-bpcfgType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputRefMap"
+          ]
+        },
+        "ebccd6e8-892e-403a-81fb-0e74a20e6bf5": {
+          "subItptOf": "ActionHandler",
+          "canInterpretType": "ActionHandler-ObjectType",
+          "nameSelf": "ebccd6e8-892e-403a-81fb-0e74a20e6bf5",
+          "initialKvStores": [
+            {
+              "key": "canHandleType",
+              "value": "editor-action-save",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "8e8a7d7d-1013-4965-a9a9-9207ca899014": {
+          "subItptOf": "keycloak/auth/config",
+          "canInterpretType": "keycloak/auth/config-ObjectType",
+          "nameSelf": "8e8a7d7d-1013-4965-a9a9-9207ca899014",
+          "initialKvStores": [
+            {
+              "key": "jsonConfigurationPath",
+              "value": "/media/public-cfg.json",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}

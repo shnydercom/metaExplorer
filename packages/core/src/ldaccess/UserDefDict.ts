@@ -66,6 +66,10 @@ export enum UserDefDict {
 	intrprtrBPCfgRefMapType = "InterpreterReferenceMapType",
 	intrprtrBPCfgRefMapName = "shnyder/RefMapInterpreter",
 
+	itptRefMapBpCfg = "shnyder/refmap-bpcfgType",
+	responseWrapperKey = "shnyder/responsewrapper",
+	responseWrapperType = "shnyder/responsewrapperType",
+
 	itptContainerObjType = "shnyder/ContainerObjType",
 
 	standardItptObjectTypeSuffix = "-ObjectType",

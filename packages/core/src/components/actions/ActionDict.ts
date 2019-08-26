@@ -23,6 +23,10 @@ export enum ActionKeysDict {
 	 * for the handler to declare it can handle an id
 	 */
 	canHandleId = "canHandleId",
+	/**
+	 * for actions that trigger saving or somehow costly functions
+	 */
+	action_save = "Action_Save"
 }
 
 export enum ActionTypesDict {

@@ -1,12 +1,16 @@
 import {
 	BlueprintConfig, intrprtrTypeInstanceFromBlueprint, addBlueprintToRetriever, ILDOptions, NetworkPreferredToken, DEFAULT_ITPT_RETRIEVER_NAME,
-	getApplicationStore, ldOptionsClientSideUpdateAction, isProduction
+	getApplicationStore, ldOptionsClientSideUpdateAction, isProduction, IAsyncRequestWrapper
 } from "@metaexplorer/core";
 
 export interface UserItptLoadResponse {
 	itptMetaInfo: [{}];
 	itptList: BlueprintConfig[];
 	mainItpt: string;
+}
+
+export interface UserItptSetResponse extends IAsyncRequestWrapper {
+	
 }
 
 export class UserItptLoadApi {
@@ -44,6 +48,31 @@ export class UserItptLoadApi {
 				});
 			});
 		};
+	}
+
+	setItptsAt(targetUrl: string, postBodyJson): () => Promise<IAsyncRequestWrapper> {
+		return () => {
+			return new Promise<IAsyncRequestWrapper>((resolve, reject) => {
+				fetch(targetUrl, {
+					method: 'POST',
+					headers: {
+						Accept: "application/json",
+						'Content-Type': 'application/json'
+					},
+					body: postBodyJson
+				}
+				).then((response) => {
+					if (response.status >= 400) {
+						reject("Bad response from server");
+					}
+					response.json().then((bodyVal) => {
+						resolve(bodyVal as IAsyncRequestWrapper);
+					}).catch((reason) => {
+						reject(reason);
+					});
+				});
+			})
+		}
 	}
 
 	batchAdd = (input: BlueprintConfig[]) => {

@@ -13,7 +13,9 @@ import { UserInfo } from './content/status/UserInfo';
 import { TabDropLayer } from './panels/TabDropLayer';
 import { NewItptPanel } from './new-itpt/newItptPanel';
 import { NewItptNode, INewNameObj } from './new-itpt/newItptNodeDummy';
-import { ISaveStatusProps, SaveStatus } from './content/status/SaveStatus';
+import { SaveStatus } from './content/status/SaveStatus';
+import { IAsyncRequestWrapper } from '@metaexplorer/core';
+
 const DND_CLASS = 'entrypoint-editor'
 const TRANSIT_CLASS = 'editor-transit'
 
@@ -28,7 +30,7 @@ export interface EditorMainProps {
 	onBlockItemDropped: (blockItem: DragItem<EditorDNDItemType, IEditorBlockData>) => void;
 	changeNodeCurrentlyEditing(data: IEditorBlockData): {};
 	onNewBtnClick: (newNameObj: INewNameObj) => void;
-	saveStatus: ISaveStatusProps;
+	saveStatus: IAsyncRequestWrapper;
 }
 
 type TabTypes = "nodeEditor" | "newNode";
@@ -106,7 +108,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 					<NewItptNode onNewBtnClick={(newNameObj) => {
 						setActiveTab('nodeEditor');
 						props.onNewBtnClick(newNameObj);
-					}}/>
+					}} />
 				</NewItptPanel>
 			</div>
 		</div>
@@ -152,7 +154,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 					</div>
 				</EditorTray>
 			</div>
-			<SaveStatus {...props.saveStatus}/>
+			<SaveStatus {...props.saveStatus} />
 		</DNDEnabler>
 	)
 }

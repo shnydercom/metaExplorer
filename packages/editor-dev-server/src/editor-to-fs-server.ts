@@ -25,6 +25,7 @@ export function editorToFileSystem(basePath?: string, srvrPort?: number) {
 		console.log('port not set: using default port');
 		srvrPort = Number(portDefault);
 	}
+	let isDirModified = false;
 	let resolvedBasePath = path.resolve(basePath);
 	let resolvedBlockPath = path.join(resolvedBasePath, 'blocks');
 	fs.mkdirSync(resolvedBasePath, { recursive: true });
@@ -36,6 +37,10 @@ export function editorToFileSystem(basePath?: string, srvrPort?: number) {
 
 	app.get(API_IRI_BLOCKS, function (req, res) {
 		res.sendFile(path.join(resolvedBasePath, './interpreters.json'));
+		if (isDirModified) {
+			createBlocksFromLib(basePath + "/index", resolvedBlockPath, basePath);
+		}
+		isDirModified = false;
 	});
 
 	app.post(API_IRI_BLOCKS, (req, res) => {
@@ -55,6 +60,7 @@ export function editorToFileSystem(basePath?: string, srvrPort?: number) {
 			fs.writeFileSync(path.join(resolvedFullPath, '/', fileName), JSON.stringify(req.body));
 			res.sendStatus(200);
 		});
+		isDirModified = true;
 	});
 
 	app.listen(srvrPort, function () {

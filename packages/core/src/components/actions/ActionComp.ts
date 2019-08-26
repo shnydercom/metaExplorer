@@ -11,7 +11,7 @@ const transfOutputKey = UserDefDict.outputData;
 export const idField = "actionId";
 export const typeField = "actionType";
 
-export const ActionCompName: string = "ActionComponent";
+export const ActionCompName: string = "ActionAssembler";
 
 export const ActionCompKeys: string[] = [idField, typeField, payloadInputKey];
 export const ActionCompOutputKVs: IKvStore[] = [

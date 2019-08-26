@@ -5,3 +5,4 @@ export * from './OrganizationRetriever';
 export * from './ProductRetriever';
 export * from './SideFXDict';
 export * from './nonVisualConnect';
+export * from './interfaces';
