@@ -11,6 +11,9 @@ import { MainEditorDropLayer } from './panels/MainEditorDropLayer';
 import { EditorTrayProps, EditorTray } from './content/blockselection/EditorTray';
 import { UserInfo } from './content/status/UserInfo';
 import { TabDropLayer } from './panels/TabDropLayer';
+import { NewItptPanel } from './new-itpt/newItptPanel';
+import { NewItptNode, INewNameObj } from './new-itpt/newItptNodeDummy';
+import { ISaveStatusProps, SaveStatus } from './content/status/SaveStatus';
 const DND_CLASS = 'entrypoint-editor'
 const TRANSIT_CLASS = 'editor-transit'
 
@@ -23,7 +26,9 @@ export interface EditorMainProps {
 	currentlyEditingItpt: string;
 	onZoomAutoLayoutPress: () => void;
 	onBlockItemDropped: (blockItem: DragItem<EditorDNDItemType, IEditorBlockData>) => void;
-	changeNodeCurrentlyEditing(data: IEditorBlockData): {} ;
+	changeNodeCurrentlyEditing(data: IEditorBlockData): {};
+	onNewBtnClick: (newNameObj: INewNameObj) => void;
+	saveStatus: ISaveStatusProps;
 }
 
 type TabTypes = "nodeEditor" | "newNode";
@@ -52,7 +57,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 		rv.push({
 			forType: EditorDNDItemType.block,
 			componentFactory: (dragItem) => (props) => <EditorTrayItem {...editorTrayItemProps}
-			data={(props.data as IEditorBlockData)}
+				data={(props.data as IEditorBlockData)}
 			></EditorTrayItem>
 		})
 		//Minitoolbox
@@ -90,12 +95,20 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 	}
 	if (activeTab === 'newNode') {
 		return <div className={DND_CLASS}>
-			<Tabs<TabTypes>
-				className='editor-tabs'
-				selectedIdx={1}
-				tabs={tabDatas}
-				onSelectionChange={(tabData) => { setActiveTab(tabData.data) }}
-			></Tabs>
+			<div className={`${DND_CLASS}-inner`}>
+				<Tabs<TabTypes>
+					className='editor-tabs'
+					selectedIdx={1}
+					tabs={tabDatas}
+					onSelectionChange={(tabData) => { setActiveTab(tabData.data) }}
+				></Tabs>
+				<NewItptPanel>
+					<NewItptNode onNewBtnClick={(newNameObj) => {
+						setActiveTab('nodeEditor');
+						props.onNewBtnClick(newNameObj);
+					}}/>
+				</NewItptPanel>
+			</div>
 		</div>
 	}
 	return (
@@ -139,6 +152,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 					</div>
 				</EditorTray>
 			</div>
+			<SaveStatus {...props.saveStatus}/>
 		</DNDEnabler>
 	)
 }

@@ -10,6 +10,8 @@
 @import "./diagram.scss";
 @import "./user-info.scss";
 @import "./preview.scss";
+@import "./newitpt.scss";
+@import "./save-status.scss";
 //@import "../../../../node_modules/metaexplorer-react-components/src/components/card/card.scss";
 
 
@@ -18,7 +20,10 @@ $color-primary-dark: #AA00AA; //$palette-purple-a700;
 
 $tray-item-color-primary: #dadada;
 $tray-item-color-secondary: $editor-background-elevated-color;
-$traybuttonheight: 20px;
+$tray-item-color-tertiary: #57a1f5c8;
+$traybuttonheight: 36px;
+
+$button-color-cta: orange;
 
 .inputElement {
   background-color: transparent;
@@ -560,6 +565,7 @@ $traybuttonheight: 20px;
   flex-direction: row;
   background-color: $editor-background-color;
   overflow: hidden;
+  font-family: Roboto, Arial;
 
   .editor-content {
     background-color: $editor-background-elevated-color;
@@ -588,7 +594,7 @@ $traybuttonheight: 20px;
 
   .diagram-body {
     position: absolute;
-    top:0;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -641,24 +647,7 @@ $traybuttonheight: 20px;
     color: $tray-item-color-secondary;
   }
 
-  .edit-iconbtn {
-    visibility: hidden;
-    opacity: 0;
-    height: $traybuttonheight;
-    margin-bottom: $traybuttonheight;
-    position: absolute;
-    background-color: #edc11cff !important;
-    color: black !important;
-    align-self: center;
-    right: 0.5em;
-    transition: opacity 0.1s ease-in, visibility 0.3s linear;
 
-    &.opened {
-      visibility: visible;
-      opacity: 1;
-      transition: opacity 0.2s ease-out;
-    }
-  }
   .preview-iconbtn {
     visibility: hidden;
     opacity: 0;
@@ -693,4 +682,53 @@ $traybuttonheight: 20px;
   left: 0;
   right: 0;
   height: 32px;
+}
+
+.editor-btn {
+  border: none;
+  border-right: solid 0px;
+  border-radius: 6px;
+  background-color: transparent;
+  font-weight: bold;
+
+  &-confirm {
+    background-color: $button-color-cta;
+    color: $tray-item-color-secondary;
+    &:hover {
+      background-color: lighten($button-color-cta, 10%)
+    }
+  }
+
+  &-addport {
+    padding: 12px 18px;
+    background-color: $tray-item-color-secondary;
+    color: $tray-item-color-primary;
+    &:hover {
+      background-color: $tray-item-color-tertiary;
+    }
+  }
+
+  &-edit {
+    padding: 0px 18px;
+    background-color: $tray-item-color-secondary;
+    color: $tray-item-color-primary;
+    visibility: hidden;
+    opacity: 0;
+    height: $traybuttonheight;
+    position: absolute;
+    align-self: center;
+    right: 0.5em;
+    transition: opacity 0.1s ease-in, visibility 0.3s linear;
+    &:hover {
+      background-color: $tray-item-color-tertiary;
+    }
+
+    &.opened {
+      visibility: visible;
+      opacity: 0.8;
+      transition: opacity 0.2s ease-out;
+      
+    }
+  }
+
 }

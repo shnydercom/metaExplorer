@@ -18,8 +18,8 @@ export interface EditorTrayState {
 export const EditorTrayItem: React.FC<EditorTrayItemProps> = (props) => {
 
 	const trayCssClass = props.isOpen ? "editor-tray-item opened" : "editor-tray-item";
-	const btnEditCssClass = props.isOpen ? "edit-iconbtn opened" : "edit-iconbtn";
-	const btnPreviewCssClass = props.isOpen ? "preview-iconbtn opened" : "preview-iconbtn";
+	const btnEditCssClass = props.isOpen ? "editor-btn editor-btn-edit opened" : "editor-btn editor-btn-edit";
+	//const btnPreviewCssClass = props.isOpen ? "preview-iconbtn opened" : "preview-iconbtn";
 
 	const renderContent = () => {
 		return (
@@ -32,13 +32,15 @@ export const EditorTrayItem: React.FC<EditorTrayItemProps> = (props) => {
 					e.stopPropagation();
 					props.onEditBtnPress(props.data);
 				}} >edit</button>
-				<button className={btnPreviewCssClass} onClick={(e) => {
-					e.stopPropagation();
-					props.onPreviewBtnPress(props.data);
-				}} >preview</button>
 			</div >
 		);
 	}
+	/*
+					<button className={btnPreviewCssClass} onClick={(e) => {
+					e.stopPropagation();
+					props.onPreviewBtnPress(props.data);
+				}} >preview</button>
+	*/
 
 	return (
 		<>{renderContent()}</>

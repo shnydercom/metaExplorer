@@ -32,7 +32,7 @@ export enum UserDefDict {
 	singleKvStore = "singleKvStore",
 
 	//values
-	outputItpt = "Output Info",
+	outputItpt = "End Output",
 
 	//types
 	/**

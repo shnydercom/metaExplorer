@@ -1,0 +1,39 @@
+.savestatus {
+	min-width: 64px;
+	min-height: 15px;
+	opacity: 0.6;
+	background-color: #00375f;
+	color: white;
+	position: absolute;
+	right: 0;
+	top: 33px;
+	padding: 6px 6px 6px 18px;
+	text-align: end;
+	font-size: small;
+
+	p {
+		border-top: 1px solid white;
+		max-width: 180px;
+		text-align: justify;
+	}
+
+	&-error {
+		background-color: #5f0010;
+		span {
+			text-align: start;
+		}
+		box-shadow: -6px 7px 8px 0px rgba(0, 0, 0, 0.6);
+	}
+
+	&-warning {
+		background-color: white;
+		color: #00375f;
+		span {
+			text-align: start;
+		}
+		box-shadow: -6px 7px 8px 0px rgba(0, 0, 0, 0.6);
+		p {
+			border-top: 1px solid #00375f;
+		}
+	}
+}

@@ -25,6 +25,8 @@ import { LDPortModel } from "./node-editor/_super/LDPortModel";
 import { UserInfo } from "./content/status/UserInfo";
 import debounce from 'debounce'
 import { EditorMain } from "./EditorMain";
+import { INewNameObj } from "./new-itpt/newItptNodeDummy";
+import { ISaveStatusProps, TXT_INIT } from "./content/status/SaveStatus";
 
 const DNDBackend = HTML5Backend;// TouchBackend; //HTML5Backend
 
@@ -48,6 +50,7 @@ export type AIEState = {
 	redirect: null | string;
 	isDropZoneClickThrough: boolean;
 	ignoreExternalProps: boolean;
+	saveStatus: ISaveStatusProps;
 } & LDLocalState;
 
 const EDITOR_KV_KEY = "EditorKvKey";
@@ -232,7 +235,11 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone",
 			hasCompletedFirstRender: false, hasCompletedEditorRender: false,
 			isDropZoneClickThrough: true,
-			ignoreExternalProps: false
+			ignoreExternalProps: false,
+			saveStatus: {
+				status: 'ok',
+				statusTxt: TXT_INIT
+			}
 		};
 	}
 
@@ -249,7 +256,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				logic.setDimensions(width, height);
 				logic.newModel(this.props.ldTokenString);
 			}
-			logic.setOnOutputInfoSaved(() => this.onInterpretBtnClick(null));
+			logic.setOnOutputInfoSaved(() => this.onSaveDiagramTriggered());
 			this.logic = logic;
 		}
 		if (!this.props.ldOptions) {
@@ -263,7 +270,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.evalPreviewReload();
 	}
 
-	toggleDrawerActive = () => {
+	toggleDrawerActive () {
 		let sideBar = this.sideBarRef.current;
 		let previewActive = this.state.previewActive;
 		let drawerActive = !this.state.drawerActive;
@@ -275,12 +282,12 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		this.setState({ ...this.state, drawerActive, previewActive: previewActive });
 	}
-	togglePreview = () => {
+	togglePreview ()  {
 		this.setState({ ...this.state, previewActive: !this.state.previewActive });
 	}
 
 	render() {
-		const { drawerActive, bottomBarHidden, drawerHidden, currentlyEditingItptName } = this.state;
+		const { drawerActive, bottomBarHidden, drawerHidden, currentlyEditingItptName, saveStatus } = this.state;
 		//const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		const itpts = this.logic ? this.logic.getItptList() : [];
 		const editorTrayProps: EditorTrayProps = {
@@ -293,6 +300,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		if (!this.logic) return <div>loading Editor</div>
 		return <EditorMain
+			saveStatus={saveStatus}
+			onNewBtnClick={(newNameObj) => this.setNodeEditorToNew(newNameObj)}
 			changeNodeCurrentlyEditing={this.changeNodeCurrentlyEditing.bind(this)}
 			currentlyEditingItpt={currentlyEditingItptName}
 			onBlockItemDropped={(blockItem) => this.addBlockToDiagram(blockItem)}
@@ -398,7 +407,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		);
 	}
 
-	setNodeEditorToNew() {
+	setNodeEditorToNew(newNameObj: INewNameObj) {
 		this.logic.clear();
 		this.setState({ ...this.state, currentlyEditingItptName: null });
 	}
@@ -535,8 +544,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		</button>;
 	}
 
-	protected onInterpretBtnClick = (e) => {
-		if (e) e.preventDefault();
+	protected onSaveDiagramTriggered () {
 		let nodesBPCFG: BlueprintConfig = this.logic.intrprtrBlueprintFromDiagram(null);
 		let newType = nodesBPCFG.canInterpretType;
 		if (!newType) {
@@ -559,7 +567,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.dispatchCurrentlyEditingChange(nodesBPCFG.nameSelf);
 	}
 
-	protected dispatchCurrentlyEditingChange = (currentlyEditingName: string) => {
+	protected dispatchCurrentlyEditingChange (currentlyEditingName: string) {
 		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
 		if (!outputKVMap) return;
 		let outCurItptKV: IKvStore = {
@@ -570,7 +578,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.props.dispatchKvOutput([outCurItptKV], this.props.ldTokenString, outputKVMap);
 	}
 
-	protected addBlockToDiagram = (dndItem: DragItem<EditorDNDItemType, IEditorBlockData>) => {
+	protected addBlockToDiagram(dndItem: DragItem<EditorDNDItemType, IEditorBlockData>) {
 		const data: IEditorBlockData = dndItem.data;
 		var nodesCount = keys(
 			this.logic
@@ -678,7 +686,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 	}
 
-	protected loadToEditorByName: (name: string, isAutodistribute?: boolean) => boolean = (name: string, isAutodistribute?: boolean) => {
+	protected loadToEditorByName(name: string, isAutodistribute?: boolean) {
 		let itptInfo = this.logic.getItptList().find((itm) => itm.nameSelf === name);
 		let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
 		if (!itptCfg.initialKvStores
@@ -696,7 +704,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		return true;
 	}
 
-	protected generatePrefilled = (input: any) => {
+	protected generatePrefilled (input: any) {
 		let nodesBPCFG: BlueprintConfig = input as BlueprintConfig;
 		let dummyInstance = intrprtrTypeInstanceFromBlueprint(nodesBPCFG);
 		addBlueprintToRetriever(nodesBPCFG);
@@ -711,7 +719,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.props.notifyLDOptionsChange(newLDOptions);
 	}
 
-	protected editTkString: (inputTkStr: string) => string = (inputTkStr: string) => {
+	protected editTkString (inputTkStr: string)  {
 		return inputTkStr + "-edit";
 	}
 }

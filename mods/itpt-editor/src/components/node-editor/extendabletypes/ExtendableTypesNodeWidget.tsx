@@ -6,6 +6,8 @@ import { IKvStore, UserDefDict } from "@metaexplorer/core";
 import { EXTENDABLETYPES_MODEL } from "../node-editor-consts";
 import React from "react";
 
+export const TXT_ADD_PORT = "+1 in";
+
 export interface ExtendableTypesNodeProps  extends BaseWidgetProps {
 	node: ExtendableTypesNodeModel;
 	diagramEngine: DiagramEngine;
@@ -50,7 +52,7 @@ export class ExtendableTypesNodeWidget extends BaseWidget<ExtendableTypesNodePro
 					<div className="out">{map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
 				</div>
 				{/**label="+ in"  */}
-				<button className="input-highlight" onClick={this.addInPort.bind(this)} />
+				<button className="editor-btn editor-btn-addport input-highlight" onClick={this.addInPort.bind(this)} >{TXT_ADD_PORT}</button>
 			</div>
 		);
 	}
