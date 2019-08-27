@@ -47,21 +47,30 @@ let bpCfg: BlueprintConfig = {
 export class RefMapBpCfgSender extends LDRetrieverSuperRewrite {
 	constructor(parameters) {
 		super(parameters, interpretableKeys);
-		this.apiCallOverride = () => new Promise<IAsyncRequestWrapper>((resolve, reject) => {
+		this.apiCallOverride = () => new Promise<any>((resolve, reject) => {
 			const srvUrl = this.state.localValues.get(SideFXDict.srvURL);
 			const postBody = this.state.localValues.get(inputRefMap);
 			const promise = UserItptLoadApi.getUserItptLoadApiSingleton().setItptsAt(srvUrl, postBody);
 			promise().then(response =>
-				resolve(response)
+				resolve(
+					this.wrapOutputKv(response)
+				)
 			).catch(
-				reason => resolve(
+				reason => resolve(this.wrapOutputKv(
 					{
 						status: 'error',
 						message: reason,
 						statusPayload: "error"
-					}
+					})
 				)
 			)
 		});
 	}
+
+	protected wrapOutputKv (inputBody: IAsyncRequestWrapper): any {
+		return {
+			 [UserDefDict.responseWrapperKey]: inputBody
+		}
+	}
+
 }
