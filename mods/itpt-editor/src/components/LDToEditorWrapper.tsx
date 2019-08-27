@@ -568,6 +568,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		addBlueprintToRetriever(nodesBPCFG);
 		let nodesSerialized = JSON.stringify(nodesBPCFG, undefined, 2);
 		let newLDOptions = ldOptionsDeepCopy(this.props.ldOptions);
+		newLDOptions.ldToken = new NetworkPreferredToken(this.editTkString(newLDOptions.ldToken.get()));
 		newLDOptions.resource.kvStores = [
 			{ key: EDITOR_KV_KEY, ldType: newType, value: dummyInstance }
 		];

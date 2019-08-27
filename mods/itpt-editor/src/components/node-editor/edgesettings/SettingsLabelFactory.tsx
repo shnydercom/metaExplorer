@@ -3,7 +3,7 @@ import { AbstractLabelFactory, DefaultLabelModel, DiagramEngine } from "storm-re
 import { SettingsLabelWidget } from "./SettingsLabelWidget";
 
 /**
- * @author Dylan Vorster
+ * @author Jonathan Schneider
  */
 export class SettingsLabelFactory extends AbstractLabelFactory<DefaultLabelModel> {
 	constructor() {

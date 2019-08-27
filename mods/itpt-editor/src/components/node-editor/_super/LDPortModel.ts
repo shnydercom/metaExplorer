@@ -4,7 +4,7 @@ import { IKvStore, isInputValueValidFor, arrayMove } from "@metaexplorer/core";
 import { LD_PORTMODEL } from "../node-editor-consts";
 
 /**
- * @author Dylan Vorster
+ * @author Jonathan Schneider
  */
 export class LDPortModel extends PortModel {
 	in: boolean;

@@ -32,8 +32,7 @@
   "scripts": {
     "start": "react-scripts start --verbose",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "startdynamic": "yarn start"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

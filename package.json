@@ -11,9 +11,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "prestart": "lerna run build",
-    "start": "lerna run start",
     "tsc": "lerna run tsc",
     "build": "lerna run build",
-    "startdynamic": "set MIO_DYNAMIC=true && lerna run startdynamic"
+    "start": "set MIO_DYNAMIC=true && lerna run start"
   }
 }

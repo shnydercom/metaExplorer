@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import { createBlocksFromLib } from './scripts/create-blocks-from-lib';
+import { mkdir } from './scripts/copydir';
 /*
 	this server will save blocks to the file system, 
 	building a directory structure dependent on the IRI of the "nameSelf"-property.
@@ -16,7 +17,7 @@ const REQ_PATH_DETERMINING_KEY = 'nameSelf';
 const basePathDefault = './';
 const portDefault: number | string = process.env.PORT || 5000;
 
-export function editorToFileSystem(basePath?: string, srvrPort?: number) {
+export function editorToFileSystem(basePath?: string, mainItpt?: string, srvrPort?: number) {
 	if (!basePath) {
 		console.log('path not set: using default path');
 		basePath = basePathDefault;
@@ -25,12 +26,48 @@ export function editorToFileSystem(basePath?: string, srvrPort?: number) {
 		console.log('port not set: using default port');
 		srvrPort = Number(portDefault);
 	}
+
 	let isDirModified = false;
 	let resolvedBasePath = path.resolve(basePath);
 	let resolvedBlockPath = path.join(resolvedBasePath, 'blocks');
 	fs.mkdirSync(resolvedBasePath, { recursive: true });
 	fs.mkdirSync(resolvedBlockPath, { recursive: true });
-	createBlocksFromLib(basePath + "/index", resolvedBlockPath, basePath);
+
+	if (!mainItpt) {
+		let indexItpt = {
+			"subItptOf": "c6c6d88d-00e9-4bf2-8c89-c2ebc1b9adbe",
+			"canInterpretType": "my-user/my-project/index-ObjectType",
+			"nameSelf": "my-user/my-project/index",
+			"initialKvStores": [
+				{
+					"key": "InterpreterReferenceMapKey",
+					"value": {
+						"c6c6d88d-00e9-4bf2-8c89-c2ebc1b9adbe": {
+							"subItptOf": "shnyder/baseContainer",
+							"canInterpretType": "shnyder/ContainerObjType",
+							"nameSelf": "c6c6d88d-00e9-4bf2-8c89-c2ebc1b9adbe",
+							"initialKvStores": [],
+							"crudSkills": "cRud",
+							"interpretableKeys": []
+						}
+					},
+					"ldType": "InterpreterReferenceMapType"
+				}
+			],
+			"crudSkills": "cRud",
+			"interpretableKeys": []
+		};
+		let userName = "my-user";
+		let projectName = "my-project";
+		let mainItptPath = userName + "/" + projectName;
+		mainItpt = mainItptPath + "/index";
+		mkdir(path.resolve(resolvedBlockPath + "/" + userName));
+		mkdir(path.resolve(resolvedBlockPath + "/" + userName + "/" + projectName));
+		//fs.mkdirSync(path.resolve(resolvedBlockPath + "/" + mainItptPath));
+		fs.writeFileSync(path.join(resolvedBlockPath, mainItpt + ".json"), JSON.stringify(indexItpt))
+	}
+
+	createBlocksFromLib(mainItpt, resolvedBlockPath, basePath);
 	// Create a new express application instance
 	const app: express.Application = express();
 	app.use(express.json());
@@ -38,7 +75,7 @@ export function editorToFileSystem(basePath?: string, srvrPort?: number) {
 	app.get(API_IRI_BLOCKS, function (req, res) {
 		res.sendFile(path.join(resolvedBasePath, './interpreters.json'));
 		if (isDirModified) {
-			createBlocksFromLib(basePath + "/index", resolvedBlockPath, basePath);
+			createBlocksFromLib(mainItpt, resolvedBlockPath, basePath);
 		}
 		isDirModified = false;
 	});
@@ -58,7 +95,10 @@ export function editorToFileSystem(basePath?: string, srvrPort?: number) {
 		fs.mkdir(resolvedFullPath, { recursive: true }, (err) => {
 			if (err) throw err;
 			fs.writeFileSync(path.join(resolvedFullPath, '/', fileName), JSON.stringify(req.body));
-			res.sendStatus(200);
+			res.status(200).json({
+				statusPayload: "saved!",
+				status: 'success'
+			})
 		});
 		isDirModified = true;
 	});

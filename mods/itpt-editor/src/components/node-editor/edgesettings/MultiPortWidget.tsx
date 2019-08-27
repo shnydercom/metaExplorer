@@ -12,7 +12,7 @@ export interface PortState {
 }
 
 /**
- * @author Dylan Vorster
+ * @author Jonathan Schneider
  */
 export class MultiPortWidget extends Component<PortProps, PortState> {
 	constructor(props: PortProps) {
