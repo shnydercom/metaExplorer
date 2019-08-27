@@ -2,8 +2,9 @@ import {
 	addBlueprintToRetriever, BaseContainerRewrite, BlueprintConfig, DEFAULT_ITPT_RETRIEVER_NAME, gdsfpLD, IKvStore, ILDOptions,
 	initLDLocalState, intrprtrTypeInstanceFromBlueprint, ldBlueprint, LDConnectedDispatch, LDConnectedState, LDDict, LDLocalState,
 	ldOptionsDeepCopy, LDOwnProps, mapDispatchToProps, mapStateToProps, NetworkPreferredToken, OutputKVMap, UserDefDict,
-	IAsyncRequestWrapper
-	} from "@metaexplorer/core";
+	IAsyncRequestWrapper,
+	COMP_BASE_CONTAINER
+} from "@metaexplorer/core";
 import { keys } from "lodash";
 import { DragItem } from "metaexplorer-react-components";
 import React, { Component, createRef } from "react";
@@ -27,6 +28,7 @@ import { UserInfo } from "./content/status/UserInfo";
 import { EditorMain } from "./EditorMain";
 import { INewNameObj } from "./new-itpt/newItptNodeDummy";
 import { TXT_INIT } from "./content/status/SaveStatus";
+import * as shortid from "shortid";
 
 const DNDBackend = HTML5Backend;// TouchBackend; //HTML5Backend
 
@@ -158,7 +160,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			ITPT_BLOCK_EDITOR_TYPE,
 			[], [false, false, false, false, true, false, false, false, false, false, false]);
 		if (!rvLD) {
-			if(prevState.redirect === null) return null;
+			if (prevState.redirect === null) return null;
 			return redirState;
 		}
 		if (rvLD) {
@@ -421,7 +423,62 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	setNodeEditorToNew(newNameObj: INewNameObj) {
 		this.logic.clear();
-		this.setState({ ...this.state, currentlyEditingItptName: null });
+		const containerID = shortid.generate();
+		const boldID = shortid.generate();
+		const invitationText: string = "Get Started!";
+		const itptName: string = newNameObj.concatTitle;
+		const newBpCfg: BlueprintConfig = {
+			subItptOf: containerID,
+			canInterpretType: itptName + UserDefDict.standardItptObjectTypeSuffix,
+			nameSelf: itptName,
+			initialKvStores: [
+				{
+					key: UserDefDict.intrprtrBPCfgRefMapKey,
+					value: {
+						[containerID]: {
+							subItptOf: COMP_BASE_CONTAINER,
+							canInterpretType: UserDefDict.itptContainerObjType,
+							nameSelf: containerID,
+							initialKvStores: [
+								{
+									key: "in_0",
+									value: {
+										objRef: boldID,
+										propRef: null
+									},
+									ldType: "InterpreterClassType"
+								}
+							],
+							crudSkills: "cRud",
+							interpretableKeys: [
+								"in_0"
+							]
+						},
+						[boldID]: {
+							"subItptOf": "shnyder/basichtml/bold",
+							"canInterpretType": "http://schema.org/Text",
+							"nameSelf": boldID,
+							"initialKvStores": [
+								{
+									"key": "inputdata",
+									"value": invitationText,
+									"ldType": "http://schema.org/Text"
+								}
+							],
+							"crudSkills": "cRud",
+							"interpretableKeys": []
+						}
+					},
+					ldType: UserDefDict.intrprtrBPCfgRefMapType
+				}
+			],
+			crudSkills: "cRud",
+			interpretableKeys: []
+		};
+		this.generatePrefilled(newBpCfg);
+		this.logic.diagramFromItptBlueprint(newBpCfg);
+		this.logic.autoDistribute();
+		this.setState({ ...this.state, currentlyEditingItptName: itptName });
 	}
 
 	renderEditor() {

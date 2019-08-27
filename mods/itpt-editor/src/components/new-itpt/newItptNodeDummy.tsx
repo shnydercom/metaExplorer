@@ -3,9 +3,9 @@ import React from "react";
 const NEWITPT_NODE_CLASS = "newitpt-node";
 
 const TXT_CREATENEW = "create a new compound node:";
-const TXT_BLOCKNAME = "... with a block Name";
+const TXT_USERNAME = "... with a user name";
 const TXT_PROJECTNAME = "... a project name";
-const TXT_USERNAME = "... and a user name";
+const TXT_BLOCKNAME = "... and a block Name";
 const TXT_BTN_CREATE = "create";
 
 const TXT_HEADING_PLACEHOLDER = "...";
@@ -65,12 +65,12 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 			</div>
 			<div className='description'>{TXT_CREATENEW}</div>
 			<div className='body'>
-				<span>{TXT_BLOCKNAME}</span>
-				<input onChange={(ev) => setBlockName(ev.target.value)} value={newNameObj.blockName === TXT_HEADING_BLOCK_PLACEHOLDER ? '' : newNameObj.blockName} />
-				<span>{TXT_PROJECTNAME}</span>
-				<input onChange={(ev) => setProjectName(ev.target.value)} value={newNameObj.projectName === TXT_HEADING_PROJECT_PLACEHOLDER ? '' : newNameObj.projectName} />
 				<span>{TXT_USERNAME}</span>
 				<input onChange={(ev) => setUserName(ev.target.value)} value={newNameObj.userName === TXT_HEADING_USERNAME_PLACEHOLDER ? '' : newNameObj.userName} />
+				<span>{TXT_PROJECTNAME}</span>
+				<input onChange={(ev) => setProjectName(ev.target.value)} value={newNameObj.projectName === TXT_HEADING_PROJECT_PLACEHOLDER ? '' : newNameObj.projectName} />
+				<span>{TXT_BLOCKNAME}</span>
+				<input onChange={(ev) => setBlockName(ev.target.value)} value={newNameObj.blockName === TXT_HEADING_BLOCK_PLACEHOLDER ? '' : newNameObj.blockName} />
 			</div>
 			<button
 				className='editor-btn editor-btn-confirm confirm-btn' onClick={(e) => props.onNewBtnClick(newNameObj)}>{TXT_BTN_CREATE}</button>

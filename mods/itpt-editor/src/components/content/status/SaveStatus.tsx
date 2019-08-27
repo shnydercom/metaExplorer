@@ -3,7 +3,7 @@ import { IAsyncRequestWrapper } from '@metaexplorer/core';
 
 const CSS_CLASS_NAME = "savestatus";
 
-export const TXT_INIT = "...initialising";
+export const TXT_INIT = "...no changes yet";
 export const TXT_SAVED = "saved";
 export const TXT_SAVING_ERROR = "couldn't save:"
 
