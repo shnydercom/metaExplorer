@@ -1,10 +1,8 @@
 import {
-	appItptRetrFn, IModStatus, SingleModStateKeysDict, changeMainAppItpt, ITPT_TAG_ATOMIC, ITPT_TAG_MOD, LDDict, UserDefDict
-} from "@metaexplorer/core";
-import {
-	ITPT_BLOCK_EDITOR_NAME, PureAppItptEditor, ITPT_BLOCK_EDITOR_TYPE, ITPT_BLOCK_EDITOR_EDITING_ITPT,
-	ITPT_BLOCK_EDITOR_DISPLAYING_ITPT, ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_RETRIEVER_NAME, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, SAVE_ACTION_LDTYPE, ITPT_BLOCK_EDITOR_SAVING_STATUS
-} from "./components/LDToEditorWrapper";
+	appItptRetrFn, IModStatus, SingleModStateKeysDict, changeMainAppItpt, ITPT_TAG_ATOMIC, ITPT_TAG_MOD, BlueprintConfig, addBlueprintToRetriever} from "@metaexplorer/core";
+import {	PureAppItptEditor, ITPT_BLOCK_EDITOR_TYPE} from "./components/LDToEditorWrapper";
+
+const connectedEditorJSON = require('./connected-editor.json');
 
 export const MOD_ITPTEDITOR_ID = "itpt-editor";
 export const MOD_ITPTEDITOR_NAME = "Block Editor Mod";
@@ -13,7 +11,9 @@ export function initItptEditorMod(isMainItptChange: boolean): Promise<IModStatus
 	const appIntRetr = appItptRetrFn();
 	const rv: Promise<IModStatus> = new Promise((resolve) => {
 		appIntRetr.addItpt(ITPT_BLOCK_EDITOR_TYPE, PureAppItptEditor, "cRud", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
-		let startingInstance = [{
+		let connectedEditorCfg: BlueprintConfig = connectedEditorJSON;
+		addBlueprintToRetriever(connectedEditorCfg, "default");
+		let startingInstance = [/*{
 			key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
 			value: "shnyder/meta-explorer/MainAppEntryPoint",
 			ldType: LDDict.Text
@@ -62,9 +62,9 @@ export function initItptEditorMod(isMainItptChange: boolean): Promise<IModStatus
 			key: ITPT_BLOCK_EDITOR_SAVING_STATUS,
 			value: undefined,
 			ldType: UserDefDict.responseWrapperType
-		},
+		},*/
 		];
-		if (isMainItptChange) changeMainAppItpt(ITPT_BLOCK_EDITOR_NAME, startingInstance);
+		if (isMainItptChange) changeMainAppItpt("shnyder/meta-explorer/connected-editor", startingInstance);
 		resolve({ id: MOD_ITPTEDITOR_ID, name: MOD_ITPTEDITOR_NAME, state: SingleModStateKeysDict.readyToUse, errorMsg: null });
 	});
 	return rv;

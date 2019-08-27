@@ -1,0 +1,134 @@
+{
+  "subItptOf": "projCfg",
+  "canInterpretType": "shnyder/meta-explorer/connected-editor-ObjectType",
+  "nameSelf": "shnyder/meta-explorer/connected-editor",
+  "initialKvStores": [
+    {
+      "key": "InterpreterReferenceMapKey",
+      "value": {
+        "projCfg": {
+          "subItptOf": "ProjectConfiguration",
+          "canInterpretType": "ProjectConfiguration-ObjectType",
+          "nameSelf": "projCfg",
+          "initialKvStores": [
+            {
+              "key": "inputContainer",
+              "value": {
+                "objRef": "rm-blockeditor",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            },
+            {
+              "key": "configurationBlocks",
+              "value": {
+                "objRef": "rm-kcauthcfg",
+                "propRef": null
+              },
+              "ldType": "InterpreterClassType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputContainer",
+            "configurationBlocks"
+          ]
+        },
+        "rm-blockeditor": {
+          "subItptOf": "shnyder/block-editor",
+          "canInterpretType": "blockeditortype",
+          "nameSelf": "rm-blockeditor",
+          "initialKvStores": [
+            {
+              "key": "currentlyediting",
+              "value": "shnyder/me-beta/index",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "isGlobal",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
+            },
+            {
+              "key": "isFullScreenPreview",
+              "value": true,
+              "ldType": "http://schema.org/Boolean"
+            },
+            {
+              "key": "SaveAction_LDType",
+              "value": "save-editor-action",
+              "ldType": "http://schema.org/Text"
+            },
+            {
+              "key": "savingStatus",
+              "value": {
+                "objRef": "rm-bpcfgSender",
+                "propRef": "shnyder/responsewrapper"
+              },
+              "ldType": "shnyder/responsewrapperType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "savingStatus"
+          ]
+        },
+        "rm-bpcfgSender": {
+          "subItptOf": "shnyder/meta-explorer/RefMapBpCfgSender",
+          "canInterpretType": "shnyder/meta-explorer/RefMapBpCfgSenderType",
+          "nameSelf": "rm-bpcfgSender",
+          "initialKvStores": [
+            {
+              "key": "srvURL",
+              "value": "/api/blocks",
+              "ldType": "https://schema.org/URL"
+            },
+            {
+              "key": "inputRefMap",
+              "value": {
+                "objRef": "rm-actionhandler",
+                "propRef": "outputdata"
+              },
+              "ldType": "shnyder/refmap-bpcfgType"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": [
+            "inputRefMap"
+          ]
+        },
+        "rm-actionhandler": {
+          "subItptOf": "ActionHandler",
+          "canInterpretType": "ActionHandler-ObjectType",
+          "nameSelf": "rm-actionhandler",
+          "initialKvStores": [
+            {
+              "key": "canHandleType",
+              "value": "save-editor-action",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        },
+        "rm-kcauthcfg": {
+          "subItptOf": "keycloak/auth/config",
+          "canInterpretType": "keycloak/auth/config-ObjectType",
+          "nameSelf": "rm-kcauthcfg",
+          "initialKvStores": [
+            {
+              "key": "jsonConfigurationPath",
+              "value": "/media/public-cfg.json",
+              "ldType": "http://schema.org/Text"
+            }
+          ],
+          "crudSkills": "cRud",
+          "interpretableKeys": []
+        }
+      },
+      "ldType": "InterpreterReferenceMapType"
+    }
+  ],
+  "crudSkills": "cRud",
+  "interpretableKeys": []
+}
