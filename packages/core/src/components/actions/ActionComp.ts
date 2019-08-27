@@ -8,12 +8,12 @@ import { isObjPropertyRef } from "../../ldaccess/ldUtils";
 
 export const payloadInputKey = UserDefDict.inputData;
 const transfOutputKey = UserDefDict.outputData;
-export const idField = "actionId";
-export const typeField = "actionType";
+export const actionIdField = "actionId";
+export const actionTypeField = "actionType";
 
 export const ActionCompName: string = "ActionAssembler";
 
-export const ActionCompKeys: string[] = [idField, typeField, payloadInputKey];
+export const ActionCompKeys: string[] = [actionIdField, actionTypeField, payloadInputKey];
 export const ActionCompOutputKVs: IKvStore[] = [
 	{
 		key: transfOutputKey,
@@ -24,12 +24,12 @@ export const ActionCompOutputKVs: IKvStore[] = [
 
 const initialKVStores: IKvStore[] = [
 	{
-		key: idField,
+		key: actionIdField,
 		value: undefined,
 		ldType: LDDict.Text
 	},
 	{
-		key: typeField,
+		key: actionTypeField,
 		value: undefined,
 		ldType: LDDict.Text
 	},
@@ -77,8 +77,8 @@ export class ActionComp extends AbstractDataTransformer {
 		outputKvStores: Map<string, IKvStore>): IKvStore[] {
 		let rv = [];
 		let payloadInputKv = inputParams.get(payloadInputKey);
-		let idFieldKv = inputParams.get(idField);
-		let typeFieldKv = inputParams.get(typeField);
+		let idFieldKv = inputParams.get(actionIdField);
+		let typeFieldKv = inputParams.get(actionTypeField);
 		if (payloadInputKv && payloadInputKv.value && ((idFieldKv && idFieldKv.value) || (typeFieldKv && typeFieldKv.value))) {
 			let payload: any[] = payloadInputKv.value;
 			//source type constants

@@ -2,11 +2,8 @@ import {
 	addBlueprintToRetriever, BaseContainerRewrite, BlueprintConfig, DEFAULT_ITPT_RETRIEVER_NAME, gdsfpLD, IKvStore, ILDOptions,
 	initLDLocalState, intrprtrTypeInstanceFromBlueprint, ldBlueprint, LDConnectedDispatch, LDConnectedState, LDDict, LDLocalState,
 	ldOptionsDeepCopy, LDOwnProps, mapDispatchToProps, mapStateToProps, NetworkPreferredToken, OutputKVMap, UserDefDict,
-	IAsyncRequestWrapper,
-	ActionKeysDict,
-	ActionType,
-	ActionTypesDict
-} from "@metaexplorer/core";
+	IAsyncRequestWrapper
+	} from "@metaexplorer/core";
 import { keys } from "lodash";
 import { DragItem } from "metaexplorer-react-components";
 import React, { Component, createRef } from "react";
@@ -27,7 +24,6 @@ import { ExtendableTypesNodeModel } from "./node-editor/extendabletypes/Extendab
 import { GeneralDataTypeNodeModel } from "./node-editor/generaldatatypes/GeneralDataTypeNodeModel";
 import { LDPortModel } from "./node-editor/_super/LDPortModel";
 import { UserInfo } from "./content/status/UserInfo";
-import debounce from 'debounce'
 import { EditorMain } from "./EditorMain";
 import { INewNameObj } from "./new-itpt/newItptNodeDummy";
 import { TXT_INIT } from "./content/status/SaveStatus";
@@ -53,7 +49,6 @@ export type AIEState = {
 	mode: "editor" | "app" | "initial";
 	redirect: null | string;
 	isDropZoneClickThrough: boolean;
-	ignoreExternalProps: boolean;
 	saveStatus: IAsyncRequestWrapper;
 } & LDLocalState;
 
@@ -63,7 +58,6 @@ export const ITPT_BLOCK_EDITOR_NAME = "shnyder/block-editor";
 export const ITPT_BLOCK_EDITOR_TYPE = "blockeditortype";
 
 export const ITPT_BLOCK_EDITOR_EDITING_ITPT = "currentlyediting";
-export const ITPT_BLOCK_EDITOR_SERIALIZED_REFMAP_BPCFG = "shnyder/serialized-refmap";
 export const ITPT_BLOCK_EDITOR_SAVING_STATUS = "savingStatus";
 
 export const ITPT_BLOCK_EDITOR_DISPLAYING_ITPT = "currentlydisplaying";
@@ -77,10 +71,12 @@ export const ITPT_BLOCK_EDITOR_AV_DRAWER = "drawer";
 export const ITPT_BLOCK_EDITOR_AV_PREVIEW = "preview";
 export const ITPT_BLOCK_EDITOR_AV_BOTTOMBAR = "bottombar";
 
+export const SAVE_ACTION_LDTYPE = "SaveAction_LDType"
+
 let allMyInputKeys: string[] = [
 	ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
 	ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
-	UserDefDict.username, UserDefDict.projectname, ActionKeysDict.action_save, ITPT_BLOCK_EDITOR_SAVING_STATUS
+	UserDefDict.username, UserDefDict.projectname, SAVE_ACTION_LDTYPE, ITPT_BLOCK_EDITOR_SAVING_STATUS
 ];
 let initialKVStores: IKvStore[] = [
 	{
@@ -124,9 +120,9 @@ let initialKVStores: IKvStore[] = [
 		ldType: LDDict.Text
 	},
 	{
-		key: ActionKeysDict.action_save,
+		key: SAVE_ACTION_LDTYPE,
 		value: undefined,
-		ldType: ActionTypesDict.metaExplorerAction
+		ldType: LDDict.Text
 	},
 	{
 		key: ITPT_BLOCK_EDITOR_SAVING_STATUS,
@@ -137,11 +133,6 @@ let initialKVStores: IKvStore[] = [
 		key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
 		value: undefined,
 		ldType: LDDict.Text
-	},
-	{
-		key: ITPT_BLOCK_EDITOR_SERIALIZED_REFMAP_BPCFG,
-		value: undefined,
-		ldType: UserDefDict.itptRefMapBpCfg
 	}
 ];
 export const BlockEditorCfg: BlueprintConfig = {
@@ -157,7 +148,6 @@ export const BlockEditorCfg: BlueprintConfig = {
 export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	static getDerivedStateFromProps(nextProps: AIEProps, prevState: AIEState): AIEState | null {
-		if (prevState.ignoreExternalProps) return { ...prevState, ignoreExternalProps: false };
 		let redirState = null;
 		if (nextProps.routes && nextProps.routes.location + "" === prevState.redirect) {
 			redirState = { ...prevState, redirect: null };
@@ -168,6 +158,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			ITPT_BLOCK_EDITOR_TYPE,
 			[], [false, false, false, false, true, false, false, false, false, false, false]);
 		if (!rvLD) {
+			if(prevState.redirect === null) return null;
 			return redirState;
 		}
 		if (rvLD) {
@@ -203,12 +194,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			return newState;
 		}
 		return redirState;
-	}
-
-	protected setIsDropZoneClickThrough(val: boolean) {
-		if (val !== this.state.isDropZoneClickThrough) {
-			debounce(() => { this.setState({ ...this.state, isDropZoneClickThrough: val, ignoreExternalProps: true }) }, 200);
-		}
 	}
 
 	finalCanInterpretType: string = LDDict.ViewAction; // what type the itpt you're designing is capable of interpreting -> usually a new generic type
@@ -263,7 +248,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone",
 			hasCompletedFirstRender: false, hasCompletedEditorRender: false,
 			isDropZoneClickThrough: true,
-			ignoreExternalProps: false,
 			saveStatus: {
 				status: 'success',
 				statusPayload: TXT_INIT
@@ -599,9 +583,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	protected dispatchNodesSerializedChange(nodesSerialized: string) {
-		let saveAction: ActionType = this.state.localValues.get(ActionKeysDict.action_save);
-		if (saveAction) {
-			this.props.dispatchLdAction(saveAction.ldId, saveAction.ldType, saveAction.payload);
+		let saveActionType: string = this.state.localValues.get(SAVE_ACTION_LDTYPE);
+		if (saveActionType) {
+			this.props.dispatchLdAction(null, saveActionType, nodesSerialized);
 		}
 		/*
 		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
