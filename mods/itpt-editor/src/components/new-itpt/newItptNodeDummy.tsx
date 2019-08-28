@@ -61,19 +61,23 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 		const projectName = val.projectName ? val.projectName : TXT_HEADING_PROJECT_PLACEHOLDER;
 		const userName = val.userName ? val.userName : TXT_HEADING_USERNAME_PLACEHOLDER;
 		const concatTitle = [userName, projectName, blockName].join('/');
-		val = { blockName, concatTitle, projectName, userName };
+		val = { ...val, concatTitle };
 		setNewNameObj(val);
 	}
 
-	const validate = (input: string): boolean => {
+	const validateInput = (input: string): boolean => {
 		return !!input;
 	}
 
 	const handleCreateBtnClick = () => {
+		const isAllValid = validateAll();
+		if (isAllValid) props.onNewBtnClick(newNameObj)
+	}
+	const validateAll = () => {
 		const lValidationMap = {
-			isBlockValid: validate(newNameObj.blockName),
-			isProjectValid: validate(newNameObj.projectName),
-			isUserNameValid: validate(newNameObj.userName)
+			isBlockValid: validateInput(newNameObj.blockName),
+			isProjectValid: validateInput(newNameObj.projectName),
+			isUserNameValid: validateInput(newNameObj.userName)
 		}
 		let isMapValid: boolean = true;
 		for (const key in lValidationMap) {
@@ -83,7 +87,7 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 			}
 		}
 		setValidationMap(lValidationMap);
-		if (isMapValid) props.onNewBtnClick(newNameObj)
+		return isMapValid;
 	}
 
 	return (
@@ -96,16 +100,26 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 			<div className='description'>{TXT_CREATENEW}</div>
 			<div className='body'>
 				<span>{TXT_USERNAME}</span>
-				<input className={validationMap.isUserNameValid ? '': 'invalid'}
-					onChange={(ev) => setUserName(ev.target.value)} value={newNameObj.userName === TXT_HEADING_USERNAME_PLACEHOLDER ? '' : newNameObj.userName} />
+				<input className={validationMap.isUserNameValid ? '' : 'invalid'}
+					onChange={(ev) => {
+						setUserName(ev.target.value);
+						validateAll();
+					}}
+					value={newNameObj.userName === TXT_HEADING_USERNAME_PLACEHOLDER ? '' : newNameObj.userName} />
 				<span>{TXT_PROJECTNAME}</span>
-				<input className={validationMap.isProjectValid ? '': 'invalid'}
-					onChange={(ev) => setProjectName(ev.target.value)} value={newNameObj.projectName === TXT_HEADING_PROJECT_PLACEHOLDER ? '' : newNameObj.projectName} />
+				<input className={validationMap.isProjectValid ? '' : 'invalid'}
+					onChange={(ev) => {
+						setProjectName(ev.target.value);
+						validateAll();
+					}} value={newNameObj.projectName === TXT_HEADING_PROJECT_PLACEHOLDER ? '' : newNameObj.projectName} />
 				<span>{TXT_BLOCKNAME}</span>
-				<input className={validationMap.isBlockValid ? '': 'invalid'}
-					onChange={(ev) => setBlockName(ev.target.value)} value={newNameObj.blockName === TXT_HEADING_BLOCK_PLACEHOLDER ? '' : newNameObj.blockName} />
+				<input className={validationMap.isBlockValid ? '' : 'invalid'}
+					onChange={(ev) => {
+						setBlockName(ev.target.value);
+						validateAll();
+						}} value={newNameObj.blockName === TXT_HEADING_BLOCK_PLACEHOLDER ? '' : newNameObj.blockName} />
 			</div>
-			<small className={validationMap.isBlockValid && validationMap.isProjectValid && validationMap.isUserNameValid ? '': 'invalid'}>{TXT_SET_ALL_FIELDS}</small>
+			<small className={validationMap.isBlockValid && validationMap.isProjectValid && validationMap.isUserNameValid ? 'validationtxt' : 'validationtxt invalid'}>{TXT_SET_ALL_FIELDS}</small>
 			<button
 				className='editor-btn editor-btn-confirm confirm-btn' onClick={(e) => {
 					e.stopPropagation();

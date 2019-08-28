@@ -71,7 +71,7 @@
 			}
 		
 		}
-		&.invalid {
+		.invalid {
 			background-color: adjust-color($color: #5f0010, $alpha: 0.4);
 		}
 	}
