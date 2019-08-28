@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { ITPTFullscreen } from './content/ITPTFullscreen';
 import { LDRouteProps, BaseContainerRewrite } from '@metaexplorer/core';
-import { ITransitComp, ITabData, Tabs, MiniToolBox, DragItem } from 'metaexplorer-react-components';
+import { ITransitComp, ITabData, Tabs, MiniToolBox, DragItem, StylableDragItemProps, ActiveStates } from 'metaexplorer-react-components';
 import { EditorDNDItemType, IEditorBlockData, IEditorPreviewData } from './editorInterfaces';
 import { EditorTrayItem, EditorTrayItemProps } from './content/blockselection/EditorTrayItem';
-import { PreviewMoveLayer } from './panels/PreviewMoveLayer';
+import { PreviewMoveLayer, MTBItemDragContainer } from './panels/PreviewMoveLayer';
 
 import { DNDEnabler } from './panels/DNDEnabler';
 import { MainEditorDropLayer } from './panels/MainEditorDropLayer';
@@ -31,6 +31,11 @@ export interface EditorMainProps {
 	changeNodeCurrentlyEditing(data: IEditorBlockData): {};
 	onNewBtnClick: (newNameObj: INewNameObj) => void;
 	saveStatus: IAsyncRequestWrapper;
+	onMiniChanged?: (isMini: boolean) => void;
+	onUpClick?: () => void;
+	onActiveStateChanged?: (activeState: ActiveStates) => void;
+	isMini?: boolean;
+	activeState?: ActiveStates;
 }
 
 type TabTypes = "nodeEditor" | "newNode";
@@ -41,7 +46,40 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 
 	const [isPreviewFullScreen, setIsPreviewFullScreen] = React.useState<boolean>(props.isPreviewFullScreen)
 
-	const [previewPosition, setPreviewPosition] = React.useState<{ top: number, left: number }>({ top: 20, left: 200 });
+	const [previewPosition, setPreviewPosition] = React.useState<{ top: number, left: number }>({ top: 50, left: 400 });
+
+	const mtbProps: {
+		onMiniChanged?: (isMini: boolean) => void;
+		onMaxiClick?: () => void;
+		onUpClick?: () => void;
+		onActiveStateChanged?: (activeState: ActiveStates) => void;
+		isMini?: boolean;
+		activeState?: ActiveStates;
+	} = {
+		onMiniChanged: (mini) => props.onMiniChanged(mini),
+		onMaxiClick: () => setIsPreviewFullScreen(true),
+		onActiveStateChanged: (as) => props.onActiveStateChanged(as),
+		//isMini: isMini,
+		activeState: props.activeState
+	}
+
+	const mtbDragItem: DragItem<EditorDNDItemType, IEditorPreviewData> = {
+		id: 'mtb',
+		type: EditorDNDItemType.preview,
+		sourceBhv: 'sGone',
+		targetBhv: 'tCopy',
+		data: {
+			activeState: props.activeState,
+			isMini: props.isMini
+		}
+	}
+	const mtbStylableDragItem: StylableDragItemProps<EditorDNDItemType, IEditorPreviewData> = {
+		...mtbDragItem,
+		isWithDragHandle: true,
+		className: 'mtb-dragcontainer',
+		dragOrigin: { top: -10, left: -163 },
+		isTransitDummy: true
+	}
 
 	const createTransitComponents: () => ITransitComp<EditorDNDItemType, (IEditorBlockData | IEditorPreviewData)>[] = () => {
 		const rv: ITransitComp<EditorDNDItemType, (IEditorBlockData | IEditorPreviewData)>[] = [];
@@ -65,7 +103,14 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 		//Minitoolbox
 		rv.push({
 			forType: EditorDNDItemType.preview,
-			componentFactory: (dragItem) => (props) => (<MiniToolBox className='minitoolbox'></MiniToolBox>)
+			componentFactory: (dragItem: DragItem<EditorDNDItemType, IEditorPreviewData>) => (props) => (
+				<MTBItemDragContainer {...mtbStylableDragItem}>
+					<MiniToolBox
+						className='minitoolbox'
+						activeState={dragItem.data.activeState}
+						isMini={dragItem.data.isMini}
+					></MiniToolBox>
+				</MTBItemDragContainer>)
 		})
 		return rv;
 	}
@@ -132,6 +177,9 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 			<TabDropLayer onDrop={onTabDrop} ></TabDropLayer>
 			<MainEditorDropLayer onDrop={onMainEditorDrop}></MainEditorDropLayer>
 			<PreviewMoveLayer<EditorDNDItemType>
+				{...mtbProps}
+				isMini={props.isMini}
+				onUpClick={() => props.onUpClick()}
 				previewPos={{ left: previewPosition.left, top: previewPosition.top }}
 				previewItemType={EditorDNDItemType.preview}>
 				<div className="app-content mdscrollbar">

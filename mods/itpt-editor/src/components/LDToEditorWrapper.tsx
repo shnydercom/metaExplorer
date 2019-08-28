@@ -6,7 +6,7 @@ import {
 	COMP_BASE_CONTAINER
 } from "@metaexplorer/core";
 import { keys } from "lodash";
-import { DragItem } from "metaexplorer-react-components";
+import { DragItem, ActiveStates } from "metaexplorer-react-components";
 import React, { Component, createRef } from "react";
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -52,6 +52,8 @@ export type AIEState = {
 	redirect: null | string;
 	isDropZoneClickThrough: boolean;
 	saveStatus: IAsyncRequestWrapper;
+	previewActiveState: ActiveStates;
+	previewIsMini: boolean;
 } & LDLocalState;
 
 const EDITOR_KV_KEY = "EditorKvKey";
@@ -253,7 +255,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			saveStatus: {
 				status: 'success',
 				statusPayload: TXT_INIT
-			}
+			},
+			previewIsMini: false,
+			previewActiveState: "phoneEd"
 		};
 	}
 
@@ -301,6 +305,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	render() {
+		console.log("rendering LDtoEditorWrapper")
 		const { drawerActive, bottomBarHidden, drawerHidden, currentlyEditingItptName, saveStatus } = this.state;
 		//const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		const itpts = this.logic ? this.logic.getItptList() : [];
@@ -312,8 +317,26 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				this.diagramRef.current.forceUpdate();
 			}
 		}
+		const miniProps: {
+			onMiniChanged: (isMini: boolean) => void;
+			onActiveStateChanged: (activeState: ActiveStates) => void;
+			isMini: boolean;
+			onUpClick: () => void;
+			activeState: ActiveStates;
+		} = {
+			activeState: this.state.previewActiveState,
+			isMini: this.state.previewIsMini,
+			onMiniChanged: (isMini) => {
+				this.setState({ ...this.state, previewIsMini: !isMini })
+			},
+			onActiveStateChanged: (as) => {
+				this.setState({ ...this.state, previewActiveState: as })
+			},
+			onUpClick: () => this.triggerNavToTop()
+		}
 		if (!this.logic) return <div>loading Editor</div>
 		return <EditorMain
+			{...miniProps}
 			saveStatus={saveStatus}
 			onNewBtnClick={(newNameObj) => this.setNodeEditorToNew(newNameObj)}
 			changeNodeCurrentlyEditing={this.changeNodeCurrentlyEditing.bind(this)}

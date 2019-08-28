@@ -349,17 +349,21 @@
         "version": "b005da1c4608d2f5bc8fd66eb46510894f546197e3ad0fd579ca821d33d38e76",
         "signature": "c47328ab33bb932b50eab1d91d4b6198bf44cbe15db32704509ecbf93b8e98c7"
       },
+      "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/copydir.ts": {
+        "version": "07f1e5115f69a8796bdf65352e215f8ceb87f16f3fa7f5e127b7dcf67cb91aba",
+        "signature": "20b9d2ca6bc4dadb162625943f68afd0e48d7569dc27fa4ad8c0e1e765108ff6"
+      },
       "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/editor-to-fs-server.ts": {
-        "version": "b8ecf1fe6543ccb71ba95db0878186a469ee9d44d63653e24d6d967ef425733c",
-        "signature": "2dcc3733c2dcf3720fcfed4acfaf1d86c260b5f6e9296497a522dff1c1d1f780"
+        "version": "34476dc78d5155a08de977c2d7a391d1a71c212c74f22e267eff34a8dd9135ea",
+        "signature": "743cfeecc4a68dd9d4cf2f329ef29139bbd5f2b5fdcbcc556efe3fa4f20adda2"
       },
       "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/app.ts": {
-        "version": "e98c62e82e8f43c38bb4b7a50dd5bcfb0b029d8c589cbae0c3ddb8ba2872117f",
+        "version": "98b17ad860294588736c1ac785867d0a4026cb4bad3e6666ec573e9873be62b2",
         "signature": "0ebbf2deff20f03c7b437e483de653b75527fa6902b246bd18b4a4b415c9a1d3"
       },
       "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/index.ts": {
-        "version": "0c575fa610f08fd2d7bd6df1c84517d3f86e49c478b77c84554caee0606d9826",
-        "signature": "ccadecadad6e1d59a2296447d91cacbc27b3cc086ab0cb8d012e7b133f97f1d6"
+        "version": "be11e6a0058bddde3ddbe4eeebe50fd225026e2856d552093ead163d014edf91",
+        "signature": "5fa069702db1e38c625a2dfd6d7eb4d6d9398d25e42fa6ee4da8251f1bd8b708"
       },
       "c:/users/jonat/git/metaexplorer/node_modules/@types/anymatch/index.d.ts": {
         "version": "48b52264fa193879a074197839dbb4796fa07e86350ff888e5361e06aa46df76",
@@ -1161,22 +1165,32 @@
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/copydir.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/fs.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/path.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/editor-to-fs-server.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/express/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/path.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/fs.d.ts",
         "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/create-blocks-from-lib.ts",
+        "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/copydir.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/app.ts": [
         "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/editor-to-fs-server.ts",
+        "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/copydir.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/path.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/index.ts": [
         "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/create-blocks-from-lib.ts",
         "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/editor-to-fs-server.ts",
+        "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/copydir.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2037,7 +2051,8 @@
       ],
       "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/index.ts": [
         "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/create-blocks-from-lib.ts",
-        "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/editor-to-fs-server.ts"
+        "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/editor-to-fs-server.ts",
+        "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/copydir.ts"
       ],
       "c:/users/jonat/git/metaexplorer/node_modules/@types/anymatch/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
@@ -2533,6 +2548,7 @@
       "c:/users/jonat/git/metaexplorer/node_modules/@types/body-parser/index.d.ts",
       "c:/users/jonat/git/metaexplorer/node_modules/@types/express/index.d.ts",
       "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/create-blocks-from-lib.ts",
+      "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/copydir.ts",
       "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/editor-to-fs-server.ts",
       "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/app.ts",
       "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/index.ts",

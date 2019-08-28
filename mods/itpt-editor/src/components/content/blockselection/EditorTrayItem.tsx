@@ -56,8 +56,8 @@ export const DraggableEditorTrayItem: React.FC<EditorTrayItemProps & StylableDra
 	}
 	//assigns part of the props to properties of a sub-element https://stackoverflow.com/a/39333479/1149845
 	const dragContainerProps: StylableDragItemProps<EditorDNDItemType, IEditorBlockData> =
-		(({ className, data, id, isWithDragHandle, onOutDragHandle, onOverDragHandle, sourceBhv, targetBhv, type }) =>
-			({ className, data, id, isWithDragHandle, onOutDragHandle, onOverDragHandle, sourceBhv, targetBhv, type }))(props);
+		(({ className, data, id, isWithDragHandle, dragOrigin, sourceBhv, targetBhv, type }) =>
+			({ className, data, id, isWithDragHandle, dragOrigin, sourceBhv, targetBhv, type }))(props);
 	const editorTrayItemProps: EditorTrayItemProps =
 		(({ isCompoundBlock, data, onEditBtnPress, onPreviewBtnPress, isOpen, onClick }) =>
 			({ isCompoundBlock, data, onEditBtnPress, onPreviewBtnPress, isOpen, onClick }))(props);

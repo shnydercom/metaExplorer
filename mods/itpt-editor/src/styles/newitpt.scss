@@ -69,6 +69,10 @@
 			&:focus {
 				background-color: rgba(87, 161, 245, 0.4);
 			}
+		
+		}
+		&.invalid {
+			background-color: adjust-color($color: #5f0010, $alpha: 0.4);
 		}
 	}
 

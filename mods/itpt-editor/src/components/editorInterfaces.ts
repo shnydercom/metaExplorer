@@ -1,3 +1,5 @@
+import { ActiveStates } from "metaexplorer-react-components";
+
 export interface IEditorBlockData { 
 	type: "bdt" | "inputtype" | "outputtype" | "lineardata" | "ldbp";
 	label: string;
@@ -7,6 +9,8 @@ export interface IEditorBlockData {
 }
 
 export interface IEditorPreviewData {
+	isMini:boolean;
+	activeState: ActiveStates;
 }
 
 export enum EditorDNDItemType {

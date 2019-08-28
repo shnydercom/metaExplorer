@@ -36,7 +36,8 @@ const editorDragItem: DragItem<EditorDNDItemType, IEditorBlockData> = {
 const editorStylableDragItem: StylableDragItemProps<EditorDNDItemType, IEditorBlockData> = {
 	...editorDragItem,
 	isWithDragHandle: false,
-	className: 'block-dragcontainer'
+	className: 'block-dragcontainer',
+	dragOrigin: { left: 0, top: 0 }
 }
 export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 
@@ -258,6 +259,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			</div>
 			<div className="button-row">
 				<button className="editorbtn editorbtn-small editorbtn-action editorbtn-autolayout" onClick={(ev) => {
+					ev.stopPropagation();
 					this.props.onZoomAutoLayoutPress();
 				}
 				} >beautify</button>

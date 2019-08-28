@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MoveContainer, DragItem, StylableDragItemProps, DragContainer, MiniToolBox } from 'metaexplorer-react-components';
+import { MoveContainer, DragItem, StylableDragItemProps, DragContainer, MiniToolBox, ActiveStates } from 'metaexplorer-react-components';
 import { IEditorPreviewData } from '../editorInterfaces';
 
 export interface PreviewMoveLayerProps<TItemType extends string> {
@@ -8,6 +8,12 @@ export interface PreviewMoveLayerProps<TItemType extends string> {
 		top: number;
 		left: number
 	}
+	onMiniChanged?: (isMini: boolean) => void;
+	onMaxiClick?: () => void;
+	onUpClick?: () => void;
+	onActiveStateChanged?: (activeState: ActiveStates) => void;
+	isMini?: boolean;
+	activeState?: ActiveStates;
 }
 
 export function PreviewMoveLayer<TItemType extends string>(props: React.PropsWithChildren<PreviewMoveLayerProps<TItemType>>) {
@@ -16,12 +22,16 @@ export function PreviewMoveLayer<TItemType extends string>(props: React.PropsWit
 		type: props.previewItemType,
 		sourceBhv: 'sGone',
 		targetBhv: 'tCopy',
-		data: {}
+		data: {
+			activeState: props.activeState,
+			isMini: props.isMini
+		}
 	}
 	const mtbStylableDragItem: StylableDragItemProps<TItemType, IEditorPreviewData> = {
 		...mtbDragItem,
 		isWithDragHandle: true,
-		className: 'mtb-dragcontainer'
+		className: 'mtb-dragcontainer',
+		dragOrigin: { top: -10, left: -163}
 	}
 
 	return (
@@ -31,7 +41,15 @@ export function PreviewMoveLayer<TItemType extends string>(props: React.PropsWit
 				mtb: {
 					pos: { top: props.previewPos.top, left: props.previewPos.left },
 					child: <MTBItemDragContainer {...mtbStylableDragItem}>
-						<MiniToolBox className='minitoolbox'>
+						<MiniToolBox
+							className='minitoolbox'
+							onMiniChanged={props.onMiniChanged}
+							onMaxiClick={props.onMaxiClick}
+							onUpClick={props.onUpClick}
+							onActiveStateChanged={props.onActiveStateChanged}
+							isMini={props.isMini}
+							activeState={props.activeState}
+						>
 							{props.children}
 						</MiniToolBox>
 					</MTBItemDragContainer>
