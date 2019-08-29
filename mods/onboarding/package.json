@@ -7,7 +7,7 @@
     "build": "tsc"
   },
   "author": "Jonathan Schneider",
-  "license": "MIT",
+  "license": "EUPL",
   "module": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "repository": "",

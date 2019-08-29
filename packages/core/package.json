@@ -3,7 +3,7 @@
   "name": "@metaexplorer/core",
   "version": "0.0.1",
   "description": "a GUI editor for configuring bizSys-Server",
-  "license": "MIT",
+  "license": "EUPL",
   "module": "./lib-esm/index.js",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

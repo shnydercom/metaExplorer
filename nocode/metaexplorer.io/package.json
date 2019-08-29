@@ -8,7 +8,7 @@
     "build": "node ./create-block-lib.js"
   },
   "author": "Jonathan Schneider",
-  "license": "MIT",
+  "license": "EUPL",
   "devDependencies": {
     "@metaexplorer/editor-dev-server": "*"
   }

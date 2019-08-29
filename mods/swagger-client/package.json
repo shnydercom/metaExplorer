@@ -6,7 +6,7 @@
     "test": "test"
   },
   "author": "Jonathan Schneider",
-  "license": "MIT",
+  "license": "EUPL",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "repository": "",
