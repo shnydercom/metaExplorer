@@ -1,4 +1,4 @@
-import { DiagramEngine, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
+import { DiagramEngine, BaseWidget, BaseWidgetProps } from "@projectstorm/react-diagrams";
 import { BaseDataTypePortSelector } from "./BaseDataTypePortSelectorWidget";
 import { BaseDataTypeNodeModel } from "./BaseDataTypeNodeModel";
 import { createFactory } from "react";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AbstractLabelFactory, DefaultLabelModel, DiagramEngine } from "storm-react-diagrams";
+import { AbstractLabelFactory, DefaultLabelModel, DiagramEngine } from "@projectstorm/react-diagrams";
 import { SettingsLabelWidget } from "./SettingsLabelWidget";
 
 /**

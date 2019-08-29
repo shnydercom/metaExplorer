@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BaseWidgetProps, DefaultLabelModel, BaseWidget } from "storm-react-diagrams";
+import { BaseWidgetProps, DefaultLabelModel, BaseWidget } from "@projectstorm/react-diagrams";
 import { indexOf } from "lodash";
 import { LDPortModel } from "../_super/LDPortModel";
 export interface SettingsLabelWidgetProps extends BaseWidgetProps {

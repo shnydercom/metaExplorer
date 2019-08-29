@@ -21,7 +21,11 @@
     "@metaexplorer/core": "^0.0.1",
     "dagre": "^0.8.4",
     "debounce": "^1.2.0",
-    "storm-react-diagrams": "^5.2.1",
+    "@projectstorm/react-diagrams": "^5.3.2",
+    "closest": "^0.0.1",
+    "lodash": "4.*",
+    "pathfinding": "^0.4.18",
+    "paths-js": "^0.4.9",
     "metaexplorer-react-components": "https://github.com/aJonathanSchneider/metaExplorer-react-components.git"
   },
   "devDependencies": {

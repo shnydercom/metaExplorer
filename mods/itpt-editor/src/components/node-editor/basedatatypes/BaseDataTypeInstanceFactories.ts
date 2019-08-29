@@ -1,4 +1,4 @@
-import { AbstractNodeFactory, DiagramEngine } from "storm-react-diagrams";
+import { AbstractNodeFactory, DiagramEngine } from "@projectstorm/react-diagrams";
 import { BaseDataTypeNodeModel } from "./BaseDataTypeNodeModel";
 import { BASEDATATYPE_MODEL } from "../node-editor-consts";
 import * as React from "react";

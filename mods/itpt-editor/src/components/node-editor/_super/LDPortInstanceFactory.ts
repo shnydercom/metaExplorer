@@ -1,5 +1,5 @@
 import { LDPortModel } from "./LDPortModel";
-import { AbstractPortFactory } from "storm-react-diagrams";
+import { AbstractPortFactory } from "@projectstorm/react-diagrams";
 import { IKvStore,UserDefDict } from "@metaexplorer/core";
 import { LD_PORTMODEL } from "../node-editor-consts";
 

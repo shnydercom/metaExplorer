@@ -1,4 +1,4 @@
-import { NodeModel, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
+import { NodeModel, BaseWidget, BaseWidgetProps } from "@projectstorm/react-diagrams";
 import React from "react";
 
 export interface PortProps extends BaseWidgetProps {

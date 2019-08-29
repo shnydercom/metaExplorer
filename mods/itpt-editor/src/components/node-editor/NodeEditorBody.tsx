@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DiagramWidget } from "storm-react-diagrams";
+import { DiagramWidget } from "@projectstorm/react-diagrams";
 import { NodeEditorLogic } from "./NodeEditorLogic";
 
 export interface EditorBodyProps {

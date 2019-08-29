@@ -1,4 +1,4 @@
-import { DiagramEngine, AbstractNodeFactory } from "storm-react-diagrams";
+import { DiagramEngine, AbstractNodeFactory } from "@projectstorm/react-diagrams";
 import { OutputInfoNodeWidgetFactory } from "./OutputInfoNodeWidget";
 import { OUTPUT_INFO_MODEL } from "../node-editor-consts";
 import { OutputInfoPartNodeModel } from "./OutputInfoNodeModel";

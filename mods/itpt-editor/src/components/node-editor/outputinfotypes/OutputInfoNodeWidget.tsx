@@ -1,4 +1,4 @@
-import { DefaultPortLabel, DiagramEngine } from "storm-react-diagrams";
+import { DefaultPortLabel, DiagramEngine } from "@projectstorm/react-diagrams";
 import { OutputInfoPartNodeModel } from "./OutputInfoNodeModel";
 import { Component, createFactory } from "react";
 import { map } from "lodash";

@@ -1,4 +1,4 @@
-import { NodeModel, DiagramEngine } from "storm-react-diagrams";
+import { NodeModel, DiagramEngine } from "@projectstorm/react-diagrams";
 import { LDPortModel } from './LDPortModel';
 import { merge, filter } from "lodash";
 import { INTERPRETERDATATYPE_MODEL } from "../node-editor-consts";

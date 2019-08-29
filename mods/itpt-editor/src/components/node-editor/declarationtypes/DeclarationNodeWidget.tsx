@@ -1,4 +1,4 @@
-import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "storm-react-diagrams";
+import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "@projectstorm/react-diagrams";
 import { DeclarationPartNodeModel } from "./DeclarationNodeModel";
 import { createFactory } from "react";
 import { map } from "lodash";

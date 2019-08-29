@@ -1,4 +1,4 @@
-import { NodeModel } from "storm-react-diagrams";
+import { NodeModel } from "@projectstorm/react-diagrams";
 import { Component } from "react";
 import React from "react";
 

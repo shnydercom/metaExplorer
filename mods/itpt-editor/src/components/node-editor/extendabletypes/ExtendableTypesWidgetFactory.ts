@@ -1,4 +1,4 @@
-import { DiagramEngine, AbstractNodeFactory } from "storm-react-diagrams";
+import { DiagramEngine, AbstractNodeFactory } from "@projectstorm/react-diagrams";
 import { ExtendableTypesNodeWidget } from "./ExtendableTypesNodeWidget";
 import { EXTENDABLETYPES_MODEL } from "../node-editor-consts";
 import { ExtendableTypesNodeModel } from "./ExtendableTypesNodeModel";

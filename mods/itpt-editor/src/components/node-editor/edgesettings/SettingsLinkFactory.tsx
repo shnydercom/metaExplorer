@@ -1,4 +1,4 @@
-import { DefaultLinkFactory, DefaultLinkModel } from "storm-react-diagrams";
+import { DefaultLinkFactory, DefaultLinkModel } from "@projectstorm/react-diagrams";
 
 export class SettingsLinkFactory extends DefaultLinkFactory {
 	getNewInstance(initialConfig?: any): DefaultLinkModel {

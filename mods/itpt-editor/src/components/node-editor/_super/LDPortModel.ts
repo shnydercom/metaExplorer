@@ -1,4 +1,4 @@
-import { PortModel, DiagramEngine, LinkModel, DefaultLinkModel } from "storm-react-diagrams";
+import { PortModel, DiagramEngine, LinkModel, DefaultLinkModel } from "@projectstorm/react-diagrams";
 import { merge } from "lodash";
 import { IKvStore, isInputValueValidFor, arrayMove } from "@metaexplorer/core";
 import { LD_PORTMODEL } from "../node-editor-consts";

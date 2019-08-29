@@ -1,4 +1,4 @@
-import { DiagramEngine, AbstractNodeFactory } from "storm-react-diagrams";
+import { DiagramEngine, AbstractNodeFactory } from "@projectstorm/react-diagrams";
 import { DeclarationNodeWidgetFactory } from "./DeclarationNodeWidget";
 import { DECLARATION_MODEL } from "../node-editor-consts";
 import { DeclarationPartNodeModel } from "./DeclarationNodeModel";

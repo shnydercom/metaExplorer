@@ -1,6 +1,10 @@
 {
   "private": true,
   "license": "EUPL",
+  "repository": {
+		"type": "git",
+		"url": "https://https://github.com/aJonathanSchneider/metaExplorer.git"
+	},
   "devDependencies": {
     "lerna": "^3.16.4"
   },
