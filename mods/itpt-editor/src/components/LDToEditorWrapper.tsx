@@ -183,7 +183,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				bottomBarHidden = !!(hiddenViews as []).find((val) => val === ITPT_BLOCK_EDITOR_AV_BOTTOMBAR);
 			}
 			let lSavingStat = rvLD.localValues.get(ITPT_BLOCK_EDITOR_SAVING_STATUS);
-			console.log(lSavingStat);
 			if (!lSavingStat) lSavingStat = {
 				status: 'warning',
 				statusPayload: "not connected"
@@ -305,7 +304,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	render() {
-		console.log("rendering LDtoEditorWrapper")
 		const { drawerActive, bottomBarHidden, drawerHidden, currentlyEditingItptName, saveStatus } = this.state;
 		//const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		const itpts = this.logic ? this.logic.getItptList() : [];
@@ -792,7 +790,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		const { hasCompletedFirstRender, currentlyEditingItptName, mode, hasCompletedEditorRender } = this.state;
 		if (!!currentlyEditingItptName) {
 			if (!hasCompletedFirstRender) {
-				console.log("evaluating preview reload");
 				if (mode === "editor") {
 					this.loadToEditorByName(this.state.currentlyEditingItptName, true);
 					this.setState({ ...this.state, hasCompletedFirstRender: true, hasCompletedEditorRender: true });

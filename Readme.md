@@ -5,7 +5,9 @@
 
 # running with the development server
 
-- run `yarn startdynamic`
+- run `yarn start`
+
+the development server saves your blocks under packages/editor-dev-server/dev-srv-nocode/blocks
 
 # license
 

@@ -1,6 +1,8 @@
-import { COMP_BASE_CONTAINER, IItptInfoItem, DEFAULT_ITPT_RETRIEVER_NAME, ReduxItptRetriever, getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg,
+import {
+	COMP_BASE_CONTAINER, IItptInfoItem, DEFAULT_ITPT_RETRIEVER_NAME, ReduxItptRetriever, getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg,
 	ldBaseDataTypeList, BlueprintConfig, IBlueprintItpt, LDDict, IKvStore, isInputValueValidFor, isObjPropertyRef,
-	ObjectPropertyRef, UserDefDict, appItptMatcherFn } from "@metaexplorer/core";
+	ObjectPropertyRef, UserDefDict, appItptMatcherFn
+} from "@metaexplorer/core";
 import { DefaultLinkModel, DiagramEngine, DiagramModel, NodeModel } from "storm-react-diagrams";
 import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
@@ -143,6 +145,7 @@ export class NodeEditorLogic {
 				}
 			}
 		}
+		this.addListenersToModel(deSerializedModel);
 		return deSerializedModel;
 	}
 
@@ -181,10 +184,24 @@ export class NodeEditorLogic {
 		this.outputNode = outputNode;
 		//5) load model into engine
 		this.activeModel = model;
+		this.addListenersToModel(model);
 		this.diagramEngine.setDiagramModel(model);
 		/*if (this.diagramEngine.canvas) {
 			this.diagramEngine.zoomToFit();
 		}*/
+	}
+
+	addListenersToModel(model: DiagramModel) {
+		model.addListener({
+			nodesUpdated: (event) => {
+				console.log("nodesUpdated ev")
+				this.onOutputInfoSaved(this.outputNode.getItptName());
+			},
+			linksUpdated: (event) => {
+				console.log("linksUpdated ev");
+				this.onOutputInfoSaved(this.outputNode.getItptName());
+			}
+		})
 	}
 
 	public getActiveModel(): DiagramModel {
