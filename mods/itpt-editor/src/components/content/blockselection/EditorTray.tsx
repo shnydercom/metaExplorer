@@ -259,6 +259,7 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			</div>
 			<div className="button-row">
 				<button className="editorbtn editorbtn-small editorbtn-action editorbtn-autolayout" onClick={(ev) => {
+					ev.preventDefault();
 					ev.stopPropagation();
 					this.props.onZoomAutoLayoutPress();
 				}

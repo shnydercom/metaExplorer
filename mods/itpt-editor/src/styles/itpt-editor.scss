@@ -82,6 +82,7 @@ $button-color-cta: orange;
   background-color: rgba($editor-background-elevated-color, 0.6);
   height: 36px;
   padding-right: 3px;
+  z-index: 99;
 
   >div>* {
     padding: 0 6px !important;
@@ -730,5 +731,4 @@ $button-color-cta: orange;
       
     }
   }
-
 }

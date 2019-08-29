@@ -11,9 +11,9 @@ import React, { Component, createRef } from "react";
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 //import TouchBackend from 'react-dnd-touch-backend';
-import { connect } from "react-redux";/*
+import { connect } from "react-redux";
 import { Redirect } from "react-router";
-import { Route } from 'react-router-dom';*/
+//import { Route } from 'react-router-dom';
 import "storm-react-diagrams/dist/style.min.css";
 import { IEditorBlockData, EditorDNDItemType } from "./editorInterfaces";
 import { BaseDataTypeNodeModel } from "./node-editor/basedatatypes/BaseDataTypeNodeModel";
@@ -329,12 +329,22 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			onMiniChanged: (isMini) => {
 				this.setState({ ...this.state, previewIsMini: !isMini })
 			},
-			onActiveStateChanged: (as) => {
-				this.setState({ ...this.state, previewActiveState: as })
+			onActiveStateChanged: (activeState) => {
+				this.setState({ ...this.state, previewActiveState: activeState, previewIsMini: false })
 			},
 			onUpClick: () => this.triggerNavToTop()
 		}
-		if (!this.logic) return <div>loading Editor</div>
+		if (!this.logic) return <div>loading Editor</div>;
+		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
+			return <div>{this.errorNotAvailableMsg}</div>;
+		}
+		const { /*mode, localValues,*/ redirect } = this.state;
+		//let isGlobal = !!localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
+
+		if (!!redirect) {
+			this.setState({ ...this.state, redirect: null });
+			return <Redirect to={redirect} />;
+		}
 		return <EditorMain
 			{...miniProps}
 			saveStatus={saveStatus}
@@ -748,12 +758,13 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				break;
 		}
 		var points = this.logic.getDiagramEngine().getRelativeMousePoint(event);
-		node.x = points.x;
-		node.y = points.y;
+		node.x = points.x - 224 / 2;
+		node.y = points.y - 32 / 2;
 		this.logic
 			.getDiagramEngine()
 			.getDiagramModel()
 			.addNode(node);
+		this.forceUpdate();
 	}
 
 	protected changeNodeCurrentlyEditing(data: IEditorBlockData): {} {

@@ -66,11 +66,13 @@
 			font-size: large;
 			border-bottom: 1px solid white;
 			padding: 3px;
+
 			&:focus {
 				background-color: rgba(87, 161, 245, 0.4);
 			}
-		
+
 		}
+
 		.invalid {
 			background-color: adjust-color($color: #5f0010, $alpha: 0.4);
 		}
@@ -80,4 +82,11 @@
 		grid-column: 4/span 2;
 		grid-row: 5;
 	}
+}
+
+.validationtxt {
+	font-size: small;
+	grid-column: 2/span 4;
+	text-align: right;
+	opacity: 0.8;
 }

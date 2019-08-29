@@ -71,7 +71,15 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 
 	const handleCreateBtnClick = () => {
 		const isAllValid = validateAll();
-		if (isAllValid) props.onNewBtnClick(newNameObj)
+		if(!isAllValid) return;
+		const trimmedObj = {};
+		for (const key in newNameObj) {
+			if (newNameObj.hasOwnProperty(key)) {
+				const elem: string = newNameObj[key];
+				trimmedObj[key] = elem.trim();
+			}
+		}
+		props.onNewBtnClick(trimmedObj as INewNameObj);
 	}
 	const validateAll = () => {
 		const lValidationMap = {

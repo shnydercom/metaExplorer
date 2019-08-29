@@ -58,7 +58,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 	} = {
 		onMiniChanged: (mini) => props.onMiniChanged(mini),
 		onMaxiClick: () => setIsPreviewFullScreen(true),
-		onActiveStateChanged: (as) => props.onActiveStateChanged(as),
+		onActiveStateChanged: (activeState) => props.onActiveStateChanged(activeState),
 		//isMini: isMini,
 		activeState: props.activeState
 	}
