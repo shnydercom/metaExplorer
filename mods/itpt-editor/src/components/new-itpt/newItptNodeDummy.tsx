@@ -16,10 +16,10 @@ const TXT_HEADING_PROJECT_PLACEHOLDER = "{project}";
 const TXT_HEADING_USERNAME_PLACEHOLDER = "{user}";
 
 export interface NewItptNodeProps {
-	onNewBtnClick: (newNameObj: INewNameObj) => void;
+	onNewBtnClick: (newNameObj: IITPTNameObj) => void;
 }
 
-export interface INewNameObj {
+export interface IITPTNameObj {
 	blockName: string;
 	projectName: string;
 	userName: string;
@@ -34,7 +34,7 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 		isUserNameValid: boolean
 	}>({ isBlockValid: true, isProjectValid: true, isUserNameValid: true });
 
-	const [newNameObj, setNewNameObj] = React.useState<INewNameObj>({
+	const [newNameObj, setNewNameObj] = React.useState<IITPTNameObj>({
 		blockName: '',
 		projectName: '',
 		userName: '',
@@ -51,7 +51,7 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 		updateTitle({ ...newNameObj, userName: val });
 	}
 
-	const updateTitle = (val: INewNameObj) => {
+	const updateTitle = (val: IITPTNameObj) => {
 		if (!val.blockName && !val.projectName && !val.userName) {
 			val.concatTitle = TXT_HEADING_PLACEHOLDER
 			setNewNameObj(val);
@@ -79,7 +79,7 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 				trimmedObj[key] = elem.trim();
 			}
 		}
-		props.onNewBtnClick(trimmedObj as INewNameObj);
+		props.onNewBtnClick(trimmedObj as IITPTNameObj);
 	}
 	const validateAll = () => {
 		const lValidationMap = {

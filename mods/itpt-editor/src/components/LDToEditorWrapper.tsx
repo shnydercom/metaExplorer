@@ -26,7 +26,7 @@ import { GeneralDataTypeNodeModel } from "./node-editor/generaldatatypes/General
 import { LDPortModel } from "./node-editor/_super/LDPortModel";
 import { UserInfo } from "./content/status/UserInfo";
 import { EditorMain } from "./EditorMain";
-import { INewNameObj } from "./new-itpt/newItptNodeDummy";
+import { IITPTNameObj } from "./new-itpt/newItptNodeDummy";
 import { TXT_INIT } from "./content/status/SaveStatus";
 import * as shortid from "shortid";
 
@@ -454,7 +454,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		);
 	}
 
-	setNodeEditorToNew(newNameObj: INewNameObj) {
+	setNodeEditorToNew(newNameObj: IITPTNameObj) {
 		this.logic.clear();
 		const containerID = shortid.generate();
 		const boldID = shortid.generate();

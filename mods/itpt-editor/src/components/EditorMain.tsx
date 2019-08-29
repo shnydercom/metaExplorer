@@ -12,7 +12,7 @@ import { EditorTrayProps, EditorTray } from './content/blockselection/EditorTray
 import { UserInfo } from './content/status/UserInfo';
 import { TabDropLayer } from './panels/TabDropLayer';
 import { NewItptPanel } from './new-itpt/newItptPanel';
-import { NewItptNode, INewNameObj } from './new-itpt/newItptNodeDummy';
+import { NewItptNode, IITPTNameObj } from './new-itpt/newItptNodeDummy';
 import { SaveStatus } from './content/status/SaveStatus';
 import { IAsyncRequestWrapper } from '@metaexplorer/core';
 
@@ -29,7 +29,7 @@ export interface EditorMainProps {
 	onZoomAutoLayoutPress: () => void;
 	onBlockItemDropped: (blockItem: DragItem<EditorDNDItemType, IEditorBlockData>) => void;
 	changeNodeCurrentlyEditing(data: IEditorBlockData): {};
-	onNewBtnClick: (newNameObj: INewNameObj) => void;
+	onNewBtnClick: (newNameObj: IITPTNameObj) => void;
 	saveStatus: IAsyncRequestWrapper;
 	onMiniChanged?: (isMini: boolean) => void;
 	onUpClick?: () => void;

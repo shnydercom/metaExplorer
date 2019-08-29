@@ -1,0 +1,14 @@
+.itpt-summary{
+	min-width: 200px;
+	display: flex;
+	flex-direction: column;
+	.subheading {
+		opacity: 0.8;
+		font-size: small;
+	}
+	.info-itm {
+		font-size: medium;
+		margin-bottom: 6px;
+    text-decoration: underline;
+	}
+}

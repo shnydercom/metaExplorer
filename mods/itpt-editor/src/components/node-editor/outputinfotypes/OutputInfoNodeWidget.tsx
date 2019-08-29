@@ -4,6 +4,8 @@ import { Component, createFactory } from "react";
 import { map } from "lodash";
 import { isDemo } from "@metaexplorer/core";
 import React from "react";
+import { IITPTNameObj } from "../../new-itpt/newItptNodeDummy";
+import { ITPTSummary } from "../../panels/ITPTSummary";
 
 export interface OutputInfoNodeProps {
 	node: OutputInfoPartNodeModel;
@@ -23,7 +25,7 @@ export interface OutputInfoTypeNodeState {
 /**
  * @author Jonathan Schneider
  */
-export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputInfoTypeNodeState> {
+export class OutputInfoNodeWidget_deprecated extends Component<OutputInfoNodeProps, OutputInfoTypeNodeState> {
 
 	static getDerivedStateFromProps(nextProps: OutputInfoNodeProps, prevState: OutputInfoTypeNodeState): OutputInfoTypeNodeState | null {
 		const itptName = nextProps.node.getItptName();
@@ -157,7 +159,7 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 					</div>
 					{/**icon={!isBtnEnabled ? "warning" : "chevron_right"} */}
 					<button style={{ marginTop: "0" }} disabled={!isBtnEnabled}
-						 onClick={() => {
+						onClick={() => {
 							this.handleModalToggle();
 							const newItptName = userNameInput + "/" + userProjectInput + "/" + blockNameInput;
 							node.setItptName(newItptName);
@@ -169,6 +171,41 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps, OutputI
 		);
 	}
 }
-//<div className="out">{map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
+
+export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps> {
+
+	generatePort(port) {
+		return <DefaultPortLabel model={port} key={port.id} />;
+	}
+
+	render() {
+		const { node } = this.props;
+		//const usrProj = node.getUserProject();
+		//const usrName = node.getUserName();
+		const projectName = node.getItptProjName();
+		const userName = node.getItptUserName();
+		const blockName = node.getItptBlockName();
+		const nameObj: IITPTNameObj = {
+			blockName,
+			concatTitle: '',
+			projectName,
+			userName
+		}
+		return (
+			<div className="basic-node" style={{ background: node.color }}>
+				<div className="title">
+					<div className="name">{node.nameSelf}</div>
+				</div>
+				<div className="onboarding-form ports">
+					<div className="dense-form">
+						<div style={{ marginLeft: "-2em" }}
+							className="in">{map(node.getInPorts(), this.generatePort.bind(this))}</div>
+							<ITPTSummary {...nameObj}/>
+					</div>
+				</div>
+			</div>
+		);
+	}
+}
 
 export var OutputInfoNodeWidgetFactory = createFactory(OutputInfoNodeWidget);
