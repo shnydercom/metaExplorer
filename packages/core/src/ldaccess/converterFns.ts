@@ -17,11 +17,3 @@ export let singleHyperMediaToKvStores = (inputHM: any): IKvStore[] => {
 	}
 	return kvStoreArray;
 };
-
-/*
-export let multiHyperMediaToKvStores = (inputHMs: IHypermediaContainer): IKvStore[] => {
-	let kvStoreArray: IKvStore[] = new Array<IKvStore>();
-	console.log(inputHMs);
-	return kvStoreArray;
-};
-*/

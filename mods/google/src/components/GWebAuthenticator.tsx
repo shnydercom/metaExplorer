@@ -61,7 +61,6 @@ export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnec
 	}
 	render() {
 		const { googleState } = this.state;
-		console.log(googleState);
 		const isLoggedIn: boolean = googleState.generalState === "signedIn";
 		const isInitial: boolean = googleState.generalState === "initial";
 		const canReSignIn: boolean = googleState.generalState === "notSignedIn";

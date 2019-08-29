@@ -61,7 +61,6 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 		keyIdxMap.set(elemKey, idx);
 		let newLDTokenStr: string = linearLDTokenStr(ldTkStr, idx);
 		let newLDToken = new NetworkPreferredToken(newLDTokenStr);
-		//assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
 		let targetLDToken: ILDToken = new NetworkPreferredToken(ldTkStr);
 		if (itm.ldType === UserDefDict.outputKVMapType || itm.key === UserDefDict.outputKVMapKey) {
 			//TODO: if an outputKvMap exists in the list of kvStores to split, then look for the right value and modify
@@ -105,8 +104,6 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 
 function assignDerivedItpt(retriever: string, newLDTokenStr: string, ldType: string, crudSkills: string): void {
 	(appItptMatcherFn().getItptRetriever(retriever) as ReduxItptRetriever).searchForObjItptAndDerive(ldType, crudSkills, newLDTokenStr);
-	//let baseItpt = appItptMatcherFn().getItptRetriever(retriever).searchForObjItpt(ldType, crudSkills);
-	//appItptMatcherFn().getItptRetriever(retriever).setDerivedItpt(newLDTokenStr, baseItpt);
 }
 
 export function clearDerivedItpt(retriever: string, oldLDTokenStr: string) {
@@ -126,15 +123,11 @@ export const linearSplitEpic = (action$: ActionsObservable<any>, store: any) => 
 				let retriever = action.ldOptionsBase.visualInfo.retriever;
 				let ldTkStr = action.ldOptionsBase.ldToken.get();
 				let splitReqPromise = new Promise((resolve, reject) => {
-					//TOdo: check if it's needed:
-					// clearDerivedItpt(retriever, ldTkStr);
 					ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
 						let newLDTokenStr: string = linearLDTokenStr(ldTkStr, idx);
-						//let newLDToken = new NetworkPreferredToken(newLDTokenStr);
 						assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
 					});
 					ldOptionsObj.isLoading = false;
-					// assignDerivedItpt(retriever, ldTkStr, UserDefDict.itptContainerObjType, "cRud");
 					resolve(ldOptionsObj);
 				});
 				let rv = from(splitReqPromise);
@@ -145,28 +138,4 @@ export const linearSplitEpic = (action$: ActionsObservable<any>, store: any) => 
 			}
 		)
 	);
-	/*.do(() => console.log("after splitting LDOptions generate Retrievers/Matchers"))*/
-	/*.mergeMap((action) => {
-		if (!action.ldOptionsBase) return;
-		let ldOptionsObj = action.ldOptionsBase;
-		let retriever = action.ldOptionsBase.visualInfo.retriever;
-		let ldTkStr = action.ldOptionsBase.ldToken.get();
-		let splitReqPromise = new Promise((resolve, reject) => {
-			//TOdo: check if it's needed:
-			// clearDerivedItpt(retriever, ldTkStr);
-			ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
-				let newLDTokenStr: string = linearLDTokenStr(ldTkStr, idx);
-				let newLDToken = new NetworkPreferredToken(newLDTokenStr);
-				assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
-			});
-			ldOptionsObj.isLoading = false;
-			// assignDerivedItpt(retriever, ldTkStr, UserDefDict.itptContainerObjType, "cRud");
-			resolve(ldOptionsObj);
-		});
-		let rv = Observable.from(splitReqPromise);
-		return rv.map((ldOptions: ILDOptions) => (
-			linearSplitSuccessAction(ldOptions)
-		));
-	}
-	);*/
 };

@@ -35,7 +35,6 @@ export const loadingEpic = (action$: ActionsObservable<any>, store: StateObserva
 	return action$.pipe(
 		ofType(MOD_LOAD_RESULT_ALL),
 		tap(() => {
-			console.log("loading complete...");
 			const storeval = store.value;
 			if (store.value.ldoptionsMap[storeval.appCfg.appKey]) {
 				changeMainAppItpt(storeval.appCfg.mainItpt, store.value.ldoptionsMap[storeval.appCfg.appKey].resource.kvStores);

@@ -3,25 +3,6 @@ import { Observable, from } from 'rxjs';
 import { ILDOptions } from '../ldaccess/ildoptions';
 import { ILDWebResource } from '../ldaccess/ildresource';
 
-//let testTC = new TypesCollection(["someTypeInAnArray"] || new Array<string>());
-//console.log(testTC.contains("someTypeInAnArray"));
-
-/*
-class MyArray<T> extends Array<T> {
-	constructor(items?: Array<T>) {
-		super(...items);
-		Object.setPrototypeOf(this, Object.create(MyArray.prototype));
-	}
-	logCount() {
-		console.log("Count: " + this.length)
-	}
-}
-
-var myArray = new MyArray<string>();
-console.dir(myArray);
-myArray.logCount();
-*/
-
 export class LDOptionsAPI {  // URL to web api IRI resource
 	getLDOptions(targetUrl: string): Observable<ILDWebResource> {
 		if (targetUrl == null) {

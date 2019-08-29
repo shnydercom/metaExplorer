@@ -103,6 +103,7 @@ class PureThemeProviderDark extends Component<LDConnectedState & LDConnectedDisp
 	}
 	render() {
 		let renderFreeResult: JSX.Element = this.renderInputContainer();
+		if(!renderFreeResult) return null;
 		return <ThemeProvider theme={darkTheme}>{renderFreeResult}</ThemeProvider>;
 	}
 }
@@ -110,6 +111,7 @@ class PureThemeProviderDark extends Component<LDConnectedState & LDConnectedDisp
 class PureThemeProviderLight extends PureThemeProviderDark {
 	render() {
 		let renderFreeResult: JSX.Element = this.renderInputContainer();
+		if(!renderFreeResult) return null;
 		return <ThemeProvider theme={lightTheme}>{renderFreeResult}</ThemeProvider>;
 	}
 }

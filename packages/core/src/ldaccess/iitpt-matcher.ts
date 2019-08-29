@@ -11,7 +11,7 @@ export interface IItptMatcher {
 	 **/
 	getItptRetriever(itptRetrieverId: string): IItptRetriever;
 	/**
-	 * 
+	 *
 	 * @param itptRetrieverId the id/name of the retriever
 	 * @param retriever the retriever to be set
 	 */

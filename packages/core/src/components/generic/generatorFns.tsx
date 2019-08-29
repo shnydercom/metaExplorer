@@ -24,7 +24,6 @@ export function generateIntrprtrForProp(kvStores: IKvStore[], prop: string, retr
 		return null;
 	}
 	if (isReactComponent(BaseComp)) {
-		console.log("baseToken: " + baseRMTkStr);
 		return <BaseComp routes={routes} ldTokenString={baseRMTkStr} />;
 	} else { return null; }
 }
@@ -102,8 +101,6 @@ export function generateItptFromCompInfo(compKey: string, routes?: LDRouteProps,
 	if (!compInfo) return null;
 	let BaseComp = compInfo.compClass;
 	const compRoutes = routes ? routes : this.props.routes;
-	//console.log(compInfo.ldTokenString);
-	//console.dir(compRoutes);
 	return <BaseComp key={locIndex} routes={compRoutes} ldTokenString={compInfo.ldTokenString} />;
 }
 

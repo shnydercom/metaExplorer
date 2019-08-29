@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { LDError, LDErrorMsgState } from './../LDError';
-import { tap, mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { ILDWebResource } from '../../ldaccess/ildresource';
 
 export const IMG_UPLOAD_REQUEST = 'shnyder/IMG_UPLOAD_REQUEST';
@@ -42,7 +42,6 @@ export const isUploadingImgReducer = function isUploadingImg(
 export const uploadImageEpic = (action$: ActionsObservable<any>, store: any, { imgULAPI }: any) => {
     return action$.pipe(
         ofType(IMG_UPLOAD_REQUEST),
-        tap(() => console.log("uploading image epic...")),
         mergeMap((action) =>
             imgULAPI.postNewImage(action.imgUL, action.targetUrl)
                 .map((response: ILDWebResource) => uploadImgResultAction(response))

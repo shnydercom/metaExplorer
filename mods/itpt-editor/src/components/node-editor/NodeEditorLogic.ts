@@ -194,11 +194,9 @@ export class NodeEditorLogic {
 	addListenersToModel(model: DiagramModel) {
 		model.addListener({
 			nodesUpdated: (event) => {
-				console.log("nodesUpdated ev")
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			},
 			linksUpdated: (event) => {
-				console.log("linksUpdated ev");
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			}
 		})

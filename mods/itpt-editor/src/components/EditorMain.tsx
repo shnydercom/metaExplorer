@@ -170,7 +170,6 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 				selectedIdx={0}
 				tabs={tabDatas}
 				onSelectionChange={(tabData) => {
-					console.log("called onSelChange")
 					setActiveTab(tabData.data);
 				}}
 			></Tabs>

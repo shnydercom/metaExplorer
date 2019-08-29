@@ -142,13 +142,11 @@ export class GoogleWebAuthAPI implements EventTarget {
 	 *  listeners.
 	 */
 	initClient(cfg?: GoogleWebAuthAPICfg) {
-		console.log("initialising client on state: " + this._state);
 		if (!cfg && !this._cfg) {
 			console.warn("not initializing Auth Client, no configuration set");
 			return;
 		}
 		this._cfg = cfg ? cfg : this._cfg;
-		console.log("initialising google auth");
 		this.setState({ ...this._state, generalState: "signingIn" });
 		gapi.client.init({
 			apiKey: this._cfg.apiKey,
@@ -189,7 +187,6 @@ export class GoogleWebAuthAPI implements EventTarget {
 	 *  appropriately. After a sign-in, the API is called.
 	 */
 	private _updateSigninStatus(isSignedIn) {
-		console.log(isSignedIn);
 		if (isSignedIn) {
 			this.setState({ ...this._state, generalState: "signedIn" });
 		} else {
@@ -208,13 +205,3 @@ export class GoogleWebAuthAPI implements EventTarget {
 		);
 	}
 }
-
-//functional code:
-/*let authOpts: GoogleAuthOptions = {
-	scopes: gScopes,
-	projectId: gClientId
-};
-
-let test: GoogleAuth = new GoogleAuth(authOpts);
-
-console.log(test.fromAPIKey(gApiKey));*/

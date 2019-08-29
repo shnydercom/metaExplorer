@@ -152,7 +152,6 @@ export abstract class AbstractNavBarWActions<TStateExtension = {}> extends
 			let route: string = cleanRouteString(routeSendSearch, this.props.routes);
 			//if (match.params.nextPath === undefined) match.params.nextPath = route;
 			this.setState({ ...this.state, isDoRedirect: false, isDoRedirectCancel: false });
-			console.log("navBar redirect to: " + route);
 			return <Redirect to={route} />;
 		}
 		return this.renderCore();

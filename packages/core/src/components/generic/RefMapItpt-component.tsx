@@ -50,9 +50,7 @@ RefMapItptState>
 		if (ldOptions.isLoading) return null;
 		let ldTokenString = ldOptions.ldToken.get();
 		let retriever: string = ldOptions.visualInfo.retriever;
-		//let interpretedBy = ldOptions.visualInfo.interpretedBy;
 		let newreactCompInfos: Map<string, IReactCompInfoItm> = new Map();
-		//let newLDTypes: Map<string, string> = new Map();
 		if (
 			!isRouteSame(nextProps.routes, prevState.routes)
 			||
@@ -60,9 +58,6 @@ RefMapItptState>
 		) {
 			let newLDOptions: ILDOptions = ldOptionsDeepCopy(nextProps.ldOptions);
 			newLDOptions.visualInfo.interpretedBy = prevState.cfg.nameSelf;
-			//console.log(prevState.cfg.canInterpretType);
-			//console.dir(newLDOptions);
-			//console.dir(prevState.cfg);
 			nextProps.notifyLDOptionsRefMapSplitChange(newLDOptions, prevState.cfg);
 			let routes: LDRouteProps = nextProps.routes;
 			return { ...prevState, routes };
@@ -70,13 +65,11 @@ RefMapItptState>
 		let baseRMTkStr = refMapBaseTokenStr(ldTokenString);
 		let BaseComp = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(baseRMTkStr);
 		if (BaseComp === null || BaseComp === undefined) {
-			console.log(prevState.routes);
 			console.error("ItptReferenceMapType-component: itpt null or undefined: " + baseRMTkStr);
 			return null;
 		}
 		if (isReactComponent(BaseComp)) {
 			newreactCompInfos.set(baseRMTkStr, { compClass: BaseComp, key: baseRMTkStr, ldTokenString: baseRMTkStr });
-			//return <BaseComp routes={routes} ldTokenString={baseRMTkStr} />;
 		} else {
 			return null;
 		}
@@ -92,13 +85,9 @@ RefMapItptState>
 	initialKvStores: IKvStore[];
 
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	//subItpt: any = null;
 	constructor(props?: any) {
 		super(props);
 		this.cfg = this.constructor["cfg"];
-		/*if (props && props.ldOptions) {
-			this.consumeLDOptions(props.ldOptions, props.routes);
-		}*/
 		this.state = {
 			errorMsg: '',
 			hasError: false,
@@ -109,38 +98,7 @@ RefMapItptState>
 			cfg: this.cfg
 		};
 	}
-	/*
-		consumeLDOptions = (ldOptions: ILDOptions, routes?: LDRouteProps) => {
-			if (!this.props.ldOptions) return;
-			if (!this.props.ldOptions.visualInfo.interpretedBy) {
-				let newLDOptions: ILDOptions = ldOptionsDeepCopy(this.props.ldOptions);
-				newLDOptions.visualInfo.interpretedBy = this.cfg.nameSelf;
-				this.props.notifyLDOptionsRefMapSplitChange(newLDOptions, this.cfg);
-				return null;
-			}
-			//this.subItpt = this.buildIntrprtrJSX(ldOptions, routes);
-		}
 
-		componentWillReceiveProps(nextProps: OwnProps & LDConnectedDispatch & LDConnectedState, nextContext): void {
-			console.log("receiving refmap-props: " + nextProps.routes.location.pathname);
-			if (!isRouteSame(nextProps.routes, this.props.routes)) {
-				let newLDOptions: ILDOptions = ldOptionsDeepCopy(this.props.ldOptions);
-				newLDOptions.visualInfo.interpretedBy = this.cfg.nameSelf;
-				this.props.notifyLDOptionsRefMapSplitChange(newLDOptions, this.cfg);
-				return null;
-			} else {
-				//if (compNeedsUpdate(nextProps, this.props)) {
-				//if (nextProps.ldOptions.isLoading) return;
-				this.consumeLDOptions(nextProps.ldOptions, nextProps.routes);
-			}
-		}
-
-		componentWillMount() {
-			console.log("componentWillmount");
-			console.log(this.constructor.name);
-			console.log(this.constructor["cfg"]);
-		}
-	*/
 	buildIntrprtrJSX(ldOptions: ILDOptions, routes: LDRouteProps): any { //TODO: search for right type ?! React.Component<LDOwnProps>
 		let { ldTokenString } = this.props;
 		let { retriever } = ldOptions.visualInfo;

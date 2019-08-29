@@ -114,7 +114,6 @@ export class QRCodeScanner extends Component<LDConnectedState & LDConnectedDispa
     }
 
     private onQRCodeDetected = (result) => {
-        console.log("qr code: " + result);
         const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
         if (!outputKVMap) return;
         let qrcode: string = result;

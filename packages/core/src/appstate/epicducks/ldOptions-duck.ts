@@ -8,7 +8,7 @@ import { ILDToken, NetworkPreferredToken } from '../../ldaccess/ildtoken';
 import { ldOptionsDeepCopy } from '../../ldaccess/ldUtils';
 import { DEFAULT_ITPT_RETRIEVER_NAME } from '../../defaults/DefaultItptRetriever';
 import { OutputKVMap } from '../../ldaccess/ldBlueprint';
-import { tap, mergeMap, map, catchError } from 'rxjs/operators';
+import { mergeMap, map, catchError } from 'rxjs/operators';
 import { LDOptionsAPI } from '../../apis/ldoptions-api';
 import { getApplicationStore } from '../../approot';
 import { ActionKeysDict } from '../../components/actions/ActionDict';
@@ -216,8 +216,6 @@ export const ldOptionsMapReducer = (
 			let updatedState = Object.assign({}, state, { [tokenVal]: updatedLDOptionsObj });
 			return updatedState;
 		case LDOPTIONS_REQUEST_ASYNC:
-			console.log("async ldoptions request");
-			console.dir(action);
 			let asyncLnk = action.targetReceiverLnk;
 			let asyncReqLDOptions = ldOptionsDeepCopy(state[asyncLnk]);
 			asyncReqLDOptions.isLoading = true;
@@ -232,7 +230,7 @@ export const ldOptionsMapReducer = (
 			let reqResultState = Object.assign({}, state, { [lnk]: newLDOptions });
 			return reqResultState;
 		case LDOPTIONS_REQUEST_ERROR:
-			console.log('ldOptions Error message received, subMsg: ' + action.message);
+			console.warn('ldOptions Error message received, subMsg: ' + action.message);
 			return state;
 		case LDOPTIONS_KV_UPDATE:
 			let stateCopy = { ...state };
@@ -279,18 +277,13 @@ export const requestLDOptionsEpic = (action$: ActionsObservable<any>, store: any
 	const _LDOAPI: LDOptionsAPI = ldOptionsAPI;
 	return action$.pipe(
 		ofType(LDOPTIONS_REQUEST_ASYNC),
-		tap(() => console.log("Requesting LD Options from network")),
+		//tap(() => console.log("Requesting LD Options from network")),
 		mergeMap((action) => {
-			console.log(action.targetReceiverLnk);
+			//console.log(action.targetReceiverLnk);
 			if (action.isExternalAPICall) {
 				let apiCallOverride: () => Promise<any> = externalAPICallDict.get(action.targetReceiverLnk);
 				let apiObservable = from(apiCallOverride());
 				return apiObservable.pipe(map((val: any) => {
-					/*let response: IWebResource = {
-						hypermedia: val,
-						iri: null,
-						type: null
-					};*/
 					return ldOptionsResultAction(val, action.targetReceiverLnk);
 				}),
 					catchError((error) =>

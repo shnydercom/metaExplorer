@@ -64,9 +64,6 @@ export const refMapReducer = (
 				//makes sure a copy of the RefMap-KV exists in the ILDOptions-Object (basically pushes itpt-declaration
 				// to runtime-model, while making sure the declaration isn't changed by being used)
 				stateCopy = { ...state };
-				if (ldOptionsBase.ldToken.get() === "app-l0-edit-l0_b4759e72-bdd3-4da9-ad54-b189cb8752c8_rmb_b491155c-d2e4-4429-b825-6b5373d98719_72e91f55-a3be-4aa9-bff0-34f13da5d375") {
-					console.dir(action.refMap);
-				}
 				let modBPCfg: BlueprintConfig = ldBlueprintCfgDeepCopy(action.refMap);
 				stateCopy = createRuntimeRefMapLinks(stateCopy, modBPCfg, ldOptionsBase);
 				stateCopy = assignValuesToRuntimeRefMap(stateCopy, modBPCfg, ldOptionsBase);
@@ -323,15 +320,8 @@ const assignOutputKvMaps: RefMapIteratorFn<ILDOptionsMapStatePart> = (
 				}
 			});
 		}
-		/*} else {
-			console.log("test");
-		}*/
 	});
 	okvmMap.forEach((val, key) => {
-		if (!modifiedObj[key]) {
-			console.dir(modifiedObj);
-			console.log(key);
-		}
 		modifiedObj[key].resource.kvStores.push({ key: UserDefDict.outputKVMapKey, value: val, ldType: UserDefDict.outputKVMapType });
 	});
 	return modifiedObj;
@@ -422,16 +412,9 @@ function assignDerivedItpt(retriever: string, newLDTokenStr: string, bpCfg: Blue
 export const refMapEpic = (action$: ActionsObservable<any>, store: Store<ExplorerState>) => {
 	return action$.pipe(
 		ofType(REFMAP_REQUEST),
-		/*.do(() => console.log("REQUESTing Refmap Async part (itpt-retrieval)"))*/
 		mergeMap((action: RefMapRequestAction) => {
 			let ldOptionsObj: ILDOptions = action.ldOptionsBase;
-			// let baseRefMap: BlueprintConfig = action.refMap;
-			//let refMapREQUESTPromise = new Promise((resolve, reject) => {
 			let rv = createItpts(ldOptionsObj, store);
-			//	ldOptionsObj.isLoading = false;
-			//	resolve(ldOptionsObj);
-			//});
-			//let rv = Observable.from(refMapREQUESTPromise);
 			return concat$(
 				rv,
 				of(refMapSUCCESSAction({ ...ldOptionsObj, isLoading: false }))

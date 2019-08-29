@@ -44,7 +44,6 @@ export class KeyCloakAuthAPI {
 		let rv = new KeyCloakAuthAPI();
 		rv.kc = Keycloak(cfgSrc);
 		rv.kc.init({}).success((authenticated) => {
-			console.log("authenticated: " + authenticated);
 			if (!authenticated) {
 				rv.setState({ isAuthenticated: false, token: "" });
 			}else{
@@ -131,7 +130,6 @@ export class KeyCloakAuthAPI {
 		const oldState = this._state;
 		this._state = state;
 		let isAuthChanged = oldState.isAuthenticated !== this._state.isAuthenticated;
-		console.log(state);
 		this.dispatchEvent({
 			isAuthChanged,
 			kcState: state,

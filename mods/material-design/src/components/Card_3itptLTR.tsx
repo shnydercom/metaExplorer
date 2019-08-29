@@ -106,8 +106,7 @@ export class PureCard3itptLTR extends Component<LDConnectedState & LDConnectedDi
 	}
 
 	onConfirmClick = () => {
-		let middleContainerAction = this.state.localValues.get(ACTION_MIDDLE_CONTAINER);
-		console.log("middleContainerAction: " + middleContainerAction);
+		//let middleContainerAction = this.state.localValues.get(ACTION_MIDDLE_CONTAINER);
 		//TODO: execute that action
 		this.setState({
 			...this.state,
@@ -121,7 +120,6 @@ export class PureCard3itptLTR extends Component<LDConnectedState & LDConnectedDi
 		if (isDoRedirectFromMiddleContent && routeSendFromMiddleContent) {
 			let route: string = cleanRouteString(routeSendFromMiddleContent, this.props.routes);
 			this.setState({ ...this.state, isDoRedirectFromMiddleContent: false });
-			console.log("Card redirect to : " + route);
 			return <Redirect to={route} />;
 		}
 		return <Card

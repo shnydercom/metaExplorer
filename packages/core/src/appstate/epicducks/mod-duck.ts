@@ -1,5 +1,5 @@
 import { ActionsObservable, ofType } from "redux-observable";
-import { tap, mergeMap, map, catchError } from 'rxjs/operators';
+import { mergeMap, map, catchError } from 'rxjs/operators';
 import { IModStatePart, SingleModStateKeysDict, IModStatus } from '../../appstate/modstate';
 import { of, from } from 'rxjs';
 import { ModAPI } from '../../apis/mod-api';
@@ -69,7 +69,6 @@ export const loadModEpic = (action$: ActionsObservable<any>, store: any, { modAP
 	const modQueue: string[] = [];
 	return action$.pipe(
 		ofType(MOD_LOAD_REQUEST),
-		tap(() => console.log("requesting Mod...")), // debugging
 		mergeMap((action) => {
 			if (!_MODAPI.checkDependencies(action.modId)) {
 				modQueue.push(action.modId);

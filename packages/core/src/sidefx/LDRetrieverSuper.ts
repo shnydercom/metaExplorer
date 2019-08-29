@@ -103,7 +103,6 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 					let idSplitIdx = idStr.indexOf('/');
 					let requestURL;
 					if (idSplitIdx !== -1) {
-						console.log(idStr.slice(0, idSplitIdx));
 						let nsMHasValue = false;
 						let nsMSearchVal = idStr.slice(0, idSplitIdx);
 						for (const nsMEntry of
@@ -157,10 +156,6 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 	private refreshOutput(): void {
 		let okvmPNs = Object.getOwnPropertyNames(this.outputKVMap);
 		let webObj = this.webContent;
-		console.log("ldRetrieverSuper got new output");
-		console.log(webObj);
-		console.log(okvmPNs);
-		console.log(this.outputKVMap);
 		let statePart: ILDOptionsMapStatePart = {};
 		okvmPNs.forEach((pn) => {
 			let fillValue = webObj[pn];

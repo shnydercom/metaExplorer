@@ -46,7 +46,6 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 				}
 			})
 			.catch((err) => {
-				console.error(err);
 				this.setStateToError();
 				return;
 			});

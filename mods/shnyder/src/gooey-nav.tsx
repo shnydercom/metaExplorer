@@ -59,7 +59,6 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 
 	constructor(props: any) {
 		super(props);
-		console.log("GooeyNav Constructor called");
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
 		this.state = {
 			...initLDLocalState(this.cfg, props,

@@ -53,7 +53,6 @@ export class BaseDataTypeDropDown extends Component<IDataTypeDropDownProps, IDat
 	}
 
 	handleChange = (value) => {
-		console.log(value)
 		this.setState({ selectedDataType: value });
 		this.props.selectionChange(value);
 	}
