@@ -98,7 +98,9 @@
     color: #dadada;
     border: solid 1px #ffffffc8;
     overflow: visible;
-    font-size: 11px;
+		font-size: 11px;
+		display:flex;
+		flex-direction: column;
 
 		.title {
 			/*			background-image: linear-gradient(rgba(black,0.1),rgba(black,0.2));*/

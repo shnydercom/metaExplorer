@@ -4,6 +4,8 @@ import { map } from 'lodash';
 import { GENERALDATATYPE_MODEL } from "../node-editor-consts";
 import React from "react";
 
+export const TXT_EXPLORE = "explore";
+
 export interface GeneralDataTypeNodeProps extends BaseWidgetProps {
 	node: GeneralDataTypeNodeModel;
 	diagramEngine: DiagramEngine;
@@ -34,6 +36,13 @@ export class GeneralDataTypeNodeWidget extends BaseWidget<GeneralDataTypeNodePro
 					<div className="in">{map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>
 					<div className="out">{map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
 				</div>
+				{this.props.node.isCompound
+					? <button
+						onClick={(ev) => this.props.node.onExploreBtnClicked()}
+						className="editor-btn editor-btn-explore">
+						{TXT_EXPLORE}
+					</button>
+					: null}
 			</div>
 		);
 	}

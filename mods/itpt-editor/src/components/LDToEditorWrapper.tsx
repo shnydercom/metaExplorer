@@ -274,6 +274,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				logic.newModel(this.props.ldTokenString);
 			}
 			logic.setOnOutputInfoSaved(() => this.onSaveDiagramTriggered());
+			logic.setOnExploreTriggered((itptName) => this.onExploreTriggered(itptName));
 			this.logic = logic;
 		}
 		if (!this.props.ldOptions) {
@@ -630,6 +631,11 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				}
 			} style={{ background: '#010f27aa' }}>
 		</button>;
+	}
+
+
+	protected onExploreTriggered(itptName: string) {
+		this.loadToEditorByName(itptName, true);
 	}
 
 	protected onSaveDiagramTriggered() {

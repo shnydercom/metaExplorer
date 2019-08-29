@@ -13,7 +13,7 @@ import { BASEDATATYPE_MODEL, DECLARATION_MODEL, EXTENDABLETYPES_MODEL, GENERALDA
 import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
 import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesWidgetFactory";
 import { GeneralDataTypeNodeFactory } from "./generaldatatypes/GeneralDataTypeInstanceFactories";
-import { GeneralDataTypeNodeModel } from "./generaldatatypes/GeneralDataTypeNodeModel";
+import { GeneralDataTypeNodeModel, GeneralDataTypeNodeModelListener } from "./generaldatatypes/GeneralDataTypeNodeModel";
 import { ItptNodeModel } from "./_super/ItptNodeModel";
 import { LDPortInstanceFactory } from "./_super/LDPortInstanceFactory";
 import { LDPortModel } from "./_super/LDPortModel";
@@ -46,6 +46,7 @@ export class NodeEditorLogic {
 	protected outputNode: OutputInfoPartNodeModel;
 	protected outputLDOptionsToken: string;
 	protected onOutputInfoSaved: (itptName: string) => void;
+	protected onExploreTriggered: (itptName: string) => void;
 	protected retrieverName: string = DEFAULT_ITPT_RETRIEVER_NAME;
 
 	protected width: number = 300;
@@ -86,11 +87,21 @@ export class NodeEditorLogic {
 		this.onOutputInfoSaved = (itptName: string) => {
 			//
 		};
+		this.onExploreTriggered = (itptName: string) => {
+			//
+		};
 	}
 
 	public setDimensions(width: number, height: number) {
 		this.width = width;
 		this.height = height;
+	}
+
+	public getOnExploreTriggered(): (itptName: string) => void {
+		return this.onExploreTriggered;
+	}
+	public setOnExploreTriggered(value: (itptName: string) => void) {
+		this.onExploreTriggered = value;
 	}
 
 	public getOnOutputInfoSaved(): (itptName: string) => void {
@@ -200,6 +211,21 @@ export class NodeEditorLogic {
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			}
 		})
+		const nodesMap = model.getNodes();
+		for (const key in nodesMap) {
+			if (nodesMap.hasOwnProperty(key)) {
+				const node = nodesMap[key];
+				if (node.getType() === GENERALDATATYPE_MODEL) {
+					if ((node as GeneralDataTypeNodeModel).isCompound) {
+						node.addListener({
+							onTriggerExplore: (ev) => {
+								this.onExploreTriggered(ev.itptName)
+							}
+						} as GeneralDataTypeNodeModelListener)
+					}
+				}
+			}
+		}
 	}
 
 	public getActiveModel(): DiagramModel {
@@ -247,6 +273,7 @@ export class NodeEditorLogic {
 		let initialKvStores: IKvStore[] = cfg.initialKvStores;
 		node.nameSelf = node.id;
 		node.subItptOf = cfg.nameSelf;
+		node.isCompound = !!cfg.subItptOf;
 		let numObjPropRef = 0;
 		let isInitKVsmallerThanKeys: boolean = initialKvStores.length < intrprtrKeys.length;
 		for (var i = 0; i < intrprtrKeys.length; i++) {
@@ -332,7 +359,7 @@ export class NodeEditorLogic {
 		let newSigBaseItpt: NewNodeSig = { id: itpt.subItptOf, x: newX, y: newY - DIAG_TRANSF_Y };
 
 		//create nodes first
-		let nodeMap = new Map<string, GeneralDataTypeNodeModel>();
+		let nodeMap = new Map<string, GeneralDataTypeNodeModel | ExtendableTypesNodeModel>();
 		let yIterator = 0;
 		for (const itm in refMap.value) {
 			if (refMap.value.hasOwnProperty(itm)) {

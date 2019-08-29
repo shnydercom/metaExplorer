@@ -688,6 +688,7 @@ $button-color-cta: orange;
   &-confirm {
     background-color: $button-color-cta;
     color: $tray-item-color-secondary;
+
     &:hover {
       background-color: lighten($button-color-cta, 10%)
     }
@@ -701,6 +702,7 @@ $button-color-cta: orange;
     box-shadow: -6px 7px 8px 0px rgba(0, 0, 0, 0.6);
     padding: 0px;
     font-size: x-small;
+
     &:before {
       content: ' ';
       background: url(/static/minimize.svg);
@@ -717,8 +719,36 @@ $button-color-cta: orange;
     padding: 12px 18px;
     background-color: $tray-item-color-secondary;
     color: $tray-item-color-primary;
+
     &:hover {
       background-color: $tray-item-color-tertiary;
+    }
+  }
+
+  &-explore {
+    padding: 12px 18px;
+    background-color: $tray-item-color-secondary;
+    color: $tray-item-color-primary;
+    position: relative;
+    min-width: 120px;
+
+    &:hover {
+      background-color: $tray-item-color-tertiary;
+    }
+
+    &:before {
+      content: '';
+      background: url(/static/maximize.svg);
+      background-origin: content-box;
+      top: auto;
+      right: 6px;
+      bottom: auto;
+      margin-top: -5px;
+      height: 24px;
+      width: 24px;
+      position: absolute;
+      background-size: contain;
+      opacity: 0.6;
     }
   }
 
@@ -733,6 +763,7 @@ $button-color-cta: orange;
     align-self: center;
     right: 0.5em;
     transition: opacity 0.1s ease-in, visibility 0.3s linear;
+
     &:hover {
       background-color: $tray-item-color-tertiary;
     }
@@ -741,20 +772,23 @@ $button-color-cta: orange;
       visibility: visible;
       opacity: 0.8;
       transition: opacity 0.2s ease-out;
-      
+
     }
   }
 }
 
-.minitoolbox-phonemenu-btn-1, .minitoolbox-watchmenu-btn-1 {
-    background-color: $button-color-cta;
-    &:hover {
-      background-color: lighten($button-color-cta, 10%)
-    }
+.minitoolbox-phonemenu-btn-1,
+.minitoolbox-watchmenu-btn-1 {
+  background-color: $button-color-cta;
+
+  &:hover {
+    background-color: lighten($button-color-cta, 10%)
+  }
 }
+
 .mode-switcher {
-	z-index: 999;
-	position: absolute;
-	right: 32px;
-	top: 32px;
+  z-index: 999;
+  position: absolute;
+  right: 32px;
+  top: 32px;
 }

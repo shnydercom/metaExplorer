@@ -9,13 +9,15 @@ export class ItptNodeModel extends NodeModel {
 	subItptOf: string;
 	color: string;
 	ports: { [s: string]: LDPortModel };
+	isCompound: boolean;
 
-	constructor(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", type?: string, id?: string) {
+	constructor(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", type?: string, id?: string, isCompound?: boolean) {
 		super(type ? type : INTERPRETERDATATYPE_MODEL, id);
 		this.nameSelf = nameSelf;
 		this.color = color;
 		this.canInterpretType = canInterpretType;
 		this.subItptOf = subItptOf;
+		this.isCompound = !!isCompound;
 	}
 
 	deSerialize(object, engine: DiagramEngine) {
@@ -24,6 +26,7 @@ export class ItptNodeModel extends NodeModel {
 		this.color = object.color;
 		this.canInterpretType = object.canInterpretType;
 		this.subItptOf = object.subItptOf;
+		this.isCompound = object.isCompound;
 	}
 
 	serialize() {
@@ -31,7 +34,8 @@ export class ItptNodeModel extends NodeModel {
 			nameSelf: this.nameSelf,
 			color: this.color,
 			canInterpretType: this.canInterpretType,
-			subItptOf: this.subItptOf
+			subItptOf: this.subItptOf,
+			isCompound: this.isCompound
 		});
 	}
 
