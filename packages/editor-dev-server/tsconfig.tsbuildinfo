@@ -1745,6 +1745,211 @@
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/async_hooks.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/buffer.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/events/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/child_process.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/cluster.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/child_process.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/console.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/constants.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/crypto.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/dgram.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/dns.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/dns.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/domain.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/fs.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/url.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/http.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/url.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/http2.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/fs.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/tls.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/url.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/http.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/https.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/tls.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/http.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/url.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/inspector.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/module.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/dns.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/os.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/path.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/perf_hooks.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/async_hooks.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/process.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/punycode.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/querystring.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/readline.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/repl.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/readline.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/vm.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/string_decoder.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/timers.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/tls.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/crypto.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/dns.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/trace_events.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/tty.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/url.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/querystring.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/v8.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/vm.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/worker_threads.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/vm.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/zlib.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "c:/users/jonat/git/metaexplorer/node_modules/@types/node/base.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/globals.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/assert.d.ts",
@@ -1788,33 +1993,44 @@
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/zlib.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/globals.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/globals.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/base.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/globals.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/tapable/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/uglify-js/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/anymatch/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack-sources/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/range-parser/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack-sources/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/crypto.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/source-list-map/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/glob/index.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/express-serve-static-core/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/http.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/minimatch/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/range-parser/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/mime/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/serve-static/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/express-serve-static-core/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/mime/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/connect/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/http.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
@@ -1838,286 +2054,312 @@
         "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/editor-to-fs-server.ts",
         "c:/users/jonat/git/metaexplorer/packages/editor-dev-server/src/scripts/copydir.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/connect/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/http.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/anymatch/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/asap/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@babel/types/lib/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__generator/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@babel/types/lib/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__traverse/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@babel/types/lib/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@babel/parser/typings/babel-parser.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@babel/types/lib/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__template/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@babel/parser/typings/babel-parser.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@babel/types/lib/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__core/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__generator/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__traverse/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__template/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@babel/types/lib/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@babel/parser/typings/babel-parser.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/classnames/types.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/classnames/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/classnames/types.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/dagre/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/debounce/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/gapi/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/gapi.auth2/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/gapi/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/gapi.client/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/gapi.client.sheets/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/gapi.client/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/minimatch/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/glob/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/minimatch/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/express-serve-static-core/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/http.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/range-parser/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/domutils.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/serve-static/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/express-serve-static-core/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/mime/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/createbrowserhistory.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/domutils.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/async_hooks.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/createhashhistory.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/domutils.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/perf_hooks.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/async_hooks.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/creatememoryhistory.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/domutils.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/buffer.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/locationutils.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/events/index.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/pathutils.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/child_process.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/createbrowserhistory.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/createhashhistory.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/creatememoryhistory.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/locationutils.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/pathutils.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/cluster.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/child_process.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/react/global.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/console.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/csstype/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/constants.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/prop-types/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/crypto.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/csstype/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/prop-types/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/global.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/tls.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/crypto.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/dns.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/https.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/tls.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/http.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/url.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/http2.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/fs.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/tls.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/url.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/http.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/dgram.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/dns.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/dns.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/dns.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/tty.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/http.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/url.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/net.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/domain.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/worker_threads.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/vm.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/zlib.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/v8.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/readline.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/repl.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/readline.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/vm.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/fs.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/stream.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/url.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/inspector.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/events.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/module.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/os.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/path.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/process.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/punycode.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/querystring.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/url.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/querystring.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/string_decoder.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/timers.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/trace_events.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs-parser/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs-parser/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/uglify-js/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/tapable/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/styled-jsx/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/styled-jsx/css.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/styled-jsx/server.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/styled-jsx/server.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/hoist-non-react-statics/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/styled-jsx/css.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/invariant/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/strip-json-comments/index.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/istanbul-lib-coverage/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/strip-bom/index.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/istanbul-lib-report/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/istanbul-lib-coverage/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/stack-utils/index.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/istanbul-reports/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/istanbul-lib-report/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/istanbul-lib-coverage/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/source-list-map/index.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/jasmine/ts3.1/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/shortid/index.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/q/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/shallowequal/index.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-dom/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-dropzone/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/symbol-observable/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/redux/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/symbol-observable/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-redux/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/redux/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/hoist-non-react-statics/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-router/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-router-dom/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-router/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/transition.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/csstransition.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/transition.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/transitiongroup.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/transition.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/switchtransition.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/transition.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/csstransition.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/transitiongroup.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/switchtransition.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-core/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-core-binding/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-core/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-core/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-core-binding/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-aggregates/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-async/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-backpressure/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-coincidence/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-experimental/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-joinpatterns/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-virtualtime/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-testing/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-virtualtime/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-time/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2137,325 +2379,83 @@
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-time/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/shallowequal/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-testing/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-virtualtime/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/shortid/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-virtualtime/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/source-list-map/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-joinpatterns/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/stack-utils/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-experimental/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/strip-bom/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-coincidence/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/strip-json-comments/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-backpressure/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/styled-jsx/css.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-async/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite-aggregates/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-lite/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-core/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-core-binding/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-core-binding/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-core/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/rx-core/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/transition.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/csstransition.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/transitiongroup.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/switchtransition.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/switchtransition.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/styled-jsx/server.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/transitiongroup.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/styled-jsx/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/transition.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/styled-jsx/css.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/styled-jsx/server.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/csstransition.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/transition.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/tapable/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-transition-group/transition.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-router-dom/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react-router/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/uglify-js/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-router/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack-sources/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/crypto.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/source-list-map/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-redux/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/redux/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/hoist-non-react-statics/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/tapable/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/uglify-js/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/anymatch/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/source-map/source-map.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/webpack-sources/index.d.ts",
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/redux/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/symbol-observable/index.d.ts",
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs-parser/index.d.ts": [
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "c:/users/jonat/git/metaexplorer/node_modules/symbol-observable/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-dropzone/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/react-dom/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/q/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/jasmine/ts3.1/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/istanbul-reports/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/istanbul-lib-report/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/istanbul-lib-coverage/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/istanbul-lib-report/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/istanbul-lib-coverage/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/istanbul-lib-coverage/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/invariant/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/hoist-non-react-statics/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/react/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/csstype/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/prop-types/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/react/global.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/prop-types/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/csstype/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/react/global.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/createbrowserhistory.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/createhashhistory.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/creatememoryhistory.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/locationutils.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/pathutils.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/pathutils.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/locationutils.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/creatememoryhistory.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/domutils.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/createhashhistory.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/domutils.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/createbrowserhistory.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/history/domutils.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/history/domutils.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/minimatch/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/gapi.client.sheets/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/gapi.client/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/gapi.client/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/gapi.auth2/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/gapi/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/gapi/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/debounce/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/dagre/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/classnames/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/classnames/types.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/classnames/types.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__core/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__generator/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__traverse/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__template/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@babel/types/lib/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@babel/parser/typings/babel-parser.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__template/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@babel/parser/typings/babel-parser.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@babel/types/lib/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@babel/parser/typings/babel-parser.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@babel/types/lib/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__traverse/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@babel/types/lib/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/babel__generator/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@babel/types/lib/index.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@babel/types/lib/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/asap/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/anymatch/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/mime/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/range-parser/index.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/globals.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/globals.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts": [
-        "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts"
-      ],
-      "c:/users/jonat/git/metaexplorer/node_modules/@types/node/vm.d.ts": [
+      "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs/index.d.ts": [
+        "c:/users/jonat/git/metaexplorer/node_modules/@types/yargs-parser/index.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/util.d.ts",
         "c:/users/jonat/git/metaexplorer/node_modules/@types/node/ts3.2/util.d.ts"
       ]

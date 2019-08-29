@@ -1,5 +1,5 @@
 import {
-	addBlueprintToRetriever, BaseContainerRewrite, BlueprintConfig, DEFAULT_ITPT_RETRIEVER_NAME, gdsfpLD, IKvStore, ILDOptions,
+	addBlueprintToRetriever, BlueprintConfig, DEFAULT_ITPT_RETRIEVER_NAME, gdsfpLD, IKvStore, ILDOptions,
 	initLDLocalState, intrprtrTypeInstanceFromBlueprint, ldBlueprint, LDConnectedDispatch, LDConnectedState, LDDict, LDLocalState,
 	ldOptionsDeepCopy, LDOwnProps, mapDispatchToProps, mapStateToProps, NetworkPreferredToken, OutputKVMap, UserDefDict,
 	IAsyncRequestWrapper,
@@ -438,18 +438,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		if (this.props.routes.location + "" !== redirTo) {
 			this.setState({ ...this.state, redirect: redirTo });
 		}
-	}
-
-	renderApp() {
-		const { routes } = this.props;
-		return (
-			<div className="app-actual app-content">
-				<BaseContainerRewrite routes={routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
-				<div className="mode-switcher">
-					<button className="editor-switch-btn" onClick={() => this.toggleFullScreen.apply(this)} />
-				</div>
-			</div>
-		);
 	}
 
 	setNodeEditorToNew(newNameObj: IITPTNameObj) {

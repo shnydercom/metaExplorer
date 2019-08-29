@@ -546,14 +546,6 @@ $button-color-cta: orange;
 }
 
 
-.editor-switch-btn {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  background-color: #edc11cff !important;
-}
-
-
 .entrypoint-editor-inner {
   height: 100%;
   width: 100%;
@@ -701,6 +693,26 @@ $button-color-cta: orange;
     }
   }
 
+  &-fstoggle {
+    height: 64px;
+    width: 64px;
+    border-radius: 32px;
+    outline: 0px;
+    box-shadow: -6px 7px 8px 0px rgba(0, 0, 0, 0.6);
+    padding: 0px;
+    font-size: x-small;
+    &:before {
+      content: ' ';
+      background: url(/static/minimize.svg);
+      top: 0;
+      left: 0;
+      width: 64px;
+      height: 64px;
+      position: absolute;
+      background-size: contain;
+    }
+  }
+
   &-addport {
     padding: 12px 18px;
     background-color: $tray-item-color-secondary;
@@ -732,4 +744,17 @@ $button-color-cta: orange;
       
     }
   }
+}
+
+.minitoolbox-phonemenu-btn-1, .minitoolbox-watchmenu-btn-1 {
+    background-color: $button-color-cta;
+    &:hover {
+      background-color: lighten($button-color-cta, 10%)
+    }
+}
+.mode-switcher {
+	z-index: 999;
+	position: absolute;
+	right: 32px;
+	top: 32px;
 }
