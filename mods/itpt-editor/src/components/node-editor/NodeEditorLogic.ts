@@ -205,7 +205,6 @@ export class NodeEditorLogic {
 	addListenersToNode(node: NodeModel) {
 		node.addListener({
 			entityRemoved: (event) => { 
-				console.log("node event")
 				this.onOutputInfoSaved(this.outputNode.getItptName()) 
 			}
 		})
@@ -213,7 +212,6 @@ export class NodeEditorLogic {
 			if ((node as GeneralDataTypeNodeModel).isCompound) {
 				node.addListener({
 					onTriggerExplore: (ev) => {
-						console.log("onExplore triggered")
 						this.onExploreTriggered(ev.itptName)
 					}
 				} as GeneralDataTypeNodeModelListener)
@@ -224,11 +222,9 @@ export class NodeEditorLogic {
 	addListenersToLink(link: LinkModel<LinkModelListener>) {
 		link.addListener({
 			sourcePortChanged: (ev) => {
-				console.log("sp event")
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			},
 			targetPortChanged: (ev) => {
-				console.log("tp event")
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			}
 		})
@@ -237,14 +233,9 @@ export class NodeEditorLogic {
 	addListenersToModel(model: DiagramModel) {
 		model.addListener({
 			nodesUpdated: (event) => {
-				console.log("model nodes ev")
-				event.node.clearListeners();
-				this.addListenersToNode(event.node);
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			},
 			linksUpdated: (event) => {
-				console.log("model links event")
-				event.link.clearListeners();
 				this.addListenersToLink(event.link);
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			}
