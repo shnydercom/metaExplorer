@@ -13,6 +13,7 @@ import { Component, ReactNode } from "react";
 import { UserDefDict } from "../../../ldaccess/UserDefDict";
 import { getKVStoreByKey } from "../../../ldaccess/kvConvenienceFns";
 import { gdsfpLD, initLDLocalState, determineSingleKVKey } from "../../generic/generatorFns";
+import { debounce } from 'debounce';
 
 /**
  * @author Jonathan Schneider
@@ -27,7 +28,8 @@ type OwnProps = {
 type BaseDataTypeState = {
 	singleKVOutput: IKvStore,
 	singleKVInputKey: string,
-	singleKVOutputKey: string
+	singleKVOutputKey: string,
+	isDispatched: boolean
 };
 
 export interface PureBaseDataTypeInputComponent {
@@ -76,13 +78,21 @@ export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedSta
 	cfg: BlueprintConfig;
 	initialKvStores: IKvStore[];
 
+	protected dispatchDebounced = debounce((
+		modSingleKV, ldTokenString, outputKVMap
+	) => {
+		this.setState({ ...this.state, singleKVOutput: modSingleKV, isDispatched: true });
+		this.props.dispatchKvOutput([modSingleKV], ldTokenString, outputKVMap);
+	}, 400);
+
 	constructor(props?: LDConnectedState & LDConnectedDispatch & OwnProps) {
 		super(props);
 		this.cfg = this.constructor["cfg"];
 		let bdtState: BaseDataTypeState = {
 			singleKVOutput: null,
 			singleKVInputKey: UserDefDict.inputData,
-			singleKVOutputKey: UserDefDict.outputData
+			singleKVOutputKey: UserDefDict.outputData,
+			isDispatched: true
 		};
 		this.state = {
 			...bdtState,
@@ -113,11 +123,10 @@ export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedSta
 			value: this.state.localValues.get(singleInputKey)
 		};
 		modSingleKV.value = evtval;
-		this.setState({ ...this.state, singleKVOutput: modSingleKV });
-		//TODO: it might be a good idea to debounce before updating the application state
+		this.setState({ ...this.state, singleKVOutput: modSingleKV, isDispatched: false });
 		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
 		if (!outputKVMap || !outputKVMap[this.state.singleKVOutputKey]) return;
-		this.props.dispatchKvOutput([modSingleKV], this.props.ldTokenString, outputKVMap);
+		this.dispatchDebounced(modSingleKV, this.props.ldTokenString, outputKVMap);
 	}
 
 	componentDidMount() {
@@ -152,6 +161,10 @@ export function wrapBaseDataTypeGDSF(cfg: BlueprintConfig) {
 	return (
 		nextProps: LDConnectedState & LDConnectedDispatch & OwnProps,
 		prevState: BaseDataTypeState & LDLocalState) => {
+		if (!prevState.isDispatched) {
+			//user input takes precedence, dispatching that before handling other input!
+			return null;
+		}
 		let rvLD = gdsfpLD(nextProps, prevState, [], [LDDict.description, UserDefDict.inputData, UserDefDict.outputKVMapKey], cfg.canInterpretType);
 		if (!rvLD) return null;
 		let rvLocal: BaseDataTypeState = null;
@@ -171,7 +184,7 @@ export function wrapBaseDataTypeGDSF(cfg: BlueprintConfig) {
 			rvLD.localValues.set(LDDict.description, desc);
 			let singleKVOutputKeyStr: string = UserDefDict.outputData;
 			if (newSingleKVKey !== UserDefDict.inputData) singleKVOutputKeyStr = newSingleKVKey;
-			rvLocal = { singleKVOutput: nextSingleKV, singleKVInputKey: newSingleKVKey, singleKVOutputKey: singleKVOutputKeyStr };
+			rvLocal = { singleKVOutput: nextSingleKV, singleKVInputKey: newSingleKVKey, singleKVOutputKey: singleKVOutputKeyStr, isDispatched: true };
 		}
 		if (!rvLocal) return null;
 		return { ...prevState, ...rvLD, ...rvLocal };

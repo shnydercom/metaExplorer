@@ -96,6 +96,18 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 			};
 			newLDOptions.resource.kvStores = [newKV, outputKvMap];
 			nextProps.notifyLDOptionsChange(newLDOptions);
+			if ((newKV.value !== prevState.portKvStore.value) && nextProps.model) {
+				const links = nextProps.model.getLinks();
+				if (links && Object.keys(links).length > 0) {
+					const linksKeys = Object.keys(links);
+					links[linksKeys[0]].iterateListeners((listener, event) => {
+						if (listener.sourcePortChanged) {
+							const nextPort = { ...nextProps.model, kv: newKV };
+							listener.sourcePortChanged({ ...event, port: nextPort as LDPortModel });
+						}
+					});
+				}
+			}
 		}
 		return { ...prevState, ...rvLD, portKvStore: newKV, portType: newType };
 	}

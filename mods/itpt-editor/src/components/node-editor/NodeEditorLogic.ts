@@ -658,7 +658,7 @@ export class NodeEditorLogic {
 				let leafNode: NodeModel = oneLink.getSourcePort().getParent();
 				let leafPort: LDPortModel = oneLink.getSourcePort() as LDPortModel;
 				if (leafPort.in) {//leafNode.getID() === branchNode.getID()) {
-					if(oneLink.getTargetPort()) continue;
+					if(!oneLink.getTargetPort()) continue;
 					leafNode = oneLink.getTargetPort().getParent();
 					leafPort = oneLink.getTargetPort() as LDPortModel;
 				}
