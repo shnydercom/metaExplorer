@@ -100,16 +100,6 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 		return { ...prevState, ...rvLD, portKvStore: newKV, portType: newType };
 	}
 
-	/*componentWillReceiveProps(nextProps, nextContext): void {
-		if (compNeedsUpdate(nextProps, this.props)) {
-			let newKV: IKvStore = getKVStoreByKey(nextProps.ldOptions.resource.kvStores, UserDefDict.singleKvStore);
-			newKV = newKV ? newKV : { key: null, value: null, ldType: null };
-			nextProps.model.kv = newKV;
-			let newType = newKV ? newKV.ldType : null;
-			this.onPortTypeChange(newType, nextProps);
-		}
-	}*/
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -121,6 +111,12 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 			localLDTypes: null
 		};
 		// this.props.notifyLDOptionsChange(null);
+	}
+
+	componentDidUpdate() {
+		if (this.props.ldOptions && !this.state.portType) {
+			this.onPortTypeChange(LDDict.Boolean, this.props);
+		}
 	}
 
 	onPortTypeChange = (newType: string, nProps: BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch) => {
@@ -172,7 +168,9 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 						LDDict.Date |
 						LDDict.DateTime}
 						selectionChange={(newType) => { this.onPortTypeChange(newType, this.props); }} />
-					{portType ? <BaseContainerRewrite ldTokenString={targetID} routes={null} /> : null}
+					<div className="editor-selectbdt-inputcontainer">
+						{portType ? <BaseContainerRewrite ldTokenString={targetID} routes={null} /> : null}
+					</div>
 				</div>
 				{port}
 			</div>

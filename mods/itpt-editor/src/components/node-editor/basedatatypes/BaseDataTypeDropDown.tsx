@@ -15,13 +15,14 @@ export interface IDataTypeLabel {
 
 export interface IDataTypeDropDownProps {
 	className?: string;
-	selection?: LDDict.Boolean |
+	selection?: null |
+	LDDict.Boolean |
 	LDDict.Integer |
 	LDDict.Double |
 	LDDict.Text |
 	LDDict.Date |
 	LDDict.DateTime;
-	selectionChange: (selectedDataType: string) => void;
+	selectionChange: (selectedDataType: string | null) => void;
 }
 
 export interface IDataTypeState {
@@ -59,7 +60,8 @@ export class BaseDataTypeDropDown extends Component<IDataTypeDropDownProps, IDat
 
 	render() {
 		//return <div>DropDown</div>;
-		return <select name="cars"
+		return <select name="bdatatypes"
+			className="editor-selectbdt"
 			value={this.state.selectedDataType} onChange={(event) => this.handleChange(event.currentTarget.value)}>
 			{baseDataTypes.map((val, idx) => <option key={`option-${idx}`} value={val.value}>{val.label}</option>)}
 		</select>;
