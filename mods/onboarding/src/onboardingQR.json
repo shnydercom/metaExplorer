@@ -1,6 +1,6 @@
 {
   "subItptOf": "7e9d2646-1e29-41b2-b6e0-bcc9fa809ebe",
-  "canInterpretType": "shnyder/meta-explorer/QRcodeFromText-ObjectType",
+  "canInterpretType": "shnyder/metaexplorer/QRcodeFromText-ObjectType",
   "nameSelf": "shnyder/qr/QRcodeFromText",
   "initialKvStores": [
     {

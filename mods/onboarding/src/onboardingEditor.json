@@ -1,7 +1,7 @@
 {
   "subItptOf": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
-  "canInterpretType": "shnyder/meta-explorer/onboarding/onboardingEditor-ObjectType",
-  "nameSelf": "shnyder/meta-explorer/onboarding/onboardingEditor",
+  "canInterpretType": "shnyder/metaexplorer/onboarding/onboardingEditor-ObjectType",
+  "nameSelf": "shnyder/metaexplorer/onboarding/onboardingEditor",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",

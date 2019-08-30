@@ -1,20 +1,20 @@
 {
-  "subItptOf": "projCfg",
-  "canInterpretType": "shnyder/metaexplorer/connected-editor-ObjectType",
-  "nameSelf": "shnyder/metaexplorer/connected-editor",
+  "subItptOf": "5447468d-5c5b-4f2f-a56a-9b4a508b8d40",
+  "canInterpretType": "shnyder/metaexplorer/MainAppEntryPoint-ObjectType",
+  "nameSelf": "shnyder/metaexplorer/MainAppEntryPoint",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
-        "projCfg": {
+        "5447468d-5c5b-4f2f-a56a-9b4a508b8d40": {
           "subItptOf": "ProjectConfiguration",
           "canInterpretType": "ProjectConfiguration-ObjectType",
-          "nameSelf": "projCfg",
+          "nameSelf": "5447468d-5c5b-4f2f-a56a-9b4a508b8d40",
           "initialKvStores": [
             {
               "key": "inputContainer",
               "value": {
-                "objRef": "rm-blockeditor",
+                "objRef": "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -22,7 +22,7 @@
             {
               "key": "configurationBlocks",
               "value": {
-                "objRef": "rm-kcauthcfg",
+                "objRef": "8e8a7d7d-1013-4965-a9a9-9207ca899014",
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
@@ -34,10 +34,10 @@
             "configurationBlocks"
           ]
         },
-        "rm-blockeditor": {
+        "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725": {
           "subItptOf": "shnyder/block-editor",
           "canInterpretType": "blockeditortype",
-          "nameSelf": "rm-blockeditor",
+          "nameSelf": "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725",
           "initialKvStores": [
             {
               "key": "currentlyediting",
@@ -62,7 +62,7 @@
             {
               "key": "savingStatus",
               "value": {
-                "objRef": "rm-bpcfgSender",
+                "objRef": "ae9427b8-c461-41f5-b125-caad47106b1a",
                 "propRef": "shnyder/responsewrapper"
               },
               "ldType": "shnyder/responsewrapperType"
@@ -73,10 +73,10 @@
             "savingStatus"
           ]
         },
-        "rm-bpcfgSender": {
+        "ae9427b8-c461-41f5-b125-caad47106b1a": {
           "subItptOf": "shnyder/metaexplorer/RefMapBpCfgSender",
           "canInterpretType": "shnyder/metaexplorer/RefMapBpCfgSenderType",
-          "nameSelf": "rm-bpcfgSender",
+          "nameSelf": "ae9427b8-c461-41f5-b125-caad47106b1a",
           "initialKvStores": [
             {
               "key": "srvURL",
@@ -86,7 +86,7 @@
             {
               "key": "inputRefMap",
               "value": {
-                "objRef": "rm-actionhandler",
+                "objRef": "01492f64-e72f-42c6-9bfa-c39b2ee3f415",
                 "propRef": "outputdata"
               },
               "ldType": "shnyder/refmap-bpcfgType"
@@ -97,10 +97,10 @@
             "inputRefMap"
           ]
         },
-        "rm-actionhandler": {
+        "01492f64-e72f-42c6-9bfa-c39b2ee3f415": {
           "subItptOf": "ActionHandler",
           "canInterpretType": "ActionHandler-ObjectType",
-          "nameSelf": "rm-actionhandler",
+          "nameSelf": "01492f64-e72f-42c6-9bfa-c39b2ee3f415",
           "initialKvStores": [
             {
               "key": "canHandleType",
@@ -111,10 +111,10 @@
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
-        "rm-kcauthcfg": {
+        "8e8a7d7d-1013-4965-a9a9-9207ca899014": {
           "subItptOf": "keycloak/auth/config",
           "canInterpretType": "keycloak/auth/config-ObjectType",
-          "nameSelf": "rm-kcauthcfg",
+          "nameSelf": "8e8a7d7d-1013-4965-a9a9-9207ca899014",
           "initialKvStores": [
             {
               "key": "jsonConfigurationPath",
