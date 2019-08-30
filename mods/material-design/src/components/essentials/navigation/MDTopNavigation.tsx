@@ -1,4 +1,4 @@
-import {ldBlueprint, TopNavW5ChoicesBpCfg, classNamesLD} from "@metaexplorer/core";
+import { ldBlueprint, TopNavW5ChoicesBpCfg, classNamesLD } from "@metaexplorer/core";
 import { MDBottomNavigation } from "./MDBottomNavigation";
 import { Route } from "react-router";
 import { BottomNavigation } from "@material-ui/core";
@@ -38,7 +38,7 @@ export class MDTopNavigation extends MDBottomNavigation {
 				{tabs}
 			</BottomNavigation>
 			<div className="bottom-nav-topfree mdscrollbar">
-				{this.generateRedirect(tabIdx)}
+				{tabs.length > 0 ? this.generateRedirect(tabIdx) : null}
 				<Route component={this.renderInputContainer} />
 				{this.props.children}
 			</div>

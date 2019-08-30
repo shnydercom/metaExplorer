@@ -55,7 +55,7 @@ export class MDBottomNavigation extends AbstractBottomNavigation {
 		}
 		return <div className={classNamesLD("bottom-nav", localValues)}>
 			<div className="bottom-nav-topfree mdscrollbar">
-				{this.generateRedirect(tabIdx)}
+				{tabs.length > 0 ? this.generateRedirect(tabIdx) : null}
 				<Route component={this.renderInputContainer} />
 				{this.props.children}
 			</div>

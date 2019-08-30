@@ -3,7 +3,7 @@ import {
 	ldBaseDataTypeList, BlueprintConfig, IBlueprintItpt, LDDict, IKvStore, isInputValueValidFor, isObjPropertyRef,
 	ObjectPropertyRef, UserDefDict, appItptMatcherFn
 } from "@metaexplorer/core";
-import { DefaultLinkModel, DiagramEngine, DiagramModel, NodeModel } from "@projectstorm/react-diagrams";
+import { DefaultLinkModel, DiagramEngine, DiagramModel, NodeModel, LinkModelListener, LinkModel } from "@projectstorm/react-diagrams";
 import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
 import { distributeElements } from "./dagre-utils";
@@ -202,12 +202,50 @@ export class NodeEditorLogic {
 		}*/
 	}
 
+	addListenersToNode(node: NodeModel) {
+		node.addListener({
+			entityRemoved: (event) => { 
+				console.log("node event")
+				this.onOutputInfoSaved(this.outputNode.getItptName()) 
+			}
+		})
+		if (node.getType() === GENERALDATATYPE_MODEL) {
+			if ((node as GeneralDataTypeNodeModel).isCompound) {
+				node.addListener({
+					onTriggerExplore: (ev) => {
+						console.log("onExplore triggered")
+						this.onExploreTriggered(ev.itptName)
+					}
+				} as GeneralDataTypeNodeModelListener)
+			}
+		}
+	}
+
+	addListenersToLink(link: LinkModel<LinkModelListener>) {
+		link.addListener({
+			sourcePortChanged: (ev) => {
+				console.log("sp event")
+				this.onOutputInfoSaved(this.outputNode.getItptName());
+			},
+			targetPortChanged: (ev) => {
+				console.log("tp event")
+				this.onOutputInfoSaved(this.outputNode.getItptName());
+			}
+		})
+	}
+
 	addListenersToModel(model: DiagramModel) {
 		model.addListener({
 			nodesUpdated: (event) => {
+				console.log("model nodes ev")
+				event.node.clearListeners();
+				this.addListenersToNode(event.node);
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			},
 			linksUpdated: (event) => {
+				console.log("model links event")
+				event.link.clearListeners();
+				this.addListenersToLink(event.link);
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			}
 		})
@@ -215,15 +253,14 @@ export class NodeEditorLogic {
 		for (const key in nodesMap) {
 			if (nodesMap.hasOwnProperty(key)) {
 				const node = nodesMap[key];
-				if (node.getType() === GENERALDATATYPE_MODEL) {
-					if ((node as GeneralDataTypeNodeModel).isCompound) {
-						node.addListener({
-							onTriggerExplore: (ev) => {
-								this.onExploreTriggered(ev.itptName)
-							}
-						} as GeneralDataTypeNodeModelListener)
-					}
-				}
+				this.addListenersToNode(node);
+			}
+		}
+		const linksMap = model.getLinks();
+		for (const linkKey in linksMap) {
+			if (linksMap.hasOwnProperty(linkKey)) {
+				const link = linksMap[linkKey];
+				this.addListenersToLink(link);
 			}
 		}
 	}
@@ -591,6 +628,7 @@ export class NodeEditorLogic {
 				let leafNode: NodeModel = oneLink.getSourcePort().getParent();
 				let leafPort: LDPortModel = oneLink.getSourcePort() as LDPortModel;
 				if (!leafPort.in) {//leafNode.getID() === branchNode.getID()) {
+					if(!oneLink.getTargetPort()) continue;
 					leafNode = oneLink.getTargetPort().getParent();
 					leafPort = oneLink.getTargetPort() as LDPortModel;
 				}
@@ -629,6 +667,7 @@ export class NodeEditorLogic {
 				let leafNode: NodeModel = oneLink.getSourcePort().getParent();
 				let leafPort: LDPortModel = oneLink.getSourcePort() as LDPortModel;
 				if (leafPort.in) {//leafNode.getID() === branchNode.getID()) {
+					if(oneLink.getTargetPort()) continue;
 					leafNode = oneLink.getTargetPort().getParent();
 					leafPort = oneLink.getTargetPort() as LDPortModel;
 				}
