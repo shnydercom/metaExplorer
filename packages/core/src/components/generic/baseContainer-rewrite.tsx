@@ -60,6 +60,7 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 		let newLDTypes: Map<string, string> = new Map();
 		let isLDTypeSame = true;
 		let isItptKey = false;
+		let hasOutputKvMap = false;
 		ldOptions.resource.kvStores.forEach((itm, idx, kvstores) => {
 			let prevStateLDType = prevState.localLDTypes.get(itm.key);
 			newLDTypes.set(itm.key, itm.ldType);
@@ -71,11 +72,14 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 			if (prevStateLDType !== itm.ldType) {
 				isLDTypeSame = false;
 			}
+			if (itm.key === UserDefDict.outputKVMapKey) {
+				hasOutputKvMap = true;
+			}
 		});
 		if ((!interpretedBy
 			|| !isRouteSame(nextProps.routes, prevState.routes)
 			|| !isLDTypeSame)
-			&& !isItptKey) {
+			&& !isItptKey && !(hasOutputKvMap && ldOptions.resource.kvStores.length === 1)) {
 			//i.e. first time this ldOptions-Object gets interpreted, or itpt-change
 			let newldOptions = ldOptionsDeepCopy(ldOptions);
 			newldOptions.visualInfo.interpretedBy = prevState.nameSelf;
