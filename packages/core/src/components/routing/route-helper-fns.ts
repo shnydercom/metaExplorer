@@ -3,6 +3,12 @@ import { LDRouteProps } from "../../appstate/LDProps";
 export function cleanRouteString(destination: string, routes: LDRouteProps) {
 	const { match } = routes;
 	let route: string = destination;
+	if (route.startsWith('http://')
+		|| route.startsWith('mailto:')
+		|| route.startsWith('https://')) {
+		window.location.href = route;
+		return "/";
+	}
 	if (route.startsWith("/")) {//i.e attach to path/create sub-path
 		route = route.substring(1);
 		route = match.url.endsWith("/") ? match.url + route : `${match.url}/${route}`;
