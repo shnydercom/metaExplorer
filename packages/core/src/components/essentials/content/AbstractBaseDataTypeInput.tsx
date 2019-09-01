@@ -26,7 +26,7 @@ type OwnProps = {
 } & LDOwnProps;
 
 type BaseDataTypeState = {
-	singleKVOutput: IKvStore,
+	singleKVInput: IKvStore,
 	singleKVInputKey: string,
 	singleKVOutputKey: string,
 	isDispatched: boolean
@@ -81,7 +81,7 @@ export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedSta
 	protected dispatchDebounced = debounce((
 		modSingleKV, ldTokenString, outputKVMap
 	) => {
-		this.setState({ ...this.state, singleKVOutput: modSingleKV, isDispatched: true });
+		this.setState({ ...this.state, singleKVInput: modSingleKV, isDispatched: true });
 		this.props.dispatchKvOutput([modSingleKV], ldTokenString, outputKVMap);
 	}, 400);
 
@@ -89,7 +89,7 @@ export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedSta
 		super(props);
 		this.cfg = this.constructor["cfg"];
 		let bdtState: BaseDataTypeState = {
-			singleKVOutput: null,
+			singleKVInput: null,
 			singleKVInputKey: UserDefDict.inputData,
 			singleKVOutputKey: UserDefDict.outputData,
 			isDispatched: true
@@ -102,7 +102,7 @@ export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedSta
 				[LDDict.description, UserDefDict.inputData, UserDefDict.outputKVMapKey])
 		};
 		this.state = {
-			...this.state, singleKVOutput:
+			...this.state, singleKVInput:
 			{
 				key: this.state.singleKVOutputKey,
 				value: this.state.localValues.get(this.state.singleKVInputKey),
@@ -117,20 +117,45 @@ export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedSta
 
 	handleChange = (evtval) => {
 		let singleInputKey: string = this.state.singleKVInputKey;
-		let modSingleKV: IKvStore = {
+		let modSingleKVOutput: IKvStore = {
 			key: this.state.singleKVOutputKey,
 			ldType: this.state.localLDTypes.get(singleInputKey),
 			value: this.state.localValues.get(singleInputKey)
 		};
-		modSingleKV.value = evtval;
-		this.setState({ ...this.state, singleKVOutput: modSingleKV, isDispatched: false });
-		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
-		if (!outputKVMap || !outputKVMap[this.state.singleKVOutputKey]) return;
-		this.dispatchDebounced(modSingleKV, this.props.ldTokenString, outputKVMap);
+		if (typeof evtval === 'string') {
+			switch (modSingleKVOutput.ldType) {
+				case LDDict.Boolean:
+					evtval = (evtval === 'true');
+					break;
+				case LDDict.Integer:
+					evtval = parseInt(evtval, 10);
+					break;
+				case LDDict.Double:
+					evtval = parseFloat(evtval);
+					break;
+				case LDDict.Date:
+					evtval = new Date(evtval);
+					break;
+				case LDDict.DateTime:
+					evtval = new Date(evtval);
+					break;
+				default:
+					break;
+			}
+		}
+		modSingleKVOutput.value = evtval;
+		const modSingleKvInput = this.state.singleKVInput;
+		modSingleKvInput.value = evtval;
+		this.setState({ ...this.state, singleKVInput: modSingleKvInput, isDispatched: false }, () => {
+			const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
+			if (!outputKVMap || !outputKVMap[this.state.singleKVOutputKey]) return;
+			this.dispatchDebounced(modSingleKVOutput, this.props.ldTokenString, outputKVMap);
+		}
+		);
 	}
 
 	componentDidMount() {
-		if (!this.state.singleKVOutput || !this.state.singleKVOutput.ldType) {
+		if (!this.state.singleKVInput || !this.state.singleKVInput.ldType) {
 			console.log('PureBaseDataTypeInput notifyLDOptionsChange');
 			//this self-creates an object. Used e.g. in the itpt-editor, bdt-part
 			console.dir(this.props.ldOptions);
@@ -170,21 +195,29 @@ export function wrapBaseDataTypeGDSF(cfg: BlueprintConfig) {
 		let rvLocal: BaseDataTypeState = null;
 		if (nextProps.ldOptions) {
 			let pLdOpts: ILDOptions = nextProps.ldOptions;
-			let newSingleKVKey: string = determineSingleKVKey(pLdOpts.resource.kvStores, cfg.canInterpretType, cfg.interpretableKeys as string[]);
+			let newSingleKVInputKey: string = determineSingleKVKey(pLdOpts.resource.kvStores, cfg.canInterpretType, cfg.interpretableKeys as string[]);
 			let nextDescription = rvLD.localValues.get(LDDict.description);
-			let nextSingleKV = getKVStoreByKey(pLdOpts.resource.kvStores, newSingleKVKey);
-			if (!nextSingleKV) {
+			let nextSingleInputKV = getKVStoreByKey(pLdOpts.resource.kvStores, newSingleKVInputKey);
+			if (!nextSingleInputKV) {
 				//this happens when state changes let this comp re-evaluate before it's being replaced. Do nothing
 				return null;
 			}
-			let desc = nextDescription ? nextDescription : newSingleKVKey;
-			rvLD.localLDTypes.set(newSingleKVKey, nextSingleKV.ldType);
-			rvLD.localValues.set(newSingleKVKey, nextSingleKV.value);
+			let desc = nextDescription ? nextDescription : newSingleKVInputKey;
+			rvLD.localLDTypes.set(newSingleKVInputKey, nextSingleInputKV.ldType);
+			rvLD.localValues.set(newSingleKVInputKey, nextSingleInputKV.value);
 			rvLD.localLDTypes.set(LDDict.description, LDDict.Text);
 			rvLD.localValues.set(LDDict.description, desc);
 			let singleKVOutputKeyStr: string = UserDefDict.outputData;
-			if (newSingleKVKey !== UserDefDict.inputData) singleKVOutputKeyStr = newSingleKVKey;
-			rvLocal = { singleKVOutput: nextSingleKV, singleKVInputKey: newSingleKVKey, singleKVOutputKey: singleKVOutputKeyStr, isDispatched: true };
+			let outputKvMap = getKVStoreByKey(pLdOpts.resource.kvStores, UserDefDict.outputKVMapKey);
+			//i.e. inputKvStore is not set or it's dynamically generated
+			if (newSingleKVInputKey !== UserDefDict.inputData) singleKVOutputKeyStr = newSingleKVInputKey;
+			if (outputKvMap && outputKvMap.value) {
+				if (outputKvMap.value.hasOwnProperty(UserDefDict.outputData)) {
+					//unless outputData is explicitly set
+					singleKVOutputKeyStr = UserDefDict.outputData;
+				}
+			}
+			rvLocal = { singleKVInput: nextSingleInputKV, singleKVInputKey: newSingleKVInputKey, singleKVOutputKey: singleKVOutputKeyStr, isDispatched: true };
 		}
 		if (!rvLocal) return null;
 		return { ...prevState, ...rvLD, ...rvLocal };

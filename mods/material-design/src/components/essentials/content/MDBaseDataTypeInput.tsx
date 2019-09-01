@@ -11,36 +11,36 @@ abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 		const heading = this.state.localValues.get(LDDict.description);
 		switch (baseDT) {
 			case LDDict.Boolean:
-				let parsedBoolean = parseBoolean(this.state.singleKVOutput);
+				let parsedBoolean = parseBoolean(this.state.singleKVInput);
 				return <FormControlLabel
 					control={<Switch checked={parsedBoolean}
-						onChange={(evt) => this.handleChange(evt.currentTarget.value)} />
+						onChange={(evt) => this.handleChange(evt.target.checked)} />
 					}
 					label={heading}
 				/>;
 			case LDDict.Integer:
-				const parsedInt = parseNumber(this.state.singleKVOutput);
+				const parsedInt = parseNumber(this.state.singleKVInput);
 				return <TextField type='number'
 					label={heading}
 					name={heading}
 					value={parsedInt}
 					onChange={(evt) => this.handleChange(evt.currentTarget.value)} />;
 			case LDDict.Double:
-				const parsedDouble = parseNumber(this.state.singleKVOutput);
+				const parsedDouble = parseNumber(this.state.singleKVInput);
 				return <TextField type='number'
 					label={heading}
 					name={heading}
 					value={parsedDouble}
 					onChange={(evt) => this.handleChange(evt.currentTarget.value)} />;
 			case LDDict.Text:
-				let parsedText = parseText(this.state.singleKVOutput);
+				let parsedText = parseText(this.state.singleKVInput);
 				return <TextField type='text'
 					label={heading}
 					name={heading}
 					value={parsedText}
 					onChange={(evt) => this.handleChange(evt.currentTarget.value)} />;
 			case LDDict.Date:
-				var parsedDate = parseDate(this.state.singleKVOutput);
+				var parsedDate = parseDate(this.state.singleKVInput);
 				return <TextField
 					id="date"
 					label={heading}
@@ -56,7 +56,7 @@ abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 				value={parsedDate}
 	sundayFirstDayOfWeek />*/
 			case LDDict.DateTime:
-				var parsedDate = parseDate(this.state.singleKVOutput);
+				var parsedDate = parseDate(this.state.singleKVInput);
 				//var parsedTime = parseTime(this.state.singleKVOutput);
 				return <div className="dateTimePicker">
 					<TextField

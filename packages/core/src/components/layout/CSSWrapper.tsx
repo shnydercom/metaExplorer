@@ -79,9 +79,9 @@ export class PureCSSWrapper extends Component<LDConnectedState & LDConnectedDisp
 		const { localValues } = this.state;
 		if (isReactComponent(renderFreeResult)) {
 			const cssClassNames: string[] = localValues.get(VisualKeysDict.cssClassName);
-			const cssClassStrings = cssClassNames.join(" ");
 			if (!!renderFreeResult && !!cssClassNames /*&& renderFreeResult.hasOwnProperty("className")*/) {
 				/*renderFreeResult["className"] = cssClassName;*/
+				const cssClassStrings = cssClassNames.join(" ");
 				return <div className={cssClassStrings}>{renderFreeResult}</div>;
 			}
 		}

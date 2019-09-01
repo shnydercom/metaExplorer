@@ -8,8 +8,17 @@
 	align-items: center;
 
 	>img {
-    height: 200px;
+		height: 200px;
 		width: 200px;
 		min-height: 200px;
 	}
+}
+
+.mxp-bg {
+	background-color: #efefef;
+	width: 700px;
+}
+
+.mxp-welcome-whitespace {
+	padding: 20vh 0px;
 }
