@@ -4,9 +4,9 @@ import {
 } from "@metaexplorer/core";
 import { UserItptLoadApi } from "../apis/itpt-load-api";
 
-export const RefMapBpCfgSenderName = "metaexplorer.io/v1/RefMapBpCfgSender";
+export const RefMapBpCfgSenderName = "metaexplorer.io/server/RefMapBpCfgSender";
 
-export const RefMapBpCfgSenderType = "metaexplorer.io/v1/RefMapBpCfgSenderType";
+export const RefMapBpCfgSenderType = "metaexplorer.io/server/RefMapBpCfgSenderType";
 
 export const inputRefMap = "inputRefMap";
 

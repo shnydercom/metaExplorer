@@ -74,8 +74,8 @@
           ]
         },
         "ae9427b8-c461-41f5-b125-caad47106b1a": {
-          "subItptOf": "metaexplorer.io/v1/RefMapBpCfgSender",
-          "canInterpretType": "metaexplorer.io/v1/RefMapBpCfgSenderType",
+          "subItptOf": "metaexplorer.io/server/RefMapBpCfgSender",
+          "canInterpretType": "metaexplorer.io/server/RefMapBpCfgSenderType",
           "nameSelf": "ae9427b8-c461-41f5-b125-caad47106b1a",
           "initialKvStores": [
             {
