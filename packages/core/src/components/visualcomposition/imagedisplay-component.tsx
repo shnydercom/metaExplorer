@@ -57,12 +57,6 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 		let cssClassName = localValues.get(VisualKeysDict.cssClassName);
 		cssClassName = cssClassName ? cssClassName : "";
 		let imgLnk: string = localValues.get(LDDict.contentUrl);
-		if (imgLnk
-			&& !imgLnk.startsWith("http://")
-			&& !imgLnk.startsWith("blob:http://")
-			&& !imgLnk.startsWith("/")) {
-			imgLnk = "http://localhost:1111/api/ysj/media/jpgs/" + imgLnk;
-		}
 		if (!ldOptions) return <div>no Image data</div>;
 		return <div className={"imgdisplay " + cssClassName}>
 			<img alt="" src={imgLnk} className="is-loading"
@@ -72,8 +66,6 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 					}
 				}
 				style={{ objectFit: objFit }} />
-			{/*imgLnk*/}
-			{this.props.children}
 		</div>;
 	}
 }

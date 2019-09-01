@@ -11,10 +11,12 @@ import { PureRedirectComponent, RouteRedirectName } from "../routing/redirect";
 import { TwoDtoJSONArray, TwoDtoJSONArrayName } from "../../datatransformation/TwoDtoJSONArray";
 import { JSONArrayToCompactInfoArrayName, JSONArrayToCompactInfoArray } from "../../datatransformation/JSONArrayToCompactInfoArray";
 import { CSSWrapperName, PureCSSWrapper } from "../../components/layout/CSSWrapper";
+import { PureVideoDisplay } from "../visualcomposition";
 
 export function initEssentialInterpreters() {
 	let appIntRetr = appItptRetrFn();
-	appIntRetr.addItpt(LDDict.ViewAction, PureImgDisplay, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(LDDict.ImageObject, PureImgDisplay, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(LDDict.VideoObject, PureVideoDisplay, "cRud", [ITPT_TAG_ATOMIC]);
 
 	//register routing itpts
 	appIntRetr.addItpt(RouteComponentName, PureRouteComponent, "cRud", [ITPT_TAG_ATOMIC]);
