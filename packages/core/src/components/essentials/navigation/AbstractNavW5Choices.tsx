@@ -129,7 +129,7 @@ export type BottomNavState = LDLocalState & {
 	labels: string[];
 	hasTabChanged: boolean;
 	numTabs: number;
-}
+};
 
 export abstract class AbstractBottomNavigation extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, BottomNavState>
 	implements IBlueprintItpt {
@@ -162,8 +162,8 @@ export abstract class AbstractBottomNavigation extends Component<LDConnectedStat
 			routes[idx] = rvNew.localValues.get(ROUTES_SEND[idx]);
 			labels[idx] = rvNew.localValues.get(LABELS[idx]);
 			isGenerateAtPositions[idx] = checkAllFilled(
-				iconEnabledURLs[idx],
-				iconDisabledURLs[idx],
+				//iconEnabledURLs[idx],
+				//iconDisabledURLs[idx],
 				routes[idx],
 				labels[idx]
 			);

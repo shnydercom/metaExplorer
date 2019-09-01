@@ -1,3 +1,15 @@
 @import '~@metaexplorer/core/src/styles/core-index';
 @import '~@metaexplorer-mods/itpt-editor/src/styles/itpt-editor-index.scss';
 @import '~@metaexplorer-mods/material-design/src/styles/material-design-index.scss';
+
+.mxp-svgs {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	>img {
+    height: 200px;
+		width: 200px;
+		min-height: 200px;
+	}
+}

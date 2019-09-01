@@ -32,7 +32,7 @@ export interface IDataTypeState {
 const baseDataTypes: IDataTypeLabel[] = [
 	{ value: LDDict.Boolean, label: 'Boolean', img: null },
 	{ value: LDDict.Integer, label: 'Integer', img: null },
-	{ value: LDDict.Double, label: 'Double', img: null },
+	{ value: LDDict.Double, label: 'Number', img: null },
 	{ value: LDDict.Text, label: 'Text', img: null },
 	{ value: LDDict.Date, label: 'Date', img: null },
 	{ value: LDDict.DateTime, label: 'DateTime', img: null },

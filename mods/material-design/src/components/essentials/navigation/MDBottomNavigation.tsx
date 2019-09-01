@@ -1,4 +1,4 @@
-import {ldBlueprint, BottomNavW5ChoicesBpCfg, AbstractBottomNavigation,cleanRouteString, classNamesLD } from '@metaexplorer/core';
+import { ldBlueprint, BottomNavW5ChoicesBpCfg, AbstractBottomNavigation, cleanRouteString, classNamesLD } from '@metaexplorer/core';
 import { Redirect, Route } from 'react-router';
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import React from 'react';
@@ -7,9 +7,15 @@ import React from 'react';
 export class MDBottomNavigation extends AbstractBottomNavigation {
 	generateTab(imgSrcActive, imgSrcInActive: string, route: string, isActive: boolean, key: string, label: string): JSX.Element {
 		//const mustRedirect = match && isActive && (match.params.lastPath !== undefined || match.params.lastPath !== null) && match.params.lastPath !== route;
-		return <BottomNavigationAction key={key} label={label} icon={isActive
-			? <img src={imgSrcActive} style={{ height: "24px" }} />
-			: <img src={imgSrcInActive} style={{ height: "24px" }} />} />;
+		let icon = null;
+		if (imgSrcActive && imgSrcInActive) {
+			if (isActive) {
+				icon = <img src={imgSrcActive} style={{ height: "24px" }} />;
+			} else {
+				icon = <img src={imgSrcInActive} style={{ height: "24px" }} />;
+			}
+		}
+		return <BottomNavigationAction key={key} label={label} icon={icon}/>
 		/*<Tab label='' key={key} className="bottom-nav-tab" icon={isActive
 			? <img src={imgSrcActive} style={{ height: "inherit" }} />
 			: <img src={imgSrcInActive} style={{ height: "inherit" }} />}>
