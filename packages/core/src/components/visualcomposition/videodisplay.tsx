@@ -15,9 +15,10 @@ let cfgType: string = LDDict.VideoObject;
 export const VIDEO_SHOW_CONTROLS = "showControls";
 export const VIDEO_IS_MUTED = "muted";
 export const VIDEO_IS_AUTOPLAYING = "autoplay";
+export const VIDEO_IS_LOOP = "loop";
 
 let cfgIntrprtKeys: string[] =
-	[LDDict.name, LDDict.fileFormat, LDDict.contentUrl, VIDEO_SHOW_CONTROLS, VIDEO_IS_MUTED, VIDEO_IS_AUTOPLAYING, VisualKeysDict.cssClassName];
+	[LDDict.name, LDDict.fileFormat, LDDict.contentUrl, VIDEO_SHOW_CONTROLS, VIDEO_IS_MUTED, VIDEO_IS_AUTOPLAYING, VIDEO_IS_LOOP, VisualKeysDict.cssClassName];
 let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
@@ -39,7 +40,7 @@ export class PureVideoDisplay extends Component<LDConnectedState & LDConnectedDi
 			nextProps, prevState, [],
 			[LDDict.name, LDDict.fileFormat, LDDict.contentUrl,
 				VIDEO_SHOW_CONTROLS, VIDEO_IS_MUTED, VIDEO_IS_AUTOPLAYING,
-			VisualKeysDict.cssClassName], cfgType);
+				VIDEO_IS_LOOP, VisualKeysDict.cssClassName], cfgType);
 		if (!rvLD) {
 			return null;
 		}
@@ -58,7 +59,7 @@ export class PureVideoDisplay extends Component<LDConnectedState & LDConnectedDi
 		this.state = initLDLocalState(this.cfg, props, [],
 			[LDDict.name, LDDict.fileFormat, LDDict.contentUrl,
 				VIDEO_SHOW_CONTROLS, VIDEO_IS_MUTED, VIDEO_IS_AUTOPLAYING,
-			VisualKeysDict.cssClassName]);
+				VIDEO_IS_LOOP, VisualKeysDict.cssClassName]);
 	}
 
 	render() {
@@ -68,6 +69,7 @@ export class PureVideoDisplay extends Component<LDConnectedState & LDConnectedDi
 		isShowVideoControls = isShowVideoControls ? isShowVideoControls : false;
 		let isMuted = localValues.get(VIDEO_IS_MUTED);
 		let isAutoPlay = localValues.get(VIDEO_IS_AUTOPLAYING);
+		let isLooping = localValues.get(VIDEO_IS_LOOP);
 		let cssClassName = localValues.get(VisualKeysDict.cssClassName);
 		cssClassName = cssClassName ? cssClassName : "";
 		let videoLink: string = localValues.get(LDDict.contentUrl);
@@ -77,6 +79,7 @@ export class PureVideoDisplay extends Component<LDConnectedState & LDConnectedDi
 				autoPlay={isAutoPlay}
 				muted={isMuted}
 				controls={isShowVideoControls}
+				loop={isLooping}
 				onLoad={
 					(ev) => {
 						ev.currentTarget.classList.remove("is-loading");

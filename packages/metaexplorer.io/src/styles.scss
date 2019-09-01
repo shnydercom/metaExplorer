@@ -103,3 +103,15 @@
 .mxp-welcome-whitespace {
 	padding: 20vh 0px;
 }
+
+.videodisplay {
+	video {
+		height: 100%;
+		object-fit: scale-down;
+		width: 100%;
+	}
+}
+
+.app-content {
+	background-color: #efefef;
+}
