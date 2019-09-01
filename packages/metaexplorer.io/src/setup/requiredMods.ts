@@ -9,7 +9,7 @@ import { MOD_USERITPT_ID, initUSERITPTClientMod } from '@metaexplorer-mods/useri
 import { MOD_ITPTEDITOR_ID, initItptEditorMod } from '@metaexplorer-mods/itpt-editor';
 import { MOD_QRCODEGENSCAN_ID, initQRCODEGENClientMod } from '@metaexplorer-mods/qr-code-genscan';
 import { initOnboardingMod, MOD_ONBOARDING_ID } from '@metaexplorer-mods/onboarding';
-import { initShnyderMod, MOD_SHNYDER_ID } from '@metaexplorer-mods/shnyder';
+import { initMetaExplorerMod, MOD_METAEXPLORERIO_ID } from '@metaexplorer-mods/metaexplorer.io';
 import { isProduction } from '@metaexplorer/core';
 
 export function setupRequiredMods(): IModSpec[] {
@@ -80,8 +80,8 @@ export function setupRequiredMods(): IModSpec[] {
 	}
 	);
 	modSpecs.push({
-		id: MOD_SHNYDER_ID,
-		initFn: () => initShnyderMod(),
+		id: MOD_METAEXPLORERIO_ID,
+		initFn: () => initMetaExplorerMod(),
 		dependencies: [MOD_ONBOARDING_ID]
 	});
 	return modSpecs;

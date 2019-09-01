@@ -24,7 +24,7 @@ export interface EANScannerState extends LDLocalState {
 	curId: string;
 }
 
-export const EANScannerName = "shnyder/EANScanner";
+export const EANScannerName = "metaexplorer.io/EANScanner";
 let cfgType: string = LDDict.ViewAction;
 let cfgIntrprtKeys: string[] =
 	[];

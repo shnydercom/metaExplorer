@@ -10,7 +10,7 @@
     "@metaexplorer-mods/material-design": "^0.0.1",
     "@metaexplorer-mods/onboarding": "0.0.1",
     "@metaexplorer-mods/qr-code-genscan": "0.0.1",
-    "@metaexplorer-mods/shnyder": "0.0.1",
+    "@metaexplorer-mods/metaexplorer.io": "0.0.1",
     "@metaexplorer-mods/useritpt": "0.0.1",
     "@metaexplorer-nocode/metaexplorer.io": "1.0.0",
     "@metaexplorer/core": "^0.0.1",

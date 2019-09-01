@@ -14,7 +14,7 @@ export const CONTAINER_MIDDLE = "middleContainer";
 export const CONTAINER_LAST = "lastContainer";
 export const ACTION_MIDDLE_CONTAINER = "Action_middleContainer";
 export const ROUTESEND_MIDDLE_CONTAINER = "RouteSend_middleContainer";
-export const Card3itptLTRName = "shnyder/material-design/CardW3Containers";
+export const Card3itptLTRName = "metaexplorer.io/material-design/CardW3Containers";
 
 let cfgIntrprtKeys: string[] =
 	[CONTAINER_FRONT, CONTAINER_MIDDLE, CONTAINER_LAST, ROUTESEND_MIDDLE_CONTAINER, ACTION_MIDDLE_CONTAINER];

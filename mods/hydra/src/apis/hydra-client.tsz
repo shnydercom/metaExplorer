@@ -8,7 +8,7 @@ import { IHydraResource } from "hydraclient.js/src/DataModel/IHydraResource";
 const hydraApiDocURL: string = "http://localhost:1111"; ///api/ysj/hydra/ApiDocumentation";
 
 const serverURLMap: Map<string, string> = new Map();
-serverURLMap.set("http://shnyder.com", "http://localhost:1111");
+serverURLMap.set("http://metaexplorer.io", "http://localhost:1111");
 
 export class HydraClientAPI {
 

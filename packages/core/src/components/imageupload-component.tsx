@@ -49,7 +49,7 @@ let initialKVStores: IKvStore[] = [
 var bpCfg: BlueprintConfig = {
     subItptOf: null,
     canInterpretType: cfgType,
-    nameSelf: "shnyder/imageUpload",
+    nameSelf: "metaexplorer.io/imageUpload",
     initialKvStores: initialKVStores,
     interpretableKeys: cfgIntrprtKeys,
     crudSkills: "Crud"

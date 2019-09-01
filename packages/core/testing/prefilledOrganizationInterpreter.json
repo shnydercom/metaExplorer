@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "orgSub": {
-          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
-          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "orgSub",
           "initialKvStores": [
             {
@@ -53,7 +53,7 @@
           ]
         },
         "imgDisp": {
-          "subItptOf": "shnyder/imageDisplay",
+          "subItptOf": "metaexplorer.io/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "imgDisp",
           "initialKvStores": [
@@ -87,8 +87,8 @@
           ]
         },
         "imgRetr": {
-          "subItptOf": "shnyder/imageRetriever",
-          "canInterpretType": "shnyder/imageRetriever-ObjectType",
+          "subItptOf": "metaexplorer.io/imageRetriever",
+          "canInterpretType": "metaexplorer.io/imageRetriever-ObjectType",
           "nameSelf": "imgRetr",
           "initialKvStores": [
             {
@@ -111,13 +111,13 @@
           ]
         },
         "orgRetr": {
-          "subItptOf": "shnyder/organizationRetriever",
-          "canInterpretType": "shnyder/organizationRetriever-ObjectType",
+          "subItptOf": "metaexplorer.io/organizationRetriever",
+          "canInterpretType": "metaexplorer.io/organizationRetriever-ObjectType",
           "nameSelf": "orgRetr",
           "initialKvStores": [
             {
               "key": "srvURL",
-              "value": "http://localhost:1111/api/ysj/ns/shnyder/Bens3DPrints",
+              "value": "http://localhost:1111/api/ysj/ns/metaexplorer/Bens3DPrints",
               "ldType": "http://schema.org/Text"
             },
             {

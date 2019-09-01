@@ -26,8 +26,8 @@
           ]
         },
         "77347eb9-cf79-4d15-9bc3-93287c5a1109": {
-          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
-          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "77347eb9-cf79-4d15-9bc3-93287c5a1109",
           "initialKvStores": [
             {

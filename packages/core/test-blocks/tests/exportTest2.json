@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "testB_linearContainer": {
-          "subItptOf": "shnyder/baseContainer",
-          "canInterpretType": "shnyder/ContainerObjType",
+          "subItptOf": "metaexplorer.io/baseContainer",
+          "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "testB_linearContainer",
           "initialKvStores": [
             {
@@ -63,7 +63,7 @@
           ]
         },
         "testB_TextInputToChangeDescription": {
-          "subItptOf": "shnyder/material-design/http://schema.org/Text",
+          "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "testB_TextInputToChangeDescription",
           "initialKvStores": [],
@@ -71,8 +71,8 @@
           "interpretableKeys": []
         },
         "testB_imgHeadSubDesc": {
-          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
-          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "testB_imgHeadSubDesc",
           "initialKvStores": [
             {

@@ -12,7 +12,7 @@ import { Component, ReactNode } from 'react';
 import { cleanRouteString } from '../../routing/route-helper-fns';
 import { ActionKeysDict, ActionTypesDict, ActionType } from '../../../components/actions/ActionDict';
 
-export const NavProcessAtomName = "shnyder/material-design/NavProcessAtom";
+export const NavProcessAtomName = "metaexplorer.io/material-design/NavProcessAtom";
 let cfgIntrprtKeys: string[] =
 	[
 		VisualKeysDict.inputContainer,

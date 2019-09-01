@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "652b474d-91a4-48cb-8a32-cf68beff5218": {
-          "subItptOf": "shnyder/baseContainer",
-          "canInterpretType": "shnyder/ContainerObjType",
+          "subItptOf": "metaexplorer.io/baseContainer",
+          "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "652b474d-91a4-48cb-8a32-cf68beff5218",
           "initialKvStores": [
             {
@@ -44,8 +44,8 @@
           ]
         },
         "d00a440b-5fc9-4691-a12a-fbbba0c996b9": {
-          "subItptOf": "shnyder/material-design/SectionedList",
-          "canInterpretType": "shnyder/material-design/SectionedList-ObjectType",
+          "subItptOf": "metaexplorer.io/material-design/SectionedList",
+          "canInterpretType": "metaexplorer.io/material-design/SectionedList-ObjectType",
           "nameSelf": "d00a440b-5fc9-4691-a12a-fbbba0c996b9",
           "initialKvStores": [
             {
@@ -86,8 +86,8 @@
           ]
         },
         "6772902a-7474-4e0c-a309-39aa14097b8f": {
-          "subItptOf": "shnyder/MagicBox",
-          "canInterpretType": "shnyder/MagicBoxType",
+          "subItptOf": "metaexplorer.io/MagicBox",
+          "canInterpretType": "metaexplorer.io/MagicBoxType",
           "nameSelf": "6772902a-7474-4e0c-a309-39aa14097b8f",
           "initialKvStores": [
             {
@@ -104,7 +104,7 @@
           ]
         },
         "3f2a6f85-e736-4850-9863-741f1dedff7e": {
-          "subItptOf": "shnyder/material-design/http://schema.org/Text",
+          "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "3f2a6f85-e736-4850-9863-741f1dedff7e",
           "initialKvStores": [
@@ -118,8 +118,8 @@
           "interpretableKeys": []
         },
         "8095bac7-14f4-4b4c-a49f-ed1fffcd5e5a": {
-          "subItptOf": "shnyder/MagicBox",
-          "canInterpretType": "shnyder/MagicBoxType",
+          "subItptOf": "metaexplorer.io/MagicBox",
+          "canInterpretType": "metaexplorer.io/MagicBoxType",
           "nameSelf": "8095bac7-14f4-4b4c-a49f-ed1fffcd5e5a",
           "initialKvStores": [
             {
@@ -136,7 +136,7 @@
           ]
         },
         "c9c940c1-c2c2-4c96-89d5-15d3a5dca0b8": {
-          "subItptOf": "shnyder/material-design/http://schema.org/Boolean",
+          "subItptOf": "metaexplorer.io/material-design/http://schema.org/Boolean",
           "canInterpretType": "http://schema.org/Boolean",
           "nameSelf": "c9c940c1-c2c2-4c96-89d5-15d3a5dca0b8",
           "initialKvStores": [
@@ -150,7 +150,7 @@
           "interpretableKeys": []
         },
         "05f13016-4525-4fbe-a5a3-e978a3c16a1d": {
-          "subItptOf": "shnyder/CompactInfoListElement",
+          "subItptOf": "metaexplorer.io/CompactInfoListElement",
           "canInterpretType": "CompactInformationElement",
           "nameSelf": "05f13016-4525-4fbe-a5a3-e978a3c16a1d",
           "initialKvStores": [

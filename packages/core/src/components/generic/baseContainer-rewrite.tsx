@@ -26,7 +26,7 @@ export interface BaseContOwnState extends LDLocalState, ErrorBoundaryState {
 	interpretableKeys: (string | ObjectPropertyRef)[];
 }
 
-export const COMP_BASE_CONTAINER = "shnyder/baseContainer";
+export const COMP_BASE_CONTAINER = "metaexplorer.io/baseContainer";
 
 let cfgType: string = UserDefDict.itptContainerObjType;
 let cfgIntrprtKeys: string[] =

@@ -58,7 +58,7 @@ export type AIEState = {
 
 const EDITOR_KV_KEY = "EditorKvKey";
 
-export const ITPT_BLOCK_EDITOR_NAME = "shnyder/block-editor";
+export const ITPT_BLOCK_EDITOR_NAME = "metaexplorer.io/block-editor";
 export const ITPT_BLOCK_EDITOR_TYPE = "blockeditortype";
 
 export const ITPT_BLOCK_EDITOR_EDITING_ITPT = "currentlyediting";
@@ -475,7 +475,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							]
 						},
 						[boldID]: {
-							"subItptOf": "shnyder/basichtml/bold",
+							"subItptOf": "metaexplorer.io/basichtml/bold",
 							"canInterpretType": "http://schema.org/Text",
 							"nameSelf": boldID,
 							"initialKvStores": [

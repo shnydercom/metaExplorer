@@ -1,12 +1,12 @@
 import { IAppConfigStatePart } from "../store";
 import { MOD_LOAD_ERROR, ModErrorAction } from "./mod-duck";
 
-export const ACTION_APPCFG_UPDATE_KEY = 'shnyder/APPCFG_UPDATE_KEY';
-export const ACTION_APPCFG_UPDATE_ITPT = 'shnyder/APPCFG_UPDATE_ITPT';
+export const ACTION_APPCFG_UPDATE_KEY = 'metaexplorer.io/APPCFG_UPDATE_KEY';
+export const ACTION_APPCFG_UPDATE_ITPT = 'metaexplorer.io/APPCFG_UPDATE_ITPT';
 
 export type AppCfgAction =
-	{ type: 'shnyder/APPCFG_UPDATE_KEY', appKey: string } |
-	{ type: 'shnyder/APPCFG_UPDATE_ITPT', mainItpt: string } |
+	{ type: 'metaexplorer.io/APPCFG_UPDATE_KEY', appKey: string } |
+	{ type: 'metaexplorer.io/APPCFG_UPDATE_ITPT', mainItpt: string } |
 	ModErrorAction;
 
 export const appKeyUpdateAction = (updatedKey: string): AppCfgAction => ({ type: ACTION_APPCFG_UPDATE_KEY, appKey: updatedKey });

@@ -11,7 +11,7 @@ import { cleanRouteString } from '../../routing/route-helper-fns';
 import { LDDict } from '../../../ldaccess/LDDict';
 import { UserDefDict } from '../../../ldaccess/UserDefDict';
 
-export const NavBarWActionsName = "shnyder/material-design/NavBarWActions";
+export const NavBarWActionsName = "metaexplorer.io/material-design/NavBarWActions";
 
 let cfgIntrprtItptKeys: string[] =
 	[

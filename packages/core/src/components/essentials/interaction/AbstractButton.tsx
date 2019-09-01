@@ -11,7 +11,7 @@ import { VisualKeysDict, VisualTypesDict } from '../../../components/visualcompo
 import { gdsfpLD, initLDLocalState } from '../../../components/generic/generatorFns';
 import { cleanRouteString } from '../../../components/routing/route-helper-fns';
 
-export const MDButtonName = "shnyder/material-design/Button";
+export const MDButtonName = "metaexplorer.io/material-design/Button";
 export const fontIcon = "fontIcon";
 export const isIcon = "isIcon";
 let cfgIntrprtKeys: string[] =

@@ -51,8 +51,8 @@ export const BOTTOMNAV_VALUE_FIELDS: string[] = [
 
 export const CHANGED_ROUTE_OUTPUT = "ChangedRoute";
 
-export const BottomNavigationName = "shnyder/material-design/BottomNavigation";
-export const TopNavigationName = "shnyder/material-design/TopNavigation";
+export const BottomNavigationName = "metaexplorer.io/material-design/BottomNavigation";
+export const TopNavigationName = "metaexplorer.io/material-design/TopNavigation";
 
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer];

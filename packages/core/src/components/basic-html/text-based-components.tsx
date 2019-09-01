@@ -70,7 +70,7 @@ export abstract class PureTextBasedComponent extends Component<LDConnectedState 
 	}
 }
 
-export const H1TextComponentName = 'shnyder/basichtml/h1';
+export const H1TextComponentName = 'metaexplorer.io/basichtml/h1';
 @ldBlueprint(createTextBasedBpCfg(H1TextComponentName))
 export class PureH1TextComponent extends PureTextBasedComponent {
 	render() {
@@ -80,7 +80,7 @@ export class PureH1TextComponent extends PureTextBasedComponent {
 	}
 }
 
-export const H2TextComponentName = 'shnyder/basichtml/h2';
+export const H2TextComponentName = 'metaexplorer.io/basichtml/h2';
 @ldBlueprint(createTextBasedBpCfg(H2TextComponentName))
 export class PureH2TextComponent extends PureTextBasedComponent {
 	render() {
@@ -90,7 +90,7 @@ export class PureH2TextComponent extends PureTextBasedComponent {
 	}
 }
 
-export const H3TextComponentName = 'shnyder/basichtml/h3';
+export const H3TextComponentName = 'metaexplorer.io/basichtml/h3';
 @ldBlueprint(createTextBasedBpCfg(H3TextComponentName))
 export class PureH3TextComponent extends PureTextBasedComponent {
 	render() {
@@ -100,7 +100,7 @@ export class PureH3TextComponent extends PureTextBasedComponent {
 	}
 }
 
-export const H4TextComponentName = 'shnyder/basichtml/h4';
+export const H4TextComponentName = 'metaexplorer.io/basichtml/h4';
 @ldBlueprint(createTextBasedBpCfg(H4TextComponentName))
 export class PureH4TextComponent extends PureTextBasedComponent {
 	render() {
@@ -110,7 +110,7 @@ export class PureH4TextComponent extends PureTextBasedComponent {
 	}
 }
 
-export const SpanTextComponentName = 'shnyder/basichtml/span';
+export const SpanTextComponentName = 'metaexplorer.io/basichtml/span';
 @ldBlueprint(createTextBasedBpCfg(SpanTextComponentName))
 export class PureSpanTextComponent extends PureTextBasedComponent {
 	render() {
@@ -120,7 +120,7 @@ export class PureSpanTextComponent extends PureTextBasedComponent {
 	}
 }
 
-export const BoldTextComponentName = 'shnyder/basichtml/bold';
+export const BoldTextComponentName = 'metaexplorer.io/basichtml/bold';
 @ldBlueprint(createTextBasedBpCfg(BoldTextComponentName))
 export class PureBoldTextComponent extends PureTextBasedComponent {
 	render() {
@@ -130,7 +130,7 @@ export class PureBoldTextComponent extends PureTextBasedComponent {
 	}
 }
 
-export const ItalicsTextComponentName = 'shnyder/basichtml/italics';
+export const ItalicsTextComponentName = 'metaexplorer.io/basichtml/italics';
 @ldBlueprint(createTextBasedBpCfg(ItalicsTextComponentName))
 export class PureItalicsTextComponent extends PureTextBasedComponent {
 	render() {
@@ -140,7 +140,7 @@ export class PureItalicsTextComponent extends PureTextBasedComponent {
 	}
 }
 
-export const ParagraphTextComponentName = 'shnyder/basichtml/paragraph';
+export const ParagraphTextComponentName = 'metaexplorer.io/basichtml/paragraph';
 @ldBlueprint(createTextBasedBpCfg(ParagraphTextComponentName))
 export class PureParagraphTextComponent extends PureTextBasedComponent {
 	render() {

@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "d57234da-46f2-443a-87d1-4a9b02e6b237": {
-          "subItptOf": "shnyder/material-design/NavBarWActions",
-          "canInterpretType": "shnyder/material-design/NavBarWActions-ObjectType",
+          "subItptOf": "metaexplorer.io/material-design/NavBarWActions",
+          "canInterpretType": "metaexplorer.io/material-design/NavBarWActions-ObjectType",
           "nameSelf": "d57234da-46f2-443a-87d1-4a9b02e6b237",
           "initialKvStores": [
             {
@@ -55,8 +55,8 @@
           ]
         },
         "aacd1cf2-b8d4-4546-b38d-71adaa580c00": {
-          "subItptOf": "shnyder/baseContainer",
-          "canInterpretType": "shnyder/ContainerObjType",
+          "subItptOf": "metaexplorer.io/baseContainer",
+          "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "aacd1cf2-b8d4-4546-b38d-71adaa580c00",
           "initialKvStores": [
             {
@@ -92,8 +92,8 @@
           ]
         },
         "078c5817-632f-44cc-a088-03d29edf795d": {
-          "subItptOf": "shnyder/routing/Route",
-          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "subItptOf": "metaexplorer.io/routing/Route",
+          "canInterpretType": "metaexplorer.io/routing/Route-ObjectType",
           "nameSelf": "078c5817-632f-44cc-a088-03d29edf795d",
           "initialKvStores": [
             {
@@ -116,8 +116,8 @@
           ]
         },
         "e6726813-b826-455f-b993-fe7ad70af5f0": {
-          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
-          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "e6726813-b826-455f-b993-fe7ad70af5f0",
           "initialKvStores": [
             {
@@ -140,7 +140,7 @@
           ]
         },
         "9f84fba9-6b41-4701-b5ca-f15df95bfa46": {
-          "subItptOf": "shnyder/material-design/SingleImageSelector",
+          "subItptOf": "metaexplorer.io/material-design/SingleImageSelector",
           "canInterpretType": "http://schema.org/CreateAction",
           "nameSelf": "9f84fba9-6b41-4701-b5ca-f15df95bfa46",
           "initialKvStores": [],
@@ -148,8 +148,8 @@
           "interpretableKeys": []
         },
         "70e96539-0b43-43d2-aaa3-be5e8fb7cd1a": {
-          "subItptOf": "shnyder/routing/Route",
-          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "subItptOf": "metaexplorer.io/routing/Route",
+          "canInterpretType": "metaexplorer.io/routing/Route-ObjectType",
           "nameSelf": "70e96539-0b43-43d2-aaa3-be5e8fb7cd1a",
           "initialKvStores": [
             {
@@ -172,8 +172,8 @@
           ]
         },
         "75807a16-9f05-40f6-be32-ed445c846dfe": {
-          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
-          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "75807a16-9f05-40f6-be32-ed445c846dfe",
           "initialKvStores": [
             {
@@ -205,7 +205,7 @@
           ]
         },
         "de7c0c96-3a17-4953-b18c-6367465c2c9d": {
-          "subItptOf": "shnyder/EANScanner",
+          "subItptOf": "metaexplorer.io/EANScanner",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "de7c0c96-3a17-4953-b18c-6367465c2c9d",
           "initialKvStores": [],
@@ -213,8 +213,8 @@
           "interpretableKeys": []
         },
         "9f3a4457-e185-47b0-bc02-27e28256eb57": {
-          "subItptOf": "shnyder/routing/Route",
-          "canInterpretType": "shnyder/routing/Route-ObjectType",
+          "subItptOf": "metaexplorer.io/routing/Route",
+          "canInterpretType": "metaexplorer.io/routing/Route-ObjectType",
           "nameSelf": "9f3a4457-e185-47b0-bc02-27e28256eb57",
           "initialKvStores": [
             {
@@ -237,7 +237,7 @@
           ]
         },
         "eb48f2e7-52db-4e23-9dba-79159a2cfd4e": {
-          "subItptOf": "shnyder/imageDisplay",
+          "subItptOf": "metaexplorer.io/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "eb48f2e7-52db-4e23-9dba-79159a2cfd4e",
           "initialKvStores": [

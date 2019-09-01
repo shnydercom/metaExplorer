@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "RMObj_ImgHeadSubDesc": {
-          "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
-          "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+          "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
+          "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "RMObj_ImgHeadSubDesc",
           "initialKvStores": [
             {
@@ -26,8 +26,8 @@
           ]
         },
         "RMObj_LinearContainer": {
-          "subItptOf": "shnyder/baseContainer",
-          "canInterpretType": "shnyder/ContainerObjType",
+          "subItptOf": "metaexplorer.io/baseContainer",
+          "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "RMObj_LinearContainer",
           "initialKvStores": [
             {
@@ -54,7 +54,7 @@
           ]
         },
         "RMObj_Date": {
-          "subItptOf": "shnyder/material-design/http://schema.org/Date",
+          "subItptOf": "metaexplorer.io/material-design/http://schema.org/Date",
           "canInterpretType": "http://schema.org/Date",
           "nameSelf": "RMObj_Date",
           "initialKvStores": [],
@@ -62,7 +62,7 @@
           "interpretableKeys": []
         },
         "RMObj_Boolean": {
-          "subItptOf": "shnyder/material-design/http://schema.org/Boolean",
+          "subItptOf": "metaexplorer.io/material-design/http://schema.org/Boolean",
           "canInterpretType": "http://schema.org/Boolean",
           "nameSelf": "RMObj_Boolean",
           "initialKvStores": [],

@@ -6,7 +6,7 @@ import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 
 import { initLDLocalState, gdsfpLD } from '../../../components/generic/generatorFns';
 import { Component, ReactNode } from 'react';
 
-export const SimpleTextTableName = "shnyder/material-design/SimpleTextTable";
+export const SimpleTextTableName = "metaexplorer.io/material-design/SimpleTextTable";
 export const tableHeadings = "headings";
 export const tableRows = "rows";
 

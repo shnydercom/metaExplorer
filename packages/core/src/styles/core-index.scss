@@ -2,7 +2,6 @@
 @import './editor/colors.scss';
 //@import "./../../node_modules/storm-react-diagrams/dist/style.min.css";
 @import "./game/game.scss";
-@import "./shnyder/shnyder.scss";
 //@import "@metaexplorer-mods/material-design/styles/md-new.scss";
 //@import "@metaexplorer-mods/itpt-editor/styles/itpt-editor.scss";
 //@import "@metaexplorer-mods/material-design/styles/material-design.scss";
@@ -219,7 +218,7 @@ body {
 	background-color: #00375f;
 }
 
-.shnyder-nav {
+.metaexplorerio-nav {
 	background-color: #00375f;
 
 	div div {

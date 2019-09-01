@@ -1,13 +1,13 @@
 {
   "subItptOf": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
-  "canInterpretType": "shnyder/metaexplorer/onboarding/onboardingEditor-ObjectType",
-  "nameSelf": "shnyder/metaexplorer/onboarding/onboardingEditor",
+  "canInterpretType": "metaexplorer.io/v1/onboarding/onboardingEditor-ObjectType",
+  "nameSelf": "metaexplorer.io/v1/onboarding/onboardingEditor",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
         "2f9e4459-ce85-4dee-8b60-ab815e9374ee": {
-          "subItptOf": "shnyder/block-editor",
+          "subItptOf": "metaexplorer.io/block-editor",
           "canInterpretType": "blockeditortype",
           "nameSelf": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
           "initialKvStores": [

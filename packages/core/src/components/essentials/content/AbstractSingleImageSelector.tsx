@@ -22,7 +22,7 @@ export interface SingleImageSelectorState extends LDLocalState {
 	previewURL: string;
 }
 
-export const SingleImageSelectorName = "shnyder/material-design/SingleImageSelector";
+export const SingleImageSelectorName = "metaexplorer.io/material-design/SingleImageSelector";
 let cfgType: string = LDDict.CreateAction;
 let cfgIntrprtKeys: string[] =
 	[];

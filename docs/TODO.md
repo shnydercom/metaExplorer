@@ -30,7 +30,7 @@ last serialized bits & pieces: seems to work!
       "key": "InterpreterReferenceMapKey",
       "value": {
         "78e74a11-229b-4bdd-99ff-3f324b7920ca": {
-          "forType": "shnyder/ImgHeadSubDescIntrprtr",
+          "forType": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "nameSelf": "78e74a11-229b-4bdd-99ff-3f324b7920ca",
           "initialKvStores": [
             {
@@ -95,7 +95,7 @@ last serialized bits & pieces: seems to work!
           "interpretableKeys": []
         },
         "b8db4aae-e272-4a76-bc32-edfc210d97fe": {
-          "forType": "shnyder/imageRetriever",
+          "forType": "metaexplorer.io/imageRetriever",
           "nameSelf": "b8db4aae-e272-4a76-bc32-edfc210d97fe",
           "initialKvStores": [
             {
@@ -116,7 +116,7 @@ last serialized bits & pieces: seems to work!
           "interpretableKeys": []
         },
         "db879383-4a43-4c5d-aead-5e2844c5ab63": {
-          "forType": "shnyder/productRetriever",
+          "forType": "metaexplorer.io/productRetriever",
           "nameSelf": "db879383-4a43-4c5d-aead-5e2844c5ab63",
           "initialKvStores": [
             {

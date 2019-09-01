@@ -22,7 +22,7 @@ let initialKVStores: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
-	nameSelf: "shnyder/videoDisplay",
+	nameSelf: "metaexplorer.io/videoDisplay",
 	initialKvStores: initialKVStores,
 	interpretableKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"

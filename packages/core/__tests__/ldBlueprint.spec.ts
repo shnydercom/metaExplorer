@@ -9,8 +9,8 @@ let bpCfg: BlueprintConfig = {
     //Needs to be re-designed with crud-skills in mind though. Clear separation of concerns and DRY should
     //be applicable to the end result
     subItptOf: null,
-    canInterpretType: "http://shnyder.com/Testtype",
-    nameSelf: "shnyder/testTypeInterpreter",
+    canInterpretType: "http://metaexplorer.io/Testtype",
+    nameSelf: "metaexplorer.io/testTypeInterpreter",
     initialKvStores: [],
     interpretableKeys: [],
     crudSkills: "cRud"

@@ -70,7 +70,7 @@ export abstract class PureLayoutComponent extends Component<LDConnectedState & L
 	}
 }
 
-export const LayoutVHCenteredColumnName = 'shnyder/layout/vh-centered-column';
+export const LayoutVHCenteredColumnName = 'metaexplorer.io/layout/vh-centered-column';
 @ldBlueprint(createLayoutBpCfg(LayoutVHCenteredColumnName))
 export class PureVHcenteredColumnLayout extends PureLayoutComponent {
 	styleClassName = "vh-centered-column";

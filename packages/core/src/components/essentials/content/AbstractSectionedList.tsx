@@ -8,7 +8,7 @@ import { Component, ReactNode } from 'react';
 import { LDDict } from '../../../ldaccess/LDDict';
 import { UserDefDict } from '../../../ldaccess/UserDefDict';
 
-export const SectionedListName = "shnyder/material-design/SectionedList";
+export const SectionedListName = "metaexplorer.io/material-design/SectionedList";
 export const sectionHeadings = "section-headings";
 export const sectionElements = "section-elements";
 

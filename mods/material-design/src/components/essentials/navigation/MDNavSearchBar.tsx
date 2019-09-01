@@ -5,7 +5,7 @@ import { Toolbar, IconButton, AppBar,InputBase } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import React from 'react';
 
-export const NavSearchBarName = "shnyder/material-design/NavSearchBar";
+export const NavSearchBarName = "metaexplorer.io/material-design/NavSearchBar";
 export interface NavSearchBarState extends LDLocalState {
 	searchValue: string;
 	routeSendBack: string;

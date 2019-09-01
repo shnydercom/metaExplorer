@@ -1,2 +1,2 @@
 const mxpDevServer = require('@metaexplorer/editor-dev-server');
-mxpDevServer.createBlocksFromLib("shnyder/metaexplorer/MainAppEntryPoint", "blocks");
+mxpDevServer.createBlocksFromLib("metaexplorer.io/v1/MainAppEntryPoint", "blocks");

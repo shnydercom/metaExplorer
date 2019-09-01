@@ -15,8 +15,8 @@ import * as lightThemeJson from '../../../themes/metaexplorer-mui-theme-light.js
 import { editorTheme } from 'styles/editor/editorTheme';
 import { appTheme } from 'styles/appTheme/appTheme';*/
 
-export const ThemeProviderDarkName = "shnyder/material-design/ThemeProvider-dark";
-export const ThemeProviderLightName = "shnyder/material-design/ThemeProvider-light";
+export const ThemeProviderDarkName = "metaexplorer.io/material-design/ThemeProvider-dark";
+export const ThemeProviderLightName = "metaexplorer.io/material-design/ThemeProvider-light";
 
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer];

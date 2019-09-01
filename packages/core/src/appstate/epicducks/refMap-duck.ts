@@ -24,11 +24,11 @@ import { LDOPTIONS_KV_UPDATE, LD_KVUpdateAction } from "./ldOptions-duck";
  * Note: No epic has been added yet
  */
 
-export const REFMAP_REQUEST = 'shnyder/REFMAP_REQUEST'; //fills all static/non-ObjProp, nonldTkStrngRef,
-export const REFMAP_SUCCESS = 'shnyder/REFMAP_SUCCESS';
+export const REFMAP_REQUEST = 'metaexplorer.io/REFMAP_REQUEST'; //fills all static/non-ObjProp, nonldTkStrngRef,
+export const REFMAP_SUCCESS = 'metaexplorer.io/REFMAP_SUCCESS';
 
-export type RefMapRequestAction = { type: 'shnyder/REFMAP_REQUEST', ldOptionsBase: ILDOptions, refMap: BlueprintConfig };
-export type RefMapSuccessAction = { type: 'shnyder/REFMAP_SUCCESS', ldOptionsBase: ILDOptions };
+export type RefMapRequestAction = { type: 'metaexplorer.io/REFMAP_REQUEST', ldOptionsBase: ILDOptions, refMap: BlueprintConfig };
+export type RefMapSuccessAction = { type: 'metaexplorer.io/REFMAP_SUCCESS', ldOptionsBase: ILDOptions };
 export type RefMapAction = RefMapRequestAction | RefMapSuccessAction | LD_KVUpdateAction;
 
 //Action factories, return action Objects

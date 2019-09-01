@@ -5,7 +5,7 @@ import { ldBlueprint, BlueprintConfig } from "./../ldaccess/ldBlueprint";
 import { LDRetrieverSuper } from "./../sidefx/LDRetrieverSuper";
 import { ldRetrCfgIntrprtKeys } from "./LDRetrieverSuper-rewrite";
 
-export const organizationRetrieverName = "shnyder/organizationRetriever";
+export const organizationRetrieverName = "metaexplorer.io/organizationRetriever";
 
 let initialKVStores: IKvStore[] = [
 	{

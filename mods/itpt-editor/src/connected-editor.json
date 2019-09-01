@@ -1,7 +1,7 @@
 {
   "subItptOf": "projCfg",
-  "canInterpretType": "shnyder/metaexplorer/connected-editor-ObjectType",
-  "nameSelf": "shnyder/metaexplorer/connected-editor",
+  "canInterpretType": "metaexplorer.io/v1/connected-editor-ObjectType",
+  "nameSelf": "metaexplorer.io/v1/connected-editor",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
@@ -35,13 +35,13 @@
           ]
         },
         "rm-blockeditor": {
-          "subItptOf": "shnyder/block-editor",
+          "subItptOf": "metaexplorer.io/block-editor",
           "canInterpretType": "blockeditortype",
           "nameSelf": "rm-blockeditor",
           "initialKvStores": [
             {
               "key": "currentlyediting",
-              "value": "shnyder/me-beta/index",
+              "value": "metaexplorer.io/me-beta/index",
               "ldType": "http://schema.org/Text"
             },
             {
@@ -63,9 +63,9 @@
               "key": "savingStatus",
               "value": {
                 "objRef": "rm-bpcfgSender",
-                "propRef": "shnyder/responsewrapper"
+                "propRef": "metaexplorer.io/responsewrapper"
               },
-              "ldType": "shnyder/responsewrapperType"
+              "ldType": "metaexplorer.io/responsewrapperType"
             }
           ],
           "crudSkills": "cRud",
@@ -74,8 +74,8 @@
           ]
         },
         "rm-bpcfgSender": {
-          "subItptOf": "shnyder/metaexplorer/RefMapBpCfgSender",
-          "canInterpretType": "shnyder/metaexplorer/RefMapBpCfgSenderType",
+          "subItptOf": "metaexplorer.io/v1/RefMapBpCfgSender",
+          "canInterpretType": "metaexplorer.io/v1/RefMapBpCfgSenderType",
           "nameSelf": "rm-bpcfgSender",
           "initialKvStores": [
             {
@@ -89,7 +89,7 @@
                 "objRef": "rm-actionhandler",
                 "propRef": "outputdata"
               },
-              "ldType": "shnyder/refmap-bpcfgType"
+              "ldType": "metaexplorer.io/refmap-bpcfgType"
             }
           ],
           "crudSkills": "cRud",

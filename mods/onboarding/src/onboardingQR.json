@@ -1,14 +1,14 @@
 {
   "subItptOf": "7e9d2646-1e29-41b2-b6e0-bcc9fa809ebe",
-  "canInterpretType": "shnyder/metaexplorer/QRcodeFromText-ObjectType",
-  "nameSelf": "shnyder/qr/QRcodeFromText",
+  "canInterpretType": "metaexplorer.io/v1/QRcodeFromText-ObjectType",
+  "nameSelf": "metaexplorer.io/qr/QRcodeFromText",
   "initialKvStores": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
         "7e9d2646-1e29-41b2-b6e0-bcc9fa809ebe": {
-          "subItptOf": "shnyder/layout/vh-centered-column",
-          "canInterpretType": "shnyder/layout/vh-centered-column-ObjectType",
+          "subItptOf": "metaexplorer.io/layout/vh-centered-column",
+          "canInterpretType": "metaexplorer.io/layout/vh-centered-column-ObjectType",
           "nameSelf": "7e9d2646-1e29-41b2-b6e0-bcc9fa809ebe",
           "initialKvStores": [
             {
@@ -26,8 +26,8 @@
           ]
         },
         "124871c4-dedc-4bbe-ac32-cd54984e91ae": {
-          "subItptOf": "shnyder/baseContainer",
-          "canInterpretType": "shnyder/ContainerObjType",
+          "subItptOf": "metaexplorer.io/baseContainer",
+          "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "124871c4-dedc-4bbe-ac32-cd54984e91ae",
           "initialKvStores": [
             {
@@ -88,7 +88,7 @@
           ]
         },
         "348aa3f5-1106-4819-a1f8-67eecf777aa3": {
-          "subItptOf": "shnyder/material-design/http://schema.org/Text",
+          "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "348aa3f5-1106-4819-a1f8-67eecf777aa3",
           "initialKvStores": [

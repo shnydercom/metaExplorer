@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "testA_linearBase": {
-          "subItptOf": "shnyder/baseContainer",
-          "canInterpretType": "shnyder/ContainerObjType",
+          "subItptOf": "metaexplorer.io/baseContainer",
+          "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "testA_linearBase",
           "initialKvStores": [
             {
@@ -44,7 +44,7 @@
           ]
         },
         "testA_TextInput": {
-          "subItptOf": "shnyder/material-design/http://schema.org/Text",
+          "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "testA_TextInput",
           "initialKvStores": [
@@ -64,15 +64,15 @@
           ]
         },
         "testA_italics": {
-          "subItptOf": "shnyder/basichtml/italics",
-          "canInterpretType": "shnyder/basichtml/italics-ObjectType",
+          "subItptOf": "metaexplorer.io/basichtml/italics",
+          "canInterpretType": "metaexplorer.io/basichtml/italics-ObjectType",
           "nameSelf": "testA_italics",
           "initialKvStores": [],
           "crudSkills": "cRud",
           "interpretableKeys": []
         },
         "testA_eanScanner": {
-          "subItptOf": "shnyder/EANScanner",
+          "subItptOf": "metaexplorer.io/EANScanner",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "testA_eanScanner",
           "initialKvStores": [],

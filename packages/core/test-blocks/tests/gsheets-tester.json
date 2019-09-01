@@ -7,8 +7,8 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "59bf7b60-b89a-4a0f-ad14-dbfd15ad5bb2": {
-          "subItptOf": "shnyder/baseContainer",
-          "canInterpretType": "shnyder/ContainerObjType",
+          "subItptOf": "metaexplorer.io/baseContainer",
+          "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "59bf7b60-b89a-4a0f-ad14-dbfd15ad5bb2",
           "initialKvStores": [
             {
@@ -88,7 +88,7 @@
           "interpretableKeys": []
         },
         "03172f8c-20fa-42ee-a208-721ff6631881": {
-          "subItptOf": "shnyder/material-design/http://schema.org/Text",
+          "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "03172f8c-20fa-42ee-a208-721ff6631881",
           "initialKvStores": [
@@ -107,7 +107,7 @@
           "interpretableKeys": []
         },
         "0bceb3a1-20b5-4ffd-b9b3-07a78fdc1ebd": {
-          "subItptOf": "shnyder/material-design/http://schema.org/Text",
+          "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "0bceb3a1-20b5-4ffd-b9b3-07a78fdc1ebd",
           "initialKvStores": [
@@ -126,7 +126,7 @@
           "interpretableKeys": []
         },
         "63d651d3-b428-42a2-ad32-ce441d0308ce": {
-          "subItptOf": "shnyder/material-design/http://schema.org/Text",
+          "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "63d651d3-b428-42a2-ad32-ce441d0308ce",
           "initialKvStores": [
@@ -145,8 +145,8 @@
           "interpretableKeys": []
         },
         "a0e2dd2f-fcb2-4276-8f34-443f9e4957ba": {
-          "subItptOf": "shnyder/basichtml/bold",
-          "canInterpretType": "shnyder/basichtml/bold-ObjectType",
+          "subItptOf": "metaexplorer.io/basichtml/bold",
+          "canInterpretType": "metaexplorer.io/basichtml/bold-ObjectType",
           "nameSelf": "a0e2dd2f-fcb2-4276-8f34-443f9e4957ba",
           "initialKvStores": [
             {
@@ -159,8 +159,8 @@
           "interpretableKeys": []
         },
         "ce47b2f9-3999-4e23-94ca-7af7d0507ae1": {
-          "subItptOf": "shnyder/MagicBox",
-          "canInterpretType": "shnyder/MagicBoxType",
+          "subItptOf": "metaexplorer.io/MagicBox",
+          "canInterpretType": "metaexplorer.io/MagicBoxType",
           "nameSelf": "ce47b2f9-3999-4e23-94ca-7af7d0507ae1",
           "initialKvStores": [
             {
@@ -279,8 +279,8 @@
           ]
         },
         "3b154a92-d981-4ec6-a81f-824575095192": {
-          "subItptOf": "shnyder/material-design/SimpleTextTable",
-          "canInterpretType": "shnyder/material-design/SimpleTextTable-ObjectType",
+          "subItptOf": "metaexplorer.io/material-design/SimpleTextTable",
+          "canInterpretType": "metaexplorer.io/material-design/SimpleTextTable-ObjectType",
           "nameSelf": "3b154a92-d981-4ec6-a81f-824575095192",
           "initialKvStores": [
             {

@@ -1,0 +1,24 @@
+{
+  "name": "@metaexplorer-mods/metaexplorer.io",
+  "version": "0.0.1",
+  "description": "TODO:changeDescription",
+  "scripts": {
+    "test": "test",
+    "build": "tsc"
+  },
+  "author": "Jonathan Schneider",
+  "license": "EUPL-1.2",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "repository": "",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "@metaexplorer/core": "^0.0.1",
+    "react-gooey-nav": "^2.0.0"
+  }
+}

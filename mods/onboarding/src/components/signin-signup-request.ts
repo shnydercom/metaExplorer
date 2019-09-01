@@ -3,7 +3,7 @@ import { tokenStr } from "@metaexplorer-mods/keycloak";
 import { RESPONSE_CONTENT } from "../apis/datatypes";
 import { OnboardingAPI } from "../apis/onboardingAPI";
 
-export const signinSignupName = "shnyder/metaexplorer/onboarding/signinSignupRequest";
+export const signinSignupName = "metaexplorer.io/onboarding/signinSignupRequest";
 let inputKVStores: IKvStore[] = [
 	{
 		key: "payload",

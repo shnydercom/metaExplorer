@@ -15,12 +15,12 @@ export function initItptEditorMod(isMainItptChange: boolean): Promise<IModStatus
 		addBlueprintToRetriever(connectedEditorCfg, "default");
 		let startingInstance = [/*{
 			key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
-			value: "shnyder/metaexplorer/MainAppEntryPoint",
+			value: "metaexplorer.io/v1/MainAppEntryPoint",
 			ldType: LDDict.Text
 		},
 		{
 			key: ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-			value: "shnyder/metaexplorer/MainAppEntryPoint",
+			value: "metaexplorer.io/v1/MainAppEntryPoint",
 			ldType: LDDict.Text
 		},
 		{
@@ -64,7 +64,7 @@ export function initItptEditorMod(isMainItptChange: boolean): Promise<IModStatus
 			ldType: UserDefDict.responseWrapperType
 		},*/
 		];
-		if (isMainItptChange) changeMainAppItpt("shnyder/metaexplorer/connected-editor", startingInstance);
+		if (isMainItptChange) changeMainAppItpt("metaexplorer.io/v1/connected-editor", startingInstance);
 		resolve({ id: MOD_ITPTEDITOR_ID, name: MOD_ITPTEDITOR_NAME, state: SingleModStateKeysDict.readyToUse, errorMsg: null });
 	});
 	return rv;

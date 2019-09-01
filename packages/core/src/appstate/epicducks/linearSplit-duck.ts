@@ -14,11 +14,11 @@ import { mergeMap, map } from "rxjs/operators";
  * a duck for linear state splitting, used for containers
  */
 
-export const LINEAR_SPLIT_REQUEST = 'shnyder/LINEAR_SPLIT_REQUEST';
-export const LINEAR_SPLIT_SUCCESS = 'shnyder/LINEAR_SPLIT_SUCCESS';
+export const LINEAR_SPLIT_REQUEST = 'metaexplorer.io/LINEAR_SPLIT_REQUEST';
+export const LINEAR_SPLIT_SUCCESS = 'metaexplorer.io/LINEAR_SPLIT_SUCCESS';
 
-export type LinearSplitAction = { type: 'shnyder/LINEAR_SPLIT_REQUEST', ldOptionsBase: ILDOptions }
-	| { type: 'shnyder/LINEAR_SPLIT_SUCCESS', ldOptionsBase: ILDOptions };
+export type LinearSplitAction = { type: 'metaexplorer.io/LINEAR_SPLIT_REQUEST', ldOptionsBase: ILDOptions }
+	| { type: 'metaexplorer.io/LINEAR_SPLIT_SUCCESS', ldOptionsBase: ILDOptions };
 //Action factories, return action Objects
 
 export const linearSplitRequestAction = (updatedLDOptions: ILDOptions): LinearSplitAction => ({ type: LINEAR_SPLIT_REQUEST, ldOptionsBase: updatedLDOptions });

@@ -1,12 +1,12 @@
 import { ILDActionsHandlerStatePart } from '../store';
-export const REGISTER_ID_HANDLER = 'shnyder/REGISTER_ID_HANDLER';
-export const REGISTER_TYPE_HANDLER = 'shnyder/REGISTER_TYPE_HANDLER';
-export const UNREGISTER_HANDLER = 'shnyder/UNREGISTER_HANDLER';
+export const REGISTER_ID_HANDLER = 'metaexplorer.io/REGISTER_ID_HANDLER';
+export const REGISTER_TYPE_HANDLER = 'metaexplorer.io/REGISTER_TYPE_HANDLER';
+export const UNREGISTER_HANDLER = 'metaexplorer.io/UNREGISTER_HANDLER';
 
 export type ActionMapAction =
-	{ type: 'shnyder/REGISTER_ID_HANDLER', handlesId: string, ldTkStr: string } |
-	{ type: 'shnyder/REGISTER_TYPE_HANDLER', handlesType: string, ldTkStr: string } |
-	{ type: 'shnyder/UNREGISTER_HANDLER', ldTkStr: string };
+	{ type: 'metaexplorer.io/REGISTER_ID_HANDLER', handlesId: string, ldTkStr: string } |
+	{ type: 'metaexplorer.io/REGISTER_TYPE_HANDLER', handlesType: string, ldTkStr: string } |
+	{ type: 'metaexplorer.io/UNREGISTER_HANDLER', ldTkStr: string };
 
 //Action factories
 export const registerIdActionHandlerAction = (handlesId: string, ldTkStr: string): ActionMapAction => ({

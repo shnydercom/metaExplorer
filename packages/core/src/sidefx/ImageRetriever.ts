@@ -6,7 +6,7 @@ import { ILDOptions } from "../ldaccess/ildoptions";
 import { resolveNS } from "../ldaccess/ns/nameSpaceResolution";
 import { LDRetrieverSuperRewrite, ldRetrCfgIntrprtKeys, LDRetrieverSuperState } from "./LDRetrieverSuper-rewrite";
 
-export const imageRetrieverName = "shnyder/imageRetriever";
+export const imageRetrieverName = "metaexplorer.io/imageRetriever";
 let initialKVStores: IKvStore[] = [
 	{
 		key: SideFXDict.srvURL,

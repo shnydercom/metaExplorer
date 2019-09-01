@@ -4,9 +4,9 @@ import { LDError, LDErrorMsgState } from './../LDError';
 import { mergeMap } from 'rxjs/operators';
 import { ILDWebResource } from '../../ldaccess/ildresource';
 
-export const IMG_UPLOAD_REQUEST = 'shnyder/IMG_UPLOAD_REQUEST';
-export const IMG_UPLOAD_RESULT = 'shnyder/IMG_UPLOAD_RESULT';
-export const IMG_UPLOAD_ERROR = 'shnyder/IMG_UPLOAD_ERROR';
+export const IMG_UPLOAD_REQUEST = 'metaexplorer.io/IMG_UPLOAD_REQUEST';
+export const IMG_UPLOAD_RESULT = 'metaexplorer.io/IMG_UPLOAD_RESULT';
+export const IMG_UPLOAD_ERROR = 'metaexplorer.io/IMG_UPLOAD_ERROR';
 
 //Action factories
 export const uploadImgRequestAction = (fileList: FileList, targetUrl: string) => ({

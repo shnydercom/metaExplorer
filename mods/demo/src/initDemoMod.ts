@@ -7,7 +7,7 @@ export const MOD_DEMO_NAME = "MetaExplorer Demo Mod";
 export function initDemoMod(): Promise<IModStatus> {
 	const appIntRetr = appItptRetrFn();
 	const rv: Promise<IModStatus> = new Promise((resolve, reject) => {
-		let worksheetAssemblerName = "shnyder/generaldemo/data/worksheet";
+		let worksheetAssemblerName = "metaexplorer.io/generaldemo/data/worksheet";
 		let worksheetInputKvs: IKvStore[] = [
 			{
 				key: "customer",
@@ -51,7 +51,7 @@ export function initDemoMod(): Promise<IModStatus> {
 			}
 		];
 		let worksheetAssemblerComp = flatDataTypeAssemblerFactory(worksheetInputKvs, worksheetAssemblerName);
-		let expenseFormAssemblerName = "shnyder/generaldemo/data/expenseForm";
+		let expenseFormAssemblerName = "metaexplorer.io/generaldemo/data/expenseForm";
 		let expenseFormKvs: IKvStore[] = [
 			{
 				key: "proof",

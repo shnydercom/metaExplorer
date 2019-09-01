@@ -8,7 +8,7 @@ import { VisualKeysDict, VisualTypesDict } from '../../visualcomposition/visualD
 import { initLDLocalState, gdsfpLD, generateItptFromCompInfo } from '../../generic/generatorFns';
 import { Component, ReactNode } from 'react';
 
-export const NavSearchBarName = "shnyder/material-design/NavSearchBar";
+export const NavSearchBarName = "metaexplorer.io/material-design/NavSearchBar";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer, VisualKeysDict.searchText, VisualKeysDict.routeSend_back, VisualKeysDict.cssClassName];
 let initialKVStores: IKvStore[] = [

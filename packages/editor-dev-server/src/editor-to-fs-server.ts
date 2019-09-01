@@ -43,8 +43,8 @@ export function editorToFileSystem(basePath?: string, mainItpt?: string, srvrPor
 					"key": "InterpreterReferenceMapKey",
 					"value": {
 						"c6c6d88d-00e9-4bf2-8c89-c2ebc1b9adbe": {
-							"subItptOf": "shnyder/baseContainer",
-							"canInterpretType": "shnyder/ContainerObjType",
+							"subItptOf": "metaexplorer.io/baseContainer",
+							"canInterpretType": "metaexplorer.io/ContainerObjType",
 							"nameSelf": "c6c6d88d-00e9-4bf2-8c89-c2ebc1b9adbe",
 							"initialKvStores": [],
 							"crudSkills": "cRud",

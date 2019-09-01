@@ -7,7 +7,7 @@
       "key": "InterpreterReferenceMapKey",
       "value": {
         "7fb8a093-892a-4ef7-97da-3388e266526a": {
-          "subItptOf": "shnyder/imageDisplay",
+          "subItptOf": "metaexplorer.io/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "7fb8a093-892a-4ef7-97da-3388e266526a",
           "initialKvStores": [

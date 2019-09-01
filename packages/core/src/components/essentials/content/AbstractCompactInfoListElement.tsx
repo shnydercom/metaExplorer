@@ -9,7 +9,7 @@ import { initLDLocalState, generateItptFromCompInfo, gdsfpLD } from '../../../co
 import { VisualTypesDict, VisualKeysDict } from '../../../components/visualcomposition/visualDict';
 import { LDDict } from '../../../ldaccess/LDDict';
 
-export const CompactInfoListElementName = "shnyder/CompactInfoListElement";
+export const CompactInfoListElementName = "metaexplorer.io/CompactInfoListElement";
 
 let CompactInfoListElementItptKeys: string[] = [VisualKeysDict.primaryItpt, VisualKeysDict.secondaryItpt];
 let compactInfoListElementValueKeys: string[] = [VisualKeysDict.headerTxt, VisualKeysDict.subHeaderTxt];

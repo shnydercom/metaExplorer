@@ -9,7 +9,7 @@ import { Redirect } from "react-router";
 import { cleanRouteString } from "./route-helper-fns";
 import React from "react";
 
-export const RouteRedirectName = "shnyder/routing/Redirect";
+export const RouteRedirectName = "metaexplorer.io/routing/Redirect";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.routeSend_confirm];
 let initialKVStores: IKvStore[] = [

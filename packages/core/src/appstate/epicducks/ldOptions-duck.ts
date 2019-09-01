@@ -14,24 +14,24 @@ import { getApplicationStore } from '../../approot';
 import { ActionKeysDict } from '../../components/actions/ActionDict';
 import { ILDWebResource } from '../../ldaccess/ildresource';
 
-export const LDOPTIONS_CLIENTSIDE_CREATE = 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE';
-export const LDOPTIONS_CLIENTSIDE_UPDATE = 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE';
-export const LDOPTIONS_REQUEST_ASYNC = 'shnyder/LDOPTIONS_REQUEST_ASYNC';
-export const LDOPTIONS_REQUEST_ERROR = 'shnyder/LDOPTIONS_REQUEST_ERROR';
-export const LDOPTIONS_REQUEST_RESULT = 'shnyder/LDOPTIONS_REQUEST_RESULT';
-export const LDOPTIONS_KV_UPDATE = 'shnyder/LDOPTIONS_KV_UPDATE';
-export const ACTION_LDACTION = 'shnyder/ACTION_LDACTION';
+export const LDOPTIONS_CLIENTSIDE_CREATE = 'metaexplorer.io/LDOPTIONS_CLIENTSIDE_CREATE';
+export const LDOPTIONS_CLIENTSIDE_UPDATE = 'metaexplorer.io/LDOPTIONS_CLIENTSIDE_UPDATE';
+export const LDOPTIONS_REQUEST_ASYNC = 'metaexplorer.io/LDOPTIONS_REQUEST_ASYNC';
+export const LDOPTIONS_REQUEST_ERROR = 'metaexplorer.io/LDOPTIONS_REQUEST_ERROR';
+export const LDOPTIONS_REQUEST_RESULT = 'metaexplorer.io/LDOPTIONS_REQUEST_RESULT';
+export const LDOPTIONS_KV_UPDATE = 'metaexplorer.io/LDOPTIONS_KV_UPDATE';
+export const ACTION_LDACTION = 'metaexplorer.io/ACTION_LDACTION';
 
-export type LD_KVUpdateAction = { type: 'shnyder/LDOPTIONS_KV_UPDATE', changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap };
+export type LD_KVUpdateAction = { type: 'metaexplorer.io/LDOPTIONS_KV_UPDATE', changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap };
 
-export type LDActionType = { type: 'shnyder/ACTION_LDACTION', payload: any, idHandler: string, typeHandler: string };
+export type LDActionType = { type: 'metaexplorer.io/ACTION_LDACTION', payload: any, idHandler: string, typeHandler: string };
 
 export type LDAction =
-	{ type: 'shnyder/LDOPTIONS_CLIENTSIDE_CREATE', kvStores: IKvStore[], lang: string, alias: string }
-	| { type: 'shnyder/LDOPTIONS_CLIENTSIDE_UPDATE', updatedLDOptions: ILDOptions }
-	| { type: 'shnyder/LDOPTIONS_REQUEST_ASYNC', isExternalAPICall: boolean, uploadData: ILDOptions, targetUrl: string, targetReceiverLnk: string }
-	| { type: 'shnyder/LDOPTIONS_REQUEST_RESULT', ldOptionsPayload: ILDWebResource, targetReceiverLnk: string }
-	| { type: 'shnyder/LDOPTIONS_REQUEST_ERROR', message: string, targetReceiverLnk: string }
+	{ type: 'metaexplorer.io/LDOPTIONS_CLIENTSIDE_CREATE', kvStores: IKvStore[], lang: string, alias: string }
+	| { type: 'metaexplorer.io/LDOPTIONS_CLIENTSIDE_UPDATE', updatedLDOptions: ILDOptions }
+	| { type: 'metaexplorer.io/LDOPTIONS_REQUEST_ASYNC', isExternalAPICall: boolean, uploadData: ILDOptions, targetUrl: string, targetReceiverLnk: string }
+	| { type: 'metaexplorer.io/LDOPTIONS_REQUEST_RESULT', ldOptionsPayload: ILDWebResource, targetReceiverLnk: string }
+	| { type: 'metaexplorer.io/LDOPTIONS_REQUEST_ERROR', message: string, targetReceiverLnk: string }
 	| LD_KVUpdateAction
 	| LDActionType;
 

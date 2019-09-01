@@ -11,7 +11,7 @@ import { LDDict } from '../../ldaccess/LDDict';
 import { isReactComponent } from '../../components/reactUtils/reactUtilFns';
 import React from 'react';
 
-export const CSSWrapperName = "shnyder/layout/CSSWrapper";
+export const CSSWrapperName = "metaexplorer.io/layout/CSSWrapper";
 
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer, VisualKeysDict.cssClassName];

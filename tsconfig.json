@@ -43,6 +43,6 @@
     { "path": "mods/itpt-editor"},
     { "path": "mods/qr-code-genscan"},
     { "path": "mods/onboarding"},
-    { "path": "mods/shnyder" }
+    { "path": "mods/metaexplorer.io" }
   ]
 }

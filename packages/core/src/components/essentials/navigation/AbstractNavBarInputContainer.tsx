@@ -8,7 +8,7 @@ import { generateItptFromCompInfo, initLDLocalState, gdsfpLD } from '../../gener
 import { Component, ReactNode } from 'react';
 import { LDDict } from '../../../ldaccess/LDDict';
 
-export const NavBarInputContainerName = "shnyder/material-design/NavBarInputContainer";
+export const NavBarInputContainerName = "metaexplorer.io/material-design/NavBarInputContainer";
 
 let cfgIntrprtItptKeys: string[] =
 	[

@@ -1,12 +1,12 @@
 import { IBlueprintItpt } from "../../ldaccess/ldBlueprint";
 import { ILDNonvisualIntrprtrMapStatePart } from "../store";
 
-export const LDNONVIS_SET = 'shnyder/LDNONVIS_SET';
-export const LDNONVIS_DELETE = 'shnyder/LDNONVIS_DELETE';
+export const LDNONVIS_SET = 'metaexplorer.io/LDNONVIS_SET';
+export const LDNONVIS_DELETE = 'metaexplorer.io/LDNONVIS_DELETE';
 
 export type LDNonVisAction =
-	{ type: 'shnyder/LDNONVIS_SET', alias: string, intrprtr: IBlueprintItpt }
-	| { type: 'shnyder/LDNONVIS_DELETE', alias: string };
+	{ type: 'metaexplorer.io/LDNONVIS_SET', alias: string, intrprtr: IBlueprintItpt }
+	| { type: 'metaexplorer.io/LDNONVIS_DELETE', alias: string };
 
 /**
  * sets a non-visual itpt. If one exists with that alias and the cfg is same it will keep the old one

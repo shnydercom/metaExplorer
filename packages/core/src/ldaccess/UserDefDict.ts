@@ -64,13 +64,13 @@ export enum UserDefDict {
 	 * serialization
 	 */
 	intrprtrBPCfgRefMapType = "InterpreterReferenceMapType",
-	intrprtrBPCfgRefMapName = "shnyder/RefMapInterpreter",
+	intrprtrBPCfgRefMapName = "metaexplorer.io/RefMapInterpreter",
 
-	itptRefMapBpCfg = "shnyder/refmap-bpcfgType",
-	responseWrapperKey = "shnyder/responsewrapper",
-	responseWrapperType = "shnyder/responsewrapperType",
+	itptRefMapBpCfg = "metaexplorer.io/refmap-bpcfgType",
+	responseWrapperKey = "metaexplorer.io/responsewrapper",
+	responseWrapperType = "metaexplorer.io/responsewrapperType",
 
-	itptContainerObjType = "shnyder/ContainerObjType",
+	itptContainerObjType = "metaexplorer.io/ContainerObjType",
 
 	standardItptObjectTypeSuffix = "-ObjectType",
 

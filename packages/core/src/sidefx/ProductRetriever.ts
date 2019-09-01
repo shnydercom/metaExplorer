@@ -4,7 +4,7 @@ import { IKvStore } from "./../ldaccess/ikvstore";
 import { ldBlueprint, BlueprintConfig } from "./../ldaccess/ldBlueprint";
 import { LDRetrieverSuperRewrite, ldRetrCfgIntrprtKeys } from "./LDRetrieverSuper-rewrite";
 
-export const productRetrieverName = "shnyder/productRetriever";
+export const productRetrieverName = "metaexplorer.io/productRetriever";
 
 let initialKVStores: IKvStore[] = [
 	{

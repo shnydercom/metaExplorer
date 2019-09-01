@@ -23,8 +23,8 @@
         ]
       },
       "aImgHS": {
-        "subItptOf": "shnyder/ImgHeadSubDescIntrprtr",
-        "canInterpretType": "shnyder/ImgHeadSubDescIntrprtr-ObjectType",
+        "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
+        "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
         "nameSelf": "aImgHS",
         "initialKvStores": [{
             "key": "HeaderText",
@@ -64,7 +64,7 @@
         ]
       },
       "textInputComp": {
-        "subItptOf": "shnyder/material-design/http://schema.org/Text",
+        "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
         "canInterpretType": "http://schema.org/Text",
         "nameSelf": "textInputComp",
         "initialKvStores": [{

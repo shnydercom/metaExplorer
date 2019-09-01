@@ -17,14 +17,13 @@ import { initEssentialItpts } from './defaults/initEssentialItpts';
 import { initGameItpt } from './components/game/initGameItpts';
 import { initBaseHtmlItpt } from './components/basic-html/initBaseHtmlItpt';
 import { LDApproot } from './ldapproot';
-//import { initShnyderItpts } from 'components/shnyder/initShnyderItpts';
 import { initRequiredMods } from './modding/initMods';
 import { mapStateToPropsRoot } from './appstate/reduxFns';
 import { IModSpec } from './apis/mod-api';
 
 export const APP_LD_KEY = "app";
 
-const firstDisplayedBlock: string = "shnyder-website/main-page";
+const firstDisplayedBlock: string = "metaexplorer.io/index";
 
 const initialState: ExplorerState = {
 	appCfg: {
@@ -69,7 +68,6 @@ export function rootSetup(requiredMods: IModSpec[]): void {
 	initGameItpt();
 	initLDConnect();
 	initRequiredMods(modAPI, requiredMods);
-	//initShnyderItpts();
 }
 
 export class PureAppRoot extends Component<AppRootProps, AppRootState>{

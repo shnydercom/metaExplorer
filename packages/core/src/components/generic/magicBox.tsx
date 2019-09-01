@@ -12,10 +12,10 @@ import { getKVStoreByKey } from '../../ldaccess/kvConvenienceFns';
 import { UserDefDict } from '../../ldaccess/UserDefDict';
 import React from 'react';
 
-export const MagicBoxName = "shnyder/MagicBox";
+export const MagicBoxName = "metaexplorer.io/MagicBox";
 const inputdata = UserDefDict.inputData;
 const magicOutput = "mOut";
-export const magicCanInterpretType = "shnyder/MagicBoxType";
+export const magicCanInterpretType = "metaexplorer.io/MagicBoxType";
 
 let MagicBoxInputKeys: string[] = [inputdata];
 let initialKVStores: IKvStore[] = [
