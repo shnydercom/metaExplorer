@@ -709,6 +709,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					this.logic.addLDPortModelsToNodeFromItptRetr(node, data.bpname);
 				}
 				if (data.canInterpretType) node.canInterpretType = data.canInterpretType;
+				this.logic.addListenersToNode(node);
 				break;
 			case "bdt":
 				var baseDataTypeKVStore: IKvStore = {

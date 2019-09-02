@@ -7,7 +7,7 @@ import {
 import { Component, CSSProperties } from 'react';
 
 export const CSS_BASECLASS = "titletextandimage";
-export var TitleTextAndImageName: string = "metaexplorer.io/TitleTextAndImage";
+export var TitleTextAndImageName: string = "metaexplorer.io/TitleTextAndContainer";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer, VisualKeysDict.headerTxt, VisualKeysDict.description, VisualKeysDict.directionChangeBreakPoint, VisualKeysDict.switchVerticalDirection, VisualKeysDict.switchHorizontalDirection];
 let initialKVStores: IKvStore[] = [
