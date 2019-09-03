@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/itpt-editor",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "TODO:changeDescription",
   "scripts": {
     "test": "test",
@@ -18,15 +18,15 @@
     "lib"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.1",
-    "dagre": "^0.8.4",
-    "debounce": "^1.2.0",
+    "@metaexplorer/core": "^0.0.2",
     "@projectstorm/react-diagrams": "^5.3.2",
     "closest": "^0.0.1",
+    "dagre": "^0.8.4",
+    "debounce": "^1.2.0",
     "lodash": "4.*",
+    "metaexplorer-react-components": "0.0.2",
     "pathfinding": "^0.4.18",
-    "paths-js": "^0.4.9",
-    "metaexplorer-react-components": "0.0.2"
+    "paths-js": "^0.4.9"
   },
   "devDependencies": {
     "@types/debounce": "^1.2.0"

@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/swagger-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "TODO:changeDescription",
   "scripts": {
     "test": "test"
@@ -17,6 +17,6 @@
     "lib"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.1"
+    "@metaexplorer/core": "^0.0.2"
   }
 }
