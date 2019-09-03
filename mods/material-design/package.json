@@ -13,7 +13,8 @@
   ],
   "scripts": {
     "test": "test",
-    "build": "tsc"
+    "build": "tsc",
+    "compcss": "node-sass --output-style compressed ./src/styles/material-design-index.scss > cat ./dist/style.css"
   },
   "devDependencies": {
     "@metaexplorer/core": "*",

@@ -22,7 +22,7 @@
     "buildregular": "tsc",
     "build": "yarn buildesm && yarn buildwp",
     "lint": "tslint ./src/**/*.ts -t verbose",
-    "compcss": "node-sass --output-style compressed ./src/styles/styles.scss > cat ./dist/style.css",
+    "compcss": "node-sass --output-style compressed ./src/styles/core-index.scss > cat ./dist/style.css",
     "createmock": "node ./scripts/createItptMock.js"
   },
   "peerDependencies": {

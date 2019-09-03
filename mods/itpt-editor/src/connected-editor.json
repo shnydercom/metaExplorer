@@ -41,7 +41,7 @@
           "initialKvStores": [
             {
               "key": "currentlyediting",
-              "value": "metaexplorer.io/me-beta/index",
+              "value": "metaexplorer.io/v2/index",
               "ldType": "http://schema.org/Text"
             },
             {
