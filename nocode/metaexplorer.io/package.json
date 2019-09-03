@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-nocode/metaexplorer.io",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "block definition files for metaexplorer.io",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,6 @@
   "author": "Jonathan Schneider",
   "license": "EUPL-1.2",
   "devDependencies": {
-    "@metaexplorer/editor-dev-server": "^0.0.3"
+    "@metaexplorer/editor-dev-server": "^0.0.4"
   }
 }
