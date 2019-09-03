@@ -1,5 +1,5 @@
 {
-  "name": "metaexplorer.io",
+  "name": "@metaexplorer/metaexplorer.io",
   "version": "0.1.0",
   "dependencies": {
     "@metaexplorer-mods/demo": "0.0.1",
