@@ -1,7 +1,7 @@
 {
   "author": "Jonathan Schneider",
   "name": "@metaexplorer/core",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "a GUI editor for configuring bizSys-Server",
   "license": "EUPL-1.2",
   "module": "./lib-esm/index.js",
