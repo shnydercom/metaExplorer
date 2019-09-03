@@ -26,7 +26,7 @@
     "lodash": "4.*",
     "pathfinding": "^0.4.18",
     "paths-js": "^0.4.9",
-    "metaexplorer-react-components": "https://github.com/aJonathanSchneider/metaExplorer-react-components.git"
+    "metaexplorer-react-components": "0.0.2"
   },
   "devDependencies": {
     "@types/debounce": "^1.2.0"
