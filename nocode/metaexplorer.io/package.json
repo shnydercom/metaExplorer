@@ -11,5 +11,8 @@
   "license": "EUPL-1.2",
   "devDependencies": {
     "@metaexplorer/editor-dev-server": "^0.0.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

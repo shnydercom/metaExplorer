@@ -16,5 +16,8 @@
     "express": "^4.17.1",
     "ts-node-dev": "^1.0.0-pre.40",
     "typescript": "^3.5.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

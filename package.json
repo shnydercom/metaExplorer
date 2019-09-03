@@ -1,9 +1,8 @@
 {
-  "license": "EUPL-1.2",
   "repository": {
-		"type": "git",
-		"url": "https://https://github.com/aJonathanSchneider/metaExplorer.git"
-	},
+    "type": "git",
+    "url": "https://https://github.com/aJonathanSchneider/metaExplorer.git"
+  },
   "devDependencies": {
     "lerna": "^3.16.4"
   },
@@ -18,5 +17,10 @@
     "tsc": "lerna run tsc",
     "build": "lerna run build",
     "start": "set MIO_DYNAMIC=true && lerna run start"
-  }
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "EUPL-1.2"
 }
