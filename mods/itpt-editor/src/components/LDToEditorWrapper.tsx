@@ -167,13 +167,11 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		if (rvLD) {
 			let initiallyDisplayed = rvLD.localValues.get(ITPT_BLOCK_EDITOR_EDITING_ITPT);
-			let isGlobal = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
+			//let isGlobal = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 			let isFSPreview = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW);
 			let hiddenViews = rvLD.localValues.get(ITPT_BLOCK_EDITOR_HIDDEN_VIEWS);
 
-			let mode = isGlobal
-				? prevState.mode
-				: isFSPreview ? "app" : "editor";
+			let mode = isFSPreview ? "app" : "editor";
 			let bottomBarHidden = prevState.bottomBarHidden;
 			let drawerHidden = prevState.drawerHidden;
 			let previewHidden = prevState.previewHidden;
@@ -226,13 +224,11 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			[], [false, false, false, false, true, false, false, false, false, false, false]);
 
 		let initiallyDisplayed = rvLD.localValues.get(ITPT_BLOCK_EDITOR_EDITING_ITPT);
-		let isGlobal = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
-		let isFSPreview = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW);
+		//let isGlobal = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
+		//let isFSPreview = !!rvLD.localValues.get(ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW);
 		let hiddenViews = rvLD.localValues.get(ITPT_BLOCK_EDITOR_HIDDEN_VIEWS);
 
-		let mode: "initial" | "app" | "editor" = isGlobal
-			? "initial"
-			: isFSPreview ? "app" : "editor";
+		let mode: "initial" | "app" | "editor" = "initial";
 		let drawerActive = true;
 		let previewActive = true;
 		let bottomBarHidden = false;
@@ -333,7 +329,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			},
 			onUpClick: () => this.triggerNavToTop()
 		}
-		if (!this.logic) return <div>loading Editor</div>;
+		if (!this.logic || this.state.mode === "initial") return <div>loading Editor</div>;
 		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
 			return <div>{this.errorNotAvailableMsg}</div>;
 		}
@@ -353,7 +349,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			onBlockItemDropped={(blockItem) => this.addBlockToDiagram(blockItem)}
 			isLeftDrawerActive={drawerActive}
 			trayProps={editorTrayProps}
-			isPreviewFullScreen={false}
+			isPreviewFullScreen={this.state.mode === "app"}
 			previewLDTokenString={this.state.previewerToken}
 			routes={this.props.routes}
 			onZoomAutoLayoutPress={() => {

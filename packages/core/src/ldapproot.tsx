@@ -27,7 +27,7 @@ export class PureLDApproot extends Component<LDApprootProps & LDConnectedState &
 		}
 	}
 	render() {
-		return <div className="app-content" style={{ background: "white" }}>
+		return <div className="app-content">
 			<Route path="/" render={(routeProps: LDRouteProps) => {
 				return <>
 					<BaseContainerRewrite routes={routeProps} ldTokenString={this.props.ldTokenString} />
