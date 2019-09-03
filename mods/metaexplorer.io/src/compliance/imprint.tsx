@@ -113,7 +113,7 @@ export class PureImprint extends Component<LDConnectedState & LDConnectedDispatc
 				<span className="imprint_name">{vschemaOrgName}</span><br/>
 				<span className="imprint_street">{vschemaOrgStreetAddress}</span><br/>
 				<span className="imprint_zipcode">{vschemaOrgPostalCode} </span>
-				<span className="imprint_locality">{vschemaOrgAdressLocality}, </span>
+				<span className="imprint_locality">{vschemaOrgAdressLocality}</span>
 				<span className="imprint_country">{vschemaOrgAddressCountry}</span>
 			</p>
 		</div>;

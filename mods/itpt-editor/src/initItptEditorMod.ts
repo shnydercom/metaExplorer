@@ -15,12 +15,12 @@ export function initItptEditorMod(isMainItptChange: boolean): Promise<IModStatus
 		addBlueprintToRetriever(connectedEditorCfg, "default");
 		let startingInstance = [/*{
 			key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
-			value: "metaexplorer.io/v1/MainAppEntryPoint",
+			value: "metaexplorer.io/v2/index",
 			ldType: LDDict.Text
 		},
 		{
 			key: ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
-			value: "metaexplorer.io/v1/MainAppEntryPoint",
+			value: "metaexplorer.io/v2/index",
 			ldType: LDDict.Text
 		},
 		{

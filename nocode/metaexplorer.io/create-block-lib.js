@@ -1,2 +1,2 @@
 const mxpDevServer = require('@metaexplorer/editor-dev-server');
-mxpDevServer.createBlocksFromLib("metaexplorer.io/v1/MainAppEntryPoint", "blocks");
+mxpDevServer.createBlocksFromLib("metaexplorer.io/v2/index", "blocks");
