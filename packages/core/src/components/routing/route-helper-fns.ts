@@ -7,7 +7,7 @@ export function cleanRouteString(destination: string, routes: LDRouteProps) {
 		|| route.startsWith('mailto:')
 		|| route.startsWith('https://')) {
 		window.location.href = route;
-		return "/";
+		return match.url;
 	}
 	if (route.startsWith("/")) {//i.e attach to path/create sub-path
 		route = route.substring(1);

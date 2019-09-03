@@ -27,7 +27,7 @@ export class MDTopNavigation extends MDBottomNavigation {
 			);
 			tabs.push(newTab);
 		}
-		return <div className={classNamesLD("bottom-nav", localValues)}>
+		return <div className={classNamesLD("top-nav", localValues)}>
 			<BottomNavigation
 				value={tabIdx}
 				onChange={(event, newValue) => {
@@ -37,7 +37,7 @@ export class MDTopNavigation extends MDBottomNavigation {
 			>
 				{tabs}
 			</BottomNavigation>
-			<div className="bottom-nav-topfree mdscrollbar">
+			<div className="top-nav-bottomfree mdscrollbar">
 				{tabs.length > 0 ? this.generateRedirect(tabIdx) : null}
 				<Route component={this.renderInputContainer} />
 				{this.props.children}
