@@ -12,7 +12,7 @@
     "@metaexplorer-mods/onboarding": "^0.0.2",
     "@metaexplorer-mods/qr-code-genscan": "^0.0.2",
     "@metaexplorer-mods/useritpt": "^0.0.2",
-    "@metaexplorer-nocode/metaexplorer.io": "1.0.0",
+    "@metaexplorer-nocode/metaexplorer.io": "0.0.2",
     "@metaexplorer/core": "^0.0.2",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
