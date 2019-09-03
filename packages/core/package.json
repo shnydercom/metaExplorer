@@ -15,7 +15,6 @@
   ],
   "scripts": {
     "test": "jest --watch",
-    "buildcra": "react-scripts build",
     "buildwp": "webpack --config=webpack.prod.config.js",
     "startfornetwork": "webpack-dev-server --host 0.0.0.0",
     "buildesm": "tsc -m es6 --outDir lib-esm",

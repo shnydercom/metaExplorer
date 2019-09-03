@@ -14,13 +14,11 @@
     "module": "esnext",
     "emitDeclarationOnly": false,
     "resolveJsonModule": true,
-    "lib": [
-      "dom",
-      "esnext"
-    ],
-    "allowJs": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve"
+    "lib": ["dom", "esnext"],
+    "paths": {
+      "*": [
+        "*"
+      ]
+    }
   }
 }

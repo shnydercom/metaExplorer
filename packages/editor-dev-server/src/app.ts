@@ -12,4 +12,4 @@ mkdir(devNocodeFolder+"/blocks");
 copyDir(path.resolve('../../nocode/metaexplorer.io/blocks'), path.resolve(devNocodeFolder,"blocks"));
 
 //load the express server
-editorToFileSystem(devNocodeFolder);
+editorToFileSystem(devNocodeFolder, "metaexplorer.io/v2/index");
