@@ -24,7 +24,7 @@
     "dagre": "^0.8.4",
     "debounce": "^1.2.0",
     "lodash": "4.*",
-    "metaexplorer-react-components": "0.0.2",
+    "metaexplorer-react-components": "0.0.3",
     "pathfinding": "^0.4.18",
     "paths-js": "^0.4.9"
   },
