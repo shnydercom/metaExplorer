@@ -15,6 +15,8 @@ module.exports = function (app) {
       }
     }));
     app.use(proxy('/api/blocks', { target: 'http://localhost:5000/' }));
+    
+    app.use(proxy('/styles/*', { target: 'http://localhost:5000/styles/' /*, pathRewrite: { '^/styles': '' } */}));
   } else {
     //only statically retrieving the interpreters in dev
     app.get('/api-static/interpreters.json', function (req, res) {

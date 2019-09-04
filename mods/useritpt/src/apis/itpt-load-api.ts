@@ -3,6 +3,9 @@ import {
 	getApplicationStore, ldOptionsClientSideUpdateAction, isProduction, IAsyncRequestWrapper
 } from "@metaexplorer/core";
 
+export const USER_CSS_PREFIX = "/styles/";
+export const USER_CSS_POSTFIX = "-style.css";
+
 export interface UserItptLoadResponse {
 	itptMetaInfo: [{}];
 	itptList: BlueprintConfig[];
@@ -10,7 +13,7 @@ export interface UserItptLoadResponse {
 }
 
 export interface UserItptSetResponse extends IAsyncRequestWrapper {
-	
+
 }
 
 export class UserItptLoadApi {
@@ -99,5 +102,18 @@ export class UserItptLoadApi {
 			}
 		};
 		getApplicationStore().dispatch(ldOptionsClientSideUpdateAction(newLDOptions));
+	}
+
+	loadUserStyleSheet = (userName) => {
+		return new Promise((resolve, reject) => {
+			const fileName = USER_CSS_PREFIX + userName + USER_CSS_POSTFIX;
+			var cssFileReference = document.createElement("link")
+			cssFileReference.onload = resolve;
+			cssFileReference.onerror = reject;
+			cssFileReference.setAttribute("rel", "stylesheet")
+			cssFileReference.setAttribute("type", "text/css")
+			cssFileReference.setAttribute("href", fileName)
+			document.body.appendChild(cssFileReference);
+		});
 	}
 }

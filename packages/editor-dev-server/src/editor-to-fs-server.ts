@@ -10,6 +10,7 @@ import { mkdir } from './scripts/copydir';
 	This is a server for development!
 */
 
+const IRI_STYLES = '/styles'
 const API_IRI_BLOCKS = '/api/blocks';
 const FS_BLOCKS_SUBPATH = 'blocks';
 const REQ_PATH_DETERMINING_KEY = 'nameSelf';
@@ -71,6 +72,13 @@ export function editorToFileSystem(basePath?: string, mainItpt?: string, srvrPor
 	// Create a new express application instance
 	const app: express.Application = express();
 	app.use(express.json());
+
+	app.get(IRI_STYLES + "/*", function (req, res) {
+		console.log(req.path)
+		let localPath = req.path;
+		localPath = localPath.replace("styles/", "");
+		res.sendFile(path.join(path.resolve(basePath), localPath));
+	});
 
 	app.get(API_IRI_BLOCKS, function (req, res) {
 		res.sendFile(path.join(resolvedBasePath, './interpreters.json'));
