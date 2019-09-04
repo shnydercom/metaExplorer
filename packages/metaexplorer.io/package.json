@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer/metaexplorer.io",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "dependencies": {
     "@metaexplorer-mods/demo": "^0.0.7",
     "@metaexplorer-mods/google": "^0.0.7",
