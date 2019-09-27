@@ -1,6 +1,8 @@
-import {ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap, IKvStore,
+import {
+	ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap, IKvStore,
 	LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState, VisualKeysDict, ILDOptions,
-	LDDict, gdsfpLD, initLDLocalState } from "@metaexplorer/core";
+	LDDict, gdsfpLD, initLDLocalState
+} from "@metaexplorer/core";
 import { Component } from "react";
 import React from "react";
 
@@ -63,6 +65,25 @@ export class PureQRCodeDisplay extends Component<LDConnectedState & LDConnectedD
 		utf8textData = localValues.get(VisualKeysDict.utf8textData);
 		typeNumber = localValues.get(QRCodeDisplayStngTypeNumber);
 		correctionLevel = localValues.get(QRCodeDisplayStngErrorCorrectionLevel);
+
+		if (typeNumber === undefined || typeNumber === null || typeNumber < 0 || typeNumber > 40) {
+			typeNumber = 0;
+		}
+		switch (correctionLevel) {
+			case "L":
+				break;
+			case "M":
+				break;
+			case "Q":
+				break;
+			case "H":
+				break;
+			default:
+				correctionLevel = "L";
+				break;
+		}
+
+		if(!utf8textData) utf8textData = "no data";
 
 		var qr = qrcode(typeNumber as TypeNumber, correctionLevel as ErrorCorrectionLevel);
 		qr.addData(utf8textData);
