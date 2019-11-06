@@ -35,8 +35,16 @@
 			"name": "Attach to Chrome",
 			"port": 9222,
 			"url": "http://localhost:3000*",
-			"webRoot": "${workspaceRoot}/packages/metaexplorer.io/src",
-			"sourceMaps": true
+			"webRoot": "${workspaceRoot}",///packages/metaexplorer.io/src",
+			"sourceMaps": true,
+			/*"pathMapping": {
+				"mods/material-design" : "${workspaceRoot}/mods/material-design",
+				"/C:/Users/Jonat/git/metaExplorer/mods/material-design/lib": "${workspaceRoot}/mods/material-design/src",
+				"/static/js/": "${workspaceRoot}/",
+				"../../mods/material-design/lib/": "${workspaceRoot}/mods/material-design/lib",
+				"/static/js/C:/Users/Jonat/git/metaExplorer/": "${workspaceRoot}/",
+				"/static/js/C:/Users/Jonat/git/metaExplorer/mods/material-design/lib/": "${workspaceRoot}/mods/material-design/lib/",
+			}*/
 		},
 		/*	{
 			"type": "chrome",

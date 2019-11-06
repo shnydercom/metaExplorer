@@ -15,9 +15,7 @@
     "@metaexplorer-nocode/metaexplorer.io": "^0.0.8",
     "@metaexplorer/core": "^0.0.7",
     "node-sass": "^4.12.0",
-    "react": "^16.8.6",
     "react-dnd": "^9.0.1",
-    "react-dom": "^16.8.6",
     "react-gooey-nav": "^2.0.0",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
@@ -28,6 +26,10 @@
     "rxjs-compat": "^6.5.2",
     "shortid": "^2.2.14",
     "typescript": "^3.5.3"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
   },
   "scripts": {
     "start": "react-scripts start --verbose",
