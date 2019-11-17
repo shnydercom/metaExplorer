@@ -95,7 +95,7 @@ export const loadModEpic = (action$: ActionsObservable<any>, store: any, { modAP
 					catchError((error: Error) => {
 						console.warn(error);
 						return of(loadModFailure(action.modId,
-							`An error occurred: ${error.message}`
+							`An error occurred: ${error.message ? error.message : JSON.stringify(error)}`
 						));
 					}
 					));

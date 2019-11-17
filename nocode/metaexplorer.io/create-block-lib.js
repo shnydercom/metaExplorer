@@ -1,2 +1,3 @@
 const mxpDevServer = require('@metaexplorer/editor-dev-server');
-mxpDevServer.createBlocksFromLib("metaexplorer.io/v2/index", "blocks");
+const mainItpt = "metaexplorer.io/v2/index";// "metaexplorer.io/v1/connected-editor";//"metaexplorer.io/v2/index"
+mxpDevServer.createBlocksFromLib(mainItpt, "blocks");

@@ -1,5 +1,5 @@
 //@import url('https://fonts.googleapis.com/css?family=Roboto');
-@import './editor/colors.scss';
+@import './colors.scss';
 //@import "./../../node_modules/storm-react-diagrams/dist/style.min.css";
 @import "./game/game.scss";
 //@import "@metaexplorer-mods/material-design/styles/md-new.scss";
@@ -21,7 +21,7 @@ body {
   overflow-y: hidden;
 }
 
-#app {
+#root {
 	margin: 0;
 	padding: 0;
 	height: 100%;

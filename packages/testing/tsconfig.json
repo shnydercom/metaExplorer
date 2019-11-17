@@ -1,0 +1,41 @@
+{
+  "include": [
+    "src"
+  ],
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src",
+    "declarationDir": "lib",
+    "declaration": true,
+    "declarationMap": true,
+    "composite": true,
+    "sourceMap": true,
+    "module": "esnext",
+    "emitDeclarationOnly": false,
+    "resolveJsonModule": true,
+    "lib": ["dom", "esnext"],
+    "paths": {
+      "*": [
+        "*"
+      ]
+    }
+  },
+  "dependencies": {
+    "@babel/core": "^7.6.2",
+    "@storybook/react": "^5.2.1",
+    "@types/storybook__react": "^4.0.2",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.6",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.0",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^1.0.0",
+    "typescript": "^3.6.3",
+    "@types/node": "^12.7.7"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+}

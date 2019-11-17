@@ -18,14 +18,6 @@
                 "propRef": null
               },
               "ldType": "InterpreterClassType"
-            },
-            {
-              "key": "configurationBlocks",
-              "value": {
-                "objRef": "rm-kcauthcfg",
-                "propRef": null
-              },
-              "ldType": "InterpreterClassType"
             }
           ],
           "crudSkills": "cRud",
@@ -105,20 +97,6 @@
             {
               "key": "canHandleType",
               "value": "save-editor-action",
-              "ldType": "http://schema.org/Text"
-            }
-          ],
-          "crudSkills": "cRud",
-          "interpretableKeys": []
-        },
-        "rm-kcauthcfg": {
-          "subItptOf": "keycloak/auth/config",
-          "canInterpretType": "keycloak/auth/config-ObjectType",
-          "nameSelf": "rm-kcauthcfg",
-          "initialKvStores": [
-            {
-              "key": "jsonConfigurationPath",
-              "value": "/media/public-cfg.json",
               "ldType": "http://schema.org/Text"
             }
           ],

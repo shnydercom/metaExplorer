@@ -10,7 +10,7 @@
   "author": "Jonathan Schneider",
   "license": "EUPL-1.2",
   "devDependencies": {
-    "@metaexplorer/editor-dev-server": "^0.0.8"
+    "@metaexplorer/editor-dev-server": "^0.0.9"
   },
   "publishConfig": {
     "access": "public"

@@ -3,7 +3,7 @@ const path = require('path');
 const mxpIOItpts = require('@metaexplorer-nocode/metaexplorer.io/lib/interpreters.json');
 const qrCodeGenScanMod = require('@metaexplorer-mods/qr-code-genscan/server-bom.js');
 
-const itptEditorMod = require('@metaexplorer-mods/itpt-editor/server-bom.js');
+const itptEditorMod = require('@metaexplorer-mods/itpt-editor/lib/server-bom');
 
 module.exports = function (app) {
   itptEditorMod(app);

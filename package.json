@@ -16,7 +16,7 @@
     "prestart": "lerna run build",
     "tsc": "lerna run tsc",
     "build": "lerna run build",
-    "start": "set MIO_DYNAMIC=true && lerna run start"
+    "start": "set MIO_DYNAMIC=true && lerna run start --stream"
   },
   "private": true,
   "publishConfig": {

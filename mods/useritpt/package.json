@@ -1,7 +1,7 @@
 {
   "name": "@metaexplorer-mods/useritpt",
   "version": "0.0.10",
-  "description": "TODO:changeDescription",
+  "description": "A mod that enables getting user-defined blocks from an API",
   "scripts": {
     "test": "test",
     "build": "tsc"

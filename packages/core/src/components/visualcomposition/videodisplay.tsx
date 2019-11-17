@@ -103,7 +103,7 @@ export class PureVideoDisplay extends Component<LDConnectedState & LDConnectedDi
 	initialKvStores: IKvStore[];
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 
-	videoRef: HTMLVideoElement;
+	videoContainer: HTMLDivElement;
 
 	constructor(props: any) {
 		super(props);
@@ -115,26 +115,34 @@ export class PureVideoDisplay extends Component<LDConnectedState & LDConnectedDi
 	}
 
 	componentDidMount() {
-		const { localValues } = this.state;
-		let isMuted = localValues.get(VIDEO_IS_MUTED);
-		this.videoRef.muted = isMuted;
-	}
 
-	render() {
-		const { ldOptions } = this.props;
+		//this is a workaround, not the ideal code:
 		const { localValues } = this.state;
 		let isShowVideoControls = localValues.get(VIDEO_SHOW_CONTROLS);
 		isShowVideoControls = isShowVideoControls ? isShowVideoControls : false;
 		let isMuted = localValues.get(VIDEO_IS_MUTED);
 		let isAutoPlay = localValues.get(VIDEO_IS_AUTOPLAYING);
 		let isLooping = localValues.get(VIDEO_IS_LOOP);
-		let cssClassName = localValues.get(VisualKeysDict.cssClassName);
-		cssClassName = cssClassName ? cssClassName : "";
 		let videoLink: string = localValues.get(LDDict.contentUrl);
-		if (!ldOptions) return <div>{TXT_NO_VIDEO}</div>;
-		return <div className={`${CSS_CLASS_NAME} ${cssClassName}`}>
-			<video src={videoLink} className="is-loading"
-				ref={(ref) => this.videoRef = ref}
+
+		const video = document.createElement('video');
+		video.autoplay = isAutoPlay;
+		video.loop = isLooping;
+		if (isMuted) {
+			video.setAttribute("muted", 'true');
+			video.muted = true;
+		}
+		video.setAttribute('playsinline', 'true'); // fixes autoplay in webkit (ie. mobile safari)
+
+		const source = document.createElement('source');
+		source.src = videoLink;
+		source.type = 'video/mp4';
+		video.appendChild(source);
+
+		this.videoContainer.appendChild(video);
+		//TODO: check https://github.com/facebook/react/issues/10389 if muted-attribute is added or not
+		/**
+		 * <video src={videoLink} className="is-loading"
 				autoPlay={isAutoPlay}
 				muted={isMuted}
 				controls={isShowVideoControls}
@@ -150,6 +158,16 @@ export class PureVideoDisplay extends Component<LDConnectedState & LDConnectedDi
 					}
 				}>
 			</video>
-		</div>;
+		 */
+	}
+
+	render() {
+		const { ldOptions } = this.props;
+		const { localValues } = this.state;
+		let cssClassName = localValues.get(VisualKeysDict.cssClassName);
+		cssClassName = cssClassName ? cssClassName : "";
+		if (!ldOptions) return <div>{TXT_NO_VIDEO}</div>;
+		return <div className={`${CSS_CLASS_NAME} ${cssClassName}`}
+			ref={(ref) => this.videoContainer = ref} />;
 	}
 }

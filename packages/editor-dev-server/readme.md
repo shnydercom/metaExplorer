@@ -1,0 +1,1 @@
+use the `NOCODE_BLOCKS_PATH` environment variable to set the path where your initial blocks are in. They will be copied to the editor-server's internal folder structure every time you start the server
