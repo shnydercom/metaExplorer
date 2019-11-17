@@ -100,5 +100,6 @@
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
     "write-file-webpack-plugin": "^4.5.0"
-  }
+  },
+  "gitHead": "2ac51488d3796cf6caa6df0990759362a4ee6fe8"
 }

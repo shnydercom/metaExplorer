@@ -22,5 +22,6 @@
     "qr-scanner": "^1.1.1",
     "qrcode-generator": "^1.4.3",
     "quagga": "^0.12.1"
-  }
+  },
+  "gitHead": "2ac51488d3796cf6caa6df0990759362a4ee6fe8"
 }
