@@ -1,11 +1,10 @@
-//@import "react-toolbox/lib/colors.module.css";
-//@import "react-toolbox/lib/input/theme.css";
-//@import './colors.scss';
-@import "../../../../node_modules/metaexplorer-react-components/src/components/treeview/treeview.scss";
-@import "../../../../node_modules/metaexplorer-react-components/src/components/circle/circleview.scss";
-
-@import "../../../../node_modules/metaexplorer-react-components/src/components/minitoolbox/minitoolbox.scss";
-@import "../../../../node_modules/metaexplorer-react-components/src/components/dnd/editor-dnd.scss";
+@import "~metaexplorer-react-components/lib/components/card/card.css";
+@import "~metaexplorer-react-components/lib/components/circle/circleview.css";
+@import "~metaexplorer-react-components/lib/components/dnd/dnd.css";
+@import "~metaexplorer-react-components/lib/components/hero/hero.css";
+@import "~metaexplorer-react-components/lib/components/minitoolbox/minitoolbox.css";
+@import "~metaexplorer-react-components/lib/components/tabs/tabs.css";
+@import "~metaexplorer-react-components/lib/components/treeview/treeview.css";
 
 @import "./diagram.scss";
 @import "./user-info.scss";
@@ -14,7 +13,6 @@
 @import "./save-status.scss";
 @import "./itpt-summary.scss";
 @import "./simple-data-types.scss";
-//@import "../../../../node_modules/metaexplorer-react-components/src/components/card/card.scss";
 
 
 $color-primary: #FF00FF; //$palette-green-600;

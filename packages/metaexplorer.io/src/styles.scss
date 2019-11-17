@@ -1,11 +1,8 @@
-@import "../../core/src/styles/core-index.scss";
-@import "../../../mods/itpt-editor/src/styles/itpt-editor-index.scss";
-@import "../../../mods/material-design/src/styles/material-design-index.scss";
+@import "~@metaexplorer/core/lib/style.css";
+@import "~@metaexplorer-mods/itpt-editor/lib/style.css";
+@import "~@metaexplorer-mods/material-design/lib/style.css";
 
-//@import "metaexplorer-react-components/src/components/hero/hero.scss";
-//@import "../mods/mailchimp.scss";
-//@import "../mods/keycloak.scss";
-@import "../../../mods/metaexplorer.io/src/styles/index.scss";
+@import "~@metaexplorer-mods/metaexplorer.io/lib/style.css";
 
 .fadefromright {
 	margin-left: 100%;
