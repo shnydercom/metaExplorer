@@ -6,9 +6,15 @@
 @import 'react-toolbox/lib/ripple/config.module.css';
 @import 'react-toolbox/lib/ripple/theme.module.css';*/
 //@import './colors.scss';
-@import "./../../../node_modules/metaexplorer-react-components/src/components/treeview/treeview.scss";
-@import "./../../../node_modules/metaexplorer-react-components/src/components/circle/circleview.scss";
-@import "./../../../node_modules/metaexplorer-react-components/src/components/card/card.scss";
+@import "~metaexplorer-react-components/lib/components/card/card.css";
+@import "~metaexplorer-react-components/lib/components/circle/circleview.css";
+@import "~metaexplorer-react-components/lib/components/dnd/dnd.css";
+@import "~metaexplorer-react-components/lib/components/hero/hero.css";
+@import "~metaexplorer-react-components/lib/components/minitoolbox/minitoolbox.css";
+@import "~metaexplorer-react-components/lib/components/tabs/tabs.css";
+@import "~metaexplorer-react-components/lib/components/treeview/treeview.css";
+//@import "~metaexplorer-react-components/src/components/circle/circleview.scss";
+//@import "~metaexplorer-react-components/src/components/card/card.scss";
 
 .bottom-nav {
   flex: 1;
@@ -253,4 +259,8 @@ canvas.drawingBuffer {
     flex: 1;
     padding: 10px;
   }
+}
+
+.MuiAppBar-positionFixed {
+	position: absolute;
 }

@@ -19,9 +19,9 @@
     "startfornetwork": "webpack-dev-server --host 0.0.0.0",
     "buildesm": "tsc -m es6 --outDir lib-esm",
     "buildregular": "tsc",
-    "build": "yarn buildesm && yarn buildwp",
+    "build": "yarn buildesm && yarn buildregular && yarn compcss",
     "lint": "tslint ./src/**/*.ts -t verbose",
-    "compcss": "node-sass --output-style compressed ./src/styles/core-index.scss > cat ./dist/style.css",
+    "compcss": "node-sass --output-style compressed ./src/styles/core-index.scss > ./lib/style.css",
     "createmock": "node ./scripts/createItptMock.js"
   },
   "peerDependencies": {
@@ -75,7 +75,7 @@
     "jasmine": "^3.4.0",
     "jest": "24.7.1",
     "mini-css-extract-plugin": "^0.7.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.0",
     "react": "*",
     "react-dnd": "^9.0.1",
     "react-dom": "*",

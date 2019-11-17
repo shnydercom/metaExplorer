@@ -11,7 +11,9 @@ mkdir(devNocodeFolder + "/blocks");
 mkdir(devNocodeFolder + "/" + DYN_USER_CSS_FOLDER);
 
 //copy nocode to devNocodeFolder
-copyDir(path.resolve('../../nocode/metaexplorer.io/blocks'), path.resolve(devNocodeFolder, "blocks"));
+const nocodePath = process.env.NOCODE_BLOCKS_PATH ? process.env.NOCODE_BLOCKS_PATH : '../../nocode/metaexplorer.io/blocks';
+const nocodeItpt = process.env.NOCODE_BLOCK_START ? process.env.NOCODE_BLOCK_START : "metaexplorer.io/v2/index";
+copyDir(path.resolve(nocodePath.trim()), path.resolve(devNocodeFolder, "blocks"));
 
 //load the express server
-editorToFileSystem(devNocodeFolder, "metaexplorer.io/v2/index");
+editorToFileSystem(devNocodeFolder, nocodeItpt.trim());

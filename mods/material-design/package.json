@@ -14,8 +14,8 @@
   "scripts": {
     "story": "start-storybook -p 2019 -s ./public",
     "test": "test",
-    "build": "tsc",
-    "compcss": "node-sass --output-style compressed ./src/styles/material-design-index.scss > cat ./dist/style.css"
+    "build": "tsc && yarn compcss",
+    "compcss": "node-sass --output-style compressed ./src/styles/material-design-index.scss > ./lib/style.css"
   },
   "devDependencies": {
     "@material-ui/core": "^4.1.3",
