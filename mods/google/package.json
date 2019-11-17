@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/google",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "TODO:changeDescription",
   "scripts": {
     "test": "test",
@@ -18,6 +18,6 @@
     "lib"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.9"
+    "@metaexplorer/core": "^0.0.10"
   }
 }
