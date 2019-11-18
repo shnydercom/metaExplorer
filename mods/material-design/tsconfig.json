@@ -1,10 +1,11 @@
 {
-  "include": ["src", "src/**/*.json"],
+  "include": ["src", "*themes*.json"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
     "baseUrl": ".",
+    "composite": false, //because of a bug in at-loader
     "resolveJsonModule": true
   },
   "references": [

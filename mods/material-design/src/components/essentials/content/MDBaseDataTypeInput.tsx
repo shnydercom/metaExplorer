@@ -1,4 +1,3 @@
-import assertNever from "assert-never";
 import {
 	AbstractBaseDataTypeInput, wrapBaseDataTypeGDSF, baseDataTypeBpcfgs, LDBaseDataType, ldBlueprint,
 	parseDate, parseText, parseNumber, parseBoolean, LDDict
@@ -82,7 +81,7 @@ abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 					}
 				</div>;
 			default:
-				return assertNever(baseDT);
+				return null;
 		}
 	}
 }

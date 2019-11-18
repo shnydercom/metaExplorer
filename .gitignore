@@ -3,5 +3,5 @@ node_modules
 ./*.lock
 lib
 *.log
-./**/*.tsbuildinfo
 *.lock
+*.tsbuildinfo

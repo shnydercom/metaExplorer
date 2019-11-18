@@ -1,8 +1,8 @@
 import { configure } from '@storybook/react'
-import './storybook.css'
+//import './storybook.css'
 
-const req = require.context('../src', true, /\.story\.(ts|tsx)$/)
-
-configure(() => {
-  req.keys().forEach(filename => req(filename))
-}, module);
+export function createStoryBookConfig(req: __WebpackModuleApi.RequireContext) {
+  configure(() => {
+    req.keys().forEach(filename => req(filename))
+  }, module);
+}

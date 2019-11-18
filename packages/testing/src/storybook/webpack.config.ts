@@ -1,15 +1,16 @@
 const path = require('path');
-module.exports = {
-  module: {
-    rules: [{
+export function createWebpackConfig(dir: string) {
+  return {
+    module: {
+      rules: [{
         test: /\.scss$/,
         loaders: ["style-loader", "css-loader", "sass-loader"],
-        include: path.resolve(__dirname, '../')
+        include: path.resolve(dir, '../')
       },
       {
         test: /\.css/,
         loaders: ["style-loader", "css-loader"],
-        include: path.resolve(__dirname, '../')
+        include: path.resolve(dir, '../')
       },
       {
         enforce: 'pre',
@@ -20,17 +21,18 @@ module.exports = {
         ]
       },
       {
-        test: /\.tsx?$/,
-        include: path.resolve(__dirname, '../src'),
+        test: /\.tsx?$|\.jsx?|\.json$/,
+        include: path.resolve(dir, '../src'),
         loader: 'awesome-typescript-loader',
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
         loader: "file-loader"
       }
-    ]
-  },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"]
+      ]
+    },
+    resolve: {
+      extensions: ['.json', '.css', '.scss', '.ts', '.tsx', '.js']
+    }
   }
-};
+}
