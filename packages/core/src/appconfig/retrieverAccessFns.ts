@@ -62,7 +62,7 @@ export const intrprtrTypeInstanceFromBlueprint = (input: BlueprintConfig): any =
 	return rv;
 };
 
-export const changeMainAppItpt = (toItptName: string, startingInstance?: any): void => {
+export const changeMainAppItpt = (toItptName: string, startingInstance?: IKvStore[]): void => {
 	const appState = getApplicationStore().getState();
 	const appKey = appState.appCfg.appKey;
 	//this.generatePrefilled(val.itptList[numItpts - 1]);

@@ -4,6 +4,7 @@ import { ILDResource, ILDWebResource } from "./ildresource";
 import { IKvStore } from "./ikvstore";
 import { OutputKVMap, BlueprintConfig } from "./ldBlueprint";
 import { LDError } from "../appstate/LDError";
+import { LDApiConst } from "./LDconsts";
 
 export const isItpt = (input: any): boolean => {
 	if (!input) return false;
@@ -142,5 +143,11 @@ export const itptKeysFromInputKvs = (inputKvStores: IKvStore[]): string[] => {
 	inputKvStores.forEach((value) => {
 		rv.push(value.key);
 	});
+	return rv;
+};
+
+export const createLDUINSUrl = (s: string, p: string, o: string): string => {
+	const spoAsVars: string = `?s=${s}&p=${p}&o=${o}`;
+	const rv: string = `${LDApiConst.baseUrl}${LDApiConst.apiEndpoint}/${spoAsVars}`;
 	return rv;
 };

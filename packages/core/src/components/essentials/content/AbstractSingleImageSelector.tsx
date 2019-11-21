@@ -6,6 +6,7 @@ import { IKvStore } from '../../../ldaccess/ikvstore';
 import { ILDOptions } from '../../../ldaccess/ildoptions';
 import { UserDefDict } from '../../../ldaccess/UserDefDict';
 import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
+import { createLDUINSUrl } from '../../../ldaccess/ldUtils';
 // TODO: drop file anim: https://css-tricks.com/examples/DragAndDropFileUploading/
 
 export enum SingleImageSelectorStateEnum {
@@ -23,7 +24,7 @@ export interface SingleImageSelectorState extends LDLocalState {
 }
 
 export const SingleImageSelectorName = "metaexplorer.io/material-design/SingleImageSelector";
-let cfgType: string = LDDict.CreateAction;
+let cfgType: string = createLDUINSUrl(LDDict.CreateAction, LDDict.result, LDDict.ImageObject);
 let cfgIntrprtKeys: string[] =
 	[];
 const RESULT_KV: IKvStore = {
