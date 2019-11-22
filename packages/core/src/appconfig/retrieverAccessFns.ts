@@ -19,7 +19,7 @@ import { appItptMatcherFn } from "./appItptMatcher";
  * for the correct React-Class to extend
  * @param input the BlueprintConfig used as a setup for the new Itpt
  */
-export const addBlueprintToRetriever = (input: BlueprintConfig, retrieverName?: string) => {
+export const addBlueprintToRetriever = (input: BlueprintConfig, retrieverName?: string): void => {
 	let retriever = retrieverName ? appItptMatcherFn().getItptRetriever(retrieverName) as ReduxItptRetriever : appItptRetrFn() as ReduxItptRetriever;
 	if (!retriever) throw new LDError("retriever " + retrieverName + " not found");
 	let candidate = retriever.getUnconnectedByNameSelf(input.subItptOf);

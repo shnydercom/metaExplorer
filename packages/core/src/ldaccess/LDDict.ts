@@ -27,6 +27,7 @@ export enum LDDict {
 	description = "http://schema.org/description",
 	image = "http://schema.org/image",
 	gtin8 = "http://schema.org/gtin8",
+	object = "http://schema.org/object",
 
 	email = "http://schema.org/email",
 	embedUrl = "https://schema.org/embedUrl",

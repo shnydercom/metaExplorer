@@ -11,7 +11,12 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 
 import AddPhotoAlternate from '@material-ui/icons/AddPhotoAlternate';
 
-@ldBlueprint(SingleImageSelectorBpCfg)
+export const MD_SINGLE_IMAGE_SELECTOR_NAME = "metaexplorer.io/material-design/SingleImageSelector";
+export const MD_SINGLE_IMAGE_SELECTOR_CFG = {...SingleImageSelectorBpCfg};
+
+MD_SINGLE_IMAGE_SELECTOR_CFG.nameSelf = MD_SINGLE_IMAGE_SELECTOR_NAME;
+
+@ldBlueprint(MD_SINGLE_IMAGE_SELECTOR_CFG)
 export class MDSingleImageSelector extends AbstractSingleImageSelector {
 	protected dropzoneRef: Ref<DropzoneRef> = createRef();
 

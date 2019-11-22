@@ -145,9 +145,14 @@ export const itptKeysFromInputKvs = (inputKvStores: IKvStore[]): string[] => {
 	});
 	return rv;
 };
-
+/**
+ * creates a URL in the ldui.net-namespace in the triplet notation
+ * @param s subject
+ * @param p verb
+ * @param o object
+ */
 export const createLDUINSUrl = (s: string, p: string, o: string): string => {
-	const spoAsVars: string = `?s=${s}&p=${p}&o=${o}`;
+	const spoAsVars: string = `spo?s=${s}&p=${p}&o=${o}`;
 	const rv: string = `${LDApiConst.baseUrl}${LDApiConst.apiEndpoint}/${spoAsVars}`;
 	return rv;
 };

@@ -1,9 +1,14 @@
 import {
 	AbstractBaseDataTypeInput, wrapBaseDataTypeGDSF, baseDataTypeBpcfgs, LDBaseDataType, ldBlueprint,
-	parseDate, parseText, parseNumber, parseBoolean, LDDict
+	parseDate, parseText, parseNumber, parseBoolean, LDDict, LD_BASE_DATA_TYPE_INPUT_TYPES
 } from "@metaexplorer/core";
-import { Switch, TextField, FormControlLabel, } from "@material-ui/core";
+import { Switch, TextField, FormControlLabel } from "@material-ui/core";
 import React from "react";
+import { createMDModNSUrl } from "../../../mdUtils";
+
+const mdBaseDataTypeBpcfgs = baseDataTypeBpcfgs.map((cfg,idx) => {
+	return {...cfg, nameSelf: createMDModNSUrl(LD_BASE_DATA_TYPE_INPUT_TYPES[idx])}
+})
 
 abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 	renderSingleKv(baseDT: LDBaseDataType) {
@@ -86,27 +91,27 @@ abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 	}
 }
 class PureBoolBase extends MDBaseDataTypeInput {
-	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(baseDataTypeBpcfgs[0]);
+	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(mdBaseDataTypeBpcfgs[0]);
 }
 class PureIntBase extends MDBaseDataTypeInput {
-	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(baseDataTypeBpcfgs[1]);
+	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(mdBaseDataTypeBpcfgs[1]);
 }
 class PureDoubleBase extends MDBaseDataTypeInput {
-	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(baseDataTypeBpcfgs[2]);
+	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(mdBaseDataTypeBpcfgs[2]);
 }
 class PureTextBase extends MDBaseDataTypeInput {
-	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(baseDataTypeBpcfgs[3]);
+	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(mdBaseDataTypeBpcfgs[3]);
 }
 class PureDateBase extends MDBaseDataTypeInput {
-	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(baseDataTypeBpcfgs[4]);
+	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(mdBaseDataTypeBpcfgs[4]);
 }
 class PureDateTimeBase extends MDBaseDataTypeInput {
-	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(baseDataTypeBpcfgs[5]);
+	static getDerivedStateFromProps = wrapBaseDataTypeGDSF(mdBaseDataTypeBpcfgs[5]);
 }
 
-export const MDBoolInput = ldBlueprint(baseDataTypeBpcfgs[0])(PureBoolBase);
-export const MDIntInput = ldBlueprint(baseDataTypeBpcfgs[1])(PureIntBase);
-export const MDDoubleInput = ldBlueprint(baseDataTypeBpcfgs[2])(PureDoubleBase);
-export const MDTextInput = ldBlueprint(baseDataTypeBpcfgs[3])(PureTextBase);
-export const MDDateInput = ldBlueprint(baseDataTypeBpcfgs[4])(PureDateBase);
-export const MDDateTimeInput = ldBlueprint(baseDataTypeBpcfgs[5])(PureDateTimeBase);
+export const MDBoolInput = ldBlueprint(mdBaseDataTypeBpcfgs[0])(PureBoolBase);
+export const MDIntInput = ldBlueprint(mdBaseDataTypeBpcfgs[1])(PureIntBase);
+export const MDDoubleInput = ldBlueprint(mdBaseDataTypeBpcfgs[2])(PureDoubleBase);
+export const MDTextInput = ldBlueprint(mdBaseDataTypeBpcfgs[3])(PureTextBase);
+export const MDDateInput = ldBlueprint(mdBaseDataTypeBpcfgs[4])(PureDateBase);
+export const MDDateTimeInput = ldBlueprint(mdBaseDataTypeBpcfgs[5])(PureDateTimeBase);

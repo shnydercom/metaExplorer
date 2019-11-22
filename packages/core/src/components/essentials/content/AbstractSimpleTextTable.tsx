@@ -5,18 +5,21 @@ import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 
 
 import { initLDLocalState, gdsfpLD } from '../../../components/generic/generatorFns';
 import { Component, ReactNode } from 'react';
+import { LDUIDict } from '../../../ldaccess/LDUIDict';
+import { createLDUINSUrl, LDDict } from '../../../ldaccess';
 
-export const SimpleTextTableName = "metaexplorer.io/material-design/SimpleTextTable";
-export const tableHeadings = "headings";
-export const tableRows = "rows";
+const SimpleTextTableName = "metaexplorer.io/core/SimpleTextTable";
 
-let simpleTextTableInputKeys: string[] = [tableHeadings, tableRows];
+const viewSimpleTextTableAction = createLDUINSUrl(LDDict.ViewAction, LDDict.object, LDUIDict.TupleTextTable);
+
+let simpleTextTableInputKeys: string[] = [LDUIDict.headings, LDUIDict.tuples];
 let initialKVStores: IKvStore[] = [
-	{ key: tableHeadings, value: undefined, ldType: undefined },
-	{ key: tableRows, value: undefined, ldType: undefined }
+	{ key: LDUIDict.headings, value: undefined, ldType: undefined },
+	{ key: LDUIDict.tuples, value: undefined, ldType: undefined }
 ];
 export const simpleTextTableCfg: BlueprintConfig = {
 	subItptOf: null,
+	canInterpretType: viewSimpleTextTableAction,
 	nameSelf: SimpleTextTableName,
 	initialKvStores: initialKVStores,
 	interpretableKeys: simpleTextTableInputKeys,

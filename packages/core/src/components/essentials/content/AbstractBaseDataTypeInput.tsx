@@ -36,12 +36,12 @@ export interface PureBaseDataTypeInputComponent {
 	renderSingleKv(baseDT: LDBaseDataType): ReactNode;
 }
 
-let bdts: LDBaseDataType[] = [LDDict.Boolean, LDDict.Integer, LDDict.Double, LDDict.Text, LDDict.Date, LDDict.DateTime];
+export const LD_BASE_DATA_TYPE_INPUT_TYPES: LDBaseDataType[] = [LDDict.Boolean, LDDict.Integer, LDDict.Double, LDDict.Text, LDDict.Date, LDDict.DateTime];
 export const baseDataTypeBpcfgs: BlueprintConfig[] = new Array();
 
-for (var bdt in bdts) {
-	if (bdts.hasOwnProperty(bdt)) {
-		var elem = bdts[bdt];
+for (var bdt in LD_BASE_DATA_TYPE_INPUT_TYPES) {
+	if (LD_BASE_DATA_TYPE_INPUT_TYPES.hasOwnProperty(bdt)) {
+		var elem = LD_BASE_DATA_TYPE_INPUT_TYPES[bdt];
 		//let cfgType: string = LDDict.CreateAction;
 		let cfgIntrprtKeys: string[] = [LDDict.description, UserDefDict.inputData];
 		let initialKVStores: IKvStore[] = [
@@ -64,7 +64,7 @@ for (var bdt in bdts) {
 		let bpCfg: BlueprintConfig = {
 			subItptOf: undefined,
 			canInterpretType: elem,
-			nameSelf: "metaexplorer.io/material-design/" + elem,
+			nameSelf: "metaexplorer.io/core/" + elem,
 			initialKvStores: initialKVStores,
 			interpretableKeys: cfgIntrprtKeys,
 			crudSkills: "CRUd"
