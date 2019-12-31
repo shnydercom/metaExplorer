@@ -10,6 +10,7 @@ export enum LDDict {
 	Action = "https://schema.org/Action",
 	CreateAction = "http://schema.org/CreateAction",
 	ViewAction = "http://schema.org/ViewAction",
+	ChooseAction = "http://schema.org/ChooseAction",
 	ImageObject = "http://schema.org/ImageObject",
 	VideoObject = "https://schema.org/VideoObject",
 	EntryPoint = "http://http://schema.org/EntryPoint",
@@ -28,6 +29,7 @@ export enum LDDict {
 	image = "http://schema.org/image",
 	gtin8 = "http://schema.org/gtin8",
 	object = "http://schema.org/object",
+	actionOption = "http://schema.org/actionOption",
 
 	email = "http://schema.org/email",
 	embedUrl = "https://schema.org/embedUrl",

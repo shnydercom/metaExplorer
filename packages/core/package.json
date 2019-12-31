@@ -22,7 +22,8 @@
     "build": "yarn buildesm && yarn buildregular && yarn compcss",
     "lint": "tslint ./src/**/*.ts -t verbose",
     "compcss": "node-sass --output-style compressed ./src/styles/core-index.scss > ./lib/style.css",
-    "createmock": "node ./scripts/createItptMock.js"
+    "createmock": "node ./scripts/createItptMock.js",
+    "story": "start-storybook -p 2018 -s ./public"
   },
   "peerDependencies": {
     "react": "*",
@@ -99,6 +100,7 @@
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
-    "write-file-webpack-plugin": "^4.5.0"
+    "write-file-webpack-plugin": "^4.5.0",
+    "@metaexplorer/testing": "^0.0.3"
   }
 }

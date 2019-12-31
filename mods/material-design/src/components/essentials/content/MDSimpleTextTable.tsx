@@ -1,4 +1,4 @@
-import {ldBlueprint, AbstractSimpleTextTable, simpleTextTableCfg, LDUIDict } from '@metaexplorer/core';
+import {ldBlueprint, AbstractSimpleTextTable, simpleTextTableCfg, LDUIDictVerbs } from '@metaexplorer/core';
 import { TableBody, Table, TableHead, TableRow, TableCell } from '@material-ui/core';
 import React from 'react';
 
@@ -12,8 +12,8 @@ export class MDSimpleTextTable extends AbstractSimpleTextTable {
 
 	render() {
 		const { localValues } = this.state;
-		const headingRow = localValues.get(LDUIDict.headings);
-		const contentRows = localValues.get(LDUIDict.tuples);
+		const headingRow = localValues.get(LDUIDictVerbs.headings);
+		const contentRows = localValues.get(LDUIDictVerbs.tuples);
 		if (!headingRow || !contentRows) return null;
 		return <Table>
 			<TableHead>

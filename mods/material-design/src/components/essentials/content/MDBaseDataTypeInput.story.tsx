@@ -4,7 +4,9 @@ import {
 	AppRoot, rootSetup,
 	changeMainAppItpt,
 	appItptRetrFn, ITPT_TAG_ATOMIC,
-	LD_BASE_DATA_TYPE_INPUT_TYPES
+	LD_BASE_DATA_TYPE_INPUT_TYPES,
+	LDDict,
+	UserDefDict
 } from '@metaexplorer/core';
 import {
 	MDBoolInput,
@@ -41,14 +43,33 @@ stories.add(LD_BASE_DATA_TYPE_INPUT_TYPES[2], () => {
 	return (<AppRoot />)
 });
 stories.add(LD_BASE_DATA_TYPE_INPUT_TYPES[3], () => {
-	changeMainAppItpt(createMDModNSUrl(LD_BASE_DATA_TYPE_INPUT_TYPES[3]), MDTextInput);
+	changeMainAppItpt(createMDModNSUrl(LD_BASE_DATA_TYPE_INPUT_TYPES[3]),
+		[
+			{
+				key: LDDict.description,
+				value: "This is an example description",
+				ldType: LDDict.Text
+			},
+			{
+				key: UserDefDict.inputData,
+				value: "some Text",
+				ldType: LDDict.Text
+			}]);
 	return (<AppRoot />)
 });
 stories.add(LD_BASE_DATA_TYPE_INPUT_TYPES[4], () => {
-	changeMainAppItpt(createMDModNSUrl(LD_BASE_DATA_TYPE_INPUT_TYPES[4]), MDDateInput);
+	changeMainAppItpt(
+		createMDModNSUrl(LD_BASE_DATA_TYPE_INPUT_TYPES[4]),
+		MDDateInput);
 	return (<AppRoot />)
 });
 stories.add(LD_BASE_DATA_TYPE_INPUT_TYPES[5], () => {
-	changeMainAppItpt(createMDModNSUrl(LD_BASE_DATA_TYPE_INPUT_TYPES[5]), MDDateTimeInput);
+	changeMainAppItpt(
+		createMDModNSUrl(LD_BASE_DATA_TYPE_INPUT_TYPES[5]),
+		[{
+			key: 'someKey',
+			value: Date.now(),
+			ldType: LDDict.DateTime
+		}]);
 	return (<AppRoot />)
 });

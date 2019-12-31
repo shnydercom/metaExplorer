@@ -2,61 +2,56 @@ import React, { Component } from 'react';
 
 let imageFormat: string = 'image/jpeg';
 
-export enum DOMCameraErrorTypes {
+export enum DOMMicrophoneErrorTypes {
 	streamError = 2,
 	mediaDevicesAccessFail = 3,
 	noVideoInputs = 4,
 	enumerateDevicesFail = 5
 }
 
-export enum DOMCameraStateEnum {
+export enum DOMMicrophoneStateEnum {
 	isLoading = 2,
 	isError = 3,
-	isVideoing = 4,
+	isListening = 4,
 }
 
-export interface DOMCameraState {
-	curStep: DOMCameraStateEnum;
+export interface DOMMicrophoneState {
+	curStep: DOMMicrophoneStateEnum;
 	vidDeviceList: MediaDeviceInfo[];
 	curId: string;
 }
 
-export interface DOMCameraUserInteraction {
-	onImageCaptured?: (imgURL: string) => void;
-	onVideoRecordingStarted?: () => void;
-	onVideoRecordingStopped?: () => void;
-	onVideoRecordingPaused?: () => void;
+export interface DOMMicrophoneTriggers {
+	triggerImageCapture?: () => void;
+	triggerVideoRecordingStart?: () => void;
+	triggerVideoRecordingStop?: () => void;
+	triggerVideoRecordingPause?: () => void;
 }
 
-export interface DOMCameraCallbacks {
+export interface DOMMicrophoneCallbacks {
+	onImageCaptured?: (imgURL: string) => void;
 	onVideoDisplayReady?: (video: HTMLVideoElement) => void;
 	onVideoDisplayRemoved?: () => void;
-	onError?: (errorType: DOMCameraErrorTypes) => void;
+	onError?: (errorType: DOMMicrophoneErrorTypes) => void;
 }
 
-/**
- * inspired by:
- * https://webrtc.github.io/samples/
- * https://github.com/webrtc/samples/blob/gh-pages/src/content/getusermedia/record/js/main.js
- */
-export interface DOMCameraProps extends DOMCameraUserInteraction, DOMCameraCallbacks {
+export interface DOMMicrophoneProps extends DOMMicrophoneTriggers, DOMMicrophoneCallbacks {
 	showControls: boolean;
-	isRecordingAudio: boolean;
 }
 
-export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
+export class DOMMicrophone extends Component<DOMMicrophoneProps, DOMMicrophoneState> {
 	videoDispl: HTMLVideoElement;
 	ctx: CanvasRenderingContext2D;
 	canvas: HTMLCanvasElement;
 	constructor(props: any) {
 		super(props);
-		this.state = { curStep: DOMCameraStateEnum.isLoading, vidDeviceList: null, curId: null };
+		this.state = { curStep: DOMMicrophoneStateEnum.isLoading, vidDeviceList: null, curId: null };
 	}
 
 	startStream(strDeviceId: string) {
 		if (!this.videoDispl || !strDeviceId) return;
 		if (this.videoDispl.srcObject) return;
-		navigator.mediaDevices.getUserMedia({ video: { deviceId: strDeviceId }, audio: this.props.isRecordingAudio })
+		navigator.mediaDevices.getUserMedia({ video: { deviceId: strDeviceId }, audio: false })
 			.then((stream) => {
 				if (!this.videoDispl.paused) return;
 				this.videoDispl.setAttribute("autoplay", 'true');
@@ -69,14 +64,14 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 				}
 			})
 			.catch(() => {
-				this.setStateToError(DOMCameraErrorTypes.streamError);
+				this.setStateToError(DOMMicrophoneErrorTypes.streamError);
 				return;
 			});
 	}
 
 	componentWillUnmount() {
-		if (this.state.curStep !== DOMCameraStateEnum.isError)
-			this.setState({ curStep: DOMCameraStateEnum.isLoading, vidDeviceList: null, curId: null });
+		if (this.state.curStep !== DOMMicrophoneStateEnum.isError)
+			this.setState({ curStep: DOMMicrophoneStateEnum.isLoading, vidDeviceList: null, curId: null });
 		if (this.videoDispl) this.videoDispl.pause();
 		if (this.props.onVideoDisplayRemoved) {
 			this.props.onVideoDisplayRemoved();
@@ -84,8 +79,8 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 		this.videoDispl = null;
 	}
 
-	setStateToError(errorType: DOMCameraErrorTypes) {
-		this.setState({ ...this.state, curStep: DOMCameraStateEnum.isError });
+	setStateToError(errorType: DOMMicrophoneErrorTypes) {
+		this.setState({ ...this.state, curStep: DOMMicrophoneStateEnum.isError });
 		if (this.props.onVideoDisplayRemoved) {
 			this.props.onVideoDisplayRemoved();
 		}
@@ -95,7 +90,7 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 	}
 	componentDidMount() {
 		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-			this.setStateToError(DOMCameraErrorTypes.mediaDevicesAccessFail);
+			this.setStateToError(DOMMicrophoneErrorTypes.mediaDevicesAccessFail);
 			return;
 		}
 		navigator.mediaDevices.enumerateDevices()
@@ -106,17 +101,17 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 						vidInputList.push(device);
 				});
 				if (vidInputList.length === 0) {
-					this.setStateToError(DOMCameraErrorTypes.noVideoInputs);
+					this.setStateToError(DOMMicrophoneErrorTypes.noVideoInputs);
 					return;
 				} else {
 					const deviceId = vidInputList[0].deviceId;
-					this.setState({ curId: deviceId, curStep: DOMCameraStateEnum.isVideoing, vidDeviceList: vidInputList });
+					this.setState({ curId: deviceId, curStep: DOMMicrophoneStateEnum.isListening, vidDeviceList: vidInputList });
 					this.startStream(deviceId);
 					return;
 				}
 			})
 			.catch(() => {
-				this.setStateToError(DOMCameraErrorTypes.enumerateDevicesFail);
+				this.setStateToError(DOMMicrophoneErrorTypes.enumerateDevicesFail);
 				return;
 			});
 
@@ -124,10 +119,7 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 
 	getScreenshotAsDataURL() {
 		const canvas = this.getCanvas();
-		if (canvas) {
-			const b = canvas.toDataURL(imageFormat);
-			this.props.onImageCaptured(b);
-		}
+		return canvas && canvas.toDataURL(imageFormat);
 	}
 
 	getScreenshotAsBlob() {
@@ -158,30 +150,15 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 		return canvas;
 	}
 
-	startVideoRecording() {
-		console.log("started video recording");
-		if (this.props.onVideoRecordingStarted) this.props.onVideoRecordingStarted();
-	}
-
-	stopVideoRecording() {
-		console.log("stopped video recording");
-		if (this.props.onVideoRecordingStopped) this.props.onVideoRecordingStopped();
-	}
-
-	pauseVideoRecording() {
-		console.log("paused video recording");
-		if (this.props.onVideoRecordingPaused) this.props.onVideoRecordingPaused();
-	}
-
 	renderError() {
-		return <span>error opening camera</span>;
+		return <span>error opening microphone</span>;
 	}
 
 	renderLoading() {
 		return <span>loading</span>;
 	}
 
-	renderVideo() {
+	renderVisualization() {
 		const { curId } = this.state;
 		return <video ref={(video) => {
 			this.videoDispl = video;
@@ -191,7 +168,6 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 
 	renderControls() {
 		return <div className="controls-container">
-			{/* icon='camera' floating accent  */}
 			<button onClick={() => {
 				if (this.props.onImageCaptured) this.getScreenshotAsBlob();
 			}} />
@@ -201,18 +177,16 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 	render() {
 		const { curStep } = this.state;
 		return (
-			<div className="dom-camera">
+			<div className="dom-microphone">
 				{(() => {
 					switch (curStep) {
-						case DOMCameraStateEnum.isError:
+						case DOMMicrophoneStateEnum.isError:
 							return this.renderError();
-						/*<FontIcon className="vid-big-icons" value='videocam_off' />;*/
-						case DOMCameraStateEnum.isLoading:
+						case DOMMicrophoneStateEnum.isLoading:
 							return this.renderLoading();
-						/*<FontIcon className="vid-big-icons" value='videocam' />;*/
-						case DOMCameraStateEnum.isVideoing:
+						case DOMMicrophoneStateEnum.isListening:
 							return <>
-								{this.renderVideo()}
+								{this.renderVisualization()}
 								{this.renderControls()}
 							</>;
 						default:

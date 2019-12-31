@@ -5,17 +5,17 @@ import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from 
 
 import { initLDLocalState, gdsfpLD } from '../../../components/generic/generatorFns';
 import { Component, ReactNode } from 'react';
-import { LDUIDict } from '../../../ldaccess/LDUIDict';
+import { LDUIDict, LDUIDictVerbs } from '../../../ldaccess/LDUIDict';
 import { createLDUINSUrl, LDDict } from '../../../ldaccess';
 
 const SimpleTextTableName = "metaexplorer.io/core/SimpleTextTable";
 
 const viewSimpleTextTableAction = createLDUINSUrl(LDDict.ViewAction, LDDict.object, LDUIDict.TupleTextTable);
 
-let simpleTextTableInputKeys: string[] = [LDUIDict.headings, LDUIDict.tuples];
+let simpleTextTableInputKeys: string[] = [LDUIDictVerbs.headings, LDUIDictVerbs.tuples];
 let initialKVStores: IKvStore[] = [
-	{ key: LDUIDict.headings, value: undefined, ldType: undefined },
-	{ key: LDUIDict.tuples, value: undefined, ldType: undefined }
+	{ key: LDUIDictVerbs.headings, value: undefined, ldType: undefined },
+	{ key: LDUIDictVerbs.tuples, value: undefined, ldType: undefined }
 ];
 export const simpleTextTableCfg: BlueprintConfig = {
 	subItptOf: null,
