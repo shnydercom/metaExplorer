@@ -46,6 +46,7 @@
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
+    "@metaexplorer/testing": "^0.0.3",
     "@types/classnames": "^2.2.8",
     "@types/dagre": "^0.7.42",
     "@types/gapi": "^0.0.38",
@@ -59,6 +60,7 @@
     "@types/react-router": "^5.0.2",
     "@types/react-router-dom": "^4.3.4",
     "@types/rx": "^4.1.1",
+    "@types/dom-mediacapture-record": "^1.0.2",
     "assert-never": "^1.2.0",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
@@ -100,7 +102,6 @@
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
-    "write-file-webpack-plugin": "^4.5.0",
-    "@metaexplorer/testing": "^0.0.3"
+    "write-file-webpack-plugin": "^4.5.0"
   }
 }

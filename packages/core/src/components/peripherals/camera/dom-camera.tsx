@@ -41,26 +41,35 @@ export interface DOMCameraCallbacks {
  */
 export interface DOMCameraProps extends DOMCameraUserInteraction, DOMCameraCallbacks {
 	showControls: boolean;
-	isRecordingAudio: boolean;
+	isRecordingAudio?: boolean;
 }
 
 export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 	videoDispl: HTMLVideoElement;
 	ctx: CanvasRenderingContext2D;
 	canvas: HTMLCanvasElement;
+
+	private stream: MediaStream;
+
 	constructor(props: any) {
 		super(props);
 		this.state = { curStep: DOMCameraStateEnum.isLoading, vidDeviceList: null, curId: null };
 	}
 
+	public getStream(){
+		return this.stream;
+	}
+
 	startStream(strDeviceId: string) {
 		if (!this.videoDispl || !strDeviceId) return;
 		if (this.videoDispl.srcObject) return;
-		navigator.mediaDevices.getUserMedia({ video: { deviceId: strDeviceId }, audio: this.props.isRecordingAudio })
+		navigator.mediaDevices.getUserMedia({ video: { deviceId: strDeviceId }, audio: !!this.props.isRecordingAudio })
 			.then((stream) => {
 				if (!this.videoDispl.paused) return;
+				this.stream = stream;
 				this.videoDispl.setAttribute("autoplay", 'true');
 				this.videoDispl.setAttribute('muted', 'true');
+				this.videoDispl.muted = true;
 				this.videoDispl.setAttribute('playsinline', 'true');
 				this.videoDispl.srcObject = stream;
 				this.videoDispl.play();
