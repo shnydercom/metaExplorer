@@ -2,7 +2,7 @@ import * as React from 'react';
 import { storiesOf } from "@storybook/react";
 import { DOMMicrophone } from './dom-microphone';
 import { AudioRecorder } from '../camera/recorderWrapper';
-import { blobDownloadTriggerFactory } from '../camera/cameraUtils';
+import { blobDownloadTriggerFactory } from '../peripheralsUtils';
 
 class DownloadingDOMMicrophoneWControls extends DOMMicrophone {
 	audioRecorder: AudioRecorder = new AudioRecorder();

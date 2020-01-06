@@ -13,6 +13,7 @@ export enum LDDict {
 	ChooseAction = "http://schema.org/ChooseAction",
 	ImageObject = "http://schema.org/ImageObject",
 	VideoObject = "https://schema.org/VideoObject",
+	AudioObject = "http://schema.org/AudioObject",
 	EntryPoint = "http://http://schema.org/EntryPoint",
 	Organization = "http://schema.org/Organization",
 	URL = "https://schema.org/URL",

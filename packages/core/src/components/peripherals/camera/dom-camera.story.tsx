@@ -2,7 +2,7 @@ import * as React from 'react';
 import { storiesOf } from "@storybook/react";
 import { DOMCamera } from './dom-camera';
 import { VideoRecorder } from './recorderWrapper';
-import { blobDownloadTriggerFactory } from './cameraUtils';
+import { blobDownloadTriggerFactory } from '../peripheralsUtils';
 
 class DownloadingDOMCameraWControls extends DOMCamera {
 
