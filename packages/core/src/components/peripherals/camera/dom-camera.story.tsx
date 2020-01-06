@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from "@storybook/react";
 import { DOMCamera } from './dom-camera';
-import { VideoRecorder } from './videoRecorder';
+import { VideoRecorder } from './recorderWrapper';
 import { blobDownloadTriggerFactory } from './cameraUtils';
 
 class DownloadingDOMCameraWControls extends DOMCamera {
@@ -20,6 +20,7 @@ class DownloadingDOMCameraWControls extends DOMCamera {
 	stopVideoRecording() {
 		const videoBlob = this.videoRecorder.stopRecording();
 		this.onClickDownload = blobDownloadTriggerFactory(videoBlob, "storybookvideo.webm");
+		if (this.props.onVideoSrcReady) this.props.onVideoSrcReady(window.URL.createObjectURL(videoBlob));
 		super.stopVideoRecording();
 	}
 
@@ -46,9 +47,13 @@ class DownloadingDOMCameraWControls extends DOMCamera {
 
 const CameraUXManager = () => {
 	const [imgSrc, setImgSrc] = React.useState<string>("");
+	const [videoSrc, setVideoSrc] = React.useState<string>("");
 	return (<>
-		<DownloadingDOMCameraWControls isRecordingAudio showControls={false} onImageCaptured={(url) => setImgSrc(url)} />
+		<DownloadingDOMCameraWControls isRecordingAudio showControls={false}
+			onImageSrcReady={(url) => setImgSrc(url)}
+			onVideoSrcReady={(url) => setVideoSrc(url)} />
 		<img src={imgSrc} />
+		<video src={videoSrc}  controls/>
 	</>);
 };
 

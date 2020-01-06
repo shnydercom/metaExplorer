@@ -22,7 +22,8 @@ export interface DOMCameraState {
 }
 
 export interface DOMCameraUserInteraction {
-	onImageCaptured?: (imgURL: string) => void;
+	onImageSrcReady?: (imgURL: string) => void;
+	onVideoSrcReady?: (videoURL: string) => void;
 	onVideoRecordingStarted?: () => void;
 	onVideoRecordingStopped?: () => void;
 	onVideoRecordingPaused?: () => void;
@@ -135,7 +136,7 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 		const canvas = this.getCanvas();
 		if (canvas) {
 			const b = canvas.toDataURL(imageFormat);
-			this.props.onImageCaptured(b);
+			this.props.onImageSrcReady(b);
 		}
 	}
 
@@ -143,7 +144,7 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 		const canvas = this.getCanvas();
 		return canvas && canvas.toBlob((a) => {
 			const b = window.URL.createObjectURL(a);
-			this.props.onImageCaptured(b);
+			this.props.onImageSrcReady(b);
 		});
 	}
 
@@ -202,7 +203,7 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 		return <div className="controls-container">
 			{/* icon='camera' floating accent  */}
 			<button onClick={() => {
-				if (this.props.onImageCaptured) this.getScreenshotAsBlob();
+				if (this.props.onImageSrcReady) this.getScreenshotAsBlob();
 			}} />
 		</div>;
 	}

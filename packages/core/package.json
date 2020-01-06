@@ -2,7 +2,7 @@
   "author": "Jonathan Schneider",
   "name": "@metaexplorer/core",
   "version": "0.0.9",
-  "description": "a GUI editor for configuring bizSys-Server",
+  "description": "base functionality that is neede to make metaexplorer work",
   "license": "EUPL-1.2",
   "module": "./lib-esm/index.js",
   "main": "./lib/index.js",

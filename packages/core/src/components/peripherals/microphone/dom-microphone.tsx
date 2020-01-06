@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-let imageFormat: string = 'image/jpeg';
-
 export enum DOMMicrophoneErrorTypes {
 	streamError = 2,
 	mediaDevicesAccessFail = 3,
@@ -17,21 +15,20 @@ export enum DOMMicrophoneStateEnum {
 
 export interface DOMMicrophoneState {
 	curStep: DOMMicrophoneStateEnum;
-	vidDeviceList: MediaDeviceInfo[];
+	audioInputDeviceList: MediaDeviceInfo[];
 	curId: string;
 }
 
 export interface DOMMicrophoneTriggers {
-	triggerImageCapture?: () => void;
-	triggerVideoRecordingStart?: () => void;
-	triggerVideoRecordingStop?: () => void;
-	triggerVideoRecordingPause?: () => void;
+	onAudioSrcReady?: (audioURL: string) => void;
+	onAudioRecordingStarted?: () => void;
+	onAudioRecordingStopped?: () => void;
+	onAudioRecordingPaused?: () => void;
 }
 
 export interface DOMMicrophoneCallbacks {
-	onImageCaptured?: (imgURL: string) => void;
-	onVideoDisplayReady?: (video: HTMLVideoElement) => void;
-	onVideoDisplayRemoved?: () => void;
+	onAudioVisualizationReady?: (video: HTMLVideoElement) => void;
+	onAudioVisualizationRemoved?: () => void;
 	onError?: (errorType: DOMMicrophoneErrorTypes) => void;
 }
 
@@ -40,28 +37,25 @@ export interface DOMMicrophoneProps extends DOMMicrophoneTriggers, DOMMicrophone
 }
 
 export class DOMMicrophone extends Component<DOMMicrophoneProps, DOMMicrophoneState> {
-	videoDispl: HTMLVideoElement;
 	ctx: CanvasRenderingContext2D;
-	canvas: HTMLCanvasElement;
+	audioVisualization: HTMLCanvasElement;
+
+	private stream: MediaStream;
+
 	constructor(props: any) {
 		super(props);
-		this.state = { curStep: DOMMicrophoneStateEnum.isLoading, vidDeviceList: null, curId: null };
+		this.state = { curStep: DOMMicrophoneStateEnum.isLoading, audioInputDeviceList: null, curId: null };
+	}
+
+	public getStream(){
+		return this.stream;
 	}
 
 	startStream(strDeviceId: string) {
-		if (!this.videoDispl || !strDeviceId) return;
-		if (this.videoDispl.srcObject) return;
-		navigator.mediaDevices.getUserMedia({ video: { deviceId: strDeviceId }, audio: false })
+		if (!this.audioVisualization || !strDeviceId) return;
+		navigator.mediaDevices.getUserMedia({ audio: { deviceId: strDeviceId } })
 			.then((stream) => {
-				if (!this.videoDispl.paused) return;
-				this.videoDispl.setAttribute("autoplay", 'true');
-				this.videoDispl.setAttribute('muted', 'true');
-				this.videoDispl.setAttribute('playsinline', 'true');
-				this.videoDispl.srcObject = stream;
-				this.videoDispl.play();
-				if (this.props.onVideoDisplayReady) {
-					this.props.onVideoDisplayReady(this.videoDispl);
-				}
+				this.stream = stream;
 			})
 			.catch(() => {
 				this.setStateToError(DOMMicrophoneErrorTypes.streamError);
@@ -71,18 +65,17 @@ export class DOMMicrophone extends Component<DOMMicrophoneProps, DOMMicrophoneSt
 
 	componentWillUnmount() {
 		if (this.state.curStep !== DOMMicrophoneStateEnum.isError)
-			this.setState({ curStep: DOMMicrophoneStateEnum.isLoading, vidDeviceList: null, curId: null });
-		if (this.videoDispl) this.videoDispl.pause();
-		if (this.props.onVideoDisplayRemoved) {
-			this.props.onVideoDisplayRemoved();
+			this.setState({ curStep: DOMMicrophoneStateEnum.isLoading, audioInputDeviceList: null, curId: null });
+		if (this.props.onAudioVisualizationRemoved) {
+			this.props.onAudioVisualizationRemoved();
 		}
-		this.videoDispl = null;
+		this.audioVisualization = null;
 	}
 
 	setStateToError(errorType: DOMMicrophoneErrorTypes) {
 		this.setState({ ...this.state, curStep: DOMMicrophoneStateEnum.isError });
-		if (this.props.onVideoDisplayRemoved) {
-			this.props.onVideoDisplayRemoved();
+		if (this.props.onAudioVisualizationRemoved) {
+			this.props.onAudioVisualizationRemoved();
 		}
 		if (this.props.onError) {
 			this.props.onError(errorType);
@@ -95,17 +88,21 @@ export class DOMMicrophone extends Component<DOMMicrophoneProps, DOMMicrophoneSt
 		}
 		navigator.mediaDevices.enumerateDevices()
 			.then((devices) => {
-				let vidInputList: MediaDeviceInfo[] = [];
+				let audioInputList: MediaDeviceInfo[] = [];
 				devices.forEach((device) => {
-					if (device.kind === "videoinput")
-						vidInputList.push(device);
+					if (device.kind === "audioinput")
+						audioInputList.push(device);
 				});
-				if (vidInputList.length === 0) {
+				if (audioInputList.length === 0) {
 					this.setStateToError(DOMMicrophoneErrorTypes.noVideoInputs);
 					return;
 				} else {
-					const deviceId = vidInputList[0].deviceId;
-					this.setState({ curId: deviceId, curStep: DOMMicrophoneStateEnum.isListening, vidDeviceList: vidInputList });
+					const deviceId = audioInputList[0].deviceId;
+					this.setState({
+						curId: deviceId,
+						curStep: DOMMicrophoneStateEnum.isListening,
+						audioInputDeviceList: audioInputList
+					});
 					this.startStream(deviceId);
 					return;
 				}
@@ -117,37 +114,19 @@ export class DOMMicrophone extends Component<DOMMicrophoneProps, DOMMicrophoneSt
 
 	}
 
-	getScreenshotAsDataURL() {
-		const canvas = this.getCanvas();
-		return canvas && canvas.toDataURL(imageFormat);
+	startAudioRecording() {
+		console.log("started audio recording");
+		if (this.props.onAudioRecordingStarted) this.props.onAudioRecordingStarted();
 	}
 
-	getScreenshotAsBlob() {
-		const canvas = this.getCanvas();
-		return canvas && canvas.toBlob((a) => {
-			const b = window.URL.createObjectURL(a);
-			this.props.onImageCaptured(b);
-		});
+	stopAudioRecording() {
+		console.log("stopped audio recording");
+		if (this.props.onAudioRecordingStopped) this.props.onAudioRecordingStopped();
 	}
 
-	getCanvas() {
-		if (!this.videoDispl.videoHeight) return null;
-
-		if (!this.ctx) {
-			const canvasElem = document.createElement('canvas');
-			const aspectRatio = this.videoDispl.videoWidth / this.videoDispl.videoHeight;
-
-			canvasElem.width = this.videoDispl.clientWidth;
-			canvasElem.height = this.videoDispl.clientWidth / aspectRatio;
-
-			this.canvas = canvasElem;
-			this.ctx = canvasElem.getContext('2d');
-		}
-
-		const { ctx, canvas } = this;
-		ctx.drawImage(this.videoDispl, 0, 0, canvas.width, canvas.height);
-
-		return canvas;
+	pauseAudioRecording() {
+		console.log("paused audio recording");
+		if (this.props.onAudioRecordingPaused) this.props.onAudioRecordingPaused();
 	}
 
 	renderError() {
@@ -159,18 +138,14 @@ export class DOMMicrophone extends Component<DOMMicrophoneProps, DOMMicrophoneSt
 	}
 
 	renderVisualization() {
-		const { curId } = this.state;
-		return <video ref={(video) => {
-			this.videoDispl = video;
-			this.startStream(curId);
+		return <canvas ref={(canvas) => {
+			this.audioVisualization = canvas;
+			//this.startStream(curId);
 		}} />;
 	}
 
 	renderControls() {
 		return <div className="controls-container">
-			<button onClick={() => {
-				if (this.props.onImageCaptured) this.getScreenshotAsBlob();
-			}} />
 		</div>;
 	}
 
