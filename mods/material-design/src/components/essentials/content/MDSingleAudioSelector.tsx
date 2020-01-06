@@ -11,20 +11,21 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 
 import AddPhotoAlternate from '@material-ui/icons/AddPhotoAlternate';
 
-export const MD_SINGLE_AUDIO_SELECTOR_NAME = "metaexplorer.io/material-design/SingleImageSelector";
+export const MD_SINGLE_AUDIO_SELECTOR_NAME = "metaexplorer.io/material-design/SingleAudioSelector";
 export const MD_SINGLE_AUDIO_SELECTOR_CFG = {...SingleAudioSelectorBpCfg};
 
-MD_SINGLE_AUDIO_SELECTOR_CFG.nameSelf = MD_SINGLE_IMAGE_SELECTOR_NAME;
+MD_SINGLE_AUDIO_SELECTOR_CFG.nameSelf = MD_SINGLE_AUDIO_SELECTOR_NAME;
 
+const	DRAGGING_IMG_LINK: string = "/media/dragndrop.svg";
 @ldBlueprint(MD_SINGLE_AUDIO_SELECTOR_CFG)
 export class MDSingleAudioSelector extends AbstractSingleAudioSelector {
 	protected dropzoneRef: Ref<DropzoneRef> = createRef();
 
 	render() {
-		const { curStep, isCamAvailable, previewURL } = this.state;
+		const { curStep, isMicAvailable, previewURL } = this.state;
 		const dzInputKey = "dz-input";
 		return (<Dropzone
-			// className={curStep === SingleImageSelectorStateEnum.isPreviewing ? "single-img-sel accept" : "single-img-sel"}
+			// className={curStep === SingleAudioSelectorStateEnum.isPreviewing ? "single-img-sel accept" : "single-img-sel"}
 			accept="image/*"
 			multiple={false}
 			noClick={true}
@@ -51,13 +52,13 @@ export class MDSingleAudioSelector extends AbstractSingleAudioSelector {
 		>
 			{((dzstate: DropzoneState) => {
 				switch (curStep) {
-					case SingleImageSelectorStateEnum.isSelectInputType:
+					case SingleAudioSelectorStateEnum.isSelectInputType:
 						return <div className="single-img-sel" {...dzstate.getRootProps() as any //todo: check if "as any" can be removed without throwing an error. Currently @types wrong!
 						}>
 							<input key={dzInputKey} {...dzstate.getInputProps() as any //todo: check if "as any" can be removed without throwing an error. Currently @types wrong!
 							} />
-							{isCamAvailable
-								? <Button className="btn-extension" onClick={() => { this.startCamera(); }}>
+							{isMicAvailable
+								? <Button className="btn-extension" onClick={() => { this.startMic(); }}>
 									<AddAPhotoIcon />
 									Open Camera
 							</Button>
@@ -66,20 +67,20 @@ export class MDSingleAudioSelector extends AbstractSingleAudioSelector {
 								<AddPhotoAlternate />
 								Select Image
 								</Button></div>;
-					case SingleImageSelectorStateEnum.isCamShooting:
-						return <DOMCamera showControls onImageCaptured={(a) => {
+					case SingleAudioSelectorStateEnum.isRecording:
+						return <DOMMicrophone showControls onAudioSrcReady={(a) => {
 							this.onDropSuccess(null, a);
 						}} />;
-					case SingleImageSelectorStateEnum.isDragging:
+					case SingleAudioSelectorStateEnum.isDragging:
 						return <div className="single-img-sel accept" {...dzstate.getRootProps() as any //todo: check if "as any" can be removed without throwing an error. Currently @types wrong!
 						}>
 							<input key={dzInputKey} {...dzstate.getInputProps() as any //todo: check if "as any" can be removed without throwing an error. Currently @types wrong!
 							} />
-							<img className="md-large-image" style={{ flex: 1 }} src={this.draggingImgLink} height="100px" />
+							<img className="md-large-image" style={{ flex: 1 }} src={DRAGGING_IMG_LINK} height="100px" />
 						</div>;
-					case SingleImageSelectorStateEnum.isPreviewing:
+					case SingleAudioSelectorStateEnum.isPreviewing:
 						return <img className="cover-img" src={previewURL} alt="image preview" ></img>;
-					case SingleImageSelectorStateEnum.isError:
+					case SingleAudioSelectorStateEnum.isError:
 						return <span>isError</span>;
 					default:
 						return null;

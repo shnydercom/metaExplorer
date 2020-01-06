@@ -4,3 +4,4 @@ export * from './AbstractSectionedList';
 export * from './AbstractSimpleTextTable';
 export * from './AbstractSingleImageSelector';
 export * from './AbstractSingleValueSelector';
+export * from './AbstractSingleAudioSelector';

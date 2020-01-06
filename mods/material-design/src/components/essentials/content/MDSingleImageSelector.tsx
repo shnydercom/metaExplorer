@@ -67,7 +67,7 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 								Select Image
 								</Button></div>;
 					case SingleImageSelectorStateEnum.isCamShooting:
-						return <DOMCamera showControls onImageCaptured={(a) => {
+						return <DOMCamera showControls onImageSrcReady={(a) => {
 							this.onDropSuccess(null, a);
 						}} />;
 					case SingleImageSelectorStateEnum.isDragging:
