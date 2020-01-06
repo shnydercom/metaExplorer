@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/material-design",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "TODO:changeDescription",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -36,5 +36,6 @@
     "@material-ui/pickers": "^3.1.2",
     "@metaexplorer/core": "^0.0.1",
     "react-dropzone": "^10.1.5"
-  }
+  },
+  "gitHead": "2ac51488d3796cf6caa6df0990759362a4ee6fe8"
 }

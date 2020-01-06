@@ -1,10 +1,11 @@
 {
   "name": "@metaexplorer-mods/metaexplorer.io",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "TODO:changeDescription",
   "scripts": {
     "test": "test",
-    "build": "tsc"
+    "build": "yarn tsc && yarn compcss",
+    "compcss": "node-sass --output-style compressed ./src/styles/index.scss > ./lib/style.css"
   },
   "author": "Jonathan Schneider",
   "license": "EUPL-1.2",
@@ -18,7 +19,8 @@
     "lib"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.9",
+    "@metaexplorer/core": "^0.0.10",
     "react-gooey-nav": "^2.0.0"
-  }
+  },
+  "gitHead": "2ac51488d3796cf6caa6df0990759362a4ee6fe8"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer/editor-dev-server",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "server side scripts for local development",
   "main": "lib/index.js",
   "scripts": {
@@ -19,5 +19,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "gitHead": "2ac51488d3796cf6caa6df0990759362a4ee6fe8"
 }

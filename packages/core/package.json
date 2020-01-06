@@ -1,7 +1,7 @@
 {
   "author": "Jonathan Schneider",
   "name": "@metaexplorer/core",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "base functionality that is needed to make metaexplorer work",
   "license": "EUPL-1.2",
   "module": "./lib-esm/index.js",
@@ -103,5 +103,6 @@
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
     "write-file-webpack-plugin": "^4.5.0"
-  }
+  },
+  "gitHead": "2ac51488d3796cf6caa6df0990759362a4ee6fe8"
 }
