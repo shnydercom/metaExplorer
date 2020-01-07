@@ -7,6 +7,7 @@ import {
 } from '@metaexplorer/core';
 import { MDSingleAudioSelector, MD_SINGLE_AUDIO_SELECTOR_NAME, MD_SINGLE_AUDIO_SELECTOR_CFG } from './MDSingleAudioSelector';
 
+import './../../../styles/material-design-index.scss';
 
 //import { MD_SIMPLE_TEXT_TABLE_NAME, MD_SIMPLE_TEXT_TABLE_CFG, MDSimpleTextTable } from './MDSimpleTextTable';
 
@@ -21,7 +22,7 @@ stories.add('SingleAudioSelector', () => {
 	changeMainAppItpt(MD_SINGLE_AUDIO_SELECTOR_NAME);
 	return (
 		<AppRoot />
-	)
+	);
 }
 );
 /*

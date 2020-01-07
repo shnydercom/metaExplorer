@@ -148,9 +148,13 @@ export abstract class AbstractSingleAudioSelector extends Component<
 		this.setState({ ...this.state, curStep: SingleAudioSelectorStateEnum.isRecording });
 	}
 
+	/**
+	 * revokes the previewURL and sets state.previewURL to null, it does not change state.curStep
+	 */
 	destroyPreview() {
 		if (this.state.previewURL) {
 			window.URL.revokeObjectURL(this.state.previewURL);
+			this.setState({...this.state, previewURL: null});
 		}
 	}
 	render(): ReactNode {

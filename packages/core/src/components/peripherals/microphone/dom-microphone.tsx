@@ -36,7 +36,7 @@ export interface DOMMicrophoneProps extends DOMMicrophoneTriggers, DOMMicrophone
 	showControls: boolean;
 }
 
-export class DOMMicrophone extends Component<DOMMicrophoneProps, DOMMicrophoneState> {
+export class DOMMicrophone<TProps = DOMMicrophoneProps> extends Component<TProps & DOMMicrophoneProps, DOMMicrophoneState> {
 	ctx: CanvasRenderingContext2D;
 	audioVisualization: HTMLCanvasElement;
 
