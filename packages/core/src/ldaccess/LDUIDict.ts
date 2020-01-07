@@ -36,4 +36,8 @@ export enum LDUIDictVerbs {
 	 * - single select objects
 	 */
 	tuples = "http://ldui.net/tuples",
+	/**
+	 * used when describing the src-attribute of an html element
+	 */
+	htmlSrc = "http://ldui.net/html/src"
 }

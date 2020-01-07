@@ -17,6 +17,7 @@ import { MDNavProcessAtom } from "./components/essentials/navigation/MDNavProces
 import { MDTopNavigation } from "./components/essentials/navigation/MDTopNavigation";
 import { MDSimpleTextTable, MD_SIMPLE_TEXT_TABLE_CFG } from "./components/essentials/content/MDSimpleTextTable";
 import { ThemeProviderDarkName, ThemeProviderLightName, ThemeProviderLight, ThemeProviderDark } from "./components/essentials/content/DarkLightThemeProviders";
+import { MD_SINGLE_AUDIO_SELECTOR_CFG, MDSingleAudioSelector } from "./components/essentials/content/MDSingleAudioSelector";
 export const MOD_MATERIALDESIGN_ID = "material-design";
 export const MOD_MATERIALDESIGN_NAME = "Material Design Mod";
 
@@ -39,6 +40,7 @@ export function initMaterialDesignMod(): Promise<IModStatus> {
 		appIntRetr.addItpt(LDDict.Action, MDButton, "cRud", [ITPT_TAG_ATOMIC]);
 
 		appIntRetr.addItpt(MD_SINGLE_IMAGE_SELECTOR_CFG.canInterpretType, MDSingleImageSelector, "cRud", [ITPT_TAG_ATOMIC]);
+		appIntRetr.addItpt(MD_SINGLE_AUDIO_SELECTOR_CFG.canInterpretType, MDSingleAudioSelector, "cRud", [ITPT_TAG_ATOMIC]);
 
 		//register visual composition itpts.
 		//default core overrides
