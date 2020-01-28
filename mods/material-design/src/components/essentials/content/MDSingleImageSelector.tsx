@@ -13,14 +13,31 @@ import AddPhotoAlternate from '@material-ui/icons/AddPhotoAlternate';
 
 import Delete from '@material-ui/icons/Delete';
 
+import Camera from '@material-ui/icons/Camera';
+
 export const MD_SINGLE_IMAGE_SELECTOR_NAME = "metaexplorer.io/material-design/SingleImageSelector";
 export const MD_SINGLE_IMAGE_SELECTOR_CFG = { ...SingleImageSelectorBpCfg };
 
 MD_SINGLE_IMAGE_SELECTOR_CFG.nameSelf = MD_SINGLE_IMAGE_SELECTOR_NAME;
 
 const cssClasses = {
-	delBtn: 'del-btn'
+	delBtn: 'del-btn',
+	controlsContainer: 'controls-container',
 };
+
+class ImgSelDOMCamera extends DOMCamera {
+	renderControls() {
+		return <div className={cssClasses.controlsContainer}>
+			<Fab
+				color="secondary"
+				onClick={() => {
+					if (this.props.onImageSrcReady) this.getScreenshotAsBlob();
+				}} >
+				<Camera />
+			</Fab>
+		</div>;
+	}
+}
 
 @ldBlueprint(MD_SINGLE_IMAGE_SELECTOR_CFG)
 export class MDSingleImageSelector extends AbstractSingleImageSelector {
@@ -40,7 +57,6 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 			noClick={true}
 			ref={this.dropzoneRef}
 			onDropAccepted={(acceptedOrRejected) => {
-				console.log("asdf")
 				let files = acceptedOrRejected.map((file) => ({
 					...file,
 					preview: URL.createObjectURL(file)
@@ -48,8 +64,7 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 				this.onDropSuccess(files[0], files[0].preview);
 			}}
 			onDropRejected={() => {
-				console.log("fdsa")
-				this.onDropFailure()
+				this.onDropFailure();
 			}}
 			onDragEnter={() => this.startDrag()}
 			onDragOver={() => this.startDrag()}
@@ -75,7 +90,7 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 								Select Image
 								</Button></div>;
 					case SingleImageSelectorStateEnum.isCamShooting:
-						return <DOMCamera showControls onImageSrcReady={(a) => {
+						return <ImgSelDOMCamera showControls onImageSrcReady={(a) => {
 							this.onDropSuccess(null, a);
 						}} />;
 					case SingleImageSelectorStateEnum.isDragging:

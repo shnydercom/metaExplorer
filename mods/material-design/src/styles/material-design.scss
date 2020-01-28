@@ -171,6 +171,7 @@ canvas.drawingBuffer {
   width: 100%;
   height: 100%;
   justify-content: center;
+  position: relative;
 
   .btn-extension {
     height: 100%;
@@ -215,6 +216,7 @@ canvas.drawingBuffer {
   justify-content: center;
   align-items: flex-end;
   overflow: hidden;
+  position: relative;
 
   .vid-big-icons {
     line-height: 1 !important;
