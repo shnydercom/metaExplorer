@@ -1,6 +1,5 @@
 import { appItptRetrFn, ITPT_TAG_ATOMIC, SingleModStateKeysDict, IModStatus, flatDataTypeAssemblerFactory, IKvStore, LDDict } from "@metaexplorer/core";
 
-
 export const MOD_DEMO_ID = "demo";
 export const MOD_DEMO_NAME = "MetaExplorer Demo Mod";
 

@@ -4,6 +4,8 @@
   ],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "types": ["node", "dom-mediacapture-record"],
+    "typeRoots": ["../node_modules/@types"],
     "outDir": "lib",
     "rootDir": "src",
     "declarationDir": "lib",

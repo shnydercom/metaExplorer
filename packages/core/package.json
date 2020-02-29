@@ -1,8 +1,8 @@
 {
   "author": "Jonathan Schneider",
   "name": "@metaexplorer/core",
-  "version": "0.0.10",
-  "description": "a GUI editor for configuring bizSys-Server",
+  "version": "0.0.13",
+  "description": "base functionality that is needed to make metaexplorer work",
   "license": "EUPL-1.2",
   "module": "./lib-esm/index.js",
   "main": "./lib/index.js",
@@ -22,7 +22,8 @@
     "build": "yarn buildesm && yarn buildregular && yarn compcss",
     "lint": "tslint ./src/**/*.ts -t verbose",
     "compcss": "node-sass --output-style compressed ./src/styles/core-index.scss > ./lib/style.css",
-    "createmock": "node ./scripts/createItptMock.js"
+    "createmock": "node ./scripts/createItptMock.js",
+    "story": "start-storybook -p 2018 -s ./public"
   },
   "peerDependencies": {
     "react": "*",
@@ -45,13 +46,15 @@
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
+    "@metaexplorer/testing": "^0.0.6",
     "@types/classnames": "^2.2.8",
     "@types/dagre": "^0.7.42",
+    "@types/dom-mediacapture-record": "^1.0.2",
     "@types/gapi": "^0.0.38",
     "@types/gapi.auth2": "^0.0.50",
     "@types/gapi.client.sheets": "4.0.1",
     "@types/jasmine": "^3.3.13",
-    "@types/node": "12.0.10",
+    "@types/node": "13.1.4",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.3",
     "@types/react-redux": "^7.1.1",
@@ -94,12 +97,11 @@
     "ts-loader": "^6.0.4",
     "tslint": "^5.18.0",
     "typeface-roboto": "^0.0.54",
-    "typescript": "3.5.2",
+    "typescript": "^3.7.4",
     "webpack": "^4.35.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
     "write-file-webpack-plugin": "^4.5.0"
-  },
-  "gitHead": "2ac51488d3796cf6caa6df0990759362a4ee6fe8"
+  }
 }

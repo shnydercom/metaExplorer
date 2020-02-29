@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer/editor-dev-server",
-  "version": "0.0.10",
+  "version": "0.0.13",
   "description": "server side scripts for local development",
   "main": "lib/index.js",
   "scripts": {
@@ -15,10 +15,9 @@
     "@types/express": "^4.17.0",
     "express": "^4.17.1",
     "ts-node-dev": "^1.0.0-pre.40",
-    "typescript": "^3.5.3"
+    "typescript": "^3.7.4"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "gitHead": "2ac51488d3796cf6caa6df0990759362a4ee6fe8"
+  }
 }

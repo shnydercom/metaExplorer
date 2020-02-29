@@ -1,11 +1,13 @@
 {
   "name": "@metaexplorer/testing",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "description": "testing tools for metaexplorer-projects",
   "main": "index.js",
   "license": "EUPL",
   "scripts": {
-    "story": "start-storybook -p 2019 -s ./public"
+    "story": "start-storybook -p 2019 -s ./public",
+    "build": "tsc && yarn cpcss",
+    "cpcss": "node-sass ./src/storybook/storybook.css ./lib/storybook/storybook.css"
   },
   "dependencies": {
     "@babel/core": "^7.6.2",
@@ -13,7 +15,7 @@
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.7",
+    "@types/node": "^13.1.4",
     "@types/react": "^16.9.3",
     "@types/react-dom": "^16.9.1",
     "@types/storybook__react": "^4.0.2",
@@ -27,11 +29,10 @@
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.0",
     "ts-jest": "^24.1.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.7.4"
   },
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"
-  },
-  "gitHead": "2ac51488d3796cf6caa6df0990759362a4ee6fe8"
+  }
 }

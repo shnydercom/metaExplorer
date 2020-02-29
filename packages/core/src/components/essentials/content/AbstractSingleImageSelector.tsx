@@ -6,6 +6,7 @@ import { IKvStore } from '../../../ldaccess/ikvstore';
 import { ILDOptions } from '../../../ldaccess/ildoptions';
 import { UserDefDict } from '../../../ldaccess/UserDefDict';
 import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
+import { createLDUINSUrl } from '../../../ldaccess/ldUtils';
 // TODO: drop file anim: https://css-tricks.com/examples/DragAndDropFileUploading/
 
 export enum SingleImageSelectorStateEnum {
@@ -22,8 +23,9 @@ export interface SingleImageSelectorState extends LDLocalState {
 	previewURL: string;
 }
 
-export const SingleImageSelectorName = "metaexplorer.io/material-design/SingleImageSelector";
-let cfgType: string = LDDict.CreateAction;
+const SingleImageSelectorName = "metaexplorer.io/core/SingleImageSelector";
+
+let cfgType: string = createLDUINSUrl(LDDict.CreateAction, LDDict.result, LDDict.ImageObject);
 let cfgIntrprtKeys: string[] =
 	[];
 const RESULT_KV: IKvStore = {
@@ -62,6 +64,9 @@ export abstract class AbstractSingleImageSelector extends Component<
 	draggingImgLink: string = "/media/dragndrop.svg";
 
 	initialKvStores: IKvStore[];
+	// tslint:disable-next-line:variable-name
+	_isMounted: boolean = false;
+
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
@@ -98,7 +103,12 @@ export abstract class AbstractSingleImageSelector extends Component<
 		}*/
 	}
 
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
+
 	componentDidMount() {
+		this._isMounted = true;
 		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
 			this.setState({ ...this.state, isCamAvailable: false });
 			return;
@@ -110,10 +120,12 @@ export abstract class AbstractSingleImageSelector extends Component<
 						if (device.kind === "videoinput")
 							vidInputList.push(device);
 					});
-					if (vidInputList.length === 0) {
-						this.setState({ ...this.state, isCamAvailable: false });
-					} else {
-						this.setState({ ...this.state, isCamAvailable: true });
+					if (this._isMounted) {
+						if (vidInputList.length === 0) {
+							this.setState({ ...this.state, isCamAvailable: false });
+						} else {
+							this.setState({ ...this.state, isCamAvailable: true });
+						}
 					}
 				});
 		}

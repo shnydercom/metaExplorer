@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+import { Button, Fab } from "@material-ui/core";
 import {
 	DOMCamera,
 	ldBlueprint, AbstractSingleImageSelector, SingleImageSelectorBpCfg,
@@ -11,22 +11,60 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 
 import AddPhotoAlternate from '@material-ui/icons/AddPhotoAlternate';
 
-@ldBlueprint(SingleImageSelectorBpCfg)
+import Delete from '@material-ui/icons/Delete';
+
+import Camera from '@material-ui/icons/Camera';
+
+export const MD_SINGLE_IMAGE_SELECTOR_NAME = "metaexplorer.io/material-design/SingleImageSelector";
+export const MD_SINGLE_IMAGE_SELECTOR_CFG = { ...SingleImageSelectorBpCfg };
+
+MD_SINGLE_IMAGE_SELECTOR_CFG.nameSelf = MD_SINGLE_IMAGE_SELECTOR_NAME;
+
+const cssClasses = {
+	delBtn: 'del-btn',
+	controlsContainer: 'controls-container',
+};
+
+class ImgSelDOMCamera extends DOMCamera {
+
+	stopVideoRecording() {
+		this.getStream().getTracks().forEach((track) => {
+			track.stop();
+		});
+		super.stopVideoRecording();
+	}
+
+	renderControls() {
+		return <div className={cssClasses.controlsContainer}>
+			<Fab
+				color="secondary"
+				onClick={() => {
+					if (this.props.onImageSrcReady) this.getScreenshotAsBlob();
+				}} >
+				<Camera />
+			</Fab>
+		</div>;
+	}
+}
+
+@ldBlueprint(MD_SINGLE_IMAGE_SELECTOR_CFG)
 export class MDSingleImageSelector extends AbstractSingleImageSelector {
 	protected dropzoneRef: Ref<DropzoneRef> = createRef();
+
+	deletePreview() {
+		this.destroyPreview();
+		this.setState({ ...this.state, curStep: SingleImageSelectorStateEnum.isSelectInputType });
+	}
 
 	render() {
 		const { curStep, isCamAvailable, previewURL } = this.state;
 		const dzInputKey = "dz-input";
 		return (<Dropzone
-			// className={curStep === SingleImageSelectorStateEnum.isPreviewing ? "single-img-sel accept" : "single-img-sel"}
 			accept="image/*"
 			multiple={false}
 			noClick={true}
-			//disableClick={true}
 			ref={this.dropzoneRef}
 			onDropAccepted={(acceptedOrRejected) => {
-				console.log("asdf")
 				let files = acceptedOrRejected.map((file) => ({
 					...file,
 					preview: URL.createObjectURL(file)
@@ -34,10 +72,8 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 				this.onDropSuccess(files[0], files[0].preview);
 			}}
 			onDropRejected={() => {
-				console.log("fdsa")
-				this.onDropFailure()
+				this.onDropFailure();
 			}}
-			//onDragStart={() => this.startDrag()}
 			onDragEnter={() => this.startDrag()}
 			onDragOver={() => this.startDrag()}
 			onDragLeave={() => this.onDropFailure()}
@@ -62,7 +98,7 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 								Select Image
 								</Button></div>;
 					case SingleImageSelectorStateEnum.isCamShooting:
-						return <DOMCamera showControls onImageCaptured={(a) => {
+						return <ImgSelDOMCamera showControls onImageSrcReady={(a) => {
 							this.onDropSuccess(null, a);
 						}} />;
 					case SingleImageSelectorStateEnum.isDragging:
@@ -73,7 +109,15 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 							<img className="md-large-image" style={{ flex: 1 }} src={this.draggingImgLink} height="100px" />
 						</div>;
 					case SingleImageSelectorStateEnum.isPreviewing:
-						return <img className="cover-img" src={previewURL} alt="image preview" ></img>;
+						return <div className="single-img-sel">
+							<img className="cover-img" src={previewURL} alt="image preview" ></img>;
+							<Fab
+								className={cssClasses.delBtn}
+								color="secondary"
+								onClick={() => this.deletePreview()} >
+								<Delete />
+							</Fab>
+						</div>;
 					case SingleImageSelectorStateEnum.isError:
 						return <span>isError</span>;
 					default:

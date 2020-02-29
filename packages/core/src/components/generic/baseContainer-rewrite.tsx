@@ -107,7 +107,7 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 				newreactCompInfos.set(newKey, { compClass: itpt, key: newKey, ldTokenString: ldTokenStringNew });
 				newLDTypes.set(newKey, itpt.cfg.canInterpretType);
 			} else {
-				throw new LDError("baseContainer got a non-visual component");
+				throw new LDError(`baseContainer got a non-visual component. It was looking for ${JSON.stringify(elem)} and got ${itpt}`);
 			}
 		});
 		return { ...prevState, compInfos: newreactCompInfos, localLDTypes: newLDTypes };
