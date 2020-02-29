@@ -1,3 +1,7 @@
+# Getting started quickly
+
+If you want to get started quickly, use the [metaExplorer starter template](https://github.com/shnydercom/metaexplorer-starter)
+
 # Installation
 
 - run `yarn bootsrap`
@@ -10,7 +14,7 @@
 the development server saves your blocks under "packages/editor-dev-server/dev-srv-nocode/blocks"
 you can load a stylesheet depending on the username of your main interpreter. This would be located under "WEB_ROOT/styles/username-style.css", or if you're using the editor-dev-server, put it under "packages/editor-dev-server/dev-srv-nocode/styles/username-style.css"
 
-# creating your own app
+# creating your own app - old flow
 
 - cd into `packages/metaexplorer.io`
 - run `yarn buildcra` to execute create-react-app / react-scripts, which will create a build folder in that sub-project
