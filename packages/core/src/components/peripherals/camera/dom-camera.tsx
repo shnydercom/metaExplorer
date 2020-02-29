@@ -57,7 +57,7 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 		this.state = { curStep: DOMCameraStateEnum.isLoading, vidDeviceList: null, curId: null };
 	}
 
-	public getStream(){
+	public getStream() {
 		return this.stream;
 	}
 
@@ -66,6 +66,12 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 		if (this.videoDispl.srcObject) return;
 		navigator.mediaDevices.getUserMedia({ video: { deviceId: strDeviceId }, audio: !!this.props.isRecordingAudio })
 			.then((stream) => {
+				if (!this.videoDispl || !this.videoDispl.paused) {
+					this.stream.getTracks().forEach((track) => {
+						track.stop();
+					});
+					return;
+				}
 				if (!this.videoDispl.paused) return;
 				this.stream = stream;
 				this.videoDispl.setAttribute("autoplay", 'true');
@@ -87,6 +93,11 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 	componentWillUnmount() {
 		if (this.state.curStep !== DOMCameraStateEnum.isError)
 			this.setState({ curStep: DOMCameraStateEnum.isLoading, vidDeviceList: null, curId: null });
+		if (this.stream && this.stream.active) {
+			this.stream.getTracks().forEach((track) => {
+				track.stop();
+			});
+		}
 		if (this.videoDispl) this.videoDispl.pause();
 		if (this.props.onVideoDisplayRemoved) {
 			this.props.onVideoDisplayRemoved();
@@ -194,6 +205,7 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 	renderVideo() {
 		const { curId } = this.state;
 		return <video ref={(video) => {
+			if (!video) return;
 			this.videoDispl = video;
 			this.startStream(curId);
 		}} />;

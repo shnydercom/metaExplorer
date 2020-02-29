@@ -26,6 +26,14 @@ const cssClasses = {
 };
 
 class ImgSelDOMCamera extends DOMCamera {
+
+	stopVideoRecording() {
+		this.getStream().getTracks().forEach((track) => {
+			track.stop();
+		});
+		super.stopVideoRecording();
+	}
+
 	renderControls() {
 		return <div className={cssClasses.controlsContainer}>
 			<Fab

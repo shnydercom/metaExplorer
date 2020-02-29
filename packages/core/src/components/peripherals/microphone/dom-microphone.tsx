@@ -47,7 +47,7 @@ export class DOMMicrophone<TProps = DOMMicrophoneProps> extends Component<TProps
 		this.state = { curStep: DOMMicrophoneStateEnum.isLoading, audioInputDeviceList: null, curId: null };
 	}
 
-	public getStream(){
+	public getStream() {
 		return this.stream;
 	}
 
@@ -55,6 +55,12 @@ export class DOMMicrophone<TProps = DOMMicrophoneProps> extends Component<TProps
 		if (!this.audioVisualization || !strDeviceId) return;
 		navigator.mediaDevices.getUserMedia({ audio: { deviceId: strDeviceId } })
 			.then((stream) => {
+				if (!this.audioVisualization) {
+					this.stream.getTracks().forEach((track) => {
+						track.stop();
+					});
+					return;
+				}
 				this.stream = stream;
 			})
 			.catch(() => {
@@ -66,6 +72,11 @@ export class DOMMicrophone<TProps = DOMMicrophoneProps> extends Component<TProps
 	componentWillUnmount() {
 		if (this.state.curStep !== DOMMicrophoneStateEnum.isError)
 			this.setState({ curStep: DOMMicrophoneStateEnum.isLoading, audioInputDeviceList: null, curId: null });
+		if (this.stream && this.stream.active) {
+			this.stream.getTracks().forEach((track) => {
+				track.stop();
+			});
+		}
 		if (this.props.onAudioVisualizationRemoved) {
 			this.props.onAudioVisualizationRemoved();
 		}

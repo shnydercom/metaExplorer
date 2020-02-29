@@ -25,6 +25,9 @@ export class MDRecorder extends DOMMicrophone<MDRecorderProps> {
 
 	stopAudioRecording() {
 		const audioBlob = this.audioRecorder.stopRecording();
+		this.getStream().getTracks().forEach((track) => {
+			track.stop();
+		});
 		if (this.props.onAudioSrcReady) this.props.onAudioSrcReady(window.URL.createObjectURL(audioBlob));
 		super.stopAudioRecording();
 	}
