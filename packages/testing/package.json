@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer/testing",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "testing tools for metaexplorer-projects",
   "main": "index.js",
   "license": "EUPL",
