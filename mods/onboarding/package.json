@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/onboarding",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "TODO:changeDescription",
   "scripts": {
     "test": "test",
@@ -18,7 +18,7 @@
     "lib"
   ],
   "dependencies": {
-    "@metaexplorer-mods/keycloak": "^0.0.6",
-    "@metaexplorer/core": "^0.0.11"
+    "@metaexplorer-mods/keycloak": "^0.0.7",
+    "@metaexplorer/core": "^0.0.12"
   }
 }

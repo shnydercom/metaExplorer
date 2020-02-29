@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/metaexplorer.io",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "TODO:changeDescription",
   "scripts": {
     "test": "test",
@@ -19,7 +19,7 @@
     "lib"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.11",
+    "@metaexplorer/core": "^0.0.12",
     "react-gooey-nav": "^2.0.0"
   }
 }

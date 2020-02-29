@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer/editor-dev-server",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "server side scripts for local development",
   "main": "lib/index.js",
   "scripts": {
