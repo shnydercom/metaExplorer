@@ -3,6 +3,7 @@ import { TsVisitor } from './visitor';
 import { TypeScriptPluginConfig } from './config';
 import autoBind from 'auto-bind';
 
+/* tslint:disable */
 export class TsIntrospectionVisitor extends TsVisitor {
   private typesToInclude: GraphQLNamedType[] = [];
 

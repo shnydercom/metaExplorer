@@ -1,6 +1,7 @@
 import { RawTypesConfig } from '@graphql-codegen/visitor-plugin-common';
 import { AvoidOptionalsConfig } from './types';
 
+/* tslint:disable */
 export interface TypeScriptPluginConfig extends RawTypesConfig {
   /**
    * @name avoidOptionals

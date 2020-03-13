@@ -1,6 +1,7 @@
 import { ParsedEnumValuesMap, OperationVariablesToObject, NormalizedScalarsMap, ConvertNameFn, InterfaceOrVariable, indent } from '@graphql-codegen/visitor-plugin-common';
 import { TypeNode, Kind } from 'graphql';
 
+/* tslint:disable */
 export class TypeScriptOperationVariablesToObject extends OperationVariablesToObject {
   constructor(
     _scalars: NormalizedScalarsMap,

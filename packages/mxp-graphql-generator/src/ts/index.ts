@@ -4,6 +4,7 @@ import { TsVisitor } from './visitor';
 import { TsIntrospectionVisitor } from './introspection-visitor';
 import { TypeScriptPluginConfig } from './config';
 
+/* tslint:disable */
 export * from './typescript-variables-to-object';
 export * from './visitor';
 export * from './types';

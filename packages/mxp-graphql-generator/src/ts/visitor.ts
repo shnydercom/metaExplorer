@@ -1,11 +1,13 @@
-import { transformComment, wrapWithSingleQuotes, DeclarationBlock, indent, BaseTypesVisitor, ParsedTypesConfig, getConfigValue, DeclarationKind } from '@graphql-codegen/visitor-plugin-common';
+import { transformComment, wrapWithSingleQuotes, DeclarationBlock, indent, BaseTypesVisitor, ParsedTypesConfig, getConfigValue, DeclarationKind, buildScalars } from '@graphql-codegen/visitor-plugin-common';
 import { TypeScriptPluginConfig } from './config';
 import { AvoidOptionalsConfig } from './types';
 import autoBind from 'auto-bind';
 import { FieldDefinitionNode, NamedTypeNode, ListTypeNode, NonNullTypeNode, EnumTypeDefinitionNode, Kind, InputValueDefinitionNode, GraphQLSchema, GraphQLEnumType } from 'graphql';
 import { TypeScriptOperationVariablesToObject } from './typescript-variables-to-object';
 import { normalizeAvoidOptionals } from './avoid-optionals';
+import { DEFAULT_MXP_SCALARS } from './default/ldScalar';
 
+/* tslint:disable */
 export interface TypeScriptPluginParsedConfig extends ParsedTypesConfig {
   avoidOptionals: AvoidOptionalsConfig;
   constEnums: boolean;
@@ -28,6 +30,7 @@ export class TsVisitor<TRawConfig extends TypeScriptPluginConfig = TypeScriptPlu
       enumsAsTypes: getConfigValue(pluginConfig.enumsAsTypes, false),
       immutableTypes: getConfigValue(pluginConfig.immutableTypes, false),
       wrapFieldDefinitions: getConfigValue(pluginConfig.wrapFieldDefinitions, false),
+      scalars: buildScalars(schema, pluginConfig.scalars, DEFAULT_MXP_SCALARS),
       ...(additionalConfig || {}),
     } as TParsedConfig);
 
