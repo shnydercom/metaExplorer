@@ -8,8 +8,6 @@ describe('TypeScript', () => {
     const schema = buildSchema(/* GraphQL */ `
       scalar A
     `);
-    const aMap = schema.getTypeMap();
-    const b = Object.keys(aMap).join('\n');
     const result = (await plugin(schema, [], {}, { outputFile: '' })) as Types.ComplexPluginOutput;
     expect(result.prepend).toBeSimilarStringTo('export type Maybe<T> =');
   });
@@ -202,6 +200,27 @@ describe('TypeScript', () => {
         Test = '_TEST',
         MyValue = 'My_Value'
       }`);
+    });
+
+    it('Should work with enum as const', async () => {
+      const schema = buildSchema(/* GraphQL */ `
+        enum MyEnum {
+          A_B_C
+          X_Y_Z
+          _TEST
+          My_Value
+        }
+      `);
+      const result = (await plugin(schema, [], { enumsAsConst: true }, { outputFile: '' })) as Types.ComplexPluginOutput;
+
+      expect(result.content).toBeSimilarStringTo(`
+      export const MyEnum = {
+        ABC: 'A_B_C',
+        XYZ: 'X_Y_Z',
+        Test: '_TEST',
+        MyValue: 'My_Value'
+      } as const;
+      export type MyEnum = typeof MyEnum[keyof typeof MyEnum];`);
     });
 
     it('Should work with enum and enum values (enumsAsTypes)', async () => {
