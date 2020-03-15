@@ -1,14 +1,15 @@
 {
-  "name": "mxp-graphql-generator",
+  "name": "@metaexplorer/graphql-generator",
   "version": "0.0.1",
   "description": "graphql-generator for metaexplorer projects",
   "author": "Jonathan Schneider",
-  "license": "EUPL 2.0",
+  "license": "EUPL-1.2",
   "scripts": {
     "lint": "tslint src/**/*.ts",
     "prepack": "bob-update-version",
     "build": "bob",
-    "test": "jest --no-watchman --config ./jest.config.js"
+    "test": "jest --no-watchman --config ../../jest.config.js",
+    "watch": "jest --watch --config ../../jest.config.js"
   },
   "dependencies": {
     "@graphql-codegen/plugin-helpers": "1.12.2",
