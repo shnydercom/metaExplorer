@@ -9,12 +9,18 @@
 			"name": "GQL-generator-Tests",
 			"type": "node",
 			"request": "launch",
-			"program": "${workspaceRoot}/node_modules/jest-cli/bin/jest.js",
+			"program": "${workspaceFolder}/node_modules/.bin/jest",
+			"windows": {
+        "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+      },
 			"stopOnEntry": false,
 			"args": [
-				"--runInBand"
+				"--runInBand",
+				"--watch",
+				"--config",
+				"${workspaceRoot}/jest.config.js"
 			],
-			"cwd": "${workspaceRoot}/packages/mxp-graphql-generator",
+			"cwd": "${workspaceRoot}/packages/graphql-generator",
 			"preLaunchTask": null,
 			"runtimeExecutable": null,
 			"runtimeArgs": [
