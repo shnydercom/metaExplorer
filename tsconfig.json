@@ -3,8 +3,6 @@
   "files":  ["./typings.d.ts"],
   "compilerOptions": {
     "skipLibCheck": true,
-    "target": "esnext",
-    "module": "esnext",
     "lib": ["dom", "esnext"],
     "jsx": "react",
     "rootDir": ".",

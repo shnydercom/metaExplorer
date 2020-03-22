@@ -17,7 +17,7 @@
     "test": "jest --watch",
     "buildwp": "webpack --config=webpack.prod.config.js",
     "startfornetwork": "webpack-dev-server --host 0.0.0.0",
-    "buildesm": "tsc -m es6 --outDir lib-esm",
+    "buildesm": "tsc -m es6 -target esnext --outDir lib-esm",
     "buildregular": "tsc",
     "build": "yarn buildesm && yarn buildregular && yarn compcss",
     "lint": "tslint ./src/**/*.ts -t verbose",
