@@ -85,12 +85,8 @@ export class MetaExplorerDocumentsVisitor extends BaseDocumentsVisitor<MetaExplo
 			blockWrapper: BLOCK_SPLITTER,
 			blockTransformer: (block) => {
 				const parts = block.split(BLOCK_SPLITTER);
-				const rv = `
-${parts[0]}
-${INITIAL_KV_STORES}[
-	${parts[1]}
-]${parts[2]}
-				`;
+				const rv = `${parts[0]}
+${parts[1]}${parts[2]}`;
 				return rv;
 			}
 		};
@@ -144,7 +140,7 @@ ${INITIAL_KV_STORES}[
 			)
 			.withBlock(visitedOperationVariables).string;
 
-		console.dir(operationVariables);
+		console.dir(node.variableDefinitions);
 		console.dir(operationResult)
 		return [operationVariables, operationResult].filter(r => r).join('\n\n');
 	}
