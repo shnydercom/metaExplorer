@@ -18,8 +18,6 @@ export const plugin: PluginFunction<{}
   const visitorResult = visit(allAst, {
     leave: new MetaExplorerDocumentsVisitor(schema, config, allFragments),
   });
-  console.log("vsr:");
-  console.dir(visitorResult);
 
   const result = visitorResult.definitions.join('\n');
 

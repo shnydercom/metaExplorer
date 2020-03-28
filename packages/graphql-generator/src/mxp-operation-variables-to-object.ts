@@ -50,7 +50,6 @@ ${INITIAL_KV_STORES}: [${super.transform(variablesNode)}]`;
 		const prefix = this._namespacedImportName ? `${this._namespacedImportName}.` : '';
 
 		if (typeNode.kind === Kind.NON_NULL_TYPE) {
-			console.dir(typeNode)
 			const type = this.wrapAstTypeWithModifiers(baseType, typeNode.type);
 			let nnRV = this.clearOptional(type);
 			nnRV = this.wrapRequired(nnRV);
@@ -67,7 +66,7 @@ ${INITIAL_KV_STORES}: [${super.transform(variablesNode)}]`;
 	}
 
 	protected transformInputDef<TDefinitionType extends InterfaceOrVariable>(variable: TDefinitionType): string {
-		return this.getName(variable);
+		return `"${this.getName(variable)}"`;
 	}
 
 	protected transformVariable<TDefinitionType extends InterfaceOrVariable>(variable: TDefinitionType): string {
