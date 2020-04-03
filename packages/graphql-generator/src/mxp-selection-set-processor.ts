@@ -1,10 +1,11 @@
 import { BaseSelectionSetProcessor, ProcessResult, LinkField, PrimitiveAliasedFields, PrimitiveField, SelectionSetProcessorConfig } from '@graphql-codegen/visitor-plugin-common';
-import { GraphQLObjectType, GraphQLInterfaceType } from 'graphql';
+import { GraphQLObjectType, GraphQLInterfaceType, isEnumType } from 'graphql';
+import { getBaseType } from '@graphql-codegen/plugin-helpers';
 
 /* tslint:disable */
 export class MetaExplorerSelectionSetProcessor extends BaseSelectionSetProcessor<SelectionSetProcessorConfig> {
   transformPrimitiveFields(schemaType: GraphQLObjectType | GraphQLInterfaceType, fields: PrimitiveField[]): ProcessResult {
-    if (fields.length === 0) {
+    /*if (fields.length === 0) {
       return [];
     }
 
@@ -14,7 +15,29 @@ export class MetaExplorerSelectionSetProcessor extends BaseSelectionSetProcessor
         useTypesPrefix: true,
       });
 
-    return [`Pick<${parentName}, ${fields.map(field => `'${field}'`).join(' | ')}>`];
+    return [`Pick<${parentName}, ${fields.map(field => `'${field}'`).join(' | ')}>`];*/
+    if (fields.length === 0) {
+      return [];
+    }
+
+    return fields.map(field => {
+      const fieldObj = schemaType.getFields()[field];
+      const baseType = getBaseType(fieldObj.type);
+      let typeToUse = baseType.name;
+
+      if (isEnumType(baseType)) {
+        typeToUse = (this.config.namespacedImportName ? `${this.config.namespacedImportName}.` : '') + this.config.convertName(baseType.name, { useTypesPrefix: this.config.enumPrefix });
+      } else if (this.config.scalars[baseType.name]) {
+        typeToUse = this.config.scalars[baseType.name];
+      }
+
+      const wrappedType = this.config.wrapTypeWithModifiers(typeToUse, fieldObj.type as GraphQLObjectType);
+
+      return {
+        name: this.config.formatNamedField(field),
+        type: wrappedType,
+      };
+    });
   }
 
   transformTypenameField(type: string, name: string): ProcessResult {

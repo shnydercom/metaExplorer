@@ -1,13 +1,12 @@
 import { DeclarationBlock } from '@graphql-codegen/visitor-plugin-common';
-import { NAME_SELF, SUBITPTOF, CRUD_SKILLS, BLUEPRINT_CFG } from './constants';
+import { NAME_SELF, SUBITPTOF, CRUD_SKILLS, BLUEPRINT_CFG_FRAGMENT } from './constants';
 
 export class MetaExplorerDeclarationBlock extends DeclarationBlock {
 
 	public get string(): string {
 		let result = '';
 		let nameSelf = '';
-		let subItptOf = `${SUBITPTOF} = null,`;
-		let crudSkills = `${CRUD_SKILLS} = "cRUd",`;
+		let crudSkills = `${CRUD_SKILLS} : "cRUd",`;
 
 		if (this._decorator) {
 			result += this._decorator + '\n';
@@ -16,7 +15,7 @@ export class MetaExplorerDeclarationBlock extends DeclarationBlock {
 		if (this._export) {
 			result += 'export ';
 		}
-		console.dir(this)
+		console.dir(this);
 		if (this._kind) {
 			let extra = '';
 			let name = '';
@@ -30,7 +29,7 @@ export class MetaExplorerDeclarationBlock extends DeclarationBlock {
 				nameSelf = `${NAME_SELF} = "${name.trim()}",`;
 			}
 
-			result += this._kind + ' ' + name + ':' + BLUEPRINT_CFG + ' ' + extra;
+			result += this._kind + ' ' + name + ':' + BLUEPRINT_CFG_FRAGMENT + ' ' + extra;
 		}
 
 		if (this._block) {
@@ -41,7 +40,7 @@ export class MetaExplorerDeclarationBlock extends DeclarationBlock {
 			const blockWrapper = this._ignoreBlockWrapper ? '' : this._config.blockWrapper;
 			const before = '{' + blockWrapper;
 			const after = blockWrapper + '}';
-			const block = [before, subItptOf, nameSelf, crudSkills, this._block, after].filter(val => !!val).join('\n');
+			const block = [before, nameSelf, crudSkills, this._block, after].filter((val) => !!val).join('\n');
 
 			if (this._methodName) {
 				result += `${this._methodName}(${this._config.blockTransformer(block)})`;

@@ -21,6 +21,16 @@ export enum LDUIDict {
 	 * equates to an array[index]-accessor or a map.get(index)-call
 	 */
 	PickAction = "http://ldui.net/PickAction",
+	/**
+	 * query variables in GraphQL can only contain input types and scalars,
+	 * so they need special handling
+	 */
+	GQLQueryVars = "http://ldui.net/GQLQueryVariables",
+	/**
+	 * from declarative to functional: such a component will assemble data from
+	 * disparate data
+	 */
+	DataTypeAssembler = "http://ldui.net/DataTypeAssembler"
 }
 export enum LDUIDictVerbs {
 /**
@@ -49,5 +59,5 @@ export enum LDUIDictVerbs {
 	 * general capability to be able to narrow down the maximum supported version of types
 	 * (because "type" can mean a lot of different things in different programming languages)
 	 */
-	typeOf = "http://ldui.net/typeof"
+	typed = "http://ldui.net/typed"
 }

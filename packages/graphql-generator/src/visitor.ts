@@ -73,7 +73,7 @@ export class MetaExplorerDocumentsVisitor extends BaseDocumentsVisitor<MetaExplo
 			formatNamedField: (name: string): string => (this.config.immutableTypes ? `readonly ${name}` : name),
 			wrapTypeWithModifiers,
 		};
-		const processor = new (config.preResolveTypes ? PreResolveTypesProcessor : MetaExplorerSelectionSetProcessor)(processorConfig);
+		const processor = new (MetaExplorerSelectionSetProcessor)(processorConfig);
 		this.setSelectionSetHandler(new MetaExplorerSelectionSetToObject(processor, this.scalars, this.schema, this.convertName.bind(this), allFragments, this.config));
 		const enumsNames = Object.keys(schema.getTypeMap()).filter((typeName) => isEnumType(schema.getType(typeName)));
 		this.setVariablesTransformer(

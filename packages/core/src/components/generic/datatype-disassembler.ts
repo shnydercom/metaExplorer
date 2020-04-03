@@ -5,7 +5,7 @@ import { AbstractDataTransformer } from "../../datatransformation/abstractDataTr
 
 const transfInputKey = UserDefDict.inputData;
 
-class DataTypeDisassembler extends AbstractDataTransformer {
+class PureDataTypeDisassembler extends AbstractDataTransformer {
 
 	/**
 	 * this function assembles input fields to a single flat new datatype
@@ -60,9 +60,9 @@ export function flatDataTypeDisassemblerFactory(outputKvStores: IKvStore[], name
 		crudSkills: "cRUd"
 	};
 
-	let DataTypeAssemblerExt = class extends DataTypeDisassembler {
+	let DataTypeDisassemblerExt = class extends PureDataTypeDisassembler {
 		itptKeys = interpretableKeys;
 		outputKvStores = outputKvStores;
 	};
-	return ldBlueprint(bpCfg)(DataTypeAssemblerExt);
+	return ldBlueprint(bpCfg)(DataTypeDisassemblerExt);
 }

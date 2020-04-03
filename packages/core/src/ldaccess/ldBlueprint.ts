@@ -35,6 +35,19 @@ export interface BlueprintConfig {
     interpretableKeys: (string | ObjectPropertyRef)[];
 }
 
+/**
+ * an interface used to construct BlueprintConfig-objects,
+ * all its fields are optional
+ */
+export interface BlueprintConfigFragment {
+    subItptOf?: string;
+    canInterpretType?: string;
+    nameSelf?: string;
+    initialKvStores?: IKvStore[];
+    crudSkills?: string;
+    interpretableKeys?: (string | ObjectPropertyRef)[];
+}
+
 function handleKVInheritance(baseClassKV: IKvStore[], subClassKV: IKvStore[], isReplace: boolean): IKvStore[] {
     let rv: IKvStore[] = [];
     if (isReplace) {

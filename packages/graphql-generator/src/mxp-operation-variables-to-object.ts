@@ -1,9 +1,12 @@
 import { ParsedEnumValuesMap, OperationVariablesToObject, NormalizedScalarsMap, ConvertNameFn, InterfaceOrVariable, getBaseTypeNode } from '@graphql-codegen/visitor-plugin-common';
 import { TypeNode, Kind } from 'graphql';
 import { createLDUINSUrl, LDUIDict, LDUIDictVerbs } from '@metaexplorer/core';
-import { ikvFragment, wrapInSPOfunction, INITIAL_KV_STORES, INTERPRETABLE_KEYS } from './constants';
+import { ikvFragment, wrapInSPOfunction, INITIAL_KV_STORES, INTERPRETABLE_KEYS, CAN_INTERPRET_TYPE, OUTPUT_KV_FRAGMENT, SUBITPTOF } from './constants';
 
 /* tslint:disable */
+/**
+ * this class is responsible for turning query variables into a BlueprintConfig
+ */
 export class MetaExplorerOperationVariablesToObject extends OperationVariablesToObject {
 	constructor(
 		_scalars: NormalizedScalarsMap,
@@ -41,8 +44,11 @@ export class MetaExplorerOperationVariablesToObject extends OperationVariablesTo
 		
     const varsInputs = variablesNode.map(variable => this.transformInputDef(variable)).join(',');
 
-		const varsInner = `${INTERPRETABLE_KEYS}: [${varsInputs}],
-${INITIAL_KV_STORES}: [${super.transform(variablesNode)}]`;
+		const varsInner = `${SUBITPTOF}: LDUIDict.DataTypeAssembler,
+${INTERPRETABLE_KEYS}: [${varsInputs}],
+${INITIAL_KV_STORES}: [${super.transform(variablesNode)},
+${OUTPUT_KV_FRAGMENT}],
+`;
 		return varsInner;
   }
 
@@ -56,7 +62,7 @@ ${INITIAL_KV_STORES}: [${super.transform(variablesNode)}]`;
 			return nnRV;
 		} else if (typeNode.kind === Kind.LIST_TYPE) {
 			const innerType = this.wrapAstTypeWithModifiers(baseType, typeNode.type);
-			const rv = wrapInSPOfunction('LDUIDict.NTuple','LDUIDict.typeOf',`${prefix}${innerType}`);
+			const rv = wrapInSPOfunction('LDUIDict.NTuple','LDUIDict.typed',`${prefix}${innerType}`);
 			return rv;
 			//return `${prefix}Maybe<${this._immutableTypes ? 'ReadonlyArray' : 'Array'}<${innerType}>>`;
 		} else {

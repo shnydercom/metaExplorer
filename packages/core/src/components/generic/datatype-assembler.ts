@@ -4,10 +4,19 @@ import { UserDefDict } from "../../ldaccess/UserDefDict";
 import { VisualTypesDict } from "../../components/visualcomposition/visualDict";
 import { AbstractDataTransformer } from "../../datatransformation/abstractDataTransformer";
 import { itptKeysFromInputKvs } from "../../ldaccess/ldUtils";
+import { LDUIDict } from "../../ldaccess";
 
 const transfOutputKey = UserDefDict.outputData;
 
-class DataTypeAssembler extends AbstractDataTransformer {
+const DATATYPE_ASSEMBLER_CFG: BlueprintConfig = {
+	subItptOf: null,
+	nameSelf: LDUIDict.DataTypeAssembler,
+	initialKvStores: [],
+	interpretableKeys: [],
+	crudSkills: "cRud"
+};
+
+class AbstractDataTypeAssembler extends AbstractDataTransformer {
 
 	/**
 	 * this function assembles input fields to a single flat new datatype
@@ -35,6 +44,8 @@ class DataTypeAssembler extends AbstractDataTransformer {
 	}
 }
 
+export const DataTypeDisassembler = ldBlueprint(DATATYPE_ASSEMBLER_CFG)(AbstractDataTypeAssembler);
+
 export function flatDataTypeAssemblerFactory(inputKvStores: IKvStore[], nameSelf: string) {
 
 	const ActionCompOutputKVs: IKvStore[] = [
@@ -59,7 +70,7 @@ export function flatDataTypeAssemblerFactory(inputKvStores: IKvStore[], nameSelf
 		crudSkills: "cRUd"
 	};
 
-	let DataTypeAssemblerExt = class extends DataTypeAssembler {
+	let DataTypeAssemblerExt = class extends AbstractDataTypeAssembler {
 		itptKeys = interpretableKeys;
 		outputKvStores = ActionCompOutputKVs;
 	};
