@@ -26,6 +26,7 @@ export enum LDUIDict {
 	 * so they need special handling
 	 */
 	GQLQueryVars = "http://ldui.net/GQLQueryVariables",
+	GQLQueryType = "http://ldui.net/GQLQuery",
 	/**
 	 * from declarative to functional: such a component will assemble data from
 	 * disparate data

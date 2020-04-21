@@ -1,4 +1,4 @@
-import { GraphQLSchema, isListType, GraphQLObjectType, GraphQLNonNull, GraphQLList, isEnumType, OperationDefinitionNode, VariableDefinitionNode } from 'graphql';
+import { GraphQLSchema, isListType, GraphQLObjectType, GraphQLNonNull, GraphQLList, isEnumType, OperationDefinitionNode, VariableDefinitionNode, FragmentDefinitionNode } from 'graphql';
 import { PreResolveTypesProcessor, ParsedDocumentsConfig, BaseDocumentsVisitor, LoadedFragment, getConfigValue, SelectionSetProcessorConfig, SelectionSetToObject, DeclarationKind, DeclarationBlock } from '@graphql-codegen/visitor-plugin-common';
 import { MetaExplorerOperationVariablesToObject } from './mxp-operation-variables-to-object';
 import { MetaExplorerDocumentsPluginConfig } from './config';
@@ -51,9 +51,9 @@ export class MetaExplorerDocumentsVisitor extends BaseDocumentsVisitor<MetaExplo
 			return str;
 		};
 
+		//todo: change this for ikvstore
 		const wrapTypeWithModifiers = (baseType: string, type: GraphQLObjectType | GraphQLNonNull<GraphQLObjectType> | GraphQLList<GraphQLObjectType>): string => {
 			const prefix = this.config.namespacedImportName ? `${this.config.namespacedImportName}.` : '';
-
 			if (isNonNullType(type)) {
 				return clearOptional(wrapTypeWithModifiers(baseType, type.ofType));
 			} else if (isListType(type)) {
@@ -142,7 +142,34 @@ export class MetaExplorerDocumentsVisitor extends BaseDocumentsVisitor<MetaExplo
 		return [operationVariables, operationResult].filter(r => r).join('\n\n');
 	}
 
+  FragmentDefinition(node: FragmentDefinitionNode): string {
+    const fragmentRootType = this._schema.getType(node.typeCondition.name.value) as GraphQLObjectType;
+    const selectionSet = this._selectionSetToObject.createNext(fragmentRootType, node.selectionSet);
+    const fragmentSuffix = this.getFragmentSuffix(node);
+
+    return selectionSet.transformFragmentSelectionSetToTypes(
+      node.name.value,
+      fragmentSuffix,
+      this._declarationBlockConfig
+    );
+  }
+
 	protected getPunctuation(declarationKind: DeclarationKind): string {
 		return ';';
 	}
+	public getFragmentSuffix(node: FragmentDefinitionNode | string): string {
+    return this.getOperationSuffix(node, 'Fragment');
+	}
+	public getOperationSuffix(
+    node: FragmentDefinitionNode | OperationDefinitionNode | string,
+    operationType: string
+  ): string {
+    const { omitOperationSuffix = false, dedupeOperationSuffix = false } = this.config as { [key: string]: any };
+    const operationName = typeof node === 'string' ? node : node.name.value;
+    return omitOperationSuffix
+      ? ''
+      : dedupeOperationSuffix && operationName.toLowerCase().endsWith(operationType.toLowerCase())
+      ? ''
+      : operationType;
+  }
 }

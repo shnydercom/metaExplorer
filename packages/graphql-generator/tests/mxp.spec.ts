@@ -16,7 +16,7 @@ describe('MetaExplorer', () => {
     
     type Query {
       me: User!
-      user(id: ID!, username: String): User
+      user(id: ID!, username: String, emailInVar: String): User
       allUsers: [User]
       search(term: String!): [SearchResult!]!
       myChats: [Chat!]!
@@ -56,11 +56,12 @@ describe('MetaExplorer', () => {
     `);
 
     const query = parse(/* GraphQL */ `
-    query findUser($userId: ID!, $username: String) {
-      user(id: $userId, username: $username) {
+    query findUser($userId: ID!, $username: String, $emailInVar: string) {
+      user(id: $userId, username: $username, email: $emailInVar) {
+        email,
         ...UserFields
       }
-    }
+    } 
     
     fragment UserFields on User {
       id
