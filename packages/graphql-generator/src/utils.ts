@@ -26,7 +26,7 @@ export class MetaExplorerDeclarationBlock extends DeclarationBlock {
 
 			if (this._name) {
 				name = this._name + (this._nameGenerics || '') ;
-				nameSelf = `${NAME_SELF} = "${name.trim()}",`;
+				nameSelf = `${NAME_SELF} : "${name.trim()}",`;
 			}
 
 			result += this._kind + ' ' + name + ':' + BLUEPRINT_CFG_FRAGMENT + ' ' + extra;
