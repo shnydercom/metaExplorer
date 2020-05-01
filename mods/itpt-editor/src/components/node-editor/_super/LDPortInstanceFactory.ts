@@ -1,9 +1,10 @@
 import { LDPortModel } from "./LDPortModel";
-import { AbstractPortFactory } from "@projectstorm/react-diagrams";
 import { IKvStore,UserDefDict } from "@metaexplorer/core";
 import { LD_PORTMODEL } from "../node-editor-consts";
+import { AbstractModelFactory } from "@projectstorm/react-canvas-core";
+import { DiagramEngine } from "@projectstorm/react-diagrams";
 
-export class LDPortInstanceFactory extends AbstractPortFactory<LDPortModel> {
+export class LDPortInstanceFactory extends AbstractModelFactory<LDPortModel, DiagramEngine> {
 	constructor() {
 		super(LD_PORTMODEL);
 	}
@@ -15,5 +16,9 @@ export class LDPortInstanceFactory extends AbstractPortFactory<LDPortModel> {
 			ldType: undefined
 		};
 		return new LDPortModel(true, "unknown", baseDataTypeKVStore);
+	}
+
+	generateModel(event): LDPortModel {
+		return this.getNewInstance();
 	}
 }

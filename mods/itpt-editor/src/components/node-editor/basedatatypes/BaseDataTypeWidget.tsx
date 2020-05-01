@@ -1,14 +1,13 @@
-import { DiagramEngine, BaseWidget, BaseWidgetProps } from "@projectstorm/react-diagrams";
+import { DiagramEngine } from "@projectstorm/react-diagrams";
 import { BaseDataTypePortSelector } from "./BaseDataTypePortSelectorWidget";
 import { BaseDataTypeNodeModel } from "./BaseDataTypeNodeModel";
 import { createFactory } from "react";
 import { map } from "lodash";
-import { BASEDATATYPE_MODEL } from "../node-editor-consts";
 import React from "react";
 
-export interface BaseDataTypeNodeProps extends BaseWidgetProps {
+export interface BaseDataTypeNodeProps {
 	node: BaseDataTypeNodeModel;
-	diagramEngine: DiagramEngine;
+	engine: DiagramEngine;
 }
 
 export interface BaseDataTypeNodeState { }
@@ -16,9 +15,10 @@ export interface BaseDataTypeNodeState { }
 /**
  * @author Jonathan Schneider
  */
-export class BaseDataTypeNodeWidget extends BaseWidget<BaseDataTypeNodeProps, BaseDataTypeNodeState> {
+export class BaseDataTypeNodeWidget extends React.Component<BaseDataTypeNodeProps, BaseDataTypeNodeState> {
 	constructor(props: BaseDataTypeNodeProps) {
-		super(BASEDATATYPE_MODEL, props);
+		super(props);
+		//super(BASEDATATYPE_MODEL, props);
 		this.state = {};
 	}
 

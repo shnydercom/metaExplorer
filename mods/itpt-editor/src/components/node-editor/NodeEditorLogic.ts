@@ -68,17 +68,17 @@ export class NodeEditorLogic {
 		this.userProject = userProject;
 		this.diagramEngine = new DiagramEngine();
 		//label factories
-		this.diagramEngine.registerLabelFactory(new SettingsLabelFactory());
+		this.diagramEngine.getLabelFactories().registerFactory(new SettingsLabelFactory());
 		//link factories
-		this.diagramEngine.registerLinkFactory(new SettingsLinkFactory());
+		this.diagramEngine.getLinkFactories().registerFactory(new SettingsLinkFactory());
 		//node factories
-		this.diagramEngine.registerNodeFactory(new BaseDataTypeNodeFactory());
-		this.diagramEngine.registerNodeFactory(new GeneralDataTypeNodeFactory());
-		this.diagramEngine.registerNodeFactory(new DeclarationWidgetFactory());
-		this.diagramEngine.registerNodeFactory(new ExtendableTypesWidgetFactory());
-		this.diagramEngine.registerNodeFactory(new OutputInfoWidgetFactory());
+		this.diagramEngine.getNodeFactories().registerFactory(new BaseDataTypeNodeFactory());
+		this.diagramEngine.getNodeFactories().registerFactory(new GeneralDataTypeNodeFactory());
+		this.diagramEngine.getNodeFactories().registerFactory(new DeclarationWidgetFactory());
+		this.diagramEngine.getNodeFactories().registerFactory(new ExtendableTypesWidgetFactory());
+		this.diagramEngine.getNodeFactories().registerFactory(new OutputInfoWidgetFactory());
 		//port factories
-		this.diagramEngine.registerPortFactory(new LDPortInstanceFactory());
+		this.diagramEngine.getPortFactories().registerFactory(new LDPortInstanceFactory());
 		this.newModel(outputLDOptionsToken);
 		let retriever = appItptMatcherFn().getItptRetriever(this.retrieverName);
 		if (!retriever) retriever = appItptMatcherFn().getItptRetriever(DEFAULT_ITPT_RETRIEVER_NAME);
@@ -117,7 +117,7 @@ export class NodeEditorLogic {
 
 	public autoDistribute() {
 		const engine = this.diagramEngine;
-		const model = engine.getDiagramModel();
+		const model = engine.getModel();
 		let distributedModel = this.getDistributedModel(engine, model);
 		this.activeModel = distributedModel;
 		this.outputNode = this.activeModel.getNode(this.outputLDOptionsToken) as OutputInfoPartNodeModel;
@@ -128,8 +128,8 @@ export class NodeEditorLogic {
 				this.onOutputInfoSaved(newItpt);
 			}
 		} as any);
-		engine.setDiagramModel(distributedModel);
-		engine.recalculatePortsVisually();
+		engine.setModel(distributedModel);
+		//engine.recalculatePortsVisually();
 		let prevZoomlvl = distributedModel.getZoomLevel();
 		if (engine.canvas) engine.zoomToFit();
 		let newZoomLevel = distributedModel.getZoomLevel() * .8;
@@ -146,7 +146,7 @@ export class NodeEditorLogic {
 		const distributedSerializedDiagram = distributeElements(serialized);
 		//deserialize the model
 		let deSerializedModel = new DiagramModel();
-		deSerializedModel.deSerializeDiagram(distributedSerializedDiagram, engine);
+		deSerializedModel.deserializeModel(distributedSerializedDiagram, engine);
 		//bugfix for multiple labels:
 		for (const key in deSerializedModel.links) {
 			if (deSerializedModel.links.hasOwnProperty(key)) {
@@ -196,7 +196,7 @@ export class NodeEditorLogic {
 		//5) load model into engine
 		this.activeModel = model;
 		this.addListenersToModel(model);
-		this.diagramEngine.setDiagramModel(model);
+		this.diagramEngine.setModel(model);
 		/*if (this.diagramEngine.canvas) {
 			this.diagramEngine.zoomToFit();
 		}*/
@@ -454,7 +454,7 @@ export class NodeEditorLogic {
 				let inputMarkerNode = new DeclarationPartNodeModel("External Input Marker", null, null, editorSpecificNodesColor);
 				let inputMarkerPort = inputMarkerNode.addPort(new LDPortModel(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
 				this.getDiagramEngine()
-					.getDiagramModel()
+					.getModel()
 					.addNode(inputMarkerNode);
 				let targetNode = nodeMap.get(itptKeyField.objRef);
 				let targetPort = targetNode.getPort(itptKeyField.propRef + "_in");
@@ -477,7 +477,7 @@ export class NodeEditorLogic {
 				let outputMarkerNode = new DeclarationPartNodeModel("External Output Marker", null, null, editorSpecificNodesColor);
 				let outputMarkerPort = outputMarkerNode.addPort(new LDPortModel(true, "in-4", outputDataTypeKvStore, UserDefDict.externalOutput));
 				this.getDiagramEngine()
-					.getDiagramModel()
+					.getModel()
 					.addNode(outputMarkerNode);
 				let targetNode = nodeMap.get(outputInfo.objRef);
 				let targetPort = targetNode.getPort(outputInfo.propRef + "_out");
@@ -497,10 +497,10 @@ export class NodeEditorLogic {
 		outputItptLink.setTargetPort(outputNodeItptInPort);
 		outputItptLink.setSourcePort(baseNode.getPort(UserDefDict.outputSelfKey));
 
-		this.getDiagramEngine().getDiagramModel().addLink(outputItptLink);
+		this.getDiagramEngine().getModel().addLink(outputItptLink);
 		this.getDiagramEngine().recalculatePortsVisually();
 		linkArray.forEach((link) => {
-			this.getDiagramEngine().getDiagramModel().addLink(link);
+			this.getDiagramEngine().getModel().addLink(link);
 		});
 	}
 
@@ -519,7 +519,7 @@ export class NodeEditorLogic {
 		extendableNode.id = signature.id;
 		extendableNode.nameSelf = "Linear Data Display";
 		this.getDiagramEngine()
-			.getDiagramModel()
+			.getModel()
 			.addNode(extendableNode);
 		return extendableNode;
 	}
@@ -533,7 +533,7 @@ export class NodeEditorLogic {
 		this.addLDPortModelsToNodeFromItptRetr(generalNode, nodeName);
 		if (itpt.canInterpretType) generalNode.canInterpretType = itpt.canInterpretType;
 		this.getDiagramEngine()
-			.getDiagramModel()
+			.getModel()
 			.addNode(generalNode);
 		return generalNode;
 	}
@@ -557,7 +557,7 @@ export class NodeEditorLogic {
 		node.y = signature.y;
 		node.addPort(new LDPortModel(false, PORTNAME_OUT_OUTPUTSELF, baseDataTypeKVStore, "output", signature.id));
 		this.getDiagramEngine()
-			.getDiagramModel()
+			.getModel()
 			.addNode(node);
 		return node;
 	}

@@ -164,9 +164,9 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 
 	render() {
 		const { portType } = this.state;
-		var port = <SinglePortWidget node={this.props.model.getParent()} name={this.props.model.name} isMulti={true} />;
+		var port = <SinglePortWidget node={this.props.model.getParent()} name={this.props.model.getName()} isMulti={true} />;
 		var label = <div className="name">{this.props.model.label}</div>;
-		let targetID = this.props.model.id;
+		let targetID = this.props.model.getID();
 		//let newToken: ILDToken = new NetworkPreferredToken(targetID);
 		//let newOutputKVMap: OutputKVMap = { [targetID]: { targetLDToken: newToken, targetProperty: null } };
 		return (

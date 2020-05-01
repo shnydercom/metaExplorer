@@ -1,16 +1,15 @@
-import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "@projectstorm/react-diagrams";
+import { DefaultPortLabel, DiagramEngine } from "@projectstorm/react-diagrams";
 import { ExtendableTypesNodeModel } from "./ExtendableTypesNodeModel";
 import { map } from "lodash";
 import { LDPortModel } from "../_super/LDPortModel";
 import { IKvStore, UserDefDict } from "@metaexplorer/core";
-import { EXTENDABLETYPES_MODEL } from "../node-editor-consts";
 import React from "react";
 
 export const TXT_ADD_PORT = "+1 in";
 
-export interface ExtendableTypesNodeProps  extends BaseWidgetProps {
+export interface ExtendableTypesNodeProps {
 	node: ExtendableTypesNodeModel;
-	diagramEngine: DiagramEngine;
+	engine: DiagramEngine;
 }
 
 export interface ExtendableTypesTypeNodeState { }
@@ -18,14 +17,15 @@ export interface ExtendableTypesTypeNodeState { }
 /**
  * @author Jonathan Schneider
  */
-export class ExtendableTypesNodeWidget extends BaseWidget<ExtendableTypesNodeProps, ExtendableTypesTypeNodeState> {
+export class ExtendableTypesNodeWidget extends React.Component<ExtendableTypesNodeProps, ExtendableTypesTypeNodeState> {
 	constructor(props: ExtendableTypesNodeProps) {
-		super(EXTENDABLETYPES_MODEL, props);
+		super(props)
+		//super(EXTENDABLETYPES_MODEL, props);
 		this.state = {};
 	}
 
 	generatePort(port) {
-		return <DefaultPortLabel model={port} key={port.id} />;
+		return <DefaultPortLabel engine={this.props.engine} port={port} key={port.id} />;
 		//return <GeneralDataTypePortSelector model={port} key={port.id} />;
 	}
 

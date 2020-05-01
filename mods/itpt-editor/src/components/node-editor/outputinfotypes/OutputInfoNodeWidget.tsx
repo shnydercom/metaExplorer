@@ -9,7 +9,7 @@ import { ITPTSummary } from "../../panels/ITPTSummary";
 
 export interface OutputInfoNodeProps {
 	node: OutputInfoPartNodeModel;
-	diagramEngine: DiagramEngine;
+	engine: DiagramEngine;
 }
 
 export interface OutputInfoTypeNodeState {
@@ -62,7 +62,7 @@ export class OutputInfoNodeWidget_deprecated extends Component<OutputInfoNodePro
 	}
 
 	generatePort(port) {
-		return <DefaultPortLabel model={port} key={port.id} />;
+		return <DefaultPortLabel engine={this.props.engine} port={port} key={port.id}/>;
 	}
 
 	handleModalToggle() {
@@ -175,7 +175,7 @@ export class OutputInfoNodeWidget_deprecated extends Component<OutputInfoNodePro
 export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps> {
 
 	generatePort(port) {
-		return <DefaultPortLabel model={port} key={port.id} />;
+		return <DefaultPortLabel engine={this.props.engine} port={port} key={port.id}/>;
 	}
 
 	render() {

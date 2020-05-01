@@ -18,7 +18,7 @@ export class SinglePortLabel extends Component<SinglePortLabelProps, SinglePortL
 	};
 
 	render() {
-		var port = <SinglePortWidget node={this.props.model.getParent()} name={this.props.model.name} isMulti={true} />;
+		var port = <SinglePortWidget node={this.props.model.getParent()} name={this.props.model.getName()} isMulti={true} />;
 		var label = <div className="name">{this.props.model.label}</div>;
 
 		return (

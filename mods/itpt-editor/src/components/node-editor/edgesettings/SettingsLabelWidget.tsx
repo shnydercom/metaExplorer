@@ -1,8 +1,8 @@
 import * as React from "react";
-import { BaseWidgetProps, DefaultLabelModel, BaseWidget } from "@projectstorm/react-diagrams";
+import { DefaultLabelModel } from "@projectstorm/react-diagrams";
 import { indexOf } from "lodash";
 import { LDPortModel } from "../_super/LDPortModel";
-export interface SettingsLabelWidgetProps extends BaseWidgetProps {
+export interface SettingsLabelWidgetProps {
 	model: DefaultLabelModel;
 }
 
@@ -13,7 +13,7 @@ export interface SettingsLabelWidgetState {
 	outputLinks: string[];
 }
 
-export class SettingsLabelWidget extends BaseWidget<SettingsLabelWidgetProps, SettingsLabelWidgetState> {
+export class SettingsLabelWidget extends React.Component<SettingsLabelWidgetProps, SettingsLabelWidgetState> {
 	static getDerivedStateFromProps(nextProps: SettingsLabelWidgetProps, prevState: SettingsLabelWidgetState): SettingsLabelWidgetState | null {
 		let inputLinks = [];
 		let outputLinks = [];
@@ -47,8 +47,9 @@ export class SettingsLabelWidget extends BaseWidget<SettingsLabelWidgetProps, Se
 	}
 
 	constructor(props) {
-		//	super("srd-default-label", props);
-		super("srd-link-menu", props);
+		super(props);
+		// super("srd-default-label", props);
+		// super("srd-link-menu", props);
 		this.state = { isVisible: false, isOpened: false, inputLinks: [], outputLinks: [] };
 	}
 
@@ -75,10 +76,11 @@ export class SettingsLabelWidget extends BaseWidget<SettingsLabelWidgetProps, Se
 		if (!isVisible) return null;
 		const inputLinksLen = inputLinks.length;
 		const outputLinksLen = outputLinks.length;
-		const inputPos = indexOf(inputLinks, parentLink.id) + 1;
-		const outputPos = indexOf(outputLinks, parentLink.id) + 1;
-		const thisProps = this.getProps();
-		return <div {...thisProps} className={isOpened ? thisProps.className + "anim" : thisProps.className}
+		const inputPos = indexOf(inputLinks, parentLink.getID()) + 1;
+		const outputPos = indexOf(outputLinks, parentLink.getID()) + 1;
+		// const thisProps = this.getProps();
+		// {...thisProps} className={isOpened ? thisProps.className + "anim" : thisProps.className}
+		return <div 
 			onMouseEnter={(event) => this.setState({ ...this.state, isOpened: true })}
 			onMouseLeave={() => this.setState({ ...this.state, isOpened: false })}
 		>

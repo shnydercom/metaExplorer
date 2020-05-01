@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DiagramWidget } from "@projectstorm/react-diagrams";
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { NodeEditorLogic } from "./NodeEditorLogic";
 
 export interface EditorBodyProps {
@@ -60,7 +60,8 @@ export class NodeEditorBody extends Component<EditorBodyProps, EditorBodyState> 
 						event.preventDefault();
 					}}
 				>
-					<DiagramWidget inverseZoom diagramEngine={this.props.logic.getDiagramEngine()} maxNumberPointsPerLink={0} />
+					{/**inverseZoom  maxNumberPointsPerLink={0} */}
+					<CanvasWidget   engine={this.props.logic.getDiagramEngine()} />
 					{hideRefMapDropSpace
 						? null
 						: <div className="editor-top-bar">

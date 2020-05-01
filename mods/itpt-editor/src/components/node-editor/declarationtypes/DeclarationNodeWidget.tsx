@@ -1,13 +1,12 @@
-import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "@projectstorm/react-diagrams";
+import { DefaultPortLabel, DiagramEngine } from "@projectstorm/react-diagrams";
 import { DeclarationPartNodeModel } from "./DeclarationNodeModel";
-import { createFactory } from "react";
 import { map } from "lodash";
-import { DECLARATION_MODEL } from "../node-editor-consts";
+// import { DECLARATION_MODEL } from "../node-editor-consts";
 import React from "react";
 
-export interface DeclarationNodeProps extends BaseWidgetProps {
+export interface DeclarationNodeProps {
 	node: DeclarationPartNodeModel;
-	diagramEngine: DiagramEngine;
+	engine: DiagramEngine;
 }
 
 export interface DeclarationTypeNodeState { }
@@ -15,14 +14,16 @@ export interface DeclarationTypeNodeState { }
 /**
  * @author Jonathan Schneider
  */
-export class DeclarationNodeWidget extends BaseWidget<DeclarationNodeProps, DeclarationTypeNodeState> {
+export class DeclarationNodeWidget extends React.Component<DeclarationNodeProps, DeclarationTypeNodeState> {
 	constructor(props: DeclarationNodeProps) {
-		super(DECLARATION_MODEL, props);
+		super(
+			// DECLARATION_MODEL, 
+			props);
 		this.state = {};
 	}
 
 	generatePort(port) {
-		return <DefaultPortLabel model={port} key={port.id} />;
+		return <DefaultPortLabel engine={this.props.engine} port={port} key={port.id} />;
 		//return <GeneralDataTypePortSelector model={port} key={port.id} />;
 	}
 
@@ -40,5 +41,3 @@ export class DeclarationNodeWidget extends BaseWidget<DeclarationNodeProps, Decl
 		);
 	}
 }
-
-export var DeclarationNodeWidgetFactory = createFactory(DeclarationNodeWidget);

@@ -693,7 +693,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		var nodesCount = keys(
 			this.logic
 				.getDiagramEngine()
-				.getDiagramModel()
+				.getModel()
 				.getNodes()
 		).length;
 		var node = null;
@@ -751,7 +751,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		node.y = points.y - 32 / 2;
 		this.logic
 			.getDiagramEngine()
-			.getDiagramModel()
+			.getModel()
 			.addNode(node);
 		this.forceUpdate();
 	}

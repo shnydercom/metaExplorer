@@ -1,14 +1,13 @@
-import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "@projectstorm/react-diagrams";
+import { DefaultPortLabel, DiagramEngine } from "@projectstorm/react-diagrams";
 import { GeneralDataTypeNodeModel } from "./GeneralDataTypeNodeModel";
 import { map } from 'lodash';
-import { GENERALDATATYPE_MODEL } from "../node-editor-consts";
 import React from "react";
 
 export const TXT_EXPLORE = "explore";
 
-export interface GeneralDataTypeNodeProps extends BaseWidgetProps {
+export interface GeneralDataTypeNodeProps {
 	node: GeneralDataTypeNodeModel;
-	diagramEngine: DiagramEngine;
+	engine: DiagramEngine;
 }
 
 export interface GeneralDataTypeNodeState { }
@@ -16,14 +15,15 @@ export interface GeneralDataTypeNodeState { }
 /**
  * @author Jonathan Schneider
  */
-export class GeneralDataTypeNodeWidget extends BaseWidget<GeneralDataTypeNodeProps, GeneralDataTypeNodeState> {
+export class GeneralDataTypeNodeWidget extends React.Component<GeneralDataTypeNodeProps, GeneralDataTypeNodeState> {
 	constructor(props: GeneralDataTypeNodeProps) {
-		super(GENERALDATATYPE_MODEL, props);
+		super(props);
+		// super(GENERALDATATYPE_MODEL, props);
 		this.state = {};
 	}
 
 	generatePort(port) {
-		return <DefaultPortLabel model={port} key={port.id} />;
+		return <DefaultPortLabel engine={this.props.engine} port={port} key={port.id}/>;
 	}
 
 	render() {
