@@ -2,6 +2,7 @@ node_modules
 
 ./*.lock
 lib
+lib-esm
 *.log
 ./**/*.tsbuildinfo
 *.lock
