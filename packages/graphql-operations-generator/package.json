@@ -1,5 +1,5 @@
 {
-  "name": "@metaexplorer/graphql-generator",
+  "name": "@metaexplorer/graphql-operations-generator",
   "version": "0.0.1",
   "description": "graphql-generator for metaexplorer projects",
   "author": "Jonathan Schneider",
@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "tslint src/**/*.ts",
     "prepack": "bob-update-version",
-    "build": "bob",
+    "build-generator": "bob",
     "test": "jest --no-watchman --config ../../jest.config.js",
     "watch": "jest --watch --config ../../jest.config.js"
   },

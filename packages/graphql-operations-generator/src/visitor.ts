@@ -58,8 +58,8 @@ export class MetaExplorerDocumentsVisitor extends BaseDocumentsVisitor<MetaExplo
 				return clearOptional(wrapTypeWithModifiers(baseType, type.ofType));
 			} else if (isListType(type)) {
 				const innerType = wrapTypeWithModifiers(baseType, type.ofType);
-
 				return `${prefix}Maybe<${this.config.immutableTypes ? 'ReadonlyArray' : 'Array'}<${innerType}>>`;
+				// return `${prefix}Maybe<${this.config.immutableTypes ? 'ReadonlyArray' : 'Array'}<${innerType}>>`;
 			} else {
 				return `${prefix}Maybe<${baseType}>`;
 			}

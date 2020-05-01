@@ -84,7 +84,6 @@ ${OUTPUT_KV_FRAGMENT}],
 		} else {
 			const baseType = getBaseTypeNode(variable.type);
 			const typeName = baseType.name.value;
-
 			if (this._scalars[typeName]) {
 				typeValue = this.getScalar(typeName);
 			} else if (this._enumValues[typeName] && this._enumValues[typeName].sourceFile) {
@@ -97,10 +96,14 @@ ${OUTPUT_KV_FRAGMENT}],
 		}
 
 		const fieldName = this.getName(variable);
-		const fieldType = this.wrapAstTypeWithModifiers(typeValue, variable.type);
+		let fieldType = this.wrapAstTypeWithModifiers(typeValue, variable.type);
 
 		const hasDefaultValue = variable.defaultValue != null && typeof variable.defaultValue !== 'undefined';
 		const isNonNullType = variable.type.kind === Kind.NON_NULL_TYPE;
+
+		if (this._scalars[fieldType]) {
+			fieldType = this.getScalar(fieldType);
+		}
 
 		const formattedFieldString = this.formatFieldString(fieldName, isNonNullType, hasDefaultValue);
 		const formattedTypeString = this.formatTypeString(fieldType, isNonNullType, hasDefaultValue);
