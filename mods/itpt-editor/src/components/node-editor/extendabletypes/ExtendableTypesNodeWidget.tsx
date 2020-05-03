@@ -37,7 +37,11 @@ export class ExtendableTypesNodeWidget extends React.Component<ExtendableTypesNo
 			value: undefined,
 			ldType: UserDefDict.intrprtrClassType
 		};
-		this.props.node.addPort(new LDPortModel(true, newPortName, newPortKV));
+		this.props.node.addPort(new LDPortModel({
+			in: true,
+			name: newPortName,
+			kv: newPortKV
+		}));
 		this.forceUpdate();
 	}
 

@@ -15,7 +15,7 @@ export class ExtendableTypesWidgetFactory extends AbstractReactFactory<Extendabl
 	}
 	
 	getNewInstance() {
-		return new ExtendableTypesNodeModel();
+		return ExtendableTypesNodeModel.fromVars();
 	}
 
 	generateModel(event): ExtendableTypesNodeModel {

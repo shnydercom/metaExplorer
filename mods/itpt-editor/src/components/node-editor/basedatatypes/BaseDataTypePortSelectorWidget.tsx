@@ -100,12 +100,14 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 				const links = nextProps.model.getLinks();
 				if (links && Object.keys(links).length > 0) {
 					const linksKeys = Object.keys(links);
-					links[linksKeys[0]].iterateListeners((listener, event) => {
-						if (listener.sourcePortChanged) {
-							const nextPort = { ...nextProps.model, kv: newKV };
-							listener.sourcePortChanged({ ...event, port: nextPort as LDPortModel });
-						}
-					});
+					const nextPort = { ...nextProps.model, kv: newKV };
+
+					links[linksKeys[0]].fireEvent(
+						{
+							port: nextPort as LDPortModel
+						},
+						'sourcePortChanged'
+					);
 				}
 			}
 		}

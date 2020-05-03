@@ -19,6 +19,6 @@ export class DeclarationWidgetFactory extends AbstractReactFactory<DeclarationPa
 	}
 
 	getNewInstance() {
-		return new DeclarationPartNodeModel();
+		return DeclarationPartNodeModel.fromVars();
 	}
 }

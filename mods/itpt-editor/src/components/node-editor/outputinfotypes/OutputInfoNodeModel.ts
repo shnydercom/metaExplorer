@@ -1,10 +1,17 @@
-import { BaseEvent, BaseModelListener, DiagramEngine } from "@projectstorm/react-diagrams";
 import { OUTPUT_INFO_MODEL } from "../node-editor-consts";
-import { ItptNodeModel } from "../_super/ItptNodeModel";
+import { ItptNodeModel, ItptNodeModelOptions } from "../_super/ItptNodeModel";
 import { merge } from "lodash";
+import { DeserializeEvent, BaseListener, BaseEvent } from "@projectstorm/react-canvas-core";
 
-export interface OutputInfoNodeModelListener extends BaseModelListener {
-	outputInfoSaved?(event: BaseEvent<OutputInfoPartNodeModel> & { itptName: null | string }): void;
+export interface OutputInfoNodeModelListener extends BaseListener {
+	outputInfoSaved?(event: BaseEvent & { itptName: null | string }): void;
+}
+
+export interface OutputInfoPartNodeModelOptions extends ItptNodeModelOptions {
+	itptName: string | null;
+	itptUserName: string;
+	itptProjName: string;
+	itptBlockName: string;
 }
 
 export const OUTPUT_NODE_WIDTH = 275;
@@ -28,21 +35,33 @@ export class OutputInfoPartNodeModel extends ItptNodeModel {
 	 */
 	protected userProject: string;
 
-	constructor(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", id?: string,
-		           userName?: string, userProject?: string
-	) {
-		super(nameSelf, subItptOf, canInterpretType, color, OUTPUT_INFO_MODEL, id);
-		this.nameSelf = nameSelf;
-		this.color = color;
+	static fromVars(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", id?: string, isCompound?: boolean, type?: string, userName?: string, userProject?: string) {
+		return new this({
+			nameSelf,
+			subItptOf,
+			canInterpretType,
+			color,
+			type,
+			id,
+			isCompound,
+			itptName: null,
+			itptUserName: userName,
+			itptProjName: userProject,
+			itptBlockName: ""
+		}
+		);
+	}
+
+	constructor(options: OutputInfoPartNodeModelOptions) {
+		options.type = OUTPUT_INFO_MODEL;
+		super(options);
 		this.setItptName(null);
-		this.userName = userName,
-		this.userProject = userProject;
 		this.width = OUTPUT_NODE_WIDTH;
 	}
 
-	deSerialize(object, engine: DiagramEngine) {
-		super.deSerialize(object, engine);
-		this.setItptName(object.itptName);
+	deserialize(event: DeserializeEvent<this>) {
+		super.deSerialize(event);
+		this.setItptName(event.data.itptName);
 	}
 
 	serialize() {
@@ -51,24 +70,24 @@ export class OutputInfoPartNodeModel extends ItptNodeModel {
 		});
 	}
 
-	getItptUserName(){
+	getItptUserName() {
 		return this.itptUserName;
 	}
 
-	getItptProjName(){
+	getItptProjName() {
 		return this.itptProjName;
 	}
 
-	getUserName(){
+	getUserName() {
 		return this.userName;
 	}
 
-	getUserProject(){
+	getUserProject() {
 		return this.userProject;
 	}
 
 	setItptName(value: string) {
-		if (value){
+		if (value) {
 			this.itptName = value;
 			let splitValue = value.split("/");
 			if (splitValue.length === 0) {
@@ -97,7 +116,7 @@ export class OutputInfoPartNodeModel extends ItptNodeModel {
 	getItptName() {
 		return this.itptName;
 	}
-	getItptBlockName(){
+	getItptBlockName() {
 		return this.itptBlockName;
 	}
 
@@ -114,7 +133,7 @@ export class OutputInfoPartNodeModel extends ItptNodeModel {
 				if (links.hasOwnProperty(key)) {
 					elemCounter++;
 					const element = links[key];
-					if (!element.sourcePort || !element.targetPort) return false;
+					if (!element.getSourcePort() || !element.getTargetPort()) return false;
 				}
 			}
 			if (elemCounter !== 1) return false;
@@ -124,10 +143,9 @@ export class OutputInfoPartNodeModel extends ItptNodeModel {
 
 	handleOutputInfoSaved() {
 		const newItptName = this.itptName;
-		this.iterateListeners((listener: OutputInfoNodeModelListener, event: BaseEvent<OutputInfoPartNodeModel> & { itptName: null | string }) => {
-			if (listener.outputInfoSaved) {
-				listener.outputInfoSaved({ ...event, itptName: newItptName });
-			}
-		});
+		this.fireEvent({
+			itptName: newItptName
+		},
+			'outputInfoSaved');
 	}
 }

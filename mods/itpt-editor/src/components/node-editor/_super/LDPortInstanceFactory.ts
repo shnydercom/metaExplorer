@@ -15,7 +15,11 @@ export class LDPortInstanceFactory extends AbstractModelFactory<LDPortModel, Dia
 			value: undefined,
 			ldType: undefined
 		};
-		return new LDPortModel(true, "unknown", baseDataTypeKVStore);
+		return new LDPortModel({
+			in: true,
+			name: "unknown",
+			kv: baseDataTypeKVStore
+		});
 	}
 
 	generateModel(event): LDPortModel {

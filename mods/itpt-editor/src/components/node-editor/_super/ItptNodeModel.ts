@@ -1,7 +1,16 @@
-import { NodeModel, DiagramEngine } from "@projectstorm/react-diagrams";
+import { NodeModel } from "@projectstorm/react-diagrams";
 import { LDPortModel } from './LDPortModel';
 import { merge, filter } from "lodash";
 import { INTERPRETERDATATYPE_MODEL } from "../node-editor-consts";
+import { BaseModelOptions, DeserializeEvent } from "@projectstorm/react-canvas-core";
+
+export interface ItptNodeModelOptions extends BaseModelOptions {
+	nameSelf: string;
+	canInterpretType: string;
+	subItptOf: string;
+	color: string;
+	isCompound: boolean;
+}
 
 export class ItptNodeModel extends NodeModel {
 	nameSelf: string;
@@ -11,22 +20,47 @@ export class ItptNodeModel extends NodeModel {
 	ports: { [s: string]: LDPortModel };
 	isCompound: boolean;
 
-	constructor(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", type?: string, id?: string, isCompound?: boolean) {
-		super(type ? type : INTERPRETERDATATYPE_MODEL, id);
+	static fromVars(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", id?: string, isCompound?: boolean, type?: string) {
+		return new this({
+			nameSelf,
+			subItptOf,
+			canInterpretType,
+			color,
+			type,
+			id,
+			isCompound
+		}
+		);
+	}
+
+	constructor(options: ItptNodeModelOptions) {
+		// nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", type?: string, id?: string, isCompound?: boolean) {
+		super({
+			type: options.type ? options.type : INTERPRETERDATATYPE_MODEL,
+			nameSelf: options.nameSelf,
+			color: options.color,
+			canInterpretType: options.canInterpretType,
+			subItptOf: options.subItptOf,
+			isCompound: !!options.isCompound,
+			...options
+		});
+		/*
+		type ? type : INTERPRETERDATATYPE_MODEL, id);
 		this.nameSelf = nameSelf;
 		this.color = color;
 		this.canInterpretType = canInterpretType;
 		this.subItptOf = subItptOf;
 		this.isCompound = !!isCompound;
+		*/
 	}
 
-	deSerialize(object, engine: DiagramEngine) {
-		super.deSerialize(object, engine);
-		this.nameSelf = object.nameSelf;
-		this.color = object.color;
-		this.canInterpretType = object.canInterpretType;
-		this.subItptOf = object.subItptOf;
-		this.isCompound = object.isCompound;
+	deSerialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+		this.nameSelf = event.data.nameSelf;
+		this.color = event.data.color;
+		this.canInterpretType = event.data.canInterpretType;
+		this.subItptOf = event.data.subItptOf;
+		this.isCompound = event.data.isCompound;
 	}
 
 	serialize() {

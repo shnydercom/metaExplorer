@@ -15,6 +15,6 @@ export class BaseDataTypeNodeFactory extends AbstractReactFactory<BaseDataTypeNo
 	}
 
 	generateModel(event) {
-		return new BaseDataTypeNodeModel();
+		return BaseDataTypeNodeModel.fromVars();
 	}
 }

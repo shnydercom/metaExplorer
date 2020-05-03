@@ -11,7 +11,7 @@ export class GeneralDataTypeNodeFactory extends AbstractReactFactory<GeneralData
 	}
 
 	getNewInstance() {
-		return new GeneralDataTypeNodeModel();
+		return GeneralDataTypeNodeModel.fromVars();
 	}
 
 	generateReactWidget(event: GenerateWidgetEvent<GeneralDataTypeNodeModel>): JSX.Element {

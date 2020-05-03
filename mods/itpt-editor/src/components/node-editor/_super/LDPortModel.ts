@@ -1,31 +1,53 @@
-import { PortModel, DiagramEngine, LinkModel, DefaultLinkModel } from "@projectstorm/react-diagrams";
+import { PortModel, LinkModel, DefaultLinkModel, PortModelOptions, PortModelGenerics, PortModelAlignment } from "@projectstorm/react-diagrams";
 import { merge } from "lodash";
 import { IKvStore, isInputValueValidFor, arrayMove } from "@metaexplorer/core";
 import { LD_PORTMODEL } from "../node-editor-consts";
+import { DeserializeEvent } from "@projectstorm/react-canvas-core";
+
+export interface LDPortModelOptions extends PortModelOptions {
+	in: boolean;
+	label?: string;
+	kv: IKvStore;
+	linkSortOrder?: string[];
+}
+
+export interface LDPortModelGenerics extends PortModelGenerics {
+	OPTIONS: LDPortModelOptions;
+}
 
 /**
  * @author Jonathan Schneider
  */
-export class LDPortModel extends PortModel {
+export class LDPortModel extends PortModel<LDPortModelGenerics> {
 	in: boolean;
 	label: string;
 	kv: IKvStore;
 	linkSortOrder: string[];
 
-	constructor(isInput: boolean, name: string, kv: IKvStore, label: string = null, id?: string) {
-		super(name, id);
-		this.type = LD_PORTMODEL;
-		this.in = isInput;
-		this.label = label || name;
-		this.kv = kv;
-		this.linkSortOrder = [];
+	static fromVars(isInput: boolean, name: string, kv: IKvStore, label: string = null, id?: string) {
+		return new this({
+			in: isInput,
+			name,
+			kv,
+			label,
+			id
+		});
+	}
+	constructor(options: LDPortModelOptions){
+		super({
+			alignment: options.in ? PortModelAlignment.LEFT : PortModelAlignment.RIGHT,
+			type: LD_PORTMODEL,
+			linkSortOrder: [],
+			...options
+		});
 	}
 
-	deSerialize(object, engine: DiagramEngine) {
-		super.deSerialize(object, engine);
-		this.in = object.in;
-		this.label = object.label;
-		this.kv = object.kv;
+	deSerialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+			//object, engine);
+		this.in = event.data.in;
+		this.label = event.data.label;
+		this.kv = event.data.kv;
 	}
 
 	serialize() {
@@ -69,7 +91,7 @@ export class LDPortModel extends PortModel {
 
 	removeLink(link: LinkModel) {
 		super.removeLink(link);
-		var idx = this.linkSortOrder.indexOf(link.id);
+		var idx = this.linkSortOrder.indexOf(link.getID());
 		if (idx > -1) {
 			this.linkSortOrder.splice(idx, 1);
 		}
@@ -77,18 +99,18 @@ export class LDPortModel extends PortModel {
 
 	addLink(link: LinkModel) {
 		super.addLink(link);
-		this.linkSortOrder.push(link.id);
+		this.linkSortOrder.push(link.getID());
 	}
 
 	decreaseLinksSortOrder(link: LinkModel) {
-		const idx = this.linkSortOrder.indexOf(link.id);
+		const idx = this.linkSortOrder.indexOf(link.getID());
 		if (idx > 0) {
 			arrayMove(this.linkSortOrder, idx, idx - 1);
 		}
 	}
 
 	increaseLinksSortOrder(link: LinkModel) {
-		const idx = this.linkSortOrder.indexOf(link.id);
+		const idx = this.linkSortOrder.indexOf(link.getID());
 		if (idx > -1 && idx <= this.linkSortOrder.length - 1) {
 			arrayMove(this.linkSortOrder, idx, idx + 1);
 		}

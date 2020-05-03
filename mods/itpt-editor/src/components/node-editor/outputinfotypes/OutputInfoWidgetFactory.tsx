@@ -19,6 +19,6 @@ export class OutputInfoWidgetFactory extends AbstractReactFactory<OutputInfoPart
 	}
 
 	getNewInstance() {
-		return new OutputInfoPartNodeModel();
+		return OutputInfoPartNodeModel.fromVars();
 	}
 }
