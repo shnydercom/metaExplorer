@@ -1,4 +1,4 @@
-import { DefaultPortLabel, DiagramEngine } from "@projectstorm/react-diagrams";
+import { DefaultPortLabel, DiagramEngine, DefaultPortModel } from "@projectstorm/react-diagrams";
 import { ExtendableTypesNodeModel } from "./ExtendableTypesNodeModel";
 import { map } from "lodash";
 import { LDPortModel } from "../_super/LDPortModel";
@@ -24,8 +24,8 @@ export class ExtendableTypesNodeWidget extends React.Component<ExtendableTypesNo
 		this.state = {};
 	}
 
-	generatePort(port) {
-		return <DefaultPortLabel engine={this.props.engine} port={port} key={port.id} />;
+	generatePort(port: LDPortModel) {
+		return <DefaultPortLabel engine={this.props.engine} port={port as DefaultPortModel} key={port.getID()} />;
 		//return <GeneralDataTypePortSelector model={port} key={port.id} />;
 	}
 
@@ -40,7 +40,9 @@ export class ExtendableTypesNodeWidget extends React.Component<ExtendableTypesNo
 		this.props.node.addPort(new LDPortModel({
 			in: true,
 			name: newPortName,
-			kv: newPortKV
+			kv: newPortKV,
+			id: newPortName,
+			label: newPortName
 		}));
 		this.forceUpdate();
 	}

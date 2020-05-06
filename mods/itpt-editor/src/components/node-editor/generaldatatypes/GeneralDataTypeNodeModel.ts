@@ -27,7 +27,6 @@ export class GeneralDataTypeNodeModel extends ItptNodeModel {
 		options.type = GENERALDATATYPE_MODEL;
 		super(options);
 	}
-	
 
 	onExploreBtnClicked() {
 		const newItptName = this.subItptOf;

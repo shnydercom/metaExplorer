@@ -74,14 +74,14 @@ export class ItptNodeModel extends NodeModel {
 	}
 
 	getInPorts(): LDPortModel[] {
-		return filter(this.ports, (portModel) => {
-			return portModel.in;
+		return filter(this.ports, (portModel: LDPortModel) => {
+			return portModel.isIn();
 		});
 	}
 
 	getOutPorts(): LDPortModel[] {
-		return filter(this.ports, (portModel) => {
-			return !portModel.in;
+		return filter(this.ports, (portModel: LDPortModel) => {
+			return !portModel.isIn();
 		});
 	}
 }

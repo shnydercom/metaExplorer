@@ -1,8 +1,9 @@
-import { DefaultPortLabel, DiagramEngine } from "@projectstorm/react-diagrams";
+import { DefaultPortLabel, DiagramEngine, DefaultPortModel } from "@projectstorm/react-diagrams";
 import { DeclarationPartNodeModel } from "./DeclarationNodeModel";
 import { map } from "lodash";
 // import { DECLARATION_MODEL } from "../node-editor-consts";
 import React from "react";
+import { LDPortModel } from "../_super/LDPortModel";
 
 export interface DeclarationNodeProps {
 	node: DeclarationPartNodeModel;
@@ -17,13 +18,13 @@ export interface DeclarationTypeNodeState { }
 export class DeclarationNodeWidget extends React.Component<DeclarationNodeProps, DeclarationTypeNodeState> {
 	constructor(props: DeclarationNodeProps) {
 		super(
-			// DECLARATION_MODEL, 
+			// DECLARATION_MODEL,
 			props);
 		this.state = {};
 	}
 
-	generatePort(port) {
-		return <DefaultPortLabel engine={this.props.engine} port={port} key={port.id} />;
+	generatePort(port: LDPortModel) {
+		return <DefaultPortLabel engine={this.props.engine} port={port as DefaultPortModel} key={port.getID()} />;
 		//return <GeneralDataTypePortSelector model={port} key={port.id} />;
 	}
 

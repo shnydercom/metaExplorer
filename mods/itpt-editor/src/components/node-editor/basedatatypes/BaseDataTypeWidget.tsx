@@ -4,6 +4,7 @@ import { BaseDataTypeNodeModel } from "./BaseDataTypeNodeModel";
 import { createFactory } from "react";
 import { map } from "lodash";
 import React from "react";
+import { LDPortModel } from "../_super/LDPortModel";
 
 export interface BaseDataTypeNodeProps {
 	node: BaseDataTypeNodeModel;
@@ -22,8 +23,8 @@ export class BaseDataTypeNodeWidget extends React.Component<BaseDataTypeNodeProp
 		this.state = {};
 	}
 
-	generatePort(port) {
-		return <BaseDataTypePortSelector model={port} key={port.id} ldTokenString={port.id}/>;
+	generatePort(port: LDPortModel) {
+		return <BaseDataTypePortSelector model={port} key={port.getID()} ldTokenString={port.getID()}/>;
 	}
 
 	render() {

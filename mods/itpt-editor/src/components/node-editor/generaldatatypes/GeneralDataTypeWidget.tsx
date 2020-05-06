@@ -1,7 +1,8 @@
-import { DefaultPortLabel, DiagramEngine } from "@projectstorm/react-diagrams";
+import { DefaultPortLabel, DiagramEngine, DefaultPortModel } from "@projectstorm/react-diagrams";
 import { GeneralDataTypeNodeModel } from "./GeneralDataTypeNodeModel";
 import { map } from 'lodash';
 import React from "react";
+import { LDPortModel } from "../_super/LDPortModel";
 
 export const TXT_EXPLORE = "explore";
 
@@ -22,8 +23,8 @@ export class GeneralDataTypeNodeWidget extends React.Component<GeneralDataTypeNo
 		this.state = {};
 	}
 
-	generatePort(port) {
-		return <DefaultPortLabel engine={this.props.engine} port={port} key={port.id}/>;
+	generatePort(port: LDPortModel) {
+		return <DefaultPortLabel engine={this.props.engine} port={port as DefaultPortModel} key={port.getID()}/>;
 	}
 
 	render() {

@@ -737,7 +737,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					value: undefined,
 					ldType: UserDefDict.intrprtrClassType
 				};
-				node.addPort(LDPortModel.fromVars(false, outputSelfKV.key, outputSelfKV));
+				node.addPort(LDPortModel.fromVars(false, outputSelfKV.key, outputSelfKV, outputSelfKV.key));
 				break;
 			default:
 				break;

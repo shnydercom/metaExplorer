@@ -188,7 +188,7 @@ export class NodeEditorLogic {
 			ldType: UserDefDict.intrprtrClassType
 		};
 		let finalInputName: string = outputFinalInputKV.key;
-		let outputNodeInputPort = LDPortModel.fromVars(true, finalInputName, outputFinalInputKV);
+		let outputNodeInputPort = LDPortModel.fromVars(true, finalInputName, outputFinalInputKV, "", finalInputName);
 		outputNode.addPort(outputNodeInputPort);
 		model.addNode(outputNode);
 		//model.setOffsetX(this.width / 4);
