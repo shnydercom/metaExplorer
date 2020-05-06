@@ -61,7 +61,7 @@ export class NodeEditorBody extends Component<EditorBodyProps, EditorBodyState> 
 					}}
 				>
 					{/**inverseZoom  maxNumberPointsPerLink={0} */}
-					<CanvasWidget   engine={this.props.logic.getDiagramEngine()} />
+					<CanvasWidget  className="srd-diagram" engine={this.props.logic.getDiagramEngine()} />
 					{hideRefMapDropSpace
 						? null
 						: <div className="editor-top-bar">

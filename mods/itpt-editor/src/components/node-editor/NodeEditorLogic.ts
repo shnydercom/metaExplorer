@@ -66,7 +66,7 @@ export class NodeEditorLogic {
 		this.retrieverName = retrieverName;
 		this.userName = userName;
 		this.userProject = userProject;
-		this.diagramEngine = createEngine({ registerDefaultDeleteItemsAction: false });
+		this.diagramEngine = createEngine({});
 		this.dagreEngine = new DagreEngine({
 			graph: {
 				rankdir: 'RL',
@@ -129,6 +129,7 @@ export class NodeEditorLogic {
 		const engine = this.diagramEngine;
 		const model = engine.getModel();
 		this.dagreEngine.redistribute(model);
+		engine.zoomToFitNodes();
 		/*
 		const engine = this.diagramEngine;
 		const model = engine.getModel();
