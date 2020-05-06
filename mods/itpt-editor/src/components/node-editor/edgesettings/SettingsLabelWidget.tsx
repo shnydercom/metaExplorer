@@ -20,7 +20,7 @@ export class SettingsLabelWidget extends React.Component<SettingsLabelWidgetProp
 		try {
 			//sourceLinks = nextProps.model.getParent().getSourcePort().getLinks();
 			const sourcePort = (nextProps.model.getParent().getSourcePort() as LDPortModel);
-			if (sourcePort.in) {
+			if (sourcePort.isIn()) {
 				inputLinks = sourcePort.getLinksSortOrder();
 			} else {
 				outputLinks = sourcePort.getLinksSortOrder();
@@ -31,7 +31,7 @@ export class SettingsLabelWidget extends React.Component<SettingsLabelWidgetProp
 		try {
 			//targetLinks = nextProps.model.getParent().getTargetPort().getLinks();
 			const targetPort = (nextProps.model.getParent().getTargetPort() as LDPortModel);
-			if (targetPort.in) {
+			if (targetPort.isIn()) {
 				inputLinks = targetPort.getLinksSortOrder();
 			} else {
 				outputLinks = targetPort.getLinksSortOrder();
@@ -55,7 +55,7 @@ export class SettingsLabelWidget extends React.Component<SettingsLabelWidgetProp
 
 	getInPort(): LDPortModel {
 		const parentLink = this.props.model.getParent();
-		if ((parentLink.getSourcePort() as LDPortModel).in) {
+		if ((parentLink.getSourcePort() as LDPortModel).isIn()) {
 			return parentLink.getSourcePort() as LDPortModel;
 		} else {
 			return parentLink.getTargetPort() as LDPortModel;
@@ -63,7 +63,7 @@ export class SettingsLabelWidget extends React.Component<SettingsLabelWidgetProp
 	}
 	getOutPort(): LDPortModel {
 		const parentLink = this.props.model.getParent();
-		if (!(parentLink.getSourcePort() as LDPortModel).in) {
+		if (!(parentLink.getSourcePort() as LDPortModel).isIn()) {
 			return parentLink.getSourcePort() as LDPortModel;
 		} else {
 			return parentLink.getTargetPort() as LDPortModel;
@@ -80,7 +80,7 @@ export class SettingsLabelWidget extends React.Component<SettingsLabelWidgetProp
 		const outputPos = indexOf(outputLinks, parentLink.getID()) + 1;
 		// const thisProps = this.getProps();
 		// {...thisProps} className={isOpened ? thisProps.className + "anim" : thisProps.className}
-		return <div 
+		return <div
 			onMouseEnter={(event) => this.setState({ ...this.state, isOpened: true })}
 			onMouseLeave={() => this.setState({ ...this.state, isOpened: false })}
 		>

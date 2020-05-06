@@ -26,7 +26,6 @@ export interface EditorMainProps {
 	trayProps: EditorTrayProps;
 	isLeftDrawerActive: boolean;
 	currentlyEditingItpt: string;
-	onZoomAutoLayoutPress: () => void;
 	onBlockItemDropped: (blockItem: DragItem<EditorDNDItemType, IEditorBlockData>, clientPosition: EditorClientPosition) => void;
 	changeNodeCurrentlyEditing(data: IEditorBlockData): {};
 	onNewBtnClick: (newNameObj: IITPTNameObj) => void;
@@ -190,7 +189,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 				<EditorTray
 					itpts={props.trayProps.itpts}
 					onEditTrayItem={props.trayProps.onEditTrayItem.bind(this)}
-					onZoomAutoLayoutPress={() => props.onZoomAutoLayoutPress()}
+					onZoomAutoLayoutPress={() => props.trayProps.onZoomAutoLayoutPress()}
 				>
 					<div className="fakeheader">
 						<UserInfo userLabel="John Doe" projectLabel="JohnsPersonalProject" userIconSrc="" />

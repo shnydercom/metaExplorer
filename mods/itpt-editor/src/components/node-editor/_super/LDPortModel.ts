@@ -19,9 +19,6 @@ export interface LDPortModelGenerics extends PortModelGenerics {
  * @author Jonathan Schneider
  */
 export class LDPortModel extends PortModel<LDPortModelGenerics> {
-	in: boolean;
-	label: string;
-	kv: IKvStore;
 
 	static fromVars(isInput: boolean, name: string, kv: IKvStore, label: string = null, id?: string) {
 		return new this({
@@ -32,7 +29,7 @@ export class LDPortModel extends PortModel<LDPortModelGenerics> {
 			id
 		});
 	}
-	constructor(options: LDPortModelOptions){
+	constructor(options: LDPortModelOptions) {
 		super({
 			alignment: options.in ? PortModelAlignment.LEFT : PortModelAlignment.RIGHT,
 			type: LD_PORTMODEL,
@@ -43,17 +40,17 @@ export class LDPortModel extends PortModel<LDPortModelGenerics> {
 
 	deSerialize(event: DeserializeEvent<this>) {
 		super.deserialize(event);
-			//object, engine);
-		this.in = event.data.in;
-		this.label = event.data.label;
-		this.kv = event.data.kv;
+		//object, engine);
+		this.options.in = event.data.in;
+		this.options.label = event.data.label;
+		this.options.kv = event.data.kv;
 	}
 
 	serialize() {
 		return merge(super.serialize(), {
-			in: this.in,
-			label: this.label,
-			kv: this.kv
+			in: this.options.in,
+			label: this.options.label,
+			kv: this.options.kv
 		});
 	}
 
@@ -67,15 +64,15 @@ export class LDPortModel extends PortModel<LDPortModelGenerics> {
 	canLinkToPort(port: PortModel): boolean {
 		let rv: boolean = true;
 		if (port instanceof LDPortModel) {
-			if (this.in === port.in) return false;
+			if (this.options.in === port.options.in) return false;
 		} else {
 			return false;
 		}
 		let ldPort = port as LDPortModel;
-		if (ldPort.in) {
-			rv = isInputValueValidFor(this.kv, ldPort.kv);
+		if (ldPort.options.in) {
+			rv = isInputValueValidFor(this.options.kv, ldPort.options.kv);
 		} else {
-			rv = isInputValueValidFor(ldPort.kv, this.kv);
+			rv = isInputValueValidFor(ldPort.options.kv, this.options.kv);
 		}
 		return rv;
 	}
@@ -117,5 +114,21 @@ export class LDPortModel extends PortModel<LDPortModelGenerics> {
 
 	getLinksSortOrder(): string[] {
 		return this.options.linkSortOrder;
+	}
+
+	setKV(kv: IKvStore): void {
+		this.options.kv = kv;
+	}
+
+	getKV(): IKvStore {
+		return this.options.kv;
+	}
+
+	isIn(): boolean {
+		return this.options.in;
+	}
+
+	getLabel(): string | undefined{
+		return this.options.label;
 	}
 }

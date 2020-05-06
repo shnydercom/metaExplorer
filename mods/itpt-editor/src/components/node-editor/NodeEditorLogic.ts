@@ -20,6 +20,7 @@ import { OutputInfoPartNodeModel, OUTPUT_NODE_WIDTH } from "./outputinfotypes/Ou
 import { OutputInfoWidgetFactory } from "./outputinfotypes/OutputInfoWidgetFactory";
 import { SettingsLabelFactory } from "./edgesettings/SettingsLabelFactory";
 import { SettingsLinkFactory } from "./edgesettings/SettingsLinkFactory";
+import { ZoomCanvasAction } from "@projectstorm/react-canvas-core";
 
 export interface NewNodeSig {
 	x: number;
@@ -66,7 +67,7 @@ export class NodeEditorLogic {
 		this.retrieverName = retrieverName;
 		this.userName = userName;
 		this.userProject = userProject;
-		this.diagramEngine = createEngine({});
+		this.diagramEngine = createEngine({ registerDefaultZoomCanvasAction: false });
 		this.dagreEngine = new DagreEngine({
 			graph: {
 				rankdir: 'RL',
@@ -77,6 +78,8 @@ export class NodeEditorLogic {
 			includeLinks: true
 		});
 		//new DiagramEngine();
+
+		this.diagramEngine.getActionEventBus().registerAction(new ZoomCanvasAction({ inverseZoom: true }));
 		//label factories
 		this.diagramEngine.getLabelFactories().registerFactory(new SettingsLabelFactory());
 		//link factories
@@ -126,10 +129,10 @@ export class NodeEditorLogic {
 	}
 
 	public autoDistribute() {
-		const engine = this.diagramEngine;
+		/*const engine = this.diagramEngine;
 		const model = engine.getModel();
 		this.dagreEngine.redistribute(model);
-		engine.zoomToFitNodes();
+		engine.zoomToFitNodes();*/
 		/*
 		const engine = this.diagramEngine;
 		const model = engine.getModel();
@@ -201,8 +204,8 @@ export class NodeEditorLogic {
 
 	addListenersToNode(node: NodeModel) {
 		node.registerListener({
-			entityRemoved: (event) => { 
-				this.onOutputInfoSaved(this.outputNode.getItptName()) 
+			entityRemoved: (event) => {
+				this.onOutputInfoSaved(this.outputNode.getItptName())
 			}
 		})
 		if (node.getType() === GENERALDATATYPE_MODEL) {
@@ -554,7 +557,7 @@ export class NodeEditorLogic {
 		let node = BaseDataTypeNodeModel.fromVars("Simple Data Type", null, null, editorDefaultNodesColor);
 		const nodex = signature.x;
 		const nodey = signature.y;
-		node.setPosition(nodex,nodey);
+		node.setPosition(nodex, nodey);
 		node.addPort(LDPortModel.fromVars(false, PORTNAME_OUT_OUTPUTSELF, baseDataTypeKVStore, "output", signature.id));
 		this.getDiagramEngine()
 			.getModel()
@@ -618,8 +621,8 @@ export class NodeEditorLogic {
 				const oneLink = outport.getLinks()[element];
 				let leafNode: NodeModel = oneLink.getSourcePort().getParent();
 				let leafPort: LDPortModel = oneLink.getSourcePort() as LDPortModel;
-				if (!leafPort.in) {//leafNode.getID() === branchNode.getID()) {
-					if(!oneLink.getTargetPort()) continue;
+				if (!leafPort.isIn()) {//leafNode.getID() === branchNode.getID()) {
+					if (!oneLink.getTargetPort()) continue;
 					leafNode = oneLink.getTargetPort().getParent();
 					leafPort = oneLink.getTargetPort() as LDPortModel;
 				}
@@ -627,17 +630,17 @@ export class NodeEditorLogic {
 					case DECLARATION_MODEL:
 						//let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
 						//let declarID = declarModel.getID();
-						if (leafPort.kv) {
-							if (leafPort.kv.key === UserDefDict.externalOutput) {
+						if (leafPort.getKV()) {
+							if (leafPort.getKV().key === UserDefDict.externalOutput) {
 								//is an external input marker
-								let keyOutputMarked = outport.kv.key;
+								let keyOutputMarked = outport.getKV().key;
 								let outputObjPropRef: ObjectPropertyRef = { objRef: branchNode.getID(), propRef: keyOutputMarked };
 								//let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.interpretableKeys;
 								//cfgIntrprtKeys.push(inputObjPropRef);
-								let externalOutputKV = this.copyKV(outport.kv);
+								let externalOutputKV = this.copyKV(outport.getKV());
 								externalOutputKV.value = outputObjPropRef;
 								topBPCfg.initialKvStores.push(externalOutputKV);
-								//branchBPCfg.interpretableKeys.push(port.kv.key);
+								//branchBPCfg.interpretableKeys.push(port.getKV().key);
 							}
 						}
 						break;
@@ -657,8 +660,8 @@ export class NodeEditorLogic {
 				const oneLink = port.getLinks()[element];
 				let leafNode: NodeModel = oneLink.getSourcePort().getParent();
 				let leafPort: LDPortModel = oneLink.getSourcePort() as LDPortModel;
-				if (leafPort.in) {//leafNode.getID() === branchNode.getID()) {
-					if(!oneLink.getTargetPort()) continue;
+				if (leafPort.isIn()) {//leafNode.getID() === branchNode.getID()) {
+					if (!oneLink.getTargetPort()) continue;
 					leafNode = oneLink.getTargetPort().getParent();
 					leafPort = oneLink.getTargetPort() as LDPortModel;
 				}
@@ -666,30 +669,30 @@ export class NodeEditorLogic {
 					case DECLARATION_MODEL:
 						//let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
 						//let declarID = declarModel.getID();
-						if (leafPort.kv) {
-							if (leafPort.kv.key === UserDefDict.externalInput) {
+						if (leafPort.getKV()) {
+							if (leafPort.getKV().key === UserDefDict.externalInput) {
 								//is an external input marker
 								//is an external input marker
-								let keyInputMarked = port.kv.key;
+								let keyInputMarked = port.getKV().key;
 								let inputObjPropRef: ObjectPropertyRef = { objRef: branchNode.getID(), propRef: keyInputMarked };
 								let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.interpretableKeys;
 								cfgIntrprtKeys.push(inputObjPropRef);
-								branchBPCfg.initialKvStores.push(this.copyKV(port.kv));
-								branchBPCfg.interpretableKeys.push(port.kv.key);
+								branchBPCfg.initialKvStores.push(this.copyKV(port.getKV()));
+								branchBPCfg.interpretableKeys.push(port.getKV().key);
 							}
-							if (leafPort.kv.key === UserDefDict.externalOutput) {
-								let keyOutputMarked = port.kv.key;
+							if (leafPort.getKV().key === UserDefDict.externalOutput) {
+								let keyOutputMarked = port.getKV().key;
 								let outputObjPropRef: ObjectPropertyRef = { objRef: branchNode.getID(), propRef: keyOutputMarked };
 								let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.interpretableKeys;
 								cfgIntrprtKeys.push(outputObjPropRef);
-								branchBPCfg.initialKvStores.push(this.copyKV(port.kv));
-								branchBPCfg.interpretableKeys.push(port.kv.key);
+								branchBPCfg.initialKvStores.push(this.copyKV(port.getKV()));
+								branchBPCfg.interpretableKeys.push(port.getKV().key);
 							}
 						}
 						break;
 					case BASEDATATYPE_MODEL:
 						let bdtLeafNode: BaseDataTypeNodeModel = leafNode as BaseDataTypeNodeModel;
-						let bdtKV = this.composeKVs(bdtLeafNode.getOutPorts()[0].kv, port.kv);
+						let bdtKV = this.composeKVs(bdtLeafNode.getOutPorts()[0].getKV(), port.getKV());
 						branchBPCfg.initialKvStores.push(bdtKV);
 						//TODO: check here, that BDT-Nodes hand up their input correctly
 						break;
@@ -717,21 +720,21 @@ export class NodeEditorLogic {
 						} else {
 							initialKvStores = outputBPCfg.initialKvStores;
 						}
-						let outputType: string = leafPort.kv.ldType;
-						let propRef = leafPort.kv.key === UserDefDict.outputSelfKey ? null : leafPort.kv.key;
+						let outputType: string = leafPort.getKV().ldType;
+						let propRef = leafPort.getKV().key === UserDefDict.outputSelfKey ? null : leafPort.getKV().key;
 						let outputRef: ObjectPropertyRef = {
 							objRef: leafNodeID,
 							propRef: propRef
 						};
 						let outputKV: IKvStore = {
-							key: leafPort.kv.key,
+							key: leafPort.getKV().key,
 							value: outputRef,
 							ldType: outputType
 						};
-						let gdtKV = this.composeKVs(outputKV, port.kv);
+						let gdtKV = this.composeKVs(outputKV, port.getKV());
 						branchBPCfg.initialKvStores.push(gdtKV);
 						//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
-						if (branchNode.getType() === OUTPUT_INFO_MODEL && port.kv.key === UserDefDict.finalInputKey) {
+						if (branchNode.getType() === OUTPUT_INFO_MODEL && port.getKV().key === UserDefDict.finalInputKey) {
 							branchNode.subItptOf = leafNode.getID();
 						} else {
 							branchBPCfg.interpretableKeys.push(gdtKV.key);
@@ -759,21 +762,21 @@ export class NodeEditorLogic {
 						} else {
 							extInitialKvStores = extendableBPCfg.initialKvStores;
 						}
-						let extOutputType: string = leafPort.kv.ldType;
-						let extPropRef = leafPort.kv.key === UserDefDict.outputSelfKey ? null : leafPort.kv.key;
+						let extOutputType: string = leafPort.getKV().ldType;
+						let extPropRef = leafPort.getKV().key === UserDefDict.outputSelfKey ? null : leafPort.getKV().key;
 						let extOutputRef: ObjectPropertyRef = {
 							objRef: extendableNodeID,
 							propRef: extPropRef
 						};
 						let extOutputKV: IKvStore = {
-							key: leafPort.kv.key,
+							key: leafPort.getKV().key,
 							value: extOutputRef,
 							ldType: extOutputType
 						};
-						let extDtKV = this.composeKVs(extOutputKV, port.kv);
+						let extDtKV = this.composeKVs(extOutputKV, port.getKV());
 						branchBPCfg.initialKvStores.push(extDtKV);
 						//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
-						if (branchNode.getType() === OUTPUT_INFO_MODEL && port.kv.key === UserDefDict.finalInputKey) {
+						if (branchNode.getType() === OUTPUT_INFO_MODEL && port.getKV().key === UserDefDict.finalInputKey) {
 							branchNode.subItptOf = leafNode.getID();
 						} else {
 							branchBPCfg.interpretableKeys.push(extDtKV.key);

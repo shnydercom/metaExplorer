@@ -352,10 +352,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			isPreviewFullScreen={this.state.mode === "app"}
 			previewLDTokenString={this.state.previewerToken}
 			routes={this.props.routes}
-			onZoomAutoLayoutPress={() => {
-				this.logic.autoDistribute();
-				this.diagramRef.current.forceUpdate();
-			}}
 		>
 			<NodeEditorBody hideRefMapDropSpace={bottomBarHidden}
 				ref={this.diagramRef}

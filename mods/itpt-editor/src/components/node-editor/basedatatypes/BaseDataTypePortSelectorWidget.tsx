@@ -36,7 +36,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 		if (!prevState.compInfos && !prevState.localLDTypes && !prevState.localValues && !prevState.portKvStore && !prevState.portType) {
 			let newLDTypes = new Map<string, any>();
 			let newLDValues = new Map<string, any>();
-			if (nextProps.model.kv) {
+			if (nextProps.model.getKV()) {
 				let newLDTk: ILDToken = new NetworkPreferredToken(nextProps.ldTokenString);
 				let ldOptsWModel: ILDOptions = {
 					isLoading: false,
@@ -47,7 +47,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 						webInResource: null,
 						webOutResource: null,
 						kvStores: [
-							nextProps.model.kv
+							nextProps.model.getKV()
 						]
 					}
 				};
@@ -56,8 +56,8 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 					compInfos: null,
 					localLDTypes: newLDTypes,
 					localValues: newLDValues,
-					portKvStore: nextProps.model.kv,
-					portType: nextProps.model.kv.ldType
+					portKvStore: nextProps.model.getKV(),
+					portType: nextProps.model.getKV().ldType
 				};
 			}
 			nextProps.notifyLDOptionsChange(null);
@@ -74,7 +74,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 		let newKV = nextProps.ldOptions && nextProps.ldOptions.resource && nextProps.ldOptions.resource.kvStores
 			? getKVStoreByKey(nextProps.ldOptions.resource.kvStores, UserDefDict.inputData) : null;
 		newKV = newKV ? newKV : prevState.portKvStore ? prevState.portKvStore : { key: UserDefDict.inputData, value: null, ldType: null };
-		nextProps.model.kv = newKV;
+		nextProps.model.setKV(newKV);
 		let newType = newKV ? newKV.ldType : null;
 		if (!rvLD) {
 			return { ...prevState, portKvStore: newKV, portType: newType };
@@ -100,8 +100,9 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 				const links = nextProps.model.getLinks();
 				if (links && Object.keys(links).length > 0) {
 					const linksKeys = Object.keys(links);
-					const nextPort = { ...nextProps.model, kv: newKV };
-
+					const nextPort: LDPortModel = nextProps.model.clone();
+					nextPort.setKV(newKV);
+					// { ...nextProps.model, kv: newKV };
 					links[linksKeys[0]].fireEvent(
 						{
 							port: nextPort as LDPortModel
@@ -134,7 +135,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 	}
 
 	onPortTypeChange = (newType: string, nProps: BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch) => {
-		let changedKvStore: IKvStore = this.props.model.kv;
+		let changedKvStore: IKvStore = this.props.model.getKV();
 		let thisInput: OutputKVMapElement = {
 			targetLDToken: new NetworkPreferredToken(""),
 			targetProperty: UserDefDict.inputData
@@ -167,7 +168,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 	render() {
 		const { portType } = this.state;
 		var port = <SinglePortWidget node={this.props.model.getParent()} name={this.props.model.getName()} isMulti={true} />;
-		var label = <div className="name">{this.props.model.label}</div>;
+		var label = <div className="name">{this.props.model.getLabel()}</div>;
 		let targetID = this.props.model.getID();
 		//let newToken: ILDToken = new NetworkPreferredToken(targetID);
 		//let newOutputKVMap: OutputKVMap = { [targetID]: { targetLDToken: newToken, targetProperty: null } };
