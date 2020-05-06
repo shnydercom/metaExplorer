@@ -3,10 +3,9 @@ import {
 	ldBaseDataTypeList, BlueprintConfig, IBlueprintItpt, LDDict, IKvStore, isInputValueValidFor, isObjPropertyRef,
 	ObjectPropertyRef, UserDefDict, appItptMatcherFn
 } from "@metaexplorer/core";
-import { DefaultLinkModel, DiagramEngine, DiagramModel, NodeModel, LinkModel, LinkModelGenerics } from "@projectstorm/react-diagrams";
+import createEngine, { DefaultLinkModel, DiagramEngine, DiagramModel, NodeModel, LinkModel, LinkModelGenerics, DagreEngine } from "@projectstorm/react-diagrams";
 import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
-import { distributeElements } from "./dagre-utils";
 import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeModel";
 import { DeclarationWidgetFactory } from "./declarationtypes/DeclarationNodeWidgetFactory";
 import { BASEDATATYPE_MODEL, DECLARATION_MODEL, EXTENDABLETYPES_MODEL, GENERALDATATYPE_MODEL, OUTPUT_INFO_MODEL } from "./node-editor-consts";
@@ -42,6 +41,7 @@ export const editorDefaultNodesColor = "rgba(87, 161, 245, 0.4)"; // "#00375f";
 export class NodeEditorLogic {
 	protected activeModel: DiagramModel;
 	protected diagramEngine: DiagramEngine;
+	protected dagreEngine: DagreEngine;
 	protected itptList: IItptInfoItem[];
 	protected outputNode: OutputInfoPartNodeModel;
 	protected outputLDOptionsToken: string;
@@ -66,7 +66,17 @@ export class NodeEditorLogic {
 		this.retrieverName = retrieverName;
 		this.userName = userName;
 		this.userProject = userProject;
-		this.diagramEngine = new DiagramEngine();
+		this.diagramEngine = createEngine({ registerDefaultDeleteItemsAction: false });
+		this.dagreEngine = new DagreEngine({
+			graph: {
+				rankdir: 'RL',
+				ranker: 'longest-path',
+				marginx: 25,
+				marginy: 25
+			},
+			includeLinks: true
+		});
+		//new DiagramEngine();
 		//label factories
 		this.diagramEngine.getLabelFactories().registerFactory(new SettingsLabelFactory());
 		//link factories
@@ -118,6 +128,10 @@ export class NodeEditorLogic {
 	public autoDistribute() {
 		const engine = this.diagramEngine;
 		const model = engine.getModel();
+		this.dagreEngine.redistribute(model);
+		/*
+		const engine = this.diagramEngine;
+		const model = engine.getModel();
 		let distributedModel = this.getDistributedModel(engine, model);
 		this.activeModel = distributedModel;
 		this.outputNode = this.activeModel.getNode(this.outputLDOptionsToken) as OutputInfoPartNodeModel;
@@ -138,26 +152,7 @@ export class NodeEditorLogic {
 		if (!(lowerBnd < newZoomLevel && newZoomLevel < higherBnd)) {
 			distributedModel.setZoomLevel(newZoomLevel);
 		}
-		distributedModel.setOffsetX(this.width / 5);
-	}
-
-	public getDistributedModel(engine, model) {
-		const serialized = model.serializeDiagram();
-		const distributedSerializedDiagram = distributeElements(serialized);
-		//deserialize the model
-		let deSerializedModel = new DiagramModel();
-		deSerializedModel.deserializeModel(distributedSerializedDiagram, engine);
-		//bugfix for multiple labels:
-		/*for (const key in deSerializedModel.getLinks()) {
-			if (deSerializedModel.links.hasOwnProperty(key)) {
-				const oneLink = deSerializedModel.links[key];
-				if (oneLink.labels.length > 1) {
-					oneLink.labels.pop();
-				}
-			}
-		}*/
-		this.addListenersToModel(deSerializedModel);
-		return deSerializedModel;
+		distributedModel.setOffsetX(this.width / 5);*/
 	}
 
 	public newModel(outputLDOptionsToken: string) {
