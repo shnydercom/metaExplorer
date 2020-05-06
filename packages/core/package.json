@@ -19,7 +19,7 @@
     "startfornetwork": "webpack-dev-server --host 0.0.0.0",
     "buildesm": "tsc -m es6 --outDir lib-esm",
     "buildregular": "tsc",
-    "build": "yarn buildesm && yarn buildregular && yarn compcss",
+    "buildcore": "yarn buildesm && yarn buildregular && yarn compcss",
     "lint": "tslint ./src/**/*.ts -t verbose",
     "compcss": "node-sass --output-style compressed ./src/styles/core-index.scss > ./lib/style.css",
     "createmock": "node ./scripts/createItptMock.js",

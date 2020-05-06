@@ -14,7 +14,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 //import { Route } from 'react-router-dom';
-import "@projectstorm/react-diagrams/dist/style.min.css";
+//import "@projectstorm/react-diagrams/dist/style.min.css";
 import { IEditorBlockData, EditorDNDItemType, EditorClientPosition } from "./editorInterfaces";
 import { BaseDataTypeNodeModel } from "./node-editor/basedatatypes/BaseDataTypeNodeModel";
 import { DeclarationPartNodeModel } from "./node-editor/declarationtypes/DeclarationNodeModel";

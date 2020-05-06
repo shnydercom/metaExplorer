@@ -22,7 +22,6 @@ export class LDPortModel extends PortModel<LDPortModelGenerics> {
 	in: boolean;
 	label: string;
 	kv: IKvStore;
-	linkSortOrder: string[];
 
 	static fromVars(isInput: boolean, name: string, kv: IKvStore, label: string = null, id?: string) {
 		return new this({
@@ -91,32 +90,32 @@ export class LDPortModel extends PortModel<LDPortModelGenerics> {
 
 	removeLink(link: LinkModel) {
 		super.removeLink(link);
-		var idx = this.linkSortOrder.indexOf(link.getID());
+		var idx = this.options.linkSortOrder.indexOf(link.getID());
 		if (idx > -1) {
-			this.linkSortOrder.splice(idx, 1);
+			this.options.linkSortOrder.splice(idx, 1);
 		}
 	}
 
 	addLink(link: LinkModel) {
 		super.addLink(link);
-		this.linkSortOrder.push(link.getID());
+		this.options.linkSortOrder.push(link.getID());
 	}
 
 	decreaseLinksSortOrder(link: LinkModel) {
-		const idx = this.linkSortOrder.indexOf(link.getID());
+		const idx = this.options.linkSortOrder.indexOf(link.getID());
 		if (idx > 0) {
-			arrayMove(this.linkSortOrder, idx, idx - 1);
+			arrayMove(this.options.linkSortOrder, idx, idx - 1);
 		}
 	}
 
 	increaseLinksSortOrder(link: LinkModel) {
-		const idx = this.linkSortOrder.indexOf(link.getID());
-		if (idx > -1 && idx <= this.linkSortOrder.length - 1) {
-			arrayMove(this.linkSortOrder, idx, idx + 1);
+		const idx = this.options.linkSortOrder.indexOf(link.getID());
+		if (idx > -1 && idx <= this.options.linkSortOrder.length - 1) {
+			arrayMove(this.options.linkSortOrder, idx, idx + 1);
 		}
 	}
 
 	getLinksSortOrder(): string[] {
-		return this.linkSortOrder;
+		return this.options.linkSortOrder;
 	}
 }

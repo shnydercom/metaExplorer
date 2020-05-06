@@ -35,7 +35,9 @@
     "lodash": "4.*",
     "metaexplorer-react-components": "0.0.6",
     "pathfinding": "^0.4.18",
-    "paths-js": "^0.4.9"
+    "paths-js": "^0.4.10",
+    "emotion": "10.*",
+		"mathjs": "^6.6.5"
   },
   "devDependencies": {
     "@types/debounce": "^1.2.0"
