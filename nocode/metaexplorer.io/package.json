@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-nocode/metaexplorer.io",
-  "version": "0.0.11",
+  "version": "0.0.14",
   "description": "block definition files for metaexplorer.io",
   "main": "index.js",
   "scripts": {
@@ -10,10 +10,9 @@
   "author": "Jonathan Schneider",
   "license": "EUPL-1.2",
   "devDependencies": {
-    "@metaexplorer/editor-dev-server": "^0.0.10"
+    "@metaexplorer/editor-dev-server": "^0.0.13"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "gitHead": "2ac51488d3796cf6caa6df0990759362a4ee6fe8"
+  }
 }

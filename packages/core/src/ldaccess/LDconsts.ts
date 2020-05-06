@@ -8,3 +8,8 @@ export enum LDConsts {
 	isA = "isA",
 	iri = "iri",
 }
+
+export enum LDApiConst {
+	baseUrl = "ldui.net",
+	apiEndpoint = "/api"
+}

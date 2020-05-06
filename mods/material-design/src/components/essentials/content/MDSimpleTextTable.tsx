@@ -1,14 +1,19 @@
-import {ldBlueprint, AbstractSimpleTextTable, tableHeadings, tableRows, simpleTextTableCfg } from '@metaexplorer/core';
+import {ldBlueprint, AbstractSimpleTextTable, simpleTextTableCfg, LDUIDictVerbs } from '@metaexplorer/core';
 import { TableBody, Table, TableHead, TableRow, TableCell } from '@material-ui/core';
 import React from 'react';
 
-@ldBlueprint(simpleTextTableCfg)
+export const MD_SIMPLE_TEXT_TABLE_NAME = "metaexplorer.io/material-design/SimpleTextTable";
+
+export const MD_SIMPLE_TEXT_TABLE_CFG = {...simpleTextTableCfg};
+MD_SIMPLE_TEXT_TABLE_CFG.nameSelf = MD_SIMPLE_TEXT_TABLE_NAME;
+
+@ldBlueprint(MD_SIMPLE_TEXT_TABLE_CFG)
 export class MDSimpleTextTable extends AbstractSimpleTextTable {
 
 	render() {
 		const { localValues } = this.state;
-		const headingRow = localValues.get(tableHeadings);
-		const contentRows = localValues.get(tableRows);
+		const headingRow = localValues.get(LDUIDictVerbs.headings);
+		const contentRows = localValues.get(LDUIDictVerbs.tuples);
 		if (!headingRow || !contentRows) return null;
 		return <Table>
 			<TableHead>

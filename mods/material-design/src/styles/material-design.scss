@@ -134,7 +134,7 @@ canvas.drawingBuffer {
   }
 }
 
-.single-img-sel {
+.single-audio-sel {
   display: flex;
   width: 100%;
   height: 100%;
@@ -160,6 +160,48 @@ canvas.drawingBuffer {
     display: flex;
     justify-content: center;
   }
+
+  .del-btn {
+    margin-left: 16px;
+  }
+  audio {
+    flex: 1;
+  }
+}
+
+.single-img-sel {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+
+  .btn-extension {
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+  }
+
+  .btn-extension .material-icons {
+    line-height: 1 !important;
+    font-size: 300% !important;
+  }
+
+  .accept {
+    border: 2px dashed;
+    border-radius: 8px;
+    margin: 20px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .del-btn {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+  }
 }
 
 
@@ -177,6 +219,7 @@ canvas.drawingBuffer {
   justify-content: center;
   align-items: flex-end;
   overflow: hidden;
+  position: relative;
 
   .vid-big-icons {
     line-height: 1 !important;
@@ -200,6 +243,45 @@ canvas.drawingBuffer {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    flex-direction: column;
+    padding-bottom: var(--appbar-h-padding);
+
+    >button>span {
+      font-size: 170% !important;
+    }
+  }
+}
+
+.dom-microphone {
+  width: inherit;
+  height: inherit;
+  justify-content: center;
+  align-items: flex-end;
+  display: flex;
+
+  .vid-big-icons {
+    line-height: 1 !important;
+    font-size: 600% !important;
+    color: white;
+    width: 100%;
+    text-align: center;
+    align-self: center;
+  }
+
+  >canvas {
+    height: 0; //once we have a visualizer, change this
+    width: 0;
+    object-fit: cover;
+  }
+
+  .controls-container {
+    flex: 1;
+    height: inherit;
+    width: inherit;
+    //position: absolute;
+    display: flex;
+    align-items: center;
+    //justify-content: flex-end;
     flex-direction: column;
     padding-bottom: var(--appbar-h-padding);
 
@@ -238,13 +320,14 @@ canvas.drawingBuffer {
   background: white;
   margin: 0px;
   margin-top: 69px;
-  color:  #0c1e3a;
+  color: #0c1e3a;
   //padding: 10px;
   justify-content: center;
   align-items: center;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   display: flex;
+
   button {
     margin-left: 1em;
     color: white !important;
@@ -255,6 +338,7 @@ canvas.drawingBuffer {
 .dateTimePicker {
   display: flex;
   min-height: fit-content;
+
   >* {
     flex: 1;
     padding: 10px;
@@ -262,5 +346,5 @@ canvas.drawingBuffer {
 }
 
 .MuiAppBar-positionFixed {
-	position: absolute;
+  position: absolute;
 }
