@@ -3,7 +3,7 @@ import {
 	ldBaseDataTypeList, BlueprintConfig, IBlueprintItpt, LDDict, IKvStore, isInputValueValidFor, isObjPropertyRef,
 	ObjectPropertyRef, UserDefDict, appItptMatcherFn
 } from "@metaexplorer/core";
-import { DefaultLinkModel, DiagramEngine, DiagramModel, NodeModel, LinkModelListener, LinkModel } from "@projectstorm/react-diagrams";
+import { DefaultLinkModel, DiagramEngine, DiagramModel, NodeModel, LinkModel, LinkModelGenerics } from "@projectstorm/react-diagrams";
 import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
 import { distributeElements } from "./dagre-utils";
@@ -122,7 +122,7 @@ export class NodeEditorLogic {
 		this.activeModel = distributedModel;
 		this.outputNode = this.activeModel.getNode(this.outputLDOptionsToken) as OutputInfoPartNodeModel;
 		this.outputNode.width = OUTPUT_NODE_WIDTH;
-		this.outputNode.addListener({
+		this.outputNode.registerListener({
 			outputInfoSaved: (evtVal) => {
 				const newItpt = evtVal.itptName;
 				this.onOutputInfoSaved(newItpt);
@@ -131,7 +131,7 @@ export class NodeEditorLogic {
 		engine.setModel(distributedModel);
 		//engine.recalculatePortsVisually();
 		let prevZoomlvl = distributedModel.getZoomLevel();
-		if (engine.canvas) engine.zoomToFit();
+		if (engine.getCanvas()) engine.zoomToFit();
 		let newZoomLevel = distributedModel.getZoomLevel() * .8;
 		const lowerBnd = prevZoomlvl * .79;
 		const higherBnd = prevZoomlvl * .81;
@@ -148,14 +148,14 @@ export class NodeEditorLogic {
 		let deSerializedModel = new DiagramModel();
 		deSerializedModel.deserializeModel(distributedSerializedDiagram, engine);
 		//bugfix for multiple labels:
-		for (const key in deSerializedModel.links) {
+		/*for (const key in deSerializedModel.getLinks()) {
 			if (deSerializedModel.links.hasOwnProperty(key)) {
 				const oneLink = deSerializedModel.links[key];
 				if (oneLink.labels.length > 1) {
 					oneLink.labels.pop();
 				}
 			}
-		}
+		}*/
 		this.addListenersToModel(deSerializedModel);
 		return deSerializedModel;
 	}
@@ -166,16 +166,17 @@ export class NodeEditorLogic {
 
 		//create fixed output node
 		//TODO: make fixed but ports should still be settable, make outputNode singleton per Itpt
-		let outputNode = new OutputInfoPartNodeModel(UserDefDict.outputItpt, null, null, editorSpecificNodesColor,
-			outputLDOptionsToken, this.userName, this.userProject);
+		let outputNode = OutputInfoPartNodeModel.fromVars(UserDefDict.outputItpt, null, null, editorSpecificNodesColor,
+			outputLDOptionsToken, false, this.userName, this.userProject);
 		//outputNode.setLocked(true); // locking would lock the ports as well
-		const canvas = this.diagramEngine.canvas;
+		const canvas = this.diagramEngine.getCanvas();
 		if (canvas) {
 			this.setDimensions(canvas.clientWidth, canvas.clientHeight);
 		}
-		outputNode.x = this.width / 2 - OUTPUT_NODE_WIDTH / 2;
-		outputNode.y = this.height / 2 - OUTPUT_NODE_WIDTH / 2;
-		outputNode.addListener({
+		const outputNodex = this.width / 2 - OUTPUT_NODE_WIDTH / 2;
+		const outputNodey = this.height / 2 - OUTPUT_NODE_WIDTH / 2;
+		outputNode.setPosition(outputNodex, outputNodey);
+		outputNode.registerListener({
 			outputInfoSaved: (evtVal) => {
 				const newItpt = evtVal.itptName;
 				this.onOutputInfoSaved(newItpt);
@@ -188,7 +189,7 @@ export class NodeEditorLogic {
 			ldType: UserDefDict.intrprtrClassType
 		};
 		let finalInputName: string = outputFinalInputKV.key;
-		let outputNodeInputPort = new LDPortModel(true, finalInputName, outputFinalInputKV);
+		let outputNodeInputPort = LDPortModel.fromVars(true, finalInputName, outputFinalInputKV);
 		outputNode.addPort(outputNodeInputPort);
 		model.addNode(outputNode);
 		//model.setOffsetX(this.width / 4);
@@ -203,14 +204,14 @@ export class NodeEditorLogic {
 	}
 
 	addListenersToNode(node: NodeModel) {
-		node.addListener({
+		node.registerListener({
 			entityRemoved: (event) => { 
 				this.onOutputInfoSaved(this.outputNode.getItptName()) 
 			}
 		})
 		if (node.getType() === GENERALDATATYPE_MODEL) {
 			if ((node as GeneralDataTypeNodeModel).isCompound) {
-				node.addListener({
+				node.registerListener({
 					onTriggerExplore: (ev) => {
 						this.onExploreTriggered(ev.itptName)
 					}
@@ -219,8 +220,8 @@ export class NodeEditorLogic {
 		}
 	}
 
-	addListenersToLink(link: LinkModel<LinkModelListener>) {
-		link.addListener({
+	addListenersToLink(link: LinkModel<LinkModelGenerics>) {
+		link.registerListener({
 			sourcePortChanged: (ev) => {
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			},
@@ -231,7 +232,7 @@ export class NodeEditorLogic {
 	}
 
 	addListenersToModel(model: DiagramModel) {
-		model.addListener({
+		model.registerListener({
 			nodesUpdated: (event) => {
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			},
@@ -299,7 +300,7 @@ export class NodeEditorLogic {
 		//let rv: LDPortModel[] = [];
 		let intrprtrKeys: any[] = cfg.interpretableKeys;
 		let initialKvStores: IKvStore[] = cfg.initialKvStores;
-		node.nameSelf = node.id;
+		node.nameSelf = node.getID();
 		node.subItptOf = cfg.nameSelf;
 		node.isCompound = !!cfg.subItptOf;
 		let numObjPropRef = 0;
@@ -332,7 +333,7 @@ export class NodeEditorLogic {
 			let nName: string = elemi.key + "_in";
 			//don't add KvStores that already have a value, unless they are ItptReferenceMap-typed
 			if (!elemi.value) {
-				node.addPort(new LDPortModel(true, nName, elemi, elemi.key));
+				node.addPort(LDPortModel.fromVars(true, nName, elemi, elemi.key));
 			} else
 				if (elemi.ldType === UserDefDict.intrprtrBPCfgRefMapType) {
 					let objPropRef: ObjectPropertyRef = intrprtrKeys[i];
@@ -344,7 +345,7 @@ export class NodeEditorLogic {
 						ldType: nestedType
 					};
 					let nestedName = nestedKey + "_in";
-					node.addPort(new LDPortModel(true, nestedName, elemiNested, nestedKey));
+					node.addPort(LDPortModel.fromVars(true, nestedName, elemiNested, nestedKey));
 				}
 				else if (elemi.ldType === UserDefDict.intrprtrClassType) {
 					let newInKV: IKvStore = {
@@ -352,7 +353,7 @@ export class NodeEditorLogic {
 						value: undefined,
 						ldType: UserDefDict.intrprtrClassType
 					};
-					node.addPort(new LDPortModel(true, elemi.key + "_in", newInKV, elemi.key));
+					node.addPort(LDPortModel.fromVars(true, elemi.key + "_in", newInKV, elemi.key));
 				}
 
 			//node.addPort(new LDPortModel(true, "identifier", { key: null, value: null, ldType: null }));
@@ -365,13 +366,13 @@ export class NodeEditorLogic {
 			value: undefined,
 			ldType: UserDefDict.intrprtrClassType
 		};
-		node.addPort(new LDPortModel(false, outputSelfKV.key, outputSelfKV));
+		node.addPort(LDPortModel.fromVars(false, outputSelfKV.key, outputSelfKV));
 		for (var j = intrprtrKeys.length - numObjPropRef; j < initialKvStores.length; j++) {
 			//console.dir(node.getPorts());
 			var elemj = initialKvStores[j];
 			if (elemj.ldType === UserDefDict.intrprtrBPCfgRefMapType) continue;
 			let nName: string = elemj.key + "_out";
-			node.addPort(new LDPortModel(false, nName, elemj, elemj.key));
+			node.addPort(LDPortModel.fromVars(false, nName, elemj, elemj.key));
 			//let newLDPM: LDPortModel = new LDPortModel(false, elemj.key, elemj.key + "-out");
 			//rv.push(newLDPM);
 		}
@@ -382,8 +383,8 @@ export class NodeEditorLogic {
 
 		let refMap = getKVStoreByKey(itpt.initialKvStores, UserDefDict.intrprtrBPCfgRefMapKey);
 
-		let newX = this.outputNode.x + DIAG_TRANSF_X;
-		let newY = this.outputNode.y + DIAG_TRANSF_Y;
+		let newX = this.outputNode.getX() + DIAG_TRANSF_X;
+		let newY = this.outputNode.getY() + DIAG_TRANSF_Y;
 		let newSigBaseItpt: NewNodeSig = { id: itpt.subItptOf, x: newX, y: newY - DIAG_TRANSF_Y };
 
 		//create nodes first
@@ -451,8 +452,8 @@ export class NodeEditorLogic {
 					value: undefined,
 					ldType: undefined
 				};
-				let inputMarkerNode = new DeclarationPartNodeModel("External Input Marker", null, null, editorSpecificNodesColor);
-				let inputMarkerPort = inputMarkerNode.addPort(new LDPortModel(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
+				let inputMarkerNode = DeclarationPartNodeModel.fromVars("External Input Marker", null, null, editorSpecificNodesColor);
+				let inputMarkerPort = inputMarkerNode.addPort(LDPortModel.fromVars(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
 				this.getDiagramEngine()
 					.getModel()
 					.addNode(inputMarkerNode);
@@ -474,8 +475,8 @@ export class NodeEditorLogic {
 					value: undefined,
 					ldType: undefined
 				};
-				let outputMarkerNode = new DeclarationPartNodeModel("External Output Marker", null, null, editorSpecificNodesColor);
-				let outputMarkerPort = outputMarkerNode.addPort(new LDPortModel(true, "in-4", outputDataTypeKvStore, UserDefDict.externalOutput));
+				let outputMarkerNode = DeclarationPartNodeModel.fromVars("External Output Marker", null, null, editorSpecificNodesColor);
+				let outputMarkerPort = outputMarkerNode.addPort(LDPortModel.fromVars(true, "in-4", outputDataTypeKvStore, UserDefDict.externalOutput));
 				this.getDiagramEngine()
 					.getModel()
 					.addNode(outputMarkerNode);
@@ -498,17 +499,18 @@ export class NodeEditorLogic {
 		outputItptLink.setSourcePort(baseNode.getPort(UserDefDict.outputSelfKey));
 
 		this.getDiagramEngine().getModel().addLink(outputItptLink);
-		this.getDiagramEngine().recalculatePortsVisually();
+		//this.getDiagramEngine().recalculatePortsVisually();
 		linkArray.forEach((link) => {
 			this.getDiagramEngine().getModel().addLink(link);
 		});
 	}
 
 	public addNewExtendableNode(signature: NewNodeSig, itpt: BlueprintConfig): ExtendableTypesNodeModel {
-		let extendableNode = new ExtendableTypesNodeModel("Linear Data Display", null, null, editorSpecificNodesColor);
+		let extendableNode = ExtendableTypesNodeModel.fromVars("Linear Data Display", null, null, editorSpecificNodesColor, signature.id);
 		//let nodeName: string = itpt.subItptOf;
-		extendableNode.x = signature.x;
-		extendableNode.y = signature.y;
+		const extendableNodex = signature.x;
+		const extendableNodey = signature.y;
+		extendableNode.setPosition(extendableNodex, extendableNodey)
 		extendableNode.canInterpretType = itpt.canInterpretType;
 		/*let outputSelfKV: IKvStore = {
 			key: UserDefDict.outputSelfKey,
@@ -516,7 +518,7 @@ export class NodeEditorLogic {
 			ldType: UserDefDict.intrprtrClassType
 		};*/
 		this.addLDPortModelsToNodeFromCfg(extendableNode, itpt);
-		extendableNode.id = signature.id;
+		//extendableNode.id = signature.id;
 		extendableNode.nameSelf = "Linear Data Display";
 		this.getDiagramEngine()
 			.getModel()
@@ -526,10 +528,11 @@ export class NodeEditorLogic {
 
 	public addNewGeneralNode(signature: NewNodeSig, itpt: BlueprintConfig): GeneralDataTypeNodeModel {
 		let nodeName: string = itpt.subItptOf;
-		let generalNode = new GeneralDataTypeNodeModel(nodeName, null, null, editorDefaultNodesColor);
-		generalNode.id = signature.id;
-		generalNode.x = signature.x;
-		generalNode.y = signature.y;
+		let generalNode = GeneralDataTypeNodeModel.fromVars(nodeName, null, null, editorDefaultNodesColor, signature.id);
+		//generalNode.id = signature.id;
+		const generalNodex = signature.x;
+		const generalNodey = signature.y;
+		generalNode.setPosition(generalNodex, generalNodey);
 		this.addLDPortModelsToNodeFromItptRetr(generalNode, nodeName);
 		if (itpt.canInterpretType) generalNode.canInterpretType = itpt.canInterpretType;
 		this.getDiagramEngine()
@@ -552,10 +555,11 @@ export class NodeEditorLogic {
 			value: value,
 			ldType: ldType
 		};
-		let node = new BaseDataTypeNodeModel("Simple Data Type", null, null, editorDefaultNodesColor);
-		node.x = signature.x;
-		node.y = signature.y;
-		node.addPort(new LDPortModel(false, PORTNAME_OUT_OUTPUTSELF, baseDataTypeKVStore, "output", signature.id));
+		let node = BaseDataTypeNodeModel.fromVars("Simple Data Type", null, null, editorDefaultNodesColor);
+		const nodex = signature.x;
+		const nodey = signature.y;
+		node.setPosition(nodex,nodey);
+		node.addPort(LDPortModel.fromVars(false, PORTNAME_OUT_OUTPUTSELF, baseDataTypeKVStore, "output", signature.id));
 		this.getDiagramEngine()
 			.getModel()
 			.addNode(node);
@@ -623,7 +627,7 @@ export class NodeEditorLogic {
 					leafNode = oneLink.getTargetPort().getParent();
 					leafPort = oneLink.getTargetPort() as LDPortModel;
 				}
-				switch (leafNode.type) {
+				switch (leafNode.getType()) {
 					case DECLARATION_MODEL:
 						//let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
 						//let declarID = declarModel.getID();
@@ -662,7 +666,7 @@ export class NodeEditorLogic {
 					leafNode = oneLink.getTargetPort().getParent();
 					leafPort = oneLink.getTargetPort() as LDPortModel;
 				}
-				switch (leafNode.type) {
+				switch (leafNode.getType()) {
 					case DECLARATION_MODEL:
 						//let declarModel: DeclarationPartNodeModel = leafNode as DeclarationPartNodeModel;
 						//let declarID = declarModel.getID();
@@ -731,7 +735,7 @@ export class NodeEditorLogic {
 						let gdtKV = this.composeKVs(outputKV, port.kv);
 						branchBPCfg.initialKvStores.push(gdtKV);
 						//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
-						if (branchNode.type === OUTPUT_INFO_MODEL && port.kv.key === UserDefDict.finalInputKey) {
+						if (branchNode.getType() === OUTPUT_INFO_MODEL && port.kv.key === UserDefDict.finalInputKey) {
 							branchNode.subItptOf = leafNode.getID();
 						} else {
 							branchBPCfg.interpretableKeys.push(gdtKV.key);
@@ -773,7 +777,7 @@ export class NodeEditorLogic {
 						let extDtKV = this.composeKVs(extOutputKV, port.kv);
 						branchBPCfg.initialKvStores.push(extDtKV);
 						//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
-						if (branchNode.type === OUTPUT_INFO_MODEL && port.kv.key === UserDefDict.finalInputKey) {
+						if (branchNode.getType() === OUTPUT_INFO_MODEL && port.kv.key === UserDefDict.finalInputKey) {
 							branchNode.subItptOf = leafNode.getID();
 						} else {
 							branchBPCfg.interpretableKeys.push(extDtKV.key);

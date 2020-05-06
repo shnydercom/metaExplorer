@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ITPTFullscreen } from './content/ITPTFullscreen';
 import { LDRouteProps, BaseContainerRewrite } from '@metaexplorer/core';
 import { ITransitComp, ITabData, Tabs, MiniToolBox, DragItem, StylableDragItemProps, ActiveStates } from 'metaexplorer-react-components';
-import { EditorDNDItemType, IEditorBlockData, IEditorPreviewData } from './editorInterfaces';
+import { EditorDNDItemType, IEditorBlockData, IEditorPreviewData, EditorClientPosition } from './editorInterfaces';
 import { EditorTrayItem, EditorTrayItemProps } from './content/blockselection/EditorTrayItem';
 import { PreviewMoveLayer, MTBItemDragContainer } from './panels/PreviewMoveLayer';
 
@@ -27,7 +27,7 @@ export interface EditorMainProps {
 	isLeftDrawerActive: boolean;
 	currentlyEditingItpt: string;
 	onZoomAutoLayoutPress: () => void;
-	onBlockItemDropped: (blockItem: DragItem<EditorDNDItemType, IEditorBlockData>) => void;
+	onBlockItemDropped: (blockItem: DragItem<EditorDNDItemType, IEditorBlockData>, clientPosition: EditorClientPosition) => void;
 	changeNodeCurrentlyEditing(data: IEditorBlockData): {};
 	onNewBtnClick: (newNameObj: IITPTNameObj) => void;
 	saveStatus: IAsyncRequestWrapper;
@@ -129,7 +129,8 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 			setPreviewPosition({ left, top });
 		}
 		if (item.type == EditorDNDItemType.block) {
-			props.onBlockItemDropped(item);
+			const clientPosition: EditorClientPosition = {clientX: left, clientY: top};
+			props.onBlockItemDropped(item, clientPosition);
 		}
 	}
 

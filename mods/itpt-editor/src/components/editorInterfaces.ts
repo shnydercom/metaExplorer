@@ -17,3 +17,8 @@ export enum EditorDNDItemType {
 	block = 'block',
 	preview = 'preview'
 }
+
+export interface EditorClientPosition {
+	clientX: number;
+	clientY: number;
+}

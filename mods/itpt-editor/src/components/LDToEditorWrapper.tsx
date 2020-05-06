@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router";
 //import { Route } from 'react-router-dom';
 import "@projectstorm/react-diagrams/dist/style.min.css";
-import { IEditorBlockData, EditorDNDItemType } from "./editorInterfaces";
+import { IEditorBlockData, EditorDNDItemType, EditorClientPosition } from "./editorInterfaces";
 import { BaseDataTypeNodeModel } from "./node-editor/basedatatypes/BaseDataTypeNodeModel";
 import { DeclarationPartNodeModel } from "./node-editor/declarationtypes/DeclarationNodeModel";
 import { NodeEditorLogic, editorSpecificNodesColor, editorDefaultNodesColor } from "./node-editor/NodeEditorLogic";
@@ -346,7 +346,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			onNewBtnClick={(newNameObj) => this.setNodeEditorToNew(newNameObj)}
 			changeNodeCurrentlyEditing={this.changeNodeCurrentlyEditing.bind(this)}
 			currentlyEditingItpt={currentlyEditingItptName}
-			onBlockItemDropped={(blockItem) => this.addBlockToDiagram(blockItem)}
+			onBlockItemDropped={(blockItem, clientPosition) => this.addBlockToDiagram(blockItem, clientPosition)}
 			isLeftDrawerActive={drawerActive}
 			trayProps={editorTrayProps}
 			isPreviewFullScreen={this.state.mode === "app"}
@@ -688,7 +688,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.props.dispatchKvOutput([outCurItptKV], this.props.ldTokenString, outputKVMap);
 	}
 
-	protected addBlockToDiagram(dndItem: DragItem<EditorDNDItemType, IEditorBlockData>) {
+	protected addBlockToDiagram(dndItem: DragItem<EditorDNDItemType, IEditorBlockData>, clientPosition: EditorClientPosition) {
 		const data: IEditorBlockData = dndItem.data;
 		var nodesCount = keys(
 			this.logic
@@ -700,7 +700,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		switch (data.type) {
 			case "ldbp":
 				let nodeName: string = "Node " + (nodesCount + 1) + ":";
-				node = new GeneralDataTypeNodeModel(nodeName, null, null, editorDefaultNodesColor);
+				node = GeneralDataTypeNodeModel.fromVars(nodeName, null, null, editorDefaultNodesColor);
 				if (data.bpname) {
 					this.logic.addLDPortModelsToNodeFromItptRetr(node, data.bpname);
 				}
@@ -713,8 +713,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					value: undefined,
 					ldType: undefined
 				};
-				node = new BaseDataTypeNodeModel("Simple Data Type", null, null, editorDefaultNodesColor);
-				node.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "output"));
+				node = BaseDataTypeNodeModel.fromVars("Simple Data Type", null, null, editorDefaultNodesColor);
+				node.addPort(LDPortModel.fromVars(false, "out-3", baseDataTypeKVStore, "output"));
 				break;
 			case "inputtype":
 				var inputDataTypeKVStore: IKvStore = {
@@ -722,8 +722,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					value: undefined,
 					ldType: undefined
 				};
-				node = new DeclarationPartNodeModel("External Input Marker", null, null, editorSpecificNodesColor);
-				node.addPort(new LDPortModel(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
+				node = DeclarationPartNodeModel.fromVars("External Input Marker", null, null, editorSpecificNodesColor);
+				node.addPort(LDPortModel.fromVars(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
 				break;
 			case "outputtype":
 				var outputDataTypeKVStore: IKvStore = {
@@ -731,22 +731,22 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					value: undefined,
 					ldType: undefined
 				};
-				node = new DeclarationPartNodeModel("External Output Marker", null, null, editorSpecificNodesColor);
-				node.addPort(new LDPortModel(true, "in-4", outputDataTypeKVStore, UserDefDict.externalOutput));
+				node = DeclarationPartNodeModel.fromVars("External Output Marker", null, null, editorSpecificNodesColor);
+				node.addPort(LDPortModel.fromVars(true, "in-4", outputDataTypeKVStore, UserDefDict.externalOutput));
 				break;
 			case "lineardata":
-				node = new ExtendableTypesNodeModel("Linear Data Display", null, null, editorSpecificNodesColor);
+				node = ExtendableTypesNodeModel.fromVars("Linear Data Display", null, null, editorSpecificNodesColor);
 				let outputSelfKV: IKvStore = {
 					key: UserDefDict.outputSelfKey,
 					value: undefined,
 					ldType: UserDefDict.intrprtrClassType
 				};
-				node.addPort(new LDPortModel(false, outputSelfKV.key, outputSelfKV));
+				node.addPort(LDPortModel.fromVars(false, outputSelfKV.key, outputSelfKV));
 				break;
 			default:
 				break;
 		}
-		var points = this.logic.getDiagramEngine().getRelativeMousePoint(event);
+		var points = this.logic.getDiagramEngine().getRelativeMousePoint(clientPosition);
 		node.x = points.x - 224 / 2;
 		node.y = points.y - 32 / 2;
 		this.logic
