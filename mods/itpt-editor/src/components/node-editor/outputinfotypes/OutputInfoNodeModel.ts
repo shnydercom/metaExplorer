@@ -18,6 +18,22 @@ export const OUTPUT_NODE_WIDTH = 275;
 
 export class OutputInfoPartNodeModel extends ItptNodeModel {
 
+	static fromVars(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)",
+			              isCompound?: boolean, type?: string, userName?: string, userProject?: string) {
+		return new this({
+			nameSelf,
+			subItptOf,
+			canInterpretType,
+			color,
+			type,
+			isCompound,
+			itptName: null,
+			itptUserName: userName,
+			itptProjName: userProject,
+			itptBlockName: ""
+		}
+		);
+	}
 	/**
 	 * itptName is the full name of any interpreter that's loaded, regardless of userName and userProject
 	 */
@@ -34,23 +50,6 @@ export class OutputInfoPartNodeModel extends ItptNodeModel {
 	 * project that the currently logged in user is editing, used for constructing new itptNames
 	 */
 	protected userProject: string;
-
-	static fromVars(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", id?: string, isCompound?: boolean, type?: string, userName?: string, userProject?: string) {
-		return new this({
-			nameSelf,
-			subItptOf,
-			canInterpretType,
-			color,
-			type,
-			id,
-			isCompound,
-			itptName: null,
-			itptUserName: userName,
-			itptProjName: userProject,
-			itptBlockName: ""
-		}
-		);
-	}
 
 	constructor(options: OutputInfoPartNodeModelOptions) {
 		options.type = OUTPUT_INFO_MODEL;

@@ -1,8 +1,8 @@
-import { NodeModel } from "@projectstorm/react-diagrams";
+import { NodeModel, NodeModelGenerics } from "@projectstorm/react-diagrams";
 import { LDPortModel } from './LDPortModel';
 import { merge, filter } from "lodash";
 import { INTERPRETERDATATYPE_MODEL } from "../node-editor-consts";
-import { BaseModelOptions, DeserializeEvent } from "@projectstorm/react-canvas-core";
+import { BaseModelOptions, DeserializeEvent, Toolkit } from "@projectstorm/react-canvas-core";
 
 export interface ItptNodeModelOptions extends BaseModelOptions {
 	nameSelf: string;
@@ -12,26 +12,30 @@ export interface ItptNodeModelOptions extends BaseModelOptions {
 	isCompound: boolean;
 }
 
-export class ItptNodeModel extends NodeModel {
-	nameSelf: string;
-	canInterpretType: string;
-	subItptOf: string;
-	color: string;
-	ports: { [s: string]: LDPortModel };
-	isCompound: boolean;
+export interface ItptNodeModelGenerics extends NodeModelGenerics {
+	OPTIONS: ItptNodeModelOptions;
+}
 
-	static fromVars(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", id?: string, isCompound?: boolean, type?: string) {
+export class ItptNodeModel extends NodeModel<ItptNodeModelGenerics> {
+
+	static fromVars(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", isCompound?: boolean, type?: string) {
 		return new this({
 			nameSelf,
 			subItptOf,
 			canInterpretType,
 			color,
 			type,
-			id,
 			isCompound
 		}
 		);
 	}
+
+	nameSelf: string;
+	canInterpretType: string;
+	subItptOf: string;
+	color: string;
+	ports: { [s: string]: LDPortModel };
+	isCompound: boolean;
 
 	constructor(options: ItptNodeModelOptions) {
 		// nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", type?: string, id?: string, isCompound?: boolean) {
@@ -42,6 +46,7 @@ export class ItptNodeModel extends NodeModel {
 			canInterpretType: options.canInterpretType,
 			subItptOf: options.subItptOf,
 			isCompound: !!options.isCompound,
+			id: options.id ? options.id : Toolkit.UID(),
 			...options
 		});
 		/*

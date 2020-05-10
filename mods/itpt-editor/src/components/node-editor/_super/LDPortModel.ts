@@ -20,15 +20,15 @@ export interface LDPortModelGenerics extends PortModelGenerics {
  */
 export class LDPortModel extends PortModel<LDPortModelGenerics> {
 
-	static fromVars(isInput: boolean, name: string, kv: IKvStore, label: string = null, id?: string) {
+	static fromVars(isInput: boolean, name: string, kv: IKvStore, label: string = null) {
 		return new this({
 			in: isInput,
 			name,
 			kv,
-			label,
-			id
+			label
 		});
 	}
+
 	constructor(options: LDPortModelOptions) {
 		super({
 			alignment: options.in ? PortModelAlignment.LEFT : PortModelAlignment.RIGHT,

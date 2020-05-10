@@ -12,15 +12,14 @@ export interface GeneralDataTypeNodeModelListener extends BaseListener {
 
 export class GeneralDataTypeNodeModel extends ItptNodeModel {
 
-	static fromVars(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(222,222,222)", id?: string, isCompound?: boolean) {
+	static fromVars(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(222,222,222)", isCompound?: boolean) {
 		return new this({
 			nameSelf,
 			subItptOf,
 			canInterpretType,
 			color,
-			isCompound,
-			id
-		})
+			isCompound
+		});
 	}
 
 	constructor(options: GeneralDataTypeNodeModelOptions){

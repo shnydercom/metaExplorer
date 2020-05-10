@@ -7,16 +7,14 @@ export interface ExtendableTypesNodeModelOptions extends ItptNodeModelOptions {
 
 export class ExtendableTypesNodeModel extends ItptNodeModel {
 
-
-	static fromVars(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", id?: string) {
+	static fromVars(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)") {
 		return new this({
 			nameSelf,
 			subItptOf,
 			canInterpretType,
 			color,
-			isCompound: false,
-			id
-		})
+			isCompound: false
+		});
 	}
 
 	constructor(options: ExtendableTypesNodeModelOptions) {

@@ -70,7 +70,7 @@ export class NodeEditorLogic {
 		this.diagramEngine = createEngine({ registerDefaultZoomCanvasAction: false });
 		this.dagreEngine = new DagreEngine({
 			graph: {
-				rankdir: 'RL',
+				rankdir: 'LR',
 				ranker: 'longest-path',
 				marginx: 25,
 				marginy: 25
@@ -129,10 +129,10 @@ export class NodeEditorLogic {
 	}
 
 	public autoDistribute() {
-		/*const engine = this.diagramEngine;
+		const engine = this.diagramEngine;
 		const model = engine.getModel();
 		this.dagreEngine.redistribute(model);
-		engine.zoomToFitNodes();*/
+		engine.zoomToFit();
 		/*
 		const engine = this.diagramEngine;
 		const model = engine.getModel();
@@ -166,7 +166,8 @@ export class NodeEditorLogic {
 		//create fixed output node
 		//TODO: make fixed but ports should still be settable, make outputNode singleton per Itpt
 		let outputNode = OutputInfoPartNodeModel.fromVars(UserDefDict.outputItpt, null, null, editorSpecificNodesColor,
-			outputLDOptionsToken, false, this.userName, this.userProject);
+			false, this.userName, this.userProject);
+		outputNode.getOptions().id = outputLDOptionsToken;
 		//outputNode.setLocked(true); // locking would lock the ports as well
 		const canvas = this.diagramEngine.getCanvas();
 		if (canvas) {
@@ -188,7 +189,7 @@ export class NodeEditorLogic {
 			ldType: UserDefDict.intrprtrClassType
 		};
 		let finalInputName: string = outputFinalInputKV.key;
-		let outputNodeInputPort = LDPortModel.fromVars(true, finalInputName, outputFinalInputKV, "", finalInputName);
+		let outputNodeInputPort = LDPortModel.fromVars(true, finalInputName, outputFinalInputKV, finalInputName);
 		outputNode.addPort(outputNodeInputPort);
 		model.addNode(outputNode);
 		//model.setOffsetX(this.width / 4);
@@ -505,7 +506,8 @@ export class NodeEditorLogic {
 	}
 
 	public addNewExtendableNode(signature: NewNodeSig, itpt: BlueprintConfig): ExtendableTypesNodeModel {
-		let extendableNode = ExtendableTypesNodeModel.fromVars("Linear Data Display", null, null, editorSpecificNodesColor, signature.id);
+		let extendableNode = ExtendableTypesNodeModel.fromVars("Linear Data Display", null, null, editorSpecificNodesColor);
+		extendableNode.getOptions().id = signature.id;
 		//let nodeName: string = itpt.subItptOf;
 		const extendableNodex = signature.x;
 		const extendableNodey = signature.y;
@@ -527,8 +529,8 @@ export class NodeEditorLogic {
 
 	public addNewGeneralNode(signature: NewNodeSig, itpt: BlueprintConfig): GeneralDataTypeNodeModel {
 		let nodeName: string = itpt.subItptOf;
-		let generalNode = GeneralDataTypeNodeModel.fromVars(nodeName, null, null, editorDefaultNodesColor, signature.id);
-		//generalNode.id = signature.id;
+		let generalNode = GeneralDataTypeNodeModel.fromVars(nodeName, null, null, editorDefaultNodesColor);
+		generalNode.getOptions().id = signature.id;
 		const generalNodex = signature.x;
 		const generalNodey = signature.y;
 		generalNode.setPosition(generalNodex, generalNodey);
@@ -558,7 +560,9 @@ export class NodeEditorLogic {
 		const nodex = signature.x;
 		const nodey = signature.y;
 		node.setPosition(nodex, nodey);
-		node.addPort(LDPortModel.fromVars(false, PORTNAME_OUT_OUTPUTSELF, baseDataTypeKVStore, "output", signature.id));
+		const newPort = LDPortModel.fromVars(false, PORTNAME_OUT_OUTPUTSELF, baseDataTypeKVStore, "output");
+		newPort.getOptions().id = signature.id;
+		node.addPort(newPort);
 		this.getDiagramEngine()
 			.getModel()
 			.addNode(node);

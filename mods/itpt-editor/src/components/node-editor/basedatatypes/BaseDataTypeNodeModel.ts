@@ -2,7 +2,7 @@ import { ItptNodeModel, ItptNodeModelOptions } from "../_super/ItptNodeModel";
 import { BASEDATATYPE_MODEL } from "../node-editor-consts";
 
 export interface BaseDataTypeNodeModelOptions extends ItptNodeModelOptions {
-	
+
 }
 
 export class BaseDataTypeNodeModel extends ItptNodeModel {
@@ -14,7 +14,7 @@ export class BaseDataTypeNodeModel extends ItptNodeModel {
 			canInterpretType,
 			color,
 			isCompound: false
-		})
+		});
 	}
 
 	constructor(options: BaseDataTypeNodeModelOptions) {
