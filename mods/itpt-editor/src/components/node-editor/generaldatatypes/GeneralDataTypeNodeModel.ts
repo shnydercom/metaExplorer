@@ -28,7 +28,7 @@ export class GeneralDataTypeNodeModel extends ItptNodeModel {
 	}
 
 	onExploreBtnClicked() {
-		const newItptName = this.subItptOf;
+		const newItptName = this.getSubItptOf();
 		this.fireEvent(
 			{
 				itptName: newItptName

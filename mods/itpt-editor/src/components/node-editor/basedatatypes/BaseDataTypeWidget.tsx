@@ -29,9 +29,9 @@ export class BaseDataTypeNodeWidget extends React.Component<BaseDataTypeNodeProp
 
 	render() {
 		return (
-			<div className="basic-node" style={{ background: this.props.node.color }}>
+			<div className="basic-node" style={{ background: this.props.node.getColor() }}>
 				<div className="title">
-					<div className="name">{this.props.node.nameSelf}</div>
+					<div className="name">{this.props.node.getNameSelf()}</div>
 				</div>
 				<div className="ports">
 					<div className="out">{map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>

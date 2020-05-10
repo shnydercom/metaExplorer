@@ -19,7 +19,7 @@ export interface ExtendableTypesTypeNodeState { }
  */
 export class ExtendableTypesNodeWidget extends React.Component<ExtendableTypesNodeProps, ExtendableTypesTypeNodeState> {
 	constructor(props: ExtendableTypesNodeProps) {
-		super(props)
+		super(props);
 		//super(EXTENDABLETYPES_MODEL, props);
 		this.state = {};
 	}
@@ -49,15 +49,14 @@ export class ExtendableTypesNodeWidget extends React.Component<ExtendableTypesNo
 
 	render() {
 		return (
-			<div className="basic-node" style={{ background: this.props.node.color }}>
+			<div className="basic-node" style={{ background: this.props.node.getColor() }}>
 				<div className="title">
-					<div className="name">{this.props.node.nameSelf}</div>
+					<div className="name">{this.props.node.getNameSelf()}</div>
 				</div>
 				<div className="ports">
 					<div className="in">{map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>
 					<div className="out">{map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
 				</div>
-				{/**label="+ in"  */}
 				<button className="editor-btn editor-btn-addport input-highlight" onClick={this.addInPort.bind(this)} >{TXT_ADD_PORT}</button>
 			</div>
 		);

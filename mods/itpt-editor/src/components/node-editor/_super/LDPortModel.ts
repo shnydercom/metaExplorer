@@ -34,6 +34,7 @@ export class LDPortModel extends PortModel<LDPortModelGenerics> {
 			alignment: options.in ? PortModelAlignment.LEFT : PortModelAlignment.RIGHT,
 			type: LD_PORTMODEL,
 			linkSortOrder: [],
+			label: options.label ? options.label : options.name,
 			...options
 		});
 	}

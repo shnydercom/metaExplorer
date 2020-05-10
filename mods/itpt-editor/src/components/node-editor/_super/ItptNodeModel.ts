@@ -1,8 +1,8 @@
-import { NodeModel, NodeModelGenerics } from "@projectstorm/react-diagrams";
-import { LDPortModel } from './LDPortModel';
-import { merge, filter } from "lodash";
-import { INTERPRETERDATATYPE_MODEL } from "../node-editor-consts";
 import { BaseModelOptions, DeserializeEvent, Toolkit } from "@projectstorm/react-canvas-core";
+import { NodeModel, NodeModelGenerics } from "@projectstorm/react-diagrams";
+import { filter, merge } from "lodash";
+import { INTERPRETERDATATYPE_MODEL } from "../node-editor-consts";
+import { LDPortModel } from './LDPortModel';
 
 export interface ItptNodeModelOptions extends BaseModelOptions {
 	nameSelf: string;
@@ -30,12 +30,7 @@ export class ItptNodeModel extends NodeModel<ItptNodeModelGenerics> {
 		);
 	}
 
-	nameSelf: string;
-	canInterpretType: string;
-	subItptOf: string;
-	color: string;
 	ports: { [s: string]: LDPortModel };
-	isCompound: boolean;
 
 	constructor(options: ItptNodeModelOptions) {
 		// nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", type?: string, id?: string, isCompound?: boolean) {
@@ -49,32 +44,24 @@ export class ItptNodeModel extends NodeModel<ItptNodeModelGenerics> {
 			id: options.id ? options.id : Toolkit.UID(),
 			...options
 		});
-		/*
-		type ? type : INTERPRETERDATATYPE_MODEL, id);
-		this.nameSelf = nameSelf;
-		this.color = color;
-		this.canInterpretType = canInterpretType;
-		this.subItptOf = subItptOf;
-		this.isCompound = !!isCompound;
-		*/
 	}
 
 	deSerialize(event: DeserializeEvent<this>) {
 		super.deserialize(event);
-		this.nameSelf = event.data.nameSelf;
-		this.color = event.data.color;
-		this.canInterpretType = event.data.canInterpretType;
-		this.subItptOf = event.data.subItptOf;
-		this.isCompound = event.data.isCompound;
+		this.setNameSelf(event.data.nameSelf);
+		this.setColor(event.data.color);
+		this.setCanInterpretType(event.data.canInterpretType);
+		this.setSubItptOf(event.data.subItptOf);
+		this.setIsCompound(event.data.isCompound);
 	}
 
 	serialize() {
 		return merge(super.serialize(), {
-			nameSelf: this.nameSelf,
-			color: this.color,
-			canInterpretType: this.canInterpretType,
-			subItptOf: this.subItptOf,
-			isCompound: this.isCompound
+			nameSelf: this.getNameSelf(),
+			color: this.getColor(),
+			canInterpretType: this.getCanInterpretType(),
+			subItptOf: this.getSubItptOf(),
+			isCompound: this.getIsCompound()
 		});
 	}
 
@@ -88,5 +75,37 @@ export class ItptNodeModel extends NodeModel<ItptNodeModelGenerics> {
 		return filter(this.ports, (portModel: LDPortModel) => {
 			return !portModel.isIn();
 		});
+	}
+
+	getNameSelf(): string {
+		return this.options.nameSelf;
+	}
+	getCanInterpretType(): string {
+		return this.options.canInterpretType;
+	}
+	getSubItptOf(): string {
+		return this.options.subItptOf;
+	}
+	getColor(): string {
+		return this.options.color;
+	}
+	getIsCompound(): boolean {
+		return this.options.isCompound;
+	}
+
+	setNameSelf(val: string) {
+		this.options.nameSelf = val;
+	}
+	setCanInterpretType(val: string) {
+		this.options.canInterpretType = val;
+	}
+	setSubItptOf(val: string) {
+		this.options.subItptOf = val;
+	}
+	setColor(val: string) {
+		this.options.color = val;
+	}
+	setIsCompound(val: boolean) {
+		this.options.isCompound = val;
 	}
 }

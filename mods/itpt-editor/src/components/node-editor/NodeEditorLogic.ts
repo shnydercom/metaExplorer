@@ -132,7 +132,10 @@ export class NodeEditorLogic {
 		const engine = this.diagramEngine;
 		const model = engine.getModel();
 		this.dagreEngine.redistribute(model);
-		engine.zoomToFit();
+		engine.zoomToFitNodes();
+		model.setZoomLevel(model.getZoomLevel() * .8);
+		model.setOffsetX(this.width / 5);
+		model.setOffsetY(32);
 		/*
 		const engine = this.diagramEngine;
 		const model = engine.getModel();
@@ -206,16 +209,16 @@ export class NodeEditorLogic {
 	addListenersToNode(node: NodeModel) {
 		node.registerListener({
 			entityRemoved: (event) => {
-				this.onOutputInfoSaved(this.outputNode.getItptName())
+				this.onOutputInfoSaved(this.outputNode.getItptName());
 			}
-		})
+		});
 		if (node.getType() === GENERALDATATYPE_MODEL) {
-			if ((node as GeneralDataTypeNodeModel).isCompound) {
+			if ((node as GeneralDataTypeNodeModel).getIsCompound()) {
 				node.registerListener({
 					onTriggerExplore: (ev) => {
-						this.onExploreTriggered(ev.itptName)
+						this.onExploreTriggered(ev.itptName);
 					}
-				} as GeneralDataTypeNodeModelListener)
+				} as GeneralDataTypeNodeModelListener);
 			}
 		}
 	}
@@ -228,7 +231,7 @@ export class NodeEditorLogic {
 			targetPortChanged: (ev) => {
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			}
-		})
+		});
 	}
 
 	addListenersToModel(model: DiagramModel) {
@@ -240,7 +243,7 @@ export class NodeEditorLogic {
 				this.addListenersToLink(event.link);
 				this.onOutputInfoSaved(this.outputNode.getItptName());
 			}
-		})
+		});
 		const nodesMap = model.getNodes();
 		for (const key in nodesMap) {
 			if (nodesMap.hasOwnProperty(key)) {
@@ -300,9 +303,9 @@ export class NodeEditorLogic {
 		//let rv: LDPortModel[] = [];
 		let intrprtrKeys: any[] = cfg.interpretableKeys;
 		let initialKvStores: IKvStore[] = cfg.initialKvStores;
-		node.nameSelf = node.getID();
-		node.subItptOf = cfg.nameSelf;
-		node.isCompound = !!cfg.subItptOf;
+		node.setNameSelf(node.getID());
+		node.setSubItptOf(cfg.nameSelf);
+		node.setIsCompound(!!cfg.subItptOf);
 		let numObjPropRef = 0;
 		let isInitKVsmallerThanKeys: boolean = initialKvStores.length < intrprtrKeys.length;
 		for (var i = 0; i < intrprtrKeys.length; i++) {
@@ -366,7 +369,7 @@ export class NodeEditorLogic {
 			value: undefined,
 			ldType: UserDefDict.intrprtrClassType
 		};
-		node.addPort(LDPortModel.fromVars(false, outputSelfKV.key, outputSelfKV));
+		node.addPort(LDPortModel.fromVars(false, outputSelfKV.key, outputSelfKV, outputSelfKV.key));
 		for (var j = intrprtrKeys.length - numObjPropRef; j < initialKvStores.length; j++) {
 			//console.dir(node.getPorts());
 			var elemj = initialKvStores[j];
@@ -511,8 +514,8 @@ export class NodeEditorLogic {
 		//let nodeName: string = itpt.subItptOf;
 		const extendableNodex = signature.x;
 		const extendableNodey = signature.y;
-		extendableNode.setPosition(extendableNodex, extendableNodey)
-		extendableNode.canInterpretType = itpt.canInterpretType;
+		extendableNode.setPosition(extendableNodex, extendableNodey);
+		extendableNode.setCanInterpretType(itpt.canInterpretType);
 		/*let outputSelfKV: IKvStore = {
 			key: UserDefDict.outputSelfKey,
 			value: undefined,
@@ -520,7 +523,7 @@ export class NodeEditorLogic {
 		};*/
 		this.addLDPortModelsToNodeFromCfg(extendableNode, itpt);
 		//extendableNode.id = signature.id;
-		extendableNode.nameSelf = "Linear Data Display";
+		extendableNode.setNameSelf("Linear Data Display");
 		this.getDiagramEngine()
 			.getModel()
 			.addNode(extendableNode);
@@ -535,7 +538,7 @@ export class NodeEditorLogic {
 		const generalNodey = signature.y;
 		generalNode.setPosition(generalNodex, generalNodey);
 		this.addLDPortModelsToNodeFromItptRetr(generalNode, nodeName);
-		if (itpt.canInterpretType) generalNode.canInterpretType = itpt.canInterpretType;
+		if (itpt.canInterpretType) generalNode.setCanInterpretType(itpt.canInterpretType);
 		this.getDiagramEngine()
 			.getModel()
 			.addNode(generalNode);
@@ -594,7 +597,7 @@ export class NodeEditorLogic {
 			value: subIntrprtrCfgMap,
 			ldType: UserDefDict.intrprtrBPCfgRefMapType
 		};
-		outputBPCfg.subItptOf = this.outputNode.subItptOf;
+		outputBPCfg.subItptOf = this.outputNode.getSubItptOf();
 		outputBPCfg.initialKvStores.unshift(intrprtMapKV);
 		this.bakeKvStoresIntoBP(outputBPCfg);
 		return outputBPCfg;
@@ -705,8 +708,8 @@ export class NodeEditorLogic {
 						let outputBPCfg: BlueprintConfig = otherIntrprtrCfgs[leafNodeID];
 						let initialKvStores = null;
 						if (!outputBPCfg) {
-							let canInterpretType = (leafNode as ItptNodeModel).canInterpretType;
-							let subItptOf = (leafNode as ItptNodeModel).subItptOf;
+							let canInterpretType = (leafNode as ItptNodeModel).getCanInterpretType();
+							let subItptOf = (leafNode as ItptNodeModel).getSubItptOf();
 							let crudSkills = "cRud";
 							let nameSelf = leafNodeID;
 							initialKvStores = [];
@@ -739,7 +742,7 @@ export class NodeEditorLogic {
 						branchBPCfg.initialKvStores.push(gdtKV);
 						//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
 						if (branchNode.getType() === OUTPUT_INFO_MODEL && port.getKV().key === UserDefDict.finalInputKey) {
-							branchNode.subItptOf = leafNode.getID();
+							branchNode.setSubItptOf(leafNode.getID());
 						} else {
 							branchBPCfg.interpretableKeys.push(gdtKV.key);
 						}
@@ -781,7 +784,7 @@ export class NodeEditorLogic {
 						branchBPCfg.initialKvStores.push(extDtKV);
 						//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
 						if (branchNode.getType() === OUTPUT_INFO_MODEL && port.getKV().key === UserDefDict.finalInputKey) {
-							branchNode.subItptOf = leafNode.getID();
+							branchNode.setSubItptOf(leafNode.getID());
 						} else {
 							branchBPCfg.interpretableKeys.push(extDtKV.key);
 						}

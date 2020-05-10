@@ -40,11 +40,11 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps> {
 			concatTitle: '',
 			projectName,
 			userName
-		}
+		};
 		return (
-			<div className="basic-node" style={{ background: node.color }}>
+			<div className="basic-node" style={{ background: node.getColor() }}>
 				<div className="title">
-					<div className="name">{node.nameSelf}</div>
+					<div className="name">{node.getNameSelf()}</div>
 				</div>
 				<div className="onboarding-form ports">
 					<div className="dense-form">
