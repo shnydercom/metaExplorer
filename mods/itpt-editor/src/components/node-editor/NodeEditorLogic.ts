@@ -80,10 +80,10 @@ export class NodeEditorLogic {
 		//new DiagramEngine();
 
 		this.diagramEngine.getActionEventBus().registerAction(new ZoomCanvasAction({ inverseZoom: true }));
-		//label factories
-		this.diagramEngine.getLabelFactories().registerFactory(new SettingsLabelFactory());
 		//link factories
 		this.diagramEngine.getLinkFactories().registerFactory(new SettingsLinkFactory());
+		//label factories
+		this.diagramEngine.getLabelFactories().registerFactory(new SettingsLabelFactory());
 		//node factories
 		this.diagramEngine.getNodeFactories().registerFactory(new BaseDataTypeNodeFactory());
 		this.diagramEngine.getNodeFactories().registerFactory(new GeneralDataTypeNodeFactory());
@@ -136,30 +136,6 @@ export class NodeEditorLogic {
 		model.setZoomLevel(model.getZoomLevel() * .8);
 		model.setOffsetX(this.width / 5);
 		model.setOffsetY(32);
-		/*
-		const engine = this.diagramEngine;
-		const model = engine.getModel();
-		let distributedModel = this.getDistributedModel(engine, model);
-		this.activeModel = distributedModel;
-		this.outputNode = this.activeModel.getNode(this.outputLDOptionsToken) as OutputInfoPartNodeModel;
-		this.outputNode.width = OUTPUT_NODE_WIDTH;
-		this.outputNode.registerListener({
-			outputInfoSaved: (evtVal) => {
-				const newItpt = evtVal.itptName;
-				this.onOutputInfoSaved(newItpt);
-			}
-		} as any);
-		engine.setModel(distributedModel);
-		//engine.recalculatePortsVisually();
-		let prevZoomlvl = distributedModel.getZoomLevel();
-		if (engine.getCanvas()) engine.zoomToFit();
-		let newZoomLevel = distributedModel.getZoomLevel() * .8;
-		const lowerBnd = prevZoomlvl * .79;
-		const higherBnd = prevZoomlvl * .81;
-		if (!(lowerBnd < newZoomLevel && newZoomLevel < higherBnd)) {
-			distributedModel.setZoomLevel(newZoomLevel);
-		}
-		distributedModel.setOffsetX(this.width / 5);*/
 	}
 
 	public newModel(outputLDOptionsToken: string) {
