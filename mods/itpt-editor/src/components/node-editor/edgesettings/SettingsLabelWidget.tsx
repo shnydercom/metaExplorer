@@ -53,7 +53,7 @@ export class SettingsLabelWidget extends React.Component<SettingsLabelWidgetProp
 		this.state = { isVisible: false, isOpened: false, inputLinks: [], outputLinks: [] };
 	}
 
-	getInPort(): LDPortModel {
+	getDestinationPort(): LDPortModel {
 		const parentLink = this.props.model.getParent();
 		if ((parentLink.getSourcePort() as LDPortModel).isIn()) {
 			return parentLink.getSourcePort() as LDPortModel;
@@ -61,13 +61,22 @@ export class SettingsLabelWidget extends React.Component<SettingsLabelWidgetProp
 			return parentLink.getTargetPort() as LDPortModel;
 		}
 	}
-	getOutPort(): LDPortModel {
+	getOriginPort(): LDPortModel {
 		const parentLink = this.props.model.getParent();
 		if (!(parentLink.getSourcePort() as LDPortModel).isIn()) {
 			return parentLink.getSourcePort() as LDPortModel;
 		} else {
 			return parentLink.getTargetPort() as LDPortModel;
 		}
+	}
+
+	renderLabelMsg() {
+		const inKey = this.getDestinationPort().getKV().key;
+		const outKey = this.getOriginPort().getKV().key;
+		return <div className="labelmsg">
+			<span>{outKey}</span>
+			<span>👉{inKey}</span>
+		</div>;
 	}
 
 	render() {
@@ -78,51 +87,56 @@ export class SettingsLabelWidget extends React.Component<SettingsLabelWidgetProp
 		const outputLinksLen = outputLinks.length;
 		const inputPos = indexOf(inputLinks, parentLink.getID()) + 1;
 		const outputPos = indexOf(outputLinks, parentLink.getID()) + 1;
-		// const thisProps = this.getProps();
-		// {...thisProps} className={isOpened ? thisProps.className + "anim" : thisProps.className}
-		return <div
+		const destPort = this.getDestinationPort();
+		if (!destPort) return null;
+		const inKey = destPort.getKV().key;
+		const origPort = this.getOriginPort();
+		if (!origPort) return null;
+		const outKey = origPort.getKV().key;
+		const linkMenuClassName = "srd-link-menu";
+		return <div className={isOpened ? linkMenuClassName + " anim" : linkMenuClassName}
 			onMouseEnter={(event) => this.setState({ ...this.state, isOpened: true })}
 			onMouseLeave={() => this.setState({ ...this.state, isOpened: false })}
-		>
+		>{this.renderLabelMsg()}
 			{
 				isOpened ?
 					<div className="menu-col">
-						{inputLinksLen > 1
-							? <>
-								<h3>input position:</h3>
-								<div className="menu-row">
-									<button type="button" className="btn" disabled={inputPos === 1}
-										onClick={() => {
-											this.getInPort().decreaseLinksSortOrder(parentLink);
-											this.forceUpdate();
-										}
-										} >&lt;</button>
-									<b>{" " + inputPos + "/" + inputLinksLen + " "}</b>
-									<button type="button" className="btn" disabled={inputPos === inputLinksLen}
-										onClick={() => {
-											this.getInPort().increaseLinksSortOrder(parentLink);
-											this.forceUpdate();
-										}}>&gt;</button><br />
-								</div>
-							</>
-							: null}
 						{outputLinksLen > 1
 							? <>
-								<h3>output position</h3>
+								<h3>{outKey} position</h3>
 								<div className="menu-row">
 									<button type="button" className="btn" disabled={outputPos === 1}
 										onClick={() => {
-											this.getOutPort().decreaseLinksSortOrder(parentLink);
+											this.getOriginPort().decreaseLinksSortOrder(parentLink);
 											this.forceUpdate();
 										}
 										}>&lt;</button>
 									<b>{" " + outputPos + "/" + outputLinksLen + " "}</b>
 									<button type="button" className="btn" disabled={outputPos === outputLinksLen}
 										onClick={() => {
-											this.getOutPort().increaseLinksSortOrder(parentLink);
+											this.getOriginPort().increaseLinksSortOrder(parentLink);
 											this.forceUpdate();
 										}
 										}>&gt;</button>
+								</div>
+							</>
+							: null}
+						{inputLinksLen > 1
+							? <>
+								<h3>{inKey} position:</h3>
+								<div className="menu-row">
+									<button type="button" className="btn" disabled={inputPos === 1}
+										onClick={() => {
+											this.getDestinationPort().decreaseLinksSortOrder(parentLink);
+											this.forceUpdate();
+										}
+										} >&lt;</button>
+									<b>{" " + inputPos + "/" + inputLinksLen + " "}</b>
+									<button type="button" className="btn" disabled={inputPos === inputLinksLen}
+										onClick={() => {
+											this.getDestinationPort().increaseLinksSortOrder(parentLink);
+											this.forceUpdate();
+										}}>&gt;</button><br />
 								</div>
 							</>
 							: null}

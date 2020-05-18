@@ -1,17 +1,21 @@
-import { DefaultLinkFactory, DefaultLinkModel } from "@projectstorm/react-diagrams";
+import { DefaultLinkFactory } from "@projectstorm/react-diagrams";
+import { SettingsLinkModel } from "./SettingsLinkModel";
+import { LINK_SETTINGS_MODEL } from "../node-editor-consts";
 
+/**
+ * factory is not used when manually dragging out from a port
+ */
 export class SettingsLinkFactory extends DefaultLinkFactory {
+	constructor() {
+		super(LINK_SETTINGS_MODEL);
+	}
 
 	generateModel() {
 		return this.getNewInstance();
 	}
 
-	getNewInstance(initialConfig?: any): DefaultLinkModel {
-		const newInstance = new DefaultLinkModel({
-			color: 'rgba(180, 180, 0, 0.3)',
-			selectedColor: 'rgba(87, 161, 245, 0.9)'
-		});
-		newInstance.addLabel(" ");
+	getNewInstance(initialConfig?: any): SettingsLinkModel {
+		const newInstance = new SettingsLinkModel();
 		return newInstance;
 	}
 

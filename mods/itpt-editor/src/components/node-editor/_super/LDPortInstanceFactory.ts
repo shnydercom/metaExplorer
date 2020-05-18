@@ -1,8 +1,9 @@
 import { LDPortModel } from "./LDPortModel";
 import { IKvStore, UserDefDict } from "@metaexplorer/core";
-import { LD_PORTMODEL } from "../node-editor-consts";
+import { LD_PORTMODEL, LINK_SETTINGS_MODEL } from "../node-editor-consts";
 import { AbstractModelFactory } from "@projectstorm/react-canvas-core";
 import { DiagramEngine } from "@projectstorm/react-diagrams";
+import { SettingsLinkModel } from "../edgesettings/SettingsLinkModel";
 
 export class LDPortInstanceFactory extends AbstractModelFactory<LDPortModel, DiagramEngine> {
 	constructor() {
@@ -24,5 +25,9 @@ export class LDPortInstanceFactory extends AbstractModelFactory<LDPortModel, Dia
 
 	generateModel(event): LDPortModel {
 		return this.getNewInstance();
+	}
+
+	createLinkModel(): SettingsLinkModel | null {
+		return this.engine.getLinkFactories().getFactory(LINK_SETTINGS_MODEL).generateModel({}) as SettingsLinkModel;
 	}
 }

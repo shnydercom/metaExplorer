@@ -1,8 +1,9 @@
-import { PortModel, LinkModel, DefaultLinkModel, PortModelOptions, PortModelGenerics, PortModelAlignment } from "@projectstorm/react-diagrams";
+import { PortModel, LinkModel, PortModelOptions, PortModelGenerics, PortModelAlignment } from "@projectstorm/react-diagrams";
 import { merge } from "lodash";
 import { IKvStore, isInputValueValidFor, arrayMove } from "@metaexplorer/core";
 import { LD_PORTMODEL } from "../node-editor-consts";
 import { DeserializeEvent } from "@projectstorm/react-canvas-core";
+import { SettingsLinkModel } from "../edgesettings/SettingsLinkModel";
 
 export interface LDPortModelOptions extends PortModelOptions {
 	in: boolean;
@@ -81,11 +82,9 @@ export class LDPortModel extends PortModel<LDPortModelGenerics> {
 	createLinkModel(): LinkModel {
 		let link = super.createLinkModel();
 		if (link) return link;
-		let defaultLink = new DefaultLinkModel();
-		defaultLink.addLabel("");
+		let defaultLink = new SettingsLinkModel();
 		return defaultLink;
 	}
-
 	removeLink(link: LinkModel) {
 		super.removeLink(link);
 		var idx = this.options.linkSortOrder.indexOf(link.getID());

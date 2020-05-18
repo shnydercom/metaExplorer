@@ -3,12 +3,12 @@ import {
 	ldBaseDataTypeList, BlueprintConfig, IBlueprintItpt, LDDict, IKvStore, isInputValueValidFor, isObjPropertyRef,
 	ObjectPropertyRef, UserDefDict, appItptMatcherFn
 } from "@metaexplorer/core";
-import createEngine, { DefaultLinkModel, DiagramEngine, DiagramModel, NodeModel, LinkModel, LinkModelGenerics, DagreEngine } from "@projectstorm/react-diagrams";
+import createEngine, { DiagramEngine, DiagramModel, NodeModel, LinkModel, LinkModelGenerics, DagreEngine } from "@projectstorm/react-diagrams";
 import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
 import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeModel";
 import { DeclarationWidgetFactory } from "./declarationtypes/DeclarationNodeWidgetFactory";
-import { BASEDATATYPE_MODEL, DECLARATION_MODEL, EXTENDABLETYPES_MODEL, GENERALDATATYPE_MODEL, OUTPUT_INFO_MODEL } from "./node-editor-consts";
+import { BASEDATATYPE_MODEL, DECLARATION_MODEL, EXTENDABLETYPES_MODEL, GENERALDATATYPE_MODEL, OUTPUT_INFO_MODEL, LINK_SETTINGS_MODEL } from "./node-editor-consts";
 import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
 import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesWidgetFactory";
 import { GeneralDataTypeNodeFactory } from "./generaldatatypes/GeneralDataTypeInstanceFactories";
@@ -80,10 +80,10 @@ export class NodeEditorLogic {
 		//new DiagramEngine();
 
 		this.diagramEngine.getActionEventBus().registerAction(new ZoomCanvasAction({ inverseZoom: true }));
-		//link factories
-		this.diagramEngine.getLinkFactories().registerFactory(new SettingsLinkFactory());
 		//label factories
 		this.diagramEngine.getLabelFactories().registerFactory(new SettingsLabelFactory());
+		//link factories
+		this.diagramEngine.getLinkFactories().registerFactory(new SettingsLinkFactory());
 		//node factories
 		this.diagramEngine.getNodeFactories().registerFactory(new BaseDataTypeNodeFactory());
 		this.diagramEngine.getNodeFactories().registerFactory(new GeneralDataTypeNodeFactory());
@@ -413,7 +413,7 @@ export class NodeEditorLogic {
 						}
 						sourcePort = bdtStaticNode.getPort(PORTNAME_OUT_OUTPUTSELF) as LDPortModel;
 					}
-					let subItptLink = new DefaultLinkModel();
+					let subItptLink = this.diagramEngine.getLinkFactories().getFactory(LINK_SETTINGS_MODEL).generateModel({});
 					subItptLink.setSourcePort(sourcePort);
 					subItptLink.setTargetPort(targetPort);
 					linkArray.push(subItptLink);
@@ -438,7 +438,7 @@ export class NodeEditorLogic {
 					.addNode(inputMarkerNode);
 				let targetNode = nodeMap.get(itptKeyField.objRef);
 				let targetPort = targetNode.getPort(itptKeyField.propRef + "_in");
-				let inputMarkerLink = new DefaultLinkModel();
+				let inputMarkerLink = this.diagramEngine.getLinkFactories().getFactory(LINK_SETTINGS_MODEL).generateModel({});
 				inputMarkerLink.setSourcePort(inputMarkerPort);
 				inputMarkerLink.setTargetPort(targetPort);
 				linkArray.push(inputMarkerLink);
@@ -461,7 +461,7 @@ export class NodeEditorLogic {
 					.addNode(outputMarkerNode);
 				let targetNode = nodeMap.get(outputInfo.objRef);
 				let targetPort = targetNode.getPort(outputInfo.propRef + "_out");
-				let outputMarkerLink = new DefaultLinkModel();
+				let outputMarkerLink = this.diagramEngine.getLinkFactories().getFactory(LINK_SETTINGS_MODEL).generateModel({});
 				outputMarkerLink.setSourcePort(outputMarkerPort);
 				outputMarkerLink.setTargetPort(targetPort);
 				linkArray.push(outputMarkerLink);
@@ -473,7 +473,7 @@ export class NodeEditorLogic {
 		this.outputNode.setItptName(itpt.nameSelf);
 		let outputNodeItptInPort = this.outputNode.getPort(UserDefDict.finalInputKey);
 
-		let outputItptLink = new DefaultLinkModel();
+		let outputItptLink = this.diagramEngine.getLinkFactories().getFactory(LINK_SETTINGS_MODEL).generateModel({});
 		outputItptLink.setTargetPort(outputNodeItptInPort);
 		outputItptLink.setSourcePort(baseNode.getPort(UserDefDict.outputSelfKey));
 

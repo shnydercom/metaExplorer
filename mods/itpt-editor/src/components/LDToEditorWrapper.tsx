@@ -490,7 +490,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.generatePrefilled(newBpCfg);
 		this.logic.diagramFromItptBlueprint(newBpCfg);
 		this.logic.autoDistribute();
-		this.setState({ ...this.state, currentlyEditingItptName: itptName });
+		this.setState(
+			{ ...this.state, currentlyEditingItptName: itptName }
+		);
 	}
 
 	renderEditor() {

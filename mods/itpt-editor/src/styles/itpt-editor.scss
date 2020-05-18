@@ -440,24 +440,6 @@ $button-color-cta: orange;
   transform: translate(0%, 60px) rotate(270deg);
 }
 
-@keyframes expand {
-  from {
-    max-height: 30px;
-    width: 30px;
-    border: solid 0px;
-    border-radius: 15px;
-    color: #FFFFFF00;
-  }
-
-  to {
-    max-height: 300px;
-    width: 120px;
-    border: solid 0px;
-    border-radius: 6px;
-    color: #fff;
-  }
-}
-
 @keyframes fadein {
   0% {
     opacity: 0;
@@ -476,13 +458,22 @@ $button-color-cta: orange;
   }
 }
 
+@keyframes expand {
+  from {
+    max-height: 32px;
+    color: #FFFFFF00;
+  }
+
+  to {
+    max-height: 240px;
+    color: #fff;
+  }
+}
+
 .srd-link-menu.anim {
   animation: expand;
   animation-duration: 200ms;
   height: fit-content;
-  width: 120px;
-  border: solid 0px;
-  border-radius: 6px;
 }
 
 .srd-link-menu {
@@ -493,22 +484,36 @@ $button-color-cta: orange;
   /* Chrome/Safari/Opera */
   user-select: none;
   border: solid 0px;
-  border-radius: 50px;
+  border-radius: 6px;
   cursor: move;
   pointer-events: all;
   z-index: 150;
   color: white;
   font-family: Roboto, Arial;
   font-size: 11px;
+  opacity: 0.8;
+  height: 32px;
+  width: fit-content;
 
   h3 {
     padding: 6px;
-    margin: 6px 0px 15px 0px;
+    margin: 6px 0px 6px 0px;
     white-space: nowrap;
     overflow: hidden;
   }
 
   background-color: $editor-background-elevated-color;
+
+  .labelmsg {
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    color: #fff;
+    > * {
+      flex: 1;
+    }
+  }
 
   .menu-col {
     //animation: fadein;
@@ -517,7 +522,8 @@ $button-color-cta: orange;
     align-items: center;
     flex-direction: column;
     justify-content: flex-start;
-    padding-bottom: 50px;
+    padding: 12px;
+    padding-top: 0;
 
     .menu-row {
       display: flex;
