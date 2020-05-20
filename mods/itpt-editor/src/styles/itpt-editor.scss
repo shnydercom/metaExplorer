@@ -472,7 +472,7 @@ $button-color-cta: orange;
 
 .srd-link-menu.anim {
   animation: expand;
-  animation-duration: 200ms;
+  animation-duration: 600ms;
   height: fit-content;
 }
 
@@ -510,7 +510,8 @@ $button-color-cta: orange;
     flex-direction: column;
     padding: 3px;
     color: #fff;
-    > * {
+
+    >* {
       flex: 1;
     }
   }
@@ -797,4 +798,11 @@ $button-color-cta: orange;
   position: absolute;
   right: 32px;
   top: 32px;
+}
+
+.hidden-editor {
+  position: absolute;
+  transform: translateY(100vh);
+  height: 100%;
+  width: 100%;
 }

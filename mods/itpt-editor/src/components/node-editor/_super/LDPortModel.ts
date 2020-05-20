@@ -99,6 +99,7 @@ export class LDPortModel extends PortModel<LDPortModelGenerics> {
 	}
 
 	decreaseLinksSortOrder(link: LinkModel) {
+		// TODO: in here and in increaseLinksSortOrder fire a custom event. Currently doesn't update app preview
 		const idx = this.options.linkSortOrder.indexOf(link.getID());
 		if (idx > 0) {
 			arrayMove(this.options.linkSortOrder, idx, idx - 1);

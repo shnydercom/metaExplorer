@@ -30,8 +30,6 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps> {
 
 	render() {
 		const { node } = this.props;
-		//const usrProj = node.getUserProject();
-		//const usrName = node.getUserName();
 		const projectName = node.getItptProjName();
 		const userName = node.getItptUserName();
 		const blockName = node.getItptBlockName();
@@ -41,8 +39,9 @@ export class OutputInfoNodeWidget extends Component<OutputInfoNodeProps> {
 			projectName,
 			userName
 		};
+		const className = `basic-node ${this.props.node.isSelected() ? 'selected' : ''}`;
 		return (
-			<div className="basic-node" style={{ background: node.getColor() }}>
+			<div className={className} style={{ background: node.getColor() }}>
 				<div className="title">
 					<div className="name">{node.getNameSelf()}</div>
 				</div>

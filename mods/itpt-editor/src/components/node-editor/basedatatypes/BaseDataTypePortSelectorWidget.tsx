@@ -70,10 +70,10 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 			};
 		}
 		let rvLD = gdsfpLD(
-			nextProps, prevState, [], [UserDefDict.inputData]);
+			nextProps, prevState, [], [UserDefDict.outputData]);
 		let newKV = nextProps.ldOptions && nextProps.ldOptions.resource && nextProps.ldOptions.resource.kvStores
-			? getKVStoreByKey(nextProps.ldOptions.resource.kvStores, UserDefDict.inputData) : null;
-		newKV = newKV ? newKV : prevState.portKvStore ? prevState.portKvStore : { key: UserDefDict.inputData, value: null, ldType: null };
+			? getKVStoreByKey(nextProps.ldOptions.resource.kvStores, UserDefDict.outputData) : null;
+		newKV = newKV ? newKV : prevState.portKvStore ? prevState.portKvStore : { key: UserDefDict.outputData, value: null, ldType: null };
 		nextProps.model.setKV(newKV);
 		let newType = newKV ? newKV.ldType : null;
 		if (!rvLD) {
@@ -83,7 +83,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 			let newLDOptions = ldOptionsDeepCopy(nextProps.ldOptions);
 			let thisInput: OutputKVMapElement = {
 				targetLDToken: new NetworkPreferredToken(""),
-				targetProperty: UserDefDict.inputData
+				targetProperty: UserDefDict.outputData
 			};
 			let outputKvMap: IKvStore = {
 				key: UserDefDict.outputKVMapKey,
@@ -138,7 +138,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 		let changedKvStore: IKvStore = this.props.model.getKV();
 		let thisInput: OutputKVMapElement = {
 			targetLDToken: new NetworkPreferredToken(""),
-			targetProperty: UserDefDict.inputData
+			targetProperty: UserDefDict.outputData
 		};
 		let outputKvMap: IKvStore = {
 			key: UserDefDict.outputKVMapKey,
@@ -156,7 +156,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 		};
 		if (newType !== changedKvStore.ldType) {
 			changedKvStore.ldType = newType;
-			changedKvStore.key = UserDefDict.inputData;
+			changedKvStore.key = UserDefDict.outputData;
 			changedKvStore.value = null;
 		}
 		this.setState({ ...this.state, portType: newType, portKvStore: outputKv });

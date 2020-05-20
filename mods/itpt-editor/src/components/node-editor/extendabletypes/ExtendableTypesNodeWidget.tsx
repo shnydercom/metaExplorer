@@ -48,8 +48,9 @@ export class ExtendableTypesNodeWidget extends React.Component<ExtendableTypesNo
 	}
 
 	render() {
+		const className = `basic-node ${this.props.node.isSelected() ? 'selected' : ''}`;
 		return (
-			<div className="basic-node" style={{ background: this.props.node.getColor() }}>
+			<div className={className} style={{ background: this.props.node.getColor() }}>
 				<div className="title">
 					<div className="name">{this.props.node.getNameSelf()}</div>
 				</div>

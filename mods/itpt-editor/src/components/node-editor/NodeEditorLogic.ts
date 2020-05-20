@@ -516,7 +516,7 @@ export class NodeEditorLogic {
 			ldType = LDDict.Text;
 		}
 		var baseDataTypeKVStore: IKvStore = {
-			key: UserDefDict.inputData,
+			key: UserDefDict.outputData,
 			value: value,
 			ldType: ldType
 		};
@@ -524,7 +524,6 @@ export class NodeEditorLogic {
 		const nodex = signature.x;
 		const nodey = signature.y;
 		node.setPosition(nodex, nodey);
-		console.log(signature.id);
 		//const newPort = LDPortModel.fromVars(false, PORTNAME_OUT_OUTPUTSELF, baseDataTypeKVStore, "output");
 		const newPort = new LDPortModel({ id: signature.id, in: false, name: PORTNAME_OUT_OUTPUTSELF, kv: baseDataTypeKVStore, label: "output" });
 		node.addPort(newPort);
