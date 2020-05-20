@@ -127,7 +127,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 		if (item.type === EditorDNDItemType.preview) {
 			setPreviewPosition({ left, top });
 		}
-		if (item.type == EditorDNDItemType.block) {
+		if (item.type === EditorDNDItemType.block) {
 			const clientPosition: EditorClientPosition = {clientX: left, clientY: top};
 			props.onBlockItemDropped(item, clientPosition);
 		}

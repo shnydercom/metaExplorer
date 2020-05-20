@@ -703,7 +703,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					this.logic.addLDPortModelsToNodeFromItptRetr(node, data.bpname);
 				}
 				if (data.canInterpretType) node.canInterpretType = data.canInterpretType;
-				this.logic.addListenersToNode(node);
 				break;
 			case "bdt":
 				var baseDataTypeKVStore: IKvStore = {
@@ -744,6 +743,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			default:
 				break;
 		}
+		this.logic.addListenersToNode(node);
 		var points = this.logic.getDiagramEngine().getRelativeMousePoint(clientPosition);
 		node.x = points.x - 224 / 2;
 		node.y = points.y - 32 / 2;

@@ -500,6 +500,7 @@ export class NodeEditorLogic {
 		this.addLDPortModelsToNodeFromCfg(extendableNode, itpt);
 		//extendableNode.id = signature.id;
 		extendableNode.setNameSelf("Linear Data Display");
+		this.addListenersToNode(extendableNode);
 		this.getDiagramEngine()
 			.getModel()
 			.addNode(extendableNode);
@@ -515,6 +516,7 @@ export class NodeEditorLogic {
 		generalNode.setPosition(generalNodex, generalNodey);
 		this.addLDPortModelsToNodeFromItptRetr(generalNode, nodeName);
 		if (itpt.canInterpretType) generalNode.setCanInterpretType(itpt.canInterpretType);
+		this.addListenersToNode(generalNode);
 		this.getDiagramEngine()
 			.getModel()
 			.addNode(generalNode);
@@ -542,6 +544,7 @@ export class NodeEditorLogic {
 		const newPort = LDPortModel.fromVars(false, PORTNAME_OUT_OUTPUTSELF, baseDataTypeKVStore, "output");
 		newPort.getOptions().id = signature.id;
 		node.addPort(newPort);
+		this.addListenersToNode(node);
 		this.getDiagramEngine()
 			.getModel()
 			.addNode(node);

@@ -16,7 +16,7 @@ export interface ItptNodeModelGenerics extends NodeModelGenerics {
 	OPTIONS: ItptNodeModelOptions;
 }
 
-export class ItptNodeModel extends NodeModel<ItptNodeModelGenerics> {
+export class ItptNodeModel<G extends ItptNodeModelGenerics = ItptNodeModelGenerics> extends NodeModel<G> {
 
 	static fromVars(nameSelf: string = "Untitled", subItptOf: string = null, canInterpretType: string = "", color: string = "rgb(0,192,255)", isCompound?: boolean, type?: string) {
 		return new this({
