@@ -1,5 +1,6 @@
 import { ItptNodeModel, ItptNodeModelOptions } from "../_super/ItptNodeModel";
 import { DECLARATION_MODEL } from "../node-editor-consts";
+import { editorSpecificNodesColor } from "../consts";
 
 export interface DeclarationPartNodeModelOptions extends ItptNodeModelOptions {
 
@@ -18,6 +19,7 @@ export class DeclarationPartNodeModel extends ItptNodeModel {
 	}
 	constructor(options: DeclarationPartNodeModelOptions) {
 		options.type = DECLARATION_MODEL;
+		options.color = options.color ? options.color : editorSpecificNodesColor;
 		super(options);
 	}
 }

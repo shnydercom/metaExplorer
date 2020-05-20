@@ -3,13 +3,14 @@ import { NodeModel, NodeModelGenerics } from "@projectstorm/react-diagrams";
 import { filter, merge } from "lodash";
 import { INTERPRETERDATATYPE_MODEL } from "../node-editor-consts";
 import { LDPortModel } from './LDPortModel';
+import { editorDefaultNodesColor } from "../consts";
 
 export interface ItptNodeModelOptions extends BaseModelOptions {
 	nameSelf: string;
-	canInterpretType: string;
-	subItptOf: string;
-	color: string;
-	isCompound: boolean;
+	canInterpretType?: string;
+	subItptOf?: string;
+	color?: string;
+	isCompound?: boolean;
 }
 
 export interface ItptNodeModelGenerics extends NodeModelGenerics {
@@ -37,9 +38,9 @@ export class ItptNodeModel<G extends ItptNodeModelGenerics = ItptNodeModelGeneri
 		super({
 			type: options.type ? options.type : INTERPRETERDATATYPE_MODEL,
 			nameSelf: options.nameSelf,
-			color: options.color,
-			canInterpretType: options.canInterpretType,
-			subItptOf: options.subItptOf,
+			color: options.color ? options.color : editorDefaultNodesColor,
+			canInterpretType: options.canInterpretType ? options.canInterpretType : null,
+			subItptOf: options.subItptOf ? options.subItptOf : null,
 			isCompound: !!options.isCompound,
 			id: options.id ? options.id : Toolkit.UID(),
 			...options

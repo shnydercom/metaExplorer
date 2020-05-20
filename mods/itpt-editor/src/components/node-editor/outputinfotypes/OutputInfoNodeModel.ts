@@ -2,6 +2,7 @@ import { OUTPUT_INFO_MODEL } from "../node-editor-consts";
 import { ItptNodeModel, ItptNodeModelOptions } from "../_super/ItptNodeModel";
 import { merge } from "lodash";
 import { DeserializeEvent, BaseListener, BaseEvent } from "@projectstorm/react-canvas-core";
+import { editorSpecificNodesColor } from "../consts";
 
 export interface OutputInfoNodeModelListener extends BaseListener {
 	outputInfoSaved?(event: BaseEvent & { itptName: null | string }): void;
@@ -53,6 +54,7 @@ export class OutputInfoPartNodeModel extends ItptNodeModel {
 
 	constructor(options: OutputInfoPartNodeModelOptions) {
 		options.type = OUTPUT_INFO_MODEL;
+		options.color = options.color ? options.color : editorSpecificNodesColor,
 		super(options);
 		this.setItptName(null);
 		this.width = OUTPUT_NODE_WIDTH;

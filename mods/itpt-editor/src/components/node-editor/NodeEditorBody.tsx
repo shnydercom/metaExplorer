@@ -49,7 +49,6 @@ export class NodeEditorBody extends Component<EditorBodyProps, EditorBodyState> 
 		const { hideRefMapDropSpace } = this.props;
 		/*onDrop={(event) => {
 						var data = JSON.parse(event.dataTransfer.getData("ld-node"));
-						
 						this.forceUpdate();
 					}}*/
 		return (

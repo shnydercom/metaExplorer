@@ -4,37 +4,30 @@ import {
 	ObjectPropertyRef, UserDefDict, appItptMatcherFn
 } from "@metaexplorer/core";
 import createEngine, { DiagramEngine, DiagramModel, NodeModel, LinkModel, LinkModelGenerics, DagreEngine } from "@projectstorm/react-diagrams";
-import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
+import { ItptNodeModel } from "./_super/ItptNodeModel";
+import { LDPortModel } from "./_super/LDPortModel";
 import { BaseDataTypeNodeModel } from "./basedatatypes/BaseDataTypeNodeModel";
 import { DeclarationPartNodeModel } from "./declarationtypes/DeclarationNodeModel";
-import { DeclarationWidgetFactory } from "./declarationtypes/DeclarationNodeWidgetFactory";
-import { BASEDATATYPE_MODEL, DECLARATION_MODEL, EXTENDABLETYPES_MODEL, GENERALDATATYPE_MODEL, OUTPUT_INFO_MODEL, LINK_SETTINGS_MODEL } from "./node-editor-consts";
 import { ExtendableTypesNodeModel } from "./extendabletypes/ExtendableTypesNodeModel";
+import { OutputInfoPartNodeModel, OUTPUT_NODE_WIDTH } from "./outputinfotypes/OutputInfoNodeModel";
+import { GeneralDataTypeNodeModel, GeneralDataTypeNodeModelListener } from "./generaldatatypes/GeneralDataTypeNodeModel";
+import { BaseDataTypeNodeFactory } from "./basedatatypes/BaseDataTypeInstanceFactories";
+import { DeclarationWidgetFactory } from "./declarationtypes/DeclarationNodeWidgetFactory";
 import { ExtendableTypesWidgetFactory } from "./extendabletypes/ExtendableTypesWidgetFactory";
 import { GeneralDataTypeNodeFactory } from "./generaldatatypes/GeneralDataTypeInstanceFactories";
-import { GeneralDataTypeNodeModel, GeneralDataTypeNodeModelListener } from "./generaldatatypes/GeneralDataTypeNodeModel";
-import { ItptNodeModel } from "./_super/ItptNodeModel";
 import { LDPortInstanceFactory } from "./_super/LDPortInstanceFactory";
-import { LDPortModel } from "./_super/LDPortModel";
-import { OutputInfoPartNodeModel, OUTPUT_NODE_WIDTH } from "./outputinfotypes/OutputInfoNodeModel";
 import { OutputInfoWidgetFactory } from "./outputinfotypes/OutputInfoWidgetFactory";
 import { SettingsLabelFactory } from "./edgesettings/SettingsLabelFactory";
 import { SettingsLinkFactory } from "./edgesettings/SettingsLinkFactory";
+import { BASEDATATYPE_MODEL, DECLARATION_MODEL, EXTENDABLETYPES_MODEL, GENERALDATATYPE_MODEL, OUTPUT_INFO_MODEL, LINK_SETTINGS_MODEL } from "./node-editor-consts";
 import { ZoomCanvasAction } from "@projectstorm/react-canvas-core";
+import { DIAG_TRANSF_X, DIAG_TRANSF_Y, PORTNAME_OUT_OUTPUTSELF } from "./consts";
 
 export interface NewNodeSig {
 	x: number;
 	y: number;
 	id: string;
 }
-
-export const DIAG_TRANSF_X = -250;
-export const DIAG_TRANSF_Y = 200;
-export const PORTNAME_OUT_OUTPUTSELF = "out-outputSelf";
-
-export var editorSpecificNodesColor = "rgba(87, 161, 245, 0.4)";
-
-export const editorDefaultNodesColor = "rgba(87, 161, 245, 0.4)"; // "#00375f";
 
 /**
  * @author Jonathan Schneider
@@ -139,15 +132,18 @@ export class NodeEditorLogic {
 	}
 
 	public newModel(outputLDOptionsToken: string) {
-		//2) setup the diagram model
 		var model = new DiagramModel();
 
 		//create fixed output node
 		//TODO: make fixed but ports should still be settable, make outputNode singleton per Itpt
-		let outputNode = OutputInfoPartNodeModel.fromVars(UserDefDict.outputItpt, null, null, editorSpecificNodesColor,
-			false, this.userName, this.userProject);
-		outputNode.getOptions().id = outputLDOptionsToken;
-		//outputNode.setLocked(true); // locking would lock the ports as well
+		let outputNode = new OutputInfoPartNodeModel({
+			nameSelf: UserDefDict.outputItpt,
+			itptName: null,
+			itptUserName: this.userName,
+			itptProjName: this.userProject,
+			itptBlockName: "",
+			id: outputLDOptionsToken
+		});
 		const canvas = this.diagramEngine.getCanvas();
 		if (canvas) {
 			this.setDimensions(canvas.clientWidth, canvas.clientHeight);
@@ -171,15 +167,11 @@ export class NodeEditorLogic {
 		let outputNodeInputPort = LDPortModel.fromVars(true, finalInputName, outputFinalInputKV, finalInputName);
 		outputNode.addPort(outputNodeInputPort);
 		model.addNode(outputNode);
-		//model.setOffsetX(this.width / 4);
 		this.outputNode = outputNode;
-		//5) load model into engine
+		// load model into engine
 		this.activeModel = model;
 		this.addListenersToModel(model);
 		this.diagramEngine.setModel(model);
-		/*if (this.diagramEngine.canvas) {
-			this.diagramEngine.zoomToFit();
-		}*/
 	}
 
 	addListenersToNode(node: NodeModel) {
@@ -431,7 +423,7 @@ export class NodeEditorLogic {
 					value: undefined,
 					ldType: undefined
 				};
-				let inputMarkerNode = DeclarationPartNodeModel.fromVars("External Input Marker", null, null, editorSpecificNodesColor);
+				let inputMarkerNode = new DeclarationPartNodeModel({ nameSelf: "External Input Marker" });
 				let inputMarkerPort = inputMarkerNode.addPort(LDPortModel.fromVars(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
 				this.getDiagramEngine()
 					.getModel()
@@ -454,7 +446,7 @@ export class NodeEditorLogic {
 					value: undefined,
 					ldType: undefined
 				};
-				let outputMarkerNode = DeclarationPartNodeModel.fromVars("External Output Marker", null, null, editorSpecificNodesColor);
+				let outputMarkerNode = new DeclarationPartNodeModel({ nameSelf: "External Output Marker" });
 				let outputMarkerPort = outputMarkerNode.addPort(LDPortModel.fromVars(true, "in-4", outputDataTypeKvStore, UserDefDict.externalOutput));
 				this.getDiagramEngine()
 					.getModel()
@@ -478,27 +470,18 @@ export class NodeEditorLogic {
 		outputItptLink.setSourcePort(baseNode.getPort(UserDefDict.outputSelfKey));
 
 		this.getDiagramEngine().getModel().addLink(outputItptLink);
-		//this.getDiagramEngine().recalculatePortsVisually();
 		linkArray.forEach((link) => {
 			this.getDiagramEngine().getModel().addLink(link);
 		});
 	}
 
 	public addNewExtendableNode(signature: NewNodeSig, itpt: BlueprintConfig): ExtendableTypesNodeModel {
-		let extendableNode = ExtendableTypesNodeModel.fromVars("Linear Data Display", null, null, editorSpecificNodesColor);
-		extendableNode.getOptions().id = signature.id;
-		//let nodeName: string = itpt.subItptOf;
+		let extendableNode = new ExtendableTypesNodeModel({ id: signature.id, nameSelf: "Linear Data Display" });
 		const extendableNodex = signature.x;
 		const extendableNodey = signature.y;
 		extendableNode.setPosition(extendableNodex, extendableNodey);
 		extendableNode.setCanInterpretType(itpt.canInterpretType);
-		/*let outputSelfKV: IKvStore = {
-			key: UserDefDict.outputSelfKey,
-			value: undefined,
-			ldType: UserDefDict.intrprtrClassType
-		};*/
 		this.addLDPortModelsToNodeFromCfg(extendableNode, itpt);
-		//extendableNode.id = signature.id;
 		extendableNode.setNameSelf("Linear Data Display");
 		this.addListenersToNode(extendableNode);
 		this.getDiagramEngine()
@@ -509,8 +492,7 @@ export class NodeEditorLogic {
 
 	public addNewGeneralNode(signature: NewNodeSig, itpt: BlueprintConfig): GeneralDataTypeNodeModel {
 		let nodeName: string = itpt.subItptOf;
-		let generalNode = GeneralDataTypeNodeModel.fromVars(nodeName, null, null, editorDefaultNodesColor);
-		generalNode.getOptions().id = signature.id;
+		let generalNode = new GeneralDataTypeNodeModel({ id: signature.id, nameSelf: nodeName });
 		const generalNodex = signature.x;
 		const generalNodey = signature.y;
 		generalNode.setPosition(generalNodex, generalNodey);
@@ -537,7 +519,7 @@ export class NodeEditorLogic {
 			value: value,
 			ldType: ldType
 		};
-		let node = BaseDataTypeNodeModel.fromVars("Simple Data Type", null, null, editorDefaultNodesColor);
+		let node = new BaseDataTypeNodeModel({ nameSelf: "Simple Data Type" });
 		const nodex = signature.x;
 		const nodey = signature.y;
 		node.setPosition(nodex, nodey);

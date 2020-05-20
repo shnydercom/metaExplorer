@@ -103,6 +103,10 @@
 		font-size: 11px;
 		display:flex;
 		flex-direction: column;
+		
+		&.selected {
+			border-color: #00c0ff;
+		}
 
 		.title {
 			background: rgba(black, 0.3);

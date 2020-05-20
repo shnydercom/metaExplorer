@@ -19,7 +19,6 @@ export interface BaseDataTypeNodeState { }
 export class BaseDataTypeNodeWidget extends React.Component<BaseDataTypeNodeProps, BaseDataTypeNodeState> {
 	constructor(props: BaseDataTypeNodeProps) {
 		super(props);
-		//super(BASEDATATYPE_MODEL, props);
 		this.state = {};
 	}
 
@@ -28,8 +27,9 @@ export class BaseDataTypeNodeWidget extends React.Component<BaseDataTypeNodeProp
 	}
 
 	render() {
+		const className = `basic-node ${this.props.node.isSelected() ? 'selected' : ''}`;
 		return (
-			<div className="basic-node" style={{ background: this.props.node.getColor() }}>
+			<div className={className} style={{ background: this.props.node.getOptions().color }}>
 				<div className="title">
 					<div className="name">{this.props.node.getNameSelf()}</div>
 				</div>

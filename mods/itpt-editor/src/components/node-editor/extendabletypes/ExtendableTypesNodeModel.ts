@@ -1,5 +1,6 @@
 import { ItptNodeModel, ItptNodeModelOptions } from "../_super/ItptNodeModel";
 import { EXTENDABLETYPES_MODEL } from "../node-editor-consts";
+import { editorSpecificNodesColor } from "../consts";
 
 export interface ExtendableTypesNodeModelOptions extends ItptNodeModelOptions {
 
@@ -19,6 +20,7 @@ export class ExtendableTypesNodeModel extends ItptNodeModel {
 
 	constructor(options: ExtendableTypesNodeModelOptions) {
 		options.type = EXTENDABLETYPES_MODEL;
+		options.color = options.color ? options.color : editorSpecificNodesColor;
 		super(options);
 	}
 }

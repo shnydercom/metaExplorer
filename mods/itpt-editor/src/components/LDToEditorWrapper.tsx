@@ -18,7 +18,7 @@ import { Redirect } from "react-router";
 import { IEditorBlockData, EditorDNDItemType, EditorClientPosition } from "./editorInterfaces";
 import { BaseDataTypeNodeModel } from "./node-editor/basedatatypes/BaseDataTypeNodeModel";
 import { DeclarationPartNodeModel } from "./node-editor/declarationtypes/DeclarationNodeModel";
-import { NodeEditorLogic, editorSpecificNodesColor, editorDefaultNodesColor } from "./node-editor/NodeEditorLogic";
+import { NodeEditorLogic } from "./node-editor/NodeEditorLogic";
 import { NodeEditorBody } from "./node-editor/NodeEditorBody";
 import { EditorTray as EditorTray, EditorTrayProps } from "./content/blockselection/EditorTray";
 import { ExtendableTypesNodeModel } from "./node-editor/extendabletypes/ExtendableTypesNodeModel";
@@ -29,8 +29,10 @@ import { EditorMain } from "./EditorMain";
 import { IITPTNameObj } from "./new-itpt/newItptNodeDummy";
 import { TXT_INIT } from "./content/status/SaveStatus";
 import * as shortid from "shortid";
+import { ItptNodeModel } from "./node-editor/_super/ItptNodeModel";
+import { editorSpecificNodesColor } from "./node-editor/consts";
 
-const DNDBackend = HTML5Backend;// TouchBackend; //HTML5Backend
+const DNDBackend = HTML5Backend; // TouchBackend; //HTML5Backend
 
 export type AIEProps = {
 	logic?: NodeEditorLogic;
@@ -75,7 +77,7 @@ export const ITPT_BLOCK_EDITOR_AV_DRAWER = "drawer";
 export const ITPT_BLOCK_EDITOR_AV_PREVIEW = "preview";
 export const ITPT_BLOCK_EDITOR_AV_BOTTOMBAR = "bottombar";
 
-export const SAVE_ACTION_LDTYPE = "SaveAction_LDType"
+export const SAVE_ACTION_LDTYPE = "SaveAction_LDType";
 
 let allMyInputKeys: string[] = [
 	ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
@@ -311,7 +313,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				this.logic.autoDistribute();
 				this.diagramRef.current.forceUpdate();
 			}
-		}
+		};
 		const miniProps: {
 			onMiniChanged: (isMini: boolean) => void;
 			onActiveStateChanged: (activeState: ActiveStates) => void;
@@ -328,7 +330,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				this.setState({ ...this.state, previewActiveState: activeState, previewIsMini: false })
 			},
 			onUpClick: () => this.triggerNavToTop()
-		}
+		};
 		if (!this.logic || this.state.mode === "initial") return <div>loading Editor</div>;
 		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
 			return <div>{this.errorNotAvailableMsg}</div>;
@@ -627,7 +629,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		</button>;
 	}
 
-
 	protected onExploreTriggered(itptName: string) {
 		this.loadToEditorByName(itptName, true);
 	}
@@ -694,15 +695,17 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				.getModel()
 				.getNodes()
 		).length;
-		var node = null;
+		var node: ItptNodeModel | null = null;
 		switch (data.type) {
 			case "ldbp":
 				let nodeName: string = "Node " + (nodesCount + 1) + ":";
-				node = GeneralDataTypeNodeModel.fromVars(nodeName, null, null, editorDefaultNodesColor);
+				node = new GeneralDataTypeNodeModel({
+					nameSelf: nodeName,
+					canInterpretType: data.canInterpretType ? data.canInterpretType : null
+				});
 				if (data.bpname) {
 					this.logic.addLDPortModelsToNodeFromItptRetr(node, data.bpname);
 				}
-				if (data.canInterpretType) node.canInterpretType = data.canInterpretType;
 				break;
 			case "bdt":
 				var baseDataTypeKVStore: IKvStore = {
@@ -710,7 +713,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					value: undefined,
 					ldType: undefined
 				};
-				node = BaseDataTypeNodeModel.fromVars("Simple Data Type", null, null, editorDefaultNodesColor);
+				node = new BaseDataTypeNodeModel({
+					nameSelf: "Simple Data Type"
+				});
 				node.addPort(LDPortModel.fromVars(false, "out-3", baseDataTypeKVStore, "output"));
 				break;
 			case "inputtype":
@@ -719,7 +724,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					value: undefined,
 					ldType: undefined
 				};
-				node = DeclarationPartNodeModel.fromVars("External Input Marker", null, null, editorSpecificNodesColor);
+				node = new DeclarationPartNodeModel({ nameSelf: "External Input Marker", color: editorSpecificNodesColor });
 				node.addPort(LDPortModel.fromVars(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
 				break;
 			case "outputtype":
@@ -728,11 +733,11 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					value: undefined,
 					ldType: undefined
 				};
-				node = DeclarationPartNodeModel.fromVars("External Output Marker", null, null, editorSpecificNodesColor);
+				node = new DeclarationPartNodeModel({ nameSelf: "External Output Marker", color: editorSpecificNodesColor });
 				node.addPort(LDPortModel.fromVars(true, "in-4", outputDataTypeKVStore, UserDefDict.externalOutput));
 				break;
 			case "lineardata":
-				node = ExtendableTypesNodeModel.fromVars("Linear Data Display", null, null, editorSpecificNodesColor);
+				node = new ExtendableTypesNodeModel({ nameSelf: "Linear Data Display", color: editorSpecificNodesColor });
 				let outputSelfKV: IKvStore = {
 					key: UserDefDict.outputSelfKey,
 					value: undefined,
@@ -745,8 +750,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		this.logic.addListenersToNode(node);
 		var points = this.logic.getDiagramEngine().getRelativeMousePoint(clientPosition);
-		node.x = points.x - 224 / 2;
-		node.y = points.y - 32 / 2;
+		// TODO: fix visual bug: clientPosition is top-left corner of drag element, but should be mouse cursor
+		//points.translate(- 224 / 2, - 32 / 2);
+		node.setPosition(points);
 		this.logic
 			.getDiagramEngine()
 			.getModel()
