@@ -397,7 +397,8 @@ export class NodeEditorLogic {
 					} else {
 						if (kvItm.value === undefined) return;
 						let bdtStaticNode;
-						let newBDTSig: NewNodeSig = { id: itm, x: newSigBaseItpt.x + DIAG_TRANSF_X, y: newSigBaseItpt.y - DIAG_TRANSF_Y * idx };
+						let newBDTid: string = `${itm}-bdt${idx}`;
+						let newBDTSig: NewNodeSig = { id: newBDTid, x: newSigBaseItpt.x + DIAG_TRANSF_X, y: newSigBaseItpt.y - DIAG_TRANSF_Y * idx };
 						if (!kvItm.ldType || kvItm.ldType === LDDict.Text) {
 							bdtStaticNode = this.addNewBDTNode(newBDTSig, LDDict.Text, kvItm.value);
 						} else {
@@ -523,8 +524,9 @@ export class NodeEditorLogic {
 		const nodex = signature.x;
 		const nodey = signature.y;
 		node.setPosition(nodex, nodey);
-		const newPort = LDPortModel.fromVars(false, PORTNAME_OUT_OUTPUTSELF, baseDataTypeKVStore, "output");
-		newPort.getOptions().id = signature.id;
+		console.log(signature.id);
+		//const newPort = LDPortModel.fromVars(false, PORTNAME_OUT_OUTPUTSELF, baseDataTypeKVStore, "output");
+		const newPort = new LDPortModel({ id: signature.id, in: false, name: PORTNAME_OUT_OUTPUTSELF, kv: baseDataTypeKVStore, label: "output" });
 		node.addPort(newPort);
 		this.addListenersToNode(node);
 		this.getDiagramEngine()
