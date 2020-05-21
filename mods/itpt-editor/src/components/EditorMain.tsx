@@ -136,10 +136,12 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 
 	//conditional returns
 	if (isPreviewFullScreen) {
-		return <ITPTFullscreen
-			onExitFullscreen={() => setIsPreviewFullScreen(false)}
-			ldTokenString={props.previewLDTokenString}
-			routes={props.routes} />;
+		return (
+			<ITPTFullscreen
+				onExitFullscreen={() => setIsPreviewFullScreen(false)}
+				ldTokenString={props.previewLDTokenString}
+				routes={props.routes} />
+		);
 	}
 	if (activeTab === 'newNode') {
 		return (

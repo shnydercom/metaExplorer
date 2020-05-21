@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { NodeEditorLogic } from "./NodeEditorLogic";
+import { ErrorhandlingCanvasWidget } from "./ErrorhandlingCanvasWidget";
 
 export interface EditorBodyProps {
 	logic: NodeEditorLogic;
@@ -54,7 +54,7 @@ export class NodeEditorBody extends Component<EditorBodyProps, EditorBodyState> 
 						event.preventDefault();
 					}}
 				>
-					<CanvasWidget className="srd-diagram" engine={this.props.logic.getDiagramEngine()} />
+					<ErrorhandlingCanvasWidget className="srd-diagram" engine={this.props.logic.getDiagramEngine()} />
 					{hideRefMapDropSpace
 						? null
 						: <div className="editor-top-bar">
