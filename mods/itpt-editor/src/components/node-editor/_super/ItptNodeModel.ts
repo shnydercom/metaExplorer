@@ -45,6 +45,9 @@ export class ItptNodeModel<G extends ItptNodeModelGenerics = ItptNodeModelGeneri
 			id: options.id ? options.id : Toolkit.UID(),
 			...options
 		});
+		//HOTFIX: initial auto-layout doesn't know the dimensions of the nodes
+		this.height = 150;
+		this.width = 200;
 	}
 
 	deSerialize(event: DeserializeEvent<this>) {

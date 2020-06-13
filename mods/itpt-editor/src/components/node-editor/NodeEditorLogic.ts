@@ -20,7 +20,7 @@ import { OutputInfoWidgetFactory } from "./outputinfotypes/OutputInfoWidgetFacto
 import { SettingsLabelFactory } from "./edgesettings/SettingsLabelFactory";
 import { SettingsLinkFactory } from "./edgesettings/SettingsLinkFactory";
 import { BASEDATATYPE_MODEL, DECLARATION_MODEL, EXTENDABLETYPES_MODEL, GENERALDATATYPE_MODEL, OUTPUT_INFO_MODEL, LINK_SETTINGS_MODEL } from "./node-editor-consts";
-import { ZoomCanvasAction } from "@projectstorm/react-canvas-core";
+import { ZoomCanvasAction, DiagramModelOptions } from "@projectstorm/react-canvas-core";
 import { DIAG_TRANSF_X, DIAG_TRANSF_Y, PORTNAME_OUT_OUTPUTSELF } from "./consts";
 
 export interface NewNodeSig {
@@ -117,8 +117,8 @@ export class NodeEditorLogic {
 		this.onOutputInfoSaved = value;
 	}
 
-	public clear() {
-		this.newModel(this.outputLDOptionsToken);
+	public clear(preservedOptions?: DiagramModelOptions) {
+		this.newModel(this.outputLDOptionsToken, preservedOptions);
 	}
 
 	public autoDistribute() {
@@ -131,8 +131,8 @@ export class NodeEditorLogic {
 		model.setOffsetY(32);
 	}
 
-	public newModel(outputLDOptionsToken: string) {
-		var model = new DiagramModel();
+	public newModel(outputLDOptionsToken: string, preservedOptions?: DiagramModelOptions) {
+		var model = new DiagramModel(preservedOptions);
 
 		//create fixed output node
 		//TODO: make fixed but ports should still be settable, make outputNode singleton per Itpt

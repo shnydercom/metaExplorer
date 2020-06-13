@@ -316,10 +316,10 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			activeState: this.state.previewActiveState,
 			isMini: this.state.previewIsMini,
 			onMiniChanged: (isMini) => {
-				this.setState({ ...this.state, previewIsMini: !isMini })
+				this.setState({ ...this.state, previewIsMini: !isMini });
 			},
 			onActiveStateChanged: (activeState) => {
-				this.setState({ ...this.state, previewActiveState: activeState, previewIsMini: false })
+				this.setState({ ...this.state, previewActiveState: activeState, previewIsMini: false });
 			},
 			onUpClick: () => this.triggerNavToTop()
 		};
@@ -386,7 +386,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	setNodeEditorToNew(newNameObj: IITPTNameObj) {
-		this.logic.clear();
+		this.logic.clear(this.logic.getActiveModel().getOptions());
 		const containerID = shortid.generate();
 		const boldID = shortid.generate();
 		const invitationText: string = "Get Started!";
@@ -419,18 +419,18 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							]
 						},
 						[boldID]: {
-							"subItptOf": "metaexplorer.io/basichtml/bold",
-							"canInterpretType": "http://schema.org/Text",
-							"nameSelf": boldID,
-							"initialKvStores": [
+							subItptOf: "metaexplorer.io/basichtml/bold",
+							canInterpretType: "http://schema.org/Text",
+							nameSelf: boldID,
+							initialKvStores: [
 								{
-									"key": "inputdata",
-									"value": invitationText,
-									"ldType": "http://schema.org/Text"
+									key: "inputdata",
+									value: invitationText,
+									ldType: "http://schema.org/Text"
 								}
 							],
-							"crudSkills": "cRud",
-							"interpretableKeys": []
+							crudSkills: "cRud",
+							interpretableKeys: []
 						}
 					},
 					ldType: UserDefDict.intrprtrBPCfgRefMapType
@@ -443,8 +443,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.logic.diagramFromItptBlueprint(newBpCfg);
 		this.logic.autoDistribute();
 		this.setState(
-			{ ...this.state, currentlyEditingItptName: itptName }
-		);
+			{ ...this.state, currentlyEditingItptName: itptName });
 	}
 
 	protected onExploreTriggered(itptName: string) {
@@ -572,7 +571,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	protected changeNodeCurrentlyEditing(data: IEditorBlockData): {} {
 		switch (data.type) {
 			case "ldbp":
-				this.logic.clear();
+				//this.logic.clear();
 				let isLoadSuccess = this.loadToEditorByName(data.bpname, true);
 				if (!isLoadSuccess) return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
 				return { isSuccess: true, message: "check the diagram on the right to see your interpreter, or drop another Compound Block here to edit that one" };
@@ -619,12 +618,14 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			return false;
 		}
 		this.generatePrefilled(itptCfg);
-		this.logic.clear();
+		this.logic.clear(this.logic.getActiveModel().getOptions());
 		this.logic.diagramFromItptBlueprint(itptCfg);
 		if (isAutodistribute) {
 			this.logic.autoDistribute();
 		}
-		this.setState({ ...this.state, currentlyEditingItptName: itptCfg.nameSelf });
+		this.setState(
+			{ ...this.state, currentlyEditingItptName: itptCfg.nameSelf }
+		);
 		return true;
 	}
 
