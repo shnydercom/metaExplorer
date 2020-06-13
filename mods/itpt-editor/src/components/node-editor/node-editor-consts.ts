@@ -5,3 +5,4 @@ export const GENERALDATATYPE_MODEL = "generaldatatype";
 export const INTERPRETERDATATYPE_MODEL = "interpreter";
 export const EXTENDABLETYPES_MODEL = "xtypes";
 export const LD_PORTMODEL = "ldportmodel";
+export const LINK_SETTINGS_MODEL = "settingslink";

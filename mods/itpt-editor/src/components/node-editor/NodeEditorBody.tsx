@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { DiagramWidget } from "@projectstorm/react-diagrams";
 import { NodeEditorLogic } from "./NodeEditorLogic";
+import { ErrorhandlingCanvasWidget } from "./ErrorhandlingCanvasWidget";
 
 export interface EditorBodyProps {
 	logic: NodeEditorLogic;
@@ -28,7 +28,6 @@ export class NodeEditorBody extends Component<EditorBodyProps, EditorBodyState> 
 		return null;
 	}
 
-	// private privOnRMDrop = this.onRefMapDrop.bind(this);
 	constructor(props: EditorBodyProps) {
 		super(props);
 		this.state = { currentlyEditingItpt: null, isReloadToEditor: false };
@@ -47,11 +46,6 @@ export class NodeEditorBody extends Component<EditorBodyProps, EditorBodyState> 
 
 	render() {
 		const { hideRefMapDropSpace } = this.props;
-		/*onDrop={(event) => {
-						var data = JSON.parse(event.dataTransfer.getData("ld-node"));
-						
-						this.forceUpdate();
-					}}*/
 		return (
 			<div className="diagram-body">
 				<div
@@ -60,15 +54,10 @@ export class NodeEditorBody extends Component<EditorBodyProps, EditorBodyState> 
 						event.preventDefault();
 					}}
 				>
-					<DiagramWidget inverseZoom diagramEngine={this.props.logic.getDiagramEngine()} maxNumberPointsPerLink={0} />
+					<ErrorhandlingCanvasWidget className="srd-diagram" engine={this.props.logic.getDiagramEngine()} />
 					{hideRefMapDropSpace
 						? null
 						: <div className="editor-top-bar">
-							{/*<RefMapDropSpace
-								currentlyEditingItpt={this.state.currentlyEditingItpt}
-								dropText="...drop a Compound Block here to edit and load it to the preview..."
-								refMapDrop={this.privOnRMDrop}
-							/>*/}
 						</div>
 					}
 				</div>

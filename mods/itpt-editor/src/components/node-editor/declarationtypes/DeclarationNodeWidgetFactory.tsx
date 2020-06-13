@@ -1,21 +1,24 @@
-import { DiagramEngine, AbstractNodeFactory } from "@projectstorm/react-diagrams";
-import { DeclarationNodeWidgetFactory } from "./DeclarationNodeWidget";
+import { DiagramEngine } from "@projectstorm/react-diagrams";
+import { AbstractReactFactory, GenerateWidgetEvent } from '@projectstorm/react-canvas-core';
+import { DeclarationNodeWidget } from "./DeclarationNodeWidget";
 import { DECLARATION_MODEL } from "../node-editor-consts";
 import { DeclarationPartNodeModel } from "./DeclarationNodeModel";
+import React from "react";
 
-export class DeclarationWidgetFactory extends AbstractNodeFactory<DeclarationPartNodeModel> {
+export class DeclarationWidgetFactory extends AbstractReactFactory<DeclarationPartNodeModel, DiagramEngine> {
 	constructor() {
 		super(DECLARATION_MODEL);
 	}
 
-	generateReactWidget(diagramEngine: DiagramEngine, node: DeclarationPartNodeModel): JSX.Element {
-		return DeclarationNodeWidgetFactory({
-			node: node,
-			diagramEngine: diagramEngine
-		});
+	generateReactWidget(event: GenerateWidgetEvent<DeclarationPartNodeModel>): JSX.Element {
+		return <DeclarationNodeWidget engine={this.engine} node={event.model} />
+	}
+
+	generateModel(event): DeclarationPartNodeModel {
+		return this.getNewInstance();
 	}
 
 	getNewInstance() {
-		return new DeclarationPartNodeModel();
+		return DeclarationPartNodeModel.fromVars();
 	}
 }

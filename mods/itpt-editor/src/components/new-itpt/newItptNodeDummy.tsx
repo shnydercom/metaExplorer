@@ -39,21 +39,21 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 		projectName: '',
 		userName: '',
 		concatTitle: TXT_HEADING_PLACEHOLDER
-	})
+	});
 
 	const setBlockName = (val: string) => {
 		updateTitle({ ...newNameObj, blockName: val });
-	}
+	};
 	const setProjectName = (val: string) => {
 		updateTitle({ ...newNameObj, projectName: val });
-	}
+	};
 	const setUserName = (val: string) => {
 		updateTitle({ ...newNameObj, userName: val });
-	}
+	};
 
 	const updateTitle = (val: IITPTNameObj) => {
 		if (!val.blockName && !val.projectName && !val.userName) {
-			val.concatTitle = TXT_HEADING_PLACEHOLDER
+			val.concatTitle = TXT_HEADING_PLACEHOLDER;
 			setNewNameObj(val);
 			return;
 		}
@@ -63,15 +63,15 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 		const concatTitle = [userName, projectName, blockName].join('/');
 		val = { ...val, concatTitle };
 		setNewNameObj(val);
-	}
+	};
 
 	const validateInput = (input: string): boolean => {
 		return !!input;
-	}
+	};
 
 	const handleCreateBtnClick = () => {
 		const isAllValid = validateAll();
-		if(!isAllValid) return;
+		if (!isAllValid) return;
 		const trimmedObj = {};
 		for (const key in newNameObj) {
 			if (newNameObj.hasOwnProperty(key)) {
@@ -80,13 +80,13 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 			}
 		}
 		props.onNewBtnClick(trimmedObj as IITPTNameObj);
-	}
+	};
 	const validateAll = () => {
 		const lValidationMap = {
 			isBlockValid: validateInput(newNameObj.blockName),
 			isProjectValid: validateInput(newNameObj.projectName),
 			isUserNameValid: validateInput(newNameObj.userName)
-		}
+		};
 		let isMapValid: boolean = true;
 		for (const key in lValidationMap) {
 			if (lValidationMap.hasOwnProperty(key)) {
@@ -96,7 +96,7 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 		}
 		setValidationMap(lValidationMap);
 		return isMapValid;
-	}
+	};
 
 	return (
 		<div className={NEWITPT_NODE_CLASS}>
@@ -125,7 +125,7 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 					onChange={(ev) => {
 						setBlockName(ev.target.value);
 						validateAll();
-						}} value={newNameObj.blockName === TXT_HEADING_BLOCK_PLACEHOLDER ? '' : newNameObj.blockName} />
+					}} value={newNameObj.blockName === TXT_HEADING_BLOCK_PLACEHOLDER ? '' : newNameObj.blockName} />
 			</div>
 			<small className={validationMap.isBlockValid && validationMap.isProjectValid && validationMap.isUserNameValid ? 'validationtxt' : 'validationtxt invalid'}>{TXT_SET_ALL_FIELDS}</small>
 			<button
@@ -135,5 +135,5 @@ export const NewItptNode = (props: React.PropsWithChildren<NewItptNodeProps>) =>
 				}
 				}>{TXT_BTN_CREATE}</button>
 		</div>
-	)
-}
+	);
+};

@@ -14,6 +14,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "tsc": "lerna run tsc",
+    "prebuild": "lerna run buildcore",
     "build": "lerna run build",
     "start": "set MIO_DYNAMIC=true && lerna run start --stream",
     "release": "npm config set access public yarn lerna publish"
