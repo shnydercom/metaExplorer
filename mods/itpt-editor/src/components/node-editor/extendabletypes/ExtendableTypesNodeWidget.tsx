@@ -1,16 +1,15 @@
-import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "@projectstorm/react-diagrams";
+import { DefaultPortLabel, DiagramEngine, DefaultPortModel } from "@projectstorm/react-diagrams";
 import { ExtendableTypesNodeModel } from "./ExtendableTypesNodeModel";
 import { map } from "lodash";
 import { LDPortModel } from "../_super/LDPortModel";
 import { IKvStore, UserDefDict } from "@metaexplorer/core";
-import { EXTENDABLETYPES_MODEL } from "../node-editor-consts";
 import React from "react";
 
 export const TXT_ADD_PORT = "+1 in";
 
-export interface ExtendableTypesNodeProps  extends BaseWidgetProps {
+export interface ExtendableTypesNodeProps {
 	node: ExtendableTypesNodeModel;
-	diagramEngine: DiagramEngine;
+	engine: DiagramEngine;
 }
 
 export interface ExtendableTypesTypeNodeState { }
@@ -18,14 +17,15 @@ export interface ExtendableTypesTypeNodeState { }
 /**
  * @author Jonathan Schneider
  */
-export class ExtendableTypesNodeWidget extends BaseWidget<ExtendableTypesNodeProps, ExtendableTypesTypeNodeState> {
+export class ExtendableTypesNodeWidget extends React.Component<ExtendableTypesNodeProps, ExtendableTypesTypeNodeState> {
 	constructor(props: ExtendableTypesNodeProps) {
-		super(EXTENDABLETYPES_MODEL, props);
+		super(props);
+		//super(EXTENDABLETYPES_MODEL, props);
 		this.state = {};
 	}
 
-	generatePort(port) {
-		return <DefaultPortLabel model={port} key={port.id} />;
+	generatePort(port: LDPortModel) {
+		return <DefaultPortLabel engine={this.props.engine} port={port as DefaultPortModel} key={port.getID()} />;
 		//return <GeneralDataTypePortSelector model={port} key={port.id} />;
 	}
 
@@ -37,21 +37,27 @@ export class ExtendableTypesNodeWidget extends BaseWidget<ExtendableTypesNodePro
 			value: undefined,
 			ldType: UserDefDict.intrprtrClassType
 		};
-		this.props.node.addPort(new LDPortModel(true, newPortName, newPortKV));
+		this.props.node.addPort(new LDPortModel({
+			in: true,
+			name: newPortName,
+			kv: newPortKV,
+			id: newPortName,
+			label: newPortName
+		}));
 		this.forceUpdate();
 	}
 
 	render() {
+		const className = `basic-node ${this.props.node.isSelected() ? 'selected' : ''}`;
 		return (
-			<div className="basic-node" style={{ background: this.props.node.color }}>
+			<div className={className} style={{ background: this.props.node.getColor() }}>
 				<div className="title">
-					<div className="name">{this.props.node.nameSelf}</div>
+					<div className="name">{this.props.node.getNameSelf()}</div>
 				</div>
 				<div className="ports">
 					<div className="in">{map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>
 					<div className="out">{map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
 				</div>
-				{/**label="+ in"  */}
 				<button className="editor-btn editor-btn-addport input-highlight" onClick={this.addInPort.bind(this)} >{TXT_ADD_PORT}</button>
 			</div>
 		);

@@ -1,21 +1,24 @@
-import { DiagramEngine, AbstractNodeFactory } from "@projectstorm/react-diagrams";
+import { DiagramEngine } from "@projectstorm/react-diagrams";
 import { OutputInfoNodeWidgetFactory } from "./OutputInfoNodeWidget";
 import { OUTPUT_INFO_MODEL } from "../node-editor-consts";
 import { OutputInfoPartNodeModel } from "./OutputInfoNodeModel";
+import { AbstractReactFactory, GenerateWidgetEvent } from "@projectstorm/react-canvas-core";
+import React from "react";
 
-export class OutputInfoWidgetFactory extends AbstractNodeFactory<OutputInfoPartNodeModel> {
+export class OutputInfoWidgetFactory extends AbstractReactFactory<OutputInfoPartNodeModel, DiagramEngine> {
 	constructor() {
 		super(OUTPUT_INFO_MODEL);
 	}
 
-	generateReactWidget(diagramEngine: DiagramEngine, node: OutputInfoPartNodeModel): JSX.Element {
-		return OutputInfoNodeWidgetFactory({
-			node: node,
-			diagramEngine: diagramEngine
-		});
+	generateReactWidget(event: GenerateWidgetEvent<OutputInfoPartNodeModel>): JSX.Element {
+		return <OutputInfoNodeWidgetFactory node={event.model} engine={this.engine} />
+	}
+
+	generateModel(event): OutputInfoPartNodeModel {
+		return this.getNewInstance();
 	}
 
 	getNewInstance() {
-		return new OutputInfoPartNodeModel();
+		return OutputInfoPartNodeModel.fromVars();
 	}
 }

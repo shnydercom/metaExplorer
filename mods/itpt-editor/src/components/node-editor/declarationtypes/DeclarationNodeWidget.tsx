@@ -1,13 +1,13 @@
-import { DefaultPortLabel, DiagramEngine, BaseWidget, BaseWidgetProps } from "@projectstorm/react-diagrams";
+import { DefaultPortLabel, DiagramEngine, DefaultPortModel } from "@projectstorm/react-diagrams";
 import { DeclarationPartNodeModel } from "./DeclarationNodeModel";
-import { createFactory } from "react";
 import { map } from "lodash";
-import { DECLARATION_MODEL } from "../node-editor-consts";
+// import { DECLARATION_MODEL } from "../node-editor-consts";
 import React from "react";
+import { LDPortModel } from "../_super/LDPortModel";
 
-export interface DeclarationNodeProps extends BaseWidgetProps {
+export interface DeclarationNodeProps {
 	node: DeclarationPartNodeModel;
-	diagramEngine: DiagramEngine;
+	engine: DiagramEngine;
 }
 
 export interface DeclarationTypeNodeState { }
@@ -15,22 +15,25 @@ export interface DeclarationTypeNodeState { }
 /**
  * @author Jonathan Schneider
  */
-export class DeclarationNodeWidget extends BaseWidget<DeclarationNodeProps, DeclarationTypeNodeState> {
+export class DeclarationNodeWidget extends React.Component<DeclarationNodeProps, DeclarationTypeNodeState> {
 	constructor(props: DeclarationNodeProps) {
-		super(DECLARATION_MODEL, props);
+		super(
+			// DECLARATION_MODEL,
+			props);
 		this.state = {};
 	}
 
-	generatePort(port) {
-		return <DefaultPortLabel model={port} key={port.id} />;
+	generatePort(port: LDPortModel) {
+		return <DefaultPortLabel engine={this.props.engine} port={port as DefaultPortModel} key={port.getID()} />;
 		//return <GeneralDataTypePortSelector model={port} key={port.id} />;
 	}
 
 	render() {
+		const className = `basic-node ${this.props.node.isSelected() ? 'selected' : ''}`;
 		return (
-			<div className="basic-node" style={{ background: this.props.node.color }}>
+			<div className={className} style={{ background: this.props.node.getColor() }}>
 				<div className="title">
-					<div className="name">{this.props.node.nameSelf}</div>
+					<div className="name">{this.props.node.getNameSelf()}</div>
 				</div>
 				<div className="ports">
 					<div className="in">{map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>
@@ -40,5 +43,3 @@ export class DeclarationNodeWidget extends BaseWidget<DeclarationNodeProps, Decl
 		);
 	}
 }
-
-export var DeclarationNodeWidgetFactory = createFactory(DeclarationNodeWidget);

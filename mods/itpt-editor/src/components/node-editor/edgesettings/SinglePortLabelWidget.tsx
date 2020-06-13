@@ -18,13 +18,13 @@ export class SinglePortLabel extends Component<SinglePortLabelProps, SinglePortL
 	};
 
 	render() {
-		var port = <SinglePortWidget node={this.props.model.getParent()} name={this.props.model.name} isMulti={true} />;
-		var label = <div className="name">{this.props.model.label}</div>;
+		var port = <SinglePortWidget node={this.props.model.getParent()} name={this.props.model.getName()} isMulti={true} />;
+		var label = <div className="name">{this.props.model.getLabel()}</div>;
 
 		return (
-			<div className={(this.props.model.in ? "in" : "out") + "-port"}>
-				{this.props.model.in ? port : label}
-				{this.props.model.in ? label : port}
+			<div className={(this.props.model.isIn() ? "in" : "out") + "-port"}>
+				{this.props.model.isIn() ? port : label}
+				{this.props.model.isIn() ? label : port}
 			</div>
 		);
 	}

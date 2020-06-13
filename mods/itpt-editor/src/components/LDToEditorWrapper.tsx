@@ -8,29 +8,23 @@ import {
 import { keys } from "lodash";
 import { DragItem, ActiveStates } from "metaexplorer-react-components";
 import React, { Component, createRef } from "react";
-import { DndProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-//import TouchBackend from 'react-dnd-touch-backend';
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
-//import { Route } from 'react-router-dom';
-import "@projectstorm/react-diagrams/dist/style.min.css";
-import { IEditorBlockData, EditorDNDItemType } from "./editorInterfaces";
+import { IEditorBlockData, EditorDNDItemType, EditorClientPosition } from "./editorInterfaces";
 import { BaseDataTypeNodeModel } from "./node-editor/basedatatypes/BaseDataTypeNodeModel";
 import { DeclarationPartNodeModel } from "./node-editor/declarationtypes/DeclarationNodeModel";
-import { NodeEditorLogic, editorSpecificNodesColor, editorDefaultNodesColor } from "./node-editor/NodeEditorLogic";
+import { NodeEditorLogic } from "./node-editor/NodeEditorLogic";
 import { NodeEditorBody } from "./node-editor/NodeEditorBody";
-import { EditorTray as EditorTray, EditorTrayProps } from "./content/blockselection/EditorTray";
+import { EditorTrayProps } from "./content/blockselection/EditorTray";
 import { ExtendableTypesNodeModel } from "./node-editor/extendabletypes/ExtendableTypesNodeModel";
 import { GeneralDataTypeNodeModel } from "./node-editor/generaldatatypes/GeneralDataTypeNodeModel";
 import { LDPortModel } from "./node-editor/_super/LDPortModel";
-import { UserInfo } from "./content/status/UserInfo";
 import { EditorMain } from "./EditorMain";
 import { IITPTNameObj } from "./new-itpt/newItptNodeDummy";
 import { TXT_INIT } from "./content/status/SaveStatus";
 import * as shortid from "shortid";
-
-const DNDBackend = HTML5Backend;// TouchBackend; //HTML5Backend
+import { ItptNodeModel } from "./node-editor/_super/ItptNodeModel";
+import { editorSpecificNodesColor } from "./node-editor/consts";
 
 export type AIEProps = {
 	logic?: NodeEditorLogic;
@@ -75,7 +69,7 @@ export const ITPT_BLOCK_EDITOR_AV_DRAWER = "drawer";
 export const ITPT_BLOCK_EDITOR_AV_PREVIEW = "preview";
 export const ITPT_BLOCK_EDITOR_AV_BOTTOMBAR = "bottombar";
 
-export const SAVE_ACTION_LDTYPE = "SaveAction_LDType"
+export const SAVE_ACTION_LDTYPE = "SaveAction_LDType";
 
 let allMyInputKeys: string[] = [
 	ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
@@ -184,7 +178,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			if (!lSavingStat) lSavingStat = {
 				status: 'warning',
 				statusPayload: "not connected"
-			}
+			};
 			let newState = null;
 			if (!!initiallyDisplayed && !prevState.currentlyEditingItptName) {
 				newState = { ...prevState, ...rvLD, saveStatus: lSavingStat, currentlyEditingItptName: initiallyDisplayed, mode, bottomBarHidden, drawerHidden, previewHidden };
@@ -311,7 +305,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				this.logic.autoDistribute();
 				this.diagramRef.current.forceUpdate();
 			}
-		}
+		};
 		const miniProps: {
 			onMiniChanged: (isMini: boolean) => void;
 			onActiveStateChanged: (activeState: ActiveStates) => void;
@@ -322,19 +316,18 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			activeState: this.state.previewActiveState,
 			isMini: this.state.previewIsMini,
 			onMiniChanged: (isMini) => {
-				this.setState({ ...this.state, previewIsMini: !isMini })
+				this.setState({ ...this.state, previewIsMini: !isMini });
 			},
 			onActiveStateChanged: (activeState) => {
-				this.setState({ ...this.state, previewActiveState: activeState, previewIsMini: false })
+				this.setState({ ...this.state, previewActiveState: activeState, previewIsMini: false });
 			},
 			onUpClick: () => this.triggerNavToTop()
-		}
+		};
 		if (!this.logic || this.state.mode === "initial") return <div>loading Editor</div>;
 		if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
 			return <div>{this.errorNotAvailableMsg}</div>;
 		}
-		const { /*mode, localValues,*/ redirect } = this.state;
-		//let isGlobal = !!localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
+		const { redirect } = this.state;
 
 		if (!!redirect) {
 			this.setState({ ...this.state, redirect: null });
@@ -346,16 +339,12 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			onNewBtnClick={(newNameObj) => this.setNodeEditorToNew(newNameObj)}
 			changeNodeCurrentlyEditing={this.changeNodeCurrentlyEditing.bind(this)}
 			currentlyEditingItpt={currentlyEditingItptName}
-			onBlockItemDropped={(blockItem) => this.addBlockToDiagram(blockItem)}
+			onBlockItemDropped={(blockItem, clientPosition) => this.addBlockToDiagram(blockItem, clientPosition)}
 			isLeftDrawerActive={drawerActive}
 			trayProps={editorTrayProps}
 			isPreviewFullScreen={this.state.mode === "app"}
 			previewLDTokenString={this.state.previewerToken}
 			routes={this.props.routes}
-			onZoomAutoLayoutPress={() => {
-				this.logic.autoDistribute();
-				this.diagramRef.current.forceUpdate();
-			}}
 		>
 			<NodeEditorBody hideRefMapDropSpace={bottomBarHidden}
 				ref={this.diagramRef}
@@ -379,47 +368,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				</>
 			}
 		</EditorMain >;
-		/*if (!this.props || !this.props.ldTokenString || this.props.ldTokenString.length === 0) {
-			return <div>{this.errorNotAvailableMsg}</div>;
-		}
-		const { mode, localValues, redirect } = this.state;
-		let isGlobal = !!localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
-
-		if (!!redirect) {
-			this.setState({ ...this.state, redirect: null });
-			return <Redirect to={redirect} />;
-		}
-		if (isGlobal) {
-			return <Route path="/" render={(routeProps: LDRouteProps) => {
-				if (routeProps.location.search === "?mode=editor" && mode !== "editor") {
-					this.setState({ ...this.state, mode: "editor" });
-				}
-				if (routeProps.location.search === "?mode=app" && mode !== "app") {
-					this.setState({ ...this.state, mode: "app" });
-				}
-				if (!routeProps.location.search && mode === "initial") {
-					this.setState({ ...this.state, mode: "app" });
-				}
-				if (mode === "editor") {
-					return this.renderEditor();
-				} else
-					if (mode === "app") {
-						return this.renderApp();
-					}
-					else {
-						return null;
-					}
-			}} />;
-		}
-		if (mode === "editor") {
-			return this.renderEditor();
-		} else
-			if (mode === "app") {
-				return this.renderApp();
-			}
-			else {
-				return null;
-			}*/
 	}
 
 	toggleFullScreen() {
@@ -438,7 +386,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	setNodeEditorToNew(newNameObj: IITPTNameObj) {
-		this.logic.clear();
+		this.logic.clear(this.logic.getActiveModel().getOptions());
 		const containerID = shortid.generate();
 		const boldID = shortid.generate();
 		const invitationText: string = "Get Started!";
@@ -471,18 +419,18 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							]
 						},
 						[boldID]: {
-							"subItptOf": "metaexplorer.io/basichtml/bold",
-							"canInterpretType": "http://schema.org/Text",
-							"nameSelf": boldID,
-							"initialKvStores": [
+							subItptOf: "metaexplorer.io/basichtml/bold",
+							canInterpretType: "http://schema.org/Text",
+							nameSelf: boldID,
+							initialKvStores: [
 								{
-									"key": "inputdata",
-									"value": invitationText,
-									"ldType": "http://schema.org/Text"
+									key: "inputdata",
+									value: invitationText,
+									ldType: "http://schema.org/Text"
 								}
 							],
-							"crudSkills": "cRud",
-							"interpretableKeys": []
+							crudSkills: "cRud",
+							interpretableKeys: []
 						}
 					},
 					ldType: UserDefDict.intrprtrBPCfgRefMapType
@@ -494,141 +442,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.generatePrefilled(newBpCfg);
 		this.logic.diagramFromItptBlueprint(newBpCfg);
 		this.logic.autoDistribute();
-		this.setState({ ...this.state, currentlyEditingItptName: itptName });
+		this.setState(
+			{ ...this.state, currentlyEditingItptName: itptName });
 	}
-
-	renderEditor() {
-		const { drawerActive, previewActive, localValues, bottomBarHidden, previewHidden, drawerHidden } = this.state;
-		const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
-		if (!this.logic) {
-			return <div className="entrypoint-editor" ref={this.editorWrapperRef}></div>;
-		}
-		const itpts = this.logic.getItptList();
-		return <DndProvider backend={DNDBackend}>
-			<div className="entrypoint-editor" ref={this.editorWrapperRef}>
-				<div className='editor-layout'>
-					{drawerHidden
-						? null
-						: <div className={`nav-drawer-wrapper ${drawerActive ? "active" : "inactive"}`}>
-							<EditorTray
-								itpts={itpts}
-								onEditTrayItem={this.changeNodeCurrentlyEditing.bind(this)}
-								onZoomAutoLayoutPress={() => {
-									this.logic.autoDistribute();
-									this.diagramRef.current.forceUpdate();
-								}}
-							>
-								<div className="fakeheader">
-									<UserInfo userLabel="John Doe" projectLabel="JohnsPersonalProject" userIconSrc="" />
-									{
-										isGlobal
-											? <button style={{ color: "white" }} onClick={() => this.toggleFullScreen.apply(this)}>View in full size FontIconfullscreenFontIcon</button>
-											: null
-									}
-								</div>
-							</EditorTray>
-						</div>
-					}
-					<div>
-						<NodeEditorBody hideRefMapDropSpace={bottomBarHidden}
-							ref={this.diagramRef}
-							loadToEditorByName={this.loadToEditorByName}
-							changeCurrentlyEditingItpt={(newItpt) => this.setState({ ...this.state, currentlyEditingItptName: newItpt })}
-							currentlyEditingItpt={this.state.currentlyEditingItptName} logic={this.logic} />
-						{previewHidden ? null : this.renderPreview(isGlobal, previewActive)}
-					</div>
-					{drawerHidden
-						? null
-						: <>
-							<div className="nav-element top-left">
-								<button
-									className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-large`}
-									onClick={this.toggleDrawerActive} />
-							</div>
-							<div className="nav-element bottom-left">
-								<button
-									className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-small`}
-									style={{ color: "white" }}
-									onClick={this.toggleDrawerActive}></button>
-							</div>
-						</>
-					}
-				</div>
-			</div>
-		</DndProvider>;
-	}
-
-	protected renderPreview(isGlobal: boolean, previewActive: boolean) {
-		return <>
-			{/*this.state.previewDisplay === "phone" ?
-				<>
-					<DropContainer isDropZoneClickthrough={this.state.isDropZoneClickThrough}
-						onBlockDropped={(itm: DragItem) => {
-							console.dir(itm);
-							this.addBlockToDiagram(itm)
-						}}>
-						<MiniToolBox
-							id="a"
-							left={0}
-							top={0}
-							type={DND_MINI_TOOLBOX_TYPE}
-							onOutDragHandle={() => this.setIsDropZoneClickThrough(true)}
-							onOverDragHandle={() => this.setIsDropZoneClickThrough(false)}
-						>
-							<div className="app-content mdscrollbar">
-								<BaseContainerRewrite routes={this.props.routes} ldTokenString={this.editTkString(this.props.ldTokenString)} />
-							</div>
-						</MiniToolBox>
-					</DropContainer>
-				</>
-				:
-				<div className="code-preview">
-					<div className="editor-json-header">
-						<h4>Developer Mode: Declarative Output</h4>
-						{this.renderBtnSwitchPreviewOrCode()}
-					</div>
-					<pre className="editor-json">
-						<p>
-							<small>
-								{this.state.serialized ? this.state.serialized :
-									<span>Nothing to display yet! <br />Drag and drop elements in the design-tool on the right,
-				<br />and click "Interpret!"</span>
-								}
-							</small>
-						</p>
-					</pre>
-				</div>
-			*/}
-		</>;
-	}
-
-	protected renderPhoneNavBtns(isGlobal: boolean) {
-		return <>
-			{isGlobal
-				? <>
-					<button onClick={() => this.toggleFullScreen.apply(this)} className="fullscreen" />
-					<button onClick={() => this.triggerNavToTop.apply(this)} />
-				</>
-				: null
-			}
-			<button onClick={() => this.togglePreview.apply(this)} />
-		</>;
-	}
-
-	protected renderBtnSwitchPreviewOrCode() {
-		return <button
-			onClick={
-				() => {
-					if (this.state.previewDisplay === "phone") {
-						this.setState({ ...this.state, previewDisplay: "code" });
-					} else {
-						this.setState({ ...this.state, previewDisplay: "phone" });
-					}
-				}
-			} style={{ background: '#010f27aa' }}>
-		</button>;
-	}
-
 
 	protected onExploreTriggered(itptName: string) {
 		this.loadToEditorByName(itptName, true);
@@ -666,15 +482,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		if (saveActionType) {
 			this.props.dispatchLdAction(null, saveActionType, nodesSerialized);
 		}
-		/*
-		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
-		if (!outputKVMap) return;
-		let outNodesSerializedKV: IKvStore = {
-			key: ITPT_BLOCK_EDITOR_SERIALIZED_REFMAP_BPCFG,
-			value: nodesSerialized,
-			ldType: UserDefDict.itptRefMapBpCfg
-		}
-		this.props.dispatchKvOutput([outNodesSerializedKV], this.props.ldTokenString, outputKVMap);*/
 	}
 
 	protected dispatchCurrentlyEditingChange(currentlyEditingName: string) {
@@ -688,24 +495,25 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.props.dispatchKvOutput([outCurItptKV], this.props.ldTokenString, outputKVMap);
 	}
 
-	protected addBlockToDiagram(dndItem: DragItem<EditorDNDItemType, IEditorBlockData>) {
+	protected addBlockToDiagram(dndItem: DragItem<EditorDNDItemType, IEditorBlockData>, clientPosition: EditorClientPosition) {
 		const data: IEditorBlockData = dndItem.data;
 		var nodesCount = keys(
 			this.logic
 				.getDiagramEngine()
-				.getDiagramModel()
+				.getModel()
 				.getNodes()
 		).length;
-		var node = null;
+		var node: ItptNodeModel | null = null;
 		switch (data.type) {
 			case "ldbp":
 				let nodeName: string = "Node " + (nodesCount + 1) + ":";
-				node = new GeneralDataTypeNodeModel(nodeName, null, null, editorDefaultNodesColor);
+				node = new GeneralDataTypeNodeModel({
+					nameSelf: nodeName,
+					canInterpretType: data.canInterpretType ? data.canInterpretType : null
+				});
 				if (data.bpname) {
 					this.logic.addLDPortModelsToNodeFromItptRetr(node, data.bpname);
 				}
-				if (data.canInterpretType) node.canInterpretType = data.canInterpretType;
-				this.logic.addListenersToNode(node);
 				break;
 			case "bdt":
 				var baseDataTypeKVStore: IKvStore = {
@@ -713,8 +521,10 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					value: undefined,
 					ldType: undefined
 				};
-				node = new BaseDataTypeNodeModel("Simple Data Type", null, null, editorDefaultNodesColor);
-				node.addPort(new LDPortModel(false, "out-3", baseDataTypeKVStore, "output"));
+				node = new BaseDataTypeNodeModel({
+					nameSelf: "Simple Data Type"
+				});
+				node.addPort(LDPortModel.fromVars(false, "out-3", baseDataTypeKVStore, "output"));
 				break;
 			case "inputtype":
 				var inputDataTypeKVStore: IKvStore = {
@@ -722,8 +532,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					value: undefined,
 					ldType: undefined
 				};
-				node = new DeclarationPartNodeModel("External Input Marker", null, null, editorSpecificNodesColor);
-				node.addPort(new LDPortModel(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
+				node = new DeclarationPartNodeModel({ nameSelf: "External Input Marker", color: editorSpecificNodesColor });
+				node.addPort(LDPortModel.fromVars(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
 				break;
 			case "outputtype":
 				var outputDataTypeKVStore: IKvStore = {
@@ -731,27 +541,29 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 					value: undefined,
 					ldType: undefined
 				};
-				node = new DeclarationPartNodeModel("External Output Marker", null, null, editorSpecificNodesColor);
-				node.addPort(new LDPortModel(true, "in-4", outputDataTypeKVStore, UserDefDict.externalOutput));
+				node = new DeclarationPartNodeModel({ nameSelf: "External Output Marker", color: editorSpecificNodesColor });
+				node.addPort(LDPortModel.fromVars(true, "in-4", outputDataTypeKVStore, UserDefDict.externalOutput));
 				break;
 			case "lineardata":
-				node = new ExtendableTypesNodeModel("Linear Data Display", null, null, editorSpecificNodesColor);
+				node = new ExtendableTypesNodeModel({ nameSelf: "Linear Data Display", color: editorSpecificNodesColor });
 				let outputSelfKV: IKvStore = {
 					key: UserDefDict.outputSelfKey,
 					value: undefined,
 					ldType: UserDefDict.intrprtrClassType
 				};
-				node.addPort(new LDPortModel(false, outputSelfKV.key, outputSelfKV));
+				node.addPort(LDPortModel.fromVars(false, outputSelfKV.key, outputSelfKV, outputSelfKV.key));
 				break;
 			default:
 				break;
 		}
-		var points = this.logic.getDiagramEngine().getRelativeMousePoint(event);
-		node.x = points.x - 224 / 2;
-		node.y = points.y - 32 / 2;
+		this.logic.addListenersToNode(node);
+		var points = this.logic.getDiagramEngine().getRelativeMousePoint(clientPosition);
+		// TODO: fix visual bug: clientPosition is top-left corner of drag element, but should be mouse cursor
+		//points.translate(- 224 / 2, - 32 / 2);
+		node.setPosition(points);
 		this.logic
 			.getDiagramEngine()
-			.getDiagramModel()
+			.getModel()
 			.addNode(node);
 		this.forceUpdate();
 	}
@@ -759,7 +571,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	protected changeNodeCurrentlyEditing(data: IEditorBlockData): {} {
 		switch (data.type) {
 			case "ldbp":
-				this.logic.clear();
+				//this.logic.clear();
 				let isLoadSuccess = this.loadToEditorByName(data.bpname, true);
 				if (!isLoadSuccess) return { isSuccess: false, message: "interpreter is not a RefMap-Interpreter" };
 				return { isSuccess: true, message: "check the diagram on the right to see your interpreter, or drop another Compound Block here to edit that one" };
@@ -806,12 +618,14 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			return false;
 		}
 		this.generatePrefilled(itptCfg);
-		this.logic.clear();
+		this.logic.clear(this.logic.getActiveModel().getOptions());
 		this.logic.diagramFromItptBlueprint(itptCfg);
 		if (isAutodistribute) {
 			this.logic.autoDistribute();
 		}
-		this.setState({ ...this.state, currentlyEditingItptName: itptCfg.nameSelf });
+		this.setState(
+			{ ...this.state, currentlyEditingItptName: itptCfg.nameSelf }
+		);
 		return true;
 	}
 

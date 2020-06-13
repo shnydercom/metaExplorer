@@ -1,38 +1,58 @@
-import { PortModel, DiagramEngine, LinkModel, DefaultLinkModel } from "@projectstorm/react-diagrams";
+import { PortModel, LinkModel, PortModelOptions, PortModelGenerics, PortModelAlignment } from "@projectstorm/react-diagrams";
 import { merge } from "lodash";
 import { IKvStore, isInputValueValidFor, arrayMove } from "@metaexplorer/core";
 import { LD_PORTMODEL } from "../node-editor-consts";
+import { DeserializeEvent } from "@projectstorm/react-canvas-core";
+import { SettingsLinkModel } from "../edgesettings/SettingsLinkModel";
+
+export interface LDPortModelOptions extends PortModelOptions {
+	in: boolean;
+	label?: string;
+	kv: IKvStore;
+	linkSortOrder?: string[];
+}
+
+export interface LDPortModelGenerics extends PortModelGenerics {
+	OPTIONS: LDPortModelOptions;
+}
 
 /**
  * @author Jonathan Schneider
  */
-export class LDPortModel extends PortModel {
-	in: boolean;
-	label: string;
-	kv: IKvStore;
-	linkSortOrder: string[];
+export class LDPortModel extends PortModel<LDPortModelGenerics> {
 
-	constructor(isInput: boolean, name: string, kv: IKvStore, label: string = null, id?: string) {
-		super(name, id);
-		this.type = LD_PORTMODEL;
-		this.in = isInput;
-		this.label = label || name;
-		this.kv = kv;
-		this.linkSortOrder = [];
+	static fromVars(isInput: boolean, name: string, kv: IKvStore, label: string = null) {
+		return new this({
+			in: isInput,
+			name,
+			kv,
+			label
+		});
 	}
 
-	deSerialize(object, engine: DiagramEngine) {
-		super.deSerialize(object, engine);
-		this.in = object.in;
-		this.label = object.label;
-		this.kv = object.kv;
+	constructor(options: LDPortModelOptions) {
+		super({
+			alignment: options.in ? PortModelAlignment.LEFT : PortModelAlignment.RIGHT,
+			type: LD_PORTMODEL,
+			linkSortOrder: [],
+			label: options.label ? options.label : options.name,
+			...options
+		});
+	}
+
+	deSerialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+		//object, engine);
+		this.options.in = event.data.in;
+		this.options.label = event.data.label;
+		this.options.kv = event.data.kv;
 	}
 
 	serialize() {
 		return merge(super.serialize(), {
-			in: this.in,
-			label: this.label,
-			kv: this.kv
+			in: this.options.in,
+			label: this.options.label,
+			kv: this.options.kv
 		});
 	}
 
@@ -46,15 +66,15 @@ export class LDPortModel extends PortModel {
 	canLinkToPort(port: PortModel): boolean {
 		let rv: boolean = true;
 		if (port instanceof LDPortModel) {
-			if (this.in === port.in) return false;
+			if (this.options.in === port.options.in) return false;
 		} else {
 			return false;
 		}
 		let ldPort = port as LDPortModel;
-		if (ldPort.in) {
-			rv = isInputValueValidFor(this.kv, ldPort.kv);
+		if (ldPort.options.in) {
+			rv = isInputValueValidFor(this.options.kv, ldPort.options.kv);
 		} else {
-			rv = isInputValueValidFor(ldPort.kv, this.kv);
+			rv = isInputValueValidFor(ldPort.options.kv, this.options.kv);
 		}
 		return rv;
 	}
@@ -62,39 +82,54 @@ export class LDPortModel extends PortModel {
 	createLinkModel(): LinkModel {
 		let link = super.createLinkModel();
 		if (link) return link;
-		let defaultLink = new DefaultLinkModel();
-		defaultLink.addLabel("");
+		let defaultLink = new SettingsLinkModel();
 		return defaultLink;
 	}
-
 	removeLink(link: LinkModel) {
 		super.removeLink(link);
-		var idx = this.linkSortOrder.indexOf(link.id);
+		var idx = this.options.linkSortOrder.indexOf(link.getID());
 		if (idx > -1) {
-			this.linkSortOrder.splice(idx, 1);
+			this.options.linkSortOrder.splice(idx, 1);
 		}
 	}
 
 	addLink(link: LinkModel) {
 		super.addLink(link);
-		this.linkSortOrder.push(link.id);
+		this.options.linkSortOrder.push(link.getID());
 	}
 
 	decreaseLinksSortOrder(link: LinkModel) {
-		const idx = this.linkSortOrder.indexOf(link.id);
+		// TODO: in here and in increaseLinksSortOrder fire a custom event. Currently doesn't update app preview
+		const idx = this.options.linkSortOrder.indexOf(link.getID());
 		if (idx > 0) {
-			arrayMove(this.linkSortOrder, idx, idx - 1);
+			arrayMove(this.options.linkSortOrder, idx, idx - 1);
 		}
 	}
 
 	increaseLinksSortOrder(link: LinkModel) {
-		const idx = this.linkSortOrder.indexOf(link.id);
-		if (idx > -1 && idx <= this.linkSortOrder.length - 1) {
-			arrayMove(this.linkSortOrder, idx, idx + 1);
+		const idx = this.options.linkSortOrder.indexOf(link.getID());
+		if (idx > -1 && idx <= this.options.linkSortOrder.length - 1) {
+			arrayMove(this.options.linkSortOrder, idx, idx + 1);
 		}
 	}
 
 	getLinksSortOrder(): string[] {
-		return this.linkSortOrder;
+		return this.options.linkSortOrder;
+	}
+
+	setKV(kv: IKvStore): void {
+		this.options.kv = kv;
+	}
+
+	getKV(): IKvStore {
+		return this.options.kv;
+	}
+
+	isIn(): boolean {
+		return this.options.in;
+	}
+
+	getLabel(): string | undefined{
+		return this.options.label;
 	}
 }
