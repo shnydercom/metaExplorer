@@ -74,8 +74,6 @@ export class PureImgUploader extends Component<ConnectedState & ConnectedDispatc
         return <div>
             <input type="file" onChange={(evt) => this.onClickFileChange(evt)}
                 placeholder="Upload file" accept=".jpg,.png,.txt" />
-            //  ImgDisplay/>
-            // singleImage="" />
         </div>;
     }
 
