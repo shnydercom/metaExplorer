@@ -16,7 +16,7 @@ describe('MetaExplorer', () => {
     
     type Query {
       me: User!
-      user(id: ID!, username: String, emailInVar: String): User
+      user(id: ID!, username: String, email: String): User
       allUsers: [User]
       search(term: String!): [SearchResult!]!
       myChats: [Chat!]!
