@@ -12,15 +12,15 @@
     "watch": "jest --watch --config ../../jest.config.js"
   },
   "dependencies": {
-    "@graphql-codegen/plugin-helpers": "1.12.2",
-    "@graphql-codegen/visitor-plugin-common": "1.12.2",
+    "@graphql-codegen/plugin-helpers": "1.15.3",
+    "@graphql-codegen/visitor-plugin-common": "1.15.3",
+    "@metaexplorer/core": "*",
     "auto-bind": "4.0.0",
-    "tslib": "1.11.1",
-    "@metaexplorer/core": "*"
+    "tslib": "1.11.1"
   },
   "devDependencies": {
     "@ardatan/bob": "0.2.7",
-    "@graphql-codegen/testing": "1.12.2",
+    "@graphql-codegen/testing": "1.15.3",
     "graphql": "14.6.0",
     "jest": "25.1.0",
     "jest-docblock": "25.1.0",
