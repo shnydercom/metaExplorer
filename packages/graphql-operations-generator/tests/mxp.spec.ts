@@ -56,7 +56,7 @@ describe('MetaExplorer', () => {
     `);
 
     const query = parse(/* GraphQL */ `
-    query findUser($userId: ID!, $username: String, $emailInVar: string) {
+    query findUser($userId: ID!, $username: String, $emailInVar: String) {
       user(id: $userId, username: $username, email: $emailInVar) {
         email,
         ...UserFields
