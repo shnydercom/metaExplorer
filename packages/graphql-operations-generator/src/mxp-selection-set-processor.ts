@@ -69,7 +69,7 @@ export class MetaExplorerSelectionSetProcessor extends BaseSelectionSetProcessor
       });
 
     return [
-      `[ ${fields
+      `[${fields
         .map(aliasedField => {
           const value = aliasedField.fieldName === '__typename' ? `'${schemaType.name}'` : `${parentName}['${aliasedField.fieldName}']`;
           //return `${this.config.formatNamedField(aliasedField.alias)}: ${value}`;
@@ -96,7 +96,7 @@ export class MetaExplorerSelectionSetProcessor extends BaseSelectionSetProcessor
 
 
   buildFieldsIntoObject(allObjectsMerged: string[]): string {
-    return `[ ${allObjectsMerged.join(', ')} ]`;
+    return `[${allObjectsMerged.join(', ')}]`;
   }
 
   buildSelectionSetFromStrings(pieces: string[]): string {

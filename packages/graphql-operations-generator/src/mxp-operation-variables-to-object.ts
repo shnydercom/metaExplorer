@@ -38,19 +38,19 @@ export class MetaExplorerOperationVariablesToObject extends OperationVariablesTo
 	}
 
 	public transform<TDefinitionType extends InterfaceOrVariable>(variablesNode: ReadonlyArray<TDefinitionType>): string {
-    if (!variablesNode || variablesNode.length === 0) {
-      return null;
+		if (!variablesNode || variablesNode.length === 0) {
+			return null;
 		}
-		
-    const varsInputs = variablesNode.map(variable => this.transformInputDef(variable)).join(',');
 
-		const varsInner = `${SUBITPTOF}: LDUIDict.DataTypeAssembler,
+		const varsInputs = variablesNode.map(variable => this.transformInputDef(variable)).join(',');
+
+		const varsInner = `${SUBITPTOF}: null,
 ${INTERPRETABLE_KEYS}: [${varsInputs}],
-${INITIAL_KV_STORES}: [${super.transform(variablesNode)},
+${INITIAL_KV_STORES}: [${super.transform(variablesNode)}
 ${OUTPUT_KV_FRAGMENT}],
 `;
 		return varsInner;
-  }
+	}
 
 	public wrapAstTypeWithModifiers(baseType: string, typeNode: TypeNode): string {
 		const prefix = this._namespacedImportName ? `${this._namespacedImportName}.` : '';
@@ -62,7 +62,7 @@ ${OUTPUT_KV_FRAGMENT}],
 			return nnRV;
 		} else if (typeNode.kind === Kind.LIST_TYPE) {
 			const innerType = this.wrapAstTypeWithModifiers(baseType, typeNode.type);
-			const rv = wrapInSPOfunction('LDUIDict.NTuple','LDUIDict.typed',`${prefix}${innerType}`);
+			const rv = wrapInSPOfunction('LDUIDict.NTuple', 'LDUIDict.typed', `${prefix}${innerType}`);
 			return rv;
 			//return `${prefix}Maybe<${this._immutableTypes ? 'ReadonlyArray' : 'Array'}<${innerType}>>`;
 		} else {
@@ -129,6 +129,6 @@ ${OUTPUT_KV_FRAGMENT}],
 	}
 
 	protected getPunctuation(): string {
-		return ';';
+		return ',';
 	}
 }
