@@ -8,8 +8,7 @@ import { removeWhiteSpaces } from './utils';
 /* tslint:disable */
 
 describe('MetaExplorer', () => {
-  it('should expose Maybe', async () => {
-    const schema = buildSchema(/* GraphQL */ `
+  const schema = buildSchema(/* GraphQL */ `
     scalar Date
 
     schema {
@@ -72,6 +71,7 @@ describe('MetaExplorer', () => {
     }
   `);
 
+  it('should create a BlueprintConfigFragment for GQL-Queryvariables', async () => {
     const aMap = schema.getTypeMap();
     const b = Object.keys(aMap).join('\n');
     const result = (await plugin(

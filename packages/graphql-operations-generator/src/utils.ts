@@ -15,7 +15,6 @@ export class MetaExplorerDeclarationBlock extends DeclarationBlock {
 		if (this._export) {
 			result += 'export ';
 		}
-		console.dir(this);
 		if (this._kind) {
 			let extra = '';
 			let name = '';
