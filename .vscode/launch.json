@@ -20,7 +20,7 @@
 				"--config",
 				"${workspaceRoot}/jest.config.js"
 			],
-			"cwd": "${workspaceRoot}/packages/graphql-generator",
+			"cwd": "${workspaceRoot}/packages/graphql-operations-generator",
 			"preLaunchTask": null,
 			"runtimeExecutable": null,
 			"runtimeArgs": [

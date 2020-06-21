@@ -91,7 +91,7 @@ export class MetaExplorerDocumentsVisitor extends BaseDocumentsVisitor<MetaExplo
 		};
 	}
 
-	private handleAnonymousOperation(node) {
+	private handleAnonymousOperation2(node) {
 		const name = node.name && node.name.value;
 		if (name) {
 			return this.convertName(node, {
@@ -106,7 +106,7 @@ export class MetaExplorerDocumentsVisitor extends BaseDocumentsVisitor<MetaExplo
 	}
 
 	public OperationDefinition(node: OperationDefinitionNode): string {
-		const name = this.handleAnonymousOperation(node);
+		const name = this.handleAnonymousOperation2(node);
 		const operationRootType = getRootType(node.operation, this._schema);
 
 		if (!operationRootType) {

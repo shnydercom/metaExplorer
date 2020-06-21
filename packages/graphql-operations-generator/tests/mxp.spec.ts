@@ -2,6 +2,8 @@ import { validateTs } from '@graphql-codegen/testing';
 import { Types, mergeOutputs } from '@graphql-codegen/plugin-helpers';
 import { buildSchema, parse, GraphQLSchema, GraphQLObjectType, GraphQLEnumType } from 'graphql';
 import { plugin } from '../src/index';
+import {snapshotQueryVars} from './__snapshotQueryVars';
+import { removeWhiteSpaces } from './utils';
 
 /* tslint:disable */
 
@@ -77,9 +79,6 @@ describe('MetaExplorer', () => {
       [{ location: '', document: query }],
       {},
       { outputFile: '' }));// as Types.ComplexPluginOutput;
-    console.log(result + "hallö");
-    mergeOutputs(result);
-    expect(true).toBe(true);
-    //expect(result.prepend).toBeSimilarStringTo('export type Maybe<T> =');
+    expect(removeWhiteSpaces(result.toString()).includes(removeWhiteSpaces(snapshotQueryVars))).toBeTruthy();
   });
 });
