@@ -79,6 +79,7 @@ describe('MetaExplorer', () => {
       [{ location: '', document: query }],
       {},
       { outputFile: '' }));// as Types.ComplexPluginOutput;
+      console.log(result)
     expect(removeWhiteSpaces(result.toString()).includes(removeWhiteSpaces(snapshotQueryVars))).toBeTruthy();
   });
 });

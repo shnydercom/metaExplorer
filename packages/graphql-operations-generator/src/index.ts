@@ -1,6 +1,6 @@
 import { PluginFunction, Types } from '@graphql-codegen/plugin-helpers';
 import { visit, concatAST, GraphQLSchema, Kind, FragmentDefinitionNode } from 'graphql';
-import { MetaExplorerDocumentsVisitor } from './visitor';
+import { MetaExplorerDocumentsVisitor, AnotherDocumentsVisitor } from './visitor';
 import { LoadedFragment, optimizeOperations } from '@graphql-codegen/visitor-plugin-common';
 import { MetaExplorerDocumentsPluginConfig } from './config';
 
@@ -17,6 +17,7 @@ export const plugin: PluginFunction<{}
 
   const visitorResult = visit(allAst, {
     leave: new MetaExplorerDocumentsVisitor(schema, config, allFragments),
+    //AnotherDocumentsVisitor(schema, config, allFragments),
   });
 
   const result = visitorResult.definitions.join('\n');
