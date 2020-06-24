@@ -2,7 +2,7 @@ import { validateTs } from '@graphql-codegen/testing';
 import { Types, mergeOutputs } from '@graphql-codegen/plugin-helpers';
 import { buildSchema, parse, GraphQLSchema, GraphQLObjectType, GraphQLEnumType } from 'graphql';
 import { plugin } from '../src/index';
-import {snapshotQueryVars} from './__snapshotQueryVars';
+import {snapshotFindUserQueryVariables} from './__snapshotsToBe';
 import { removeWhiteSpaces } from './utils';
 
 /* tslint:disable */
@@ -80,6 +80,6 @@ describe('MetaExplorer', () => {
       {},
       { outputFile: '' }));// as Types.ComplexPluginOutput;
       console.log(result)
-    expect(removeWhiteSpaces(result.toString()).includes(removeWhiteSpaces(snapshotQueryVars))).toBeTruthy();
+    expect(removeWhiteSpaces(result.toString()).includes(removeWhiteSpaces(snapshotFindUserQueryVariables))).toBeTruthy();
   });
 });

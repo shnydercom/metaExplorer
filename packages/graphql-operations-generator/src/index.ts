@@ -16,8 +16,8 @@ export const plugin: PluginFunction<{}
   ];
 
   const visitorResult = visit(allAst, {
-    leave: new MetaExplorerDocumentsVisitor(schema, config, allFragments),
-    //AnotherDocumentsVisitor(schema, config, allFragments),
+    leave: //new MetaExplorerDocumentsVisitor(schema, config, allFragments),
+      new AnotherDocumentsVisitor(schema, config, allFragments),
   });
 
   const result = visitorResult.definitions.join('\n');
