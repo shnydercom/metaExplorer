@@ -24,7 +24,7 @@ let cfgIntrprtKeys: string[] =
 		ActionKeysDict.action_confirm,
 		VisualKeysDict.cssClassName
 	];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -69,8 +69,8 @@ let initialKVStores: IKvStore[] = [
 export const NavProcessAtomBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: NavProcessAtomName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 export type NavProcessAtomState = {
@@ -106,7 +106,7 @@ export abstract class AbstractNavProcessAtom extends Component<LDConnectedState 
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	constructor(props: any) {
 		super(props);

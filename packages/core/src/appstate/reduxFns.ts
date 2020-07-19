@@ -106,7 +106,7 @@ export const mapDispatchToProps = (dispatch: Dispatch<Action<any>>, ownProps: LD
 			}
 			newLDOptions.resource.kvStores = newKvArr;
 		}
-		let refMapKv = refMap.initialKvStores.find((val) => val.key === UserDefDict.intrprtrBPCfgRefMapKey);
+		let refMapKv = refMap.ownKVL.find((val) => val.key === UserDefDict.intrprtrBPCfgRefMapKey);
 		if (refMapKv && refMapKv.value && refMapKv.value[ITPT_REFMAP_BASE]) {
 			dispatch(refMapSUCCESSAction(newLDOptions));
 			return;

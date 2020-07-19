@@ -16,7 +16,7 @@ export const CSSWrapperName = "metaexplorer.io/layout/CSSWrapper";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer, VisualKeysDict.cssClassName];
 
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -32,8 +32,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: CSSWrapperName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 export interface CSSWrapperState extends LDLocalState {
@@ -60,7 +60,7 @@ export class PureCSSWrapper extends Component<LDConnectedState & LDConnectedDisp
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	styleClassName: string;
 
 	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);

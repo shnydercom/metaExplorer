@@ -34,7 +34,7 @@ export const ActionHandlerInputKVs: IKvStore[] = [
 	}
 ];
 
-const initialKVStores: IKvStore[] = [
+const ownKVL: IKvStore[] = [
 	...ActionHandlerInputKVs,
 	...ActionHandlerOutputKVs
 ];
@@ -42,8 +42,8 @@ const initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ActionHandlerName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: ActionHandlerKeys,
+	ownKVL: ownKVL,
+	inKeys: ActionHandlerKeys,
 	crudSkills: "cRUd"
 };
 @ldBlueprint(bpCfg)
@@ -52,8 +52,8 @@ export class ActionHandler extends AbstractDataTransformer {
 		super(ldTkStr);
 		this.itptKeys = [ActionKeysDict.action_internal, ...ActionHandlerKeys];
 		this.outputKvStores = ActionHandlerOutputKVs;
-		let typeKv = this.cfg.initialKvStores.find((val) => val.key === handleTypeKey);
-		let idKv = this.cfg.initialKvStores.find((val) => val.key === handleIdKey);
+		let typeKv = this.cfg.ownKVL.find((val) => val.key === handleTypeKey);
+		let idKv = this.cfg.ownKVL.find((val) => val.key === handleIdKey);
 		this.triggerRegisterIfNecessary(typeKv, idKv);
 	}
 

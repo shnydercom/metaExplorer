@@ -7,7 +7,7 @@ import React from "react";
 export const MailChimpSignupName = "mailchimp/condensedSignup";
 let cfgIntrprtKeys: string[] =
 	[LDDict.embedUrl, VisualKeysDict.headerTxt];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: LDDict.embedUrl,
 		value: undefined,
@@ -22,8 +22,8 @@ let initialKVStores: IKvStore[] = [
 const bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: MailChimpSignupName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 export interface MailChimpSignupState extends LDLocalState {
@@ -51,7 +51,7 @@ export class PureMailChimpSignup extends Component<LDConnectedState & LDConnecte
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	styleClassName: string;
 
 	constructor(props: any) {

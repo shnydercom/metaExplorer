@@ -127,7 +127,7 @@ export function initLDLocalState(
 	let newLDTypeMap = new Map<string, any>();
 	let retriever = DEFAULT_ITPT_RETRIEVER_NAME;
 	if (cfg) {
-		let kvs = cfg.initialKvStores;
+		let kvs = cfg.ownKVL;
 		if (props && props.ldOptions && props.ldOptions.visualInfo && props.ldOptions.visualInfo.retriever) {
 			retriever = props.ldOptions.visualInfo.retriever;
 		}
@@ -173,7 +173,7 @@ export function gdsfpLD(
 	let rvCompInfo = new Map<string, IReactCompInfoItm | IReactCompInfoItm[]>();
 	let newValueMap = new Map<string, any>();
 	let newLDTypeMap = new Map<string, any>();
-	// a) get state filled through the interpretableKeys
+	// a) get state filled through the inKeys
 	let reactCompLocalState = getDerivedItptStateFromProps(props, prevState, itptKeys, itptIsMulti);
 	let kvLocalState = getDerivedKVStateFromProps(props, prevState, kvKeys, kvIsMulti);
 	if (!reactCompLocalState && !kvLocalState) {
@@ -206,7 +206,7 @@ export function gdsfpLD(
 		newLDTypeMap = prevState.localLDTypes;
 	}
 	// b) get state filled through a singleKv in the ldOptions.resources.kvstores,
-	// 		if interpretableKeys aren't really filled and the Itpt can interpret a type
+	// 		if inKeys aren't really filled and the Itpt can interpret a type
 	if (canInterpretType && canInterpretType.length > 0 && itptsLen + kvsLen < itptKeys.length + kvKeys.length) {
 		let concatItptAndKvs = [...itptKeys, ...kvKeys];
 		let singleKvKey = determineSingleKVKey(props.ldOptions.resource.kvStores, canInterpretType, concatItptAndKvs);
@@ -360,7 +360,7 @@ function getDerivedKVStateFromProps(
  * and "forProject" as the description
  * @param kvStores the kvStores to determine singleKVKey from
  */
-export function determineSingleKVKey(kvStores: IKvStore[], canInterpretType: string, interpretableKeys: string[]): string {
+export function determineSingleKVKey(kvStores: IKvStore[], canInterpretType: string, inKeys: string[]): string {
 	let rv: string = UserDefDict.singleKvStore;
 	let candidates: IKvStore[] = [];
 	if (kvStores) {
@@ -377,7 +377,7 @@ export function determineSingleKVKey(kvStores: IKvStore[], canInterpretType: str
 	if (candidates.length === 1) {
 		rv = candidates[0].key as string;
 	} else {
-		candidates.filter((a) => interpretableKeys.includes(a.key));
+		candidates.filter((a) => inKeys.includes(a.key));
 		rv = candidates.length > 0 ? candidates[0].key : rv;
 	}
 	return rv;

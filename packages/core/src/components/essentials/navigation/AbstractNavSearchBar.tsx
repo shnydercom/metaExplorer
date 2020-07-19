@@ -11,7 +11,7 @@ import { Component, ReactNode } from 'react';
 export const NavSearchBarName = "metaexplorer.io/material-design/NavSearchBar";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer, VisualKeysDict.searchText, VisualKeysDict.routeSend_back, VisualKeysDict.cssClassName];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -41,8 +41,8 @@ let initialKVStores: IKvStore[] = [
 export const NavSearchBarBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: NavSearchBarName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 export type NavSearchBarState = LDLocalState & {
@@ -74,7 +74,7 @@ NavSearchBarState>
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 

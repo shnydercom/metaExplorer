@@ -13,15 +13,15 @@ export const KeyCloakTokenStateOutputKVs: IKvStore[] = [
 	}
 ];
 
-const initialKVStores: IKvStore[] = [
+const ownKVL: IKvStore[] = [
 	...KeyCloakTokenStateOutputKVs
 ];
 
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: keyCloakTokenStateName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: KeyCloakTokenStateItptKeys,
+	ownKVL: ownKVL,
+	inKeys: KeyCloakTokenStateItptKeys,
 	crudSkills: "cRUd"
 };
 
@@ -46,7 +46,7 @@ export class KeyCloakTokenRetriever extends AbstractDataTransformer {
 	}
 
 	protected propagateChange() {
-		let outputKVMap: IKvStore = this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
+		let outputKVMap: IKvStore = this.cfg.ownKVL.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		this.isOutputDirty = true;
 		this.evalDirtyOutput();

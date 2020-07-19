@@ -2,7 +2,7 @@
   "subItptOf": "testA_linearBase",
   "canInterpretType": "a-ObjectType",
   "nameSelf": "a",
-  "initialKvStores": [
+  "ownKVL": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "testA_linearBase",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "in_0",
               "value": {
@@ -37,7 +37,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "in_0",
             "in_1",
             "in_2"
@@ -47,7 +47,7 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "testA_TextInput",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "http://schema.org/description",
               "ldType": "http://schema.org/Text"
@@ -59,7 +59,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "http://schema.org/description"
           ]
         },
@@ -67,17 +67,17 @@
           "subItptOf": "metaexplorer.io/basichtml/italics",
           "canInterpretType": "metaexplorer.io/basichtml/italics-ObjectType",
           "nameSelf": "testA_italics",
-          "initialKvStores": [],
+          "ownKVL": [],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "testA_eanScanner": {
           "subItptOf": "metaexplorer.io/EANScanner",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "testA_eanScanner",
-          "initialKvStores": [],
+          "ownKVL": [],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
@@ -100,7 +100,7 @@
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": [
+  "inKeys": [
     {
       "objRef": "testA_TextInput",
       "propRef": "http://schema.org/description"

@@ -8,7 +8,7 @@ const singleValueSelectorInputKeys: string[] = [
 	LDDict.description,
 	LDDict.actionOption,
 	LDDict.object];
-const initialKVStores: IKvStore[] = [
+const ownKVL: IKvStore[] = [
 	{
 		key: LDDict.description,
 		value: undefined,
@@ -30,8 +30,8 @@ export const SingleValueSelectorBpCfg: BlueprintConfig = {
 	subItptOf: undefined,
 	canInterpretType: cfgType,
 	nameSelf: "metaexplorer.io/core/SingleValueSelector",
-	initialKvStores: initialKVStores,
-	interpretableKeys: singleValueSelectorInputKeys,
+	ownKVL: ownKVL,
+	inKeys: singleValueSelectorInputKeys,
 	crudSkills: "CRUd"
 };
 
@@ -55,7 +55,7 @@ export abstract class AbstractSingleValueSelector extends Component<LDConnectedS
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	constructor(props: any) {
 		super(props);

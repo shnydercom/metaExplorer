@@ -15,7 +15,7 @@ const nextBtnLabel = "nextBtnLabel";
 
 let cfgIntrprtKeys: string[] =
 	[backgroundItpt, foregroundItpt, prevBtnLabel, nextBtnLabel, VisualKeysDict.headerTxt, VisualKeysDict.subHeaderTxt];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: cfgIntrprtKeys[0],
 		value: undefined,
@@ -50,8 +50,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: HeroGalleryName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -87,7 +87,7 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	private renderSub = generateItptFromCompInfo.bind(this);
 

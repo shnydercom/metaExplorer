@@ -33,15 +33,15 @@ const RESULT_KV: IKvStore = {
 	value: undefined,
 	ldType: LDDict.URL
 };
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	RESULT_KV
 ];
 export let SingleImageSelectorBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: SingleImageSelectorName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -63,7 +63,7 @@ export abstract class AbstractSingleImageSelector extends Component<
 	errorImgLink: string = "/media/nocamera_negative_black.svg";
 	draggingImgLink: string = "/media/dragndrop.svg";
 
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	// tslint:disable-next-line:variable-name
 	_isMounted: boolean = false;
 

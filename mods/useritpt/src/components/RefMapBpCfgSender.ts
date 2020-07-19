@@ -31,14 +31,14 @@ let outputKVStores: IKvStore[] = [
 	},
 ];
 
-let initialKVStores = [...inputKVStores, ...outputKVStores];
+let ownKVL = [...inputKVStores, ...outputKVStores];
 
-let interpretableKeys = itptKeysFromInputKvs(inputKVStores);
+let inKeys = itptKeysFromInputKvs(inputKVStores);
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: RefMapBpCfgSenderName,
-	initialKvStores: initialKVStores,
-	interpretableKeys,
+	ownKVL: ownKVL,
+	inKeys,
 	crudSkills: "cRud",
 	canInterpretType: RefMapBpCfgSenderType
 };
@@ -46,7 +46,7 @@ let bpCfg: BlueprintConfig = {
 @ldBlueprint(bpCfg)
 export class RefMapBpCfgSender extends LDRetrieverSuperRewrite {
 	constructor(parameters) {
-		super(parameters, interpretableKeys);
+		super(parameters, inKeys);
 		this.apiCallOverride = () => new Promise<any>((resolve, reject) => {
 			const srvUrl = this.state.localValues.get(SideFXDict.srvURL);
 			const postBody = this.state.localValues.get(inputRefMap);

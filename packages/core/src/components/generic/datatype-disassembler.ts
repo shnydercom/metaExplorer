@@ -45,23 +45,23 @@ export function flatDataTypeDisassemblerFactory(outputKvStores: IKvStore[], name
 			ldType: inputType
 		}
 	];
-	const initialKvStores: IKvStore[] = [
+	const ownKVL: IKvStore[] = [
 		...ActionCompInputKVs,
 		...outputKvStores,
 	];
 
-	const interpretableKeys: string[] = [transfInputKey];
+	const inKeys: string[] = [transfInputKey];
 
 	let bpCfg: BlueprintConfig = {
 		subItptOf: null,
 		nameSelf,
-		initialKvStores,
-		interpretableKeys,
+		ownKVL,
+		inKeys,
 		crudSkills: "cRUd"
 	};
 
 	let DataTypeDisassemblerExt = class extends PureDataTypeDisassembler {
-		itptKeys = interpretableKeys;
+		itptKeys = inKeys;
 		outputKvStores = outputKvStores;
 	};
 	return ldBlueprint(bpCfg)(DataTypeDisassemblerExt);

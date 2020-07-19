@@ -56,7 +56,7 @@ export const TopNavigationName = "metaexplorer.io/material-design/TopNavigation"
 
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -69,35 +69,35 @@ for (let i = 0; i < ICON_URLS.length; i++) {
 	cfgIntrprtKeys.push(ICON_URLS_DISABLED[i]);
 	cfgIntrprtKeys.push(ROUTES_SEND[i]);
 	cfgIntrprtKeys.push(LABELS[i]);
-	initialKVStores.push({
+	ownKVL.push({
 		key: ICON_URLS[i],
 		value: undefined,
 		ldType: LDDict.Text
 	});
-	initialKVStores.push({
+	ownKVL.push({
 		key: ICON_URLS_DISABLED[i],
 		value: undefined,
 		ldType: LDDict.Text
 	});
-	initialKVStores.push({
+	ownKVL.push({
 		key: ROUTES_SEND[i],
 		value: undefined,
 		ldType: VisualTypesDict.route_added
 	});
-	initialKVStores.push({
+	ownKVL.push({
 		key: LABELS[i],
 		value: undefined,
 		ldType: LDDict.Text
 	});
 }
 cfgIntrprtKeys.push(VisualKeysDict.cssClassName);
-initialKVStores.push({
+ownKVL.push({
 	key: VisualKeysDict.cssClassName,
 	value: undefined,
 	ldType: LDDict.Text
 });
 
-initialKVStores.push({
+ownKVL.push({
 	key: CHANGED_ROUTE_OUTPUT,
 	value: undefined,
 	ldType: VisualTypesDict.route_added
@@ -106,16 +106,16 @@ initialKVStores.push({
 export const BottomNavW5ChoicesBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: BottomNavigationName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
 export const TopNavW5ChoicesBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: TopNavigationName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -208,7 +208,7 @@ export abstract class AbstractBottomNavigation extends Component<LDConnectedStat
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 	constructor(props: any) {

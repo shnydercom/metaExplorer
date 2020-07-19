@@ -7,13 +7,13 @@ import React from 'react';
 
 export const GoogleWebAuthenticatorName: string = "google-api/WebAuthenticator";
 let allMyInputKeys: string[] = [];
-let initialKVStores: IKvStore[] = [];
+let ownKVL: IKvStore[] = [];
 export const GWebAuthenticatorCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: GoogleWebAuthenticatorName,
 	canInterpretType: "http://my-domain.com/my-class",
-	initialKvStores: initialKVStores,
-	interpretableKeys: allMyInputKeys,
+	ownKVL: ownKVL,
+	inKeys: allMyInputKeys,
 	crudSkills: "cRUd"
 };
 export interface GWebAuthenticatorState extends LDLocalState {
@@ -40,7 +40,7 @@ export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnec
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	//generates child react components
 	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 

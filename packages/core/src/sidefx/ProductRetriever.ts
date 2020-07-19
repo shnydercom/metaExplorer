@@ -6,7 +6,7 @@ import { LDRetrieverSuperRewrite, ldRetrCfgIntrprtKeys } from "./LDRetrieverSupe
 
 export const productRetrieverName = "metaexplorer.io/productRetriever";
 
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: SideFXDict.srvURL,
 		value: undefined,
@@ -41,8 +41,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: productRetrieverName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: ldRetrCfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: ldRetrCfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 

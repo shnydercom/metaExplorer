@@ -25,7 +25,7 @@ export const addBlueprintToRetriever = (input: BlueprintConfig, retrieverName?: 
 	let candidate = retriever.getUnconnectedByNameSelf(input.subItptOf);
 	if (!candidate) {
 		//check if it's well-defined
-		let refMap = getKVStoreByKey(input.initialKvStores, UserDefDict.intrprtrBPCfgRefMapKey);
+		let refMap = getKVStoreByKey(input.ownKVL, UserDefDict.intrprtrBPCfgRefMapKey);
 		if (!refMap || !refMap.value || refMap.value === {}) return;
 		if (!refMap.value[input.subItptOf]) return;
 		let searchTerm: string = UserDefDict.intrprtrBPCfgRefMapName;
@@ -39,17 +39,17 @@ export const addBlueprintToRetriever = (input: BlueprintConfig, retrieverName?: 
 export const intrprtrTypeInstanceFromBlueprint = (input: BlueprintConfig): any => {
 	if (!input) return null;
 	let rv = {};
-	input.interpretableKeys.forEach((val) => {
+	input.inKeys.forEach((val) => {
 		try {
 			let propID: string = (val as ObjectPropertyRef).propRef;
 			if (propID) {
 				rv[propID] = null;
 			} else if (val) {
-				const kv = getKVStoreByKey(input.initialKvStores, val as string);
+				const kv = getKVStoreByKey(input.ownKVL, val as string);
 				if (!kv) {
-					let skvKey = determineSingleKVKey(input.initialKvStores, input.canInterpretType, input.interpretableKeys as string[]);
+					let skvKey = determineSingleKVKey(input.ownKVL, input.canInterpretType, input.inKeys as string[]);
 					if (skvKey) {
-						rv[val as string] = getKVStoreByKey(input.initialKvStores, skvKey).value[val as string];
+						rv[val as string] = getKVStoreByKey(input.ownKVL, skvKey).value[val as string];
 						return;
 					}
 				}
@@ -69,7 +69,7 @@ export const changeMainAppItpt = (toItptName: string, startingInstance?: IKvStor
 	let newItpt = appItptRetrFn().getItptByNameSelf(toItptName);
 	if (!newItpt) throw new LDError("error in interpreterAPI: could not find " + toItptName);
 	let newItptCfg = { ...newItpt.cfg } as BlueprintConfig;
-	newItptCfg.initialKvStores = startingInstance;
+	newItptCfg.ownKVL = startingInstance;
 	let newType = newItptCfg.canInterpretType;
 	let dummyInstance = intrprtrTypeInstanceFromBlueprint(newItptCfg);
 	const appKvKey = appKey + "KvKey";

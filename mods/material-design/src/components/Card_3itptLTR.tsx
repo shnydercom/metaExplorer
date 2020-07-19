@@ -18,7 +18,7 @@ export const Card3itptLTRName = "metaexplorer.io/material-design/CardW3Container
 
 let cfgIntrprtKeys: string[] =
 	[CONTAINER_FRONT, CONTAINER_MIDDLE, CONTAINER_LAST, ROUTESEND_MIDDLE_CONTAINER, ACTION_MIDDLE_CONTAINER];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: CONTAINER_FRONT,
 		value: undefined,
@@ -49,8 +49,8 @@ export const createLayoutBpCfg: (nameSelf: string) => BlueprintConfig = (nameSel
 	return {
 		subItptOf: null,
 		nameSelf: nameSelf,
-		initialKvStores: initialKVStores,
-		interpretableKeys: cfgIntrprtKeys,
+		ownKVL: ownKVL,
+		inKeys: cfgIntrprtKeys,
 		crudSkills: "cRud"
 	};
 };
@@ -61,8 +61,8 @@ export interface Card3itptLTRState extends LDLocalState {
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: Card3itptLTRName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 @ldBlueprint(bpCfg)
@@ -89,7 +89,7 @@ export class PureCard3itptLTR extends Component<LDConnectedState & LDConnectedDi
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	styleClassName: string = "card-style";
 
 	protected renderInputContainer = generateItptFromCompInfo.bind(this);

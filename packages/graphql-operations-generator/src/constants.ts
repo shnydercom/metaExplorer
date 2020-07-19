@@ -8,8 +8,8 @@ export const ikvFragment = (key: string, value: string, ldType: string) => `{
 
 export const OUTPUT_KV_FRAGMENT = ikvFragment(UserDefDict.outputData, undefined, 'LDUIDict.GQLQueryVars');
 
-export const INITIAL_KV_STORES = 'initialKvStores';
-export const INTERPRETABLE_KEYS = 'interpretableKeys';
+export const INITIAL_KV_STORES = 'ownKVL';
+export const INTERPRETABLE_KEYS = 'inKeys';
 export const NAME_SELF = 'nameSelf';
 export const SUBITPTOF = 'subItptOf';
 export const BLUEPRINT_CFG_FRAGMENT = 'BlueprintConfigFragment';

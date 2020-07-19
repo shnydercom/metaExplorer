@@ -11,8 +11,8 @@ let bpCfg: BlueprintConfig = {
     subItptOf: null,
     canInterpretType: "http://metaexplorer.io/Testtype",
     nameSelf: "metaexplorer.io/testTypeInterpreter",
-    initialKvStores: [],
-    interpretableKeys: [],
+    ownKVL: [],
+    inKeys: [],
     crudSkills: "cRud"
 };
 
@@ -21,7 +21,7 @@ export class LDBlueprintContainerClass implements IBlueprintItpt {
     cfg: BlueprintConfig;
     outputKVMap: OutputKVMap;
     consumeLDOptions: (ldOptions: ILDOptions) => any;
-    initialKvStores: IKvStore[];
+    ownKVL: IKvStore[];
 }
 
 describe("ldBlueprint decorator func", () => {

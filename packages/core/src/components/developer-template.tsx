@@ -11,7 +11,7 @@ import { Component } from 'react';
 import { LDDict } from '../ldaccess/LDDict';
 
 let allMyInputKeys: string[] = [VisualKeysDict.inputContainer, "http://my-domain.com/my-class/my-member-a"];
-let initialKVStores: IKvStore[] = [ //the content of the key-value stores at initialization
+let ownKVL: IKvStore[] = [ //the content of the key-value stores at initialization
 	//is an input, because it is defined in var allMyInputKeys, and is a visual container
 	{ key: VisualKeysDict.inputContainer, value: undefined, ldType: UserDefDict.intrprtrClassType },
 	//is an input, because it is defined in var allMyInputKeys, is NOT a visual container
@@ -23,8 +23,8 @@ export const myTemplateCfg: BlueprintConfig = {
 	subItptOf: null, //used for extending compound nodes
 	nameSelf: "http://my-domain.com/components/my-component-name",
 	canInterpretType: "http://my-domain.com/my-class",
-	initialKvStores: initialKVStores,
-	interpretableKeys: allMyInputKeys,
+	ownKVL: ownKVL,
+	inKeys: allMyInputKeys,
 	crudSkills: "cRUd" //supports _R_ead and _U_pdate, but not _c_reate and _d_elete (capitalization)
 };
 export interface MyTemplateState extends LDLocalState { }
@@ -52,7 +52,7 @@ export class PureMyTemplate extends Component<LDConnectedState & LDConnectedDisp
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	//generates child react components
 	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 

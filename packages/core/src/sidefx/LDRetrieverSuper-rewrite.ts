@@ -15,7 +15,7 @@ import { UserDefDict } from '../ldaccess/UserDefDict';
 import { ILDWebResource } from '../ldaccess/ildresource';
 
 export const ldRetrCfgIntrprtKeys: string[] = [SideFXDict.srvURL, SideFXDict.identifier];
-/*let ldRetrInitialKVStores: IKvStore[] = [
+/*let ldRetrownKVL: IKvStore[] = [
 	{ key: SideFXDict.srvURL, value: undefined, ldType: LDDict.Text },
 	{ key: SideFXDict.identifier, value: undefined, ldType: LDDict.Text }
 ];*/
@@ -25,14 +25,14 @@ export type LDRetrieverSuperState = LDLocalState & {
 	isOutputDirty: boolean;
 	webContent: ILDWebResource;
 	retrieverStoreKey: string;
-	interpretableKeys: string[];
+	inKeys: string[];
 };
 
 export abstract class LDRetrieverSuperRewrite implements IBlueprintItpt {
 	//member-declarations for the interface
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	inputKeys: string[];
 	protected state: LDRetrieverSuperState;
 	//non-interface declarations
@@ -52,7 +52,7 @@ export abstract class LDRetrieverSuperRewrite implements IBlueprintItpt {
 			isOutputDirty: false,
 			webContent: null,
 			retrieverStoreKey: ldTkStr,
-			interpretableKeys: this.inputKeys,
+			inKeys: this.inputKeys,
 			...ldState
 		};
 	}

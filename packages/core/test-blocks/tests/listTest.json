@@ -2,7 +2,7 @@
   "subItptOf": "652b474d-91a4-48cb-8a32-cf68beff5218",
   "canInterpretType": "listtest-ObjectType",
   "nameSelf": "listtest",
-  "initialKvStores": [
+  "ownKVL": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "652b474d-91a4-48cb-8a32-cf68beff5218",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "in_0",
               "value": {
@@ -37,7 +37,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "in_0",
             "in_1",
             "in_2"
@@ -47,7 +47,7 @@
           "subItptOf": "metaexplorer.io/material-design/SectionedList",
           "canInterpretType": "metaexplorer.io/material-design/SectionedList-ObjectType",
           "nameSelf": "d00a440b-5fc9-4691-a12a-fbbba0c996b9",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "section-headings",
               "value": "TestHeading",
@@ -79,7 +79,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "section-elements",
             "section-elements",
             "section-elements"
@@ -89,7 +89,7 @@
           "subItptOf": "metaexplorer.io/MagicBox",
           "canInterpretType": "metaexplorer.io/MagicBoxType",
           "nameSelf": "6772902a-7474-4e0c-a309-39aa14097b8f",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "inputdata",
               "value": {
@@ -99,7 +99,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputdata"
           ]
         },
@@ -107,7 +107,7 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "3f2a6f85-e736-4850-9863-741f1dedff7e",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "inputdata",
               "value": "listtest",
@@ -115,13 +115,13 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "8095bac7-14f4-4b4c-a49f-ed1fffcd5e5a": {
           "subItptOf": "metaexplorer.io/MagicBox",
           "canInterpretType": "metaexplorer.io/MagicBoxType",
           "nameSelf": "8095bac7-14f4-4b4c-a49f-ed1fffcd5e5a",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "inputdata",
               "value": {
@@ -131,7 +131,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputdata"
           ]
         },
@@ -139,7 +139,7 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Boolean",
           "canInterpretType": "http://schema.org/Boolean",
           "nameSelf": "c9c940c1-c2c2-4c96-89d5-15d3a5dca0b8",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "inputdata",
               "value": false,
@@ -147,13 +147,13 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "05f13016-4525-4fbe-a5a3-e978a3c16a1d": {
           "subItptOf": "metaexplorer.io/CompactInfoListElement",
           "canInterpretType": "CompactInformationElement",
           "nameSelf": "05f13016-4525-4fbe-a5a3-e978a3c16a1d",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "HeaderText",
               "value": "Text in header",
@@ -166,12 +166,12 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "inKeys": []
 }

@@ -12,7 +12,7 @@ import React from "react";
 export const RouteRedirectName = "metaexplorer.io/routing/Redirect";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.routeSend_confirm];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.routeSend_confirm,
 		value: undefined,
@@ -22,8 +22,8 @@ let initialKVStores: IKvStore[] = [
 const bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: RouteRedirectName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 export interface RedirectComponentState extends LDLocalState {
@@ -50,7 +50,7 @@ export class PureRedirectComponent extends Component<LDConnectedState & LDConnec
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	styleClassName: string;
 
 	constructor(props: any) {

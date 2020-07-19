@@ -10,7 +10,7 @@ import { Component } from 'react';
 export var ImgHeadSubDescIntrprtrName: string = "metaexplorer.io/ImgHeadSubDescIntrprtr";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.primaryItpt, VisualKeysDict.headerTxt, VisualKeysDict.subHeaderTxt, VisualKeysDict.description, VisualKeysDict.secondaryItpt];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.primaryItpt,
 		value: undefined,
@@ -40,8 +40,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ImgHeadSubDescIntrprtrName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -66,7 +66,7 @@ export class PureImgHeadSubDesc extends Component<LDConnectedState & LDConnected
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	private renderSub = generateItptFromCompInfo.bind(this);
 

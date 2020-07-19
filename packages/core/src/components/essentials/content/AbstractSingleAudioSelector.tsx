@@ -33,15 +33,15 @@ const RESULT_KV: IKvStore = {
 	value: undefined,
 	ldType: LDDict.URL
 };
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	RESULT_KV
 ];
 export let SingleAudioSelectorBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: SingleAudioSelectorName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -60,7 +60,7 @@ export abstract class AbstractSingleAudioSelector extends Component<
 
 	cfg: BlueprintConfig;
 
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	// tslint:disable-next-line:variable-name
 	_isMounted: boolean = false;
 

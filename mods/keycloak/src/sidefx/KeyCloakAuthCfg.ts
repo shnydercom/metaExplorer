@@ -19,7 +19,7 @@ export const kcCfgOutputKvs = [
 	}
 ];
 
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: jsonCfgPath,
 		value: undefined,
@@ -31,8 +31,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: kcloakAuthCfgName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: kcCfgItptKeys,
+	ownKVL: ownKVL,
+	inKeys: kcCfgItptKeys,
 	crudSkills: "cRud"
 };
 
@@ -74,7 +74,7 @@ export class KeyCloakAuthCfg extends AbstractDataTransformer {
 	}
 
 	protected propagateChange() {
-		let outputKVMap: IKvStore = this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
+		let outputKVMap: IKvStore = this.cfg.ownKVL.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		this.isOutputDirty = true;
 		this.evalDirtyOutput();

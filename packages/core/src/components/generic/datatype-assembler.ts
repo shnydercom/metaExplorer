@@ -11,8 +11,8 @@ const transfOutputKey = UserDefDict.outputData;
 const DATATYPE_ASSEMBLER_CFG: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: LDUIDict.DataTypeAssembler,
-	initialKvStores: [],
-	interpretableKeys: [],
+	ownKVL: [],
+	inKeys: [],
 	crudSkills: "cRud"
 };
 
@@ -55,23 +55,23 @@ export function flatDataTypeAssemblerFactory(inputKvStores: IKvStore[], nameSelf
 			ldType: VisualTypesDict.compactInfoElement
 		}
 	];
-	const initialKvStores: IKvStore[] = [
+	const ownKVL: IKvStore[] = [
 		...inputKvStores,
 		...ActionCompOutputKVs
 	];
 
-	const interpretableKeys: string[] = itptKeysFromInputKvs(inputKvStores);
+	const inKeys: string[] = itptKeysFromInputKvs(inputKvStores);
 
 	let bpCfg: BlueprintConfig = {
 		subItptOf: null,
 		nameSelf,
-		initialKvStores,
-		interpretableKeys,
+		ownKVL,
+		inKeys,
 		crudSkills: "cRUd"
 	};
 
 	let DataTypeAssemblerExt = class extends AbstractDataTypeAssembler {
-		itptKeys = interpretableKeys;
+		itptKeys = inKeys;
 		outputKvStores = ActionCompOutputKVs;
 	};
 	return ldBlueprint(bpCfg)(DataTypeAssemblerExt);

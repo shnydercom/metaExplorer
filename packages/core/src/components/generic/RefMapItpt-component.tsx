@@ -25,13 +25,13 @@ export interface RefMapItptState extends LDLocalState, ErrorBoundaryState {
 let canInterpretType: string = UserDefDict.intrprtrBPCfgRefMapType;
 let cfgIntrprtKeys: string[] =
 	[];
-let initialKVStores: IKvStore[] = [];
+let ownKVL: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: canInterpretType,
 	nameSelf: UserDefDict.intrprtrBPCfgRefMapName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -82,7 +82,7 @@ RefMapItptState>
 	}
 
 	cfg: BlueprintConfig;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	constructor(props?: any) {

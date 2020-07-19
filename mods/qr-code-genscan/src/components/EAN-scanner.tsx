@@ -28,7 +28,7 @@ export const EANScannerName = "metaexplorer.io/EANScanner";
 let cfgType: string = LDDict.ViewAction;
 let cfgIntrprtKeys: string[] =
 	[];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: LDDict.gtin8,
 		value: undefined,
@@ -39,8 +39,8 @@ let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: EANScannerName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -53,7 +53,7 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 	loadingImgLink: string = "/media/camera_negative_black.svg";
 	errorImgLink: string = "/media/nocamera_negative_black.svg";
 
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);

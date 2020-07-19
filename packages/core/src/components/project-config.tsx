@@ -15,8 +15,8 @@ export const projCfgName = "ProjectConfiguration";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer, UserDefDict.configItpt];
 
-let interpretableKeys: string[] = [...cfgIntrprtKeys, VisualKeysDict.cssClassName];
-let initialKVStores: IKvStore[] = [
+let inKeys: string[] = [...cfgIntrprtKeys, VisualKeysDict.cssClassName];
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -38,8 +38,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: projCfgName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: interpretableKeys,
+	ownKVL: ownKVL,
+	inKeys: inKeys,
 	crudSkills: "cRud"
 };
 export interface ProjectConfigState extends LDLocalState {
@@ -66,7 +66,7 @@ export class PureProjectConfig extends Component<LDConnectedState & LDConnectedD
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	styleClassName: string;
 
 	protected renderInputContainer = generateItptFromCompInfo.bind(this);

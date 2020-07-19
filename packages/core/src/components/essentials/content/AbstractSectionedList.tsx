@@ -15,15 +15,15 @@ export const sectionElements = "section-elements";
 export const sectionedListItptKeys: string[] = [sectionElements];
 export const sectionedListValueKeys: string[] = [sectionHeadings];
 export const sectionedListInputKeys: string[] = [...sectionedListValueKeys, ...sectionedListItptKeys];
-export const initialKVStores: IKvStore[] = [
+export const ownKVL: IKvStore[] = [
 	{ key: sectionHeadings, value: undefined, ldType: LDDict.Text },
 	{ key: sectionElements, value: undefined, ldType: UserDefDict.intrprtrClassType }
 ];
 export const SectionedListCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: SectionedListName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: sectionedListInputKeys,
+	ownKVL: ownKVL,
+	inKeys: sectionedListInputKeys,
 	crudSkills: "cRud"
 };
 export type SectionedListState = LDLocalState;
@@ -47,7 +47,7 @@ export abstract class AbstractSectionedList extends Component<LDConnectedState
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	protected renderSub = generateItptFromCompInfo.bind(this);
 

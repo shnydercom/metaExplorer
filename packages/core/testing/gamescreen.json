@@ -2,7 +2,7 @@
   "subItptOf": "2413c0f1-4c38-4658-bc34-957621841afd",
   "canInterpretType": "flightdemo-ObjectType",
   "nameSelf": "flightdemo",
-  "initialKvStores": [
+  "ownKVL": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "game/FourFieldsView",
           "canInterpretType": "game/FourFieldsView-ObjectType",
           "nameSelf": "2413c0f1-4c38-4658-bc34-957621841afd",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "GameTaskHeading",
               "value": "Choose the correct answer",
@@ -65,7 +65,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "GameFieldItpt_UpperLeft",
             "GameFieldItpt_UpperRight",
             "GameFieldItpt_LowerLeft",
@@ -76,7 +76,7 @@
           "subItptOf": "game/SingleFieldView",
           "canInterpretType": "game/SingleFieldView-ObjectType",
           "nameSelf": "fcc48ef2-56df-467b-977d-6316391a12f3",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "HeaderText",
               "value": "max 100ml, but gels and cremes are o.k.",
@@ -84,13 +84,13 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "a700107b-85e4-4c0e-b429-e5f26acfa6ba": {
           "subItptOf": "game/SingleFieldView",
           "canInterpretType": "game/SingleFieldView-ObjectType",
           "nameSelf": "a700107b-85e4-4c0e-b429-e5f26acfa6ba",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "HeaderText",
               "value": "max 150ml, no more than 4 bottles",
@@ -98,13 +98,13 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "68b98593-8161-4a99-907b-a81291e44820": {
           "subItptOf": "game/SingleFieldView",
           "canInterpretType": "game/SingleFieldView-ObjectType",
           "nameSelf": "68b98593-8161-4a99-907b-a81291e44820",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "HeaderText",
               "value": "max 100ml, in a 1L plastic bag",
@@ -112,13 +112,13 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "bbdc562f-0b8d-499d-8989-c165299cd6c1": {
           "subItptOf": "game/SingleFieldView",
           "canInterpretType": "game/SingleFieldView-ObjectType",
           "nameSelf": "bbdc562f-0b8d-499d-8989-c165299cd6c1",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "HeaderText",
               "value": "a single 1L bottle",
@@ -126,12 +126,12 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "inKeys": []
 }

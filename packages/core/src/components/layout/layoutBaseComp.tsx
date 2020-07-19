@@ -11,7 +11,7 @@ import React from 'react';
 
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -22,8 +22,8 @@ export const createLayoutBpCfg: (nameSelf: string) => BlueprintConfig = (nameSel
 	return {
 		subItptOf: null,
 		nameSelf: nameSelf,
-		initialKvStores: initialKVStores,
-		interpretableKeys: cfgIntrprtKeys,
+		ownKVL: ownKVL,
+		inKeys: cfgIntrprtKeys,
 		crudSkills: "cRud"
 	};
 };
@@ -51,7 +51,7 @@ export abstract class PureLayoutComponent extends Component<LDConnectedState & L
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	styleClassName: string;
 
 	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);

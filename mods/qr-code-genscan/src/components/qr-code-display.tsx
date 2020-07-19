@@ -12,7 +12,7 @@ export const QRCodeDisplayStngErrorCorrectionLevel = "qr/correctionLevel";
 
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.utf8textData, QRCodeDisplayStngTypeNumber, QRCodeDisplayStngErrorCorrectionLevel];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.utf8textData,
 		value: undefined,
@@ -32,8 +32,8 @@ let initialKVStores: IKvStore[] = [
 const bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: QRCodeDisplayName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 export type QRCodeDisplayState = LDLocalState & {
@@ -95,7 +95,7 @@ export class PureQRCodeDisplay extends Component<LDConnectedState & LDConnectedD
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	styleClassName: string;
 
 	constructor(props: any) {

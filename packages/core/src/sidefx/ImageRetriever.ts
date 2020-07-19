@@ -7,7 +7,7 @@ import { resolveNS } from "../ldaccess/ns/nameSpaceResolution";
 import { LDRetrieverSuperRewrite, ldRetrCfgIntrprtKeys, LDRetrieverSuperState } from "./LDRetrieverSuper-rewrite";
 
 export const imageRetrieverName = "metaexplorer.io/imageRetriever";
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: SideFXDict.srvURL,
 		value: undefined,
@@ -37,8 +37,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: imageRetrieverName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: ldRetrCfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: ldRetrCfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -63,7 +63,7 @@ export class ImageRetriever extends LDRetrieverSuperRewrite {
 		if (identifierKv && identifierKv.value && changedSrvIdPart !== identifierKv.value) this.isInputDirty = true;
 		identifierKv.value = changedSrvIdPart;*/
 
-		/*outputKVMap = outputKVMap ? outputKVMap : this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
+		/*outputKVMap = outputKVMap ? outputKVMap : this.cfg.ownKVL.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		for (let idx = 0; idx < ldRetrCfgIntrprtKeys.length; idx++) {
 			const inputKey = ldRetrCfgIntrprtKeys[idx];

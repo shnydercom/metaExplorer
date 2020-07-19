@@ -18,7 +18,7 @@ export const isImprintPersonNotOrganization = "isPersonNotOrganization";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.cssClassName, schemaOrgName, schemaOrgAddressCountry, schemaOrgPostalCode, schemaOrgAdressLocality, schemaOrgStreetAddress, isImprintPersonNotOrganization];
 
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.cssClassName,
 		value: undefined,
@@ -59,8 +59,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ImprintName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 export interface ImprintState extends LDLocalState {
@@ -87,7 +87,7 @@ export class PureImprint extends Component<LDConnectedState & LDConnectedDispatc
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	styleClassName: string;
 
 	constructor(props: any) {

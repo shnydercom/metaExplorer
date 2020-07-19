@@ -2,7 +2,7 @@
   "subItptOf": "7fb8a093-892a-4ef7-97da-3388e266526a",
   "canInterpretType": "localhost/imageDisplay-ObjectType",
   "nameSelf": "localhost/imageDisplay",
-  "initialKvStores": [
+  "ownKVL": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,19 +10,19 @@
           "subItptOf": "metaexplorer.io/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "7fb8a093-892a-4ef7-97da-3388e266526a",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "http://schema.org/contentUrl",
               "value": "http://localhost:5000/media/localhost.png"
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "inKeys": []
 }

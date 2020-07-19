@@ -12,7 +12,7 @@ export var GooeyNavName: string = "metaexplorer.io/GooeyNav";
 export const centralIcon: string = "centralIcon";
 let cfgIntrprtKeys: string[] =
 	[centralIcon, VisualKeysDict.iconName];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: centralIcon,
 		value: undefined,
@@ -27,8 +27,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: GooeyNavName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -53,7 +53,7 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	//private renderSub = generateItptFromCompInfo.bind(this);
 

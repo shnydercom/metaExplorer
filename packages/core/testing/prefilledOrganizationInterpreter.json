@@ -2,7 +2,7 @@
   "subItptOf": "orgSub",
   "canInterpretType": "organizationDisplay-ObjectType",
   "nameSelf": "organizationDisplayInterpreter",
-  "initialKvStores": [
+  "ownKVL": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "orgSub",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "primaryInterpreter",
               "value": {
@@ -45,7 +45,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "primaryInterpreter",
             "HeaderText",
             "SubHeaderText",
@@ -56,7 +56,7 @@
           "subItptOf": "metaexplorer.io/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "imgDisp",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "http://schema.org/name",
               "value": {
@@ -80,7 +80,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "http://schema.org/name",
             "http://schema.org/fileFormat",
             "http://schema.org/contentUrl"
@@ -90,7 +90,7 @@
           "subItptOf": "metaexplorer.io/imageRetriever",
           "canInterpretType": "metaexplorer.io/imageRetriever-ObjectType",
           "nameSelf": "imgRetr",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "srvURL",
               "value": "http://localhost:1111/api/ysj/ns/{identifier}",
@@ -106,7 +106,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "identifier"
           ]
         },
@@ -114,7 +114,7 @@
           "subItptOf": "metaexplorer.io/organizationRetriever",
           "canInterpretType": "metaexplorer.io/organizationRetriever-ObjectType",
           "nameSelf": "orgRetr",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "srvURL",
               "value": "http://localhost:1111/api/ysj/ns/metaexplorer/Bens3DPrints",
@@ -126,7 +126,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "identifier"
           ]
         }
@@ -135,7 +135,7 @@
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": [
+  "inKeys": [
     {
       "objRef": "orgRetr",
       "propRef": "identifier"

@@ -10,7 +10,7 @@ export const sheetName = "sheetName";
 export const spreadSheetRange = "range";
 export const spreadSheetData = "data";
 export const rangeRetrItptKeys = [googleDocID, sheetName, spreadSheetRange];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: googleDocID,
 		value: undefined,
@@ -35,8 +35,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: gSheetsRangeRetrieverName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: rangeRetrItptKeys,
+	ownKVL: ownKVL,
+	inKeys: rangeRetrItptKeys,
 	crudSkills: "cRud"
 };
 
@@ -100,7 +100,7 @@ export class GSheetsRetriever extends LDRetrieverSuper {
 		this.retrieverStoreKey = ldOptions.ldToken.get();
 		let kvs = ldOptions.resource.kvStores;
 		let outputKVMap: IKvStore = kvs.find((val) => UserDefDict.outputKVMapKey === val.key);
-		outputKVMap = outputKVMap ? outputKVMap : this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
+		outputKVMap = outputKVMap ? outputKVMap : this.cfg.ownKVL.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		for (let inputidx = 0; inputidx < rangeRetrItptKeys.length; inputidx++) {
 			const inputKey = rangeRetrItptKeys[inputidx];

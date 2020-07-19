@@ -11,7 +11,7 @@ import { LDDict } from '../../ldaccess/LDDict';
 
 let cfgIntrprtKeys: string[] =
 	[UserDefDict.inputData];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: UserDefDict.inputData,
 		value: undefined,
@@ -22,8 +22,8 @@ export const createTextBasedBpCfg: (nameSelf: string) => BlueprintConfig = (name
 	return {
 		subItptOf: null,
 		nameSelf: nameSelf,
-		initialKvStores: initialKVStores,
-		interpretableKeys: cfgIntrprtKeys,
+		ownKVL: ownKVL,
+		inKeys: cfgIntrprtKeys,
 		crudSkills: "cRud",
 		canInterpretType: LDDict.Text
 	};
@@ -52,7 +52,7 @@ export abstract class PureTextBasedComponent extends Component<LDConnectedState 
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	constructor(props: any) {
 		super(props);

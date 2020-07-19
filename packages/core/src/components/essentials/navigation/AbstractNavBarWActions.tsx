@@ -32,7 +32,7 @@ export type NavBarWActionState = {
 };
 
 let cfgIntrprtKeys: string[] = [...cfgIntrprtItptKeys, ...cfgIntrprtValueKeys];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -73,8 +73,8 @@ let initialKVStores: IKvStore[] = [
 export const NavBarWActionsBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: NavBarWActionsName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 export abstract class AbstractNavBarWActions<TStateExtension = {}> extends
@@ -99,7 +99,7 @@ export abstract class AbstractNavBarWActions<TStateExtension = {}> extends
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	protected renderSub = generateItptFromCompInfo.bind(this);
 

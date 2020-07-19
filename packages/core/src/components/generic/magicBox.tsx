@@ -18,14 +18,14 @@ const magicOutput = "mOut";
 export const magicCanInterpretType = "metaexplorer.io/MagicBoxType";
 
 let MagicBoxInputKeys: string[] = [inputdata];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{ key: inputdata, value: undefined, ldType: undefined }
 ];
 export const MagicBoxCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: MagicBoxName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: MagicBoxInputKeys,
+	ownKVL: ownKVL,
+	inKeys: MagicBoxInputKeys,
 	crudSkills: "cRud",
 	canInterpretType: magicCanInterpretType
 };
@@ -93,7 +93,7 @@ export class PureMagicBox extends Component<LDConnectedState & LDConnectedDispat
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	constructor(props: any) {
 		super(props);

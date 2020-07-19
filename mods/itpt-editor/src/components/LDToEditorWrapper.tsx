@@ -76,7 +76,7 @@ let allMyInputKeys: string[] = [
 	ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
 	UserDefDict.username, UserDefDict.projectname, SAVE_ACTION_LDTYPE, ITPT_BLOCK_EDITOR_SAVING_STATUS
 ];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
 		value: undefined,
@@ -137,8 +137,8 @@ export const BlockEditorCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ITPT_BLOCK_EDITOR_NAME,
 	canInterpretType: ITPT_BLOCK_EDITOR_TYPE,
-	initialKvStores: initialKVStores,
-	interpretableKeys: allMyInputKeys,
+	ownKVL: ownKVL,
+	inKeys: allMyInputKeys,
 	crudSkills: "cRUd"
 };
 
@@ -198,7 +198,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	private sideBarRef = createRef<HTMLDivElement>();
 
@@ -395,7 +395,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			subItptOf: containerID,
 			canInterpretType: itptName + UserDefDict.standardItptObjectTypeSuffix,
 			nameSelf: itptName,
-			initialKvStores: [
+			ownKVL: [
 				{
 					key: UserDefDict.intrprtrBPCfgRefMapKey,
 					value: {
@@ -403,7 +403,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							subItptOf: COMP_BASE_CONTAINER,
 							canInterpretType: UserDefDict.itptContainerObjType,
 							nameSelf: containerID,
-							initialKvStores: [
+							ownKVL: [
 								{
 									key: "in_0",
 									value: {
@@ -414,7 +414,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 								}
 							],
 							crudSkills: "cRud",
-							interpretableKeys: [
+							inKeys: [
 								"in_0"
 							]
 						},
@@ -422,7 +422,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							subItptOf: "metaexplorer.io/basichtml/bold",
 							canInterpretType: "http://schema.org/Text",
 							nameSelf: boldID,
-							initialKvStores: [
+							ownKVL: [
 								{
 									key: "inputdata",
 									value: invitationText,
@@ -430,14 +430,14 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 								}
 							],
 							crudSkills: "cRud",
-							interpretableKeys: []
+							inKeys: []
 						}
 					},
 					ldType: UserDefDict.intrprtrBPCfgRefMapType
 				}
 			],
 			crudSkills: "cRud",
-			interpretableKeys: []
+			inKeys: []
 		};
 		this.generatePrefilled(newBpCfg);
 		this.logic.diagramFromItptBlueprint(newBpCfg);
@@ -612,9 +612,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	protected loadToEditorByName(name: string, isAutodistribute?: boolean) {
 		let itptInfo = this.logic.getItptList().find((itm) => itm.nameSelf === name);
 		let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
-		if (!itptCfg.initialKvStores
-			|| itptCfg.initialKvStores.length < 1
-			|| itptCfg.initialKvStores.findIndex((searchVal) => searchVal.key === UserDefDict.intrprtrBPCfgRefMapKey) === -1) {
+		if (!itptCfg.ownKVL
+			|| itptCfg.ownKVL.length < 1
+			|| itptCfg.ownKVL.findIndex((searchVal) => searchVal.key === UserDefDict.intrprtrBPCfgRefMapKey) === -1) {
 			return false;
 		}
 		this.generatePrefilled(itptCfg);

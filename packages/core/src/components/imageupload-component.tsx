@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action<any>>): ConnectedDispatch 
 let cfgType: string = LDDict.CreateAction;
 let cfgIntrprtKeys: string[] =
     [LDDict.agent, LDDict.target];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
     {
         key: LDDict.agent,
         value: undefined,
@@ -50,8 +50,8 @@ var bpCfg: BlueprintConfig = {
     subItptOf: null,
     canInterpretType: cfgType,
     nameSelf: "metaexplorer.io/imageUpload",
-    initialKvStores: initialKVStores,
-    interpretableKeys: cfgIntrprtKeys,
+    ownKVL: ownKVL,
+    inKeys: cfgIntrprtKeys,
     crudSkills: "Crud"
 };
 
@@ -60,7 +60,7 @@ export class PureImgUploader extends Component<ConnectedState & ConnectedDispatc
     implements IBlueprintItpt {
     cfg: BlueprintConfig;
     outputKVMap: OutputKVMap;
-    initialKvStores: IKvStore[];
+    ownKVL: IKvStore[];
     consumeLDOptions: (ldOptions: ILDOptions) => any;
     onClickFileChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -78,7 +78,7 @@ export class PureImgUploader extends Component<ConnectedState & ConnectedDispatc
     }
 
     private getStringValFromKey(key: string): string {
-        let kvStoreVal = this.initialKvStores;
+        let kvStoreVal = this.ownKVL;
         if (kvStoreVal != null && kvStoreVal) {
             return kvStoreVal.filter(
                 (curItm) => curItm.key === key).map((val) => val.value as string).reduce(

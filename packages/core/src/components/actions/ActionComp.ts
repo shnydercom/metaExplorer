@@ -22,7 +22,7 @@ export const ActionCompOutputKVs: IKvStore[] = [
 	}
 ];
 
-const initialKVStores: IKvStore[] = [
+const ownKVL: IKvStore[] = [
 	{
 		key: actionIdField,
 		value: undefined,
@@ -44,8 +44,8 @@ const initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ActionCompName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: ActionCompKeys,
+	ownKVL: ownKVL,
+	inKeys: ActionCompKeys,
 	crudSkills: "cRUd"
 };
 @ldBlueprint(bpCfg)
@@ -54,7 +54,7 @@ export class ActionComp extends AbstractDataTransformer {
 		super(ldTkStr);
 		this.itptKeys = ActionCompKeys;
 		this.outputKvStores = ActionCompOutputKVs;
-		let kvs = this.cfg.initialKvStores;
+		let kvs = this.cfg.ownKVL;
 		//setting inputParams on first load, refresh output if necessary
 		for (let inputidx = 0; inputidx < this.itptKeys.length; inputidx++) {
 			const inputKey = this.itptKeys[inputidx];

@@ -2,7 +2,7 @@
   "subItptOf": "bSub",
   "canInterpretType": "BHead-ObjectType",
   "nameSelf": "BHead",
-  "initialKvStores": [
+  "ownKVL": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/BottomNavigation",
           "canInterpretType": "metaexplorer.io/BottomNavigation-ObjectType",
           "nameSelf": "bSub",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "inputContainer",
               "ldType": "InterpreterClassType"
@@ -77,7 +77,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputContainer"
           ]
         }
@@ -86,7 +86,7 @@
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": [
+  "inKeys": [
     {
       "objRef": "bSub",
       "propRef": "inputContainer"

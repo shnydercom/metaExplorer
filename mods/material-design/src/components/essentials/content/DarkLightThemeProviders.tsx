@@ -21,7 +21,7 @@ export const ThemeProviderLightName = "metaexplorer.io/material-design/ThemeProv
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer];
 
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -32,16 +32,16 @@ let initialKVStores: IKvStore[] = [
 let darkBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ThemeProviderDarkName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
 let lightBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ThemeProviderLightName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -88,7 +88,7 @@ class PureThemeProviderDark extends Component<LDConnectedState & LDConnectedDisp
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 

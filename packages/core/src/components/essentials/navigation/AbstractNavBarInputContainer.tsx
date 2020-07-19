@@ -19,7 +19,7 @@ let cfgIntrprtValueKeys: string[] = [
 	VisualKeysDict.cssClassName
 ];
 let cfgIntrprtKeys: string[] = [...cfgIntrprtItptKeys, ...cfgIntrprtValueKeys];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -39,8 +39,8 @@ let initialKVStores: IKvStore[] = [
 export const NavBarInputContainerBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: NavBarInputContainerName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 export type NavBarInputContainerState = {
@@ -66,7 +66,7 @@ export abstract class AbstractNavBarInputContainer extends Component<LDConnected
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	protected renderSub = generateItptFromCompInfo.bind(this);
 

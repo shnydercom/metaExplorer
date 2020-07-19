@@ -15,7 +15,7 @@ let CompactInfoListElementItptKeys: string[] = [VisualKeysDict.primaryItpt, Visu
 let compactInfoListElementValueKeys: string[] = [VisualKeysDict.headerTxt, VisualKeysDict.subHeaderTxt];
 let CompactInfoListElementInputKeys: string[] = [...CompactInfoListElementItptKeys, ...compactInfoListElementValueKeys];
 
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{ key: VisualKeysDict.primaryItpt, value: undefined, ldType: UserDefDict.intrprtrClassType },
 	{ key: VisualKeysDict.secondaryItpt, value: undefined, ldType: UserDefDict.intrprtrClassType },
 	{ key: VisualKeysDict.headerTxt, value: undefined, ldType: LDDict.Text },
@@ -24,8 +24,8 @@ let initialKVStores: IKvStore[] = [
 export const CompactInfoListElementCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: CompactInfoListElementName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: CompactInfoListElementInputKeys,
+	ownKVL: ownKVL,
+	inKeys: CompactInfoListElementInputKeys,
 	crudSkills: "cRud",
 	canInterpretType: VisualTypesDict.compactInfoElement
 };
@@ -47,7 +47,7 @@ export abstract class AbstractCompactInfoListElement extends Component<LDConnect
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	protected renderSub = generateItptFromCompInfo.bind(this);
 

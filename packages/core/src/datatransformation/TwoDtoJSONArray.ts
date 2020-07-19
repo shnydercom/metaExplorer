@@ -26,7 +26,7 @@ export const TwoDtoJSONArrayOutputKVs: IKvStore[] = [
 	}
 ];
 
-const initialKVStores: IKvStore[] = [
+const ownKVL: IKvStore[] = [
 	{
 		key: rowsAndCols,
 		value: undefined,
@@ -43,8 +43,8 @@ const initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: TwoDtoJSONArrayName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: TwoDtoJSONArrayItptKeys,
+	ownKVL: ownKVL,
+	inKeys: TwoDtoJSONArrayItptKeys,
 	crudSkills: "cRUd"
 };
 @ldBlueprint(bpCfg)

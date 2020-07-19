@@ -44,7 +44,7 @@ for (var bdt in LD_BASE_DATA_TYPE_INPUT_TYPES) {
 		var elem = LD_BASE_DATA_TYPE_INPUT_TYPES[bdt];
 		//let cfgType: string = LDDict.CreateAction;
 		let cfgIntrprtKeys: string[] = [LDDict.description, UserDefDict.inputData];
-		let initialKVStores: IKvStore[] = [
+		let ownKVL: IKvStore[] = [
 			{
 				key: LDDict.description,
 				value: undefined,
@@ -65,8 +65,8 @@ for (var bdt in LD_BASE_DATA_TYPE_INPUT_TYPES) {
 			subItptOf: undefined,
 			canInterpretType: elem,
 			nameSelf: "metaexplorer.io/core/" + elem,
-			initialKvStores: initialKVStores,
-			interpretableKeys: cfgIntrprtKeys,
+			ownKVL: ownKVL,
+			inKeys: cfgIntrprtKeys,
 			crudSkills: "CRUd"
 		};
 		baseDataTypeBpcfgs.push(bpCfg);
@@ -76,7 +76,7 @@ export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedSta
 	implements IBlueprintItpt, PureBaseDataTypeInputComponent {
 
 	cfg: BlueprintConfig;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	protected dispatchDebounced = debounce((
 		modSingleKV, ldTokenString, outputKVMap
@@ -195,7 +195,7 @@ export function wrapBaseDataTypeGDSF(cfg: BlueprintConfig) {
 		let rvLocal: BaseDataTypeState = null;
 		if (nextProps.ldOptions) {
 			let pLdOpts: ILDOptions = nextProps.ldOptions;
-			let newSingleKVInputKey: string = determineSingleKVKey(pLdOpts.resource.kvStores, cfg.canInterpretType, cfg.interpretableKeys as string[]);
+			let newSingleKVInputKey: string = determineSingleKVKey(pLdOpts.resource.kvStores, cfg.canInterpretType, cfg.inKeys as string[]);
 			let nextDescription = rvLD.localValues.get(LDDict.description);
 			let nextSingleInputKV = getKVStoreByKey(pLdOpts.resource.kvStores, newSingleKVInputKey);
 			if (!nextSingleInputKV) {

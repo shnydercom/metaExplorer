@@ -7,7 +7,7 @@ import { ldRetrCfgIntrprtKeys } from "./LDRetrieverSuper-rewrite";
 
 export const organizationRetrieverName = "metaexplorer.io/organizationRetriever";
 
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: SideFXDict.srvURL,
 		value: undefined,
@@ -42,8 +42,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: organizationRetrieverName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: ldRetrCfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: ldRetrCfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 

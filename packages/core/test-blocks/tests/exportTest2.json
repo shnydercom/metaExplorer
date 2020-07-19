@@ -2,7 +2,7 @@
   "subItptOf": "testB_linearContainer",
   "canInterpretType": "b-ObjectType",
   "nameSelf": "b",
-  "initialKvStores": [
+  "ownKVL": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "testB_linearContainer",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "in_0",
               "value": {
@@ -37,7 +37,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "in_0",
             "in_1",
             "in_2"
@@ -47,7 +47,7 @@
           "subItptOf": "a",
           "canInterpretType": "a-ObjectType",
           "nameSelf": "testB_AinsideB",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "http://schema.org/description",
               "value": {
@@ -58,7 +58,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "http://schema.org/description"
           ]
         },
@@ -66,15 +66,15 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "testB_TextInputToChangeDescription",
-          "initialKvStores": [],
+          "ownKVL": [],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "testB_imgHeadSubDesc": {
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "testB_imgHeadSubDesc",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "HeaderText",
               "value": {
@@ -93,7 +93,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "HeaderText",
             "SubHeaderText"
           ]
@@ -103,5 +103,5 @@
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "inKeys": []
 }

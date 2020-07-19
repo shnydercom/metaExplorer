@@ -32,7 +32,7 @@ let cfgIntrprtKeys: string[] =
 		VisualKeysDict.inputContainer,
 		GAME_CORRECT_FIELD_IDX
 	];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{ key: GAME_TASK_HEADING, value: undefined, ldType: LDDict.Text },
 	{ key: GAME_TASK_TXT, value: undefined, ldType: LDDict.Text },
 	{ key: GAME_FIELD_ITPT_UL, value: undefined, ldType: UserDefDict.intrprtrClassType },
@@ -46,8 +46,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: cfgType,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -86,7 +86,7 @@ export class PureFourFieldsView extends Component<LDConnectedState & LDConnected
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	private renderSub = generateItptFromCompInfo.bind(this);
 

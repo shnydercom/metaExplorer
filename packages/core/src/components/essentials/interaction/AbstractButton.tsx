@@ -22,7 +22,7 @@ let cfgIntrprtKeys: string[] =
 		fontIcon,
 		isIcon
 	];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: VisualKeysDict.confirmTxt,
 		value: undefined,
@@ -52,8 +52,8 @@ let initialKVStores: IKvStore[] = [
 export const ButtonBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: MDButtonName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 export type MDButtonState = {
@@ -87,7 +87,7 @@ export abstract class AbstractButton extends Component<LDConnectedState & LDConn
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	constructor(props: any) {
 		super(props);

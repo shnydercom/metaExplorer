@@ -25,21 +25,21 @@ let outputKVStores: IKvStore[] = [
 	},
 ];
 
-let initialKVStores = [...inputKVStores, ...outputKVStores];
+let ownKVL = [...inputKVStores, ...outputKVStores];
 
-let interpretableKeys = itptKeysFromInputKvs(inputKVStores);
+let inKeys = itptKeysFromInputKvs(inputKVStores);
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: signinSignupName,
-	initialKvStores: initialKVStores,
-	interpretableKeys,
+	ownKVL: ownKVL,
+	inKeys,
 	crudSkills: "cRud"
 };
 
 @ldBlueprint(bpCfg)
 export class SignInSignupRequest extends LDRetrieverSuperRewrite {
 	constructor(parameters) {
-		super(parameters, interpretableKeys);
+		super(parameters, inKeys);
 		this.apiCallOverride = () => new Promise((resolve, reject) => {
 			const tokenValue = this.state.localValues.get(tokenStr);
 			OnboardingAPI.getOnboardingAPISingleton().loginFetch(resolve, reject, tokenValue);

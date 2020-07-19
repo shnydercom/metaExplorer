@@ -13,7 +13,7 @@ const SimpleTextTableName = "metaexplorer.io/core/SimpleTextTable";
 const viewSimpleTextTableAction = createLDUINSUrl(LDDict.ViewAction, LDDict.object, LDUIDict.TupleTextTable);
 
 let simpleTextTableInputKeys: string[] = [LDUIDictVerbs.headings, LDUIDictVerbs.tuples];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{ key: LDUIDictVerbs.headings, value: undefined, ldType: undefined },
 	{ key: LDUIDictVerbs.tuples, value: undefined, ldType: undefined }
 ];
@@ -21,8 +21,8 @@ export const simpleTextTableCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: viewSimpleTextTableAction,
 	nameSelf: SimpleTextTableName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: simpleTextTableInputKeys,
+	ownKVL: ownKVL,
+	inKeys: simpleTextTableInputKeys,
 	crudSkills: "cRud"
 };
 export type SimpleTextTableState = LDLocalState;
@@ -45,7 +45,7 @@ export abstract class AbstractSimpleTextTable extends Component<LDConnectedState
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	constructor(props: any) {
 		super(props);

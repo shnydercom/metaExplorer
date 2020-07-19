@@ -2,7 +2,7 @@
   "subItptOf": "headUID",
   "canInterpretType": "testInterpreter-ObjectType",
   "nameSelf": "ProductDisplayInterpreter",
-  "initialKvStores": [
+  "ownKVL": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "headUID",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "primaryInterpreter",
               "value": {
@@ -41,7 +41,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "primaryInterpreter",
             "HeaderText",
             "SubHeaderText",
@@ -52,7 +52,7 @@
           "subItptOf": "metaexplorer.io/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "imgDispUID",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "http://schema.org/name",
               "value": {
@@ -76,7 +76,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "http://schema.org/name",
             "http://schema.org/fileFormat",
             "http://schema.org/contentUrl"
@@ -86,7 +86,7 @@
           "subItptOf": "metaexplorer.io/imageRetriever",
           "canInterpretType": "metaexplorer.io/imageRetriever-ObjectType",
           "nameSelf": "imgRetrUID",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "srvURL",
               "value": "http://localhost:1111/api/ysj/ns/{identifier}",
@@ -102,7 +102,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "identifier"
           ]
         },
@@ -110,7 +110,7 @@
           "subItptOf": "metaexplorer.io/productRetriever",
           "canInterpretType": "metaexplorer.io/productRetriever-ObjectType",
           "nameSelf": "prodRetrUID",
-          "initialKvStores": [
+          "ownKVL": [
             {
               "key": "srvURL",
               "value": "http://localhost:1111/api/ysj/ns/metaexplorer/FlyingCar1",
@@ -122,7 +122,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "identifier"
           ]
         }
@@ -131,7 +131,7 @@
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": [
+  "inKeys": [
     {
       "objRef": "prodRetrUID",
       "propRef": "identifier"

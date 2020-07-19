@@ -28,7 +28,7 @@ let cfgIntrprtKeys: string[] =
 		VIDEO_IS_LOOP,
 		VisualKeysDict.cssClassName
 	];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: LDDict.name,
 		value: undefined,
@@ -74,8 +74,8 @@ let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: "metaexplorer.io/videoDisplay",
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -100,7 +100,7 @@ export class PureVideoDisplay extends Component<LDConnectedState & LDConnectedDi
 
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 
 	videoContainer: HTMLDivElement;

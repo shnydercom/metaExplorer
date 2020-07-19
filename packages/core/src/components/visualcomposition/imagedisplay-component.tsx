@@ -12,13 +12,13 @@ let cfgType: string = LDDict.ImageObject;
 export const CSS_OBJECT_FIT = "CSSObjectFit";
 let cfgIntrprtKeys: string[] =
 	[LDDict.name, LDDict.fileFormat, LDDict.contentUrl, CSS_OBJECT_FIT, VisualKeysDict.cssClassName];
-let initialKVStores: IKvStore[] = [];
+let ownKVL: IKvStore[] = [];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: "metaexplorer.io/imageDisplay",
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -40,7 +40,7 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 
 	constructor(props: any) {

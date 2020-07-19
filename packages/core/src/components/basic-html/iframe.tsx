@@ -12,7 +12,7 @@ import { VisualKeysDict } from '../visualcomposition';
 
 let cfgIntrprtKeys: string[] =
 	[LDUIDictVerbs.htmlSrc, VisualKeysDict.cssClassName];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
 	{
 		key: LDUIDictVerbs.htmlSrc,
 		value: undefined,
@@ -30,8 +30,8 @@ export const CORE_IFRAME_NAME = "metaexplorer.io/basichtml/iframe";
 const iframeBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: CORE_IFRAME_NAME,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVL: ownKVL,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud",
 	canInterpretType: CORE_IFRAME_NAME + UserDefDict.standardItptObjectTypeSuffix
 };
@@ -62,7 +62,7 @@ export class PureIFrameComponent extends Component<LDConnectedState & LDConnecte
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	constructor(props: any) {
 		super(props);

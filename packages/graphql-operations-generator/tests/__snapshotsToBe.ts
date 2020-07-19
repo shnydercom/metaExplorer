@@ -2,8 +2,8 @@ export const snapshotFindUserQueryVariables: string = `export const FindUserQuer
 	nameSelf : "FindUserQueryVariables",
 	crudSkills : "cRUd",
 	subItptOf: null,
-	interpretableKeys: ["userId","username","emailInVar"],
-	initialKvStores: [  {
+	inKeys: ["userId","username","emailInVar"],
+	ownKVL: [  {
 			key: "userId",
 			value: null,
 			ldType: createTriple(Scalars['ID'], LDUIDictVerbs.required, true)
@@ -30,8 +30,8 @@ export const snapshotFindUserQuery: string = `export const FindUserQuery:Bluepri
 	nameSelf : "FindUserQuery",
 	crudSkills : "cRUd",
 	subItptOf: null,
-	interpretableKeys: ["variables"],
-	initialKvStores: [
+	inKeys: ["variables"],
+	ownKVL: [
 		{
 			key: "variables",
 			value: null,

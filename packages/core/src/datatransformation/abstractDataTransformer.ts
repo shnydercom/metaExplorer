@@ -20,7 +20,7 @@ export const AbstractDataTransformerOutputKVs: IKvStore[] = [];
 export abstract class AbstractDataTransformer implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	initialKvStores: IKvStore[];
+	ownKVL: IKvStore[];
 
 	inputParams: Map<string, IKvStore> = new Map();
 	itptKeys: string[];
@@ -34,7 +34,7 @@ export abstract class AbstractDataTransformer implements IBlueprintItpt {
 		this.ldTkStr = ldTkStr;
 		this.itptKeys = AbstractDataTransformerItptKeys;
 		this.outputKvStores = AbstractDataTransformerOutputKVs;
-		const outputKVMap = this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
+		const outputKVMap = this.cfg.ownKVL.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : null);
 	}
 
@@ -43,7 +43,7 @@ export abstract class AbstractDataTransformer implements IBlueprintItpt {
 		this.ldTkStr = ldOptions.ldToken.get();
 		let kvs = ldOptions.resource.kvStores;
 		let outputKVMap: IKvStore = kvs.find((val) => UserDefDict.outputKVMapKey === val.key);
-		outputKVMap = outputKVMap ? outputKVMap : this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
+		outputKVMap = outputKVMap ? outputKVMap : this.cfg.ownKVL.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		for (let inputidx = 0; inputidx < this.itptKeys.length; inputidx++) {
 			const inputKey = this.itptKeys[inputidx];

@@ -35,7 +35,7 @@ export const QRCodeScannerName = "qr/QRCodeScanner";
 let cfgType: string = LDDict.ViewAction;
 let cfgIntrprtKeys: string[] =
     [];
-let initialKVStores: IKvStore[] = [
+let ownKVL: IKvStore[] = [
     {
         key: VisualKeysDict.utf8textData,
         value: undefined,
@@ -46,8 +46,8 @@ let bpCfg: BlueprintConfig = {
     subItptOf: null,
     canInterpretType: cfgType,
     nameSelf: QRCodeScannerName,
-    initialKvStores: initialKVStores,
-    interpretableKeys: cfgIntrprtKeys,
+    ownKVL: ownKVL,
+    inKeys: cfgIntrprtKeys,
     crudSkills: "cRud"
 };
 
@@ -60,7 +60,7 @@ export class QRCodeScanner extends Component<LDConnectedState & LDConnectedDispa
     loadingImgLink: string = "/media/camera_negative_black.svg";
     errorImgLink: string = "/media/nocamera_negative_black.svg";
 
-    initialKvStores: IKvStore[];
+    ownKVL: IKvStore[];
     constructor(props: any) {
         super(props);
         this.cfg = (this.constructor["cfg"] as BlueprintConfig);

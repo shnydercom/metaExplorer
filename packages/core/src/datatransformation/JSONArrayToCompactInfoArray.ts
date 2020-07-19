@@ -21,7 +21,7 @@ export const ToCompactInfoArrayOutputKVs: IKvStore[] = [
 	}
 ];
 
-const initialKVStores: IKvStore[] = [
+const ownKVL: IKvStore[] = [
 	{
 		key: transfInputKey,
 		value: undefined,
@@ -43,8 +43,8 @@ const initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: JSONArrayToCompactInfoArrayName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: ToCompactInfoArrayItptKeys,
+	ownKVL: ownKVL,
+	inKeys: ToCompactInfoArrayItptKeys,
 	crudSkills: "cRUd"
 };
 @ldBlueprint(bpCfg)
