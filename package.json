@@ -16,7 +16,8 @@
     "tsc": "lerna run tsc",
     "prebuild": "lerna run buildcore",
     "build": "lerna run build",
-    "start": "set MIO_DYNAMIC=true && lerna run start --stream",
+    "dev": "set MIO_DYNAMIC=true && lerna run start --stream",
+    "start": "set OVERWRITE_ON_RESTART=true && yarn dev",
     "release": "npm config set access public yarn lerna publish"
   },
   "private": true,

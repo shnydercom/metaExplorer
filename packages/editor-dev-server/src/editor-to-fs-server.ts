@@ -81,11 +81,12 @@ export function editorToFileSystem(basePath?: string, mainItpt?: string, srvrPor
 	});
 
 	app.get(API_IRI_BLOCKS, function (req, res) {
-		res.sendFile(path.join(resolvedBasePath, './interpreters.json'));
 		if (isDirModified) {
+			console.log("recreating from filesystem")
 			createBlocksFromLib(mainItpt, resolvedBlockPath, basePath);
 		}
 		isDirModified = false;
+		res.sendFile(path.join(resolvedBasePath, './interpreters.json'));
 	});
 
 	app.post(API_IRI_BLOCKS, (req, res) => {
