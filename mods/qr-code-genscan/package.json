@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/qr-code-genscan",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "TODO:changeDescription",
   "scripts": {
     "test": "test",
@@ -18,7 +18,7 @@
     "lib"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.13",
+    "@metaexplorer/core": "^0.0.14",
     "qr-scanner": "^1.1.1",
     "qrcode-generator": "^1.4.3",
     "quagga": "^0.12.1"
