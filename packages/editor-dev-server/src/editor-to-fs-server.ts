@@ -39,7 +39,7 @@ export function editorToFileSystem(basePath?: string, mainItpt?: string, srvrPor
 			"subItptOf": "c6c6d88d-00e9-4bf2-8c89-c2ebc1b9adbe",
 			"canInterpretType": "my-user/my-project/index-ObjectType",
 			"nameSelf": "my-user/my-project/index",
-			"initialKvStores": [
+			"ownKVLs": [
 				{
 					"key": "InterpreterReferenceMapKey",
 					"value": {
@@ -47,16 +47,16 @@ export function editorToFileSystem(basePath?: string, mainItpt?: string, srvrPor
 							"subItptOf": "metaexplorer.io/baseContainer",
 							"canInterpretType": "metaexplorer.io/ContainerObjType",
 							"nameSelf": "c6c6d88d-00e9-4bf2-8c89-c2ebc1b9adbe",
-							"initialKvStores": [],
+							"ownKVLs": [],
 							"crudSkills": "cRud",
-							"interpretableKeys": []
+							"inKeys": []
 						}
 					},
 					"ldType": "InterpreterReferenceMapType"
 				}
 			],
 			"crudSkills": "cRud",
-			"interpretableKeys": []
+			"inKeys": []
 		};
 		let userName = "my-user";
 		let projectName = "my-project";
@@ -81,11 +81,12 @@ export function editorToFileSystem(basePath?: string, mainItpt?: string, srvrPor
 	});
 
 	app.get(API_IRI_BLOCKS, function (req, res) {
-		res.sendFile(path.join(resolvedBasePath, './interpreters.json'));
 		if (isDirModified) {
+			console.log("recreating from filesystem")
 			createBlocksFromLib(mainItpt, resolvedBlockPath, basePath);
 		}
 		isDirModified = false;
+		res.sendFile(path.join(resolvedBasePath, './interpreters.json'));
 	});
 
 	app.post(API_IRI_BLOCKS, (req, res) => {

@@ -5,13 +5,13 @@ import { ILDToken, NetworkPreferredToken, linearLDTokenStr } from '../src/ldacce
 import { LDDict } from '../src/ldaccess/LDDict';
 import { ILDOptionsMapStatePart } from '../src/appstate/store';
 import { ldOptionsDeepCopy } from '../src/ldaccess/ldUtils';
-import { IKvStore } from '../src/ldaccess/ikvstore';
+import { KVL } from '../src/ldaccess/KVL';
 import { linearReducer, linearSplitRequestAction, LinearSplitAction } from '../src/appstate/epicducks/linearSplit-duck';
 
 let testTokenStr: string = "testTokenString";
 let testToken: ILDToken = new NetworkPreferredToken(testTokenStr);
 let testLang: string = "en";
-let testStartKVStores: IKvStore[] = [
+let testStartKVStores: KVL[] = [
 	{ key: "string_firstKey", value: "stringValStart", ldType: LDDict.Text },
 	{ key: "double_secondKey", value: 123.456, ldType: LDDict.Double }
 ];
@@ -27,7 +27,7 @@ let linearTestOptions: ILDOptions = {
 	visualInfo: { retriever: DEFAULT_ITPT_RETRIEVER_NAME }
 };
 
-let testDiffKVStores: IKvStore[] = [
+let testDiffKVStores: KVL[] = [
 	{ key: "string_firstKey", value: "stringValEnd", ldType: LDDict.Text },
 	{ key: "double_secondKey", value: 987.654, ldType: LDDict.Double }
 ];
@@ -74,7 +74,7 @@ describe("linear split reducer function", () => {
 		it("should add new LDOptions with new values to existing", () => {
 			execAction.ldOptionsBase.isLoading = false;
 			let reducerResult = linearReducer(startStore, execAction);
-			let startKVStoresPlusOne: IKvStore[] = [
+			let startKVStoresPlusOne: KVL[] = [
 				{ key: "string_latestKey", value: "stringValNew", ldType: LDDict.Text }, ...testStartKVStores];
 			secondExecAction.ldOptionsBase.resource.kvStores = startKVStoresPlusOne;
 			reducerResult = linearReducer(reducerResult, secondExecAction);
@@ -86,7 +86,7 @@ describe("linear split reducer function", () => {
 		it("should remove LDOptions when base-ldOptions-kvStore is smaller", () => {
 			execAction.ldOptionsBase.isLoading = false;
 			let reducerResult = linearReducer(startStore, execAction);
-			let smallerKvStores: IKvStore[] = [{ key: "another_key", value: 345.678, ldType: LDDict.Double }];
+			let smallerKvStores: KVL[] = [{ key: "another_key", value: 345.678, ldType: LDDict.Double }];
 			secondExecAction.ldOptionsBase.resource.kvStores = smallerKvStores;
 			expect(reducerResult[testTokenStr].resource.kvStores.length).toBe(2);
 			reducerResult = linearReducer(reducerResult, secondExecAction);

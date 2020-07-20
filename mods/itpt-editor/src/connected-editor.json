@@ -2,7 +2,7 @@
   "subItptOf": "projCfg",
   "canInterpretType": "metaexplorer.io/v1/connected-editor-ObjectType",
   "nameSelf": "metaexplorer.io/v1/connected-editor",
-  "initialKvStores": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "ProjectConfiguration",
           "canInterpretType": "ProjectConfiguration-ObjectType",
           "nameSelf": "projCfg",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -21,7 +21,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputContainer",
             "configurationBlocks"
           ]
@@ -30,7 +30,7 @@
           "subItptOf": "metaexplorer.io/block-editor",
           "canInterpretType": "blockeditortype",
           "nameSelf": "rm-blockeditor",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "currentlyediting",
               "value": "metaexplorer.io/v2/index",
@@ -61,7 +61,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "savingStatus"
           ]
         },
@@ -69,7 +69,7 @@
           "subItptOf": "metaexplorer.io/server/RefMapBpCfgSender",
           "canInterpretType": "metaexplorer.io/server/RefMapBpCfgSenderType",
           "nameSelf": "rm-bpcfgSender",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "srvURL",
               "value": "/api/blocks",
@@ -85,7 +85,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputRefMap"
           ]
         },
@@ -93,7 +93,7 @@
           "subItptOf": "ActionHandler",
           "canInterpretType": "ActionHandler-ObjectType",
           "nameSelf": "rm-actionhandler",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "canHandleType",
               "value": "save-editor-action",
@@ -101,12 +101,12 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "inKeys": []
 }

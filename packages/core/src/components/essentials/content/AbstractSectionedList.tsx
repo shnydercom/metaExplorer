@@ -1,4 +1,4 @@
-import { IKvStore } from '../../../ldaccess/ikvstore';
+import { KVL } from '../../../ldaccess/KVL';
 import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../../ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
@@ -15,15 +15,15 @@ export const sectionElements = "section-elements";
 export const sectionedListItptKeys: string[] = [sectionElements];
 export const sectionedListValueKeys: string[] = [sectionHeadings];
 export const sectionedListInputKeys: string[] = [...sectionedListValueKeys, ...sectionedListItptKeys];
-export const initialKVStores: IKvStore[] = [
+export const ownKVLs: KVL[] = [
 	{ key: sectionHeadings, value: undefined, ldType: LDDict.Text },
 	{ key: sectionElements, value: undefined, ldType: UserDefDict.intrprtrClassType }
 ];
 export const SectionedListCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: SectionedListName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: sectionedListInputKeys,
+	ownKVLs: ownKVLs,
+	inKeys: sectionedListInputKeys,
 	crudSkills: "cRud"
 };
 export type SectionedListState = LDLocalState;
@@ -47,7 +47,7 @@ export abstract class AbstractSectionedList extends Component<LDConnectedState
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 
 	protected renderSub = generateItptFromCompInfo.bind(this);
 

@@ -1,13 +1,13 @@
 import { SideFXDict } from "../sidefx/SideFXDict";
 import { LDDict } from "../ldaccess/LDDict";
-import { IKvStore } from "../ldaccess/ikvstore";
+import { KVL } from "../ldaccess/KVL";
 import { ldBlueprint, BlueprintConfig } from "../ldaccess/ldBlueprint";
 import { ILDOptions } from "../ldaccess/ildoptions";
 import { resolveNS } from "../ldaccess/ns/nameSpaceResolution";
 import { LDRetrieverSuperRewrite, ldRetrCfgIntrprtKeys, LDRetrieverSuperState } from "./LDRetrieverSuper-rewrite";
 
 export const imageRetrieverName = "metaexplorer.io/imageRetriever";
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: SideFXDict.srvURL,
 		value: undefined,
@@ -37,14 +37,14 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: imageRetrieverName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: ldRetrCfgIntrprtKeys,
+	ownKVLs: ownKVLs,
+	inKeys: ldRetrCfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
 @ldBlueprint(bpCfg)
 export class ImageRetriever extends LDRetrieverSuperRewrite {
-	/*setIdentifier = (value: IKvStore) => {
+	/*setIdentifier = (value: KVL) => {
 		let kvResolved: string = getKVValue(value);
 		let changedSrvIdPart = resolveNS(kvResolved);
 		if (changedSrvIdPart !== this.identifier) this.isInputDirty = true;
@@ -56,14 +56,14 @@ export class ImageRetriever extends LDRetrieverSuperRewrite {
 		super.consumeLDOptions(ldOptions);
 		this.retrieverStoreKey = ldOptions.ldToken.get();
 		let kvs = ldOptions.resource.kvStores;
-		let identifier: IKvStore = kvs.find((val) => SideFXDict.identifier === val.key);
+		let identifier: KVL = kvs.find((val) => SideFXDict.identifier === val.key);
 		let kvResolved: string = getKVValue(identifier);
 		let changedSrvIdPart = resolveNS(kvResolved);
 		let identifierKv = this.inputParams.get(SideFXDict.identifier);
 		if (identifierKv && identifierKv.value && changedSrvIdPart !== identifierKv.value) this.isInputDirty = true;
 		identifierKv.value = changedSrvIdPart;*/
 
-		/*outputKVMap = outputKVMap ? outputKVMap : this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
+		/*outputKVMap = outputKVMap ? outputKVMap : this.cfg.ownKVLs.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		for (let idx = 0; idx < ldRetrCfgIntrprtKeys.length; idx++) {
 			const inputKey = ldRetrCfgIntrprtKeys[idx];

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IKvStore, ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap,
+import { KVL, ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap,
 	ILDOptions, LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState,
 	VisualKeysDict, initLDLocalState, gdsfpLD, LDDict
 } from '@metaexplorer/core';
@@ -18,7 +18,7 @@ export const isImprintPersonNotOrganization = "isPersonNotOrganization";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.cssClassName, schemaOrgName, schemaOrgAddressCountry, schemaOrgPostalCode, schemaOrgAdressLocality, schemaOrgStreetAddress, isImprintPersonNotOrganization];
 
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: VisualKeysDict.cssClassName,
 		value: undefined,
@@ -59,8 +59,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ImprintName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVLs: ownKVLs,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 export interface ImprintState extends LDLocalState {
@@ -87,7 +87,7 @@ export class PureImprint extends Component<LDConnectedState & LDConnectedDispatc
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 	styleClassName: string;
 
 	constructor(props: any) {

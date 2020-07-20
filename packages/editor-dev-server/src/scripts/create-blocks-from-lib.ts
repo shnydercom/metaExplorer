@@ -3,7 +3,7 @@ const path = require('path')
 
 function readDirectory(sourceDir, cObj) {
 	fs.readdirSync(sourceDir).forEach((file) => {
-		console.log(file);
+		//console.log(file);
 		// you may want to filter these by extension, etc. to make sure they are JSON files
 		if (file.endsWith("json")) {
 			let newContent = fs.readFileSync(sourceDir + "/" + file, "utf8");

@@ -1,4 +1,4 @@
-import { IKvStore, ldBlueprint, ILDOptions, BlueprintConfig, IBlueprintItpt, OutputKVMap,
+import { KVL, ldBlueprint, ILDOptions, BlueprintConfig, IBlueprintItpt, OutputKVMap,
 	 LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState,
 	 initLDLocalState, generateItptFromCompInfo, gdsfpLD, VisualKeysDict, LDDict
 	} from '@metaexplorer/core';
@@ -11,7 +11,7 @@ export const loginRedir: string = "redirAfterLogin";
 export const logoutRedir: string = "redirAfterLogout";
 
 let allMyInputKeys: string[] = [loginRedir, logoutRedir];
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: loginRedir,
 		value: undefined,
@@ -26,8 +26,8 @@ let initialKVStores: IKvStore[] = [
 export const KCAuthenticatorCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: KCAuthenticatorBtnName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: allMyInputKeys,
+	ownKVLs: ownKVLs,
+	inKeys: allMyInputKeys,
 	crudSkills: "cRUd"
 };
 
@@ -56,7 +56,7 @@ export class KCAuthenticatorBtn extends Component<LDConnectedState & LDConnected
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 	//generates child react components
 	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 

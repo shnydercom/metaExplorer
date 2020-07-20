@@ -7,7 +7,7 @@ export * from './UserDefDict';
 export * from './converterFns';
 export * from './iitpt-matcher';
 export * from './iitpt-retriever';
-export * from './ikvstore';
+export * from './KVL';
 export * from './ildoptions';
 export * from './ildresource';
 export * from './ildtoken';

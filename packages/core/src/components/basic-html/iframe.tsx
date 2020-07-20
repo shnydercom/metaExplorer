@@ -1,5 +1,5 @@
 import React from 'react';
-import { IKvStore } from '../../ldaccess/ikvstore';
+import { KVL } from '../../ldaccess/KVL';
 import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../appstate/LDProps';
@@ -12,7 +12,7 @@ import { VisualKeysDict } from '../visualcomposition';
 
 let cfgIntrprtKeys: string[] =
 	[LDUIDictVerbs.htmlSrc, VisualKeysDict.cssClassName];
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: LDUIDictVerbs.htmlSrc,
 		value: undefined,
@@ -30,8 +30,8 @@ export const CORE_IFRAME_NAME = "metaexplorer.io/basichtml/iframe";
 const iframeBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: CORE_IFRAME_NAME,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVLs: ownKVLs,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud",
 	canInterpretType: CORE_IFRAME_NAME + UserDefDict.standardItptObjectTypeSuffix
 };
@@ -62,7 +62,7 @@ export class PureIFrameComponent extends Component<LDConnectedState & LDConnecte
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 
 	constructor(props: any) {
 		super(props);

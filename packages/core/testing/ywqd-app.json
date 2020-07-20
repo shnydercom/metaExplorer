@@ -2,7 +2,7 @@
   "subItptOf": "d57234da-46f2-443a-87d1-4a9b02e6b237",
   "canInterpretType": "愿望清单2/AppEntry2-ObjectType",
   "nameSelf": "愿望清单2/AppEntry2",
-  "initialKvStores": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/material-design/NavBarWActions",
           "canInterpretType": "metaexplorer.io/material-design/NavBarWActions-ObjectType",
           "nameSelf": "d57234da-46f2-443a-87d1-4a9b02e6b237",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -31,7 +31,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputContainer"
           ]
         },
@@ -39,7 +39,7 @@
           "subItptOf": "愿望清单/BottomBar",
           "canInterpretType": "MyNewBottomBar-ObjectType",
           "nameSelf": "6d06988c-606b-4862-9698-bbf1c21ec283",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -50,7 +50,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputContainer"
           ]
         },
@@ -58,7 +58,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "aacd1cf2-b8d4-4546-b38d-71adaa580c00",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "in_0",
               "value": {
@@ -85,7 +85,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "in_0",
             "in_1",
             "in_2"
@@ -95,7 +95,7 @@
           "subItptOf": "metaexplorer.io/routing/Route",
           "canInterpretType": "metaexplorer.io/routing/Route-ObjectType",
           "nameSelf": "078c5817-632f-44cc-a088-03d29edf795d",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -111,7 +111,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputContainer"
           ]
         },
@@ -119,7 +119,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "e6726813-b826-455f-b993-fe7ad70af5f0",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "primaryInterpreter",
               "value": {
@@ -135,7 +135,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "primaryInterpreter"
           ]
         },
@@ -143,15 +143,15 @@
           "subItptOf": "metaexplorer.io/material-design/SingleImageSelector",
           "canInterpretType": "http://schema.org/CreateAction",
           "nameSelf": "9f84fba9-6b41-4701-b5ca-f15df95bfa46",
-          "initialKvStores": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "70e96539-0b43-43d2-aaa3-be5e8fb7cd1a": {
           "subItptOf": "metaexplorer.io/routing/Route",
           "canInterpretType": "metaexplorer.io/routing/Route-ObjectType",
           "nameSelf": "70e96539-0b43-43d2-aaa3-be5e8fb7cd1a",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -167,7 +167,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputContainer"
           ]
         },
@@ -175,7 +175,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "75807a16-9f05-40f6-be32-ed445c846dfe",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "primaryInterpreter",
               "value": {
@@ -199,7 +199,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "primaryInterpreter",
             "SubHeaderText"
           ]
@@ -208,15 +208,15 @@
           "subItptOf": "metaexplorer.io/EANScanner",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "de7c0c96-3a17-4953-b18c-6367465c2c9d",
-          "initialKvStores": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "9f3a4457-e185-47b0-bc02-27e28256eb57": {
           "subItptOf": "metaexplorer.io/routing/Route",
           "canInterpretType": "metaexplorer.io/routing/Route-ObjectType",
           "nameSelf": "9f3a4457-e185-47b0-bc02-27e28256eb57",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -232,7 +232,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputContainer"
           ]
         },
@@ -240,19 +240,19 @@
           "subItptOf": "metaexplorer.io/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "eb48f2e7-52db-4e23-9dba-79159a2cfd4e",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "http://schema.org/contentUrl",
               "value": "http://localhost:5000/media/localhost.png"
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "inKeys": []
 }

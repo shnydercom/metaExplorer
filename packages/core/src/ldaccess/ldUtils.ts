@@ -1,7 +1,7 @@
 import { OBJECT_REF } from "./ObjectPropertyRef";
 import { ILDOptions } from "./ildoptions";
 import { ILDResource, ILDWebResource } from "./ildresource";
-import { IKvStore } from "./ikvstore";
+import { KVL } from "./KVL";
 import { OutputKVMap, BlueprintConfig } from "./ldBlueprint";
 import { LDError } from "../appstate/LDError";
 import { LDApiConst } from "./LDconsts";
@@ -65,7 +65,7 @@ export const ldBlueprintCfgDeepCopy = (input: BlueprintConfig): BlueprintConfig 
 export const ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {
 	if (!input) throw new LDError("ldOptionsDeepCopy: input must not be null or undefined");
 	let rv: ILDOptions;
-	let newKVStores: IKvStore[] = [];
+	let newKVStores: KVL[] = [];
 	input.resource.kvStores.forEach((elem) => {
 		let newKey = elem.key ? "" + elem.key : null;
 		let newValue = null;
@@ -88,7 +88,7 @@ export const ldOptionsDeepCopy = (input: ILDOptions): ILDOptions => {
 		if (valType === 'boolean' || valType === 'number')
 			newValue = elem.value;
 		let newLDType = elem.ldType ? "" + elem.ldType : null;
-		let newKvSingle: IKvStore = {
+		let newKvSingle: KVL = {
 			//intrprtrClass: elem.intrprtrClass,
 			key: newKey,
 			value: newValue,
@@ -128,7 +128,7 @@ export const isOutputKVSame = (a: OutputKVMap, b: OutputKVMap): boolean => {
 	return isSame;
 };
 
-export const getKVValue = (input: IKvStore | string | number): any => {
+export const getKVValue = (input: KVL | string | number): any => {
 	if (typeof input !== 'object') return input;
 	if (!input || input.value === null || input.value === undefined) return null;
 	if (input.value.constructor === Array) {
@@ -138,7 +138,7 @@ export const getKVValue = (input: IKvStore | string | number): any => {
 	return input.value;
 };
 
-export const itptKeysFromInputKvs = (inputKvStores: IKvStore[]): string[] => {
+export const itptKeysFromInputKvs = (inputKvStores: KVL[]): string[] => {
 	let rv = [];
 	inputKvStores.forEach((value) => {
 		rv.push(value.key);

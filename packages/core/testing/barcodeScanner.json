@@ -2,7 +2,7 @@
   "subItptOf": "topImgHeadSubDesc",
   "canInterpretType": "BarcodeScannerComp-ObjectType",
   "nameSelf": "BarcodeScannerComp",
-  "initialKvStores": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "topImgHeadSubDesc",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "primaryInterpreter",
               "value": {
@@ -29,7 +29,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "primaryInterpreter",
             "HeaderText"
           ]
@@ -38,14 +38,14 @@
           "subItptOf": "metaexplorer.io/EANScanner",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "scannerHead",
-          "initialKvStores": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "inKeys": []
 }

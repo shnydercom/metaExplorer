@@ -1,7 +1,7 @@
 import React from 'react';
 import {
 	LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState,
-	gdsfpLD, generateItptFromCompInfo, initLDLocalState, LDDict, IKvStore,
+	gdsfpLD, generateItptFromCompInfo, initLDLocalState, LDDict, KVL,
 	ldBlueprint, ILDOptions, VisualKeysDict, UserDefDict, BlueprintConfig, IBlueprintItpt, OutputKVMap
 } from '@metaexplorer/core';
 import { Component } from 'react';
@@ -15,7 +15,7 @@ const nextBtnLabel = "nextBtnLabel";
 
 let cfgIntrprtKeys: string[] =
 	[backgroundItpt, foregroundItpt, prevBtnLabel, nextBtnLabel, VisualKeysDict.headerTxt, VisualKeysDict.subHeaderTxt];
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: cfgIntrprtKeys[0],
 		value: undefined,
@@ -50,8 +50,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: HeroGalleryName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVLs: ownKVLs,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -87,7 +87,7 @@ export class PureHeroGallery extends Component<LDConnectedState & LDConnectedDis
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 
 	private renderSub = generateItptFromCompInfo.bind(this);
 

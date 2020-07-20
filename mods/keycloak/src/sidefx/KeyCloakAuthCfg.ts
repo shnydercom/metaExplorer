@@ -1,4 +1,4 @@
-import { IKvStore, LDDict, ldBlueprint, BlueprintConfig, UserDefDict, initLDLocalState,AbstractDataTransformer } from "@metaexplorer/core";
+import { KVL, LDDict, ldBlueprint, BlueprintConfig, UserDefDict, initLDLocalState,AbstractDataTransformer } from "@metaexplorer/core";
 import { KeyCloakAuthAPI, EVENT_KEYCLOAK_WEB_AUTH } from "../apis/KeyCloakAuthAPI";
 
 export const kcloakAuthCfgName = "keycloak/auth/config";
@@ -19,7 +19,7 @@ export const kcCfgOutputKvs = [
 	}
 ];
 
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: jsonCfgPath,
 		value: undefined,
@@ -31,8 +31,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: kcloakAuthCfgName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: kcCfgItptKeys,
+	ownKVLs: ownKVLs,
+	inKeys: kcCfgItptKeys,
 	crudSkills: "cRud"
 };
 
@@ -74,7 +74,7 @@ export class KeyCloakAuthCfg extends AbstractDataTransformer {
 	}
 
 	protected propagateChange() {
-		let outputKVMap: IKvStore = this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
+		let outputKVMap: KVL = this.cfg.ownKVLs.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		this.isOutputDirty = true;
 		this.evalDirtyOutput();
@@ -86,8 +86,8 @@ export class KeyCloakAuthCfg extends AbstractDataTransformer {
  * @param outputKvStores
  */
 	protected mappingFunction(
-		inputParams: Map<string, IKvStore>,
-		outputKvStores: Map<string, IKvStore>): IKvStore[] {
+		inputParams: Map<string, KVL>,
+		outputKvStores: Map<string, KVL>): KVL[] {
 		let rv = [];
 		//let jsonCfgStr = inputParams.get(jsonCfgPath);
 		const tokenOutputKV = outputKvStores.get(tokenStr);

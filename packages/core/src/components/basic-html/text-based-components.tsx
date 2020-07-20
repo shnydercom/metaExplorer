@@ -1,5 +1,5 @@
 import React from 'react';
-import { IKvStore } from '../../ldaccess/ikvstore';
+import { KVL } from '../../ldaccess/KVL';
 import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../appstate/LDProps';
@@ -11,7 +11,7 @@ import { LDDict } from '../../ldaccess/LDDict';
 
 let cfgIntrprtKeys: string[] =
 	[UserDefDict.inputData];
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: UserDefDict.inputData,
 		value: undefined,
@@ -22,8 +22,8 @@ export const createTextBasedBpCfg: (nameSelf: string) => BlueprintConfig = (name
 	return {
 		subItptOf: null,
 		nameSelf: nameSelf,
-		initialKvStores: initialKVStores,
-		interpretableKeys: cfgIntrprtKeys,
+		ownKVLs: ownKVLs,
+		inKeys: cfgIntrprtKeys,
 		crudSkills: "cRud",
 		canInterpretType: LDDict.Text
 	};
@@ -52,7 +52,7 @@ export abstract class PureTextBasedComponent extends Component<LDConnectedState 
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 
 	constructor(props: any) {
 		super(props);

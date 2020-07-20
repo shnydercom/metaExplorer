@@ -1,5 +1,5 @@
 import { LDDict } from '../../../ldaccess/LDDict';
-import { IKvStore } from '../../../ldaccess/ikvstore';
+import { KVL } from '../../../ldaccess/KVL';
 import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../../ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
@@ -56,7 +56,7 @@ export const TopNavigationName = "metaexplorer.io/material-design/TopNavigation"
 
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer];
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -69,35 +69,35 @@ for (let i = 0; i < ICON_URLS.length; i++) {
 	cfgIntrprtKeys.push(ICON_URLS_DISABLED[i]);
 	cfgIntrprtKeys.push(ROUTES_SEND[i]);
 	cfgIntrprtKeys.push(LABELS[i]);
-	initialKVStores.push({
+	ownKVLs.push({
 		key: ICON_URLS[i],
 		value: undefined,
 		ldType: LDDict.Text
 	});
-	initialKVStores.push({
+	ownKVLs.push({
 		key: ICON_URLS_DISABLED[i],
 		value: undefined,
 		ldType: LDDict.Text
 	});
-	initialKVStores.push({
+	ownKVLs.push({
 		key: ROUTES_SEND[i],
 		value: undefined,
 		ldType: VisualTypesDict.route_added
 	});
-	initialKVStores.push({
+	ownKVLs.push({
 		key: LABELS[i],
 		value: undefined,
 		ldType: LDDict.Text
 	});
 }
 cfgIntrprtKeys.push(VisualKeysDict.cssClassName);
-initialKVStores.push({
+ownKVLs.push({
 	key: VisualKeysDict.cssClassName,
 	value: undefined,
 	ldType: LDDict.Text
 });
 
-initialKVStores.push({
+ownKVLs.push({
 	key: CHANGED_ROUTE_OUTPUT,
 	value: undefined,
 	ldType: VisualTypesDict.route_added
@@ -106,16 +106,16 @@ initialKVStores.push({
 export const BottomNavW5ChoicesBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: BottomNavigationName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVLs: ownKVLs,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
 export const TopNavW5ChoicesBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: TopNavigationName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVLs: ownKVLs,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -208,7 +208,7 @@ export abstract class AbstractBottomNavigation extends Component<LDConnectedStat
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 
 	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 	constructor(props: any) {
@@ -232,7 +232,7 @@ export abstract class AbstractBottomNavigation extends Component<LDConnectedStat
 		if (this.state.tabIdx !== tabIdx) {
 			this.setState({ ...this.state, tabIdx, hasTabChanged: true });
 		}
-		const outRouteKV: IKvStore = {
+		const outRouteKV: KVL = {
 			key: CHANGED_ROUTE_OUTPUT,
 			value: undefined,
 			ldType: VisualTypesDict.route_added

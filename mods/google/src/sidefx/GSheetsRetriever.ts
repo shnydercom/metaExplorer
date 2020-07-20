@@ -1,4 +1,4 @@
-import { LDRetrieverSuper, ILDOptions, IKvStore, LDDict, BlueprintConfig, ldBlueprint, UserDefDict, isObjPropertyRef } from "@metaexplorer/core";
+import { LDRetrieverSuper, ILDOptions, KVL, LDDict, BlueprintConfig, ldBlueprint, UserDefDict, isObjPropertyRef } from "@metaexplorer/core";
 import { GoogleWebAuthAPI, EVENT_GOOGLE_WEB_AUTH } from "../apis/GoogleWebAuthAPI";
 
 //import { sheets_v4 } from "googleapis";
@@ -10,7 +10,7 @@ export const sheetName = "sheetName";
 export const spreadSheetRange = "range";
 export const spreadSheetData = "data";
 export const rangeRetrItptKeys = [googleDocID, sheetName, spreadSheetRange];
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: googleDocID,
 		value: undefined,
@@ -35,8 +35,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: gSheetsRangeRetrieverName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: rangeRetrItptKeys,
+	ownKVLs: ownKVLs,
+	inKeys: rangeRetrItptKeys,
 	crudSkills: "cRud"
 };
 
@@ -99,8 +99,8 @@ export class GSheetsRetriever extends LDRetrieverSuper {
 		if (!ldOptions || !ldOptions.resource || !ldOptions.resource.kvStores) return;
 		this.retrieverStoreKey = ldOptions.ldToken.get();
 		let kvs = ldOptions.resource.kvStores;
-		let outputKVMap: IKvStore = kvs.find((val) => UserDefDict.outputKVMapKey === val.key);
-		outputKVMap = outputKVMap ? outputKVMap : this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
+		let outputKVMap: KVL = kvs.find((val) => UserDefDict.outputKVMapKey === val.key);
+		outputKVMap = outputKVMap ? outputKVMap : this.cfg.ownKVLs.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		for (let inputidx = 0; inputidx < rangeRetrItptKeys.length; inputidx++) {
 			const inputKey = rangeRetrItptKeys[inputidx];
@@ -146,8 +146,8 @@ export class GSheetsRetriever extends LDRetrieverSuper {
 	updateAPIcallOverride = () => {
 		if (this.gsApi) {
 			let spreadsheetIdKv = this.inputParams.get(googleDocID);
-			let subSheetKv: IKvStore = this.inputParams.get(sheetName);
-			let rangeKv: IKvStore = this.inputParams.get(spreadSheetRange);
+			let subSheetKv: KVL = this.inputParams.get(sheetName);
+			let rangeKv: KVL = this.inputParams.get(spreadSheetRange);
 			let spreadsheetId = spreadsheetIdKv.value; //'1HL-Zf9NKxuo03SVlcMGQk22I5ZhGq3CD4nX9k12TBLA';
 			let subSheet: string = subSheetKv.value; //'History';
 			let range: string = rangeKv.value; // 'A1:I';

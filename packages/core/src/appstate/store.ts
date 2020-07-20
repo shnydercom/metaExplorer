@@ -43,10 +43,16 @@ export const isProduction = process.env.NODE_ENV === 'production';
 export const isDemo = process.env.METAEXPLORER_MODE === 'demo';
 export const isStateDebug = process.env.METAEXPLORER_MODE === 'statedebug';
 
-const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
+let composeEnhancers = null;
+
+if (typeof window !== "undefined") {
+  composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__']
+} else {
+  composeEnhancers = compose;
+}
 
 let middleWare = composeEnhancers(applyMiddleware(epicMiddleware)); // /*isProduction ?*/ applyMiddleware(epicMiddleware); /* :
-  //isStateDebug ? compose(applyMiddleware(epicMiddleware), DevTools.instrument()) : applyMiddleware(epicMiddleware);*/
+//isStateDebug ? compose(applyMiddleware(epicMiddleware), DevTools.instrument()) : applyMiddleware(epicMiddleware);*/
 
 export interface IAppConfigStatePart {
   appKey: string;

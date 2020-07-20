@@ -1,13 +1,22 @@
-import { IKvStore } from "../../ldaccess/ikvstore";
+import { KVL } from "../../ldaccess/KVL";
 import { ldBlueprint, BlueprintConfig } from "../../ldaccess/ldBlueprint";
 import { UserDefDict } from "../../ldaccess/UserDefDict";
 import { VisualTypesDict } from "../../components/visualcomposition/visualDict";
 import { AbstractDataTransformer } from "../../datatransformation/abstractDataTransformer";
 import { itptKeysFromInputKvs } from "../../ldaccess/ldUtils";
+import { LDUIDict } from "../../ldaccess";
 
 const transfOutputKey = UserDefDict.outputData;
 
-class DataTypeAssembler extends AbstractDataTransformer {
+const DATATYPE_ASSEMBLER_CFG: BlueprintConfig = {
+	subItptOf: null,
+	nameSelf: LDUIDict.DataTypeAssembler,
+	ownKVLs: [],
+	inKeys: [],
+	crudSkills: "cRud"
+};
+
+class AbstractDataTypeAssembler extends AbstractDataTransformer {
 
 	/**
 	 * this function assembles input fields to a single flat new datatype
@@ -15,8 +24,8 @@ class DataTypeAssembler extends AbstractDataTransformer {
 	 * @param outputKvStores
 	 */
 	protected mappingFunction(
-		inputParams: Map<string, IKvStore>,
-		outputKvStores: Map<string, IKvStore>): IKvStore[] {
+		inputParams: Map<string, KVL>,
+		outputKvStores: Map<string, KVL>): KVL[] {
 		let rv = [];
 
 		const newOutputObj = {
@@ -35,32 +44,34 @@ class DataTypeAssembler extends AbstractDataTransformer {
 	}
 }
 
-export function flatDataTypeAssemblerFactory(inputKvStores: IKvStore[], nameSelf: string) {
+export const DataTypeDisassembler = ldBlueprint(DATATYPE_ASSEMBLER_CFG)(AbstractDataTypeAssembler);
 
-	const ActionCompOutputKVs: IKvStore[] = [
+export function flatDataTypeAssemblerFactory(inputKvStores: KVL[], nameSelf: string) {
+
+	const ActionCompOutputKVs: KVL[] = [
 		{
 			key: transfOutputKey,
 			value: undefined,
 			ldType: VisualTypesDict.compactInfoElement
 		}
 	];
-	const initialKvStores: IKvStore[] = [
+	const ownKVLs: KVL[] = [
 		...inputKvStores,
 		...ActionCompOutputKVs
 	];
 
-	const interpretableKeys: string[] = itptKeysFromInputKvs(inputKvStores);
+	const inKeys: string[] = itptKeysFromInputKvs(inputKvStores);
 
 	let bpCfg: BlueprintConfig = {
 		subItptOf: null,
 		nameSelf,
-		initialKvStores,
-		interpretableKeys,
+		ownKVLs,
+		inKeys,
 		crudSkills: "cRUd"
 	};
 
-	let DataTypeAssemblerExt = class extends DataTypeAssembler {
-		itptKeys = interpretableKeys;
+	let DataTypeAssemblerExt = class extends AbstractDataTypeAssembler {
+		itptKeys = inKeys;
 		outputKvStores = ActionCompOutputKVs;
 	};
 	return ldBlueprint(bpCfg)(DataTypeAssemblerExt);

@@ -1,7 +1,7 @@
 import {ldBlueprint, LDLocalState, AbstractNavSearchBar, NavSearchBarBpCfg,
 	cleanRouteString, classNamesLD, VisualKeysDict} from '@metaexplorer/core';
 import { Redirect } from 'react-router';
-import { Toolbar, IconButton, AppBar,InputBase } from '@material-ui/core';
+import { Toolbar, IconButton, AppBar, InputBase } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import React from 'react';
 
@@ -31,36 +31,16 @@ export class MDNavSearchBar extends AbstractNavSearchBar {
 						onClick={() => this.onBackBtnClick()}>
 						<ArrowBackIcon />
 					</IconButton>
-					{/*
-					<Input
-						onChange={(evt) => this.onSearchChange(evt.currentTarget.value)}>
-						{searchValue}
-					</Input>*/}
 					<InputBase
 						placeholder="Search…"
 						defaultValue={searchValue}
 						inputProps={{ onChange: (evt) => this.onSearchChange(evt.currentTarget.value) }}
-					>{searchValue}</InputBase>
-					{/*<SearchIcon />*/}
+						value={searchValue}
+					/>
 				</Toolbar>
 			</AppBar>
 			{this.renderInputContainer()}
 		</>
 		);
-		/*
-		<>
-			<AppBar
-				className={classNamesLD(null, localValues)}
-			leftIcon='arrow_back' onLeftIconClick={() => this.onBackBtnClick()} rightIcon='search'>
-				<Input type='text'
-					className='searchbar-input'
-					label=""
-					name="searchInput"
-					value={searchValue}
-					onChange={(evt) => this.onSearchChange(evt)} />
-			</AppBar>
-			{this.renderInputContainer()}
-		</>
-		*/
 	}
 }

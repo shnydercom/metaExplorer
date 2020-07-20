@@ -1,5 +1,5 @@
 import { LDDict } from '../../../ldaccess/LDDict';
-import { IKvStore } from '../../../ldaccess/ikvstore';
+import { KVL } from '../../../ldaccess/KVL';
 import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../../ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
@@ -11,7 +11,7 @@ import { Component, ReactNode } from 'react';
 export const NavSearchBarName = "metaexplorer.io/material-design/NavSearchBar";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer, VisualKeysDict.searchText, VisualKeysDict.routeSend_back, VisualKeysDict.cssClassName];
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -41,8 +41,8 @@ let initialKVStores: IKvStore[] = [
 export const NavSearchBarBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: NavSearchBarName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVLs: ownKVLs,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 export type NavSearchBarState = LDLocalState & {
@@ -74,7 +74,7 @@ NavSearchBarState>
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 
 	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 
@@ -96,7 +96,7 @@ NavSearchBarState>
 		this.setState({ ...this.state, searchValue: evtVal });
 		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
 		if (!outputKVMap) return;
-		let outSearchKv: IKvStore = {
+		let outSearchKv: KVL = {
 			key: VisualKeysDict.searchText,
 			value: evtVal,
 			ldType: LDDict.Text

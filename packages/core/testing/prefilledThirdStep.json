@@ -2,7 +2,7 @@
   "subItptOf": "9a3630de-5349-437c-9a77-e1b168fa1216",
   "canInterpretType": "CHead-ObjectType",
   "nameSelf": "CHead",
-  "initialKvStores": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "BHead",
           "canInterpretType": "BHead-ObjectType",
           "nameSelf": "9a3630de-5349-437c-9a77-e1b168fa1216",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -21,7 +21,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputContainer"
           ]
         },
@@ -29,7 +29,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "77347eb9-cf79-4d15-9bc3-93287c5a1109",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "HeaderText",
               "value": "A header from RefMap",
@@ -46,7 +46,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "Description"
           ]
         }
@@ -55,7 +55,7 @@
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": [
+  "inKeys": [
     {
       "objRef": "77347eb9-cf79-4d15-9bc3-93287c5a1109",
       "propRef": "Description"

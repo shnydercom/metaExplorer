@@ -1,5 +1,5 @@
 import { AbstractDataTransformer } from "./abstractDataTransformer";
-import { IKvStore } from "../ldaccess/ikvstore";
+import { KVL } from "../ldaccess/KVL";
 import { ldBlueprint, BlueprintConfig } from "../ldaccess/ldBlueprint";
 import { LDDict } from "../ldaccess/LDDict";
 import { UserDefDict } from "../ldaccess/UserDefDict";
@@ -13,7 +13,7 @@ export const shField = "SubHeaderTextField";
 export const JSONArrayToCompactInfoArrayName: string = "data/JSONArrayToCompactInfoArray";
 
 export const ToCompactInfoArrayItptKeys: string[] = [transfInputKey, headerField, shField];
-export const ToCompactInfoArrayOutputKVs: IKvStore[] = [
+export const ToCompactInfoArrayOutputKVs: KVL[] = [
 	{
 		key: transfOutputKey,
 		value: undefined,
@@ -21,7 +21,7 @@ export const ToCompactInfoArrayOutputKVs: IKvStore[] = [
 	}
 ];
 
-const initialKVStores: IKvStore[] = [
+const ownKVLs: KVL[] = [
 	{
 		key: transfInputKey,
 		value: undefined,
@@ -43,8 +43,8 @@ const initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: JSONArrayToCompactInfoArrayName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: ToCompactInfoArrayItptKeys,
+	ownKVLs: ownKVLs,
+	inKeys: ToCompactInfoArrayItptKeys,
 	crudSkills: "cRUd"
 };
 @ldBlueprint(bpCfg)
@@ -65,8 +65,8 @@ export class JSONArrayToCompactInfoArray extends AbstractDataTransformer {
 	 * @param outputKvStores
 	 */
 	protected mappingFunction(
-		inputParams: Map<string, IKvStore>,
-		outputKvStores: Map<string, IKvStore>): IKvStore[] {
+		inputParams: Map<string, KVL>,
+		outputKvStores: Map<string, KVL>): KVL[] {
 		//TODO: actually implement
 		let rv = [];
 		let jsonArrKv = inputParams.get(transfInputKey);

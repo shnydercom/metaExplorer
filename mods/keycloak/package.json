@@ -4,10 +4,13 @@
   "description": "TODO:changeDescription",
   "scripts": {
     "test": "test",
-    "build": "tsc"
+    "buildesm": "tsc -m es6 -target esnext --outDir lib-esm",
+    "buildregular": "tsc",
+    "build": "yarn buildesm && yarn buildregular"
   },
   "author": "Jonathan Schneider",
   "license": "EUPL-1.2",
+  "module": "./lib-esm/index.js",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "repository": "",

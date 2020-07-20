@@ -1,7 +1,7 @@
 import { AbstractDataTransformer } from "../../datatransformation/abstractDataTransformer";
 import { UserDefDict } from "../../ldaccess/UserDefDict";
 import { ActionKeysDict } from "./ActionDict";
-import { IKvStore } from "../../ldaccess/ikvstore";
+import { KVL } from "../../ldaccess/KVL";
 import { LDDict } from "../../ldaccess/LDDict";
 import { ldBlueprint, BlueprintConfig } from "../../ldaccess/ldBlueprint";
 import { getApplicationStore } from "../../approot";
@@ -14,14 +14,14 @@ export const payloadOutputKey = UserDefDict.outputData;
 export const ActionHandlerName = "ActionHandler";
 
 export const ActionHandlerKeys: string[] = [handleTypeKey, handleIdKey];
-export const ActionHandlerOutputKVs: IKvStore[] = [
+export const ActionHandlerOutputKVs: KVL[] = [
 	{
 		key: payloadOutputKey,
 		value: undefined,
 		ldType: undefined
 	}
 ];
-export const ActionHandlerInputKVs: IKvStore[] = [
+export const ActionHandlerInputKVs: KVL[] = [
 	{
 		key: handleTypeKey,
 		value: undefined,
@@ -34,7 +34,7 @@ export const ActionHandlerInputKVs: IKvStore[] = [
 	}
 ];
 
-const initialKVStores: IKvStore[] = [
+const ownKVLs: KVL[] = [
 	...ActionHandlerInputKVs,
 	...ActionHandlerOutputKVs
 ];
@@ -42,8 +42,8 @@ const initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ActionHandlerName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: ActionHandlerKeys,
+	ownKVLs: ownKVLs,
+	inKeys: ActionHandlerKeys,
 	crudSkills: "cRUd"
 };
 @ldBlueprint(bpCfg)
@@ -52,12 +52,12 @@ export class ActionHandler extends AbstractDataTransformer {
 		super(ldTkStr);
 		this.itptKeys = [ActionKeysDict.action_internal, ...ActionHandlerKeys];
 		this.outputKvStores = ActionHandlerOutputKVs;
-		let typeKv = this.cfg.initialKvStores.find((val) => val.key === handleTypeKey);
-		let idKv = this.cfg.initialKvStores.find((val) => val.key === handleIdKey);
+		let typeKv = this.cfg.ownKVLs.find((val) => val.key === handleTypeKey);
+		let idKv = this.cfg.ownKVLs.find((val) => val.key === handleIdKey);
 		this.triggerRegisterIfNecessary(typeKv, idKv);
 	}
 
-	protected triggerRegisterIfNecessary(typeKv: IKvStore, idKv: IKvStore) {
+	protected triggerRegisterIfNecessary(typeKv: KVL, idKv: KVL) {
 		if (idKv && !!idKv.value) {
 			getApplicationStore().dispatch(registerIdActionHandlerAction(idKv.value, this.ldTkStr));
 		}
@@ -67,8 +67,8 @@ export class ActionHandler extends AbstractDataTransformer {
 	}
 
 	protected mappingFunction(
-		inputParams: Map<string, IKvStore>,
-		outputKvStores: Map<string, IKvStore>): IKvStore[] {
+		inputParams: Map<string, KVL>,
+		outputKvStores: Map<string, KVL>): KVL[] {
 		let rv = [];
 		let handleTypeInputKv = inputParams.get(handleTypeKey);
 		let handleIdInputKv = inputParams.get(handleIdKey);

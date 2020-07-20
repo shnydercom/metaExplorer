@@ -1,11 +1,11 @@
-import { IKvStore,BlueprintConfig , ldBlueprint, LDDict, AbstractDataTransformer, UserDefDict} from "@metaexplorer/core";
+import { KVL,BlueprintConfig , ldBlueprint, LDDict, AbstractDataTransformer, UserDefDict} from "@metaexplorer/core";
 import { KeyCloakAuthAPI, EVENT_KEYCLOAK_WEB_AUTH } from "../apis/KeyCloakAuthAPI";
 import { tokenStr } from "../sidefx/KeyCloakAuthCfg";
 
 export const keyCloakTokenStateName: string = "keycloak/auth/tokenstate";
 
 export const KeyCloakTokenStateItptKeys: string[] = [];
-export const KeyCloakTokenStateOutputKVs: IKvStore[] = [
+export const KeyCloakTokenStateOutputKVs: KVL[] = [
 	{
 		key: tokenStr,
 		value: undefined,
@@ -13,15 +13,15 @@ export const KeyCloakTokenStateOutputKVs: IKvStore[] = [
 	}
 ];
 
-const initialKVStores: IKvStore[] = [
+const ownKVLs: KVL[] = [
 	...KeyCloakTokenStateOutputKVs
 ];
 
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: keyCloakTokenStateName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: KeyCloakTokenStateItptKeys,
+	ownKVLs: ownKVLs,
+	inKeys: KeyCloakTokenStateItptKeys,
 	crudSkills: "cRUd"
 };
 
@@ -46,7 +46,7 @@ export class KeyCloakTokenRetriever extends AbstractDataTransformer {
 	}
 
 	protected propagateChange() {
-		let outputKVMap: IKvStore = this.cfg.initialKvStores.find((val) => UserDefDict.outputKVMapKey === val.key);
+		let outputKVMap: KVL = this.cfg.ownKVLs.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		this.isOutputDirty = true;
 		this.evalDirtyOutput();
@@ -58,8 +58,8 @@ export class KeyCloakTokenRetriever extends AbstractDataTransformer {
 	 * @param outputKvStores
 	 */
 	protected mappingFunction(
-		inputParams: Map<string, IKvStore>,
-		outputKvStores: Map<string, IKvStore>): IKvStore[] {
+		inputParams: Map<string, KVL>,
+		outputKvStores: Map<string, KVL>): KVL[] {
 		let rv = [];
 		const tokenOutputKV = outputKvStores.get(tokenStr);
 		tokenOutputKV.value = this.kcAPI.getState().token;

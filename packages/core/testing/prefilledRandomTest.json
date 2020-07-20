@@ -2,7 +2,7 @@
   "subItptOf": "e50eca39-5c21-42ec-a0bf-207f266e5b46",
   "canInterpretType": "2RandomInputsComplex-ObjectType",
   "nameSelf": "2RandomInputsComplex",
-  "initialKvStores": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/material-design/NavBarWActions",
           "canInterpretType": "metaexplorer.io/material-design/NavBarWActions-ObjectType",
           "nameSelf": "e50eca39-5c21-42ec-a0bf-207f266e5b46",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -34,13 +34,13 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "a39b2dbf-e61e-4650-a0fb-95980e368759": {
           "subItptOf": "metaexplorer.io/material-design/BottomNav",
           "canInterpretType": "metaexplorer.io/material-design/BottomNav-ObjectType",
           "nameSelf": "a39b2dbf-e61e-4650-a0fb-95980e368759",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -51,27 +51,27 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "bda01b43-6805-4490-be80-b9ce7cc95916": {
           "subItptOf": "ProductDisplayInterpreter",
           "canInterpretType": "testInterpreter-ObjectType",
           "nameSelf": "bda01b43-6805-4490-be80-b9ce7cc95916",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "identifier",
               "ldType": "http://schema.org/Text"
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": [
+  "inKeys": [
     {
       "objRef": "bda01b43-6805-4490-be80-b9ce7cc95916",
       "propRef": "identifier"

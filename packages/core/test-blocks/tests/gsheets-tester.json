@@ -2,7 +2,7 @@
   "subItptOf": "59bf7b60-b89a-4a0f-ad14-dbfd15ad5bb2",
   "canInterpretType": "google/sheets/retriever-test-ObjectType",
   "nameSelf": "google/sheets/retriever-test",
-  "initialKvStores": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "59bf7b60-b89a-4a0f-ad14-dbfd15ad5bb2",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "in_0",
               "value": {
@@ -69,7 +69,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "in_0",
             "in_1",
             "in_2",
@@ -83,15 +83,15 @@
           "subItptOf": "google-api/WebAuthenticator",
           "canInterpretType": "http://my-domain.com/my-class",
           "nameSelf": "0de650b7-8890-4e48-afdc-40b2241a66b6",
-          "initialKvStores": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "03172f8c-20fa-42ee-a208-721ff6631881": {
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "03172f8c-20fa-42ee-a208-721ff6631881",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "http://schema.org/description",
               "value": "The sheet's document ID as in the URL",
@@ -104,13 +104,13 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "0bceb3a1-20b5-4ffd-b9b3-07a78fdc1ebd": {
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "0bceb3a1-20b5-4ffd-b9b3-07a78fdc1ebd",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "http://schema.org/description",
               "value": "sheet name inside the document",
@@ -123,13 +123,13 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "63d651d3-b428-42a2-ad32-ce441d0308ce": {
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "63d651d3-b428-42a2-ad32-ce441d0308ce",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "http://schema.org/description",
               "value": "The range to get from that sheet",
@@ -142,13 +142,13 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "a0e2dd2f-fcb2-4276-8f34-443f9e4957ba": {
           "subItptOf": "metaexplorer.io/basichtml/bold",
           "canInterpretType": "metaexplorer.io/basichtml/bold-ObjectType",
           "nameSelf": "a0e2dd2f-fcb2-4276-8f34-443f9e4957ba",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputdata",
               "value": "below here will be a table once data has been successfully loaded...",
@@ -156,13 +156,13 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "ce47b2f9-3999-4e23-94ca-7af7d0507ae1": {
           "subItptOf": "metaexplorer.io/MagicBox",
           "canInterpretType": "metaexplorer.io/MagicBoxType",
           "nameSelf": "ce47b2f9-3999-4e23-94ca-7af7d0507ae1",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputdata",
               "value": {
@@ -172,7 +172,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputdata"
           ]
         },
@@ -180,7 +180,7 @@
           "subItptOf": "data/JSONArrayToCompactInfoArray",
           "canInterpretType": "data/JSONArrayToCompactInfoArray-ObjectType",
           "nameSelf": "fdec6c75-1b20-4163-889b-211be0b4ba95",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputdata",
               "value": {
@@ -199,7 +199,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "inputdata"
           ]
         },
@@ -207,7 +207,7 @@
           "subItptOf": "data/2DtoJSONArray",
           "canInterpretType": "data/2DtoJSONArray-ObjectType",
           "nameSelf": "c1068925-8bf3-46f4-a540-36af6990e057",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "rowsAndCols",
               "value": {
@@ -222,7 +222,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "rowsAndCols"
           ]
         },
@@ -230,7 +230,7 @@
           "subItptOf": "google-api/sheets/rangeRetriever",
           "canInterpretType": "google-api/sheets/rangeRetriever-ObjectType",
           "nameSelf": "fea0a2de-b1ff-424c-9d95-bdd5bc45f348",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "googleDocID",
               "value": "1HL-Zf9NKxuo03SVlcMGQk22I5ZhGq3CD4nX9k12TBLA",
@@ -272,7 +272,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "googleDocID",
             "sheetName",
             "range"
@@ -282,7 +282,7 @@
           "subItptOf": "metaexplorer.io/material-design/SimpleTextTable",
           "canInterpretType": "metaexplorer.io/material-design/SimpleTextTable-ObjectType",
           "nameSelf": "3b154a92-d981-4ec6-a81f-824575095192",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "headings",
               "value": {
@@ -299,7 +299,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "headings",
             "rows"
           ]
@@ -309,5 +309,5 @@
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "inKeys": []
 }

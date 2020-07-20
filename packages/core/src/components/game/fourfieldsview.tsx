@@ -1,6 +1,6 @@
 import React from 'react';
 import { LDDict } from '../../ldaccess/LDDict';
-import { IKvStore } from '../../ldaccess/ikvstore';
+import { KVL } from '../../ldaccess/KVL';
 import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../ldaccess/ildoptions';
 import { VisualKeysDict } from '../../components/visualcomposition/visualDict';
@@ -32,7 +32,7 @@ let cfgIntrprtKeys: string[] =
 		VisualKeysDict.inputContainer,
 		GAME_CORRECT_FIELD_IDX
 	];
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{ key: GAME_TASK_HEADING, value: undefined, ldType: LDDict.Text },
 	{ key: GAME_TASK_TXT, value: undefined, ldType: LDDict.Text },
 	{ key: GAME_FIELD_ITPT_UL, value: undefined, ldType: UserDefDict.intrprtrClassType },
@@ -46,8 +46,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: cfgType,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVLs: ownKVLs,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -86,7 +86,7 @@ export class PureFourFieldsView extends Component<LDConnectedState & LDConnected
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 
 	private renderSub = generateItptFromCompInfo.bind(this);
 

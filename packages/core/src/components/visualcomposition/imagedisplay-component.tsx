@@ -1,5 +1,5 @@
 import { LDDict } from '../../ldaccess/LDDict';
-import { IKvStore } from '../../ldaccess/ikvstore';
+import { KVL } from '../../ldaccess/KVL';
 import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../appstate/LDProps';
@@ -12,13 +12,13 @@ let cfgType: string = LDDict.ImageObject;
 export const CSS_OBJECT_FIT = "CSSObjectFit";
 let cfgIntrprtKeys: string[] =
 	[LDDict.name, LDDict.fileFormat, LDDict.contentUrl, CSS_OBJECT_FIT, VisualKeysDict.cssClassName];
-let initialKVStores: IKvStore[] = [];
+let ownKVLs: KVL[] = [];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: "metaexplorer.io/imageDisplay",
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVLs: ownKVLs,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -40,7 +40,7 @@ export class PureImgDisplay extends Component<LDConnectedState & LDConnectedDisp
 
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 
 	constructor(props: any) {

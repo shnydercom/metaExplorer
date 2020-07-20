@@ -6,7 +6,7 @@ import { ActionsObservable, ofType } from "redux-observable";
 import { from } from 'rxjs';
 import { ReduxItptRetriever } from "../../ld-react-redux-connect/ReduxItptRetriever";
 import { OutputKVMap } from "../../ldaccess/ldBlueprint";
-import { IKvStore } from "../../ldaccess/ikvstore";
+import { KVL } from "../../ldaccess/KVL";
 import { UserDefDict } from "../../ldaccess/UserDefDict";
 import { mergeMap, map } from "rxjs/operators";
 
@@ -64,7 +64,7 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 		let targetLDToken: ILDToken = new NetworkPreferredToken(ldTkStr);
 		if (itm.ldType === UserDefDict.outputKVMapType || itm.key === UserDefDict.outputKVMapKey) {
 			//TODO: if an outputKvMap exists in the list of kvStores to split, then look for the right value and modify
-			//the okvmap on that ikvstore
+			//the okvmap on that KVL
 			const splitOKV: OutputKVMap = itm.value;
 			for (const okvElemStr in splitOKV) {
 				if (splitOKV.hasOwnProperty(okvElemStr)) {
@@ -76,7 +76,7 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 					let outputKvMaps = curSC.resource.kvStores.filter((val) => val.key === UserDefDict.outputKVMapKey);
 					let newOutputKvMapInStore: OutputKVMap = { [okvElemStr]: [{ targetLDToken: targetLDToken, targetProperty: targetProp }] };
 					if (outputKvMaps.length === 0) {
-						let newOKVStoreInStore: IKvStore = { key: UserDefDict.outputKVMapKey, value: newOutputKvMapInStore, ldType: UserDefDict.outputKVMapType };
+						let newOKVStoreInStore: KVL = { key: UserDefDict.outputKVMapKey, value: newOutputKvMapInStore, ldType: UserDefDict.outputKVMapType };
 						curSC.resource.kvStores.push(newOKVStoreInStore);
 					} else {
 						outputKvMaps[0].value = newOutputKvMapInStore;
@@ -86,7 +86,7 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 			return;
 		}
 		let newOutputKvMap: OutputKVMap = { [elemKey]: [{ targetLDToken: targetLDToken, targetProperty: elemKey }] };
-		let newOKVStore: IKvStore = { key: UserDefDict.outputKVMapKey, value: newOutputKvMap, ldType: UserDefDict.outputKVMapType };
+		let newOKVStore: KVL = { key: UserDefDict.outputKVMapKey, value: newOutputKvMap, ldType: UserDefDict.outputKVMapType };
 		let newLDOptions: ILDOptions = {
 			isLoading: false,
 			lang: lang,

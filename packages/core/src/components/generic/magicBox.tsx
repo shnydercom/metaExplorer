@@ -1,4 +1,4 @@
-import { IKvStore } from '../../ldaccess/ikvstore';
+import { KVL } from '../../ldaccess/KVL';
 import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap, OutputKVMapElement } from '../../ldaccess/ldBlueprint';
 
 import { BaseContainerRewrite } from './baseContainer-rewrite';
@@ -18,14 +18,14 @@ const magicOutput = "mOut";
 export const magicCanInterpretType = "metaexplorer.io/MagicBoxType";
 
 let MagicBoxInputKeys: string[] = [inputdata];
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{ key: inputdata, value: undefined, ldType: undefined }
 ];
 export const MagicBoxCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: MagicBoxName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: MagicBoxInputKeys,
+	ownKVLs: ownKVLs,
+	inKeys: MagicBoxInputKeys,
 	crudSkills: "cRud",
 	canInterpretType: magicCanInterpretType
 };
@@ -49,11 +49,11 @@ export class PureMagicBox extends Component<LDConnectedState & LDConnectedDispat
 		if (!prevState.containertoken) {
 			const newLDOptionsFItpt: ILDOptions = ldOptionsDeepCopy(nextProps.ldOptions);
 			newLDOptionsFItpt.ldToken = nextContainerToken;
-			const modKV: IKvStore = getKVStoreByKey(nextProps.ldOptions.resource.kvStores, inputdata);
+			const modKV: KVL = getKVStoreByKey(nextProps.ldOptions.resource.kvStores, inputdata);
 			let outputNum: number = 1;
 			if (Array.isArray(modKV.value)) {
 				let newLdType = modKV.ldType;
-				let newKvStores: IKvStore[] = [];
+				let newKvStores: KVL[] = [];
 				outputNum = modKV.value.length;
 				for (let i = 0; i < outputNum; i++) {
 					newKvStores.push({
@@ -66,7 +66,7 @@ export class PureMagicBox extends Component<LDConnectedState & LDConnectedDispat
 			}
 			nextProps.notifyLDOptionsChange(newLDOptionsFItpt);
 		} else {
-			const modKV: IKvStore = getKVStoreByKey(nextProps.ldOptions.resource.kvStores, inputdata);
+			const modKV: KVL = getKVStoreByKey(nextProps.ldOptions.resource.kvStores, inputdata);
 
 			let outputKVMap: OutputKVMap = rvLocal.localValues.get(UserDefDict.outputKVMapKey);
 			if (!outputKVMap) {
@@ -93,7 +93,7 @@ export class PureMagicBox extends Component<LDConnectedState & LDConnectedDispat
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 
 	constructor(props: any) {
 		super(props);

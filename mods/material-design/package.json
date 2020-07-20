@@ -2,6 +2,7 @@
   "name": "@metaexplorer-mods/material-design",
   "version": "0.0.13",
   "description": "TODO:changeDescription",
+  "module": "./lib-esm/index.js",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "repository": "",
@@ -14,7 +15,9 @@
   "scripts": {
     "story": "start-storybook -p 2019 -s ./public",
     "test": "test",
-    "build": "tsc && yarn compcss",
+    "buildesm": "tsc -m es6 -target esnext --outDir lib-esm",
+    "buildregular": "tsc",
+    "build": "yarn buildesm && yarn buildregular && yarn compcss",
     "compcss": "node-sass --output-style compressed ./src/styles/material-design-index.scss > ./lib/style.css"
   },
   "devDependencies": {

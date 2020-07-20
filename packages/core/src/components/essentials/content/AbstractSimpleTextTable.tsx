@@ -1,4 +1,4 @@
-import { IKvStore } from '../../../ldaccess/ikvstore';
+import { KVL } from '../../../ldaccess/KVL';
 import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../../ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
@@ -13,7 +13,7 @@ const SimpleTextTableName = "metaexplorer.io/core/SimpleTextTable";
 const viewSimpleTextTableAction = createLDUINSUrl(LDDict.ViewAction, LDDict.object, LDUIDict.TupleTextTable);
 
 let simpleTextTableInputKeys: string[] = [LDUIDictVerbs.headings, LDUIDictVerbs.tuples];
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{ key: LDUIDictVerbs.headings, value: undefined, ldType: undefined },
 	{ key: LDUIDictVerbs.tuples, value: undefined, ldType: undefined }
 ];
@@ -21,8 +21,8 @@ export const simpleTextTableCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: viewSimpleTextTableAction,
 	nameSelf: SimpleTextTableName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: simpleTextTableInputKeys,
+	ownKVLs: ownKVLs,
+	inKeys: simpleTextTableInputKeys,
 	crudSkills: "cRud"
 };
 export type SimpleTextTableState = LDLocalState;
@@ -45,7 +45,7 @@ export abstract class AbstractSimpleTextTable extends Component<LDConnectedState
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 
 	constructor(props: any) {
 		super(props);

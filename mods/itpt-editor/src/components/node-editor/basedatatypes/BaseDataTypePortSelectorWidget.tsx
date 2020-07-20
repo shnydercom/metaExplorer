@@ -2,7 +2,7 @@ import { SinglePortWidget } from "../edgesettings/SinglePortWidget";
 import { LDPortModel } from "../_super/LDPortModel";
 import { BaseDataTypeDropDown } from "./BaseDataTypeDropDown";
 import {
-	IKvStore, LDOwnProps, LDConnectedState, LDConnectedDispatch, LDLocalState, mapStateToProps, mapDispatchToProps,
+	KVL, LDOwnProps, LDConnectedState, LDConnectedDispatch, LDLocalState, mapStateToProps, mapDispatchToProps,
 	OutputKVMapElement, ldOptionsDeepCopy, UserDefDict, ILDToken, NetworkPreferredToken, getKVStoreByKey,
 	ILDOptions, DEFAULT_ITPT_RETRIEVER_NAME, LDDict, gdsfpLD, BaseContainerRewrite
 } from "@metaexplorer/core";
@@ -18,7 +18,7 @@ export type BaseDataTypePortSelectorProps = {
 
 export interface BaseDataTypePortSelectorState {
 	portType: string;
-	portKvStore: IKvStore | null;
+	portKvStore: KVL | null;
 }
 
 class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch, BaseDataTypePortSelectorState & LDLocalState> {
@@ -85,7 +85,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 				targetLDToken: new NetworkPreferredToken(""),
 				targetProperty: UserDefDict.outputData
 			};
-			let outputKvMap: IKvStore = {
+			let outputKvMap: KVL = {
 				key: UserDefDict.outputKVMapKey,
 				ldType: UserDefDict.outputKVMapType,
 				value: {
@@ -135,12 +135,12 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 	}
 
 	onPortTypeChange = (newType: string, nProps: BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch) => {
-		let changedKvStore: IKvStore = this.props.model.getKV();
+		let changedKvStore: KVL = this.props.model.getKV();
 		let thisInput: OutputKVMapElement = {
 			targetLDToken: new NetworkPreferredToken(""),
 			targetProperty: UserDefDict.outputData
 		};
-		let outputKvMap: IKvStore = {
+		let outputKvMap: KVL = {
 			key: UserDefDict.outputKVMapKey,
 			ldType: UserDefDict.outputKVMapType,
 			value: {
@@ -149,7 +149,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 				]
 			}
 		};
-		const outputKv: IKvStore = {
+		const outputKv: KVL = {
 			key: UserDefDict.outputData,
 			value: null,
 			ldType: newType

@@ -2,7 +2,7 @@ import { Component, ReactNode } from 'react';
 import { LDConnectedDispatch, LDConnectedState, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
 import { BlueprintConfig, IBlueprintItpt } from '../../../ldaccess/ldBlueprint';
 import { LDDict } from '../../../ldaccess/LDDict';
-import { IKvStore } from '../../../ldaccess/ikvstore';
+import { KVL } from '../../../ldaccess/KVL';
 import { ILDOptions } from '../../../ldaccess/ildoptions';
 import { UserDefDict } from '../../../ldaccess/UserDefDict';
 import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
@@ -28,20 +28,20 @@ const SingleImageSelectorName = "metaexplorer.io/core/SingleImageSelector";
 let cfgType: string = createLDUINSUrl(LDDict.CreateAction, LDDict.result, LDDict.ImageObject);
 let cfgIntrprtKeys: string[] =
 	[];
-const RESULT_KV: IKvStore = {
+const RESULT_KV: KVL = {
 	key: LDDict.result,
 	value: undefined,
 	ldType: LDDict.URL
 };
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	RESULT_KV
 ];
 export let SingleImageSelectorBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: SingleImageSelectorName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVLs: ownKVLs,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -63,7 +63,7 @@ export abstract class AbstractSingleImageSelector extends Component<
 	errorImgLink: string = "/media/nocamera_negative_black.svg";
 	draggingImgLink: string = "/media/dragndrop.svg";
 
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 	// tslint:disable-next-line:variable-name
 	_isMounted: boolean = false;
 

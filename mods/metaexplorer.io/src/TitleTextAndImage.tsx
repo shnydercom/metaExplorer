@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	LDDict, IKvStore, gdsfpLD, generateItptFromCompInfo, initLDLocalState,
+	LDDict, KVL, gdsfpLD, generateItptFromCompInfo, initLDLocalState,
 	ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap,
 	ILDOptions, VisualKeysDict, UserDefDict, LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState
 } from '@metaexplorer/core';
@@ -10,7 +10,7 @@ export const CSS_BASECLASS = "titletextandimage";
 export var TitleTextAndImageName: string = "metaexplorer.io/TitleTextAndContainer";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer, VisualKeysDict.headerTxt, VisualKeysDict.description, VisualKeysDict.directionChangeBreakPoint, VisualKeysDict.switchVerticalDirection, VisualKeysDict.switchHorizontalDirection];
-let initialKVStores: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -45,8 +45,8 @@ let initialKVStores: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: TitleTextAndImageName,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVLs: ownKVLs,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -78,7 +78,7 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 
 	private renderSub = generateItptFromCompInfo.bind(this);
 

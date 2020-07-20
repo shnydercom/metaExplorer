@@ -1,4 +1,4 @@
-import { IKvStore } from "../ikvstore";
+import { KVL } from "../KVL";
 import { LDDict } from "../LDDict";
 import { VisualKeysDict, VisualTypesDict } from "../../components/visualcomposition/visualDict";
 
@@ -7,7 +7,7 @@ import { VisualKeysDict, VisualTypesDict } from "../../components/visualcomposit
  * @param inputKv the input KvStore
  * @param targetKv the target KvStore
  */
-export const isInputValueValidFor: (inputKv: IKvStore, targetKv: IKvStore) => boolean
+export const isInputValueValidFor: (inputKv: KVL, targetKv: KVL) => boolean
 	= (inputKv, targetKv) => {
 		if (inputKv.ldType && targetKv.ldType) {
 			if (inputKv.ldType !== targetKv.ldType) {

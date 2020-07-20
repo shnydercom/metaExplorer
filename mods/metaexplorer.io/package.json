@@ -1,14 +1,17 @@
 {
   "name": "@metaexplorer-mods/metaexplorer.io",
   "version": "0.0.13",
-  "description": "TODO:changeDescription",
+  "description": "components that you'll find on the metaexplorer site",
   "scripts": {
     "test": "test",
-    "build": "yarn tsc && yarn compcss",
+    "buildesm": "tsc -m es6 -target esnext --outDir lib-esm",
+    "buildregular": "tsc",
+    "build": "yarn buildesm && yarn buildregular && yarn compcss",
     "compcss": "node-sass --output-style compressed ./src/styles/index.scss > ./lib/style.css"
   },
   "author": "Jonathan Schneider",
   "license": "EUPL-1.2",
+  "module": "./lib-esm/index.js",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "repository": "",
@@ -16,7 +19,8 @@
     "access": "public"
   },
   "files": [
-    "lib"
+    "lib",
+    "lib-esm"
   ],
   "dependencies": {
     "@metaexplorer/core": "^0.0.13",

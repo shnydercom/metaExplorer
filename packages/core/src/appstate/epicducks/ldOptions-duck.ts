@@ -2,7 +2,7 @@ import { ActionsObservable, ofType } from 'redux-observable';
 import { from, of } from 'rxjs';
 import { LDError, LDErrorMsgState } from './../LDError';
 import { ILDOptionsMapStatePart } from '../store';
-import { IKvStore } from '../../ldaccess/ikvstore';
+import { KVL } from '../../ldaccess/KVL';
 import { ILDOptions } from '../../ldaccess/ildoptions';
 import { ILDToken, NetworkPreferredToken } from '../../ldaccess/ildtoken';
 import { ldOptionsDeepCopy } from '../../ldaccess/ldUtils';
@@ -22,12 +22,12 @@ export const LDOPTIONS_REQUEST_RESULT = 'metaexplorer.io/LDOPTIONS_REQUEST_RESUL
 export const LDOPTIONS_KV_UPDATE = 'metaexplorer.io/LDOPTIONS_KV_UPDATE';
 export const ACTION_LDACTION = 'metaexplorer.io/ACTION_LDACTION';
 
-export type LD_KVUpdateAction = { type: 'metaexplorer.io/LDOPTIONS_KV_UPDATE', changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap };
+export type LD_KVUpdateAction = { type: 'metaexplorer.io/LDOPTIONS_KV_UPDATE', changedKvStores: KVL[], thisLdTkStr: string, updatedKvMap: OutputKVMap };
 
 export type LDActionType = { type: 'metaexplorer.io/ACTION_LDACTION', payload: any, idHandler: string, typeHandler: string };
 
 export type LDAction =
-	{ type: 'metaexplorer.io/LDOPTIONS_CLIENTSIDE_CREATE', kvStores: IKvStore[], lang: string, alias: string }
+	{ type: 'metaexplorer.io/LDOPTIONS_CLIENTSIDE_CREATE', kvStores: KVL[], lang: string, alias: string }
 	| { type: 'metaexplorer.io/LDOPTIONS_CLIENTSIDE_UPDATE', updatedLDOptions: ILDOptions }
 	| { type: 'metaexplorer.io/LDOPTIONS_REQUEST_ASYNC', isExternalAPICall: boolean, uploadData: ILDOptions, targetUrl: string, targetReceiverLnk: string }
 	| { type: 'metaexplorer.io/LDOPTIONS_REQUEST_RESULT', ldOptionsPayload: ILDWebResource, targetReceiverLnk: string }
@@ -38,7 +38,7 @@ export type LDAction =
 const externalAPICallDict = new Map<string, () => Promise<any>>();
 
 //Action factories, return action objects
-export const ldOptionsClientSideCreateAction = (kvStores: IKvStore[], lang: string, alias: string) => ({
+export const ldOptionsClientSideCreateAction = (kvStores: KVL[], lang: string, alias: string) => ({
 	type: LDOPTIONS_CLIENTSIDE_CREATE,
 	kvStores: kvStores,
 	lang: lang,
@@ -96,7 +96,7 @@ export const ldOptionsFailureAction = (message: string, targetReceiverLnk): LDEr
 	};
 };
 
-export const dispatchKvUpdateAction = (changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => ({
+export const dispatchKvUpdateAction = (changedKvStores: KVL[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => ({
 	type: LDOPTIONS_KV_UPDATE,
 	changedKvStores,
 	thisLdTkStr,
@@ -185,8 +185,8 @@ export const ldOptionsMapReducer = (
 					isUpdateNeeded = true;
 				} else {
 					//check kvStores in detail, quick and dirty deep compare
-					let kvStoresA: IKvStore[] = action.kvStores;
-					let kvStoresB: IKvStore[] = singleLDOptions.resource.kvStores;
+					let kvStoresA: KVL[] = action.kvStores;
+					let kvStoresB: KVL[] = singleLDOptions.resource.kvStores;
 					isUpdateNeeded = !(JSON.stringify(kvStoresA) === JSON.stringify(kvStoresB));
 				}
 			}
@@ -257,7 +257,7 @@ export const ldOptionsMapReducer = (
 					stateCopy[targetTokenStr] = ldOptionsDeepCopy(stateCopy[targetTokenStr]);
 					const targetKvCopy = stateCopy[targetTokenStr].resource.kvStores.slice();
 					let targetTokenStrKvIdx = targetKvCopy.findIndex((a) => a.key === targetProp);
-					let kvElemCopy: IKvStore = {
+					let kvElemCopy: KVL = {
 						key: targetProp,
 						value: kvElem.value,
 						ldType: kvElem.ldType

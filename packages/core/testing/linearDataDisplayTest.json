@@ -2,7 +2,7 @@
   "subItptOf": "RootItpt",
   "canInterpretType": "test-ObjectType",
   "nameSelf": "test",
-  "initialKvStores": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "RootItpt",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "in_0",
               "value": {
@@ -21,7 +21,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "in_0"
           ]
         },
@@ -29,7 +29,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "ImgHeadSubDesc",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "primaryInterpreter",
               "value": {
@@ -48,7 +48,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "primaryInterpreter",
             "SubHeaderText"
           ]
@@ -57,7 +57,7 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "TextInputItpt",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "inputdata",
               "value": "predefinedInputfromTest",
@@ -65,12 +65,12 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "inKeys": []
 }

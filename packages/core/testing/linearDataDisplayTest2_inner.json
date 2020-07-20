@@ -2,7 +2,7 @@
   "subItptOf": "RMObj_ImgHeadSubDesc",
   "canInterpretType": "LinearContainer-Inner-ObjectType",
   "nameSelf": "LinearContainer-Inner",
-  "initialKvStores": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "RMObj_ImgHeadSubDesc",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "primaryInterpreter",
               "value": {
@@ -21,7 +21,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "primaryInterpreter"
           ]
         },
@@ -29,7 +29,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "RMObj_LinearContainer",
-          "initialKvStores": [
+          "ownKVLs": [
             {
               "key": "in_0",
               "value": {
@@ -48,7 +48,7 @@
             }
           ],
           "crudSkills": "cRud",
-          "interpretableKeys": [
+          "inKeys": [
             "in_0",
             "in_1"
           ]
@@ -57,22 +57,22 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Date",
           "canInterpretType": "http://schema.org/Date",
           "nameSelf": "RMObj_Date",
-          "initialKvStores": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         },
         "RMObj_Boolean": {
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Boolean",
           "canInterpretType": "http://schema.org/Boolean",
           "nameSelf": "RMObj_Boolean",
-          "initialKvStores": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
-          "interpretableKeys": []
+          "inKeys": []
         }
       },
       "ldType": "InterpreterReferenceMapType"
     }
   ],
   "crudSkills": "cRud",
-  "interpretableKeys": []
+  "inKeys": []
 }

@@ -10,7 +10,7 @@ import { LDError } from "../appstate/LDError";
 import { ldOptionsDeepCopy } from "../ldaccess/ldUtils";
 import { ldOptionsClientSideUpdateAction, ldOptionsClientSideCreateAction } from "../appstate/epicducks/ldOptions-duck";
 import { appItptUpdateAction } from "../appstate/epicducks/appCfg-duck";
-import { IKvStore } from "../ldaccess/ikvstore";
+import { KVL } from "../ldaccess/KVL";
 import { determineSingleKVKey } from "../components/generic/generatorFns";
 import { appItptMatcherFn } from "./appItptMatcher";
 
@@ -25,7 +25,7 @@ export const addBlueprintToRetriever = (input: BlueprintConfig, retrieverName?: 
 	let candidate = retriever.getUnconnectedByNameSelf(input.subItptOf);
 	if (!candidate) {
 		//check if it's well-defined
-		let refMap = getKVStoreByKey(input.initialKvStores, UserDefDict.intrprtrBPCfgRefMapKey);
+		let refMap = getKVStoreByKey(input.ownKVLs, UserDefDict.intrprtrBPCfgRefMapKey);
 		if (!refMap || !refMap.value || refMap.value === {}) return;
 		if (!refMap.value[input.subItptOf]) return;
 		let searchTerm: string = UserDefDict.intrprtrBPCfgRefMapName;
@@ -39,17 +39,17 @@ export const addBlueprintToRetriever = (input: BlueprintConfig, retrieverName?: 
 export const intrprtrTypeInstanceFromBlueprint = (input: BlueprintConfig): any => {
 	if (!input) return null;
 	let rv = {};
-	input.interpretableKeys.forEach((val) => {
+	input.inKeys.forEach((val) => {
 		try {
 			let propID: string = (val as ObjectPropertyRef).propRef;
 			if (propID) {
 				rv[propID] = null;
 			} else if (val) {
-				const kv = getKVStoreByKey(input.initialKvStores, val as string);
+				const kv = getKVStoreByKey(input.ownKVLs, val as string);
 				if (!kv) {
-					let skvKey = determineSingleKVKey(input.initialKvStores, input.canInterpretType, input.interpretableKeys as string[]);
+					let skvKey = determineSingleKVKey(input.ownKVLs, input.canInterpretType, input.inKeys as string[]);
 					if (skvKey) {
-						rv[val as string] = getKVStoreByKey(input.initialKvStores, skvKey).value[val as string];
+						rv[val as string] = getKVStoreByKey(input.ownKVLs, skvKey).value[val as string];
 						return;
 					}
 				}
@@ -62,14 +62,14 @@ export const intrprtrTypeInstanceFromBlueprint = (input: BlueprintConfig): any =
 	return rv;
 };
 
-export const changeMainAppItpt = (toItptName: string, startingInstance?: IKvStore[]): void => {
+export const changeMainAppItpt = (toItptName: string, startingInstance?: KVL[]): void => {
 	const appState = getApplicationStore().getState();
 	const appKey = appState.appCfg.appKey;
 	//this.generatePrefilled(val.itptList[numItpts - 1]);
 	let newItpt = appItptRetrFn().getItptByNameSelf(toItptName);
 	if (!newItpt) throw new LDError("error in interpreterAPI: could not find " + toItptName);
 	let newItptCfg = { ...newItpt.cfg } as BlueprintConfig;
-	newItptCfg.initialKvStores = startingInstance;
+	newItptCfg.ownKVLs = startingInstance;
 	let newType = newItptCfg.canInterpretType;
 	let dummyInstance = intrprtrTypeInstanceFromBlueprint(newItptCfg);
 	const appKvKey = appKey + "KvKey";
@@ -80,7 +80,7 @@ export const changeMainAppItpt = (toItptName: string, startingInstance?: IKvStor
 		];
 		getApplicationStore().dispatch(ldOptionsClientSideUpdateAction(newLDOptions));
 	} else {
-		let kvStores: IKvStore[] = [
+		let kvStores: KVL[] = [
 			{ key: appKvKey, ldType: newType, value: dummyInstance }
 		];
 		let lang: string;

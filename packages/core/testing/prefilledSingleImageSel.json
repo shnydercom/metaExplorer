@@ -2,14 +2,14 @@
   "subItptOf": "27b22aa0-6c09-4ec6-b306-296c907f6693",
   "canInterpretType": "MyNewBarcodeApp-ObjectType",
   "nameSelf": "MyNewBarcodeApp",
-  "initialKvStores": [{
+  "ownKVLs": [{
     "key": "InterpreterReferenceMapKey",
     "value": {
       "27b22aa0-6c09-4ec6-b306-296c907f6693": {
         "subItptOf": "metaexplorer.io/material-design/NavBarWActions",
         "canInterpretType": "metaexplorer.io/material-design/NavBarWActions-ObjectType",
         "nameSelf": "27b22aa0-6c09-4ec6-b306-296c907f6693",
-        "initialKvStores": [{
+        "ownKVLs": [{
             "key": "inputContainer",
             "value": {
               "objRef": "226a9915-c8c3-4885-8dc4-6dccb0c98614",
@@ -32,7 +32,7 @@
           }
         ],
         "crudSkills": "cRud",
-        "interpretableKeys": [
+        "inKeys": [
           "inputContainer",
           "PopOverContent"
         ]
@@ -41,7 +41,7 @@
         "subItptOf": "愿望清单/BottomBar",
         "canInterpretType": "愿望清单/BottomBar-ObjectType",
         "nameSelf": "226a9915-c8c3-4885-8dc4-6dccb0c98614",
-        "initialKvStores": [{
+        "ownKVLs": [{
           "key": "inputContainer",
           "value": {
             "objRef": "67384b7b-a5a2-413c-898b-2201412aa01b",
@@ -50,7 +50,7 @@
           "ldType": "InterpreterClassType"
         }],
         "crudSkills": "cRud",
-        "interpretableKeys": [
+        "inKeys": [
           "inputContainer"
         ]
       },
@@ -58,7 +58,7 @@
         "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
         "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
         "nameSelf": "67384b7b-a5a2-413c-898b-2201412aa01b",
-        "initialKvStores": [{
+        "ownKVLs": [{
             "key": "primaryInterpreter",
             "value": {
               "objRef": "cd09fcc9-46be-4af9-a4bd-1f036739908f",
@@ -98,7 +98,7 @@
           }
         ],
         "crudSkills": "cRud",
-        "interpretableKeys": [
+        "inKeys": [
           "primaryInterpreter",
           "SubHeaderText",
           "Description",
@@ -109,15 +109,15 @@
         "subItptOf": "metaexplorer.io/EANScanner",
         "canInterpretType": "http://schema.org/ViewAction",
         "nameSelf": "cd09fcc9-46be-4af9-a4bd-1f036739908f",
-        "initialKvStores": [],
+        "ownKVLs": [],
         "crudSkills": "cRud",
-        "interpretableKeys": []
+        "inKeys": []
       },
       "46933941-3233-4f2d-9d6e-57dbaf137a4f": {
         "subItptOf": "metaexplorer.io/material-design/NavSearchBar",
         "canInterpretType": "metaexplorer.io/material-design/NavSearchBar-ObjectType",
         "nameSelf": "46933941-3233-4f2d-9d6e-57dbaf137a4f",
-        "initialKvStores": [{
+        "ownKVLs": [{
             "key": "inputContainer",
             "value": {
               "objRef": "db530b76-baca-4370-ae6b-41a994ab1e4b",
@@ -132,7 +132,7 @@
           }
         ],
         "crudSkills": "cRud",
-        "interpretableKeys": [
+        "inKeys": [
           "inputContainer"
         ]
       },
@@ -140,18 +140,18 @@
         "subItptOf": "metaexplorer.io/imageDisplay",
         "canInterpretType": "http://schema.org/ViewAction",
         "nameSelf": "db530b76-baca-4370-ae6b-41a994ab1e4b",
-        "initialKvStores": [{
+        "ownKVLs": [{
           "key": "http://schema.org/contentUrl",
           "value": "http://localhost:5000/media/localhost.png"
         }],
         "crudSkills": "cRud",
-        "interpretableKeys": []
+        "inKeys": []
       }
     },
     "ldType": "InterpreterReferenceMapType"
   }],
   "crudSkills": "cRud",
-  "interpretableKeys": [{
+  "inKeys": [{
     "objRef": "67384b7b-a5a2-413c-898b-2201412aa01b",
     "propRef": "secondaryInterpreter"
   }]

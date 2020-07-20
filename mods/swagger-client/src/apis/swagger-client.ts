@@ -100,7 +100,7 @@ export class SwaggerClientAPI {
               nameSelf: retrieverName,
               crudSkills: "cRud",
               subItptOf: null,
-              interpretableKeys: []
+              inKeys: []
             };
             bpcfgs.push(bpcfg);
           }

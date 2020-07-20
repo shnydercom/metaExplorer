@@ -1,3 +1,3 @@
 export interface IMediaRetriever {
-    getMediaURL( contentURL: string, fileFormat: string )
+    getMediaURL( contentURL: string, fileFormat: string );
 }

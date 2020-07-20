@@ -1,10 +1,10 @@
-import { LDRetrieverSuperRewrite, IKvStore, itptKeysFromInputKvs, ldBlueprint, BlueprintConfig,LDDict } from "@metaexplorer/core";
+import { LDRetrieverSuperRewrite, KVL, itptKeysFromInputKvs, ldBlueprint, BlueprintConfig,LDDict } from "@metaexplorer/core";
 import { tokenStr } from "@metaexplorer-mods/keycloak";
 import { RESPONSE_CONTENT } from "../apis/datatypes";
 import { OnboardingAPI } from "../apis/onboardingAPI";
 
 export const signinSignupName = "metaexplorer.io/onboarding/signinSignupRequest";
-let inputKVStores: IKvStore[] = [
+let inputKVStores: KVL[] = [
 	{
 		key: "payload",
 		value: undefined,
@@ -17,7 +17,7 @@ let inputKVStores: IKvStore[] = [
 	},
 ];
 
-let outputKVStores: IKvStore[] = [
+let outputKVStores: KVL[] = [
 	{
 		key: RESPONSE_CONTENT,
 		value: undefined,
@@ -25,21 +25,21 @@ let outputKVStores: IKvStore[] = [
 	},
 ];
 
-let initialKVStores = [...inputKVStores, ...outputKVStores];
+let ownKVLs = [...inputKVStores, ...outputKVStores];
 
-let interpretableKeys = itptKeysFromInputKvs(inputKVStores);
+let inKeys = itptKeysFromInputKvs(inputKVStores);
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: signinSignupName,
-	initialKvStores: initialKVStores,
-	interpretableKeys,
+	ownKVLs: ownKVLs,
+	inKeys,
 	crudSkills: "cRud"
 };
 
 @ldBlueprint(bpCfg)
 export class SignInSignupRequest extends LDRetrieverSuperRewrite {
 	constructor(parameters) {
-		super(parameters, interpretableKeys);
+		super(parameters, inKeys);
 		this.apiCallOverride = () => new Promise((resolve, reject) => {
 			const tokenValue = this.state.localValues.get(tokenStr);
 			OnboardingAPI.getOnboardingAPISingleton().loginFetch(resolve, reject, tokenValue);

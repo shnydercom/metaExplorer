@@ -1,6 +1,6 @@
 import { LDOwnProps, LDLocalState, LDConnectedState, LDConnectedDispatch, LDRouteProps } from "../../appstate/LDProps";
 import { UserDefDict } from "../../ldaccess/UserDefDict";
-import { IKvStore } from "../../ldaccess/ikvstore";
+import { KVL } from "../../ldaccess/KVL";
 import { ldBlueprint, BlueprintConfig, OutputKVMap, IBlueprintItpt } from "../../ldaccess/ldBlueprint";
 import { Component } from "react";
 import { ILDOptions } from "../../ldaccess/ildoptions";
@@ -23,7 +23,7 @@ export interface BaseContOwnState extends LDLocalState, ErrorBoundaryState {
 	errorMsg: string;
 	nameSelf: string;
 	routes: LDRouteProps | null;
-	interpretableKeys: (string | ObjectPropertyRef)[];
+	inKeys: (string | ObjectPropertyRef)[];
 }
 
 export const COMP_BASE_CONTAINER = "metaexplorer.io/baseContainer";
@@ -31,13 +31,13 @@ export const COMP_BASE_CONTAINER = "metaexplorer.io/baseContainer";
 let cfgType: string = UserDefDict.itptContainerObjType;
 let cfgIntrprtKeys: string[] =
 	[];
-let initialKVStores: IKvStore[] = [];
+let ownKVLs: KVL[] = [];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: COMP_BASE_CONTAINER,
-	initialKvStores: initialKVStores,
-	interpretableKeys: cfgIntrprtKeys,
+	ownKVLs: ownKVLs,
+	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
 
@@ -52,7 +52,7 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 			nextProps.ldOptions.resource.kvStores.length === 0) return null;
 		const ldOptions = nextProps.ldOptions;
 		if (ldOptions.isLoading) return null;
-		let interpretableKeys = prevState.interpretableKeys;
+		let inKeys = prevState.inKeys;
 		let ldTokenString = ldOptions.ldToken.get();
 		let retriever: string = ldOptions.visualInfo.retriever;
 		let interpretedBy = ldOptions.visualInfo.interpretedBy;
@@ -64,7 +64,7 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 		ldOptions.resource.kvStores.forEach((itm, idx, kvstores) => {
 			let prevStateLDType = prevState.localLDTypes.get(itm.key);
 			newLDTypes.set(itm.key, itm.ldType);
-			if (interpretableKeys.length > 0 && interpretableKeys.findIndex((itptKey) => itptKey === itm.key) >= 0) {
+			if (inKeys.length > 0 && inKeys.findIndex((itptKey) => itptKey === itm.key) >= 0) {
 				isItptKey = true;
 				return;
 			}
@@ -116,7 +116,7 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	initialKvStores: IKvStore[];
+	ownKVLs: KVL[];
 
 	constructor(props?: BaseContOwnProps & LDConnectedState & LDConnectedDispatch) {
 		super(props);
@@ -129,7 +129,7 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 			compInfos: new Map(),
 			localLDTypes: new Map(),
 			localValues: new Map(),
-			interpretableKeys: this.cfg.interpretableKeys
+			inKeys: this.cfg.inKeys
 		};
 	}
 
