@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps, DOMCamera, UserDefDict, initLDLocalState, ILDOptions,
-    ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap, VisualKeysDict, IKvStore, LDDict,
+    ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap, VisualKeysDict, KVL, LDDict,
     LDLocalState, LDConnectedState, LDConnectedDispatch, LDOwnProps  } from "@metaexplorer/core";
 import { QrCodeGenScanClientAPI } from "../apis/qr-code-genscan-api";
 import React from "react";
@@ -35,7 +35,7 @@ export const QRCodeScannerName = "qr/QRCodeScanner";
 let cfgType: string = LDDict.ViewAction;
 let cfgIntrprtKeys: string[] =
     [];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
     {
         key: VisualKeysDict.utf8textData,
         value: undefined,
@@ -46,7 +46,7 @@ let bpCfg: BlueprintConfig = {
     subItptOf: null,
     canInterpretType: cfgType,
     nameSelf: QRCodeScannerName,
-    ownKVL: ownKVL,
+    ownKVLs: ownKVLs,
     inKeys: cfgIntrprtKeys,
     crudSkills: "cRud"
 };
@@ -60,7 +60,7 @@ export class QRCodeScanner extends Component<LDConnectedState & LDConnectedDispa
     loadingImgLink: string = "/media/camera_negative_black.svg";
     errorImgLink: string = "/media/nocamera_negative_black.svg";
 
-    ownKVL: IKvStore[];
+    ownKVLs: KVL[];
     constructor(props: any) {
         super(props);
         this.cfg = (this.constructor["cfg"] as BlueprintConfig);
@@ -117,7 +117,7 @@ export class QRCodeScanner extends Component<LDConnectedState & LDConnectedDispa
         const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
         if (!outputKVMap) return;
         let qrcode: string = result;
-        const barcodeKV: IKvStore = {
+        const barcodeKV: KVL = {
             key: VisualKeysDict.utf8textData,
             value: qrcode,
             ldType: LDDict.Text

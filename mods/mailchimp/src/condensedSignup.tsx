@@ -1,4 +1,4 @@
-import { BlueprintConfig, IBlueprintItpt, OutputKVMap, ldBlueprint, IKvStore, 
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap, ldBlueprint, KVL, 
 	LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState, ILDOptions, LDDict,
 	gdsfpLD, initLDLocalState, VisualKeysDict, isProduction } from "@metaexplorer/core";
 import { Component } from "react";
@@ -7,7 +7,7 @@ import React from "react";
 export const MailChimpSignupName = "mailchimp/condensedSignup";
 let cfgIntrprtKeys: string[] =
 	[LDDict.embedUrl, VisualKeysDict.headerTxt];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: LDDict.embedUrl,
 		value: undefined,
@@ -22,7 +22,7 @@ let ownKVL: IKvStore[] = [
 const bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: MailChimpSignupName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -51,7 +51,7 @@ export class PureMailChimpSignup extends Component<LDConnectedState & LDConnecte
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 	styleClassName: string;
 
 	constructor(props: any) {

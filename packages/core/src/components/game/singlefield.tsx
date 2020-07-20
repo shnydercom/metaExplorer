@@ -1,5 +1,5 @@
 import { LDDict } from '../../ldaccess/LDDict';
-import { IKvStore } from '../../ldaccess/ikvstore';
+import { KVL } from '../../ldaccess/KVL';
 import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../ldaccess/ildoptions';
 import { VisualKeysDict } from '../../components/visualcomposition/visualDict';
@@ -13,7 +13,7 @@ let cfgIntrprtKeys: string[] =
 	[
 		VisualKeysDict.headerTxt
 	];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: VisualKeysDict.headerTxt,
 		value: undefined,
@@ -23,7 +23,7 @@ let ownKVL: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: SingleFieldViewIntrprtrName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -54,7 +54,7 @@ export class PureSingleFieldView extends Component<LDConnectedState & LDConnecte
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 
 	constructor(props: any) {
 		super(props);

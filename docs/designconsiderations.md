@@ -37,7 +37,7 @@ export type LDConnectedDispatch = {
         notifyLDOptionsChange: (ldOptions: ILDOptions) => void;
 };
 - the ldTokenString is important to make clear, which part of the ld the itpts is supposed to display. The ldOptions are needed for the consume-function of the ldBlueprint and will trigger updates on the ldOptions
-- when mutating from ownKVL, create a new object like so: this.state.singleKV = {...this.ownKVL[0]};
+- when mutating from ownKVLs, create a new object like so: this.state.singleKV = {...this.ownKVLs[0]};
 
 ## style considerations/code convenctions/patterns:
 a dollar sign at the end is a common RxJS convention to identify variables that reference a stream

@@ -1,4 +1,4 @@
-import { IKvStore } from '../ldaccess/ikvstore';
+import { KVL } from '../ldaccess/KVL';
 import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../ldaccess/ldBlueprint';
 import { ILDOptions } from '../ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../appstate/LDProps';
@@ -16,7 +16,7 @@ let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer, UserDefDict.configItpt];
 
 let inKeys: string[] = [...cfgIntrprtKeys, VisualKeysDict.cssClassName];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -38,7 +38,7 @@ let ownKVL: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: projCfgName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: inKeys,
 	crudSkills: "cRud"
 };
@@ -66,7 +66,7 @@ export class PureProjectConfig extends Component<LDConnectedState & LDConnectedD
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 	styleClassName: string;
 
 	protected renderInputContainer = generateItptFromCompInfo.bind(this);

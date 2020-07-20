@@ -1,6 +1,6 @@
 import { ldBlueprint, BlueprintConfig, IBlueprintItpt } from "../../ldaccess/ldBlueprint";
 import { UserDefDict } from "../../ldaccess/UserDefDict";
-import { IKvStore } from "../../ldaccess/ikvstore";
+import { KVL } from "../../ldaccess/KVL";
 import { ILDOptions } from "../../ldaccess/ildoptions";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch, LDRouteProps, LDLocalState } from "../../appstate/LDProps";
 import { isReactComponent } from "../../components/reactUtils/reactUtilFns";
@@ -25,12 +25,12 @@ export interface RefMapItptState extends LDLocalState, ErrorBoundaryState {
 let canInterpretType: string = UserDefDict.intrprtrBPCfgRefMapType;
 let cfgIntrprtKeys: string[] =
 	[];
-let ownKVL: IKvStore[] = [];
+let ownKVLs: KVL[] = [];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: canInterpretType,
 	nameSelf: UserDefDict.intrprtrBPCfgRefMapName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -82,7 +82,7 @@ RefMapItptState>
 	}
 
 	cfg: BlueprintConfig;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 	constructor(props?: any) {

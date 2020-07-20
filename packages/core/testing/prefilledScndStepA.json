@@ -2,14 +2,14 @@
   "subItptOf": "aSub",
   "canInterpretType": "AName-ObjectType",
   "nameSelf": "AName",
-  "ownKVL": [{
+  "ownKVLs": [{
     "key": "InterpreterReferenceMapKey",
     "value": {
       "aSub": {
         "subItptOf": "愿望清单/BottomBar",
         "canInterpretType": "愿望清单/BottomBar-ObjectType",
         "nameSelf": "aSub",
-        "ownKVL": [{
+        "ownKVLs": [{
           "key": "inputContainer",
           "value": {
             "objRef": "aImgHS",
@@ -26,7 +26,7 @@
         "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
         "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
         "nameSelf": "aImgHS",
-        "ownKVL": [{
+        "ownKVLs": [{
             "key": "HeaderText",
             "value": "Header from RefMap-Def",
             "ldType": "http://schema.org/Text"
@@ -67,7 +67,7 @@
         "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
         "canInterpretType": "http://schema.org/Text",
         "nameSelf": "textInputComp",
-        "ownKVL": [{
+        "ownKVLs": [{
             "key": "http://schema.org/description",
             "value": "a description Text",
             "ldType": "http://schema.org/Text"

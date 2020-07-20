@@ -1,4 +1,4 @@
-import { BlueprintConfig, IBlueprintItpt, OutputKVMap, ldBlueprint, IKvStore,
+import { BlueprintConfig, IBlueprintItpt, OutputKVMap, ldBlueprint, KVL,
 	LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState, ILDOptions, VisualKeysDict,
 	LDDict, gdsfpLD, initLDLocalState, isProduction
  } from "@metaexplorer/core";
@@ -8,7 +8,7 @@ import React from "react";
 export const YoutubeEmbedName = "google-api/YoutubeEmbed";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.videoId];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: VisualKeysDict.videoId,
 		value: undefined,
@@ -18,7 +18,7 @@ let ownKVL: IKvStore[] = [
 const bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: YoutubeEmbedName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -46,7 +46,7 @@ export class PureYoutubeEmbed extends Component<LDConnectedState & LDConnectedDi
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 	styleClassName: string;
 
 	constructor(props: any) {

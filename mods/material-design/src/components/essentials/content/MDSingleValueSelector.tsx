@@ -1,6 +1,6 @@
 import React from "react";
 import { Select, MenuItem } from "@material-ui/core";
-import { ldBlueprint, AbstractSingleValueSelector, SingleValueSelectorBpCfg, LDDict, IKvStore } from "@metaexplorer/core";
+import { ldBlueprint, AbstractSingleValueSelector, SingleValueSelectorBpCfg, LDDict, KVL } from "@metaexplorer/core";
 import shortid from "shortid";
 
 export const MD_SINGLE_VALUE_SELECTOR_NAME = "metaexplorer.io/material-design/SingleValueSelector";
@@ -14,7 +14,7 @@ export interface IMDValueSelectOption {
 	label: string;
 }
 
-function mapActionOptionToMDValueSelectOption(actionOption: IKvStore, id: string): IMDValueSelectOption {
+function mapActionOptionToMDValueSelectOption(actionOption: KVL, id: string): IMDValueSelectOption {
 	const val: {} = actionOption.value;
 	console.log(val);
 	return {

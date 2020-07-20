@@ -1,5 +1,5 @@
 import { LDDict } from '../../ldaccess/LDDict';
-import { IKvStore } from '../../ldaccess/ikvstore';
+import { KVL } from '../../ldaccess/KVL';
 import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../appstate/LDProps';
@@ -28,7 +28,7 @@ let cfgIntrprtKeys: string[] =
 		VIDEO_IS_LOOP,
 		VisualKeysDict.cssClassName
 	];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: LDDict.name,
 		value: undefined,
@@ -74,7 +74,7 @@ let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: "metaexplorer.io/videoDisplay",
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -100,7 +100,7 @@ export class PureVideoDisplay extends Component<LDConnectedState & LDConnectedDi
 
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
 
 	videoContainer: HTMLDivElement;

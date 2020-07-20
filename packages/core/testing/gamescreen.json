@@ -2,7 +2,7 @@
   "subItptOf": "2413c0f1-4c38-4658-bc34-957621841afd",
   "canInterpretType": "flightdemo-ObjectType",
   "nameSelf": "flightdemo",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "game/FourFieldsView",
           "canInterpretType": "game/FourFieldsView-ObjectType",
           "nameSelf": "2413c0f1-4c38-4658-bc34-957621841afd",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "GameTaskHeading",
               "value": "Choose the correct answer",
@@ -76,7 +76,7 @@
           "subItptOf": "game/SingleFieldView",
           "canInterpretType": "game/SingleFieldView-ObjectType",
           "nameSelf": "fcc48ef2-56df-467b-977d-6316391a12f3",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "HeaderText",
               "value": "max 100ml, but gels and cremes are o.k.",
@@ -90,7 +90,7 @@
           "subItptOf": "game/SingleFieldView",
           "canInterpretType": "game/SingleFieldView-ObjectType",
           "nameSelf": "a700107b-85e4-4c0e-b429-e5f26acfa6ba",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "HeaderText",
               "value": "max 150ml, no more than 4 bottles",
@@ -104,7 +104,7 @@
           "subItptOf": "game/SingleFieldView",
           "canInterpretType": "game/SingleFieldView-ObjectType",
           "nameSelf": "68b98593-8161-4a99-907b-a81291e44820",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "HeaderText",
               "value": "max 100ml, in a 1L plastic bag",
@@ -118,7 +118,7 @@
           "subItptOf": "game/SingleFieldView",
           "canInterpretType": "game/SingleFieldView-ObjectType",
           "nameSelf": "bbdc562f-0b8d-499d-8989-c165299cd6c1",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "HeaderText",
               "value": "a single 1L bottle",

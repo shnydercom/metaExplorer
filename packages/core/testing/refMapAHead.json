@@ -2,7 +2,7 @@
   "subItptOf": "aSub",
   "canInterpretType": "AName-ObjectType",
   "nameSelf": "AName",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "BHead",
           "canInterpretType": "BHead-ObjectType",
           "nameSelf": "aSub",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -29,7 +29,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "aImgHS",
-          "ownKVL": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
           "inKeys": []
         }

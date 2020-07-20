@@ -2,7 +2,7 @@
   "subItptOf": "headUID",
   "canInterpretType": "testInterpreter-ObjectType",
   "nameSelf": "ProductDisplayInterpreter",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "headUID",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "primaryInterpreter",
               "value": {
@@ -52,7 +52,7 @@
           "subItptOf": "metaexplorer.io/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "imgDispUID",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "http://schema.org/name",
               "value": {
@@ -86,7 +86,7 @@
           "subItptOf": "metaexplorer.io/imageRetriever",
           "canInterpretType": "metaexplorer.io/imageRetriever-ObjectType",
           "nameSelf": "imgRetrUID",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "srvURL",
               "value": "http://localhost:1111/api/ysj/ns/{identifier}",
@@ -110,7 +110,7 @@
           "subItptOf": "metaexplorer.io/productRetriever",
           "canInterpretType": "metaexplorer.io/productRetriever-ObjectType",
           "nameSelf": "prodRetrUID",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "srvURL",
               "value": "http://localhost:1111/api/ysj/ns/metaexplorer/FlyingCar1",

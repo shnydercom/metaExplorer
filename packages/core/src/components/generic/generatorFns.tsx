@@ -1,4 +1,4 @@
-import { IKvStore } from "../../ldaccess/ikvstore";
+import { KVL } from "../../ldaccess/KVL";
 import { LDOwnProps, LDRouteProps, LDConnectedState, LDLocalState, ReactCompLDLocalState, LDLocalKv } from "../../appstate/LDProps";
 import { isObjPropertyRef, getKVValue } from "../../ldaccess/ldUtils";
 import { appItptMatcherFn } from "../../appconfig/appItptMatcher";
@@ -12,7 +12,7 @@ import { DEFAULT_ITPT_RETRIEVER_NAME } from "../../defaults/DefaultItptRetriever
 import { getKVStoreByKey, getAllKVStoresByKey } from "../../ldaccess/kvConvenienceFns";
 import React from "react";
 
-export function generateIntrprtrForProp(kvStores: IKvStore[], prop: string, retriever: string, routes: LDRouteProps): any {//JSX.Element {
+export function generateIntrprtrForProp(kvStores: KVL[], prop: string, retriever: string, routes: LDRouteProps): any {//JSX.Element {
 	let genKv = kvStores.find((elem) => elem.key === prop);
 	if (!genKv) return null;
 	if (!isObjPropertyRef(genKv.value)) return null;
@@ -28,7 +28,7 @@ export function generateIntrprtrForProp(kvStores: IKvStore[], prop: string, retr
 	} else { return null; }
 }
 
-export function generateCompInfoItm(kvStores: IKvStore[], prop: string, retriever: string): IReactCompInfoItm {
+export function generateCompInfoItm(kvStores: KVL[], prop: string, retriever: string): IReactCompInfoItm {
 	let rv: IReactCompInfoItm = null;
 	let genKv = kvStores.find((elem) => elem.key === prop);
 	if (!genKv) return null;
@@ -50,7 +50,7 @@ export function generateCompInfoItm(kvStores: IKvStore[], prop: string, retrieve
 	} else { return null; }
 }
 
-export function generateAllCompInfoItms(kvStores: IKvStore[], prop: string, retriever: string): IReactCompInfoItm[] {
+export function generateAllCompInfoItms(kvStores: KVL[], prop: string, retriever: string): IReactCompInfoItm[] {
 	let rv: IReactCompInfoItm[] = [];
 	let genKvs = getAllKVStoresByKey(kvStores, prop); // kvStores.find((elem) => elem.key === prop);
 	if (!genKvs || genKvs.length === 0) rv.push(null);
@@ -127,7 +127,7 @@ export function initLDLocalState(
 	let newLDTypeMap = new Map<string, any>();
 	let retriever = DEFAULT_ITPT_RETRIEVER_NAME;
 	if (cfg) {
-		let kvs = cfg.ownKVL;
+		let kvs = cfg.ownKVLs;
 		if (props && props.ldOptions && props.ldOptions.visualInfo && props.ldOptions.visualInfo.retriever) {
 			retriever = props.ldOptions.visualInfo.retriever;
 		}
@@ -256,7 +256,7 @@ function getDerivedItptStateFromProps(
 					"but is not set for all itptKeys. Aborting function");
 				return undefined;
 			}
-			let kvs: IKvStore[];
+			let kvs: KVL[];
 			let retriever = props.ldOptions.visualInfo.retriever;
 			kvs = props.ldOptions.resource.kvStores;
 			let newMap: ReactCompInfoMap = new Map<string, IReactCompInfoItm | IReactCompInfoItm[]>();
@@ -297,7 +297,7 @@ function getDerivedKVStateFromProps(
 				"but is not set for all kvKeys. Aborting function");
 			return null;
 		}
-		let kvs: IKvStore[];
+		let kvs: KVL[];
 		//let retriever = props.ldOptions.visualInfo.retriever;
 		kvs = props.ldOptions.resource.kvStores;
 		let newValueMap = new Map<string, any>();
@@ -360,9 +360,9 @@ function getDerivedKVStateFromProps(
  * and "forProject" as the description
  * @param kvStores the kvStores to determine singleKVKey from
  */
-export function determineSingleKVKey(kvStores: IKvStore[], canInterpretType: string, inKeys: string[]): string {
+export function determineSingleKVKey(kvStores: KVL[], canInterpretType: string, inKeys: string[]): string {
 	let rv: string = UserDefDict.singleKvStore;
-	let candidates: IKvStore[] = [];
+	let candidates: KVL[] = [];
 	if (kvStores) {
 		for (let idx = 0; idx < kvStores.length; idx++) {
 			const a = kvStores[idx];

@@ -1,4 +1,4 @@
-import { IKvStore } from "../../ldaccess/ikvstore";
+import { KVL } from "../../ldaccess/KVL";
 import { ldBlueprint, BlueprintConfig } from "../../ldaccess/ldBlueprint";
 import { UserDefDict } from "../../ldaccess/UserDefDict";
 import { AbstractDataTransformer } from "../../datatransformation/abstractDataTransformer";
@@ -13,8 +13,8 @@ class PureDataTypeDisassembler extends AbstractDataTransformer {
 	 * @param outputKvStores
 	 */
 	protected mappingFunction(
-		inputParams: Map<string, IKvStore>,
-		outputKvStores: Map<string, IKvStore>): IKvStore[] {
+		inputParams: Map<string, KVL>,
+		outputKvStores: Map<string, KVL>): KVL[] {
 		let rv = [];
 
 		const inputKV = inputParams.get(transfInputKey);
@@ -23,7 +23,7 @@ class PureDataTypeDisassembler extends AbstractDataTransformer {
 		let outputValArr = [];
 
 		outputKvStores.forEach((val, idx) => {
-			const newOutputObj: IKvStore = {
+			const newOutputObj: KVL = {
 				key: val.key,
 				value: inputKV.value[val.key],
 				ldType: val.ldType
@@ -36,16 +36,16 @@ class PureDataTypeDisassembler extends AbstractDataTransformer {
 	}
 }
 
-export function flatDataTypeDisassemblerFactory(outputKvStores: IKvStore[], nameSelf: string, inputType: string) {
+export function flatDataTypeDisassemblerFactory(outputKvStores: KVL[], nameSelf: string, inputType: string) {
 
-	const ActionCompInputKVs: IKvStore[] = [
+	const ActionCompInputKVs: KVL[] = [
 		{
 			key: transfInputKey,
 			value: undefined,
 			ldType: inputType
 		}
 	];
-	const ownKVL: IKvStore[] = [
+	const ownKVLs: KVL[] = [
 		...ActionCompInputKVs,
 		...outputKvStores,
 	];
@@ -55,7 +55,7 @@ export function flatDataTypeDisassemblerFactory(outputKvStores: IKvStore[], name
 	let bpCfg: BlueprintConfig = {
 		subItptOf: null,
 		nameSelf,
-		ownKVL,
+		ownKVLs,
 		inKeys,
 		crudSkills: "cRUd"
 	};

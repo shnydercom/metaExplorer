@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	LDDict, IKvStore, ILDOptions, VisualKeysDict, gdsfpLD, initLDLocalState,
+	LDDict, KVL, ILDOptions, VisualKeysDict, gdsfpLD, initLDLocalState,
 	ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap,
 	LDOwnProps, LDConnectedDispatch, LDConnectedState, LDLocalState
 } from '@metaexplorer/core';
@@ -12,7 +12,7 @@ export var GooeyNavName: string = "metaexplorer.io/GooeyNav";
 export const centralIcon: string = "centralIcon";
 let cfgIntrprtKeys: string[] =
 	[centralIcon, VisualKeysDict.iconName];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: centralIcon,
 		value: undefined,
@@ -27,7 +27,7 @@ let ownKVL: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: GooeyNavName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -53,7 +53,7 @@ export class PureGooeyNav extends Component<LDConnectedState & LDConnectedDispat
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 
 	//private renderSub = generateItptFromCompInfo.bind(this);
 

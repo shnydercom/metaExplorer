@@ -1,4 +1,4 @@
-import { IKvStore, BlueprintConfig, IBlueprintItpt, OutputKVMap, ldBlueprint, ILDOptions,
+import { KVL, BlueprintConfig, IBlueprintItpt, OutputKVMap, ldBlueprint, ILDOptions,
 	LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState,
 	initLDLocalState, generateItptFromCompInfo, gdsfpLD, VisualKeysDict } from '@metaexplorer/core';
 import { Component } from 'react';
@@ -7,12 +7,12 @@ import React from 'react';
 
 export const GoogleWebAuthenticatorName: string = "google-api/WebAuthenticator";
 let allMyInputKeys: string[] = [];
-let ownKVL: IKvStore[] = [];
+let ownKVLs: KVL[] = [];
 export const GWebAuthenticatorCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: GoogleWebAuthenticatorName,
 	canInterpretType: "http://my-domain.com/my-class",
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: allMyInputKeys,
 	crudSkills: "cRUd"
 };
@@ -40,7 +40,7 @@ export class PureGWebAuthenticator extends Component<LDConnectedState & LDConnec
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 	//generates child react components
 	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 

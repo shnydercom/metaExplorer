@@ -2,7 +2,7 @@ import { DefaultPortLabel, DiagramEngine, DefaultPortModel } from "@projectstorm
 import { ExtendableTypesNodeModel } from "./ExtendableTypesNodeModel";
 import { map } from "lodash";
 import { LDPortModel } from "../_super/LDPortModel";
-import { IKvStore, UserDefDict } from "@metaexplorer/core";
+import { KVL, UserDefDict } from "@metaexplorer/core";
 import React from "react";
 
 export const TXT_ADD_PORT = "+1 in";
@@ -32,7 +32,7 @@ export class ExtendableTypesNodeWidget extends React.Component<ExtendableTypesNo
 	addInPort() {
 		let len = this.props.node.getInPorts().length;
 		let newPortName = "in_" + len;
-		let newPortKV: IKvStore = {
+		let newPortKV: KVL = {
 			key: newPortName,
 			value: undefined,
 			ldType: UserDefDict.intrprtrClassType

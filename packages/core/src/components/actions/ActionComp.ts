@@ -1,4 +1,4 @@
-import { IKvStore } from "../../ldaccess/ikvstore";
+import { KVL } from "../../ldaccess/KVL";
 import { ldBlueprint, BlueprintConfig } from "../../ldaccess/ldBlueprint";
 import { LDDict } from "../../ldaccess/LDDict";
 import { UserDefDict } from "../../ldaccess/UserDefDict";
@@ -14,7 +14,7 @@ export const actionTypeField = "actionType";
 export const ActionCompName: string = "ActionAssembler";
 
 export const ActionCompKeys: string[] = [actionIdField, actionTypeField, payloadInputKey];
-export const ActionCompOutputKVs: IKvStore[] = [
+export const ActionCompOutputKVs: KVL[] = [
 	{
 		key: transfOutputKey,
 		value: undefined,
@@ -22,7 +22,7 @@ export const ActionCompOutputKVs: IKvStore[] = [
 	}
 ];
 
-const ownKVL: IKvStore[] = [
+const ownKVLs: KVL[] = [
 	{
 		key: actionIdField,
 		value: undefined,
@@ -44,7 +44,7 @@ const ownKVL: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ActionCompName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: ActionCompKeys,
 	crudSkills: "cRUd"
 };
@@ -54,7 +54,7 @@ export class ActionComp extends AbstractDataTransformer {
 		super(ldTkStr);
 		this.itptKeys = ActionCompKeys;
 		this.outputKvStores = ActionCompOutputKVs;
-		let kvs = this.cfg.ownKVL;
+		let kvs = this.cfg.ownKVLs;
 		//setting inputParams on first load, refresh output if necessary
 		for (let inputidx = 0; inputidx < this.itptKeys.length; inputidx++) {
 			const inputKey = this.itptKeys[inputidx];
@@ -73,8 +73,8 @@ export class ActionComp extends AbstractDataTransformer {
 	 * @param outputKvStores
 	 */
 	protected mappingFunction(
-		inputParams: Map<string, IKvStore>,
-		outputKvStores: Map<string, IKvStore>): IKvStore[] {
+		inputParams: Map<string, KVL>,
+		outputKvStores: Map<string, KVL>): KVL[] {
 		let rv = [];
 		let payloadInputKv = inputParams.get(payloadInputKey);
 		let idFieldKv = inputParams.get(actionIdField);

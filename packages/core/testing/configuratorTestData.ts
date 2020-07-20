@@ -1,8 +1,8 @@
 import { LDDict } from "ldaccess/LDDict";
 
-import { IKvStore } from 'ldaccess/ikvstore';
+import { KVL } from 'ldaccess/KVL';
 
-let testData: IKvStore[] =  [
+let testData: KVL[] =  [
     { key: "IstNeuprojekt", ldType: LDDict.Boolean, value: true },
     { key: "AnzahlPersonenTage", ldType: LDDict.Double, value: 133.7 },
     { key: "AnzahlPersonen", ldType: LDDict.Integer, value: 3 },

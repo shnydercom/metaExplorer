@@ -2,7 +2,7 @@
   "subItptOf": "aaSub",
   "canInterpretType": "AAHead-ObjectType",
   "nameSelf": "AAHead",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "aaSub",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "primaryInterpreter",
               "value": {
@@ -29,7 +29,7 @@
           "subItptOf": "BHead",
           "canInterpretType": "BHead-ObjectType",
           "nameSelf": "aaBHead",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -48,7 +48,7 @@
           "subItptOf": "metaexplorer.io/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "aaImgDisp",
-          "ownKVL": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
           "inKeys": []
         }

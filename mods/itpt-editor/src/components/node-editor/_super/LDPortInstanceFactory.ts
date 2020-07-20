@@ -1,5 +1,5 @@
 import { LDPortModel } from "./LDPortModel";
-import { IKvStore, UserDefDict } from "@metaexplorer/core";
+import { KVL, UserDefDict } from "@metaexplorer/core";
 import { LD_PORTMODEL, LINK_SETTINGS_MODEL } from "../node-editor-consts";
 import { AbstractModelFactory } from "@projectstorm/react-canvas-core";
 import { DiagramEngine } from "@projectstorm/react-diagrams";
@@ -11,7 +11,7 @@ export class LDPortInstanceFactory extends AbstractModelFactory<LDPortModel, Dia
 	}
 
 	getNewInstance() {
-		var baseDataTypeKVStore: IKvStore = {
+		var baseDataTypeKVStore: KVL = {
 			key: UserDefDict.outputSelfKey,
 			value: undefined,
 			ldType: undefined

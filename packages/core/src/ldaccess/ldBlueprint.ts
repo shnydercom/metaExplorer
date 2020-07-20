@@ -1,4 +1,4 @@
-import { IKvStore } from './ikvstore';
+import { KVL } from './KVL';
 import { LDError } from '../appstate/LDError';
 import { ILDOptions } from './ildoptions';
 import { UserDefDict } from './UserDefDict';
@@ -18,19 +18,19 @@ export type OutputKVMap = { [key: string]: OutputKVMapElement[] };
 export interface IBlueprintItpt {
     cfg: BlueprintConfig;
     consumeLDOptions: ConsumeLDOptionsFunc;
-    ownKVL: IKvStore[];
+    ownKVLs: KVL[];
 }
 
 /**
- * ownKVL will be overriden if defined in config.
- * The order of ownKVL and getinKeys is important, especially for
+ * ownKVLs will be overriden if defined in config.
+ * The order of ownKVLs and getinKeys is important, especially for
  * visual components, e.g.: display image as header, then text as heading, text as subheading, then text as description
  */
 export interface BlueprintConfig {
     subItptOf: string;
     canInterpretType?: string;
     nameSelf: string;
-    ownKVL?: IKvStore[];
+    ownKVLs?: KVL[];
     crudSkills: string;
     inKeys: (string | ObjectPropertyRef)[];
 }
@@ -43,13 +43,13 @@ export interface BlueprintConfigFragment {
     subItptOf?: string;
     canInterpretType?: string;
     nameSelf?: string;
-    ownKVL?: IKvStore[];
+    ownKVLs?: KVL[];
     crudSkills?: string;
     inKeys?: (string | ObjectPropertyRef)[];
 }
 
-function handleKVInheritance(baseClassKV: IKvStore[], subClassKV: IKvStore[], isReplace: boolean): IKvStore[] {
-    let rv: IKvStore[] = [];
+function handleKVInheritance(baseClassKV: KVL[], subClassKV: KVL[], isReplace: boolean): KVL[] {
+    let rv: KVL[] = [];
     if (isReplace) {
         rv = subClassKV ? subClassKV : baseClassKV;
     } else {
@@ -77,9 +77,9 @@ function blueprintDecorator<T extends { new(...args: any[]): IBlueprintItpt }>(c
     classToExtend = class extends constructorFn {
         static nameSelf = blueprintCfg.nameSelf;
         static cfg = blueprintCfg;
-        ownKVL = this["ownKVL"]
-            ? handleKVInheritance(this["ownKVL"], blueprintCfg.ownKVL, replaceKVs)
-            : blueprintCfg.ownKVL;
+        ownKVLs = this["ownKVLs"]
+            ? handleKVInheritance(this["ownKVLs"], blueprintCfg.ownKVLs, replaceKVs)
+            : blueprintCfg.ownKVLs;
         inKeys = blueprintCfg.inKeys;
     };
     return classToExtend;

@@ -2,7 +2,7 @@
   "subItptOf": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
   "canInterpretType": "metaexplorer.io/v1/onboarding/onboardingEditor-ObjectType",
   "nameSelf": "metaexplorer.io/v1/onboarding/onboardingEditor",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/block-editor",
           "canInterpretType": "blockeditortype",
           "nameSelf": "2f9e4459-ce85-4dee-8b60-ab815e9374ee",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "isGlobal",
               "value": false,

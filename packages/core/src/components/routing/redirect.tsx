@@ -1,6 +1,6 @@
 import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from "../../ldaccess/ldBlueprint";
 import { VisualKeysDict, VisualTypesDict } from "../visualcomposition/visualDict";
-import { IKvStore } from "../../ldaccess/ikvstore";
+import { KVL } from "../../ldaccess/KVL";
 import { Component } from "react";
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from "../../appstate/LDProps";
 import { gdsfpLD, initLDLocalState } from "../generic/generatorFns";
@@ -12,7 +12,7 @@ import React from "react";
 export const RouteRedirectName = "metaexplorer.io/routing/Redirect";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.routeSend_confirm];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: VisualKeysDict.routeSend_confirm,
 		value: undefined,
@@ -22,7 +22,7 @@ let ownKVL: IKvStore[] = [
 const bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: RouteRedirectName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -50,7 +50,7 @@ export class PureRedirectComponent extends Component<LDConnectedState & LDConnec
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 	styleClassName: string;
 
 	constructor(props: any) {

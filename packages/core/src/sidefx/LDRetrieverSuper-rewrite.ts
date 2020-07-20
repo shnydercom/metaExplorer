@@ -1,4 +1,4 @@
-import { IKvStore } from '../ldaccess/ikvstore';
+import { KVL } from '../ldaccess/KVL';
 import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../ldaccess/ldBlueprint';
 import { ILDOptions } from '../ldaccess/ildoptions';
 import { LDConnectedState, LDOwnProps, LDLocalState } from '../appstate/LDProps';
@@ -15,7 +15,7 @@ import { UserDefDict } from '../ldaccess/UserDefDict';
 import { ILDWebResource } from '../ldaccess/ildresource';
 
 export const ldRetrCfgIntrprtKeys: string[] = [SideFXDict.srvURL, SideFXDict.identifier];
-/*let ldRetrownKVL: IKvStore[] = [
+/*let ldRetrownKVLs: KVL[] = [
 	{ key: SideFXDict.srvURL, value: undefined, ldType: LDDict.Text },
 	{ key: SideFXDict.identifier, value: undefined, ldType: LDDict.Text }
 ];*/
@@ -32,7 +32,7 @@ export abstract class LDRetrieverSuperRewrite implements IBlueprintItpt {
 	//member-declarations for the interface
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 	inputKeys: string[];
 	protected state: LDRetrieverSuperState;
 	//non-interface declarations

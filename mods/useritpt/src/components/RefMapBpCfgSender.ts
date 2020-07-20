@@ -1,5 +1,5 @@
 import {
-	LDRetrieverSuperRewrite, IKvStore, itptKeysFromInputKvs, ldBlueprint, BlueprintConfig, LDDict, UserDefDict, SideFXDict
+	LDRetrieverSuperRewrite, KVL, itptKeysFromInputKvs, ldBlueprint, BlueprintConfig, LDDict, UserDefDict, SideFXDict
 	, IAsyncRequestWrapper
 } from "@metaexplorer/core";
 import { UserItptLoadApi } from "../apis/itpt-load-api";
@@ -10,7 +10,7 @@ export const RefMapBpCfgSenderType = "metaexplorer.io/server/RefMapBpCfgSenderTy
 
 export const inputRefMap = "inputRefMap";
 
-let inputKVStores: IKvStore[] = [
+let inputKVStores: KVL[] = [
 	{
 		key: SideFXDict.srvURL,
 		value: undefined,
@@ -23,7 +23,7 @@ let inputKVStores: IKvStore[] = [
 	}
 ];
 
-let outputKVStores: IKvStore[] = [
+let outputKVStores: KVL[] = [
 	{
 		key: UserDefDict.responseWrapperKey,
 		value: undefined,
@@ -31,13 +31,13 @@ let outputKVStores: IKvStore[] = [
 	},
 ];
 
-let ownKVL = [...inputKVStores, ...outputKVStores];
+let ownKVLs = [...inputKVStores, ...outputKVStores];
 
 let inKeys = itptKeysFromInputKvs(inputKVStores);
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: RefMapBpCfgSenderName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys,
 	crudSkills: "cRud",
 	canInterpretType: RefMapBpCfgSenderType

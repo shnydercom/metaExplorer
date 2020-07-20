@@ -1,6 +1,6 @@
 import { PortModel, LinkModel, PortModelOptions, PortModelGenerics, PortModelAlignment } from "@projectstorm/react-diagrams";
 import { merge } from "lodash";
-import { IKvStore, isInputValueValidFor, arrayMove } from "@metaexplorer/core";
+import { KVL, isInputValueValidFor, arrayMove } from "@metaexplorer/core";
 import { LD_PORTMODEL } from "../node-editor-consts";
 import { DeserializeEvent } from "@projectstorm/react-canvas-core";
 import { SettingsLinkModel } from "../edgesettings/SettingsLinkModel";
@@ -8,7 +8,7 @@ import { SettingsLinkModel } from "../edgesettings/SettingsLinkModel";
 export interface LDPortModelOptions extends PortModelOptions {
 	in: boolean;
 	label?: string;
-	kv: IKvStore;
+	kv: KVL;
 	linkSortOrder?: string[];
 }
 
@@ -21,7 +21,7 @@ export interface LDPortModelGenerics extends PortModelGenerics {
  */
 export class LDPortModel extends PortModel<LDPortModelGenerics> {
 
-	static fromVars(isInput: boolean, name: string, kv: IKvStore, label: string = null) {
+	static fromVars(isInput: boolean, name: string, kv: KVL, label: string = null) {
 		return new this({
 			in: isInput,
 			name,
@@ -117,11 +117,11 @@ export class LDPortModel extends PortModel<LDPortModelGenerics> {
 		return this.options.linkSortOrder;
 	}
 
-	setKV(kv: IKvStore): void {
+	setKV(kv: KVL): void {
 		this.options.kv = kv;
 	}
 
-	getKV(): IKvStore {
+	getKV(): KVL {
 		return this.options.kv;
 	}
 

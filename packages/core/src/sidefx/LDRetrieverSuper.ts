@@ -1,5 +1,5 @@
 import { IBlueprintItpt, BlueprintConfig, OutputKVMap } from "../ldaccess/ldBlueprint";
-import { IKvStore } from "../ldaccess/ikvstore";
+import { KVL } from "../ldaccess/KVL";
 import { ILDOptions } from "../ldaccess/ildoptions";
 import { UserDefDict } from "../ldaccess/UserDefDict";
 import { SideFXDict } from "../sidefx/SideFXDict";
@@ -20,8 +20,8 @@ export type LDRetrieverSuperStateOld = LDLocalKv;
 export class LDRetrieverSuper implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	ownKVL: IKvStore[];
-	inputParams: Map<string, IKvStore>;
+	ownKVLs: KVL[];
+	inputParams: Map<string, KVL>;
 	//srvUrl: string;
 	//identifier: string | number;
 	isInputDirty: boolean = false;
@@ -36,8 +36,8 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 		this.cfg = this.constructor["cfg"];
 		this.inputParams = new Map();
 		//this.retrieverStoreKey = this.cfg.nameSelf;
-		/*if (this.cfg.ownKVL) {
-			let extRefKey = this.cfg.ownKVL.find(
+		/*if (this.cfg.ownKVLs) {
+			let extRefKey = this.cfg.ownKVLs.find(
 				(val) => val.key === UserDefDict.externalReferenceKey);
 			this.retrieverStoreKey = extRefKey.value ? extRefKey.value : this.retrieverStoreKey;
 		}*/
@@ -46,8 +46,8 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 		if (!ldOptions || !ldOptions.resource || !ldOptions.resource.kvStores) return;
 		this.retrieverStoreKey = ldOptions.ldToken.get();
 		let kvs = ldOptions.resource.kvStores;
-		let outputKVMap: IKvStore = kvs.find((val) => UserDefDict.outputKVMapKey === val.key);
-		outputKVMap = outputKVMap ? outputKVMap : this.cfg.ownKVL.find((val) => UserDefDict.outputKVMapKey === val.key);
+		let outputKVMap: KVL = kvs.find((val) => UserDefDict.outputKVMapKey === val.key);
+		outputKVMap = outputKVMap ? outputKVMap : this.cfg.ownKVLs.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		for (let idx = 0; idx < ldRetrCfgIntrprtKeys.length; idx++) {
 			const inputKey = ldRetrCfgIntrprtKeys[idx];
@@ -67,7 +67,7 @@ export class LDRetrieverSuper implements IBlueprintItpt {
 		if (!isOutputKVSame(value, this.outputKVMap)) this.isOutputDirty = true;
 		this.outputKVMap = value;
 	}
-	/*setIdentifier = (value: IKvStore | string | number) => {
+	/*setIdentifier = (value: KVL | string | number) => {
 		if (getKVValue(value) !== this.identifier) this.isInputDirty = true;
 		this.identifier = getKVValue(value);
 	}

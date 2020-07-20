@@ -1,6 +1,6 @@
 import {
 	COMP_BASE_CONTAINER, IItptInfoItem, DEFAULT_ITPT_RETRIEVER_NAME, ReduxItptRetriever, getKVStoreByKey, getKVStoreByKeyFromLDOptionsOrCfg,
-	ldBaseDataTypeList, BlueprintConfig, IBlueprintItpt, LDDict, IKvStore, isInputValueValidFor, isObjPropertyRef,
+	ldBaseDataTypeList, BlueprintConfig, IBlueprintItpt, LDDict, KVL, isInputValueValidFor, isObjPropertyRef,
 	ObjectPropertyRef, UserDefDict, appItptMatcherFn
 } from "@metaexplorer/core";
 import createEngine, { DiagramEngine, DiagramModel, NodeModel, LinkModel, LinkModelGenerics, DagreEngine } from "@projectstorm/react-diagrams";
@@ -158,7 +158,7 @@ export class NodeEditorLogic {
 			}
 		} as any);
 
-		let outputFinalInputKV: IKvStore = {
+		let outputFinalInputKV: KVL = {
 			key: UserDefDict.finalInputKey,
 			value: undefined,
 			ldType: UserDefDict.intrprtrClassType
@@ -270,17 +270,17 @@ export class NodeEditorLogic {
 	public addLDPortModelsToNodeFromCfg(node: ItptNodeModel, cfg: BlueprintConfig) {
 		//let rv: LDPortModel[] = [];
 		let intrprtrKeys: any[] = cfg.inKeys;
-		let ownKVL: IKvStore[] = cfg.ownKVL;
+		let ownKVLs: KVL[] = cfg.ownKVLs;
 		node.setNameSelf(node.getID());
 		node.setSubItptOf(cfg.nameSelf);
 		node.setIsCompound(!!cfg.subItptOf);
 		let numObjPropRef = 0;
-		let isInitKVsmallerThanKeys: boolean = ownKVL.length < intrprtrKeys.length;
+		let isInitKVsmallerThanKeys: boolean = ownKVLs.length < intrprtrKeys.length;
 		for (var i = 0; i < intrprtrKeys.length; i++) {
-			let elemi: IKvStore;
+			let elemi: KVL;
 			if (isInitKVsmallerThanKeys) {
-				if (i < ownKVL.length - 1) {
-					elemi = ownKVL[i];
+				if (i < ownKVLs.length - 1) {
+					elemi = ownKVLs[i];
 				} else {
 					if (isObjPropertyRef(intrprtrKeys[i])) {
 						elemi = {
@@ -298,7 +298,7 @@ export class NodeEditorLogic {
 					}
 				}
 			} else {
-				elemi = ownKVL[i];
+				elemi = ownKVLs[i];
 			}
 			//let newLDPM: LDPortModel =
 			let nName: string = elemi.key + "_in";
@@ -310,7 +310,7 @@ export class NodeEditorLogic {
 					let objPropRef: ObjectPropertyRef = intrprtrKeys[i];
 					let nestedKey = objPropRef.propRef;
 					let nestedType = getKVStoreByKeyFromLDOptionsOrCfg(null, elemi.value[objPropRef.objRef], nestedKey).ldType;
-					let elemiNested: IKvStore = {
+					let elemiNested: KVL = {
 						key: nestedKey,
 						value: undefined,
 						ldType: nestedType
@@ -319,7 +319,7 @@ export class NodeEditorLogic {
 					node.addPort(LDPortModel.fromVars(true, nestedName, elemiNested, nestedKey));
 				}
 				else if (elemi.ldType === UserDefDict.intrprtrClassType) {
-					let newInKV: IKvStore = {
+					let newInKV: KVL = {
 						key: elemi.key,
 						value: undefined,
 						ldType: UserDefDict.intrprtrClassType
@@ -332,15 +332,15 @@ export class NodeEditorLogic {
 			//rv.push(newLDPM);
 		}
 		//Itpt always exports itself
-		let outputSelfKV: IKvStore = {
+		let outputSelfKV: KVL = {
 			key: UserDefDict.outputSelfKey,
 			value: undefined,
 			ldType: UserDefDict.intrprtrClassType
 		};
 		node.addPort(LDPortModel.fromVars(false, outputSelfKV.key, outputSelfKV, outputSelfKV.key));
-		for (var j = intrprtrKeys.length - numObjPropRef; j < ownKVL.length; j++) {
+		for (var j = intrprtrKeys.length - numObjPropRef; j < ownKVLs.length; j++) {
 			//console.dir(node.getPorts());
-			var elemj = ownKVL[j];
+			var elemj = ownKVLs[j];
 			if (elemj.ldType === UserDefDict.intrprtrBPCfgRefMapType) continue;
 			let nName: string = elemj.key + "_out";
 			node.addPort(LDPortModel.fromVars(false, nName, elemj, elemj.key));
@@ -352,7 +352,7 @@ export class NodeEditorLogic {
 
 	public diagramFromItptBlueprint(itpt: BlueprintConfig): void {
 
-		let refMap = getKVStoreByKey(itpt.ownKVL, UserDefDict.intrprtrBPCfgRefMapKey);
+		let refMap = getKVStoreByKey(itpt.ownKVLs, UserDefDict.intrprtrBPCfgRefMapKey);
 
 		let newX = this.outputNode.getX() + DIAG_TRANSF_X;
 		let newY = this.outputNode.getY() + DIAG_TRANSF_Y;
@@ -382,7 +382,7 @@ export class NodeEditorLogic {
 			if (refMap.value.hasOwnProperty(itm)) {
 				const subItpt: BlueprintConfig = refMap.value[itm];
 				const targetNode = nodeMap.get(itm);
-				subItpt.ownKVL.forEach((kvItm, idx) => {
+				subItpt.ownKVLs.forEach((kvItm, idx) => {
 					let sourcePort: LDPortModel;
 					let targetPort: LDPortModel;
 					targetPort = targetNode.getPort(kvItm.key + "_in") as LDPortModel;
@@ -419,7 +419,7 @@ export class NodeEditorLogic {
 			const a = itpt.inKeys[itptKeysIdx];
 			if (isObjPropertyRef(a)) {
 				let itptKeyField: ObjectPropertyRef = a as ObjectPropertyRef;
-				var inputDataTypeKVStore: IKvStore = {
+				var inputDataTypeKVStore: KVL = {
 					key: UserDefDict.externalInput,
 					value: undefined,
 					ldType: undefined
@@ -438,11 +438,11 @@ export class NodeEditorLogic {
 			}
 		}
 
-		for (let outputKeysIdx = 0; outputKeysIdx < itpt.ownKVL.length; outputKeysIdx++) {
-			const outputElement = itpt.ownKVL[outputKeysIdx];
+		for (let outputKeysIdx = 0; outputKeysIdx < itpt.ownKVLs.length; outputKeysIdx++) {
+			const outputElement = itpt.ownKVLs[outputKeysIdx];
 			if (isObjPropertyRef(outputElement.value)) {
 				let outputInfo: ObjectPropertyRef = outputElement.value as ObjectPropertyRef;
-				let outputDataTypeKvStore: IKvStore = {
+				let outputDataTypeKvStore: KVL = {
 					key: UserDefDict.externalOutput,
 					value: undefined,
 					ldType: undefined
@@ -515,7 +515,7 @@ export class NodeEditorLogic {
 			ldType !== LDDict.DateTime) {
 			ldType = LDDict.Text;
 		}
-		var baseDataTypeKVStore: IKvStore = {
+		var baseDataTypeKVStore: KVL = {
 			key: UserDefDict.outputData,
 			value: value,
 			ldType: ldType
@@ -540,27 +540,27 @@ export class NodeEditorLogic {
 		let crudSkills = "cRud";
 		let subItptOf = null; //set later, relies on info from fillBPCfgFromGraph
 		let nameSelf = this.outputNode.getItptName();
-		let ownKVL = [];
+		let ownKVLs = [];
 		let inKeysArr = [];
 		let canInterpretType = finalCanInterpretType ? finalCanInterpretType : null;
 		let outputBPCfg: BlueprintConfig = {
 			subItptOf,
 			canInterpretType,
 			nameSelf,
-			ownKVL,
+			ownKVLs,
 			crudSkills,
 			inKeys: inKeysArr,
 		};
 		let subIntrprtrCfgMap: { [s: string]: BlueprintConfig } = {};
 		this.fillBPCfgFromGraph(outputBPCfg, this.outputNode, subIntrprtrCfgMap, outputBPCfg);
-		let intrprtMapKV: IKvStore =
+		let intrprtMapKV: KVL =
 		{
 			key: UserDefDict.intrprtrBPCfgRefMapKey,
 			value: subIntrprtrCfgMap,
 			ldType: UserDefDict.intrprtrBPCfgRefMapType
 		};
 		outputBPCfg.subItptOf = this.outputNode.getSubItptOf();
-		outputBPCfg.ownKVL.unshift(intrprtMapKV);
+		outputBPCfg.ownKVLs.unshift(intrprtMapKV);
 		this.bakeKvStoresIntoBP(outputBPCfg);
 		return outputBPCfg;
 	}
@@ -608,7 +608,7 @@ export class NodeEditorLogic {
 								//cfgIntrprtKeys.push(inputObjPropRef);
 								let externalOutputKV = this.copyKV(outport.getKV());
 								externalOutputKV.value = outputObjPropRef;
-								topBPCfg.ownKVL.push(externalOutputKV);
+								topBPCfg.ownKVLs.push(externalOutputKV);
 								//branchBPCfg.inKeys.push(port.getKV().key);
 							}
 						}
@@ -646,7 +646,7 @@ export class NodeEditorLogic {
 								let inputObjPropRef: ObjectPropertyRef = { objRef: branchNode.getID(), propRef: keyInputMarked };
 								let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.inKeys;
 								cfgIntrprtKeys.push(inputObjPropRef);
-								branchBPCfg.ownKVL.push(this.copyKV(port.getKV()));
+								branchBPCfg.ownKVLs.push(this.copyKV(port.getKV()));
 								branchBPCfg.inKeys.push(port.getKV().key);
 							}
 							if (leafPort.getKV().key === UserDefDict.externalOutput) {
@@ -654,7 +654,7 @@ export class NodeEditorLogic {
 								let outputObjPropRef: ObjectPropertyRef = { objRef: branchNode.getID(), propRef: keyOutputMarked };
 								let cfgIntrprtKeys: (string | ObjectPropertyRef)[] = topBPCfg.inKeys;
 								cfgIntrprtKeys.push(outputObjPropRef);
-								branchBPCfg.ownKVL.push(this.copyKV(port.getKV()));
+								branchBPCfg.ownKVLs.push(this.copyKV(port.getKV()));
 								branchBPCfg.inKeys.push(port.getKV().key);
 							}
 						}
@@ -662,32 +662,32 @@ export class NodeEditorLogic {
 					case BASEDATATYPE_MODEL:
 						let bdtLeafNode: BaseDataTypeNodeModel = leafNode as BaseDataTypeNodeModel;
 						let bdtKV = this.composeKVs(bdtLeafNode.getOutPorts()[0].getKV(), port.getKV());
-						branchBPCfg.ownKVL.push(bdtKV);
+						branchBPCfg.ownKVLs.push(bdtKV);
 						//TODO: check here, that BDT-Nodes hand up their input correctly
 						break;
 					case GENERALDATATYPE_MODEL:
 						let leafNodeID = leafNode.getID();
 						let outputBPCfg: BlueprintConfig = otherIntrprtrCfgs[leafNodeID];
-						let ownKVL = null;
+						let ownKVLs = null;
 						if (!outputBPCfg) {
 							let canInterpretType = (leafNode as ItptNodeModel).getCanInterpretType();
 							let subItptOf = (leafNode as ItptNodeModel).getSubItptOf();
 							let crudSkills = "cRud";
 							let nameSelf = leafNodeID;
-							ownKVL = [];
+							ownKVLs = [];
 							let inKeysArr = [];
 							outputBPCfg = outputBPCfg ? outputBPCfg : {
 								subItptOf: subItptOf,
 								canInterpretType: canInterpretType,
 								nameSelf: nameSelf,
-								ownKVL: ownKVL,
+								ownKVLs: ownKVLs,
 								crudSkills: crudSkills,
 								inKeys: inKeysArr,
 							};
 							otherIntrprtrCfgs[leafNodeID] = outputBPCfg;
 							this.fillBPCfgFromGraph(outputBPCfg, leafNode as ItptNodeModel, otherIntrprtrCfgs, topBPCfg);
 						} else {
-							ownKVL = outputBPCfg.ownKVL;
+							ownKVLs = outputBPCfg.ownKVLs;
 						}
 						let outputType: string = leafPort.getKV().ldType;
 						let propRef = leafPort.getKV().key === UserDefDict.outputSelfKey ? null : leafPort.getKV().key;
@@ -695,13 +695,13 @@ export class NodeEditorLogic {
 							objRef: leafNodeID,
 							propRef: propRef
 						};
-						let outputKV: IKvStore = {
+						let outputKV: KVL = {
 							key: leafPort.getKV().key,
 							value: outputRef,
 							ldType: outputType
 						};
 						let gdtKV = this.composeKVs(outputKV, port.getKV());
-						branchBPCfg.ownKVL.push(gdtKV);
+						branchBPCfg.ownKVLs.push(gdtKV);
 						//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
 						if (branchNode.getType() === OUTPUT_INFO_MODEL && port.getKV().key === UserDefDict.finalInputKey) {
 							branchNode.setSubItptOf(leafNode.getID());
@@ -712,24 +712,24 @@ export class NodeEditorLogic {
 					case EXTENDABLETYPES_MODEL:
 						let extendableNodeID = leafNode.getID();
 						let extendableBPCfg: BlueprintConfig = otherIntrprtrCfgs[extendableNodeID];
-						let extownKVL = null;
+						let extownKVLs = null;
 						if (!extendableBPCfg) {
 							let crudSkills = "cRud";
 							let nameSelf = extendableNodeID;
-							extownKVL = [];
+							extownKVLs = [];
 							let inKeysArr = [];
 							extendableBPCfg = extendableBPCfg ? extendableBPCfg : {
 								subItptOf: COMP_BASE_CONTAINER,
 								canInterpretType: UserDefDict.itptContainerObjType,
 								nameSelf: nameSelf,
-								ownKVL: extownKVL,
+								ownKVLs: extownKVLs,
 								crudSkills: crudSkills,
 								inKeys: inKeysArr,
 							};
 							otherIntrprtrCfgs[extendableNodeID] = extendableBPCfg;
 							this.fillBPCfgFromGraph(extendableBPCfg, leafNode as ItptNodeModel, otherIntrprtrCfgs, topBPCfg);
 						} else {
-							extownKVL = extendableBPCfg.ownKVL;
+							extownKVLs = extendableBPCfg.ownKVLs;
 						}
 						let extOutputType: string = leafPort.getKV().ldType;
 						let extPropRef = leafPort.getKV().key === UserDefDict.outputSelfKey ? null : leafPort.getKV().key;
@@ -737,13 +737,13 @@ export class NodeEditorLogic {
 							objRef: extendableNodeID,
 							propRef: extPropRef
 						};
-						let extOutputKV: IKvStore = {
+						let extOutputKV: KVL = {
 							key: leafPort.getKV().key,
 							value: extOutputRef,
 							ldType: extOutputType
 						};
 						let extDtKV = this.composeKVs(extOutputKV, port.getKV());
-						branchBPCfg.ownKVL.push(extDtKV);
+						branchBPCfg.ownKVLs.push(extDtKV);
 						//extra handling so that the final output-class.subInterpretOf property and intererpretableKeys on subItpts
 						if (branchNode.getType() === OUTPUT_INFO_MODEL && port.getKV().key === UserDefDict.finalInputKey) {
 							branchNode.setSubItptOf(leafNode.getID());
@@ -764,8 +764,8 @@ export class NodeEditorLogic {
 	 * @param sourceKV
 	 * @param targetKV
 	 */
-	private composeKVs(sourceKV: IKvStore, targetKV: IKvStore): IKvStore {
-		let rv: IKvStore = null;
+	private composeKVs(sourceKV: KVL, targetKV: KVL): KVL {
+		let rv: KVL = null;
 		if (!isInputValueValidFor(sourceKV, targetKV))/*((sourceKV.ldType && targetKV.ldType) &&
 			(sourceKV.ldType !== targetKV.ldType))*/ return targetKV;
 		rv = {
@@ -776,16 +776,16 @@ export class NodeEditorLogic {
 		return rv;
 	}
 
-	/*private copyKVforExport(sourceKV: IKvStore): IKvStore {
-		let newKVStore: IKvStore = this.copyKV(sourceKV);
+	/*private copyKVforExport(sourceKV: KVL): KVL {
+		let newKVStore: KVL = this.copyKV(sourceKV);
 		if (newKVStore.value && newKVStore.value.hasOwnProperty(OBJECT_PROP_REF)) {
 			(sourceKV.value as ObjectPropertyRef).propRef = null;
 		}
 		return newKVStore;
 	}*/
 
-	private copyKV(sourceKV: IKvStore): IKvStore {
-		let rv: IKvStore = {
+	private copyKV(sourceKV: KVL): KVL {
+		let rv: KVL = {
 			key: sourceKV.key,
 			value: sourceKV.value,
 			ldType: sourceKV.ldType,
@@ -796,7 +796,7 @@ export class NodeEditorLogic {
 
 	private bakeKvStoresIntoBP(targetBP: BlueprintConfig) {
 		if (!targetBP) return;
-		let kvStores: IKvStore[] = targetBP.ownKVL;
+		let kvStores: KVL[] = targetBP.ownKVLs;
 		if (!kvStores || kvStores.length === 0) return;
 		let idxMap: Map<string, number> = new Map();
 		kvStores.forEach((itm, idx) => {

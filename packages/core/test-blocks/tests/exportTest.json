@@ -2,7 +2,7 @@
   "subItptOf": "testA_linearBase",
   "canInterpretType": "a-ObjectType",
   "nameSelf": "a",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "testA_linearBase",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "in_0",
               "value": {
@@ -47,7 +47,7 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "testA_TextInput",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "http://schema.org/description",
               "ldType": "http://schema.org/Text"
@@ -67,7 +67,7 @@
           "subItptOf": "metaexplorer.io/basichtml/italics",
           "canInterpretType": "metaexplorer.io/basichtml/italics-ObjectType",
           "nameSelf": "testA_italics",
-          "ownKVL": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
           "inKeys": []
         },
@@ -75,7 +75,7 @@
           "subItptOf": "metaexplorer.io/EANScanner",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "testA_eanScanner",
-          "ownKVL": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
           "inKeys": []
         }

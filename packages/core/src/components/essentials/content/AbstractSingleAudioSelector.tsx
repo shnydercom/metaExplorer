@@ -2,7 +2,7 @@ import { Component, ReactNode } from 'react';
 import { LDConnectedDispatch, LDConnectedState, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
 import { BlueprintConfig, IBlueprintItpt } from '../../../ldaccess/ldBlueprint';
 import { LDDict } from '../../../ldaccess/LDDict';
-import { IKvStore } from '../../../ldaccess/ikvstore';
+import { KVL } from '../../../ldaccess/KVL';
 import { ILDOptions } from '../../../ldaccess/ildoptions';
 import { UserDefDict } from '../../../ldaccess/UserDefDict';
 import { initLDLocalState, gdsfpLD } from '../../generic/generatorFns';
@@ -28,19 +28,19 @@ const SingleAudioSelectorName = "metaexplorer.io/core/SingleAudioSelector";
 let cfgType: string = createLDUINSUrl(LDDict.CreateAction, LDDict.result, LDDict.AudioObject);
 let cfgIntrprtKeys: string[] =
 	[];
-const RESULT_KV: IKvStore = {
+const RESULT_KV: KVL = {
 	key: LDDict.result,
 	value: undefined,
 	ldType: LDDict.URL
 };
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	RESULT_KV
 ];
 export let SingleAudioSelectorBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: SingleAudioSelectorName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -60,7 +60,7 @@ export abstract class AbstractSingleAudioSelector extends Component<
 
 	cfg: BlueprintConfig;
 
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 	// tslint:disable-next-line:variable-name
 	_isMounted: boolean = false;
 

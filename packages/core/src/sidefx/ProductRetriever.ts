@@ -1,12 +1,12 @@
 import { SideFXDict } from "./SideFXDict";
 import { LDDict } from "./../ldaccess/LDDict";
-import { IKvStore } from "./../ldaccess/ikvstore";
+import { KVL } from "./../ldaccess/KVL";
 import { ldBlueprint, BlueprintConfig } from "./../ldaccess/ldBlueprint";
 import { LDRetrieverSuperRewrite, ldRetrCfgIntrprtKeys } from "./LDRetrieverSuper-rewrite";
 
 export const productRetrieverName = "metaexplorer.io/productRetriever";
 
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: SideFXDict.srvURL,
 		value: undefined,
@@ -41,7 +41,7 @@ let ownKVL: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: productRetrieverName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: ldRetrCfgIntrprtKeys,
 	crudSkills: "cRud"
 };

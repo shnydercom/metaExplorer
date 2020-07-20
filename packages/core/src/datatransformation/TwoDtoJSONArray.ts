@@ -1,5 +1,5 @@
 import { AbstractDataTransformer } from "./abstractDataTransformer";
-import { IKvStore } from "../ldaccess/ikvstore";
+import { KVL } from "../ldaccess/KVL";
 import { ldBlueprint, BlueprintConfig } from "../ldaccess/ldBlueprint";
 import { LDDict } from "../ldaccess/LDDict";
 
@@ -13,7 +13,7 @@ export const columnKeyAutoName = "col";
 export const TwoDtoJSONArrayName: string = "data/2DtoJSONArray";
 
 export const TwoDtoJSONArrayItptKeys: string[] = [rowsAndCols, isFirstRowHeading];
-export const TwoDtoJSONArrayOutputKVs: IKvStore[] = [
+export const TwoDtoJSONArrayOutputKVs: KVL[] = [
 	{
 		key: headings,
 		value: undefined,
@@ -26,7 +26,7 @@ export const TwoDtoJSONArrayOutputKVs: IKvStore[] = [
 	}
 ];
 
-const ownKVL: IKvStore[] = [
+const ownKVLs: KVL[] = [
 	{
 		key: rowsAndCols,
 		value: undefined,
@@ -43,7 +43,7 @@ const ownKVL: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: TwoDtoJSONArrayName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: TwoDtoJSONArrayItptKeys,
 	crudSkills: "cRUd"
 };
@@ -66,8 +66,8 @@ export class TwoDtoJSONArray extends AbstractDataTransformer {
 	 * @param outputKvStores
 	 */
 	protected mappingFunction(
-		inputParams: Map<string, IKvStore>,
-		outputKvStores: Map<string, IKvStore>): IKvStore[] {
+		inputParams: Map<string, KVL>,
+		outputKvStores: Map<string, KVL>): KVL[] {
 		let rv = [];
 		let twoDArrKv = inputParams.get(rowsAndCols);
 		let isExtractHeadingKv = inputParams.get(isFirstRowHeading);

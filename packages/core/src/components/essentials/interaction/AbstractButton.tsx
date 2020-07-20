@@ -1,6 +1,6 @@
 import React from 'react';
 import { LDDict } from '../../../ldaccess/LDDict';
-import { IKvStore } from '../../../ldaccess/ikvstore';
+import { KVL } from '../../../ldaccess/KVL';
 import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../../ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
@@ -22,7 +22,7 @@ let cfgIntrprtKeys: string[] =
 		fontIcon,
 		isIcon
 	];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: VisualKeysDict.confirmTxt,
 		value: undefined,
@@ -52,7 +52,7 @@ let ownKVL: IKvStore[] = [
 export const ButtonBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: MDButtonName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -87,7 +87,7 @@ export abstract class AbstractButton extends Component<LDConnectedState & LDConn
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 
 	constructor(props: any) {
 		super(props);

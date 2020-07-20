@@ -2,7 +2,7 @@
   "subItptOf": "RMObj_ImgHeadSubDesc",
   "canInterpretType": "LinearContainer-Inner-ObjectType",
   "nameSelf": "LinearContainer-Inner",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "RMObj_ImgHeadSubDesc",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "primaryInterpreter",
               "value": {
@@ -29,7 +29,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "RMObj_LinearContainer",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "in_0",
               "value": {
@@ -57,7 +57,7 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Date",
           "canInterpretType": "http://schema.org/Date",
           "nameSelf": "RMObj_Date",
-          "ownKVL": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
           "inKeys": []
         },
@@ -65,7 +65,7 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Boolean",
           "canInterpretType": "http://schema.org/Boolean",
           "nameSelf": "RMObj_Boolean",
-          "ownKVL": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
           "inKeys": []
         }

@@ -1,5 +1,5 @@
 import { LDDict } from '../../ldaccess/LDDict';
-import { IKvStore } from '../../ldaccess/ikvstore';
+import { KVL } from '../../ldaccess/KVL';
 import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../appstate/LDProps';
@@ -19,7 +19,7 @@ export const ROUTE_PATH = "routePath";
 export const RouteComponentName = "metaexplorer.io/routing/Route";
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer, ROUTE_ISEXACT, ROUTE_ISABSOLUTE, ROUTE_PATH, ActionKeysDict.action_onRoute];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -49,7 +49,7 @@ let ownKVL: IKvStore[] = [
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: RouteComponentName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -96,7 +96,7 @@ export class PureRouteComponent extends Component<LDConnectedState & LDConnected
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 
 	private renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 

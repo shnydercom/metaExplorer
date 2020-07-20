@@ -1,7 +1,7 @@
 import { ILDOptions } from "../ldaccess/ildoptions";
 import { OutputKVMap, BlueprintConfig } from "../ldaccess/ldBlueprint";
 import { RouteComponentProps } from 'react-router';
-import { IKvStore } from "../ldaccess/ikvstore";
+import { KVL } from "../ldaccess/KVL";
 import { ReactCompInfoMap } from "../components/reactUtils/iReactCompInfo";
 
 export interface LDRouteParams {
@@ -36,7 +36,7 @@ export type LDConnectedDispatch = {
 	 * @param thisLdTkStr is the LD-Token of the itpt from which the update gets dispatched
 	 * @param updatedKvMap the values that shall be updated. Unchanged values of the kvMap aren't affected
 	 */
-	dispatchKvOutput: (changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => void;
+	dispatchKvOutput: (changedKvStores: KVL[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => void;
 
 	dispatchLdAction: (ldId: string, ldType: string, payload) => void;
 };

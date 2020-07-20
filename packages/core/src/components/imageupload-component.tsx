@@ -3,7 +3,7 @@ import { BlueprintConfig, OutputKVMap } from '../ldaccess/ldBlueprint';
 import { ldBlueprint, IBlueprintItpt } from '../ldaccess/ldBlueprint';
 import { ILDOptions } from '../ldaccess/ildoptions';
 
-import { IKvStore } from '../ldaccess/ikvstore';
+import { KVL } from '../ldaccess/KVL';
 import { LDDict } from '../ldaccess/LDDict';
 import { Component } from 'react';
 //import { Dispatch, Action } from 'redux';
@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action<any>>): ConnectedDispatch 
 let cfgType: string = LDDict.CreateAction;
 let cfgIntrprtKeys: string[] =
     [LDDict.agent, LDDict.target];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
     {
         key: LDDict.agent,
         value: undefined,
@@ -50,7 +50,7 @@ var bpCfg: BlueprintConfig = {
     subItptOf: null,
     canInterpretType: cfgType,
     nameSelf: "metaexplorer.io/imageUpload",
-    ownKVL: ownKVL,
+    ownKVLs: ownKVLs,
     inKeys: cfgIntrprtKeys,
     crudSkills: "Crud"
 };
@@ -60,7 +60,7 @@ export class PureImgUploader extends Component<ConnectedState & ConnectedDispatc
     implements IBlueprintItpt {
     cfg: BlueprintConfig;
     outputKVMap: OutputKVMap;
-    ownKVL: IKvStore[];
+    ownKVLs: KVL[];
     consumeLDOptions: (ldOptions: ILDOptions) => any;
     onClickFileChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -78,7 +78,7 @@ export class PureImgUploader extends Component<ConnectedState & ConnectedDispatc
     }
 
     private getStringValFromKey(key: string): string {
-        let kvStoreVal = this.ownKVL;
+        let kvStoreVal = this.ownKVLs;
         if (kvStoreVal != null && kvStoreVal) {
             return kvStoreVal.filter(
                 (curItm) => curItm.key === key).map((val) => val.value as string).reduce(

@@ -2,7 +2,7 @@
   "subItptOf": "projCfg",
   "canInterpretType": "metaexplorer.io/v1/connected-editor-ObjectType",
   "nameSelf": "metaexplorer.io/v1/connected-editor",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "ProjectConfiguration",
           "canInterpretType": "ProjectConfiguration-ObjectType",
           "nameSelf": "projCfg",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -30,7 +30,7 @@
           "subItptOf": "metaexplorer.io/block-editor",
           "canInterpretType": "blockeditortype",
           "nameSelf": "rm-blockeditor",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "currentlyediting",
               "value": "metaexplorer.io/v2/index",
@@ -69,7 +69,7 @@
           "subItptOf": "metaexplorer.io/server/RefMapBpCfgSender",
           "canInterpretType": "metaexplorer.io/server/RefMapBpCfgSenderType",
           "nameSelf": "rm-bpcfgSender",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "srvURL",
               "value": "/api/blocks",
@@ -93,7 +93,7 @@
           "subItptOf": "ActionHandler",
           "canInterpretType": "ActionHandler-ObjectType",
           "nameSelf": "rm-actionhandler",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "canHandleType",
               "value": "save-editor-action",

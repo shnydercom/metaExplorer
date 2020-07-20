@@ -2,7 +2,7 @@
   "subItptOf": "RootItpt",
   "canInterpretType": "test-ObjectType",
   "nameSelf": "test",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "RootItpt",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "in_0",
               "value": {
@@ -29,7 +29,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "ImgHeadSubDesc",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "primaryInterpreter",
               "value": {
@@ -57,7 +57,7 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "TextInputItpt",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "inputdata",
               "value": "predefinedInputfromTest",

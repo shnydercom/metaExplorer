@@ -1,14 +1,14 @@
 import { IItptMatcher } from "../ldaccess/iitpt-matcher";
-import { IKvStore } from "../ldaccess/ikvstore";
+import { KVL } from "../ldaccess/KVL";
 
 import { IItptRetriever } from "../ldaccess/iitpt-retriever";
 import { ILDOptions } from "../ldaccess/ildoptions";
 import { DEFAULT_ITPT_RETRIEVER_NAME } from "../defaults/DefaultItptRetriever";
 
 /*
-let matchIsType = (a: IKvStore) => a.key === LDConsts.type || a.key === LDConsts.isA;
-let matchIsLang = (a: IKvStore) => a.key === LDConsts.lang;
-let matchIsId = (a: IKvStore) => a.key === LDConsts.id || a.key === LDConsts.iri;
+let matchIsType = (a: KVL) => a.key === LDConsts.type || a.key === LDConsts.isA;
+let matchIsLang = (a: KVL) => a.key === LDConsts.lang;
+let matchIsId = (a: KVL) => a.key === LDConsts.id || a.key === LDConsts.iri;
 */
 /**
  * the matcher is used for encapsuling the decision process that associates keys and values in a kv-store a matching itpt.
@@ -35,7 +35,7 @@ setItptRetriever(itptRetrieverId: string, retriever: IItptRetriever) {
 	this.itptRetrieverMap.set(itptRetrieverId, retriever);
 }
 
-matchSingleKV(single: IKvStore, crudSkills: string): ILDOptions {
+matchSingleKV(single: KVL, crudSkills: string): ILDOptions {
 	throw new Error("Method not implemented.");
 }
 matchLDOptions(matchInput: ILDOptions, crudSkills: string, itptRetrieverId: string): ILDOptions[] {
@@ -48,10 +48,10 @@ matchLDOptions(matchInput: ILDOptions, crudSkills: string, itptRetrieverId: stri
 		//this is a base object and has an id, if an itpt-retriever for special IDs is defined, then it could be used here
 		//return;
 	}
-	let searchTerm: Array<IKvStore>;
+	let searchTerm: Array<KVL>;
 	if (ldType) {
 		//this is a typed base object then
-		let singleSearch: IKvStore = { key: undefined, value: undefined, ldType: ldType.value };
+		let singleSearch: KVL = { key: undefined, value: undefined, ldType: ldType.value };
 		searchTerm = [singleSearch];
 	} else {
 		searchTerm = [];
@@ -67,14 +67,14 @@ matchLDOptions(matchInput: ILDOptions, crudSkills: string, itptRetrieverId: stri
 		if (searchTerm.length === 1) {
 			let intrprtr = appIntRetrFn().searchForObjItpt(searchTerm[0].ldType, crudSkills);
 			searchTerm[0].intrprtrClass = intrprtr;
-			let rvAdd: IKvStore = searchTerm[0];
+			let rvAdd: KVL = searchTerm[0];
 			rv.push(rvAdd);
 			return rv;
 		} else {
 			searchTerm.forEach((elem) => {
 				let intrprtr = appIntRetrFn().searchForObjItpt(elem.ldType, crudSkills);
 				elem.intrprtrClass = intrprtr;
-				//let rvAddMulti: IKvStore = { key: null, value: null, intrprtrClass: intrprtr, ldType: elem };
+				//let rvAddMulti: KVL = { key: null, value: null, intrprtrClass: intrprtr, ldType: elem };
 				rv.push(elem);
 			});
 			return rv;

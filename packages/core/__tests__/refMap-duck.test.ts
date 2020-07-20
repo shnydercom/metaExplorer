@@ -3,7 +3,7 @@
 import * as refMapAHeadjson from '../testing/refMapAHead.json';
 import { ILDToken, NetworkPreferredToken } from '../src/ldaccess/ildtoken';
 import { ILDOptions } from '../src/ldaccess/ildoptions';
-import { IKvStore } from '../src/ldaccess/ikvstore';
+import { KVL } from '../src/ldaccess/KVL';
 import { BlueprintConfig } from '../src/ldaccess/ldBlueprint';
 import { DEFAULT_ITPT_RETRIEVER_NAME } from '../src/defaults/DefaultItptRetriever';
 import { ILDOptionsMapStatePart } from '../src/appstate/store';
@@ -14,7 +14,7 @@ let testTokenStr: string = "testRefMapTokenString";
 let testToken: ILDToken = new NetworkPreferredToken(testTokenStr);
 let testLang: string = "en";
 
-let kvStoresA: IKvStore[] = [{ key: null, value: null, ldType: "AName-ObjectType" }];
+let kvStoresA: KVL[] = [{ key: null, value: null, ldType: "AName-ObjectType" }];
 
 let refMapAHead: BlueprintConfig = refMapAHeadjson as any;
 

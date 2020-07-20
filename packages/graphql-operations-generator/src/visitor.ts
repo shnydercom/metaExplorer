@@ -58,7 +58,7 @@ export class MetaExplorerDocumentsVisitor extends BaseDocumentsVisitor<MetaExplo
 			return str;
 		};
 
-		//todo: change this for ikvstore
+		//todo: change this for KVL
 		const wrapTypeWithModifiers = (baseType: string, type: GraphQLObjectType | GraphQLNonNull<GraphQLObjectType> | GraphQLList<GraphQLObjectType>): string => {
 			const prefix = this.config.namespacedImportName ? `${this.config.namespacedImportName}.` : '';
 			if (isNonNullType(type)) {

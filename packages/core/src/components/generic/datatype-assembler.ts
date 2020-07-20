@@ -1,4 +1,4 @@
-import { IKvStore } from "../../ldaccess/ikvstore";
+import { KVL } from "../../ldaccess/KVL";
 import { ldBlueprint, BlueprintConfig } from "../../ldaccess/ldBlueprint";
 import { UserDefDict } from "../../ldaccess/UserDefDict";
 import { VisualTypesDict } from "../../components/visualcomposition/visualDict";
@@ -11,7 +11,7 @@ const transfOutputKey = UserDefDict.outputData;
 const DATATYPE_ASSEMBLER_CFG: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: LDUIDict.DataTypeAssembler,
-	ownKVL: [],
+	ownKVLs: [],
 	inKeys: [],
 	crudSkills: "cRud"
 };
@@ -24,8 +24,8 @@ class AbstractDataTypeAssembler extends AbstractDataTransformer {
 	 * @param outputKvStores
 	 */
 	protected mappingFunction(
-		inputParams: Map<string, IKvStore>,
-		outputKvStores: Map<string, IKvStore>): IKvStore[] {
+		inputParams: Map<string, KVL>,
+		outputKvStores: Map<string, KVL>): KVL[] {
 		let rv = [];
 
 		const newOutputObj = {
@@ -46,16 +46,16 @@ class AbstractDataTypeAssembler extends AbstractDataTransformer {
 
 export const DataTypeDisassembler = ldBlueprint(DATATYPE_ASSEMBLER_CFG)(AbstractDataTypeAssembler);
 
-export function flatDataTypeAssemblerFactory(inputKvStores: IKvStore[], nameSelf: string) {
+export function flatDataTypeAssemblerFactory(inputKvStores: KVL[], nameSelf: string) {
 
-	const ActionCompOutputKVs: IKvStore[] = [
+	const ActionCompOutputKVs: KVL[] = [
 		{
 			key: transfOutputKey,
 			value: undefined,
 			ldType: VisualTypesDict.compactInfoElement
 		}
 	];
-	const ownKVL: IKvStore[] = [
+	const ownKVLs: KVL[] = [
 		...inputKvStores,
 		...ActionCompOutputKVs
 	];
@@ -65,7 +65,7 @@ export function flatDataTypeAssemblerFactory(inputKvStores: IKvStore[], nameSelf
 	let bpCfg: BlueprintConfig = {
 		subItptOf: null,
 		nameSelf,
-		ownKVL,
+		ownKVLs,
 		inKeys,
 		crudSkills: "cRUd"
 	};

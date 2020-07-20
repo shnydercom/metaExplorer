@@ -1,5 +1,5 @@
 import {
-	addBlueprintToRetriever, BlueprintConfig, DEFAULT_ITPT_RETRIEVER_NAME, gdsfpLD, IKvStore, ILDOptions,
+	addBlueprintToRetriever, BlueprintConfig, DEFAULT_ITPT_RETRIEVER_NAME, gdsfpLD, KVL, ILDOptions,
 	initLDLocalState, intrprtrTypeInstanceFromBlueprint, ldBlueprint, LDConnectedDispatch, LDConnectedState, LDDict, LDLocalState,
 	ldOptionsDeepCopy, LDOwnProps, mapDispatchToProps, mapStateToProps, NetworkPreferredToken, OutputKVMap, UserDefDict,
 	IAsyncRequestWrapper,
@@ -76,7 +76,7 @@ let allMyInputKeys: string[] = [
 	ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
 	UserDefDict.username, UserDefDict.projectname, SAVE_ACTION_LDTYPE, ITPT_BLOCK_EDITOR_SAVING_STATUS
 ];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
 		value: undefined,
@@ -137,7 +137,7 @@ export const BlockEditorCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ITPT_BLOCK_EDITOR_NAME,
 	canInterpretType: ITPT_BLOCK_EDITOR_TYPE,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: allMyInputKeys,
 	crudSkills: "cRUd"
 };
@@ -198,7 +198,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 
 	private sideBarRef = createRef<HTMLDivElement>();
 
@@ -395,7 +395,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			subItptOf: containerID,
 			canInterpretType: itptName + UserDefDict.standardItptObjectTypeSuffix,
 			nameSelf: itptName,
-			ownKVL: [
+			ownKVLs: [
 				{
 					key: UserDefDict.intrprtrBPCfgRefMapKey,
 					value: {
@@ -403,7 +403,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							subItptOf: COMP_BASE_CONTAINER,
 							canInterpretType: UserDefDict.itptContainerObjType,
 							nameSelf: containerID,
-							ownKVL: [
+							ownKVLs: [
 								{
 									key: "in_0",
 									value: {
@@ -422,7 +422,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 							subItptOf: "metaexplorer.io/basichtml/bold",
 							canInterpretType: "http://schema.org/Text",
 							nameSelf: boldID,
-							ownKVL: [
+							ownKVLs: [
 								{
 									key: "inputdata",
 									value: invitationText,
@@ -487,7 +487,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	protected dispatchCurrentlyEditingChange(currentlyEditingName: string) {
 		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
 		if (!outputKVMap) return;
-		let outCurItptKV: IKvStore = {
+		let outCurItptKV: KVL = {
 			key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
 			value: currentlyEditingName,
 			ldType: LDDict.Text
@@ -516,7 +516,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				}
 				break;
 			case "bdt":
-				var baseDataTypeKVStore: IKvStore = {
+				var baseDataTypeKVStore: KVL = {
 					key: UserDefDict.outputSelfKey,
 					value: undefined,
 					ldType: undefined
@@ -527,7 +527,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				node.addPort(LDPortModel.fromVars(false, "out-3", baseDataTypeKVStore, "output"));
 				break;
 			case "inputtype":
-				var inputDataTypeKVStore: IKvStore = {
+				var inputDataTypeKVStore: KVL = {
 					key: UserDefDict.externalInput,
 					value: undefined,
 					ldType: undefined
@@ -536,7 +536,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				node.addPort(LDPortModel.fromVars(false, "out-4", inputDataTypeKVStore, UserDefDict.externalInput));
 				break;
 			case "outputtype":
-				var outputDataTypeKVStore: IKvStore = {
+				var outputDataTypeKVStore: KVL = {
 					key: UserDefDict.externalOutput,
 					value: undefined,
 					ldType: undefined
@@ -546,7 +546,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				break;
 			case "lineardata":
 				node = new ExtendableTypesNodeModel({ nameSelf: "Linear Data Display", color: editorSpecificNodesColor });
-				let outputSelfKV: IKvStore = {
+				let outputSelfKV: KVL = {
 					key: UserDefDict.outputSelfKey,
 					value: undefined,
 					ldType: UserDefDict.intrprtrClassType
@@ -612,9 +612,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	protected loadToEditorByName(name: string, isAutodistribute?: boolean) {
 		let itptInfo = this.logic.getItptList().find((itm) => itm.nameSelf === name);
 		let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
-		if (!itptCfg.ownKVL
-			|| itptCfg.ownKVL.length < 1
-			|| itptCfg.ownKVL.findIndex((searchVal) => searchVal.key === UserDefDict.intrprtrBPCfgRefMapKey) === -1) {
+		if (!itptCfg.ownKVLs
+			|| itptCfg.ownKVLs.length < 1
+			|| itptCfg.ownKVLs.findIndex((searchVal) => searchVal.key === UserDefDict.intrprtrBPCfgRefMapKey) === -1) {
 			return false;
 		}
 		this.generatePrefilled(itptCfg);

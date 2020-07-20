@@ -2,7 +2,7 @@
   "subItptOf": "7fb8a093-892a-4ef7-97da-3388e266526a",
   "canInterpretType": "localhost/imageDisplay-ObjectType",
   "nameSelf": "localhost/imageDisplay",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/imageDisplay",
           "canInterpretType": "http://schema.org/ViewAction",
           "nameSelf": "7fb8a093-892a-4ef7-97da-3388e266526a",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "http://schema.org/contentUrl",
               "value": "http://localhost:5000/media/localhost.png"

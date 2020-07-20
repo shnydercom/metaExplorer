@@ -1,7 +1,7 @@
 import { ExplorerState } from "../appstate/store";
 import { LDOwnProps, LDConnectedState, LDConnectedDispatch } from "../appstate/LDProps";
 import { ILDOptions } from "../ldaccess/ildoptions";
-import { IKvStore } from "../ldaccess/ikvstore";
+import { KVL } from "../ldaccess/KVL";
 import { ldOptionsClientSideCreateAction, ldOptionsClientSideUpdateAction, dispatchKvUpdateAction, ldAction } from "../appstate/epicducks/ldOptions-duck";
 import { UserDefDict } from "../ldaccess/UserDefDict";
 import { OutputKVMapElement, OutputKVMap, BlueprintConfig } from "../ldaccess/ldBlueprint";
@@ -67,7 +67,7 @@ const ldTkStrRefToFilledProp = (state: ExplorerState, ownProps: LDOwnProps, ldOp
 export const mapDispatchToProps = (dispatch: Dispatch<Action<any>>, ownProps: LDOwnProps): LDConnectedDispatch => ({
 	notifyLDOptionsChange: (ldOptions: ILDOptions) => {
 		if (!ldOptions) {
-			let kvStores: IKvStore[] = [/*ownProps.singleKV*/];
+			let kvStores: KVL[] = [/*ownProps.singleKV*/];
 			let lang: string;
 			let alias: string = ownProps.ldTokenString;
 			dispatch(ldOptionsClientSideCreateAction(kvStores, lang, alias));
@@ -92,28 +92,28 @@ export const mapDispatchToProps = (dispatch: Dispatch<Action<any>>, ownProps: LD
 			//console.warn("can't dispatch RefMap Split");
 			//return;
 		} else {
-			const newKvArr: IKvStore[] = [];
+			const newKvArr: KVL[] = [];
 			const matchVal = matchingTypeKV.value;
 			if (!(!matchVal && matchVal !== false)) {
 				const matchValAsObj: { [s: string]: any } = matchVal;
 				for (const keyPart in matchValAsObj) {
 					if (matchValAsObj.hasOwnProperty(keyPart)) {
 						const valPart = matchValAsObj[keyPart];
-						const newKV: IKvStore = { key: keyPart, value: valPart, ldType: null };
+						const newKV: KVL = { key: keyPart, value: valPart, ldType: null };
 						newKvArr.push(newKV);
 					}
 				}
 			}
 			newLDOptions.resource.kvStores = newKvArr;
 		}
-		let refMapKv = refMap.ownKVL.find((val) => val.key === UserDefDict.intrprtrBPCfgRefMapKey);
+		let refMapKv = refMap.ownKVLs.find((val) => val.key === UserDefDict.intrprtrBPCfgRefMapKey);
 		if (refMapKv && refMapKv.value && refMapKv.value[ITPT_REFMAP_BASE]) {
 			dispatch(refMapSUCCESSAction(newLDOptions));
 			return;
 		}
 		dispatch(refMapREQUESTAction(newLDOptions, refMap));
 	},
-	dispatchKvOutput: (changedKvStores: IKvStore[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => {
+	dispatchKvOutput: (changedKvStores: KVL[], thisLdTkStr: string, updatedKvMap: OutputKVMap) => {
 		if (!(changedKvStores && thisLdTkStr && updatedKvMap)) {
 			//console.warn("dispatching KVs failed because not all values were set");
 			return;

@@ -39,7 +39,7 @@ export function editorToFileSystem(basePath?: string, mainItpt?: string, srvrPor
 			"subItptOf": "c6c6d88d-00e9-4bf2-8c89-c2ebc1b9adbe",
 			"canInterpretType": "my-user/my-project/index-ObjectType",
 			"nameSelf": "my-user/my-project/index",
-			"ownKVL": [
+			"ownKVLs": [
 				{
 					"key": "InterpreterReferenceMapKey",
 					"value": {
@@ -47,7 +47,7 @@ export function editorToFileSystem(basePath?: string, mainItpt?: string, srvrPor
 							"subItptOf": "metaexplorer.io/baseContainer",
 							"canInterpretType": "metaexplorer.io/ContainerObjType",
 							"nameSelf": "c6c6d88d-00e9-4bf2-8c89-c2ebc1b9adbe",
-							"ownKVL": [],
+							"ownKVLs": [],
 							"crudSkills": "cRud",
 							"inKeys": []
 						}

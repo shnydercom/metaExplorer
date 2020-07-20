@@ -1,6 +1,6 @@
 import { LDOwnProps, LDLocalState, LDConnectedState, LDConnectedDispatch, LDRouteProps } from "../../appstate/LDProps";
 import { UserDefDict } from "../../ldaccess/UserDefDict";
-import { IKvStore } from "../../ldaccess/ikvstore";
+import { KVL } from "../../ldaccess/KVL";
 import { ldBlueprint, BlueprintConfig, OutputKVMap, IBlueprintItpt } from "../../ldaccess/ldBlueprint";
 import { Component } from "react";
 import { ILDOptions } from "../../ldaccess/ildoptions";
@@ -31,12 +31,12 @@ export const COMP_BASE_CONTAINER = "metaexplorer.io/baseContainer";
 let cfgType: string = UserDefDict.itptContainerObjType;
 let cfgIntrprtKeys: string[] =
 	[];
-let ownKVL: IKvStore[] = [];
+let ownKVLs: KVL[] = [];
 let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: COMP_BASE_CONTAINER,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -116,7 +116,7 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 
 	constructor(props?: BaseContOwnProps & LDConnectedState & LDConnectedDispatch) {
 		super(props);

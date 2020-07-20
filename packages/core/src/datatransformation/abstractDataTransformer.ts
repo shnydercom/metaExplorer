@@ -1,5 +1,5 @@
 import { IBlueprintItpt, BlueprintConfig, OutputKVMap } from "../ldaccess/ldBlueprint";
-import { IKvStore } from "../ldaccess/ikvstore";
+import { KVL } from "../ldaccess/KVL";
 import { ILDOptions } from "../ldaccess/ildoptions";
 import { UserDefDict } from "../ldaccess/UserDefDict";
 import { isObjPropertyRef, isOutputKVSame } from "../ldaccess/ldUtils";
@@ -8,23 +8,23 @@ import { dispatchKvUpdateAction } from "../appstate/epicducks/ldOptions-duck";
 import { LDError } from "../appstate/LDError";
 
 export const AbstractDataTransformerItptKeys = [];
-export const AbstractDataTransformerOutputKVs: IKvStore[] = [];
+export const AbstractDataTransformerOutputKVs: KVL[] = [];
 
 /**
  * abstract class to implement a data flow. Should simplify the setup to
  * the following steps:
  * a) set input Itpt-Keys in the constructor
- * b) set an Array of your output-IKVstores in the constructor
+ * b) set an Array of your output-KVLs in the constructor
  * c) override this.mappingFunction(...)
  */
 export abstract class AbstractDataTransformer implements IBlueprintItpt {
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 
-	inputParams: Map<string, IKvStore> = new Map();
+	inputParams: Map<string, KVL> = new Map();
 	itptKeys: string[];
-	outputKvStores: IKvStore[];
+	outputKvStores: KVL[];
 	isInputDirty: boolean = false;
 	isOutputDirty: boolean = false;
 	ldTkStr: string;
@@ -34,7 +34,7 @@ export abstract class AbstractDataTransformer implements IBlueprintItpt {
 		this.ldTkStr = ldTkStr;
 		this.itptKeys = AbstractDataTransformerItptKeys;
 		this.outputKvStores = AbstractDataTransformerOutputKVs;
-		const outputKVMap = this.cfg.ownKVL.find((val) => UserDefDict.outputKVMapKey === val.key);
+		const outputKVMap = this.cfg.ownKVLs.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : null);
 	}
 
@@ -42,8 +42,8 @@ export abstract class AbstractDataTransformer implements IBlueprintItpt {
 		if (!ldOptions || !ldOptions.resource || !ldOptions.resource.kvStores) return;
 		this.ldTkStr = ldOptions.ldToken.get();
 		let kvs = ldOptions.resource.kvStores;
-		let outputKVMap: IKvStore = kvs.find((val) => UserDefDict.outputKVMapKey === val.key);
-		outputKVMap = outputKVMap ? outputKVMap : this.cfg.ownKVL.find((val) => UserDefDict.outputKVMapKey === val.key);
+		let outputKVMap: KVL = kvs.find((val) => UserDefDict.outputKVMapKey === val.key);
+		outputKVMap = outputKVMap ? outputKVMap : this.cfg.ownKVLs.find((val) => UserDefDict.outputKVMapKey === val.key);
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		for (let inputidx = 0; inputidx < this.itptKeys.length; inputidx++) {
 			const inputKey = this.itptKeys[inputidx];
@@ -75,19 +75,19 @@ export abstract class AbstractDataTransformer implements IBlueprintItpt {
 		}
 	}
 	protected mappingFunction(
-		inputParams: Map<string, IKvStore>,
-		outputKvStores: Map<string, IKvStore>): IKvStore[] {
+		inputParams: Map<string, KVL>,
+		outputKvStores: Map<string, KVL>): KVL[] {
 		let rv = [];
 		return rv;
 	}
 
 	protected refreshOutput(): void {
-		let newOutputKvStores: Map<string, IKvStore> = new Map();
+		let newOutputKvStores: Map<string, KVL> = new Map();
 		this.outputKvStores.
 			forEach((kvStore) => {
 				newOutputKvStores.set(kvStore.key, { key: kvStore.key, value: kvStore.value, ldType: kvStore.ldType });
 			});
-		const changedKvStores: IKvStore[] = this.mappingFunction(this.inputParams,
+		const changedKvStores: KVL[] = this.mappingFunction(this.inputParams,
 			newOutputKvStores);
 		const thisLdTkStr: string = this.ldTkStr;
 		if (!thisLdTkStr) {

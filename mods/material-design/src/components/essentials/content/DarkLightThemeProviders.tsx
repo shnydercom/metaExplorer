@@ -1,4 +1,4 @@
-import { IKvStore, ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap, ILDOptions,
+import { KVL, ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap, ILDOptions,
 	LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState ,UserDefDict, VisualKeysDict,
 	gdsfpLD, generateItptFromCompInfo, initLDLocalState
  } from '@metaexplorer/core';
@@ -21,7 +21,7 @@ export const ThemeProviderLightName = "metaexplorer.io/material-design/ThemeProv
 let cfgIntrprtKeys: string[] =
 	[VisualKeysDict.inputContainer];
 
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -32,7 +32,7 @@ let ownKVL: IKvStore[] = [
 let darkBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ThemeProviderDarkName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -40,7 +40,7 @@ let darkBpCfg: BlueprintConfig = {
 let lightBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: ThemeProviderLightName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -88,7 +88,7 @@ class PureThemeProviderDark extends Component<LDConnectedState & LDConnectedDisp
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 
 	protected renderInputContainer = generateItptFromCompInfo.bind(this, VisualKeysDict.inputContainer);
 

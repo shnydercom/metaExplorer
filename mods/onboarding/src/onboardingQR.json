@@ -2,7 +2,7 @@
   "subItptOf": "7e9d2646-1e29-41b2-b6e0-bcc9fa809ebe",
   "canInterpretType": "metaexplorer.io/v1/QRcodeFromText-ObjectType",
   "nameSelf": "metaexplorer.io/qr/QRcodeFromText",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/layout/vh-centered-column",
           "canInterpretType": "metaexplorer.io/layout/vh-centered-column-ObjectType",
           "nameSelf": "7e9d2646-1e29-41b2-b6e0-bcc9fa809ebe",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -29,7 +29,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "124871c4-dedc-4bbe-ac32-cd54984e91ae",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "in_0",
               "value": {
@@ -57,7 +57,7 @@
           "subItptOf": "qr/QRCodeDisplay",
           "canInterpretType": "qr/QRCodeDisplay-ObjectType",
           "nameSelf": "831f4e45-c7b9-48af-9d89-c214669404a6",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "utf8textData",
               "value": "This could be your text",
@@ -91,7 +91,7 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "348aa3f5-1106-4819-a1f8-67eecf777aa3",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "http://schema.org/description",
               "value": "encode this:",

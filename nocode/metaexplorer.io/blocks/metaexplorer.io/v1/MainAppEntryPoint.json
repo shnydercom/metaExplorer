@@ -2,7 +2,7 @@
   "subItptOf": "5447468d-5c5b-4f2f-a56a-9b4a508b8d40",
   "canInterpretType": "metaexplorer.io/v1/MainAppEntryPoint-ObjectType",
   "nameSelf": "metaexplorer.io/v1/MainAppEntryPoint",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "ProjectConfiguration",
           "canInterpretType": "ProjectConfiguration-ObjectType",
           "nameSelf": "5447468d-5c5b-4f2f-a56a-9b4a508b8d40",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "value": {
@@ -38,7 +38,7 @@
           "subItptOf": "metaexplorer.io/block-editor",
           "canInterpretType": "blockeditortype",
           "nameSelf": "b4f8aeb5-2ef7-488b-bad7-f0c7c4bb6725",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "currentlyediting",
               "value": "metaexplorer.io/me-beta/index",
@@ -77,7 +77,7 @@
           "subItptOf": "metaexplorer.io/server/RefMapBpCfgSender",
           "canInterpretType": "metaexplorer.io/server/RefMapBpCfgSenderType",
           "nameSelf": "ae9427b8-c461-41f5-b125-caad47106b1a",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "srvURL",
               "value": "/api/blocks",
@@ -101,7 +101,7 @@
           "subItptOf": "ActionHandler",
           "canInterpretType": "ActionHandler-ObjectType",
           "nameSelf": "01492f64-e72f-42c6-9bfa-c39b2ee3f415",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "canHandleType",
               "value": "save-editor-action",
@@ -115,7 +115,7 @@
           "subItptOf": "keycloak/auth/config",
           "canInterpretType": "keycloak/auth/config-ObjectType",
           "nameSelf": "8e8a7d7d-1013-4965-a9a9-9207ca899014",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "jsonConfigurationPath",
               "value": "/media/public-cfg.json",

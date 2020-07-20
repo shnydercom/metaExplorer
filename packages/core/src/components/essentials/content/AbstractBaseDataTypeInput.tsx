@@ -3,7 +3,7 @@ import { BlueprintConfig } from '../../../ldaccess/ldBlueprint';
 import { IBlueprintItpt } from '../../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../../ldaccess/ildoptions';
 
-import { IKvStore } from '../../../ldaccess/ikvstore';
+import { KVL } from '../../../ldaccess/KVL';
 import { LDDict } from '../../../ldaccess/LDDict';
 
 import { LDBaseDataType } from '../../../ldaccess/LDBaseDataType';
@@ -22,11 +22,11 @@ import { debounce } from 'debounce';
  */
 
 type OwnProps = {
-	//singleKV: IKvStore; //TODO: doesn't seem to be used any more as react-prop
+	//singleKV: KVL; //TODO: doesn't seem to be used any more as react-prop
 } & LDOwnProps;
 
 type BaseDataTypeState = {
-	singleKVInput: IKvStore,
+	singleKVInput: KVL,
 	singleKVInputKey: string,
 	singleKVOutputKey: string,
 	isDispatched: boolean
@@ -44,7 +44,7 @@ for (var bdt in LD_BASE_DATA_TYPE_INPUT_TYPES) {
 		var elem = LD_BASE_DATA_TYPE_INPUT_TYPES[bdt];
 		//let cfgType: string = LDDict.CreateAction;
 		let cfgIntrprtKeys: string[] = [LDDict.description, UserDefDict.inputData];
-		let ownKVL: IKvStore[] = [
+		let ownKVLs: KVL[] = [
 			{
 				key: LDDict.description,
 				value: undefined,
@@ -65,7 +65,7 @@ for (var bdt in LD_BASE_DATA_TYPE_INPUT_TYPES) {
 			subItptOf: undefined,
 			canInterpretType: elem,
 			nameSelf: "metaexplorer.io/core/" + elem,
-			ownKVL: ownKVL,
+			ownKVLs: ownKVLs,
 			inKeys: cfgIntrprtKeys,
 			crudSkills: "CRUd"
 		};
@@ -76,7 +76,7 @@ export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedSta
 	implements IBlueprintItpt, PureBaseDataTypeInputComponent {
 
 	cfg: BlueprintConfig;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 
 	protected dispatchDebounced = debounce((
 		modSingleKV, ldTokenString, outputKVMap
@@ -117,7 +117,7 @@ export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedSta
 
 	handleChange = (evtval) => {
 		let singleInputKey: string = this.state.singleKVInputKey;
-		let modSingleKVOutput: IKvStore = {
+		let modSingleKVOutput: KVL = {
 			key: this.state.singleKVOutputKey,
 			ldType: this.state.localLDTypes.get(singleInputKey),
 			value: this.state.localValues.get(singleInputKey)
@@ -164,7 +164,7 @@ export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedSta
 				let kvStoreIdx = newLDOptionsObj.resource.kvStores.findIndex((a) => {
 					return UserDefDict.singleKvStore.toString() === a.key;
 				});
-				let singleKv: IKvStore;
+				let singleKv: KVL;
 				if (kvStoreIdx === -1) {
 					singleKv = { key: UserDefDict.singleKvStore, value: null, ldType: this.cfg.canInterpretType };
 					newLDOptionsObj.resource.kvStores.push(singleKv);

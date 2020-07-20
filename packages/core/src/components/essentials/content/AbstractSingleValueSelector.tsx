@@ -1,5 +1,5 @@
 import { LDConnectedDispatch, LDConnectedState, LDLocalState, LDOwnProps } from "../../../appstate";
-import { BlueprintConfig, IBlueprintItpt, IKvStore, ILDOptions, LDDict, LDUIDict, OutputKVMap } from "../../../ldaccess";
+import { BlueprintConfig, IBlueprintItpt, KVL, ILDOptions, LDDict, LDUIDict, OutputKVMap } from "../../../ldaccess";
 import { Component, ReactNode } from "react";
 import { gdsfpLD, initLDLocalState } from "../../generic";
 
@@ -8,7 +8,7 @@ const singleValueSelectorInputKeys: string[] = [
 	LDDict.description,
 	LDDict.actionOption,
 	LDDict.object];
-const ownKVL: IKvStore[] = [
+const ownKVLs: KVL[] = [
 	{
 		key: LDDict.description,
 		value: undefined,
@@ -30,7 +30,7 @@ export const SingleValueSelectorBpCfg: BlueprintConfig = {
 	subItptOf: undefined,
 	canInterpretType: cfgType,
 	nameSelf: "metaexplorer.io/core/SingleValueSelector",
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: singleValueSelectorInputKeys,
 	crudSkills: "CRUd"
 };
@@ -55,7 +55,7 @@ export abstract class AbstractSingleValueSelector extends Component<LDConnectedS
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 
 	constructor(props: any) {
 		super(props);

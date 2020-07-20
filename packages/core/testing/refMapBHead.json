@@ -2,7 +2,7 @@
   "subItptOf": "bSub",
   "canInterpretType": "BHead-ObjectType",
   "nameSelf": "BHead",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/BottomNavigation",
           "canInterpretType": "metaexplorer.io/BottomNavigation-ObjectType",
           "nameSelf": "bSub",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "inputContainer",
               "ldType": "InterpreterClassType"

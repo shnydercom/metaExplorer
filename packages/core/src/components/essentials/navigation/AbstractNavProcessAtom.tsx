@@ -1,6 +1,6 @@
 import React from 'react';
 import { LDDict } from '../../../ldaccess/LDDict';
-import { IKvStore } from '../../../ldaccess/ikvstore';
+import { KVL } from '../../../ldaccess/KVL';
 import { BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../../../ldaccess/ldBlueprint';
 import { ILDOptions } from '../../../ldaccess/ildoptions';
 import { LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState } from '../../../appstate/LDProps';
@@ -24,7 +24,7 @@ let cfgIntrprtKeys: string[] =
 		ActionKeysDict.action_confirm,
 		VisualKeysDict.cssClassName
 	];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: VisualKeysDict.inputContainer,
 		value: undefined,
@@ -69,7 +69,7 @@ let ownKVL: IKvStore[] = [
 export const NavProcessAtomBpCfg: BlueprintConfig = {
 	subItptOf: null,
 	nameSelf: NavProcessAtomName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -106,7 +106,7 @@ export abstract class AbstractNavProcessAtom extends Component<LDConnectedState 
 	cfg: BlueprintConfig;
 	outputKVMap: OutputKVMap;
 	consumeLDOptions: (ldOptions: ILDOptions) => any;
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 
 	constructor(props: any) {
 		super(props);

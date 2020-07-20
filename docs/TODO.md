@@ -25,14 +25,14 @@ last serialized bits & pieces: seems to work!
 {
   "forType": "78e74a11-229b-4bdd-99ff-3f324b7920ca",
   "nameSelf": "nameee",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
         "78e74a11-229b-4bdd-99ff-3f324b7920ca": {
           "forType": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "nameSelf": "78e74a11-229b-4bdd-99ff-3f324b7920ca",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "primaryInterpreter",
               "value": {
@@ -68,7 +68,7 @@ last serialized bits & pieces: seems to work!
         "50de35ae-191b-4fb4-a830-1f86855ccd7d": {
           "forType": "http://schema.org/ViewAction",
           "nameSelf": "50de35ae-191b-4fb4-a830-1f86855ccd7d",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "http://schema.org/name",
               "value": {
@@ -97,7 +97,7 @@ last serialized bits & pieces: seems to work!
         "b8db4aae-e272-4a76-bc32-edfc210d97fe": {
           "forType": "metaexplorer.io/imageRetriever",
           "nameSelf": "b8db4aae-e272-4a76-bc32-edfc210d97fe",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "srvURL",
               "value": "http://image",
@@ -118,7 +118,7 @@ last serialized bits & pieces: seems to work!
         "db879383-4a43-4c5d-aead-5e2844c5ab63": {
           "forType": "metaexplorer.io/productRetriever",
           "nameSelf": "db879383-4a43-4c5d-aead-5e2844c5ab63",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "srvURL",
               "value": "http://prod",

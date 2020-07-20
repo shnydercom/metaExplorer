@@ -2,7 +2,7 @@
   "subItptOf": "testB_linearContainer",
   "canInterpretType": "b-ObjectType",
   "nameSelf": "b",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "testB_linearContainer",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "in_0",
               "value": {
@@ -47,7 +47,7 @@
           "subItptOf": "a",
           "canInterpretType": "a-ObjectType",
           "nameSelf": "testB_AinsideB",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "http://schema.org/description",
               "value": {
@@ -66,7 +66,7 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "testB_TextInputToChangeDescription",
-          "ownKVL": [],
+          "ownKVLs": [],
           "crudSkills": "cRud",
           "inKeys": []
         },
@@ -74,7 +74,7 @@
           "subItptOf": "metaexplorer.io/ImgHeadSubDescIntrprtr",
           "canInterpretType": "metaexplorer.io/ImgHeadSubDescIntrprtr-ObjectType",
           "nameSelf": "testB_imgHeadSubDesc",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "HeaderText",
               "value": {

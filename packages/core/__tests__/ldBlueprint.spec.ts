@@ -1,7 +1,7 @@
 //import jasmine from 'jasmine';
 import { ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap } from '../src/ldaccess/ldBlueprint';
 import { ILDOptions } from '../src/ldaccess/ildoptions';
-import { IKvStore } from '../src/ldaccess/ikvstore';
+import { KVL } from '../src/ldaccess/KVL';
 
 let bpCfg: BlueprintConfig = {
     //TODO: property forType needs to be renamed, maybe split up into multiple properties. I need a clear
@@ -11,7 +11,7 @@ let bpCfg: BlueprintConfig = {
     subItptOf: null,
     canInterpretType: "http://metaexplorer.io/Testtype",
     nameSelf: "metaexplorer.io/testTypeInterpreter",
-    ownKVL: [],
+    ownKVLs: [],
     inKeys: [],
     crudSkills: "cRud"
 };
@@ -21,7 +21,7 @@ export class LDBlueprintContainerClass implements IBlueprintItpt {
     cfg: BlueprintConfig;
     outputKVMap: OutputKVMap;
     consumeLDOptions: (ldOptions: ILDOptions) => any;
-    ownKVL: IKvStore[];
+    ownKVLs: KVL[];
 }
 
 describe("ldBlueprint decorator func", () => {

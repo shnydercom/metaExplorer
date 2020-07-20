@@ -1,4 +1,4 @@
-import { LDDict, IKvStore, ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap,
+import { LDDict, KVL, ldBlueprint, BlueprintConfig, IBlueprintItpt, OutputKVMap,
 	LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState,
 	ILDOptions, CameraSwitcherTabs,	UserDefDict, initLDLocalState
 } from '@metaexplorer/core';
@@ -28,7 +28,7 @@ export const EANScannerName = "metaexplorer.io/EANScanner";
 let cfgType: string = LDDict.ViewAction;
 let cfgIntrprtKeys: string[] =
 	[];
-let ownKVL: IKvStore[] = [
+let ownKVLs: KVL[] = [
 	{
 		key: LDDict.gtin8,
 		value: undefined,
@@ -39,7 +39,7 @@ let bpCfg: BlueprintConfig = {
 	subItptOf: null,
 	canInterpretType: cfgType,
 	nameSelf: EANScannerName,
-	ownKVL: ownKVL,
+	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"
 };
@@ -53,7 +53,7 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 	loadingImgLink: string = "/media/camera_negative_black.svg";
 	errorImgLink: string = "/media/nocamera_negative_black.svg";
 
-	ownKVL: IKvStore[];
+	ownKVLs: KVL[];
 	constructor(props: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
@@ -197,7 +197,7 @@ export class EANScanner extends Component<LDConnectedState & LDConnectedDispatch
 		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
 		if (!outputKVMap) return;
 		let barcode: string = result.codeResult.code;
-		const barcodeKV: IKvStore = {
+		const barcodeKV: KVL = {
 			key: LDDict.gtin8,
 			value: barcode,
 			ldType: LDDict.Text

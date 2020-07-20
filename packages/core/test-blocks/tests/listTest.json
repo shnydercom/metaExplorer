@@ -2,7 +2,7 @@
   "subItptOf": "652b474d-91a4-48cb-8a32-cf68beff5218",
   "canInterpretType": "listtest-ObjectType",
   "nameSelf": "listtest",
-  "ownKVL": [
+  "ownKVLs": [
     {
       "key": "InterpreterReferenceMapKey",
       "value": {
@@ -10,7 +10,7 @@
           "subItptOf": "metaexplorer.io/baseContainer",
           "canInterpretType": "metaexplorer.io/ContainerObjType",
           "nameSelf": "652b474d-91a4-48cb-8a32-cf68beff5218",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "in_0",
               "value": {
@@ -47,7 +47,7 @@
           "subItptOf": "metaexplorer.io/material-design/SectionedList",
           "canInterpretType": "metaexplorer.io/material-design/SectionedList-ObjectType",
           "nameSelf": "d00a440b-5fc9-4691-a12a-fbbba0c996b9",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "section-headings",
               "value": "TestHeading",
@@ -89,7 +89,7 @@
           "subItptOf": "metaexplorer.io/MagicBox",
           "canInterpretType": "metaexplorer.io/MagicBoxType",
           "nameSelf": "6772902a-7474-4e0c-a309-39aa14097b8f",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "inputdata",
               "value": {
@@ -107,7 +107,7 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
           "canInterpretType": "http://schema.org/Text",
           "nameSelf": "3f2a6f85-e736-4850-9863-741f1dedff7e",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "inputdata",
               "value": "listtest",
@@ -121,7 +121,7 @@
           "subItptOf": "metaexplorer.io/MagicBox",
           "canInterpretType": "metaexplorer.io/MagicBoxType",
           "nameSelf": "8095bac7-14f4-4b4c-a49f-ed1fffcd5e5a",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "inputdata",
               "value": {
@@ -139,7 +139,7 @@
           "subItptOf": "metaexplorer.io/material-design/http://schema.org/Boolean",
           "canInterpretType": "http://schema.org/Boolean",
           "nameSelf": "c9c940c1-c2c2-4c96-89d5-15d3a5dca0b8",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "inputdata",
               "value": false,
@@ -153,7 +153,7 @@
           "subItptOf": "metaexplorer.io/CompactInfoListElement",
           "canInterpretType": "CompactInformationElement",
           "nameSelf": "05f13016-4525-4fbe-a5a3-e978a3c16a1d",
-          "ownKVL": [
+          "ownKVLs": [
             {
               "key": "HeaderText",
               "value": "Text in header",
