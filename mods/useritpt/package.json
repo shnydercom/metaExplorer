@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/useritpt",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "A mod that enables getting user-defined blocks from an API",
   "scripts": {
     "test": "test",
@@ -21,6 +21,6 @@
     "lib"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.15"
+    "@metaexplorer/core": "^0.0.16"
   }
 }
