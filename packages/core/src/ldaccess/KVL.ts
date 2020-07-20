@@ -1,7 +1,7 @@
 import { LDDictWildCard } from "./LDDict";
 
 /**
- * previously IKVStore, now KeyValueLinkeddatatype
+ * a key value store with an optional LDType: KeyValueLinkeddatatype
  */
 export interface KVL {
     key: LDDictWildCard;
