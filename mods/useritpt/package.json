@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/useritpt",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "A mod that enables getting user-defined blocks from an API",
   "scripts": {
     "test": "test",
