@@ -44,7 +44,5 @@
   "jest-junit": {
     "outputDirectory": "./test-results/typescript"
   },
-  "publishConfig": {
-    "access": "public"
-  }
+  "private": true
 }
