@@ -10,7 +10,8 @@
     "access": "public"
   },
   "files": [
-    "lib"
+    "lib",
+    "lib-esm"
   ],
   "scripts": {
     "story": "start-storybook -p 2019 -s ./public",

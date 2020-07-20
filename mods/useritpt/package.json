@@ -18,7 +18,8 @@
     "access": "public"
   },
   "files": [
-    "lib"
+    "lib",
+    "lib-esm"
   ],
   "dependencies": {
     "@metaexplorer/core": "^0.0.17"
