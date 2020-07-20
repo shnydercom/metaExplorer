@@ -18,7 +18,7 @@
     "build": "lerna run build",
     "dev": "set MIO_DYNAMIC=true && lerna run start --stream",
     "start": "set OVERWRITE_ON_RESTART=true && yarn dev",
-    "release": "npm config set access public yarn lerna publish"
+    "release": "npm config set access public && yarn lerna publish"
   },
   "private": true,
   "publishConfig": {
