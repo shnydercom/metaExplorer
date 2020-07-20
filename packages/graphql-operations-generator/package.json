@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer/graphql-operations-generator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "graphql-generator for metaexplorer projects",
   "author": "Jonathan Schneider",
   "license": "EUPL-1.2",
