@@ -6,8 +6,10 @@
   "license": "EUPL",
   "scripts": {
     "story": "start-storybook -p 2019 -s ./public",
-    "build": "tsc && yarn cpcss",
-    "cpcss": "node-sass ./src/storybook/storybook.css ./lib/storybook/storybook.css"
+    "buildesm": "tsc -m es6 -target esnext --outDir lib-esm",
+    "buildregular": "tsc",
+    "build": "yarn buildesm && yarn buildregular && yarn compcss",
+    "compcss": "node-sass ./src/storybook/storybook.css ./lib/storybook/storybook.css"
   },
   "dependencies": {
     "@babel/core": "^7.6.2",
