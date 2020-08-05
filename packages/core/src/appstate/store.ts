@@ -46,7 +46,8 @@ export const isStateDebug = process.env.METAEXPLORER_MODE === 'statedebug';
 let composeEnhancers = null;
 
 if (typeof window !== "undefined") {
-  composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__']
+  const chromeReduxDevtools = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'];
+  composeEnhancers = chromeReduxDevtools ? chromeReduxDevtools : compose;
 } else {
   composeEnhancers = compose;
 }
