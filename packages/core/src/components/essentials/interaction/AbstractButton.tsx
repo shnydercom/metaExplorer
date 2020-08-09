@@ -10,8 +10,8 @@ import { ActionKeysDict, ActionTypesDict, ActionType } from '../../../components
 import { VisualKeysDict, VisualTypesDict } from '../../../components/visualcomposition/visualDict';
 import { gdsfpLD, initLDLocalState } from '../../../components/generic/generatorFns';
 import { cleanRouteString } from '../../../components/routing/route-helper-fns';
+import { LDUIDict } from 'packages/core/src/ldaccess';
 
-export const MDButtonName = "metaexplorer.io/material-design/Button";
 export const fontIcon = "fontIcon";
 export const isIcon = "isIcon";
 let cfgIntrprtKeys: string[] =
@@ -51,7 +51,7 @@ let ownKVLs: KVL[] = [
 ];
 export const ButtonBpCfg: BlueprintConfig = {
 	subItptOf: null,
-	nameSelf: MDButtonName,
+	nameSelf: LDUIDict.Button,
 	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
 	crudSkills: "cRud"

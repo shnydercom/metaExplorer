@@ -1,2 +1,2 @@
 export * from './initMaterialDesign';
-export * from './mdUtils';
+export * from './utils';

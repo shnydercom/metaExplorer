@@ -16,8 +16,7 @@ import {
 	MDDateInput,
 	MDDateTimeInput
 } from './MDBaseDataTypeInput';
-import { createMDModNSUrl } from '../../../mdUtils';
-
+import { createMDModNSUrl } from '../../../utils/mdUtils';
 
 rootSetup([]);
 const appIntRetr = appItptRetrFn();
