@@ -31,7 +31,13 @@ export enum LDUIDict {
 	 * from declarative to functional: such a component will assemble data from
 	 * disparate data
 	 */
-	DataTypeAssembler = "http://ldui.net/DataTypeAssembler"
+	DataTypeAssembler = "http://ldui.net/DataTypeAssembler",
+
+	/**
+	 * the graphical control element "button", although the appearance can change a lot the
+	 * functionality of buttons hasn't really changed
+	 */
+	Button = "http://ldui.net/interaction/Button",
 }
 export enum LDUIDictVerbs {
 /**
@@ -60,5 +66,5 @@ export enum LDUIDictVerbs {
 	 * general capability to be able to narrow down the maximum supported version of types
 	 * (because "type" can mean a lot of different things in different programming languages)
 	 */
-	typed = "http://ldui.net/typed"
+	typed = "http://ldui.net/typed",
 }

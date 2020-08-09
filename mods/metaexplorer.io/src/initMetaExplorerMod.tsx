@@ -7,7 +7,7 @@ import { PureImprint, ImprintName } from "./compliance/imprint";
 import { LayoutCircleDisplayName, PureCircleLayout } from "./circleview";
 
 export const MOD_METAEXPLORERIO_ID = "METAEXPLORERIO_MOD";
-export const MOD_METAEXPLORERIO_NAME = "MetaExplorer component Mod"
+export const MOD_METAEXPLORERIO_NAME = "MetaExplorer component Mod";
 
 export function initMetaExplorerMod() {
 	let appIntRetr = appItptRetrFn();
@@ -18,7 +18,6 @@ export function initMetaExplorerMod() {
 		appIntRetr.addItpt(GooeyNavName, PureGooeyNav, "cRud", [ITPT_TAG_ATOMIC]);
 		appIntRetr.addItpt(ImprintName, PureImprint, "cRud", [ITPT_TAG_ATOMIC]);
 		appIntRetr.addItpt(LayoutCircleDisplayName, PureCircleLayout, "cRud", [ITPT_TAG_ATOMIC]);
-		
 		resolve({ id: MOD_METAEXPLORERIO_ID, name: MOD_METAEXPLORERIO_NAME, state: SingleModStateKeysDict.readyToUse, errorMsg: null });
 	});
 	return rv;

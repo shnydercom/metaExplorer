@@ -4,11 +4,11 @@ import {
 } from "@metaexplorer/core";
 import { Switch, TextField, FormControlLabel } from "@material-ui/core";
 import React from "react";
-import { createMDModNSUrl } from "../../../mdUtils";
+import { createMDModNSUrl } from "../../../utils/mdUtils";
 
-const mdBaseDataTypeBpcfgs = baseDataTypeBpcfgs.map((cfg,idx) => {
-	return {...cfg, nameSelf: createMDModNSUrl(LD_BASE_DATA_TYPE_INPUT_TYPES[idx])}
-})
+const mdBaseDataTypeBpcfgs = baseDataTypeBpcfgs.map((cfg, idx) => {
+	return { ...cfg, nameSelf: createMDModNSUrl(LD_BASE_DATA_TYPE_INPUT_TYPES[idx]) };
+});
 
 abstract class MDBaseDataTypeInput extends AbstractBaseDataTypeInput {
 	renderSingleKv(baseDT: LDBaseDataType) {
