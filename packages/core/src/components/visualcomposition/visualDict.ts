@@ -5,6 +5,7 @@ export enum VisualKeysDict {
 	description = "Description",
 	cancelTxt = "cancelTxt",
 	confirmTxt = "confirmTxt",
+	copyTxt = "copyTxt",
 
 	//layout
 	switchVerticalDirection = "switchVerticalDirection",

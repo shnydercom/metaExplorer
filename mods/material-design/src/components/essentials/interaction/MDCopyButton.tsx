@@ -12,7 +12,7 @@ import { copyToClipboard } from '../../../utils/copyToClipboard';
 export const MDCopyButtonName: string = "metaexplorer.io/material-design/CopyButton";
 let cfgRegularInputKeys: string[] = [
 	UserDefDict.inputData,
-	VisualKeysDict.confirmTxt,
+	VisualKeysDict.copyTxt,
 	fontIcon,
 	isIcon,
 ];
@@ -23,7 +23,7 @@ let ownKVLs: KVL[] = [
 		ldType: LDDict.Text
 	},
 	{
-		key: VisualKeysDict.confirmTxt,
+		key: VisualKeysDict.copyTxt,
 		value: undefined,
 		ldType: LDDict.Text
 	},
@@ -81,13 +81,13 @@ export class PureMDCopyButton extends Component<LDConnectedState & LDConnectedDi
 	render() {
 		const { localValues } = this.state;
 		const textToCopy = localValues.get(UserDefDict.inputData);
-		const confirmTxt = localValues.get(VisualKeysDict.confirmTxt);
+		const copyTxt = localValues.get(VisualKeysDict.copyTxt);
 		const localFontIcon = localValues.get(fontIcon);
 		const localIsIcon = localValues.get(isIcon);
-		return this.renderButton(localIsIcon, localFontIcon, confirmTxt, textToCopy);
+		return this.renderButton(localIsIcon, localFontIcon, copyTxt, textToCopy);
 	}
 
-	onConfirmClick = () => {
+	onCopyBtnClick = () => {
 		const { localValues } = this.state;
 		const inputData = localValues.get(UserDefDict.inputData);
 		if (inputData) {
@@ -95,12 +95,12 @@ export class PureMDCopyButton extends Component<LDConnectedState & LDConnectedDi
 		}
 	}
 
-	protected renderButton(isIconVal: boolean, iconUrlVal: string, confirmTxt: string, textToCopy: string) {
+	protected renderButton(isIconVal: boolean, iconUrlVal: string, copyTxt: string, textToCopy: string) {
 		return <Button
 		disabled={!textToCopy}
-			onClick={() => this.onConfirmClick()}>
+			onClick={() => this.onCopyBtnClick()}>
 			{iconUrlVal ? <img src={iconUrlVal} /> : null}
-			{!isIconVal && confirmTxt && "confirm"}
+			{!isIconVal && copyTxt && "copy"}
 		</Button>;
 	}
 
