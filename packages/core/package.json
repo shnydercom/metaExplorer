@@ -1,7 +1,7 @@
 {
   "author": "Jonathan Schneider",
   "name": "@metaexplorer/core",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "base functionality that is needed to make metaexplorer work",
   "license": "EUPL-1.2",
   "module": "./lib-esm/index.js",

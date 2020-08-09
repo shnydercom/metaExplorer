@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/swagger-client",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "TODO:changeDescription",
   "scripts": {
     "test": "test"
@@ -19,6 +19,6 @@
     "lib-esm"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.20"
+    "@metaexplorer/core": "^0.0.21"
   }
 }
