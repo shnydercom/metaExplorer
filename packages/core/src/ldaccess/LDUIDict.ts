@@ -80,4 +80,8 @@ export enum LDUIDictVerbs {
 	 * used for visual constraints, i.e. side sheets opening up from, slide in animations etc.
 	 */
 	anchor = "http://ldui.net/anchor",
+	/**
+	 * used to determine whether a UI element should be exclusive (modal)
+	 */
+	isModal = "http://ldui.net/isModal",
 }

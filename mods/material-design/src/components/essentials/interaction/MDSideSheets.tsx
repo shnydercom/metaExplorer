@@ -15,6 +15,7 @@ const cfgItptInputKeys: string[] = [
 ];
 let cfgRegularInputKeys: string[] = [
 	LDUIDictVerbs.isOpen,
+	LDUIDictVerbs.isModal,
 	ActionKeysDict.action_confirm,
 	LDUIDictVerbs.anchor,
 ];
@@ -26,6 +27,11 @@ let ownKVLs: KVL[] = [
 	},
 	{
 		key: LDUIDictVerbs.isOpen,
+		value: undefined,
+		ldType: LDDict.Boolean
+	},
+	{
+		key: LDUIDictVerbs.isModal,
 		value: undefined,
 		ldType: LDDict.Boolean
 	},
@@ -107,6 +113,7 @@ export class PureMDSideSheet extends
 		const { localValues, compInfos, isOpen } = this.state;
 		const hasPrimaryContent = compInfos.has(VisualKeysDict.primaryItpt);
 		const anchorLD = localValues.get(LDUIDictVerbs.anchor);
+		const isModal = localValues.get(LDUIDictVerbs.isModal);
 		//allow shorthand values
 		let anchor = (["top", "right", "bottom", "left"].find((val) => val === anchorLD));
 		anchor = anchor ? anchor : "left";
@@ -126,7 +133,7 @@ export class PureMDSideSheet extends
 			default:
 				break;
 		}
-		return this.renderSideSheet(isOpen, hasPrimaryContent, anchor);
+		return this.renderSideSheet(isOpen, hasPrimaryContent, anchor, isModal);
 	}
 
 	setIsDrawerOpen = (isOpen: boolean) => {
@@ -162,9 +169,9 @@ export class PureMDSideSheet extends
 	/**
 	 * in a separate render function to eventually turn it into an abstract component
 	 */
-	protected renderSideSheet(isOpen?: boolean, hasPrimaryContent?: boolean, anchor?) {
+	protected renderSideSheet(isOpen?: boolean, hasPrimaryContent?: boolean, anchor?, isModal?: boolean) {
 		this.renderSub(VisualKeysDict.primaryItpt);
-		return <Drawer anchor={anchor ? anchor : 'left'} open={!!isOpen} onClose={() => this.setIsDrawerOpen(false)} >
+		return <Drawer variant={isModal ? "temporary" : "permanent"} anchor={anchor ? anchor : 'left'} open={!!isOpen} onClose={() => this.setIsDrawerOpen(false)} >
 			{hasPrimaryContent && this.renderSub(VisualKeysDict.primaryItpt)}
 		</Drawer>;
 	}

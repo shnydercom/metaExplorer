@@ -1,7 +1,10 @@
 import { ButtonBpCfg, AbstractButton, ldBlueprint } from '@metaexplorer/core';
 import { Button } from '@material-ui/core';
 import React from 'react';
-@ldBlueprint(ButtonBpCfg)
+
+export const MDButtonName: string = "metaexplorer.io/material-design/Button";
+@ldBlueprint({...ButtonBpCfg,
+nameSelf: MDButtonName})
 export class MDButton extends AbstractButton {
 
 	protected renderButton(isIconVal: boolean, iconUrlVal: string, confirmTxt: string) {
