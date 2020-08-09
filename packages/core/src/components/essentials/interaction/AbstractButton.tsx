@@ -10,7 +10,7 @@ import { ActionKeysDict, ActionTypesDict, ActionType } from '../../../components
 import { VisualKeysDict, VisualTypesDict } from '../../../components/visualcomposition/visualDict';
 import { gdsfpLD, initLDLocalState } from '../../../components/generic/generatorFns';
 import { cleanRouteString } from '../../../components/routing/route-helper-fns';
-import { LDUIDict } from 'packages/core/src/ldaccess';
+import { LDUIDict } from '../../../ldaccess';
 
 export const fontIcon = "fontIcon";
 export const isIcon = "isIcon";
