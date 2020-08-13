@@ -21,7 +21,12 @@ const REQ_PATH_DETERMINING_KEY = 'nameSelf';
 const basePathDefault = './';
 const portDefault: number | string = process.env.PORT || 5000;
 
-export function editorToFileSystem(basePath?: string, mainItpt?: string, srvrPort?: number) {
+export function editorToFileSystem(
+	basePath?: string,
+	mainItpt?: string,
+	srvrPort?: number,
+	chainCall?: (chainedApp: express.Application) => void
+) {
 	if (!basePath) {
 		console.log('path not set: using default path');
 		basePath = basePathDefault;
@@ -148,6 +153,10 @@ export function editorToFileSystem(basePath?: string, mainItpt?: string, srvrPor
 		});
 		isDirModified = true;
 	});
+
+	if(chainCall){
+		chainCall(app);
+	}
 
 	app.listen(srvrPort, () => {
 		console.log(`basePath set to: ${basePath}`);
