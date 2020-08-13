@@ -154,7 +154,7 @@ export function editorToFileSystem(
 		isDirModified = true;
 	});
 
-	if(chainCall){
+	if (chainCall) {
 		chainCall(app);
 	}
 

@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path')
+import fs from 'fs';
+import path from 'path';
 
 function readDirectory(sourceDir, cObj) {
 	fs.readdirSync(sourceDir).forEach((file) => {
@@ -14,14 +14,14 @@ function readDirectory(sourceDir, cObj) {
 			try {
 				readDirectory(sourceDir + "/" + file, cObj);
 			} catch (error) {
-				console.log(error)
+				console.log(error);
 			}
 		}
 	});
 }
 
 export function createBlocksFromLib(mainItpt, startDir, libPath) {
-	if (!mainItpt) throw new Error("you need to define a main interpreter/block")
+	if (!mainItpt) throw new Error("you need to define a main interpreter/block");
 	if (!libPath) libPath = 'lib';
 	let concatenatedObj = {
 		itptMetaInfo: [{}],
@@ -29,7 +29,7 @@ export function createBlocksFromLib(mainItpt, startDir, libPath) {
 
 		],
 		mainItpt: mainItpt
-	}
+	};
 	const rootDir = path.resolve(startDir ? startDir : "blocks"); // or whatever directory you want to read
 	readDirectory(rootDir, concatenatedObj);
 	fs.mkdir(libPath, { recursive: true }, (err) => {
