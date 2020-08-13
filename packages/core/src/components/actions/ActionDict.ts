@@ -26,7 +26,15 @@ export enum ActionKeysDict {
 	/**
 	 * for actions that trigger saving or somehow costly functions
 	 */
-	action_save = "Action_Save"
+	action_save = "Action_Save",
+	/**
+	 * for actions that open (side drawers, folder structures, panels etc)
+	 */
+	action_open = "Action_Open",
+	/**
+	 * for actions that close (side drawers, folder structures, panels etc)
+	 */
+	action_close = "Action_Close"
 }
 
 export enum ActionTypesDict {

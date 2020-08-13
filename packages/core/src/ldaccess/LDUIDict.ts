@@ -38,6 +38,10 @@ export enum LDUIDict {
 	 * functionality of buttons hasn't really changed
 	 */
 	Button = "http://ldui.net/interaction/Button",
+	Top = "http://ldui.net/layout/Top",
+	Right = "http://ldui.net/layout/Right",
+	Bottom = "http://ldui.net/layout/Bottom",
+	Left = "http://ldui.net/layout/Left",
 }
 export enum LDUIDictVerbs {
 /**
@@ -67,4 +71,17 @@ export enum LDUIDictVerbs {
 	 * (because "type" can mean a lot of different things in different programming languages)
 	 */
 	typed = "http://ldui.net/typed",
+	/**
+	 * indicates whether a visual component or part of it is open.
+	 * e.g. for panels, drawers, parts of a treeview etc
+	 */
+	isOpen = "http://ldui.net/isOpen",
+	/**
+	 * used for visual constraints, i.e. side sheets opening up from, slide in animations etc.
+	 */
+	anchor = "http://ldui.net/anchor",
+	/**
+	 * used to determine whether a UI element should be exclusive (modal)
+	 */
+	isModal = "http://ldui.net/isModal",
 }

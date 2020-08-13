@@ -19,6 +19,7 @@ import { MDSimpleTextTable, MD_SIMPLE_TEXT_TABLE_CFG } from "./components/essent
 import { ThemeProviderDarkName, ThemeProviderLightName, ThemeProviderLight, ThemeProviderDark } from "./components/essentials/content/DarkLightThemeProviders";
 import { MD_SINGLE_AUDIO_SELECTOR_CFG, MDSingleAudioSelector } from "./components/essentials/content/MDSingleAudioSelector";
 import { MDCopyButtonName, PureMDCopyButton } from "./components/essentials/interaction/MDCopyButton";
+import { MDSideSheetName, PureMDSideSheet } from "./components/essentials/interaction/MDSideSheets";
 export const MOD_MATERIALDESIGN_ID = "material-design";
 export const MOD_MATERIALDESIGN_NAME = "Material Design Mod";
 
@@ -40,6 +41,7 @@ export function initMaterialDesignMod(): Promise<IModStatus> {
 		//register Action itpts
 		appIntRetr.addItpt(LDDict.Action, MDButton, "cRud", [ITPT_TAG_ATOMIC]);
 		appIntRetr.addItpt(MDCopyButtonName, PureMDCopyButton, "cRud", [ITPT_TAG_ATOMIC]);
+		appIntRetr.addItpt(MDSideSheetName, PureMDSideSheet, "cRud", [ITPT_TAG_ATOMIC]);
 
 		appIntRetr.addItpt(MD_SINGLE_IMAGE_SELECTOR_CFG.canInterpretType, MDSingleImageSelector, "cRud", [ITPT_TAG_ATOMIC]);
 		appIntRetr.addItpt(MD_SINGLE_AUDIO_SELECTOR_CFG.canInterpretType, MDSingleAudioSelector, "cRud", [ITPT_TAG_ATOMIC]);
