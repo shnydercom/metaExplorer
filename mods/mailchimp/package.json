@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/mailchimp",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "TODO:changeDescription",
   "scripts": {
     "test": "test",
@@ -22,6 +22,6 @@
     "lib-esm"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.21"
+    "@metaexplorer/core": "^0.0.22"
   }
 }
