@@ -46,13 +46,13 @@ class AbstractDataTypeAssembler extends AbstractDataTransformer {
 
 export const DataTypeDisassembler = ldBlueprint(DATATYPE_ASSEMBLER_CFG)(AbstractDataTypeAssembler);
 
-export function flatDataTypeAssemblerFactory(inputKvStores: KVL[], nameSelf: string) {
+export function flatDataTypeAssemblerFactory(inputKvStores: KVL[], nameSelf: string, outputKey?: string, outputType?: string) {
 
 	const ActionCompOutputKVs: KVL[] = [
 		{
-			key: transfOutputKey,
+			key: outputKey ? outputKey : transfOutputKey,
 			value: undefined,
-			ldType: VisualTypesDict.compactInfoElement
+			ldType: outputType ? outputType : VisualTypesDict.compactInfoElement
 		}
 	];
 	const ownKVLs: KVL[] = [

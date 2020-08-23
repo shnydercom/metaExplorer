@@ -10,13 +10,13 @@ import { mkdir } from './scripts/copydir';
 	This is a server for development!
 */
 
-const IRI_STYLES = '/styles';
-const API_IRI_BLOCKS = '/api/blocks';
-const API_IRI_GLOBALS = '/api/globals';
-const FS_BLOCKS_SUBPATH = 'blocks';
-const FS_BLOCKS_FILENAME = 'interpreters.json';
-const FS_GLOBALS_FILENAME = 'globals.json';
-const REQ_PATH_DETERMINING_KEY = 'nameSelf';
+export const IRI_STYLES = '/styles';
+export const API_IRI_BLOCKS = '/api/blocks';
+export const API_IRI_GLOBALS = '/api/globals';
+export const FS_BLOCKS_SUBPATH = 'blocks';
+export const FS_BLOCKS_FILENAME = 'interpreters.json';
+export const FS_GLOBALS_FILENAME = 'globals.json';
+export const REQ_PATH_DETERMINING_KEY = 'nameSelf';
 
 const basePathDefault = './';
 const portDefault: number | string = process.env.PORT || 5000;

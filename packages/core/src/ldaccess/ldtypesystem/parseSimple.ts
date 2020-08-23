@@ -7,7 +7,16 @@ export const parseBoolean = (inputKv: KVL): boolean => {
 };
 export const parseText = (inputKv: KVL): string => {
 	if (!inputKv) return "";
-	let input = inputKv.value;
+	let input;
+	if (inputKv.value && typeof inputKv.value === 'object') {
+		try {
+			input = JSON.stringify(inputKv.value);
+		} catch (error) {
+			input = inputKv.value;
+		}
+	} else {
+		input = inputKv.value;
+	}
 	return input ? input : '';
 };
 export const parseDate = (inputKv: KVL): Date => {
