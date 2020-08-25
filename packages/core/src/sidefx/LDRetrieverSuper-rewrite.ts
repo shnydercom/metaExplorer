@@ -71,8 +71,15 @@ export abstract class LDRetrieverSuperRewrite implements IBlueprintItpt {
 				if (!param) break;
 				let prevParam = this.state.localValues.get(inputKey);
 				if (param !== prevParam) {
-					gdsfpResult.isInputDirty = true;
-					break;
+					if (param && prevParam && typeof param === 'object' && typeof prevParam === 'object') {
+						if (JSON.stringify(param) !== JSON.stringify(prevParam)) {
+							gdsfpResult.isInputDirty = true;
+							break;
+						}
+					} else {
+						gdsfpResult.isInputDirty = true;
+						break;
+					}
 				}
 			}
 			let okvMap = gdsfpResult.localValues.get(UserDefDict.outputKVMapKey);
