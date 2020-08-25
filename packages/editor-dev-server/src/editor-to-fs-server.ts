@@ -81,13 +81,14 @@ export function editorToFileSystem(
 	const app: express.Application = express();
 	app.use(express.json());
 
-	app.get(IRI_STYLES + "/*", (req, res) => {
-		console.log(req.path);
+	app.get(IRI_STYLES + "/*", (req, res, next) => {
 		let localPath = req.path;
 		localPath = localPath.replace("styles/", "");
+		let stylePath = path.join(path.resolve(basePath), localPath);
+		console.log(stylePath);
 		res.sendFile(
-			path.join(path.resolve(basePath), localPath),
-			(err) => { throw err; }
+			stylePath,
+			(err) => { next(err); }
 		);
 	});
 
@@ -131,7 +132,7 @@ export function editorToFileSystem(
 	 * POST call to save a single compound block in the file system, builds a subfolder-structure
 	 * from the block's name
 	 */
-	app.post(API_IRI_BLOCKS, (req, res) => {
+	app.post(API_IRI_BLOCKS, (req, res, next) => {
 		const reqNameSelf: string = req.body[REQ_PATH_DETERMINING_KEY];
 		let fileName = reqNameSelf;
 		let subDir = "";
@@ -144,7 +145,7 @@ export function editorToFileSystem(
 		//create path to save in
 		let resolvedFullPath = path.join(resolvedBasePath, FS_BLOCKS_SUBPATH, subDir);
 		fs.mkdir(resolvedFullPath, { recursive: true }, (err) => {
-			if (err) throw err;
+			if (err) next(err);
 			fs.writeFileSync(path.join(resolvedFullPath, '/', fileName), JSON.stringify(req.body));
 			res.status(200).json({
 				statusPayload: "saved!",
