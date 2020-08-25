@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/metaexplorer.io",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "components that you'll find on the metaexplorer site",
   "scripts": {
     "test": "test",
@@ -23,7 +23,7 @@
     "lib-esm"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.22",
+    "@metaexplorer/core": "^0.0.23",
     "react-gooey-nav": "^2.0.0"
   }
 }
