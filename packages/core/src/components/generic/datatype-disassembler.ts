@@ -17,7 +17,7 @@ class PureDataTypeDisassembler extends AbstractDataTransformer {
 		outputKvStores: Map<string, KVL>): KVL[] {
 		let rv = [];
 
-		const inputKV = inputParams.get(transfInputKey);
+		let inputKV = inputParams.get(transfInputKey);
 
 		//output var
 		let outputValArr = [];
@@ -25,7 +25,7 @@ class PureDataTypeDisassembler extends AbstractDataTransformer {
 		outputKvStores.forEach((val, idx) => {
 			const newOutputObj: KVL = {
 				key: val.key,
-				value: inputKV.value[val.key],
+				value: inputKV ? inputKV.value[val.key] : null,
 				ldType: val.ldType
 			};
 			outputValArr.push(newOutputObj);

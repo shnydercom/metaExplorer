@@ -112,6 +112,9 @@ export abstract class AbstractButton extends Component<LDConnectedState & LDConn
 
 	onConfirmClick = () => {
 		let confirmAction: ActionType = this.state.localValues.get(ActionKeysDict.action_confirm);
+		if (Array.isArray(confirmAction) && confirmAction.length === 0) {
+			confirmAction = confirmAction[0];
+		}
 		if (confirmAction) {
 			this.props.dispatchLdAction(confirmAction.ldId, confirmAction.ldType, confirmAction.payload);
 		}
