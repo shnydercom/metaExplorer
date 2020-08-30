@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/itpt-editor",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "TODO:changeDescription",
   "scripts": {
     "test": "test",
@@ -23,7 +23,7 @@
     "lib-esm"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.24",
+    "@metaexplorer/core": "^0.0.25",
     "@projectstorm/react-canvas-core": "^6.2.0",
     "@projectstorm/react-diagrams": "^6.2.0",
     "@projectstorm/react-diagrams-core": "^6.2.0",
