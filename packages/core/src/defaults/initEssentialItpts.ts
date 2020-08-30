@@ -7,6 +7,7 @@ import { magicCanInterpretType, PureMagicBox } from "../components/generic/magic
 import { projCfgName, PureProjectConfig } from "../components/project-config";
 import { ActionComp, ActionCompName } from "../components/actions/ActionComp";
 import { ActionHandler, ActionHandlerName } from "../components/actions/ActionHandler";
+import { ActionDispatcherName, ActionDispatcher } from "../components/actions/ActionDispatcher";
 
 export function initEssentialItpts() {
 	let appIntRetr = appItptRetrFn();
@@ -16,4 +17,5 @@ export function initEssentialItpts() {
 	appIntRetr.addItpt(projCfgName, PureProjectConfig, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(ActionCompName, ActionComp, "cRud", [ITPT_TAG_ATOMIC]);
 	appIntRetr.addItpt(ActionHandlerName, ActionHandler, "cRud", [ITPT_TAG_ATOMIC]);
+	appIntRetr.addItpt(ActionDispatcherName, ActionDispatcher, "cRud", [ITPT_TAG_ATOMIC]);
 }

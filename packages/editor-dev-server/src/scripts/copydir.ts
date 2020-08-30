@@ -2,7 +2,7 @@ import fs, { copyFileSync } from 'fs';
 import path from 'path';
 
 //inspired&copied from here: https://gist.github.com/tkihira/3014700
-export var mkdir = (dir) => {
+export let mkdir = (dir) => {
 	// making directory without exception if exists
 	try {
 		fs.mkdirSync(dir, '0755');
@@ -13,7 +13,7 @@ export var mkdir = (dir) => {
 	}
 };
 
-export var copyDir = (src, dest) => {
+export let copyDir = (src, dest) => {
 	mkdir(dest);
 	var files = fs.readdirSync(src);
 	for (var i = 0; i < files.length; i++) {

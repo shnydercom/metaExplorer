@@ -34,7 +34,13 @@ export enum ActionKeysDict {
 	/**
 	 * for actions that close (side drawers, folder structures, panels etc)
 	 */
-	action_close = "Action_Close"
+	action_close = "Action_Close",
+
+	/**
+	 * a key on a component that dispatches actions,
+	 * after triggering will dispatch the action
+	 */
+	trigger = "action-trigger"
 }
 
 export enum ActionTypesDict {
