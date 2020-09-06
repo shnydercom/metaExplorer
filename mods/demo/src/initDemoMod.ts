@@ -1,4 +1,4 @@
-import { appItptRetrFn, ITPT_TAG_ATOMIC, SingleModStateKeysDict, IModStatus, flatDataTypeAssemblerFactory, KVL, LDDict } from "@metaexplorer/core";
+import { appItptRetrFn, ITPT_TAG_ATOMIC, SingleModStateKeysDict, IModStatus, flatDataTypeAssemblerFactory, KVL, LDDict, flatDataTypeDisassemblerFactory, ITPT_TAG_MOD } from "@metaexplorer/core";
 
 export const MOD_DEMO_ID = "demo";
 export const MOD_DEMO_NAME = "MetaExplorer Demo Mod";
@@ -6,8 +6,10 @@ export const MOD_DEMO_NAME = "MetaExplorer Demo Mod";
 export function initDemoMod(): Promise<IModStatus> {
 	const appIntRetr = appItptRetrFn();
 	const rv: Promise<IModStatus> = new Promise((resolve, reject) => {
-		let worksheetAssemblerName = "metaexplorer.io/generaldemo/data/worksheet";
-		let worksheetInputKvs: KVL[] = [
+		let worksheetType = "metaexplorer.io/generaldemo/data/worksheet-type";
+		let worksheetAssemblerName = "metaexplorer.io/generaldemo/data/worksheet-assembler";
+		let worksheetDisAssemblerName = "metaexplorer.io/generaldemo/data/worksheet-disassembler";
+		let worksheetKvs: KVL[] = [
 			{
 				key: "customer",
 				value: null,
@@ -49,7 +51,8 @@ export function initDemoMod(): Promise<IModStatus> {
 				ldType: LDDict.Text
 			}
 		];
-		let worksheetAssemblerComp = flatDataTypeAssemblerFactory(worksheetInputKvs, worksheetAssemblerName);
+		let worksheetAssemblerComp = flatDataTypeAssemblerFactory(worksheetKvs, worksheetAssemblerName);
+		let worksheetDisAssemblerComp = flatDataTypeDisassemblerFactory(worksheetKvs, worksheetDisAssemblerName, worksheetType);
 		let expenseFormAssemblerName = "metaexplorer.io/generaldemo/data/expenseForm";
 		let expenseFormKvs: KVL[] = [
 			{
@@ -74,8 +77,9 @@ export function initDemoMod(): Promise<IModStatus> {
 			}
 		];
 		let expenseFormAssemblerComp = flatDataTypeAssemblerFactory(expenseFormKvs, expenseFormAssemblerName);
-		appIntRetr.addItpt(worksheetAssemblerName, worksheetAssemblerComp, "cRud", [ITPT_TAG_ATOMIC]);
-		appIntRetr.addItpt(expenseFormAssemblerName, expenseFormAssemblerComp, "cRud", [ITPT_TAG_ATOMIC]);
+		appIntRetr.addItpt(worksheetAssemblerName, worksheetAssemblerComp, "cRud", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
+		appIntRetr.addItpt(worksheetDisAssemblerName, worksheetDisAssemblerComp, "cRud", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
+		appIntRetr.addItpt(expenseFormAssemblerName, expenseFormAssemblerComp, "cRud", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
 		resolve({ id: MOD_DEMO_ID, name: MOD_DEMO_NAME, state: SingleModStateKeysDict.readyToUse, errorMsg: null });
 	});
 	return rv;

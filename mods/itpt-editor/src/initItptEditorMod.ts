@@ -1,7 +1,10 @@
 import {
 	appItptRetrFn, IModStatus, SingleModStateKeysDict, changeMainAppItpt, ITPT_TAG_ATOMIC, ITPT_TAG_MOD, BlueprintConfig, addBlueprintToRetriever} from "@metaexplorer/core";
 import {	PureAppItptEditor, ITPT_BLOCK_EDITOR_TYPE} from "./components/LDToEditorWrapper";
+import { EditorGlobalsPersisterType, EditorGlobalsPersister } from "./components/sideFX/EditorGlobalsPersister";
+import { EditorGlobalsRetrieverType, EditorGlobalsRetriever } from "./components/sideFX/EditorGlobalsRetriever";
 
+// tslint:disable-next-line:no-var-requires
 const connectedEditorJSON = require('./connected-editor.json');
 
 export const MOD_ITPTEDITOR_ID = "itpt-editor";
@@ -64,6 +67,8 @@ export function initItptEditorMod(isMainItptChange: boolean): Promise<IModStatus
 			ldType: UserDefDict.responseWrapperType
 		},*/
 		];
+		appIntRetr.addItpt(EditorGlobalsPersisterType, EditorGlobalsPersister, "CrUd", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
+		appIntRetr.addItpt(EditorGlobalsRetrieverType, EditorGlobalsRetriever, "cRud", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
 		if (isMainItptChange) changeMainAppItpt("metaexplorer.io/v1/connected-editor", startingInstance);
 		resolve({ id: MOD_ITPTEDITOR_ID, name: MOD_ITPTEDITOR_NAME, state: SingleModStateKeysDict.readyToUse, errorMsg: null });
 	});

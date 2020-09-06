@@ -15,6 +15,7 @@ module.exports = function (app) {
       }
     }));
     app.use(proxy('/api/blocks', { target: 'http://localhost:5000/' }));
+    app.use(proxy('/api/globals', { target: 'http://localhost:5000/' }));
     
     app.use(proxy('/styles/*', { target: 'http://localhost:5000/styles/' /*, pathRewrite: { '^/styles': '' } */}));
   } else {
