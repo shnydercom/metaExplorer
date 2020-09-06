@@ -3,7 +3,10 @@
 If you want to get started quickly, use the [metaExplorer starter template](https://github.com/shnydercom/metaexplorer-starter)
 
 # Introduction
-MetaExplorer is a Proof of Concept for an integrated frontend development experience. Between design-tools and API-calls us developers are fulfilling the wishes of clients, product managers, designers, backenders and many more stakeholders. We can already hot-reload our projects so they can see code changes in an instant, but what if we could hand a visual editor to the designer, and a graphql editor to the backender? Then it would be nice to have a tool for ourselves to create the connection between the two, copy/pasting standard UX. And only after that we'd write custom code.
+
+> Graphql has a schema, databases have schemas, why not have one for the frontend?
+
+MetaExplorer is a Proof of Concept for an integrated frontend development experience to achieve exactly that. Between design-tools and API-calls us developers are fulfilling the wishes of clients, product managers, designers, backenders and many more stakeholders. We can already hot-reload our projects so they can see code changes in an instant, but what if we could hand a visual editor to the designer, and a graphql editor to the backender? Then it would be nice to have a tool for ourselves to create the connection between the two, copy/pasting standard UX. And only after that we'd write custom code.
 ![metaexplorer connecting framer sketch and graphql](/docs/media/readme-mxp-connecting.jpg)
 ## How is that achieved? 
 JSON, inputs and outputs in a graph, plus some types. 
