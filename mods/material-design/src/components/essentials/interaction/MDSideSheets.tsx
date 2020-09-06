@@ -16,7 +16,7 @@ const cfgItptInputKeys: string[] = [
 let cfgRegularInputKeys: string[] = [
 	LDUIDictVerbs.isOpen,
 	LDUIDictVerbs.isModal,
-	ActionKeysDict.action_confirm,
+	ActionKeysDict.action_close,
 	LDUIDictVerbs.anchor,
 ];
 let ownKVLs: KVL[] = [
@@ -36,7 +36,7 @@ let ownKVLs: KVL[] = [
 		ldType: LDDict.Boolean
 	},
 	{
-		key: ActionKeysDict.action_confirm,
+		key: ActionKeysDict.action_close,
 		value: undefined,
 		ldType: ActionTypesDict.metaExplorerAction
 	},
