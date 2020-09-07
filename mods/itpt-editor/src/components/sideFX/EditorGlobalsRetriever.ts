@@ -7,6 +7,8 @@ export const EditorGlobalsRetrieverName = "metaexplorer.io/v1/server/EditorGloba
 
 export const EditorGlobalsRetrieverType = "metaexplorer.io/v1/server/EditorGlobalsRetrieverType";
 
+const TRIGGER = "trigger";
+
 let inputKVStores: KVL[] = [
 	{
 		key: SideFXDict.srvURL,
@@ -14,7 +16,7 @@ let inputKVStores: KVL[] = [
 		ldType: LDDict.URL
 	},
 	{
-		key: "trigger",
+		key: TRIGGER,
 		value: undefined,
 		ldType: undefined
 	}
@@ -61,6 +63,11 @@ export class EditorGlobalsRetriever extends LDRetrieverSuperRewrite {
 				)
 			);
 		});
+		let triggerValue = this.state.localValues.get(TRIGGER);
+		if (triggerValue) {
+			this.state.isInputDirty = true;
+			this.evalDirtyInput();
+		}
 	}
 
 	protected wrapOutputKv(inputBody: any): any {

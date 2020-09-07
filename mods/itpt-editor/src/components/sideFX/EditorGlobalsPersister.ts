@@ -8,6 +8,8 @@ export const EditorGlobalsPersisterName = "metaexplorer.io/v1/server/EditorGloba
 
 export const EditorGlobalsPersisterType = "metaexplorer.io/v1/server/EditorGlobalsPersisterType";
 
+const TRIGGER = "trigger";
+
 let inputKVStores: KVL[] = [
 	{
 		key: SideFXDict.srvURL,
@@ -16,6 +18,11 @@ let inputKVStores: KVL[] = [
 	},
 	{
 		key: UserDefDict.inputData,
+		value: undefined,
+		ldType: undefined
+	},
+	{
+		key: TRIGGER,
 		value: undefined,
 		ldType: undefined
 	}
@@ -66,9 +73,16 @@ export class EditorGlobalsPersister extends LDRetrieverSuperRewrite {
 		});
 	}
 
+	evalDirtyInput() {
+		let triggerVal = this.state.localValues.get(TRIGGER);
+		if (triggerVal && JSON.stringify(triggerVal) !== "{}") {
+			super.evalDirtyInput();
+		}
+	}
+
 	protected wrapOutputKv(inputBody: IAsyncRequestWrapper): any {
 		return {
-			 [UserDefDict.responseWrapperKey]: inputBody
+			[UserDefDict.responseWrapperKey]: inputBody
 		};
 	}
 
