@@ -70,7 +70,7 @@ export interface DOMCameraProps extends DOMCameraUserInteraction, DOMCameraCallb
  * It can also handle getting individual images, and will by default render the video stream
  * in a <video>-tag, so the users can see themselves.
  */
-export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
+export class DOMCamera<TProps = DOMCameraProps> extends Component<TProps & DOMCameraProps, DOMCameraState>{
 	videoDispl: HTMLVideoElement | null;
 	ctx: CanvasRenderingContext2D;
 	canvas: HTMLCanvasElement;
@@ -78,7 +78,7 @@ export class DOMCamera extends Component<DOMCameraProps, DOMCameraState> {
 	private stream: MediaStream;
 	private mounted: boolean = false;
 
-	constructor(props: DOMCameraProps) {
+	constructor(props: any) {
 		super(props);
 		this.state = { curStep: DOMCameraStateEnum.isLoading, vidDeviceList: null, curId: null };
 	}

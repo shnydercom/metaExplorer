@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { MDRecorder } from './MDRecorder';
+import { MDAudioRecorder } from './MDAudioRecorder';
 
-export interface MDRecorderPlaybackProps {
+export interface MDAudioRecorderPlaybackProps {
 	onAudioSrcReady?: (audioURL: string) => void;
 }
-export const MDRecorderWPlayback = (props: MDRecorderPlaybackProps) => {
+export const MDAudioRecorderWPlayback = (props: MDAudioRecorderPlaybackProps) => {
 	const [isRecording, setIsRecording] = React.useState<boolean>(false);
 	return (<>
-		<MDRecorder showControls={false}
+		<MDAudioRecorder showControls={false}
 			isRecording={isRecording}
 			onAudioRecordingStarted={
 				() => setIsRecording(true)

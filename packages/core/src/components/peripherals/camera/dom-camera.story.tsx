@@ -49,7 +49,7 @@ const CameraUXManager = () => {
 	const [imgSrc, setImgSrc] = React.useState<string>("");
 	const [videoSrc, setVideoSrc] = React.useState<string>("");
 	return (<>
-		<DownloadingDOMCameraWControls isRecordingAudio showControls={false}
+		<DownloadingDOMCameraWControls isRecordingAudio={true} showControls={false}
 			onImageSrcReady={(url) => setImgSrc(url)}
 			onVideoSrcReady={(url) => setVideoSrc(url)} />
 		<img src={imgSrc} />

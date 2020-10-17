@@ -20,6 +20,7 @@ import { ThemeProviderDarkName, ThemeProviderLightName, ThemeProviderLight, Them
 import { MD_SINGLE_AUDIO_SELECTOR_CFG, MDSingleAudioSelector } from "./components/essentials/content/MDSingleAudioSelector";
 import { MDCopyButtonName, PureMDCopyButton } from "./components/essentials/interaction/MDCopyButton";
 import { MDSideSheetName, PureMDSideSheet } from "./components/essentials/interaction/MDSideSheets";
+import { MD_SINGLE_VIDEO_SELECTOR_CFG, MDSingleVideoSelector } from "./components/essentials/content/MDSingleVideoSelector";
 export const MOD_MATERIALDESIGN_ID = "material-design";
 export const MOD_MATERIALDESIGN_NAME = "Material Design Mod";
 
@@ -45,6 +46,7 @@ export function initMaterialDesignMod(): Promise<IModStatus> {
 
 		appIntRetr.addItpt(MD_SINGLE_IMAGE_SELECTOR_CFG.canInterpretType, MDSingleImageSelector, "cRud", [ITPT_TAG_ATOMIC]);
 		appIntRetr.addItpt(MD_SINGLE_AUDIO_SELECTOR_CFG.canInterpretType, MDSingleAudioSelector, "cRud", [ITPT_TAG_ATOMIC]);
+		appIntRetr.addItpt(MD_SINGLE_VIDEO_SELECTOR_CFG.canInterpretType, MDSingleVideoSelector, "cRud", [ITPT_TAG_ATOMIC]);
 
 		//register visual composition itpts.
 		//default core overrides

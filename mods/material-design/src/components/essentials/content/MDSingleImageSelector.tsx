@@ -110,7 +110,7 @@ export class MDSingleImageSelector extends AbstractSingleImageSelector {
 						</div>;
 					case SingleImageSelectorStateEnum.isPreviewing:
 						return <div className="single-img-sel">
-							<img className="cover-img" src={previewURL} alt="image preview" ></img>;
+							<img className="cover-img" src={previewURL} alt="image preview" ></img>
 							<Fab
 								className={cssClasses.delBtn}
 								color="secondary"
