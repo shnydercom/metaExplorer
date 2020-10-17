@@ -5,16 +5,13 @@ import { Fab } from '@material-ui/core';
 import MicOff from '@material-ui/icons/MicOff';
 import Mic from '@material-ui/icons/Mic';
 import Stop from '@material-ui/icons/Stop';
-
-export interface MDRecorderProps {
-	isRecording: boolean;
-}
+import { MDRecorderProps } from './interfaces';
 
 const cssClasses = {
 	controlsContainer: "controls-container"
 };
 
-export class MDRecorder extends DOMMicrophone<MDRecorderProps> {
+export class MDAudioRecorder extends DOMMicrophone<MDRecorderProps> {
 
 	audioRecorder: AudioRecorder = new AudioRecorder();
 

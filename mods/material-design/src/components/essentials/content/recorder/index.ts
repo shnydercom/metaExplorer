@@ -1,2 +1,5 @@
-export * from './MDRecorder';
-export * from './MDRecorderWPlayback';
+export * from './MDAudioRecorder';
+export * from './MDAudioRecorderWPlayback';
+
+export * from './MDVideoRecorder';
+export * from './MDVideoRecorderWPlayback';

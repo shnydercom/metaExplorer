@@ -5,3 +5,4 @@ export * from './AbstractSimpleTextTable';
 export * from './AbstractSingleImageSelector';
 export * from './AbstractSingleValueSelector';
 export * from './AbstractSingleAudioSelector';
+export * from './AbstractSingleVideoSelector';

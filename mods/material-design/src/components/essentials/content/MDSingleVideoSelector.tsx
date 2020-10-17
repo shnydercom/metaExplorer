@@ -1,48 +1,48 @@
 import { Button, Fab } from "@material-ui/core";
 import {
-	ldBlueprint, AbstractSingleAudioSelector, SingleAudioSelectorBpCfg,
-	SingleAudioSelectorStateEnum
+	ldBlueprint, AbstractSingleVideoSelector, SingleVideoSelectorBpCfg,
+	SingleVideoSelectorStateEnum
 } from "@metaexplorer/core";
 import Dropzone, { DropzoneRef, DropzoneState } from "react-dropzone";
 import React, { createRef, Ref } from "react";
-import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
-import Audiotrack from '@material-ui/icons/Audiotrack';
-import { MDAudioRecorderWPlayback } from "./recorder";
+import RecordVideoIcon from '@material-ui/icons/Videocam';
+import Videotrack from '@material-ui/icons/Movie';
+import { MDVideoRecorderWPlayback } from "./recorder";
 
 import Delete from '@material-ui/icons/Delete';
 
-export const MD_SINGLE_AUDIO_SELECTOR_NAME = "metaexplorer.io/material-design/SingleAudioSelector";
-export const MD_SINGLE_AUDIO_SELECTOR_CFG = { ...SingleAudioSelectorBpCfg };
+export const MD_SINGLE_VIDEO_SELECTOR_NAME = "metaexplorer.io/material-design/SingleVideoSelector";
+export const MD_SINGLE_VIDEO_SELECTOR_CFG = { ...SingleVideoSelectorBpCfg };
 
-MD_SINGLE_AUDIO_SELECTOR_CFG.nameSelf = MD_SINGLE_AUDIO_SELECTOR_NAME;
+MD_SINGLE_VIDEO_SELECTOR_CFG.nameSelf = MD_SINGLE_VIDEO_SELECTOR_NAME;
 
 const DRAGGING_IMG_LINK: string = "/media/dragndrop.svg";
 
 const i18nTxts = {
 	openRecorder: 'open recorder',
-	selectFile: 'select audio file'
+	selectFile: 'select video file'
 };
 
 const cssClasses = {
-	root: 'single-audio-sel',
+	root: 'single-video-sel',
 	delBtn: 'del-btn'
 };
 
-@ldBlueprint(MD_SINGLE_AUDIO_SELECTOR_CFG)
-export class MDSingleAudioSelector extends AbstractSingleAudioSelector {
+@ldBlueprint(MD_SINGLE_VIDEO_SELECTOR_CFG)
+export class MDSingleVideoSelector extends AbstractSingleVideoSelector {
 	protected dropzoneRef: Ref<DropzoneRef> = createRef();
 
 	deletePreview() {
 		this.destroyPreview();
-		this.setState({ ...this.state, curStep: SingleAudioSelectorStateEnum.isSelectInputType });
+		this.setState({ ...this.state, curStep: SingleVideoSelectorStateEnum.isSelectInputType });
 	}
 
 	render() {
-		const { curStep, isMicAvailable, previewURL } = this.state;
+		const { curStep, isCameraAvailable, previewURL } = this.state;
 		const dzInputKey = "dz-input";
 		return (<Dropzone
-			// className={curStep === SingleAudioSelectorStateEnum.isPreviewing ? "single-img-sel accept" : "single-img-sel"}
-			accept="audio/*"
+			// className={curStep === SingleVideoSelectorStateEnum.isPreviewing ? "single-img-sel accept" : "single-img-sel"}
+			accept="video/*"
 			multiple={false}
 			noClick={true}
 			//disableClick={true}
@@ -66,35 +66,35 @@ export class MDSingleAudioSelector extends AbstractSingleAudioSelector {
 		>
 			{((dzstate: DropzoneState) => {
 				switch (curStep) {
-					case SingleAudioSelectorStateEnum.isSelectInputType:
+					case SingleVideoSelectorStateEnum.isSelectInputType:
 						return <div className={cssClasses.root} {...dzstate.getRootProps() as any //todo: check if "as any" can be removed without throwing an error. Currently @types wrong!
 						}>
 							<input key={dzInputKey} {...dzstate.getInputProps() as any //todo: check if "as any" can be removed without throwing an error. Currently @types wrong!
 							} />
-							{isMicAvailable
-								? <Button className="btn-extension" onClick={() => { this.startMic(); }}>
-									<RecordVoiceOverIcon />
+							{isCameraAvailable
+								? <Button className="btn-extension" onClick={() => { this.startCamera(); }}>
+									<RecordVideoIcon />
 									{i18nTxts.openRecorder}
 								</Button>
 								: null}
 							<Button className="btn-extension" onClick={() => { dzstate.open(); }}>
-								<Audiotrack />
+								<Videotrack />
 								{i18nTxts.selectFile}
 							</Button></div>;
-					case SingleAudioSelectorStateEnum.isRecording:
-						return <MDAudioRecorderWPlayback onAudioSrcReady={(a) => {
+					case SingleVideoSelectorStateEnum.isRecording:
+						return <MDVideoRecorderWPlayback onVideoSrcReady={(a) => {
 							this.onDropSuccess(null, a);
 						}} />;
-					case SingleAudioSelectorStateEnum.isDragging:
+					case SingleVideoSelectorStateEnum.isDragging:
 						return <div className={`${cssClasses.root}`} {...dzstate.getRootProps() as any //todo: check if "as any" can be removed without throwing an error. Currently @types wrong!
 						}>
 							<input key={dzInputKey} {...dzstate.getInputProps() as any //todo: check if "as any" can be removed without throwing an error. Currently @types wrong!
 							} />
 							<img className="md-large-image" style={{ flex: 1 }} src={DRAGGING_IMG_LINK} height="100px" />
 						</div>;
-					case SingleAudioSelectorStateEnum.isPreviewing:
+					case SingleVideoSelectorStateEnum.isPreviewing:
 						return <div className={`${cssClasses.root}`}>
-							<audio src={previewURL} controls={true}></audio>
+							<video src={previewURL} controls={true}></video>
 							<Fab
 								className={cssClasses.delBtn}
 								color="secondary"
@@ -102,7 +102,7 @@ export class MDSingleAudioSelector extends AbstractSingleAudioSelector {
 								<Delete />
 							</Fab>
 						</div>;
-					case SingleAudioSelectorStateEnum.isError:
+					case SingleVideoSelectorStateEnum.isError:
 						return <span>isError</span>;
 					default:
 						return null;
