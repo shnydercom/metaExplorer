@@ -86,8 +86,8 @@
           ]
         },
         "6772902a-7474-4e0c-a309-39aa14097b8f": {
-          "subItptOf": "metaexplorer.io/MagicBox",
-          "canInterpretType": "metaexplorer.io/MagicBoxType",
+          "subItptOf": "metaexplorer.io/SingleDynamicTypeDisplay",
+          "canInterpretType": "metaexplorer.io/SingleDynamicTypeDisplayType",
           "nameSelf": "6772902a-7474-4e0c-a309-39aa14097b8f",
           "ownKVLs": [
             {
@@ -118,8 +118,8 @@
           "inKeys": []
         },
         "8095bac7-14f4-4b4c-a49f-ed1fffcd5e5a": {
-          "subItptOf": "metaexplorer.io/MagicBox",
-          "canInterpretType": "metaexplorer.io/MagicBoxType",
+          "subItptOf": "metaexplorer.io/SingleDynamicTypeDisplay",
+          "canInterpretType": "metaexplorer.io/SingleDynamicTypeDisplayType",
           "nameSelf": "8095bac7-14f4-4b4c-a49f-ed1fffcd5e5a",
           "ownKVLs": [
             {

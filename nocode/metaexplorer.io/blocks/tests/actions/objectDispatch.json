@@ -1,1 +1,202 @@
-{"subItptOf":"3eb5db31-3ec5-437e-a991-94e0761221d1","canInterpretType":"tests/actions/objectDispatch-ObjectType","nameSelf":"tests/actions/objectDispatch","ownKVLs":[{"key":"InterpreterReferenceMapKey","value":{"3eb5db31-3ec5-437e-a991-94e0761221d1":{"subItptOf":"ProjectConfiguration","canInterpretType":"ProjectConfiguration-ObjectType","nameSelf":"3eb5db31-3ec5-437e-a991-94e0761221d1","ownKVLs":[{"key":"inputContainer","value":{"objRef":"o4NvUcSsM","propRef":null},"ldType":"InterpreterClassType"},{"key":"configurationBlocks","value":{"objRef":"cefef5e8-9a22-4c5d-ba8e-005c5424208a","propRef":null},"ldType":"InterpreterClassType"},{"key":"configurationBlocks","value":{"objRef":"6c4e082c-3d30-40fa-b394-54ad31ddeba3","propRef":null},"ldType":"InterpreterClassType"}],"crudSkills":"cRud","inKeys":["inputContainer","configurationBlocks","configurationBlocks"]},"o4NvUcSsM":{"subItptOf":"metaexplorer.io/baseContainer","canInterpretType":"metaexplorer.io/ContainerObjType","nameSelf":"o4NvUcSsM","ownKVLs":[{"key":"in_0","value":{"objRef":"QFwr5HXKdo","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_3","value":{"objRef":"5d632636-00c5-4dda-ac1e-abe8d05c5c11","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_5","value":{"objRef":"d90bfda2-1aa8-4884-a19d-676757594572","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_4","value":{"objRef":"818730e7-0d0b-4ca5-84a7-f9550426d7a6","propRef":null},"ldType":"InterpreterClassType"}],"crudSkills":"cRud","inKeys":["in_0","in_3","in_5","in_4"]},"QFwr5HXKdo":{"subItptOf":"metaexplorer.io/basichtml/bold","canInterpretType":"http://schema.org/Text","nameSelf":"QFwr5HXKdo","ownKVLs":[{"key":"inputdata","value":"Get Started!","ldType":"http://schema.org/Text"}],"crudSkills":"cRud","inKeys":[]},"5d632636-00c5-4dda-ac1e-abe8d05c5c11":{"subItptOf":"metaexplorer.io/material-design/http://schema.org/Text","canInterpretType":"http://schema.org/Text","nameSelf":"5d632636-00c5-4dda-ac1e-abe8d05c5c11","ownKVLs":[{"key":"inputdata","value":{"objRef":"cefef5e8-9a22-4c5d-ba8e-005c5424208a","propRef":"outputdata"},"ldType":"http://schema.org/Text"}],"crudSkills":"cRud","inKeys":["inputdata"]},"cefef5e8-9a22-4c5d-ba8e-005c5424208a":{"subItptOf":"ActionHandler","canInterpretType":"ActionHandler-ObjectType","nameSelf":"cefef5e8-9a22-4c5d-ba8e-005c5424208a","ownKVLs":[{"key":"canHandleId","value":"testID","ldType":"http://schema.org/Text"}],"crudSkills":"cRud","inKeys":[]},"d90bfda2-1aa8-4884-a19d-676757594572":{"subItptOf":"metaexplorer.io/material-design/http://schema.org/Text","canInterpretType":"http://schema.org/Text","nameSelf":"d90bfda2-1aa8-4884-a19d-676757594572","ownKVLs":[],"crudSkills":"cRud","inKeys":[]},"818730e7-0d0b-4ca5-84a7-f9550426d7a6":{"subItptOf":"metaexplorer.io/material-design/http://schema.org/Number","canInterpretType":"http://schema.org/Number","nameSelf":"818730e7-0d0b-4ca5-84a7-f9550426d7a6","ownKVLs":[],"crudSkills":"cRud","inKeys":[]},"6c4e082c-3d30-40fa-b394-54ad31ddeba3":{"subItptOf":"ActionDispatcher","canInterpretType":"ActionDispatcher-ObjectType","nameSelf":"6c4e082c-3d30-40fa-b394-54ad31ddeba3","ownKVLs":[{"key":"action-trigger","value":{"objRef":"6ec4abd1-9524-4e82-9da4-689b458bd613","propRef":"outputdata"}},{"key":"Action_Confirm","value":{"objRef":"6ec4abd1-9524-4e82-9da4-689b458bd613","propRef":"outputdata"},"ldType":"MetaExplorerAction"}],"crudSkills":"cRud","inKeys":["action-trigger","Action_Confirm"]},"6ec4abd1-9524-4e82-9da4-689b458bd613":{"subItptOf":"ActionAssembler","canInterpretType":"ActionAssembler-ObjectType","nameSelf":"6ec4abd1-9524-4e82-9da4-689b458bd613","ownKVLs":[{"key":"actionId","value":"testID","ldType":"http://schema.org/Text"},{"key":"inputdata","value":{"objRef":"cb3447f4-7c0f-47c7-8c13-1b14ec0ca48e","propRef":"outputdata"}}],"crudSkills":"cRud","inKeys":["inputdata"]},"cb3447f4-7c0f-47c7-8c13-1b14ec0ca48e":{"subItptOf":"metaexplorer.io/generaldemo/data/expenseForm","canInterpretType":"metaexplorer.io/generaldemo/data/expenseForm-ObjectType","nameSelf":"cb3447f4-7c0f-47c7-8c13-1b14ec0ca48e","ownKVLs":[{"key":"proof","value":"stringB","ldType":"https://schema.org/URL"},{"key":"proof","value":"stringA ","ldType":"https://schema.org/URL"},{"key":"expenseamount","value":{"objRef":"818730e7-0d0b-4ca5-84a7-f9550426d7a6","propRef":"outputdata"},"ldType":"http://schema.org/Number"},{"key":"summary","value":{"objRef":"d90bfda2-1aa8-4884-a19d-676757594572","propRef":"outputdata"},"ldType":"http://schema.org/Text"}],"crudSkills":"cRud","inKeys":["expenseamount","summary"]}},"ldType":"InterpreterReferenceMapType"}],"crudSkills":"cRud","inKeys":[]}
+{
+	"subItptOf": "testRefMapRoot",
+	"canInterpretType": "tests/actions/objectDispatch-ObjectType",
+	"nameSelf": "tests/actions/objectDispatch",
+	"ownKVLs": [{
+		"key": "InterpreterReferenceMapKey",
+		"value": {
+			"testRefMapRoot": {
+				"subItptOf": "ProjectConfiguration",
+				"canInterpretType": "ProjectConfiguration-ObjectType",
+				"nameSelf": "testRefMapRoot",
+				"ownKVLs": [{
+					"key": "inputContainer",
+					"value": {
+						"objRef": "o4NvUcSsM",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "configurationBlocks",
+					"value": {
+						"objRef": "cefef5e8-9a22-4c5d-ba8e-005c5424208a",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "configurationBlocks",
+					"value": {
+						"objRef": "6c4e082c-3d30-40fa-b394-54ad31ddeba3",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["inputContainer", "configurationBlocks", "configurationBlocks"]
+			},
+			"o4NvUcSsM": {
+				"subItptOf": "metaexplorer.io/baseContainer",
+				"canInterpretType": "metaexplorer.io/ContainerObjType",
+				"nameSelf": "o4NvUcSsM",
+				"ownKVLs": [{
+					"key": "in_0",
+					"value": {
+						"objRef": "QFwr5HXKdo",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_3",
+					"value": {
+						"objRef": "5d632636-00c5-4dda-ac1e-abe8d05c5c11",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_5",
+					"value": {
+						"objRef": "d90bfda2-1aa8-4884-a19d-676757594572",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_4",
+					"value": {
+						"objRef": "818730e7-0d0b-4ca5-84a7-f9550426d7a6",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["in_0", "in_3", "in_5", "in_4"]
+			},
+			"QFwr5HXKdo": {
+				"subItptOf": "metaexplorer.io/basichtml/bold",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "QFwr5HXKdo",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "in the top input field, there's the stringified object that is received through an ActionHandler. The payload of that Action is created with the two lower inputs, and it dispatches when it is being changed",
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"5d632636-00c5-4dda-ac1e-abe8d05c5c11": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "5d632636-00c5-4dda-ac1e-abe8d05c5c11",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": {
+						"objRef": "cefef5e8-9a22-4c5d-ba8e-005c5424208a",
+						"propRef": "outputdata"
+					},
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["inputdata"]
+			},
+			"cefef5e8-9a22-4c5d-ba8e-005c5424208a": {
+				"subItptOf": "ActionHandler",
+				"canInterpretType": "ActionHandler-ObjectType",
+				"nameSelf": "cefef5e8-9a22-4c5d-ba8e-005c5424208a",
+				"ownKVLs": [{
+					"key": "canHandleId",
+					"value": "testID",
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"d90bfda2-1aa8-4884-a19d-676757594572": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "d90bfda2-1aa8-4884-a19d-676757594572",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"818730e7-0d0b-4ca5-84a7-f9550426d7a6": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Number",
+				"canInterpretType": "http://schema.org/Number",
+				"nameSelf": "818730e7-0d0b-4ca5-84a7-f9550426d7a6",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"6c4e082c-3d30-40fa-b394-54ad31ddeba3": {
+				"subItptOf": "ActionDispatcher",
+				"canInterpretType": "ActionDispatcher-ObjectType",
+				"nameSelf": "6c4e082c-3d30-40fa-b394-54ad31ddeba3",
+				"ownKVLs": [{
+					"key": "action-trigger",
+					"value": {
+						"objRef": "6ec4abd1-9524-4e82-9da4-689b458bd613",
+						"propRef": "outputdata"
+					}
+				}, {
+					"key": "Action_Confirm",
+					"value": {
+						"objRef": "6ec4abd1-9524-4e82-9da4-689b458bd613",
+						"propRef": "outputdata"
+					},
+					"ldType": "MetaExplorerAction"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["action-trigger", "Action_Confirm"]
+			},
+			"6ec4abd1-9524-4e82-9da4-689b458bd613": {
+				"subItptOf": "ActionAssembler",
+				"canInterpretType": "ActionAssembler-ObjectType",
+				"nameSelf": "6ec4abd1-9524-4e82-9da4-689b458bd613",
+				"ownKVLs": [{
+					"key": "actionId",
+					"value": "testID",
+					"ldType": "http://schema.org/Text"
+				}, {
+					"key": "inputdata",
+					"value": {
+						"objRef": "cb3447f4-7c0f-47c7-8c13-1b14ec0ca48e",
+						"propRef": "outputdata"
+					}
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["inputdata"]
+			},
+			"cb3447f4-7c0f-47c7-8c13-1b14ec0ca48e": {
+				"subItptOf": "metaexplorer.io/generaldemo/data/expenseForm",
+				"canInterpretType": "metaexplorer.io/generaldemo/data/expenseForm-ObjectType",
+				"nameSelf": "cb3447f4-7c0f-47c7-8c13-1b14ec0ca48e",
+				"ownKVLs": [{
+					"key": "proof",
+					"value": "stringB",
+					"ldType": "https://schema.org/URL"
+				}, {
+					"key": "proof",
+					"value": "stringA ",
+					"ldType": "https://schema.org/URL"
+				}, {
+					"key": "expenseamount",
+					"value": {
+						"objRef": "818730e7-0d0b-4ca5-84a7-f9550426d7a6",
+						"propRef": "outputdata"
+					},
+					"ldType": "http://schema.org/Number"
+				}, {
+					"key": "summary",
+					"value": {
+						"objRef": "d90bfda2-1aa8-4884-a19d-676757594572",
+						"propRef": "outputdata"
+					},
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["expenseamount", "summary"]
+			}
+		},
+		"ldType": "InterpreterReferenceMapType"
+	}],
+	"crudSkills": "cRud",
+	"inKeys": []
+}
