@@ -7,7 +7,7 @@ export interface LibraryPreviewProps {
 }
 
 export const LibraryPreviewVisual = (props: LibraryPreviewProps) => {
-	return <div className="editor-library-preview">
+	return <div className="editor-library-preview mdscrollbar">
 		<BaseContainerRewrite ldTokenString={
 			props.ldTokenString
 				? props.ldTokenString
