@@ -1,5 +1,6 @@
-import { BaseModelOptions, DeserializeEvent, Toolkit } from "@projectstorm/react-canvas-core";
+import { BaseModelOptions, DeserializeEvent } from "@projectstorm/react-canvas-core";
 import { NodeModel, NodeModelGenerics } from "@projectstorm/react-diagrams";
+import shortid from "shortid";
 import { filter, merge } from "lodash";
 import { INTERPRETERDATATYPE_MODEL } from "../node-editor-consts";
 import { LDPortModel } from './LDPortModel';
@@ -42,7 +43,7 @@ export class ItptNodeModel<G extends ItptNodeModelGenerics = ItptNodeModelGeneri
 			canInterpretType: options.canInterpretType ? options.canInterpretType : null,
 			subItptOf: options.subItptOf ? options.subItptOf : null,
 			isCompound: !!options.isCompound,
-			id: options.id ? options.id : Toolkit.UID(),
+			id: options.id ? options.id : shortid.generate(),
 			...options
 		});
 		//HOTFIX: initial auto-layout doesn't know the dimensions of the nodes

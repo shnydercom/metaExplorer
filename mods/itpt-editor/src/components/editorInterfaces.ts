@@ -1,15 +1,15 @@
 import { ActiveStates } from "metaexplorer-react-components";
 
-export interface IEditorBlockData { 
+export interface IEditorBlockData {
 	type: "bdt" | "inputtype" | "outputtype" | "lineardata" | "ldbp";
 	label: string;
 	bpname?: string;
 	canInterpretType?: string;
-	subItptOf?: string 
+	subItptOf?: string;
 }
 
 export interface IEditorPreviewData {
-	isMini:boolean;
+	isMini: boolean;
 	activeState: ActiveStates;
 }
 

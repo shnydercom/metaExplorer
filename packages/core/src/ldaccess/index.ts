@@ -18,3 +18,4 @@ export * from './ldUtils';
 
 export * from './ldtypesystem';
 export * from './ns';
+export * from './refMapPrototype';

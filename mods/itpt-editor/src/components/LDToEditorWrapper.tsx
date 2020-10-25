@@ -3,7 +3,8 @@ import {
 	initLDLocalState, intrprtrTypeInstanceFromBlueprint, ldBlueprint, LDConnectedDispatch, LDConnectedState, LDDict, LDLocalState,
 	ldOptionsDeepCopy, LDOwnProps, mapDispatchToProps, mapStateToProps, NetworkPreferredToken, OutputKVMap, UserDefDict,
 	IAsyncRequestWrapper,
-	COMP_BASE_CONTAINER
+	COMP_BASE_CONTAINER,
+	//createRefMapPrototype
 } from "@metaexplorer/core";
 import { keys } from "lodash";
 import { DragItem, ActiveStates } from "metaexplorer-react-components";
@@ -25,6 +26,7 @@ import { TXT_INIT } from "./content/status/SaveStatus";
 import * as shortid from "shortid";
 import { ItptNodeModel } from "./node-editor/_super/ItptNodeModel";
 import { editorSpecificNodesColor } from "./node-editor/consts";
+import { LIBRARY_PREVIEW_KEY } from "./content/librarypreview/ldInterfacing";
 
 export type AIEProps = {
 	logic?: NodeEditorLogic;
@@ -32,6 +34,7 @@ export type AIEProps = {
 
 export type AIEState = {
 	serialized: string;
+	libraryPreviewToken: string;
 	previewerToken: string;
 	previewDisplay: "phone" | "code";
 	hasCompletedFirstRender: boolean;
@@ -209,7 +212,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	constructor(props?: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		let previewerToken = this.editTkString(props.ldTokenString);
+		let editorPreviewToken = this.editTkString(props.ldTokenString);
+		const libraryPreviewToken = this.libTkString(props.ldTokenString);
 		if (props.logic) {
 			this.logic = props.logic;
 		}
@@ -236,9 +240,10 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		this.state = {
 			...rvLD,
+			libraryPreviewToken,
 			redirect: null,
 			mode, drawerActive, previewActive, bottomBarHidden, drawerHidden, previewHidden,
-			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone",
+			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: editorPreviewToken, previewDisplay: "phone",
 			hasCompletedFirstRender: false, hasCompletedEditorRender: false,
 			isDropZoneClickThrough: true,
 			saveStatus: {
@@ -301,6 +306,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		const editorTrayProps: EditorTrayProps = {
 			itpts,
 			onEditTrayItem: this.changeNodeCurrentlyEditing.bind(this),
+			onTriggerPreview: this.triggerPreview.bind(this),
 			onZoomAutoLayoutPress: () => {
 				this.logic.autoDistribute();
 				this.diagramRef.current.forceUpdate();
@@ -344,6 +350,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			trayProps={editorTrayProps}
 			isPreviewFullScreen={this.state.mode === "app"}
 			previewLDTokenString={this.state.previewerToken}
+			libraryPreviewToken={this.state.libraryPreviewToken}
 			routes={this.props.routes}
 		>
 			<NodeEditorBody hideRefMapDropSpace={bottomBarHidden}
@@ -356,7 +363,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				: <>
 					<div className="nav-element top-left">
 						<button
-							className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-large`}
+							className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-small`}
 							onClick={this.toggleDrawerActive.bind(this)} />
 					</div>
 					<div className="nav-element bottom-left">
@@ -589,6 +596,37 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		return { isSuccess: false, message: JSON.stringify(data) };
 	}
 
+	protected triggerPreview(data: IEditorBlockData) {
+		const { libraryPreviewToken } = this.state;
+		console.dir(data);
+		const newPreviewLDOptions: ILDOptions = {
+			isLoading: false,
+			lang: this.props.ldOptions.lang,
+			ldToken: new NetworkPreferredToken(libraryPreviewToken),
+			visualInfo: this.props.ldOptions.visualInfo,
+			resource: {
+				kvStores: [
+					/*createRefMapPrototype(
+						libraryPreviewToken,
+						"unset-nameSelf",
+						data.subItptOf,
+						data.canInterpretType,
+					).ownKVLs[0]*/
+					{
+						key: LIBRARY_PREVIEW_KEY,
+						value: undefined,
+						ldType: data.canInterpretType,
+					}
+				],
+				webInResource: {
+					hypermedia: {}
+				},
+				webOutResource: ""
+			}
+		};
+		this.props.notifyLDOptionsChange(newPreviewLDOptions);
+	}
+
 	protected evalPreviewReload() {
 		const { hasCompletedFirstRender, currentlyEditingItptName, mode, hasCompletedEditorRender } = this.state;
 		if (!!currentlyEditingItptName) {
@@ -646,6 +684,10 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	protected editTkString(inputTkStr: string) {
 		return inputTkStr + "-edit";
+	}
+
+	protected libTkString(inputTkStr: string) {
+		return `${inputTkStr}-${LIBRARY_PREVIEW_KEY}`;
 	}
 }
 

@@ -1,0 +1,14 @@
+.editor-library-preview {
+	display: flex;
+	justify-content: center;
+	height: 144px;
+	width: 144px;
+	border: 2px solid white;
+	border-radius: 8px;
+	background: linear-gradient(133deg, rgba(252,252,252,0.5) 0%, rgba(42,48,70,1) 100%);
+	box-shadow: 0 0 9px 3px #ffffff26;
+}
+
+.editor-library-trayheader {
+	margin: 48px auto 16px auto;
+}
