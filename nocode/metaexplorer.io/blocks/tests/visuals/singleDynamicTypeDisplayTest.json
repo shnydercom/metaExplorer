@@ -1,1 +1,314 @@
-{"subItptOf":"LXg0QedJr","canInterpretType":"tests/visuals/singleDynamicTypeDisplayTest-ObjectType","nameSelf":"tests/visuals/singleDynamicTypeDisplayTest","ownKVLs":[{"key":"InterpreterReferenceMapKey","value":{"LXg0QedJr":{"subItptOf":"metaexplorer.io/baseContainer","canInterpretType":"metaexplorer.io/ContainerObjType","nameSelf":"LXg0QedJr","ownKVLs":[{"key":"in_0","value":{"objRef":"fEME1f31M","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_1","value":{"objRef":"93Fini79I","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_2","value":{"objRef":"4UcD0ccEe","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_3","value":{"objRef":"_JMtbRoEw","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_4","value":{"objRef":"T2MqH7tMj","propRef":null},"ldType":"InterpreterClassType"}],"crudSkills":"cRud","inKeys":["in_0","in_1","in_2","in_3","in_4"]},"fEME1f31M":{"subItptOf":"metaexplorer.io/baseContainer","canInterpretType":"metaexplorer.io/ContainerObjType","nameSelf":"fEME1f31M","ownKVLs":[{"key":"in_0","value":{"objRef":"QYX3Ga8Vc","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_1","value":{"objRef":"vD__5DMZp","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_2","value":{"objRef":"o1It5ThwE","propRef":null},"ldType":"InterpreterClassType"}],"crudSkills":"cRud","inKeys":["in_0","in_1","in_2"]},"QYX3Ga8Vc":{"subItptOf":"metaexplorer.io/SingleDynamicTypeDisplay","canInterpretType":"metaexplorer.io/SingleDynamicTypeDisplayType","nameSelf":"QYX3Ga8Vc","ownKVLs":[{"key":"inputdata","value":{"objRef":"o1It5ThwE","propRef":"outputdata"}}],"crudSkills":"cRud","inKeys":["inputdata"]},"o1It5ThwE":{"subItptOf":"metaexplorer.io/material-design/http://schema.org/Integer","canInterpretType":"http://schema.org/Integer","nameSelf":"o1It5ThwE","ownKVLs":[],"crudSkills":"cRud","inKeys":[]},"vD__5DMZp":{"subItptOf":"metaexplorer.io/basichtml/bold","canInterpretType":"http://schema.org/Text","nameSelf":"vD__5DMZp","ownKVLs":[{"key":"inputdata","value":"Above this line will be the dynamic type display, taking 1 dynamic value only","ldType":"http://schema.org/Text"}],"crudSkills":"cRud","inKeys":[]},"93Fini79I":{"subItptOf":"metaexplorer.io/basichtml/italics","canInterpretType":"http://schema.org/Text","nameSelf":"93Fini79I","ownKVLs":[],"crudSkills":"cRud","inKeys":[]},"4UcD0ccEe":{"subItptOf":"metaexplorer.io/baseContainer","canInterpretType":"metaexplorer.io/ContainerObjType","nameSelf":"4UcD0ccEe","ownKVLs":[{"key":"in_0","value":{"objRef":"2xk1GYs9d","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_1","value":{"objRef":"fpAH5rrpf","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_2","value":{"objRef":"U0MNPhZc1","propRef":null},"ldType":"InterpreterClassType"}],"crudSkills":"cRud","inKeys":["in_0","in_1","in_2"]},"2xk1GYs9d":{"subItptOf":"metaexplorer.io/SingleDynamicTypeDisplay","canInterpretType":"metaexplorer.io/SingleDynamicTypeDisplayType","nameSelf":"2xk1GYs9d","ownKVLs":[{"key":"inputdata","value":"this is default text"},{"key":"inputdata","value":{"objRef":"U0MNPhZc1","propRef":"outputdata"}}],"crudSkills":"cRud","inKeys":["inputdata"]},"U0MNPhZc1":{"subItptOf":"metaexplorer.io/material-design/http://schema.org/Integer","canInterpretType":"http://schema.org/Integer","nameSelf":"U0MNPhZc1","ownKVLs":[],"crudSkills":"cRud","inKeys":[]},"fpAH5rrpf":{"subItptOf":"metaexplorer.io/basichtml/bold","canInterpretType":"http://schema.org/Text","nameSelf":"fpAH5rrpf","ownKVLs":[{"key":"inputdata","value":"above this line will be the dynamic type display, taking 1 default value and 1 dynamic value","ldType":"http://schema.org/Text"}],"crudSkills":"cRud","inKeys":[]},"_JMtbRoEw":{"subItptOf":"metaexplorer.io/basichtml/italics","canInterpretType":"http://schema.org/Text","nameSelf":"_JMtbRoEw","ownKVLs":[{"key":"inputdata","value":"__________test-divider___________","ldType":"http://schema.org/Text"}],"crudSkills":"cRud","inKeys":[]},"T2MqH7tMj":{"subItptOf":"metaexplorer.io/baseContainer","canInterpretType":"metaexplorer.io/ContainerObjType","nameSelf":"T2MqH7tMj","ownKVLs":[{"key":"in_0","value":{"objRef":"0dc5dec4-5075-4c6b-a975-6da695b723f1","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_1","value":{"objRef":"2afS0te4Fb","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_2","value":{"objRef":"iCKkTs9QK","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_3","value":{"objRef":"cHccuXl2B","propRef":null},"ldType":"InterpreterClassType"},{"key":"in_4","value":{"objRef":"OuZMBl4sp","propRef":null},"ldType":"InterpreterClassType"}],"crudSkills":"cRud","inKeys":["in_0","in_1","in_2","in_3","in_4"]},"0dc5dec4-5075-4c6b-a975-6da695b723f1":{"subItptOf":"metaexplorer.io/SingleDynamicTypeDisplay","canInterpretType":"metaexplorer.io/SingleDynamicTypeDisplayType","nameSelf":"0dc5dec4-5075-4c6b-a975-6da695b723f1","ownKVLs":[{"key":"inputdata","value":{"objRef":"iCKkTs9QK","propRef":"outputdata"}},{"key":"inputdata","value":{"objRef":"cHccuXl2B","propRef":"outputdata"}},{"key":"inputdata","value":{"objRef":"OuZMBl4sp","propRef":"outputdata"}}],"crudSkills":"cRud","inKeys":["inputdata","inputdata","inputdata"]},"iCKkTs9QK":{"subItptOf":"metaexplorer.io/material-design/http://schema.org/Boolean","canInterpretType":"http://schema.org/Boolean","nameSelf":"iCKkTs9QK","ownKVLs":[],"crudSkills":"cRud","inKeys":[]},"cHccuXl2B":{"subItptOf":"metaexplorer.io/material-design/http://schema.org/Integer","canInterpretType":"http://schema.org/Integer","nameSelf":"cHccuXl2B","ownKVLs":[],"crudSkills":"cRud","inKeys":[]},"OuZMBl4sp":{"subItptOf":"metaexplorer.io/material-design/http://schema.org/Text","canInterpretType":"http://schema.org/Text","nameSelf":"OuZMBl4sp","ownKVLs":[],"crudSkills":"cRud","inKeys":[]},"2afS0te4Fb":{"subItptOf":"metaexplorer.io/basichtml/bold","canInterpretType":"http://schema.org/Text","nameSelf":"2afS0te4Fb","ownKVLs":[{"key":"inputdata","value":"Above this line will be the dynamic type display, taking 3 dynamic ObjPropRef-inputs","ldType":"http://schema.org/Text"}],"crudSkills":"cRud","inKeys":[]}},"ldType":"InterpreterReferenceMapType"}],"crudSkills":"cRud","inKeys":[]}
+{
+	"subItptOf": "linDDroot",
+	"canInterpretType": "tests/visuals/singleDynamicTypeDisplayTest-ObjectType",
+	"nameSelf": "tests/visuals/singleDynamicTypeDisplayTest",
+	"ownKVLs": [{
+		"key": "InterpreterReferenceMapKey",
+		"value": {
+			"linDDroot": {
+				"subItptOf": "metaexplorer.io/baseContainer",
+				"canInterpretType": "metaexplorer.io/ContainerObjType",
+				"nameSelf": "linDDroot",
+				"ownKVLs": [{
+					"key": "in_0",
+					"value": {
+						"objRef": "linDDoneDyn",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_1",
+					"value": {
+						"objRef": "testDividerOne",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_2",
+					"value": {
+						"objRef": "linDDoneDefoneDyn",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_3",
+					"value": {
+						"objRef": "testDividerTwo",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_4",
+					"value": {
+						"objRef": "linDDthreeDyn",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["in_0", "in_1", "in_2", "in_3", "in_4"]
+			},
+			"linDDoneDyn": {
+				"subItptOf": "metaexplorer.io/baseContainer",
+				"canInterpretType": "metaexplorer.io/ContainerObjType",
+				"nameSelf": "linDDoneDyn",
+				"ownKVLs": [{
+					"key": "in_0",
+					"value": {
+						"objRef": "firstTestDisplay",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_1",
+					"value": {
+						"objRef": "firstTestHelptext",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_2",
+					"value": {
+						"objRef": "firstTestInput",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["in_0", "in_1", "in_2"]
+			},
+			"firstTestDisplay": {
+				"subItptOf": "metaexplorer.io/SingleDynamicTypeDisplay",
+				"canInterpretType": "metaexplorer.io/SingleDynamicTypeDisplayType",
+				"nameSelf": "firstTestDisplay",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": {
+						"objRef": "firstTestInput",
+						"propRef": "outputdata"
+					}
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["inputdata"]
+			},
+			"firstTestInput": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Integer",
+				"canInterpretType": "http://schema.org/Integer",
+				"nameSelf": "firstTestInput",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"firstTestHelptext": {
+				"subItptOf": "metaexplorer.io/basichtml/bold",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "firstTestHelptext",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "Above this line will be the dynamic type display, taking 1 dynamic value only",
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"testDividerOne": {
+				"subItptOf": "metaexplorer.io/basichtml/italics",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "testDividerOne",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "__________test-divider___________",
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"linDDoneDefoneDyn": {
+				"subItptOf": "metaexplorer.io/baseContainer",
+				"canInterpretType": "metaexplorer.io/ContainerObjType",
+				"nameSelf": "linDDoneDefoneDyn",
+				"ownKVLs": [{
+					"key": "in_0",
+					"value": {
+						"objRef": "secondTestDisplay",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_1",
+					"value": {
+						"objRef": "secondTestHelpText",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_2",
+					"value": {
+						"objRef": "secondTestIntInput",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["in_0", "in_1", "in_2"]
+			},
+			"secondTestDisplay": {
+				"subItptOf": "metaexplorer.io/SingleDynamicTypeDisplay",
+				"canInterpretType": "metaexplorer.io/SingleDynamicTypeDisplayType",
+				"nameSelf": "secondTestDisplay",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "this is default text"
+				}, {
+					"key": "inputdata",
+					"value": {
+						"objRef": "secondTestIntInput",
+						"propRef": "outputdata"
+					}
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["inputdata"]
+			},
+			"secondTestIntInput": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Integer",
+				"canInterpretType": "http://schema.org/Integer",
+				"nameSelf": "secondTestIntInput",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"secondTestHelpText": {
+				"subItptOf": "metaexplorer.io/basichtml/bold",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "secondTestHelpText",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "above this line will be the dynamic type display, taking 1 default value and 1 dynamic value",
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"testDividerTwo": {
+				"subItptOf": "metaexplorer.io/basichtml/italics",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "testDividerTwo",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "__________test-divider___________",
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"linDDthreeDyn": {
+				"subItptOf": "metaexplorer.io/baseContainer",
+				"canInterpretType": "metaexplorer.io/ContainerObjType",
+				"nameSelf": "linDDthreeDyn",
+				"ownKVLs": [{
+					"key": "in_0",
+					"value": {
+						"objRef": "thirdTestDisplay",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_1",
+					"value": {
+						"objRef": "thirdTestHelptext",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_2",
+					"value": {
+						"objRef": "thirdTestBoolInput",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_3",
+					"value": {
+						"objRef": "thirdTestIntInput",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_4",
+					"value": {
+						"objRef": "thirdTestTextInput",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["in_0", "in_1", "in_2", "in_3", "in_4"]
+			},
+			"thirdTestDisplay": {
+				"subItptOf": "metaexplorer.io/SingleDynamicTypeDisplay",
+				"canInterpretType": "metaexplorer.io/SingleDynamicTypeDisplayType",
+				"nameSelf": "thirdTestDisplay",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": {
+						"objRef": "thirdTestBoolInput",
+						"propRef": "outputdata"
+					}
+				}, {
+					"key": "inputdata",
+					"value": {
+						"objRef": "thirdTestIntInput",
+						"propRef": "outputdata"
+					}
+				}, {
+					"key": "inputdata",
+					"value": {
+						"objRef": "thirdTestTextInput",
+						"propRef": "outputdata"
+					}
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["inputdata", "inputdata", "inputdata"]
+			},
+			"thirdTestBoolInput": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Boolean",
+				"canInterpretType": "http://schema.org/Boolean",
+				"nameSelf": "thirdTestBoolInput",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"thirdTestIntInput": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Integer",
+				"canInterpretType": "http://schema.org/Integer",
+				"nameSelf": "thirdTestIntInput",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"thirdTestTextInput": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "thirdTestTextInput",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"thirdTestHelptext": {
+				"subItptOf": "metaexplorer.io/basichtml/bold",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "thirdTestHelptext",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "Above this line will be the dynamic type display, taking 3 dynamic ObjPropRef-inputs",
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			}
+		},
+		"ldType": "InterpreterReferenceMapType"
+	}],
+	"crudSkills": "cRud",
+	"inKeys": []
+}
