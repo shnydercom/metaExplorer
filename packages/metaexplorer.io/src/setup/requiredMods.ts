@@ -63,7 +63,13 @@ export function setupRequiredMods(): IModSpec[] {
 	);
 	modSpecs.push({
 		id: MOD_ITPTEDITOR_ID,
-		initFn: () => initItptEditorMod(!isProduction),
+		initFn: () => initItptEditorMod(
+			isProduction
+				? undefined
+				: {
+					currrentlyEditing: "tests/visuals/singleDynamicTypeDisplayTest"
+				}
+		),
 		dependencies: []
 	}
 	);

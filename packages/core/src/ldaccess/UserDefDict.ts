@@ -28,8 +28,11 @@ export enum UserDefDict {
 	/**
 	 * in some cases, a value might exist without itself having a key. This happens for example when a wrapping LDOptions-Object only
 	 * has a a single value. For this case, singleKvStore is used so that the key is referencable (by OutputKvMap for example)
+	 * This behaviour has been changed to use UserDefDict.inputData as a default instead. The approach
+	 * is to use "inputData"/"outputData" for property references, and "outputSelf" for block references. There's no use-case yet for using
+	 * "inputSelf" for block-self-referencing.
 	 */
-	singleKvStore = "singleKvStore",
+	singleKvStore = "inputData", // TODO: deprecating previous value: "singleKvStore",
 
 	//values
 	outputItpt = "End Output",

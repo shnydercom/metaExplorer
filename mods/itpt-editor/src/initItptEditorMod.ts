@@ -1,6 +1,7 @@
 import {
-	appItptRetrFn, IModStatus, SingleModStateKeysDict, changeMainAppItpt, ITPT_TAG_ATOMIC, ITPT_TAG_MOD, BlueprintConfig, addBlueprintToRetriever} from "@metaexplorer/core";
-import {	PureAppItptEditor, ITPT_BLOCK_EDITOR_TYPE} from "./components/LDToEditorWrapper";
+	appItptRetrFn, IModStatus, SingleModStateKeysDict, changeMainAppItpt, ITPT_TAG_ATOMIC, ITPT_TAG_MOD, BlueprintConfig, addBlueprintToRetriever
+} from "@metaexplorer/core";
+import { PureAppItptEditor, ITPT_BLOCK_EDITOR_TYPE, ITPT_BLOCK_EDITOR_EDITING_ITPT } from "./components/LDToEditorWrapper";
 import { EditorGlobalsPersisterType, EditorGlobalsPersister } from "./components/sideFX/EditorGlobalsPersister";
 import { EditorGlobalsRetrieverType, EditorGlobalsRetriever } from "./components/sideFX/EditorGlobalsRetriever";
 
@@ -10,11 +11,22 @@ const connectedEditorJSON = require('./connected-editor.json');
 export const MOD_ITPTEDITOR_ID = "itpt-editor";
 export const MOD_ITPTEDITOR_NAME = "Block Editor Mod";
 
-export function initItptEditorMod(isMainItptChange: boolean): Promise<IModStatus> {
+export interface EditorModConfig {
+	currrentlyEditing?: string;
+}
+
+export function initItptEditorMod(modConfig?: EditorModConfig): Promise<IModStatus> {
 	const appIntRetr = appItptRetrFn();
 	const rv: Promise<IModStatus> = new Promise((resolve) => {
 		appIntRetr.addItpt(ITPT_BLOCK_EDITOR_TYPE, PureAppItptEditor, "cRud", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
 		let connectedEditorCfg: BlueprintConfig = connectedEditorJSON;
+		let connectedEditorCurrentlyEditing: string =
+			(connectedEditorCfg.ownKVLs[0].value["rm-blockeditor"] as BlueprintConfig)
+				.ownKVLs.find((kvl) => kvl.key === ITPT_BLOCK_EDITOR_EDITING_ITPT).value;
+		const nocodeItpt = modConfig && modConfig.currrentlyEditing ? modConfig.currrentlyEditing : connectedEditorCurrentlyEditing;
+		(connectedEditorCfg.ownKVLs[0].value["rm-blockeditor"] as BlueprintConfig)
+			.ownKVLs.find((kvl) => kvl.key === ITPT_BLOCK_EDITOR_EDITING_ITPT).value = nocodeItpt;
+
 		addBlueprintToRetriever(connectedEditorCfg, "default");
 		let startingInstance = [/*{
 			key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
@@ -69,7 +81,7 @@ export function initItptEditorMod(isMainItptChange: boolean): Promise<IModStatus
 		];
 		appIntRetr.addItpt(EditorGlobalsPersisterType, EditorGlobalsPersister, "CrUd", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
 		appIntRetr.addItpt(EditorGlobalsRetrieverType, EditorGlobalsRetriever, "cRud", [ITPT_TAG_ATOMIC, ITPT_TAG_MOD]);
-		if (isMainItptChange) changeMainAppItpt("metaexplorer.io/v1/connected-editor", startingInstance);
+		if (modConfig) changeMainAppItpt("metaexplorer.io/v1/connected-editor", startingInstance);
 		resolve({ id: MOD_ITPTEDITOR_ID, name: MOD_ITPTEDITOR_NAME, state: SingleModStateKeysDict.readyToUse, errorMsg: null });
 	});
 	return rv;

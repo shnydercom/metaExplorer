@@ -89,10 +89,12 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 			if (hasOutputKvMap) {
 				newldOptions.resource.kvStores = newldOptions.resource.kvStores.filter((kvl) => kvl.key !== UserDefDict.outputKVMapKey);
 			}
-			console.log("notifyBaseContainerRWLinearSplit");
 			nextProps.notifyLDOptionsLinearSplitChange(newldOptions);
 			let routes: LDRouteProps = nextProps.routes;
-			return { ...prevState, routes, localLDTypes: newLDTypes };
+			// if there's a reason to notify a state update, any old error shouldn't be displayed any more
+			const hasError = false;
+			const errorMsg = "";
+			return { ...prevState, routes, localLDTypes: newLDTypes, hasError, errorMsg };
 		}
 		try {
 			ldOptions.resource.kvStores.forEach((elem, idx) => {

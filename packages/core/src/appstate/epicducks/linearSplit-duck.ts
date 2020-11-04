@@ -9,6 +9,8 @@ import { OutputKVMap } from "../../ldaccess/ldBlueprint";
 import { KVL } from "../../ldaccess/KVL";
 import { UserDefDict } from "../../ldaccess/UserDefDict";
 import { mergeMap, map } from "rxjs/operators";
+import { isObjPropertyRef, ObjectPropertyRef } from "../../ldaccess";
+import { ExplorerState } from "..";
 
 /**
  * a duck for linear state splitting, used for containers
@@ -125,7 +127,14 @@ export const linearSplitEpic = (action$: ActionsObservable<any>, store: any) => 
 				let splitReqPromise = new Promise((resolve, reject) => {
 					ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
 						let newLDTokenStr: string = linearLDTokenStr(ldTkStr, idx);
-						assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
+						let searchTerm: string = itm.ldType;
+						if (!itm.ldType && isObjPropertyRef(itm.value)) {
+							const locObjPropRef: ObjectPropertyRef = itm.value;
+							const searchRef = (store.value as ExplorerState).ldoptionsMap[locObjPropRef.objRef].resource.kvStores.find((kvl) => kvl.key === locObjPropRef.propRef);
+							if (!searchRef) return;
+							searchTerm = searchRef.ldType;
+						}
+						assignDerivedItpt(retriever, newLDTokenStr, searchTerm, "cRud");
 					});
 					ldOptionsObj.isLoading = false;
 					resolve(ldOptionsObj);
