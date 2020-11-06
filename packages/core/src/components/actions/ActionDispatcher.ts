@@ -72,7 +72,6 @@ export class ActionDispatcher extends AbstractDataTransformer {
 	 */
 	protected refreshOutput(): void {
 		const trigger = this.inputParams.get(ActionKeysDict.trigger);
-		console.log(trigger);
 		const confirmAction = this.inputParams.get(ActionKeysDict.action_confirm);
 		if (!confirmAction || !confirmAction.value || (typeof confirmAction.value !== 'object')) {
 			console.info('received an invalid action in KVL: ' + confirmAction);

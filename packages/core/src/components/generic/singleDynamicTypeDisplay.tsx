@@ -87,7 +87,7 @@ export class PureSingleDynamicTypeDisplay extends Component<LDConnectedState & L
 					const newElems: OutputKVMapElement[] = [{ targetLDToken: nextContainerToken, targetProperty: inputdata }];
 					outputKVMap[inputdata] = newElems;
 				}
-				nextProps.dispatchKvOutput([modKV], nextProps.ldTokenString, outputKVMap);
+				nextProps.dispatchKvOutput([modKV], nextContainerTokenStr, outputKVMap);
 			}
 		}
 		let rvNew = { ...rvLocal };

@@ -156,9 +156,7 @@ export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedSta
 
 	componentDidMount() {
 		if (!this.state.singleKVInput || !this.state.singleKVInput.ldType) {
-			console.log('PureBaseDataTypeInput notifyLDOptionsChange');
 			//this self-creates an object. Used e.g. in the itpt-editor, bdt-part
-			console.dir(this.props.ldOptions);
 			if (this.props.ldOptions) {
 				let newLDOptionsObj = ldOptionsDeepCopy(this.props.ldOptions);
 				let kvStoreIdx = newLDOptionsObj.resource.kvStores.findIndex((a) => {

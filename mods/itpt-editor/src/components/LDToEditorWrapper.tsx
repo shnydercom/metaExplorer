@@ -598,7 +598,6 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	protected triggerPreview(data: IEditorBlockData) {
 		const { libraryPreviewToken } = this.state;
-		console.dir(data);
 		const newPreviewLDOptions: ILDOptions = {
 			isLoading: false,
 			lang: this.props.ldOptions.lang,

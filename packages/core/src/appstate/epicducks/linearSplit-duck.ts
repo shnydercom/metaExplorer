@@ -5,7 +5,7 @@ import { appItptMatcherFn } from "../../appconfig/appItptMatcher";
 import { ActionsObservable, ofType } from "redux-observable";
 import { from } from 'rxjs';
 import { ReduxItptRetriever } from "../../ld-react-redux-connect/ReduxItptRetriever";
-import { OutputKVMap } from "../../ldaccess/ldBlueprint";
+import { OutputKVMap, OutputKVMapElement } from "../../ldaccess/ldBlueprint";
 import { KVL } from "../../ldaccess/KVL";
 import { UserDefDict } from "../../ldaccess/UserDefDict";
 import { mergeMap, map } from "rxjs/operators";
@@ -58,6 +58,7 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 	let lang = ldOptionsObj.lang;
 	let retriever = ldOptionsObj.visualInfo.retriever;
 	let keyIdxMap: Map<string, number> = new Map();
+	let rootOKV: OutputKVMap = {};
 	ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
 		const elemKey = itm.key;
 		keyIdxMap.set(elemKey, idx);
@@ -86,6 +87,10 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 				}
 			}
 			return;
+		} else {
+			//build okvMapElement on the root:
+			const newOKVElem: OutputKVMapElement = { targetLDToken: newLDToken, targetProperty: elemKey };
+			rootOKV[elemKey] = [newOKVElem];
 		}
 		let newOutputKvMap: OutputKVMap = { [elemKey]: [{ targetLDToken: targetLDToken, targetProperty: elemKey }] };
 		let newOKVStore: KVL = { key: UserDefDict.outputKVMapKey, value: newOutputKvMap, ldType: UserDefDict.outputKVMapType };
@@ -102,6 +107,13 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 		};
 		stateCopy[newLDToken.get()] = newLDOptions;
 	});
+	const rootOKVStore: KVL = { key: UserDefDict.outputKVMapKey, value: rootOKV, ldType: UserDefDict.outputKVMapType };
+	const rootKVLidx = ldOptionsObj.resource.kvStores.findIndex((itm) => (itm.ldType === UserDefDict.outputKVMapType || itm.key === UserDefDict.outputKVMapKey));
+	if (rootKVLidx >= 0) {
+		ldOptionsObj.resource.kvStores[rootKVLidx] = rootOKVStore;
+	} else {
+		ldOptionsObj.resource.kvStores.push(rootOKVStore);
+	}
 }
 
 function assignDerivedItpt(retriever: string, newLDTokenStr: string, ldType: string, crudSkills: string): void {

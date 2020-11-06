@@ -57,13 +57,18 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 		let ldTokenString = ldOptions.ldToken.get();
 		let retriever: string = ldOptions.visualInfo.retriever;
 		let interpretedBy = ldOptions.visualInfo.interpretedBy;
+		// TODO: check if it can be simplified with gdsfpLD()
 		let newreactCompInfos: Map<string, IReactCompInfoItm> = new Map();
 		let newLDTypes: Map<string, string> = new Map();
+		let newValueMap = new Map<string, any>();
 		let isLDTypeSame = true;
 		let isItptKey = false;
 		let hasOutputKvMap = false;
 		ldOptions.resource.kvStores.forEach((itm, idx, kvstores) => {
-			if (!isObjPropertyRef(itm.value)) newLDTypes.set(itm.key, itm.ldType);
+			if (!isObjPropertyRef(itm.value)) {
+				newLDTypes.set(itm.key, itm.ldType);
+				newValueMap.set(itm.key, itm.value);
+			}
 			if (inKeys.length > 0 && inKeys.findIndex((itptKey) => itptKey === itm.key) >= 0) {
 				isItptKey = true;
 				return;
@@ -85,16 +90,12 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 			//i.e. first time this ldOptions-Object gets interpreted, or itpt-change
 			let newldOptions = ldOptionsDeepCopy(ldOptions);
 			newldOptions.visualInfo.interpretedBy = prevState.nameSelf;
-			//remove the previous outputKvStore
-			if (hasOutputKvMap) {
-				newldOptions.resource.kvStores = newldOptions.resource.kvStores.filter((kvl) => kvl.key !== UserDefDict.outputKVMapKey);
-			}
 			nextProps.notifyLDOptionsLinearSplitChange(newldOptions);
 			let routes: LDRouteProps = nextProps.routes;
 			// if there's a reason to notify a state update, any old error shouldn't be displayed any more
 			const hasError = false;
 			const errorMsg = "";
-			return { ...prevState, routes, localLDTypes: newLDTypes, hasError, errorMsg };
+			return { ...prevState, routes, localLDTypes: newLDTypes, localValues: newValueMap, hasError, errorMsg };
 		}
 		try {
 			ldOptions.resource.kvStores.forEach((elem, idx) => {
@@ -116,6 +117,7 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 					}
 					newreactCompInfos.set(newKey, { compClass: itpt, key: newKey, ldTokenString: ldTokenStringNew });
 					newLDTypes.set(newKey, itpt.cfg.canInterpretType);
+					newValueMap.set(newKey, elem.value);
 				} else {
 					throw new LDError(`baseContainer got a non-visual component. It was looking for ${JSON.stringify(elem)} and got ${itpt}`);
 				}
@@ -124,8 +126,32 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 			const errorMsg = `${JSON.stringify(error)}`;
 			return { ...prevState, hasError: true, errorMsg };
 		}
-
-		return { ...prevState, compInfos: newreactCompInfos, localLDTypes: newLDTypes };
+		//compare localValues against each other and dispatch KVUpdate
+		const changedValues: string[] = [];
+		newValueMap.forEach((val, key) => {
+			if (key !== UserDefDict.outputKVMapKey) {
+				const prevHas = prevState.localValues.has(key);
+				if (!prevHas || (prevHas && JSON.stringify(prevState.localValues.get(key)) !== JSON.stringify(val))) {
+					changedValues.push(key);
+				}
+			}
+		});
+		if (changedValues.length > 0) {
+			const outputKvs: KVL[] = changedValues.map((key) => {
+				return { key, value: newValueMap.get(key), ldType: newLDTypes.get(key) };
+			});
+			const newKVM = (newValueMap.get(UserDefDict.outputKVMapKey) as OutputKVMap);
+			if (newKVM) {
+				const outputKVMap = changedValues.reduce<OutputKVMap>((prevVal, key) => {
+					if (newKVM[key]) {
+						prevVal[key] = newKVM[key];
+					}
+					return prevVal;
+				}, {});
+				nextProps.dispatchKvOutput(outputKvs, ldTokenString, outputKVMap);
+			}
+		}
+		return { ...prevState, compInfos: newreactCompInfos, localValues: newValueMap, localLDTypes: newLDTypes };
 	}
 
 	cfg: BlueprintConfig;
