@@ -83,7 +83,7 @@ export abstract class AbstractBaseDataTypeInput extends Component<LDConnectedSta
 	) => {
 		this.setState({ ...this.state, singleKVInput: modSingleKV, isDispatched: true });
 		this.props.dispatchKvOutput([modSingleKV], ldTokenString, outputKVMap);
-	}, 400);
+	}, 200);
 
 	constructor(props?: LDConnectedState & LDConnectedDispatch & OwnProps) {
 		super(props);
