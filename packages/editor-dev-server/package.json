@@ -4,7 +4,7 @@
   "description": "server side scripts for local development",
   "main": "lib/index.js",
   "scripts": {
-    "build": "tsc",
+    "buildcore": "tsc",
     "dev": "ts-node-dev --respawn ./src/app.ts",
     "prod": "tsc && node ./lib/app.js",
     "start": "yarn dev"
