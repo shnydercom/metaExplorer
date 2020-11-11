@@ -1,0 +1,201 @@
+{
+	"subItptOf": "ULkiTton3",
+	"canInterpretType": "metaexplorer.io/v3/landing/google-using-structured-data/index-ObjectType",
+	"nameSelf": "metaexplorer.io/v3/landing/google-using-structured-data/index",
+	"ownKVLs": [{
+		"key": "InterpreterReferenceMapKey",
+		"value": {
+			"ULkiTton3": {
+				"subItptOf": "metaexplorer.io/baseContainer",
+				"canInterpretType": "metaexplorer.io/ContainerObjType",
+				"nameSelf": "ULkiTton3",
+				"ownKVLs": [{
+					"key": "in_0",
+					"value": {
+						"objRef": "lhDXVV6_s",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_1",
+					"value": {
+						"objRef": "0r_6-p5zd",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_2",
+					"value": {
+						"objRef": "cA9nxhsdI",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["in_0", "in_1", "in_2"]
+			},
+			"lhDXVV6_s": {
+				"subItptOf": "metaexplorer.io/v3/landing/google-using-structured-data/hero",
+				"canInterpretType": "metaexplorer.io/v3/landing/google-using-structured-data/hero-ObjectType",
+				"nameSelf": "lhDXVV6_s",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"0r_6-p5zd": {
+				"subItptOf": "metaexplorer.io/baseContainer",
+				"canInterpretType": "metaexplorer.io/ContainerObjType",
+				"nameSelf": "0r_6-p5zd",
+				"ownKVLs": [{
+					"key": "in_0",
+					"value": {
+						"objRef": "4k3C0OLRO",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_1",
+					"value": {
+						"objRef": "TmOe2ns5S",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_2",
+					"value": {
+						"objRef": "OoKKoAIrb",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["in_0", "in_1", "in_2"]
+			},
+			"4k3C0OLRO": {
+				"subItptOf": "metaexplorer.io/v2/TitleTextAndImage",
+				"canInterpretType": "metaexplorer.io/v2/TitleTextAndImage-ObjectType",
+				"nameSelf": "4k3C0OLRO",
+				"ownKVLs": [{
+					"key": "http://schema.org/contentUrl",
+					"value": "/media/v3/gRating_border.jpg"
+				}, {
+					"key": "HeaderText",
+					"value": "Speak the language of the search engines"
+				}, {
+					"key": "Description",
+					"value": "When you're looking at stars, carousels and FAQ sections on google, that's because of structured data."
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"TmOe2ns5S": {
+				"subItptOf": "metaexplorer.io/v2/TitleTextAndImage",
+				"canInterpretType": "metaexplorer.io/v2/TitleTextAndImage-ObjectType",
+				"nameSelf": "TmOe2ns5S",
+				"ownKVLs": [{
+					"key": "http://schema.org/contentUrl",
+					"value": "/media/v3/gReviewHotel_border.jpg"
+				}, {
+					"key": "HeaderText",
+					"value": "(Re)Actions for users"
+				}, {
+					"key": "Description",
+					"value": "When you got info about a flight coming up or a review-email is asking you to take action, that's because of structured data."
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"OoKKoAIrb": {
+				"subItptOf": "metaexplorer.io/v2/TitleTextAndImage",
+				"canInterpretType": "metaexplorer.io/v2/TitleTextAndImage-ObjectType",
+				"nameSelf": "OoKKoAIrb",
+				"ownKVLs": [{
+					"key": "http://schema.org/contentUrl",
+					"value": "/media/v3/gEvents_border.jpg"
+				}, {
+					"key": "HeaderText",
+					"value": "Seems powerful?"
+				}, {
+					"key": "Description",
+					"value": "It's only used by X% of websites, mostly to be found by google. We're trying to make it interactive."
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"cA9nxhsdI": {
+				"subItptOf": "metaexplorer.io/baseContainer",
+				"canInterpretType": "metaexplorer.io/ContainerObjType",
+				"nameSelf": "cA9nxhsdI",
+				"ownKVLs": [{
+					"key": "in_0",
+					"value": {
+						"objRef": "Y3Nmm_lJl",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_1",
+					"value": {
+						"objRef": "10z3xHnjX",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_2",
+					"value": {
+						"objRef": "xa7pko2WM",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["in_0", "in_1", "in_2"]
+			},
+			"Y3Nmm_lJl": {
+				"subItptOf": "metaexplorer.io/v2/TitleTextAndImage",
+				"canInterpretType": "metaexplorer.io/v2/TitleTextAndImage-ObjectType",
+				"nameSelf": "Y3Nmm_lJl",
+				"ownKVLs": [{
+					"key": "HeaderText",
+					"value": "Create, update, delete"
+				}, {
+					"key": "Description",
+					"value": "When you press a button or change a text field in MetaExplorer, you create and modify structured data."
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"10z3xHnjX": {
+				"subItptOf": "metaexplorer.io/v2/TitleTextAndImage",
+				"canInterpretType": "metaexplorer.io/v2/TitleTextAndImage-ObjectType",
+				"nameSelf": "10z3xHnjX",
+				"ownKVLs": [{
+					"key": "HeaderText",
+					"value": "Data that knows its limits"
+				}, {
+					"key": "Description",
+					"value": "When you use MetaExplorer's nocode-editor, you are safeguarded from making wrong connections because of structured data."
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"xa7pko2WM": {
+				"subItptOf": "metaexplorer.io/v2/TitleTextAndImage",
+				"canInterpretType": "metaexplorer.io/v2/TitleTextAndImage-ObjectType",
+				"nameSelf": "xa7pko2WM",
+				"ownKVLs": [{
+					"key": "HeaderText",
+					"value": "Like a USB cord for the web"
+				}, {
+					"key": "Description",
+					"value": "When you create your own components for MetaExplorer, you can plug them anywhere, thanks to structured data."
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			}
+		},
+		"ldType": "InterpreterReferenceMapType"
+	}],
+	"crudSkills": "cRud",
+	"inKeys": []
+}
