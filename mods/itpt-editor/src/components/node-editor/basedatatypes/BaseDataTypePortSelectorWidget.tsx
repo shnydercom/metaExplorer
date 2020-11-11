@@ -82,7 +82,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 			if (!nextProps.ldOptions) return null;
 			let newLDOptions = ldOptionsDeepCopy(nextProps.ldOptions);
 			let thisInput: OutputKVMapElement = {
-				targetLDToken: new NetworkPreferredToken(""),
+				targetLDToken: new NetworkPreferredToken(nextProps.ldOptions.ldToken.get()),
 				targetProperty: UserDefDict.outputData
 			};
 			let outputKvMap: KVL = {
@@ -137,7 +137,7 @@ class PureBaseDataTypePortSelector extends Component<BaseDataTypePortSelectorPro
 	onPortTypeChange = (newType: string, nProps: BaseDataTypePortSelectorProps & LDConnectedState & LDConnectedDispatch) => {
 		let changedKvStore: KVL = this.props.model.getKV();
 		let thisInput: OutputKVMapElement = {
-			targetLDToken: new NetworkPreferredToken(""),
+			targetLDToken: new NetworkPreferredToken(nProps.ldOptions.ldToken.get()),
 			targetProperty: UserDefDict.outputData
 		};
 		let outputKvMap: KVL = {
