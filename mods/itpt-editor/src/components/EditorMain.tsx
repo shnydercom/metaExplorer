@@ -27,6 +27,7 @@ export interface EditorMainProps {
 	routes: LDRouteProps;
 	trayProps: EditorTrayProps;
 	isLeftDrawerActive: boolean;
+	isPreviewHidden: boolean;
 	currentlyEditingItpt: string;
 	onBlockItemDropped: (blockItem: DragItem<EditorDNDItemType, IEditorBlockData>, clientPosition: EditorClientPosition) => void;
 	changeNodeCurrentlyEditing: (data: IEditorBlockData) => {};
@@ -185,16 +186,20 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 			></Tabs>
 			<TabDropLayer onDrop={onTabDrop} ></TabDropLayer>
 			<MainEditorDropLayer onDrop={onMainEditorDrop}></MainEditorDropLayer>
-			<PreviewMoveLayer<EditorDNDItemType>
-				{...mtbProps}
-				isMini={props.isMini}
-				onUpClick={() => props.onUpClick()}
-				previewPos={{ left: previewPosition.left, top: previewPosition.top }}
-				previewItemType={EditorDNDItemType.preview}>
-				<div className="app-content mdscrollbar">
-					<BaseContainerRewrite key={props.previewLDTokenString} routes={props.routes} ldTokenString={props.previewLDTokenString} />
-				</div>
-			</PreviewMoveLayer>
+			{
+				props.isPreviewHidden ?
+					null
+					: <PreviewMoveLayer<EditorDNDItemType>
+						{...mtbProps}
+						isMini={props.isMini}
+						onUpClick={() => props.onUpClick()}
+						previewPos={{ left: previewPosition.left, top: previewPosition.top }}
+						previewItemType={EditorDNDItemType.preview}>
+						<div className="app-content mdscrollbar">
+							<BaseContainerRewrite key={props.previewLDTokenString} routes={props.routes} ldTokenString={props.previewLDTokenString} />
+						</div>
+					</PreviewMoveLayer>
+			}
 			<div className={`nav-drawer-wrapper ${props.isLeftDrawerActive ? "active" : "inactive"}`}>
 				<EditorTray
 					itpts={props.trayProps.itpts}
