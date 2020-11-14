@@ -32,7 +32,7 @@ export function editorToFileSystem(
 		basePath = basePathDefault;
 	}
 	if (!srvrPort) {
-		console.log('port not set: using default port');
+		console.log('port not set: using default port: ' + portDefault);
 		srvrPort = Number(portDefault);
 	}
 

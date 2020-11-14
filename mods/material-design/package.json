@@ -27,7 +27,7 @@
     "@material-ui/pickers": "^3.1.2",
     "@metaexplorer/core": "^0.0.25",
     "@metaexplorer/testing": "^0.0.10",
-    "@storybook/react": "^5.2.6",
+    "@storybook/react": "^6.1.0-rc.2",
     "@types/react-dropzone": "4.2.2",
     "@types/storybook__react": "^4.0.2",
     "awesome-typescript-loader": "^5.2.1",
