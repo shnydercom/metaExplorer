@@ -20,6 +20,7 @@ import { LDApproot } from './ldapproot';
 import { initRequiredMods } from './modding/initMods';
 import { mapStateToPropsRoot } from './appstate/reduxFns';
 import { IModSpec } from './apis/mod-api';
+import { initIRIFormatter } from './components/iri-formatter/initIRIFormatter';
 
 export const APP_LD_KEY = "app";
 
@@ -65,6 +66,7 @@ export function rootSetup(requiredMods: IModSpec[]): void {
 	initEssentialItpts();
 	initBaseHtmlItpt();
 	initEssentialInterpreters();
+	initIRIFormatter();
 	initGameItpt();
 	initLDConnect();
 	initRequiredMods(modAPI, requiredMods);
