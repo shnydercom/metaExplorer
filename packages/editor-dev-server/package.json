@@ -5,9 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "buildcore": "tsc",
-    "dev": "ts-node-dev --respawn ./src/app.ts",
-    "prod": "tsc && node ./lib/app.js",
-    "start": "yarn dev"
+    "start-dev-server": "ts-node-dev --respawn ./src/app.ts"
   },
   "author": "Jonathan Schneider",
   "license": "EUPL-1.2",

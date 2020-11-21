@@ -1,0 +1,18 @@
+{
+  "name": "@metaexplorer-nocode/metaexplorer.io",
+  "version": "0.0.24",
+  "description": "block definition files for metaexplorer.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ./create-block-lib.js"
+  },
+  "author": "Jonathan Schneider",
+  "license": "EUPL-1.2",
+  "devDependencies": {
+    "@metaexplorer/editor-dev-server": "^0.0.20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@metaexplorer/local-dev-service",
+  "version": "1.0.0",
+  "description": "MetaExplorer editor server for local development of metaexplorer.io and the template",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "initserver": "cross-env-shell NOCODE_BLOCKS_PATH=../../../nocode/@metaexplorer-nocode/metaexplorer.io/blocks \"ts-node-dev ./src/initFolder.ts\"",
+    "dev": "ts-node-dev --respawn --exit-child ./src/app.ts",
+    "dev:debug": "ts-node-dev --respawn --inspect=4321 ./src/app.ts",
+    "editor": "cross-env-shell NOCODE_BLOCKS_PATH=../../../nocode/@metaexplorer-nocode/metaexplorer.io/blocks NOCODE_BLOCK_START=metaexplorer.io/v2/index \"yarn dev:debug\""
+  },
+  "dependencies": {
+    "@metaexplorer/editor-dev-server": "*",
+    "@types/express": "^4.17.0",
+    "express": "^4.17.1"
+  },
+  "peerDependencies": {
+    "cross-env": "*"
+  }
+}

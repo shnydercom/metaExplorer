@@ -1,0 +1,314 @@
+{
+	"subItptOf": "linDDroot",
+	"canInterpretType": "tests/visuals/singleDynamicTypeDisplayTest-ObjectType",
+	"nameSelf": "tests/visuals/singleDynamicTypeDisplayTest",
+	"ownKVLs": [{
+		"key": "InterpreterReferenceMapKey",
+		"value": {
+			"linDDroot": {
+				"subItptOf": "metaexplorer.io/baseContainer",
+				"canInterpretType": "metaexplorer.io/ContainerObjType",
+				"nameSelf": "linDDroot",
+				"ownKVLs": [{
+					"key": "in_0",
+					"value": {
+						"objRef": "linDDoneDyn",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_1",
+					"value": {
+						"objRef": "testDividerOne",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_2",
+					"value": {
+						"objRef": "linDDoneDefoneDyn",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_3",
+					"value": {
+						"objRef": "testDividerTwo",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_4",
+					"value": {
+						"objRef": "linDDthreeDyn",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["in_0", "in_1", "in_2", "in_3", "in_4"]
+			},
+			"linDDoneDyn": {
+				"subItptOf": "metaexplorer.io/baseContainer",
+				"canInterpretType": "metaexplorer.io/ContainerObjType",
+				"nameSelf": "linDDoneDyn",
+				"ownKVLs": [{
+					"key": "in_0",
+					"value": {
+						"objRef": "firstTestDisplay",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_1",
+					"value": {
+						"objRef": "firstTestHelptext",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_2",
+					"value": {
+						"objRef": "firstTestInput",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["in_0", "in_1", "in_2"]
+			},
+			"firstTestDisplay": {
+				"subItptOf": "metaexplorer.io/SingleDynamicTypeDisplay",
+				"canInterpretType": "metaexplorer.io/SingleDynamicTypeDisplayType",
+				"nameSelf": "firstTestDisplay",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": {
+						"objRef": "firstTestInput",
+						"propRef": "outputdata"
+					}
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["inputdata"]
+			},
+			"firstTestInput": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Integer",
+				"canInterpretType": "http://schema.org/Integer",
+				"nameSelf": "firstTestInput",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"firstTestHelptext": {
+				"subItptOf": "metaexplorer.io/basichtml/bold",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "firstTestHelptext",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "Above this line will be the dynamic type display, taking 1 dynamic value only",
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"testDividerOne": {
+				"subItptOf": "metaexplorer.io/basichtml/italics",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "testDividerOne",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "__________test-divider___________",
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"linDDoneDefoneDyn": {
+				"subItptOf": "metaexplorer.io/baseContainer",
+				"canInterpretType": "metaexplorer.io/ContainerObjType",
+				"nameSelf": "linDDoneDefoneDyn",
+				"ownKVLs": [{
+					"key": "in_0",
+					"value": {
+						"objRef": "secondTestDisplay",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_1",
+					"value": {
+						"objRef": "secondTestHelpText",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_2",
+					"value": {
+						"objRef": "secondTestIntInput",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["in_0", "in_1", "in_2"]
+			},
+			"secondTestDisplay": {
+				"subItptOf": "metaexplorer.io/SingleDynamicTypeDisplay",
+				"canInterpretType": "metaexplorer.io/SingleDynamicTypeDisplayType",
+				"nameSelf": "secondTestDisplay",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "this is default text"
+				}, {
+					"key": "inputdata",
+					"value": {
+						"objRef": "secondTestIntInput",
+						"propRef": "outputdata"
+					}
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["inputdata"]
+			},
+			"secondTestIntInput": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Integer",
+				"canInterpretType": "http://schema.org/Integer",
+				"nameSelf": "secondTestIntInput",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"secondTestHelpText": {
+				"subItptOf": "metaexplorer.io/basichtml/bold",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "secondTestHelpText",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "above this line will be the dynamic type display, taking 1 default value and 1 dynamic value",
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"testDividerTwo": {
+				"subItptOf": "metaexplorer.io/basichtml/italics",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "testDividerTwo",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "__________test-divider___________",
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"linDDthreeDyn": {
+				"subItptOf": "metaexplorer.io/baseContainer",
+				"canInterpretType": "metaexplorer.io/ContainerObjType",
+				"nameSelf": "linDDthreeDyn",
+				"ownKVLs": [{
+					"key": "in_0",
+					"value": {
+						"objRef": "thirdTestDisplay",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_1",
+					"value": {
+						"objRef": "thirdTestHelptext",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_2",
+					"value": {
+						"objRef": "thirdTestBoolInput",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_3",
+					"value": {
+						"objRef": "thirdTestIntInput",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}, {
+					"key": "in_4",
+					"value": {
+						"objRef": "thirdTestTextInput",
+						"propRef": null
+					},
+					"ldType": "InterpreterClassType"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["in_0", "in_1", "in_2", "in_3", "in_4"]
+			},
+			"thirdTestDisplay": {
+				"subItptOf": "metaexplorer.io/SingleDynamicTypeDisplay",
+				"canInterpretType": "metaexplorer.io/SingleDynamicTypeDisplayType",
+				"nameSelf": "thirdTestDisplay",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": {
+						"objRef": "thirdTestBoolInput",
+						"propRef": "outputdata"
+					}
+				}, {
+					"key": "inputdata",
+					"value": {
+						"objRef": "thirdTestIntInput",
+						"propRef": "outputdata"
+					}
+				}, {
+					"key": "inputdata",
+					"value": {
+						"objRef": "thirdTestTextInput",
+						"propRef": "outputdata"
+					}
+				}],
+				"crudSkills": "cRud",
+				"inKeys": ["inputdata", "inputdata", "inputdata"]
+			},
+			"thirdTestBoolInput": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Boolean",
+				"canInterpretType": "http://schema.org/Boolean",
+				"nameSelf": "thirdTestBoolInput",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"thirdTestIntInput": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Integer",
+				"canInterpretType": "http://schema.org/Integer",
+				"nameSelf": "thirdTestIntInput",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"thirdTestTextInput": {
+				"subItptOf": "metaexplorer.io/material-design/http://schema.org/Text",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "thirdTestTextInput",
+				"ownKVLs": [],
+				"crudSkills": "cRud",
+				"inKeys": []
+			},
+			"thirdTestHelptext": {
+				"subItptOf": "metaexplorer.io/basichtml/bold",
+				"canInterpretType": "http://schema.org/Text",
+				"nameSelf": "thirdTestHelptext",
+				"ownKVLs": [{
+					"key": "inputdata",
+					"value": "Above this line will be the dynamic type display, taking 3 dynamic ObjPropRef-inputs",
+					"ldType": "http://schema.org/Text"
+				}],
+				"crudSkills": "cRud",
+				"inKeys": []
+			}
+		},
+		"ldType": "InterpreterReferenceMapType"
+	}],
+	"crudSkills": "cRud",
+	"inKeys": []
+}

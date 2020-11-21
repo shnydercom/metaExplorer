@@ -1,0 +1,128 @@
+@import "~@metaexplorer/core/lib/style.css";
+@import "~@metaexplorer-mods/itpt-editor/lib/style.css";
+@import "~@metaexplorer-mods/material-design/lib/style.css";
+
+@import "~@metaexplorer-mods/metaexplorer.io/lib/style.css";
+
+.fadefromright {
+	margin-left: 100%;
+	opacity: 0;
+	animation: slidefromright 2s forwards;
+	animation-delay: 1.5s;
+}
+
+@keyframes slidefromright {
+	from {
+		margin-left: 110%;
+		opacity: 0;
+	}
+
+	to {
+		margin-left: 0;
+		opacity: 1;
+	}
+}
+
+.fadefromleft {
+	margin-left: -100%;
+	opacity: 0;
+	animation: slidefromleft 2s forwards;
+	animation-delay: 0.5s;
+}
+
+@keyframes slidefromleft {
+	from {
+		margin-left: -110%;
+		opacity: 0;
+	}
+
+	to {
+		margin-left: 0;
+		opacity: 1;
+	}
+}
+
+.stackedimages {
+	overflow: hidden;
+	position: relative;
+	flex: 1;
+	max-height: fit-content;
+
+	:nth-child(2) {
+		position: absolute;
+		top: 0;
+
+		img {
+			object-position: right;
+		}
+	}
+}
+
+.onboarding-bg {
+	//background-color: #00375f;
+	//background-image: linear-gradient(#00375f, #001e34);
+	background: linear-gradient(55deg, #001e34, #00375f);
+
+	.titletextandimage {
+		&-heading {
+			color: white;
+			margin-bottom: 24px;
+		}
+
+		&-text {
+			color: #e1e1e1;
+		}
+	}
+
+	.headings {
+		color: white;
+	}
+}
+
+
+.mxp-svgs {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	>img {
+		height: 200px;
+		width: 200px;
+		min-height: 200px;
+	}
+}
+
+.mxp-bg {
+	background-color: #efefef;
+	width: 700px;
+}
+
+.mxp-welcome-whitespace {
+	padding: 20vh 0px;
+}
+
+.videodisplay {
+	video {
+		height: 100%;
+		object-fit: scale-down;
+		width: 100%;
+	}
+}
+
+.app-content {
+	background-color: #efefef;
+}
+
+.mxp-hero {
+	padding: 30% 0px;
+	text-align: center;
+}
+
+.mxp-imprint {
+	padding: 3em;
+}
+
+.mxp-linkedin {
+	max-height: 160px;
+	padding: 20px;
+}
