@@ -66,7 +66,7 @@ export class IRIMailtoFormatter extends AbstractDataTransformer {
 
 		let urlParts = [];
 
-		const toFormatted = mailtoTo && mailtoTo.value ? `mailto:${encodeURI(mailtoTo.value)}` : 'mailto';
+		const toFormatted = mailtoTo && mailtoTo.value ? `mailto:${encodeURI(mailtoTo.value)}` : 'mailto:';
 		if (!mailtoTo || !mailtoTo.value) urlParts.push('to='); // address can be omitted
 		const subjectFormatted = mailtoSubject && mailtoSubject.value ? `subject=${encodeURI(mailtoSubject.value)}` : null;
 		const bodyFormatted = mailtoBody && mailtoBody.value ? `body=${encodeURI(mailtoBody.value)}` : null;
