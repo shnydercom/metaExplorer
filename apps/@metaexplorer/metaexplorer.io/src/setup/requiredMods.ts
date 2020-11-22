@@ -1,6 +1,7 @@
 import { changeMainAppItpt, IModSpec, SingleModStateKeysDict } from '@metaexplorer/core';
 import { MOD_MATERIALDESIGN_ID, initMaterialDesignMod } from '@metaexplorer-mods/material-design';
 import { MOD_USERITPT_ID, initUSERITPTClientMod } from '@metaexplorer-mods/useritpt';
+import { MOD_ITPTEDITOR_ID, initItptEditorMod } from '@metaexplorer-mods/itpt-editor';
 import { MOD_QRCODEGENSCAN_ID, initQRCODEGENClientMod } from '@metaexplorer-mods/qr-code-genscan';
 import { initMetaExplorerMod, MOD_METAEXPLORERIO_ID } from '@metaexplorer-mods/metaexplorer.io';
 import { isProduction } from '@metaexplorer/core';
@@ -11,6 +12,12 @@ export function setupRequiredMods(): IModSpec[] {
 	modSpecs.push({
 		id: MOD_MATERIALDESIGN_ID,
 		initFn: () => initMaterialDesignMod(),
+		dependencies: []
+	}
+	);
+	modSpecs.push({
+		id: MOD_ITPTEDITOR_ID,
+		initFn: () => initItptEditorMod(),
 		dependencies: []
 	}
 	);
