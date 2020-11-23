@@ -67,7 +67,7 @@ export function setupRequiredMods(): IModSpec[] {
 			isProduction
 				? undefined
 				: {
-					currrentlyEditing: "tests/visuals/singleDynamicTypeDisplayTest"
+					currrentlyEditing: "metaexplorer.io/v3/landing/google-using-structured-data/index"
 				}
 		),
 		dependencies: []
