@@ -4,12 +4,8 @@
   "dependencies": {
     "@metaexplorer-mods/demo": "^0.0.27",
     "@metaexplorer-mods/google": "^0.0.26",
-    "@metaexplorer-mods/itpt-editor": "^0.0.30",
-    "@metaexplorer-mods/keycloak": "^0.0.12",
     "@metaexplorer-mods/material-design": "^0.0.27",
     "@metaexplorer-mods/metaexplorer.io": "^0.0.25",
-    "@metaexplorer-mods/onboarding": "^0.0.26",
-    "@metaexplorer-mods/qr-code-genscan": "^0.0.26",
     "@metaexplorer-mods/useritpt": "^0.0.27",
     "@metaexplorer-nocode/metaexplorer.io": "^0.0.24",
     "@metaexplorer/core": "^0.0.25",
