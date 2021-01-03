@@ -33,6 +33,12 @@ export class NodeEditorBody extends Component<EditorBodyProps, EditorBodyState> 
 		this.state = { currentlyEditingItpt: null, isReloadToEditor: false };
 	}
 
+	componentDidMount() {
+		if (this.props.logic) {
+			this.props.logic.autoDistribute();
+		}
+	}
+
 	componentDidUpdate(nextProps: EditorBodyProps) {
 		const { currentlyEditingItpt, isReloadToEditor } = this.state;
 		if (!isReloadToEditor && currentlyEditingItpt) {

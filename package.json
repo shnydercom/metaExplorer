@@ -4,20 +4,23 @@
     "url": "https://https://github.com/aJonathanSchneider/metaExplorer.git"
   },
   "devDependencies": {
-    "lerna": "^3.20.2"
+    "lerna": "^3.22.1"
   },
   "workspaces": [
     "packages/*",
     "mods/*",
-    "nocode/*"
+    "nocode/@metaexplorer-nocode/*",
+    "services/@metaexplorer/*",
+    "apps/@metaexplorer/*"
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "tsc": "lerna run tsc",
     "prebuild": "lerna run buildcore",
     "build": "lerna run build",
-    "dev": "set MIO_DYNAMIC=true && lerna run start --stream",
-    "start": "set OVERWRITE_ON_RESTART=true && yarn dev",
+    "preeditor": "lerna run initserver",
+    "editor": "lerna run editor --stream",
+    "start": "set OVERWRITE_ON_RESTART=true && yarn editor",
     "release": "npm config set access public && yarn lerna publish"
   },
   "private": true,

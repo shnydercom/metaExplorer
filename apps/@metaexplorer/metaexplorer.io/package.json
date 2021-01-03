@@ -1,0 +1,56 @@
+{
+  "name": "@metaexplorer/metaexplorer.io",
+  "version": "0.0.33",
+  "dependencies": {
+    "@metaexplorer-mods/demo": "^0.0.27",
+    "@metaexplorer-mods/google": "^0.0.26",
+    "@metaexplorer-mods/material-design": "^0.0.27",
+    "@metaexplorer-mods/metaexplorer.io": "^0.0.25",
+    "@metaexplorer-mods/useritpt": "^0.0.27",
+    "@metaexplorer-mods/qr-code-genscan": "^0.0.26",
+    "@metaexplorer-nocode/metaexplorer.io": "^0.0.24",
+    "@metaexplorer/core": "^0.0.25",
+    "@types/react-router-dom": "^5.1.7",
+    "node-sass": "^4.12.0",
+    "react-dnd": "^9.0.1",
+    "react-gooey-nav": "^2.0.0",
+    "react-redux": "^7.1.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "redux": "^4.0.1",
+    "redux-observable": "^1.1.0",
+    "rxjs": "^6.5.2",
+    "rxjs-compat": "^6.5.2",
+    "shortid": "^2.2.14",
+    "typescript": "^4.0.5"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "scripts": {
+    "start": "cross-env PORT=3010 react-scripts start",
+    "buildcra": "react-scripts build --verbose",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

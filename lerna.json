@@ -2,7 +2,9 @@
   "packages": [
     "packages/*",
     "mods/*",
-    "nocode/*"
+    "nocode/@metaexplorer-nocode/*",
+    "services/@metaexplorer/*",
+    "apps/@metaexplorer/*"
   ],
   "npmClient": "yarn",
   "version": "independent",

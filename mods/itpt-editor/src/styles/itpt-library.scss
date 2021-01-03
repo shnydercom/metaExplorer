@@ -1,0 +1,19 @@
+.editor-library-preview {
+	display: flex;
+	justify-content: center;
+	height: 144px;
+	align-items: center;
+	border: 2px solid white;
+	border-radius: 8px;
+	padding: 0 36px;
+	background: linear-gradient(133deg, rgba(252, 252, 252, 0.5) 0%, #2a3046 100%);
+	box-shadow: 0 0 9px 3px #ffffff26;
+
+	&.mdscrollbar {
+		overflow-x: auto;
+	}
+}
+
+.editor-library-trayheader {
+	margin: 48px 16px 16px 16px;
+}

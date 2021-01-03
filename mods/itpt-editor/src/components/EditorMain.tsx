@@ -9,22 +9,25 @@ import { PreviewMoveLayer, MTBItemDragContainer } from './panels/PreviewMoveLaye
 import { DNDEnabler } from './panels/DNDEnabler';
 import { MainEditorDropLayer } from './panels/MainEditorDropLayer';
 import { EditorTrayProps, EditorTray } from './content/blockselection/EditorTray';
-import { UserInfo } from './content/status/UserInfo';
+// import { UserInfo } from './content/status/UserInfo';
 import { TabDropLayer } from './panels/TabDropLayer';
 import { NewItptPanel } from './new-itpt/newItptPanel';
 import { NewItptNode, IITPTNameObj } from './new-itpt/newItptNodeDummy';
 import { SaveStatus } from './content/status/SaveStatus';
 import { IAsyncRequestWrapper } from '@metaexplorer/core';
+import { LibraryPreviewVisual } from './content/librarypreview/LibraryPreviewVisuals';
 
-const DND_CLASS = 'entrypoint-editor'
-const TRANSIT_CLASS = 'editor-transit'
+const DND_CLASS = 'entrypoint-editor';
+const TRANSIT_CLASS = 'editor-transit';
 
 export interface EditorMainProps {
 	isPreviewFullScreen: boolean;
 	previewLDTokenString: string;
+	libraryPreviewToken: string;
 	routes: LDRouteProps;
 	trayProps: EditorTrayProps;
 	isLeftDrawerActive: boolean;
+	isPreviewHidden: boolean;
 	currentlyEditingItpt: string;
 	onBlockItemDropped: (blockItem: DragItem<EditorDNDItemType, IEditorBlockData>, clientPosition: EditorClientPosition) => void;
 	changeNodeCurrentlyEditing: (data: IEditorBlockData) => {};
@@ -91,19 +94,21 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 				label: 'TODO'
 			},
 			isOpen: false,
+			// tslint:disable-next-line:no-empty
 			onEditBtnPress: () => { },
-			onPreviewBtnPress: () => { }
+			// tslint:disable-next-line:no-empty
+			onTriggerPreview: () => { }
 		};
 		rv.push({
 			forType: EditorDNDItemType.block,
-			componentFactory: (dragItem) => (props) => <EditorTrayItem {...editorTrayItemProps}
-				data={(props.data as IEditorBlockData)}
+			componentFactory: (dragItem) => (fProps) => <EditorTrayItem {...editorTrayItemProps}
+				data={(fProps.data as IEditorBlockData)}
 			></EditorTrayItem>
 		});
 		//Minitoolbox
 		rv.push({
 			forType: EditorDNDItemType.preview,
-			componentFactory: (dragItem: DragItem<EditorDNDItemType, IEditorPreviewData>) => (props) => (
+			componentFactory: (dragItem: DragItem<EditorDNDItemType, IEditorPreviewData>) => () => (
 				<MTBItemDragContainer {...mtbStylableDragItem}>
 					<MiniToolBox
 						className='minitoolbox'
@@ -111,7 +116,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 						isMini={dragItem.data.isMini}
 					></MiniToolBox>
 				</MTBItemDragContainer>)
-		})
+		});
 		return rv;
 	};
 
@@ -121,7 +126,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 	];
 
 	const onTabDrop = (item: DragItem<EditorDNDItemType, (IEditorBlockData)>, left, top) => {
-		props.changeNodeCurrentlyEditing(item.data)
+		props.changeNodeCurrentlyEditing(item.data);
 	};
 
 	const onMainEditorDrop = (item, left, top) => {
@@ -181,24 +186,32 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 			></Tabs>
 			<TabDropLayer onDrop={onTabDrop} ></TabDropLayer>
 			<MainEditorDropLayer onDrop={onMainEditorDrop}></MainEditorDropLayer>
-			<PreviewMoveLayer<EditorDNDItemType>
-				{...mtbProps}
-				isMini={props.isMini}
-				onUpClick={() => props.onUpClick()}
-				previewPos={{ left: previewPosition.left, top: previewPosition.top }}
-				previewItemType={EditorDNDItemType.preview}>
-				<div className="app-content mdscrollbar">
-					<BaseContainerRewrite key={props.previewLDTokenString} routes={props.routes} ldTokenString={props.previewLDTokenString} />
-				</div>
-			</PreviewMoveLayer>
+			{
+				props.isPreviewHidden ?
+					null
+					: <PreviewMoveLayer<EditorDNDItemType>
+						{...mtbProps}
+						isMini={props.isMini}
+						onUpClick={() => props.onUpClick()}
+						previewPos={{ left: previewPosition.left, top: previewPosition.top }}
+						previewItemType={EditorDNDItemType.preview}>
+						<div className="app-content mdscrollbar">
+							<BaseContainerRewrite key={props.previewLDTokenString} routes={props.routes} ldTokenString={props.previewLDTokenString} />
+						</div>
+					</PreviewMoveLayer>
+			}
 			<div className={`nav-drawer-wrapper ${props.isLeftDrawerActive ? "active" : "inactive"}`}>
 				<EditorTray
 					itpts={props.trayProps.itpts}
 					onEditTrayItem={props.trayProps.onEditTrayItem.bind(this)}
+					onTriggerPreview={props.trayProps.onTriggerPreview.bind(this)}
 					onZoomAutoLayoutPress={() => props.trayProps.onZoomAutoLayoutPress()}
 				>
-					<div className="fakeheader">
-						<UserInfo userLabel="John Doe" projectLabel="JohnsPersonalProject" userIconSrc="" />
+					<div className="editor-library-trayheader">
+						<LibraryPreviewVisual ldTokenString={props.libraryPreviewToken} />
+						{/*
+							<UserInfo userLabel="John Doe" projectLabel="JohnsPersonalProject" userIconSrc="" />
+						*/}
 					</div>
 				</EditorTray>
 			</div>

@@ -5,10 +5,12 @@ import { appItptMatcherFn } from "../../appconfig/appItptMatcher";
 import { ActionsObservable, ofType } from "redux-observable";
 import { from } from 'rxjs';
 import { ReduxItptRetriever } from "../../ld-react-redux-connect/ReduxItptRetriever";
-import { OutputKVMap } from "../../ldaccess/ldBlueprint";
+import { OutputKVMap, OutputKVMapElement } from "../../ldaccess/ldBlueprint";
 import { KVL } from "../../ldaccess/KVL";
 import { UserDefDict } from "../../ldaccess/UserDefDict";
 import { mergeMap, map } from "rxjs/operators";
+import { isObjPropertyRef, ObjectPropertyRef } from "../../ldaccess";
+import { ExplorerState } from "..";
 
 /**
  * a duck for linear state splitting, used for containers
@@ -56,6 +58,7 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 	let lang = ldOptionsObj.lang;
 	let retriever = ldOptionsObj.visualInfo.retriever;
 	let keyIdxMap: Map<string, number> = new Map();
+	let rootOKV: OutputKVMap = {};
 	ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
 		const elemKey = itm.key;
 		keyIdxMap.set(elemKey, idx);
@@ -84,6 +87,10 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 				}
 			}
 			return;
+		} else {
+			//build okvMapElement on the root:
+			const newOKVElem: OutputKVMapElement = { targetLDToken: newLDToken, targetProperty: elemKey };
+			rootOKV[elemKey] = [newOKVElem];
 		}
 		let newOutputKvMap: OutputKVMap = { [elemKey]: [{ targetLDToken: targetLDToken, targetProperty: elemKey }] };
 		let newOKVStore: KVL = { key: UserDefDict.outputKVMapKey, value: newOutputKvMap, ldType: UserDefDict.outputKVMapType };
@@ -100,6 +107,13 @@ function splitValues(stateCopy: ILDOptionsMapStatePart, action: LinearSplitActio
 		};
 		stateCopy[newLDToken.get()] = newLDOptions;
 	});
+	const rootOKVStore: KVL = { key: UserDefDict.outputKVMapKey, value: rootOKV, ldType: UserDefDict.outputKVMapType };
+	const rootKVLidx = ldOptionsObj.resource.kvStores.findIndex((itm) => (itm.ldType === UserDefDict.outputKVMapType || itm.key === UserDefDict.outputKVMapKey));
+	if (rootKVLidx >= 0) {
+		ldOptionsObj.resource.kvStores[rootKVLidx] = rootOKVStore;
+	} else {
+		ldOptionsObj.resource.kvStores.push(rootOKVStore);
+	}
 }
 
 function assignDerivedItpt(retriever: string, newLDTokenStr: string, ldType: string, crudSkills: string): void {
@@ -125,7 +139,14 @@ export const linearSplitEpic = (action$: ActionsObservable<any>, store: any) => 
 				let splitReqPromise = new Promise((resolve, reject) => {
 					ldOptionsObj.resource.kvStores.forEach((itm, idx) => {
 						let newLDTokenStr: string = linearLDTokenStr(ldTkStr, idx);
-						assignDerivedItpt(retriever, newLDTokenStr, itm.ldType, "cRud");
+						let searchTerm: string = itm.ldType;
+						if (!itm.ldType && isObjPropertyRef(itm.value)) {
+							const locObjPropRef: ObjectPropertyRef = itm.value;
+							const searchRef = (store.value as ExplorerState).ldoptionsMap[locObjPropRef.objRef].resource.kvStores.find((kvl) => kvl.key === locObjPropRef.propRef);
+							if (!searchRef) return;
+							searchTerm = searchRef.ldType;
+						}
+						assignDerivedItpt(retriever, newLDTokenStr, searchTerm, "cRud");
 					});
 					ldOptionsObj.isLoading = false;
 					resolve(ldOptionsObj);

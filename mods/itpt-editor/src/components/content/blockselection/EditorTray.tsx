@@ -15,6 +15,7 @@ export interface EditorTrayProps {
 	itpts: IItptInfoItem[];
 	onZoomAutoLayoutPress: () => void;
 	onEditTrayItem: (data: any) => void;
+	onTriggerPreview: (data) => void;
 }
 
 export interface EditorTrayState {
@@ -31,14 +32,15 @@ const editorDragItem: DragItem<EditorDNDItemType, IEditorBlockData> = {
 		type: 'bdt',
 		label: "base data type"
 	}
-}
+};
 
 const editorStylableDragItem: StylableDragItemProps<EditorDNDItemType, IEditorBlockData> = {
 	...editorDragItem,
 	isWithDragHandle: false,
 	className: 'block-dragcontainer',
 	dragOrigin: { left: 0, top: 0 }
-}
+};
+
 export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 
 	static getDerivedStateFromProps(nextProps: EditorTrayProps, prevState: EditorTrayState): EditorTrayState {
@@ -77,9 +79,9 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 		const specialBlocksCommonProps = {
 			...baseDragProps,
 			isCompoundBlock: false,
-			onPreviewBtnPress: (data) => nextProps.onEditTrayItem(data),
+			onTriggerPreview: (data) => { /*nextProps.onEditTrayItem(data), */ },
 			onEditBtnPress: (data) => nextProps.onEditTrayItem(data)
-		}
+		};
 		const specialNodesTreeItem: TreeEntry = {
 			flatContent: [
 				<DraggableEditorTrayItem isOpen={false} {...specialBlocksCommonProps} key={1} data={{ type: "bdt", label: "Simple Data Type" }} />,
@@ -98,15 +100,6 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			subEntries: [],
 			itpts: []
 		};
-		/*
-				const hydraNodesText: string = "Interact with outside data from a hydra endpoint";
-				const hydraNodesTreeItem: TreeEntry & FlatContentInfo = {
-					flatContentURLs: [],
-					flatContent: [],
-					label: 'Hydra Blocks',
-					subEntries: [],
-					itpts: []
-				};*/
 
 		const compoundNodesText: string = "Click on a block to see how it's been made, or drag and drop it to the right to re-use your creations";
 		const compoundNodesTreeItem: TreeEntry & FlatContentInfo = {
@@ -126,8 +119,8 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 					EditorTray.addItptToTree(compoundNodesTreeItem, iItptInfoItm, trayName);
 				}
 		});
-		EditorTray.createFlatContentFromItpts(atomicNodesTreeItem, nextProps.onEditTrayItem, false, nextProps);
-		EditorTray.createFlatContentFromItpts(compoundNodesTreeItem, nextProps.onEditTrayItem, true, nextProps);
+		EditorTray.createFlatContentFromItpts(atomicNodesTreeItem, nextProps.onEditTrayItem, nextProps.onTriggerPreview, false, nextProps);
+		EditorTray.createFlatContentFromItpts(compoundNodesTreeItem, nextProps.onEditTrayItem, nextProps.onTriggerPreview, true, nextProps);
 		return <>
 			<TreeView entry={specialNodesTreeItem}>{specialNodesText}</TreeView>
 			<TreeView entry={atomicNodesTreeItem}>{atomicNodesText}</TreeView>
@@ -223,7 +216,9 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 
 	protected static createFlatContentFromItpts(
 		tree: TreeEntry & FlatContentInfo,
-		onEditTrayItem: (data: any) => void, isCompoundBlock: boolean,
+		onEditTrayItem: (data: any) => void, 
+		onTriggerPreview: (data: any) => void, 
+		isCompoundBlock: boolean,
 		nextProps: EditorTrayProps) {
 		const baseDragProps: StylableDragItemProps<EditorDNDItemType, IEditorBlockData> = {
 			...editorStylableDragItem
@@ -234,14 +229,14 @@ export class EditorTray extends Component<EditorTrayProps, EditorTrayState> {
 			let trayItptType = ldBPCfg ? ldBPCfg.canInterpretType : ldBPCfg.canInterpretType;
 			let remainingName = tree.flatContentURLs[idx];
 			tree.flatContent.push(<DraggableEditorTrayItem isOpen={false} {...baseDragProps} isCompoundBlock={isCompoundBlock}
-				onPreviewBtnPress={(data) => onEditTrayItem(data)}
+				onTriggerPreview={(data) => onTriggerPreview(data)}
 				onEditBtnPress={(data) => onEditTrayItem(data)}
 				key={trayName}
 				data={{ type: "ldbp", label: remainingName, bpname: trayName, canInterpretType: trayItptType, subItptOf: null }} />
 			);
 		});
 		tree.subEntries.forEach((treeEntry: TreeEntry & FlatContentInfo, idx) => {
-			EditorTray.createFlatContentFromItpts(treeEntry, onEditTrayItem, isCompoundBlock, nextProps);
+			EditorTray.createFlatContentFromItpts(treeEntry, onEditTrayItem, onTriggerPreview, isCompoundBlock, nextProps);
 		});
 	}
 

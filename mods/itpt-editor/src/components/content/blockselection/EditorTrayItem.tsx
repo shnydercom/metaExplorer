@@ -6,7 +6,7 @@ import { DragContainer, StylableDragItemProps } from "metaexplorer-react-compone
 export interface EditorTrayItemProps {
 	data: IEditorBlockData;
 	onEditBtnPress: (data) => void;
-	onPreviewBtnPress: (data) => void;
+	onTriggerPreview: (data) => void;
 	isCompoundBlock: boolean;
 	isOpen: boolean;
 	onClick?: () => void;
@@ -24,7 +24,11 @@ export const EditorTrayItem: React.FC<EditorTrayItemProps> = (props) => {
 	const renderContent = () => {
 		return (
 			<div
-				onClick={props.isCompoundBlock ? () => props.onClick() : () => { return; }}
+				onClick={
+					//	props.isCompoundBlock ? 
+					() => props.onClick()
+					//	 : () => { return; }
+				}
 				className={trayCssClass}
 			>
 				{props.data.label}
@@ -34,39 +38,40 @@ export const EditorTrayItem: React.FC<EditorTrayItemProps> = (props) => {
 				}} >edit</button>
 			</div >
 		);
-	}
+	};
 	/*
 					<button className={btnPreviewCssClass} onClick={(e) => {
 					e.stopPropagation();
-					props.onPreviewBtnPress(props.data);
+					props.onTriggerPreview(props.data);
 				}} >preview</button>
 	*/
 
 	return (
 		<>{renderContent()}</>
-	)
+	);
 
 };
 
 export const DraggableEditorTrayItem: React.FC<EditorTrayItemProps & StylableDragItemProps<EditorDNDItemType, IEditorBlockData>> = (props) => {
 
-	const [isOpen, setIsOpen] = useState(false);
+	const [isTrayOpen, setIsTrayOpen] = useState(false);
 	function handleClick() {
-		setIsOpen(props.isCompoundBlock ? !isOpen : false);
+		setIsTrayOpen(props.isCompoundBlock ? !isTrayOpen : false);
+		if (!props.isCompoundBlock) props.onTriggerPreview(props.data);
 	}
 	//assigns part of the props to properties of a sub-element https://stackoverflow.com/a/39333479/1149845
 	const dragContainerProps: StylableDragItemProps<EditorDNDItemType, IEditorBlockData> =
 		(({ className, data, id, isWithDragHandle, dragOrigin, sourceBhv, targetBhv, type }) =>
 			({ className, data, id, isWithDragHandle, dragOrigin, sourceBhv, targetBhv, type }))(props);
 	const editorTrayItemProps: EditorTrayItemProps =
-		(({ isCompoundBlock, data, onEditBtnPress, onPreviewBtnPress, isOpen, onClick }) =>
-			({ isCompoundBlock, data, onEditBtnPress, onPreviewBtnPress, isOpen, onClick }))(props);
-	editorTrayItemProps.isOpen = isOpen;
+		(({ isCompoundBlock, data, onEditBtnPress, onTriggerPreview: onTriggerPreview, isOpen, onClick }) =>
+			({ isCompoundBlock, data, onEditBtnPress, onTriggerPreview, isOpen, onClick }))(props);
+	editorTrayItemProps.isOpen = isTrayOpen;
 	if (editorTrayItemProps.onClick) {
 		editorTrayItemProps.onClick = () => {
 			handleClick();
-			props.onClick()
-		}
+			props.onClick();
+		};
 	} else {
 		editorTrayItemProps.onClick = handleClick;
 	}
@@ -74,5 +79,5 @@ export const DraggableEditorTrayItem: React.FC<EditorTrayItemProps & StylableDra
 		{...dragContainerProps}
 	>
 		<EditorTrayItem {...editorTrayItemProps} />
-	</DragContainer >)
-}
+	</DragContainer >);
+};

@@ -32,7 +32,7 @@ export function editorToFileSystem(
 		basePath = basePathDefault;
 	}
 	if (!srvrPort) {
-		console.log('port not set: using default port');
+		console.log('port not set: using default port: ' + portDefault);
 		srvrPort = Number(portDefault);
 	}
 
@@ -85,7 +85,10 @@ export function editorToFileSystem(
 		let localPath = req.path;
 		localPath = localPath.replace("styles/", "");
 		let stylePath = path.join(path.resolve(basePath), localPath);
-		console.log(stylePath);
+		
+		if (!fs.existsSync(stylePath)) {
+			fs.writeFileSync(stylePath, "");
+		}
 		res.sendFile(
 			stylePath,
 			(err) => { next(err); }

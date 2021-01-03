@@ -3,7 +3,9 @@ import {
 	initLDLocalState, intrprtrTypeInstanceFromBlueprint, ldBlueprint, LDConnectedDispatch, LDConnectedState, LDDict, LDLocalState,
 	ldOptionsDeepCopy, LDOwnProps, mapDispatchToProps, mapStateToProps, NetworkPreferredToken, OutputKVMap, UserDefDict,
 	IAsyncRequestWrapper,
-	COMP_BASE_CONTAINER
+	COMP_BASE_CONTAINER,
+	handleTechnicalKnownIssue,
+	//createRefMapPrototype
 } from "@metaexplorer/core";
 import { keys } from "lodash";
 import { DragItem, ActiveStates } from "metaexplorer-react-components";
@@ -25,6 +27,8 @@ import { TXT_INIT } from "./content/status/SaveStatus";
 import * as shortid from "shortid";
 import { ItptNodeModel } from "./node-editor/_super/ItptNodeModel";
 import { editorSpecificNodesColor } from "./node-editor/consts";
+import { LIBRARY_PREVIEW_KEY } from "./content/librarypreview/ldInterfacing";
+import { LOAD_BY_NAME_FAILED } from "./../errorMessages";
 
 export type AIEProps = {
 	logic?: NodeEditorLogic;
@@ -32,6 +36,7 @@ export type AIEProps = {
 
 export type AIEState = {
 	serialized: string;
+	libraryPreviewToken: string;
 	previewerToken: string;
 	previewDisplay: "phone" | "code";
 	hasCompletedFirstRender: boolean;
@@ -71,12 +76,12 @@ export const ITPT_BLOCK_EDITOR_AV_BOTTOMBAR = "bottombar";
 
 export const SAVE_ACTION_LDTYPE = "SaveAction_LDType";
 
-let allMyInputKeys: string[] = [
+const allMyInputKeys: string[] = [
 	ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
 	ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
 	UserDefDict.username, UserDefDict.projectname, SAVE_ACTION_LDTYPE, ITPT_BLOCK_EDITOR_SAVING_STATUS
 ];
-let ownKVLs: KVL[] = [
+const ownKVLs: KVL[] = [
 	{
 		key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
 		value: undefined,
@@ -150,7 +155,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		if (nextProps.routes && nextProps.routes.location + "" === prevState.redirect) {
 			redirState = { ...prevState, redirect: null };
 		}
-		let rvLD = gdsfpLD(
+		const rvLD = gdsfpLD(
 			nextProps, prevState, [],
 			[...allMyInputKeys, UserDefDict.outputKVMapKey],
 			ITPT_BLOCK_EDITOR_TYPE,
@@ -209,7 +214,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	constructor(props?: any) {
 		super(props);
 		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		let previewerToken = this.editTkString(props.ldTokenString);
+		let editorPreviewToken = this.editTkString(props.ldTokenString);
+		const libraryPreviewToken = this.libTkString(props.ldTokenString);
 		if (props.logic) {
 			this.logic = props.logic;
 		}
@@ -236,9 +242,10 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		this.state = {
 			...rvLD,
+			libraryPreviewToken,
 			redirect: null,
 			mode, drawerActive, previewActive, bottomBarHidden, drawerHidden, previewHidden,
-			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: previewerToken, previewDisplay: "phone",
+			currentlyEditingItptName: initiallyDisplayed, serialized: "", previewerToken: editorPreviewToken, previewDisplay: "phone",
 			hasCompletedFirstRender: false, hasCompletedEditorRender: false,
 			isDropZoneClickThrough: true,
 			saveStatus: {
@@ -295,12 +302,13 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 	}
 
 	render() {
-		const { drawerActive, bottomBarHidden, drawerHidden, currentlyEditingItptName, saveStatus } = this.state;
+		const { drawerActive, bottomBarHidden, drawerHidden, currentlyEditingItptName, saveStatus, previewHidden } = this.state;
 		//const isGlobal = localValues.get(ITPT_BLOCK_EDITOR_IS_GLOBAL);
 		const itpts = this.logic ? this.logic.getItptList() : [];
 		const editorTrayProps: EditorTrayProps = {
 			itpts,
 			onEditTrayItem: this.changeNodeCurrentlyEditing.bind(this),
+			onTriggerPreview: this.triggerPreview.bind(this),
 			onZoomAutoLayoutPress: () => {
 				this.logic.autoDistribute();
 				this.diagramRef.current.forceUpdate();
@@ -335,15 +343,17 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		}
 		return <EditorMain
 			{...miniProps}
+			isPreviewHidden={previewHidden}
 			saveStatus={saveStatus}
 			onNewBtnClick={(newNameObj) => this.setNodeEditorToNew(newNameObj)}
 			changeNodeCurrentlyEditing={this.changeNodeCurrentlyEditing.bind(this)}
 			currentlyEditingItpt={currentlyEditingItptName}
 			onBlockItemDropped={(blockItem, clientPosition) => this.addBlockToDiagram(blockItem, clientPosition)}
-			isLeftDrawerActive={drawerActive}
+			isLeftDrawerActive={!drawerHidden && drawerActive}
 			trayProps={editorTrayProps}
 			isPreviewFullScreen={this.state.mode === "app"}
 			previewLDTokenString={this.state.previewerToken}
+			libraryPreviewToken={this.state.libraryPreviewToken}
 			routes={this.props.routes}
 		>
 			<NodeEditorBody hideRefMapDropSpace={bottomBarHidden}
@@ -356,7 +366,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				: <>
 					<div className="nav-element top-left">
 						<button
-							className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-large`}
+							className={`editorbtn ${drawerActive ? "isopen" : ""} editorbtn-toleft editorbtn-small`}
 							onClick={this.toggleDrawerActive.bind(this)} />
 					</div>
 					<div className="nav-element bottom-left">
@@ -518,8 +528,8 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 			case "bdt":
 				var baseDataTypeKVStore: KVL = {
 					key: UserDefDict.outputSelfKey,
-					value: undefined,
-					ldType: undefined
+					value: "",
+					ldType: LDDict.Text,
 				};
 				node = new BaseDataTypeNodeModel({
 					nameSelf: "Simple Data Type"
@@ -589,6 +599,36 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		return { isSuccess: false, message: JSON.stringify(data) };
 	}
 
+	protected triggerPreview(data: IEditorBlockData) {
+		const { libraryPreviewToken } = this.state;
+		const newPreviewLDOptions: ILDOptions = {
+			isLoading: false,
+			lang: this.props.ldOptions.lang,
+			ldToken: new NetworkPreferredToken(libraryPreviewToken),
+			visualInfo: this.props.ldOptions.visualInfo,
+			resource: {
+				kvStores: [
+					/*createRefMapPrototype(
+						libraryPreviewToken,
+						"unset-nameSelf",
+						data.subItptOf,
+						data.canInterpretType,
+					).ownKVLs[0]*/
+					{
+						key: LIBRARY_PREVIEW_KEY,
+						value: undefined,
+						ldType: data.canInterpretType,
+					}
+				],
+				webInResource: {
+					hypermedia: {}
+				},
+				webOutResource: ""
+			}
+		};
+		this.props.notifyLDOptionsChange(newPreviewLDOptions);
+	}
+
 	protected evalPreviewReload() {
 		const { hasCompletedFirstRender, currentlyEditingItptName, mode, hasCompletedEditorRender } = this.state;
 		if (!!currentlyEditingItptName) {
@@ -600,7 +640,9 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 				} else if (mode === "initial") {
 					this.loadToEditorByName(this.state.currentlyEditingItptName);
 				}
-				this.setState({ ...this.state, hasCompletedFirstRender: true });
+				let isFSPreview = !!this.state.localValues.get(ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW);
+				const newMode = isFSPreview ? "app" : "editor";
+				this.setState({ ...this.state, mode: newMode, hasCompletedFirstRender: true });
 				return;
 			} else if (!hasCompletedEditorRender && !!this.diagramRef.current) {
 				this.loadToEditorByName(this.state.currentlyEditingItptName, true);
@@ -611,6 +653,10 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	protected loadToEditorByName(name: string, isAutodistribute?: boolean) {
 		let itptInfo = this.logic.getItptList().find((itm) => itm.nameSelf === name);
+		if(!itptInfo){
+			handleTechnicalKnownIssue(LOAD_BY_NAME_FAILED, name);
+			return false;
+		}
 		let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
 		if (!itptCfg.ownKVLs
 			|| itptCfg.ownKVLs.length < 1
@@ -620,7 +666,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		this.generatePrefilled(itptCfg);
 		this.logic.clear(this.logic.getActiveModel().getOptions());
 		this.logic.diagramFromItptBlueprint(itptCfg);
-		if (isAutodistribute) {
+		if (isAutodistribute && this.diagramRef.current) {
 			this.logic.autoDistribute();
 		}
 		this.setState(
@@ -646,6 +692,10 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	protected editTkString(inputTkStr: string) {
 		return inputTkStr + "-edit";
+	}
+
+	protected libTkString(inputTkStr: string) {
+		return `${inputTkStr}-${LIBRARY_PREVIEW_KEY}`;
 	}
 }
 

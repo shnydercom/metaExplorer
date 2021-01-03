@@ -14,6 +14,7 @@
 @import "./save-status.scss";
 @import "./itpt-summary.scss";
 @import "./simple-data-types.scss";
+@import "./itpt-library.scss";
 
 
 $color-primary: #FF00FF; //$palette-green-600;
@@ -579,8 +580,8 @@ $button-color-cta: orange;
   .editor-tray {
     z-index: 2000;
     position: relative;
-    min-width: 304px;
-    max-width: 304px;
+    min-width: 288px;
+    max-width: 288px;
     background: $editor-background-elevated-color;
     flex-grow: 0;
     flex: 1;

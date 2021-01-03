@@ -1,1 +1,104 @@
 @import "~metaexplorer-react-components/lib/components/hero/hero.css";
+
+.app-content {
+	background-color: #fff;
+}
+
+.mdscrollbar.landing-struct-data {
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	align-items: center;
+}
+
+.mxp-hero {
+	padding: 0;
+	min-height: 66vh;
+	max-width: 768px;
+	align-self: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-image: url("/media/Image01-Gift.jpg");
+	background-position: center;
+	background-size: cover;
+}
+
+.mxp-hero.bottom-img {
+	padding: 0;
+	min-height: 66vh;
+	max-width: 768px;
+	align-self: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-image: url("/media/Image02-Manualwork.jpg");
+	background-position: center;
+	background-size: cover;
+}
+
+.mxp-hero p {
+	background-color: #ffffffaa;
+}
+
+.mxp-hero h2 {
+	background-color: #ffffffaa;
+}
+
+.flex-filler.vh-centered-column.titletextandimage-inputcontainer {
+	height: 300px;
+	width: 300px;
+}
+
+.flex-filler.vh-centered-column.titletextandimage-textcontainer {
+	max-width: 300px;
+	margin: 0;
+	padding: 24px;
+	text-align: justify;
+	height: fit-content;
+	min-height: inherit !important;
+	/* box-shadow: inset 2px 5px 6px #00000021; */
+	/* border: 32px solid white; */
+	border-radius: 32px;
+	align-items: center;
+	background-color: #00000008;
+	align-self: center;
+}
+
+.flex-container.titletextandimage.column >div {
+	margin-bottom: 30px;
+}
+.flex-container.titletextandimage.row >div {
+	margin-right: 60px;
+}
+.flex-container.titletextandimage.row-reverse >div {
+	margin-left: 60px;
+}
+
+.flex-container.titletextandimage {
+	max-width: 768px;
+	width: 100%;
+}
+
+.landing-mailto-form {
+	padding: 24px;
+	box-shadow: 2px 5px 6px #00000061;
+	border: 0px solid;
+	border-radius: 12px;
+}
+
+.videodisplay {
+	video {
+		height: 100%;
+		object-fit: scale-down;
+		width: 100%;
+	}
+}
+
+.app-content {
+	background-color: #efefef;
+}
+
+.mxp-hero {
+	text-align: center;
+}

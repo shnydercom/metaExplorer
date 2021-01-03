@@ -17,6 +17,7 @@ import { LDError } from "../../appstate/LDError";
 import { ErrorBoundaryState } from "../errors/ErrorBoundaryState";
 import React from "react";
 export interface BaseContOwnProps extends LDOwnProps {
+	errorDisplay?: React.Component<{ errorMsg: string }>;
 }
 
 export interface BaseContOwnState extends LDLocalState, ErrorBoundaryState {
@@ -56,24 +57,30 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 		let ldTokenString = ldOptions.ldToken.get();
 		let retriever: string = ldOptions.visualInfo.retriever;
 		let interpretedBy = ldOptions.visualInfo.interpretedBy;
+		// TODO: check if it can be simplified with gdsfpLD()
 		let newreactCompInfos: Map<string, IReactCompInfoItm> = new Map();
 		let newLDTypes: Map<string, string> = new Map();
+		let newValueMap = new Map<string, any>();
 		let isLDTypeSame = true;
 		let isItptKey = false;
 		let hasOutputKvMap = false;
 		ldOptions.resource.kvStores.forEach((itm, idx, kvstores) => {
-			let prevStateLDType = prevState.localLDTypes.get(itm.key);
-			newLDTypes.set(itm.key, itm.ldType);
+			if (!isObjPropertyRef(itm.value)) {
+				newLDTypes.set(itm.key, itm.ldType);
+				newValueMap.set(itm.key, itm.value);
+			}
 			if (inKeys.length > 0 && inKeys.findIndex((itptKey) => itptKey === itm.key) >= 0) {
 				isItptKey = true;
 				return;
 			}
-			if (!isLDTypeSame) return;
-			if (prevStateLDType !== itm.ldType) {
-				isLDTypeSame = false;
-			}
 			if (itm.key === UserDefDict.outputKVMapKey) {
 				hasOutputKvMap = true;
+			}
+			if (!isLDTypeSame) return;
+			const prevStateLDType = prevState.localLDTypes.get(itm.key);
+			if (prevStateLDType !== itm.ldType) {
+				if (isObjPropertyRef(itm.value)) return;
+				isLDTypeSame = false;
 			}
 		});
 		if ((!interpretedBy
@@ -85,32 +92,66 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 			newldOptions.visualInfo.interpretedBy = prevState.nameSelf;
 			nextProps.notifyLDOptionsLinearSplitChange(newldOptions);
 			let routes: LDRouteProps = nextProps.routes;
-			return { ...prevState, routes, localLDTypes: newLDTypes };
+			// if there's a reason to notify a state update, any old error shouldn't be displayed any more
+			const hasError = false;
+			const errorMsg = "";
+			return { ...prevState, routes, localLDTypes: newLDTypes, localValues: newValueMap, hasError, errorMsg };
 		}
-		ldOptions.resource.kvStores.forEach((elem, idx) => {
-			let elemKey: string = elem.key;
-			if (elemKey === UserDefDict.outputKVMapKey) {
-				return;
-			}
-			let itpt: React.ComponentClass<LDOwnProps> & IBlueprintItpt = null;
-			if (elem.ldType === UserDefDict.intrprtrClassType && elem.value && isObjPropertyRef(elem.value)) {
-				itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt((elem.value as ObjectPropertyRef).objRef);
-			} else {
-				itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(linearLDTokenStr(ldTokenString, idx));
-			}
-			let newKey: string = elem.key; // "_" + idx;
-			if (isReactComponent(itpt)) {
-				let ldTokenStringNew: string = linearLDTokenStr(ldTokenString, idx);
-				if (isItptKey && isObjPropertyRef(elem.value)) {
-					ldTokenStringNew = (elem.value as ObjectPropertyRef).objRef;
+		try {
+			ldOptions.resource.kvStores.forEach((elem, idx) => {
+				let elemKey: string = elem.key;
+				if (elemKey === UserDefDict.outputKVMapKey) {
+					return;
 				}
-				newreactCompInfos.set(newKey, { compClass: itpt, key: newKey, ldTokenString: ldTokenStringNew });
-				newLDTypes.set(newKey, itpt.cfg.canInterpretType);
-			} else {
-				throw new LDError(`baseContainer got a non-visual component. It was looking for ${JSON.stringify(elem)} and got ${itpt}`);
+				let itpt: React.ComponentClass<LDOwnProps> & IBlueprintItpt = null;
+				if (elem.ldType === UserDefDict.intrprtrClassType && elem.value && isObjPropertyRef(elem.value)) {
+					itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt((elem.value as ObjectPropertyRef).objRef);
+				} else {
+					itpt = appItptMatcherFn().getItptRetriever(retriever).getDerivedItpt(linearLDTokenStr(ldTokenString, idx));
+				}
+				let newKey: string = elem.key; // "_" + idx;
+				if (isReactComponent(itpt)) {
+					let ldTokenStringNew: string = linearLDTokenStr(ldTokenString, idx);
+					if (isItptKey && isObjPropertyRef(elem.value)) {
+						ldTokenStringNew = (elem.value as ObjectPropertyRef).objRef;
+					}
+					newreactCompInfos.set(newKey, { compClass: itpt, key: newKey, ldTokenString: ldTokenStringNew });
+					newLDTypes.set(newKey, itpt.cfg.canInterpretType);
+					newValueMap.set(newKey, elem.value);
+				} else {
+					throw new LDError(`baseContainer got a non-visual component. It was looking for ${JSON.stringify(elem)} and got ${itpt}`);
+				}
+			});
+		} catch (error) {
+			const errorMsg = `${JSON.stringify(error)}`;
+			return { ...prevState, hasError: true, errorMsg };
+		}
+		//compare localValues against each other and dispatch KVUpdate
+		const changedValues: string[] = [];
+		newValueMap.forEach((val, key) => {
+			if (key !== UserDefDict.outputKVMapKey) {
+				const prevHas = prevState.localValues.has(key);
+				if (!prevHas || (prevHas && JSON.stringify(prevState.localValues.get(key)) !== JSON.stringify(val))) {
+					changedValues.push(key);
+				}
 			}
 		});
-		return { ...prevState, compInfos: newreactCompInfos, localLDTypes: newLDTypes };
+		if (changedValues.length > 0) {
+			const outputKvs: KVL[] = changedValues.map((key) => {
+				return { key, value: newValueMap.get(key), ldType: newLDTypes.get(key) };
+			});
+			const newKVM = (newValueMap.get(UserDefDict.outputKVMapKey) as OutputKVMap);
+			if (newKVM) {
+				const outputKVMap = changedValues.reduce<OutputKVMap>((prevVal, key) => {
+					if (newKVM[key]) {
+						prevVal[key] = newKVM[key];
+					}
+					return prevVal;
+				}, {});
+				nextProps.dispatchKvOutput(outputKvs, ldTokenString, outputKVMap);
+			}
+		}
+		return { ...prevState, compInfos: newreactCompInfos, localValues: newValueMap, localLDTypes: newLDTypes };
 	}
 
 	cfg: BlueprintConfig;
@@ -134,7 +175,8 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 	}
 
 	componentDidCatch(error, info) {
-		this.setState({ ...this.state, hasError: true, errorMsg: info });
+		const errorMsg = `${JSON.stringify(info)}`;
+		this.setState({ ...this.state, hasError: true, errorMsg });
 	}
 
 	render() {
@@ -153,7 +195,7 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 				}
 				for (let i = 0; i < cInfoAsArray.length; i++) {
 					const cInfoItm = cInfoAsArray[i];
-					let GenericComp = cInfoItm.compClass;
+					const GenericComp = cInfoItm.compClass;
 					reactComps[iterator] = <GenericComp key={cInfoItm.key} routes={routes} ldTokenString={cInfoItm.ldTokenString} />;
 					iterator++;
 				}
@@ -162,7 +204,11 @@ export class PureBaseContainerRewrite extends Component<BaseContOwnProps & LDCon
 				{reactComps ? reactComps : null}
 			</>;
 		} else {
-			return <span>error caught in baseContainer: {errorMsg}</span>;
+			if (this.props.errorDisplay) {
+				const GenericErrorDispl: any = this.props.errorDisplay;
+				return <GenericErrorDispl errorMsg={`${errorMsg}`} />;
+			}
+			return <span>error caught in baseContainer: {`${errorMsg}`}</span>;
 		}
 	}
 

@@ -121,7 +121,10 @@ export class PureTitleTextAndImage extends Component<LDConnectedState & LDConnec
 		const directionStyle: CSSProperties = isHorizontal
 			? switchHorizontal ? { flexDirection: "row" } : { flexDirection: "row-reverse" }
 			: switchVertical ? { flexDirection: "column" } : { flexDirection: "column-reverse" };
-		return <div className={`flex-container ${CSS_BASECLASS}`}
+		const switcherCSSclassName = isHorizontal
+			? switchHorizontal ? "row" : "row-reverse"
+			: switchVertical ? "column" : "column-reverse";
+		return <div className={`flex-container ${CSS_BASECLASS} ${switcherCSSclassName}`}
 			ref={(divElement) => this.divElement = divElement}
 			style={directionStyle}>
 			<div className={`flex-filler vh-centered-column ${CSS_BASECLASS}-inputcontainer`} style={{ minHeight: DEFAULT_BREAKPOINT }}>
