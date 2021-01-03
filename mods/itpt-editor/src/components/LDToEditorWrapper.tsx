@@ -76,12 +76,12 @@ export const ITPT_BLOCK_EDITOR_AV_BOTTOMBAR = "bottombar";
 
 export const SAVE_ACTION_LDTYPE = "SaveAction_LDType";
 
-let allMyInputKeys: string[] = [
+const allMyInputKeys: string[] = [
 	ITPT_BLOCK_EDITOR_EDITING_ITPT, ITPT_BLOCK_EDITOR_DISPLAYING_ITPT,
 	ITPT_BLOCK_EDITOR_IS_GLOBAL, ITPT_BLOCK_EDITOR_IS_FULLSCREEN_PREVIEW, ITPT_BLOCK_EDITOR_HIDDEN_VIEWS, ITPT_BLOCK_EDITOR_RETRIEVER_NAME,
 	UserDefDict.username, UserDefDict.projectname, SAVE_ACTION_LDTYPE, ITPT_BLOCK_EDITOR_SAVING_STATUS
 ];
-let ownKVLs: KVL[] = [
+const ownKVLs: KVL[] = [
 	{
 		key: ITPT_BLOCK_EDITOR_EDITING_ITPT,
 		value: undefined,
@@ -155,7 +155,7 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 		if (nextProps.routes && nextProps.routes.location + "" === prevState.redirect) {
 			redirState = { ...prevState, redirect: null };
 		}
-		let rvLD = gdsfpLD(
+		const rvLD = gdsfpLD(
 			nextProps, prevState, [],
 			[...allMyInputKeys, UserDefDict.outputKVMapKey],
 			ITPT_BLOCK_EDITOR_TYPE,

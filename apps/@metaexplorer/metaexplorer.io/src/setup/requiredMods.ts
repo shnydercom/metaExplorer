@@ -2,11 +2,18 @@ import { changeMainAppItpt, IModSpec, SingleModStateKeysDict } from '@metaexplor
 import { MOD_MATERIALDESIGN_ID, initMaterialDesignMod } from '@metaexplorer-mods/material-design';
 import { MOD_USERITPT_ID, initUSERITPTClientMod } from '@metaexplorer-mods/useritpt';
 import { initMetaExplorerMod, MOD_METAEXPLORERIO_ID } from '@metaexplorer-mods/metaexplorer.io';
+import { MOD_QRCODEGENSCAN_ID, initQRCODEGENClientMod } from '@metaexplorer-mods/qr-code-genscan';
 import { isProduction } from '@metaexplorer/core';
 
 export function setupRequiredMods(): IModSpec[] {
 	//mod initialization functions
 	const modSpecs: IModSpec[] = [];
+	modSpecs.push({
+		id: MOD_QRCODEGENSCAN_ID,
+		initFn: () => initQRCODEGENClientMod(),
+		dependencies: []
+	}
+	);
 	modSpecs.push({
 		id: MOD_MATERIALDESIGN_ID,
 		initFn: () => initMaterialDesignMod(),
