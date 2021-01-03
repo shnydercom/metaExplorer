@@ -1,9 +1,14 @@
 const proxy = require('http-proxy-middleware');
 const path = require('path');
-const mxpIOItpts = require('@metaexplorer-nocode/metaexplorer.io/lib/interpreters.json');
 const qrCodeGenScanMod = require('@metaexplorer-mods/qr-code-genscan/server-bom.js');
-
 const itptEditorMod = require('@metaexplorer-mods/itpt-editor/lib/server-bom');
+
+let mxpIOItpts = {};
+try {
+  mxpIOItpts = require('nocode/@metaexplorer-nocode/metaexplorer.io/lib/interpreters.json');
+} catch (error) {
+  console.warn("couldn't find interpreters.json. Have you built the nocode-project?");
+}
 
 module.exports = function (app) {
   itptEditorMod(app);

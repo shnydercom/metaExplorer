@@ -4,6 +4,7 @@ import {
 	ldOptionsDeepCopy, LDOwnProps, mapDispatchToProps, mapStateToProps, NetworkPreferredToken, OutputKVMap, UserDefDict,
 	IAsyncRequestWrapper,
 	COMP_BASE_CONTAINER,
+	handleTechnicalKnownIssue,
 	//createRefMapPrototype
 } from "@metaexplorer/core";
 import { keys } from "lodash";
@@ -27,6 +28,7 @@ import * as shortid from "shortid";
 import { ItptNodeModel } from "./node-editor/_super/ItptNodeModel";
 import { editorSpecificNodesColor } from "./node-editor/consts";
 import { LIBRARY_PREVIEW_KEY } from "./content/librarypreview/ldInterfacing";
+import { LOAD_BY_NAME_FAILED } from "./../errorMessages";
 
 export type AIEProps = {
 	logic?: NodeEditorLogic;
@@ -651,6 +653,10 @@ export class PureAppItptEditor extends Component<AIEProps, AIEState> {
 
 	protected loadToEditorByName(name: string, isAutodistribute?: boolean) {
 		let itptInfo = this.logic.getItptList().find((itm) => itm.nameSelf === name);
+		if(!itptInfo){
+			handleTechnicalKnownIssue(LOAD_BY_NAME_FAILED, name);
+			return false;
+		}
 		let itptCfg: BlueprintConfig = itptInfo.itpt.cfg;
 		if (!itptCfg.ownKVLs
 			|| itptCfg.ownKVLs.length < 1

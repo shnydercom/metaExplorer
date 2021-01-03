@@ -8,7 +8,7 @@
     "initserver": "cross-env-shell NOCODE_BLOCKS_PATH=../../../nocode/@metaexplorer-nocode/metaexplorer.io/blocks \"ts-node-dev ./src/initFolder.ts\"",
     "dev": "ts-node-dev --respawn --exit-child ./src/app.ts",
     "dev:debug": "ts-node-dev --respawn --inspect=4321 ./src/app.ts",
-    "editor": "cross-env-shell NOCODE_BLOCKS_PATH=../../../nocode/@metaexplorer-nocode/metaexplorer.io/blocks NOCODE_BLOCK_START=metaexplorer.io/v2/index \"yarn dev:debug\""
+    "editor": "cross-env-shell NOCODE_BLOCKS_PATH=../../../nocode/@metaexplorer-nocode/metaexplorer.io/blocks NOCODE_BLOCK_START=landing/index \"yarn dev:debug\""
   },
   "dependencies": {
     "@metaexplorer/editor-dev-server": "*",

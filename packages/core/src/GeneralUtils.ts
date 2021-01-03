@@ -27,3 +27,14 @@ export const arrayMove = (arr, oldIdx: number, newIdx: number) => {
 	arr.splice(newIdx, 0, arr.splice(oldIdx, 1)[0]);
 	return arr; // for testing purposes
 };
+
+/**
+ * use this function for cases where the error source can be resolved by a 
+ * technical user by changing code. Handle other errors in the frontend
+ * 
+ * @param userMessage a human readable Message to tell a (technical) user
+ * @param dynValue a dynamic value, if any
+ */
+export const handleTechnicalKnownIssue = (userMessage: string, dynValue?: string) => {
+	console.warn(userMessage + dynValue);
+}

@@ -67,7 +67,7 @@ export function setupRequiredMods(): IModSpec[] {
 			isProduction
 				? undefined
 				: {
-					currrentlyEditing: "metaexplorer.io/v3/landing/google-using-structured-data/index"
+					currrentlyEditing: "landing/index"
 				}
 		),
 		dependencies: []

@@ -85,7 +85,10 @@ export function editorToFileSystem(
 		let localPath = req.path;
 		localPath = localPath.replace("styles/", "");
 		let stylePath = path.join(path.resolve(basePath), localPath);
-		console.log(stylePath);
+		
+		if (!fs.existsSync(stylePath)) {
+			fs.writeFileSync(stylePath, "");
+		}
 		res.sendFile(
 			stylePath,
 			(err) => { next(err); }

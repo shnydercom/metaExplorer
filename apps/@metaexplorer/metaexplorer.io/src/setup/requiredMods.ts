@@ -44,7 +44,7 @@ export function setupRequiredMods(): IModSpec[] {
 	modSpecs.push({
 		id: MOD_ID,
 		initFn: () => {
-			const startItpt = "metaexplorer.io/v3/landing/google-using-structured-data/index";
+			const startItpt = "landing/google-using-structured-data/index";
 			changeMainAppItpt(startItpt, []);
 			return new Promise((resolve, reject) => {
 				resolve({
