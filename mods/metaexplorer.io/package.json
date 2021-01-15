@@ -24,6 +24,7 @@
   ],
   "dependencies": {
     "@metaexplorer/core": "^0.0.25",
+    "@metaexplorer/wpgraphql-to-linkeddata": "^1.0.0",
     "react-gooey-nav": "^2.0.0"
   }
 }
