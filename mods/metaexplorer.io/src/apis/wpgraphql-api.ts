@@ -1,16 +1,25 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import {
+	ApolloClient,
+	InMemoryCache,
+	NormalizedCacheObject,
+	HttpLink,
+} from "@apollo/client";
+
+export interface WPGraphQLAPIOptions {
+	uri: string;
+}
 
 export class WPGraphQLAPI {
 	private static apiSingleton: WPGraphQLAPI;
-	private apiClient: ApolloClient<InMemoryCache>;
+	private apiClient: ApolloClient<NormalizedCacheObject>;
 
-	public static getClient(): ApolloClient<InMemoryCache> {
+	public static getClient(): ApolloClient<NormalizedCacheObject> {
 		return WPGraphQLAPI.getAPISingleton().apiClient;
 	}
 
-	public static getAPISingleton(cfgSrc?: string): WPGraphQLAPI {
+	public static getAPISingleton(cfg?: WPGraphQLAPIOptions): WPGraphQLAPI {
 		if (WPGraphQLAPI.apiSingleton == null) {
-			WPGraphQLAPI.apiSingleton = WPGraphQLAPI.init(cfgSrc);
+			WPGraphQLAPI.apiSingleton = WPGraphQLAPI.init(cfg);
 		}
 		return WPGraphQLAPI.apiSingleton;
 	}
@@ -19,8 +28,26 @@ export class WPGraphQLAPI {
 		return !!WPGraphQLAPI.apiSingleton;
 	}
 
-	private static init(cfgSrc?: string): WPGraphQLAPI {
-        const rv = new WPGraphQLAPI();
-        return rv;
-    }
+	private static init(cfg?: WPGraphQLAPIOptions): WPGraphQLAPI {
+		const rv = new WPGraphQLAPI();
+		rv.apiClient = new ApolloClient({
+			//graphql endpoint
+			link: new HttpLink({ uri: cfg && cfg.uri ? cfg.uri : "/graphql" }),
+			cache: new InMemoryCache(),
+			/*fetchOptions: {
+              mode: 'no-cors'
+            }*/
+		});
+		return rv;
+	}
+
+	// class methods
+
+	public setConfig(cfg: WPGraphQLAPIOptions): void {
+		if (cfg) {
+			this.apiClient.setLink(
+				new HttpLink({ uri: cfg.uri ? cfg.uri : "/graphql" })
+			);
+		}
+	}
 }
