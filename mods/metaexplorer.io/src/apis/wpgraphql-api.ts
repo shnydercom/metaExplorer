@@ -13,10 +13,6 @@ export class WPGraphQLAPI {
 	private static apiSingleton: WPGraphQLAPI;
 	private apiClient: ApolloClient<NormalizedCacheObject>;
 
-	public static getClient(): ApolloClient<NormalizedCacheObject> {
-		return WPGraphQLAPI.getAPISingleton().apiClient;
-	}
-
 	public static getAPISingleton(cfg?: WPGraphQLAPIOptions): WPGraphQLAPI {
 		if (WPGraphQLAPI.apiSingleton == null) {
 			WPGraphQLAPI.apiSingleton = WPGraphQLAPI.init(cfg);
@@ -39,6 +35,10 @@ export class WPGraphQLAPI {
             }*/
 		});
 		return rv;
+    }
+    
+    public getClient(): ApolloClient<NormalizedCacheObject> {
+		return this.apiClient;
 	}
 
 	// class methods
