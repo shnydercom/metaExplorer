@@ -102,3 +102,12 @@
 .mxp-hero {
 	text-align: center;
 }
+
+.buttonrow {
+	display: flex;
+	flex-direction: row;
+	margin: 16px 0 16px 0;
+	@media (max-width: 600px){
+		flex-direction: column;
+	}
+}
