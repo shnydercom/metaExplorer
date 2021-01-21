@@ -1,5 +1,6 @@
 const proxy = require('http-proxy-middleware');
 const path = require('path');
+const fs = require("fs");
 const qrCodeGenScanMod = require('@metaexplorer-mods/qr-code-genscan/server-bom.js');
 const itptEditorMod = require('@metaexplorer-mods/itpt-editor/lib/server-bom');
 
@@ -34,6 +35,11 @@ module.exports = function (app) {
   }
   app.get('/media/*', function (req, res) {
     const noMediaPath = req.path.replace('/media/', '');
-    res.sendFile(path.join(__dirname, './../assets/', noMediaPath));
+    const fileDest = path.join(__dirname, './../assets/', noMediaPath);
+    if(fs.existsSync(fileDest)){
+      res.sendFile(fileDest);
+      return;
+    }
+    res.redirect("http://localhost:5001/");
   });
 };
