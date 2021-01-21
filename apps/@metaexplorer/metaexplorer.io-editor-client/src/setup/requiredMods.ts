@@ -67,7 +67,7 @@ export function setupRequiredMods(): IModSpec[] {
 			isProduction
 				? undefined
 				: {
-					currrentlyEditing: "landing/index"
+					currrentlyEditing: "sitewide/navigation/index"
 				}
 		),
 		dependencies: []
