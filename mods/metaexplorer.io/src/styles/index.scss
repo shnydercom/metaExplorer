@@ -13,36 +13,41 @@
 
 .mxp-hero {
 	padding: 0;
-	min-height: 66vh;
-	max-width: 768px;
-	align-self: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	background-image: url("/media/Image01-Gift.jpg");
-	background-position: center;
-	background-size: cover;
+    min-height: 66vh;
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-attachment: fixed;
+    background-size: auto 67%;
+    background-position-x: center;
+    background-position-y: 70px;
+    background-repeat: no-repeat;
+	
+	background-image: url("/media/landing-hands-gift");
 }
 
-.mxp-hero.bottom-img {
-	padding: 0;
-	min-height: 66vh;
-	max-width: 768px;
-	align-self: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	background-image: url("/media/Image02-Manualwork.jpg");
-	background-position: center;
-	background-size: cover;
+.mxp-hero.bottom-img {	
+	background-image: url("/media/landing-hands-pottery");
 }
 
 .mxp-hero p {
 	background-color: #ffffffaa;
+	margin: 1em auto;
+	padding: 3px 6px;
+	border-radius: 3px;
+    border: 0px solid;
+	max-width: 768px;
 }
 
 .mxp-hero h2 {
 	background-color: #ffffffaa;
+	margin: 1.5em auto;
+	padding: 3px 15px;
+	border-radius: 3px;
+    border: 0px solid;
+	max-width: 768px;
 }
 
 .flex-filler.vh-centered-column.titletextandimage-inputcontainer {

@@ -40,6 +40,6 @@ module.exports = function (app) {
       res.sendFile(fileDest);
       return;
     }
-    res.redirect("http://localhost:5001/");
+    res.redirect(`http://localhost:5001${req.path}`);
   });
 };
