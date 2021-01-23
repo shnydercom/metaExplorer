@@ -66,7 +66,7 @@
 	/* border: 32px solid white; */
 	border-radius: 32px;
 	align-items: center;
-	background-color: #00000008;
+	//background-color: #00000008;
 	align-self: center;
 }
 
@@ -90,6 +90,8 @@
 	box-shadow: 2px 5px 6px #00000061;
 	border: 0px solid;
 	border-radius: 12px;
+	margin: -112px 0 64px 0;
+    background: white;
 }
 
 .videodisplay {
@@ -106,6 +108,7 @@
 
 .mxp-hero {
 	text-align: center;
+	padding-bottom: 108px;
 }
 
 .buttonrow {
@@ -136,4 +139,21 @@
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-weight: 500;
     line-height: 1.75;
+}
+
+.cta-container {
+	display: flex;
+	flex-direction: column;
+	margin-top: -108px;
+    align-items: center;
+    background-color: #ffffffd1;
+    border: 0 solid;
+    border-radius: 6px 6px 0 0;
+    margin: -108px 12px 0 12px;
+    /* box-shadow: 5px 5px 6px #00000061; */
+    z-index: 0;
+	padding: 0px 16px;
+	@media (max-width: 600px){
+		background-color: white;
+	}
 }
