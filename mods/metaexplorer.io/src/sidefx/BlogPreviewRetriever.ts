@@ -15,7 +15,6 @@ export class BlogPreviewRetriever extends LDRetrieverSuperRewrite {
 		super(parameters, IN_KEYS);
 		const srvUrl = this.state.localValues.get(SideFXDict.srvURL);
         WPGraphQLAPI.getAPISingleton().setConfig({ uri: srvUrl });
-        debugger;
 		this.apiCallOverride = () =>
 			new Promise<any>((resolve) => {
 				const wpCat = this.state.localValues.get(
