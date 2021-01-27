@@ -1,6 +1,7 @@
 export * from './LDBaseDataType';
 export * from './LDDict';
 export * from './LDUIDict';
+export * from './LDServiceSchemaDict';
 export * from './LDconsts';
 export * from './ObjectPropertyRef';
 export * from './UserDefDict';

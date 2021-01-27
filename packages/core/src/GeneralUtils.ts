@@ -1,3 +1,5 @@
+import { VisualKeysDict } from "./components/visualcomposition/visualDict";
+
 /**
  * checks juggling if any of the parameters is null or undefined
  * @param inputs the input parameters
@@ -29,12 +31,34 @@ export const arrayMove = (arr, oldIdx: number, newIdx: number) => {
 };
 
 /**
- * use this function for cases where the error source can be resolved by a 
+ * use this function for cases where the error source can be resolved by a
  * technical user by changing code. Handle other errors in the frontend
- * 
+ *
  * @param userMessage a human readable Message to tell a (technical) user
  * @param dynValue a dynamic value, if any
  */
-export const handleTechnicalKnownIssue = (userMessage: string, dynValue?: string) => {
+export const handleTechnicalKnownIssue = (
+	userMessage: string,
+	dynValue?: string
+) => {
 	console.warn(userMessage + dynValue);
+};
+
+export interface ClassNameProp {
+	className?: string;
+}
+
+/**
+ *
+ * @param localValues
+ */
+export function cssClassNamePropFromLocalValues(
+	localValues: Map<string, any>
+): ClassNameProp {
+	const cssClassNames: string[] = localValues.get(
+		VisualKeysDict.cssClassName
+	);
+	if (!cssClassNames || cssClassNames.length === 0) return {};
+	const className = cssClassNames.join(" ");
+	return { className };
 }

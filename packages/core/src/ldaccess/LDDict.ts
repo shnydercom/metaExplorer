@@ -17,6 +17,8 @@ export enum LDDict {
 	EntryPoint = "http://http://schema.org/EntryPoint",
 	Organization = "http://schema.org/Organization",
 	URL = "https://schema.org/URL",
+	Blog = "https://schema.org/Blog",
+	BlogPosting = "https://schema.org/BlogPosting",
 	//properties:
 	address = "http://schema.org/address",
 	target = "http://schema.org/target",
@@ -31,6 +33,7 @@ export enum LDDict {
 	gtin8 = "http://schema.org/gtin8",
 	object = "http://schema.org/object",
 	actionOption = "http://schema.org/actionOption",
+	blogPost = "https://schema.org/blogPost",
 
 	email = "http://schema.org/email",
 	embedUrl = "https://schema.org/embedUrl",
