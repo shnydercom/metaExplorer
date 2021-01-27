@@ -21,6 +21,7 @@ import { initRequiredMods } from './modding/initMods';
 import { mapStateToPropsRoot } from './appstate/reduxFns';
 import { IModSpec } from './apis/mod-api';
 import { initIRIFormatter } from './components/iri-formatter/initIRIFormatter';
+import { initMathsBlocks } from './components/maths/initMathsBlocks';
 
 export const APP_LD_KEY = "app";
 
@@ -64,6 +65,7 @@ export const getApplicationStore: () => Store<ExplorerState> = () => {
 export function rootSetup(requiredMods: IModSpec[]): void {
 	appItptMatcherFn();
 	initEssentialItpts();
+	initMathsBlocks();
 	initBaseHtmlItpt();
 	initEssentialInterpreters();
 	initIRIFormatter();
