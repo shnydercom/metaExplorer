@@ -53,8 +53,8 @@ export function cleanRouteString(
 	}
 	route = newRouteParts.join("/");
 	// on same page, just scroll
-	if(route.startsWith("#")){
-		const elemName = route.substring(1);
+	if(newRouteParts.length > 0 && newRouteParts[newRouteParts.length-1].startsWith("#")){
+		const elemName = newRouteParts[newRouteParts.length-1].substring(1);
 		const element = document.getElementById(elemName);
 		element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
 	}

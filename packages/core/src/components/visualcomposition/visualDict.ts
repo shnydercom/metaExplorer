@@ -12,6 +12,10 @@ export enum VisualKeysDict {
 	switchHorizontalDirection = "switchHorizontalDirection",
 	directionChangeBreakPoint = "directionChangeBreakPoint",
 	cssClassName = "cssClass", //TODO: follow development of http://pending.schema.org/cssSelector and adjust
+	/**
+	 * id of the html element. User is responsible for making it unique
+	 */
+	elementId = "elementId",
 
 	//other
 	popOverContent = "PopOverContent",

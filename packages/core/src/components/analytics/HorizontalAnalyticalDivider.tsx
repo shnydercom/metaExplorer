@@ -11,37 +11,50 @@ import {
 import { VisualKeysDict } from "../visualcomposition";
 import { ActionKeysDict, ActionType, ActionTypesDict } from "../actions";
 import useIntersectionObserver from "./intersector-hook";
-import { LDConnectedDispatch, LDConnectedState, LDLocalState, LDOwnProps } from "../../appstate";
+import {
+	LDConnectedDispatch,
+	LDConnectedState,
+	LDLocalState,
+	LDOwnProps,
+} from "../../appstate";
 import { gdsfpLD, initLDLocalState } from "../generic";
 
 interface DividerHRProps {
+	elementId?: string;
 	className?: string;
 	onVisibilityChanged?: (visible: boolean) => void;
 }
 
 const DividerHR = (props?: DividerHRProps) => {
 	const hrRef = useRef<HTMLHRElement | null>(null);
-	const [isVisible, entry] = useIntersectionObserver({
+	const [isVisible /*entry*/] = useIntersectionObserver({
 		elementRef: hrRef,
 	});
-	console.log(isVisible);
-	console.log(entry);
 
-	useEffect(() => props.onVisibilityChanged(isVisible), [
-		isVisible,
-		!!props.onVisibilityChanged,
-	]);
+	useEffect(
+		() => props.onVisibilityChanged && props.onVisibilityChanged(isVisible),
+		[isVisible, !!props.onVisibilityChanged]
+	);
 
-	const compProps =
-		props && props.className ? { className: props.className } : {};
+	const compProps = {};
+	if(props) {
+		if(props.className) compProps["className"] = props.className;
+		if(props.elementId) compProps["id"] = props.elementId;
+	}
 	return <hr ref={hrRef} {...compProps} />;
 };
 
 let cfgIntrprtKeys: string[] = [
+	VisualKeysDict.elementId,
 	VisualKeysDict.cssClassName,
 	ActionKeysDict.action_visibility_change,
 ];
 let ownKVLs: KVL[] = [
+	{
+		key: VisualKeysDict.elementId,
+		value: undefined,
+		ldType: LDDict.Text
+	},
 	{
 		key: VisualKeysDict.cssClassName,
 		value: undefined,
@@ -143,6 +156,7 @@ export class PureHRAnalyticsComponent
 	render() {
 		const { localValues } = this.state;
 		const cssClassName = localValues.get(VisualKeysDict.cssClassName);
-		return <DividerHR className={cssClassName}></DividerHR>;
+		const elementId = localValues.get(VisualKeysDict.elementId);
+		return <DividerHR elementId={elementId} className={cssClassName}></DividerHR>;
 	}
 }
