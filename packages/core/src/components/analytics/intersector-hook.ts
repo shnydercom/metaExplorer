@@ -19,13 +19,13 @@ function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>({
   const [entry, setEntry] = useState<IntersectionObserverEntry>()
   const isClient = typeof window !== `undefined`
   const hasIOSupport = isClient && !!window.IntersectionObserver
-  const noUpdate = entry?.isIntersecting && freezeOnceVisible
+  const noUpdate = entry && entry.isIntersecting && freezeOnceVisible
   const IOOptions = { threshold, root, rootMargin }
   const updateEntry = ([entry]: IntersectionObserverEntry[]): void => {
     setEntry(entry)
   }
   useEffect(() => {
-    const node = elementRef?.current // DOM Ref
+    const node = elementRef && elementRef.current // DOM Ref
     if (!hasIOSupport || noUpdate || !node) {
       return undefined;
     }
@@ -39,6 +39,6 @@ function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>({
       currentObserver.disconnect()
     }
   }, [elementRef, threshold, root, rootMargin, noUpdate])
-  return [!!entry?.isIntersecting, entry]
+  return [!!(entry && entry.isIntersecting), entry]
 }
 export default useIntersectionObserver
