@@ -22,9 +22,9 @@
     "compcss": "node-sass --output-style compressed ./src/styles/material-design-index.scss > ./lib/style.css"
   },
   "devDependencies": {
-    "@material-ui/core": "^4.1.3",
-    "@material-ui/icons": "^4.2.1",
-    "@material-ui/pickers": "^3.1.2",
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/pickers": "^3.2.10",
     "@metaexplorer/core": "^0.0.25",
     "@metaexplorer/testing": "^0.0.10",
     "@storybook/react": "^6.1.0-rc.2",
