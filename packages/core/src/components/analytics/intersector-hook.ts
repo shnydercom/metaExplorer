@@ -7,7 +7,7 @@ type ReturnType = [boolean, IntersectionObserverEntry | undefined]
 /**
  * source: https://usehooks-typescript.com/react-hook/use-intersection-observer
  * @param param0 
- */
+ **/
 function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>({
   elementRef,
   threshold = 0.1,

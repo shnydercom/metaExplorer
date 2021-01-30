@@ -36,6 +36,8 @@ export enum ActionKeysDict {
 	 */
 	action_close = "Action_Close",
 
+	action_visibility_change = "Action_VisibilityChange",
+
 	/**
 	 * a key on a component that dispatches actions,
 	 * after triggering will dispatch the action

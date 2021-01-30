@@ -13,3 +13,5 @@ export * from './visualcomposition';
 export * from './project-config';
 export * from './imageupload-component';
 export * from './developer-template';
+
+export * from './analytics';
