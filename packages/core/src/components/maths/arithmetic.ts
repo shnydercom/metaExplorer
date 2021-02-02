@@ -72,7 +72,6 @@ class MultiplicationOrAddition extends AbstractDataTransformer {
 		outputKvStores: Map<string, KVL>
 	): KVL[] {
 		let rv = [];
-		debugger;
 		const operandKVLs = [
 			inputParams.get(ARITHMETIC_OPERAND_ONE),
 			inputParams.get(ARITHMETIC_OPERAND_TWO),
