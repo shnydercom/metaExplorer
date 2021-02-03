@@ -227,3 +227,15 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.my-fixed-conv-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: white;
+	border: 0px solid;
+	border-radius: 12px;
+	padding: 24px;
+	box-shadow: 2px 5px 6px #00000061;
+}
