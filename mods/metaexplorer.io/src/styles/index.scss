@@ -245,6 +245,9 @@
 	.bottom-nav{
 		.bottom-nav-topfree {
 			padding: 0 24px 0 24px;
+			.imgdisplay {
+				height: 150px;
+			}
 		}
 		.MuiBottomNavigation-root {
 			margin: 0 -24px 0 -24px;
