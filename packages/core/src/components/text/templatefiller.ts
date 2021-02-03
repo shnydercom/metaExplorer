@@ -14,6 +14,8 @@ export const TEXT_TEMPLATE = "text/template";
 export const TEXT_FRAGMENT_ONE = "text/fragment-one";
 export const TEXT_FRAGMENT_TWO = "text/fragment-two";
 
+export const TEXT_ALTERNATIVE = "text/alternative";
+
 export const TEXT_FILLER_TYPE = "text/Textfiller-Type";
 
 export const ARITHMETIC_OUTPUT_TYPE = LDDict.Text;
@@ -24,6 +26,7 @@ export const textfillerItptKeys: string[] = [
 	TEXT_TEMPLATE,
 	TEXT_FRAGMENT_ONE,
 	TEXT_FRAGMENT_TWO,
+	TEXT_ALTERNATIVE,
 ];
 export const TextfillerOutputKVs: KVL[] = [
 	{
@@ -46,6 +49,11 @@ const textfillerKVLs: KVL[] = [
 	},
 	{
 		key: TEXT_FRAGMENT_TWO,
+		value: undefined,
+		ldType: undefined,
+	},
+	{
+		key: TEXT_ALTERNATIVE,
 		value: undefined,
 		ldType: undefined,
 	},
@@ -78,6 +86,7 @@ class Textfiller extends AbstractDataTransformer {
 		let rv = [];
 		const textFragment_one = inputParams.get(TEXT_FRAGMENT_ONE);
 		const textFragment_two = inputParams.get(TEXT_FRAGMENT_TWO);
+		const textAlternative = inputParams.get(TEXT_ALTERNATIVE);
 		const textTemplate = inputParams.get(TEXT_TEMPLATE);
 		const outputDataKV = outputKvStores.get(UserDefDict.outputData);
 
@@ -102,7 +111,10 @@ class Textfiller extends AbstractDataTransformer {
 			});
 		}
 
-		outputDataKV.value = templatedString;
+		outputDataKV.value =
+			templatedString === textTemplate.value && textAlternative && textAlternative.value
+				? textAlternative.value
+				: templatedString;
 		rv = [outputDataKV];
 		return rv;
 	}
