@@ -202,3 +202,21 @@
 	padding: 24px;
 	box-shadow: 2px 5px 6px #00000061;
 }
+
+.my-little-video-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: white;
+	border: 0px solid;
+	border-radius: 12px;
+	padding: 0;
+	overflow: hidden;
+	width: fit-content;
+	height: fit-content;
+	box-shadow: 2px 5px 6px #00000061;
+	video {
+		background: white;
+	}
+}
