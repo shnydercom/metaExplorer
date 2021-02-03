@@ -1,8 +1,8 @@
 import { AbstractDataTransformer } from "../../datatransformation";
 import {
 	BlueprintConfig,
-	ILDOptions,
-	isObjPropertyRef,
+	//ILDOptions,
+	//isObjPropertyRef,
 	KVL,
 	ldBlueprint,
 	LDDict,
@@ -11,7 +11,8 @@ import {
 
 export const TEXT_TEMPLATE = "text/template";
 
-export const TEXT_FRAGMENTS = "text/fragments";
+export const TEXT_FRAGMENT_ONE = "text/fragment-one";
+export const TEXT_FRAGMENT_TWO = "text/fragment-two";
 
 export const TEXT_FILLER_TYPE = "text/Textfiller-Type";
 
@@ -19,7 +20,11 @@ export const ARITHMETIC_OUTPUT_TYPE = LDDict.Text;
 
 export const TextfillerName: string = "text/Textfiller";
 
-export const textfillerItptKeys: string[] = [TEXT_TEMPLATE, TEXT_FRAGMENTS];
+export const textfillerItptKeys: string[] = [
+	TEXT_TEMPLATE,
+	TEXT_FRAGMENT_ONE,
+	TEXT_FRAGMENT_TWO,
+];
 export const TextfillerOutputKVs: KVL[] = [
 	{
 		key: UserDefDict.outputData,
@@ -35,7 +40,12 @@ const textfillerKVLs: KVL[] = [
 		ldType: LDDict.Text,
 	},
 	{
-		key: TEXT_FRAGMENTS,
+		key: TEXT_FRAGMENT_ONE,
+		value: undefined,
+		ldType: undefined,
+	},
+	{
+		key: TEXT_FRAGMENT_TWO,
 		value: undefined,
 		ldType: undefined,
 	},
@@ -61,82 +71,32 @@ class Textfiller extends AbstractDataTransformer {
 		this.outputKvStores = TextfillerOutputKVs;
 	}
 
-	private textFragments: KVL = {
-		key: TEXT_FRAGMENTS,
-		value: [],
-		ldType: undefined,
-	};
-
-	consumeLDOptions = (ldOptions: ILDOptions) => {
-		if (!ldOptions || !ldOptions.resource || !ldOptions.resource.kvStores)
-			return;
-		this.ldTkStr = ldOptions.ldToken.get();
-		let kvs = ldOptions.resource.kvStores;
-		let outputKVMap: KVL = kvs.find(
-			(val) => UserDefDict.outputKVMapKey === val.key
-		);
-		outputKVMap = outputKVMap
-			? outputKVMap
-			: this.cfg.ownKVLs.find(
-					(val) => UserDefDict.outputKVMapKey === val.key
-			  );
-		this.setOutputKVMap(
-			outputKVMap && outputKVMap.value
-				? outputKVMap.value
-				: this.outputKVMap
-		);
-
-		this.textFragments = {
-			key: TEXT_FRAGMENTS,
-			value: [],
-			ldType: undefined,
-		};
-		for (let inputidx = 0; inputidx < this.itptKeys.length; inputidx++) {
-			const inputKey = this.itptKeys[inputidx];
-			let param = kvs.find(
-				(val) => val.key === inputKey && !isObjPropertyRef(val.value)
-			);
-			if (
-				param &&
-				param.value !== null &&
-				JSON.stringify(param) !==
-					JSON.stringify(this.inputParams.get(inputKey))
-			) {
-				if (inputKey === TEXT_FRAGMENTS) {
-					(this.textFragments.value as Array<string>).push(
-						param.value
-					);
-					debugger;
-					//this.isInputDirty = true;
-				} else {
-					this.inputParams.set(inputKey, param);
-					this.isInputDirty = true;
-				}
-			}
-		}
-		this.evalDirtyInput();
-		this.evalDirtyOutput();
-	};
-
 	protected mappingFunction(
 		inputParams: Map<string, KVL>,
 		outputKvStores: Map<string, KVL>
 	): KVL[] {
 		let rv = [];
-		const textFragments = this.textFragments;
+		const textFragment_one = inputParams.get(TEXT_FRAGMENT_ONE);
+		const textFragment_two = inputParams.get(TEXT_FRAGMENT_TWO);
 		const textTemplate = inputParams.get(TEXT_TEMPLATE);
 		const outputDataKV = outputKvStores.get(UserDefDict.outputData);
 
-		let templatedString: string = textTemplate.value ? String(textTemplate.value) : "";
+		let templatedString: string = textTemplate.value
+			? String(textTemplate.value)
+			: "";
 
 		if (
 			textTemplate &&
-			textFragments &&
-			textFragments.value &&
-			Array.isArray(textFragments.value) &&
-			textTemplate.value
+			textTemplate.value &&
+			textFragment_one &&
+			textFragment_one.value &&
+			textFragment_two &&
+			textFragment_two.value
 		) {
-			const textFrags: string[] = textFragments.value;
+			const textFrags: string[] = [
+				textFragment_one.value,
+				textFragment_two.value,
+			];
 			textFrags.forEach((val, idx) => {
 				templatedString = templatedString.replaceAll(`{{${idx}}}`, val);
 			});
