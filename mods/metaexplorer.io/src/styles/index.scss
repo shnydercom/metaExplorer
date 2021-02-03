@@ -232,10 +232,24 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: stretch;
 	background: white;
 	border: 0px solid;
 	border-radius: 12px;
-	padding: 24px;
+	padding-top: 24px;
 	box-shadow: 2px 5px 6px #00000061;
+	overflow: hidden;
+	b {
+		align-self: center;
+	}
+	.bottom-nav{
+		.bottom-nav-topfree {
+			padding: 0 24px 0 24px;
+		}
+		.MuiBottomNavigation-root {
+			margin: 0 -24px 0 -24px;
+			align-self: stretch;
+		}
+	}
+
 }
