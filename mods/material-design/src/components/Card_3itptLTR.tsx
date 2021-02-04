@@ -1,38 +1,59 @@
-import { Component } from 'react';
-import Card from 'metaexplorer-react-components/lib/components/card/card';
+import { Component } from "react";
+import Card from "metaexplorer-react-components/lib/components/card/card";
 
-import { Redirect } from 'react-router';
+import { Redirect } from "react-router";
 import {
-	ActionTypesDict, UserDefDict, LDConnectedState, LDConnectedDispatch, LDOwnProps, LDLocalState,
-	ILDOptions, BlueprintConfig, IBlueprintItpt, OutputKVMap, ldBlueprint, KVL, VisualTypesDict,
-	gdsfpLD, generateItptFromCompInfo, initLDLocalState, cleanRouteString
-} from '@metaexplorer/core';
-import React from 'react';
+	ActionTypesDict,
+	UserDefDict,
+	LDConnectedState,
+	LDConnectedDispatch,
+	LDOwnProps,
+	LDLocalState,
+	ILDOptions,
+	BlueprintConfig,
+	IBlueprintItpt,
+	OutputKVMap,
+	ldBlueprint,
+	KVL,
+	VisualTypesDict,
+	gdsfpLD,
+	generateItptFromCompInfo,
+	initLDLocalState,
+	cleanRouteString,
+	isExternalRoute,
+} from "@metaexplorer/core";
+import React from "react";
 
 export const CONTAINER_FRONT = "frontContainer";
 export const CONTAINER_MIDDLE = "middleContainer";
 export const CONTAINER_LAST = "lastContainer";
 export const ACTION_MIDDLE_CONTAINER = "Action_middleContainer";
 export const ROUTESEND_MIDDLE_CONTAINER = "RouteSend_middleContainer";
-export const Card3itptLTRName = "metaexplorer.io/material-design/CardW3Containers";
+export const Card3itptLTRName =
+	"metaexplorer.io/material-design/CardW3Containers";
 
-let cfgIntrprtKeys: string[] =
-	[CONTAINER_FRONT, CONTAINER_MIDDLE, CONTAINER_LAST, ROUTESEND_MIDDLE_CONTAINER, ACTION_MIDDLE_CONTAINER];
+let cfgIntrprtKeys: string[] = [
+	CONTAINER_FRONT,
+	CONTAINER_MIDDLE,
+	CONTAINER_LAST,
+	ROUTESEND_MIDDLE_CONTAINER,
+	ACTION_MIDDLE_CONTAINER,
+];
 let ownKVLs: KVL[] = [
 	{
 		key: CONTAINER_FRONT,
 		value: undefined,
-		ldType: UserDefDict.intrprtrClassType
+		ldType: UserDefDict.intrprtrClassType,
 	},
 	{
 		key: CONTAINER_MIDDLE,
 		value: undefined,
-		ldType: UserDefDict.intrprtrClassType
+		ldType: UserDefDict.intrprtrClassType,
 	},
 	{
 		key: CONTAINER_LAST,
 		value: undefined,
-		ldType: UserDefDict.intrprtrClassType
+		ldType: UserDefDict.intrprtrClassType,
 	},
 	{
 		key: ROUTESEND_MIDDLE_CONTAINER,
@@ -42,16 +63,18 @@ let ownKVLs: KVL[] = [
 	{
 		key: ACTION_MIDDLE_CONTAINER,
 		value: undefined,
-		ldType: ActionTypesDict.metaExplorerAction
-	}
+		ldType: ActionTypesDict.metaExplorerAction,
+	},
 ];
-export const createLayoutBpCfg: (nameSelf: string) => BlueprintConfig = (nameSelf: string) => {
+export const createLayoutBpCfg: (nameSelf: string) => BlueprintConfig = (
+	nameSelf: string
+) => {
 	return {
 		subItptOf: null,
 		nameSelf: nameSelf,
 		ownKVLs: ownKVLs,
 		inKeys: cfgIntrprtKeys,
-		crudSkills: "cRud"
+		crudSkills: "cRud",
 	};
 };
 
@@ -63,26 +86,34 @@ let bpCfg: BlueprintConfig = {
 	nameSelf: Card3itptLTRName,
 	ownKVLs: ownKVLs,
 	inKeys: cfgIntrprtKeys,
-	crudSkills: "cRud"
+	crudSkills: "cRud",
 };
 @ldBlueprint(bpCfg)
-export class PureCard3itptLTR extends Component<LDConnectedState & LDConnectedDispatch & LDOwnProps, Card3itptLTRState>
+export class PureCard3itptLTR
+	extends Component<
+		LDConnectedState & LDConnectedDispatch & LDOwnProps,
+		Card3itptLTRState
+	>
 	implements IBlueprintItpt {
-
 	static getDerivedStateFromProps(
 		nextProps: LDConnectedState & LDConnectedDispatch & LDOwnProps,
-		prevState: Card3itptLTRState): null | Card3itptLTRState {
+		prevState: Card3itptLTRState
+	): null | Card3itptLTRState {
 		let rvLD = gdsfpLD(
-			nextProps, prevState, cfgIntrprtKeys.slice(0, 3), cfgIntrprtKeys.slice(3));
+			nextProps,
+			prevState,
+			cfgIntrprtKeys.slice(0, 3),
+			cfgIntrprtKeys.slice(3)
+		);
 		if (!rvLD) {
 			return null;
 		}
 		let rvNew = {
 			...prevState,
-			...rvLD
+			...rvLD,
 		};
 		return {
-			...rvNew
+			...rvNew,
 		};
 	}
 
@@ -96,9 +127,13 @@ export class PureCard3itptLTR extends Component<LDConnectedState & LDConnectedDi
 
 	constructor(props: any) {
 		super(props);
-		this.cfg = (this.constructor["cfg"] as BlueprintConfig);
-		const ldState = initLDLocalState(this.cfg, props, cfgIntrprtKeys.slice(0, 3),
-			cfgIntrprtKeys.slice(3));
+		this.cfg = this.constructor["cfg"] as BlueprintConfig;
+		const ldState = initLDLocalState(
+			this.cfg,
+			props,
+			cfgIntrprtKeys.slice(0, 3),
+			cfgIntrprtKeys.slice(3)
+		);
 		this.state = {
 			isDoRedirectFromMiddleContent: false,
 			...ldState,
@@ -110,25 +145,60 @@ export class PureCard3itptLTR extends Component<LDConnectedState & LDConnectedDi
 		//TODO: execute that action
 		this.setState({
 			...this.state,
-			isDoRedirectFromMiddleContent: true
+			isDoRedirectFromMiddleContent: true,
 		});
-	}
+	};
 
 	render() {
 		const { isDoRedirectFromMiddleContent, localValues } = this.state;
-		const routeSendFromMiddleContent = localValues.get(ROUTESEND_MIDDLE_CONTAINER);
-		if (isDoRedirectFromMiddleContent && routeSendFromMiddleContent) {
-			let route: string = cleanRouteString(routeSendFromMiddleContent, this.props.routes);
-			this.setState({ ...this.state, isDoRedirectFromMiddleContent: false });
+		const routeSendFromMiddleContent = localValues.get(
+			ROUTESEND_MIDDLE_CONTAINER
+		);
+		const isExternal = isExternalRoute(routeSendFromMiddleContent);
+		if (
+			!isExternal &&
+			isDoRedirectFromMiddleContent &&
+			routeSendFromMiddleContent
+		) {
+			let route: string = cleanRouteString(
+				routeSendFromMiddleContent,
+				this.props.routes
+			);
+			this.setState({
+				...this.state,
+				isDoRedirectFromMiddleContent: false,
+			});
 			return <Redirect to={route} />;
 		}
-		return <Card
-			frontContent={this.renderInputContainer(CONTAINER_FRONT)}
-			middleContent={this.renderInputContainer(CONTAINER_MIDDLE)}
-			lastContent={this.renderInputContainer(CONTAINER_LAST)}
-			className={this.styleClassName}
-			onMiddleContentClick={() => this.onConfirmClick()}
-		>
-		</Card>;
+		if (isExternal) {
+			return (
+				<a
+					href={routeSendFromMiddleContent}
+					target="_blank"
+					rel="noopener"
+				>
+					<Card
+						frontContent={this.renderInputContainer(
+							CONTAINER_FRONT
+						)}
+						middleContent={this.renderInputContainer(
+							CONTAINER_MIDDLE
+						)}
+						lastContent={this.renderInputContainer(CONTAINER_LAST)}
+						className={this.styleClassName}
+						onMiddleContentClick={() => {}}
+					></Card>
+				</a>
+			);
+		}
+		return (
+			<Card
+				frontContent={this.renderInputContainer(CONTAINER_FRONT)}
+				middleContent={this.renderInputContainer(CONTAINER_MIDDLE)}
+				lastContent={this.renderInputContainer(CONTAINER_LAST)}
+				className={this.styleClassName}
+				onMiddleContentClick={() => this.onConfirmClick()}
+			></Card>
+		);
 	}
 }
