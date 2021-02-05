@@ -262,10 +262,15 @@
 
 .explore-page {
 	display: flex;
+	background: white;
 	max-width: 768px;
 	flex-direction: column;
     align-items: center;
 	align-self: center;
+
+	.explore-intro {
+		margin-top: 33%;
+	}
 
 	.wordpress-container {
 		display: flex;
@@ -278,6 +283,7 @@
 		align-self: stretch;
 		width: 100%;
 		justify-content: space-evenly;
+		margin: 64px 0;
 		.card-style {
 			width: 284px;
 			margin: 16px;
@@ -306,6 +312,7 @@
 		flex-wrap: wrap;
 		justify-content: space-evenly;
     	width: 100%;
+		margin: 64px 0;
 		.social-link-w-img {
 			width: 64px;
 			display: flex;
@@ -327,4 +334,18 @@
 		}
 		
 	}
+}
+
+.MuiToolbar-gutters {
+	padding: 0px !important;
+}
+
+.footer-imprint{
+	color: darkgrey;
+	margin: 64px 0;
+	font-size: 12px;
+}
+
+.bottom-nav-topfree {
+	background: white;
 }
