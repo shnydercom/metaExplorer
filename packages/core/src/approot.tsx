@@ -22,6 +22,8 @@ import { mapStateToPropsRoot } from './appstate/reduxFns';
 import { IModSpec } from './apis/mod-api';
 import { initIRIFormatter } from './components/iri-formatter/initIRIFormatter';
 import { initMathsBlocks } from './components/maths/initMathsBlocks';
+import { initAnalyticsItpt } from './components';
+import { initTextBlocks } from './components/text/initTextBlocks';
 
 export const APP_LD_KEY = "app";
 
@@ -66,6 +68,8 @@ export function rootSetup(requiredMods: IModSpec[]): void {
 	appItptMatcherFn();
 	initEssentialItpts();
 	initMathsBlocks();
+	initTextBlocks();
+	initAnalyticsItpt();
 	initBaseHtmlItpt();
 	initEssentialInterpreters();
 	initIRIFormatter();

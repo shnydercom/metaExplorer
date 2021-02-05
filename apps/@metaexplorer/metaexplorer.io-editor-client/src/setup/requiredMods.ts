@@ -1,4 +1,4 @@
-import { IModSpec } from '@metaexplorer/core';
+import { IModSpec, isProduction } from '@metaexplorer/core';
 import { MOD_MATERIALDESIGN_ID, initMaterialDesignMod } from '@metaexplorer-mods/material-design';
 
 import { MOD_KEYCLOAK_ID, initKeycloakMod } from '@metaexplorer-mods/keycloak';
@@ -10,7 +10,6 @@ import { MOD_ITPTEDITOR_ID, initItptEditorMod } from '@metaexplorer-mods/itpt-ed
 import { MOD_QRCODEGENSCAN_ID, initQRCODEGENClientMod } from '@metaexplorer-mods/qr-code-genscan';
 import { initOnboardingMod, MOD_ONBOARDING_ID } from '@metaexplorer-mods/onboarding';
 import { initMetaExplorerMod, MOD_METAEXPLORERIO_ID } from '@metaexplorer-mods/metaexplorer.io';
-import { isProduction } from '@metaexplorer/core';
 
 export function setupRequiredMods(): IModSpec[] {
 	//mod initialization functions

@@ -25,11 +25,11 @@
     background-position-y: 70px;
     background-repeat: no-repeat;
 	
-	background-image: url("/media/landing-hands-gift");
+	background-image: url("/media/landing-hands-gift.jpg");
 }
 
 .mxp-hero.bottom-img {	
-	background-image: url("/media/landing-hands-pottery");
+	background-image: url("/media/landing-hands-pottery.jpg");
 }
 
 .mxp-hero p {
@@ -156,4 +156,196 @@
 	@media (max-width: 600px){
 		background-color: white;
 	}
+}
+
+.mxp-logo {
+	position: absolute;
+	z-index: 2;
+	height: 72px;
+	max-width: 72px;
+	margin-top: 6px;
+    background: white;
+    border: solid 0px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+	img {
+		height: 80%;
+		width: 80%;
+		padding: 10%;
+	}
+}
+
+.mxp-header {
+	display: flex;
+    flex-direction: row;
+    align-self: stretch;
+    margin: 0 auto;
+    width: 768px;
+	justify-content: center;
+	.MuiButton-root {
+		flex: 1;
+		z-index: 1;
+	}
+	.center-space {
+		width: 90px;
+	}
+}
+
+.my-little-helper-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: white;
+	border: 0px solid;
+	border-radius: 12px;
+	padding: 24px;
+	box-shadow: 2px 5px 6px #00000061;
+}
+
+.my-little-video-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: white;
+	border: 0px solid;
+	border-radius: 12px;
+	padding: 0;
+	overflow: hidden;
+	width: fit-content;
+	height: fit-content;
+	box-shadow: 2px 5px 6px #00000061;
+	video {
+		background: white;
+	}
+	.bg-editor-blue {
+		background: #001e34;
+	}
+}
+
+.three-line-height {
+	height: 3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.my-fixed-conv-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
+	background: white;
+	border: 0px solid;
+	border-radius: 12px;
+	padding-top: 24px;
+	box-shadow: 2px 5px 6px #00000061;
+	overflow: hidden;
+	b {
+		align-self: center;
+	}
+	.bottom-nav{
+		.bottom-nav-topfree {
+			padding: 0 24px 0 24px;
+			.imgdisplay {
+				height: 150px;
+			}
+		}
+		.MuiBottomNavigation-root {
+			margin: 0 -24px 0 -24px;
+			align-self: stretch;
+		}
+	}
+
+}
+
+.explore-page {
+	display: flex;
+	background: white;
+	max-width: 768px;
+	flex-direction: column;
+    align-items: center;
+	align-self: center;
+
+	.explore-intro {
+		margin-top: 33%;
+	}
+
+	.wordpress-container {
+		display: flex;
+	    flex-direction: row;
+	}
+	.youtube-container {
+		display: flex;
+	    flex-direction: row;
+		flex-wrap: wrap;
+		align-self: stretch;
+		width: 100%;
+		justify-content: space-evenly;
+		margin: 64px 0;
+		.card-style {
+			width: 284px;
+			margin: 16px;
+			height: 280px;
+			text-align: center;
+			.yt-embed {
+				margin-top: 12px;
+				margin-bottom: 12px;
+				margin-left: auto;
+				margin-right: auto;
+				max-width: 100%;
+				border-width: 0px;
+				flex: 1 1 0%;
+				width: 100%;
+				height: 100%;
+				background: darkgrey
+			}
+			.last {
+				flex-direction: column;
+			}
+		}
+	}
+	.social-links-container{
+		display: flex;
+	    flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+    	width: 100%;
+		margin: 64px 0;
+		.social-link-w-img {
+			width: 64px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			span {
+				margin: 12px 0 6px 0;
+			}
+			.imgdisplay {
+				width: 36px;
+				height: 36px;
+			}
+		}
+		a {
+			color: black;
+			text-decoration-line: none;
+			font-family: Roboto, Arial;
+			font-weight: normal;
+		}
+		
+	}
+}
+
+.MuiToolbar-gutters {
+	padding: 0px !important;
+}
+
+.footer-imprint{
+	color: darkgrey;
+	margin: 64px 0;
+	font-size: 12px;
+}
+
+.bottom-nav-topfree {
+	background: white;
 }

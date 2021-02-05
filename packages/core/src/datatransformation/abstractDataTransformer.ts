@@ -47,8 +47,8 @@ export abstract class AbstractDataTransformer implements IBlueprintItpt {
 		this.setOutputKVMap(outputKVMap && outputKVMap.value ? outputKVMap.value : this.outputKVMap);
 		for (let inputidx = 0; inputidx < this.itptKeys.length; inputidx++) {
 			const inputKey = this.itptKeys[inputidx];
-			let param = kvs.find((val) => val.key === inputKey);
-			if (param && param.value !== null && !isObjPropertyRef(param.value)
+			let param = kvs.find((val) => (val.key === inputKey && !isObjPropertyRef(val.value)));
+			if (param && param.value !== null 
 				&& JSON.stringify(param) !== JSON.stringify(this.inputParams.get(inputKey))) {
 				this.inputParams.set(inputKey, param);
 				this.isInputDirty = true;
