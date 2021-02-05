@@ -94,7 +94,7 @@ export abstract class PureTextBasedComponent
 			[],
 			[UserDefDict.inputData, VisualKeysDict.cssClassName],
 			[],
-			[true]
+			[true, true]
 		);
 		this.state = {
 			...ldState,

@@ -100,9 +100,7 @@ export class PureHRAnalyticsComponent
 			prevState,
 			[],
 			cfgIntrprtKeys,
-			null,
-			[],
-			[true]
+			null
 		);
 		if (!rvLD) {
 			return null;
@@ -125,9 +123,7 @@ export class PureHRAnalyticsComponent
 			this.cfg,
 			props,
 			[],
-			cfgIntrprtKeys,
-			[],
-			[true]
+			cfgIntrprtKeys
 		);
 		this.state = {
 			...ldState,

@@ -4,6 +4,7 @@ import { MOD_USERITPT_ID, initUSERITPTClientMod } from '@metaexplorer-mods/useri
 import { initMetaExplorerMod, MOD_METAEXPLORERIO_ID } from '@metaexplorer-mods/metaexplorer.io';
 import { MOD_QRCODEGENSCAN_ID, initQRCODEGENClientMod } from '@metaexplorer-mods/qr-code-genscan';
 import { isProduction } from '@metaexplorer/core';
+import { initGoogleMod, MOD_GOOGLE_ID } from '@metaexplorer-mods/google';
 
 export function setupRequiredMods(): IModSpec[] {
 	//mod initialization functions
@@ -17,6 +18,12 @@ export function setupRequiredMods(): IModSpec[] {
 	modSpecs.push({
 		id: MOD_MATERIALDESIGN_ID,
 		initFn: () => initMaterialDesignMod(),
+		dependencies: []
+	}
+	);
+	modSpecs.push({
+		id: MOD_GOOGLE_ID,
+		initFn: () => initGoogleMod(),
 		dependencies: []
 	}
 	);
@@ -37,7 +44,7 @@ export function setupRequiredMods(): IModSpec[] {
 	modSpecs.push({
 		id: MOD_ID,
 		initFn: () => {
-			const startItpt = "landing/google-using-structured-data/index";
+			const startItpt = "sitewide/navigation/index";
 			changeMainAppItpt(startItpt, []);
 			return new Promise((resolve, reject) => {
 				resolve({

@@ -259,3 +259,15 @@
 	}
 
 }
+
+.explore-page {
+	display: flex;
+	max-width: 768px;
+	flex-direction: column;
+	.youtube-container {
+	    flex-direction: row;
+	}
+	.wordpress-container {
+	    flex-direction: row;
+	}
+}
