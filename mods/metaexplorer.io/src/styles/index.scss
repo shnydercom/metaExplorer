@@ -264,10 +264,51 @@
 	display: flex;
 	max-width: 768px;
 	flex-direction: column;
-	.youtube-container {
+    align-items: center;
+	align-self: center;
+
+	.wordpress-container {
+		display: flex;
 	    flex-direction: row;
 	}
-	.wordpress-container {
+	.youtube-container {
+		display: flex;
 	    flex-direction: row;
+		flex-wrap: wrap;
+		align-self: stretch;
+		width: 100%;
+		justify-content: space-evenly;
+		.card-style {
+			width: 284px;
+			margin: 16px;
+			height: 280px;
+		}
+	}
+	.social-links-container{
+		display: flex;
+	    flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+    	width: 100%;
+		.social-link-w-img {
+			width: 64px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			b {
+				margin: 12px 0 6px 0;
+			}
+			.imgdisplay {
+				width: 36px;
+				height: 36px;
+			}
+		}
+		a {
+			color: black;
+			text-decoration-line: none;
+			font-family: Roboto, Arial;
+			font-weight: normal;
+		}
+		
 	}
 }
