@@ -56,6 +56,9 @@
 }
 
 .flex-filler.vh-centered-column.titletextandimage-textcontainer {
+	h2 {
+		text-align:center;
+	}
 	max-width: 300px;
 	margin: 0;
 	padding: 24px;
@@ -88,12 +91,28 @@
 }
 
 .landing-mailto-form {
+	position: relative;
 	padding: 24px;
 	box-shadow: 2px 5px 6px #00000061;
 	border: 0px solid;
 	border-radius: 12px;
 	margin: -112px 0 64px 0;
     background: white;
+	.email-bg-img {
+		position: absolute;
+		pointer-events: none;
+		opacity: 0.15;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		border: 0px solid;
+		border-radius: 12px;
+		overflow: hidden;
+		img {
+			border: 0px;
+		}
+	}
 }
 
 .videodisplay {
@@ -350,4 +369,11 @@
 
 .bottom-nav-topfree {
 	background: white;
+}
+
+.bulletpoint:before  {
+		content: "•"; 
+		display: inline-block; 
+		width: 1em;
+		margin-left: -1em
 }
