@@ -226,7 +226,7 @@
 		border: 2px dashed;
     	border-radius: 3px;
 		width: 240px;
-    	height: 240px;
+    	height: 190px;
 	}
 	.MuiFormControl-root{
 		width: 100%;
@@ -395,11 +395,12 @@ hr {
     border-radius: 3px;
     border: 0px solid;
     max-width: 768px;
+    text-align: justify;
 }
-/*
+
 .bulletpoint:before  {
 		content: "•"; 
 		display: inline-block; 
 		width: 1em;
 		margin-left: -1em
-}*/
+}
