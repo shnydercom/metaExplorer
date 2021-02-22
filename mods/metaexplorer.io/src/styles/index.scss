@@ -222,6 +222,19 @@
 	border-radius: 12px;
 	padding: 24px;
 	box-shadow: 2px 5px 6px #00000061;
+	.single-img-sel {
+		border: 2px dashed;
+    	border-radius: 3px;
+		width: 240px;
+    	height: 240px;
+	}
+	.MuiFormControl-root{
+		width: 100%;
+	}
+}
+
+.interactive-form-heading {
+	color: #9e2104;
 }
 
 .my-little-video-box {
@@ -243,6 +256,10 @@
 	.bg-editor-blue {
 		background: #001e34;
 	}
+}
+
+hr {
+	border: 0px;
 }
 
 .three-line-height {
@@ -371,9 +388,18 @@
 	background: white;
 }
 
+.bulletpoint {
+	background-color: #ffffffaa;
+    margin: 0 auto;
+    padding: 3px 6px;
+    border-radius: 3px;
+    border: 0px solid;
+    max-width: 768px;
+}
+/*
 .bulletpoint:before  {
 		content: "•"; 
 		display: inline-block; 
 		width: 1em;
 		margin-left: -1em
-}
+}*/
