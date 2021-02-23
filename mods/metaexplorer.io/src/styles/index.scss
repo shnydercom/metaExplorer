@@ -12,17 +12,18 @@
 }
 
 .mxp-hero {
+	position: relative;
 	padding: 0;
-    min-height: 66vh;
+    min-height: 80vh;
     width: 100%;
     align-self: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-attachment: fixed;
-    background-size: auto 67%;
+    background-size: auto 100%;
     background-position-x: center;
-    background-position-y: 70px;
+    background-position-y: center;
     background-repeat: no-repeat;
 	
 	background-image: url("/media/landing-hands-gift.jpg");
@@ -42,12 +43,18 @@
 }
 
 .mxp-hero h2 {
-	background-color: #ffffffaa;
-	margin: 1.5em auto;
-	padding: 3px 15px;
-	border-radius: 3px;
+	margin: 64px 50% 0 auto;
+    padding: 0;
+    border-radius: 3px;
     border: 0px solid;
-	max-width: 768px;
+    max-width: 64vh;
+    font-size: 2.5em;
+    text-align: left;
+    flex: 1;
+	filter: drop-shadow(2px 3px 2px #aaabbb);
+	@media (max-width: 600px){
+		margin: 64px 32px 0 32px; 
+	}
 }
 
 .flex-filler.vh-centered-column.titletextandimage-inputcontainer {
@@ -90,13 +97,18 @@
 	width: 100%;
 }
 
+.example-intro {
+	margin: 64px 32px 0 32px;
+	max-width: 768px;
+}
+
 .landing-mailto-form {
 	position: relative;
 	padding: 24px;
 	box-shadow: 2px 5px 6px #00000061;
 	border: 0px solid;
 	border-radius: 12px;
-	margin: -112px 0 64px 0;
+	margin: 64px 16px 64px 16px;
     background: white;
 	.email-bg-img {
 		position: absolute;
@@ -129,16 +141,16 @@
 
 .mxp-hero {
 	text-align: center;
-	padding-bottom: 108px;
+	//padding-bottom: 108px;
 }
 
 .buttonrow {
 	display: flex;
 	flex-direction: row;
 	margin: 16px 0 16px 0;
-	@media (max-width: 600px){
+	//@media (max-width: 1920px){
 		flex-direction: column;
-	}
+	//}
 }
 
 .vertical-line {
@@ -146,37 +158,62 @@
     height: 1.5em;
     width: 1px;
 	background-color: lightgrey;
-	@media (max-width: 600px){
+	//@media (max-width: 1920px){
 		height: 1px;
 		width: 1.5em;
 		margin: 0px auto;
-	}
+	//}
 }
 
 .mt-16 {
-	margin-top: 16px;
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(0, 0, 0, 0.8);
     font-size: 0.875rem;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-weight: 500;
     line-height: 1.75;
 }
 
+.mb-16 {
+	margin-bottom: 16px;
+}
+
 .cta-container {
+	position: absolute;
+    right: 32px;
+    left: 0;
+    bottom: 32px;
+    align-items: flex-end;
+
+	align-self: center;
+    margin-left: 837px;
+    margin-bottom: 32px;
+	margin: 0 auto 0 50%;
+    max-width: 64vh;
 	display: flex;
 	flex-direction: column;
 	margin-top: -108px;
-    align-items: center;
-    background-color: #ffffffd1;
     border: 0 solid;
     border-radius: 6px 6px 0 0;
-    margin: -108px 12px 0 12px;
+    //margin: -108px 12px 0 12px;
     /* box-shadow: 5px 5px 6px #00000061; */
     z-index: 0;
-	padding: 0px 16px;
-	@media (max-width: 600px){
-		background-color: white;
+	//padding: 0px 16px;
+	@media (max-width: 600px) {
+		right: 16px;
+		bottom: 16px;
 	}
+}
+
+.cta-helper-box {
+	box-shadow: none;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 0px solid;
+    border-radius: 12px;
+    padding: 24px;
 }
 
 .mxp-logo {
@@ -226,7 +263,7 @@
 		border: 2px dashed;
     	border-radius: 3px;
 		width: 240px;
-    	height: 190px;
+    	height: 160px;
 	}
 	.MuiFormControl-root{
 		width: 100%;
