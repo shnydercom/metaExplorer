@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-const imageFormat: string = 'image/jpeg';
+const imageFormat: string = "image/jpeg";
 
-export const PERMISSION_NOTALLOWED_ERROR = 'NotAllowedError';
+export const ERROR_NOT_ALLOWED = "Error:NotAllowed";
 
 export enum DOMCameraErrorTypes {
 	streamError = 2,
@@ -49,7 +49,9 @@ export interface DOMCameraCallbacks {
  * https://webrtc.github.io/samples/
  * https://github.com/webrtc/samples/blob/gh-pages/src/content/getusermedia/record/js/main.js
  */
-export interface DOMCameraProps extends DOMCameraUserInteraction, DOMCameraCallbacks {
+export interface DOMCameraProps
+	extends DOMCameraUserInteraction,
+		DOMCameraCallbacks {
 	/**
 	 * flag to display renderControls() or not
 	 */
@@ -70,17 +72,24 @@ export interface DOMCameraProps extends DOMCameraUserInteraction, DOMCameraCallb
  * It can also handle getting individual images, and will by default render the video stream
  * in a <video>-tag, so the users can see themselves.
  */
-export class DOMCamera<TProps = DOMCameraProps> extends Component<TProps & DOMCameraProps, DOMCameraState>{
+export class DOMCamera<TProps = DOMCameraProps> extends Component<
+	TProps & DOMCameraProps,
+	DOMCameraState
+> {
 	videoDispl: HTMLVideoElement | null;
 	ctx: CanvasRenderingContext2D;
 	canvas: HTMLCanvasElement;
 
 	private stream: MediaStream;
-	private mounted: boolean = false;
+	private _isMounted: boolean = false;
 
-	constructor(props: any) {
+	constructor(props: TProps & DOMCameraProps) {
 		super(props);
-		this.state = { curStep: DOMCameraStateEnum.isLoading, vidDeviceList: null, curId: null };
+		this.state = {
+			curStep: DOMCameraStateEnum.isLoading,
+			vidDeviceList: null,
+			curId: null,
+		} as DOMCameraState;
 	}
 
 	public getStream() {
@@ -88,7 +97,7 @@ export class DOMCamera<TProps = DOMCameraProps> extends Component<TProps & DOMCa
 	}
 
 	startStream(strDeviceId: string) {
-		if (!this.videoDispl || !strDeviceId) return;
+		if (!this.videoDispl) return;
 		if (this.videoDispl.srcObject) return;
 		const vidDispl = this.videoDispl;
 		navigator.mediaDevices
@@ -113,7 +122,7 @@ export class DOMCamera<TProps = DOMCameraProps> extends Component<TProps & DOMCa
 				this.triggerReadyToRecord();
 			})
 			.catch((e: DOMException) => {
-				if (e && e.name && e.name === PERMISSION_NOTALLOWED_ERROR) {
+				if (e && e.name && e.name === ERROR_NOT_ALLOWED) {
 					this.setStateToError(DOMCameraErrorTypes.notAllowed);
 				} else {
 					this.setStateToError(DOMCameraErrorTypes.streamError);
@@ -123,7 +132,7 @@ export class DOMCamera<TProps = DOMCameraProps> extends Component<TProps & DOMCa
 	}
 
 	componentWillUnmount() {
-		this.mounted = false;
+		this._isMounted = false;
 		if (this.state.curStep !== DOMCameraStateEnum.isError) {
 			this.setStateIfMounted({
 				curStep: DOMCameraStateEnum.isLoading,
@@ -144,13 +153,16 @@ export class DOMCamera<TProps = DOMCameraProps> extends Component<TProps & DOMCa
 	}
 
 	setStateIfMounted(state: DOMCameraState, callback?: () => void) {
-		if (!this.mounted) return;
-		this.setState(state, callback);
+		if (!this._isMounted) return;
+		this.setState(state as DOMCameraState, callback);
 	}
 
 	setStateToError(errorType: DOMCameraErrorTypes) {
-		if (!this.mounted) return;
-		this.setStateIfMounted({ ...this.state, curStep: DOMCameraStateEnum.isError });
+		if (!this._isMounted) return;
+		this.setStateIfMounted({
+			...this.state,
+			curStep: DOMCameraStateEnum.isError,
+		});
 		if (this.props.onVideoDisplayRemoved) {
 			this.props.onVideoDisplayRemoved();
 		}
@@ -159,8 +171,11 @@ export class DOMCamera<TProps = DOMCameraProps> extends Component<TProps & DOMCa
 		}
 	}
 	componentDidMount() {
-		this.mounted = true;
-		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+		this._isMounted = true;
+		if (
+			!navigator.mediaDevices ||
+			!navigator.mediaDevices.enumerateDevices
+		) {
 			this.setStateToError(DOMCameraErrorTypes.mediaDevicesAccessFail);
 			return;
 		}
@@ -190,7 +205,7 @@ export class DOMCamera<TProps = DOMCameraProps> extends Component<TProps & DOMCa
 								this.startStream(deviceId);
 							}
 							this.triggerReadyToStream();
-						},
+						}
 					);
 					return;
 				}
@@ -237,36 +252,51 @@ export class DOMCamera<TProps = DOMCameraProps> extends Component<TProps & DOMCa
 			this.ctx = canvasElem.getContext('2d')!;
 		}
 
-		this.ctx.drawImage(vidDispl, 0, 0, this.canvas.width, this.canvas.height);
+		this.checkAndDrawOnCanvas();
 
 		return this.canvas;
 	}
 
+	checkAndDrawOnCanvas() {
+		if (this.ctx && this.videoDispl && this.canvas) {
+			this.ctx.drawImage(
+				this.videoDispl,
+				0,
+				0,
+				this.canvas.width,
+				this.canvas.height
+			);
+		}
+	}
+
 	triggerReadyToStream() {
-		if (this.mounted && this.props.onReadyToStream) {
+		if (this._isMounted && this.props.onReadyToStream) {
 			this.props.onReadyToStream();
 		}
 	}
 
 	triggerReadyToRecord() {
-		if (this.mounted && this.props.onVideoDisplayReady) {
+		if (this._isMounted && this.props.onVideoDisplayReady) {
 			this.props.onVideoDisplayReady(this.videoDispl!);
 		}
 	}
 
 	startVideoRecording() {
-		if (this.props.onVideoRecordingStarted) this.props.onVideoRecordingStarted();
+		if (this.props.onVideoRecordingStarted)
+			this.props.onVideoRecordingStarted();
 	}
 
 	stopVideoRecording() {
-		if (this.props.onVideoRecordingStopped) this.props.onVideoRecordingStopped();
+		if (this.props.onVideoRecordingStopped)
+			this.props.onVideoRecordingStopped();
 	}
 
 	/**
 	 * not yet implemented
 	 */
 	pauseVideoRecording() {
-		if (this.props.onVideoRecordingPaused) this.props.onVideoRecordingPaused();
+		if (this.props.onVideoRecordingPaused)
+			this.props.onVideoRecordingPaused();
 	}
 
 	renderError() {
@@ -278,7 +308,7 @@ export class DOMCamera<TProps = DOMCameraProps> extends Component<TProps & DOMCa
 	}
 
 	renderVideo() {
-		const { curId } = this.state;
+		const { curId } = this.state as DOMCameraState;
 		return (
 			<video
 				ref={(video) => {
@@ -291,32 +321,41 @@ export class DOMCamera<TProps = DOMCameraProps> extends Component<TProps & DOMCa
 	}
 
 	renderControls() {
-		return <div className="controls-container">
-			{/* icon='camera' floating accent  */}
-			<button onClick={() => {
-				if (this.props.onImageSrcReady) this.getScreenshotAsBlob();
-			}} />
-		</div>;
+		return (
+			<div className="controls-container">
+				{/* icon='camera' floating accent  */}
+				<button
+					onClick={() => {
+						if (this.props.onImageSrcReady)
+							this.getScreenshotAsBlob();
+					}}
+				/>
+			</div>
+		);
 	}
 
 	render() {
 		const { curStep } = this.state;
-		return <div className="dom-camera">
-			{(() => {
-				switch (curStep) {
-					case DOMCameraStateEnum.isError:
-						return this.renderError();
-					case DOMCameraStateEnum.isLoading:
-						return this.renderLoading();
-					case DOMCameraStateEnum.isVideoing:
-						return <>
-							{this.renderVideo()}
-							{this.renderControls()}
-						</>;
-					default:
-						return null;
-				}
-			})()}
-		</div>;
+		return (
+			<div className="dom-camera">
+				{(() => {
+					switch (curStep) {
+						case DOMCameraStateEnum.isError:
+							return this.renderError();
+						case DOMCameraStateEnum.isLoading:
+							return this.renderLoading();
+						case DOMCameraStateEnum.isVideoing:
+							return (
+								<>
+									{this.renderVideo()}
+									{this.renderControls()}
+								</>
+							);
+						default:
+							return null;
+					}
+				})()}
+			</div>
+		);
 	}
 }
