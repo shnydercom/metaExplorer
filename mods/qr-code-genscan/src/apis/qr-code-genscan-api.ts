@@ -28,7 +28,7 @@ export class QrCodeGenScanClientAPI {
 		let rv = new QrCodeGenScanClientAPI();
 		const genApi = await rv.initGenScriptLoad() as QRCodeFactory;
 		await rv.initScanScriptLoad();
-		await rv.initQuaggaScriptLoad();
+		//await rv.initQuaggaScriptLoad();
 		rv.generator = genApi;
 		//rv.scanner = scanApi;
 		return rv;
