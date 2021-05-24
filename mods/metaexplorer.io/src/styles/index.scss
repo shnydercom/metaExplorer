@@ -483,4 +483,13 @@ hr {
 	display: flex;
     flex-direction: column;
     text-align: center;
+	@media (max-width: 644px){
+		margin-top: 0px;
+		margin-bottom: 76px;
+	}
+}
+
+.longintro-whatif {
+	padding: 24px;
+	text-align: justify;
 }
