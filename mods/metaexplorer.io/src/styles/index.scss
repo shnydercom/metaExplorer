@@ -30,7 +30,7 @@
 
 .enter-mxp {
 	background-color: #001e34;
-	background-image: url("/media/digital-craftsmanship.jpg");
+	background-image: url("/media/768sq-craftsmanship-hands.jpg");
 	>* h2, h3 {
 		color: white;
 		filter: drop-shadow(2px 3px 4px #001e34);
@@ -38,7 +38,7 @@
 }
 
 .mxp-hero.bottom-img {	
-	background-image: url("/media/interfaces-people-interchange.jpg");
+	background-image: url("/media/960sq-people-devices-interfaces.jpg");
 	background-color: #001e34;
 	color: white;
 	>* h2, h3 {
@@ -72,11 +72,15 @@
 }
 .bottom-img .hero-headcontainer {*/
     flex: 1;
-    margin: 128px 50% 0 5%;
     max-width: 64vh;	
 	/*@media (max-width: 600px){
 		margin: 8px 32px 0 32px; 
 	}*/
+	margin: 50% 50% 50% 5%;
+	@media (max-width: 2100px){
+		
+		margin: 128px 50% 0 5%;;//8px 32px 0 32px;// 64px 50% 0 auto; 
+	}
 	@media (max-width: 1100px){
 		margin: 64px 64px 0 64px;//8px 32px 0 32px;// 64px 50% 0 auto; 
 	}
