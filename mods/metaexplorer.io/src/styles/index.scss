@@ -26,7 +26,15 @@
     background-position-y: center;
     background-repeat: no-repeat;
 	
-	background-image: url("/media/landing-hands-gift.jpg");
+}
+
+.enter-mxp {
+	background-color: #001e34;
+	background-image: url("/media/digital-craftsmanship.jpg");
+	>* h2, h3 {
+		color: white;
+		filter: drop-shadow(2px 3px 4px #001e34);
+	}
 }
 
 .mxp-hero.bottom-img {	
@@ -39,7 +47,6 @@
 }
 
 .mxp-hero p {
-	background-color: #ffffffaa;
 	margin: 1em auto;
 	padding: 3px 6px;
 	border-radius: 3px;
@@ -53,17 +60,17 @@
     border: 0px solid;
     font-size: 2.5em;
     text-align: left;
-	filter: drop-shadow(2px 3px 4px white);
+	//filter: drop-shadow(2px 3px 4px white);
 }
 .hero-headcontainer {
-    flex: 1;
+    /*flex: 1;
     margin: 64px 50% 0 auto;
     max-width: 64vh;
 	@media (max-width: 600px){
 		margin: 8px 32px 0 32px; 
 	}
 }
-.bottom-img .hero-headcontainer {
+.bottom-img .hero-headcontainer {*/
     flex: 1;
     margin: 128px 50% 0 5%;
     max-width: 64vh;	
