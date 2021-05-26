@@ -178,7 +178,7 @@ export abstract class AbstractButton
 			);
 			//if (match.params.nextPath === undefined) match.params.nextPath = route;
 			this.setState({ ...this.state, isDoRedirectConfirm: false });
-			return <Redirect to={route} />;
+			return <Redirect to={route} push/>;
 		}
 		return this.renderButton(
 			isIconVal,
