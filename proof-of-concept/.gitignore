@@ -4,5 +4,4 @@ node_modules
 lib
 lib-esm
 *.log
-*.lock
 *.tsbuildinfo
