@@ -48,7 +48,7 @@ export const EditorMain = (props: React.PropsWithChildren<EditorMainProps>) => {
 
 	const [isPreviewFullScreen, setIsPreviewFullScreen] = React.useState<boolean>(props.isPreviewFullScreen);
 
-	const [previewPosition, setPreviewPosition] = React.useState<{ top: number, left: number }>({ top: 50, left: 400 });
+	const [previewPosition, setPreviewPosition] = React.useState<{ top: number, left: number }>({ top: 120, left: 600 });
 
 	const mtbProps: {
 		onMiniChanged?: (isMini: boolean) => void;

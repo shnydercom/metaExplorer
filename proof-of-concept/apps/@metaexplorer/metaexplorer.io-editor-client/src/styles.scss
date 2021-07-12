@@ -4,6 +4,8 @@
 
 @import "~@metaexplorer-mods/metaexplorer.io/lib/style.css";
 
+// adjustments for the demo
+
 .qr-container {
     min-height: 200px;
     background-color: #eee;
@@ -22,4 +24,21 @@
 
 .qr-reader-bounds .controls-container {
     display: none !important;
+}
+/*
+.entrypoint-editor-inner {
+    margin-top: -64px;
+}/*
+.entrypoint-editor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}*/
+.editor-transit {
+    margin-top: -64px;
+}
+.editor-movecontainer {
+    margin-top: -64px;
 }
