@@ -1,10 +1,10 @@
 import { IModSpec, isProduction } from '@metaexplorer/core';
 import { MOD_MATERIALDESIGN_ID, initMaterialDesignMod } from '@metaexplorer-mods/material-design';
 
-import { MOD_KEYCLOAK_ID, initKeycloakMod } from '@metaexplorer-mods/keycloak';
-import { MOD_DEMO_ID, initDemoMod } from '@metaexplorer-mods/demo';
+//import { MOD_KEYCLOAK_ID, initKeycloakMod } from '@metaexplorer-mods/keycloak';
+//import { MOD_DEMO_ID, initDemoMod } from '@metaexplorer-mods/demo';
 import { MOD_GOOGLE_ID, initGoogleMod } from '@metaexplorer-mods/google';
-import { MOD_MAILCHIMP_ID, initMailchimpMod } from '@metaexplorer-mods/mailchimp';
+//import { MOD_MAILCHIMP_ID, initMailchimpMod } from '@metaexplorer-mods/mailchimp';
 import { MOD_USERITPT_ID, initUSERITPTClientMod } from '@metaexplorer-mods/useritpt';
 import { MOD_ITPTEDITOR_ID, initItptEditorMod } from '@metaexplorer-mods/itpt-editor';
 import { MOD_QRCODEGENSCAN_ID, initQRCODEGENClientMod } from '@metaexplorer-mods/qr-code-genscan';
@@ -20,18 +20,18 @@ export function setupRequiredMods(): IModSpec[] {
 		dependencies: []
 	}
 	);
-	modSpecs.push({
+	/*modSpecs.push({
 		id: MOD_KEYCLOAK_ID,
 		initFn: () => initKeycloakMod(),
 		dependencies: []
 	}
-	);
-	modSpecs.push({
+	);*/
+	/*modSpecs.push({
 		id: MOD_DEMO_ID,
 		initFn: () => initDemoMod(),
 		dependencies: []
 	}
-	);
+	);*/
 	/*modAPI.addModInitFn(MOD_HYDRA_ID,
 		() => initHydraMod(),
 		[]
@@ -42,12 +42,12 @@ export function setupRequiredMods(): IModSpec[] {
 		dependencies: []
 	}
 	);
-	modSpecs.push({
+	/*modSpecs.push({
 		id: MOD_MAILCHIMP_ID,
 		initFn: () => initMailchimpMod(),
 		dependencies: []
 	}
-	);
+	);*/
 	/*modSpecs.push({
 		id: MOD_SWAGGER_ID,
 		initFn: () => initSwaggerClientMod(),
