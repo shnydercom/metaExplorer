@@ -3,3 +3,32 @@
 @import "~@metaexplorer-mods/material-design/lib/style.css";
 
 @import "~@metaexplorer-mods/metaexplorer.io/lib/style.css";
+
+// adjustments for the demo
+
+.qr-container {
+    min-height: 200px;
+    background-color: #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.qr-reader-bounds {
+    height: 200px;
+    max-height: 200px;
+    background-color: #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.qr-reader-bounds .controls-container {
+    display: none !important;
+}
+
+.editor-transit {
+    margin-top: -64px;
+}
+.editor-movecontainer {
+    margin-top: -64px;
+}

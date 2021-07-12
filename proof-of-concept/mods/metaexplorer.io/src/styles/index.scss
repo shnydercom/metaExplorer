@@ -508,3 +508,49 @@ hr {
 	padding: 24px;
 	text-align: justify;
 }
+
+.testimonial {
+    display: flex;
+    flex-direction: row;
+    margin: 16px;
+    .circle {
+        height: 42px;
+        width: 42px;
+        min-height: 42px;
+        min-width: 42px;
+    }
+    .speech-bubble {
+        background-color: #eee;
+        border: 0px solid; 
+        border-radius: 16px;
+        padding: 16px;
+        margin: 0;
+        
+    }
+	.arrow {
+		width: 0;
+		height: 0;
+		border-bottom: 16px solid transparent;
+	}
+	.person-name {
+		font-size: 80%;
+	}
+	&.left{
+		.speech-bubble {
+			border-top-left-radius: 0px;
+		}
+		.arrow {
+			border-right:16px solid #eee; 
+		}
+	}
+	&.right{
+		flex-direction: row-reverse;
+		.speech-bubble {
+			border-top-right-radius: 0px;
+		}
+		.arrow {
+			border-left: 16px solid #eee;
+		}
+	}
+}
+
