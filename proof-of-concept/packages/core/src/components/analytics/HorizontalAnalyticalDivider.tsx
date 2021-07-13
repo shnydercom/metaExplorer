@@ -19,6 +19,7 @@ import {
 } from "../../appstate";
 import { gdsfpLD, initLDLocalState } from "../generic";
 
+const VISIBLE = "visible";
 interface DividerHRProps {
 	elementId?: string;
 	className?: string;
@@ -47,7 +48,7 @@ const DividerHR = (props?: DividerHRProps) => {
 let cfgIntrprtKeys: string[] = [
 	VisualKeysDict.elementId,
 	VisualKeysDict.cssClassName,
-	ActionKeysDict.action_visibility_change,
+	ActionKeysDict.action_visibility_change
 ];
 let ownKVLs: KVL[] = [
 	{
@@ -64,6 +65,11 @@ let ownKVLs: KVL[] = [
 		key: ActionKeysDict.action_visibility_change,
 		value: undefined,
 		ldType: ActionTypesDict.metaExplorerAction,
+	},
+	{
+		key: VISIBLE,
+		value: undefined,
+		ldType: LDDict.Text,
 	},
 ];
 
@@ -99,7 +105,7 @@ export class PureHRAnalyticsComponent
 			nextProps,
 			prevState,
 			[],
-			cfgIntrprtKeys,
+			[...cfgIntrprtKeys, UserDefDict.outputKVMapKey],
 			null
 		);
 		if (!rvLD) {
@@ -123,7 +129,7 @@ export class PureHRAnalyticsComponent
 			this.cfg,
 			props,
 			[],
-			cfgIntrprtKeys
+			[...cfgIntrprtKeys, UserDefDict.outputKVMapKey],
 		);
 		this.state = {
 			...ldState,
@@ -147,12 +153,20 @@ export class PureHRAnalyticsComponent
 				visibilityAction.payload
 			);
 		}
+		const outputKVMap = this.state.localValues.get(UserDefDict.outputKVMapKey);
+		if (!outputKVMap) return;
+		let outCurItptKV: KVL = {
+			key: VISIBLE,
+			value: isVisible,
+			ldType: LDDict.Text
+		};
+		this.props.dispatchKvOutput([outCurItptKV], this.props.ldTokenString, outputKVMap);
 	};
 
 	render() {
 		const { localValues } = this.state;
 		const cssClassName = localValues.get(VisualKeysDict.cssClassName);
 		const elementId = localValues.get(VisualKeysDict.elementId);
-		return <DividerHR elementId={elementId} className={cssClassName}></DividerHR>;
+		return <DividerHR onVisibilityChanged={(v) => this.onTrigger(v)} elementId={elementId} className={cssClassName}></DividerHR>;
 	}
 }

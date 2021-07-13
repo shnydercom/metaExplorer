@@ -42,4 +42,8 @@ module.exports = function (app) {
     }
     res.redirect(`http://localhost:5001${req.path}`);
   });
+  app.post('/api/log', function (req, res) {
+    console.log("logging api called");
+    res.sendStatus(204);
+  });
 };
