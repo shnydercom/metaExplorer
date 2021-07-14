@@ -13209,10 +13209,10 @@ merge2@^1.2.3:
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.4.1.tgz#4368892f885e907455a6fd7dc55c0c9d404990ae"
   integrity sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==
 
-metaexplorer-react-components@0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/metaexplorer-react-components/-/metaexplorer-react-components-0.0.8.tgz#3d9d751701e6c29008e8ef5be0c5f4de382bd68c"
-  integrity sha512-ndSB8+r5UvITlkSaFWmgrPc/JHoFtujoUBrk5CQbapUUfhc3M+8AN1U/SMte4z/cpLriFcAaMlFtnBwT7/E4JA==
+metaexplorer-react-components@0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/metaexplorer-react-components/-/metaexplorer-react-components-0.0.9.tgz#247430c54801853abae726ee158e8beab6e1e9d5"
+  integrity sha512-CwhUqr3LTx6DrNPBWwrA64bIVRjHrSG59RJcrfmbTXr7MCNKL0MJrSRZ4g6TGVa9XkBWXYrqgSXPygMynVz9Mw==
   dependencies:
     "@material/card" "^3.0.0"
     "@types/shortid" "^0.0.29"
