@@ -30,7 +30,7 @@
 
 .enter-mxp {
 	background-color: #001e34;
-	background-image: url("/media/768sq-craftsmanship-hands.jpg");
+	background-image: url("./media/768sq-craftsmanship-hands.jpg");
 	>* h2, h3 {
 		color: white;
 		filter: drop-shadow(2px 3px 4px #001e34);
@@ -38,7 +38,7 @@
 }
 
 .mxp-hero.bottom-img {	
-	background-image: url("/media/960sq-people-devices-interfaces.jpg");
+	background-image: url("./media/960sq-people-devices-interfaces.jpg");
 	background-color: #001e34;
 	color: white;
 	>* h2, h3 {
