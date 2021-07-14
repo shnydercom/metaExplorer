@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer/local-dev-service",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MetaExplorer editor server for local development of metaexplorer.io and the template",
   "main": "index.js",
   "license": "MIT",
@@ -11,7 +11,7 @@
     "editor": "cross-env-shell NOCODE_BLOCKS_PATH=../../../nocode/@metaexplorer-nocode/metaexplorer.io/blocks NOCODE_BLOCK_START=sitewide/navigation/index \"yarn dev:debug\""
   },
   "dependencies": {
-    "@metaexplorer/editor-dev-server": "*",
+    "@metaexplorer/editor-dev-server": "^0.0.21",
     "@types/express": "^4.17.0",
     "express": "^4.17.1"
   },
