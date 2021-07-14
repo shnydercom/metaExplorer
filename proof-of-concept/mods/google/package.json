@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/google",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "TODO:changeDescription",
   "scripts": {
     "test": "test",
@@ -22,6 +22,6 @@
     "lib-esm"
   ],
   "dependencies": {
-    "@metaexplorer/core": "^0.0.26"
+    "@metaexplorer/core": "^0.0.27"
   }
 }

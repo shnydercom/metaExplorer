@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-mods/metaexplorer.io",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "components that you'll find on the metaexplorer site",
   "scripts": {
     "test": "test",
@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "@apollo/client": "^3.3.7",
-    "@metaexplorer/core": "^0.0.26",
+    "@metaexplorer/core": "^0.0.27",
     "@metaexplorer/wpgraphql-to-linkeddata": "^1.0.0",
     "react-gooey-nav": "^2.0.0"
   }
