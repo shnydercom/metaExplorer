@@ -1,6 +1,9 @@
 # Introduction-Video
 https://youtu.be/iJUnQRw52Ds
 
+### ...and here you can build your own App with the POC:
+[metaExplorer starter template](https://github.com/shnydercom/metaexplorer-starter)
+
 # Vision
 MetaExplorer aims to build user interfaces that adapt to different people and circumstances. These people can be the end-users or your team members, who solve a user's problem. MetaExplorer aims to build a general human-machine interface that can interact with different devices, operating systems and individual needs of a person.
 
