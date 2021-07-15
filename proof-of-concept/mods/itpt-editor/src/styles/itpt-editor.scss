@@ -713,7 +713,7 @@ $button-color-cta: orange;
 
     &:before {
       content: ' ';
-      background: url(/static/minimize.svg);
+      background: url("./static/minimize.svg");
       top: 0;
       left: 0;
       width: 64px;
@@ -746,7 +746,7 @@ $button-color-cta: orange;
 
     &:before {
       content: '';
-      background: url(/static/maximize.svg);
+      background: url("./static/maximize.svg");
       background-origin: content-box;
       top: auto;
       right: 6px;
