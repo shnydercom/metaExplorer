@@ -1,5 +1,5 @@
 const path = require('path');
-const qrCodeGenScanMod = require('@metaexplorer-mods/qr-code-genscan/server-bom.js');
+const qrCodeGenScanMod = require('@metaexplorer-mods/qr-code-genscan/lib/server-bom.js');
 let staticItpts = {};
 try {
   staticItpts = require('@metaexplorer-nocode/metaexplorer.io/lib/interpreters.json');

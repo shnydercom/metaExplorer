@@ -1,7 +1,7 @@
 const proxy = require('http-proxy-middleware');
 const path = require('path');
 const fs = require("fs");
-const qrCodeGenScanMod = require('@metaexplorer-mods/qr-code-genscan/server-bom.js');
+const qrCodeGenScanMod = require('@metaexplorer-mods/qr-code-genscan/lib/server-bom.js');
 const itptEditorMod = require('@metaexplorer-mods/itpt-editor/lib/server-bom');
 
 let staticItpts = {};
