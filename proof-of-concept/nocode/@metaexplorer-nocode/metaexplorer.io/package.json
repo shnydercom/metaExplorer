@@ -1,6 +1,6 @@
 {
   "name": "@metaexplorer-nocode/metaexplorer.io",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "block definition files for metaexplorer.io",
   "main": "index.js",
   "scripts": {
