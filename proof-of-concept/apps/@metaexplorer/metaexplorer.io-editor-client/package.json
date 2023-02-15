@@ -14,7 +14,7 @@
     "@metaexplorer-nocode/metaexplorer.io": "^0.0.26",
     "@metaexplorer/core": "^0.0.28",
     "@types/react-router-dom": "^5.1.7",
-    "node-sass": "^7.0.0",
+    "node-sass": "npm:sass@^1.49.9",
     "react-dnd": "^9.0.1",
     "react-gooey-nav": "^2.0.0",
     "react-redux": "^7.1.0",
@@ -25,6 +25,7 @@
     "redux-observable": "^1.1.0",
     "rxjs": "^6.5.2",
     "rxjs-compat": "^6.5.2",
+    "sass": "^1.49.9",
     "shortid": "^2.2.14",
     "typescript": "^4.0.5"
   },

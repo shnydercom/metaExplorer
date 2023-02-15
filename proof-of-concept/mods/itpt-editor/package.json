@@ -7,7 +7,7 @@
     "buildesm": "tsc -m es6 -target esnext --outDir lib-esm",
     "buildregular": "tsc",
     "build": "yarn buildesm && yarn buildregular && yarn compcss",
-    "compcss": "node-sass --output-style compressed ./src/styles/index.scss > ./lib/style.css"
+    "compcss": "sass ./src/styles/index.scss > ./lib/style.css"
   },
   "author": "Jonathan Schneider",
   "license": "EUPL-1.2",

@@ -19,7 +19,7 @@
     "buildesm": "tsc -m es6 -target esnext --outDir lib-esm",
     "buildregular": "tsc",
     "build": "yarn buildesm && yarn buildregular && yarn compcss",
-    "compcss": "node-sass --output-style compressed ./src/styles/material-design-index.scss > ./lib/style.css"
+    "compcss": "sass ./src/styles/material-design-index.scss > ./lib/style.css"
   },
   "devDependencies": {
     "@material-ui/core": "^4.11.3",
