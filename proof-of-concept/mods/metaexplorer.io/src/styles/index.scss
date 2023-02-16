@@ -556,3 +556,12 @@ hr {
 	}
 }
 
+.editing-cta {
+	> button {
+		margin-bottom: 8px;
+		outline: #86c5f2 solid;
+		background: #86c5f2;
+		font-weight: bold;
+		color: white;
+	}
+}
